@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+<script type="text/javascript">
+//添加一个QQ按钮
+TQE.toolbarBottons.qq={//
+	text:'添加QQ链接',//文字提示说明 
+	css:'background-position:-1026px 0;', //图标样式,当然, 也可以指定图片,或者 修改 TQEditor.css 添加一行: #eBTNqq{background-position:-1050px 0;}
+	click:function($,sender){// $为编辑器对象, sender为点击的按钮 , 这个方法在用户点击按钮时调用
+		var o=TQE.find($.objId+'CreateQQLink');
+		if(null==o){
+			var s='QQ号:<input type="text" id="qq" value="" size=20 />';
+			var okClick= function(){//点ok时的回调
+				TQE.hidePop();//隐藏面板
+				var es=this.form.elements;
+				if(es['qq'].value) $.exeCmd('CreateLink', $.config.qqLink+es['qq'].value);//这里使用了配置项
+				else $.exeCmd('Unlink');
+			};
+			o = $._popFormUI($.objId+'CreateQQLink','添加QQ链接', s, okClick,null,'','','',false);
+			$._intEdit(TQE._tags(o,'FORM')[0].elements['qq']);//使输入框只能输入数字
+			TQE.drag(o);//使用可拖动
+		}
+		if(!TQE.pop(o,sender)) return;
+		var f=TQE._tags(o,'FORM')[0];
+		f.reset();
+		var node=$.focusNode();
+		var reg=/^tencent:\/\/message\/.*?[^\w]uin=(\d+)/i
+		do{
+			if('A'==node.tagName){
+				var r=reg.exec(node.href)
+				if(r) {
+					f.elements['qq'].value=r[1];
+				}
+				break;
+			}
+		}while(node = node.parentNode)
+	}
+};
+TQE.toolbarBottons.mybutton={
+	text:'我的特殊按钮', 
+	//css:'background-position:-1026px 0;',
+	click:function($,sender){ alert('['+this.text+']被点了'); }
+}
+//修改默认的图标组合,normal即为默认
+TQE.toolbarMode.normal.left.push('|','qq','mybutton'); //添加分隔符与按钮
+TQE.toolbarMode.full.left.push('|','qq','mybutton'); //添加分隔符与按钮
+//也可以通过这样的真接设置
+//TQE.toolbarMode.normal.left=['fontsize','bold','italic','underline','forecolor','backcolor','removeformat','|','qq'];
+
+//添加配置项 qqLink,默设置默认值
+TQE.config.qqLink='tencent://message/?menu=no&site=e512.net&uin=';
+</script>
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script><br>
+<textarea id="e1" rows="12" cols="100" ><p>作者:李腾秋<br>
+  qq:<a href="tencent://message/?menu=no&amp;site=e512.net&amp;uin=7775038">7775038</a></p>
+ <p>email: litqqs@163.com</p>
+ </textarea>
+<script type="text/javascript" defer="true"> 
+ new tqEditor('e1',{toolbar:'normal',toolbarRight:['mode','help'],css:TQE.url+'demos/designMode.css'}); 
+</script>
+<br>
+<br>
+扩展编辑器.<br />
+示例添加一个QQ链接, 同时使用了一个设计的样式(需要IE7+,Chrome,FF等支持CSS3选择器E[att~="val"]的浏览器看才有效果)
+</body>
+</html>

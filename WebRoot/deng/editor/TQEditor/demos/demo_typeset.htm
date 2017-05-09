@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+<style type="text/css">
+.fBlue { color: #00F; }
+.fRed { color: #F00; }
+.fGreen { color: #360; }
+</style>
+</head>
+
+<body>
+	<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script>
+	<br>
+	<textarea id="e1" rows="22" cols="100" >
+&lt;p&gt;自动排版相关设置参数&lt;br&gt;
+&lt;font color=&quot;#ff0000&quot;&gt;'typesetImageTextCenter'&lt;/font&gt;:&lt;font color=&quot;#336600&quot;&gt;true&lt;/font&gt;,&lt;font color=&quot;#0000ff&quot;&gt;//自动排版图片/flash/视频等下方的文字居中&lt;br&gt;
+&lt;/font&gt;&lt;font color=&quot;#ff0000&quot;&gt;'typesetIndentParagraph'&lt;/font&gt;:&lt;font color=&quot;#336600&quot;&gt;false&lt;/font&gt;,&lt;font color=&quot;#0000ff&quot;&gt;//自动排版段落首行缩进2字&lt;br&gt;
+&lt;/font&gt;&lt;font color=&quot;#ff0000&quot;&gt;'typesetImageBorder'&lt;/font&gt;:&lt;font color=&quot;#336600&quot;&gt;true&lt;/font&gt;,&lt;font color=&quot;#0000ff&quot;&gt;//自动排版图片添边框&lt;/font&gt;
+&lt;p&gt;自动排版会将图片居中显示,且会取消文字号的大小设置.&lt;br&gt;
+&lt;p&gt;--------------------测试--------------------&lt;/p&gt;
+&lt;p&gt;&lt;img style=&quot;margin: 5px;&quot; border=&quot;1&quot; align=&quot;absMiddle&quot; src=&quot;../face/1.gif&quot; emot=&quot;1&quot;&gt;图片的标题&lt;/p&gt;
+&lt;p&gt;这是图片的详细内容,更详细的描述.&lt;/p&gt;
+&lt;p&gt;
+&lt;embed height=&quot;240&quot; name=&quot;play&quot; type=&quot;application/x-shockwave-flash&quot; align=&quot;middle&quot; pluginspage=&quot;http://www.macromedia.com/go/getflashplayer&quot; width=&quot;320&quot; src=&quot;/vt/inc/client/js/tqEditor/flvPlayer.swf&quot; wmode=&quot;opaque&quot; allowfullscreen=&quot;false&quot; allowscriptaccess=&quot;sameDomain&quot; bgcolor=&quot;#0E0E0E&quot; quality=&quot;high&quot; flashvars=&quot;vcastr_file=/vt/demo/test.flv&quot;&gt;
+It's All Too Much&lt;/p&gt;
+&lt;p&gt;&lt;/p&gt;
+&lt;p&gt;日本歌手YUI&lt;br&gt;
+&lt;embed height=&quot;100&quot; type=&quot;application/x-shockwave-flash&quot; pluginspage=&quot;http://www.macromedia.com/go/getflashplayer&quot; width=&quot;100&quot; src=&quot;/vt/demo/clock2.swf&quot; allowscriptaccess=&quot;always&quot; wmode=&quot;transparent&quot; quality=&quot;high&quot;&gt;
+漂亮的Flash时钟&lt;/p&gt;
+</textarea>
+	<script type="text/javascript" defer="true"> 
+ new tqEditor('e1'); 
+</script>
+	<br>
+	<br> 
+	自动排版相关设置参数 <br>
+	<span class="fRed" >'typesetImageTextCenter'</span>:<span class="fGreen">true</span>,<span class="fBlue">//自动排版图片/flash/视频等下方的文字居中</span><br>
+	<span class="fRed" >'typesetIndentParagraph'</span>:<span class="fGreen">false</span>,<span class="fBlue">//自动排版段落首行缩进2字</span><br>
+<span class="fRed" >'typesetImageBorder'</span>:<span class="fGreen">true</span>,<span class="fBlue">//自动排版图片添边框</span>
+<p>自动排版会将图片/Flash/视频等居中显示,且会取消文字号的大小设置.</p>
+<h3>建议: 首行缩进与段落间距应用样式调整.</h3>
+<p>	如:最后的展示页添加样式:<br>
+	P{text-indent:2em;padding:5px;margin:5px;}
+	<br>
+</p>
+</body>
+</html>

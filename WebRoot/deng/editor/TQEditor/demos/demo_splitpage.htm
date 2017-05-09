@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script>
+
+默认分页代码
+<textarea id="e1" rows="12" cols="100" >{&lt;STRONG&gt;toolbar&lt;/STRONG&gt;:&lt;FONT color=#ff00ff&gt;'full'&lt;/FONT&gt;}</textarea>
+<br>
+PHP中将内容分开示例:
+<div><span style="color: #090">$split_reg</span>=<span style="color: #F0F">'~&lt;h3[\s]+[^&gt;]*split_page&gt;(.*?)&lt;/h3&gt;~is'</span>;<br>
+<span style="color: #090">$pages</span>=<span style="color: #F00">preg_split</span>(<span style="color: #090">$split_reg</span>,<span style="color: #090"> $_POST</span>[<span style="color: #F0F">'content'</span>], -1, <span style="color: #00F">PREG_SPLIT_NO_EMPTY</span>|<span style="color: #00F">PREG_SPLIT_DELIM_CAPTURE</span>);</div>
+<br>
+自定分页代码
+<textarea id="e2" style="width:100%;height:100px;" >{toolbar:'full', tplSplitPage:'---------我的分页符---------'}</textarea>
+通过设置tplSplitPage来设置分页代码
+<script type="text/javascript" defer="true"> 
+ new tqEditor('e1',{toolbar:'full'}); 
+ new tqEditor('e2',{toolbar:'full', tplSplitPage:'---------我的分页符---------'}); 
+</script>
+</body
+></html>

@@ -1,0 +1,79 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+			http://mybatis.org/schema/mybatis-spring 
+			http://mybatis.org/schema/mybatis-spring-1.2.xsd 
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+		default-lazy-init="true">
+    <!-- 配置数据源 -->
+	<!-- 定义数据源 BoneCPDataSouce配置 测试多数据源使用-->
+  	<bean id="dataSourceTest" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+	    <property name="driverClass" value="${driverClassTest}"/>
+        <property name="jdbcUrl" value="${urlTest}"/>
+        <property name="username" value="${usernameTest}"/>
+        <property name="password" value="${passwordTest}"/>
+	    <!-- 检查数据库连接池中空闲连接的间隔时间，单位是分，默认值：240，如果要取消则设置为0  -->
+	    <property name="idleConnectionTestPeriod" value="60"/>
+	    <!-- 连接池中未使用的链接最大存活时间，单位是分，默认值：60，如果要永远存活设置为0  -->
+	    <property name="idleMaxAge" value="240"/>
+	    <!-- 每个分区最大的连接数  -->
+	    <property name="maxConnectionsPerPartition" value="30"/>
+	    <!-- 每个分区最小的连接数  -->
+	    <property name="minConnectionsPerPartition" value="10"/>
+	    <!-- 分区数 ，默认值2，最小1，推荐3-4，视应用而定 -->
+	    <property name="partitionCount" value="3"/>
+	    <!-- 每次去拿数据库连接的时候一次性要拿几个,默认值：2 --> 
+	    <property name="acquireIncrement" value="2"/>
+	    <!-- 缓存prepared statements的大小，默认值：0  -->
+	    <property name="statementCacheSize" value="100"/>
+	    <!-- 每个分区释放链接助理进程的数量，默认值：3，除非你的一个数据库连接的时间内做了很多工作，不然过多的助理进程会影响你的性能 --> 
+	    <property name="releaseHelperThreads" value="3"/>
+	</bean>
+	
+	<!-- 配置工厂 -->
+	<bean id="sqlSessionFactory.overrideMapper" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSourceTest" />  
+        <property name="typeAliasesPackage" value="*" />
+        <property name="mapperLocations" value="classpath:/**/**/*dao/mapper/*.xml"/>
+		<property name="configLocation" value="classpath:/jehc/xtmodules/xtcore/sources/mybatis/mybatistest.xml"></property>
+    </bean> 
+	
+	<!-- 事物配置 -->
+	<bean id="transactionManagerTest" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceTest" />
+	</bean>
+	
+	<!--事务增强--> 
+	<tx:advice id="txAdviceTest" transaction-manager="transactionManagerTest">
+		 <!--事务属性定义-->
+		<tx:attributes>
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />  
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 面向切面 -->
+	<aop:config proxy-target-class="true">
+	  <aop:pointcut id="epTest" expression="execution(* *.*.*service.impl.*.*(..)) ||execution(* com.phone.*.service.*.*(..))"/>
+	  <aop:advisor pointcut-ref="epTest" advice-ref="txAdviceTest" />
+	  <!-- 不再使用通知信息妈的原因根本就进入不了通知方法可能AOP拦截通知在该版本中不在使用 -->
+	</aop:config>
+</beans>

@@ -1,0 +1,12 @@
+1.0版本
+
+
+1、使用BoneCPDataSource连接所需jar如下:
+1）bonecp-0.7.0.jar
+2）google-collect-1.0.jar
+
+
+
+2、使用ehcache缓存所需jar如下:
+1)ehcache-1.6.2.jar
+2)spring.jar

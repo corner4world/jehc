@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gbk">
+<title></title>
+<script type="text/javascript" src="../TQEditor.js"></script>
+<script type="text/javascript" src="../plugin/ubb.js"></script>
+</head>
+
+<body style="background:#270530; color:#fef9ff;">
+<h2>HTML2UBB测试</h2>
+<textarea id="text" style="width:1000px; height:550px;padding:10px; border:1px inset #ccc; background:#ffffff; color:#000"></textarea>
+<script type="text/javascript">
+var htmStr='<b>粗体字</b><br><br><br><br><br><br><br><br><br><br><br><br><br>'+
+			'<u>下划线文字</u><br>'+
+			'<i>斜体字</i><br>'+
+			'<s>删除字</s><br>'+
+			'<font size="6">size=6的字</font><br>'+
+			'<font color="red">红色文字</font><br>'+
+			'<div style="background:#ffff00"><span style="color:green">黄色底文字</span></div><br>'+
+			'[code]<br>'+
+			'&nbsp;&nbsp;&nbsp;&nbsp;[b]code内部文字[/b]<br>'+
+			'[/code]<br>'+
+			'<div style="text-align:left">左对齐文字</div><br>'+
+			'<div style="text-align:center">居中对齐文字</div><br>'+
+			'<div style="text-align:right">右对齐文字</div><br>'+
+			'[code=php]<br>'+
+			'&nbsp;&nbsp;&nbsp;&nbsp;&lt;?php&nbsp;echo&nbsp;"php&nbsp;string.";&nbsp;?&gt;<br>'+
+			'[/code]<br>'+
+			'<img src="http://www.vt.com/demo/img/1.jpg"><br>'+
+			'<img src="http://www.vt.com/demo/img/2.jpg" width="400" height="300"><br>'+
+			'<ul><li>一般列表项1</li><li>一般列表项2</li><li>一般列表项3</li><li>一般列表项4</li><li>一般列表项5</li>'+
+			'</ul><br>'+
+			'<ol><li>数字列表项1,&nbsp;"[*]"不是在行开始位置的不算列表项</li><li>数字列表项2<br>'+
+			'内容是允许换行的</li><li>数字列表项3</li><li>数字列表项4</li><li>数字列表项5</li>'+
+			'</ol><br>'+
+			'<object id="mp3Player" classid="clsid:6BF52A52-394A-11d3-B153-00C04F79FAA6" type="application/x-ms-wmp" width="230" height="64"><param name="URL" value="http://www.vt.com/demo/test.mp3"><param name="autoStart" value="0"><param name="invokeURLs" value="false"><param name="playCount" value="100"><param name="Volume" value="100"><param name="defaultFrame" value="datawindow"></object><br>'+
+			'<img src="http://www.qs.com/vt/inc/client/js/tqEditor/face/1.gif" emot="1" align="absMiddle"><img src="http://www.qs.com/vt/inc/client/js/tqEditor/face/2.gif" emot="2" align="absMiddle"><img src="http://www.qs.com/vt/inc/client/js/tqEditor/face/3.gif" emot="3" align="absMiddle"><img src="http://www.qs.com/vt/inc/client/js/tqEditor/face/4.gif" emot="4" align="absMiddle"><img src="http://www.qs.com/vt/inc/client/js/tqEditor/face/5.gif" emot="5" align="absMiddle"><img src="http://www.qs.com/vt/inc/client/js/tqEditor/face/6.gif" emot="6" align="absMiddle"><br>'+
+			'<embed id="flvPlayer" src="http://www.qs.com/vt/inc/client/js/tqEditor/flvPlayer.swf" flashvars="vcastr_file=http://www.vt.com/demo/test.flv&amp;IsAutoPlay=0" width="320" height="240" quality="high" bgcolor="#0E0E0E" name="play" align="middle" allowscriptaccess="sameDomain" allowfullscreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="opaque"><br>'+
+			'<embed id="flvPlayer" src="http://www.qs.com/vt/inc/client/js/tqEditor/flvPlayer.swf" flashvars="vcastr_file=http://www.vt.com/demo/test.flv&amp;IsAutoPlay=undefined" width="640" height="480" quality="high" bgcolor="#0E0E0E" name="play" align="middle" allowscriptaccess="sameDomain" allowfullscreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="opaque"><br>'+
+			'<embed id="flvPlayer" src="http://www.qs.com/vt/inc/client/js/tqEditor/flvPlayer.swf" flashvars="vcastr_file=http://www.vt.com/demo/test.flv&amp;IsAutoPlay=undefined" width="320" height="240" quality="high" bgcolor="#0E0E0E" name="play" align="middle" allowscriptaccess="sameDomain" allowfullscreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" wmode="opaque"><br>'+
+			'&lt;font&nbsp;size=8&gt;网页源码&lt;/font&gt;'+
+			'<table><tr><td>1,1</td><td>1,2</td></tr><tr><td>2,1</td><td>2,2</td></tr></table>';
+document.getElementById('text').value=html2ubb(htmStr);
+</script>
+<br /><br />
+<hr size="1" >
+<br />
+<h2>UBB2HTML测试</h2>
+<div style="padding:10px; border:1px inset #ccc; background:#ffffff; color:#000">
+<script type="text/javascript">
+var ubbStr='[b]粗体字[/b]\n'+
+		'[u]下划线文字[/u]\n'+
+		'[i]斜体字[/i]\n'+
+		'[size=6]size=6的字[/size]\n'+
+		'[color=red]红色文字[/color]\n'+
+		'[bg=#ffff00]黄色底文字[/bg]\n'+
+		'[code]\n    [b]code内部文字[/b]\n[/code]\n'+
+		'[left]左对齐文字[/left]\n'+
+		'[center]居中对齐文字[/center]\n'+
+		'[right]右对齐文字[/right]\n'+
+		'[code=php]\n    <?php echo "php string."; ?>\n[/code]\n'+
+		'[img]http://www.vt.com/demo/img/1.jpg[/img]\n'+
+		'[img=400,300]http://www.vt.com/demo/img/2.jpg[/img]\n'+
+		'[list]\n'+
+		'[*]一般列表项1\n'+
+		'[*]一般列表项2\n'+
+		'[*]一般列表项3\n'+
+		'[*]一般列表项4\n'+
+		'[*]一般列表项5\n'+
+		'[/list]\n'+
+		'[numlist]\n'+
+		'[*]数字列表项1, "[*]"不是在行开始位置的不算列表项\n'+
+		'[*]数字列表项2\n内容是允许换行的\n'+
+		'    [*]数字列表项3\n'+
+		'[*]数字列表项4\n'+
+		'[*]数字列表项5\n'+
+		'[/numlist]\n'+
+		'[mp3]http://www.vt.com/demo/test.mp3[/mp3]\n'+
+		'[:1][:2][:3][:4][:5][:6]\n'+
+		'[flv=320,240,0]http://www.vt.com/demo/test.flv[/flv]\n'+
+		'[flv=640,480]http://www.vt.com/demo/test.flv[/flv]\n'+
+		'[flv]http://www.vt.com/demo/test.flv[/flv]\n'+
+		'<font size=8>网页源码</font>';
+//document.write(ubb2html(ubbStr));
+</script>
+</div>
+ 
+ </body>
+</html>

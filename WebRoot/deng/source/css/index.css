@@ -1,0 +1,564 @@
+.qtip-target {
+    width: 100px;
+    text-align:center;
+    padding: 5px 0;
+    border:1px dotted #99bbe8;
+    background:#dfe8f6;
+    color: #15428b;
+    cursor:default;
+    margin:10px;
+    font:bold 11px tahoma,arial,sans-serif;
+    float: left;
+}
+.x-accordion-item .x-accordion-hd-sibling-expanded {
+	border-top-color: #cfcfcf;
+	border-top-width: 0px;
+}
+.x-accordion-item .x-accordion-hd {
+	background: #fff;
+	border-width: 0 0 0px;
+	border-color: #fff #cfcfcf #cfcfcf;
+	padding: 6px 10px;
+}
+.x-grid-item-focused .x-grid-cell-inner:before {
+	content: "";
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	pointer-events: none;
+	border: 1px solid #35baf6;
+}
+.x-panel-header-default .x-tool-img {
+    background-color: #fff;
+}
+/**tbar与bbar样式开始**/
+.x-toolbar-default {
+	padding: 6px 0 6px 8px;
+	border-style: solid;
+	border-color: #f5f5f5;
+	border-width: 1px;
+	background-image: none;
+	background-color: #f5f5f5;/**#157fcc**/
+}
+.x-btn-default-toolbar-small {
+	border-color: #f5f5f5;
+	/**
+	height:28px;
+	**/
+}
+.x-btn-default-toolbar-small {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-ms-border-radius: 0px;
+	-o-border-radius: 0px;
+	border-radius: 0px;
+	padding: 3px 3px 3px 3px;
+	border-width: 0px;
+	border-style: solid;
+	background-color: #5fa2dd;
+}
+.x-toolbar-text-default {
+	padding: 0 4px;
+	font: 300 13px/16px helvetica,arial,verdana,sans-serif;
+}
+
+/**tbar与bbar鼠标移上样式**/
+.x-btn-over.x-btn-default-toolbar-small {
+	border-color: #5fa2dd;
+	background-image: none;
+	background-color: #5fa2dd;
+}
+/**tbar与bbar鼠标点击时样式**/
+.x-btn.x-btn-menu-active.x-btn-default-toolbar-small, .x-btn.x-btn-pressed.x-btn-default-toolbar-small {
+	border-color: #35baf6;
+	background-image: none;
+	background-color: #ddd;
+}
+/**tbar与bbar鼠标点击后样式**/
+.x-btn-focus.x-btn-default-toolbar-small {
+	background-image: none;
+	background-color: #35baf6;
+	-webkit-box-shadow: #35baf6 0 1px 0px 0 inset, #35baf6 0 -1px 0px 0 inset, #35baf6 -1px 0 0px 0 inset, #35baf6 1px 0 0px 0 inset;
+	-moz-box-shadow: #35baf6 0 1px 0px 0 inset, #35baf6 0 -1px 0px 0 inset, #35baf6 -1px 0 0px 0 inset, #35baf6 1px 0 0px 0 inset;
+	box-shadow: #35baf6 0 1px 0px 0 inset, #35baf6 0 -1px 0px 0 inset, #35baf6 -1px 0 0px 0 inset, #35baf6 1px 0 0px 0 inset;
+}
+/**tbar与bbar禁用后样式**/
+.x-btn.x-btn-disabled.x-btn-default-toolbar-small {
+	background-image: none;
+	background-color: #35baf6;
+}
+.x-btn-wrap-default-toolbar-small.x-btn-arrow-right:after {
+	width:0px;
+	padding-right:0px;
+	background-image: url();
+}
+/**tbar与bbar样式结束**/
+/**载入初始化页面开始**/
+.loading-indicator {
+	font-size: 11px;
+	background-image: url(../deng/images/load/loading.gif);
+	background-repeat: no-repeat;
+	background-position: top left;
+	padding-left: 20px;
+	height: 18px;
+	text-align: left;
+}
+#loading-mask {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 20000;
+	background-color: #FFFFFF !important;
+}
+#loading {
+	border: 1px solid #f5f5f5;
+	position: absolute;
+	left: 40%;
+	top: 40%;
+	padding: 2px;
+	z-index: 20001;
+	width: 250px;
+	height: auto;
+}
+#loading img {
+	margin-bottom: 5px;
+}
+#loading .loading-indicator {
+	background: white;
+	border: 0px solid #f5f5f5;
+	color: #555;
+	font: bold 13px helvetica, arial, tahoma, sans-serif;
+	padding: 10px;
+	margin: 0;
+	text-align: center;
+	height: auto;
+}
+/**载入初始化页面结束**/
+
+/* 默认第一个字体列表的选项是从textarea的样式里读取的 所以修正这个样式就可以了
+.x-html-editor-wrap textarea {
+	font: normal 12px '黑体','宋体';
+}
+*/
+.saveing-icon {
+	background-image: url(../../../deng/images/load/loading.gif ) !important;
+	background-repeat: no-repeat;
+	background-position: top left;
+	text-align: left;
+}
+
+
+
+.x-panel-header-default {
+    background-image: none;
+    background-color: #fff;
+}
+
+.x-panel-default-outer-border-trl {
+    border-top-color: #fff!important;
+    border-top-width: 0px!important;
+    border-right-color: #f5f5f5!important;
+    border-right-width: 0px!important;
+    border-left-color: #fff!important;
+    border-left-width: 0px!important;
+}
+
+
+.x-panel-header-default {
+    font-size: 17px;
+    border: 1px solid #fff;
+}
+
+.x-panel-default-outer-border-rl {
+    border-right-color: #fff!important;
+    border-right-width: 0px!important;
+    border-left-color: #fff!important;
+    border-left-width: 0px!important;
+}
+
+.x-grid-body {
+    background: white;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.x-grid-body {
+    border-top-color: #f5f5f5;
+}
+.x-column-header {
+    border-right: 1px solid #cfcfcf;
+    color: #666;
+    font: 300 13px/15px helvetica, arial, verdana, sans-serif;
+    outline: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #cfcfcf;
+}
+/**panel头部肤色开始**/
+.x-panel-header-default-framed-top {
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-bottom-left-radius: 0;
+	border-bottom-left-radius: 0;
+	padding: 9px 9px 9px 9px;
+	border-width: 1px 1px 0 1px;
+	border-style: solid;
+	/**Panel背景颜色采用经典蓝**/
+	background-color: #5fa2dd;
+}
+.x-panel-header-title-default-framed {
+	color: #fff;
+	font-family: helvetica,arial,verdana,sans-serif;
+}
+.x-panel-default-framed {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-ms-border-radius: 0px;
+	-o-border-radius: 0px;
+	border-radius: 0px;
+	padding: 0;
+	border-width: 1px;
+	border-style: solid;
+	background-color: white;
+}
+.x-panel-default-framed {
+	border-color: #fff;
+	padding: 0;
+}
+.x-panel-header-default-framed .x-tool-img {
+	background-color:#fff;
+}
+/**panel头部肤色结束**/
+/**window头部肤色开始**/
+.x-window-header-default {
+	border-width: 1px!important;
+}
+.x-window-header-default {
+	font-size: 15px;
+	/**
+	border-color: #35baf6;
+	background-color: #35baf6;
+	border-color: #fff;
+	background-color: #fff;
+	**/
+}
+.x-window-header-title-default {
+	/**
+	color: #fff;
+	**/
+	color: #35baf6;
+	font-size: 17px;
+	font-weight: 300;
+	font-family: helvetica,arial,verdana,sans-serif;
+	line-height: 32px;
+}
+.x-toolbar-footer {
+	padding: 6px 0 6px 6px;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 0;
+	background-image: none;
+	background-color: #fff;
+}
+.x-window-header-default .x-tool-img {
+	/**
+	background-color: #35baf6;
+	background-color: #fff;
+	**/
+}
+.x-window-default {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-ms-border-radius: 0px;
+	-o-border-radius: 0px;
+	border-radius: 0px;
+	padding: 0;
+	border-width: 0px;
+	border-style: solid;
+	/**
+	background-color: #35baf6;
+	background-color: #fff;
+	**/
+}
+element.style {
+	box-shadow: #fff;
+	right: auto;
+	left: 383px;
+	top: 139px;
+	width: 600px;
+	height: 391px;
+	z-index: 19000;
+}
+.x-css-shadow {
+	position: absolute;
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-ms-border-radius: 0px;
+	-o-border-radius: 0px;
+	border-radius: 0px;
+}
+.x-window-header-default-top {
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-bottom-left-radius: 0;
+	border-bottom-left-radius: 0;
+	padding: 9px 9px 6px 9px;
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	/**
+	background-color: #35baf6;
+	background-color: #fff;
+	**/
+}
+
+.x-window-header-default {
+	border-width: 2px !important;
+}
+.x-window-header-default-top {
+	-moz-border-radius-topleft: 0;
+	-webkit-border-top-left-radius: 0;
+	border-top-left-radius: 0;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-right-radius: 0;
+	border-top-right-radius: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-bottom-left-radius: 0;
+	border-bottom-left-radius: 0;
+	padding: 20px 14px 20px 14px;
+	border-width: 2px 2px 2px 2px;
+	border-style: solid;
+}
+/**window头部肤色结束**/
+/**tbar与bbar样式开始**/
+.x-toolbar-default {
+	padding: 6px 0 6px 8px;
+	border-style: solid;
+	border-color: #cecece;
+	border-width: 1px;
+	background-image: none;
+	background-color: #fff;/**#157fcc**/
+}
+.x-btn-default-toolbar-small {
+	border-color: #5fa2dd;
+	heigth:32px;
+}
+.x-btn-default-toolbar-small {
+	-webkit-border-radius: 0px;
+	-moz-border-radius: 0px;
+	-ms-border-radius: 0px;
+	-o-border-radius: 0px;
+	border-radius: 0px;
+	padding: 3px 3px 3px 3px;
+	border-width: 0px;
+	border-style: solid;
+	background-color: #5fa2dd;
+}
+/**tbar与bbar鼠标移上样式**/
+.x-btn-over.x-btn-default-toolbar-small {
+	border-color: #5fa2dd;
+	background-image: none;
+	background-color: #5fa2dd;
+}
+/**tbar与bbar鼠标点击时样式**/
+.x-btn.x-btn-menu-active.x-btn-default-toolbar-small, .x-btn.x-btn-pressed.x-btn-default-toolbar-small {
+	border-color: #5fa2dd;
+	background-image: none;
+	background-color: #5fa2dd;
+}
+/**tbar与bbar鼠标点击后样式**/
+.x-btn-focus.x-btn-default-toolbar-small {
+	background-image: none;
+	background-color: #3892d3;
+	-webkit-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+	-moz-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+	box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
+}
+/**tbar与bbar禁用后样式**/
+.x-btn.x-btn-disabled.x-btn-default-toolbar-small {
+	background-image: none;
+	background-color: #3892d3;
+}
+.x-btn-wrap-default-toolbar-small.x-btn-arrow-right:after {
+	width:0px;
+	padding-right:0px;
+	background-image: url();
+}
+
+/**tab选项默认样式开始**/
+.x-box-scroller-tab-bar-default {
+    background-color: #35baf6;
+}
+.x-tab-default-top {
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -ms-border-radius: 0;
+    -o-border-radius: 0;
+    border-radius: 0;
+    padding: 8px 10px 8px 10px;
+    border-width: 0;
+    border-style: solid;
+    /**注释清爽肤色
+    background-color: #fff;
+    background-color: transparent;
+    **/
+}
+.x-tab-inner-default {
+	/**注释清爽肤色
+	background: #fff;
+    color: #35baf6;
+    **/
+}
+.x-tab.x-tab-active.x-tab-default .x-tab-inner-default {
+    /**注释清爽肤色
+       color: #fff;
+       background: #5fa2dd;
+    **/
+    color: #fff;
+}
+/**
+.x-tab.x-tab-active.x-tab-default {
+    border-color: #3892d3;
+    background-color: #3892d3;
+}
+
+
+.x-tab-bar-default-top > .x-tab-bar-body-default {
+    padding: 0px 0px 0px 0px;
+}
+.x-tab-bar-default-bottom > .x-tab-bar-body-default {
+    padding: 0px 0px 8px 0px;
+}
+**/
+.x-tab-bar-plain {
+	/**注释清爽肤色
+	background: #fff!important;
+	**/
+}
+.x-tab-bar-default {
+	/**蓝色
+    background-color: #5fa2dd;
+    **/
+    /**
+    注释清爽肤色
+    background-color: #fff;
+    **/
+}
+.x-tab.x-tab-active.x-tab-default {
+   /**注释清爽肤色
+    border-color: #35baf6;
+    background-color: #35baf6;
+    **/
+    border-color: #35baf6;
+    background-color: #35baf6;
+}
+.x-box-scroller-tab-bar-default {
+	/**注释清爽肤色
+	background-color: #fff;
+	**/
+}
+.x-tab-default {
+	/**注释清爽肤色
+	border-color: #fff;
+	cursor: pointer;
+	**/
+}
+.x-tab-default-bottom {
+	-moz-border-radius-topleft: 0px;
+	-webkit-border-top-left-radius: 0px;
+	border-top-left-radius: 0px;
+	-moz-border-radius-topright: 0px;
+	-webkit-border-top-right-radius: 0px;
+	border-top-right-radius: 0px;
+	-moz-border-radius-bottomright: 0px;
+	-webkit-border-bottom-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	-moz-border-radius-bottomleft: 0px;
+	-webkit-border-bottom-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border-width: 1px 1px 1px 1px;
+	border-style: solid;
+	background-color: #fff;
+}
+.x-tab-default .x-tab-close-btn {
+	/**
+	top: 10px;
+	**/
+	right:10px;
+	/**
+	background: url(images/tab/tab-default-close.png) 0 0;
+	**/
+}
+/**tab选项默认样式结束**/
+.x-btn-default-small {
+    border-color: #fff;
+}
+.x-btn-icon-el-default-small.x-btn-glyph {
+	color: #35baf6;
+}
+.x-btn-default-small {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    padding: 3px 3px 3px 3px;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #35baf6;
+}
+/**button选项默认样式结束**/
+/**Panel字体颜色开始**/
+.x-panel-header-title-default {
+    color: #35baf6;
+}
+/**Panel字体颜色结束**/
+/**accordion字体颜色开始
+
+**/
+.x-accordion-hd .x-panel-header-title {
+    color: #35baf6;
+    text-transform: none;
+}
+/**accordion字体颜色结束**/
+/**tbar字体颜色开始**/
+.x-btn-inner-default-toolbar-small {
+    font: 300 14px/16px helvetica,arial,verdana,sans-serif;
+    color: #fff;
+    padding: 0 2px;
+    max-width: 100%;
+}
+/**tbar字体颜色结束**/
+img {
+    cursor: pointer;
+}
+
+.x-panel-header-default-framed {
+    font-size: 16px;
+    border: 1px solid #f5f5f5;
+}
+
+
+

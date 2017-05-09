@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+<script src="../plugin/apiEx.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script><br>
+<textarea id="e1" rows="12" cols="100" ></textarea>
+<script type="text/javascript" defer="true"> 
+var e= new tqEditor('e1',{toolbar:'full'}); 
+</script><br> 
+扩展的接口同插件plugin/apiEx.js提供<br>
+<table border="1" cellspacing="3" cellpadding="3">
+	<tr>
+		<td>接口</td>
+		<td>作用</td>
+		<td>测试</td>
+		<td>结果</td>
+	</tr>
+	<tr>
+		<td>images()</td>
+		<td>取所有图片的链接</td>
+		<td><input type="button" name="button" id="button" value="images()" onClick="alert(e.images().join('\n'))"></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>flashs()</td>
+		<td>取所有Flash的源址</td>
+		<td><input type="button" name="button" id="button" value="flashs()" onClick="alert(e.flashs().join('\n'))"></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>flvs()</td>
+		<td>取flv</td>
+		<td><input type="button" name="button" id="button" value="flvs()" onClick="alert(e.flvs().join('\n'))"></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>removeLinks(callback)</td>
+		<td><p>删除所有链接</p></td>
+		<td><input type="button" name="button" id="button" value="removeLinks()" onClick="e.removeLinks()">
+			<br>
+		<input type="button" name="button" id="button" value="removeLinks(callback)" onClick="e.removeLinks(function(url){return 'http://'==url.substr(0,7);})"></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>removeImages(callback)</td>
+		<td>删除所有图片</td>
+		<td><input type="button" name="button" id="button" value="removeImages()" onClick="e.removeImages()">
+			<br>
+		<input type="button" name="button" id="button" value="removeImages(callback)" onClick="e.removeImages(function(url){return 'http://'==url.substr(0,7);})"></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>removeFlashs(callback)</td>
+		<td>删除所有Flash</td>
+		<td><input type="button" name="button" id="button" value="removeFlashs()" onClick="e.removeFlashs()">
+			<br>
+		<input type="button" name="button" id="button" value="removeFlashs(callback)" onClick="e.removeFlashs(function(url){return 'http://'==url.substr(0,7);})"></td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>removeObjects()</td>
+		<td>删除所有Object对象</td>
+		<td><input type="button" name="button" id="button" value="removeObjects()" onClick="e.removeObjects()">
+			<br></td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+</body>
+</html>

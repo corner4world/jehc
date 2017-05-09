@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<script type="text/javascript" src="../TQEditor.js"></script>
+
+<script type="text/javascript">
+function checkForm(form)
+{
+	//如是用户在编辑器的输入, 编辑器的内容会自动同步到表单中,
+	//var content = document.getElementById('content').value;
+	//if(''===content){alert('请输入内容'); return false;} return true;
+	
+	//--------------------------------------------------
+		
+	//如内容是通过调用编辑器的接口添加的, 侧需要以下代码来保存
+	var editor = document.getElementById('content').editor;
+	if(editor.content()===''){
+		alert('请输入内容');
+		return false;	
+	}
+	return true;
+}
+function submitForm(e)
+{
+	if(! e.ctrlKey) return;//未按Ctrl键
+	var key = e.keyCode || e.which;
+	//alert(key);
+	if(key==13 || key ==10 ){//	 || key==83
+		var form=document.getElementById('form1');
+		document.getElementById('content').editor.save();//将编辑器数据保存到表单中
+		if(checkForm(form))	form.submit();
+		return false;
+	}
+	
+}
+</script>
+
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script>提交前测试编辑器内容是否空<br>
+	
+<form  id="form1" name="form1" method="post" action="" onSubmit="return checkForm(this)">
+	<textarea name="content" id="content" cols="80" rows="5"></textarea>
+	<script type="text/javascript">
+new TQEditor('content',{toolbar:'bbs',onkeydown:submitForm});
+	</script>
+<br>
+	<input type="submit" name="button" id="button" value="提交">
+	按 Ctrl+Enter提交
+</form>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script><br>
+<textarea id="e1" rows="12" cols="100" ></textarea>
+<script type="text/javascript" defer="true"> 
+var e= new tqEditor('e1'); 
+</script>
+<br>
+<input type="button" name="button" id="button" value="setHeight(150)" onClick="e.setHeight(150)">
+<input type="button" name="button" id="button" value="setWidth(1)" onClick="e.setWidth(1)">
+<input type="button" name="button" id="button" value="setWidth(0.7)" onClick="e.setWidth(0.7)">
+<input type="button" name="button" id="button" value="changeMode()" onClick="e.changeMode()">
+<input type="button" name="button" id="button" value="changeMode('code')" onClick="e.changeMode('code')">
+<input type="button" name="button" id="button" value="changeMode('visual')" onClick="e.changeMode('visual')">
+<input type="button" name="button" id="button" value="currentMode()" onClick="alert(e.currentMode())">
+<input type="button" name="button" id="button" value="content()" onClick="alert(e.content())">
+<input type="button" name="button" id="button" value="getSelectHtml()" onClick="alert(e.getSelectHtml())">
+<input type="button" name="button" id="button" value="getSelectText()" onClick="alert(e.getSelectText())">
+<input type="button" name="button" id="button" value="getSelectText(true)" onClick="alert(e.getSelectText(true))">
+<input type="button" name="button" id="button" value="setContent('TEST')" onClick="e.setContent('TEST')" >
+<input type="button" name="button" id="button" value="insertHtml('TEST')" onClick="e.insertHtml('TEST')">
+<input type="button" name="button" id="button" value="insertHtml('TEST','before')" onClick="e.insertHtml('TEST','before')">
+<input type="button" name="button" id="button" value="insertHtml('TEST','after')" onClick="e.insertHtml('TEST','after')">
+<input type="button" name="button" id="button" value="appendHtml('TEST')" onClick="e.appendHtml('TEST')">
+<br />
+编辑器对象方法: <br />
+appendHtml(string html) 最后的位置附加网页代码<br />
+changeMode(string mode) 切换可视化模式与代码模式, 空值时自动转另一种模式. mode可选值['code'|'visual']<br />
+cleanWord(bool force) 清理从word中粘贴的无用代码<br />
+content()获取代码<br />
+currentMode() /取得当前的编辑模式, code 代码 , visual 可视化<br />
+exeCmd(string cmd, string para) 执行特定的命令, 请参看W3C.<br />
+focus()使编辑器取得输入焦点<br />
+formatHTML(string html) 对代码进行美化处理<br>
+fullScreen(bool b)切换全屏与退出全屏<br />
+insertFlash(string url,[int width,[int height]]) 插入Flash<br />
+insertFlv(string url,[bool auto_start,[int width,[int height]]]) 插入Flv视频<br />
+insertHtml(string htm,[int|string position])在插入点插入HTML代码, position 为-1时, 有选中区前方插入, 1时在选中区后方插入, 0时替换选中区<br />
+insertImage(string image_url,[int width,[int height,[int border,[string alt,[string align]]]]]) 插入图片<br />
+insertMusic(string url,[bool auto_start]) 插入音频<br />
+insertRm(string url,[bool auto_start,[int width,[int height]]]) 插入RM视频<br />
+insertVideo(string url,[bool auto_start,[int width,[int height]]]) 插入一般视频<br />
+save() 保全代码至表单<br />
+setContent(string code)设置内容<br />
+setHeight(int value)设置高度,<br>
+setWidth(int|float value)设置宽度, 参数必须是0-1之间的小数表示百分比, 或大于1的整数表示像素值<br />
+typeset() 执行自动排版功能
+<hr />
+<p>事件: </p>
+<p>为编辑器添加事件回调的办法是, 在原表单加添事件处理代码</p>
+<hr />
+默认可用配置项<br>
+paragraphs:段落<br>
+fontnames:字体<br>
+fontsizes:字号<br>
+toolbar:工具栏<br>
+toolbarRight:右侧工具栏<br>
+showToolbarGroupHandle:是否显示工栏分组图标<br>
+tplFlash:<br>
+tplFlv<br>
+tplRm<br>
+tplVideo<br>
+tplMusic<br>
+tplSplitPage<br>
+uploadFieldName<br>
+imageUploadUrl<br>
+imageFileTypes<br>
+imageFileSize<br>
+directInsertUploadImage<br>
+linkUploadUrl<br>
+linkFileTypes<br>
+linkFileSize<br>
+flashUploadUrl<br>
+flashFileTypes<br>
+flashFileSize<br>
+musicUploadUrl<br>
+musicFileTypes<br>
+musicFileSize<br>
+videoUploadUrl<br>
+videoFileTypes<br>
+videoFileSize<br>
+enter2br<br>
+formatHTML<br>
+width<br>
+height<br>
+autoClean<br>
+faceCount<br>
+css<br>
+bgColor<br>
+textColor<br>
+typesetImageTextCenter<br>
+typesetIndentParagraph<br>
+typesetImageBorder<br>
+resize<br>
+debug<br>
+} 
+
+<hr />
+可通过
+document.getElementById('表单名').editor 取得编辑器对象
+<script type="text/javascript">
+//	document.write('<br>config={');
+//for (var p in TQE.config){
+//	document.write('<br>'+p);
+//}
+//	document.write('}');
+</script>
+</body>
+</html>

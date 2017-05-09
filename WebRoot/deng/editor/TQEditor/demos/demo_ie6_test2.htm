@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>添加新闻</title>
+<script type="text/javascript" src="../TQEditor.js"></script>
+</head>
+<body>
+<form method="post" onSubmit="return false">
+<table width="98%" border="0" align="center" cellpadding="2" cellspacing="1" bgcolor="#E8E8E8" style="margin-top:10px;"><tr><td height="30" colspan="3" align="left" nowrap bgcolor="#1E86A8"><span style="color:#FFF;font-size:14px;font-weight: bold;padding-left:5px">添加新闻</span>&nbsp;&nbsp;<span style="font-size:12px;color:#FFF">带*为必填项</span></td></tr><tr><td height="25" align="right" bgcolor="#EBF4FA" >所属分类：</td><td height="25" align="left" bgcolor="#FFFFFF">
+<select name="cid" id="cid">
+<option value="0">请选择</option>
+<option value="110">上装</option>
+<option value="79">裙裤</option>
+<option value="82">鞋款</option>
+<option value="85">箱包</option>
+<option value="117">内衣</option>
+<option value="118">配饰</option>
+<option value="119">饰品</option>
+<option value="154">美妆</option>
+<option value="365">家居</option>
+</select>
+，如不属分类不用选择</td></tr><tr><td height="25" align="right" bgcolor="#EBF4FA" >所属品牌：</td><td height="25" align="left" bgcolor="#FFFFFF"><select name="brandid" id="brandid">
+<option value="0">请选择</option>
+</select></td></tr><tr><td width="19%" height="25" align="right" bgcolor="#EBF4FA" >标题：&nbsp;*</td><td width="81%" height="25" align="left" bgcolor="#FFFFFF">
+<table>
+	<tr>
+		<td><textarea name="title" id="title" rows="3" cols="39"></textarea></td>
+	</tr>
+</table>
+<script type="text/javascript">
+new tqEditor('title',{toolbar:['bold','|','forecolor','|','removeformat',]});
+</script>
+</td></tr><tr><td height="25" align="right" bgcolor="#EBF4FA" >来源：</td><td height="25" align="left" bgcolor="#FFFFFF"><input name="source" type="text" id="source" size="50"/></td></tr><tr><td height="25" align="right" bgcolor="#EBF4FA" >关键词：</td><td height="25" align="left" bgcolor="#FFFFFF"><input name="keywords" type="text" id="keywords" size="50" />
+多个以逗号分开</td></tr><tr><td height="25" align="right" bgcolor="#EBF4FA" >转到：</td><td height="25" align="left" bgcolor="#FFFFFF"><input name="url" type="text" id="url" size="50" /></td></tr><tr><td height="25" align="right" bgcolor="#EBF4FA" >缩略图：</td><td height="25" align="left" bgcolor="#FFFFFF" style="line-height:25px"><div id="uploadprogress2" style="height:5px;width:100%"></div>
+<input type="text" name="upload2" id="upload2" readonly="readonly" size="50" />
+<span id="uploadmain2"></span><br /><span id="uploadlist2"></span>
+</td></tr>
+<tr><td height="25" align="right" bgcolor="#EBF4FA" >内容：</td><td height="25" align="left" bgcolor="#FFFFFF">
+<textarea name="content" id="content" cols="80" rows="12"></textarea>
+<script type="text/javascript">
+new tqEditor('content',{toolbar:'admin'});
+</script>
+</td></tr><tr><td height="25" align="right" bgcolor="#EBF4FA" >频道栏目推送项：</td><td align="left" bgcolor="#FFFFFF" style="line-height:25px">
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_1" value="1" /><label for="channelbox_1">首页</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_2" value="2" /><label for="channelbox_2">上装</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_3" value="3" /><label for="channelbox_3">裙裤</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_4" value="4" /><label for="channelbox_4">鞋款</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_5" value="5" /><label for="channelbox_5">包</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_6" value="6" /><label for="channelbox_6">内衣</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_7" value="7" /><label for="channelbox_7">配饰</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_8" value="8" /><label for="channelbox_8">饰品</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_9" value="9" /><label for="channelbox_9">美妆</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_10" value="10" /><label for="channelbox_10">美体</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_11" value="11" /><label for="channelbox_11">会员</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_12" value="12" /><label for="channelbox_12">促销</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_13" value="13" /><label for="channelbox_13">风格</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_14" value="14" /><label for="channelbox_14">品牌</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_15" value="15" /><label for="channelbox_15">名品专区</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_16" value="16" /><label for="channelbox_16">COCO女装</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_17" value="17" /><label for="channelbox_17">鞋</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_18" value="18" /><label for="channelbox_18">饰品/表</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_19" value="19" /><label for="channelbox_19">美容美体</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_20" value="20" /><label for="channelbox_20">折扣专区</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_21" value="21" /><label for="channelbox_21">V友团</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_22" value="22" /><label for="channelbox_22">抢购</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_23" value="23" /><label for="channelbox_23">品牌总汇</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_24" value="24" /><label for="channelbox_24">新闻</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_25" value="25" /><label for="channelbox_25">杂志</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_26" value="26" /><label for="channelbox_26">短信</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_27" value="27" /><label for="channelbox_27">cocogirl</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_28" value="28" /><label for="channelbox_28">专题</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_29" value="29" /><label for="channelbox_29">超级新品</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_30" value="30" /><label for="channelbox_30">网站联盟</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_31" value="31" /><label for="channelbox_31">新品上架</label></div>
+<div style="width:70px;float:left;height:25px"><input name="channel[]" type="checkbox" id="channelbox_32" value="32" /><label for="channelbox_32">薇薇女装</label></div>
+ </td></tr><tr><td height="25" align="right" bgcolor="#EBF4FA" >&nbsp;</td><td align="left" bgcolor="#FFFFFF" style="line-height:25px">
+<div id="channel_1" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">首页推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="200" />&nbsp;人气最旺v友团</label></div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="201" />&nbsp;靓丽时尚v友团</label></div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="1" />&nbsp;首页头条</label></div>
+</div>
+<div id="channel_2" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">上装推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="20" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_3" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">裙裤推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="30" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_4" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">鞋款推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="40" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_5" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">包推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="50" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_6" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">内衣推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="60" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_7" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">配饰推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="70" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_8" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">饰品推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="80" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_9" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">美妆推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="90" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_10" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">美体推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="100" />&nbsp;新闻头条</label></div>
+</div>
+<div id="channel_11" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">会员推送选项</div>
+</div>
+<div id="channel_12" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">促销推送选项</div>
+</div>
+<div id="channel_13" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">风格推送选项</div>
+</div>
+<div id="channel_14" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">品牌推送选项</div>
+</div>
+<div id="channel_15" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">名品专区推送选项</div>
+</div>
+<div id="channel_16" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">COCO女装推送选项</div>
+</div>
+<div id="channel_17" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">鞋推送选项</div>
+</div>
+<div id="channel_18" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">饰品/表推送选项</div>
+</div>
+<div id="channel_19" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">美容美体推送选项</div>
+</div>
+<div id="channel_20" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">折扣专区推送选项</div>
+</div>
+<div id="channel_21" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">V友团推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="205" />&nbsp;V友团简介</label></div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="204" />&nbsp;新闻公告</label></div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="202" />&nbsp;最新动态</label></div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="203" />&nbsp;最新动态(图)</label></div>
+</div>
+<div id="channel_22" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">抢购推送选项</div>
+</div>
+<div id="channel_23" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">品牌总汇推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="206" />&nbsp;品牌赠送优惠</label></div>
+</div>
+<div id="channel_24" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">新闻推送选项</div>
+</div>
+<div id="channel_25" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">杂志推送选项</div>
+</div>
+<div id="channel_26" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">短信推送选项</div>
+</div>
+<div id="channel_27" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">cocogirl推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="208" />&nbsp;杂项信息</label></div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="207" />&nbsp;首页新闻</label></div>
+</div>
+<div id="channel_28" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">专题推送选项</div>
+</div>
+<div id="channel_29" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">超级新品推送选项</div>
+</div>
+<div id="channel_30" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">网站联盟推送选项</div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="209" />&nbsp;公告</label></div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="210" />&nbsp;常见问题</label></div>
+<div style="width:150px;float:left;height:25px"><label><input name="special[]" type="checkbox" id="special[]" value="211" />&nbsp;活动公告</label></div>
+</div>
+<div id="channel_31" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">新品上架推送选项</div>
+</div>
+<div id="channel_32" style="display:none">
+<div style="width:100%;float:left;paddin-left:10px;font-weight:bold;">薇薇女装推送选项</div>
+</div>
+ </td></tr><tr><td align="right" bgcolor="#EBF4FA" >&nbsp;</td><td align="left" bgcolor="#FFFFFF"><input type="submit" name="addsubmit" id="addsubmit" value="提交" />
+&nbsp;</td></tr></table>
+
+</form>
+</body>
+</html>

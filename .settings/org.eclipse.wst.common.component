@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="jehc">
+        <wb-resource deploy-path="/" source-path="/WebRoot"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/jehc-src-modules"/>
+        <property name="context-root" value="jehc"/>
+        <property name="java-output-path" value="/jehc/WebRoot/WEB-INF/classes"/>
+    </wb-module>
+</project-modules>

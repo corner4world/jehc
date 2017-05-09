@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.Xt_Functioninfo">
+	<!--初始化分页-->
+	<select id="getXtFunctioninfoListByCondition" resultType="jehc.xtmodules.xtmodel.Xt_Functioninfo" parameterType="map">
+		SELECT
+			xt_functioninfo.`xt_functioninfo_id`,
+			xt_functioninfo.`xt_functioninfoName`,
+			xt_functioninfo.`xt_functioninfoTitle`,
+			xt_functioninfo.`xt_functioninfoURL`,
+			xt_functioninfo.`xt_menuinfo_id`,
+			xt_functioninfo.`xt_functioninfoMethod`,
+			xt_functioninfo.`xt_functioninfoType`,
+			xt_functioninfo.`xt_functioninfoIsAuthority`,
+			xt_functioninfo.`xt_functioninfoStatus`,
+			xt_menuinfo.`xt_menuinfo_title`
+		FROM 
+			xt_functioninfo AS xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtFunctioninfoById" resultType="jehc.xtmodules.xtmodel.Xt_Functioninfo" parameterType="string">
+		SELECT
+			xt_functioninfo.`xt_functioninfo_id`,
+			xt_functioninfo.`xt_functioninfoName`,
+			xt_functioninfo.`xt_functioninfoTitle`,
+			xt_functioninfo.`xt_functioninfoURL`,
+			xt_functioninfo.`xt_menuinfo_id`,
+			xt_functioninfo.`xt_functioninfoMethod`,
+			xt_functioninfo.`xt_functioninfoType`,
+			xt_functioninfo.`xt_functioninfoIsAuthority`,
+			xt_functioninfo.`xt_functioninfoStatus`,
+			xt_menuinfo.`xt_menuinfo_title`
+		FROM 
+			xt_functioninfo AS xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+		WHERE xt_functioninfo_id=#{xt_functioninfo_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtFunctioninfo" parameterType="jehc.xtmodules.xtmodel.Xt_Functioninfo">
+		INSERT INTO
+			xt_functioninfo
+			(
+			`xt_functioninfo_id`,
+			`xt_functioninfoName`,
+			`xt_functioninfoTitle`,
+			`xt_functioninfoURL`,
+			`xt_menuinfo_id`,
+			`xt_functioninfoMethod`,
+			`xt_functioninfoType`,
+			`xt_functioninfoIsAuthority`,
+			`xt_functioninfoStatus`
+			)
+			VALUES
+			(
+			#{xt_functioninfo_id},
+			#{xt_functioninfoName},
+			#{xt_functioninfoTitle},
+			#{xt_functioninfoURL},
+			#{xt_menuinfo_id},
+			#{xt_functioninfoMethod},
+			#{xt_functioninfoType},
+			#{xt_functioninfoIsAuthority},
+			#{xt_functioninfoStatus}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtFunctioninfo" parameterType="jehc.xtmodules.xtmodel.Xt_Functioninfo">
+		UPDATE
+			xt_functioninfo
+		SET
+			`xt_functioninfo_id` = #{xt_functioninfo_id},
+			`xt_functioninfoName` = #{xt_functioninfoName},
+			`xt_functioninfoTitle` = #{xt_functioninfoTitle},
+			`xt_functioninfoURL` = #{xt_functioninfoURL},
+			`xt_menuinfo_id` = #{xt_menuinfo_id},
+			`xt_functioninfoMethod` = #{xt_functioninfoMethod},
+			`xt_functioninfoType` = #{xt_functioninfoType},
+			`xt_functioninfoIsAuthority` = #{xt_functioninfoIsAuthority},
+			`xt_functioninfoStatus` = #{xt_functioninfoStatus}
+		WHERE xt_functioninfo_id=#{xt_functioninfo_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtFunctioninfo" parameterType="map">
+		delete from xt_functioninfo where xt_functioninfo_id in (#{xt_functioninfo_id})
+	</delete>
+	
+	<!--读取所有功能-->
+	<select id="getXtFunctioninfoList" resultType="jehc.xtmodules.xtmodel.Xt_Functioninfo" parameterType="map">
+		SELECT
+			xt_functioninfo.`xt_functioninfo_id`,
+			xt_functioninfo.`xt_functioninfoName`,
+			xt_functioninfo.`xt_functioninfoTitle`,
+			xt_functioninfo.`xt_functioninfoURL`,
+			xt_functioninfo.`xt_menuinfo_id`,
+			xt_functioninfo.`xt_functioninfoMethod`,
+			xt_functioninfo.`xt_functioninfoType`,
+			xt_functioninfo.`xt_functioninfoIsAuthority`,
+			xt_functioninfo.`xt_functioninfoStatus`,
+			xt_menuinfo.`xt_menuinfo_title`
+		FROM 
+			xt_functioninfo as xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+		WHERE 1=1
+			AND xt_functioninfo.`xt_functioninfoStatus`='0'
+			<if test="null != xt_functioninfoType">
+				AND xt_functioninfo.xt_functioninfoType = #{xt_functioninfoType}
+			</if>
+	</select>
+	
+	
+	<!-- 数据权限 -->
+	<!-- 查询所有功能数据并分组 -->
+	<select id="getXtFunctioninfoListForData" parameterType="map" resultType="jehc.xtmodules.xtmodel.Xt_Functioninfo">
+		SELECT
+			xt_functioninfo.`xt_functioninfo_id`,
+			xt_functioninfo.`xt_functioninfoName`,
+			xt_functioninfo.`xt_functioninfoTitle`,
+			xt_functioninfo.`xt_functioninfoURL`,
+			xt_functioninfo.`xt_menuinfo_id`,
+			xt_functioninfo.`xt_functioninfoMethod`,
+			xt_functioninfo.`xt_functioninfoType`,
+			xt_functioninfo.`xt_functioninfoIsAuthority`,
+			xt_menuinfo.`xt_menuinfo_title`,
+			xt_functioninfo.`xt_functioninfoStatus`
+		FROM 
+			xt_functioninfo AS xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+		WHERE 1=1
+				AND xt_functioninfo.`xt_functioninfoStatus`='0'
+			<!-- 功能权限调用使用该条件 -->
+			<if test="null != xt_menuinfo_id">
+				AND xt_functioninfo.`xt_menuinfo_id` = #{xt_menuinfo_id}
+			</if>
+			<if test="null != xt_functioninfoType">
+				AND xt_functioninfo.xt_functioninfoType = #{xt_functioninfoType}
+			</if>
+			<if test="null != xt_menuinfo_title">
+				AND xt_menuinfo.xt_menuinfo_title like '%${xt_menuinfo_title}%'
+			</if>
+			<if test="null != xt_functioninfoName">
+				AND xt_functioninfo.xt_functioninfoName like '%${xt_functioninfoName}%'
+			</if>
+			<if test="null != xt_functioninfoIsAuthority">
+				AND xt_functioninfo.xt_functioninfoIsAuthority = #{xt_functioninfoIsAuthority}
+			</if>
+		 GROUP BY xt_functioninfo.`xt_menuinfo_id`
+	</select>
+	<select id="getXtFunctioninfoAllForData" parameterType="map" resultType="jehc.xtmodules.xtmodel.Xt_Functioninfo">
+		SELECT
+		  `xt_functioninfo_id`,
+		  `xt_functioninfoName`,
+		  `xt_menuinfo_id`
+		FROM
+		  `xt_functioninfo`
+		WHERE 1=1
+			<if test="null != xt_menuinfo_id">
+				AND xt_menuinfo_id = #{xt_menuinfo_id}
+			</if>
+			<if test="null != xt_functioninfoIsAuthority">
+				AND xt_functioninfoIsAuthority = #{xt_functioninfoIsAuthority}
+			</if>
+	</select>
+</mapper>

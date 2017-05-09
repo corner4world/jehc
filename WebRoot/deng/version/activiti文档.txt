@@ -1,0 +1,79 @@
+架构springMVC+MyBatis+Mysql+Extjs为例
+
+1.流程部署方法实现
+
+
+
+2.流程发起实例
+	参数:
+	String key,
+	String businessKey,
+	Map<String, Object> variables
+	通过key发起实例
+	ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("leave", businessKey, variables);
+
+
+
+
+3.删除流程实例
+	参数:
+	String key,
+	String businessKey,
+	Map<String, Object> variables
+	通过key发起实例
+	ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("leave", businessKey, variables);
+
+
+
+
+4.删除流程部署
+
+
+
+
+5.嵌入自定义用户体系
+
+
+
+
+6.流程历史查询
+
+
+
+
+
+7.人工任务查询
+	参数：
+	String userid,
+	String processDefinitionKey
+	(1)根据当前用户的id查询代办任务列表(已经签收)
+	List<Task> taskAssignees = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskAssignee(userid).orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
+	
+	(2)根据当前用户id查询未签收的任务列表
+	List<Task> taskCandidates = taskService.createTaskQuery().processDefinitionKey(processDefinitionKey).taskCandidateUser(userid).orderByTaskPriority().desc().orderByTaskCreateTime().desc().list();
+
+
+
+8.流程监控图监控
+
+
+
+
+
+9.可视化流程图操作(Extjs流程图开发兼容所有浏览器)
+
+
+
+
+
+10.对activiti流程进行封装
+
+
+
+
+11.对页面提交进行封装(可定制开发该功能级别为最低)
+
+
+
+
+12.流程分页+条件筛选显示
