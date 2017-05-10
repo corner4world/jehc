@@ -249,6 +249,10 @@ function initXtUserinfoGrided(xt_role_id){
 		autoScroll:true,
 		frame:true,
 		selType:'checkboxmodel',
+		/**新方法使用开始**/  
+        scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',
 		title:'已导入用户',
 		viewConfig:{
 			emptyText:'暂无数据',
