@@ -306,7 +306,7 @@ public class Xt_CommonController extends BaseAction{
 			Xt_Attachment xtAttachment = xt_AttachmentService.getXtAttachmentById(xt_attachment_id);
 			String path = CommonUtils.getXtPathCache("xt_sources_default_path").get(0).getXt_path();
 			//判断该附件是否使用自定义xt_path_absolutek（自定义绝对路径K）
-			if(!StringUtils.isEmpty(xtAttachment.getXt_path_absolutek())){
+			if(null != xtAttachment && !StringUtils.isEmpty(xtAttachment.getXt_path_absolutek())){
 				 path = CommonUtils.getXtPathCache(xtAttachment.getXt_path_absolutek()).get(0).getXt_path();
 			}
 			response.setContentType("text/html;charset=utf-8");  

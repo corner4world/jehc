@@ -695,11 +695,11 @@ var collapsibleflag= 1;
 function collapsibleCE(){
 	if (collapsibleflag=== 1) {  
         Ext.getCmp('leftPanel').collapse();//panel收缩
-        Ext.getCmp('leftPanel').setTitle('<font color="#5fa2dd">导航目录</font>');
+        Ext.getCmp('leftPanel').setTitle('<font color="#5fa2dd">'+sys_pt_index+'</font>');
         collapsibleflag= 0;
     } else {  
         Ext.getCmp('leftPanel').expand();//panel展开
-        Ext.getCmp('leftPanel').setTitle('<font color="#fff">导航目录</font>');
+        Ext.getCmp('leftPanel').setTitle('<font color="#fff">'+sys_pt_index+'</font>');
         collapsibleflag = 1;
     }
 }
