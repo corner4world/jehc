@@ -247,8 +247,13 @@ function img_select(){
 
 function refresh(){
 	showWaitMsg("正在加载数据...");
+	/**
 	new Ext.util.DelayedTask(function(){  
-       grid.expandAll();
-       hideWaitMsg();
+       
     }).delay(1000);
+    **/
+	store.on('load',function(){
+		grid.expandAll();
+	    hideWaitMsg();
+    });
 }

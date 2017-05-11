@@ -43,6 +43,10 @@ function initGrid(){
         columnLines:true,
         frame:true,
         bufferedRenderer:false,
+        loadMask:true,
+        loadMask:{
+			msg:'正在加载...'
+		},
         bbar:['->',
         	{
 		        xtype:'triggerfield',
@@ -155,8 +159,7 @@ function delXtAreaRegion(){
 }
 function refresh(){
 	showWaitMsg("正在加载数据...");
-	new Ext.util.DelayedTask(function(){  
-       grid.expandAll();
-       hideWaitMsg();
-    }).delay(1000);
+	store.on('load',function(){
+    	hideWaitMsg();
+    });
 }
