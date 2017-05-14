@@ -1419,6 +1419,7 @@ function resetTitle(panel,isSetBackGround){
 	}
 }
 
+//////////////////基本form查询////////////////////////
 var searchForm;
 /**
 	panelPosition上部(north) ,中部(center), 左边(west) ,右部(east) ,底部(south)
@@ -1451,6 +1452,37 @@ function initSearchForm(panelPosition,items,isTop,labelPosition){
 	});
 }
 
+////////////自定义form查询扩展////////////////////
+/**
+	panelPosition上部(north) ,中部(center), 左边(west) ,右部(east) ,底部(south)
+	items 表单中元素
+	isTop 表单所属位置
+	labelPosition标签位置'top'上面 ，'left'左边 ，'right'右边
+**/
+function initSearchFormByUserdefined(panelPosition,items,isTop,labelPosition){
+	var panelTop = "";
+	if(isTop){
+		panelTop = "top";
+	}
+	return Ext.create(panelTop+'Ext.FormPanel',{
+		waitMsgTarget:true,
+		collapsible:true,
+		collapsed:true,
+		region:panelPosition,
+		defaultType:'textfield',
+		title:'查询区域',
+		height:'auto',
+		fieldDefaults:{
+	        labelWidth:70,
+	        style:'margin-left:10px;padding:5px 5px 5px 5px',
+	        labelAlign:labelPosition,
+	        flex:1,
+	        margin:'4 5 4 5',
+			labelAlign:'top'
+	    },
+		items:[items]
+	});
+}
 
 //调用查询方法
 function initSearch(store,url,searchForm){
