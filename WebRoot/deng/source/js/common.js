@@ -1806,6 +1806,11 @@ function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_abs
 				itemId:'save',
 				handler:function(button){
 					if(optuploadForm.form.isValid()) {
+						var items = Ext.ComponentQuery.query('button',optuploadWin); 
+						///////////激活window中组件按钮
+						for(var it in items){
+							items[it].disable();
+						}
 			            optuploadForm.submit({
 			                url:basePath+'/xtCommonController/upload',
 			                timeout:600000,/**设置超时时间10十分钟**/
@@ -1828,6 +1833,10 @@ function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_abs
 			                    }
 			                },  
 						    failure:function(response,opts){  
+						    	///////////激活window中组件按钮
+								for(var it in items){
+									items[it].enable();
+								}
 						    }  
 			            });
 			        }else{
@@ -1871,6 +1880,11 @@ function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_abs
 				itemId:'save',
 				handler:function(button){
 					if(optuploadForm.form.isValid()) {
+						var items = Ext.ComponentQuery.query('button',optuploadWin); 
+						///////////激活window中组件按钮
+						for(var it in items){
+							items[it].disable();
+						}
 			            optuploadForm.submit({
 			                url:basePath+'/xtCommonController/upload',
 			                waitMsg:'正在上传中，请稍后...',
@@ -1892,6 +1906,10 @@ function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_abs
 			                    }
 			                },  
 						    failure:function(response,opts){  
+						    	///////////激活window中组件按钮
+								for(var it in items){
+									items[it].enable();
+								}
 						    }
 			            });
 			        }else{
