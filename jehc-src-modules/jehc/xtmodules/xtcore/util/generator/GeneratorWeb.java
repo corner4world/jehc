@@ -393,8 +393,10 @@ public class GeneratorWeb extends GeneratorUtil{
             List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
         	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
         		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
-        		sb.append("\t\t\tMap<String, Object> condition = new HashMap<String, Object>();\r\n");
-        		sb.append("\t\t\tcondition.put(\""+getColumnKey(xt_Generator_Table_ColumnList)+"\", "+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
+        		if(i == 0){
+        			sb.append("\t\t\tMap<String, Object> condition = new HashMap<String, Object>();\r\n");
+        			sb.append("\t\t\tcondition.put(\""+getColumnKey(xt_Generator_Table_ColumnList)+"\", "+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
+        		}
         		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List = "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.get"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"ListByCondition(condition);\r\n");
         		sb.append("\t\t\t"+lowfristchar(xt_Generator.getXt_generator_tbname())+".set"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List);\r\n");
         	}

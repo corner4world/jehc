@@ -327,7 +327,7 @@ public class GeneratorService extends GeneratorUtil{
     	//判断是否为一对多 并且是主表 如果为一对多则导入实体
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
         	if(xt_Generator.getOne_to_many_type().equals("0")){
-        		sb.append("import xtCore.util.JsonUtil;\r\n");
+        		sb.append("import jehc.xtmodules.xtcore.util.JsonUtil;\r\n");
         	}
         	List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
         	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
@@ -339,7 +339,7 @@ public class GeneratorService extends GeneratorUtil{
         		sb.append("import java.util.HashMap;\r\n");
         	}
         	sb.append("import java.util.ArrayList;\r\n");//导入ArrayList类
-        	sb.append("import xtCore.allutils.StringUtil;\r\n");//导入StringUitl类
+        	sb.append("import jehc.xtmodules.xtcore.allutils.StringUtil;\r\n");//导入StringUitl类
         }
     	sb.append("import "+xt_Generator.getXt_generator_service_package()+"."+toUpperCase(xt_Generator.getXt_generator_tbname())+"Service;\r\n");
     	sb.append("import "+xt_Generator.getXt_generator_dao_package()+"."+toUpperCase(xt_Generator.getXt_generator_tbname())+"Dao;\r\n");
