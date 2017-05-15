@@ -1674,7 +1674,11 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t});\r\n");
 			//////////////////////生成Form模块结束/////////////////////////////
 		}
-		sb.append("}\r\n");
+		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()&&xt_Generator.getOne_to_many_type().equals("1")){
+			
+		}else{
+			sb.append("}\r\n");
+		}
 		return sb.toString();
 	}
 	/////////////////////////////////////4.生成修改Update结束//////////////////////////////////
@@ -2096,7 +2100,11 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t});\r\n");
 			//////////////////////生成Form模块结束/////////////////////////////
 		}
-		sb.append("}\r\n");
+		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()&&xt_Generator.getOne_to_many_type().equals("1")){
+			
+		}else{
+			sb.append("}\r\n");
+		}
 		
 		return sb.toString();
 	}
@@ -3693,6 +3701,7 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\tresetTitle("+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormEditFieldSet,true);\r\n");
 			//初始化附件右键
 			sb.append("\t"+createAttachmentOneToManyRight(xt_Generator_TableMany_To_One, 1)+"\r\n");
+			sb.append("}\r\n");
 		}
 		return sb.toString();
 	}
@@ -4373,6 +4382,7 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\tresetTitle("+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormDetailFieldSet,true);\r\n");
 			//初始化附件右键
 			sb.append("\t"+createAttachmentOneToManyRight(xt_Generator_TableMany_To_One, 2)+"\r\n");
+			sb.append("}\r\n");
 		}
 		return sb.toString();
 	}

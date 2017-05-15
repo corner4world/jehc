@@ -150,57 +150,59 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\t\tFROM \r\n\t\t\t"+xt_Generator.getXt_generator_tbname()+"\r\n");
 		//追加条件模块
     	sb.append("\t\tWHERE 1=1\r\n");
-    	List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
-    	if(!xt_generator_search_filedList.isEmpty() && xt_generator_search_filedList.size()>0){
-    		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
-    			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
-    			String xt_generator_search_name = xt_generator_search_filed.getXt_generator_search_name();
-    			String xt_generator_search_flag = xt_generator_search_filed.getXt_generator_search_flag();
-    			String search_type = xt_generator_search_filed.getXt_generator_search_type();
-    			if("2".equals(search_type)){//特殊处理数字框
-    				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_cs and "+xt_generator_search_name+"_cs != '' and "+xt_generator_search_name+" != null\">\r\n");
-    				sb.append("\t\t\t<choose>\r\n");
-    				sb.append("\t\t\t\t<!-- 等于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 1\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t\t<!-- 大于等于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 2\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &gt;= #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t\t<!-- 小于等于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 3\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &lt;= #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t\t<!-- 大于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 4\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &gt; #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t\t<!-- 小于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 5\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &lt; #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t</choose>\r\n");
-    				sb.append("\t\t</if>\r\n");
-    			}else if("4".equals(search_type)){//特殊处理日期查询
-    				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_st and "+xt_generator_search_name+"_st != ''\">\r\n");
-    				sb.append("\t\t\tAND "+xt_generator_search_name+" &gt;=STR_TO_DATE(#{"+xt_generator_search_name+"_st},'%Y-%m-%d')\r\n");
-        			sb.append("\t\t</if>\r\n");
-        			sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_et and "+xt_generator_search_name+"_et != ''\">\r\n");
-    				sb.append("\t\t\tAND "+xt_generator_search_name+" &lt;=STR_TO_DATE(#{"+xt_generator_search_name+"_et},'%Y-%m-%d')\r\n");
-        			sb.append("\t\t</if>\r\n");
-    			}else{
-    				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"\">\r\n");
-        			if("0".equals(xt_generator_search_flag)){
-        				//模糊查询
-        				sb.append("\t\t\tAND instr("+xt_generator_search_name+",#{"+xt_generator_search_name+"})\r\n");
-        			}else if("1".equals(xt_generator_search_flag)){
-        				//精确查找
-        				sb.append("\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
+    	if(xt_Generator.isIs_main_table()){
+    		List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
+        	if(!xt_generator_search_filedList.isEmpty() && xt_generator_search_filedList.size()>0){
+        		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
+        			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
+        			String xt_generator_search_name = xt_generator_search_filed.getXt_generator_search_name();
+        			String xt_generator_search_flag = xt_generator_search_filed.getXt_generator_search_flag();
+        			String search_type = xt_generator_search_filed.getXt_generator_search_type();
+        			if("2".equals(search_type)){//特殊处理数字框
+        				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_cs and "+xt_generator_search_name+"_cs != '' and "+xt_generator_search_name+" != null\">\r\n");
+        				sb.append("\t\t\t<choose>\r\n");
+        				sb.append("\t\t\t\t<!-- 等于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 1\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t\t<!-- 大于等于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 2\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &gt;= #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t\t<!-- 小于等于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 3\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &lt;= #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t\t<!-- 大于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 4\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &gt; #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t\t<!-- 小于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 5\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &lt; #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t</choose>\r\n");
+        				sb.append("\t\t</if>\r\n");
+        			}else if("4".equals(search_type)){//特殊处理日期查询
+        				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_st and "+xt_generator_search_name+"_st != ''\">\r\n");
+        				sb.append("\t\t\tAND "+xt_generator_search_name+" &gt;=STR_TO_DATE(#{"+xt_generator_search_name+"_st},'%Y-%m-%d')\r\n");
+            			sb.append("\t\t</if>\r\n");
+            			sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_et and "+xt_generator_search_name+"_et != ''\">\r\n");
+        				sb.append("\t\t\tAND "+xt_generator_search_name+" &lt;=STR_TO_DATE(#{"+xt_generator_search_name+"_et},'%Y-%m-%d')\r\n");
+            			sb.append("\t\t</if>\r\n");
+        			}else{
+        				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"\">\r\n");
+            			if("0".equals(xt_generator_search_flag)){
+            				//模糊查询
+            				sb.append("\t\t\tAND instr("+xt_generator_search_name+",#{"+xt_generator_search_name+"})\r\n");
+            			}else if("1".equals(xt_generator_search_flag)){
+            				//精确查找
+            				sb.append("\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
+            			}
+            			sb.append("\t\t</if>\r\n");
         			}
-        			sb.append("\t\t</if>\r\n");
-    			}
-    		}
+        		}
+        	}
     	}
     	//操作子表 通过外键查询集合
     	if(xt_Generator.getIs_one_to_many().equals("1") && !xt_Generator.isIs_main_table()){
@@ -240,57 +242,59 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\t\tFROM \r\n\t\t\t"+xt_Generator.getXt_generator_tbname()+"\r\n");
 		//追加条件模块
     	sb.append("\t\tWHERE 1=1 \r\n");
-    	List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
-    	if(!xt_generator_search_filedList.isEmpty() && xt_generator_search_filedList.size()>0){
-    		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
-    			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
-    			String xt_generator_search_name = xt_generator_search_filed.getXt_generator_search_name();
-    			String xt_generator_search_flag = xt_generator_search_filed.getXt_generator_search_flag();
-    			String search_type = xt_generator_search_filed.getXt_generator_search_type();
-    			if("2".equals(search_type)){//特殊处理数字框
-    				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_cs and "+xt_generator_search_name+"_cs != '' and "+xt_generator_search_name+" != null\">\r\n");
-    				sb.append("\t\t\t<choose>\r\n");
-    				sb.append("\t\t\t\t<!-- 等于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 1\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t\t<!-- 大于等于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 2\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &gt;= #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t\t<!-- 小于等于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 3\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &lt;= #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t\t<!-- 大于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 4\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &gt; #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t\t<!-- 小于 -->\r\n");
-    				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 5\">\r\n");
-    				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &lt; #{"+xt_generator_search_name+"}\r\n");
-    				sb.append("\t\t\t\t</when>\r\n");
-    				sb.append("\t\t\t</choose>\r\n");
-    				sb.append("\t\t</if>\r\n");
-    			}else if("4".equals(search_type)){//特殊处理日期查询
-    				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_st and "+xt_generator_search_name+"_st != ''\">\r\n");
-    				sb.append("\t\t\tAND "+xt_generator_search_name+" &gt;=STR_TO_DATE(#{"+xt_generator_search_name+"_st},'%Y-%m-%d')\r\n");
-        			sb.append("\t\t</if>\r\n");
-        			sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_et and "+xt_generator_search_name+"_et != ''\">\r\n");
-    				sb.append("\t\t\tAND "+xt_generator_search_name+" &lt;=STR_TO_DATE(#{"+xt_generator_search_name+"_et},'%Y-%m-%d')\r\n");
-        			sb.append("\t\t</if>\r\n");
-    			}else{
-    				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"\">\r\n");
-        			if("0".equals(xt_generator_search_flag)){
-        				//模糊查询
-        				sb.append("\t\t\tAND instr("+xt_generator_search_name+",#{"+xt_generator_search_name+"})\r\n");
-        			}else if("1".equals(xt_generator_search_flag)){
-        				//精确查找
-        				sb.append("\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
+    	if(xt_Generator.isIs_main_table()){
+    		List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
+        	if(!xt_generator_search_filedList.isEmpty() && xt_generator_search_filedList.size()>0){
+        		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
+        			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
+        			String xt_generator_search_name = xt_generator_search_filed.getXt_generator_search_name();
+        			String xt_generator_search_flag = xt_generator_search_filed.getXt_generator_search_flag();
+        			String search_type = xt_generator_search_filed.getXt_generator_search_type();
+        			if("2".equals(search_type)){//特殊处理数字框
+        				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_cs and "+xt_generator_search_name+"_cs != '' and "+xt_generator_search_name+" != null\">\r\n");
+        				sb.append("\t\t\t<choose>\r\n");
+        				sb.append("\t\t\t\t<!-- 等于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 1\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t\t<!-- 大于等于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 2\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &gt;= #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t\t<!-- 小于等于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 3\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &lt;= #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t\t<!-- 大于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 4\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &gt; #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t\t<!-- 小于 -->\r\n");
+        				sb.append("\t\t\t\t<when test=\""+xt_generator_search_name+"_cs == 5\">\r\n");
+        				sb.append("\t\t\t\t\tAND "+xt_generator_search_name+" &lt; #{"+xt_generator_search_name+"}\r\n");
+        				sb.append("\t\t\t\t</when>\r\n");
+        				sb.append("\t\t\t</choose>\r\n");
+        				sb.append("\t\t</if>\r\n");
+        			}else if("4".equals(search_type)){//特殊处理日期查询
+        				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_st and "+xt_generator_search_name+"_st != ''\">\r\n");
+        				sb.append("\t\t\tAND "+xt_generator_search_name+" &gt;=STR_TO_DATE(#{"+xt_generator_search_name+"_st},'%Y-%m-%d')\r\n");
+            			sb.append("\t\t</if>\r\n");
+            			sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_et and "+xt_generator_search_name+"_et != ''\">\r\n");
+        				sb.append("\t\t\tAND "+xt_generator_search_name+" &lt;=STR_TO_DATE(#{"+xt_generator_search_name+"_et},'%Y-%m-%d')\r\n");
+            			sb.append("\t\t</if>\r\n");
+        			}else{
+        				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"\">\r\n");
+            			if("0".equals(xt_generator_search_flag)){
+            				//模糊查询
+            				sb.append("\t\t\tAND instr("+xt_generator_search_name+",#{"+xt_generator_search_name+"})\r\n");
+            			}else if("1".equals(xt_generator_search_flag)){
+            				//精确查找
+            				sb.append("\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
+            			}
+            			sb.append("\t\t</if>\r\n");
         			}
-        			sb.append("\t\t</if>\r\n");
-    			}
-    		}
+        		}
+        	}
     	}
     	//追加标签结束
     	sb.append("\t</select>\r\n");
