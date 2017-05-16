@@ -12,6 +12,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtmodel.Xt_Generator;
 import jehc.xtmodules.xtmodel.Xt_Generator_TableMany_To_One;
 import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
@@ -94,17 +95,21 @@ public class GeneratorService extends GeneratorUtil{
 				out.write(sb.toString());
 			} catch (IOException e) {
 				logger.error(e.getMessage());
+				throw new ExceptionUtil(e.getMessage(),e.getCause());
 			}
 		} catch (UnsupportedEncodingException e) {
 			logger.error(e.getMessage());
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		} catch (FileNotFoundException e) {
 			logger.error(e.getMessage());
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}finally{
 			try {
 				out.flush();
 				out.close();
 			} catch (IOException e) {
 				logger.error(e.getMessage());
+				throw new ExceptionUtil(e.getMessage(),e.getCause());
 			}
 		}
     	return sb.toString();
@@ -408,17 +413,21 @@ public class GeneratorService extends GeneratorUtil{
 				out.write(sb.toString());
 			} catch (IOException e) {
 				logger.error(e.getMessage());
+				throw new ExceptionUtil(e.getMessage(),e.getCause());
 			}
 		} catch (UnsupportedEncodingException e) {
 			logger.error(e.getMessage());
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		} catch (FileNotFoundException e) {
 			logger.error(e.getMessage());
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}finally{
 			try {
 				out.flush();
 				out.close();
 			} catch (IOException e) {
 				logger.error(e.getMessage());
+				throw new ExceptionUtil(e.getMessage(),e.getCause());
 			}
 		}
     	return sb.toString();

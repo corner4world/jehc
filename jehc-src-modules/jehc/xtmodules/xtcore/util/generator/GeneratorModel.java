@@ -12,6 +12,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtmodel.Xt_Generator;
 import jehc.xtmodules.xtmodel.Xt_Generator_TableMany_To_One;
 import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
@@ -120,13 +121,16 @@ public class GeneratorModel extends GeneratorUtil{
 			} catch (IOException e) {
 				result = 0;
 				logger.error(e.getMessage());
+				throw new ExceptionUtil(e.getMessage(),e.getCause());
 			}
 		} catch (UnsupportedEncodingException e) {
 			result = 0;
 			logger.error(e.getMessage());
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		} catch (FileNotFoundException e) {
 			result = 0;
 			logger.error(e.getMessage());
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}finally{
 			try {
 				out.flush();
@@ -134,6 +138,7 @@ public class GeneratorModel extends GeneratorUtil{
 			} catch (IOException e) {
 				result = 0;
 				logger.error(e.getMessage());
+				throw new ExceptionUtil(e.getMessage(),e.getCause());
 			}
 		}
         return result;

@@ -3,6 +3,7 @@ package jehc.xtmodules.xtcore.util.generator;
 import java.util.ArrayList;
 import java.util.List;
 
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtmodel.Xt_Generator;
 import jehc.xtmodules.xtmodel.Xt_Generator_TableMany_To_One;
 import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
@@ -41,6 +42,7 @@ public class Gutil {
 		} catch (Exception e) {
 			i = 0;
 			e.printStackTrace();
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
     	return i;
     }

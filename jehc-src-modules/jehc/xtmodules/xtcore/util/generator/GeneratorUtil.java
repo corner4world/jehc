@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
 import jehc.xtmodules.xtmodel.Xt_Generator_Table_ColumnMany_To_One;
 import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column_Form;
@@ -235,7 +236,7 @@ public class GeneratorUtil {
     			return xt_Generator_Table_Column.getCOLUMN_NAME();
     		}
     	}
-    	return null;
+    	throw new ExceptionUtil("xt_Generator_Table_ColumnList---未能筛选出主键");
     }
     
     /**
@@ -250,7 +251,7 @@ public class GeneratorUtil {
     			return xt_Generator_Table_Column_Form.getColumn_name();
     		}
     	}
-    	return null;
+    	throw new ExceptionUtil("xt_Generator_Table_Column_FormList----getColumnFormKey-----筛选表单中主键 新方法 单表操作");
     }
     
     /**
@@ -269,7 +270,7 @@ public class GeneratorUtil {
     			return sb.toString();
     		}
     	}
-    	return null;
+    	throw new ExceptionUtil("xt_Generator_Table_ColumnList--getColumnKeyUpOneChar--- 筛选主键并将第一个字符转换成大写 单表操作");
     }
     
     /**
@@ -284,7 +285,7 @@ public class GeneratorUtil {
     			return xt_Generator_Table_Column_Form.getCOLUMN_NAME();
     		}
     	}
-    	return null;
+    	throw new ExceptionUtil("xt_Generator_Table_Column_FormList----getOneToManyColumnFormKey-----筛选表单中主键 新方法 一对多表操作");
     }
     
     /**
@@ -303,7 +304,7 @@ public class GeneratorUtil {
     			return sb.toString();
     		}
     	}
-    	return null;
+    	throw new ExceptionUtil("xt_Generator_Table_ColumnList----getOneToManyColumnKeyUpOneChar-----筛选主键并将第一个字符转换成大写 一对多表操作");
     }
     
     /**
@@ -362,7 +363,7 @@ public class GeneratorUtil {
     			return "import java.util.Date;\r\n";
     		}
     	}
-    	return null;
+    	throw new ExceptionUtil("xt_Generator_Table_ColumnList----sqlDatePage-----如果存在则导入包名导");
     }
     ////////////////测试//////////////////
     public static void main(String[]args){
