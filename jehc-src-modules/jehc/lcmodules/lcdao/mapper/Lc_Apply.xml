@@ -32,6 +32,31 @@
 		</if>
 		ORDER BY lc_apply_time DESC
 	</select>
+	
+	<!--根据实例编号查找集合-->
+	<select id="getLcApplyList" resultType="jehc.lcmodules.lcmodel.Lc_Apply" parameterType="map">
+		SELECT
+			lc_apply.`lc_apply_id`,
+			lc_apply.`lc_apply_title`,
+			lc_apply.`lc_apply_model_id`,
+			lc_apply.`lc_apply_delete`,
+			lc_apply.`processInstance_id`,
+			lc_apply.`processdefinitions_id`,
+			lc_apply.`lc_url`,
+			lc_apply.`xt_userinfo_id`,
+			DATE_FORMAT(lc_apply.`lc_apply_time`,'%Y-%m-%d %H:%i:%s') AS `lc_apply_time`,
+			lc_apply.`lc_apply_model_biz_id`,
+			xt_constant.`xt_constantRemark`,
+			xt_constant.`xt_constantURL`
+		FROM 
+			lc_apply lc_apply LEFT JOIN xt_constant xt_constant ON lc_apply.lc_apply_model_id = xt_constant.xt_constant_id
+		WHERE 
+			lc_apply.lc_apply_isonlysaverecord = 0
+			AND lc_apply.`processInstance_id` IN
+		<foreach item="item" index="index" collection="processInstance_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
 
 	<!--查询对象-->
 	<select id="getLcApplyById" resultType="jehc.lcmodules.lcmodel.Lc_Apply" parameterType="string">

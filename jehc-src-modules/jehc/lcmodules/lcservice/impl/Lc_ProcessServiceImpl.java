@@ -157,8 +157,7 @@ public class Lc_ProcessServiceImpl extends BaseService implements Lc_ProcessServ
 				throw new ExceptionUtil("该流程为空，无法发布");
 			}
 			if(lc_Process.getLc_process_status().equals("1")){
-				//throw new ExceptionUtil("该流程已启动中，无法发布");
-				return 0;
+				throw new ExceptionUtil("该流程已启动中，无法发布");
 			}
 			if(lc_Process.getLc_process_flag().equals("1")){
 				attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path());
@@ -186,8 +185,6 @@ public class Lc_ProcessServiceImpl extends BaseService implements Lc_ProcessServ
 			}
 			i = lc_ProcessDao.updateLcProcessStatus(condition);
 		} catch (Exception e) {
-			e.printStackTrace();
-			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}

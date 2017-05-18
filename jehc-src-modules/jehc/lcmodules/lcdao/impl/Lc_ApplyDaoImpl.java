@@ -1,6 +1,7 @@
 package jehc.lcmodules.lcdao.impl;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import jehc.lcmodules.lcdao.Lc_ApplyDao;
@@ -69,5 +70,13 @@ public class Lc_ApplyDaoImpl  extends BaseDaoImpl implements Lc_ApplyDao{
 	*/
 	public int updateBatchLcApply(List<Lc_Apply> lc_ApplyList){
 		return this.update("updateBatchLcApply", lc_ApplyList);
+	}
+	/**
+	 * 根据实例编号查找集合
+	 * @param condition
+	 * @return
+	 */
+	public List<Lc_Apply> getLcApplyList(Map<String,Object> condition){
+		return (List<Lc_Apply>)this.getList("getLcApplyList", condition);
 	}
 }

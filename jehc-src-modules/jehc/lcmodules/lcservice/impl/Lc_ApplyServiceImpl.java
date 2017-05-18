@@ -125,4 +125,12 @@ public class Lc_ApplyServiceImpl extends BaseService implements Lc_ApplyService{
 		}
 		return i;
 	}
+	/**
+	 * 根据实例编号查找集合
+	 * @param condition
+	 * @return
+	 */
+	public List getLcApplyList(Map<String,Object> condition){
+		return lc_ApplyDao.getLcApplyList(condition);
+	}
 }

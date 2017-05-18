@@ -187,8 +187,7 @@ public class ActivitiUtil {
 			repositoryService.deleteDeployment(deploymentId,true);
 			flag = 1;
 		} catch (Exception e) {
-			e.printStackTrace();
-			flag = 0;
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 		return flag;
 	}
@@ -202,7 +201,6 @@ public class ActivitiUtil {
 			ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().deploymentId(deploymentId).singleResult();
 			return processDefinition;
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
@@ -216,7 +214,6 @@ public class ActivitiUtil {
 		try {
 			processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 		return processDefinition;
@@ -243,7 +240,6 @@ public class ActivitiUtil {
 			ProcessInstance processInstance = runtimeService.startProcessInstanceByKey(key, businessKey, variables);
 			return processInstance;
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 		
@@ -274,7 +270,7 @@ public class ActivitiUtil {
 			processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
 		} catch (Exception e) {
 			System.out.println("---------------获取流程实例对象失败");
-			e.printStackTrace();
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 		return processInstance;
 	}
@@ -301,7 +297,7 @@ public class ActivitiUtil {
 			servletOutputStream.flush();
 			servletOutputStream.close();
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			throw new ExceptionUtil(ex.getMessage(),ex.getCause());
 		}
 	}
 	
@@ -368,8 +364,7 @@ public class ActivitiUtil {
 			taskService.complete(taskId,variables);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
 	
@@ -385,8 +380,7 @@ public class ActivitiUtil {
 			taskService.claim(taskId, UID);
 			i = 1;
 		} catch (Exception e) {
-			e.printStackTrace();
-			i = 0;
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 		return i;
 	}
@@ -815,6 +809,7 @@ public class ActivitiUtil {
 				lc_Apply.setXt_userinfo_id(CommonUtils.getXtUid());
 				lc_Apply.setLc_apply_time(CommonUtils.getSimpleDateFormat());
 				lc_Apply.setProcessdefinitions_id(processDefinition.getId());
+				lc_Apply.setLc_apply_model_biz_id(businessKey);
 				lc_Apply.setProcessInstance_id(procesInstance.getId());
 				lc_ApplyService.addLcApply(lc_Apply);
 				System.out.println("-------调用工作流审批信息模块成功-------");
@@ -825,7 +820,56 @@ public class ActivitiUtil {
 			}
 			/**Activiti发起实例模块(即提交发起申请)结束**/
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
+		}
+	}
+	
+	/**
+     * 添加审批（发起申请）并设置第一个节点发起人并完成第一个节点
+     * @param id流程发布历史编号
+     * @param businessKey业务编号（可选）
+     * @param variables变量（可选）
+     * @return
+     */
+	public boolean addApplySetAssignee(String id,String businessKey,Map<String, Object> variables,Lc_Apply lc_Apply){
+		try {
+			Xt_ConstantService xt_ConstantService = (Xt_ConstantService)GetApplicationContext.getBean("xt_ConstantService");
+			Lc_Deployment_HisService lc_Deployment_HisService = (Lc_Deployment_HisService)GetApplicationContext.getBean("lc_Deployment_HisService");
+			Lc_Deployment_His lc_Deployment_His = lc_Deployment_HisService.getLcDeploymentHisById(id);
+			Xt_Constant xtConstant = xt_ConstantService.getXtConstantById(lc_Deployment_His.getXt_constant_id());
+			Lc_ApplyService lc_ApplyService = (Lc_ApplyService)GetApplicationContext.getBean("lc_ApplyService");
+			ProcessDefinition processDefinition = getProcessDefinition(lc_Deployment_His.getLc_deployment_his_id());
+			ProcessInstance procesInstance = startProcessInstanceByKey(processDefinition.getKey(), businessKey, variables);
+			/**Activiti发起实例模块(即提交发起申请)开始**/
+			/**调用审批工作流**/
+			if(null != procesInstance){
+				if(StringUtil.isEmpty(lc_Apply.getLc_apply_id())){
+					lc_Apply.setLc_apply_id(UUID.toUUID());
+				}
+				lc_Apply.setLc_apply_model_id(xtConstant.getXt_constant_id());
+				lc_Apply.setXt_userinfo_id(CommonUtils.getXtUid());
+				lc_Apply.setLc_apply_time(CommonUtils.getSimpleDateFormat());
+				lc_Apply.setProcessdefinitions_id(processDefinition.getId());
+				lc_Apply.setLc_apply_model_biz_id(businessKey);
+				lc_Apply.setProcessInstance_id(procesInstance.getId());
+				lc_ApplyService.addLcApply(lc_Apply);
+				
+				///////////根据当前实例编号查找第一个节点并设置发起人//////////////
+				List<Task> tasks = taskService.createTaskQuery().processInstanceId(procesInstance.getId()).orderByTaskCreateTime().asc().list();
+				if(null != tasks &&!tasks.isEmpty()){
+					//设置当前任务为处理人即发起人
+					setAssignee(tasks.get(0).getId(), CommonUtils.getXtUid());
+					//完成第一个任务即发起人
+					completeTask(tasks.get(0).getId());
+				}
+				System.out.println("-------调用工作流审批信息模块成功-------");
+				return true;
+			}else{
+				System.out.println("-------调用工作流审批信息模块失败-------");
+				return false;
+			}
+			/**Activiti发起实例模块(即提交发起申请)结束**/
+		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
 		}
 	}
@@ -840,7 +884,7 @@ public class ActivitiUtil {
     		 taskService.claim(taskId, userId);  
     		 return true;
 		} catch (Exception e) {
-			return false;
+			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
 		}
     }  
     
@@ -854,7 +898,7 @@ public class ActivitiUtil {
     		taskService.setAssignee(taskId, userId);   
    		 return true;
 		} catch (Exception e) {
-			return false;
+			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
 		}
     }  
     
@@ -869,7 +913,7 @@ public class ActivitiUtil {
     		taskService.setOwner(taskId, userId); 
    		 return true;
 		} catch (Exception e) {
-			return false;
+			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
 		}
     }
     
@@ -883,7 +927,7 @@ public class ActivitiUtil {
     		 taskService.addCandidateUser(taskId, userId);  
    		 return true;
 		} catch (Exception e) {
-			return false;
+			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
 		}
     }  
     
@@ -897,7 +941,7 @@ public class ActivitiUtil {
     		taskService .deleteCandidateUser(taskId, userId);  
   		 return true;
 		} catch (Exception e) {
-			return false;
+			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
 		}
     }   
 	
@@ -944,6 +988,15 @@ public class ActivitiUtil {
 	}
 	
 	/**
+	 * 查找个人任务(不分页)
+	 * @param condition
+	 * @return
+	 */
+	public List<Task> getAssigneeTaskList(Map<String, Object> condition){
+		return taskService.createTaskQuery().taskAssignee(condition.get("assignee").toString()).list(); 
+	}
+	
+	/**
 	 * 查找候选人任务
 	 * @param condition
 	 * @return
@@ -984,8 +1037,7 @@ public class ActivitiUtil {
 			taskService.complete(taskId);
 			return true;
 		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
+			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
 		}
 	}
 	
@@ -1044,7 +1096,7 @@ public class ActivitiUtil {
         	taskServiceImpl.getCommandExecutor().execute(new JumpTaskCmd(executionId, activityId));  
         	return true;
 		} catch (Exception e) {
-			return false;
+			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
 		}
     }
 }

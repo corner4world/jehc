@@ -65,7 +65,9 @@ public class Xt_M_RServiceImpl extends BaseService implements Xt_M_RService{
 				i = xt_Functioninfo_RightDao.delXtFunctioninfoRight(condition);
 			}
 			i = xt_M_RDao.addBatchXtMR(xt_M_RList);
-			i = xt_Functioninfo_RightDao.addBatchXtFunctioninfoRight(xt_Functioninfo_RightList);
+			if(null != xt_Functioninfo_RightList && !xt_Functioninfo_RightList.isEmpty()){
+				i = xt_Functioninfo_RightDao.addBatchXtFunctioninfoRight(xt_Functioninfo_RightList);
+			}
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

@@ -51,4 +51,10 @@ public interface Lc_ApplyService{
 	* @return
 	*/
 	public int updateBatchLcApply(List<Lc_Apply> lc_ApplyList);
+	/**
+	 * 根据实例编号查找集合
+	 * @param condition
+	 * @return
+	 */
+	public List<Lc_Apply> getLcApplyList(Map<String,Object> condition);
 }
