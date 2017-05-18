@@ -1,27 +1,22 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance http://java.sun.com/xml/ns/javaee 
-	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
-	xsi:schemaLocation="" id="jehc-v1.0">
-	<!--SpringSession共享策略-->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="JEHC" version="2.5">
+	<!--SpringSession共享策略 -->
 	<filter>
 		<filter-name>springSessionRepositoryFilter</filter-name>
-		<filter-class>
-			org.springframework.web.filter.DelegatingFilterProxy
-		</filter-class>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>springSessionRepositoryFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 		<dispatcher>REQUEST</dispatcher>
-    	<dispatcher>ERROR</dispatcher>
+		<dispatcher>ERROR</dispatcher>
 	</filter-mapping>
 
 	<!-- spring监听器配置 -->
 	<listener>
-		<listener-class>
-			org.springframework.web.context.ContextLoaderListener
-		</listener-class>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -33,39 +28,32 @@
 	<!-- Spring 刷新Introspector防止内存泄露 -->
 	<listener>
 		<listener-class>
-			org.springframework.web.util.IntrospectorCleanupListener
-		</listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
-	<!--  支持session scope的Spring bean  -->
+	<!-- 支持session scope的Spring bean -->
 	<listener>
 		<listener-class>
-			org.springframework.web.context.request.RequestContextListener
-		</listener-class>
+			org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-	<!--  监听Request会话清空ThreadLocal变量  -->
+	<!-- 监听Request会话清空ThreadLocal变量 -->
 	<listener>
 		<listener-class>
-			jehc.xtmodules.xtcore.threadlocalutil.ServletRequestListener
-		</listener-class>
+			jehc.xtmodules.xtcore.threadlocalutil.ServletRequestListener</listener-class>
 	</listener>
 
-	<!--  Logback日志配置  -->
+	<!-- Logback日志配置 -->
 	<context-param>
 		<param-name>logbackConfigLocation</param-name>
 		<param-value>classpath:jehc/xtmodules/xtcore/sources/logback.xml</param-value>
 	</context-param>
 	<listener>
-		<listener-class>
-			ch.qos.logback.ext.spring.web.LogbackConfigListener
-		</listener-class>
+		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
 	</listener>
 
 	<!-- 编码过滤器配置 -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>
-		<filter-class>
-			org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
 		<init-param>
 			<param-name>encoding</param-name>
 			<param-value>utf-8</param-value>
@@ -83,9 +71,7 @@
 	<!-- springmvc视图转发器配置 -->
 	<servlet>
 		<servlet-name>dispatcherServlet</servlet-name>
-		<servlet-class>
-			org.springframework.web.servlet.DispatcherServlet
-		</servlet-class>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<init-param>
 			<param-name>contextConfigLocation</param-name>
 			<param-value>
@@ -119,9 +105,7 @@
 	</context-param>
 	<listener>
 		<display-name>log4jConfigLocation</display-name>
-		<listener-class>
-			org.springframework.web.util.Log4jConfigListener
-		</listener-class>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
 	<servlet>
 		<description>验证码</description>
@@ -133,48 +117,19 @@
 		<url-pattern>/VerifyCodeServlet</url-pattern>
 	</servlet-mapping>
 
-	<!-- web异常页面处理
-	<error-page>
-		<exception-type>java.lang.Throwable</exception-type>
-		<location>/error_500</location>
-	</error-page>
-	<error-page>
-		<exception-type>java.lang.Exception</exception-type>
-		<location>/error_404</location>
-	</error-page>
-	<error-page>
-		<error-code>500</error-code>
-		<location>/error_500</location>
-	</error-page>
-	<error-page>
-		<error-code>501</error-code>
-		<location>/error_500</location>
-	</error-page>
-	<error-page>
-		<error-code>502</error-code>
-		<location>/error_500</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/error_404</location>
-	</error-page>
-	<error-page>
-		<error-code>403</error-code>
-		<location>/error_404</location>
-	</error-page>
-	<error-page>
-		<error-code>400</error-code>
-		<location>/error_404</location>
-	</error-page>
-	 -->
-	<!-- 
-	<sessionState mode="Off" />
-	-->
+	<!-- web异常页面处理 <error-page> <exception-type>java.lang.Throwable</exception-type> 
+		<location>/error_500</location> </error-page> <error-page> <exception-type>java.lang.Exception</exception-type> 
+		<location>/error_404</location> </error-page> <error-page> <error-code>500</error-code> 
+		<location>/error_500</location> </error-page> <error-page> <error-code>501</error-code> 
+		<location>/error_500</location> </error-page> <error-page> <error-code>502</error-code> 
+		<location>/error_500</location> </error-page> <error-page> <error-code>404</error-code> 
+		<location>/error_404</location> </error-page> <error-page> <error-code>403</error-code> 
+		<location>/error_404</location> </error-page> <error-page> <error-code>400</error-code> 
+		<location>/error_404</location> </error-page> -->
+	<!-- <sessionState mode="Off" /> -->
 	<servlet>
 		<servlet-name>DruidStatView</servlet-name>
-		<servlet-class>
-			com.alibaba.druid.support.http.StatViewServlet
-		</servlet-class>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>DruidStatView</servlet-name>
@@ -182,9 +137,7 @@
 	</servlet-mapping>
 	<filter>
 		<filter-name>druidWebStatFilter</filter-name>
-		<filter-class>
-			com.alibaba.druid.support.http.WebStatFilter
-		</filter-class>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
 		<init-param>
 			<param-name>exclusions</param-name>
 			<param-value>
@@ -213,6 +166,47 @@
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
+	<!-- GZIPFilter压缩定义 设置此项时tk-filters.properties的GZIPFilter.Enabled=true才可用-->
+	<filter>
+		<filter-name>GZIPFilter</filter-name>
+		<filter-class>
+			com.tacitknowledge.filters.gzipfilter.GZIPFilter
+		</filter-class>
+	</filter>
+	<!-- GZIPFilter 设置自己想要压缩的文件类型-->
+	<filter-mapping>
+		<filter-name>GZIPFilter</filter-name>
+		<url-pattern>/deng/*</url-pattern>
+		<url-pattern>/view/*</url-pattern>
+	</filter-mapping>
+	<!-- CacheFilter缓存定义 设置此项时tk-filters.properties的CacheFilter.Enabled=true才可用 -->
+	<filter>
+		<filter-name>CacheFilter</filter-name>
+		<filter-class>
+			com.tacitknowledge.filters.cache.CacheHeaderFilter
+		</filter-class>
+	</filter>
+	<!-- CacheFilter 设置自己想要缓存的文件类型-->
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.gif</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.jpg</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.png</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
 	
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
