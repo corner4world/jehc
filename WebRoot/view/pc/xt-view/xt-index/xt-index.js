@@ -254,19 +254,19 @@ Ext.onReady(function(){
 			            style:{marginRight:'4px',marginLeft:'4px'},
 			            text:dt()
 			      },
-			      {
-			            /**ui:'default-toolbar',**/
-			            xtype:'button',
-			            id:'xtMessageBtn',
-			            icon:messageIcon,
-			            style:{background:'#90c258',marginRight:'4px',marginLeft:'4px'},
-			            tooltip:{
-		                 	title:'短消息'
-		                },
-			            handler:function(button){
-							initXtMessageWin();
-						}
-			      },
+//			      {
+//			            /**ui:'default-toolbar',**/
+//			            xtype:'button',
+//			            id:'xtMessageBtn',
+//			            icon:messageIcon,
+//			            style:{background:'#90c258',marginRight:'4px',marginLeft:'4px'},
+//			            tooltip:{
+//		                 	title:'短消息'
+//		                },
+//			            handler:function(button){
+//							initXtMessageWin();
+//						}
+//			      },
 			      {
 			            /**ui:'default-toolbar',**/
 			            xtype:'button',
@@ -336,10 +336,15 @@ Ext.onReady(function(){
     	var id = node.data.id;
     	/**开启多个Tab目的**/
         var tabid = 'tab_' + id;
+        var itemsLength = tabpanelCenter.items.length;
         if(tabpanelCenter.getComponent(tabid)){
         	tabpanelCenter.getComponent(tabid).isfrist = 1;
             tabpanelCenter.setActiveTab(tabid);
         }else{
+        	if(itemsLength >= 7){
+            	msgTishi("您开启的选项卡太多请关闭一些在打开");
+            	return;
+            }
         	showLoading("正在拼命载入中，请耐心等待...");
             var panel = Ext.create('Ext.Panel',{
                 id:tabid,
