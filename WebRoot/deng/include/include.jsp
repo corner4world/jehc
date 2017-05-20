@@ -142,19 +142,23 @@
 			});
 		</script>
 		<style type="text/css">
+			/**
 			.x-btn-inner-default-toolbar-small {
 			max-width: 100%;
+			**/
 			<%
 				String grid_toolbar_text_is_view = (String)application.getAttribute("grid_toolbar_text_is_view");
 				if(null != grid_toolbar_text_is_view && "0".equals(grid_toolbar_text_is_view)){
 					%>
-						/**隐藏**/
+						/**隐藏
 						display:none;
+						**/
 					<%
 				}
 			%>
-			}
 			/**
+			}
+			**/
 			.addBtn{
 			}
 			.updateBtn{
@@ -183,7 +187,7 @@
 			}
 			.printBtn{
 			}
-			**/
+			/**
 			.addBtn{
 			  	background-color:#925e8b;
 			}
@@ -226,6 +230,7 @@
 			.printBtn{
 				background-color:#A2B5CD
 			}
+			**/
 			/**定义密码样式开始**/
 			.x-form-pwd-trigger{
 				background-position:right;

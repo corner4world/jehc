@@ -34,68 +34,7 @@
 .x-panel-header-default .x-tool-img {
     background-color: #fff;
 }
-/**tbar与bbar样式开始**/
-.x-toolbar-default {
-	padding: 6px 0 6px 8px;
-	border-style: solid;
-	border-color: #f5f5f5;
-	border-width: 1px;
-	background-image: none;
-	background-color: #f5f5f5;/**#157fcc**/
-}
-.x-btn-default-toolbar-small {
-	border-color: #f5f5f5;
-	/**
-	height:28px;
-	**/
-}
-.x-btn-default-toolbar-small {
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	-ms-border-radius: 0px;
-	-o-border-radius: 0px;
-	border-radius: 0px;
-	padding: 3px 3px 3px 3px;
-	border-width: 0px;
-	border-style: solid;
-	background-color: #5fa2dd;
-}
-.x-toolbar-text-default {
-	padding: 0 4px;
-	font: 300 13px/16px helvetica,arial,verdana,sans-serif;
-}
 
-/**tbar与bbar鼠标移上样式**/
-.x-btn-over.x-btn-default-toolbar-small {
-	border-color: #5fa2dd;
-	background-image: none;
-	background-color: #5fa2dd;
-}
-/**tbar与bbar鼠标点击时样式**/
-.x-btn.x-btn-menu-active.x-btn-default-toolbar-small, .x-btn.x-btn-pressed.x-btn-default-toolbar-small {
-	border-color: #35baf6;
-	background-image: none;
-	background-color: #ddd;
-}
-/**tbar与bbar鼠标点击后样式**/
-.x-btn-focus.x-btn-default-toolbar-small {
-	background-image: none;
-	background-color: #35baf6;
-	-webkit-box-shadow: #35baf6 0 1px 0px 0 inset, #35baf6 0 -1px 0px 0 inset, #35baf6 -1px 0 0px 0 inset, #35baf6 1px 0 0px 0 inset;
-	-moz-box-shadow: #35baf6 0 1px 0px 0 inset, #35baf6 0 -1px 0px 0 inset, #35baf6 -1px 0 0px 0 inset, #35baf6 1px 0 0px 0 inset;
-	box-shadow: #35baf6 0 1px 0px 0 inset, #35baf6 0 -1px 0px 0 inset, #35baf6 -1px 0 0px 0 inset, #35baf6 1px 0 0px 0 inset;
-}
-/**tbar与bbar禁用后样式**/
-.x-btn.x-btn-disabled.x-btn-default-toolbar-small {
-	background-image: none;
-	background-color: #35baf6;
-}
-.x-btn-wrap-default-toolbar-small.x-btn-arrow-right:after {
-	width:0px;
-	padding-right:0px;
-	background-image: url();
-}
-/**tbar与bbar样式结束**/
 /**载入初始化页面开始**/
 .loading-indicator {
 	font-size: 11px;
@@ -264,14 +203,7 @@
 	font-family: helvetica,arial,verdana,sans-serif;
 	line-height: 32px;
 }
-.x-toolbar-footer {
-	padding: 6px 0 6px 6px;
-	border-style: solid;
-	border-color: #fff;
-	border-width: 0;
-	background-image: none;
-	background-color: #fff;
-}
+
 .x-window-header-default .x-tool-img {
 	/**
 	background-color: #35baf6;
@@ -352,60 +284,6 @@ element.style {
 	border-style: solid;
 }
 /**window头部肤色结束**/
-/**tbar与bbar样式开始**/
-.x-toolbar-default {
-	padding: 6px 0 6px 8px;
-	border-style: solid;
-	border-color: #cecece;
-	border-width: 1px;
-	background-image: none;
-	background-color: #fff;/**#157fcc**/
-}
-.x-btn-default-toolbar-small {
-	border-color: #5fa2dd;
-	heigth:32px;
-}
-.x-btn-default-toolbar-small {
-	-webkit-border-radius: 0px;
-	-moz-border-radius: 0px;
-	-ms-border-radius: 0px;
-	-o-border-radius: 0px;
-	border-radius: 0px;
-	padding: 3px 3px 3px 3px;
-	border-width: 0px;
-	border-style: solid;
-	background-color: #5fa2dd;
-}
-/**tbar与bbar鼠标移上样式**/
-.x-btn-over.x-btn-default-toolbar-small {
-	border-color: #5fa2dd;
-	background-image: none;
-	background-color: #5fa2dd;
-}
-/**tbar与bbar鼠标点击时样式**/
-.x-btn.x-btn-menu-active.x-btn-default-toolbar-small, .x-btn.x-btn-pressed.x-btn-default-toolbar-small {
-	border-color: #5fa2dd;
-	background-image: none;
-	background-color: #5fa2dd;
-}
-/**tbar与bbar鼠标点击后样式**/
-.x-btn-focus.x-btn-default-toolbar-small {
-	background-image: none;
-	background-color: #3892d3;
-	-webkit-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-	-moz-box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-	box-shadow: #4196d4 0 1px 0px 0 inset, #4196d4 0 -1px 0px 0 inset, #4196d4 -1px 0 0px 0 inset, #4196d4 1px 0 0px 0 inset;
-}
-/**tbar与bbar禁用后样式**/
-.x-btn.x-btn-disabled.x-btn-default-toolbar-small {
-	background-image: none;
-	background-color: #3892d3;
-}
-.x-btn-wrap-default-toolbar-small.x-btn-arrow-right:after {
-	width:0px;
-	padding-right:0px;
-	background-image: url();
-}
 
 /**tab选项默认样式开始**/
 .x-box-scroller-tab-bar-default {
@@ -512,24 +390,7 @@ element.style {
 	**/
 }
 /**tab选项默认样式结束**/
-.x-btn-default-small {
-    border-color: #fff;
-}
-.x-btn-icon-el-default-small.x-btn-glyph {
-	color: #35baf6;
-}
-.x-btn-default-small {
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    -ms-border-radius: 0px;
-    -o-border-radius: 0px;
-    border-radius: 0px;
-    padding: 3px 3px 3px 3px;
-    border-width: 1px;
-    border-style: solid;
-    background-color: #35baf6;
-}
-/**button选项默认样式结束**/
+
 /**Panel字体颜色开始**/
 .x-panel-header-title-default {
     color: #35baf6;
@@ -543,14 +404,7 @@ element.style {
     text-transform: none;
 }
 /**accordion字体颜色结束**/
-/**tbar字体颜色开始**/
-.x-btn-inner-default-toolbar-small {
-    font: 300 14px/16px helvetica,arial,verdana,sans-serif;
-    color: #fff;
-    padding: 0 2px;
-    max-width: 100%;
-}
-/**tbar字体颜色结束**/
+
 img {
     cursor: pointer;
 }
