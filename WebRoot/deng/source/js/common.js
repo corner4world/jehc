@@ -101,7 +101,22 @@ function sValue(id,val){
 function sTopValue(id,val){
 	top.Ext.getCmp(id).setValue(val);
 }
-
+//隐藏TOP层按钮
+function hiddenTopBtn(id){
+	top.Ext.getCmp(id).setVisible(false);
+}
+//隐藏层按钮
+function hiddenBtn(id){
+	Ext.getCmp(id).setVisible(false);
+}
+//显示TOP层按钮
+function showTopBtn(id){
+	top.Ext.getCmp(id).setVisible(true);
+}
+//显示层按钮
+function showBtn(id){
+	Ext.getCmp(id).setVisible(true);
+}
 //获取form元素对象(条件根据form和itemId)
 function gfiValue(form,itemId){
 	return form.getComponent(itemId).getValue();
@@ -110,6 +125,19 @@ function gfiValue(form,itemId){
 //赋值form元素对象(条件根据form和itemId)
 function sfiValue(form,itemId,val){
 	form.getComponent(itemId).setValue(val);
+}
+
+//通过form中id或name进行赋值
+function sfValue(form){
+	return form.getForm().findField(id_name).getValue();; 
+}
+//通过form中id或name进行取值
+function sfValue(form,id_name,val){
+	form.form.findField(id_name).setValue(val); 
+}
+//通过form中id或name进行设置只读或可读
+function sfReadOnly(form,id_name,isReadOnly){
+	return form.getForm().findField(id_name).setReadOnly(isReadOnly);
 }
 
 //返回随机数颜色
@@ -1111,7 +1139,9 @@ function ajaxRequest(url,grids,params,msg){
 		    			return;
 		    		}
 		    	}
-		    	msgTishi(obj.msg);
+		  		if(typeof(obj.msg) != "undefined"){
+		  			msgTishi(obj.msg);
+		  		}
 		    },  
 		    failure:function(response,opts){  
 		    	hideWaitMsg();
@@ -1147,7 +1177,9 @@ function ajaxRequestCallFn(url,grids,params,msg,fn){
 		    			return;
 		    		}
 		    	}
-		    	msgTishi(obj.msg);
+		  		if(typeof(obj.msg) != "undefined"){
+		  			msgTishi(obj.msg);
+		  		}
 		    	//回调事件
 	           	fn(response, opts);
 		    },  
@@ -2231,7 +2263,6 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
 		});
 	}
 }
-
 /**
  * 通过iFrame实现类ajax文件下载
  */

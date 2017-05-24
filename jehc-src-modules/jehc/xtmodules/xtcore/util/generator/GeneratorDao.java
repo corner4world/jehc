@@ -580,7 +580,7 @@ public class GeneratorDao extends GeneratorUtil{
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
     		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
-    			sb.append("\t\t\t\t<if test=\""+xt_Generator_Table_Column.getCOLUMN_NAME()+" != null\">\r\n");
+    			sb.append("\t\t\t\t<if test=\"item."+xt_Generator_Table_Column.getCOLUMN_NAME()+" != null\">\r\n");
     			sb.append("\t\t\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
     			sb.append("\t\t\t\t</if>\r\n");
     		}
