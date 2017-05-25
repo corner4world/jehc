@@ -30,13 +30,13 @@
 	<!--查询对象-->
 	<select id="getLcApprovalById" resultType="jehc.lcmodules.lcmodel.Lc_Approval" parameterType="string">
 		SELECT
-			lc_approval`lc_approval_id`,
-			lc_approval`lc_status_id`,
-			lc_approval`lc_apply_id`,
-			lc_approval`lc_approval_remark`,
-			lc_approval`taskId`,
+			lc_approval.`lc_approval_id`,
+			lc_approval.`lc_status_id`,
+			lc_approval.`lc_apply_id`,
+			lc_approval.`lc_approval_remark`,
+			lc_approval.`taskId`,
 			DATE_FORMAT(lc_approval.`lc_approval_time`,'%Y-%m-%d %H:%i:%s') AS `lc_approval_time`,
-			lc_approval`xt_userinfo_id`,
+			lc_approval.`xt_userinfo_id`,
 			xt_userinfo.`xt_userinfo_realName`,
 			lc_status.`lc_status_name`
 		FROM 

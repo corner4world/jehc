@@ -13,7 +13,7 @@ import Decoder.BASE64Encoder;
 public class ImageAnd64Binary {
     public static void main(String[] args){
 		String imgSrcPath 	 = "d:/abc/123.jpg";     //生成64编码的图片的路径
-		String imgCreatePath = "E:\\apache-tomcat-6.0.37\\webapps/pro/ueditor2/jsp/upload1/20140318/480ace2bfc6e44608595bd4adbdeb067.jpg";     //将64编码生成图片的路径
+		String imgCreatePath = "E:\\1.jpg";     //将64编码生成图片的路径
 		imgCreatePath=imgCreatePath.replaceAll("\\\\", "/");
 		System.out.println(imgCreatePath);
     	String strImg = getImageStr(imgSrcPath);

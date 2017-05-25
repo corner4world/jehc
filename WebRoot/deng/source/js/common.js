@@ -1862,6 +1862,11 @@ function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_abs
 				                    top.Ext.getCmp(picid).getEl().dom.src = action.result.data.jsonValue;
 				                    top.Ext.getCmp(fieldid).setValue(action.result.data.jsonID);
 				                    optuploadWin.close();
+			                    }else{
+			                    	///////////激活window中组件按钮
+									for(var it in items){
+										items[it].enable();
+									}
 			                    }
 			                },  
 						    failure:function(response,opts){  
@@ -1935,6 +1940,11 @@ function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_abs
 				                    Ext.getCmp(picid).getEl().dom.src = action.result.data.jsonValue;
 			                   		Ext.getCmp(fieldid).setValue(action.result.data.jsonID);
 				                    optuploadWin.close();
+			                    }else{
+			                    	///////////激活window中组件按钮
+									for(var it in items){
+										items[it].enable();
+									}
 			                    }
 			                },  
 						    failure:function(response,opts){  

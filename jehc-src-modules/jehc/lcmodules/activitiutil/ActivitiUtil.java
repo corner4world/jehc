@@ -814,7 +814,11 @@ public class ActivitiUtil {
 	public Map<String,Object> getProcessInstanceImg(String processInstanceId){
     	Map<String,Object> map = new HashMap<String, Object>();
     	ProcessInstance processInstance = runtimeService.createProcessInstanceQuery().processInstanceId(processInstanceId).singleResult();
-	    String processDefinitionId = processInstance.getProcessDefinitionId();
+	    if(null == processInstance){
+	    	map.put("processInstance", null);
+	    	return map;
+	    }
+    	String processDefinitionId = processInstance.getProcessDefinitionId();
 	    ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery().processDefinitionId(processDefinitionId).singleResult();
 	    String deploymentId = processDefinition.getDeploymentId();
 	    String imageName = processDefinition.getDiagramResourceName();
@@ -835,8 +839,40 @@ public class ActivitiUtil {
         map.put("img", "data:image/png;base64," + base64Img);
         map.put("ActivityImpl", processMap);
         map.put("activitiList", activitiList);
+        map.put("processInstance", processInstance);
 	    return map;
     }
+    
+    /**
+     * 根据流程定义获取流程图
+     * @param processInstanceId
+     * @return
+     */
+	public String getProcessImgEd(String deploymentId,String name){
+    	Map<String,Object> map = new HashMap<String, Object>();
+	    InputStream resourceAsStream = repositoryService.getResourceAsStream(deploymentId, name);
+	    String base64Img = ImageAnd64Binary.GetImageStr(resourceAsStream);
+	    return "data:image/png;base64," + base64Img;
+    }
+	
+//	 public String viewImage(){
+//	        InputStream  in = repositoryService.getResourceAsStream().getImageStream(deploymentId,imageName);
+//	        HttpServletResponse resp = ServletActionContext.getResponse();
+//	        try {
+//	            OutputStream out = resp.getOutputStream();
+//	            // 把图片的输入流程写入resp的输出流中
+//	            byte[] b = new byte[1024];
+//	            for (int len = -1; (len= in.read(b))!=-1; ) {
+//	                out.write(b, 0, len);
+//	            }
+//	            // 关闭流
+//	            out.close();
+//	            in.close();
+//	        } catch (IOException e) {
+//	            e.printStackTrace();
+//	        }
+//	        return null;
+//	    }
     
     /**
      * 添加审批（发起申请）

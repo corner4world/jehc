@@ -2,8 +2,10 @@ package jehc.lcmodules.lcweb;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
@@ -20,6 +22,7 @@ import net.sf.json.JSONArray;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,13 +33,19 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import jehc.lcmodules.activitiutil.ActivitiUtil;
+import jehc.lcmodules.lcmodel.Lc_Apply;
+import jehc.lcmodules.lcmodel.Lc_Deployment_His;
 import jehc.lcmodules.lcmodel.Lc_Process;
+import jehc.lcmodules.lcservice.Lc_ApplyService;
+import jehc.lcmodules.lcservice.Lc_Deployment_HisService;
 import jehc.lcmodules.lcservice.Lc_ProcessService;
 import jehc.lcmodules.mxgraph.MxGraphModel;
 import jehc.lcmodules.mxgraph.MxGraphToBPMN;
 import jehc.lcmodules.mxgraph.MxGraphToPng;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
+import jehc.xtmodules.xtcore.allutils.file.ImageAnd64Binary;
+import jehc.xtmodules.xtcore.annotation.AuthNeedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
@@ -55,6 +64,10 @@ public class Lc_ProcessController  extends BaseAction{
 	private Lc_ProcessService lc_ProcessService;
 	@Autowired
 	ActivitiUtil activitiUtil;
+	@Autowired
+	private Lc_ApplyService lc_ApplyService;
+	@Autowired
+	private Lc_Deployment_HisService lc_Deployment_HisService;
 	/**
 	* 载入初始化页面
 	* @param lc_process 
@@ -370,17 +383,50 @@ public class Lc_ProcessController  extends BaseAction{
 		request.setAttribute("lc_process_id", lc_process_id);
 		return new ModelAndView("pc/lc-view/lc-process-instance/lc-process-instance-list");
 	} 
-	
+		  
 	/**
 	* 载入实例图初始化页面
 	* @param lc_process 
 	* @param request 
 	* @return
+	 * @throws IOException 
 	*/
 	@RequestMapping(value="/loadLcProcessInstanceImg",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadLcProcessInstanceImg(String processInstanceId,Model model){
+	public ModelAndView loadLcProcessInstanceImg(String processInstanceId,Model model,HttpServletRequest request,HttpServletResponse response) throws IOException{
 		model.addAttribute("processInstanceId", processInstanceId);
 	    Map<String, Object> map = activitiUtil.getProcessInstanceImg(processInstanceId);
+	    if(map.get("processInstance") == null){
+	    	String lc_apply_id = request.getParameter("lc_apply_id");
+	    	model.addAttribute("lc_apply_id", lc_apply_id);
+//	    	Lc_Apply lc_Apply = lc_ApplyService.getLcApplyById(lc_apply_id);
+//	    	if(lc_Apply != null){
+//	    		Map<String, Object> condition = new HashMap<String, Object>();
+//	    		condition.put("xt_constant_id", lc_Apply.getLc_apply_model_id());
+//	    		Lc_Deployment_His lcDeploymentHis = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition);
+//	    		model.addAttribute("deploymentId", lcDeploymentHis.getLc_deployment_his_id());
+//	    		Lc_Process lc_Process = lc_ProcessService.getLcProcessById(lcDeploymentHis.getLc_process_id());
+//	    		String attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path()+lc_Process.getLc_process_title()+"/"+lc_Process.getLc_process_img_path());
+//	    		File file = new File(attachPath); 
+////	    		model.addAttribute("img",ImageAnd64Binary.getImageStr(attachPath));
+//	    		String xt_attachment_name=lc_Process.getLc_process_bpmn_path();
+//	    		int len=0;
+//				byte []buffers = new byte[1024];
+//				BufferedInputStream br = null; 
+//		        OutputStream ut = null;  
+//				response.reset();
+//				response.setContentType("application/x-msdownload");
+//				response.setHeader("Content-Disposition","attachment;filename=" +java.net.URLEncoder.encode(xt_attachment_name,"UTF-8"));
+//				br = new BufferedInputStream(new FileInputStream(file));  
+//		        ut = response.getOutputStream();  
+//		        while((len=br.read(buffers))!=-1){  
+//		            ut.write(buffers, 0, len);  
+//		        } 
+//		        ut.flush();
+//		        ut.close();
+//		        br.close();
+//	    	}
+	    	return new ModelAndView("pc/lc-view/lc-process-instance/lc-process-instance-imged");
+	    }
 	    model.addAttribute("x", map.get("x"));
 	    model.addAttribute("y", map.get("y"));
 	    model.addAttribute("width", map.get("width"));
@@ -391,6 +437,95 @@ public class Lc_ProcessController  extends BaseAction{
 		return new ModelAndView("pc/lc-view/lc-process-instance/lc-process-instance-img");
 	}  
 	
+//	/**
+//	 * 只查看流程图
+//	 * @param deploymentId
+//	 * @param request
+//	 * @param response
+//	 * @throws Exception
+//	 */
+//	@ResponseBody
+//	@RequestMapping(value="/viewImage",method={RequestMethod.POST,RequestMethod.GET})
+//	public void viewImage(String deploymentId,HttpServletRequest request,HttpServletResponse response) throws Exception {
+//		// 从仓库中找需要展示的文件
+//		List<String> names = activitiUtil.getRepositoryService().getDeploymentResourceNames(deploymentId);
+//		String imageName = null;
+//		for (String name : names) {
+//			if(name.indexOf(".png")>=0){
+//				imageName = name;
+//			}
+//		}
+//		if(imageName!=null){
+//			String lc_apply_id = request.getParameter("lc_apply_id");
+//			Lc_Apply lc_Apply = lc_ApplyService.getLcApplyById(lc_apply_id);
+//			if(lc_Apply != null){
+//				Map<String, Object> condition = new HashMap<String, Object>();
+//				condition.put("xt_constant_id", lc_Apply.getLc_apply_model_id());
+//				Lc_Deployment_His lcDeploymentHis = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition);
+//				Lc_Process lc_Process = lc_ProcessService.getLcProcessById(lcDeploymentHis.getLc_process_id());
+//				String attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path()+lc_Process.getLc_process_title()+"/"+lc_Process.getLc_process_img_path());
+//				File file = new File(attachPath); 
+//				//通过部署ID和文件名称得到文件的输入流
+//				InputStream in =  activitiUtil.getRepositoryService().getResourceAsStream(deploymentId, imageName);
+//				FileUtils.copyInputStreamToFile(in, file);
+//	//	   		String xt_attachment_name=lc_Process.getLc_process_bpmn_path();
+//	//	   		int len=0;
+//	//			byte []buffers = new byte[1024];
+//	//			BufferedInputStream br = null; 
+//	//	        OutputStream ut = null;  
+//	//			response.reset();
+//	//			response.setContentType("application/x-msdownload");
+//	//			response.setHeader("Content-Disposition","attachment;filename=" +java.net.URLEncoder.encode(xt_attachment_name,"UTF-8"));
+//	//			br = new BufferedInputStream(new FileInputStream(file));  
+//	//	        ut = response.getOutputStream();  
+//	//	        while((len=br.read(buffers))!=-1){  
+//	//	            ut.write(buffers, 0, len);  
+//	//	        } 
+//	//	        ut.flush();
+//	//	        ut.close();
+//	//	        br.close();
+//			}
+//		}
+//	}
+	
+	/**
+	 * 只查看流程图
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	@AuthNeedLogin
+	@ResponseBody
+	@RequestMapping(value="/viewImage",method={RequestMethod.POST,RequestMethod.GET})
+	public void viewImage(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String lc_apply_id = request.getParameter("lc_apply_id");
+		Lc_Apply lc_Apply = lc_ApplyService.getLcApplyById(lc_apply_id);
+		if(lc_Apply != null){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_constant_id", lc_Apply.getLc_apply_model_id());
+			Lc_Deployment_His lcDeploymentHis = lc_Deployment_HisService.getLcDeploymentHisNewUnique(condition);
+			Lc_Process lc_Process = lc_ProcessService.getLcProcessById(lcDeploymentHis.getLc_process_id());
+			String attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path()+lc_Process.getLc_process_title()+"/"+lc_Process.getLc_process_img_path());
+			File file = new File(attachPath); 
+	   		String xt_attachment_name=lc_Process.getLc_process_bpmn_path();
+	   		int len=0;
+			byte []buffers = new byte[1024];
+			BufferedInputStream br = null; 
+	        OutputStream ut = null;  
+			response.reset();
+			response.setContentType("application/x-msdownload");
+			response.setHeader("Content-Disposition","attachment;filename=" +java.net.URLEncoder.encode(xt_attachment_name,"UTF-8"));
+			br = new BufferedInputStream(new FileInputStream(file));  
+	        ut = response.getOutputStream();  
+	        while((len=br.read(buffers))!=-1){  
+	            ut.write(buffers, 0, len);  
+	        } 
+	        ut.flush();
+	        ut.close();
+	        br.close();
+		}
+    }
+		  
 	/**
 	 * 挂起流程实例（可作为撤销流程）
 	 * @param id
