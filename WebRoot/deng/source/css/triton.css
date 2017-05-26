@@ -1,12 +1,12 @@
-.x-body {
+/* .x-body {
 	color: #404040;
 	font-size: 13px;
 	line-height: 17px;
 	font-weight: 300;
 	font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana,sans-serif;
 	background: #fff;
-}
-.x-accordion-layout-ct {
+} */
+/* .x-accordion-layout-ct {
 	background-color: #fff;
 	padding: 0px 0px 0px 0px;
 }
@@ -15,25 +15,25 @@
 	background: #fff;
 	border-width: 0;
 	border-color: #fff;
-	/**
+	*
 	padding: 12px 10px;
-	**/
+	*
 	padding: 6px 10px;
-}
+} */
 
-.x-accordion-layout-ct {
+/* .x-accordion-layout-ct {
 	background-color: #fff;
 	padding: 0px 0px 0px 0px;
-}
+} */
 
-.x-panel-default-outer-border-rbl {
+ .x-panel-default-outer-border-rbl {
 	border-right-color: #f5f5f5 !important;
 	border-right-width: 1px !important;
 	border-bottom-color: #f5f5f5 !important;
 	border-bottom-width: 1px !important;
 	border-left-color: #f5f5f5 !important;
 	border-left-width: 1px !important;
-}
+} 
 
 /**
 	.x-panel-body-default {
@@ -47,10 +47,10 @@
 	border-style: '';
 	}
 **/
-.x-accordion-hd .x-panel-header-title {
+/* .x-accordion-hd .x-panel-header-title {
 	color: #35baf6;
 	text-transform: none;
-}
+} */
 /**
 	.x-panel-header-default .x-tool-img {
 	    background-color: #fff;
@@ -75,12 +75,12 @@
 }
 
 
-element.style {
+/* element.style {
 	right: auto;
 	left: 0px;
 	top: 0px;
 	margin: 0px;
-}
+} */
 
 /**载入初始化页面开始**/
 .loading-indicator {
@@ -183,14 +183,14 @@ element.style {
     border-bottom: 1px solid #cfcfcf;
 }
 /**panel头部肤色结束**/
-.x-toolbar-footer {
+/* .x-toolbar-footer {
 	padding: 6px 0 6px 6px;
 	border-style: solid;
 	border-color: #fff;
 	border-width: 0;
 	background-image: none;
 	background-color: #fff;
-}
+} */
 
 
 
@@ -209,13 +209,13 @@ element.style {
 /**accordion字体颜色结束**/
 
 
-.x-panel-header-title-default-framed {
+/* .x-panel-header-title-default-framed {
     color: #fff;
     font-size: 16px;
     font-weight: 400;
     font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
     line-height: 20px;
-}
+} */
 .x-panel-header-default-framed-top {
     -moz-border-radius-topleft: 0;
     -webkit-border-top-left-radius: 0;
@@ -266,17 +266,17 @@ padding: 0px 0 0px 0px;
 padding: 1px 4px 0px 0px;
 }
 **/
-.x-tab-focus.x-tab-default {
+/* .x-tab-focus.x-tab-default {
 border-color: transparent;
 background-color: transparent;
 outline: 1px solid #fff;
 outline-offset: -3px;
-}
-.x-tab-bar-default-bottom > .x-tab-bar-body-default {
+} */
+/* .x-tab-bar-default-bottom > .x-tab-bar-body-default {
 padding: 0px 4px 1px 1px;
-}
+} */
 
-element.style {
+/* element.style {
 right: auto;
 left: -2px;
 top: -2px;
@@ -302,7 +302,7 @@ padding: 20px 14px 20px 14px;
 border-width: 2px 2px 2px 2px;
 border-style: solid;
 background-color: #5fa2dd;
-}
+} */
 
 .x-panel-header-default-framed {
     font-size: 16px;

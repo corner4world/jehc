@@ -57,22 +57,23 @@ Ext.onReady(function(){
  		layout:'border',
 		items:[{
 			region:'west',
-			title:"<font color='white'>"+sys_pt_index+"</font>",
-			icon:indexIcon,
+//			title:"<font color='white'>"+sys_pt_index+"</font>",
+			title:'导航目录',
+			icon:indexlist,
 			width:255,
 			split:false,
 			border:true,
 			collapsible:collapsibleDefined,
-			hideCollapseTool:true,
+			hideCollapseTool:false,
 			/**
 			floatable:false,
 			 **/
 			titleCollapse:true,
 			/**自定义样式**/
-			header:{
-				height:100,
-				cls:'x-panel-header-defined'
-			},
+//			header:{
+//				height:100,
+//				cls:'x-panel-header-defined'
+//			},
 			/**
 			collapsed:true,
 			**/
@@ -87,7 +88,7 @@ Ext.onReady(function(){
             layout:{
 				type:'accordion',
 				animate:true,
-				hideCollapseTool:hideCollapseToolFlag,
+//				hideCollapseTool:hideCollapseToolFlag,
 				activeOnTop:true
 			}
 		},{
@@ -218,14 +219,18 @@ Ext.onReady(function(){
 		            	itemPosition:0,
 		            	height:100,
 				        items:[
+//				        {
+//			                 icon:indexlist,
+//			                 scale:'large',
+//			                 xtype:'button',
+//				             handler:function(button){
+//								collapsibleCE();
+//							 },
+//				             style:{background:'#fff'}
+//				        },
 				        {
-			                 icon:indexlist,
-			                 scale:'large',
-			                 xtype:'button',
-				             handler:function(button){
-								collapsibleCE();
-							 },
-				             style:{background:'#fff'}
+				        	xtype:'displayfield',
+				        	value:"<p style='color:red;font-size:20px;'>"+sys_pt_index+"</p>"
 				        }
 			        ]
 				}
