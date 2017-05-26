@@ -1,6 +1,18 @@
 document.onreadystatechange = overLoad; 
 Ext.onReady(function(){
 	reGetWidthAndHeight();
+	var paddingH=10;
+    if(getnavigator() == 1){
+    	paddingH =0;
+    }else{
+    	if(getCookie("css") == 'crisp'){
+        	paddingH =11;
+    	}else if(getCookie("css") =='triton'){
+    		paddingH = 14;
+    	}else if(getCookie("css") == 'crisp-touch'){
+    		paddingH = 18;
+    	}
+    }
 	function getChildMenuinfo(id){
 		//1创建store
 		var store = Ext.create('Ext.data.TreeStore', {  
@@ -219,12 +231,12 @@ Ext.onReady(function(){
 								collapsibleCE();
 							 },
 				             style:{background:'#fff'}
-				        },
+				        }/**,
 				        {
 				        	xtype:'displayfield',
-				        	style:'padding:15px 5px 5px 0px',
+				        	style:'padding:'+paddingH+'px 5px 5px 0px',
 				        	value:"<p style='color:#404040;font-size:18px;'>"+sys_pt_index+"</p>"
-				        }
+				        }**/
 			        ]
 				}
 			},{
