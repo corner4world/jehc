@@ -61,8 +61,8 @@ Ext.onReady(function(){
  		layout:'border',
 		items:[{
 			region:'west',
-//			title:"<font color='white'>"+sys_pt_index+"</font>",
-			title:'导航目录',
+			title:sys_pt_index,
+//			title:'导航目录',
 			icon:indexlist,
 			width:255,
 			split:false,
@@ -710,11 +710,11 @@ var collapsibleflag= 1;
 function collapsibleCE(){
 	if (collapsibleflag=== 1) {  
         Ext.getCmp('leftPanel').collapse();//panel收缩
-        Ext.getCmp('leftPanel').setTitle('导航目录');
+        Ext.getCmp('leftPanel').setTitle(sys_pt_index);
         collapsibleflag= 0;
     } else {  
         Ext.getCmp('leftPanel').expand();//panel展开
-        Ext.getCmp('leftPanel').setTitle('导航目录');
+        Ext.getCmp('leftPanel').setTitle(sys_pt_index);
         collapsibleflag = 1;
     }
 }
