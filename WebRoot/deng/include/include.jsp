@@ -31,7 +31,13 @@
 	    	collapsibleDefined=false;
 	    	var tbarBtnMinWidth=0;
 	    	var hideCollapseToolFlag=true;
+	    	var xt_userinfo_id; 
 		</script>
+		<c:if test="${not empty xtUserinfo.xt_userinfo_id}">
+			<script>
+			xt_userinfo_id = ${xtUserinfo.xt_userinfo_id}
+			</script>
+		</c:if>
         <%
         Cookie cookies[]=request.getCookies(); 
 		Cookie cookieC=null; 

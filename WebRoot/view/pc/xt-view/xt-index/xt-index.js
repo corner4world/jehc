@@ -1,11 +1,3 @@
-Ext.require([
-    'Ext.tab.*',
-    'Ext.window.*',
-    'Ext.tip.*',
-    'Ext.layout.container.Border',
-    'Ext.Button',
-    'Ext.window.MessageBox'
-]);
 document.onreadystatechange = overLoad; 
 Ext.onReady(function(){
 	reGetWidthAndHeight();
@@ -62,18 +54,18 @@ Ext.onReady(function(){
 			icon:indexlist,
 			width:255,
 			split:false,
-			border:true,
+			border:false,
 			collapsible:collapsibleDefined,
-			hideCollapseTool:false,
+			hideCollapseTool:collapsibleDefined,
 			/**
 			floatable:false,
 			 **/
 			titleCollapse:true,
 			/**自定义样式**/
-//			header:{
-//				height:100,
+			header:{
+				height:100
 //				cls:'x-panel-header-defined'
-//			},
+			},
 			/**
 			collapsed:true,
 			**/
@@ -219,18 +211,19 @@ Ext.onReady(function(){
 		            	itemPosition:0,
 		            	height:100,
 				        items:[
-//				        {
-//			                 icon:indexlist,
+				        {
+			                 icon:collapsibleIcon,
 //			                 scale:'large',
-//			                 xtype:'button',
-//				             handler:function(button){
-//								collapsibleCE();
-//							 },
-//				             style:{background:'#fff'}
-//				        },
+			                 xtype:'button',
+				             handler:function(button){
+								collapsibleCE();
+							 },
+				             style:{background:'#fff'}
+				        },
 				        {
 				        	xtype:'displayfield',
-				        	value:"<p style='color:red;font-size:20px;'>"+sys_pt_index+"</p>"
+				        	style:'padding:15px 5px 5px 0px',
+				        	value:"<p style='color:#404040;font-size:18px;'>"+sys_pt_index+"</p>"
 				        }
 			        ]
 				}
@@ -293,7 +286,7 @@ Ext.onReady(function(){
 			collapsible:false,  
 			split:false
 		}]
- 	}).show();
+ 	});
  	setInterval(function(){Ext.getCmp('timeLabel').setText(dt());},1000);
 	var menus;
 	if(menuJSON != "" && menuJSON != null && menuJSON != "]"){
@@ -321,7 +314,7 @@ Ext.onReady(function(){
                 /**padding:'10px'**/  
             },   
             border:false,
-            //frame:true,
+            frame:false,
             icon:group.icon,
             listeners:{  
                  'afterrender':function(){
@@ -705,11 +698,11 @@ var collapsibleflag= 1;
 function collapsibleCE(){
 	if (collapsibleflag=== 1) {  
         Ext.getCmp('leftPanel').collapse();//panel收缩
-        Ext.getCmp('leftPanel').setTitle('<font color="#5fa2dd">'+sys_pt_index+'</font>');
+        Ext.getCmp('leftPanel').setTitle('导航目录');
         collapsibleflag= 0;
     } else {  
         Ext.getCmp('leftPanel').expand();//panel展开
-        Ext.getCmp('leftPanel').setTitle('<font color="#fff">'+sys_pt_index+'</font>');
+        Ext.getCmp('leftPanel').setTitle('导航目录');
         collapsibleflag = 1;
     }
 }
