@@ -92,13 +92,52 @@ Ext.onReady(function(){
 	//console.info(xtUserinfoSexList.proxy.reader);
 	//console.info(xtUserinfoSexList.data.items);
 	/**查询区域可扩展**/
-	var items = {
-					fieldLabel:'所属部门',
-					xtype:'textfield',
-					id:'xt_departinfo_name',
-					name:'xt_departinfo_name',
-					anchor:'30%'
-				};
+	var items = Ext.create('Ext.FormPanel',{
+		xtype:'form',
+		maxHeight:220,
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:40,
+			labelAlign:'left',
+			flex:1,
+			margin:'2 5 4 5'
+		},
+		items:[
+		{
+			layout:'table',
+			xtype:'form',
+			anchor:'100%',
+			items:[
+			{
+				fieldLabel:'部门',
+				xtype:'textfield',
+				name:'xt_departinfo_name',
+				width:220
+			},
+			{
+				fieldLabel:'岗位',
+				xtype:'textfield',
+				name:'xt_post_name',
+				width:220
+			},
+			{
+				fieldLabel:'账户',
+				xtype:'textfield',
+				name:'xt_userinfo_name',
+				width:220
+			},
+			{
+				fieldLabel:'姓名',
+				xtype:'textfield',
+				name:'xt_userinfo_realName',
+				width:220
+			}
+			]
+		}
+		]
+	});
 	initSearchForm('north',items,false,'left');
 	store = getGridJsonStore('../xtUserinfoController/getXtUserinfoListByCondition',[{}]);
 	expander = new Ext.ux.RowExpander({

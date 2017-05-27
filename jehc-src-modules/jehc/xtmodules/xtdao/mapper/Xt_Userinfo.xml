@@ -93,7 +93,16 @@
 		AND xt_userinfo.`xt_userinfo_isDelete` = 0
 		AND xt_userinfo.`xt_userinfo_isAdmin` = 0
 		<if test="null != xt_departinfo_name and '' != xt_departinfo_name">
-			AND xt_departinfo.`xt_departinfo_name` like '%${xt_departinfo_name}%'
+			AND instr(xt_departinfo.`xt_departinfo_name`,#{xt_departinfo_name})
+		</if>
+		<if test="null != xt_post_name">
+			AND instr(xt_post.xt_post_name,#{xt_post_name})
+		</if>
+		<if test="null != xt_userinfo_realName">
+			AND instr(xt_userinfo.xt_userinfo_realName,#{xt_userinfo_realName})
+		</if>
+		<if test="null != xt_userinfo_name">
+			AND instr(xt_userinfo.xt_userinfo_name,#{xt_userinfo_name})
 		</if>
 	</select>
 	
