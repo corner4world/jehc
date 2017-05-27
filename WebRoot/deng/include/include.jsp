@@ -28,14 +28,14 @@
 	    	var grid_toolbar_gaps = "${grid_toolbar_gaps}";
 	    	var grid_toolbar_moretext_gaps = "${grid_toolbar_moretext_gaps}";
 	    	var JSESSIONID;
-	    	collapsibleDefined=false;
+	    	var collapsibleDefined=false;
 	    	var tbarBtnMinWidth=0;
 	    	var hideCollapseToolFlag=true;
 	    	var xt_userinfo_id; 
 		</script>
 		<c:if test="${not empty xtUserinfo.xt_userinfo_id}">
 			<script>
-			xt_userinfo_id = ${xtUserinfo.xt_userinfo_id}
+			xt_userinfo_id = '${xtUserinfo.xt_userinfo_id}';
 			</script>
 		</c:if>
         <%
@@ -93,7 +93,7 @@
 				if(cookieC.getValue().indexOf("triton")>=0){
 				%>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
-		<script type="text/javascript">collapsibleDefined=true;hideCollapseToolFlag=true;</script>
+		<script type="text/javascript">collapsibleDefined=true;hideCollapseToolFlag=false;</script>
 				<%
 				}else{
 				%>
@@ -106,7 +106,7 @@
 	    }else{
 	    	%>
 	    <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
-		<script type="text/javascript">collapsibleDefined=true;</script>
+		<script type="text/javascript">collapsibleDefined=true;hideCollapseToolFlag=false;</script>
 	    	<%
 	    }
         %>

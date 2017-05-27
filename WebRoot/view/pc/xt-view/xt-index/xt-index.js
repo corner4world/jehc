@@ -56,19 +56,22 @@ Ext.onReady(function(){
 		})
 		return treePanel;
 	}
+//	var sys_pt_index_title=sys_pt_index;
+//	if(!hideCollapseToolFlag){
+//		sys_pt_index_title = "导航目录";
+//	}
 	/**布局**/
 	Ext.create('Ext.Viewport',{  
  		layout:'border',
 		items:[{
 			region:'west',
-			title:sys_pt_index,
-//			title:'导航目录',
+			title:'目录导航',
 			icon:indexlist,
 			width:255,
 			split:false,
 			border:false,
 			collapsible:collapsibleDefined,
-			hideCollapseTool:collapsibleDefined,
+			hideCollapseTool:hideCollapseToolFlag,
 			/**
 			floatable:false,
 			 **/
@@ -223,20 +226,26 @@ Ext.onReady(function(){
 		            	itemPosition:0,
 		            	height:100,
 				        items:[
-				        {
-			                 icon:collapsibleIcon,
+//				        {
+//			                 icon:collapsibleIcon,
 //			                 scale:'large',
-			                 xtype:'button',
-				             handler:function(button){
-								collapsibleCE();
-							 },
-				             style:{background:'#fff'}
-				        }/**,
+//			                 xtype:'button',
+//				             handler:function(button){
+//								collapsibleCE();
+//							 },
+//				             style:{background:'#fff'}
+//				        },
+//				        {
+//				        	xtype:'button',
+//				        	disabled:true,
+//				        	style:{background:'#fff'},
+//				        	style:'padding:'+paddingH+'px 5px 5px 0px',
+//				        	text:sys_pt_index+"</p>"
+//				        },
 				        {
-				        	xtype:'displayfield',
-				        	style:'padding:'+paddingH+'px 5px 5px 0px',
-				        	value:"<p style='color:#404040;font-size:18px;'>"+sys_pt_index+"</p>"
-				        }**/
+				        	xtype:'label',
+				        	text:sys_pt_index
+				        }
 			        ]
 				}
 			},{
