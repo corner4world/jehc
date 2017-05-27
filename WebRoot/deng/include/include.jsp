@@ -148,23 +148,16 @@
 			});
 		</script>
 		<style type="text/css">
-			/**
 			.x-btn-inner-default-toolbar-small {
-			max-width: 100%;
-			**/
 			<%
 				String grid_toolbar_text_is_view = (String)application.getAttribute("grid_toolbar_text_is_view");
 				if(null != grid_toolbar_text_is_view && "0".equals(grid_toolbar_text_is_view)){
 					%>
-						/**隐藏
 						display:none;
-						**/
 					<%
 				}
 			%>
-			/**
 			}
-			**/
 			.addBtn{
 			}
 			.updateBtn{
@@ -406,7 +399,7 @@
 			.x-title-text {
 			    cursor: pointer;
 			}
-	        .tbar{ background-color:#5fa2dd;background-image:url();}
+	        /* .tbar{ background-color:#5fa2dd;background-image:url();} */
 		</style>
 	</head>
 	<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
