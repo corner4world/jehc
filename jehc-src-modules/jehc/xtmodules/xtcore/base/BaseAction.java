@@ -21,6 +21,7 @@ import sun.beans.editors.LongEditor;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.star.bridge.oleautomation.Decimal;
 
 import jehc.xtmodules.xtcore.base.binder.IntegerEditor;
 import jehc.xtmodules.xtcore.util.CommonUtils;
@@ -72,7 +73,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:"+jsonStr+"}";
             return jsonString;
         }catch(Exception e){      
-        	return "{sucess:false,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
+        	return "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
         }
 	}
 	/**
@@ -106,7 +107,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:"+jsonStr+"}";
             return jsonString;
         }catch(Exception e){      
-        	return "{sucess:false,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
+        	return "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
         }
 	}
 	/**
@@ -140,7 +141,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+page.getTotal()+",items:"+jsonStr+"}";
     		return jsonString;
         }catch(Exception e){      
-        	return "{sucess:false,start:"+start+",limit:"+limit+",total:"+page.getTotal()+",items:[]}";
+        	return "{sucess:true,start:"+start+",limit:"+limit+",total:"+page.getTotal()+",items:[]}";
         }
 	}
 	
@@ -205,10 +206,10 @@ public class BaseAction extends CommonUtils{
     			**/
     		}
     		String jsonStr = jsonArray.toString();
-    		String jsonString = "{sucess:false,start:"+start+",limit:"+limit+",total:"+total+",items:"+jsonStr+"}";
+    		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:"+jsonStr+"}";
             return jsonString;
         }catch(Exception e){      
-        	return "{sucess:false,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
+        	return "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
         }
 	}
 	/**
@@ -243,7 +244,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+","+items+":"+jsonStr+"}";
     		return jsonString;
         }catch(Exception e){      
-        	return "{sucess:false,"+start+",limit:"+limit+",total:"+total+","+items+":[]}";
+        	return "{sucess:true,"+start+",limit:"+limit+",total:"+total+","+items+":[]}";
         }
 	}
 	/**
@@ -253,9 +254,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outAudStr(boolean flag,String msg){
 		if(flag){
-			return "{success:"+flag+",msg:'"+msg+"',responseFlag:true}";
+			return "{success:true,msg:'"+msg+"',responseFlag:true}";
 		}else{
-			return "{success:"+flag+",msg:'"+msg+"',responseFlag:false}";
+			return "{success:true,msg:'"+msg+"',responseFlag:false}";
 		}
 	}
 	
@@ -266,9 +267,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outAudStr(boolean flag){
 		if(flag){
-			return "{success:"+flag+",msg:'"+CommonUtils.getCacheStr("sys_operate_sucess")+"',responseFlag:true}";
+			return "{success:true,msg:'"+CommonUtils.getCacheStr("sys_operate_sucess")+"',responseFlag:true}";
 		}else{
-			return "{success:"+flag+",msg:'"+CommonUtils.getCacheStr("sys_operate_error")+"',responseFlag:false}";
+			return "{success:true,msg:'"+CommonUtils.getCacheStr("sys_operate_error")+"',responseFlag:false}";
 		}
 	}
 	
@@ -278,7 +279,7 @@ public class BaseAction extends CommonUtils{
 	 * @param msg
 	 */
 	protected String outAudStr(BaseResponse baseResponse){
-		return "{success:"+baseResponse.isSucess()+",msg:'"+baseResponse.getMsg()+"',code:'"+baseResponse.getCode()+"',data:'"+baseResponse.getData()+"'}";
+		return "{sucess:true,isSucess:"+baseResponse.isSucess()+",msg:'"+baseResponse.getMsg()+"',code:'"+baseResponse.getCode()+"',data:'"+baseResponse.getData()+"'}";
 	}
 	
 	
@@ -294,7 +295,7 @@ public class BaseAction extends CommonUtils{
      	    String jsonString = "{sucess:true,items:"+jsonStr+"}";
      	    return jsonString;
         }catch(Exception e){      
-        	return "{sucess:false,items:[]}";
+        	return "{sucess:true,items:[]}";
         }
 	}
 	/**
@@ -308,7 +309,7 @@ public class BaseAction extends CommonUtils{
      	   String jsonString = "{sucess:true,items:"+jsonStr+"}";
      	   return jsonString;
         }catch(Exception e){      
-        	return "{sucess:false,items:[]}";
+        	return "{sucess:true,items:[]}";
         }
 	}
 	/**
@@ -323,8 +324,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{sucess:true,items:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){     
-        	e.printStackTrace();
-        	String jsonString = "{sucess:false,items:[]}";
+        	String jsonString = "{sucess:true,items:[]}";
 	        return jsonString;
         }
 	}
@@ -339,7 +339,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{sucess:true,items:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){      
-        	String jsonString = "{sucess:false,items:[]}";
+        	String jsonString = "{sucess:true,items:[]}";
 	        return jsonString;
         }
 	}
@@ -357,7 +357,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{success:true,data:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){      
-        	String jsonString = "{success:false,data:[]}";
+        	String jsonString = "{sucess:true,data:[]}";
 	        return jsonString;
         }
 	}
@@ -374,7 +374,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{success:true,data:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){      
-        	String jsonString = "{success:false,data:[]}";
+        	String jsonString = "{sucess:true,data:[]}";
 	        return jsonString;
         }
 	}
@@ -407,7 +407,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{success:true,items:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){      
-        	return "{success:false,items:[]}";
+        	return "{sucess:true,items:[]}";
         }
 	}
 	/**
