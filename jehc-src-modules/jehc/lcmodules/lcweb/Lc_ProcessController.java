@@ -46,6 +46,7 @@ import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.allutils.file.ImageAnd64Binary;
 import jehc.xtmodules.xtcore.annotation.AuthNeedLogin;
+import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
@@ -494,7 +495,7 @@ public class Lc_ProcessController  extends BaseAction{
 	 * @param response
 	 * @throws Exception
 	 */
-	@AuthNeedLogin
+	@AuthUneedLogin
 	@ResponseBody
 	@RequestMapping(value="/viewImage",method={RequestMethod.POST,RequestMethod.GET})
 	public void viewImage(HttpServletRequest request,HttpServletResponse response) throws IOException{

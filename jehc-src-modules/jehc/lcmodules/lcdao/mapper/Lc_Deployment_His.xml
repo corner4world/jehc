@@ -145,6 +145,6 @@
 		WHERE 1=1
 		AND lc_process.xt_constant_id=#{xt_constant_id}
 		AND lc_deployment_his_status = 0
-		ORDER BY lc_deployment_his.`lc_deployment_his_time` ASC
+		ORDER BY lc_deployment_his.`lc_deployment_his_time` DESC
 	</select>
 </mapper>
