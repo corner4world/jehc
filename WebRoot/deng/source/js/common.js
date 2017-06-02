@@ -1468,8 +1468,8 @@ function initSearchForm(panelPosition,items,isTop,labelPosition){
 	}
 	searchForm = Ext.create(panelTop+'Ext.FormPanel',{
 		waitMsgTarget:true,
-		collapsible:true,
-		collapsed:true,
+		collapsible:false,
+		collapsed:false,
 		region:panelPosition,
 		defaultType:'textfield',
 		title:'查询区域',
@@ -1500,8 +1500,8 @@ function initSearchFormByUserdefined(panelPosition,items,isTop,labelPosition){
 	}
 	return Ext.create(panelTop+'Ext.FormPanel',{
 		waitMsgTarget:true,
-		collapsible:true,
-		collapsed:true,
+		collapsible:false,
+		collapsed:false,
 		region:panelPosition,
 		defaultType:'textfield',
 		title:'查询区域',
