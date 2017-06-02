@@ -36,7 +36,6 @@ Ext.onReady(function (){
         store:store,
    	 	columnLines:true,
         multiSelect:true,
-        border:true,
         viewConfig:{
             emptyText:'暂无数据',
             stripeRows:true

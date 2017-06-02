@@ -47,11 +47,9 @@ Ext.onReady(function(){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		collapsible:true,
         scrollable:true,  
         scrollable:'x',
         scrollable:'y',
-		border:true,
 		selType:'checkboxmodel',
 		plugins:expander,
 		viewConfig:{

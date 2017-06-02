@@ -15,6 +15,7 @@ Ext.onReady(function(){
 			emptyText:'暂无数据',
 			stripeRows:true
 		},
+		border:true,
 		loadMask:{
 			msg:'正在加载...'
 		},

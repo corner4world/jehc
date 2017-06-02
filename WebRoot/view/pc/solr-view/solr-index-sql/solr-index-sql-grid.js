@@ -19,7 +19,6 @@ function initSolrIndexSqlGrid(solr_entity_id){
 	solr_index_sql_grid = Ext.create('Ext.grid.Panel',{
 		columnLines:true,
         multiSelect:true,
-        border:true,
         region:'north',
         title:'sql语句配置',
         height:250,

@@ -5,10 +5,8 @@ function initSolrIndexSqlFiledGrid(solr_entity_id){
 	solr_index_sql_filed_grid = Ext.create('Ext.grid.Panel',{
 		columnLines:true,
         multiSelect:true,
-        border:true,
         region:'center',
         title:'映射索引',
-        collapsible:false,
         plugins:{
 			ptype:'cellediting',
         	clicksToEdit:1

@@ -11,9 +11,9 @@ Ext.onReady(function(){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		collapsible:false,
 		border:true,
 		selType:'checkboxmodel',
+		title:'查询结果',
 		viewConfig:{
 			emptyText:'暂无数据',
 			stripeRows:true

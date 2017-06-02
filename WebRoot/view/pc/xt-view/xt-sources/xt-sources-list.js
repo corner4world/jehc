@@ -14,6 +14,7 @@ Ext.onReady(function(){
 	/**查询区域可扩展**/
 	var items = Ext.create('Ext.FormPanel',{
 		xtype:'form',
+		maxHeight:150,
 		waitMsgTarget:true,
 		defaultType:'textfield',
 		autoScroll:true,
@@ -79,7 +80,6 @@ Ext.onReady(function(){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		collapsible:true,
 		border:true,
 		selType:'checkboxmodel',
 		viewConfig:{

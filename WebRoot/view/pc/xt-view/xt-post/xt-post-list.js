@@ -7,7 +7,6 @@ Ext.onReady(function(){
 		maxHeight:150,
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',
@@ -36,8 +35,6 @@ Ext.onReady(function(){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		collapsible:true,
-		border:true,
 		selType:'checkboxmodel',
 		viewConfig:{
 			emptyText:'暂无数据',

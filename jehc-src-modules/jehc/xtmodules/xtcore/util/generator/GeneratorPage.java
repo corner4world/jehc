@@ -453,10 +453,10 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t\tmultiSelect:true,\r\n");
 		}
 		//列表中是否可折叠
-		if(null != xt_Generator.getXt_generator_page_collapsible() && !"".equals(xt_Generator.getXt_generator_page_collapsible()) && "1".equals(xt_Generator.getXt_generator_page_collapsible())){
-			sb.append("\t\tcollapsible:true,\r\n");
-		}
-		sb.append("\t\tborder:true,\r\n");
+//		if(null != xt_Generator.getXt_generator_page_collapsible() && !"".equals(xt_Generator.getXt_generator_page_collapsible()) && "1".equals(xt_Generator.getXt_generator_page_collapsible())){
+//			sb.append("\t\tcollapsible:true,\r\n");
+//		}
+//		sb.append("\t\tborder:true,\r\n");
 		//列表中是否显示复选框
 		if(null != xt_Generator.getXt_generator_page_checkboxmodel() && !"".equals(xt_Generator.getXt_generator_page_checkboxmodel()) && "1".equals(xt_Generator.getXt_generator_page_checkboxmodel())){
 			sb.append("\t\tselType:'checkboxmodel',\r\n");

@@ -1467,20 +1467,17 @@ function initSearchForm(panelPosition,items,isTop,labelPosition){
 		panelTop = "top";
 	}
 	searchForm = Ext.create(panelTop+'Ext.FormPanel',{
-		waitMsgTarget:true,
 		collapsible:false,
 		collapsed:false,
 		region:panelPosition,
 		defaultType:'textfield',
 		title:'查询区域',
-		height:'auto',
+//		height:'auto',
 		fieldDefaults:{
 	        labelWidth:70,
 	        style:'margin-left:10px;padding:5px 5px 5px 5px',
 	        labelAlign:labelPosition,
-	        flex:1,
-	        margin:'4 5 4 5',
-			labelAlign:'top'
+	        margin:'4 5 4 5'
 	    },
 		items:[items]
 	});
@@ -1499,20 +1496,17 @@ function initSearchFormByUserdefined(panelPosition,items,isTop,labelPosition){
 		panelTop = "top";
 	}
 	return Ext.create(panelTop+'Ext.FormPanel',{
-		waitMsgTarget:true,
 		collapsible:false,
 		collapsed:false,
 		region:panelPosition,
 		defaultType:'textfield',
 		title:'查询区域',
-		height:'auto',
+//		height:'auto',
 		fieldDefaults:{
 	        labelWidth:70,
 	        style:'margin-left:10px;padding:5px 5px 5px 5px',
 	        labelAlign:labelPosition,
-	        flex:1,
-	        margin:'4 5 4 5',
-			labelAlign:'top'
+	        margin:'4 5 4 5'
 	    },
 		items:[items]
 	});

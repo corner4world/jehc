@@ -29,7 +29,6 @@ Ext.onReady(function(){
         scrollable:'x',
         scrollable:'y',
         /**新方法使用结束**/ 
-		border:true,
 		selType:'checkboxmodel',
 		plugins:expander,
 		viewConfig:{

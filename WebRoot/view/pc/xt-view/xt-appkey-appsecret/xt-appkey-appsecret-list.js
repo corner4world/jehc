@@ -58,8 +58,6 @@ Ext.onReady(function(){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		collapsible:true,
-		border:true,
 		selType:'checkboxmodel',
 		viewConfig:{
 			emptyText:'暂无数据',

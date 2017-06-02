@@ -11,7 +11,6 @@ Ext.onReady(function(){
         region:"south",
         frame:true, 
         autoHeight:true, 
-        
         items:[
             {title:'按人员数据权限',html:'<font color=red>权限最高</font><br>使用说明:<br>如设置人员为"邓纯杰",即被选择人员为邓纯杰,邓益帝。这种含义指邓纯杰拥有"邓纯杰,邓益帝"权限。比如邓纯杰可设置拥有邓纯杰数据的编辑，删除功能功能，拥有读取邓益帝数据权限<br>以上功能可完成业务为:比如一个公司销售员录入自己的客户,但是自己不能修改自己客户,只能由销售经理修改,但销售经理录入的客户自己不能修改,只能由销售主管来修改同比类推,该权限可以精确到针对每一个人员进行设置'},
             {title:'按部门设置数据权限',html:'<font color=red>权限适中</font><br>使用说明:<br>如设置部门为"销售部",即被选择部门为销售部,采购部。这种含义指销售部拥有"销售部,采购部"权限。比如销售部可设置拥有销售部门中所有员工数据的编辑，删除功能功能，拥有读取采购部门中所有员工数据权限<br>以上功能可完成业务为:同上'},
@@ -42,8 +41,6 @@ Ext.onReady(function(){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		collapsible:false,
-		border:true,
 		selType:'checkboxmodel',
 		bbar:getGridBBar(store)
 			
