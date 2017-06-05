@@ -1426,6 +1426,7 @@ function exportExcel(grid,url){
         timeout:600000,//十分钟
         form:Ext.fly('frmDummy'),
         params:{
+        	exportOrDownloadSysFlag:'exportOrDownloadSysFlag',
             excleData:encodeURIComponent(Ext.encode(data)),
             excleHeader:encodeURIComponent(Ext.encode(headerIndex)),
             excleText:encodeURIComponent(Ext.encode(headText))
@@ -1452,6 +1453,7 @@ function exportExcelByCondition(url,searchForm){
         timeout:600000,//十分钟
         form:Ext.fly('frmDummy'),
         params:{
+        	exportOrDownloadSysFlag:'exportOrDownloadSysFlag',
 			searchJson:Ext.encode(searchForm.getForm().getFieldValues())
 		}
     });
@@ -2297,10 +2299,32 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
  * 通过iFrame实现类ajax文件下载
  */
 function downOrExport(url) {
+	/**
 	var exportIframe = document.createElement('iframe');
 	exportIframe.src = url;
 	exportIframe.style.display = "none";
 	document.body.appendChild(exportIframe);
+	**/
+	if(!Ext.fly('frmDownOrExport')){
+        var frm = document.createElement('form');
+        frm.id = 'frmDownOrExport';
+        frm.name = grid.getId();
+        frm.className = 'x-hidden';
+        document.body.appendChild(frm);
+    }
+    showWaitMsg("正在下载中...");
+    Ext.Ajax.request({
+        disableCaching:true ,
+        url:url,
+        method:'POST',
+        isUpload:true,
+        timeout:600000,//十分钟
+        form:Ext.fly('frmDownOrExport'),
+        params:{
+        	exportOrDownloadSysFlag:'exportOrDownloadSysFlag'
+        }
+    });
+    hideWaitMsg();
 }
 
 

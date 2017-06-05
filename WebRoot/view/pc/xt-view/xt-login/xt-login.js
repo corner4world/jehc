@@ -218,7 +218,6 @@ function login(){
 					}
 				}
 				showLoading("身份校验成功，开始进入...");
-				console.info(JSESSIONID)
 				window.location.href="../index/index.html";
 			},
 			failure:function(form, action) {

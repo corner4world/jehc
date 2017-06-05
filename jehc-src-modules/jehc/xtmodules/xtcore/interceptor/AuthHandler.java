@@ -37,11 +37,12 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		long beginTime = System.currentTimeMillis();
 		//线程绑定变量（该数据只有当前请求的线程可见） 
         startTimeThreadLocal.set(beginTime);
+        String exportOrDownloadSysFlag = request.getParameter("exportOrDownloadSysFlag");
         ///////////////////拦截IP黑户开始（优先级最高）///////////////////////
 		if(!validateIP(request)) {  
 			String head = request.getHeader("x-requested-with");
 			//XMLHttpRequest为异步 Ext.basex为同步
-			if(null !=head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) { 
+			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || "exportOrDownloadSysFlag".equals(exportOrDownloadSysFlag)) { 
 				response.setContentType("text/html;charset=utf-8");  
 	        	response.getWriter().print("{xt_pt_status:001}");
 	        	response.getWriter().flush();
@@ -86,7 +87,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
     		if(xt_functioninfoURL.indexOf(","+requestUrl+",")<0){
     			String head = request.getHeader("x-requested-with");
     			//XMLHttpRequest为异步 Ext.basex为同步 则Ajax拦截
-    			if(null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) { 
+    			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || "exportOrDownloadSysFlag".equals(exportOrDownloadSysFlag)) { 
     				response.setContentType("text/html;charset=utf-8");  
     	        	response.getWriter().print("{xt_pt_status:777}");
     	        	response.getWriter().flush();
@@ -103,7 +104,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		    //重定向到登录页面  
 			String head = request.getHeader("x-requested-with");
 			//XMLHttpRequest为异步 Ext.basex为同步
-			if(null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) { 
+			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || "exportOrDownloadSysFlag".equals(exportOrDownloadSysFlag)) { 
 				response.setContentType("text/html;charset=utf-8");  
 	        	response.getWriter().print("{xt_pt_status:888}");
 	        	response.getWriter().flush();

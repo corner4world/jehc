@@ -47,7 +47,6 @@ public class BaseAction extends CommonUtils{
 	 * 输出带分页的JSON格式字符串
 	 * @param jsonArray
 	 */
-	@SuppressWarnings("unchecked")
 	protected String outPageStr(List list,long total,HttpServletRequest request){
 		Integer start = 0;
 		Integer limit = 30;
@@ -73,7 +72,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:"+jsonStr+"}";
             return jsonString;
         }catch(Exception e){      
-        	return "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
+        	throw new ExceptionUtil("加载分页列表出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	/**
@@ -81,7 +80,6 @@ public class BaseAction extends CommonUtils{
 	 * 输出带分页的JSON格式字符串
 	 * @param jsonArray
 	 */
-	@SuppressWarnings("unchecked")
 	protected String outPageStr(Object object,long total,HttpServletRequest request){
 		Integer start = 0;
 		Integer limit = 30;
@@ -107,7 +105,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:"+jsonStr+"}";
             return jsonString;
         }catch(Exception e){      
-        	return "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
+        	throw new ExceptionUtil("加载分页列表出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	/**
@@ -115,7 +113,6 @@ public class BaseAction extends CommonUtils{
 	 * 输出带分页的JSON格式字符串
 	 * @param jsonArray
 	 */
-	@SuppressWarnings("unchecked")
 	protected String outPageStr(PageInfo page,HttpServletRequest request){
 		Integer start = 0;
 		Integer limit = 30;
@@ -141,7 +138,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+page.getTotal()+",items:"+jsonStr+"}";
     		return jsonString;
         }catch(Exception e){      
-        	return "{sucess:true,start:"+start+",limit:"+limit+",total:"+page.getTotal()+",items:[]}";
+        	throw new ExceptionUtil("加载分页列表出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	
@@ -150,7 +147,6 @@ public class BaseAction extends CommonUtils{
 	 * 输出带分页的JSON格式字符串
 	 * @param jsonArray
 	 */
-	@SuppressWarnings("unchecked")
 	protected String outPageStr(List list,int total,HttpServletRequest request){
 		Integer start = 0;
 		Integer limit = 30;
@@ -209,7 +205,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:"+jsonStr+"}";
             return jsonString;
         }catch(Exception e){      
-        	return "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+",items:[]}";
+        	throw new ExceptionUtil("加载分页列表出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	/**
@@ -218,7 +214,6 @@ public class BaseAction extends CommonUtils{
 	 * 输出带分页的JSON格式字符串
 	 * @param jsonArray
 	 */
-	@SuppressWarnings("unchecked")
 	protected String outPageStr(List list,int total,String items,HttpServletRequest request){
 		Integer start = 0;
 		Integer limit = 30;
@@ -244,7 +239,7 @@ public class BaseAction extends CommonUtils{
     		String jsonString = "{sucess:true,start:"+start+",limit:"+limit+",total:"+total+","+items+":"+jsonStr+"}";
     		return jsonString;
         }catch(Exception e){      
-        	return "{sucess:true,"+start+",limit:"+limit+",total:"+total+","+items+":[]}";
+        	throw new ExceptionUtil("加载分页列表出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	/**
@@ -256,7 +251,7 @@ public class BaseAction extends CommonUtils{
 		if(flag){
 			return "{success:true,msg:'"+msg+"',responseFlag:true}";
 		}else{
-			return "{success:true,msg:'"+msg+"',responseFlag:false}";
+			return "{success:false,msg:'"+msg+"',responseFlag:false}";
 		}
 	}
 	
@@ -269,7 +264,7 @@ public class BaseAction extends CommonUtils{
 		if(flag){
 			return "{success:true,msg:'"+CommonUtils.getCacheStr("sys_operate_sucess")+"',responseFlag:true}";
 		}else{
-			return "{success:true,msg:'"+CommonUtils.getCacheStr("sys_operate_error")+"',responseFlag:false}";
+			return "{success:false,msg:'"+CommonUtils.getCacheStr("sys_operate_error")+"',responseFlag:false}";
 		}
 	}
 	
@@ -279,7 +274,7 @@ public class BaseAction extends CommonUtils{
 	 * @param msg
 	 */
 	protected String outAudStr(BaseResponse baseResponse){
-		return "{sucess:true,isSucess:"+baseResponse.isSucess()+",msg:'"+baseResponse.getMsg()+"',code:'"+baseResponse.getCode()+"',data:'"+baseResponse.getData()+"'}";
+		return "{sucess:"+baseResponse.isSucess()+",msg:'"+baseResponse.getMsg()+"',code:'"+baseResponse.getCode()+"',data:'"+baseResponse.getData()+"'}";
 	}
 	
 	
@@ -295,7 +290,7 @@ public class BaseAction extends CommonUtils{
      	    String jsonString = "{sucess:true,items:"+jsonStr+"}";
      	    return jsonString;
         }catch(Exception e){      
-        	return "{sucess:true,items:[]}";
+        	throw new ExceptionUtil("加载输出树JSON格式字符串列表出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	/**
@@ -309,7 +304,7 @@ public class BaseAction extends CommonUtils{
      	   String jsonString = "{sucess:true,items:"+jsonStr+"}";
      	   return jsonString;
         }catch(Exception e){      
-        	return "{sucess:true,items:[]}";
+        	throw new ExceptionUtil("加载输出树JSON格式字符串列表出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	/**
@@ -324,8 +319,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{sucess:true,items:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){     
-        	String jsonString = "{sucess:true,items:[]}";
-	        return jsonString;
+        	throw new ExceptionUtil("输出查找对象的JSON格式字符串 或集合JSON格式字符串出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	/**
@@ -339,8 +333,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{sucess:true,items:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){      
-        	String jsonString = "{sucess:true,items:[]}";
-	        return jsonString;
+        	throw new ExceptionUtil("输出查找对象的JSON格式字符串 或集合JSON格式字符串出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	
@@ -357,8 +350,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{success:true,data:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){      
-        	String jsonString = "{sucess:true,data:[]}";
-	        return jsonString;
+        	throw new ExceptionUtil("输出查找对象的JSON格式字符串 或集合JSON格式字符串出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	
@@ -374,8 +366,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{success:true,data:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){      
-        	String jsonString = "{sucess:true,data:[]}";
-	        return jsonString;
+        	throw new ExceptionUtil("输出查找对象的JSON格式字符串 或集合JSON格式字符串出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	
@@ -407,7 +398,7 @@ public class BaseAction extends CommonUtils{
 	        String jsonString = "{success:true,items:"+jsonStr+"}";
 	        return jsonString;
         }catch(Exception e){      
-        	return "{sucess:true,items:[]}";
+        	throw new ExceptionUtil("输出查找对象的JSON格式字符串 或集合JSON格式字符串出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
 	/**
