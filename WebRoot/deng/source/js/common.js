@@ -1434,6 +1434,30 @@ function exportExcel(grid,url){
     hideWaitMsg();
 }
 
+/**根据条件筛选导出**/
+function exportExcelByCondition(url,searchForm){
+    if(!Ext.fly('frmDummy')){
+        var frm = document.createElement('form');
+        frm.id = 'frmDummy';
+        frm.name = grid.getId();
+        frm.className = 'x-hidden';
+        document.body.appendChild(frm);
+    }
+    showWaitMsg("正在导出数据...");
+    Ext.Ajax.request({
+        disableCaching:true ,
+        url:url,
+        method:'POST',
+        isUpload:true,
+        timeout:600000,//十分钟
+        form:Ext.fly('frmDummy'),
+        params:{
+			searchJson:Ext.encode(searchForm.getForm().getFieldValues())
+		}
+    });
+    hideWaitMsg();
+}
+
 //设置panel标题
 function resetTitle(panel,isSetBackGround){
 	var rpanel=[];
