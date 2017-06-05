@@ -1,5 +1,6 @@
 package jehc.xtmodules.xtcore.base;
 import org.apache.commons.lang.StringUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +24,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sun.star.bridge.oleautomation.Decimal;
 
+import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.binder.IntegerEditor;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
@@ -285,6 +287,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outRootStr(Object obj){
         try{  
+        	if(null == obj){
+				return "{sucess:true,items:''}";
+			}
         	JSONArray jsonArray = JSONArray.fromObject(obj); 
             String jsonStr = jsonArray.toString();
      	    String jsonString = "{sucess:true,items:"+jsonStr+"}";
@@ -300,6 +305,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outRootStr(JSONArray jsonArray){
         try{   
+        	if(null == jsonArray){
+				return "{sucess:true,items:''}";
+			}
            String jsonStr = jsonArray.toString();
      	   String jsonString = "{sucess:true,items:"+jsonStr+"}";
      	   return jsonString;
@@ -314,6 +322,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outItemsStr(Object obj){
 		try{ 
+			if(null == obj){
+				return "{sucess:true,items:''}";
+			}
 			JSONArray jsonArray = JSONArray.fromObject(obj); 
 			String jsonStr = jsonArray.toString();
 	        String jsonString = "{sucess:true,items:"+jsonStr+"}";
@@ -329,6 +340,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outItemsStr(JSONArray jsonArray){
 		try{ 
+			if(null == jsonArray){
+				return "{sucess:true,items:''}";
+			}
 			String jsonStr = jsonArray.toString();
 	        String jsonString = "{sucess:true,items:"+jsonStr+"}";
 	        return jsonString;
@@ -344,6 +358,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outDataStr(Object obj){
 		try{ 
+			if(null == obj){
+				return "{sucess:true,data:''}";
+			}
 			JSONArray jsonArray = JSONArray.fromObject(obj); 
 			String jsonStr = jsonArray.toString();
 			jsonStr = jsonStr.substring(1,jsonStr.length()-1);
@@ -361,6 +378,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outDataStr(JSONArray jsonArray){
 		try{ 
+			if(null == jsonArray){
+				return "{sucess:true,data:''}";
+			}
 			String jsonStr = jsonArray.toString();
 			jsonStr = jsonStr.substring(1,jsonStr.length()-1);
 	        String jsonString = "{success:true,data:"+jsonStr+"}";
@@ -393,6 +413,9 @@ public class BaseAction extends CommonUtils{
 	 */
 	protected String outComboDataStr(Object obj){
 		try{ 
+			if(null == obj){
+				return "{sucess:true,items:''}";
+			}
 			JSONArray jsonArray = JSONArray.fromObject(obj); 
 			String jsonStr = jsonArray.toString();
 	        String jsonString = "{success:true,items:"+jsonStr+"}";
