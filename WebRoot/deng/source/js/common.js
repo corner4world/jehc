@@ -834,6 +834,7 @@ function submitForm(subForm,url,grids,win,isHide,isReset){
 			           		}
 				      	},
 				        failure:function(form, action){
+				        	top.Ext.example.msg('提示', action.result.msg);//提示之后消失
 				        	///////////激活window中组件按钮
 							for(var it in items){
 								items[it].enable();
@@ -900,6 +901,7 @@ function submitFormCallFn(subForm,url,grids,win,isHide,isReset,fn){
 		           		fn(form, action);
 			      	},
 			        failure:function(form, action){
+			        	top.Ext.example.msg('提示', action.result.msg);//提示之后消失
 			        	///////////激活window中组件按钮
 						for(var it in items){
 							items[it].enable();
@@ -964,6 +966,7 @@ function submitFormIncludeParams(subForm,url,grids,win,isHide,isReset,params){
 		           		}
 			      	},
 			        failure:function(form, action){
+			        	top.Ext.example.msg('提示', action.result.msg);//提示之后消失
 			        	///////////激活window中组件按钮
 						for(var it in items){
 							items[it].enable();
@@ -1031,6 +1034,7 @@ function submitFormCallBack(subForm,url,grids,win,isHide,isReset,isCallForm,call
 		           		}
 			      	},
 			        failure:function(form, action){
+			        	top.Ext.example.msg('提示', action.result.msg);//提示之后消失
 			        	///////////激活window中组件按钮
 						for(var it in items){
 							items[it].enable();
@@ -1100,6 +1104,7 @@ function submitForm(subForm,url,grids,win,isHide,isReset,isExpandAll){
 		           		}
 			      	},
 			        failure:function(form, action){
+			        	top.Ext.example.msg('提示', action.result.msg);//提示之后消失
 			        	///////////激活window中组件按钮
 						for(var it in items){
 							items[it].enable();
@@ -1147,7 +1152,6 @@ function ajaxRequest(url,grids,params,msg){
 		    },  
 		    failure:function(response,opts){  
 		    	hideWaitMsg();
-		    	console.info('ajaxRequest---异常');
 		    }  
 		});
 	}catch(e){
@@ -1187,7 +1191,6 @@ function ajaxRequestCallFn(url,grids,params,msg,fn){
 		    },  
 		    failure:function(response,opts){  
 		    	hideWaitMsg();
-		    	console.info('ajaxRequest---异常');
 		    	//回调事件
 	           	fn(response, opts);
 		    }  
@@ -1227,7 +1230,6 @@ function ajaxReq(url,gridArray,params,msg){
 		    },  
 		    failure:function(response,opts){  
 		    	hideWaitMsg();
-		    	console.info('ajaxReq---异常');
 		    }  
 		});
 	}catch(e){
