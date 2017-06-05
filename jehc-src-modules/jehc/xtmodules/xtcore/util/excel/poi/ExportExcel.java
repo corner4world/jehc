@@ -59,11 +59,11 @@ public class ExportExcel{
             r++;
         };
         //通过Response把数据以Excel格式保存
-        response.setContentType("application/msexcel;charset=UTF-8");
-        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/msexcel;charset=GBK");
+        response.setCharacterEncoding("GBK");
         try {
             response.addHeader("Content-Disposition", "attachment;filename=\""
-                    + new String((DateUtil.getSimpleDateFormat() + ".xls").getBytes("UTF-8"),
+                    + new String((DateUtil.getSimpleDateFormat() + ".xls").getBytes("GBK"),
                             "ISO8859_1") + "\"");
             OutputStream out = response.getOutputStream();
             workbook.write(out);
