@@ -495,7 +495,7 @@ function initAddCellIcon(graph,history){
         		 || 'messageCatchingEvent' == node_type
         		 || 'signalThrowingEvent' == node_type
         		 || 'compensationThrowingEvent' == node_type){
-        	font.style.padding="30px 30px 0px 21px";
+        	font.style.padding="30px 0px 0px 18px";
         }
         font.style.fontWeight="bold";//加粗
         font.innerHTML = label;
