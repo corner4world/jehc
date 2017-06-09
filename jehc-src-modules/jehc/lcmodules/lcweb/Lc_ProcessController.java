@@ -48,6 +48,7 @@ import jehc.xtmodules.xtcore.allutils.file.ImageAnd64Binary;
 import jehc.xtmodules.xtcore.annotation.AuthNeedLogin;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
@@ -86,14 +87,9 @@ public class Lc_ProcessController  extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getLcProcessListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getLcProcessListByCondition(Lc_Process lc_Process,HttpServletRequest request){
-		Map<String, Object> condition = new HashMap<String, Object>();
+	public String getLcProcessListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		condition.put("lc_process_title",request.getParameter("lc_process_title"));
-		condition.put("lc_process_status",request.getParameter("lc_process_status"));
-		condition.put("lc_process_flag",request.getParameter("lc_process_flag"));
-		condition.put("lc_process_remark",request.getParameter("lc_process_remark"));
-		condition.put("xt_constant_id",request.getParameter("xt_constant_id"));
 		List<Lc_Process> lc_ProcessList = lc_ProcessService.getLcProcessListByCondition(condition);
 		PageInfo<Lc_Process> page = new PageInfo<Lc_Process>(lc_ProcessList);
 		return outPageStr(page,request);

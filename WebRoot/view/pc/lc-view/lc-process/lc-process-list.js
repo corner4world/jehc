@@ -560,23 +560,7 @@ function initRight(){
 }
 /**查询操作**/
 function search(){
-	var lc_process_title = Ext.getCmp("lc_process_title").getValue();
-	var lc_process_status = Ext.getCmp("lc_process_status").getValue();
-	var lc_process_flag = Ext.getCmp("lc_process_flag").getValue();
-	var lc_process_remark = Ext.getCmp("lc_process_remark").getValue();
-	var xt_constant_id = Ext.getCmp("xt_constant_id").getValue();
-	store.load({
-		url:'../lcProcessController/getLcProcessListByCondition',
-		params:{
-			start:0,
-			limit:getGridBBar(store).pageSize,
-			lc_process_title:lc_process_title,
-			lc_process_status:lc_process_status,
-			lc_process_flag:lc_process_flag,
-			lc_process_remark:lc_process_remark,
-			xt_constant_id:xt_constant_id
-		}
-	});
+	initSearch(store,'../lcProcessController/getLcProcessListByCondition',searchForm); 
 }
 
 var lcDesignWin;
