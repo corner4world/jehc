@@ -467,7 +467,7 @@ function initAddCellIcon(graph,history){
         	|| 'cancelBoundaryEvent' == node_type
         	|| 'compensationBoundaryEvent' == node_type
         	|| 'signalBoundaryEvent' == node_type){
-        	font.style.padding="30px 30px 0px 35px";
+        	font.style.padding="30px 0px 0px 30px";
         }else if('select' == node_type
         		 || 'zxline' == node_type
         		 || 'zjline' == node_type
@@ -481,7 +481,7 @@ function initAddCellIcon(graph,history){
         }else if('subProcess' == node_type || 'pool' == node_type){
         	font.style.padding="30px 30px 0px 42px";
         }else if('eventSubProcess' == node_type  || 'callActivity' == node_type || 'noneThrowingEvent' == node_type){
-        	font.style.padding="30px 30px 0px 27px";
+        	font.style.padding="30px 0px 0px 24px";
         }else if('timerStartEvent' == node_type 
         		 || 'messageStartEvent' == node_type 
         		 || 'signalStartEvent' == node_type
