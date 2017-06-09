@@ -16,7 +16,9 @@ Ext.onReady(function(){
        	emptyText:"请输入关键字",
        	hideTrigger:true,
        	minChars:1,
+       	labelWidth:100,
    		matchFieldWidth:true,
+   		labelAlign:'top',
        	fieldLabel:'标题、内容',
        	listConfig:{
 	       	loadingText:'正在查找中...',
