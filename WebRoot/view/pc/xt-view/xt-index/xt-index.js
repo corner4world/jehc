@@ -243,8 +243,8 @@ Ext.onReady(function(){
 //				        	text:sys_pt_index+"</p>"
 //				        },
 				        {
-				        	xtype:'label',
-				        	text:sys_pt_index
+				        	xtype:'displayfield',
+				        	value:"<font style = 'font-size:18px;' color=#5fa2dd>"+sys_pt_index+"</font>"
 				        }
 			        ]
 				}
