@@ -46,7 +46,7 @@ public class VerifyCodeServlet extends HttpServlet {
 		// 4.设置图片的边框
 		setBorder(g);
 		// 5.在图片上画干扰线
-		drawRandomLine(g);
+//		drawRandomLine(g);
 		// 6.写在图片上随机数
 		String random = drawRandomNum((Graphics2D) g);// 生成数字和字母组合的验证码图片
 
@@ -246,7 +246,8 @@ public class VerifyCodeServlet extends HttpServlet {
 		g.setFont(new Font("宋体", Font.BOLD, 30));
 		
 		// 数字和字母的组合
-		String baseNumLetter = "Aa0Bb1CcDd3EeFf5Gg6HhJjKkLl7MmN9nOoPp8QqRrSs2TtUuVv4WwXxYyZz";
+//		String baseNumLetter = "Aa0Bb1CcDd3EeFf5Gg6HhJjKkLl7MmN9nOoPp8QqRrSs2TtUuVv4WwXxYyZz";
+		String baseNumLetter = "0123456789";
 		return createRandomChar(g, baseNumLetter);
 	}
 

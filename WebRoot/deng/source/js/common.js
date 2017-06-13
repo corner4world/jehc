@@ -644,7 +644,7 @@ function showLoading(msg){
 		msg:msg == null ? '正在处理数据,请稍候...':msg,
 		progressText:msg == null ? '正在处理数据,请稍候...':msg,
 		width:300,
-		icon:'saveing-icon',
+//		icon:'saveing-icon',
 		progress:true,
         closable:false,
 		waitConfig:{
@@ -680,7 +680,7 @@ function showWaitMsg(msg){
 		width:300,
 		progress:true,
         closable:false,
-		icon:'saveing-icon',
+//		icon:'saveing-icon',
 		waitConfig:{
 			interval:150
 		}
