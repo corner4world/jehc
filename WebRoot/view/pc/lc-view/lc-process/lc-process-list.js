@@ -565,12 +565,11 @@ function search(){
 
 var lcDesignWin;
 function addLcDesign(lc_process_id,lc_process_title){
-	reGetWidthAndHeight();
+	reGetTopWidthAndHeight();
 	lcDesignWin = Ext.create('top.Ext.Window',{
 		layout:'fit',
-		width:clientWidth,                    
-		height:clientHeight, 
-		maximized:true,
+		width:clientWidth*0.9,                    
+		height:clientHeight*0.9, 
 		maximizable:true,
 		minimizable:true,
 		animateTarget:document.body,

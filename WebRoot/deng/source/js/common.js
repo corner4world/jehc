@@ -1344,6 +1344,12 @@ function reGetWidthAndHeight(){
 	clientHeight = cvh.height;
 }
 
+function reGetTopWidthAndHeight(){
+	var cvh = top.Ext.getBody().getViewSize();
+	clientWidth = cvh.width;
+	clientHeight = cvh.height;
+}
+
 /**
  * 从缓存中清除Cookie
  * @param {} name
