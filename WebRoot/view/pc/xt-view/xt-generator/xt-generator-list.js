@@ -36,6 +36,7 @@ Ext.onReady(function (){
         store:store,
    	 	columnLines:true,
         multiSelect:true,
+        title:'代码生成器信息列表',
         viewConfig:{
             emptyText:'暂无数据',
             stripeRows:true
@@ -96,7 +97,7 @@ Ext.onReady(function (){
 	                header:'操作人',
 	                dataIndex:'xt_userinfo_realName'
             	}],
-        fbar:[{
+        tbar:[{
 	            text:'单表',
 	            tooltip:'单表快速生成',
 				cls:'addBtn',
