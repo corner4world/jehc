@@ -1,18 +1,6 @@
 document.onreadystatechange = overLoad; 
 Ext.onReady(function(){
 	reGetWidthAndHeight();
-	var paddingH=10;
-    if(getnavigator() == 1){
-    	paddingH =0;
-    }else{
-    	if(getCookie("css") == 'crisp'){
-        	paddingH =11;
-    	}else if(getCookie("css") =='triton'){
-    		paddingH = 14;
-    	}else if(getCookie("css") == 'crisp-touch'){
-    		paddingH = 18;
-    	}
-    }
 	function getChildMenuinfo(id){
 		//1创建store
 		var store = Ext.create('Ext.data.TreeStore', {  
@@ -56,16 +44,12 @@ Ext.onReady(function(){
 		})
 		return treePanel;
 	}
-//	var sys_pt_index_title=sys_pt_index;
-//	if(!hideCollapseToolFlag){
-//		sys_pt_index_title = "导航目录";
-//	}
 	/**布局**/
 	Ext.create('Ext.Viewport',{  
  		layout:'border',
 		items:[{
 			region:'west',
-			title:'目录导航',
+			title:'快捷导航',
 			icon:indexlist,
 			width:255,
 			split:false,
@@ -86,16 +70,9 @@ Ext.onReady(function(){
 			**/
             collapseDirection:'left',
             id:'leftPanel',
-            /**
-            dockedItems:{
-            	xtype:'button',
-            	text:'dockedItems test'
-		    },
-		    **/
             layout:{
 				type:'accordion',
 				animate:true,
-//				hideCollapseTool:hideCollapseToolFlag,
 				activeOnTop:true
 			}
 		},{
@@ -235,13 +212,6 @@ Ext.onReady(function(){
 //							 },
 //				             style:{background:'#fff'}
 //				        },
-//				        {
-//				        	xtype:'button',
-//				        	disabled:true,
-//				        	style:{background:'#fff'},
-//				        	style:'padding:'+paddingH+'px 5px 5px 0px',
-//				        	text:sys_pt_index+"</p>"
-//				        },
 				        {
 				        	xtype:'displayfield',
 				        	value:"<font style = 'font-size:18px;' color=#5fa2dd>"+sys_pt_index+"</font>"
@@ -287,7 +257,6 @@ Ext.onReady(function(){
 //						}
 //			      },
 			      {
-			            /**ui:'default-toolbar',**/
 			            xtype:'button',
 			            icon:lockIcon,
 			            tooltip:{
@@ -332,7 +301,7 @@ Ext.onReady(function(){
             scrollable:'y',
             /**新方法使用结束**/ 
             bodyStyle:{    
-                /**padding:'10px'**/  
+                padding:'0px'
             },   
             border:false,
             frame:false,

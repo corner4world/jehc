@@ -399,6 +399,10 @@
 			.x-title-text {
 			    cursor: pointer;
 			}
+			.x-accordion-item .x-accordion-hd-fff{
+			    background-image: none;
+			    background: #fff;
+			}
 	        /* .tbar{ background-color:#5fa2dd;background-image:url();} */
 		</style>
 	</head>
