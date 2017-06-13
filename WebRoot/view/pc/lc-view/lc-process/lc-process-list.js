@@ -42,6 +42,7 @@ Ext.onReady(function(){
 			flex:1,
 			margin:'2 5 4 5'
 		},
+		layout:'hbox',
 		items:[
 		{
 			fieldLabel:'流程标题',
@@ -49,7 +50,7 @@ Ext.onReady(function(){
 			labelWidth:70,
 			id:'lc_process_title',
 			name:'lc_process_title',
-			anchor:'30%',
+			width:200,
 			labelAlign:'top'
 		},
 		{
@@ -66,7 +67,7 @@ Ext.onReady(function(){
 			displayField:'text',
 			id:'lc_process_status',
 			name:'lc_process_status',
-			anchor:'30%',
+			width:180,
 			labelAlign:'top'
 		},
 		{
@@ -83,16 +84,7 @@ Ext.onReady(function(){
 			displayField:'text',
 			id:'lc_process_flag',
 			name:'lc_process_flag',
-			anchor:'30%',
-			labelAlign:'top'
-		},
-		{
-			fieldLabel:'备注',
-			xtype:'textareafield',
-			labelWidth:70,
-			id:'lc_process_remark',
-			name:'lc_process_remark',
-			anchor:'30%',
+			width:180,
 			labelAlign:'top'
 		},
 		{
@@ -109,7 +101,7 @@ Ext.onReady(function(){
 			displayField:'xt_constantRemark',
 			id:'xt_constant_id',
 			name:'xt_constant_id',
-			anchor:'30%',
+			width:180,
 			labelAlign:'top'
 		}
 		]
