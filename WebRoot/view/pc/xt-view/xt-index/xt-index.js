@@ -49,7 +49,7 @@ Ext.onReady(function(){
  		layout:'border',
 		items:[{
 			region:'west',
-			title:'快捷导航',
+			title:'<font color=#fff>快捷导航</font>',
 			icon:indexlist,
 			width:255,
 			split:false,
@@ -62,8 +62,8 @@ Ext.onReady(function(){
 			titleCollapse:true,
 			/**自定义样式**/
 			header:{
-				height:100
-//				cls:'x-panel-header-defined'
+				height:100,
+				cls:'x-panel-header-defined'
 			},
 			/**
 			collapsed:true,
