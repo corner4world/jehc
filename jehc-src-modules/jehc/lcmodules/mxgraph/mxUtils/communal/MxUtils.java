@@ -1063,8 +1063,13 @@ public class MxUtils {
 		Element targetMxCell = getElement(mxCellList, edge.attributeValue("target"));
 		StringBuffer sbf = new StringBuffer();
 		if(null != listMap && listMap.size()>0 && !listMap.isEmpty()){
-			for(int i = 0; i < listMap.size(); i++){
-				sbf.append("<omgdi:waypoint x='"+listMap.get(i).get("x")+"' y='"+listMap.get(i).get("y")+"'></omgdi:waypoint>");
+			if(listMap.size() == 1){
+				sbf.append("<omgdi:waypoint x='"+listMap.get(0).get("x")+"' y='"+listMap.get(0).get("y")+"'></omgdi:waypoint>");
+				sbf.append("<omgdi:waypoint x='"+listMap.get(0).get("y")+"' y='"+listMap.get(0).get("x")+"'></omgdi:waypoint>");
+			}else{
+				for(int i = 0; i < listMap.size(); i++){
+					sbf.append("<omgdi:waypoint x='"+listMap.get(i).get("x")+"' y='"+listMap.get(i).get("y")+"'></omgdi:waypoint>");
+				}
 			}
 		}else{
 			Element mxGeometrySource = sourceMxCell.element("mxGeometry"); 
