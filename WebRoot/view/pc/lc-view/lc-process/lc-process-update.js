@@ -116,22 +116,21 @@ function initLcProcessFormEdit(){
 			name:'xt_constant_id',
 			anchor:'40%'
 		},
-		{
-			fieldLabel:'标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;识',
-			xtype:'combo',
-			emptyText:'请选择',
-			store:lc_process_flag_combo,
-			mode:'local',
-			triggerAction:'all',
-			editable:false,
-			hiddenName:'lc_process_flag',
-			valueField:'value',
-			displayField:'text',
-			hidden:true,
-			value:'1',
-			name:'lc_process_flag',
-			anchor:'40%'
-		},
+//		{
+//			fieldLabel:'标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;识',
+//			xtype:'combo',
+//			emptyText:'请选择',
+//			store:lc_process_flag_combo,
+//			mode:'local',
+//			triggerAction:'all',
+//			editable:false,
+//			hiddenName:'lc_process_flag',
+//			valueField:'value',
+//			displayField:'text',
+//			hidden:true,
+//			name:'lc_process_flag',
+//			anchor:'40%'
+//		},
 		{
 			fieldLabel:'流程附件',
 			xtype:'textfield',
