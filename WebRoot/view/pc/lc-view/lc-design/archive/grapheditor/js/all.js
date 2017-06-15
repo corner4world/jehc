@@ -290,6 +290,7 @@ function initImpfromform(graph,lc_process_hideid){
 var userGrid;
 var userStore;
 var userWin;
+var formSearc;
 //读取性别下拉框数据
 var xtUserinfoSexList = new Ext.data.Store({
 	singleton:true, 
@@ -333,6 +334,53 @@ var xtUserinfoIsmarriedList = new Ext.data.Store({
 //用户选择器--------flag标识是1单个用户选择2支持多选----------type类型1在UserTask中使用2在“流程基本信息使用”3在泳道中使用
 function initassignee(flag,type){
 	userStore = getGridJsonStore('../xtUserinfoController/getXtUserinfoListByCondition',[{}]);
+	/**查询区域可扩展**/
+	var formItems = Ext.create('top.Ext.FormPanel',{
+		maxHeight:220,
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:40,
+			labelAlign:'left',
+			flex:1,
+			margin:'2 5 4 5'
+		},
+		items:[
+		{
+			layout:'table',
+			xtype:'form',
+			anchor:'100%',
+			items:[
+			{
+				fieldLabel:'部门',
+				xtype:'textfield',
+				name:'xt_departinfo_name',
+				width:220
+			},
+			{
+				fieldLabel:'岗位',
+				xtype:'textfield',
+				name:'xt_post_name',
+				width:220
+			},
+			{
+				fieldLabel:'账户',
+				xtype:'textfield',
+				name:'xt_userinfo_name',
+				width:220
+			},
+			{
+				fieldLabel:'姓名',
+				xtype:'textfield',
+				name:'xt_userinfo_realName',
+				width:220
+			}
+			]
+		}
+		]
+	});
+	formSearc = initSearchFormByUserdefined('north',formItems,true,'left');
 	userGrid = Ext.create('top.Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
@@ -346,6 +394,7 @@ function initassignee(flag,type){
 			emptyText:'暂无数据',
 			stripeRows:true
 		},
+		title:'查询结果',
 		loadMask:{
 			msg:'正在加载...'
 		},
@@ -389,6 +438,25 @@ function initassignee(flag,type){
 							}
 						});
 					}
+				}
+			 },
+			 {
+				text:'检 索',
+				tooltip:'检索',
+				minWidth:tbarBtnMinWidth,
+				cls:'searchBtn',
+				icon:searchIcon,
+				handler:function(){
+					searchUser();
+				}
+			 },
+			 {
+				text:'重 置',
+				tooltip:'重置',
+				minWidth:tbarBtnMinWidth,
+				icon:clearSearchIcon,
+				handler:function(){
+					formSearc.reset();
 				}
 			 }
 		],
@@ -519,10 +587,10 @@ function initassignee(flag,type){
 		},
 		bbar:getGridTopBBar(userStore)
 	});
-	
+	userStore.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(userStore,formSearc));});
 	reGetWidthAndHeight();
 	userWin = Ext.create('top.Ext.Window',{
-		layout:'fit',
+		layout:'border',
 		title:'用户列表',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -531,7 +599,7 @@ function initassignee(flag,type){
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
-		items:userGrid,
+		items:[formSearc,userGrid],
 		buttons:[{
 			text:'关闭',
 			itemId:'close',
@@ -1009,4 +1077,8 @@ function initACC(assignee,candidateUsers,candidateGroups,type){
 			}
 		}
 	}
+}
+
+function searchUser(){
+	initSearch(userStore,'../xtUserinfoController/getXtUserinfoListByCondition',formSearc); 
 }
