@@ -39,7 +39,9 @@ function detailLcProcess(){
 	/**初始化附件右键菜单开始 参数4为1表示不拥有上传和删除功能 即明细页面使用**/
 	initFileRight('xt_attachment','xt_attachment_pic',1,2);
 	/**初始化附件右键菜单结束**/
-
+	if(record.items[0].data.lc_process_flag == 0){
+		Ext.getCmp('xt_attachment_fieldset').setHidden(true);
+	}
 	/**配置附件回显方法开始**/
 	var params = {xt_attachment_id:record.items[0].data.xt_attachment,field_name:'xt_attachment'};
 	ajaxFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params,1);
@@ -201,6 +203,7 @@ function initLcProcessFormDetail(){
 		{
 			title:'流程附件',
 			xtype:'fieldset',
+			id:'xt_attachment_fieldset',
 			items:{
 				xtype:'box', 
 				id:'xt_attachment_pic', 
