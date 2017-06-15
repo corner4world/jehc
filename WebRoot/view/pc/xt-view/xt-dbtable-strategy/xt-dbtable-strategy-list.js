@@ -8,6 +8,7 @@ Ext.onReady(function(){
 		waitMsgTarget:true,
 		defaultType:'textfield',
 		autoScroll:true,
+		layout:'table',
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',

@@ -13,6 +13,7 @@ Ext.onReady(function(){
 		defaultType:'textfield',
 		autoScroll:true,
 		maxHeight:150,
+		layout:'table',
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',

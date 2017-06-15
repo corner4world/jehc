@@ -14,6 +14,7 @@ Ext.onReady(function(){
 			flex:1,
 			margin:'2 5 4 5'
 		},
+		layout:'table',
 		items:[
 		{
 			fieldLabel:'模块',
@@ -39,24 +40,6 @@ Ext.onReady(function(){
 			labelWidth:70,
 			id:'xt_operate_business_logsMethodPar',
 			name:'xt_operate_business_logsMethodPar',
-			anchor:'30%',
-			labelAlign:'top'
-		},
-		{
-			fieldLabel:'执行结果',
-			xtype:'textfield',
-			labelWidth:70,
-			id:'xt_operate_business_logsResult',
-			name:'xt_operate_business_logsResult',
-			anchor:'30%',
-			labelAlign:'top'
-		},
-		{
-			fieldLabel:'操作时间',
-			xtype:'textfield',
-			labelWidth:70,
-			id:'xt_operate_business_logsTime',
-			name:'xt_operate_business_logsTime',
 			anchor:'30%',
 			labelAlign:'top'
 		},

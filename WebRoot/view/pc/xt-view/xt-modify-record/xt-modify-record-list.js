@@ -14,6 +14,7 @@ Ext.onReady(function(){
 			flex:1,
 			margin:'2 5 4 5'
 		},
+		layout:'table',
 		items:[
 		{
 			fieldLabel:'模块',
