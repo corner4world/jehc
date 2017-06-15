@@ -90,11 +90,8 @@ public class Xt_UserinfoController extends BaseAction{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getXtUserinfoDeletedListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtUserinfoDeletedListByCondition(Xt_Userinfo xt_Userinfo,HttpServletRequest request) throws UnsupportedEncodingException{
-		Map<String, Object> condition = new HashMap<String, Object>();
-		if(null != xt_Userinfo.getXt_departinfo_name()){
-			condition.put("xt_departinfo_name", URLDecoder.decode(xt_Userinfo.getXt_departinfo_name(), "UTF-8"));
-		}
+	public String getXtUserinfoDeletedListByCondition(BaseSearch baseSearch,HttpServletRequest request) throws UnsupportedEncodingException{
+		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<Xt_Userinfo>XtUserinfoList = xt_UserinfoService.getXtUserinfoDeletedListByCondition(condition);
 		PageInfo<Xt_Userinfo> page = new PageInfo<Xt_Userinfo>(XtUserinfoList);

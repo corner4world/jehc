@@ -1516,7 +1516,7 @@ var searchForm;
 function initSearchForm(panelPosition,items,isTop,labelPosition){
 	var panelTop = "";
 	if(isTop){
-		panelTop = "top";
+		panelTop = "top.";
 	}
 	searchForm = Ext.create(panelTop+'Ext.FormPanel',{
 		collapsible:false,
@@ -1545,8 +1545,9 @@ function initSearchForm(panelPosition,items,isTop,labelPosition){
 function initSearchFormByUserdefined(panelPosition,items,isTop,labelPosition){
 	var panelTop = "";
 	if(isTop){
-		panelTop = "top";
+		panelTop = "top.";
 	}
+	console.info(panelTop);
 	return Ext.create(panelTop+'Ext.FormPanel',{
 		collapsible:false,
 		collapsed:false,

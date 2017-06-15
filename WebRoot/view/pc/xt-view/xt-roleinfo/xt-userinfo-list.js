@@ -45,7 +45,7 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 			  	]
 			  }
 			  ],
-		buttons:[{
+		buttons:[/**{
 			text:'保存',
 			itemId:'save',
 			handler:function(button){
@@ -53,7 +53,7 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 				console.info(items);
 				return;
 			}
-		},{
+		},**/{
 			text:'关闭',
 			itemId:'close',
 			handler:function(button){

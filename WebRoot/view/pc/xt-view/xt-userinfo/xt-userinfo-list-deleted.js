@@ -1,6 +1,7 @@
 var store_deleted;
 var grid_deleted;
 var win_deleted;
+var formSearc;
 function initListDeleted(){
 	store_deleted = getGridJsonStore('../xtUserinfoController/getXtUserinfoDeletedListByCondition',[{}]);
 	expander_deleted = new Ext.ux.RowExpander({
@@ -18,6 +19,53 @@ function initListDeleted(){
             '</table>'
 	    )
 	});
+	/**查询区域可扩展**/
+	var formItems = Ext.create('top.Ext.FormPanel',{
+		maxHeight:220,
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:40,
+			labelAlign:'left',
+			flex:1,
+			margin:'2 5 4 5'
+		},
+		items:[
+		{
+			layout:'table',
+			xtype:'form',
+			anchor:'100%',
+			items:[
+			{
+				fieldLabel:'部门',
+				xtype:'textfield',
+				name:'xt_departinfo_name',
+				width:220
+			},
+			{
+				fieldLabel:'岗位',
+				xtype:'textfield',
+				name:'xt_post_name',
+				width:220
+			},
+			{
+				fieldLabel:'账户',
+				xtype:'textfield',
+				name:'xt_userinfo_name',
+				width:220
+			},
+			{
+				fieldLabel:'姓名',
+				xtype:'textfield',
+				name:'xt_userinfo_realName',
+				width:220
+			}
+			]
+		}
+		]
+	});
+	formSearc = initSearchFormByUserdefined('north',formItems,true,'left');
 	grid_deleted = Ext.create('top.Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
@@ -27,6 +75,7 @@ function initListDeleted(){
 		multiSelect:true,
 		border:true,
 		selType:'checkboxmodel',
+		title:'查询结果',
 		viewConfig:{
 			emptyText:'暂无数据',
 			stripeRows:true
@@ -129,6 +178,25 @@ function initListDeleted(){
 					recoverXtUserinfo();
 				}
 			 },
+			 {
+				text:'检 索',
+				tooltip:'检索',
+				minWidth:tbarBtnMinWidth,
+				cls:'searchBtn',
+				icon:searchIcon,
+				handler:function(){
+					searchDeleted();
+				}
+			 },
+			 {
+				text:'重 置',
+				tooltip:'重置',
+				minWidth:tbarBtnMinWidth,
+				icon:clearSearchIcon,
+				handler:function(){
+					formSearc.reset();
+				}
+			 },
 			 grid_toolbar_moretext_gaps,
 			 {
 	            text:moretext,
@@ -178,10 +246,10 @@ function initListDeleted(){
 		],
 		bbar:getGridTopBBar(store_deleted)
 	});
-	
+	store_deleted.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store_deleted,formSearc));});
 	reGetWidthAndHeight();
 	win_deleted = Ext.create('top.Ext.Window',{
-		layout:'fit',
+		layout:'border',
 		title:'已删除用户列表',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -199,7 +267,7 @@ function initListDeleted(){
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
-		items:grid_deleted,
+		items:[formSearc,grid_deleted],
 		buttons:[{
 			text:'关闭',
 			itemId:'close',
@@ -268,4 +336,8 @@ function recoverXtUserinfo(){
 			ajaxReq('../xtUserinfoController/recoverXtUserinfo',gridArray,params,'正在执行恢复数据中！请稍后...');
 		}
 	});
+}
+
+function searchDeleted(){
+	initSearch(store_deleted,'../xtUserinfoController/getXtUserinfoDeletedListByCondition',formSearc); 
 }
