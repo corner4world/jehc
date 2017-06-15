@@ -18,6 +18,7 @@ import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.base.BaseService;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
+import jehc.xtmodules.xtmodel.Xt_Attachment;
 import jehc.xtmodules.xtservice.Xt_AttachmentService;
 
 /**
@@ -160,11 +161,12 @@ public class Lc_ProcessServiceImpl extends BaseService implements Lc_ProcessServ
 				throw new ExceptionUtil("该流程已启动中，无法发布");
 			}
 			if(lc_Process.getLc_process_flag().equals("1")){
-				attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path());
+				Xt_Attachment attachment = xt_AttachmentService.getXtAttachmentById(lc_Process.getXt_attachment());
+				attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path()+attachment.getXt_attachmentName());
 			}else{
-				attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path()+lc_Process.getLc_process_title()+"/");
+				attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path()+lc_Process.getLc_process_title()+"/"+lc_Process.getLc_process_path());
 			}
-			File file = new File(attachPath+lc_Process.getLc_process_path());
+			File file = new File(attachPath);
 			if(!file.exists()){
 				throw new ExceptionUtil("流程文件不存在，部署失败");
 			}else{
