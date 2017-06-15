@@ -12,6 +12,7 @@ Ext.onReady(function(){
 		waitMsgTarget:true,
 		defaultType:'textfield',
 		autoScroll:true,
+		layout:'table',
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',
@@ -38,8 +39,8 @@ Ext.onReady(function(){
 			triggerAction:'all',
 			editable:false,
 			hiddenName:'xt_state',
-			valueField:'',
-			displayField:'',
+			valueField:'value',
+			displayField:'text',
 			id:'xt_state',
 			name:'xt_state',
 			anchor:'30%',
