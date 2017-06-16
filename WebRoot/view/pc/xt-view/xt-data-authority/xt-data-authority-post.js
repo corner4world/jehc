@@ -3,18 +3,17 @@ var postGrid;
 var postWin;
 function showPostWin(xt_menuinfo_id,xt_menuinfo_title){
 	initPost(xt_menuinfo_id,xt_menuinfo_title);
-	reGetWidthAndHeight();
+	reGetTopWidthAndHeight();
 	postWin = Ext.create('top.Ext.Window',{
 		layout:'fit', 
-		width:clientWidth,                    
-		height:clientHeight, 
+		width:clientWidth*0.8,                    
+		height:clientHeight*0.8, 
 		maximizable:true,
 		minimizable:true,
-		maximized:true,
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
-		frame:true,
+		headerPosition:'left',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){
@@ -50,7 +49,6 @@ function initPost(xt_menuinfo_id,xt_menuinfo_title){
         lazyFill:true
     });
     postGrid = Ext.create('top.Ext.tree.Panel', {
-        title:'岗位结构',
         reserveScrollbar:true,
         collapsible:false,
         loadMask:true,
@@ -60,6 +58,7 @@ function initPost(xt_menuinfo_id,xt_menuinfo_title){
         animate:false,
         columnLines:true,
         frame:true,
+        region:'center',
         listeners:{  
             beforeitemexpand:function(node,optd){
                 var id=node.data.id; 
@@ -120,83 +119,39 @@ function initPost(xt_menuinfo_id,xt_menuinfo_title){
             }
         },{
         	header:'操 作',
-        	columns:[{
-				header:'设置该岗位拥有其它部门的权限',
-				align:'center',
-				xtype:'widgetcolumn',
-				width:220,
-				widget:{
-					xtype:'button',
-					icon:editIcon,
-	                text:'设置该岗位拥有其它部门的权限',
-	                width:220,
-	                listeners:{
-					    render:function(rec) {
-					        var record = rec.getWidgetRecord();
-					        var type = record.data.type;
-					        if(type == '部门'){
-					        	rec.setText("<font color='red'>不能设置</font>");
-					        }else{
-					        	rec.setText("<font color=''>设置该岗位拥有其它部门的权限</font>");
-					        }
-					    } 
-					}, 
-	                handler:function(rec){
-	                	console.log(rec.getWidgetRecord());
-	                	var id = rec.getWidgetRecord().data.id;
-	                	var type = rec.getWidgetRecord().data.type;
-	                	var xt_post_parentId = rec.getWidgetRecord().data.xt_post_parentId;
-	                	var text = rec.getWidgetRecord().parentNode.data.name;
-	                	if(type == '部门'){
-	                		updateXtDepartinfo(id,xt_post_parentId,text);
-	                	}else{
-	                		var xt_post_parentId = rec.getWidgetRecord().data.xt_post_parentId;
-	                		var xt_depart_id = rec.getWidgetRecord().data.xt_depart_id;
-	                		updateXtPost(xt_depart_id,xt_post_parentId,id);
-	                	}
-				    }
-	            }
-			},{
-				header:'查看该岗位拥有其它部门的权限',
-				align:'center',
-				xtype:'widgetcolumn',
-				width:220,
-				widget:{
-	                xtype:'button',
-	                text:'查看该岗位拥有其它部门的权限',
-	                icon:detailIcon,
-	                width:220,
-	                listeners:{
-					    render:function(rec) {
-					        var record = rec.getWidgetRecord();
-					        var type = record.data.type;
-					        if(type == '部门'){
-					        	rec.setText("<font color='red'>不能设置</font>");
-					        }else{
-					        	rec.setText("<font color=''>查看该岗位拥有其它部门的权限</font>");
-					        }
-					    } 
-					},
-	                handler:function(rec){
-	                	var id = rec.getWidgetRecord().data.id;
-	                	var type = rec.getWidgetRecord().data.type;
-	                	var xt_post_id = "";
-	                	var xt_departinfo_id;
-	                	var xt_departinfo_name;
-	                	if(type == '部门'){
-	                		xt_departinfo_id = id;
-	                		//一级岗位
-	                		xt_departinfo_name = rec.getWidgetRecord().data.name;
-	                		addXtPost(xt_departinfo_id,'0',xt_departinfo_name);
-	                	}else{
-	                		//下级岗位
-	                		xt_departinfo_name = rec.getWidgetRecord().data.xt_departinfo_name;
-	                		var xt_departinfo_id = rec.getWidgetRecord().data.xt_departinfo_id;
-	                		addXtPost(xt_departinfo_id,id,xt_departinfo_name);
-	                	}
-	                }
-	            }
-			}]
+			align:'center',
+			xtype:'widgetcolumn',
+			flex:1,
+			widget:{
+				xtype:'button',
+				icon:editIcon,
+                text:'设置该岗位拥有其它部门的权限',
+                width:230,
+                listeners:{
+				    render:function(rec) {
+				        var record = rec.getWidgetRecord();
+				        var type = record.data.type;
+				        if(type == '部门'){
+				        	rec.setText("<font color='red'>不能设置</font>");
+				        }else{
+				        	rec.setText("<font color=''>设置该岗位拥有其它岗位的权限</font>");
+				        }
+				    } 
+				}, 
+                handler:function(rec){
+                	var id = rec.getWidgetRecord().data.id;
+                	var type = rec.getWidgetRecord().data.type;
+                	var xt_post_parentId = rec.getWidgetRecord().data.xt_post_parentId;
+                	var text = rec.getWidgetRecord().parentNode.data.name;
+                	if(type == '部门'){
+                		
+                	}else{
+                		var xt_post_parentId = rec.getWidgetRecord().data.xt_post_parentId;
+                		var xt_depart_id = rec.getWidgetRecord().data.xt_depart_id;
+                		updateXtPost(text,id,xt_menuinfo_id,xt_menuinfo_title);
+                	}
+			    }
+            }
         }]
     });
     postGrid.on('beforeload',function(treeloader,node) { 

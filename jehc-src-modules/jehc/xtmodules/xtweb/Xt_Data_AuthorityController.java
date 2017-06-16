@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
@@ -147,8 +148,8 @@ public class Xt_Data_AuthorityController extends BaseAction{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getUserinfoListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getUserinfoListByCondition(String type,String id,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
-		Map<String, Object> condition = new HashMap<String, Object>();
+	public String getUserinfoListByCondition(BaseSearch baseSearch,String type,String id,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		if(null != type && !"".equals(type)){
 			type = URLDecoder.decode(type, "UTF-8");
@@ -163,6 +164,9 @@ public class Xt_Data_AuthorityController extends BaseAction{
 	/**
 	 * 读取被拥有者及功能及已被设置的功能树列表
 	 * @param request
+	 * @param xt_menuinfo_id
+	 * @param xt_userinfo_id
+	 * @return
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getUserinfoAndFunctionInfoAndDataAuthorityTreeGrid",method={RequestMethod.POST,RequestMethod.GET})
@@ -172,6 +176,7 @@ public class Xt_Data_AuthorityController extends BaseAction{
 		List<Xt_Userinfo>XtUserinfoList = xt_UserinfoService.getXtUserinfoListAllByCondition(condition);
 		condition.put("xt_menuinfo_id", xt_menuinfo_id);
 		condition.put("xt_functioninfoIsAuthority", 1);
+		condition.put("xt_data_authorityType", 1);
 		condition.put("xt_userinfo_id", xt_userinfo_id);
 		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListAllByCondition(condition);
 		//定义一个拥有者编号+被拥有者编号+功能编号组合字段用来判断选择
@@ -260,6 +265,72 @@ public class Xt_Data_AuthorityController extends BaseAction{
 			list.add(BaseTreeGridEntity);
 		}
 		return outStr(BaseTreeGridEntity.buildTree(list,false));
+	}
+	
+	/**
+	 * 读取被拥有者及功能及已被设置的功能树列表（部门）
+	 * @param request
+	 * @param xt_menuinfo_id
+	 * @param xt_post_id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getXtDepartAndFunctionInfoAndDataAuthorityTreeGrid",method={RequestMethod.POST,RequestMethod.GET})
+	public String getXtDepartAndFunctionInfoAndDataAuthorityTreeGrid(HttpServletRequest request,String xt_menuinfo_id,String xt_departinfo_id){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
+		List<Xt_Departinfo> xt_DepartinfoList = xt_DepartinfoService.getXtDepartinfoListAll(condition);
+		condition.put("xt_menuinfo_id", xt_menuinfo_id);
+		condition.put("xt_data_authorityType", 2);
+		condition.put("xt_departinfo_id", xt_departinfo_id);
+		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListAllByCondition(condition);
+		//定义一个拥有者编号+被拥有者编号+功能编号组合字段用来判断选择
+		StringBuffer uf= new StringBuffer();
+		for(int j = 0; j < xt_Data_AuthorityList.size();j++){
+			Xt_Data_Authority xt_Data_Authority = xt_Data_AuthorityList.get(j);
+			uf.append("|"+xt_Data_Authority.getXtUID()+"|"+xt_Data_Authority.getXt_functioninfo_id()+"|");
+		}
+		for(int i = 0; i < xt_DepartinfoList.size(); i++){
+			Xt_Departinfo xt_Departinfo = xt_DepartinfoList.get(i);
+			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
+			BaseTreeGridEntity.setId("0@"+xt_Departinfo.getXt_departinfo_id());
+			BaseTreeGridEntity.setPid("0");
+			BaseTreeGridEntity.setText(xt_Departinfo.getXt_departinfo_name());
+			BaseTreeGridEntity.setExpanded(true);
+			BaseTreeGridEntity.setSingleClickExpand(true);
+			BaseTreeGridEntity.setTempObject("部门");
+			BaseTreeGridEntity.setContent("被选部门");
+			BaseTreeGridEntity.setIcon("../deng/images/icons/user.png");
+			if((uf.toString()).indexOf(xt_Departinfo.getXt_departinfo_id())<0){
+				BaseTreeGridEntity.setChecked(false);
+			}else{
+				BaseTreeGridEntity.setChecked(true);
+			}
+			list.add(BaseTreeGridEntity);
+		}
+		condition.put("xt_functioninfoIsAuthority", 1);
+		List<Xt_Functioninfo> xtFunctioninfoList = xt_FunctioninfoService.getXtFunctioninfoAllForData(condition);
+		for(int j = 0; j < xt_DepartinfoList.size(); j++){
+			Xt_Departinfo xt_Departinfo = xt_DepartinfoList.get(j);
+			for(int i = 0; i < xtFunctioninfoList.size(); i++){
+				Xt_Functioninfo xtFunctioninfo = xtFunctioninfoList.get(i);
+				BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
+				BaseTreeGridEntity.setId(xtFunctioninfo.getXt_functioninfo_id()+"@"+xt_Departinfo.getXt_departinfo_id());
+				BaseTreeGridEntity.setPid("0@"+xt_Departinfo.getXt_departinfo_id());
+				BaseTreeGridEntity.setText(xtFunctioninfo.getXt_functioninfoName());
+				if((uf.toString()).indexOf("|"+xt_Departinfo.getXt_departinfo_id()+"|"+xtFunctioninfo.getXt_functioninfo_id()+"|")<0){
+					BaseTreeGridEntity.setChecked(false);
+				}else{
+					BaseTreeGridEntity.setChecked(true);
+				}
+				BaseTreeGridEntity.setExpanded(true);
+				BaseTreeGridEntity.setSingleClickExpand(true);
+				BaseTreeGridEntity.setIcon("../deng/images/icons/target.png");
+				BaseTreeGridEntity.setTempObject("功能");
+				list.add(BaseTreeGridEntity);
+			}
+		}
+		return outStr(BaseTreeGridEntity.buildTree(list,true));
 	}
 	
 	/**
@@ -360,6 +431,73 @@ public class Xt_Data_AuthorityController extends BaseAction{
 		}
 		return jsonStr.toString();
 	}
+	
+	/**
+	 * 读取被拥有者及功能及已被设置的功能树列表（岗位）
+	 * @param request
+	 * @param xt_menuinfo_id
+	 * @param xt_post_id
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getXtPostAndFunctionInfoAndDataAuthorityTreeGrid",method={RequestMethod.POST,RequestMethod.GET})
+	public String getXtPostAndFunctionInfoAndDataAuthorityTreeGrid(HttpServletRequest request,String xt_menuinfo_id,String xt_post_id){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
+		List<Xt_Post> xtPostList = xt_PostService.getXtPostListAll(condition);
+		condition.put("xt_menuinfo_id", xt_menuinfo_id);
+		condition.put("xt_data_authorityType", 3);
+		condition.put("xt_post_id", xt_post_id);
+		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListAllByCondition(condition);
+		//定义一个拥有者编号+被拥有者编号+功能编号组合字段用来判断选择
+		StringBuffer uf= new StringBuffer();
+		for(int j = 0; j < xt_Data_AuthorityList.size();j++){
+			Xt_Data_Authority xt_Data_Authority = xt_Data_AuthorityList.get(j);
+			uf.append("|"+xt_Data_Authority.getXtUID()+"|"+xt_Data_Authority.getXt_functioninfo_id()+"|");
+		}
+		for(int i = 0; i < xtPostList.size(); i++){
+			Xt_Post xtPost = xtPostList.get(i);
+			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
+			BaseTreeGridEntity.setId("0@"+xtPost.getXt_post_id());
+			BaseTreeGridEntity.setPid("0");
+			BaseTreeGridEntity.setText(xtPost.getXt_post_name());
+			BaseTreeGridEntity.setExpanded(true);
+			BaseTreeGridEntity.setSingleClickExpand(true);
+			BaseTreeGridEntity.setTempObject("岗位");
+			BaseTreeGridEntity.setContent(xtPost.getXt_departinfo_name());
+			BaseTreeGridEntity.setIcon("../deng/images/icons/user.png");
+			if((uf.toString()).indexOf(xtPost.getXt_post_id())<0){
+				BaseTreeGridEntity.setChecked(false);
+			}else{
+				BaseTreeGridEntity.setChecked(true);
+			}
+			list.add(BaseTreeGridEntity);
+		}
+		condition.put("xt_functioninfoIsAuthority", 1);
+		List<Xt_Functioninfo> xtFunctioninfoList = xt_FunctioninfoService.getXtFunctioninfoAllForData(condition);
+		for(int j = 0; j < xtPostList.size(); j++){
+			Xt_Post xtPost = xtPostList.get(j);
+			for(int i = 0; i < xtFunctioninfoList.size(); i++){
+				Xt_Functioninfo xtFunctioninfo = xtFunctioninfoList.get(i);
+				BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
+				BaseTreeGridEntity.setId(xtFunctioninfo.getXt_functioninfo_id()+"@"+xtPost.getXt_post_id());
+				BaseTreeGridEntity.setPid("0@"+xtPost.getXt_post_id());
+				BaseTreeGridEntity.setText(xtFunctioninfo.getXt_functioninfoName());
+				if((uf.toString()).indexOf("|"+xtPost.getXt_post_id()+"|"+xtFunctioninfo.getXt_functioninfo_id()+"|")<0){
+					BaseTreeGridEntity.setChecked(false);
+				}else{
+					BaseTreeGridEntity.setChecked(true);
+				}
+				BaseTreeGridEntity.setExpanded(true);
+				BaseTreeGridEntity.setSingleClickExpand(true);
+				BaseTreeGridEntity.setIcon("../deng/images/icons/target.png");
+				BaseTreeGridEntity.setTempObject("功能");
+				list.add(BaseTreeGridEntity);
+			}
+		}
+		return outStr(BaseTreeGridEntity.buildTree(list,true));
+	}
+	
+	
 	
 	/**
 	* 导出

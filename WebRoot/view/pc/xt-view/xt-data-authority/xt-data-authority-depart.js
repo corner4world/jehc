@@ -3,18 +3,17 @@ var departGrid;
 var departWin;
 function showDepartWin(xt_menuinfo_id,xt_menuinfo_title){
 	initDepartTreeGrid(xt_menuinfo_id,xt_menuinfo_title);
-	reGetWidthAndHeight();
+	reGetTopWidthAndHeight();
 	departWin = Ext.create('top.Ext.Window',{
 		layout:'fit', 
-		width:clientWidth,                    
-		height:clientHeight, 
+		width:clientWidth*0.8,                    
+		height:clientHeight*0.8, 
 		maximizable:true,
 		minimizable:true,
-		maximized:true,
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
-		frame:true,
+		headerPosition:'left',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){
@@ -68,7 +67,7 @@ function initDepartTreeGrid(xt_menuinfo_id,xt_menuinfo_title){
 		       	   //异步从服务器上加载数据extjs会自动帮我们解析  
 		           type:'ajax',  
 		           url:'../xtDataAuthorityController/getXtDepartTree',  
-		           extraParams:{id:id,type:encodeURI(type)}
+		           extraParams:{id:id,type:encodeURI(type),expanded:'false'}
 		        });  
             },
             /**
@@ -113,34 +112,19 @@ function initDepartTreeGrid(xt_menuinfo_id,xt_menuinfo_title){
             }
         },{
         	header:'操 作',
-        	columns:[{
-				header:'设置该部门拥有其它部门的权限',
-				align:'center',
-				xtype:'widgetcolumn',
-				width:220,
-				widget:{
-					xtype:'button',
-					icon:editIcon,
-	                text:'设置该部门拥有其它部门的权限',
-	                handler:function(rec){
-	                	console.log(rec.getWidgetRecord());
-	                	var id = rec.getWidgetRecord().data.id;
-				    }
-	            }
-			},{
-				header:'查看该部门拥有其它部门的权限',
-				align:'center',
-				xtype:'widgetcolumn',
-				width:220,
-				widget:{
-	                xtype:'button',
-	                icon:detailIcon,
-	                text:'查看该部门拥有其它部门的权限',
-	                handler:function(rec){
-	                	var id = rec.getWidgetRecord().data.id;
-				    }
-	            }
-			}]
+			align:'center',
+			xtype:'widgetcolumn',
+			flex:1,
+			widget:{
+				xtype:'button',
+				icon:editIcon,
+                text:'设置该部门拥有其它部门的权限',
+                handler:function(rec){
+                	var id = rec.getWidgetRecord().data.id;
+                	var xt_departinfo_name = rec.getWidgetRecord().data.text;
+                	updateXtDepart(xt_departinfo_name,id,xt_menuinfo_id,xt_menuinfo_title)
+			    }
+			}
         }]
     });
     departGrid.on('beforeload',function(treeloader,node) { 
@@ -160,11 +144,11 @@ function initDepartTreeGrid(xt_menuinfo_id,xt_menuinfo_title){
        	   //异步从服务器上加载数据extjs会自动帮我们解析  
            type:'ajax',  
            url:'../xtDataAuthorityController/getXtDepartTree',  
-           extraParams:{id:id,type:encodeURI(type)}
+           extraParams:{id:id,type:encodeURI(type),expanded:'false'}
         });
     });
-	new Ext.util.DelayedTask(function(){  
-       departGrid.expandAll();
-       hideWaitMsg();
-    }).delay(1000);
+//	new Ext.util.DelayedTask(function(){  
+//       departGrid.expandAll();
+//       hideWaitMsg();
+//    }).delay(1000);
 }

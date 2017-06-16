@@ -5,16 +5,15 @@ var xtDpPanelSelect;
 var xtDpStoreSelect;
 var oldID;
 function showUserSelectWin(xt_userinfo_realName,xt_userinfo_id,xt_menuinfo_id,xt_menuinfo_title){
-	reGetWidthAndHeight();
+	reGetTopWidthAndHeight();
 	initXtUserinfoSelectGrid(xt_menuinfo_id,xt_userinfo_id);
-	initXtDpPanelSelect(xt_menuinfo_id);
+//	initXtDpPanelSelect(xt_menuinfo_id);
 	xtUserinfoSelectWin = Ext.create('top.Ext.Window',{
 		layout:'border', 
 		width:clientWidth,                    
 		height:clientHeight, 
 		maximizable:true,
 		minimizable:true,
-		maximized:true,
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
@@ -28,7 +27,7 @@ function showUserSelectWin(xt_userinfo_realName,xt_userinfo_id,xt_menuinfo_id,xt
 				}
 			}
 		},
-		items:[xtDpPanelSelect,xtUserinfoSelectGrid]
+		items:[/**xtDpPanelSelect,**/xtUserinfoSelectGrid]
 	});
 	xtUserinfoSelectWin.setTitle("数据权限--->按人员设置数据权限--->"+xt_menuinfo_title+"["+xt_userinfo_realName+"]--->选择被设置人员");
 	xtUserinfoSelectWin.show();
@@ -70,7 +69,6 @@ function initXtUserinfoSelectGrid(xt_menuinfo_id,xt_userinfo_id){
         columnLines:true,
         frame:true,
         bufferedRenderer:false,
-        title:'查询结果',
         viewConfig:{
 			emptyText:'暂无数据',
 			stripeRows:true
@@ -117,17 +115,14 @@ function initXtUserinfoSelectGrid(xt_menuinfo_id,xt_userinfo_id){
 					}   
                 }  
         },
-		tbar:[
-			 {
+		tbar:[{
 				text:'保 存',
 				tooltip:'保 存',
-				scope:this,
 				icon:saveIcon,
 				handler:function(){
 					addXtDataAuthorityByUser(xt_menuinfo_id,xt_userinfo_id);
 				}
-			 }
-			]
+			 }]
     });
     /**选择父节点选中子节点**/
     xtUserinfoSelectGrid.on('checkchange',function(node,checked){  
@@ -139,61 +134,61 @@ function initXtUserinfoSelectGrid(xt_menuinfo_id,xt_userinfo_id){
 	    });  
 	}, xtUserinfoSelectGrid);
 }
-function initXtDpPanelSelect(xt_menuinfo_id){
-	//1创建store
-	xtDpStoreSelect = Ext.create('Ext.data.TreeStore', {  
-	     root:{  
-              expanded:true  
-         },
-         proxy:{  
-                type:'ajax',  
-                url:'../xtCommonController/getXtOrgTree',  
-                reader:{  
-                    type:'json',  
-                    rootProperty:'items'  
-                },
-				extraParams:{id:'0',type:encodeURI('部门')}  
-         }  
-	});  
-	//2创建treePanel
-	xtDpPanelSelect = Ext.create('top.Ext.tree.Panel',{   
-		region:'west',
-        store:xtDpStore,  
-        autoEncode:true,//提交时是否自动编码   
-        rootVisible:false,  
-        width:200,
-        collapsible:true,
-        title:'组织机构',
-        /**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        listeners:{  
-            beforeitemexpand:function(node,optd){  
-            	//展开节点之前触发  
-                var id=node.data.id;  
-                var type=node.data.type; 
-                xtDpStoreSelect.setProxy({   
-                	//异步从服务器上加载数据  extjs会自动帮我们解析  
-                    type:'ajax',  
-                    url:'../xtCommonController/getXtOrgTree',  
-                    extraParams:{id:id,type:encodeURI(type)}
-                 });  
-            },
-            itemclick:function(node,optd){
-            	var leaf = optd.data.leaf;
-            	menuClick(optd,xt_menuinfo_id);
-            }  
-        }
-    });  
-}
-//菜单点击事件
-function menuClick(node,xt_menuinfo_id){
- 	var id = node.data.id;
- 	var type = node.data.type;
- 	var parm = {id:id,type:encodeURI(type)};
- 	load(xtUserinfoSelectGrid,parm);
-}
+//function initXtDpPanelSelect(xt_menuinfo_id){
+//	//1创建store
+//	xtDpStoreSelect = Ext.create('Ext.data.TreeStore', {  
+//	     root:{  
+//              expanded:true  
+//         },
+//         proxy:{  
+//                type:'ajax',  
+//                url:'../xtCommonController/getXtOrgTree',  
+//                reader:{  
+//                    type:'json',  
+//                    rootProperty:'items'  
+//                },
+//				extraParams:{id:'0',type:encodeURI('部门')}  
+//         }  
+//	});  
+//	//2创建treePanel
+//	xtDpPanelSelect = Ext.create('top.Ext.tree.Panel',{   
+//		region:'west',
+//        store:xtDpStore,  
+//        autoEncode:true,//提交时是否自动编码   
+//        rootVisible:false,  
+//        width:200,
+//        collapsible:true,
+//        title:'组织机构',
+//        /**新方法使用开始**/  
+//        scrollable:true,  
+//        scrollable:'x',
+//        scrollable:'y',
+//        listeners:{  
+//            beforeitemexpand:function(node,optd){  
+//            	//展开节点之前触发  
+//                var id=node.data.id;  
+//                var type=node.data.type; 
+//                xtDpStoreSelect.setProxy({   
+//                	//异步从服务器上加载数据  extjs会自动帮我们解析  
+//                    type:'ajax',  
+//                    url:'../xtCommonController/getXtOrgTree',  
+//                    extraParams:{id:id,type:encodeURI(type)}
+//                 });  
+//            },
+//            itemclick:function(node,optd){
+//            	var leaf = optd.data.leaf;
+//            	menuClick(optd,xt_menuinfo_id);
+//            }  
+//        }
+//    });  
+//}
+////菜单点击事件
+//function menuClick(node,xt_menuinfo_id){
+// 	var id = node.data.id;
+// 	var type = node.data.type;
+// 	var parm = {id:id,type:encodeURI(type)};
+// 	load(xtUserinfoSelectGrid,parm);
+//}
 
 /**按人员设置**/
 function addXtDataAuthorityByUser(xt_menuinfo_id,xt_userinfo_id){

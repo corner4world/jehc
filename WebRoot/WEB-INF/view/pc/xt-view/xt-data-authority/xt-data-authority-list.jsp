@@ -13,8 +13,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-list.js"></script>  
 	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-user.js"></script>
 	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-user-select.js"></script>  
-	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-depart.js"></script>  
+	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-depart.js"></script> 
+	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-depart-select.js"></script>   
 	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-post.js"></script>  
+	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-post-select.js"></script>  
 </head>  
 <body>  
 </body>  

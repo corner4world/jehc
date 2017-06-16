@@ -6,20 +6,20 @@ var xtUserinfoSotreed;
 var xtDpPanel;
 var xtDpStore;
 function showUserWin(xt_menuinfo_id,xt_menuinfo_title){
-	reGetWidthAndHeight();
+	reGetTopWidthAndHeight();
 	initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title);
 	initXtDpPanel(xt_menuinfo_id);
 	xtUserinfoWin = Ext.create('top.Ext.Window',{
 		layout:'border', 
-		width:clientWidth,                    
-		height:clientHeight, 
+		width:clientWidth*1.2,                    
+		height:clientHeight*1.2, 
 		maximizable:true,
 		minimizable:true,
-		maximized:true,
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
 		frame:true,
+		headerPosition:'left',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){
@@ -29,7 +29,7 @@ function showUserWin(xt_menuinfo_id,xt_menuinfo_title){
 				}
 			}
 		},
-		items:[xtDpPanel,xtUserinfoGrid]
+		items:[/**xtDpPanel,**/formSearc,xtUserinfoGrid]
 	});
 	xtUserinfoWin.setTitle("数据权限--->按人员设置数据权限--->"+xt_menuinfo_title);
 	xtUserinfoWin.show();
@@ -37,9 +37,65 @@ function showUserWin(xt_menuinfo_id,xt_menuinfo_title){
 
 
 /**用户显示**/
+var formSearc;
 function initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title){
 	reGetWidthAndHeight();
-	xtUserinfoStore = getGridJsonStore('../xtDataAuthorityController/getUserinfoListByCondition?&xt_menuinfo_id='+xt_menuinfo_id,[]);
+	xtUserinfoStore = getGridJsonStore('../xtDataAuthorityController/getUserinfoListByCondition',[]);
+	/**查询区域可扩展**/
+	var formItems = Ext.create('top.Ext.FormPanel',{
+		maxHeight:220,
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:40,
+			labelAlign:'left',
+			flex:1,
+			margin:'2 5 4 5'
+		},
+		items:[
+		{
+			layout:'table',
+			xtype:'form',
+			anchor:'100%',
+			items:[
+			{
+				fieldLabel:'部门',
+				xtype:'textfield',
+				name:'xt_departinfo_name',
+				width:220
+			},
+			{
+				fieldLabel:'岗位',
+				xtype:'textfield',
+				name:'xt_post_name',
+				width:220
+			},
+			{
+				fieldLabel:'账户',
+				xtype:'textfield',
+				name:'xt_userinfo_name',
+				width:220
+			},
+			{
+				fieldLabel:'姓名',
+				xtype:'textfield',
+				name:'xt_userinfo_realName',
+				width:220
+			},
+			{
+				fieldLabel:'模块',
+				xtype:'textfield',
+				hidden:true,
+				value:xt_menuinfo_id,
+				name:'xt_menuinfo_id',
+				width:220
+			}
+			]
+		}
+		]
+	});
+	formSearc = initSearchFormByUserdefined('north',formItems,true,'left');
 	xtUserinfoGrid = Ext.create('top.Ext.grid.Panel',{
 		region:'center',
 		store:xtUserinfoStore,
@@ -57,6 +113,27 @@ function initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title){
 		loadMask:{
 			msg:'正在加载...'
 		},
+		tbar:[
+		{
+			text:'检 索',
+			tooltip:'检索',
+			minWidth:tbarBtnMinWidth,
+			cls:'searchBtn',
+			icon:searchIcon,
+			handler:function(){
+				searchDefindSelectUser();
+			}
+		 },
+		 {
+			text:'重 置',
+			tooltip:'重置',
+			minWidth:tbarBtnMinWidth,
+			icon:clearSearchIcon,
+			handler:function(){
+				formSearc.reset();
+			}
+		 }
+		],
 		columns:[
 			{
 				header:'序号',
@@ -96,41 +173,35 @@ function initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title){
 				}
 			},
 			{
+				header:'岗位',
+				dataIndex:'xt_post_name'
+			},
+			{
+				header:'部门',
+				flex:1,
+				dataIndex:'xt_departinfo_name'
+			},
+			{
 				header:'操作',
 				flex:1,
-				columns:[{
-					header:'设置该用户拥有其他人员的权限',
-					align:'center',
-					xtype:'widgetcolumn',
-					width:240,
-					widget:{
-		                xtype:'button',
-		                icon:editIcon,
-		                text:'设置该用户拥有其他人员的权限',
-		                handler:function(rec){
-		                	var xt_userinfo_id = rec.getWidgetRecord().data.xt_userinfo_id;
-		                	var xt_userinfo_realName = rec.getWidgetRecord().data.xt_userinfo_realName;
-		                	showUserSelectWin(xt_userinfo_realName,xt_userinfo_id,xt_menuinfo_id,xt_menuinfo_title)
-		                }
-		            }
-				},{
-					header:'查看该用户拥有其他人员的权限',
-					align:'center',
-					xtype:'widgetcolumn',
-					width:240,
-					widget:{
-		                xtype:'button',
-		                icon:detailIcon,
-		                text:'查看该用户拥有其他人员的权限',
-		                handler:function(rec){
-		                	var xt_userinfo_id = rec.getWidgetRecord().data.xt_userinfo_id;
-		                }
-		            }
-				}]
+				align:'center',
+				xtype:'widgetcolumn',
+				width:240,
+				widget:{
+	                xtype:'button',
+	                icon:editIcon,
+	                text:'设置该用户拥有其他人员的权限',
+	                handler:function(rec){
+	                	var xt_userinfo_id = rec.getWidgetRecord().data.xt_userinfo_id;
+	                	var xt_userinfo_realName = rec.getWidgetRecord().data.xt_userinfo_realName;
+	                	showUserSelectWin(xt_userinfo_realName,xt_userinfo_id,xt_menuinfo_id,xt_menuinfo_title)
+	                }
+	            }
 			}
 		],
 		bbar:getGridTopBBar(xtUserinfoStore)
 	});
+	xtUserinfoStore.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(xtUserinfoStore,formSearc));});
 }
 function initXtDpPanel(xt_menuinfo_id){
 	//1创建store
@@ -186,4 +257,8 @@ function menuClick(node,xt_menuinfo_id){
  	var type = node.data.type;
  	var parm = {id:id,type:encodeURI(type)};
  	load(xtUserinfoGrid,parm);
+}
+
+function searchDefindSelectUser(){
+	initSearch(xtUserinfoStore,'../xtDataAuthorityController/getUserinfoListByCondition',formSearc); 
 }
