@@ -12,6 +12,8 @@
 		<meta name="renderer" content="webkit"/>
 	   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<link rel="icon" type="image/ico" href="${syspath }/deng/images/logo/logo.png" />
+		<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
+		<input type="hidden" value="${xt_functioninfoMethod }" id="xtFunctionInfoBtnStr">
 	   	<!-- 主题技术Extjs支持 -->
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>	
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
@@ -112,6 +114,8 @@
         %>
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/common.js"></script>
+		<!-- 数据	权限按钮操作 -->
+		<script type="text/javascript" src="${syspath}/deng/source/js/xtFunctionInfoStr.js"></script>
 		<!-- 主题切换 -->
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/theme.js"></script>
 		<!-- 时间精确时分秒 -->
@@ -406,5 +410,4 @@
 	        /* .tbar{ background-color:#5fa2dd;background-image:url();} */
 		</style>
 	</head>
-	<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
 </html>

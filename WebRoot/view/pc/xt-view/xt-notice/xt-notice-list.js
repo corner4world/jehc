@@ -241,6 +241,8 @@ Ext.onReady(function(){
 	/**调用右键**/
 	initRight();
 	store.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store,searchForm));});
+	//调用功能权限
+	xtFunctionStr();
 });
 /**删除操作**/
 function delXtNotice(){
