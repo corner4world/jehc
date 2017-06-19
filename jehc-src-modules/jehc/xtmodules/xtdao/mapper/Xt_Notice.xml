@@ -22,7 +22,13 @@
 			AND xt_notice.xt_state = #{xt_state}
 		</if>
 		<if test="null != xt_title">
-			AND xt_notice.xt_title like '%${xt_title}%'
+			AND instr(xt_notice.xt_title,#{xt_title})
+		</if>
+		<if test="null != xt_userinfo_id">
+			AND xt_notice.`xt_userinfo_id` IN
+			<foreach item="item" index="index" collection="xt_userinfo_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
 		</if>
 	</select>
 

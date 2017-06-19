@@ -35,7 +35,18 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
  *
  */
 public class BaseAction extends CommonUtils{
-	
+	/**
+	 * 封装共同的数据权限获取参数
+	 * @param condition
+	 */
+	public void dataAuthForXtUID(HttpServletRequest request,String key,Map<String, Object> condition){
+		List<String> sysUID = (List<String>)request.getSession().getAttribute("sysUID");
+		if(null != sysUID && !sysUID.isEmpty() && sysUID.size() > 0){
+			condition.put(key,sysUID);
+		}else{
+			condition.put(key,new String[]{"0"});
+		}
+	}
 	/**
 	 * 获取Request对象
 	 * @return

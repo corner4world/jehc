@@ -49,6 +49,7 @@ public class Xt_NoticeController extends BaseAction{
 	public String getXtNoticeListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
+		dataAuthForXtUID(request,"xt_userinfo_id", condition);
 		List<Xt_Notice> xt_NoticeList = xt_NoticeService.getXtNoticeListByCondition(condition);
 		PageInfo<Xt_Notice> page = new PageInfo<Xt_Notice>(xt_NoticeList);
 		return outPageStr(page,request);
@@ -107,6 +108,7 @@ public class Xt_NoticeController extends BaseAction{
 	* @param xt_notice_id 
 	* @param request 
 	*/
+	@ResponseBody
 	@RequestMapping(value="/delXtNotice",method={RequestMethod.POST,RequestMethod.GET})
 	public String delXtNotice(String xt_notice_id,HttpServletRequest request){
 		int i = 0;

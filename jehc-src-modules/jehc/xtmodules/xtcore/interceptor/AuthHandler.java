@@ -1,5 +1,9 @@
 package jehc.xtmodules.xtcore.interceptor;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +13,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.Logback4jUtil;
@@ -75,7 +80,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
         	//过滤公共功能
     		String XtFunctioninfoCommon = CommonUtils.getXtFunctioninfoCommonCache();
     		if(XtFunctioninfoCommon.indexOf(","+requestUrl+",") >= 0){
-    			return true;
+    			return dataAuth(request, response, requestUrl);
     		}
     		//如果超级管理员则放过所有功能
     		if(isAdmin()){
@@ -96,51 +101,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
     			}
     			return false;  
     		}else{
-    			//处理数据权限
-    			String[] paramNames = (String[])request.getParameterValues("systemUID");//唯一标志systemUID
-    			String systemUandM = (String)request.getSession(false).getAttribute("systemUandM");
-    			String[] systemUandMarray = new String[]{};
-				//如果系统唯一标志不为空则说明进行具体操作
-				if(null != paramNames){
-					//参数组成的数组
-					String systemUID = paramNames[0];
-					String[] systemUIDarray = new String[]{};
-					if(null != systemUID && !"".equals(systemUID)){
-						systemUIDarray = systemUID.split(",");
-					}
-					if(null != systemUandM && !"".equals(systemUandM)){
-						systemUandMarray = systemUandM.split(",");
-					}
-					if(null != systemUandMarray){
-						int result = 0;
-						for(int i = 0; i < systemUandMarray.length; i++){
-							String sysUandM = systemUandMarray[i];
-							String[] sysUandMarray = new String[]{};
-							if(null != sysUandM && !"".equals(sysUandM)){
-								sysUandMarray = sysUandM.split("#");
-								if(null != sysUandMarray){
-									//判断方法和参数都匹配
-									if(("@"+sysUandMarray[1]+"@").indexOf("@"+requestUrl+"@") >= 0){
-										for(int j = 0; j<systemUIDarray.length;j++){
-											if(sysUandMarray[0].equals(systemUIDarray[j])){
-												//如果相等
-												result = result+1;
-											}
-										}
-									}
-								}
-							}
-						}
-						//如果参数全部符合则进入方法
-						if(result != systemUIDarray.length){
-							//没有权限操作
-							response.setContentType("text/html;charset=utf-8"); 
-							response.getWriter().write("{success:false,msg:'您没有该操作权限,请与管理员联系!'}");
-							return false;
-						}
-					}
-				}
-				return true;
+				return dataAuth(request, response, requestUrl);
     		}
     		//////////////////对功能进行拦截结束///////////////////
         }else{
@@ -210,5 +171,81 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		String ip = request.getRemoteAddr();
 		boolean flag = CommonUtils.getXtIpFrozenCache(ip);
 		return flag;
+	}
+	
+	/**
+	 * 处理数据权限
+	 * @param request
+	 * @param response
+	 * @param requestUrl
+	 * @return
+	 * @throws IOException
+	 */
+	public boolean dataAuth(HttpServletRequest request,HttpServletResponse response,String requestUrl) throws IOException{
+		String[] paramNames = (String[])request.getParameterValues("systemUID");//唯一标志systemUID
+		String systemUandM = (String)request.getSession(false).getAttribute("systemUandM");
+		String[] systemUandMarray = new String[]{};
+		List<String> sysUID = new ArrayList<String>();
+		//如果系统唯一标志不为空 说明系统采用了数据权限
+		if(null != paramNames){
+			//参数组成的数组
+			String systemUID = paramNames[0];
+			String[] systemUIDarray = new String[]{};
+			if(null != systemUID && !"".equals(systemUID)){
+				systemUIDarray = systemUID.split(",");
+			}
+			if(null != systemUandM && !"".equals(systemUandM)){
+				systemUandMarray = systemUandM.split(",");
+			}
+			if(null != systemUandMarray){
+				int result = 0;
+				for(int i = 0; i < systemUandMarray.length; i++){
+					String sysUandM = systemUandMarray[i];
+					String[] sysUandMarray = new String[]{};
+					if(null != sysUandM && !"".equals(sysUandM)){
+						sysUandMarray = sysUandM.split("#");
+						if(null != sysUandMarray){
+							//判断方法和参数都匹配
+							if(("@"+sysUandMarray[1]+"@").indexOf("@"+requestUrl+"@") >= 0){
+								for(int j = 0; j<systemUIDarray.length;j++){
+									if(sysUandMarray[0].equals(systemUIDarray[j])){
+										//如果相等
+										result = result+1;
+									}
+								}
+							}
+						}
+					}
+				}
+				//如果参数全部符合则进入方法
+				if(result != systemUIDarray.length){
+					//没有权限操作
+					response.setContentType("text/html;charset=utf-8"); 
+					response.getWriter().write("{success:false,msg:'您没有该操作权限,请与管理员联系!'}");
+					return false;
+				}
+			}
+		}else{
+			//否则过滤当前操作是否数据权限查询拦截
+			request.getSession(false).removeAttribute("sysUID");
+			if(null != systemUandM && !"".equals(systemUandM)){
+				systemUandMarray = systemUandM.split(",");
+			}
+			//说明可能是第一次初始化读取数据
+			if(null != systemUandMarray){
+				for(int i = 0; i < systemUandMarray.length; i++){
+					String sysUandM = systemUandMarray[i];
+					String[] sysUandMarray = new String[]{};
+					if(!StringUtil.isEmpty(sysUandM)){
+						sysUandMarray = sysUandM.split("#");
+						if(("@"+sysUandMarray[1]+"@").indexOf("@"+requestUrl+"@") >= 0){
+							sysUID.add(sysUandMarray[0]);
+						}
+					}
+				}
+				request.getSession(false).setAttribute("sysUID", sysUID);//用户ID
+			}
+		}
+		return true;
 	}
 }
