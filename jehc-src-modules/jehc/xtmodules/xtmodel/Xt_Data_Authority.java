@@ -10,8 +10,8 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 public class Xt_Data_Authority extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String xt_data_authority_id;/**ID**/
-	private String xtUID;/**拥有人ID**/
-	private String xt_userinfo_id;/**操作人ID**/
+	private String xtUID;/**被拥有人ID**/
+	private String xt_userinfo_id;/**操作人ID（拥有者）**/
 	private String xt_functioninfo_id;/**功能ID**/
 	private String xt_menuinfo_id;/**菜单ID**/
 	private String xt_data_authorityType;/**类型（1表示按人员进行设置【即系统默认权限】2表示按部门设置3表示按岗位设置4按人员默认初始化5按部门默认初始化6按岗位默认初始化7按部门上下级8按岗位上下级）**/

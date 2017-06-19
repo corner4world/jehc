@@ -175,7 +175,7 @@ public class Xt_Data_AuthorityController extends BaseAction{
 		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
 		List<Xt_Userinfo>XtUserinfoList = xt_UserinfoService.getXtUserinfoListAllByCondition(condition);
 		condition.put("xt_menuinfo_id", xt_menuinfo_id);
-		condition.put("xt_functioninfoIsAuthority", 1);
+		condition.put("xt_functioninfoIsAuthority", 0);
 		condition.put("xt_data_authorityType", 1);
 		condition.put("xt_userinfo_id", xt_userinfo_id);
 		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListAllByCondition(condition);

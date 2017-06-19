@@ -18,6 +18,12 @@
 		FROM 
 			xt_functioninfo AS xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
 		WHERE 1=1
+		<if test="null != xt_functioninfo_id">
+			AND xt_functioninfo.`xt_functioninfo_id` IN 
+			<foreach item="item" index="index" collection="xt_functioninfo_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
 	</select>
 
 	<!--查询对象-->

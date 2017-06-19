@@ -250,16 +250,22 @@ function delXtNotice(){
 		return;
 	}
 	var xt_notice_id;
+	var systemUID="";
 	for(var i = 0; i < model.selected.length; i++){
 		if(null == xt_notice_id){
 			xt_notice_id=model.selected.items[i].data.xt_notice_id;
 		}else{
 			xt_notice_id=xt_notice_id+","+model.selected.items[i].data.xt_notice_id;
 		}
+		if(systemUID == ""){
+			systemUID = model.selected.items[i].data.xt_userinfo_id;
+		}else{
+			systemUID = systemUID + "," + model.selected.items[i].data.xt_userinfo_id;
+		}
 	}
 	Ext.Msg.confirm('提示','确定删除该行数据？',function(btn){
 		if(btn == 'yes'){
-			var params = {xt_notice_id:xt_notice_id};
+			var params = {xt_notice_id:xt_notice_id,systemUID:systemUID};
 			ajaxRequest('../xtNoticeController/delXtNotice',grid,params,'正在执行删除操作中！请稍后...');
 		}
 	});

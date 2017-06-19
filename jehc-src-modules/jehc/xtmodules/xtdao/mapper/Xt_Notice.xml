@@ -78,13 +78,10 @@
 		UPDATE
 			xt_notice
 		SET
-			`xt_notice_id` = #{xt_notice_id},
 			`xt_title` = #{xt_title},
 			`xt_content` = #{xt_content},
-			`xt_userinfo_id` = #{xt_userinfo_id},
 			`xt_isDel` = #{xt_isDel},
 			`xt_state` = #{xt_state},
-			`xt_createTime` = #{xt_createTime},
 			`xt_attachment_id` = #{xt_attachment_id},
 			`xt_attachment_id_` = #{xt_attachment_id_}
 		WHERE xt_notice_id=#{xt_notice_id}

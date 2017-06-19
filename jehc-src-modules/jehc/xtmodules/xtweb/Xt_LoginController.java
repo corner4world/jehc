@@ -1,6 +1,7 @@
 package jehc.xtmodules.xtweb;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -25,10 +26,14 @@ import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.md5.MD5;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
+import jehc.xtmodules.xtmodel.Xt_Data_Authority;
+import jehc.xtmodules.xtmodel.Xt_Functioninfo;
 import jehc.xtmodules.xtmodel.Xt_Functioninfo_Right;
 import jehc.xtmodules.xtmodel.Xt_Login_Logs;
 import jehc.xtmodules.xtmodel.Xt_U_R;
 import jehc.xtmodules.xtmodel.Xt_Userinfo;
+import jehc.xtmodules.xtservice.Xt_Data_AuthorityService;
+import jehc.xtmodules.xtservice.Xt_FunctioninfoService;
 import jehc.xtmodules.xtservice.Xt_Functioninfo_RightService;
 import jehc.xtmodules.xtservice.Xt_Login_LogsService;
 import jehc.xtmodules.xtservice.Xt_U_RService;
@@ -50,6 +55,10 @@ public class Xt_LoginController extends BaseAction{
 	private Xt_U_RService xt_U_RService;
 	@Autowired
 	private Xt_Functioninfo_RightService xt_Functioninfo_RightService;
+	@Autowired
+	private Xt_Data_AuthorityService xt_Data_AuthorityService;
+	@Autowired
+	private Xt_FunctioninfoService xt_FunctioninfoService;
 	/**
 	 * 载入登录页面
 	 * @param request
@@ -135,6 +144,7 @@ public class Xt_LoginController extends BaseAction{
 				request.getSession(false).setAttribute("xt_role_id", xt_role_id);
 				request.getSession(false).setAttribute("xt_functioninfoURL", sbfURL.toString());
 				request.getSession(false).setAttribute("xt_functioninfoMethod", sbfMethod.toString());
+				dataAuthority(request);
 			}else{
 				flag = 2;
 			}
@@ -191,5 +201,51 @@ public class Xt_LoginController extends BaseAction{
 	public String loginout(HttpServletRequest request){
 		request.getSession(false).invalidate();
 		return outAudStr(true, "注销平台成功");
+	}
+	
+	/**
+	 * 数据权限
+	 * @param request
+	 */
+	public void dataAuthority(HttpServletRequest request){
+		/////////////////////////////////
+		/////////////////////////操作数据及数据功能权限 开始
+		/////////////////////////////////
+		Map<String,Object> condition = new HashMap<String, Object>();
+		if(!isAdmin()){
+			condition.put("xt_userinfo_id", getXtUid());
+		}
+		String systemUandM="";//用户及功能URL
+		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListByCondition(condition);
+		for(int i = 0; i < xt_Data_AuthorityList.size(); i++){
+			Xt_Data_Authority xtDataAuthority = xt_Data_AuthorityList.get(i);
+			String xtFunctionInfoID = xtDataAuthority.getXt_functioninfo_id();
+			String[] xtFunctionInfoIDList = xtFunctionInfoID.split(",");
+			List<Xt_Functioninfo> xtFunctionInfoLists = new ArrayList<Xt_Functioninfo>();
+			String systemMethod = "";
+			if(null != xtFunctionInfoIDList && !"".equals(xtFunctionInfoIDList) && xtFunctionInfoIDList.length > 0){
+				condition = new HashMap<String, Object>();
+				condition.put("xt_functioninfo_id", xtFunctionInfoIDList);
+				xtFunctionInfoLists = xt_FunctioninfoService.getXtFunctioninfoListByCondition(condition);
+				if(!xtFunctionInfoLists.isEmpty()){
+					Xt_Functioninfo xtFunctionInfo = xtFunctionInfoLists.get(0);
+					if(null !=systemMethod && !"".equals(systemMethod)){
+						systemMethod = systemMethod+"@"+xtFunctionInfo.getXt_functioninfoURL();
+					}else{
+						systemMethod=xtFunctionInfo.getXt_functioninfoURL();
+					}
+				}
+			}
+			if(null != systemUandM && !"".equals(systemUandM)){
+				systemUandM= systemUandM+","+xtDataAuthority.getXtUID()+"#"+systemMethod;
+			}else{
+				systemUandM = ""+xtDataAuthority.getXtUID()+"#"+systemMethod;
+			}
+		}
+		//将数据及数据功能权限等信息放入到里面
+		request.getSession(false).setAttribute("systemUandM", systemUandM);//用户及功能URL
+		/////////////////////////////////
+		/////////////////////////操作数据及数据功能权限 结束
+		/////////////////////////////////	
 	}
 }

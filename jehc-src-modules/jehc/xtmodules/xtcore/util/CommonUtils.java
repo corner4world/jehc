@@ -266,6 +266,24 @@ public class CommonUtils extends UUID{
 	public static String getXtUpnewxtpid() {
 		return null;
 	}
+	
+	/**
+	 * 获取数据权限
+	 * @return
+	 */
+	public static String systemUandM(){
+		try {
+			RequestAttributes ra = RequestContextHolder.getRequestAttributes();
+			HttpServletRequest request = ((ServletRequestAttributes) ra).getRequest();
+			HttpSession session = request.getSession(false);
+			if(null == session){
+				return null;
+			}
+			return (String) session.getAttribute("systemUandM");
+		} catch (Exception e) {
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
 
 	/**
 	 * 判断当前用户是否为超级管理员

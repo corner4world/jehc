@@ -9,7 +9,6 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import jehc.xtmodules.xtcore.annotation.AuthNeedLogin;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.Logback4jUtil;
@@ -96,8 +95,53 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
     				request.getRequestDispatcher("/WEB-INF/view/pc/xt-view/xt-no-role/xt-no-role.jsp").forward(request, response);  
     			}
     			return false;  
+    		}else{
+    			//处理数据权限
+    			String[] paramNames = (String[])request.getParameterValues("systemUID");//唯一标志systemUID
+    			String systemUandM = (String)request.getSession(false).getAttribute("systemUandM");
+    			String[] systemUandMarray = new String[]{};
+				//如果系统唯一标志不为空则说明进行具体操作
+				if(null != paramNames){
+					//参数组成的数组
+					String systemUID = paramNames[0];
+					String[] systemUIDarray = new String[]{};
+					if(null != systemUID && !"".equals(systemUID)){
+						systemUIDarray = systemUID.split(",");
+					}
+					if(null != systemUandM && !"".equals(systemUandM)){
+						systemUandMarray = systemUandM.split(",");
+					}
+					if(null != systemUandMarray){
+						int result = 0;
+						for(int i = 0; i < systemUandMarray.length; i++){
+							String sysUandM = systemUandMarray[i];
+							String[] sysUandMarray = new String[]{};
+							if(null != sysUandM && !"".equals(sysUandM)){
+								sysUandMarray = sysUandM.split("#");
+								if(null != sysUandMarray){
+									//判断方法和参数都匹配
+									if(("@"+sysUandMarray[1]+"@").indexOf("@"+requestUrl+"@") >= 0){
+										for(int j = 0; j<systemUIDarray.length;j++){
+											if(sysUandMarray[0].equals(systemUIDarray[j])){
+												//如果相等
+												result = result+1;
+											}
+										}
+									}
+								}
+							}
+						}
+						//如果参数全部符合则进入方法
+						if(result != systemUIDarray.length){
+							//没有权限操作
+							response.setContentType("text/html;charset=utf-8"); 
+							response.getWriter().write("{success:false,msg:'您没有该操作权限,请与管理员联系!'}");
+							return false;
+						}
+					}
+				}
+				return true;
     		}
-    		return true;
     		//////////////////对功能进行拦截结束///////////////////
         }else{
         	//非法请求【超时请求】即这些请求需要登录后才能访问  

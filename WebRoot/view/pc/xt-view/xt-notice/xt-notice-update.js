@@ -31,7 +31,7 @@ function updateXtNotice(){
 			text:'保存',
 			itemId:'save',
 			handler:function(button){
-				submitForm(xtNoticeFormEdit,'../xtNoticeController/updateXtNotice',grid,xtNoticeWinEdit,false,true);
+				submitForm(xtNoticeFormEdit,'../xtNoticeController/updateXtNotice?systemUID='+record.items[0].data.xt_userinfo_id,grid,xtNoticeWinEdit,false,true);
 			}
 		},{
 			text:'关闭',
