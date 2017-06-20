@@ -83,6 +83,10 @@ Ext.onReady(function(){
 					split:false,
 					border:false,
 					tools:[{
+				        	xtype:'label',
+				        	text:"当前用户 "+sys_pt_user_name
+					       },
+					       {
 				            xtype:'button',
 				            icon:indexlist,
 					 		iconAlign:'top',
@@ -167,7 +171,6 @@ Ext.onReady(function(){
 					        },
 					        {
 					        	 icon:indexLingdang,
-				                 scale:'large',
 				                 xtype:'button',
 					             handler:function(button){
 					             	msgTishi("该功能还未开放！");
@@ -176,7 +179,6 @@ Ext.onReady(function(){
 					        },
 					        {
 					        	 icon:indexMail,
-				                 scale:'large',
 				                 xtype:'button',
 					             handler:function(button){
 					             	msgTishi("该功能还未开放！");
