@@ -227,7 +227,8 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 			}
 		}else{
 			//否则过滤当前操作是否数据权限查询拦截
-			request.getSession(false).removeAttribute("sysUID");
+//			request.getSession(false).removeAttribute("sysUID");
+			
 			if(null != systemUandM && !"".equals(systemUandM)){
 				systemUandMarray = systemUandM.split(",");
 			}
@@ -243,7 +244,8 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 						}
 					}
 				}
-				request.getSession(false).setAttribute("sysUID", sysUID);//用户ID
+//				request.getSession(false).setAttribute("sysUID", sysUID);//用户ID
+				request.setAttribute("sysUID", sysUID);//用户ID
 			}
 		}
 		return true;

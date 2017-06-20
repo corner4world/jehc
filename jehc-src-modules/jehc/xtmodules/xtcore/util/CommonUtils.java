@@ -281,7 +281,7 @@ public class CommonUtils extends UUID{
 			}
 			return (String) session.getAttribute("systemUandM");
 		} catch (Exception e) {
-			throw new ExceptionUtil(e.getMessage(),e.getCause());
+			throw new ExceptionUtil("获取systemUandM出现异常："+e.getMessage());
 		}
 	}
 

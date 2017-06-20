@@ -40,7 +40,8 @@ public class BaseAction extends CommonUtils{
 	 * @param condition
 	 */
 	public void dataAuthForXtUID(HttpServletRequest request,String key,Map<String, Object> condition){
-		List<String> sysUID = (List<String>)request.getSession().getAttribute("sysUID");
+//		List<String> sysUID = (List<String>)request.getSession().getAttribute("sysUID");
+		List<String> sysUID = (List<String>)request.getAttribute("sysUID");
 		if(null != sysUID && !sysUID.isEmpty() && sysUID.size() > 0){
 			condition.put(key,sysUID);
 		}else{
