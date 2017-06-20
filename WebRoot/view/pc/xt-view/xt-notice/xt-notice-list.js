@@ -1,5 +1,6 @@
 var store;
 var grid;
+var contextmenu;
 var XT_NOTICE_COMBO_STORE;
 Ext.onReady(function(){
 	XT_NOTICE_COMBO_STORE = Ext.create('Ext.data.SimpleStore',{ 
@@ -97,6 +98,7 @@ Ext.onReady(function(){
 			 {
 				text:'添加',
 				tooltip:'添加',
+				id:'addXtNotice',
 				minWidth:tbarBtnMinWidth,
 				cls:'addBtn',
 				icon:addIcon,
@@ -109,6 +111,7 @@ Ext.onReady(function(){
 				tooltip:'编辑',
 				minWidth:tbarBtnMinWidth,
 				cls:'updateBtn',
+				id:'updateXtNotice',
 				icon:editIcon,
 				handler:function(){
 					updateXtNotice();
@@ -120,6 +123,7 @@ Ext.onReady(function(){
 				minWidth:tbarBtnMinWidth,
 				cls:'delBtn',
 				icon:delIcon,
+				id:'delXtNotice',
 				handler:function(){
 					delXtNotice();
 				}
@@ -128,6 +132,7 @@ Ext.onReady(function(){
 				text:'检索',
 				tooltip:'检索',
 				minWidth:tbarBtnMinWidth,
+				authUneed:true,
 				cls:'searchBtn',
 				icon:searchIcon,
 				handler:function(){
@@ -137,6 +142,7 @@ Ext.onReady(function(){
 			 {
 				text:'重置',
 				tooltip:'重置',
+				authUneed:true,
 				minWidth:tbarBtnMinWidth,
 				icon:clearSearchIcon,
 				handler:function(){
@@ -147,38 +153,25 @@ Ext.onReady(function(){
 			 {
 				 text:moretext,
 				 tooltip:moretexttooltip,
+				 authUneed:true,
 				 icon:listIcon,
 				 iconAlign:'left',
 				 menu:[
 				 {
-					text:'复制一行并生成记录',
-					tooltip:'复制一行并生成记录',
-					glyph:0xf0ea,
-					handler:function(){
-						copyXtNotice();
-					}
-				 },
-				 {
 					text:'明 细',
 					tooltip:'明 细',
 					glyph:0xf03b,
+					authUneed:true,
 					handler:function(){
 						detailXtNotice();
 					}
 				 },
 				 '-',
 				 {
-					text:'导 出',
-					tooltip:'导 出',
-					glyph:0xf1c3,
-					handler:function(){
-						exportXtNotice(grid,'../xtNoticeController/exportXtNotice');
-					}
-				 },
-				 {
 					text:'打 印',
 					tooltip:'打 印',
 					glyph:0xf02f,
+					authUneed:true,
 					handler:function(){
 						printerGrid(grid);
 					}
@@ -188,12 +181,14 @@ Ext.onReady(function(){
 					text:'全 选',
 					tooltip:'全 选',
 					glyph:0xf046,
+					authUneed:true,
 					handler:function(){selectAll(grid);}
 				 },
 				 {
 					text:'反 选',
 					tooltip:'反 选',
 					glyph:0xf096,
+					authUneed:true,
 					handler:function(){unSelectAll(grid);}
 				 },
 				 '-',
@@ -201,6 +196,7 @@ Ext.onReady(function(){
 					text:'刷 新',
 					tooltip:'刷 新',
 					glyph:0xf021,
+					authUneed:true,
 					handler:function(){
 						grid.getStore().reload();
 					}
@@ -209,6 +205,7 @@ Ext.onReady(function(){
 					text:'检 索',
 					tooltip:'检 索',
 					glyph:0xf002,
+					authUneed:true,
 					handler:function(){
 						search();
 					}
@@ -217,6 +214,7 @@ Ext.onReady(function(){
 					text:'重 置',
 					tooltip:'重 置',
 					glyph:0xf014,
+					authUneed:true,
 					handler:function(){
 						searchForm.reset();
 					}
@@ -241,8 +239,8 @@ Ext.onReady(function(){
 	/**调用右键**/
 	initRight();
 	store.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store,searchForm));});
-	//调用功能权限
-	xtFunctionStr();
+	/**调用功能权限**/
+	xtFunctionStrByCondition(store,grid,contextmenu);
 });
 /**删除操作**/
 function delXtNotice(){
@@ -292,7 +290,7 @@ function exportXtNotice(grid,url){
 }
 /**初始化右键**/
 function initRight(){
-	var contextmenu = new Ext.menu.Menu({
+	contextmenu = new Ext.menu.Menu({
 		id:'theContextMenu',
 		items:[{
 			text:'添 加',
@@ -317,29 +315,36 @@ function initRight(){
 		},{
 			text:'明 细',
 			glyph:0xf03b,
+			authUneed:true,
 			id:'detailXtNoticeItem',
 			handler:function(){detailXtNotice();}
 		},{
 			text:'导 出',
 			glyph:0xf1c3,
+			authUneed:true,
+			id:'exportXtNoticeItem',
 			handler:function(){
 				exportXtNotice(grid,'../xtNoticeController/exportXtNotice');
 			}
 		},{
 			text:'打 印',
 			glyph:0xf02f,
+			authUneed:true,
 			handler:function(){printerGrid(grid);}
 		},'-',{
 			text:'全 选',
 			glyph:0xf046,
+			authUneed:true,
 			handler:function(){selectAll(grid);}
 		},{
 			text:'反 选',
 			glyph:0xf096,
+			authUneed:true,
 			handler:function(){unSelectAll(grid);}
 		},'-',{
 			text:'刷 新',
 			glyph:0xf021,
+			authUneed:true,
 			handler:function(){refreshGrid(grid);}
 		}]
 	});
