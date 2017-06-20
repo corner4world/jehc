@@ -663,4 +663,92 @@ public class Xt_Data_AuthorityController extends BaseAction{
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
 	}
+	
+	/**
+	* 1清空按人员设置数据权限
+	* @param xt_constant_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/delXtDataAuthorityUserAll",method={RequestMethod.POST,RequestMethod.GET})
+	public String delXtDataAuthorityUserAll(String xt_menuinfo_id,HttpServletRequest request){
+		int i = 0;
+		if(null != xt_menuinfo_id && !"".equals(xt_menuinfo_id)){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_menuinfo_id", xt_menuinfo_id);
+			condition.put("xt_data_authorityType", 1);
+			i = xt_Data_AuthorityService.delXtDataAuthority(condition);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	
+	/**
+	* 2清空按部门设置数据权限
+	* @param xt_constant_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/delXtDataAuthorityDepartAll",method={RequestMethod.POST,RequestMethod.GET})
+	public String delXtDataAuthorityDepartAll(String xt_menuinfo_id,HttpServletRequest request){
+		int i = 0;
+		if(null != xt_menuinfo_id && !"".equals(xt_menuinfo_id)){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_menuinfo_id", xt_menuinfo_id);
+			condition.put("xt_data_authorityType", 2);
+			i = xt_Data_Authority_DepartService.delXtDataAuthorityDepartAllByCondition(condition);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	
+	/**
+	* 3清空按岗位设置数据权限
+	* @param xt_constant_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/delXtDataAuthorityPostAll",method={RequestMethod.POST,RequestMethod.GET})
+	public String delXtDataAuthorityPostAll(String xt_menuinfo_id,HttpServletRequest request){
+		int i = 0;
+		if(null != xt_menuinfo_id && !"".equals(xt_menuinfo_id)){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_menuinfo_id", xt_menuinfo_id);
+			condition.put("xt_data_authorityType", 3);
+			i = xt_Data_Authority_PostService.delXtDataAuthorityPostListByCondition(condition);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	
+	/**
+	* 4清空按初始化数据权限设置
+	* @param xt_constant_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/delSaDataAuthorityDefaultAll",method={RequestMethod.POST,RequestMethod.GET})
+	public String delSaDataAuthorityDefaultAll(String xt_menuinfo_id,HttpServletRequest request){
+		int i = 0;
+		if(null != xt_menuinfo_id && !"".equals(xt_menuinfo_id)){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_menuinfo_id", xt_menuinfo_id);
+			condition.put("xt_data_authorityType", 4);
+			i = xt_Data_Authority_DefaultService.delXtDataAuthorityDefaultAllByCondition(condition);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
 }

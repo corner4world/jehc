@@ -45,6 +45,12 @@ public interface Xt_Data_Authority_DefaultDao{
 	*/
 	public int delXtDataAuthorityDefault(Map<String,Object> condition);
 	/**
+	 * 根据情况删除
+	 * @param condition
+	 * @return
+	 */
+	public int delXtDataAuthorityDefaultAllByCondition(Map<String,Object> condition);
+	/**
 	* 批量添加
 	* @param xt_data_authority_defaultList 
 	* @return

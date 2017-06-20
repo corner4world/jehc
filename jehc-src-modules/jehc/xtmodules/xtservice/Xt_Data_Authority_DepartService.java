@@ -45,6 +45,12 @@ public interface Xt_Data_Authority_DepartService{
 	*/
 	public int delXtDataAuthorityDepart(Map<String,Object> condition);
 	/**
+	 * 根据条件删除
+	 * @param condition
+	 * @return
+	 */
+	public int delXtDataAuthorityDepartAllByCondition(Map<String,Object> condition);
+	/**
 	* 批量添加
 	* @param xt_data_authority_departList 
 	* @return

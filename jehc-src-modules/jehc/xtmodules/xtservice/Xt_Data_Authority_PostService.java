@@ -51,6 +51,12 @@ public interface Xt_Data_Authority_PostService{
 	 */
 	public int delXtDataAuthorityPostList(Map<String,Object> condition);
 	/**
+	 * 根据情况删除
+	 * @param condition
+	 * @return
+	 */
+	public int delXtDataAuthorityPostListByCondition(Map<String,Object> condition);
+	/**
 	* 批量添加
 	* @param xt_data_authority_postList 
 	* @return

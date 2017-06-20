@@ -99,7 +99,13 @@
 	<!-- 删除集合根据拥有者及菜单编号 -->
 	<delete id="delXtDataAuthorityPostList" parameterType="map">
 		DELETE FROM xt_data_authority_post
-		WHERE xt_post_id = #{xt_post_id} AND `xt_menuinfo_id` = #{xt_menuinfo_id}
+		WHERE 1=1
+		<if test="null != xt_post_id">
+			AND xt_post_id = #{xt_post_id}
+		</if>
+		<if test="null != xt_menuinfo_id">
+			AND `xt_menuinfo_id` = #{xt_menuinfo_id}
+		</if>
 	</delete>
 
 	<!--批量添加-->

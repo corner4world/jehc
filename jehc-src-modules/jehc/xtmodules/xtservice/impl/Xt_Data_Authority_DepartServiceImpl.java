@@ -9,6 +9,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jehc.xtmodules.xtservice.Xt_Data_Authority_DepartService;
+import jehc.xtmodules.xtdao.Xt_Data_AuthorityDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_DepartDao;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority_Depart;
 
@@ -20,6 +21,8 @@ import jehc.xtmodules.xtmodel.Xt_Data_Authority_Depart;
 public class Xt_Data_Authority_DepartServiceImpl extends BaseService implements Xt_Data_Authority_DepartService{
 	@Autowired
 	private Xt_Data_Authority_DepartDao xt_Data_Authority_DepartDao;
+	@Autowired
+	private Xt_Data_AuthorityDao xt_Data_AuthorityDao;
 	/**
 	* 分页
 	* @param condition 
@@ -104,6 +107,24 @@ public class Xt_Data_Authority_DepartServiceImpl extends BaseService implements 
 		int i = 0;
 		try {
 			i = xt_Data_Authority_DepartDao.delXtDataAuthorityDepart(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	
+	/**
+	 * 根据条件删除
+	 * @param condition
+	 * @return
+	 */
+	public int delXtDataAuthorityDepartAllByCondition(Map<String,Object> condition){
+		int i = 0;
+		try {
+			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
+			i = xt_Data_Authority_DepartDao.delXtDataAuthorityDepartList(condition);
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

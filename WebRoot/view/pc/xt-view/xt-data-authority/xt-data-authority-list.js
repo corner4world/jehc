@@ -64,7 +64,7 @@ function delXtDataAuthorityAll(){
 }
 function showDelXtDataAuthorityAllBtn(btn){
 	if(btn == 'yes'){
-		var url = "saDataAuthority/saDataAuthority_delSaDataAuthorityAll.nzy";
+		var url = "../xtDataAuthorityController/delXtDataAuthorityUserAll";
 		var params = {};
 		ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
 	}
@@ -75,7 +75,7 @@ function delXtDataAuthorityDepartAll(){
 }
 function showDelXtDataAuthorityDepartAllBtn(btn){
 	if(btn == 'yes'){
-		var url = "saDataAuthority/saDataAuthority_delSaDataAuthorityDepartAll.nzy";
+		var url = "../xtDataAuthorityController/delXtDataAuthorityDepartAll";
 		var params = {};
 		ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
 	}
@@ -86,86 +86,26 @@ function delXtDataAuthorityPostAll(){
 }
 function showDelXtDataAuthorityPostAllBtn(btn){
 	if(btn == 'yes'){
-		var url = "saDataAuthority/saDataAuthority_delSaDataAuthorityPostAll.nzy";
+		var url = "../xtDataAuthorityController/delXtDataAuthorityPostAll";
 		var params = {};
 		ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
 	}
 }
 //清空按初始化数据权限设置
-var xtDataAuthorityDefaultPromptWin;
 function delSaDataAuthorityDefaultAll(){
 	record = grid.getSelectionModel().getSelected();
 	if(!record){
 		Ext.example.msg('提示', '请选择要清空初始化数据权限的一项！');
 		return;
 	}
-	xtDataAuthorityDefaultPromptWin = new Ext.Window({
-		layout:'fit', 
-		width:400,                    
-		height:100, 
-		modal:true,       
-		closeAction:'close',    
-		plain:true,  
-		closable:false, 
-		title:'提示',
-		animateTarget:document.body,
-		/**      
-		items:[new top.Ext.ux.form.LovCombo({
-					xtype:"combo",
-					width:150,
-		            store:new Ext.data.SimpleStore({
-		             fields:['Value', 'Name'],
-		             data:[["1","按人员初始化设置基本数据权限"],["2","按部门初始化设置基本数据权限"],["3","按岗位初始化设置基本数据权限"],["4","按部门启动上下级基本数据权限"],["5","按岗位启动上下级基本数据权限"]]
-		            }),
-		            emptyText:"-----------------------------请选择初始化数据权限类型-----------------------------",
-		            mode:"local",
-		            triggerAction:"all",
-		            editable:false,
-		            valueField:"Value",
-		            displayField:"Name",
-			        autoSelect:true,
-			        showSelectAll:true, 
-			        id:'promptID',
-			        resizable:true,
-		            listeners:{
-		         		'blur':function(field) {
-		                    var newValue = field.getValue();
-		                }
-	            	}
-			   })
-		],  
-		**/
-		buttons:[{
-				 text:'确 定', 
-	             width:80,
-	             iconCls:'save-icon',  
-	             handler:function(){
-					if(Ext.getCmp("promptID").getValue() == null || Ext.getCmp("promptID").getValue() == ""){
-						Ext.example.msg('提示', "请选择清空类型");//提示之后消失
-						return;
-					}
-	   	 			Ext.MessageBox.confirm('提示', '确定要清空按初始化数据权限设置吗?',
-	   	 				function(btn){
-		   	 				if(btn == 'yes'){
-								var type = Ext.getCmp("promptID").getValue();
-								xtDataAuthorityDefaultPromptWin.close(); 
-								var url = "saDataAuthority/saDataAuthority_delSaDataAuthorityDefaultAll.nzy";
-								var params = {type:type,xt_menuinfo_id:record.get("xt_menuinfo_id")};
-								ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
-							}
-	   	 				}
-	   	 			);
-	            } 
-	   	 		},{
-	               text:'关 闭', 
-		           width:80,
-		           iconCls:'cancel-icon',  
-		           handler:function(){
-			          xtDataAuthorityDefaultPromptWin.close();                        
-		           }  
-	   	 		}]                
-	});
-	xtDataAuthorityDefaultPromptWin.show();
+	Ext.MessageBox.confirm('提示', '确定要清空初始化数据权限吗?',showDelXtDataAuthorityDefaultBtn);
+}
+function showDelXtDataAuthorityDefaultBtn(btn){
+	if(btn == 'yes'){
+		var url = "../xtDataAuthorityController/delXtDataAuthorityDefaultAll";
+		var params = {};
+		ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
+	}
 }
 
 /**导出**/
@@ -179,7 +119,12 @@ function initRight(){
 		items:[{
 			text:'启动初始化设置权限',
 			glyph:0xf016,
-			handler:function(){delSaDataAuthorityDefaultAll()}
+			handler:function(){
+				var record = grid.getSelectionModel().selected;
+				var xt_menuinfo_id = record.items[0].data.xt_menuinfo_id;
+				var xt_menuinfo_title = record.items[0].data.xt_menuinfo_title;
+				showDataAuthorityDefaultAllWin(xt_menuinfo_id,xt_menuinfo_title)
+			}
 		},{
 			text:'按人员设置数据权限',
 			glyph:0xf044,
@@ -251,4 +196,9 @@ function initRight(){
 		e.preventDefault(); 
 		contextmenu.showAt(e.getXY());
 	});
+}
+
+//启动初始化数据权限
+function showDataAuthorityDefaultAllWin(xt_menuinfo_id,xt_menuinfo_title){
+	
 }

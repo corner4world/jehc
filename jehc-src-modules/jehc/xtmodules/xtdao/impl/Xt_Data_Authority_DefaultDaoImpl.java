@@ -62,6 +62,14 @@ public class Xt_Data_Authority_DefaultDaoImpl  extends BaseDaoImpl implements Xt
 		return this.del("delXtDataAuthorityDefault", condition);
 	}
 	/**
+	 * 根据情况删除
+	 * @param condition
+	 * @return
+	 */
+	public int delXtDataAuthorityDefaultAllByCondition(Map<String,Object> condition){
+		return this.del("delXtDataAuthorityDefaultAllByCondition", condition);
+	}
+	/**
 	* 批量添加
 	* @param xt_data_authority_defaultList 
 	* @return

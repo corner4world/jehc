@@ -9,6 +9,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jehc.xtmodules.xtservice.Xt_Data_Authority_PostService;
+import jehc.xtmodules.xtdao.Xt_Data_AuthorityDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_PostDao;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority_Post;
 
@@ -20,6 +21,8 @@ import jehc.xtmodules.xtmodel.Xt_Data_Authority_Post;
 public class Xt_Data_Authority_PostServiceImpl extends BaseService implements Xt_Data_Authority_PostService{
 	@Autowired
 	private Xt_Data_Authority_PostDao xt_Data_Authority_PostDao;
+	@Autowired
+	private Xt_Data_AuthorityDao xt_Data_AuthorityDao;
 	/**
 	* 分页
 	* @param condition 
@@ -119,6 +122,23 @@ public class Xt_Data_Authority_PostServiceImpl extends BaseService implements Xt
 	public int delXtDataAuthorityPostList(Map<String,Object> condition){
 		int i = 0;
 		try {
+			i = xt_Data_Authority_PostDao.delXtDataAuthorityPostList(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	 * 根据情况删除
+	 * @param condition
+	 * @return
+	 */
+	public int delXtDataAuthorityPostListByCondition(Map<String,Object> condition){
+		int i = 0;
+		try {
+			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
 			i = xt_Data_Authority_PostDao.delXtDataAuthorityPostList(condition);
 		} catch (Exception e) {
 			i = 0;

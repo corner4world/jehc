@@ -6,6 +6,7 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jehc.xtmodules.xtservice.Xt_Data_Authority_DefaultService;
+import jehc.xtmodules.xtdao.Xt_Data_AuthorityDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_DefaultDao;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority_Default;
 
@@ -17,6 +18,8 @@ import jehc.xtmodules.xtmodel.Xt_Data_Authority_Default;
 public class Xt_Data_Authority_DefaultServiceImpl extends BaseService implements Xt_Data_Authority_DefaultService{
 	@Autowired
 	private Xt_Data_Authority_DefaultDao xt_Data_Authority_DefaultDao;
+	@Autowired
+	private Xt_Data_AuthorityDao xt_Data_AuthorityDao;
 	/**
 	* 分页
 	* @param condition 
@@ -100,7 +103,24 @@ public class Xt_Data_Authority_DefaultServiceImpl extends BaseService implements
 	public int delXtDataAuthorityDefault(Map<String,Object> condition){
 		int i = 0;
 		try {
+			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
 			i = xt_Data_Authority_DefaultDao.delXtDataAuthorityDefault(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	 * 根据情况删除
+	 * @param condition
+	 * @return
+	 */
+	public int delXtDataAuthorityDefaultAllByCondition(Map<String,Object> condition){
+		int i = 0;
+		try {
+			i = xt_Data_Authority_DefaultDao.delXtDataAuthorityDefaultAllByCondition(condition);
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
