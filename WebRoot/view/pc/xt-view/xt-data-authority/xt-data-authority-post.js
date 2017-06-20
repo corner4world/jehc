@@ -121,12 +121,12 @@ function initPost(xt_menuinfo_id,xt_menuinfo_title){
         	header:'操 作',
 			align:'center',
 			xtype:'widgetcolumn',
-			flex:1,
+			width:150,
 			widget:{
 				xtype:'button',
 				icon:editIcon,
-                text:'设置该岗位拥有其它部门的权限',
-                width:230,
+                text:'设置岗位权限',
+                tooltip:'设置该岗位拥有其它岗位的权限',
                 listeners:{
 				    render:function(rec) {
 				        var record = rec.getWidgetRecord();
@@ -134,7 +134,7 @@ function initPost(xt_menuinfo_id,xt_menuinfo_title){
 				        if(type == '部门'){
 				        	rec.setText("<font color='red'>不能设置</font>");
 				        }else{
-				        	rec.setText("<font color=''>设置该岗位拥有其它岗位的权限</font>");
+				        	rec.setText("<font color=''>设置岗位权限</font>");
 				        }
 				    } 
 				}, 

@@ -114,11 +114,12 @@ function initDepartTreeGrid(xt_menuinfo_id,xt_menuinfo_title){
         	header:'操 作',
 			align:'center',
 			xtype:'widgetcolumn',
-			flex:1,
+			width:150,
 			widget:{
 				xtype:'button',
 				icon:editIcon,
-                text:'设置该部门拥有其它部门的权限',
+                text:'设置部门权限',
+                tooltip:'设置该部门拥有其它部门的权限',
                 handler:function(rec){
                 	var id = rec.getWidgetRecord().data.id;
                 	var xt_departinfo_name = rec.getWidgetRecord().data.text;

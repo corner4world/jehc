@@ -24,11 +24,16 @@ import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority;
+import jehc.xtmodules.xtmodel.Xt_Data_Authority_Depart;
+import jehc.xtmodules.xtmodel.Xt_Data_Authority_Post;
 import jehc.xtmodules.xtmodel.Xt_Departinfo;
 import jehc.xtmodules.xtmodel.Xt_Functioninfo;
 import jehc.xtmodules.xtmodel.Xt_Post;
 import jehc.xtmodules.xtmodel.Xt_Userinfo;
 import jehc.xtmodules.xtservice.Xt_Data_AuthorityService;
+import jehc.xtmodules.xtservice.Xt_Data_Authority_DefaultService;
+import jehc.xtmodules.xtservice.Xt_Data_Authority_DepartService;
+import jehc.xtmodules.xtservice.Xt_Data_Authority_PostService;
 import jehc.xtmodules.xtservice.Xt_DepartinfoService;
 import jehc.xtmodules.xtservice.Xt_FunctioninfoService;
 import jehc.xtmodules.xtservice.Xt_PostService;
@@ -51,6 +56,12 @@ public class Xt_Data_AuthorityController extends BaseAction{
 	private Xt_DepartinfoService xt_DepartinfoService;
 	@Autowired
 	private Xt_PostService xt_PostService;
+	@Autowired
+	private Xt_Data_Authority_DepartService xt_Data_Authority_DepartService;
+	@Autowired
+	private Xt_Data_Authority_PostService xt_Data_Authority_PostService;
+	@Autowired
+	private Xt_Data_Authority_DefaultService xt_Data_Authority_DefaultService;
 	/**
 	* 载入初始化页面
 	* @param xt_data_authority 
@@ -83,25 +94,36 @@ public class Xt_Data_AuthorityController extends BaseAction{
 	@ResponseBody
 	@RequestMapping(value="/addXtDataAuthorityByUser",method={RequestMethod.POST,RequestMethod.GET})
 	public String addXtDataAuthorityByUser(HttpServletRequest request,String xt_userinfo_id,String id,String xt_menuinfo_id,String delID){
-		Map<String, Object> condition = new HashMap<String, Object>();
+//		Map<String, Object> condition = new HashMap<String, Object>();
 		int i = 0;
-		StringBuffer sbf = new StringBuffer();
-		String[] delIDList = new String[]{};
-		StringBuffer delSbf = new StringBuffer();
-		if(null != delID && !"".equals(delID)){
-			delIDList = delID.split(",");
-			for(int j = 0; j < delIDList.length; j++){
-				delSbf.append(xt_userinfo_id+xt_menuinfo_id+delIDList[j].split("@")[0]+"1"+delIDList[j].split("@")[1]);
-			}
-		}
-		condition.put("xt_menuinfo_id", xt_menuinfo_id);
-		condition.put("Xt_data_authorityType", 1);
-		condition.put("xt_userinfo_id", xt_userinfo_id);
-		List<Xt_Data_Authority> xt_Data_Authority_OldList = xt_Data_AuthorityService.getXtDataAuthorityListAllByCondition(condition);
-		for(int j = 0; j < xt_Data_Authority_OldList.size(); j++){
-			Xt_Data_Authority xt_Data_Authority_Old = xt_Data_Authority_OldList.get(j);
-			sbf.append(xt_Data_Authority_Old.getXt_userinfo_id()+xt_Data_Authority_Old.getXt_menuinfo_id()+xt_Data_Authority_Old.getXt_functioninfo_id()+xt_Data_Authority_Old.getXt_data_authorityType()+xt_Data_Authority_Old.getXtUID());
-		}
+//		StringBuffer sbf = new StringBuffer();
+//		String[] delIDList = new String[]{};
+//		StringBuffer delSbf = new StringBuffer();
+//		if(null != delID && !"".equals(delID)){
+//			delIDList = delID.split(",");
+//			for(int j = 0; j < delIDList.length; j++){
+//				delSbf.append(xt_userinfo_id+xt_menuinfo_id+delIDList[j].split("@")[0]+"1"+delIDList[j].split("@")[1]);
+//			}
+//		}
+//		condition.put("xt_menuinfo_id", xt_menuinfo_id);
+//		condition.put("Xt_data_authorityType", 1);
+//		condition.put("xt_userinfo_id", xt_userinfo_id);
+//		List<Xt_Data_Authority> xt_Data_Authority_OldList = xt_Data_AuthorityService.getXtDataAuthorityListAllByCondition(condition);
+//		for(int j = 0; j < xt_Data_Authority_OldList.size(); j++){
+//			Xt_Data_Authority xt_Data_Authority_Old = xt_Data_Authority_OldList.get(j);
+//			sbf.append(xt_Data_Authority_Old.getXt_userinfo_id()+xt_Data_Authority_Old.getXt_menuinfo_id()+xt_Data_Authority_Old.getXt_functioninfo_id()+xt_Data_Authority_Old.getXt_data_authorityType()+xt_Data_Authority_Old.getXtUID());
+//		}
+//		
+//		//将xt_Data_Authority_OldList需要删除的元素去除
+//		for(int j = 0; j < xt_Data_Authority_OldList.size(); j++){
+//			Xt_Data_Authority xt_Data_Authority_Old = xt_Data_Authority_OldList.get(j);
+//			String str = xt_Data_Authority_Old.getXt_userinfo_id()+xt_Data_Authority_Old.getXt_menuinfo_id()+xt_Data_Authority_Old.getXt_functioninfo_id()+xt_Data_Authority_Old.getXt_data_authorityType()+xt_Data_Authority_Old.getXtUID();
+//			if(delSbf.toString().indexOf(str)>=0){
+//				xt_Data_Authority_OldList.remove(j);
+//				j--;
+//			}
+//		}
+		List<Xt_Data_Authority> xt_Data_Authority_List = new ArrayList<Xt_Data_Authority>();
 		if(null != id && !"".equals(id)){
 			String[] idList = id.split(",");
 			for(int j = 0; j < idList.length; j++){
@@ -114,24 +136,16 @@ public class Xt_Data_AuthorityController extends BaseAction{
 					xt_Data_Authority.setXt_menuinfo_id(xt_menuinfo_id);
 					xt_Data_Authority.setXt_userinfo_id(xt_userinfo_id);
 					xt_Data_Authority.setXtUID(idValue[1]);
-					String str = xt_Data_Authority.getXt_userinfo_id()+xt_Data_Authority.getXt_menuinfo_id()+xt_Data_Authority.getXt_functioninfo_id()+xt_Data_Authority.getXt_data_authorityType()+xt_Data_Authority.getXtUID();
+//					String str = xt_Data_Authority.getXt_userinfo_id()+xt_Data_Authority.getXt_menuinfo_id()+xt_Data_Authority.getXt_functioninfo_id()+xt_Data_Authority.getXt_data_authorityType()+xt_Data_Authority.getXtUID();
 					//将新的数据添加进去
-					if(sbf.toString().indexOf(str)<0){
-						xt_Data_Authority_OldList.add(xt_Data_Authority);
-					}
+//					if(sbf.toString().indexOf(str)<0){
+					xt_Data_Authority_List.add(xt_Data_Authority);
+//					}
 				}
 			}
 		}
-		//将xt_Data_Authority_OldList需要删除的元素去除
-		for(int j = 0; j < xt_Data_Authority_OldList.size(); j++){
-			Xt_Data_Authority xt_Data_Authority_Old = xt_Data_Authority_OldList.get(j);
-			String str = xt_Data_Authority_Old.getXt_userinfo_id()+xt_Data_Authority_Old.getXt_menuinfo_id()+xt_Data_Authority_Old.getXt_functioninfo_id()+xt_Data_Authority_Old.getXt_data_authorityType()+xt_Data_Authority_Old.getXtUID();
-			if(delSbf.toString().indexOf(str)>=0){
-				xt_Data_Authority_OldList.remove(j);
-			}
-		}
-		if(null != xt_Data_Authority_OldList && !"".equals(xt_Data_Authority_OldList)){
-			i=xt_Data_AuthorityService.addXtDataAuthority(xt_Data_Authority_OldList,xt_userinfo_id,id,xt_menuinfo_id,"1");
+		if(null != xt_Data_Authority_List && !"".equals(xt_Data_Authority_List)){
+			i=xt_Data_AuthorityService.addXtDataAuthority(xt_Data_Authority_List,xt_userinfo_id,id,xt_menuinfo_id,"1");
 		}
 		if(i>0){
 			return outAudStr(true);
@@ -140,6 +154,145 @@ public class Xt_Data_AuthorityController extends BaseAction{
 		}
 	}
 	
+	/**
+	 * 根据部门进行添加
+	 * @param request
+	 * @param xt_departinfo_id拥有者
+	 * @param id被拥有者
+	 * @param xt_menuinfo_id
+	 * @param delID
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/addXtDataAuthorityByDepart",method={RequestMethod.POST,RequestMethod.GET})
+	public String addXtDataAuthorityByDepart(HttpServletRequest request,String xt_departinfo_id,String id,String xt_menuinfo_id,String delID){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		int i = 0;
+//		StringBuffer sbf = new StringBuffer();
+//		String[] delIDList = new String[]{};
+//		StringBuffer delSbf = new StringBuffer();
+//		if(null != delID && !"".equals(delID)){
+//			delIDList = delID.split(",");
+//			for(int j = 0; j < delIDList.length; j++){
+//				delSbf.append(xt_departinfo_id+xt_menuinfo_id+delIDList[j].split("@")[0]+delIDList[j].split("@")[1]);
+//			}
+//		}
+//		condition.put("xt_menuinfo_id", xt_menuinfo_id);
+//		condition.put("xt_departinfo_id", xt_departinfo_id);
+//		
+//		List<Xt_Data_Authority_Depart> xt_Data_Authority_Depart_OldList = xt_Data_Authority_DepartService.getXtDataAuthorityDepartListByCondition(condition);
+//		for(int j = 0; j < xt_Data_Authority_Depart_OldList.size(); j++){
+//			Xt_Data_Authority_Depart xt_Data_Authority_Depart_Old = xt_Data_Authority_Depart_OldList.get(j);
+//			sbf.append(xt_Data_Authority_Depart_Old.getXt_departinfo_id()+xt_Data_Authority_Depart_Old.getXt_menuinfo_id()+xt_Data_Authority_Depart_Old.getXt_functioninfo_id()+xt_Data_Authority_Depart_Old.getXtDID());
+//		}
+		List<Xt_Data_Authority_Depart> xt_Data_Authority_Depart_OldList = new ArrayList<Xt_Data_Authority_Depart>();
+		if(null != id && !"".equals(id)){
+			String[] idList = id.split(",");
+			for(int j = 0; j < idList.length; j++){
+				String[] idValue = idList[j].split("@");
+				if(!idValue[0].equals("0")){
+					Xt_Data_Authority_Depart xt_Data_Authority_Depart = new Xt_Data_Authority_Depart();
+					xt_Data_Authority_Depart.setXt_data_authority_depart_id(UUID.toUUID());
+					xt_Data_Authority_Depart.setXt_functioninfo_id(idValue[0]);
+					xt_Data_Authority_Depart.setXt_menuinfo_id(xt_menuinfo_id);
+					xt_Data_Authority_Depart.setXt_departinfo_id(xt_departinfo_id);
+					xt_Data_Authority_Depart.setXtDID(idValue[1]);
+//					String str = xt_Data_Authority_Depart.getXt_departinfo_id()+xt_Data_Authority_Depart.getXt_menuinfo_id()+xt_Data_Authority_Depart.getXt_functioninfo_id()+xt_Data_Authority_Depart.getXtDID();
+					//将新的数据添加进去
+//					if(sbf.toString().indexOf(str)<0){
+						xt_Data_Authority_Depart_OldList.add(xt_Data_Authority_Depart);
+//					}
+				}
+			}
+		}
+		//将xt_Data_Authority_OldList需要删除的元素去除
+//		for(int j = 0; j < xt_Data_Authority_Depart_OldList.size(); j++){
+//			Xt_Data_Authority_Depart xt_Data_Authority_Depart_Old = xt_Data_Authority_Depart_OldList.get(j);
+//			String str = xt_Data_Authority_Depart_Old.getXt_departinfo_id()+xt_Data_Authority_Depart_Old.getXt_menuinfo_id()+xt_Data_Authority_Depart_Old.getXt_functioninfo_id()+xt_Data_Authority_Depart_Old.getXtDID();
+//			if(delSbf.toString().indexOf(str)>=0){
+//				xt_Data_Authority_Depart_OldList.remove(j);
+//				j--;
+//			}
+//		}
+		if(null != xt_Data_Authority_Depart_OldList && !"".equals(xt_Data_Authority_Depart_OldList)){
+			i=xt_Data_Authority_DepartService.addBatchXtDataAuthorityDepart(xt_Data_Authority_Depart_OldList,xt_departinfo_id,id,xt_menuinfo_id);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	
+	/**
+	 * 根据岗位添加
+	 * @param request
+	 * @param xt_post_id
+	 * @param id
+	 * @param xt_menuinfo_id
+	 * @param delID
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/addXtDataAuthorityByPost",method={RequestMethod.POST,RequestMethod.GET})
+	public String addXtDataAuthorityByPost(HttpServletRequest request,String xt_post_id,String id,String xt_menuinfo_id,String delID){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		int i = 0;
+//		StringBuffer sbf = new StringBuffer();
+//		String[] delIDList = new String[]{};
+//		StringBuffer delSbf = new StringBuffer();
+//		if(null != delID && !"".equals(delID)){
+//			delIDList = delID.split(",");
+//			for(int j = 0; j < delIDList.length; j++){
+//				delSbf.append(xt_post_id+xt_menuinfo_id+delIDList[j].split("@")[0]+delIDList[j].split("@")[1]);
+//			}
+//		}
+//		condition.put("xt_menuinfo_id", xt_menuinfo_id);
+//		condition.put("xt_post_id", xt_post_id);
+//		
+//		List<Xt_Data_Authority_Post> xt_Data_Authority_Post_OldList = xt_Data_Authority_PostService.getXtDataAuthorityPostListByCondition(condition);
+//		for(int j = 0; j < xt_Data_Authority_Post_OldList.size(); j++){
+//			Xt_Data_Authority_Post xt_Data_Authority_Post_Old = xt_Data_Authority_Post_OldList.get(j);
+//			sbf.append(xt_Data_Authority_Post_Old.getXt_post_id()+xt_Data_Authority_Post_Old.getXt_menuinfo_id()+xt_Data_Authority_Post_Old.getXt_functioninfo_id()+xt_Data_Authority_Post_Old.getXtPID());
+//		}
+		List<Xt_Data_Authority_Post> xt_Data_Authority_Post_OldList = new ArrayList<Xt_Data_Authority_Post>();
+		if(null != id && !"".equals(id)){
+			String[] idList = id.split(",");
+			for(int j = 0; j < idList.length; j++){
+				String[] idValue = idList[j].split("@");
+				if(!idValue[0].equals("0")){
+					Xt_Data_Authority_Post xt_Data_Authority_Post = new Xt_Data_Authority_Post();
+					xt_Data_Authority_Post.setXt_data_authority_post_id(UUID.toUUID());
+					xt_Data_Authority_Post.setXt_functioninfo_id(idValue[0]);
+					xt_Data_Authority_Post.setXt_menuinfo_id(xt_menuinfo_id);
+					xt_Data_Authority_Post.setXt_post_id(xt_post_id);
+					xt_Data_Authority_Post.setXtPID(idValue[1]);
+//					String str = xt_Data_Authority_Post.getXt_post_id()+xt_Data_Authority_Post.getXt_menuinfo_id()+xt_Data_Authority_Post.getXt_functioninfo_id()+xt_Data_Authority_Post.getXtPID();
+					//将新的数据添加进去
+//					if(sbf.toString().indexOf(str)<0){
+						xt_Data_Authority_Post_OldList.add(xt_Data_Authority_Post);
+//					}
+				}
+			}
+		}
+		//将xt_Data_Authority_OldList需要删除的元素去除
+//		for(int j = 0; j < xt_Data_Authority_Post_OldList.size(); j++){
+//			Xt_Data_Authority_Post xt_Data_Authority_Post_Old = xt_Data_Authority_Post_OldList.get(j);
+//			String str = xt_Data_Authority_Post_Old.getXt_post_id()+xt_Data_Authority_Post_Old.getXt_menuinfo_id()+xt_Data_Authority_Post_Old.getXt_functioninfo_id()+xt_Data_Authority_Post_Old.getXtPID();
+//			if(delSbf.toString().indexOf(str)>=0){
+//				xt_Data_Authority_Post_OldList.remove(j);
+//				j--;
+//			}
+//		}
+		if(null != xt_Data_Authority_Post_OldList && !"".equals(xt_Data_Authority_Post_OldList)){
+			i=xt_Data_Authority_PostService.addBatchXtDataAuthorityPost(xt_Data_Authority_Post_OldList,xt_post_id,id,xt_menuinfo_id);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
 	/**
 	 * 读取用户角色列表【用户对角色】
 	 * @param request
@@ -281,14 +434,13 @@ public class Xt_Data_AuthorityController extends BaseAction{
 		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
 		List<Xt_Departinfo> xt_DepartinfoList = xt_DepartinfoService.getXtDepartinfoListAll(condition);
 		condition.put("xt_menuinfo_id", xt_menuinfo_id);
-		condition.put("xt_data_authorityType", 2);
 		condition.put("xt_departinfo_id", xt_departinfo_id);
-		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListAllByCondition(condition);
+		List<Xt_Data_Authority_Depart> xt_Data_Authority_DepartList = xt_Data_Authority_DepartService.getXtDataAuthorityDepartListByCondition(condition);
 		//定义一个拥有者编号+被拥有者编号+功能编号组合字段用来判断选择
 		StringBuffer uf= new StringBuffer();
-		for(int j = 0; j < xt_Data_AuthorityList.size();j++){
-			Xt_Data_Authority xt_Data_Authority = xt_Data_AuthorityList.get(j);
-			uf.append("|"+xt_Data_Authority.getXtUID()+"|"+xt_Data_Authority.getXt_functioninfo_id()+"|");
+		for(int j = 0; j < xt_Data_Authority_DepartList.size();j++){
+			Xt_Data_Authority_Depart xt_Data_Authority_Depart = xt_Data_Authority_DepartList.get(j);
+			uf.append("|"+xt_Data_Authority_Depart.getXtDID()+"|"+xt_Data_Authority_Depart.getXt_functioninfo_id()+"|");
 		}
 		for(int i = 0; i < xt_DepartinfoList.size(); i++){
 			Xt_Departinfo xt_Departinfo = xt_DepartinfoList.get(i);
@@ -445,14 +597,13 @@ public class Xt_Data_AuthorityController extends BaseAction{
 		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
 		List<Xt_Post> xtPostList = xt_PostService.getXtPostListAll(condition);
 		condition.put("xt_menuinfo_id", xt_menuinfo_id);
-		condition.put("xt_data_authorityType", 3);
 		condition.put("xt_post_id", xt_post_id);
-		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListAllByCondition(condition);
+		List<Xt_Data_Authority_Post> xt_Data_Authority_PostList = xt_Data_Authority_PostService.getXtDataAuthorityPostListByCondition(condition);
 		//定义一个拥有者编号+被拥有者编号+功能编号组合字段用来判断选择
 		StringBuffer uf= new StringBuffer();
-		for(int j = 0; j < xt_Data_AuthorityList.size();j++){
-			Xt_Data_Authority xt_Data_Authority = xt_Data_AuthorityList.get(j);
-			uf.append("|"+xt_Data_Authority.getXtUID()+"|"+xt_Data_Authority.getXt_functioninfo_id()+"|");
+		for(int j = 0; j < xt_Data_Authority_PostList.size();j++){
+			Xt_Data_Authority_Post xt_Data_Authority_Post = xt_Data_Authority_PostList.get(j);
+			uf.append("|"+xt_Data_Authority_Post.getXtPID()+"|"+xt_Data_Authority_Post.getXt_functioninfo_id()+"|");
 		}
 		for(int i = 0; i < xtPostList.size(); i++){
 			Xt_Post xtPost = xtPostList.get(i);
