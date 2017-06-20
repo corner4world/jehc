@@ -2357,29 +2357,42 @@ function downOrExport(url) {
 
 ///////////////初始化右键///////////////
 function initrightgridcontextmenu(gd,contextmenu,items){
+	var contextmenu_array = contextmenu.items.items;
 	gd.on('itemcontextmenu',function(view,record,item,index,e){ 
 		e.preventDefault();
-		for(var i = 0 ; i < items.length; i++){
-			Ext.getCmp(items[i]).setDisabled(false);
-		} 
+		for(var i = 0; i < contextmenu_array.length; i++){
+			for(var j = 0 ; j < items.length; j++){
+				if(contextmenu_array[i].id == items[j]){
+					contextmenu_array[i].setDisabled(false);
+				} 
+			}
+		}
 		contextmenu.showAt(e.getXY());
 	});
 	gd.on("headercontextmenu", function(view,colIndex,e){
 		gd.getSelectionModel().clearSelections();
 		gd.getView().refresh();
     	e.preventDefault(); 
-    	for(var i = 0 ; i < items.length; i++){
-			Ext.getCmp(items[i]).setDisabled(true);
-		} 
+    	for(var i = 0; i < contextmenu_array.length; i++){
+    		for(var j = 0 ; j < items.length; j++){
+    			if(contextmenu_array[i].id == items[j]){
+    				contextmenu_array[i].setDisabled(true);
+    			} 
+    		}
+    	}
 		contextmenu.showAt(e.getXY());
 	});
 	gd.on("containercontextmenu", function(view,e,opt){
 		gd.getSelectionModel().clearSelections();
 		gd.getView().refresh();
     	e.preventDefault(); 
-    	for(var i = 0 ; i < items.length; i++){
-			Ext.getCmp(items[i]).setDisabled(true);
-		} 
+    	for(var i = 0; i < contextmenu_array.length; i++){
+    		for(var j = 0 ; j < items.length; j++){
+    			if(contextmenu_array[i].id == items[j]){
+    				contextmenu_array[i].setDisabled(true);
+    			} 
+    		}
+    	}
 		contextmenu.showAt(e.getXY());
 	});
 }
