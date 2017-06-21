@@ -103,7 +103,6 @@ public class Xt_Data_Authority_DefaultServiceImpl extends BaseService implements
 	public int delXtDataAuthorityDefault(Map<String,Object> condition){
 		int i = 0;
 		try {
-			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
 			i = xt_Data_Authority_DefaultDao.delXtDataAuthorityDefault(condition);
 		} catch (Exception e) {
 			i = 0;
@@ -120,7 +119,9 @@ public class Xt_Data_Authority_DefaultServiceImpl extends BaseService implements
 	public int delXtDataAuthorityDefaultAllByCondition(Map<String,Object> condition){
 		int i = 0;
 		try {
-			i = xt_Data_Authority_DefaultDao.delXtDataAuthorityDefaultAllByCondition(condition);
+			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
+			xt_Data_Authority_DefaultDao.delXtDataAuthorityDefaultAllByCondition(condition);
+			i = 1;
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

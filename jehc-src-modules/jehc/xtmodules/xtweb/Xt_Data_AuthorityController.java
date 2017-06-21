@@ -677,7 +677,7 @@ public class Xt_Data_AuthorityController extends BaseAction{
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("xt_menuinfo_id", xt_menuinfo_id);
 			condition.put("xt_data_authorityType", 1);
-			i = xt_Data_AuthorityService.delXtDataAuthority(condition);
+			i = xt_Data_AuthorityService.delXtDataAuthorityByCondition(condition);
 		}
 		if(i>0){
 			return outAudStr(true);
@@ -736,8 +736,8 @@ public class Xt_Data_AuthorityController extends BaseAction{
 	* @param request 
 	*/
 	@ResponseBody
-	@RequestMapping(value="/delSaDataAuthorityDefaultAll",method={RequestMethod.POST,RequestMethod.GET})
-	public String delSaDataAuthorityDefaultAll(String xt_menuinfo_id,HttpServletRequest request){
+	@RequestMapping(value="/delXtDataAuthorityDefaultAll",method={RequestMethod.POST,RequestMethod.GET})
+	public String delXtDataAuthorityDefaultAll(String xt_menuinfo_id,HttpServletRequest request){
 		int i = 0;
 		if(null != xt_menuinfo_id && !"".equals(xt_menuinfo_id)){
 			Map<String, Object> condition = new HashMap<String, Object>();

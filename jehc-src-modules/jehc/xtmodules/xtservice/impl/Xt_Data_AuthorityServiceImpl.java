@@ -97,7 +97,25 @@ public class Xt_Data_AuthorityServiceImpl extends BaseService implements Xt_Data
 	public int delXtDataAuthority(Map<String,Object> condition){
 		int i = 0;
 		try {
-			i = xt_Data_AuthorityDao.delXtDataAuthority(condition);
+			 xt_Data_AuthorityDao.delXtDataAuthority(condition);
+			 i = 1;
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 根据条件删除（用于清空）
+	* @param condition 
+	* @return
+	*/
+	public int delXtDataAuthorityByCondition(Map<String,Object> condition){
+		int i = 0;
+		try {
+			 xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
+			 i = 1;
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

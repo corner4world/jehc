@@ -139,7 +139,8 @@ public class Xt_Data_Authority_PostServiceImpl extends BaseService implements Xt
 		int i = 0;
 		try {
 			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
-			i = xt_Data_Authority_PostDao.delXtDataAuthorityPostList(condition);
+			xt_Data_Authority_PostDao.delXtDataAuthorityPostList(condition);
+			i = 1;
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

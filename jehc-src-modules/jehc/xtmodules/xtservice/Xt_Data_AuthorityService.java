@@ -39,6 +39,14 @@ public interface Xt_Data_AuthorityService{
 	* @return
 	*/
 	public int delXtDataAuthority(Map<String,Object> condition);
+	
+	/**
+	* 根据条件删除（用于清空）
+	* @param condition 
+	* @return
+	*/
+	public int delXtDataAuthorityByCondition(Map<String,Object> condition);
+	
 	/**
 	 * 读取所有数据
 	 * @param condition

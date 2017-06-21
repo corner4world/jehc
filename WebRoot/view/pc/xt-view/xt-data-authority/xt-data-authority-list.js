@@ -59,53 +59,49 @@ Ext.onReady(function(){
 });
 
 //清空按人员设置数据权限
-function delXtDataAuthorityAll(){
-	Ext.MessageBox.confirm('提示', '确定要清空按人员数据权限设置吗?',showDelXtDataAuthorityAllBtn);
-}
-function showDelXtDataAuthorityAllBtn(btn){
-	if(btn == 'yes'){
-		var url = "../xtDataAuthorityController/delXtDataAuthorityUserAll";
-		var params = {};
-		ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
-	}
+function delXtDataAuthorityAll(xt_menuinfo_id){
+	Ext.MessageBox.confirm('提示', '确定要清空按人员数据权限设置吗?',function(btn){
+		if(btn == 'yes'){
+			var url = "../xtDataAuthorityController/delXtDataAuthorityUserAll";
+			var params = {xt_menuinfo_id:xt_menuinfo_id};
+			ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
+		}
+	});
 }
 //清空按部门设置数据权限
-function delXtDataAuthorityDepartAll(){
-	Ext.MessageBox.confirm('提示', '确定要清空按部门数据权限设置吗?',showDelXtDataAuthorityDepartAllBtn);
-}
-function showDelXtDataAuthorityDepartAllBtn(btn){
-	if(btn == 'yes'){
-		var url = "../xtDataAuthorityController/delXtDataAuthorityDepartAll";
-		var params = {};
-		ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
-	}
+function delXtDataAuthorityDepartAll(xt_menuinfo_id){
+	Ext.MessageBox.confirm('提示', '确定要清空按部门数据权限设置吗?',function(btn){
+		if(btn == 'yes'){
+			var url = "../xtDataAuthorityController/delXtDataAuthorityDepartAll";
+			var params = {xt_menuinfo_id:xt_menuinfo_id};
+			ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
+		}
+	});
 }
 //清空按岗位设置数据权限
-function delXtDataAuthorityPostAll(){
-	Ext.MessageBox.confirm('提示', '确定要清空按岗位数据权限设置吗?',showDelXtDataAuthorityPostAllBtn);
-}
-function showDelXtDataAuthorityPostAllBtn(btn){
-	if(btn == 'yes'){
-		var url = "../xtDataAuthorityController/delXtDataAuthorityPostAll";
-		var params = {};
-		ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
-	}
+function delXtDataAuthorityPostAll(xt_menuinfo_id){
+	Ext.MessageBox.confirm('提示', '确定要清空按岗位数据权限设置吗?',function(btn){
+		if(btn == 'yes'){
+			var url = "../xtDataAuthorityController/delXtDataAuthorityPostAll";
+			var params = {xt_menuinfo_id:xt_menuinfo_id};
+			ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
+		}
+	});
 }
 //清空按初始化数据权限设置
-function delSaDataAuthorityDefaultAll(){
+function delXtDataAuthorityDefaultAll(xt_menuinfo_id){
 	record = grid.getSelectionModel().getSelected();
 	if(!record){
 		Ext.example.msg('提示', '请选择要清空初始化数据权限的一项！');
 		return;
 	}
-	Ext.MessageBox.confirm('提示', '确定要清空初始化数据权限吗?',showDelXtDataAuthorityDefaultBtn);
-}
-function showDelXtDataAuthorityDefaultBtn(btn){
-	if(btn == 'yes'){
-		var url = "../xtDataAuthorityController/delXtDataAuthorityDefaultAll";
-		var params = {};
-		ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
-	}
+	Ext.MessageBox.confirm('提示', '确定要清空初始化数据权限吗?',function(btn){
+		if(btn == 'yes'){
+			var url = "../xtDataAuthorityController/delXtDataAuthorityDefaultAll";
+			var params = {xt_menuinfo_id:xt_menuinfo_id};
+			ajaxRequest(url,grid,params,'正在执行清空操作,请稍等...'); 
+		}
+	});
 }
 
 /**导出**/
@@ -155,19 +151,35 @@ function initRight(){
 		},{
 			text:'清空初始化数据权限',
 			glyph:0xf014,
-			handler:function(){delSaDataAuthorityDefaultAll()}
+			handler:function(){
+				var record = grid.getSelectionModel().selected;
+				var xt_menuinfo_id = record.items[0].data.xt_menuinfo_id;
+				delXtDataAuthorityDefaultAll(xt_menuinfo_id)
+			}
 		},{
 			text:'清空按人员数据权限',
 			glyph:0xf014,
-			handler:function(){delXtDataAuthorityAll()}
+			handler:function(){
+				var record = grid.getSelectionModel().selected;
+				var xt_menuinfo_id = record.items[0].data.xt_menuinfo_id;
+				delXtDataAuthorityAll(xt_menuinfo_id)
+			}
 		},{
 			text:'清空按部门数据权限',
 			glyph:0xf014,
-			handler:function(){delXtDataAuthorityDepartAll()}
+			handler:function(){
+				var record = grid.getSelectionModel().selected;
+				var xt_menuinfo_id = record.items[0].data.xt_menuinfo_id;
+				delXtDataAuthorityDepartAll(xt_menuinfo_id)
+			}
 		},{
 			text:'清空按岗位数据权限',
 			glyph:0xf014,
-			handler:function(){delXtDataAuthorityPostAll()}
+			handler:function(){
+				var record = grid.getSelectionModel().selected;
+				var xt_menuinfo_id = record.items[0].data.xt_menuinfo_id;
+				delXtDataAuthorityPostAll(xt_menuinfo_id)
+			}
 		},'-',{
 			text:'导 出',
 			glyph:0xf1c3,
