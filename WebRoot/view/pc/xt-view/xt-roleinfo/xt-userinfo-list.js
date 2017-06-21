@@ -6,21 +6,18 @@ var xtUserinfoSotreed;
 var xtDpPanel;
 var xtDpStore;
 function addXtUserinfo(xt_role_id,xt_role_name){
-	reGetWidthAndHeight();
 	initXtUserinfoGrid(xt_role_id);
 	initXtUserinfoGrided(xt_role_id);
 	initXtDpPanel(xt_role_id);
 	xtUserinfoWin = Ext.create('top.Ext.Window',{
 		layout:'border', 
-		width:clientWidth,                    
-		height:clientHeight, 
 		maximizable:true,
 		minimizable:true,
 		maximized:true,
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
-		frame:true,
+		headerPosition:'right',
 		title:'导入用户',
 		listeners:{
 			minimize:function(win,opts){
@@ -44,8 +41,8 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 			  	}
 			  	]
 			  }
-			  ],
-		buttons:[/**{
+			  ]/**,
+		buttons:[{
 			text:'保存',
 			itemId:'save',
 			handler:function(button){
@@ -53,13 +50,13 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 				console.info(items);
 				return;
 			}
-		},**/{
+		},{
 			text:'关闭',
 			itemId:'close',
 			handler:function(button){
 				button.up('window').close();
 			}
-		}]
+		}]**/
 	});
 	xtUserinfoWin.setTitle("角色权限--->导入用户--->"+xt_role_name);
 	xtUserinfoWin.show();
@@ -78,9 +75,7 @@ function initXtUserinfoGrid(xt_role_id){
 		selType:'cellmodel',
 		multiSelect:true,
 		collapsible:false,
-		border:true,
 		autoScroll:true,
-		frame:true,
 		selType:'checkboxmodel',
 		title:'待导入用户',
 		viewConfig:{
@@ -118,52 +113,8 @@ function initXtUserinfoGrid(xt_role_id){
 				}
 			},
 			{
-				header:'是否已婚',
-				dataIndex:'xt_userinfo_ismarried',
-				renderer:function(value){
-					if(value == 0){
-						return '已婚'
-					}else{
-						return '未婚'
-					}
-				}
-			},
-			{
 				header:'籍贯',
 				dataIndex:'xt_userinfo_origo',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
-			},
-			{
-				header:'入职时间',
-				dataIndex:'xt_userinfo_intime',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
-			},
-			{
-				header:'离职时间',
-				dataIndex:'xt_userinfo_outTime',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
-			},
-			{
-				header:'到期时间',
-				dataIndex:'xt_userinfo_contractTime',
 				renderer:function(value){
 					if(value == ''){
 						return '∨'
@@ -239,15 +190,14 @@ function initXtUserinfoGrided(xt_role_id){
 	xtUserinfoGrided = Ext.create('top.Ext.grid.Panel',{
 		region:'center',
 		store:xtUserinfoStoreed,
-		height:document.documentElement.clientHeight*0.5,
+		height:document.documentElement.clientHeight*0.7,
 		style:'margin-left:auto;margin-right:auto;margin-bottom:auto;',
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
 		collapsible:false,
-		border:true,
 		autoScroll:true,
-		frame:true,
+		border:false,
 		selType:'checkboxmodel',
 		/**新方法使用开始**/  
         scrollable:true,  
@@ -289,52 +239,8 @@ function initXtUserinfoGrided(xt_role_id){
 				}
 			},
 			{
-				header:'是否已婚',
-				dataIndex:'xt_userinfo_ismarried',
-				renderer:function(value){
-					if(value == 0){
-						return '已婚'
-					}else{
-						return '未婚'
-					}
-				}
-			},
-			{
 				header:'籍贯',
 				dataIndex:'xt_userinfo_origo',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
-			},
-			{
-				header:'入职时间',
-				dataIndex:'xt_userinfo_intime',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
-			},
-			{
-				header:'离职时间',
-				dataIndex:'xt_userinfo_outTime',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
-			},
-			{
-				header:'到期时间',
-				dataIndex:'xt_userinfo_contractTime',
 				renderer:function(value){
 					if(value == ''){
 						return '∨'

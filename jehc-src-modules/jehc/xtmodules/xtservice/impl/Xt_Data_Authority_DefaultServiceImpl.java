@@ -1,4 +1,5 @@
 package jehc.xtmodules.xtservice.impl;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import jehc.xtmodules.xtcore.base.BaseService;
@@ -134,10 +135,18 @@ public class Xt_Data_Authority_DefaultServiceImpl extends BaseService implements
 	* @param xt_data_authority_defaultList 
 	* @return
 	*/
-	public int addBatchXtDataAuthorityDefault(List<Xt_Data_Authority_Default> xt_Data_Authority_DefaultList){
+	public int addBatchXtDataAuthorityDefault(List<Xt_Data_Authority_Default> xt_Data_Authority_DefaultList,String xt_menuinfo_id){
 		int i = 0;
 		try {
-			i = xt_Data_Authority_DefaultDao.addBatchXtDataAuthorityDefault(xt_Data_Authority_DefaultList);
+			//1删除 原先
+			Map<String,Object> condition = new HashMap<String, Object>();
+			condition.put("xt_menuinfo_id", xt_menuinfo_id);
+			xt_Data_Authority_DefaultDao.delXtDataAuthorityDefaultAllByCondition(condition);
+			//2添加 最新
+			if(null != xt_Data_Authority_DefaultList){
+				xt_Data_Authority_DefaultDao.addBatchXtDataAuthorityDefault(xt_Data_Authority_DefaultList);
+			}
+			i = 1;
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

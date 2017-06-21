@@ -2,11 +2,13 @@ package jehc.xtmodules.xtmodel;
 
 import java.io.Serializable;
 
+import jehc.xtmodules.xtcore.base.BaseEntity;
+
 /**
 * xt_functioninfo 功能表 
 * 2015-06-01 20:41:56  邓纯杰
 */
-public class Xt_Functioninfo implements Serializable{
+public class Xt_Functioninfo extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String xt_functioninfo_id;/**ID**/
 	private String xt_functioninfoName;/**功能名称**/

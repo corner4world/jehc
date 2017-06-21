@@ -18,12 +18,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
+import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority;
+import jehc.xtmodules.xtmodel.Xt_Data_Authority_Default;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority_Depart;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority_Post;
 import jehc.xtmodules.xtmodel.Xt_Departinfo;
@@ -293,6 +296,42 @@ public class Xt_Data_AuthorityController extends BaseAction{
 			return outAudStr(false);
 		}
 	}
+	
+	/**
+	 * 添加按默认初始化设置
+	 * @param request
+	 * @param xt_menuinfo_id
+	 * @param xt_functioninfo_id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/addXtDataAuthorityByDefault",method={RequestMethod.POST,RequestMethod.GET})
+	public String addXtDataAuthorityByDefault(HttpServletRequest request,String xt_menuinfo_id,String xt_functioninfo_id){
+		if(StringUtil.isEmpty(xt_menuinfo_id)){
+			throw new ExceptionUtil("未能获取到菜单编号---xt_menuinfo_id");
+		}
+		int i = 0;
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition.put("xt_menuinfo_id", xt_menuinfo_id);
+		List<Xt_Data_Authority_Default> xt_Data_Authority_DefaultList = new ArrayList<Xt_Data_Authority_Default>(); 
+		if(!StringUtil.isEmpty(xt_functioninfo_id)){
+			String[] xt_functioninfo_idList=xt_functioninfo_id.split(",");
+			for(int j = 0; j < xt_functioninfo_idList.length; j++){
+				Xt_Data_Authority_Default Xt_Data_Authority_Default = new Xt_Data_Authority_Default();
+				Xt_Data_Authority_Default.setXt_menuinfo_id(xt_menuinfo_id);
+				Xt_Data_Authority_Default.setXt_data_authority_default_id(UUID.toUUID());
+				Xt_Data_Authority_Default.setXt_functioninfo_id(xt_functioninfo_idList[j]);
+				Xt_Data_Authority_Default.setXt_data_authority_default_value("1");
+				xt_Data_Authority_DefaultList.add(Xt_Data_Authority_Default);
+			}
+		}
+		i = xt_Data_Authority_DefaultService.addBatchXtDataAuthorityDefault(xt_Data_Authority_DefaultList,xt_menuinfo_id);
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
 	/**
 	 * 读取用户角色列表【用户对角色】
 	 * @param request
@@ -379,6 +418,36 @@ public class Xt_Data_AuthorityController extends BaseAction{
 			}
 		}
 		return outStr(BaseTreeGridEntity.buildTree(list,true));
+	}
+	
+	/**
+	 * 读取被拥有者及功能及已被设置的功能树列表
+	 * @param request
+	 * @param xt_menuinfo_id
+	 * @param xt_userinfo_id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getDataAuthorityDefaultGrid",method={RequestMethod.POST,RequestMethod.GET})
+	public String getDataAuthorityDefaultGrid(HttpServletRequest request,String xt_menuinfo_id){
+		//获取数据权限功能
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition.put("xt_menuinfo_id", xt_menuinfo_id);
+		condition.put("xt_functioninfoIsAuthority", 0);
+		List<Xt_Data_Authority_Default> xt_Data_Authority_DefaultList= xt_Data_Authority_DefaultService.getXtDataAuthorityDefaultListByCondition(condition);
+		List<Xt_Functioninfo> xtFunctioninfoList = xt_FunctioninfoService.getXtFunctioninfoAllForData(condition);
+		for(int i = 0; i < xtFunctioninfoList.size(); i++){
+			Xt_Functioninfo xt_Functioninfo =xtFunctioninfoList.get(i);
+			for(int j = 0; j < xt_Data_Authority_DefaultList.size(); j++){
+				Xt_Data_Authority_Default xt_Data_Authority_Default = xt_Data_Authority_DefaultList.get(j);
+				if(xt_Functioninfo.getXt_functioninfo_id().equals(xt_Data_Authority_Default.getXt_functioninfo_id())){
+					xtFunctioninfoList.get(i).setItem(1);
+					break;
+				}
+			}
+		}
+		
+		return outItemsStr(xtFunctioninfoList);
 	}
 	/**
 	 * 读取部门树

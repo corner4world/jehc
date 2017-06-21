@@ -55,7 +55,7 @@ public interface Xt_Data_Authority_DefaultService{
 	* @param xt_data_authority_defaultList 
 	* @return
 	*/
-	public int addBatchXtDataAuthorityDefault(List<Xt_Data_Authority_Default> xt_Data_Authority_DefaultList);
+	public int addBatchXtDataAuthorityDefault(List<Xt_Data_Authority_Default> xt_Data_Authority_DefaultList,String xt_menuinfo_id);
 	/**
 	* 批量修改
 	* @param xt_data_authority_defaultList 
