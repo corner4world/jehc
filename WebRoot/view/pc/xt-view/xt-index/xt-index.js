@@ -49,7 +49,7 @@ Ext.onReady(function(){
  		layout:'border',
 		items:[{
 			region:'west',
-			title:'<font color=#fff>快捷导航</font>',
+			title:'<font color=#ffffff>快捷导航</font>',
 			icon:indexlist,
 			width:255,
 			split:false,
@@ -90,7 +90,7 @@ Ext.onReady(function(){
 				            xtype:'button',
 				            icon:indexlist,
 					 		iconAlign:'top',
-					 		style:{background:'#fff',marginRight:'0px'},
+					 		style:{background:'#ffffff',marginRight:'0px'},
 				            menu:[{
 									tooltip:{title:'注销平台',width:80},
 					                text:'注销',
@@ -175,7 +175,7 @@ Ext.onReady(function(){
 					             handler:function(button){
 					             	msgTishi("该功能还未开放！");
 								 },
-					             style:{background:'#fff'}
+					             style:{background:'#ffffff'}
 					        },
 					        {
 					        	 icon:indexMail,
@@ -183,7 +183,7 @@ Ext.onReady(function(){
 					             handler:function(button){
 					             	msgTishi("该功能还未开放！");
 								 },
-					             style:{background:'#fff'}
+					             style:{background:'#ffffff'}
 					        },
 					    	{
 			            	 	 width:220,
@@ -198,7 +198,7 @@ Ext.onReady(function(){
 										}
 									}
 								 },
-					             style:{background:'#fff',marginRight:'0px',marginLeft:'0px'}
+					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
 					    	}
 			        ],
 		            header:{
@@ -212,7 +212,7 @@ Ext.onReady(function(){
 //				             handler:function(button){
 //								collapsibleCE();
 //							 },
-//				             style:{background:'#fff'}
+//				             style:{background:'#ffffff'}
 //				        },
 				        {
 				        	xtype:'displayfield',
