@@ -11,6 +11,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta charset="UTF-8">  
 <title>数据权限</title>  
 	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-list.js"></script>  
+	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-default.js"></script>  
 	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-user.js"></script>
 	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-user-select.js"></script>  
 	<script type="text/javascript" src="../view/pc/xt-view/xt-data-authority/xt-data-authority-depart.js"></script> 
