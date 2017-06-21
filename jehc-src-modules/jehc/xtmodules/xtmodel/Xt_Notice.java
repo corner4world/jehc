@@ -1,6 +1,11 @@
 package jehc.xtmodules.xtmodel;
 import java.io.Serializable;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
 /**
@@ -10,10 +15,14 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 public class Xt_Notice extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String xt_notice_id;/**主键**/
+	@NotEmpty(message = "标题不能为空")
+	@NotNull(message = "标题不能为空")
 	private String xt_title;/**标题**/
+	@Size(min=0 ,max= 200 ,message = "内容长度不符合标准")
 	private String xt_content;/**内容**/
 	private String xt_userinfo_id;/**创建人**/
 	private String xt_isDel;/**标识0正常1删除**/
+	@NotEmpty(message = "状态不能为空")
 	private String xt_state;/**状态0初稿1审核中2审核通过3审核未通过**/
 	private String xt_createTime;/**创建时间**/
 	private String xt_attachment_id;/**附件编号**/

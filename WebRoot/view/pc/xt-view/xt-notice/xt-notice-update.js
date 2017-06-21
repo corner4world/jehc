@@ -103,6 +103,7 @@ function initXtNoticeFormEdit(){
 			mode:'local',
 			triggerAction:'all',
 			editable:false,
+			allowBlank:false,
 			hiddenName:'xt_state',
 			valueField:'value',
 			displayField:'text',

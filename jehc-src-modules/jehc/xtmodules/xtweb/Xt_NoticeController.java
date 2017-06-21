@@ -1,16 +1,20 @@
 package jehc.xtmodules.xtweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -72,7 +76,10 @@ public class Xt_NoticeController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/addXtNotice",method={RequestMethod.POST,RequestMethod.GET})
-	public String addXtNotice(Xt_Notice xt_Notice,HttpServletRequest request){
+	public String addXtNotice(@Valid Xt_Notice xt_Notice,BindingResult bindingResult,HttpServletRequest request){
+		if(bindingResult.hasErrors()){
+			return outAudStr(false,backFem(bindingResult));
+		}
 		int i = 0;
 		if(null != xt_Notice && !"".equals(xt_Notice)){
 			xt_Notice.setXt_notice_id(UUID.toUUID());
@@ -92,7 +99,10 @@ public class Xt_NoticeController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/updateXtNotice",method={RequestMethod.POST,RequestMethod.GET})
-	public String updateXtNotice(Xt_Notice xt_Notice,HttpServletRequest request){
+	public String updateXtNotice(@Valid Xt_Notice xt_Notice,BindingResult bindingResult,HttpServletRequest request){
+		if(bindingResult.hasErrors()){
+			return outAudStr(false,backFem(bindingResult));
+		}
 		int i = 0;
 		if(null != xt_Notice && !"".equals(xt_Notice)){
 			i=xt_NoticeService.updateXtNotice(xt_Notice);

@@ -80,6 +80,7 @@ function initXtNoticeFormAdd(){
 			fieldLabel:'状态',
 			xtype:'combo',
 			emptyText:'请选择',
+			allowBlank:false,
 			store:XT_NOTICE_COMBO_STORE,
 			mode:'local',
 			triggerAction:'all',

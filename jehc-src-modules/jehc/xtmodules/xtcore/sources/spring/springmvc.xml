@@ -14,7 +14,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
 		http://www.springframework.org/schema/tx/spring-tx-3.1.xsd  default-autowire=byName">
 	<!-- 配置springmvc注解-->
-	<mvc:annotation-driven>
+	<mvc:annotation-driven validator="validator">
 	    <mvc:message-converters>
 	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
 	        	<property name="supportedMediaTypes">
@@ -37,6 +37,8 @@
 	        <bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
 	    </mvc:message-converters>
 	</mvc:annotation-driven>
+	
+	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	
 	<!-- 注解探测器,在JUnit测试的时候需要-->
     <!-- 扫描所有的controller 但是不扫描service,不然事务将没有作用.在JUnit测试的时候不必如此配置 --> 

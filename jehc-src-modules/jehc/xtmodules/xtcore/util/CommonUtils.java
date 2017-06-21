@@ -20,6 +20,8 @@ import net.sf.json.JSONObject;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -698,4 +700,33 @@ public class CommonUtils extends UUID{
 		} catch (Exception e) {
 		}
 	}
+	
+	/**
+	 * 统一验证错误 通过注解捕捉字段验证错误信息
+	 * @param bindingResult
+	 * @return
+	 */
+	public String backFem(BindingResult bindingResult){
+		List<FieldError> fieldErrorList = bindingResult.getFieldErrors();
+	    StringBuilder sb = new StringBuilder();
+	    for (int i = 0; i < fieldErrorList.size(); i++) {
+	    	FieldError fieldError =fieldErrorList.get(i);
+	        sb.append("错误字段消息："+fieldError.getField() +" : "+fieldError.getDefaultMessage()+"<br>");
+	    }
+	    return sb.toString();
+	}
+//	/**
+//	 * 统一验证错误 通过注解捕捉字段验证错误信息
+//	 * @param bindingResult
+//	 * @return
+//	 */
+//	public String backFem(BindingResult bindingResult){
+//		List<ObjectError> fieldErrorList = bindingResult.getAllErrors();
+//	    StringBuilder sb = new StringBuilder();
+//	    for (int i = 0; i < fieldErrorList.size(); i++) {
+//	    	ObjectError fieldError =fieldErrorList.get(i);
+//	        sb.append("错误字段消息："+fieldError.getObjectName() +" : "+fieldError.getDefaultMessage()+"<br>");
+//	    }
+//	    return sb.toString();
+//	}
 }
