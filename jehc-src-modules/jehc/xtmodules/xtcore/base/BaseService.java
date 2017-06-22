@@ -110,7 +110,9 @@ public class BaseService extends Log4jUtil{
 			condition.put("xt_data_authorityType", "4");
 			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
 		}
-		xt_Data_AuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+		if(null != xt_Data_Authority_List && !xt_Data_Authority_List.isEmpty()){
+			xt_Data_AuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+		}
 		
 		//2推送部门人员
 		condition = new HashMap<String, Object>();
@@ -146,7 +148,9 @@ public class BaseService extends Log4jUtil{
 				}
 			}
 		}
-		xt_Data_AuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+		if(null != xt_Data_Authority_List && !xt_Data_Authority_List.isEmpty()){
+			xt_Data_AuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+		}
 		
 		//3推送岗位
 		condition = new HashMap<String, Object>();
@@ -183,6 +187,8 @@ public class BaseService extends Log4jUtil{
 				}
 			}
 		}
-		xt_Data_AuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+		if(null != xt_Data_Authority_List && !xt_Data_Authority_List.isEmpty()){
+			xt_Data_AuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+		}
 	}
 }
