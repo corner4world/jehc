@@ -55,6 +55,8 @@ public class Xt_FunctioninfoServiceImpl extends BaseService implements Xt_Functi
 		int i = 0;
 		try {
 			i = xt_FunctioninfoDao.addXtFunctioninfo(xt_Functioninfo);
+			//统一推送
+			addPushDataAuthority();
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
@@ -71,6 +73,8 @@ public class Xt_FunctioninfoServiceImpl extends BaseService implements Xt_Functi
 		int i = 0;
 		try {
 			i = xt_FunctioninfoDao.updateXtFunctioninfo(xt_Functioninfo);
+			//统一推送
+			addPushDataAuthority();
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
@@ -87,6 +91,8 @@ public class Xt_FunctioninfoServiceImpl extends BaseService implements Xt_Functi
 		int i = 0;
 		try {
 			i = xt_FunctioninfoDao.delXtFunctioninfo(condition);
+			//统一推送
+			addPushDataAuthority();
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
