@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>  
 <meta charset="UTF-8">  
 <style type="text/css">
-.x-grid-with-row-lines .x-grid-item {
+/* .x-grid-with-row-lines .x-grid-item {
 	border-style: dashed;
 	border-width: 1px dashed 1px;
 	border-color: #cecece;
@@ -52,11 +52,11 @@ background-color: white;
 }
 .x-toolbar-default .x-toolbar-item {
     cursor: pointer;
-}
+} */
 </style>
 </head>  
 <script type="text/javascript" src="../view/pc/xt-view/xt-desk/xt-desk.js"></script>  
-<body>  
+<body style="background: #ffffff;">  
 	<input id="xt_userinfo_id" value="${xtUserinfo.xt_userinfo_id }" type="hidden">
 </body>  
 </html> 

@@ -324,19 +324,18 @@ var knowledgeGrid;
 var knowledgeStore;
 Ext.onReady(function(){
 	reGetWidthAndHeight();
-	reGetWidthAndHeight();
 	var xtCompanyFormEdit = Ext.create('Ext.FormPanel',{
 		xtype:'form',
-		region:'center',
 		defaultType:'textfield',
 		autoScroll:true,
-		title:'&nbsp;个人信息',
+		title:'&nbsp;个人基本信息',
 		titleAlign:'left',
+		headerPosition:'top',
+		renderTo:Ext.getBody(),
 		fieldDefaults:{
 	        labelWidth:70,
 	        labelAlign:"right",
-	        flex:1,
-	        margin:'4 5 4 5'
+	        flex:1
 	    },
 		items:[
 		{
@@ -405,28 +404,14 @@ Ext.onReady(function(){
 			anchor:'40%'
 		},
 		{
-			fieldLabel:'家庭地址',
-			xtype:'textfield',
-			readOnly:true,
-			name:'xt_userinfo_address',
-			maxLength:200,
-			anchor:'40%'
-		},
-		{
 			fieldLabel:'个人简介',
 			xtype:'textarea',
-			readOnly:true,
 			name:'xt_userinfo_remark',
 			maxLength:500,
 			anchor:'80%'
 		}]
 	});
 	loadFormData(xtCompanyFormEdit,'../xtUserinfoController/getXtUserinfoById?xt_userinfo_id='+$('#xt_userinfo_id').val());
-	Ext.create('Ext.Viewport',{
-		layout:'fit',
-		xtype:'viewport',
-		items:xtCompanyFormEdit
-	});
 	/**
 	initLeft();
     initRight();
@@ -460,36 +445,36 @@ Ext.onReady(function(){
 });
 
 /**初始化登录信息**/
-function initLoginGrid(){
-	loginStore = getGridJsonStore('../xtLoginLogsController/getXtLoginLogsListByCondition?flag=1&limit=11',[]);
-	loginGrid = Ext.create('Ext.grid.Panel',{
-		region:'center',
-		xtype:'panel',
-		store:loginStore,
-		hideHeaders:true,
-		viewConfig:{
-			emptyText:'暂无数据',
-			rowLines:true
-		},
-		loadMask:{
-			msg:'正在加载...'
-		},
-		columns:[
-			{
-				header:'IP',
-				align:'left',
-				flex:1,
-				dataIndex:'xt_login_logIP'
-			},
-			{
-				header:'登录时间',
-				flex:1,
-				align:'right',
-				dataIndex:'xt_login_logtime'
-			}
-		]
-	});
-}
+//function initLoginGrid(){
+//	loginStore = getGridJsonStore('../xtLoginLogsController/getXtLoginLogsListByCondition?flag=1&limit=11',[]);
+//	loginGrid = Ext.create('Ext.grid.Panel',{
+//		region:'center',
+//		xtype:'panel',
+//		store:loginStore,
+//		hideHeaders:true,
+//		viewConfig:{
+//			emptyText:'暂无数据',
+//			rowLines:true
+//		},
+//		loadMask:{
+//			msg:'正在加载...'
+//		},
+//		columns:[
+//			{
+//				header:'IP',
+//				align:'left',
+//				flex:1,
+//				dataIndex:'xt_login_logIP'
+//			},
+//			{
+//				header:'登录时间',
+//				flex:1,
+//				align:'right',
+//				dataIndex:'xt_login_logtime'
+//			}
+//		]
+//	});
+//}
 function initLeft(){
 	var text = "Bootstrap Extjs6.2.0技术扁平化风格；<br>"+
 				"采用平台统一监控如JVM，内存，CPU等；<br>"+

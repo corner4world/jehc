@@ -12,6 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>公司信息</title>  
 	<script type="text/javascript" src="../view/pc/xt-view/xt-company/xt-company-list.js"></script>  
 </head>  
-<body>  
+<body  style="background: #ffffff;">  
 </body>  
 </html> 
