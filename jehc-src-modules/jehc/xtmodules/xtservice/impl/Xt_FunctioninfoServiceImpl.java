@@ -90,12 +90,12 @@ public class Xt_FunctioninfoServiceImpl extends BaseService implements Xt_Functi
 		try {
 			String xt_functioninfo_id = xt_Functioninfo.getXt_functioninfo_id();
 			int isAuthority = xt_FunctioninfoDao.getXtFunctioninfoById(xt_functioninfo_id).getXt_functioninfoIsAuthority();
+			i = xt_FunctioninfoDao.updateXtFunctioninfo(xt_Functioninfo);
 			//如果原来是非数据权限 现在是数据权限 则要统一推送一下
 			if(isAuthority == 1 && xt_Functioninfo.getXt_functioninfoIsAuthority() == 0){
 				//统一推送
 				addPushDataAuthority();
 			}
-			i = xt_FunctioninfoDao.updateXtFunctioninfo(xt_Functioninfo);
 			//如果原来是数据权限 现在取消了 则要处理数据权限中数据将其删除掉
 			if(isAuthority == 0 && xt_Functioninfo.getXt_functioninfoIsAuthority() == 1){
 				Map<String, Object> condition = new HashMap<String, Object>();
