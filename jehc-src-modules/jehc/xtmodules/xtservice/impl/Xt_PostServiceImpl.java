@@ -55,6 +55,8 @@ public class Xt_PostServiceImpl extends BaseService implements Xt_PostService{
 		int i = 0;
 		try {
 			i = xt_PostDao.addXtPost(xt_Post);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("岗位业务类", "添加", "添加岗位成功");
 		} catch (Exception e) {
 			i = 0;
@@ -73,6 +75,8 @@ public class Xt_PostServiceImpl extends BaseService implements Xt_PostService{
 		int i = 0;
 		try {
 			i = xt_PostDao.updateXtPost(xt_Post);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("岗位业务类", "修改", "修改岗位成功");
 		} catch (Exception e) {
 			i = 0;
@@ -102,6 +106,8 @@ public class Xt_PostServiceImpl extends BaseService implements Xt_PostService{
 				}
 			}
 			i = xt_PostDao.delXtPost(condition);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("岗位业务类", "删除", "删除岗位成功");
 		} catch (Exception e) {
 			i = 0;

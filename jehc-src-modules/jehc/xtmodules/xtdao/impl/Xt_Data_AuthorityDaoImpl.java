@@ -79,4 +79,12 @@ public class Xt_Data_AuthorityDaoImpl  extends BaseDaoImpl implements Xt_Data_Au
 	public List<Xt_Data_Authority> getXtDataAuthorityListForLogin(Map<String,Object> condition){
 		return (List<Xt_Data_Authority>)this.getList("getXtDataAuthorityListForLogin",condition);
 	}
+	/**
+	 * 批量添加
+	 * @param xt_Data_AuthorityList
+	 * @return
+	 */
+	public int addBatchXtDataAuthority(List<Xt_Data_Authority> xt_Data_AuthorityList){
+		return this.add("addBatchXtDataAuthority", xt_Data_AuthorityList); 
+	}
 }

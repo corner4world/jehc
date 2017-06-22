@@ -149,4 +149,21 @@ public class Xt_Data_AuthorityServiceImpl extends BaseService implements Xt_Data
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
+	/**
+	 * 批量添加
+	 * @param xt_Data_AuthorityList
+	 * @return
+	 */
+	public int addBatchXtDataAuthority(List<Xt_Data_Authority> xt_Data_AuthorityList){
+		int i = 0;
+		try {
+			xt_Data_AuthorityDao.addBatchXtDataAuthority(xt_Data_AuthorityList);
+			i = 1;
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
 }

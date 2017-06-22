@@ -158,7 +158,7 @@ public class Xt_Data_Authority_DepartServiceImpl extends BaseService implements 
 	public int addBatchXtDataAuthorityDepart(List<Xt_Data_Authority_Depart> xt_Data_Authority_DepartList,String xt_departinfo_id,String id,String xt_menuinfo_id){
 		int i = 0;
 		try {
-			//1先删除原来数据
+			//1先删除原表
 			Map<String, Object> condition = new HashMap<String, Object>();
 			if(StringUtil.isEmpty(xt_departinfo_id)){
 				throw new ExceptionUtil("未能获取到部门编号----xt_departinfo_id");
@@ -169,12 +169,18 @@ public class Xt_Data_Authority_DepartServiceImpl extends BaseService implements 
 			condition.put("xt_departinfo_id", xt_departinfo_id);
 			condition.put("xt_menuinfo_id", xt_menuinfo_id);
 			xt_Data_Authority_DepartDao.delXtDataAuthorityDepartList(condition);
-			//2添加新数据
+			//2删除 执行表
+			condition = new HashMap<String, Object>();
+			condition.put("xt_data_authorityType", "2");
+			condition.put("xt_menuinfo_id", xt_menuinfo_id);
+			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
+			//3添加新数据
 			if(null != xt_Data_Authority_DepartList && xt_Data_Authority_DepartList.size() > 0){
-				i = xt_Data_Authority_DepartDao.addBatchXtDataAuthorityDepart(xt_Data_Authority_DepartList);
-			}else{
-				i = 1;
+				xt_Data_Authority_DepartDao.addBatchXtDataAuthorityDepart(xt_Data_Authority_DepartList);
 			}
+			i = 1;
+			//4统一推送
+			addPushDataAuthority();
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

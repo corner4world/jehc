@@ -55,6 +55,8 @@ public class Xt_UserinfoServiceImpl extends BaseService implements Xt_UserinfoSe
 		int i = 0;
 		try {
 			i = xt_UserinfoDao.addXtUserinfo(xt_Userinfo);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("用户业务类", "添加", "执行添加操作");
 		} catch (Exception e) {
 			i = 0;
@@ -74,6 +76,8 @@ public class Xt_UserinfoServiceImpl extends BaseService implements Xt_UserinfoSe
 		try {
 			Xt_Userinfo before = xt_UserinfoDao.getXtUserinfoById(xt_Userinfo.getXt_userinfo_id());
 			i = xt_UserinfoDao.updateXtUserinfo(xt_Userinfo);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("用户业务类", "修改", "执行修改操作");
 			//记录字段变更日志
 			aRecord(before, xt_Userinfo, "Xt_Userinfo",xt_Userinfo.getXt_userinfo_id());
@@ -94,6 +98,8 @@ public class Xt_UserinfoServiceImpl extends BaseService implements Xt_UserinfoSe
 		int i = 0;
 		try {
 			i = xt_UserinfoDao.delXtUserinfo(condition);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("用户业务类", "删除", "执行删除操作");
 		} catch (Exception e) {
 			i = 0;
@@ -186,6 +192,8 @@ public class Xt_UserinfoServiceImpl extends BaseService implements Xt_UserinfoSe
 		int i = 0;
 		try {
 			i = xt_UserinfoDao.recoverXtUserinfo(condition);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("用户业务类", "恢复用户", "执行恢复用户操作");
 		} catch (Exception e) {
 			i = 0;

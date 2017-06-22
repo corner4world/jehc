@@ -59,4 +59,10 @@ public interface Xt_Data_AuthorityService{
 	 * @return
 	 */
 	public List<Xt_Data_Authority> getXtDataAuthorityListForLogin(Map<String,Object> condition);
+	/**
+	 * 批量添加
+	 * @param xt_Data_AuthorityList
+	 * @return
+	 */
+	public int addBatchXtDataAuthority(List<Xt_Data_Authority> xt_Data_AuthorityList);
 }

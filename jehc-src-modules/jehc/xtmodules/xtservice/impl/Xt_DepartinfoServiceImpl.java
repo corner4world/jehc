@@ -59,6 +59,8 @@ public class Xt_DepartinfoServiceImpl extends BaseService implements Xt_Departin
 		int i = 0;
 		try {
 			i = xt_DepartinfoDao.addXtDepartinfo(xt_Departinfo);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("部门业务类", "添加", "执行添加部门成功");
 		} catch (Exception e) {
 			i = 0;
@@ -77,6 +79,8 @@ public class Xt_DepartinfoServiceImpl extends BaseService implements Xt_Departin
 		int i = 0;
 		try {
 			i = xt_DepartinfoDao.updateXtDepartinfo(xt_Departinfo);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("部门业务类", "修改", "执行修改部门成功");
 		} catch (Exception e) {
 			i = 0;
@@ -114,6 +118,8 @@ public class Xt_DepartinfoServiceImpl extends BaseService implements Xt_Departin
 				}
 			}
 			i = xt_DepartinfoDao.delXtDepartinfo(condition);
+			//统一推送
+			addPushDataAuthority();
 			aBLogs("部门业务类", "删除", "执行删除部门成功");
 		} catch (Exception e) {
 			i = 0;

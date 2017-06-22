@@ -141,11 +141,16 @@ public class Xt_Data_Authority_DefaultServiceImpl extends BaseService implements
 			//1删除 原先
 			Map<String,Object> condition = new HashMap<String, Object>();
 			condition.put("xt_menuinfo_id", xt_menuinfo_id);
+			//2删除 执行表
+			condition.put("xt_data_authorityType", "4");
+			xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
 			xt_Data_Authority_DefaultDao.delXtDataAuthorityDefaultAllByCondition(condition);
-			//2添加 最新
+			//3添加 最新
 			if(null != xt_Data_Authority_DefaultList){
 				xt_Data_Authority_DefaultDao.addBatchXtDataAuthorityDefault(xt_Data_Authority_DefaultList);
 			}
+			//4统一推送
+			addPushDataAuthority();
 			i = 1;
 		} catch (Exception e) {
 			i = 0;
