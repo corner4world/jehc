@@ -8,6 +8,7 @@ import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.quartz.task.Solr_dataimportTask;
 import jehc.xtmodules.xtcore.util.quartz.task.Solr_fullimportTask;
+import jehc.xtmodules.xtcore.util.quartz.task.Xt_Data_Authority_Task;
 import jehc.xtmodules.xtcore.util.quartz.task.Xt_DbinfoBack_Task;
 import jehc.xtmodules.xtcore.util.quartz.task.Xt_Ehcache_Task;
 import jehc.xtmodules.xtcore.util.quartz.task.Xt_Monitor_Task;
@@ -46,6 +47,9 @@ public class QuartzJobFactory implements Job {
 		}else if(null != targetMethod && null != targetClass && targetMethod.equals("service") && targetClass.equals("xtCore.util.quartz.task.Solr_fullimportTask")){
 			Solr_fullimportTask solr_fullimportTask = new Solr_fullimportTask();
 			solr_fullimportTask.service();
+		}else if(null != targetMethod && null != targetClass && targetMethod.equals("service") && targetClass.equals("xtCore.util.quartz.task.Xt_Data_Authority_Task")){
+			Xt_Data_Authority_Task xt_Data_Authority_Task = new Xt_Data_Authority_Task();
+			xt_Data_Authority_Task.service();
 		}
 		xt_Quartz_Log.setXt_quartz_log_etime(CommonUtils.getSimpleDateFormat());
 		xt_Quartz_LogService.addXtQuartzLog(xt_Quartz_Log);

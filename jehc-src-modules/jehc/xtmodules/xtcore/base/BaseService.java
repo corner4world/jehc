@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.Log4jUtil;
 import jehc.xtmodules.xtcore.util.UUID;
+import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
 import jehc.xtmodules.xtdao.Xt_Data_AuthorityDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_DefaultDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_DepartDao;
@@ -31,16 +32,6 @@ import jehc.xtmodules.xtservice.Xt_Operate_Business_LogsService;
 public class BaseService extends Log4jUtil{
 	@Autowired
 	private Xt_Operate_Business_LogsService xt_Operate_Business_LogsService;
-	@Autowired
-	private Xt_Data_Authority_DepartDao xt_Data_Authority_DepartDao;
-	@Autowired
-	private Xt_Data_Authority_PostDao xt_Data_Authority_PostDao;
-	@Autowired
-	private Xt_Data_Authority_DefaultDao xt_Data_Authority_DefaultDao;
-	@Autowired
-	private Xt_UserinfoDao xt_UserinfoDao;
-	@Autowired
-	private Xt_Data_AuthorityDao xt_Data_AuthorityDao;
 	/**
 	 * 添加平台业务操作日志通用 采用put方法目的不走事务控制
 	 * @param classname
@@ -88,6 +79,11 @@ public class BaseService extends Log4jUtil{
 	 * 统一推送数据权限至执行表中
 	 */
 	public void addPushDataAuthority(){
+		Xt_Data_Authority_DepartDao xt_Data_Authority_DepartDao = (Xt_Data_Authority_DepartDao)GetApplicationContext.getBean("xt_Data_Authority_DepartDao");
+		Xt_Data_Authority_PostDao xt_Data_Authority_PostDao = (Xt_Data_Authority_PostDao)GetApplicationContext.getBean("xt_Data_Authority_PostDao");
+		Xt_Data_Authority_DefaultDao xt_Data_Authority_DefaultDao = (Xt_Data_Authority_DefaultDao)GetApplicationContext.getBean("xt_Data_Authority_DefaultDao");
+		Xt_UserinfoDao xt_UserinfoDao = (Xt_UserinfoDao)GetApplicationContext.getBean("xt_UserinfoDao");
+		Xt_Data_AuthorityDao xt_Data_AuthorityDao = (Xt_Data_AuthorityDao)GetApplicationContext.getBean("xt_Data_AuthorityDao");
 		//1推送默认（初始化数据权限）
 		Map<String, Object> condition = new HashMap<String, Object>();
 		List<Xt_Data_Authority_Default> defaultList = xt_Data_Authority_DefaultDao.getXtDataAuthorityDefaultListByCondition(condition);
