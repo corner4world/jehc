@@ -6,13 +6,13 @@ var xtUserinfoSotreed;
 var xtDpPanel;
 var xtDpStore;
 function showUserWin(xt_menuinfo_id,xt_menuinfo_title){
-	reGetTopWidthAndHeight();
 	initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title);
 	initXtDpPanel(xt_menuinfo_id);
+	reGetTopWidthAndHeight();
 	xtUserinfoWin = Ext.create('top.Ext.Window',{
 		layout:'border', 
-		width:clientWidth*1.2,                    
-		height:clientHeight*1.2, 
+		width:clientWidth*0.95,                    
+		height:clientHeight*0.95, 
 		maximizable:true,
 		minimizable:true,
 		animateTarget:document.body,
