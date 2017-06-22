@@ -14,6 +14,7 @@ import jehc.xtmodules.xtdao.Xt_Data_AuthorityDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_DefaultDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_DepartDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_PostDao;
+import jehc.xtmodules.xtdao.Xt_UserinfoDao;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority_Default;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority_Depart;
@@ -21,7 +22,6 @@ import jehc.xtmodules.xtmodel.Xt_Data_Authority_Post;
 import jehc.xtmodules.xtmodel.Xt_Operate_Business_Logs;
 import jehc.xtmodules.xtmodel.Xt_Userinfo;
 import jehc.xtmodules.xtservice.Xt_Operate_Business_LogsService;
-import jehc.xtmodules.xtservice.Xt_UserinfoService;
 
 /**
  * service父类支持
@@ -38,7 +38,7 @@ public class BaseService extends Log4jUtil{
 	@Autowired
 	private Xt_Data_Authority_DefaultDao xt_Data_Authority_DefaultDao;
 	@Autowired
-	private Xt_UserinfoService xt_UserinfoService;
+	private Xt_UserinfoDao xt_UserinfoDao;
 	@Autowired
 	private Xt_Data_AuthorityDao xt_Data_AuthorityDao;
 	/**
@@ -91,7 +91,7 @@ public class BaseService extends Log4jUtil{
 		//1推送默认（初始化数据权限）
 		Map<String, Object> condition = new HashMap<String, Object>();
 		List<Xt_Data_Authority_Default> defaultList = xt_Data_Authority_DefaultDao.getXtDataAuthorityDefaultListByCondition(condition);
-		List<Xt_Userinfo> userinfoList = xt_UserinfoService.getXtUserinfoListByCondition(condition);
+		List<Xt_Userinfo> userinfoList = xt_UserinfoDao.getXtUserinfoListByCondition(condition);
 		List<Xt_Data_Authority> xt_Data_Authority_List = new ArrayList<Xt_Data_Authority>();
 		for(Xt_Data_Authority_Default def:defaultList){
 			for(Xt_Userinfo user:userinfoList){
@@ -120,11 +120,11 @@ public class BaseService extends Log4jUtil{
 			condition = new HashMap<String, Object>();
 			//2.1获取被拥有部门下的所有用户
 			condition.put("xt_departinfo_id",xt_Data_Authority_Depart.getXtDID());
-			List<Xt_Userinfo> departUserinfoList = xt_UserinfoService.getXtUserinfoListAllByCondition(condition);
+			List<Xt_Userinfo> departUserinfoList = xt_UserinfoDao.getXtUserinfoListAllByCondition(condition);
 			//2.2获取拥有者部门下的所有用户
 			condition = new HashMap<String, Object>();
 			condition.put("xt_departinfo_id",xt_Data_Authority_Depart.getXt_departinfo_id());
-			List<Xt_Userinfo> departinfoUserinfoList = xt_UserinfoService.getXtUserinfoListAllByCondition(condition);
+			List<Xt_Userinfo> departinfoUserinfoList = xt_UserinfoDao.getXtUserinfoListAllByCondition(condition);
 			
 			//2.3先删除 后添加
 			condition = new HashMap<String, Object>();
@@ -156,12 +156,12 @@ public class BaseService extends Log4jUtil{
 			condition = new HashMap<String, Object>();
 			//3.1获取被拥有岗位下的所有用户
 			condition.put("xt_post_id",xt_Data_Authority_Post.getXtPID());
-			List<Xt_Userinfo> postUserinfoList = xt_UserinfoService.getXtUserinfoListAllByCondition(condition);
+			List<Xt_Userinfo> postUserinfoList = xt_UserinfoDao.getXtUserinfoListAllByCondition(condition);
 			
 			//3.2获取拥有者部门下的所有用户
 			condition = new HashMap<String, Object>();
 			condition.put("xt_post_id",xt_Data_Authority_Post.getXt_post_id());
-			List<Xt_Userinfo> postinfoUserinfoList = xt_UserinfoService.getXtUserinfoListAllByCondition(condition);
+			List<Xt_Userinfo> postinfoUserinfoList = xt_UserinfoDao.getXtUserinfoListAllByCondition(condition);
 			
 			//3.3先删除 后添加
 			condition = new HashMap<String, Object>();
