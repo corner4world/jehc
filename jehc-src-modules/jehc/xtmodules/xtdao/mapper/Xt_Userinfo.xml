@@ -384,10 +384,10 @@
 		WHERE 1=1
 		AND xt_userinfo.`xt_userinfo_isAdmin` = 0
 		<if test="null != xt_departinfo_id">
-			xt_userinfo.xt_departinfo_id = #{xt_departinfo_id}
+			AND xt_userinfo.xt_departinfo_id = #{xt_departinfo_id}
 		</if>
 		<if test="null != xt_post_id">
-			xt_userinfo.xt_post_id = #{xt_post_id}
+			AND xt_userinfo.xt_post_id = #{xt_post_id}
 		</if>
 	</select>
 	
