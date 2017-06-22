@@ -84,6 +84,7 @@ public class Xt_NoticeController extends BaseAction{
 		if(null != xt_Notice && !"".equals(xt_Notice)){
 			xt_Notice.setXt_notice_id(UUID.toUUID());
 			xt_Notice.setXt_userinfo_id(getXtUid());
+			xt_Notice.setXt_createTime(getSimpleDateFormat());
 			i=xt_NoticeService.addXtNotice(xt_Notice);
 		}
 		if(i>0){

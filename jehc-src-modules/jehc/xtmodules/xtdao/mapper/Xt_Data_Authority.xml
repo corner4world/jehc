@@ -116,4 +116,18 @@
 			AND xt_data_authorityType = #{xt_data_authorityType}
 		</if>
 	</delete>
+	
+	<!-- 获取所有为登录使用 -->
+	<select id="getXtDataAuthorityListForLogin" resultType="jehc.xtmodules.xtmodel.Xt_Data_Authority" parameterType="map">
+		SELECT
+			xt_data_authority.`xtUID`,				
+			xt_functioninfo.`xt_functioninfoURL`
+		FROM 
+			xt_data_authority xt_data_authority LEFT JOIN xt_functioninfo xt_functioninfo ON xt_functioninfo.xt_functioninfo_id = xt_data_authority.xt_functioninfo_id
+		WHERE 1=1
+		<if test="null != xt_userinfo_id">
+			AND xt_data_authority.xt_userinfo_id = #{xt_userinfo_id}
+		</if>
+		GROUP BY xt_data_authority.`xtUID`,xt_functioninfo.`xt_functioninfoURL`
+	</select>
 </mapper>

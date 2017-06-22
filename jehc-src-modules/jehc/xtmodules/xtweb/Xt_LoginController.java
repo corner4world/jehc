@@ -9,10 +9,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import nl.bitwalker.useragentutils.Browser;
-import nl.bitwalker.useragentutils.OperatingSystem;
-import nl.bitwalker.useragentutils.UserAgent;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -27,17 +23,18 @@ import jehc.xtmodules.xtcore.md5.MD5;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtmodel.Xt_Data_Authority;
-import jehc.xtmodules.xtmodel.Xt_Functioninfo;
 import jehc.xtmodules.xtmodel.Xt_Functioninfo_Right;
 import jehc.xtmodules.xtmodel.Xt_Login_Logs;
 import jehc.xtmodules.xtmodel.Xt_U_R;
 import jehc.xtmodules.xtmodel.Xt_Userinfo;
 import jehc.xtmodules.xtservice.Xt_Data_AuthorityService;
-import jehc.xtmodules.xtservice.Xt_FunctioninfoService;
 import jehc.xtmodules.xtservice.Xt_Functioninfo_RightService;
 import jehc.xtmodules.xtservice.Xt_Login_LogsService;
 import jehc.xtmodules.xtservice.Xt_U_RService;
 import jehc.xtmodules.xtservice.Xt_UserinfoService;
+import nl.bitwalker.useragentutils.Browser;
+import nl.bitwalker.useragentutils.OperatingSystem;
+import nl.bitwalker.useragentutils.UserAgent;
 /**
  * 登录
  * @author邓纯杰
@@ -57,8 +54,6 @@ public class Xt_LoginController extends BaseAction{
 	private Xt_Functioninfo_RightService xt_Functioninfo_RightService;
 	@Autowired
 	private Xt_Data_AuthorityService xt_Data_AuthorityService;
-	@Autowired
-	private Xt_FunctioninfoService xt_FunctioninfoService;
 	/**
 	 * 载入登录页面
 	 * @param request
@@ -215,32 +210,10 @@ public class Xt_LoginController extends BaseAction{
 		if(!isAdmin()){
 			condition.put("xt_userinfo_id", getXtUid());
 		}
-		String systemUandM="";//用户及功能URL
-		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListByCondition(condition);
-		for(int i = 0; i < xt_Data_AuthorityList.size(); i++){
-			Xt_Data_Authority xtDataAuthority = xt_Data_AuthorityList.get(i);
-			String xtFunctionInfoID = xtDataAuthority.getXt_functioninfo_id();
-			String[] xtFunctionInfoIDList = xtFunctionInfoID.split(",");
-			List<Xt_Functioninfo> xtFunctionInfoLists = new ArrayList<Xt_Functioninfo>();
-			String systemMethod = "";
-			if(null != xtFunctionInfoIDList && !"".equals(xtFunctionInfoIDList) && xtFunctionInfoIDList.length > 0){
-				condition = new HashMap<String, Object>();
-				condition.put("xt_functioninfo_id", xtFunctionInfoIDList);
-				xtFunctionInfoLists = xt_FunctioninfoService.getXtFunctioninfoListByCondition(condition);
-				if(!xtFunctionInfoLists.isEmpty()){
-					Xt_Functioninfo xtFunctionInfo = xtFunctionInfoLists.get(0);
-					if(null !=systemMethod && !"".equals(systemMethod)){
-						systemMethod = systemMethod+"@"+xtFunctionInfo.getXt_functioninfoURL();
-					}else{
-						systemMethod=xtFunctionInfo.getXt_functioninfoURL();
-					}
-				}
-			}
-			if(null != systemUandM && !"".equals(systemUandM)){
-				systemUandM= systemUandM+","+xtDataAuthority.getXtUID()+"#"+systemMethod;
-			}else{
-				systemUandM = ""+xtDataAuthority.getXtUID()+"#"+systemMethod;
-			}
+		List<String> systemUandM = new ArrayList<String>();//用户及功能URL
+		List<Xt_Data_Authority> xt_Data_AuthorityList = xt_Data_AuthorityService.getXtDataAuthorityListForLogin(condition);
+		for(Xt_Data_Authority xtDataAuthority :xt_Data_AuthorityList){
+			systemUandM.add(xtDataAuthority.getXtUID()+"#"+xtDataAuthority.getXt_functioninfoURL());
 		}
 		//将数据及数据功能权限等信息放入到里面
 		request.getSession(false).setAttribute("systemUandM", systemUandM);//用户及功能URL

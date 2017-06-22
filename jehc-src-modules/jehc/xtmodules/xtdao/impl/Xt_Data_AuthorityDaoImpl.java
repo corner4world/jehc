@@ -70,4 +70,13 @@ public class Xt_Data_AuthorityDaoImpl  extends BaseDaoImpl implements Xt_Data_Au
 	public int delXtDataAuthorityByCondition(Map<String,Object> condition){
 		return this.del("delXtDataAuthorityByCondition", condition);
 	}
+	/**
+	 * 获取所有为登录使用 
+	 * @param condition
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Xt_Data_Authority> getXtDataAuthorityListForLogin(Map<String,Object> condition){
+		return (List<Xt_Data_Authority>)this.getList("getXtDataAuthorityListForLogin",condition);
+	}
 }

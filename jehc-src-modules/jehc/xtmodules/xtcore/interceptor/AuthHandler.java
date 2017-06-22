@@ -181,10 +181,10 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 	 * @return
 	 * @throws IOException
 	 */
+	@SuppressWarnings("unchecked")
 	public boolean dataAuth(HttpServletRequest request,HttpServletResponse response,String requestUrl) throws IOException{
 		String[] paramNames = (String[])request.getParameterValues("systemUID");//唯一标志systemUID
-		String systemUandM = (String)request.getSession(false).getAttribute("systemUandM");
-		String[] systemUandMarray = new String[]{};
+		List<String> systemUandM = (List<String>)request.getSession(false).getAttribute("systemUandM");
 		List<String> sysUID = new ArrayList<String>();
 		//如果系统唯一标志不为空 说明系统采用了数据权限
 		if(null != paramNames){
@@ -194,16 +194,12 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 			if(null != systemUID && !"".equals(systemUID)){
 				systemUIDarray = systemUID.split(",");
 			}
-			if(null != systemUandM && !"".equals(systemUandM)){
-				systemUandMarray = systemUandM.split(",");
-			}
-			if(null != systemUandMarray){
+			if(null != systemUandM){
 				int result = 0;
-				for(int i = 0; i < systemUandMarray.length; i++){
-					String sysUandM = systemUandMarray[i];
+				for(String str:systemUandM){
 					String[] sysUandMarray = new String[]{};
-					if(null != sysUandM && !"".equals(sysUandM)){
-						sysUandMarray = sysUandM.split("#");
+					if(!StringUtil.isEmpty(str)){
+						sysUandMarray = str.split("#");
 						if(null != sysUandMarray){
 							//判断方法和参数都匹配
 							if(("@"+sysUandMarray[1]+"@").indexOf("@"+requestUrl+"@") >= 0){
@@ -227,24 +223,17 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 			}
 		}else{
 			//否则过滤当前操作是否数据权限查询拦截
-//			request.getSession(false).removeAttribute("sysUID");
-			
-			if(null != systemUandM && !"".equals(systemUandM)){
-				systemUandMarray = systemUandM.split(",");
-			}
 			//说明可能是第一次初始化读取数据
-			if(null != systemUandMarray){
-				for(int i = 0; i < systemUandMarray.length; i++){
-					String sysUandM = systemUandMarray[i];
+			if(null != systemUandM){
+				for(String str: systemUandM){
 					String[] sysUandMarray = new String[]{};
-					if(!StringUtil.isEmpty(sysUandM)){
-						sysUandMarray = sysUandM.split("#");
+					if(!StringUtil.isEmpty(str)){
+						sysUandMarray = str.split("#");
 						if(("@"+sysUandMarray[1]+"@").indexOf("@"+requestUrl+"@") >= 0){
 							sysUID.add(sysUandMarray[0]);
 						}
 					}
 				}
-//				request.getSession(false).setAttribute("sysUID", sysUID);//用户ID
 				request.setAttribute("sysUID", sysUID);//用户ID
 			}
 		}

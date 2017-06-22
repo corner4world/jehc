@@ -50,4 +50,10 @@ public interface Xt_Data_AuthorityDao{
 	 * @param condition
 	 */
 	public int delXtDataAuthorityByCondition(Map<String,Object> condition);
+	/**
+	 * 获取所有为登录使用 
+	 * @param condition
+	 * @return
+	 */
+	public List<Xt_Data_Authority> getXtDataAuthorityListForLogin(Map<String,Object> condition);
 }

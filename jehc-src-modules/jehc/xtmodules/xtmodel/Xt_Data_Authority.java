@@ -15,6 +15,8 @@ public class Xt_Data_Authority extends BaseEntity implements Serializable{
 	private String xt_functioninfo_id;/**功能ID**/
 	private String xt_menuinfo_id;/**菜单ID**/
 	private String xt_data_authorityType;/**类型（1表示按人员进行设置【即系统默认权限】2表示按部门设置3表示按岗位设置4按人员默认初始化5按部门默认初始化6按岗位默认初始化7按部门上下级8按岗位上下级）**/
+	private String xt_functioninfoMethod;
+	private String xt_functioninfoURL;
 	public void setXt_data_authority_id(String xt_data_authority_id){
 		this.xt_data_authority_id=xt_data_authority_id;
 	}
@@ -51,4 +53,17 @@ public class Xt_Data_Authority extends BaseEntity implements Serializable{
 	public String getXt_data_authorityType(){
 		return xt_data_authorityType;
 	}
+	public String getXt_functioninfoMethod() {
+		return xt_functioninfoMethod;
+	}
+	public void setXt_functioninfoMethod(String xt_functioninfoMethod) {
+		this.xt_functioninfoMethod = xt_functioninfoMethod;
+	}
+	public String getXt_functioninfoURL() {
+		return xt_functioninfoURL;
+	}
+	public void setXt_functioninfoURL(String xt_functioninfoURL) {
+		this.xt_functioninfoURL = xt_functioninfoURL;
+	}
+	
 }

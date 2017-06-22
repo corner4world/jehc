@@ -136,4 +136,17 @@ public class Xt_Data_AuthorityServiceImpl extends BaseService implements Xt_Data
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
+	/**
+	 * 获取所有为登录使用 
+	 * @param condition
+	 * @return
+	 */
+	public List<Xt_Data_Authority> getXtDataAuthorityListForLogin(Map<String,Object> condition){
+		try{
+			return xt_Data_AuthorityDao.getXtDataAuthorityListForLogin(condition);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
 }
