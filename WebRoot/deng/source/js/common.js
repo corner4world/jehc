@@ -262,7 +262,7 @@ function getGridBBar(store){
 		displayField:'text',
 		value:'30',
 		editable:false,
-		width:95
+		width:110
 	});
 	page_number = parseInt(pagesize_combo.getValue());
 	pagesize_combo.on("select", function(comboBox) {
@@ -285,8 +285,10 @@ function getGridBBar(store){
 		afterPageText:'页，共{0}页',
 	    beforePageText:'当前第',
 		displayInfo:true,
+//		inputItemWidth:50,//gridPanel底部分页栏方框的大小  
 		displayMsg:'当前显示从{0}至{1}，共 {2}条记录',
 		emptyMsg:'没有记录',
+		plugins:[new Ext.ux.ProgressBarPager()],
 		items:['每页显示',pagesize_combo,'条记录']
     });
 	return bbar;
@@ -310,7 +312,7 @@ function getGridTopBBar(store){
 		displayField:'text',
 		value:'30',
 		editable:false,
-		width:95
+		width:110
 	});
 	page_number = parseInt(pagesize_combo.getValue());
 	pagesize_combo.on("select", function(comboBox) {
@@ -334,6 +336,7 @@ function getGridTopBBar(store){
 		afterPageText:'页，共{0}页',
 	    beforePageText:'当前第',
 		displayInfo:true,
+//		inputItemWidth:50,//gridPanel底部分页栏方框的大小  
 		displayMsg:'当前显示从{0}至{1}，共 {2}条记录',
 		emptyMsg:'没有记录',
 		items:['每页显示',pagesize_combo,'条记录']
