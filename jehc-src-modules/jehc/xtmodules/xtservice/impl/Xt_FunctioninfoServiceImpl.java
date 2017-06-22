@@ -1,4 +1,5 @@
 package jehc.xtmodules.xtservice.impl;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,7 +8,12 @@ import org.springframework.stereotype.Service;
 
 import jehc.xtmodules.xtcore.base.BaseService;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
+import jehc.xtmodules.xtdao.Xt_Data_AuthorityDao;
+import jehc.xtmodules.xtdao.Xt_Data_Authority_DefaultDao;
+import jehc.xtmodules.xtdao.Xt_Data_Authority_DepartDao;
+import jehc.xtmodules.xtdao.Xt_Data_Authority_PostDao;
 import jehc.xtmodules.xtdao.Xt_FunctioninfoDao;
+import jehc.xtmodules.xtdao.Xt_UserinfoDao;
 import jehc.xtmodules.xtmodel.Xt_Functioninfo;
 import jehc.xtmodules.xtservice.Xt_FunctioninfoService;
 
@@ -19,6 +25,14 @@ import jehc.xtmodules.xtservice.Xt_FunctioninfoService;
 public class Xt_FunctioninfoServiceImpl extends BaseService implements Xt_FunctioninfoService{
 	@Autowired
 	private Xt_FunctioninfoDao xt_FunctioninfoDao;
+	@Autowired
+	private Xt_Data_Authority_DepartDao xt_Data_Authority_DepartDao;
+	@Autowired
+	private Xt_Data_Authority_PostDao xt_Data_Authority_PostDao;
+	@Autowired
+	private Xt_Data_Authority_DefaultDao xt_Data_Authority_DefaultDao;
+	@Autowired
+	private Xt_Data_AuthorityDao xt_Data_AuthorityDao;
 	/**
 	* 分页
 	* @param condition 
@@ -55,8 +69,10 @@ public class Xt_FunctioninfoServiceImpl extends BaseService implements Xt_Functi
 		int i = 0;
 		try {
 			i = xt_FunctioninfoDao.addXtFunctioninfo(xt_Functioninfo);
-			//统一推送
-			addPushDataAuthority();
+			if(xt_Functioninfo.getXt_functioninfoIsAuthority() == 0){
+				//统一推送
+				addPushDataAuthority();
+			}
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
@@ -72,9 +88,23 @@ public class Xt_FunctioninfoServiceImpl extends BaseService implements Xt_Functi
 	public int updateXtFunctioninfo(Xt_Functioninfo xt_Functioninfo){
 		int i = 0;
 		try {
+			String xt_functioninfo_id = xt_Functioninfo.getXt_functioninfo_id();
+			int isAuthority = xt_FunctioninfoDao.getXtFunctioninfoById(xt_functioninfo_id).getXt_functioninfoIsAuthority();
+			//如果原来是非数据权限 现在是数据权限 则要统一推送一下
+			if(isAuthority == 1 && xt_Functioninfo.getXt_functioninfoIsAuthority() == 0){
+				//统一推送
+				addPushDataAuthority();
+			}
 			i = xt_FunctioninfoDao.updateXtFunctioninfo(xt_Functioninfo);
-			//统一推送
-			addPushDataAuthority();
+			//如果原来是数据权限 现在取消了 则要处理数据权限中数据将其删除掉
+			if(isAuthority == 0 && xt_Functioninfo.getXt_functioninfoIsAuthority() == 1){
+				Map<String, Object> condition = new HashMap<String, Object>();
+				condition.put("xt_functioninfo_id", xt_functioninfo_id);
+				xt_Data_AuthorityDao.delXtDataAuthorityByCondition(condition);
+				xt_Data_Authority_DepartDao.delXtDataAuthorityDepartList(condition);
+				xt_Data_Authority_DefaultDao.delXtDataAuthorityDefaultAllByCondition(condition);
+				xt_Data_Authority_PostDao.delXtDataAuthorityPostList(condition);
+			}
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

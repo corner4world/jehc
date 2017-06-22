@@ -106,6 +106,9 @@
 		<if test="null != xt_menuinfo_id">
 			AND `xt_menuinfo_id` = #{xt_menuinfo_id}
 		</if>
+		<if test="null != xt_functioninfo_id">
+			AND xt_functioninfo_id = #{xt_functioninfo_id}
+		</if>
 	</delete>
 	
 	<!--批量添加-->
