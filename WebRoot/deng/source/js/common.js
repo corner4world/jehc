@@ -25,7 +25,7 @@ var phoneIcon = '../deng/images/grid/using/phone.png';
 var collapsibleIcon = '../deng/images/grid/using/collapsible.png';
 var taskIcon = '../deng/images/grid/using/task.png';
 var homeIcon = '../deng/images/home/home.png';
-var messageIcon = '../deng/images/grid/using/message.png';
+var messageIcon = '../deng/images/top/message.png';
 var lockIcon = '../deng/images/grid/otp/lock.png';
 
 var indexlist = '../deng/images/top/index_list.png';

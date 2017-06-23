@@ -245,26 +245,26 @@ Ext.onReady(function(){
 			            style:{marginRight:'4px',marginLeft:'4px'},
 			            text:dt()
 			      },
-//			      {
-//			            /**ui:'default-toolbar',**/
-//			            xtype:'button',
-//			            id:'xtMessageBtn',
-//			            icon:messageIcon,
-//			            style:{background:'#90c258',marginRight:'4px',marginLeft:'4px'},
-//			            tooltip:{
-//		                 	title:'短消息'
-//		                },
-//			            handler:function(button){
-//							initXtMessageWin();
-//						}
-//			      },
+			      {
+			            /**ui:'default-toolbar',**/
+			            xtype:'button',
+			            id:'xtMessageBtn',
+			            icon:messageIcon,
+			            style:{background:'#90c258',marginRight:'0px',marginLeft:'10px'},
+			            tooltip:{
+		                 	title:'短消息'
+		                },
+			            handler:function(button){
+							initXtMessageWin();
+						}
+			      },
 			      {
 			            xtype:'button',
 			            icon:lockIcon,
 			            tooltip:{
 		                 	title:'锁屏'
 		                },
-			            style:{background:'#e3495a',marginRight:'4px',marginLeft:'4px'},
+			            style:{background:'#e3495a',marginRight:'4px',marginLeft:'2px'},
 			            handler:function(button){
 			            	initLockSystem(1);
 							setCookie("syslock", '1', 240);
