@@ -161,6 +161,16 @@ function initXtMessageTreePanel(){
         xtype:'filtered-tree',
         title:'导航目录',
         collapsible:true,
+        loadMask:{
+			msg:'正在加载...'
+		},
+        tools:[{
+	    	type:'refresh',
+	    	tooltip:'刷新',
+	    	handler:function(event, toolEl, panelHeader){
+	    		freshMessage(xtMessageTreePanel,xtMessageTreeStore);
+	    	}
+  	    }],
         tbar:[
       		{
       		   width:220,
@@ -311,3 +321,10 @@ function unReadCount(){
 	});
 }
 setInterval(unReadCount,6000); 
+
+function freshMessage(xtMessageTreePanel,xtMessageTreeStore){
+	xtMessageTreeStore.load();
+	xtMessageTreeStore.on('load',function(){
+		xtMessageTreePanel.expandAll();
+    });
+}
