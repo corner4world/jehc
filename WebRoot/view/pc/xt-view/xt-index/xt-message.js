@@ -258,6 +258,8 @@ function sendM(){
 			var d=Ext.getCmp('MContent').body.dom;
 			d.scrollTop = d.scrollHeight - d.offsetHeight+2;
 			Ext.getCmp('sendBtn').setDisabled(false);　
+			var obj=Ext.decode(response.responseText);  
+			msgTishi(obj.msg);
 	    },  
 	    failure:function(response,opts){  
 	    	Ext.getCmp('sendBtn').setDisabled(false);

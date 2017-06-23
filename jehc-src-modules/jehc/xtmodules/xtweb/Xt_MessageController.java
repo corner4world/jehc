@@ -85,9 +85,9 @@ public class Xt_MessageController extends BaseAction{
 			i=xt_MessageService.addXtMessage(xt_Message);
 		}
 		if(i>0){
-			return outAudStr(true);
+			return outAudStr(true,"发送成功");
 		}else{
-			return outAudStr(false);
+			return outAudStr(false,"发送失败");
 		}
 	}
 	/**
