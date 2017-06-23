@@ -328,10 +328,9 @@ Ext.onReady(function(){
 		xtype:'form',
 		defaultType:'textfield',
 		autoScroll:true,
-		title:'&nbsp;个人基本信息',
+		title:'&nbsp;基本信息',
 		titleAlign:'left',
 		headerPosition:'top',
-		renderTo:Ext.getBody(),
 		fieldDefaults:{
 	        labelWidth:70,
 	        labelAlign:"right",
@@ -355,14 +354,14 @@ Ext.onReady(function(){
 			maxLength:20,
 			anchor:'20%'
 		},
-		{
-			fieldLabel:'出生年月',
-			xtype:'textfield',
-			readOnly:true,
-			name:'xt_userinfo_birthday',
-			maxLength:20,
-			anchor:'20%'
-		},
+//		{
+//			fieldLabel:'出生年月',
+//			xtype:'textfield',
+//			readOnly:true,
+//			name:'xt_userinfo_birthday',
+//			maxLength:20,
+//			anchor:'20%'
+//		},
 		{
 			fieldLabel:'籍贯',
 			xtype:'textfield',
@@ -405,13 +404,18 @@ Ext.onReady(function(){
 		},
 		{
 			fieldLabel:'个人简介',
-			xtype:'textarea',
+			xtype:'displayfield',
 			name:'xt_userinfo_remark',
 			maxLength:500,
 			anchor:'80%'
 		}]
 	});
 	loadFormData(xtCompanyFormEdit,'../xtUserinfoController/getXtUserinfoById?xt_userinfo_id='+$('#xt_userinfo_id').val());
+	Ext.create('Ext.Viewport',{
+		layout:'fit',
+		xtype:'viewport',
+		items:xtCompanyFormEdit
+	});
 	/**
 	initLeft();
     initRight();
