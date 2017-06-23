@@ -15,8 +15,6 @@ import jehc.xtmodules.xtcore.base.BaseEntity;
 public class Xt_Message extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String xt_message_id;/**主键**/
-	@NotEmpty(message = "发送者不能为空")
-	@NotNull(message = "发送者不能为空")
 	private String from_id;/**发送者编号**/
 	@NotEmpty(message = "接收者不能为空")
 	@NotNull(message = "接收者不能为空")

@@ -217,7 +217,6 @@ function initXtMessageTreePanel(){
 function xtMessageMenuClick(node){
 	var text = node.data.text;
 	var id = node.data.id;
-	console.info(id);
 	var xt_userinfo_id = Ext.getCmp('xt_userinfo_id').getValue();
 	if(id != xt_userinfo_id){
 		clearmsg();
