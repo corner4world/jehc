@@ -29,6 +29,7 @@ var messageIcon = '../deng/images/grid/using/message.png';
 var lockIcon = '../deng/images/grid/otp/lock.png';
 
 var indexlist = '../deng/images/top/index_list.png';
+var indexNav = '../deng/images/grid/otp/list.png';
 var indexUserIcon = '../deng/images/top/index_user.png';
 var indexCollapseIcon = '../deng/images/top/index_collapse.png';
 var indexSearchIcon = '../deng/images/top/index_search.png';

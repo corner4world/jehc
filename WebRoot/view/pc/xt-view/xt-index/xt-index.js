@@ -50,7 +50,7 @@ Ext.onReady(function(){
 		items:[{
 			region:'west',
 			title:'<font color=#ffffff>快捷导航</font>',
-			icon:indexlist,
+			icon:indexNav,
 			width:255,
 			split:false,
 			border:false,
