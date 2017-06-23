@@ -2433,7 +2433,9 @@ function filterBy(grid,text, by){
     grid.getRootNode().cascadeBy(function(tree, view) {
         var uiNode = view.getNodeByRecord(this);
         if(uiNode && !Ext.Array.contains(nodesAndParents, this.id)) {
-            Ext.get(uiNode).setDisplayed('none');
+        	if(this.id != 'root'){
+        		Ext.get(uiNode).setDisplayed('none');
+        	}
         }
     },null,[grid, view]);
 }

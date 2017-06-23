@@ -32,14 +32,6 @@ function initXtMessageWin(){
 				}
 			}
 		},
-//		{
-//			xtype:'button',
-//			text:'最大化',
-//			style:{marginRight:'4px',marginLeft:'4px'},
-//			handler:function(){
-//				xtMessageWin.maximize();
-//			}
-//		},
 		{
 			xtype:'button',
 			text:'最小化',
@@ -67,8 +59,8 @@ function initXtMessageWin(){
 			}
 		},
 		items:[
-			xtMessageEastPanel,
 			xtMessagePanel,
+			xtMessageTreePanel,
 			{
 				 xtype:'textfield',
 				 hidden:true,
@@ -148,7 +140,7 @@ function initChattingPanel(){
 function initXtMessageTreePanel(){
 	var xtMessageTreeStore = Ext.create('Ext.data.TreeStore', {  
 	     root:{  
-	     	  text:'我的朋友',
+	     	  text:'我的同事',
 	     	  expanded:true
          },
          proxy:{  
@@ -163,10 +155,31 @@ function initXtMessageTreePanel(){
 	xtMessageTreePanel = Ext.create('Ext.tree.Panel',{ 
 		region:'east',  
         store:xtMessageTreeStore,  
-        width:220,
+        width:230,
         rootVisible:true, 
-        border:false,
+        border:true,
+        split:true,
         frameHeader:false,
+        xtype:'filtered-tree',
+        title:'快捷导航',
+        collapsible:true,
+        tbar:[
+      		{
+      		   width:220,
+      		   xtype:'triggerfield',
+      		   emptyText:'请输入关键字（如“邓”，“周”等）',
+      	       triggerCls:'x-form-clear-trigger',
+      	       onTriggerClick:function(){
+      	           this.reset();
+      	       },
+      	       listeners:{
+      	           change:function(){
+      	           	filterBy(xtMessageTreePanel,this.getValue(),'text');
+      	           },
+      	           buffer:250
+      	       }
+      		}
+      	],
         listeners:{ 
             itemclick:function(node,optd){
             	var leaf = optd.data.leaf;
@@ -176,29 +189,20 @@ function initXtMessageTreePanel(){
             }
         }
 	})
-	xtMessageEastPanel = Ext.create('Ext.Panel',{
-    	region:'east',
-    	collapsible:true,
-    	border:false,
-    	split:true,
-		width:220,
-		title:'在线用户',
-		hideCollapseTool:true,
-		layout:'accordion',
-		items:[{
-			title:'用户',
-	        scrollable:true,  
-	        scrollable:'x',
-	        scrollable:'y',
-			items:xtMessageTreePanel
-		},{
-			title:'群聊',
-			items:[]
-		},{
-			title:'设置',
-			items:[]
-		}]
-    })
+//	xtMessageEastPanel = Ext.create('Ext.Panel',{
+//    	region:'east',
+//    	collapsible:true,
+//    	border:false,
+//    	split:true,
+//		width:220,
+//		hideCollapseTool:true,
+//		items:[{
+//	        scrollable:true,  
+//	        scrollable:'x',
+//	        scrollable:'y',
+//			items:xtMessageTreePanel
+//		}]
+//    })
 }
 
 //菜单点击事件

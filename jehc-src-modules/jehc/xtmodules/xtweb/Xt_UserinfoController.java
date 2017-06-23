@@ -368,7 +368,7 @@ public class Xt_UserinfoController extends BaseAction{
 			BaseTreeGridEntity.setText(Xt_Userinfo.getXt_userinfo_realName());
 			BaseTreeGridEntity.setContent("");
 			BaseTreeGridEntity.setLeaf(true);
-			BaseTreeGridEntity.setIcon("../deng/images/icons/user.png");
+			BaseTreeGridEntity.setIcon("../deng/images/icons/employee_manager.png");
 			list.add(BaseTreeGridEntity);
 		}
 		return outStr(BaseTreeGridEntity.buildTree(list,false));
