@@ -24,6 +24,24 @@ Ext.onReady(function(){
 	        autoEncode:true,
 	        rootVisible:false, 
 	        useArrows:collapsibleDefined,
+	        xtype:'filtered-tree',
+	        tbar:[
+        		{
+        		   width:220,
+        		   xtype:'triggerfield',
+        		   emptyText:'输入关键字（如“订单”，“产品”等）',
+        	       triggerCls:'x-form-clear-trigger',
+        	       onTriggerClick:function(){
+        	           this.reset();
+        	       },
+        	       listeners:{
+        	           change:function(){
+        	           	filterBy(treePanel,this.getValue(),'text');
+        	           },
+        	           buffer:250
+        	       }
+        		}
+        	],
 	        listeners:{  
 	            beforeitemexpand:function(node,optd){
 	                var id=node.data.id;  
