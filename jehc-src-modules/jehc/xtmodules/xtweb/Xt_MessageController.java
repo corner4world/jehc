@@ -4,8 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -70,9 +73,11 @@ public class Xt_MessageController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/addXtMessage",method={RequestMethod.POST,RequestMethod.GET})
-	public String addXtMessage(Xt_Message xt_Message,HttpServletRequest request){
+	public String addXtMessage(@Valid Xt_Message xt_Message,BindingResult bindingResult,HttpServletRequest request){
+		if(bindingResult.hasErrors()){
+			return outAudStr(false,backFem(bindingResult));
+		}
 		int i = 0;
-		System.out.println(xt_Message.getXt_message_id());
 		if(null != xt_Message && !"".equals(xt_Message)){
 			xt_Message.setXt_message_id(UUID.toUUID());
 			xt_Message.setCtime(getSimpleDateFormat());
