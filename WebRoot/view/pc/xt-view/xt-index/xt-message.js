@@ -7,7 +7,6 @@ function initXtMessageWin(){
 	reGetWidthAndHeight();
 	initChattingPanel();
 	initXtMessageTreePanel();
-	console.info(xtMessageWin);
 	if(xtMessageWin != null){
 		xtMessageWin.show();
 		return;
@@ -71,7 +70,6 @@ function initXtMessageWin(){
 }
 
 function initChattingPanel(){
-	console.info(getCookie("css"));
 	var htmlEditorHeight = clientHeight*0.24;
 	if(getCookie("css") == 'crisp'){
 		htmlEditorHeight = clientHeight*0.26;
@@ -79,11 +77,11 @@ function initChattingPanel(){
 	var htmlEditor = Ext.create('Ext.form.HtmlEditor',{
         labelSeparator:"：",
 		id:'sendMHtmlEditor',
-        enableAlignments:true,
+        enableAlignments:false,
         enableColors:true,
         enableFont:false,
-        enableFontSize:true,
-        enableFormat:true,
+        enableFontSize:false,
+        enableFormat:false,
         enableLinks:false,
         enableLists:true,
         enableSourceEdit:false,
@@ -161,13 +159,13 @@ function initXtMessageTreePanel(){
         split:true,
         frameHeader:false,
         xtype:'filtered-tree',
-        title:'快捷导航',
+        title:'导航目录',
         collapsible:true,
         tbar:[
       		{
       		   width:220,
       		   xtype:'triggerfield',
-      		   emptyText:'请输入关键字（如“邓”，“周”等）',
+      		   emptyText:'输入关键字（如“邓”，“周”等）',
       	       triggerCls:'x-form-clear-trigger',
       	       onTriggerClick:function(){
       	           this.reset();

@@ -33,6 +33,26 @@ var themeCombo = Ext.form.ComboBox({
 		       	 window.document.cookie="css=" + name + ";expires=" + date.toGMTString();
 		       	 window.document.cookie="css=" + name + ";expires=" + date.toGMTString()+";path=/";
 				 window.location.href=basePath+"/index/index.html";
+			}else{
+				 var theme = Ext.getCmp('themecombo').getValue();
+				 var cookiesArr = window.parent.document.cookie.split(";");
+				 var cssName = "";
+				 for(var i=0; i<cookiesArr.length; i++){
+				 	var arr = cookiesArr[i].split("=");
+				 	var values = arr[0];
+				 	if('undefind' != typeof(arr[0])){
+				 		values = Ext.util.Format.trim(values);
+				 	}
+			    	if(values == 'css'){
+			    		cssName = arr[1];
+			        	break;
+				    }
+				 };
+				 if(cssName != "" && cssName != null){
+				 	Ext.getCmp('themecombo').setValue(cssName);
+				}else{
+				 	Ext.getCmp('themecombo').setValue('triton');
+				}
 			}
 		 });
        }  
