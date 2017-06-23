@@ -535,6 +535,7 @@ function updatePwd(){
 		modal:true,
 		closable:false,
 		title:'修改密码',
+		headerPosition:'left',
 		items:pwdForm,
 		buttons:[{
 			text:'保存',
