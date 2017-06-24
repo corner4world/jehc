@@ -147,7 +147,6 @@ function initLcApprovalGrid(lc_apply_id){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		border:true,
 		selType:'checkboxmodel',
 		viewConfig:{
 			emptyText:'暂无数据',
