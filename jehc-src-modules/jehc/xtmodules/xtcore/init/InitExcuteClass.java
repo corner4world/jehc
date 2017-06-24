@@ -18,8 +18,6 @@ import javax.servlet.ServletContextListener;
 import org.quartz.Scheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import jehc.solrmodules.solrmodel.Solr_Core;
 import jehc.solrmodules.solrservice.Solr_CoreService;
@@ -55,21 +53,18 @@ import net.sf.ehcache.Element;
  *
  */
 public class InitExcuteClass implements ServletContextListener{
-	private static final long serialVersionUID = 1L;
 	Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 停止时执行的方法
 	 */
 	public void contextDestroyed(ServletContextEvent event) {
 		ServletContext sc = event.getServletContext();
-        String contextConfigLocationpath = event.getServletContext().getInitParameter("contextConfigLocation");
-		ApplicationContext ac = (ApplicationContext) new ClassPathXmlApplicationContext(contextConfigLocationpath);
 	    sc.removeAttribute("syspath");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		logger.info("------------------------"+sdf.format(new Date())+"--->服务器容器已销毁------------------------");
 		Xt_Start_Stop_Log xt_Start_Stop_Log = new Xt_Start_Stop_Log();
 		xt_Start_Stop_Log.setXt_start_stop_log_stoptime(sdf.format(new Date()));
-		addOrUpdateXtStartStopLog(xt_Start_Stop_Log, ac,1);
+		addOrUpdateXtStartStopLog(xt_Start_Stop_Log,1);
 	}
 
 	/**
@@ -78,8 +73,10 @@ public class InitExcuteClass implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent event) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		ServletContext sc = event.getServletContext();
+		/*
         String contextConfigLocationpath = event.getServletContext().getInitParameter("contextConfigLocation");
 		ApplicationContext ac = (ApplicationContext) new ClassPathXmlApplicationContext(contextConfigLocationpath);
+		*/
 		Xt_Start_Stop_Log xt_Start_Stop_Log = new Xt_Start_Stop_Log();
 		try {
 	        sc.setAttribute("syspath", getContextPath(sc));
@@ -130,7 +127,7 @@ public class InitExcuteClass implements ServletContextListener{
 		}
 		xt_Start_Stop_Log.setXt_start_stop_log_starttime(sdf.format(new Date()));
 		xt_Start_Stop_Log.setXt_start_stop_log_content("1.业务平台路径 2加载工厂耗 3.读取数据字典 4.加载缓存配置5.装载config配置");
-		addOrUpdateXtStartStopLog(xt_Start_Stop_Log, ac,0);
+		addOrUpdateXtStartStopLog(xt_Start_Stop_Log,0);
 		logger.info(sdf.format(new Date())+"--->结束类加载"); 
 		
 	}
@@ -142,8 +139,8 @@ public class InitExcuteClass implements ServletContextListener{
 	 * 添加或修改启动日志
 	 * @param xt_Start_Stop_Log
 	 */
-	public void addOrUpdateXtStartStopLog(Xt_Start_Stop_Log xt_Start_Stop_Log,ApplicationContext ac,int status){
-		Xt_Start_Stop_LogService xt_Start_Stop_LogService = (Xt_Start_Stop_LogService)ac.getBean("xt_Start_Stop_LogService");;
+	public void addOrUpdateXtStartStopLog(Xt_Start_Stop_Log xt_Start_Stop_Log,int status){
+		Xt_Start_Stop_LogService xt_Start_Stop_LogService = (Xt_Start_Stop_LogService)GetApplicationContext.getBean("xt_Start_Stop_LogService");;
 		if(1==status){
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("offset", "0");
@@ -181,7 +178,6 @@ public class InitExcuteClass implements ServletContextListener{
      * 加载数据字典，平台常量及平台路径到缓存中
      * @param ehCache
      */
-    @SuppressWarnings("unused")
 	private void loadXtDataDictionary(){
     	Xt_Data_DictionaryService xt_Data_DictionaryService = (Xt_Data_DictionaryService)GetApplicationContext.getBean("xt_Data_DictionaryService");
     	Xt_PathService xt_PathService = (Xt_PathService)GetApplicationContext.getBean("xt_PathService");
@@ -191,14 +187,6 @@ public class InitExcuteClass implements ServletContextListener{
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
     	List<Xt_Data_Dictionary> Xt_Data_DictionaryList = xt_Data_DictionaryService.getXtDataDictionaryListAllByCondition(condition);
-//    	//1创建缓存管理器
-//    	URL url = getClass().getResource("/xtCore/sources/ehcache/ehcache.xml");
-//		CacheManager cacheManager = CacheManager.create(url);
-		/**
-		 *该方法为手动设置：设置缓存并加入到缓存管理器中
-		Cache ehCache = new Cache("AllEhCache", 1, true, false, 5, 2);
-		cacheManager.addCache(ehCache);
-		**/
 		//2取得配置文件中预先，定义的XtDataDictionaryCache设置，生成一个Cache 该XtDataDictionaryCache为ehcache.xml定义好的名称
 		Cache XtDataDictionaryCache = CacheManagerUtil.getCache("XtDataDictionaryCache");
 		//3在缓存中放元素
