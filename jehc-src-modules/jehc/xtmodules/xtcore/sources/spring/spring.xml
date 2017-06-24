@@ -72,9 +72,9 @@
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/mq/rabbit.xml"/>
 	-->
 	
-	<!-- netty整合 -->
+	<!-- netty整合
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/netty/netty.xml"/>
-	
+	 -->
 	<!-- Hession整合 -->
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/hessian/hessian.xml"/>
 	<!-- 以上为插件及其他支持【结束】 -->
