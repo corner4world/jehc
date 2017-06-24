@@ -116,8 +116,8 @@ Ext.onReady(function(){
 				}
 			 },
 			 {
-			 	text:'添加',
-				tooltip:'向组任务中添加成员',
+			 	text:'添加组任务中成员',
+				tooltip:'添加组任务中成员',
 				cls:'setBtn',
 				icon:addIcon,
 				minWidth:tbarBtnMinWidth,
@@ -126,7 +126,7 @@ Ext.onReady(function(){
 				}
 			 },
 			 {
-			 	text:'删除',
+			 	text:'删除组任务中成员',
 				tooltip:'向组任务中删除成员',
 				cls:'delBtn',
 				icon:delIcon,
@@ -145,24 +145,15 @@ Ext.onReady(function(){
 					completeTask();
 				}
 			 },
-			 {
-				text:'检索',
-				minWidth:tbarBtnMinWidth,
-				cls:'searchBtn',
-				icon:searchIcon,
-				handler:function(){
-					search();
-				}
-			 },
-			 {
-				text:'重置',
-				tooltip:'重置',
-				minWidth:tbarBtnMinWidth,
-				icon:clearSearchIcon,
-				handler:function(){
-					searchForm.reset();
-				}
-			 },
+//			 {
+//				text:'检索',
+//				minWidth:tbarBtnMinWidth,
+//				cls:'searchBtn',
+//				icon:searchIcon,
+//				handler:function(){
+//					search();
+//				}
+//			 },
 			 grid_toolbar_moretext_gaps,
 			 {
 				 text:moretext,
