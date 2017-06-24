@@ -389,7 +389,7 @@ MainPanel = function(graph, history){
 				var node = enc.encode(graph.getModel());
 				var mxgraphxml = mxUtils.getPrettyXml(node);
 					mxgraphxml = mxgraphxml.replace(/\"/g,"'");
-					mxgraphxml = encodeURIComponent(mxgraphxml);
+					//mxgraphxml = encodeURIComponent(mxgraphxml);
 					
 				var xmlDoc = mxUtils.createXmlDocument(); 
 		    	var root = xmlDoc.createElement('output'); 
@@ -402,7 +402,7 @@ MainPanel = function(graph, history){
 		    	var h = Math.round(bounds.y + bounds.height + 4); 
 		    	var imgxml = mxUtils.getXml(root);
 		    		imgxml = "<output>"+imgxml+"</output>";
-	                imgxml = encodeURIComponent(imgxml);
+	                //imgxml = encodeURIComponent(imgxml);
             	save_process(mxgraphxml,w,h,imgxml);
             },
             scope:this

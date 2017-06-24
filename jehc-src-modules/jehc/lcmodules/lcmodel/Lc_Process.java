@@ -28,6 +28,8 @@ public class Lc_Process extends BaseEntity implements Serializable{
 	private String lc_process_flag;/**标识:0通过平台设计器设计1通过上传部署**/
 	private String xt_attachment;/**附件编号**/
 	private String lc_process_remark;/**备注**/
+	private String imgxml;/**imgxml**/
+	private String mxgraphxml;
 	public void setLc_process_id(String lc_process_id){
 		this.lc_process_id=lc_process_id;
 	}
@@ -142,4 +144,17 @@ public class Lc_Process extends BaseEntity implements Serializable{
 	public String getLc_process_remark(){
 		return lc_process_remark;
 	}
+	public String getImgxml() {
+		return imgxml;
+	}
+	public void setImgxml(String imgxml) {
+		this.imgxml = imgxml;
+	}
+	public String getMxgraphxml() {
+		return mxgraphxml;
+	}
+	public void setMxgraphxml(String mxgraphxml) {
+		this.mxgraphxml = mxgraphxml;
+	}
+	
 }

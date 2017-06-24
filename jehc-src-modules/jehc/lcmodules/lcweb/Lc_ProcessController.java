@@ -220,8 +220,10 @@ public class Lc_ProcessController  extends BaseAction{
 	@ResponseBody
 	@RequestMapping(value="/createBPMN",method={RequestMethod.POST,RequestMethod.GET})
 	public String createBPMN(Lc_Process lc_Process,MxGraphModel mxGraphModel,HttpServletRequest request,HttpServletResponse response) throws UnsupportedEncodingException{
-		String mxgraphxml = URLDecoder.decode(request.getParameter("mxgraphxml"), "UTF-8");
-		String imgxml = URLDecoder.decode(request.getParameter("imgxml"), "UTF-8");
+//		String mxgraphxml = URLDecoder.decode(request.getParameter("mxgraphxml"), "UTF-8");
+//		String imgxml = URLDecoder.decode(request.getParameter("imgxml"), "UTF-8");
+		String mxgraphxml = lc_Process.getMxgraphxml();
+		String imgxml = lc_Process.getImgxml();
 		mxGraphModel.setMxgraphxml(mxgraphxml);
 		mxGraphModel.setImgxml(imgxml);
 		MxGraphToBPMN MxGraphToBPMN = new MxGraphToBPMN();
