@@ -1,5 +1,7 @@
 package jehc.xtmodules.xtcore.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * UUID生成策略
@@ -7,7 +9,7 @@ package jehc.xtmodules.xtcore.util;
  *
  */
 public class UUID{
-	
+	Logger log = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 生成UUID
 	 * @return
