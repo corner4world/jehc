@@ -13,6 +13,7 @@ import org.dom4j.io.XMLWriter;
 
 import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 /**
  * 生成BPMN文件
@@ -37,7 +38,7 @@ public class MxGraphToBPMN extends BaseAction {
 				mxGraphModel.setBpmn(bpmnxml);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			throw new ExceptionUtil("调用createBPMN出现异常，异常信息："+e.getMessage());
 		}
 		return mxGraphModel;
 	}

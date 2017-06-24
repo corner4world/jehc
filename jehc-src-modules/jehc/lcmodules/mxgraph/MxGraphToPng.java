@@ -45,7 +45,7 @@ public class MxGraphToPng extends BaseAction{
 	public int mxgraphxml_to_png(String url,String imgxml,String imgpath,String w,String h,HttpServletResponse response){
 		int i = 0;
 		try{
-			imgxml = URLDecoder.decode(imgxml, "UTF-8");
+//			imgxml = URLDecoder.decode(imgxml, "UTF-8");
 			handleRequest(url,imgpath,imgxml,w,h,response);
 			i = 1;
 		}catch (Exception e) {
