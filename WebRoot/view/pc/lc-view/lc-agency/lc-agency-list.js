@@ -105,7 +105,6 @@ Ext.onReady(function(){
 		bbar:getGridBBar(store),
 		listeners:{
 			'rowdblclick':function(grid, rowIndex, e){
-				detailLcApproval();
 			}
 		}
 	});

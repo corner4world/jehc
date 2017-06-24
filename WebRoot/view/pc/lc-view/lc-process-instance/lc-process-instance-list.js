@@ -266,7 +266,6 @@ function initLcApprovalGrid(id){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		border:true,
 		selType:'checkboxmodel',
 		viewConfig:{
 			emptyText:'暂无数据',
@@ -326,7 +325,6 @@ function getTaskList(){
 		selType:'cellmodel',
 		multiSelect:true,
 		collapsible:true,
-		border:true,
 		selType:'checkboxmodel',
 		viewConfig:{
 			emptyText:'暂无数据',

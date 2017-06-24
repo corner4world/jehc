@@ -314,7 +314,6 @@ function initassignee(taskId,type){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		border:true,
 		selType:'checkboxmodel',
 		viewConfig:{
 			emptyText:'暂无数据',
@@ -550,7 +549,6 @@ function initLcApprovalGrid(id){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		border:true,
 		selType:'checkboxmodel',
 		viewConfig:{
 			emptyText:'暂无数据',
