@@ -131,28 +131,21 @@ public class MapUtils {
             }  
         }  
     }  
-      
-      
-    public static void main(String[] args) {  
-        Map map = new HashMap();  
-        /**
-        map.put(1, "第一个值是数字");  
-        map.put("2", "第2个值是字符串");  
-        map.put(new String[]{"1","2"},"第3个值是数组");  
-        map.put(new ArrayList(), "第4个值是List");  
-        map.put(new HashMap(), "Map 无值");  
-        map.put("5", "第5个");  
-        **/
-        map.put("6",null);  
-        map.put("7", "");  
-        map.put("8", "  ");  
-        /**
-        System.out.println(map);  
-        MapUtils.removeNullKey(map);  
-        System.out.println();  
-        System.out.println(map); 
-        **/ 
-        MapUtils.removeNullValue(map);  
-        System.out.println(map);  
-    }  
+    
+    /**
+	 * 方法一
+	 * 获取Key Value或者其他的对象 Object可以为对象如Students然后通过Students.属性名获取值
+	 * @param condition
+	 */
+	public static Map<String, Object> resetMap(Map<String, Object> condition){
+		Map<String, Object> map = new HashMap<String, Object>();
+		Set<Map.Entry<String, Object>> set = condition.entrySet();    
+	    for(Iterator<Map.Entry<String, Object>> it = set.iterator();it.hasNext();){   
+		  Map.Entry<String, Object> entry = (Map.Entry<String, Object>)it.next();    
+		  if(!StringUtil.isEmpty(entry.getKey()) && null !=  entry.getValue()){
+			  map.put(entry.getKey(), entry.getValue());
+		  }
+	    }
+	    return map;
+	}
 }

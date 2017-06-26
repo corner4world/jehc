@@ -4,6 +4,9 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.util.MapUtils;
 import net.sf.json.JSONObject;
@@ -14,6 +17,7 @@ import net.sf.json.JSONObject;
  *
  */
 public class BaseSearch {
+	Logger log = LoggerFactory.getLogger(this.getClass());
 	private String searchJson;
 
 	public String getSearchJson() {
@@ -29,11 +33,11 @@ public class BaseSearch {
 		try {
 			if(!StringUtil.isEmpty(searchJson)){
 				Map<String, Object> map = JSONObject.fromObject(URLDecoder.decode(getSearchJson(), "UTF-8"));
-				MapUtils.removeNullValue(map);
+				MapUtils.resetMap(map);
 				return map;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error("查询条件参数转换出现异常："+e.getMessage());
 			new HashMap<String, Object>();
 		}
 		return new HashMap<String, Object>();
