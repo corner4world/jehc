@@ -1,24 +1,10 @@
-JEHC 开源平台，采用技术为：
+http://git.oschina.net/jehc/jehc
 
-spring，springMVC，Mybatis，Activiti5，（Activiti 可视化设计器基于 IE，火狐，谷歌，360 等浏览器），Solr 4.10，MySQL，Netty，Redis，Ehcache，服务器监控模块，tk 压缩，Extjs6.2，RPC 服务 ，Junit 单元测试，Logback 与 Log4j 共用，同时融入了 Hessian，session 共享，数据库读写分离，MQ 消息中间件等技术
+交流群：330370132
 
 效果图片如下：
 
-流程设计器：
-
-
-
- 
-
-主页面：
-
-
-
-代码生成器：
-
-
-
-
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0626/173834_f34c1315_1341290.png "在这里输入图片标题")
 
 菜单管理：
 
@@ -62,7 +48,15 @@ spring，springMVC，Mybatis，Activiti5，（Activiti 可视化设计器基于 
 
 
 
+流程设计器：
+
+
+
 全文检索：
+
+
+
+
 
 
 
@@ -106,7 +100,7 @@ LogBack
 
 
 
- 
+
 
 版本控制
 
@@ -138,5 +132,26 @@ solr实例实体创建
 
 创建索引
 
- 
+
+
+
+
+登录页面：
+
+
+
+主页面：
+
+
+
+代码生成器：
+
+
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0626/173813_a8ce7cfc_1341290.png "在这里输入图片标题")
+
+GIT地址为：
+
+http://git.oschina.net/jehc/jehc
+
+交流群：330370132
 
