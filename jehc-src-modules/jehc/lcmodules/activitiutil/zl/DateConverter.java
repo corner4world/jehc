@@ -5,9 +5,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.beanutils.Converter;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.time.DateUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
+
+import jehc.xtmodules.xtcore.util.DateUtils;
 
 public class DateConverter implements Converter {
 

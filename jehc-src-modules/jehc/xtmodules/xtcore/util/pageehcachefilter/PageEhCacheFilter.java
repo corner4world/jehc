@@ -13,7 +13,7 @@ import net.sf.ehcache.constructs.web.AlreadyGzippedException;
 import net.sf.ehcache.constructs.web.filter.FilterNonReentrantException;
 import net.sf.ehcache.constructs.web.filter.SimplePageCachingFilter;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 /**
