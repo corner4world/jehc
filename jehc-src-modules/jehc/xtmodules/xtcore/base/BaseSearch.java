@@ -33,7 +33,7 @@ public class BaseSearch {
 		try {
 			if(!StringUtil.isEmpty(searchJson)){
 				Map<String, Object> map = JSONObject.fromObject(URLDecoder.decode(getSearchJson(), "UTF-8"));
-				MapUtils.resetMap(map);
+				map = MapUtils.resetMap(map);
 				return map;
 			}
 		} catch (Exception e) {
