@@ -2,6 +2,7 @@ package jehc.xtmodules.xtcore.base;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -16,6 +17,10 @@ import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
 import org.apache.commons.dbcp.BasicDataSourceFactory;
+
+import jehc.xtmodules.xtcore.allutils.StringUtil;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
+import jehc.xtmodules.xtmodel.Xt_Dbinfo;
 /**
  * 做自定义表单使用
  * @author邓纯杰
@@ -65,6 +70,8 @@ public class DBHelper {
         }
         return connection;
     }
+    
+    
 	/**
      * 执行数据库的非查询操作
      * @param sql 要执行的Sql语句
@@ -140,6 +147,104 @@ public class DBHelper {
         }
     }
     
+    
+    
+    
+	/**
+     * 关闭数据库所有链接
+     * @param connection    Connection链接对象
+     * @param pStatement    pStatement链接对象
+     * @param resultSet        resultSet对象
+     */
+    protected void closeAll(Connection connection,PreparedStatement pStatement,ResultSet resultSet){
+        try {
+            if (resultSet != null) {
+                resultSet.close();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("关闭resultSet时出错了",e);
+        }finally{
+            try {
+                if (pStatement != null) {
+                    pStatement.close();                
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException("关闭pStatement时出错了！",e);
+            }finally{
+                try {
+                    if (connection != null) {
+                        connection.close();
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException("关闭connection链接时出错了！",e);
+                }
+            }
+        }
+    }    
+    
+    
+    ///////////////////////////////////////自定义连接开始（用于flexsearch）//////////////////////////////////////
+    /**
+     * 获取连接（用于自定义查询如sql查询器）
+     * @param xt_dbinfo_id
+     * @return
+     */
+    public static Connection getConnection(Xt_Dbinfo xt_Dbinfo) {
+        Connection conn = null;
+        try {
+        	String xt_dbinfoType = xt_Dbinfo.getXt_dbinfoType();
+        	if(StringUtil.isEmpty(xt_dbinfoType)){
+        		throw new ExceptionUtil("未能获取到数据库类型");
+        	}
+        	String dbName = xt_Dbinfo.getXt_dbinfoName();
+        	String port = xt_Dbinfo.getXt_dbinfoPort();
+        	String ip = xt_Dbinfo.getXt_dbinfoIp();
+        	String driver = null;
+        	String url = null;
+        	String user = xt_Dbinfo.getXt_dbinfoUName();
+        	String password = xt_Dbinfo.getXt_dbinfoPwd();
+        	//1mysql
+        	if(("mysql").equals(xt_dbinfoType)){
+        		
+        		driver = "com.mysql.jdbc.Driver"; //数据库驱动
+                url = "jdbc:mysql://"+ip+":"+port+"/"+dbName+"?useOldAliasMetadataBehavior=true&amp;useUnicode=true&amp;characterEncoding=utf8&allowMultiQueries=true";//数据库
+        	
+        	}else if(("sqlserver").equals(xt_dbinfoType)){
+        		
+        		driver = "com.microsoft.sqlserver.jdbc.SQLServerDriver"; //数据库驱动
+                url = "jdbc:sqlserver://"+ip+":"+port+";DatabaseName="+dbName;//数据库
+                
+        	}else if(("oracle").equals(xt_dbinfoType)){
+        		
+        		driver = "oracle.jdbc.driver.OracleDriver"; //数据库驱动
+                url = "jdbc:oracle:thin:@"+ip+":"+port+"/"+dbName;//数据库
+        	
+        	}else if(("sybase").equals(xt_dbinfoType)){
+        		
+        		driver = "com.sybase.jdbc2.jdbc.SybDriver"; //数据库驱动
+                url = "jdbc:sybase:Tds:"+ip+":"+port+"/"+dbName;//数据库
+        	
+        	}else if(("db2").equals(xt_dbinfoType)){
+        		
+        		driver = "com.ibm.db2.jdbc.net.DB2Driver"; //数据库驱动
+                url = "jdbc:db2://"+ip+":"+port+"/"+dbName;//数据库
+        	
+        	}
+            Class.forName(driver); //加载数据库驱动
+            if (null == conn) {
+                conn = DriverManager.getConnection(url, user, password);
+            }
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("未能找到驱动",e);
+        } catch (SQLException e) {
+            throw new RuntimeException("获取sql连接出现异常",e);
+        } catch (Exception e) {
+        	throw new RuntimeException("获取连接出现异常",e);
+        }
+        return conn;
+    }
+    
+    
     /**
      * 重写方法为了使用自定义表单 
      * 执行查询工作
@@ -149,9 +254,9 @@ public class DBHelper {
      * @return 对象的List集合 List对象为Object类型
      */
     @SuppressWarnings("unchecked")
-    public <T> List executdQueryForObject(String sql,Object[]param,Class<T> clazz){
+    public <T> List executdQueryForObject(String sql,Object[]param,Class<T> clazz,Xt_Dbinfo xt_Dbinfo){
         List<Object> ls = null;
-        Connection connection = getConnection();
+        Connection connection = getConnection(xt_Dbinfo);
         PreparedStatement pStatement = null;
         ResultSet resultSet = null;
         try {
@@ -188,8 +293,8 @@ public class DBHelper {
      * @param rp ResultParse接口对象
      * @return 对象的List集合 List对象为Object类型
      */
-    public <T> String executdQueryJosnForObject(String sql,Object[]param,Class<T> clazz){
-        Connection connection = getConnection();
+    public <T> String executdQueryJosnForFlex(String sql,Object[]param,Class<T> clazz,Xt_Dbinfo xt_Dbinfo){
+        Connection connection = getConnection(xt_Dbinfo);
         PreparedStatement pStatement = null;
         ResultSet resultSet = null;
         StringBuffer jsonStr = new StringBuffer();
@@ -257,35 +362,28 @@ public class DBHelper {
         }
         return jsonStr.toString();
     }
-	/**
-     * 关闭数据库所有链接
-     * @param connection    Connection链接对象
-     * @param pStatement    pStatement链接对象
-     * @param resultSet        resultSet对象
+    
+    
+    /**
+     * 执行数据库的非查询操作
+     * @param sql 要执行的Sql语句
+     * @param param 参数列表
+     * @return 受影响的行数
      */
-    protected void closeAll(Connection connection,PreparedStatement pStatement,ResultSet resultSet){
+    public int executeUpdateForFlex(String sql,Object[]param,Xt_Dbinfo xt_Dbinfo) {
+        int num = 0;
+        Connection connection = getConnection(xt_Dbinfo);
+        PreparedStatement pStatement = null;
         try {
-            if (resultSet != null) {
-                resultSet.close();
-            }
+            pStatement = connection.prepareStatement(sql);
+            addParamters(param, pStatement);
+            num = pStatement.executeUpdate();
         } catch (SQLException e) {
-            throw new RuntimeException("关闭resultSet时出错了",e);
+            throw new RuntimeException("执行非查询操作时出错了！",e);
         }finally{
-            try {
-                if (pStatement != null) {
-                    pStatement.close();                
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException("关闭pStatement时出错了！",e);
-            }finally{
-                try {
-                    if (connection != null) {
-                        connection.close();
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException("关闭connection链接时出错了！",e);
-                }
-            }
+        	closeAll(connection, pStatement, null);
         }
-    }    
+        return num;
+    }
+    ///////////////////////////////////////自定义连接结束（用于flexsearch）//////////////////////////////////////
 }

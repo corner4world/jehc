@@ -178,7 +178,7 @@ function flexQuery(){
 	if(flexform.form.isValid()){   
 	   	 flexform.form.submit({                    
 	        url:'../xtFlexSearchController/flexQuery',
-	        params:{ajaxform:0},
+	        params:{ajaxform:0,xt_dbinfo_id:xt_dbinfo_id},
 	        waitTitle:'提示',
 	        timeout:6000000,/**设置超时时间100分钟**/
 	        waitMsg:'正在执行SQL语句操作，请稍后...',                      
@@ -214,7 +214,7 @@ function initXtTablePanel(){
                     type:'json',  
                     rootProperty:'items'  
                 },
-				extraParams:{id:'0'}  
+				extraParams:{id:'0',xt_dbinfo_id:xt_dbinfo_id}  
          }  
 	});  
 	//2创建treePanel
@@ -240,7 +240,7 @@ function initXtTablePanel(){
                 	//异步从服务器上加载数据  extjs会自动帮我们解析  
                     type:'ajax',  
                     url:'../xtFlexSearchController/getXtFlexSearchTablesTree',  
-                    extraParams:{id:id}
+                    extraParams:{id:id,xt_dbinfo_id:xt_dbinfo_id}
                  });  
             },
             itemclick:function(node,optd){
@@ -265,7 +265,7 @@ function initXtViewPanel(){
                     type:'json',  
                     rootProperty:'items'  
                 },
-				extraParams:{id:'0'}  
+				extraParams:{id:'0',xt_dbinfo_id:xt_dbinfo_id}  
          }  
 	});  
 	//2创建treePanel
@@ -291,7 +291,7 @@ function initXtViewPanel(){
                 	//异步从服务器上加载数据  extjs会自动帮我们解析  
                     type:'ajax',  
                     url:'../xtFlexSearchController/getXtFlexSearchViewTree',  
-                    extraParams:{id:id}
+                    extraParams:{id:id,xt_dbinfo_id:xt_dbinfo_id}
                  });  
             },
             itemclick:function(node,optd){
@@ -317,7 +317,7 @@ function initXtProPanel(){
                     type:'json',  
                     rootProperty:'items'  
                 },
-				extraParams:{id:'0'}  
+				extraParams:{id:'0',xt_dbinfo_id:xt_dbinfo_id}  
          }  
 	});  
 	//2创建treePanel
@@ -343,7 +343,7 @@ function initXtProPanel(){
                 	//异步从服务器上加载数据  extjs会自动帮我们解析  
                     type:'ajax',  
                     url:'../xtFlexSearchController/getXtFlexSearchProTree',  
-                    extraParams:{id:id}
+                    extraParams:{id:id,xt_dbinfo_id:xt_dbinfo_id}
                  });  
             },
             itemclick:function(node,optd){
@@ -371,7 +371,7 @@ function initXtFunPanel(){
                     type:'json',  
                     rootProperty:'items'  
                 },
-				extraParams:{id:'0'}  
+				extraParams:{id:'0',xt_dbinfo_id:xt_dbinfo_id}  
          }  
 	});  
 	//2创建treePanel
@@ -397,7 +397,7 @@ function initXtFunPanel(){
                 	//异步从服务器上加载数据  extjs会自动帮我们解析  
                     type:'ajax',  
                     url:'../xtFlexSearchController/getXtFlexSearchFunTree',  
-                    extraParams:{id:id}
+                    extraParams:{id:id,xt_dbinfo_id:xt_dbinfo_id}
                  });  
             },
             itemclick:function(node,optd){
@@ -423,7 +423,7 @@ function initXtTriPanel(){
                     type:'json',  
                     rootProperty:'items'  
                 },
-				extraParams:{id:'0'}  
+				extraParams:{id:'0',xt_dbinfo_id:xt_dbinfo_id}  
          }  
 	});  
 	//2创建treePanel
@@ -449,7 +449,7 @@ function initXtTriPanel(){
                 	//异步从服务器上加载数据  extjs会自动帮我们解析  
                     type:'ajax',  
                     url:'../xtFlexSearchController/getXtFlexSearchTriTree',  
-                    extraParams:{id:id}
+                    extraParams:{id:id,xt_dbinfo_id:xt_dbinfo_id}
                  });  
             },
             itemclick:function(node,optd){

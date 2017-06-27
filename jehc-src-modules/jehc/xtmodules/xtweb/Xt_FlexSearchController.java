@@ -11,11 +11,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
@@ -53,7 +55,11 @@ public class Xt_FlexSearchController extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value="/loadXtFlexSearch",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadXtFlexSearch(){
+	public ModelAndView loadXtFlexSearch(String xt_dbinfo_id,Model model){
+		if(StringUtil.isEmpty(xt_dbinfo_id)){
+			throw new ExceptionUtil("未能获取到所选数据库编号（xt_dbinfo_id）");
+		}
+		model.addAttribute("xt_dbinfo_id", xt_dbinfo_id);
 		return new ModelAndView("pc/xt-view/xt-flexsearch/xt-flexsearch");
 	} 
 	
@@ -72,14 +78,14 @@ public class Xt_FlexSearchController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/flexQuery",method={RequestMethod.POST,RequestMethod.GET})
-	public String flexQuery(String sqlType,String sql){
+	public String flexQuery(String sqlType,String sql,String xt_dbinfo_id){
 		Xt_FlexSearchService xtFlexSearchService = new Xt_FlexSearchServiceImpl();
 		int i = validateSQL(sqlType,sql);
 		String json = "";
 		if(i == 1){
-			json = xtFlexSearchService.getXtFlexSearchListQuery(sql, null);
+			json = xtFlexSearchService.getXtFlexSearchListQuery(sql, null,xt_dbinfo_id);
 		}else if(i == 2){
-			json = xtFlexSearchService.executeUpdate(sql, null);
+			json = xtFlexSearchService.executeUpdate(sql, null,xt_dbinfo_id);
 		}
 		return outStr(json);
 	}
@@ -91,7 +97,7 @@ public class Xt_FlexSearchController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getXtFlexSearchTablesTree",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtFlexSearchTablesTree(HttpServletRequest request, HttpServletResponse response){
+	public String getXtFlexSearchTablesTree(HttpServletRequest request,String xt_dbinfo_id, HttpServletResponse response){
 		String id = request.getParameter("id");
 		Map<String, Object> condition = new HashMap<String, Object>();
 		condition.put("dbName", CommonUtils.getXtConstantCache("XtDbname").getXt_constantValue());
@@ -178,7 +184,7 @@ public class Xt_FlexSearchController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getXtFlexSearchViewTree",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtFlexSearchViewTree(HttpServletRequest request, HttpServletResponse response){
+	public String getXtFlexSearchViewTree(HttpServletRequest request,String xt_dbinfo_id, HttpServletResponse response){
 		String id = request.getParameter("id");
 		Map<String, Object> condition = new HashMap<String, Object>();
 		condition.put("dbName", CommonUtils.getXtConstantCache("XtDbname").getXt_constantValue());
@@ -206,7 +212,7 @@ public class Xt_FlexSearchController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getXtFlexSearchProTree",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtFlexSearchProTree(HttpServletRequest request, HttpServletResponse response){
+	public String getXtFlexSearchProTree(HttpServletRequest request,String xt_dbinfo_id, HttpServletResponse response){
 		String id = request.getParameter("id");
 		Map<String, Object> condition = new HashMap<String, Object>();
 		condition.put("dbName", CommonUtils.getXtConstantCache("XtDbname").getXt_constantValue());
@@ -234,7 +240,7 @@ public class Xt_FlexSearchController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getXtFlexSearchFunTree",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtFlexSearchFunTree(HttpServletRequest request, HttpServletResponse response){
+	public String getXtFlexSearchFunTree(HttpServletRequest request,String xt_dbinfo_id, HttpServletResponse response){
 		String id = request.getParameter("id");
 		Map<String, Object> condition = new HashMap<String, Object>();
 		condition.put("dbName", CommonUtils.getXtConstantCache("XtDbname").getXt_constantValue());
@@ -262,7 +268,7 @@ public class Xt_FlexSearchController extends BaseAction {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getXtFlexSearchTriTree",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtFlexSearchTriTree(HttpServletRequest request, HttpServletResponse response){
+	public String getXtFlexSearchTriTree(HttpServletRequest request,String xt_dbinfo_id, HttpServletResponse response){
 		String id = request.getParameter("id");
 		Map<String, Object> condition = new HashMap<String, Object>();
 		condition.put("sql", "SHOW TRIGGERS FROM "+CommonUtils.getXtConstantCache("XtDbname").getXt_constantValue());

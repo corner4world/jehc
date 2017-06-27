@@ -36,6 +36,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			display:block;
 		}
 	</style>
+	<script type="text/javascript">
+		var xt_dbinfo_id = '${xt_dbinfo_id}';
+	</script>
 </head>  
 <body>  
 </body>  

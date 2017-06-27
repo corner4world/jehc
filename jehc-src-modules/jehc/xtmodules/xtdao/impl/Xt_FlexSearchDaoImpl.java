@@ -5,6 +5,7 @@ import java.util.Map;
 
 import jehc.xtmodules.xtcore.base.DBHelper;
 import jehc.xtmodules.xtdao.Xt_FlexSearchDao;
+import jehc.xtmodules.xtmodel.Xt_Dbinfo;
 import net.sf.json.JSONArray;
 /**
  * 查询工具
@@ -19,9 +20,9 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public String getXtFlexSearchQuery(String sql, Object[] param) {
+	public String getXtFlexSearchQuery(String sql, Object[] param,Xt_Dbinfo xt_Dbinfo) {
 		DBHelper dbHelper = new DBHelper();
-		List<Map<String, Object>> lmList = dbHelper.executdQueryForObject(sql, null, Object.class);
+		List<Map<String, Object>> lmList = dbHelper.executdQueryForObject(sql, null, Object.class,xt_Dbinfo);
 		JSONArray jsonArray = new JSONArray();
 		for(int j = 0; j < lmList.size(); j++){
 			Map<String, Object> map = lmList.get(j);
@@ -36,9 +37,9 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @param param
 	 * @return
 	 */
-	public String getXtFlexSearchListQuery(String sql, Object[] param) {
+	public String getXtFlexSearchListQuery(String sql, Object[] param,Xt_Dbinfo xt_Dbinfo) {
 		DBHelper dbHelper = new DBHelper();
-		return dbHelper.executdQueryJosnForObject(sql, null, Object.class);
+		return dbHelper.executdQueryJosnForFlex(sql, null, Object.class,xt_Dbinfo);
 	}
 	
 	/**
@@ -47,8 +48,9 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @param param
 	 * @return
 	 */
-	public Integer executeUpdate(String sql, Object[] param){
+	public Integer executeUpdate(String sql, Object[] param,Xt_Dbinfo xt_Dbinfo){
 		DBHelper dbHelper = new DBHelper();
-		return dbHelper.executeUpdate(sql, param);
+		return dbHelper.executeUpdateForFlex(sql, param,xt_Dbinfo);
 	}
+	
 }
