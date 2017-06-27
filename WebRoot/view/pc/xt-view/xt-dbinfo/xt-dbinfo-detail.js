@@ -95,6 +95,23 @@ function initXtDbinfoFormDetail(){
 			name:'xt_dbinfoPort',
 			maxLength:255,
 			anchor:'100%'
+		},
+		{
+			fieldLabel:'类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型',
+			allowBlank:false,
+			msgTarget:'side',/**qtip、title、under、side、none**/
+			emptyText:'请选择数据库类型',
+			xtype:'combo',
+			store:xt_dbinfo_type_combo,
+			mode:'local',
+			triggerAction:'all',
+			editable:false,
+			hiddenName:'xt_dbinfoType',
+			valueField:'value',
+			displayField:'text',
+			name:'xt_dbinfoType',
+			maxLength:255,
+			anchor:'100%'
 		}
 		]
 	});

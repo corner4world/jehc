@@ -10,7 +10,8 @@
 			`xt_dbinfoUName`,
 			`xt_dbinfoPwd`,
 			`xt_dbinfoIp`,
-			`xt_dbinfoPort`
+			`xt_dbinfoPort`,
+			`xt_dbinfoType`
 		FROM 
 			xt_dbinfo
 		WHERE 1=1
@@ -27,7 +28,8 @@
 			`xt_dbinfoUName`,
 			`xt_dbinfoPwd`,
 			`xt_dbinfoIp`,
-			`xt_dbinfoPort`
+			`xt_dbinfoPort`,
+			`xt_dbinfoType`
 		FROM 
 			xt_dbinfo
 		WHERE xt_dbinfo_id=#{xt_dbinfo_id}
@@ -43,7 +45,8 @@
 			`xt_dbinfoUName`,
 			`xt_dbinfoPwd`,
 			`xt_dbinfoIp`,
-			`xt_dbinfoPort`
+			`xt_dbinfoPort`,
+			`xt_dbinfoType`
 			)
 			VALUES
 			(
@@ -52,7 +55,8 @@
 			#{xt_dbinfoUName},
 			#{xt_dbinfoPwd},
 			#{xt_dbinfoIp},
-			#{xt_dbinfoPort}
+			#{xt_dbinfoPort},
+			#{xt_dbinfoType}
 			)
 	</insert>
 
@@ -66,7 +70,8 @@
 			`xt_dbinfoUName` = #{xt_dbinfoUName},
 			`xt_dbinfoPwd` = #{xt_dbinfoPwd},
 			`xt_dbinfoIp` = #{xt_dbinfoIp},
-			`xt_dbinfoPort` = #{xt_dbinfoPort}
+			`xt_dbinfoPort` = #{xt_dbinfoPort},
+			`xt_dbinfoType` = #{xt_dbinfoType}
 		WHERE xt_dbinfo_id=#{xt_dbinfo_id}
 	</update>
 

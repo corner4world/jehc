@@ -14,6 +14,7 @@ public class Xt_Dbinfo implements Serializable{
 	private String xt_dbinfoPwd;/**据库数密码**/
 	private String xt_dbinfoIp;/**份备IP**/
 	private String xt_dbinfoPort;/**端口号**/
+	private String xt_dbinfoType;/**数据库类型**/
 	public void setXt_dbinfo_id(String xt_dbinfo_id){
 		this.xt_dbinfo_id=xt_dbinfo_id;
 	}
@@ -50,4 +51,12 @@ public class Xt_Dbinfo implements Serializable{
 	public String getXt_dbinfoPort(){
 		return xt_dbinfoPort;
 	}
+	public String getXt_dbinfoType() {
+		return xt_dbinfoType;
+	}
+	public void setXt_dbinfoType(String xt_dbinfoType) {
+		this.xt_dbinfoType = xt_dbinfoType;
+	}
+	
+	
 }

@@ -43,6 +43,15 @@ public class Xt_FlexSearchController extends BaseAction {
 	 * 载入查询工具页面
 	 * @return
 	 */
+	@RequestMapping(value="/loadXtFlexSearchForSelDb",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView loadXtFlexSearchForSelDb(){
+		return new ModelAndView("pc/xt-view/xt-flexsearch/xt-flexsearch-forselDb");
+	} 
+	
+	/**
+	 * 载入查询工具页面
+	 * @return
+	 */
 	@RequestMapping(value="/loadXtFlexSearch",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView loadXtFlexSearch(){
 		return new ModelAndView("pc/xt-view/xt-flexsearch/xt-flexsearch");

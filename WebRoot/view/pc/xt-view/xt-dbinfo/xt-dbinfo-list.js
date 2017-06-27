@@ -1,6 +1,11 @@
 var store;
 var grid;
+var xt_dbinfo_type_combo;
 Ext.onReady(function(){
+	xt_dbinfo_type_combo =Ext.create('Ext.data.SimpleStore',{ 
+        fields:['value','text'],  
+		data:[["mysql","mysql"],["oracle","oracle"],["sqlserver","sqlserver"],["db2","db2"],["sybase","sybase"]]
+	});
 	/**查询区域可扩展**/
 	var items = Ext.create('Ext.FormPanel',{
 		xtype:'form',
@@ -63,12 +68,16 @@ Ext.onReady(function(){
 				dataIndex:'xt_dbinfoPwd'
 			},
 			{
-				header:'IP',
+				header:'ip',
 				dataIndex:'xt_dbinfoIp'
 			},
 			{
-				header:'端口号',
+				header:'端口',
 				dataIndex:'xt_dbinfoPort'
+			},
+			{
+				header:'类型',
+				dataIndex:'xt_dbinfoType'
 			}
 		],
 		tbar:[
