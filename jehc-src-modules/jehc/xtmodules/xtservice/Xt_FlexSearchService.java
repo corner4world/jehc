@@ -54,7 +54,7 @@ public interface Xt_FlexSearchService {
 	* 查询表索引
 	* @return
 	*/
-	public List<Xt_Db_TableIndex> getXtDbTableIndexForFlex(String xt_dbinfo_id);
+	public List<Xt_Db_TableIndex> getXtDbTableIndexForFlex(String xt_dbinfo_id,String tableName);
 	
 	/**
 	* 查询存储过程
