@@ -12,18 +12,18 @@ Ext.onReady(function(){
 		fields:['xt_dbinfo_id', 'xt_dbinfoName'],
 		autoLoad:true 
 	});
-	var xtDbinfoPanel = Ext.create('Ext.Window',{
+	var xtDbinfoPanel = Ext.create('Ext.FormPanel',{
 		xtype:'form',
-		waitMsgTarget:true,
 		renderTo:Ext.getBody(),
-		autoScroll:true,
-		draggable:true,
+		headerPosition:'top',
+		maximized:true,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'right',
 			flex:1,
 			margin:'4 5 4 5'
 		},
+		defaultType:'textfield',
 		/**
 		region:'center',
 		layout:{
@@ -33,7 +33,7 @@ Ext.onReady(function(){
 		},
 		**/
 		collapsible:true,
-		title:'查询选择器则需要选择指定数据库',
+		title:'选择指定数据库',
 		titleAlign:'left',
 		width:500,
 		closable:false,
@@ -42,14 +42,18 @@ Ext.onReady(function(){
 			text:'确认',
 			handler:function(){
 				var xt_dbinfo_id = gValue('xt_dbinfo_id');
-				window.location.href="../xtFlexSearchController/loadXtFlexSearch?xt_dbinfo_id="+xt_dbinfo_id;
+				Ext.Msg.confirm('提示','确定要操作该数据？',function(btn){
+					if(btn == 'yes'){
+						window.location.href="../xtFlexSearchController/loadXtFlexSearch?xt_dbinfo_id="+xt_dbinfo_id;
+					}
+				});
 			}
 		}],
 		items:[{
 				allowBlank:false,
 				msgTarget:'side',/**qtip、title、under、side、none**/
 				emptyText:'请选择数据库',
-				fieldLabel:'数据库名',
+				fieldLabel:'数&nbsp;据&nbsp;库',
 				xtype:'combo',
 				store:xt_dbinfo_id_combo,
 				mode:'local',
@@ -60,45 +64,47 @@ Ext.onReady(function(){
 				displayField:'xt_dbinfoName',
 				id:'xt_dbinfo_id',
 				name:'xt_dbinfo_id',
+				anchor:'100%',
+				pageSize:30,
 				listeners:{
 	                select:function(combo,records,options){
-	                	sValue('ip',"<font color=red>"+records.data.xt_dbinfoIp+"</font>");
-	                	sValue('port',"<font color=red>"+records.data.xt_dbinfoPort+"</font>");
-	                	sValue('xt_dbinfoUName',"<font color=red>"+records.data.xt_dbinfoUName+"</font>");
-	                	sValue('xt_dbinfoPwd',"xxx xxx</font>");
-	                	sValue('dbType',"<font color=red>"+records.data.xt_dbinfoType+"</font>");
+	                	sValue('ip',records.data.xt_dbinfoIp);
+	                	sValue('port',records.data.xt_dbinfoPort);
+	                	sValue('xt_dbinfoUName',records.data.xt_dbinfoUName);
+	                	sValue('xt_dbinfoPwd',"xxx xxx");
+	                	sValue('dbType',records.data.xt_dbinfoType);
 	                }
 	            }
 			},
 			{
-				xtype:'displayfield',
-				fieldLabel:'地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址',
-				id:'ip',
-				anchor:'100%'
-			},
-			{
-				xtype:'displayfield',
 				fieldLabel:'端&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;口',
 				id:'port',
-				anchor:'100%'
+				readOnly:true,
+				anchor:'40%'
 			},
 			{
-				xtype:'displayfield',
-				fieldLabel:'用&nbsp;户&nbsp;&nbsp;名',
-				id:'xt_dbinfoUName',
-				anchor:'100%'
-			},
-			{
-				xtype:'displayfield',
-				fieldLabel:'密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码',
-				id:'xt_dbinfoPwd',
-				anchor:'100%'
-			},
-			{
-				xtype:'displayfield',
 				fieldLabel:'类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型',
 				id:'dbType',
-				anchor:'100%'
+				readOnly:true,
+				anchor:'40%'
+			},
+			{
+				fieldLabel:'地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址',
+				id:'ip',
+				readOnly:true,
+				anchor:'60%'
+			},
+			{
+				fieldLabel:'用&nbsp;户&nbsp;名',
+				id:'xt_dbinfoUName',
+				readOnly:true,
+				anchor:'60%'
+			},
+			{
+				fieldLabel:'密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码',
+				id:'xt_dbinfoPwd',
+				readOnly:true,
+				anchor:'60%'
 			}]
-	}).show();
+	})
 });
