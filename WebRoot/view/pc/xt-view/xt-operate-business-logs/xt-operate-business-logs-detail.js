@@ -95,14 +95,14 @@ function initXtOperateBusinessLogsFormDetail(){
 			xtype:'textfield',
 			name:'xt_operate_business_logsTime',
 			maxLength:20,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'操&nbsp;&nbsp;作&nbsp;&nbsp;人',
 			xtype:'textfield',
 			name:'xt_userinfo_realName',
 			maxLength:32,
-			anchor:'100%'
+			anchor:'40%'
 		}
 		]
 	});

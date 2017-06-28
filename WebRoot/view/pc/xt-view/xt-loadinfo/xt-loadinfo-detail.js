@@ -73,28 +73,28 @@ function initXtLoadinfoFormDetail(){
 			xtype:'numberfield',
 			value:'0',
 			name:'xt_loadinfo_time',
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'载入时间',
 			xtype:'datefield',
 			format:'Y-m-d H:i:s',
 			name:'xt_loadinfo_begtime',
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'结束时间',
 			xtype:'datefield',
 			format:'Y-m-d H:i:s',
 			name:'xt_loadinfo_endtime',
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'操&nbsp;作&nbsp;&nbsp;人',
 			xtype:'textfield',
 			name:'xt_userinfo_realName',
 			maxLength:32,
-			anchor:'100%'
+			anchor:'40%'
 		}
 		]
 	});

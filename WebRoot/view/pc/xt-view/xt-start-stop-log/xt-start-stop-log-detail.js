@@ -66,14 +66,14 @@ function initXtStartStopLogFormDetail(){
 			xtype:'textfield',
 			name:'xt_start_stop_log_starttime',
 			maxLength:32,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'停止时间',
 			xtype:'textfield',
 			name:'xt_start_stop_log_stoptime',
 			maxLength:32,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
@@ -82,7 +82,7 @@ function initXtStartStopLogFormDetail(){
 			name:"xt_start_stop_log_iserror",
             hiddenName:'xt_start_stop_log_iserror',
             xtype:"combo",
-            anchor:'100%',
+            anchor:'40%',
             store:[["0","正常"],["1","异常"]],
             emptyText:"请选择",
             mode:"local",

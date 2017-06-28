@@ -66,34 +66,34 @@ function initXtQuartzLogFormDetail(){
 			xtype:'textfield',
 			name:'xt_quartz_log_name',
 			maxLength:100,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'调度内容',
-			xtype:'textareafield',
-			name:'xt_quartz_log_content',
-			maxLength:500,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'开始时间',
 			xtype:'textfield',
 			name:'xt_quartz_log_ctime',
 			maxLength:30,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'结束时间',
 			xtype:'textfield',
 			name:'xt_quartz_log_etime',
 			maxLength:30,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'运行标识',
 			xtype:'textfield',
 			name:'xt_quartz_log_flag',
 			maxLength:20,
+			anchor:'40%'
+		},
+		{
+			fieldLabel:'调度内容',
+			xtype:'textareafield',
+			name:'xt_quartz_log_content',
+			maxLength:500,
 			anchor:'100%'
 		}
 		]

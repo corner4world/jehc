@@ -66,47 +66,47 @@ function initXtLoginLogsFormDetail(){
 			xtype:'textfield',
 			name:'xt_login_logIP',
 			maxLength:20,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'登&nbsp;录&nbsp;时&nbsp;间',
 			xtype:'textfield',
 			name:'xt_login_logtime',
 			maxLength:20,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'登&nbsp;陆&nbsp;日&nbsp;志',
-			xtype:'textfield',
-			name:'xt_login_logContent',
-			maxLength:200,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'浏览器类型',
 			xtype:'textfield',
 			name:'xt_login_log_browser_type',
 			maxLength:200,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'浏览器名称',
 			xtype:'textfield',
 			name:'xt_login_log_browser_name',
 			maxLength:200,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'浏览器版本',
 			xtype:'textfield',
 			name:'xt_login_log_browser_version',
 			maxLength:200,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'操&nbsp;作&nbsp;系&nbsp;统',
 			xtype:'textfield',
 			name:'xt_login_log_system',
+			maxLength:200,
+			anchor:'40%'
+		},
+		{
+			fieldLabel:'登&nbsp;陆&nbsp;日&nbsp;志',
+			xtype:'textareafield',
+			name:'xt_login_logContent',
 			maxLength:200,
 			anchor:'100%'
 		},
@@ -115,7 +115,7 @@ function initXtLoginLogsFormDetail(){
 			xtype:'textfield',
 			name:'xt_userinfo_realName',
 			maxLength:32,
-			anchor:'100%'
+			anchor:'40%'
 		}
 		]
 	});

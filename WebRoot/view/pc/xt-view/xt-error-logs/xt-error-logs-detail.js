@@ -76,7 +76,7 @@ function initXtErrorLogsFormDetail(){
 			value:'0',
 			readOnly:true,
 			name:'xt_error_logType',
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'出错时间',
@@ -84,7 +84,7 @@ function initXtErrorLogsFormDetail(){
 			name:'xt_error_logTime',
 			maxLength:20,
 			readOnly:true,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'操&nbsp;&nbsp;作&nbsp;&nbsp;人',
@@ -92,7 +92,7 @@ function initXtErrorLogsFormDetail(){
 			readOnly:true,
 			name:'xt_userinfo_realName',
 			maxLength:32,
-			anchor:'100%'
+			anchor:'40%'
 		}
 		]
 	});
