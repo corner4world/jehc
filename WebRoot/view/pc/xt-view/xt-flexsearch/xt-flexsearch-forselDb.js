@@ -15,11 +15,14 @@ Ext.onReady(function(){
 	var xtDbinfoPanel = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		headerPosition:'top',
+		/**新方法使用结束**/
+		bodyStyle:'background-color:#E6E6E6;',  
 		fieldDefaults:{
 			labelWidth:70,
-			labelAlign:'right',
+			labelAlign:'left',
 			flex:1,
-			margin:'4 5 4 5'
+			margin:'2 5 4 5',
+		    style:'background:#E6E6E6'
 		},
 		style:'padding:15px 5px 5px 15px',
 		defaultType:'textfield',
