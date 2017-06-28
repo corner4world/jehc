@@ -1,5 +1,6 @@
 package jehc.xtmodules.xtdao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -68,6 +69,11 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @return
 	 */
 	public List<Xt_Db_TableAttribute> getXtDbTableAttributeForFlex(String sql,Xt_Dbinfo xt_Dbinfo){
+		DBHelper dbHelper = new DBHelper();
+		List<Map<String, Object>> list = dbHelper.executdQueryForObject(sql, null, Object.class,xt_Dbinfo);
+		for(int j = 0; j < list.size(); j++){
+			Map<String, Object> map = list.get(j);
+		}
 		return null;
 	}
 	/**
@@ -75,6 +81,8 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @return
 	 */
 	public List<Xt_Db_TableIndex> getXtDbTableIndexForFlex(String sql,Xt_Dbinfo xt_Dbinfo){
+		DBHelper dbHelper = new DBHelper();
+		List<Map<String, Object>> list = dbHelper.executdQueryForObject(sql, null, Object.class,xt_Dbinfo);
 		return null;
 	}
 	
@@ -83,6 +91,8 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @return
 	 */
 	public  List<Xt_Db_Proc> getXtDbProcListForFlex(String sql,Xt_Dbinfo xt_Dbinfo){
+		DBHelper dbHelper = new DBHelper();
+		List<Map<String, Object>> list = dbHelper.executdQueryForObject(sql, null, Object.class,xt_Dbinfo);
 		return null;
 	}
 	
@@ -92,6 +102,8 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @return
 	 */
 	public  List<Xt_Db_Fun> getXtDbFunListForFlex(String sql,Xt_Dbinfo xt_Dbinfo){
+		DBHelper dbHelper = new DBHelper();
+		List<Map<String, Object>> list = dbHelper.executdQueryForObject(sql, null, Object.class,xt_Dbinfo);
 		return null;
 	}
 	
@@ -101,6 +113,8 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @return
 	 */
 	public  List<Xt_Db_View> getXtDbViewListForFlex(String sql,Xt_Dbinfo xt_Dbinfo){
+		DBHelper dbHelper = new DBHelper();
+		List<Map<String, Object>> list = dbHelper.executdQueryForObject(sql, null, Object.class,xt_Dbinfo);
 		return null;
 	}
 	
@@ -108,6 +122,8 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * 查询触发器
 	 */
 	public  List<Xt_Db_Tri> getXtDbTriListForFlex(String sql,Xt_Dbinfo xt_Dbinfo){
+		DBHelper dbHelper = new DBHelper();
+		List<Map<String, Object>> list = dbHelper.executdQueryForObject(sql, null, Object.class,xt_Dbinfo);
 		return null;
 	}
 	
@@ -118,6 +134,12 @@ public class Xt_FlexSearchDaoImpl implements Xt_FlexSearchDao {
 	 * @return
 	 */
 	public List<Xt_Db_Structure> getXtDbStructureForFlex(String sql,Xt_Dbinfo xt_Dbinfo){
-		return null;
+		List<Xt_Db_Structure> dbStructureList = new ArrayList<Xt_Db_Structure>();
+		DBHelper dbHelper = new DBHelper();
+		List<Map<String, Object>> list = dbHelper.executdQueryForObject(sql, null, Object.class,xt_Dbinfo);
+		for(int j = 0; j < list.size(); j++){
+			Map<String, Object> map = list.get(j);
+		}
+		return dbStructureList;
 	}
 }

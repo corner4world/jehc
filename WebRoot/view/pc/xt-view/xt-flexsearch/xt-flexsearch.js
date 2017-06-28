@@ -91,7 +91,7 @@ function initAccordionPanel(){
     });
 }
 Ext.onReady(function(){
-	initAccordionPanel();
+//	initAccordionPanel();
 	reGetWidthAndHeight();
 	flexform = Ext.create('Ext.FormPanel',{
 		region:'north',
@@ -168,7 +168,7 @@ Ext.onReady(function(){
 	Ext.create('Ext.Viewport',{
 		layout:'border',
 		xtype:'viewport',
-		items:[accordionPanel,flexpanel]
+		items:[/*accordionPanel,*/flexpanel]
 	});
 });
 

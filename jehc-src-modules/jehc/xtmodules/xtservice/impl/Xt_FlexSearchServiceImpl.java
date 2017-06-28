@@ -237,78 +237,149 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 		}
 		if("mysql".equals(dbType)){
 			if(flag == 1){
-				sql = "SELECT * FROM information_schema.tables WHERE table_schema="+dbName+" AND table_type='view'";
+				//视图
+				sql = "SELECT * FROM information_schema.tables WHERE table_type='view'";
 			}else if(flag == 2){
 				if(StringUtil.isEmpty(tableName)){
 					throw new ExceptionUtil("未能获取到数据库表名");
 				}
+				//索引
 				sql = "show index from "+tableName;
 			}else if(flag == 3){
-				sql = "SELECT * FROM mysql.proc WHERE db = "+dbName+" AND `type` = 'FUNCTION'";
+				//函数
+				sql = "SELECT * FROM mysql.proc WHERE `type` = 'FUNCTION'";
 			}else if(flag == 4){
+				//触发器
 				sql = "SHOW TRIGGERS FROM "+dbName;
 			}else if(flag == 5){
-				sql = "SELECT * FROM mysql.proc WHERE db = "+dbName+" AND `type` = 'PROCEDURE'";
+				//存储过程
+				sql = "SELECT * FROM mysql.proc WHERE `type` = 'PROCEDURE'";
 			}else if(flag == 6){
+				//表
 				sql = "SHOW TABLE STATUS FROM "+dbName;
 			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
 				sql = "SHOW FULL FIELDS FROM "+tableName;
 			}
 		}else if("sqlserver".equals(dbType)){
 			if(flag == 1){
-				sql = "";
+				//视图
+				sql = "select * from information_schema.views";
 			}else if(flag == 2){
-				sql = "";
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
+				sql = "show index from "+tableName;
 			}else if(flag == 3){
-				sql = "";
+				//函数
+				sql = "select * from sys.all_objects where type='FN'";
 			}else if(flag == 4){
-				sql = "";
+				//触发器
+				sql = "SELECT * FROM Sysobjects WHERE xtype = 'TR'";
 			}else if(flag == 5){
-				sql = "";
+				//存储过程
+				sql = "select  * from sys.procedures";
 			}else if(flag == 6){
-				sql = "";
+				//表
+				sql = "select name from sysobjects where type='U'";
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				sql = "Select name from syscolumns Where ID=OBJECT_ID('"+tableName+"')";
 			}
 		}else if("oracle".equals(dbType)){
 			if(flag == 1){
-				sql = "";
+				//视图
+				sql = "SELECT view_name FROM user_views";
 			}else if(flag == 2){
-				sql = "";
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
+				sql = "SELECT * FROM user_indexes WHERE TABLE="+tableName;
 			}else if(flag == 3){
-				sql = "";
+				//函数
+				sql = "SELECT OWNER, NAME, TYPE, TEXT FROM ALL_SOURCE WHERE TYPE = 'FUNCTION'";
 			}else if(flag == 4){
-				sql = "";
+				//触发器
+				sql = "SELECT OWNER, NAME, TYPE, TEXT FROM ALL_SOURCE WHERE TYPE = 'TRIGGER'";
 			}else if(flag == 5){
-				sql = "";
+				//存储过程
+				sql = "SELECT OWNER, NAME, TYPE, TEXT FROM ALL_SOURCE WHERE TYPE = 'PROCEDURE'";
 			}else if(flag == 6){
-				sql = "";
+				//表
+				sql = "SELECT * FROM user_tables";
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				sql = "SELECT * FROM user_tab_columns WHERE Table_Name='"+tableName+"' ORDER BY column_name";
 			}
 		}else if("sybase".equals(dbType)){
 			if(flag == 1){
-				sql = "";
+				//视图
+				sql = "select name from "+dbName+".sysobjects  where type='V' order by name";
 			}else if(flag == 2){
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
 				sql = "";
 			}else if(flag == 3){
+				//函数
 				sql = "";
 			}else if(flag == 4){
-				sql = "";
+				//触发器
+				sql = "select name from "+dbName+".sysobjects  where type='TR' order by name";
 			}else if(flag == 5){
-				sql = "";
+				//存储过程
+				sql = "select name from "+dbName+".sysobjects  where type='P' order by name";
 			}else if(flag == 6){
-				sql = "";
+				//表
+				sql = "select name from "+dbName+".sysobjects  where type='U' order by name";
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//d.name = 表名&视图名&存储过程'
+				sql = "SELECT a.name, b.name FROM syscolumns a LEFT JOIN systypes b ON a.usertype = b.usertype INNER JOIN sysobjects d ON a.id = d.id AND d.name <> 'dtproperties' LEFT JOIN syscomments e ON a.cdefault = e.id WHERE d.name = '"+tableName+"'";
 			}
 		}else if("db2".equals(dbType)){
 			if(flag == 1){
-				sql = "";
+				//视图
+				sql = "SELECT * FROM syscat.views";
 			}else if(flag == 2){
-				sql = "";
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
+				sql = "SELECT * FROM SYSCAT.INDEXES  WHERE TABNAME='"+tableName+"'";
 			}else if(flag == 3){
-				sql = "";
+				//函数
+				sql = "SELECT * FROM syscat.functions WHERE funcschema='PAS'";
 			}else if(flag == 4){
-				sql = "";
+				//触发器
+				sql = "SELECT * FROM syscat.triggers";
 			}else if(flag == 5){
-				sql = "";
+				//存储过程
+				sql = "SELECT * FROM syscat.procedures WHERE procschema='PAS'";
 			}else if(flag == 6){
-				sql = "";
+				//表
+				sql = "SELECT tabname FROM syscat.tables";
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				sql = "SELECT COLNAME FROM SYSCAT.COLUMNS WHERE TABNAME='"+tableName+"' AND TABSCHEMA='SCHEMA';";
 			}
 		}
 		return sql;
