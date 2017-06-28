@@ -154,10 +154,11 @@ Ext.onReady(function(){
 		id:'configGrid',  
 		region:'center',  
         columns:[],  
-        split:true,
+        split:false,
         height:(clientHeight*0.5),  
         columnLines:true,
         collapsible:false,
+        border:true,
         viewConfig:{
 			emptyText:'暂无数据',
 			stripeRows:true,
