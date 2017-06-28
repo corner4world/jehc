@@ -14,9 +14,7 @@ Ext.onReady(function(){
 	});
 	var xtDbinfoPanel = Ext.create('Ext.FormPanel',{
 		xtype:'form',
-		renderTo:Ext.getBody(),
 		headerPosition:'top',
-		maximized:true,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'right',
@@ -32,8 +30,11 @@ Ext.onReady(function(){
 		    pack:'center'
 		},
 		**/
-		collapsible:true,
-		title:'选择指定数据库',
+		title:'<font color="#ffffff">选择指定数据源</font>',
+		/**自定义样式**/
+		header:{
+			cls:'x-panel-header-defined'
+		},
 		titleAlign:'left',
 		width:500,
 		closable:false,
@@ -42,6 +43,10 @@ Ext.onReady(function(){
 			text:'确认',
 			handler:function(){
 				var xt_dbinfo_id = gValue('xt_dbinfo_id');
+				if(null == xt_dbinfo_id || '' == xt_dbinfo_id){
+					msgTishi("请选择数据库");
+					return;
+				}
 				Ext.Msg.confirm('提示','确定要操作该数据？',function(btn){
 					if(btn == 'yes'){
 						window.location.href="../xtFlexSearchController/loadXtFlexSearch?xt_dbinfo_id="+xt_dbinfo_id;
@@ -107,4 +112,10 @@ Ext.onReady(function(){
 				anchor:'60%'
 			}]
 	})
+	
+	Ext.create('Ext.Viewport',{
+		layout:'table',
+		xtype:'viewport',
+		items:xtDbinfoPanel
+	});
 });

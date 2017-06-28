@@ -110,6 +110,17 @@ Ext.onReady(function(){
 	            width:80,
 	            triggerAction:"all",
 	            editable:false
+			},{
+	            xtype:"button",
+	            text:'切换数据库源',
+	            editable:false,
+	            handler:function(){
+	            	Ext.Msg.confirm('提示','确定要切换数据源？',function(btn){
+						if(btn == 'yes'){
+							window.location.href="../xtFlexSearchController/loadXtFlexSearchForSelDb";
+						}
+					});
+				}
 			}
 		],
 		tbar:[
