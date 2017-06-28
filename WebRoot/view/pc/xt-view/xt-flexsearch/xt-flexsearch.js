@@ -164,7 +164,9 @@ Ext.onReady(function(){
 			enableTextSelection:true//可以复制单元格文字
 		},
 		listeners:{
-			'rowdblclick':function(grids, rowIndex, e){
+			'rowdblclick':function(grids,rowIndex,e){
+				var record = grid.getSelectionModel().selected.items[0].data;
+				backPanel(record);
 			}
 		},
         displayInfo:true,    
@@ -468,4 +470,58 @@ function initXtTriPanel(){
             }  
         }
     });  
+}
+
+
+function backPanel(record){
+	var flexSearchFormDetail = Ext.create('top.Ext.FormPanel',{
+		xtype:'form',
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:150,
+			labelAlign:'right',
+			margin:'2 5 4 5',
+			anchor:'100%'
+		},
+		items:[
+		]
+	});
+	for(var dataKey in record){
+		var subgroup =  Ext.create('top.Ext.form.TextField',{
+			fieldLabel:dataKey,
+			value:record[dataKey]
+		});
+		flexSearchFormDetail.add(flexSearchFormDetail.items.getCount(),subgroup);
+	}
+	var flexSearchWinDetail = Ext.create('top.Ext.Window',{
+		layout:'fit',
+		width:800,
+		height:400,
+		maximizable:true,
+		minimizable:true,
+		animateTarget:document.body,
+		plain:true,
+		modal:true,
+		title:'明细信息',
+		listeners:{
+			minimize:function(win,opts){
+				if(!win.collapse()){
+					win.collapse();
+				}else{
+					win.expand();
+				}
+			}
+		},
+		items:flexSearchFormDetail,
+		buttons:[{
+			text:'关闭',
+			itemId:'close',
+			handler:function(button){
+				button.up('window').close();
+			}
+		}]
+	});
+	flexSearchWinDetail.show();
 }
