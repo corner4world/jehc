@@ -21,6 +21,7 @@ Ext.onReady(function(){
 			flex:1,
 			margin:'4 5 4 5'
 		},
+		style:'padding:15px 5px 5px 15px',
 		defaultType:'textfield',
 		/**
 		region:'center',
