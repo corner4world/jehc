@@ -63,7 +63,8 @@ function jsRun(){
 	});
 	jsRunWin.show();
 	var url = '../xtCodeController/jsRun';
-	var html = '<form id="jsRunForm" action="../xtCodeController/jsRun" method="post" target="_self" ><input type="hidden" value="'+val+'" name="jsRunContent" id="jsRunContent"></form>';
+	var html = '<form id="jsRunForm" action="../xtCodeController/jsRun" method="POST" target="_self"><input type="hidden" name="jsRunContent" id="jsRunContent"></form>';
 	$("#jsRunEditorFrame")[0].contentWindow.document.write(html); //将表单写入iframe中
+	$("#jsRunEditorFrame")[0].contentWindow.document.getElementById('jsRunContent').value = val;
 	$("#jsRunEditorFrame")[0].contentWindow.document.getElementById('jsRunForm').submit();
 }
