@@ -5,44 +5,24 @@ Ext.onReady(function(){
 	xtCodeform = Ext.create('Ext.FormPanel',{
 		region:'north',
 		autoScroll:false,
-		title:'在线JS',
-		headerPosition:'top',
+		headerPosition:'right',
+		titleAlign:'left',
 		/**自定义样式
 		header:{
 			cls:'x-panel-header-defined'
 		},
 		**/
-		fbar:[
+		bbar:[
 			 {
-				text:'blocked-out',
-				tooltip:'切换至编辑器',
+				text:'执行一下',
+				tooltip:'执行一下',
 				minWidth:tbarBtnMinWidth,
-				handler:function(){
-					xtCodeform.setTitle("在线JS");
-					$("#jsRunEditor")[0].contentWindow.location.href="../xtCodeController/loadXtCodeJsEditor";
-				}
-			 },
-			 {
-				text:'run',
-				tooltip:'开始运行',
-				minWidth:tbarBtnMinWidth,
-				cls:'addBtn',
 				handler:function(){
 					jsRun();
 				}
 			 }
 		],
-		url:'../xtCodeController/jsRun',
-		html:'<iframe scrolling="auto" id="jsRunEditor" frameborder="0" width="100%" height="100%" src="../xtCodeController/loadXtCodeJsEditor"></iframe>',
-		items:[{
-			xtype:'textarea',
-			name:'jsRunContent',
-			hidden:true,
-			id:'jsRunContent', 
-			style:'font-size:18px;',
-			allowBlank:false,
-			anchor:'100%'
-		}]
+		html:'<iframe scrolling="auto" id="jsRunEditor" frameborder="0" width="100%" height="100%" src="../xtCodeController/loadXtCodeJsEditor"></iframe>'
 	});
 	Ext.create('Ext.Viewport',{
 		layout:'fit',
@@ -53,23 +33,13 @@ Ext.onReady(function(){
 
 var jsRunWin;
 function jsRun(){
-	xtCodeform.setTitle("运行结果");
-	$("#jsRunEditor")[0].contentWindow.runJs();
-//	var val = $("#jsRunEditor")[0].contentWindow.setTextareaValue();
-//	sValue('jsRunContent',val);
-//	if(xtCodeform.form.isValid()){   
-//		xtCodeform.getForm().submit();          
-//	}else{ 
-//		msgTishi('请输入内容');//提示之后消失
-//	}
-	/**
+	var val = $("#jsRunEditor")[0].contentWindow.setTextareaValue();
 	jsRunWin = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:800,
 		height:400,
 		maximizable:true,
 		minimizable:true,
-		animateTarget:document.body,
 		plain:true,
 		modal:true,
 		title:'运行结果',
@@ -82,7 +52,7 @@ function jsRun(){
 				}
 			}
 		},
-		html:'<iframe scrolling="auto" id="jsRunEditor" frameborder="0" width="100%" height="100%" src="../xtCodeController/jsRun?jsRunContent='+val+'"></iframe>',
+		html:'<iframe scrolling="auto" id="jsRunEditorFrame" frameborder="0" width="100%" height="100%" src="about:blank" noresize></iframe>',
 		buttons:[{
 			text:'关闭',
 			itemId:'close',
@@ -92,5 +62,8 @@ function jsRun(){
 		}]
 	});
 	jsRunWin.show();
-	**/
+	var url = '../xtCodeController/jsRun';
+	var html = '<form id="jsRunForm" action="../xtCodeController/jsRun" method="post" target="_self" ><input type="hidden" value="'+val+'" name="jsRunContent" id="jsRunContent"></form>';
+	$("#jsRunEditorFrame")[0].contentWindow.document.write(html); //将表单写入iframe中
+	$("#jsRunEditorFrame")[0].contentWindow.document.getElementById('jsRunForm').submit();
 }

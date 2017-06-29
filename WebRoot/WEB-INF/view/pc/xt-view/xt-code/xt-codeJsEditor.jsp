@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>  
 <meta charset="UTF-8">  
 <title>jEhc前端运行器</title>  
-	<link rel="stylesheet" href="${syspath}/deng/editor/codemirroreditor/js/codemirror-5.2/theme/ambiance.css">
+	<link rel="stylesheet" href="${syspath}/deng/editor/codemirroreditor/js/codemirror-5.2/theme/base16-light.css">
 	<link type="text/css" rel="stylesheet" href="${syspath}/deng/editor/codemirroreditor/js/codemirror-5.2/lib/codemirror.css" />
 	<link type="text/css" rel="stylesheet" href="${syspath}/deng/editor/codemirroreditor/js/codemirror-5.2/addon/hint/show-hint.css" />
 	<script type="text/javascript" src="${syspath}/deng/editor/codemirroreditor/js/codemirror-5.2/lib/codemirror.js"></script>
@@ -81,21 +81,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		        mode:"text/javascript",  
 		        width:"100%",
 		        height:"100%",
-		        keyMap:"default",
-		        lineWrapping:true,
-		        foldGutter:true,
-		        gutters:["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
-		        indentUnit:4,
-		        showCursorWhenSelecting:true,
-		        extraKeys:{
-		            "Shift-Alt-Enter":function (cm){
-		                cm.setOption("fullScreen",!cm.getOption("fullScreen"));
-		            },
-		            "Ctrl-Space":"autocomplete",
-		            "Ctrl-F7":function (){
-		                $('#code_submit').click();
-		            }
-		        }
+		        indentWithTabs:true,
+				smartIndent:true,
+				lineNumbers:true,//显示行数
+				matchBrackets:true,
+				autofocus:true,
+				theme:"base16-light",
+				textWrapping:true,
+				extraKeys:{"Ctrl-Q":"autocomplete"},//输入s然后Tab就可以弹出选择项说明Ctrl：输入s然后ctrl就可以弹出选择项
+				hintOptions:{tables:{
+				  users:{name: null, score: null, birthDate: null},
+				  countries:{name: null, population: null, size: null}
+				}}
 		 });
 	   };
 	
