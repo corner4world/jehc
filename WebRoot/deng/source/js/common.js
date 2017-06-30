@@ -1551,7 +1551,6 @@ function initSearchFormByUserdefined(panelPosition,items,isTop,labelPosition){
 	if(isTop){
 		panelTop = "top.";
 	}
-	console.info(panelTop);
 	return Ext.create(panelTop+'Ext.FormPanel',{
 		collapsible:false,
 		collapsed:false,
@@ -2329,7 +2328,7 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
 /**
  * 通过iFrame实现类ajax文件下载
  */
-function downOrExport(url) {
+function downOrExport(url){
 	/**
 	var exportIframe = document.createElement('iframe');
 	exportIframe.src = url;
