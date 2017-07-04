@@ -33,6 +33,7 @@
 	    	var collapsibleDefined=false;
 	    	var tbarBtnMinWidth=0;
 	    	var hideCollapseToolFlag=true;
+	    	var lc_design_displaywin_for_edit = ${lc_design_displaywin_for_edit};
 	    	var xt_userinfo_id; 
 		</script>
 		<c:if test="${not empty xtUserinfo.xt_userinfo_id}">

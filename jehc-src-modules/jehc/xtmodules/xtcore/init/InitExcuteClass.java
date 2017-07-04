@@ -118,6 +118,7 @@ public class InitExcuteClass implements ServletContextListener{
 			sc.setAttribute("grid_toolbar_gaps", map.get("grid_toolbar_gaps"));
 			sc.setAttribute("grid_toolbar_moretext_gaps", map.get("grid_toolbar_moretext_gaps"));
 			sc.setAttribute("solr_home_path", map.get("solr_home_path"));
+			sc.setAttribute("lc_design_displaywin_for_edit", map.get("lc_design_displaywin_for_edit"));
 			logger.info(sdf.format(new Date())+"--->装载Config配置结束"); 
 			logger.info(sdf.format(new Date())+"--->开始初始化调度任务"); 
 			logger.info(sdf.format(new Date())+"--->结束初始化调度任务"); 

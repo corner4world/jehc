@@ -106,6 +106,7 @@ public class ReadProperties {
 		        map.put("grid_toolbar_gaps", prop.getProperty("grid_toolbar_gaps"));
 		        map.put("grid_toolbar_moretext_gaps", prop.getProperty("grid_toolbar_moretext_gaps"));
 		        map.put("solr_home_path", prop.getProperty("solr_home_path"));
+		        map.put("lc_design_displaywin_for_edit", prop.getProperty("lc_design_displaywin_for_edit"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
