@@ -194,35 +194,37 @@ function initEastPanel(graph){
     reGetWidthAndHeight();
 	eastPanel = new Ext.FormPanel({
     	region:'east',
-   		title:'<a href="javascript:collapsibleCE(1);">流程基本信息</font></a>',
+   		title:'流程基本信息',
+//      title:'<a href="javascript:collapsibleCE(1);">流程基本信息</font></a>',
         header:{
-        	items:[{
-                 icon:indexCollapseIcon,
-                 scale:'large',
-                 xtype:'button',
-	             handler:function(button){
-					collapsibleCE(1);
-				 },
-	             style:{background:'#fff'}
-	        }],
-            titleAlign:'left',
-            cls:'x-panel-header-defined'
+//        	items:[{
+//                 icon:indexCollapseIcon,
+//                 scale:'large',
+//                 xtype:'button',
+//	               handler:function(button){
+//					collapsibleCE(1);
+//				   },
+//	               style:{background:'#fff'}
+//	        }],
+            titleAlign:'left'
         },
-		hideCollapseTool:hideCollapseToolFlag,
+		hideCollapseTool:false,
         /**新方法使用开始**/  
         scrollable:true,  
         scrollable:'x',
         scrollable:'y',
         /**新方法使用结束**/ 
         headerHeight:400,
-        width:clientWidth-180,
+//      width:clientWidth-180,
+        width:360,
         border:false,
         collapsible:true,
         floatable:false,
 		waitMsgTarget:true,
 		layout:'border',
+		split:false,
 		collapseDirection:'left',
-		collapsed:true,
+//		collapsed:true,
 		id:'eastPanel',
 		defaultType:'textfield',
 		headerPosition:'top',
@@ -234,10 +236,10 @@ function initEastPanel(graph){
 		},
         items:[basePanel]
     })
-    eastPanel.on("collapse",function(e){
-    	Ext.getCmp('eastPanel').setTitle('<a href="javascript:collapsibleCE(1);"><font color="#5fa2dd">流程基本信息</font></a>');
-    });
-    eastPanel.on("expand",function(e){
-    	Ext.getCmp('eastPanel').setTitle('<font color="#fff">流程基本信息</font>');
-    });
+//    eastPanel.on("collapse",function(e){
+//    	Ext.getCmp('eastPanel').setTitle('<a href="javascript:collapsibleCE(1);"><font color="#5fa2dd">流程基本信息</font></a>');
+//    });
+//    eastPanel.on("expand",function(e){
+//    	Ext.getCmp('eastPanel').setTitle('<font color="#fff">流程基本信息</font>');
+//    });
 }

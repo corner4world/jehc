@@ -904,7 +904,7 @@ MainPanel = function(graph, history){
                     }
                 }**/,
                 {
-                    text:'导出文件',
+                    text:'导出',
                     iconCls:'select-line-icon',
                     scope: this,
                     handler:function(){
