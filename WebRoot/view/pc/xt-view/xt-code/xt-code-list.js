@@ -5,13 +5,13 @@ Ext.onReady(function(){
 	xtCodeform = Ext.create('Ext.FormPanel',{
 		region:'north',
 		autoScroll:false,
-		headerPosition:'right',
+		headerPosition:'left',
 		titleAlign:'left',
-		/**自定义样式
+		title:'<font color="#ffffff">操作内容</font>',
+		/**自定义样式**/
 		header:{
 			cls:'x-panel-header-defined'
 		},
-		**/
 		bbar:[
 			 {
 				text:'执行一下',
