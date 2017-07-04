@@ -75,7 +75,7 @@ function setNodeAttribute(cell,graph_refresh){
 		}else if(node_type == 'messageBoundaryEvent'){
 			//消息边界
 			messageBoundaryEventWin_(cell,graph_refresh);
-		}else if(node_type == 'calcelBoundaryEvent'){
+		}else if(node_type == 'cancelBoundaryEvent'){
 			//取消边界
 			cancelBoundaryEventWin_(cell,graph_refresh);
 		}else if(node_type == 'compensationBoundaryEvent'){

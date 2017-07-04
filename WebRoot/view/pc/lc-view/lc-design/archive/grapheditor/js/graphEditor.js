@@ -256,7 +256,59 @@ function main(){
 		}
 		**/
 	});
-	
+	//捕获任务节点的鼠标点击事件
+	graph.addListener(mxEvent.CLICK, function(sender, evt) {
+	   var cell = evt.getProperty('cell');
+//	   var nodeId = self.getTaskId(cell);
+//	   if (nodeId.length > 0) {
+//	    self.clickCell(self.graphId, nodeId);
+//	   }
+   	   if (cell!=null) { 
+			 if(!cell.edge){
+			 	//非连线节点
+			 	setNodeAttribute(cell,graph);
+			 }else{
+			 	//是连线节点
+			 	if(null == cell.source || "" == cell.source){
+			 		msgTishi("该连线没有指定源节点!");
+			 	}else if(null == cell.target || "" == cell.target){
+			 		msgTishi("该连线没有指定目标节点!");
+			 	}else{
+			 		var childsCellEdgs=cell.source.edges;
+                    for(var i=0;i<childsCellEdgs.length;i++){
+                       if(childsCellEdgs[i].source.id==cell.source.id){
+                      		//记得必须加上return不然连线会有问题的
+                      		var childEdge = childsCellEdgs[i];
+                      		var sourceRoot = resultRootCell(graph,childEdge.source);
+                      		var targetRoot = resultRootCell(graph,childEdge.target);
+                      		validateSourceRootAndTargetRoot(graph,sourceRoot,targetRoot,childEdge);
+                      		//isflow等于2则表示消息连线 否则为正常连线
+                      		if(null != childEdge && '' != childEdge && null != childEdge.isflow && '' != childEdge.isflow && childEdge.isflow == '2'){
+                      			showTransitionNodeAttributeWin(cell,graph,2);
+                      		}else{
+                      			showTransitionNodeAttributeWin(cell,graph,1);
+                      		}
+                      		return;
+                       }
+                       if(childsCellEdgs[i].target.id==cell.target.id){
+                          //连线的下一个节点类型
+                          var node_type = childsCellEdgs[i].target.node_type;
+                       }
+                   }
+			 	}
+			 }
+       }else{
+    	   var eItems =eastPanel.items;
+//    	   console.info(eItems.length);
+    	   for(var le = 0; le < eItems.length; le++){
+			 if(le > 0){
+//				 console.info(eItems.get(le));
+				 eastPanel.remove(eItems.get(le),true);
+			 }
+		   }
+    	   basePanel.setHidden(false);
+       }
+	});
 	//创建主要容器
 	var mainPanel = new MainPanel(graph, history);
 	//鼠标点击到节点上显示在节点周围显示图标

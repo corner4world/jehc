@@ -1,3 +1,4 @@
+var basePanel;
 function initEastPanel(graph){
 	//基本流程共用属性事件
 	event_task_main_grid();
@@ -8,7 +9,7 @@ function initEastPanel(graph){
 	//基本流程共用消息配置
 	initmessage_grid();
 	var processNo = new Date().getTime();
-	var basePanel = new Ext.TabPanel({
+	basePanel = new Ext.TabPanel({
         region:'center',
 		autoScroll:true,
 		tabPosition:'left',
