@@ -26,11 +26,11 @@ public class DataSourceAdvice implements MethodBeforeAdvice, AfterReturningAdvic
 		boolean hasSwitchedSlave = false;
 		for (String slaveMethod : slaveMethods) {
 			if (methodName.startsWith(slaveMethod)) {
-				if (log.isDebugEnabled()) {
-					log.info(logInfo + JdbcContextHolder.SLAVE_DATA_SOURCE);
-				}
 				hasSwitchedSlave = true;
 				JdbcContextHolder.setSlave();
+				if (log.isDebugEnabled()) {
+					log.info(logInfo + JdbcContextHolder.getDataSource());
+				}
 				break;
 			}
 		}
@@ -55,7 +55,7 @@ public class DataSourceAdvice implements MethodBeforeAdvice, AfterReturningAdvic
 	 */
 	public void afterThrowing(Method method, Object[] args, Object target, Exception ex) throws Throwable {
 		logInfo = String.format("抛异常after throwing:%s类中%s方法,", target.getClass().getName(), method.getName());
-		log.error(logInfo + "发生异常:" + ex.getMessage() + ",将数据源设置为:" + JdbcContextHolder.SLAVE_DATA_SOURCE);
+		log.error(logInfo + "发生异常:" + ex.getMessage() + ",将数据源设置为:" + JdbcContextHolder.getDataSource());
 		JdbcContextHolder.setSlave();
 	}
 
