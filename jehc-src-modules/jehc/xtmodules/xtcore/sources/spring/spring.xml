@@ -36,6 +36,8 @@
 				<value>classpath:/jehc/xtmodules/xtcore/sources/pool/pool.properties</value>
 				<!-- 引入netty配置文件-->
 				<value>classpath:/jehc/xtmodules/xtcore/sources/netty/netty.properties</value>
+				<!-- 引入rabbit配置文件-->
+				<value>classpath:/jehc/xtmodules/xtcore/sources/mq/rabbitmq.properties</value>
 			</list>
 		</property>
 	</bean>
@@ -68,9 +70,8 @@
 	<!-- 连接池整合 -->
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/pool/pool.xml"/>
 	
-	<!-- RabbitMq消息中间键 
+	<!-- RabbitMq消息中间键 -->
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/mq/rabbit.xml"/>
-	-->
 	
 	<!-- netty整合
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/netty/netty.xml"/>

@@ -1,5 +1,5 @@
 package jehc.xtmodules.xtcore.mq.rabbit;
 
-public class MessageHandler {
+public class RabbitUtil {
 
 }
