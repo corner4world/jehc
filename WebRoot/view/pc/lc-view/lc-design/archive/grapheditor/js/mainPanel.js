@@ -445,6 +445,16 @@ MainPanel = function(graph, history){
         		graph.removeCells();
         		//验证泳道是否存在 如果存在则基本信息为第一个泳道中流程信息  
 				validatePOOL(graph);
+				
+				 var eItems =eastPanel.items;
+//		    	   console.info(eItems.length);
+		    	   for(var le = 0; le < eItems.length; le++){
+					 if(le > 0){
+//						 console.info(eItems.get(le));
+						 eastPanel.remove(eItems.get(le),true);
+					 }
+				   }
+		    	   basePanel.setHidden(false);
         	},
             scope:this
         },
@@ -789,6 +799,16 @@ MainPanel = function(graph, history){
                     	graph.removeCells();
                     	//验证泳道是否存在 如果存在则基本信息为第一个泳道中流程信息  
 						validatePOOL(graph);
+						
+						 var eItems =eastPanel.items;
+	//				    	   console.info(eItems.length);
+				    	   for(var le = 0; le < eItems.length; le++){
+							 if(le > 0){
+	//								 console.info(eItems.get(le));
+								 eastPanel.remove(eItems.get(le),true);
+							 }
+						   }
+				    	   basePanel.setHidden(false);
                     }
                 },
                 {
