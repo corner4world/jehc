@@ -32,16 +32,16 @@ import org.springframework.web.servlet.support.RequestContextUtils;
  * @author 邓纯杰
  *
  */
-public final class WebContextHolder {
-	private static final Logger LOGGER = LoggerFactory.getLogger(WebContextHolder.class);  
+public final class SpringContextHolder {
+	private static final Logger LOGGER = LoggerFactory.getLogger(SpringContextHolder.class);  
     
-    private static final WebContextHolder INSTANCE = new WebContextHolder();  
+    private static final SpringContextHolder INSTANCE = new SpringContextHolder();  
       
-    public WebContextHolder get() {  
+    public SpringContextHolder get() {  
         return INSTANCE;  
     }  
   
-    private WebContextHolder() {  
+    private SpringContextHolder() {  
         super();  
     }  
       
