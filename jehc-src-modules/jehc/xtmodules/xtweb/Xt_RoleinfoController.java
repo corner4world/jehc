@@ -83,6 +83,8 @@ public class Xt_RoleinfoController extends BaseAction{
 	@RequestMapping(value="/getXtRoleinfoListByCondition",method={RequestMethod.POST,RequestMethod.GET})
 	public String getXtRoleinfoListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
+		String xt_role_isdelete = request.getParameter("xt_role_isdelete");
+		condition.put("xt_role_isdelete", xt_role_isdelete);
 		commonHPager(condition,request);
 		List<Xt_Roleinfo>XtRoleinfoList = xt_RoleinfoService.getXtRoleinfoListByCondition(condition);
 		PageInfo<Xt_Roleinfo> page = new PageInfo<Xt_Roleinfo>(XtRoleinfoList);

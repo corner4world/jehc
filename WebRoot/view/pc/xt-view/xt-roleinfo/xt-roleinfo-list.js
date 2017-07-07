@@ -27,7 +27,7 @@ Ext.onReady(function(){
 		]
 	});
 	initSearchForm('north',items,false,'left');
-	store = getGridJsonStore('../xtRoleinfoController/getXtRoleinfoListByCondition',[]);
+	store = getGridJsonStore('../xtRoleinfoController/getXtRoleinfoListByCondition?xt_role_isdelete=0',[]);
 	grid = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
