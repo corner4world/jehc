@@ -102,6 +102,7 @@ Ext.onReady(function(){
 					border:false,
 					tools:[{
 				        	xtype:'label',
+				        	cls:'label',
 				        	text:"当前用户 "+sys_pt_user_name
 					       },
 					       {

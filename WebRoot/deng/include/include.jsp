@@ -410,6 +410,8 @@
 			    background: #fff;
 			}
 	        /* .tbar{ background-color:#5fa2dd;background-image:url();} */
+	        
+	        .label{color:#5fa2dd;background-color:#ffffff}  
 		</style>
 	</head>
 </html>
