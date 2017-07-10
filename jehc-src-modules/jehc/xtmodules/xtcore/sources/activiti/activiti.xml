@@ -24,6 +24,16 @@
 		<property name="mailServerUsername" value="13611572774" />
 		<property name="mailServerPassword" value="*********" />
 		<property name="mailServerDefaultFrom" value="activiti@activiti.org" />
+		
+		<!-- 自定义表单字段类型 -->
+	    <property name="customFormTypes">
+	        <list>
+	            <bean class="jehc.lcmodules.activitiutil.form.UsersFormType"/>
+	            <bean class="jehc.lcmodules.activitiutil.form.DepartFormType"/>
+	            <bean class="jehc.lcmodules.activitiutil.form.PostFormType"/>
+	            <bean class="jehc.lcmodules.activitiutil.form.RoleFormType"/>
+	        </list>
+	    </property>
 	</bean>
 	<!-- 引用上面配置的核心流程引擎 -->
 	<bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">

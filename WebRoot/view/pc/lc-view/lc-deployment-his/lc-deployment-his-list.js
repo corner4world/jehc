@@ -96,6 +96,19 @@ Ext.onReady(function(){
 		  					document.location.href='../lcProcessController/loadLcProcessInstance?lc_deployment_his_id='+lc_deployment_his_id+'&lc_process_id='+lc_process_id;
 					    }
 		            }
+				},
+				{
+					header:'开始表单',
+					align:'center',
+					xtype:'widgetcolumn',
+					widget:{
+		                xtype:'button',
+		                text:'开始表单',
+		                handler:function(rec){	
+		  					var lc_deployment_his_id = rec.getWidgetRecord().data.lc_deployment_his_id;
+		  					showLcDynamicFormHis(lc_deployment_his_id);
+					    }
+		            }
 				}]
 			}
 		],
@@ -318,4 +331,30 @@ function search(){
 			limit:getGridBBar(store).pageSize
 		}
 	});
+}
+
+var lcDynamicFormWin;
+function showLcDynamicFormHis(lc_deployment_his_id){
+	reGetWidthAndHeight();
+	lcDynamicFormWin = Ext.create('Ext.Window',{
+		layout:'fit',
+		width:clientWidth*0.8,                    
+		height:clientHeight*0.6, 
+		maximizable:true,
+		minimizable:true,
+		animateTarget:document.body,
+		plain:true,
+		modal:true,
+		title:'流程开始表单信息',
+		html:'<iframe scrolling="auto" frameborder="0" width="100%" height="100%" src="../lcDynamicFormController/loadLcStartForm?lc_deployment_his_id='+lc_deployment_his_id+'"></iframe>',
+		listeners:{
+			minimize:function(win,opts){
+				win.collapse();
+			},
+			close:function(){
+				store.load();
+			}
+		}
+	});
+	lcDynamicFormWin.show();
 }

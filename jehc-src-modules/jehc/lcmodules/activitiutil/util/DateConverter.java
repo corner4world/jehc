@@ -1,4 +1,4 @@
-package jehc.lcmodules.activitiutil.zl;
+package jehc.lcmodules.activitiutil.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

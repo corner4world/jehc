@@ -365,6 +365,8 @@ public class Lc_ProcessController  extends BaseAction{
 				model.put("pstatus", "运行中");
 			}
 			model.put("description", processInstance.getDescription());
+			model.put("processDefinitionId", processInstance.getProcessDefinitionId());
+			model.put("processDefinitionKey", processInstance.getProcessDefinitionKey());
 			jsonArray.add(model);
 		}
 		return outItemsStr(jsonArray);

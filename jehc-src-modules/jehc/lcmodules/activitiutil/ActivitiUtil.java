@@ -30,6 +30,9 @@ import org.activiti.engine.RepositoryService;
 import org.activiti.engine.RuntimeService;
 import org.activiti.engine.TaskService;
 import org.activiti.engine.delegate.Expression;
+import org.activiti.engine.form.FormProperty;
+import org.activiti.engine.form.StartFormData;
+import org.activiti.engine.form.TaskFormData;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.identity.Group;
 import org.activiti.engine.identity.User;
@@ -60,7 +63,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jehc.lcmodules.activitiutil.zl.Variable;
+import jehc.lcmodules.activitiutil.util.Variable;
 import jehc.lcmodules.lcmodel.Lc_Apply;
 import jehc.lcmodules.lcmodel.Lc_Deployment_His;
 import jehc.lcmodules.lcservice.Lc_ApplyService;
@@ -257,7 +260,6 @@ public class ActivitiUtil {
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
-		
 	}
 	
 	/**
@@ -1175,25 +1177,6 @@ public class ActivitiUtil {
 		return map;
 	} 
 	
-	
-	/**
-	 * 调用跳转节点
-	 * executionID:当前任务
-	 * activityId:跳转目标
-	 */
-    public boolean jump(String executionId,String activityId){
-    	try {
-    		TaskServiceImpl taskServiceImpl=(TaskServiceImpl)taskService;  
-        	taskServiceImpl.getCommandExecutor().execute(new JumpTaskCmd(executionId, activityId));  
-        	return true;
-		} catch (Exception e) {
-			throw new ExceptionUtil(e.getMessage(),e.getCause()); 
-		}
-    }
-    
-    
-    
-    
     
     /** 
      * 会签操作 
@@ -1701,5 +1684,84 @@ public class ActivitiUtil {
 			return null;
 		}
 		return taskService.createTaskQuery().processInstanceId(processInstanceID).singleResult();
+	}
+	
+	/**
+	 * 发起开始动态表单 返回实例对象
+	 * @param processDefinitionId
+	 * @param properties
+	 * @return
+	 */
+	public ProcessInstance submitStartFormData(String processDefinitionId, Map<String, String> properties){
+		try {
+			ProcessInstance processInstance = formService.submitStartFormData(processDefinitionId, properties);
+			return processInstance;
+		} catch (Exception e) {
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	 *  发起开始动态表单 返回实例对象
+	 * @param processDefinitionId
+	 * @param properties
+	 * @return
+	 */
+	public ProcessInstance submitStartFormData(String processDefinitionId, String businessKey, Map<String, String> properties){
+		try {
+			ProcessInstance processInstance = formService.submitStartFormData(processDefinitionId, businessKey, properties);
+			return processInstance;
+		} catch (Exception e) {
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	/**
+	 * 根据流程定义获取开始表单字段信息（即内容）
+	 * @param processDefinitionId
+	 * @return
+	 */
+	public StartFormData getStartFormData(String processDefinitionId){
+		StartFormData startFormData = formService.getStartFormData(processDefinitionId);
+		return startFormData;
+	}
+	
+	/**
+	 * 获取开始节点中表单属性集合
+	 * @param startFormData
+	 * @return
+	 */
+	public  List<FormProperty> getStartFormProperties(StartFormData startFormData){
+		return startFormData.getFormProperties();
+	}
+	/**
+	 * 根据taskId获取task节点中表单
+	 * @param taskId
+	 * @return
+	 */
+	public TaskFormData getTaskFormData(String taskId){
+		return formService.getTaskFormData(taskId);
+	}
+	
+	/**
+	 * 获取task节点中表单属性集合
+	 * @param startFormData
+	 * @return
+	 */
+	public  List<FormProperty> getTaskFormProperties(TaskFormData taskFormData){
+		return taskFormData.getFormProperties();
+	}
+	
+	/**
+	 * 发起任务动态表单
+	 * @param processDefinitionId
+	 * @param properties
+	 * @return
+	 */
+	public void submitTaskFormData(String processDefinitionId, Map<String, String> properties){
+		try {
+			formService.submitTaskFormData(processDefinitionId, properties);
+		} catch (Exception e) {
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
 	}
 }
