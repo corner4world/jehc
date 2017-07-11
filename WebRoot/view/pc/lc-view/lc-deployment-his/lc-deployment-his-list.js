@@ -98,12 +98,12 @@ Ext.onReady(function(){
 		            }
 				},
 				{
-					header:'开始表单',
+					header:'查看开始表单',
 					align:'center',
 					xtype:'widgetcolumn',
 					widget:{
 		                xtype:'button',
-		                text:'开始表单',
+		                text:'查看开始表单',
 		                handler:function(rec){	
 		  					var lc_deployment_his_id = rec.getWidgetRecord().data.lc_deployment_his_id;
 		  					showLcDynamicFormHis(lc_deployment_his_id);

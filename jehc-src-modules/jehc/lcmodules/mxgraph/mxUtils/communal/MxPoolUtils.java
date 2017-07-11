@@ -9,6 +9,7 @@ import org.dom4j.Element;
 import jehc.lcmodules.mxgraph.MxGraphModel;
 import jehc.lcmodules.mxgraph.MxGraphToBPMN;
 import jehc.lcmodules.mxgraph.mxUtils.MxPool;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 
 /**
  * 存在泳道情况
@@ -100,7 +101,7 @@ public class MxPoolUtils {
     			bpmnxml.append(MxUnPoolUtils.bpmnxml(mxGraphModel,mxCellList, root));
     		}
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			throw new ExceptionUtil(e1.getMessage(),e1.getCause());
 		} 
 		bpmnxml.append(bpmndi.toString());
 		return bpmnxml.toString();
