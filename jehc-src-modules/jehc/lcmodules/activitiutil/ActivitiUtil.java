@@ -39,6 +39,7 @@ import org.activiti.engine.identity.User;
 import org.activiti.engine.impl.RepositoryServiceImpl;
 import org.activiti.engine.impl.TaskServiceImpl;
 import org.activiti.engine.impl.bpmn.behavior.UserTaskActivityBehavior;
+import org.activiti.engine.impl.bpmn.parser.handler.UserTaskParseHandler;
 import org.activiti.engine.impl.cfg.IdGenerator;
 import org.activiti.engine.impl.context.Context;
 import org.activiti.engine.impl.interceptor.Command;
@@ -48,6 +49,7 @@ import org.activiti.engine.impl.persistence.entity.ProcessDefinitionEntity;
 import org.activiti.engine.impl.persistence.entity.TaskEntity;
 import org.activiti.engine.impl.pvm.PvmActivity;
 import org.activiti.engine.impl.pvm.PvmTransition;
+import org.activiti.engine.impl.pvm.delegate.ActivityBehavior;
 import org.activiti.engine.impl.pvm.process.ActivityImpl;
 import org.activiti.engine.impl.pvm.process.ProcessDefinitionImpl;
 import org.activiti.engine.impl.pvm.process.TransitionImpl;
@@ -719,6 +721,85 @@ public class ActivitiUtil {
 		}
 		return pvmActivityList;
 	}
+	
+	/**
+	 * 获取当前任务集合 根据流程实例
+	 * @param procInstanceId
+	 * @return
+	 */
+	public List<Task> getCurrentTaskList(String procInstanceId){
+		List<Task> tasks = taskService.createTaskQuery().processInstanceId(procInstanceId).list(); 
+//		for(Task task:tasks){
+//			 taskService.setAssignee(task.getId(), "用户编号");  
+//		}
+		return tasks;
+	}
+	
+	/**
+	 * 根据当前节点获取下个节点为用户任务的所有节点编号
+	 * @param procInstanceId
+	 * @return
+	 */
+	public List<String> getNextTaskList(ProcessInstance processInstance){
+		List<String> taskIdList = new ArrayList<String>();
+		ProcessDefinitionEntity processDefinition1 = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)  
+		        .getDeployedProcessDefinition(processInstance.getProcessDefinitionId());  
+		List<PvmActivity> pvmActivityList = new ArrayList<PvmActivity>();
+		List<ActivityImpl> activitiList = processDefinition1.getActivities();
+		for(ActivityImpl activityImpl:activitiList){
+//			if ("userTask".equals(activityImpl.getProperty("type"))) {
+//				List<PvmTransition> outTransitions = activityImpl.getOutgoingTransitions();
+//				for(PvmTransition pr:outTransitions){
+//					PvmActivity pa = pr.getDestination();
+//					pa.getId();
+//					pvmActivityList.add(pa);
+//					//获取线路的终点节点
+//					System.out.println("下一步任务："+pa.getProperty("name"));
+//				}
+//			}
+			
+			List<PvmTransition> outTransitions = activityImpl.getOutgoingTransitions();
+			for(PvmTransition pr:outTransitions){
+				PvmActivity pa = pr.getDestination();
+				pvmActivityList.add(pa);
+			}
+		}
+		for(PvmActivity pvmActivity:pvmActivityList){
+			if ("userTask".equals(pvmActivity.getProperty("type"))) {
+				taskIdList.add(pvmActivity.getId());
+			}
+		}
+		return taskIdList;
+	} 
+	/**
+	 * 获取当前所有活动节点 根据流程实例
+	 * @param processInstance
+	 * @return
+	 */
+	public List<ActivityImpl> getActivitiList(ProcessInstance processInstance){
+		ProcessDefinitionEntity processDefinition1 = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)  
+		        .getDeployedProcessDefinition(processInstance.getProcessDefinitionId());  
+		List<ActivityImpl> activitiList = processDefinition1.getActivities();
+		return activitiList;
+	}
+	
+//	public List<Task> getTaskList(ProcessInstance processInstance){
+//		ProcessDefinitionEntity processDefinition1 = (ProcessDefinitionEntity) ((RepositoryServiceImpl) repositoryService)  
+//		        .getDeployedProcessDefinition(processInstance.getProcessDefinitionId());  
+//		List<PvmActivity> pvmActivityList = new ArrayList<PvmActivity>();
+//		List<ActivityImpl> activitiList = processDefinition1.getActivities();
+//		for(ActivityImpl activityImpl:activitiList){
+//			if ("userTask".equals(activityImpl.getProperty("type"))) {
+//				List<PvmTransition> outTransitions = activityImpl.getOutgoingTransitions();
+//				for(PvmTransition pr:outTransitions){
+//					PvmActivity pa = pr.getDestination();
+//					pvmActivityList.add(pa);
+//					//获取线路的终点节点
+//					System.out.println("下一步任务："+pa.getProperty("name"));
+//				}
+//			}
+//		}
+//	}
 	
 	/**
 	 * API通过下个节点 获取节点中各个属性
