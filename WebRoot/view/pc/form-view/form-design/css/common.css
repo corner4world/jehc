@@ -99,10 +99,10 @@ box-shadow:none;
 .btn,.btn:ACTIVE{
 position:relative;
 display:inline-block;
-color:#444;
+color:#ffffff;
 border-radius:2px;
-background-color:#f7f7f7;
-border:1px solid #ccc;
+background-color:#ffefbb;
+border:1px solid #ffefbb;
 padding: 6px 20px;
 margin:0px 5px 3px 3px;
 line-height: 150%;
