@@ -58,14 +58,14 @@ public class MxTerminateEndEvent {
         timerStartEvent_node+="<endEvent id='"+nodeID+"' name='"+name+"' "+asynchronous+isForCompensation+">";
         
         //****开始区间与闭区间属性 开始****//
+        //2备注配置开始
+        timerStartEvent_node+=MxUtils.documentation(mxCell);
+        //2备注配置结束
+        
         timerStartEvent_node += "<extensionElements>";
         //1监听的类开始
         timerStartEvent_node+=MxUtils.eventListenerNode(mxCell);
         //1监听器配置结束
-        
-        //2备注配置开始
-        timerStartEvent_node+=MxUtils.documentation(mxCell);
-        //2备注配置结束
         //****开始区间与闭区间属性 结束****//
 		//闭区间
         timerStartEvent_node += "</endEvent>";

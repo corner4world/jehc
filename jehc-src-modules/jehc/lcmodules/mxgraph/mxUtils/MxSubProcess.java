@@ -42,13 +42,15 @@ public class MxSubProcess {
 		//开区间
         subProcess_node+="<subProcess id='"+nodeID+"' name='"+name+"'>";
         //****开始区间与闭区间属性 开始****//
+        //2备注配置开始
+        subProcess_node+=MxUtils.documentation(mxCell);
+        //2备注配置结束
+        
         subProcess_node += "<extensionElements>";
         //1监听的类开始
         subProcess_node+=MxUtils.eventListenerNode(mxCell);
         //1监听器配置结束
-        //2备注配置开始
-        subProcess_node+=MxUtils.documentation(mxCell);
-        //2备注配置结束
+        
         subProcess_node += "</extensionElements>";
         //3数据属性配置开始
         //3数据属性配置结束

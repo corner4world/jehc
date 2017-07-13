@@ -51,13 +51,16 @@ public class MxPool {
 		//开区间
         pool_node+="<process id='"+processId_+"' name='"+processName_+"' "+candidateStarterUsers_+candidateStarterGroups_+">";
         //****开始区间与闭区间属性 开始****//
+        
+        //2备注配置开始
+        pool_node+=MxUtils.documentation(mxCell);
+        //2备注配置结束
+        
         pool_node += "<extensionElements>";
         //1监听的类开始
         pool_node+=MxUtils.eventListenerNode(mxCell);
         //1监听器配置结束
-        //2备注配置开始
-        pool_node+=MxUtils.documentation(mxCell);
-        //2备注配置结束
+       
         pool_node += "</extensionElements>";
         //****开始区间与闭区间属性 结束****//
 		//闭区间

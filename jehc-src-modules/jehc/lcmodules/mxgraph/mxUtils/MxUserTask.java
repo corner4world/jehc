@@ -100,15 +100,15 @@ public class MxUserTask {
 		//开区间
         task_node+="<userTask id='"+nodeID+"' name='"+name+"' "+asynchronous+assignee+candidateUsers+candidateGroups+Expression+dueDate+formKey+priority+isForCompensation+">";
         
+        //2备注配置开始
+        task_node+=MxUtils.documentation(mxCell);
+        //2备注配置结束
+        
         //****开始区间与闭区间属性 开始****//
         task_node += "<extensionElements>";
         //1监听的类开始
         task_node+=MxUtils.eventListenerNode(mxCell);
         //1监听器配置结束
-        
-        //2备注配置开始
-        task_node+=MxUtils.documentation(mxCell);
-        //2备注配置结束
         
         //3表单配置开始
         task_node+=MxUtils.form(mxCell);

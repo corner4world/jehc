@@ -70,14 +70,16 @@ public class MxMessageBoundaryEvent {
         task_node+="<boundaryEvent id='"+nodeID+"' name='"+name+"' "+MxUtils.normal(mxCell)+excluded+ruleName+ruleVariablesInput+resultVariables+" attachedToRef='"+pMxCel.attributeValue("nodeID")+"' cancelActivity='"+mxCell.attributeValue("cancelActivity")+"'>";
 
         //****开始区间与闭区间属性 开始****//
+
+        //2备注配置开始
+        task_node+=MxUtils.documentation(mxCell);
+        //2备注配置结束
+        
         task_node += "<extensionElements>";
         //1监听的类开始
         task_node+=MxUtils.eventListenerNode(mxCell);
         //1监听器配置结束
         
-        //2备注配置开始
-        task_node+=MxUtils.documentation(mxCell);
-        //2备注配置结束
         task_node += "</extensionElements>";
         //****开始区间与闭区间属性 结束****//
         
