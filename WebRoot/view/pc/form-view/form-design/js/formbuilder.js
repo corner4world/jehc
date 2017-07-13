@@ -2871,6 +2871,7 @@ function addFieldsInit() {
             times: 3
         }, 20)
     });
+    //保存
     $('#saveForm').click(function () {
         if (window.CURUSER && window.CURUSER.USERNAME == testUser) {
             return true
@@ -2878,13 +2879,15 @@ function addFieldsInit() {
         saveForm(true);
         return false
     });
+    //预览
     $('#preview').click(function () {
-        $.post("/CustomFrom/FormDesign/FormView", { formData: JSON.stringify(M), parameterData: JSON.stringify(F) });
+//        $.post("/CustomFrom/FormDesign/FormView", { formData: JSON.stringify(M), parameterData: JSON.stringify(F) });
     });
+    
     window.onbeforeunload = function () {
-        if (CHANGED) {
-            return '离开此页将导致数据丢失，建议先保存数据。'
-        }
+//        if (CHANGED) {
+//            return '离开此页将导致数据丢失，建议先保存数据。'
+//        }
     }
 }
 function needHandle(b) {

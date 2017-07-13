@@ -27,20 +27,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<h3 class="fields-group">基本字段</h3>
 	<ul id="col1">
 		<li id="drag_text" ftype="text"><a id="sl" class="btn-field" title="适用于填写简短的文字内容，身份证号、银行卡号、工号等请使用此类型。" href="#"><i class="iconfont">&#xe643;</i>单行文本</a></li>
-		<li id="drag_textarea" ftype="textarea"><a id="pt" class="btn-field" title="适用于填写大段文本，如“备注”、“留言”" href="#"><i class="iconfont">&#xe61a;</i>多行文本</a></li>
-		<li ftype="file"><a id="fu" class="btn-field" title="适用于收集文件，如简历、照片" href="#"><i class="iconfont">&#xe62b;</i>上传控件</a></li>
 		<li ftype="date"><a id="dt" class="btn-field" title="适用于选择特定的日期" href="#"><i class="iconfont">&#xe62a;</i>日期控件</a></li>
-		<li ftype="time"><a id="ti" class="btn-field" title="适用于填写特定的时间" href="#"><i class="iconfont">&#xe646;</i>时间控件</a></li>
 	</ul>
 	<ul id="col2">
-		<li id="drag_number" ftype="number"><a id="nb" class="btn-field" title="适用于填写涉及到数学运算的数字，身份证号、银行卡号、工号等请使用单行文本。" href="#"><i class="iconfont">&#xe640;</i>数字框</a></li>
-		<li id="drag_checkboxes" ftype="checkbox"><a id="cb" class="btn-field" title="适用于在几个选项里选多个，如投票" href="#"><i class="iconfont">&#xe64a;</i>多选框</a></li>
-		<li id="drag_radio" ftype="radio"><a id="mc" class="btn-field" title="适用于在少量选项里选一个，如“男/女”" href="#"><i class="iconfont">&#xe66f;</i>单选框</a></li>
-		<li id="drag_dropdown" ftype="dropdown"><a id="dd" class="btn-field" title="适用于在非常多的选项里选一个，如省份选择" href="#"><i class="iconfont">&#xe626;</i>下拉框</a></li>
+		<li id="drag_number" ftype="number"><a id="nb" class="btn-field" title="适用于填写涉及到数学运算的数字，身份证号、银行卡号、工号等请使用单行文本。" href="#"><i class="iconfont">&#xe640;</i>数字控件</a></li>
+		<li id="drag_checkboxes" ftype="checkbox"><a id="cb" class="btn-field" title="适用于在几个选项里选多个，如投票" href="#"><i class="iconfont">&#xe64a;</i>多选控件</a></li>
+		<li id="drag_radio" ftype="radio"><a id="mc" class="btn-field" title="适用于在少量选项里选一个，如“男/女”" href="#"><i class="iconfont">&#xe66f;</i>单选按钮</a></li>
+		<li id="drag_dropdown" ftype="dropdown"><a id="dd" class="btn-field" title="适用于在非常多的选项里选一个，如省份选择" href="#"><i class="iconfont">&#xe626;</i>下拉控件</a></li>
+		<li ftype="file"><a id="fu" class="btn-field" title="适用于收集文件，如简历、照片" href="#"><i class="iconfont">&#xe62b;</i>上传控件</a></li>
+		<li id="drag_textarea" ftype="textarea"><a id="pt" class="btn-field" title="适用于填写大段文本，如“备注”、“留言”" href="#"><i class="iconfont">&#xe61a;</i>多行文本</a></li>
 	</ul>
 	<h3 class="fields-group">平台控件字段</h3>
 	<ul id="col3">
-		<li ftype="name"><a id="nm" class="btn-field" title="适用于填写用户姓名" href="#"><i class="iconfont">&#xe652;</i>姓名</a></li>
+		<li ftype="name"><a id="nm" class="btn-field" title="适用于填写用户姓名" href="#"><i class="iconfont">&#xe652;</i>用户控件</a></li>
 	</ul>
 </div><!-- addFields -->
 </div>
@@ -90,11 +89,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</li>
 
 	<li id="ptype" class="left half">
-		<label class="desc" for="type">字段类型 
-			<a href="#" class="help" title="关于字段类型" rel="可以修改表单保存之前添加字段的类型。">(?)</a>
+		<label class="desc" for="type">
+			<a href="#" class="help" title="关于字段类型" rel="可以修改表单保存之前添加字段的类型。">字段类型 </a>
 		</label>
-		<select id="type" name="TYP" class="xxl" disabled="disabled">
-			<optgroup label="标准类型">
+		<select id="type" name="TYP" class="xxl">
+			<!-- <optgroup label="标准类型">
 				<option value="text">单行文本</option>
 				<option value="textarea">多行文本</option>
 				<option value="radio">单选框</option>
@@ -117,13 +116,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<option value="image">图片</option>
 				<option value="goods">配图商品</option>
 				<option value="goodsnoimg">无图商品</option>
-			</optgroup>
+			</optgroup> -->
 		</select>
 	</li>
 
 	<li class="right half" id="pfldsize">
-		<label class="desc" for="fldsize">字段长度
-			<a href="#" class="help" title="关于字段长度" rel="用于限定字段输入框的长度（“多行文本”字段限定输入框高度）。">(?)</a>
+		<label class="desc" for="fldsize">
+			<a href="#" class="help" title="关于字段长度" rel="用于限定字段输入框的长度（“多行文本”字段限定输入框高度）。">字段长度</a>
 		</label>
 		<select id="fldsize" name="FLDSZ"  class="xxl">
 			<option value="s">短</option>
@@ -145,8 +144,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</li>
 
 	<li class="right half" id="pdateformat">
-		<label class="desc" for="dateformat">日期格式
-			<a href="#" class="help hide" title="关于日期格式" rel="此属性用于指定日期的输入格式。YYYY代表年，MM代表月，DD代表日。">(?)</a>
+		<label class="desc" for="dateformat">
+			<a href="#" class="help hide" title="关于日期格式" rel="此属性用于指定日期的输入格式。YYYY代表年，MM代表月，DD代表日。">日期格式</a>
 		</label>
 		<select id="dateformat" name="FMT" class="xxl">
 			<option value="ymd" selected="selected">YYYY - MM - DD</option>
@@ -156,8 +155,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</li>
 
 	<li class="right half" id="pphoneformat">
-		<label class="desc" for="phoneformat">电话格式
-			<a href="#" class="help hide" title="关于电话格式" rel="此属性用于指定电话的输入格式。支持普通的电话号码输入和“区号-总机-分机”的座机号码输入。">(?)</a>
+		<label class="desc" for="phoneformat">
+			<a href="#" class="help hide" title="关于电话格式" rel="此属性用于指定电话的输入格式。支持普通的电话号码输入和“区号-总机-分机”的座机号码输入。">电话格式</a>
 		</label>
 		<select id="phoneformat" name="FMT" class="xxl">
 			<option value="mobile" selected="selected">手机</option>
@@ -166,8 +165,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</li>
 	
 	<li class="right half" id="pnameformat">
-		<label class="desc" for="nameformat">姓名格式
-			<a href="#" class="help hide" title="关于姓名格式" rel="此属性用于指定姓名的输入格式。支持普通的姓名格式和带称呼的加长格式。">(?)</a>
+		<label class="desc" for="nameformat">
+			<a href="#" class="help hide" title="关于姓名格式" rel="此属性用于指定姓名的输入格式。支持普通的姓名格式和带称呼的加长格式。">姓名格式</a>
 		</label>
 		<select id="nameformat" name="FMT" class="xxl">
 			<option value="short" selected="selected">普通</option>
@@ -197,19 +196,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<li class="clear noheight"></li>
 	<li id="plikert" class="bggray">
 	<fieldset>
-		<legend>行标签
-			<a href="#" class="help hide" title="关于行标签" rel="此属性用于指定组合单选框中表示组合类别的标签。">(?)</a>
+		<legend>
+			<a href="#" class="help hide" title="关于行标签" rel="此属性用于指定组合单选框中表示组合类别的标签。">行标签</a>
 		</legend>
 		<ul id="likertRows"></ul>
 	</fieldset>
 	<fieldset>
-		<legend>列标签
-			<a href="#" class="help hide" title="关于列标签" rel="此属性用于指定组合单选框中表示级次的标签。">(?)</a>
+		<legend>
+			<a href="#" class="help hide" title="关于列标签" rel="此属性用于指定组合单选框中表示级次的标签。">列标签</a>
 		</legend>
 		<ul id="likertCols"></ul>
-		<div class="center">
-			<a id="btnLikertPredefine" href="#" class="btn gray">批量编辑</a>
-		</div>
 	</fieldset>
 	</li>
 	<li class="clear noheight"></li>
@@ -225,19 +221,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</fieldset>
 			</li>
 			
-			<li id="pgoods" class="clear bggray">
+			<!-- <li id="pgoods" class="clear bggray">
 			<fieldset>
 			<legend>商品列表
 				<a href="#" class="help hide" title="关于商品列表" rel="此属性用于指定在表单中显示的商品。如果是图片商品，图片长宽比例请保持1:1，文件体积需要在500KB以内，支持.jpg格式。提示：按住商品列表拖动可以排序哦。">(?)</a>
 			</legend>
 			<ul id="goodsList" class="clearfix">
-			</ul>
+			</ul> -->
 		
-			<div id="pgoods_radio" class="center add-goods">
+			<!-- <div id="pgoods_radio" class="center add-goods">
 				<form name="goodsUploadForm" class="add-image-btn" action="" method="POST" enctype="multipart/form-data" style="height:35px;padding:5px 0px;vertical-align: middle;">
 				<a id="btnAddGoods" title="添加配图商品" class="btn gray" href="#"><span style="display:block;">+ 添加配图商品</span>
 				<input id="fileToUpload"  title="添加配图商品" name="fileToUpload" class="file-prew" title="支持jpg、jpeg、png格式，文件小于500K" type="file" size="3" accept="image/jpeg,image/png,image/bmp,image/gif"/></a>
-				<!-- <a id="btnGoodsPredefine" href="#" title="添加常用配图商品" style="display:inline-block;padding-bottom:20px;vertical-align: middle;color: #3670af;text-decoration: underline;">添加常用配图商品</a> -->
+				<a id="btnGoodsPredefine" href="#" title="添加常用配图商品" style="display:inline-block;padding-bottom:20px;vertical-align: middle;color: #3670af;text-decoration: underline;">添加常用配图商品</a>
 				</form>
 				<div id="addNoImgGoods" class="add-goods-btn" style="height:35px;padding:5px 0px;vertical-align: middle;">
 					<a id="btnAddNoImgGoods" title="添加无图商品" class="btn gray"><span>+ 添加无图商品</span></a>
@@ -247,72 +243,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			  	<label for="goodsForBuy">商品用于向供应商询价</label>
 			  	<a href="#" class="help hide" title="关于商品用于向供应商询价" rel="当勾选此选项时，将由制表人确信数量，填表人根据数量填写单价。主要用于向供应商询价，供应商填写表单进行报价的场景。">(?)</a><br>
 				</div>
-			</div>
+			</div> -->
 		</fieldset>
 	</li>
 	
-	<li id="pimage">
+	<!-- <li id="pimage">
 		<form name="uploadImageForm" action="" method="POST" enctype="multipart/form-data" style="padding:5px 0px;">
-		<label class="desc" for="uploadImage">上传图片<a href="#" class="help hide" title="关于图片" rel="在表单中添加图片显示，支持gif格式，每张图片最大2M。">(?)</a>
+		<label class="desc" for="uploadImage">上传图片<a href="#" class="help hide" title="关于图片" rel="在表单中添加图片显示，支持gif格式，每张图片最大2M。"></a>
 		</label>
 		<a class="btn gray filewrap">
 		<span>上传图片</span>
 		<input type="file" id="uploadImage"  name="uploadImage" title="支持jpg、jpeg、png格式，文件小于500K" accept="image/jpeg,image/png,image/bmp,image/gif"/>
 		</a>
 		</form>
-	</li>
+	</li> -->
 
-	<li class="left half clear" id="poptions">
-	<fieldset>
-		<legend>设置</legend>
-		<ul>
-		<li id="popt_required">
-		<input id="reqd" name="REQD" type="checkbox" value="1" />
-		<label for="reqd">必须输入</label>
-		<a href="#" class="help hide" title="关于必须输入" rel="强制填表人该字段必须输入，否则将不能提交表单。<a href='#' class='video help' videosrc='images/videos/2-1.mp4'><i class='iconfont icon green2' >&#xe64d;</i>观看视频说明</a>">(?)</a>
-		</li>
-		<li id="popt_unique">
-		<input id="uniq" name="UNIQ" type="checkbox" value="1" /> 
-		<label for="uniq">不许重复</label>  
-		<a href="#" class="help" title="关于不许重复" rel="用于保证字段输入值的唯一性，适用于如手机号、QQ号等需要保证唯一性的输入值。">(?)</a>
-		</li>
-		
-		<li id="popt_hidenum">
-		<input id="hidenum" name="HDNM" type="checkbox" value="1"/>
-		<label for="hidenum">隐藏数字</label>
-		<a href="#" class="help hide" title="关于隐藏数字" rel="在单选框下方通常都有一个数字用于标识此选项的分值，此属性用于指定是否隐藏此数字。">(?)</a>
-		</li>
-		
-		<li id="popt_authcode">
-		<div>
-		<input id="internal" name="INTERNAL" type="checkbox" value="1"/>
-		<label for="internal">启用国际手机</label> <a href="#" class="help hide" title="关于启用国际手机号" rel="启用后可以向全球200多个国家和地区发送短信，请先联系客户咨询使用详情。<a href='help/smsprice.html' target='_blank'>查看资费明细</a>">(?)</a>
-		</div>
-		
-		<input id="authcode" name="AUTH" type="checkbox" value="1"/>
-		<label for="authcode">验证码</label> <a href="#" class="help hide" title="关于手机验证码" rel="启用验证码需要满足以下两个条件：1、签名通过审核（可联系在线客服审核）；2、有可用短信量（短信需要单独购买）；<a href='help/smsprice.html' target='_blank'>查看资费明细</a>">(?)</a>
-		
-		<div id="signcnt" class="hide">
-		<input id="sign" name="SIGN" placeholder="短信签名" type="text" maxlength="16" style="width:60px;" />
-		<a id="btnSignSumbmit" target="_blank" href="/web/formview/5606403b0cf2f6fe39b1965d" class="btn no-icon btn-blue small">提交审核</a>
-		</div>
-		</li>
-		
-		<li id="popt_dismark">
-		<input id="chkDismark" name="DISMK" type="checkbox" value="1"/>
-		<label for="chkDismark">禁止手动标注</label>
-		<a href="#" class="help hide" title="禁止手动标注" rel="默认情况下，地理位置支持自动定位和手动标注。您可以勾选此选项来禁用手动标注，满足某些需要真实确认填表人位置的场景。">(?)</a>
-		</li>
-		
-		</ul>
-	</fieldset>
-	</li>
 	<li class="clear noheight"></li>
-
 	<li id="prange" class="bggray">
 	<fieldset>
-		<legend>范围
-			<a href="#" class="help" title="关于范围" rel="数值型字段用于限定数值的范围；文本型字段用于限定字数的多少。">(?)</a>
+		<legend>
+			<a href="#" class="help" title="关于范围" rel="数值型字段用于限定数值的范围；文本型字段用于限定字数的多少。">范围</a>
 		</legend>
 		<div>
 			<div class="half left">
@@ -324,39 +274,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<input class="xxl number" id="max" name="MAX" type="text" value="" />
 			</div>
 		</div>
+		<ul>
+		<li id="popt_required">
+			<a href="#" class="help hide" title="关于必须输入" rel="强制填表人该字段必须输入，否则将不能提交表单。">必须输入</a><br>
+			<input id="reqd" name="REQD" type="checkbox" value="1" />
+		</li>
+		<li id="popt_unique">
+			<a href="#" class="help" title="关于不许重复" rel="用于保证字段输入值的唯一性，适用于如手机号、QQ号等需要保证唯一性的输入值。">不许重复</a><br>
+			<input id="uniq" name="UNIQ" type="checkbox" value="1" /> 
+		</li>
+		
+		<li id="popt_hidenum">
+			<a href="#" class="help hide" title="关于隐藏数字" rel="在单选框下方通常都有一个数字用于标识此选项的分值，此属性用于指定是否隐藏此数字。"><label for="hidenum">隐藏数字</label></a><br>
+			<input id="hidenum" name="HDNM" type="checkbox" value="1"/>
+		</li>
+		<li id="popt_dismark">
+			<input id="chkDismark" name="DISMK" type="checkbox" value="1"/>
+			<label for="chkDismark"></label>
+			<a href="#" class="help hide" title="禁止手动标注" rel="默认情况下，地理位置支持自动定位和手动标注。您可以勾选此选项来禁用手动标注，满足某些需要真实确认填表人位置的场景。">禁止手动标注</a>
+		</li>
+		</ul>
 	</fieldset>
 	</li>
 	<li id="pdefval_text">
-		<label class="desc" for="defval_text">默认值
-			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">(?)</a>
+		<label class="desc" for="defval_text">
+			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">默认值</a>
 		</label>
 		<input id="defval_text" name="DEF" class="xxl" type="text"value="" maxlength="255" />
 	</li>
 	
 	<li id="pdefval_number">
-		<label class="desc" for="defval_number">默认值
-			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">(?)</a>
+		<label class="desc" for="defval_number">
+			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">默认值</a>
 		</label>
 		<input id="defval_number" name="DEF" class="xxl" type="text"value="" maxlength="255" />
 	</li>
 
 	<li id="pdefval_date">
-		<label class="desc" for="defval_date">默认值
-			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。默认值可以是'YYYY-MM-DD'格式的固定日期，也可以是如下一些动态日期：'today'， '+n days'， '+n weeks'， '+n months'， '-n days'， '-n weeks'， '-n months'，其中n为正整数，如+2 days。对于动态日期，将根据用户访问表单时的时间自动转换为对应的日期。如果不需要默认值，请将此处设置为空。">(?)</a>
+		<label class="desc" for="defval_date">
+			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。默认值可以是'YYYY-MM-DD'格式的固定日期，也可以是如下一些动态日期：'today'， '+n days'， '+n weeks'， '+n months'， '-n days'， '-n weeks'， '-n months'，其中n为正整数，如+2 days。对于动态日期，将根据用户访问表单时的时间自动转换为对应的日期。如果不需要默认值，请将此处设置为空。">默认值</a>
 		</label>
 		<input id="defval_date" name="DEF" class="xxl" type="text" value="" maxlength="255" />
 	</li>
 	
 	<li id="pdefval_time">
-		<label class="desc" for="defval_time">默认值
-			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。默认值可以是'HH:MM'格式的固定时间，也可以是如下一些动态时间：'now'， '+n minutes'， '+n hours'， '-n minutes'， '-n hours'，其中n为正整数，如+30 minutes。对于动态时间，将根据用户访问表单时的时间自动转换为对应的时间。如果不需要默认值，请将此处设置为空。">(?)</a>
+		<label class="desc" for="defval_time">
+			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。默认值可以是'HH:MM'格式的固定时间，也可以是如下一些动态时间：'now'， '+n minutes'， '+n hours'， '-n minutes'， '-n hours'，其中n为正整数，如+30 minutes。对于动态时间，将根据用户访问表单时的时间自动转换为对应的时间。如果不需要默认值，请将此处设置为空。">默认值</a>
 		</label>
 		<input id="defval_time" name="DEF" class="xxl" type="text" value="" maxlength="255" />
 	</li>
 
 	<li id="pdefval_phone_tel"  class="overhide clear hide">
-		<label class="desc" for="pdefval_phone_tel">默认值
-			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">(?)</a>
+		<label class="desc" for="pdefval_phone_tel">
+			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">默认值</a>
 		</label>
 		<div class="oneline tel reduction">
 		<span>
@@ -378,15 +348,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</li>
 	
 	<li id="pdefval_phone_mobile" class="clear hide">
-		<label class="desc" for="defval_phone_mobile">默认值
-			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">(?)</a>
+		<label class="desc" for="defval_phone_mobile">
+			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">默认值</a>
 		</label>
 		<input id="defval_phone_mobile" name="DEF" class="m" type="text" maxlength="18"/>
 	</li>
 	
 	<li id="pdefval_addr">
-		<label class="desc" for="defval_country">默认值
-			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">(?)</a>
+		<label class="desc" for="defval_country">
+			<a href="#" class="help hide" title="关于默认值" rel="在用户访问表单时，此值将作为默认值显示在输入框中。如果不需要默认值，请将此处设置为空。">默认值</a>
 		</label>
 		<select id="defval_province" name="DEF_PROVINCE" class="s"></select>
 		<select id="defval_city" name="DEF_CITY" class="s"><option>市</option></select>
@@ -394,29 +364,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</li>
 
 	<li id="psection" class="clear">
-		<label class="desc" for="secdesc">分隔描述
-			<a href="#" class="help hide" title="关于分隔描述" rel="请在此处添加对分隔符的描述，如果不需要描述可以清空。">(?)</a>
+		<label class="desc" for="secdesc">
+			<a href="#" class="help hide" title="关于分隔描述" rel="请在此处添加对分隔符的描述，如果不需要描述可以清空。">分隔描述</a>
 		</label>
 		<textarea class="xxl" rows="5" id="secdesc" name="SECDESC"></textarea>
 	</li>
 	<li id="phtml" class="clear">
-		<label class="desc" for="html">HTML内容
-			<a href="#" class="help hide" title="关于HTML内容" rel="如果您需要在表单上显示HTML内容，只支持显示型HTML（如p,a,div等），不支持输入型HTML（如input,select,radio等），请在此处输入相应HTML代码。<a href='help/formbuilder.html#t31' target='_blank'>如何插入图片和链接？</a>">(?)</a>
+		<label class="desc" for="html">
+			<a href="#" class="help hide" title="关于HTML内容" rel="如果您需要在表单上显示HTML内容，只支持显示型HTML（如p,a,div等），不支持输入型HTML（如input,select,radio等），请在此处输入相应HTML代码。<a href='help/formbuilder.html#t31' target='_blank'>如何插入图片和链接？</a>">HTML内容</a>
 		</label>
 		<textarea class="xxl" rows="5" id="html" name="HTML"></textarea>
 	</li>
 	
 	<li id="pinstruct" class="clear">
-		<label class="desc" for="instruct">字段说明 
-			<a href="#" class="help" title="关于字段说明" rel="对字段进行解释，帮助填表人进行理解和输入，并在字段右侧显示。">(?)</a>
+		<label class="desc" for="instruct">
+			<a href="#" class="help" title="关于字段说明" rel="对字段进行解释，帮助填表人进行理解和输入，并在字段右侧显示。">字段说明 </a>
 		</label>
 		<textarea class="xxl" rows="3" id="instruct" name="INSTR"></textarea>
 	</li>
 	<li class="clear noheight"></li>
 	
 	<li id="playout" class="bggray">
-		<label class="desc" for="layout">字段宽度（仅填表时可见）
-			<a href="#" class="help hide" title="字段宽度" rel="让多个字段并列显示在同一行（仅适用于PC端）。<a href='#' class='video help' videosrc='images/videos/2-1-2.mp4'><i class='iconfont icon green2' >&#xe64d;</i>观看视频说明</a><i>注意：设置的宽度在设计模式不可见，仅在查看表单时才能看到效果。</i>">(?)</a>
+		<label class="desc" for="layout">
+			<a href="#" class="help hide" title="字段宽度" rel="让多个字段并列显示在同一行（仅适用于PC端）。<i>注意：设置的宽度在设计模式不可见，仅在查看表单时才能看到效果。</i>">字段宽度（仅填表时可见）</a>
 		</label>
 		<select class="xxl" id="selLayout" name="LAYOUT">
 		<option value="">充满整行</option>
@@ -458,7 +428,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<option value="R">右对齐</option>
 		</select>
 	</li>
-	<li>
+	<%-- <li>
   		<label class="desc" for="labelAlign">多列操作
   		</label>
 		<select id="labelAlign" name="LBLAL" class="xxl">
@@ -486,7 +456,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<input id="confirmMsg_url" name="CFMURL" class="xxl hide" type="text" placeholder="http://" />
 		</li>
 	  </ul>
-	</li>
+	</li> --%>
  </ul>
 </div>  <!-- form properties end -->
 </div>  <!-- right end -->
@@ -513,9 +483,10 @@ var fieldsLimit=150;
 var goodsNumber=60;
 var imageNumber=10;
 var LVL=4;
-var middeWidth = document.body.clientWidth-140-335-40;
+var middeWidth = document.body.clientWidth-140-335-38;
 var rightHeight = document.documentElement.clientHeight;
 document.getElementById("middle").style.width=middeWidth+'px';
+document.getElementById("formButtons").style.width=middeWidth+'px';
 var isForTemplate=false;
 M.GID=M.GID || '';
 var resRoot="#",GOODSIMAGEURL="http://goodsimages.jsform.com/",IMAGESURL="#",GOODSIMAGESTYLE="@1e_200w_200h_1c_0i_1o_90Q_1x";
