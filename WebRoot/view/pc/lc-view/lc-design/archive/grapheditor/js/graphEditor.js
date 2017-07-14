@@ -409,9 +409,9 @@ function main(){
     	toolbarItems.get('cut').setDisabled(!selected);
     	toolbarItems.get('copy').setDisabled(!selected);
     	toolbarItems.get('delete').setDisabled(!selected);
-    	toolbarItems.get('italic').setDisabled(!selected);
-    	toolbarItems.get('bold').setDisabled(!selected);
-    	toolbarItems.get('underline').setDisabled(!selected);
+//    	toolbarItems.get('italic').setDisabled(!selected);
+//    	toolbarItems.get('bold').setDisabled(!selected);
+//    	toolbarItems.get('underline').setDisabled(!selected);
     };
     graph.getSelectionModel().addListener(mxEvent.CHANGE, selectionListener);
     //重做 或 撤销
