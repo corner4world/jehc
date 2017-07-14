@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.lcmodules.lcmodel.Lc_Approval">
+	<!--初始化分页-->
+	<select id="getLcApprovalListByCondition" resultType="jehc.lcmodules.lcmodel.Lc_Approval" parameterType="map">
+		SELECT
+			lc_approval.`lc_approval_id`,
+			lc_approval.`lc_status_id`,
+			lc_approval.`lc_apply_id`,
+			lc_approval.`lc_approval_remark`,
+			lc_approval.`taskId`,
+			DATE_FORMAT(lc_approval.`lc_approval_time`,'%Y-%m-%d %H:%i:%s') AS `lc_approval_time`,
+			lc_approval.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`,
+			lc_status.`lc_status_name`
+		FROM 
+			lc_approval lc_approval LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_approval.xt_userinfo_id
+			LEFT JOIN lc_status lc_status ON lc_status.lc_status_id = lc_approval.lc_status_id
+		WHERE 1=1
+		<if test="null != lc_status_id">
+			AND lc_approval.lc_status_id = #{lc_status_id}
+		</if>
+		<if test="null != lc_apply_id">
+			AND lc_approval.lc_apply_id = #{lc_apply_id}
+		</if>
+		ORDER BY lc_approval_time DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getLcApprovalById" resultType="jehc.lcmodules.lcmodel.Lc_Approval" parameterType="string">
+		SELECT
+			lc_approval.`lc_approval_id`,
+			lc_approval.`lc_status_id`,
+			lc_approval.`lc_apply_id`,
+			lc_approval.`lc_approval_remark`,
+			lc_approval.`taskId`,
+			DATE_FORMAT(lc_approval.`lc_approval_time`,'%Y-%m-%d %H:%i:%s') AS `lc_approval_time`,
+			lc_approval.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`,
+			lc_status.`lc_status_name`
+		FROM 
+			lc_approval lc_approval LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_approval.xt_userinfo_id
+			LEFT JOIN lc_status lc_status ON lc_status.lc_status_id = lc_approval.lc_status_id
+		WHERE lc_approval.lc_approval_id=#{lc_approval_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addLcApproval" parameterType="jehc.lcmodules.lcmodel.Lc_Approval">
+		INSERT INTO
+			lc_approval
+			(
+			`lc_approval_id`,
+			`lc_status_id`,
+			`lc_apply_id`,
+			`lc_approval_remark`,
+			`taskId`,
+			`lc_approval_time`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{lc_approval_id},
+			#{lc_status_id},
+			#{lc_apply_id},
+			#{lc_approval_remark},
+			#{taskId},
+			#{lc_approval_time},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateLcApproval" parameterType="jehc.lcmodules.lcmodel.Lc_Approval">
+		UPDATE
+			lc_approval
+		SET
+			`lc_approval_id` = #{lc_approval_id},
+			`lc_status_id` = #{lc_status_id},
+			`lc_apply_id` = #{lc_apply_id},
+			`lc_approval_remark` = #{lc_approval_remark},
+			`taskId` = #{taskId},
+			`lc_approval_time` = #{lc_approval_time},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE lc_approval_id=#{lc_approval_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delLcApproval" parameterType="map">
+		DELETE FROM lc_approval WHERE lc_approval_id IN
+		<foreach item="item" index="index" collection="lc_approval_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchLcApproval" parameterType="list">
+		INSERT INTO
+			lc_approval
+			(
+			`lc_approval_id`,
+			`lc_status_id`,
+			`lc_apply_id`,
+			`lc_approval_remark`,
+			`taskId`,
+			`lc_approval_time`,
+			`xt_userinfo_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.lc_approval_id},
+			#{item.lc_status_id},
+			#{item.lc_apply_id},
+			#{item.lc_approval_remark},
+			#{item.taskId},
+			#{item.lc_approval_time},
+			#{item.xt_userinfo_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchLcApproval" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				lc_approval
+			SET
+				`lc_approval_id` = #{item.lc_approval_id},
+				`lc_status_id` = #{item.lc_status_id},
+				`lc_apply_id` = #{item.lc_apply_id},
+				`lc_approval_remark` = #{item.lc_approval_remark},
+				`taskId` = #{item.taskId},
+				`lc_approval_time` = #{item.lc_approval_time},
+				`xt_userinfo_id` = #{item.xt_userinfo_id}
+			WHERE lc_approval_id=#{item.lc_approval_id}
+		</foreach>
+	</update>
+</mapper>

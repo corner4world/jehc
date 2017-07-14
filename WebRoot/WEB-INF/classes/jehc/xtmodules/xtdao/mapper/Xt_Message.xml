@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.Xt_Message">
+	<!--初始化分页-->
+	<select id="getXtMessageListByCondition" resultType="jehc.xtmodules.xtmodel.Xt_Message" parameterType="map">
+		SELECT
+			`xt_message_id`,
+			`from_id`,
+			`to_id`,
+			`xt_meesage_content`,
+			`isread`,
+			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
+			DATE_FORMAT(`readtime`,'%Y-%m-%d %H:%i:%s') AS `readtime`,
+		    xt_userinfo.xt_userinfo_realName as fromName,
+            xtuserinfo.xt_userinfo_realName as toName
+		FROM 
+			xt_message AS xt_message LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_message.from_id
+		LEFT JOIN xt_userinfo AS xtuserinfo ON xtuserinfo.xt_userinfo_id = xt_message.to_id
+		WHERE 1=1
+		<if test="null != isread">
+			AND isread = #{isread}
+		</if>
+		<if test="null != from_id">
+			AND from_id = #{from_id}
+		</if>
+		<if test="null != to_id">
+			AND to_id = #{to_id}
+		</if>
+		ORDER BY ctime ASC
+	</select>
+	
+	<!--统计-->
+	<select id="getXtMessageCountByCondition" resultType="jehc.xtmodules.xtmodel.Xt_Message" parameterType="map">
+		SELECT
+			from_id,
+			COUNT(0) AS count
+		FROM 
+			xt_message AS xt_message 
+		WHERE 1=1
+		<if test="null != isread">
+			AND isread = #{isread}
+		</if>
+		<if test="null != from_id">
+			AND from_id = #{from_id}
+		</if>
+		<if test="null != to_id">
+			AND to_id = #{to_id}
+		</if>
+		GROUP BY from_id
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtMessageById" resultType="jehc.xtmodules.xtmodel.Xt_Message" parameterType="string">
+		SELECT
+			`xt_message_id`,
+			`from_id`,
+			`to_id`,
+			`xt_meesage_content`,
+			`isread`,
+			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
+			DATE_FORMAT(`readtime`,'%Y-%m-%d %H:%i:%s') AS `readtime`,
+		    xt_userinfo.xt_userinfo_realName as fromName,
+            xtuserinfo.xt_userinfo_realName as toName
+		FROM 
+			xt_message AS xt_message LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_message.from_id
+		LEFT JOIN xt_userinfo AS xtuserinfo ON xtuserinfo.xt_userinfo_id = xt_message.to_id
+		WHERE xt_message_id=#{xt_message_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtMessage" parameterType="jehc.xtmodules.xtmodel.Xt_Message">
+		INSERT INTO
+			xt_message
+			(
+			`xt_message_id`,
+			`from_id`,
+			`to_id`,
+			`xt_meesage_content`,
+			`isread`,
+			`ctime`,
+			`readtime`
+			)
+			VALUES
+			(
+			#{xt_message_id},
+			#{from_id},
+			#{to_id},
+			#{xt_meesage_content},
+			0,
+			#{ctime},
+			#{readtime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtMessage" parameterType="jehc.xtmodules.xtmodel.Xt_Message">
+		UPDATE
+			xt_message
+		SET
+			`xt_message_id` = #{xt_message_id},
+			`from_id` = #{from_id},
+			`to_id` = #{to_id},
+			`xt_meesage_content` = #{xt_meesage_content},
+			`isread` = #{isread},
+			`ctime` = #{ctime},
+			`readtime` = #{readtime}
+		WHERE xt_message_id=#{xt_message_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtMessage" parameterType="map">
+		DELETE FROM xt_message WHERE xt_message_id IN
+		<foreach item="item" index="index" collection="xt_message_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtMessage" parameterType="list">
+		INSERT INTO
+			xt_message
+			(
+			`xt_message_id`,
+			`from_id`,
+			`to_id`,
+			`xt_meesage_content`,
+			`isread`,
+			`ctime`,
+			`readtime`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_message_id},
+			#{item.from_id},
+			#{item.to_id},
+			#{item.xt_meesage_content},
+			0,
+			#{item.ctime},
+			#{item.readtime}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtMessage" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_message
+			SET
+				`xt_message_id` = #{item.xt_message_id},
+				`from_id` = #{item.from_id},
+				`to_id` = #{item.to_id},
+				`xt_meesage_content` = #{item.xt_meesage_content},
+				`isread` = #{item.isread},
+				`ctime` = #{item.ctime},
+				`readtime` = #{item.readtime}
+			WHERE xt_message_id=#{item.xt_message_id}
+		</foreach>
+	</update>
+	
+	<!-- 更新已读状态 -->
+	<update id="updateRead" parameterType="map">
+		UPDATE
+			xt_message
+		SET
+			`isread` = #{isread},
+			`readtime` = #{readtime}
+		WHERE 1=1
+		AND isread = 0
+		AND from_id = #{from_id}
+		AND to_id = #{to_id}
+	</update>
+</mapper>
