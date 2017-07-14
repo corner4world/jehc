@@ -29,12 +29,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		background-repeat: no-repeat !important;
 	}
 	.x-btn-over.x-btn-default-toolbar-small {
-		border-color: #5fa2dd;
+		/* border-color: #5fa2dd; */
+		border-color: #FFFFFF;
 		background-image: none;
-		background-color: #5fa2dd;
+		/* background-color: #5fa2d */d;
 	}
 	.x-btn-default-toolbar-small {
-		border-color: #5fa2dd;
+		/* border-color: #5fa2dd; */
+		border-color: #ffffff;
 		height:28px;
 	}
 	.x-btn-inner-default-toolbar-small {
@@ -46,13 +48,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	.x-toolbar-default {
 		padding: 6px 0 6px 8px;
 		border-style: solid;
-		border-color: #cecece;
+		/* border-color: #cecece; */
+		border-color: #FFFFFF;
 		border-width: 1px;
 		background-image: none;
-		background-color: #fff;/**#157fcc**/
+		/* background-color: #fff; *//**#157fcc**/
 	}
 	.x-btn-default-toolbar-small {
-		border-color: #fff;
+		border-color: #fff; 
 	}
 	.x-btn-default-toolbar-small {
 		-webkit-border-radius: 0px;
@@ -63,24 +66,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		padding: 3px 3px 3px 3px;
 		border-width: 0px;
 		border-style: solid;
-		background-color: #5fa2dd;
+		/* background-color: #5fa2dd; */
 	}
 	/**tbar与bbar鼠标移上样式**/
 	.x-btn-over.x-btn-default-toolbar-small {
 		border-color: #fff;
 		background-image: none;
-		background-color: #5fa2dd;
+		/* background-color: #5fa2dd; */
 	}
 	/**tbar与bbar鼠标点击时样式**/
 	.x-btn.x-btn-menu-active.x-btn-default-toolbar-small, .x-btn.x-btn-pressed.x-btn-default-toolbar-small {
-		border-color: #5fa2dd;
+		/* border-color: #5fa2dd; */
+		border-color: #ffffff;
 		background-image: none;
-		background-color: #5fa2dd;
+		/* background-color: #5fa2dd; */
 	}
 	/**tbar与bbar鼠标点击后样式**/
 	.x-btn-focus.x-btn-default-toolbar-small {
 		background-image: none;
-		background-color: #3892d3;
+		/* background-color: #3892d3; */
 		-webkit-box-shadow: #fff 0 0px 0px 0 inset, #fff 0 -1px 0px 0 inset, #fff -1px 0 0px 0 inset, #fff 0px 0 0px 0 inset;
 		-moz-box-shadow: #fff 0 0px 0px 0 inset, #fff 0 -1px 0px 0 inset, #fff -1px 0 0px 0 inset, #fff 0px 0 0px 0 inset;
 		box-shadow: #fff 0 0px 0px 0 inset, #fff 0 -1px 0px 0 inset, #fff -1px 0 0px 0 inset, #fff 1px 0 0px 0 inset;
@@ -88,19 +92,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/**tbar与bbar禁用后样式**/
 	.x-btn.x-btn-disabled.x-btn-default-toolbar-small {
 		background-image: none;
-		background-color: #3892d3;
+		/* background-color: #3892d3; */
 	}
 	.x-btn-wrap-default-toolbar-small.x-btn-arrow-right:after {
 		width:0px;
 		padding-right:0px;
-		background-image: url();
+		/* background-image: url(); */
 	}
 	/**button选项默认样式开始**/
 	.x-btn-default-small {
-	    border-color: #fff;
+	    /* border-color: #fff; */
 	}
 	.x-btn-icon-el-default-small.x-btn-glyph {
-		color: #35baf6;
+		/* color: #35baf6; */
 	}
 	.x-btn-default-small {
 	    -webkit-border-radius: 0px;
@@ -110,13 +114,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    border-radius: 0px;
 	    border-width: 1px;
 	    border-style: solid;
-	    background-color: #5fa2dd;
+	   /*  background-color: #5fa2dd; */
 	}
 	/**button选项默认样式结束**/
 	/**tbar字体颜色开始**/
 	.x-btn-inner-default-toolbar-small {
     	font: 300 14px/16px helvetica,arial,verdana,sans-serif;
-    	color: #fff;
+    	/* color: #fff; */
     	padding: 0 2px;
     	max-width: 100%;
 	}

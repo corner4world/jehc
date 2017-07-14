@@ -633,7 +633,6 @@ MainPanel = function(graph, history){
 			id:'italic',
             text:'倾斜',
             tooltip:'倾斜',
-            hidden:true,
             iconCls:'italic-icon',
             handler: function(){
             	graph.toggleCellStyleFlags(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_ITALIC);
