@@ -412,6 +412,7 @@ MainPanel = function(graph, history){
             text:'剪切',
             iconCls:'cut-icon',
             tooltip:'剪切',
+            hidden:true,
             handler:function(){
         		mxClipboard.cut(graph);
         	},
@@ -420,6 +421,7 @@ MainPanel = function(graph, history){
         {
        		id:'copy',
             text:'拷贝',
+            hidden:true,
             iconCls:'copy-icon',
             tooltip:'拷贝',
             handler:function(){
@@ -431,6 +433,7 @@ MainPanel = function(graph, history){
             text:'粘贴',
             iconCls:'paste-icon',
             tooltip:'粘贴',
+            hidden:true,
             handler:function(){
             	mxClipboard.paste(graph);
             },
@@ -441,6 +444,7 @@ MainPanel = function(graph, history){
             text:'删除',
             iconCls:'delete-icon',
             tooltip:'删除',
+            hidden:true,
             handler:function(){
         		graph.removeCells();
         		//验证泳道是否存在 如果存在则基本信息为第一个泳道中流程信息  
@@ -463,6 +467,7 @@ MainPanel = function(graph, history){
             text:'撤销',
             iconCls:'undo-icon',
             tooltip:'撤销',
+            hidden:true,
             handler:function(){
             	history.undo();
             },
@@ -471,12 +476,148 @@ MainPanel = function(graph, history){
         {
         	id:'redo',
             text:'重做',
+            hidden:true,
             iconCls:'redo-icon',
             tooltip:'重做',
             handler:function(){
         		history.redo();
             },
             scope:this
+        }],
+        bbar:[
+        {
+           text:'放大',
+           hidden:true,
+           iconCls:'zoomin-icon',
+           scope:this,
+           handler:function(item)
+           {
+			graph.zoomIn();
+           }
+        },
+        {
+           text:'放小',
+           hidden:true,
+           iconCls:'zoomout-icon',
+           scope:this,
+           handler:function(item)
+           {
+               graph.zoomOut();
+           }
+        },
+        {
+           text:'.实际尺寸',
+           hidden:true,
+           iconCls:'zoomactual-icon',
+           scope:this,
+           handler:function(item)
+           {
+               graph.zoomActual();
+           }
+        },
+        {
+           text:'全屏',
+           hidden:true,
+           iconCls:'zoom-icon',
+           scope:this,
+           handler:function(item)
+           {
+               graph.fit();
+           }
+        },
+        {
+             text:'全选',
+             scope:this,
+             hidden:true,
+             iconCls:'select-all-icon',
+             handler:function()
+             {
+              graph.selectAll();
+             }
+         },
+         {
+             text:'全选节点',
+             scope:this,
+             hidden:true,
+             iconCls:'select-node-icon',
+             handler:function()
+             {
+ 				graph.selectVertices();
+             }
+          },
+          {
+             text:'全选连线',
+             scope:this,
+             hidden:true,
+             iconCls:'select-line-icon',
+             handler:function()
+             {
+        		graph.selectEdges();
+             }
+          },
+//        {
+//            text:'设计器脚步',
+//            scope:this,
+//            icon: '../view/lc-view/lc-design/archive/grapheditor/images/paste.gif',
+//            handler: function(item){
+//				var enc = new mxCodec(mxUtils.createXmlDocument());
+//				var node = enc.encode(graph.getModel());
+//				mxUtils.popup(mxUtils.getPrettyXml(node));
+//            }
+//        },
+//        {
+//            text:'工作流脚步',
+//            scope:this,
+//            icon:'../view/lc-view/lc-design/archive/grapheditor/images/paste.gif',
+//            handler: function(item){
+//            	var enc = new mxCodec(mxUtils.createXmlDocument());  
+//				var node1 = enc.encode(graph.getModel());  
+//				var mxgraphxml = mxUtils.getXml(node1); 
+//					mxgraphxml = mxgraphxml.replace(/\"/g,"'");
+//            	show_jpdl_xml(mxgraphxml,graph,history);
+//				//var enc = new mxCodec(mxUtils.createXmlDocument());
+//				//var node = enc.encode(graph.getModel());
+//				//mxUtils.popup(mxUtils.getPrettyXml(node));
+//            }
+//      },
+        {
+            text:'直线',
+            icon:'../view/pc/lc-view/lc-design/archive/grapheditor/images/activities/zxline.gif',
+            tooltip:'直线',
+            handler:function(){
+          	  linetostyle(0,graph);
+            },
+            scope:this
+        },
+        {
+            text:'曲线',
+            icon:'../view/pc/lc-view/lc-design/archive/grapheditor/images/activities/qxline.gif',
+            tooltip:'曲线',
+            handler:function(){
+          	  linetostyle(1,graph);
+            },
+            scope:this
+        },
+        {
+			id:'fontcolor',
+            text:'字体颜色',
+            tooltip:'字体颜色',
+            iconCls:'fontcolor-icon',
+            menu:fontColorMenu
+        },
+        {
+			id:'linecolor',
+            text:'边框颜色',
+            tooltip:'边框颜色',
+            iconCls:'linecolor-icon',
+            menu:lineColorMenu 
+        },
+        {
+			id:'fillcolor',
+            text:'背景颜色',
+            tooltip:'背景颜色',
+            iconCls:'fillcolor-icon',
+            menu:fillColorMenu 
         },
         {
 			id:'bold',
@@ -492,6 +633,7 @@ MainPanel = function(graph, history){
 			id:'italic',
             text:'倾斜',
             tooltip:'倾斜',
+            hidden:true,
             iconCls:'italic-icon',
             handler: function(){
             	graph.toggleCellStyleFlags(mxConstants.STYLE_FONTSTYLE, mxConstants.FONT_ITALIC);
@@ -573,134 +715,6 @@ MainPanel = function(graph, history){
                     }
                 }]
             }
-        }],
-        bbar:[
-        {
-            text:'直线',
-            icon:'../view/pc/lc-view/lc-design/archive/grapheditor/images/activities/zxline.gif',
-            tooltip:'直线',
-            handler:function(){
-            	linetostyle(0,graph);
-            },
-            scope:this
-        },
-        {
-            text:'曲线',
-            icon:'../view/pc/lc-view/lc-design/archive/grapheditor/images/activities/qxline.gif',
-            tooltip:'曲线',
-            handler:function(){
-            	linetostyle(1,graph);
-            },
-            scope:this
-        },
-        {
-           text:'放大',
-           iconCls:'zoomin-icon',
-           scope:this,
-           handler:function(item)
-           {
-			graph.zoomIn();
-           }
-        },
-        {
-           text:'放小',
-           iconCls:'zoomout-icon',
-           scope:this,
-           handler:function(item)
-           {
-               graph.zoomOut();
-           }
-        },
-        {
-           text:'.实际尺寸',
-           iconCls:'zoomactual-icon',
-           scope:this,
-           handler:function(item)
-           {
-               graph.zoomActual();
-           }
-        },
-        {
-           text:'全屏',
-           iconCls:'zoom-icon',
-           scope:this,
-           handler:function(item)
-           {
-               graph.fit();
-           }
-        },
-        {
-             text:'全选',
-             scope:this,
-             iconCls:'select-all-icon',
-             handler:function()
-             {
-              graph.selectAll();
-             }
-         },
-         {
-             text:'全选节点',
-             scope:this,
-             iconCls:'select-node-icon',
-             handler:function()
-             {
- 				graph.selectVertices();
-             }
-          },
-          {
-             text:'全选连线',
-             scope:this,
-             iconCls:'select-line-icon',
-             handler:function()
-             {
-        		graph.selectEdges();
-             }
-          },
-//          {
-//            text:'设计器脚步',
-//            scope:this,
-//            icon: '../view/lc-view/lc-design/archive/grapheditor/images/paste.gif',
-//            handler: function(item){
-//				var enc = new mxCodec(mxUtils.createXmlDocument());
-//				var node = enc.encode(graph.getModel());
-//				mxUtils.popup(mxUtils.getPrettyXml(node));
-//            }
-//          },
-//          {
-//            text:'工作流脚步',
-//            scope:this,
-//            icon:'../view/lc-view/lc-design/archive/grapheditor/images/paste.gif',
-//            handler: function(item){
-//            	var enc = new mxCodec(mxUtils.createXmlDocument());  
-//				var node1 = enc.encode(graph.getModel());  
-//				var mxgraphxml = mxUtils.getXml(node1); 
-//					mxgraphxml = mxgraphxml.replace(/\"/g,"'");
-//            	show_jpdl_xml(mxgraphxml,graph,history);
-//				//var enc = new mxCodec(mxUtils.createXmlDocument());
-//				//var node = enc.encode(graph.getModel());
-//				//mxUtils.popup(mxUtils.getPrettyXml(node));
-//            }
-//        },
-          {
-			id:'fontcolor',
-            text:'字体颜色',
-            tooltip:'字体颜色',
-            iconCls:'fontcolor-icon',
-            menu:fontColorMenu
-        },
-        {
-			id:'linecolor',
-            text:'边框颜色',
-            tooltip:'边框颜色',
-            iconCls:'linecolor-icon',
-            menu:lineColorMenu 
-        },
-        {
-			id:'fillcolor',
-            text:'背景颜色',
-            tooltip:'背景颜色',
-            iconCls:'fillcolor-icon',
-            menu:fillColorMenu 
         }],
         onContextMenu:function(node, e){
     		var selected = !graph.isSelectionEmpty();
@@ -790,6 +804,24 @@ MainPanel = function(graph, history){
                     	mxClipboard.paste(graph);
                     }
                 },
+                {
+                    text:'放大',
+                    iconCls:'zoomin-icon',
+                    scope:this,
+                    handler:function(item)
+                    {
+         			graph.zoomIn();
+                    }
+                 },
+                 {
+                    text:'放小',
+                    iconCls:'zoomout-icon',
+                    scope:this,
+                    handler:function(item)
+                    {
+                        graph.zoomOut();
+                    }
+                 },
                 {
                     text:'删除',
                     iconCls:'delete-icon',

@@ -411,7 +411,7 @@
 			}
 	        /* .tbar{ background-color:#5fa2dd;background-image:url();} */
 	        
-	        .label{color:#5fa2dd;background-color:#ffffff}  
+	        .label{color:#35baf6;background-color:#ffffff}  
 		</style>
 	</head>
 </html>

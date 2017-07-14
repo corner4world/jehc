@@ -29,7 +29,7 @@ Ext.onReady(function(){
         		{
         		   width:220,
         		   xtype:'triggerfield',
-        		   emptyText:'输入关键字（如“订单”，“产品”等）',
+        		   emptyText:'输入关键字（如“订单”等）',
         	       triggerCls:'x-form-clear-trigger',
         	       onTriggerClick:function(){
         	           this.reset();
@@ -234,8 +234,11 @@ Ext.onReady(function(){
 //				             style:{background:'#ffffff'}
 //				        },
 				        {
-				        	xtype:'displayfield',
-				        	value:"<font style = 'font-size:18px;' color=#5fa2dd>"+sys_pt_index+"</font>"
+				        	xtype:'label',
+				        	cls:'label',
+				        	text:sys_pt_index
+//				        	xtype:'displayfield',
+//				        	value:"<font style = 'font-size:18px;' color=#5fa2dd>"+sys_pt_index+"</font>"
 				        }
 			        ]
 				}
