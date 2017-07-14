@@ -319,3 +319,19 @@ background-color: #5fa2dd;
 .x-accordion-item .x-accordion-hd {
     background: #fff;
 }
+
+/**tbar与bbar鼠标点击后样式**/
+.x-btn-focus.x-btn-default-toolbar-small {
+	background-image: none;
+	/* background-color: #3892d3; */
+	-webkit-box-shadow: #f6f6f6 0 0px 0px 0 inset, #f6f6f6 0 -1px 0px 0 inset, #f6f6f6 -1px 0 0px 0 inset, #f6f6f6 0px 0 0px 0 inset;
+	-moz-box-shadow: #f6f6f6 0 0px 0px 0 inset, #f6f6f6 0 -1px 0px 0 inset, #f6f6f6 -1px 0 0px 0 inset, #f6f6f6 0px 0 0px 0 inset;
+	box-shadow: #f6f6f6 0 0px 0px 0 inset, #f6f6f6 0 -1px 0px 0 inset, #f6f6f6 -1px 0 0px 0 inset, #f6f6f6 1px 0 0px 0 inset;
+}
+.x-btn-focus.x-btn-over.x-btn-default-toolbar-small {
+	background-image: none;
+	/* background-color: #3892d3; */
+	-webkit-box-shadow: #f6f6f6 0 0px 0px 0 inset, #f6f6f6 0 -1px 0px 0 inset, #f6f6f6 -1px 0 0px 0 inset, #f6f6f6 0px 0 0px 0 inset;
+	-moz-box-shadow: #f6f6f6 0 0px 0px 0 inset, #f6f6f6 0 -1px 0px 0 inset, #f6f6f6 -1px 0 0px 0 inset, #f6f6f6 0px 0 0px 0 inset;
+	box-shadow: #f6f6f6 0 0px 0px 0 inset, #f6f6f6 0 -1px 0px 0 inset, #f6f6f6 -1px 0 0px 0 inset, #f6f6f6 1px 0 0px 0 inset;
+}
