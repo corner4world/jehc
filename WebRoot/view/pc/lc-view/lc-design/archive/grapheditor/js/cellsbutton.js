@@ -85,6 +85,13 @@ mxVertexToolHandler.prototype.init = function(){
                 if (btn == 'yes') {
                 	graph.removeCells([cell]);
 					mxEvent.consume(evt);
+					var eItems =eastPanel.items;
+		    	    for(var le = 0; le < eItems.length; le++){
+		    	    	if(le > 0){
+						 eastPanel.remove(eItems.get(le),true);
+		    	    	}
+				    }
+		    	    basePanel.setHidden(false);
 					//验证泳道是否存在 如果存在则基本信息为第一个泳道中流程信息  
 					validatePOOL(graph);
                 }
@@ -366,6 +373,13 @@ function mxIconSet(state){
                 	graph.removeCells([state.cell]);
 					mxEvent.consume(evt);
 					thz.destroy();
+					var eItems =eastPanel.items;
+		    	    for(var le = 0; le < eItems.length; le++){
+		    	    	if(le > 0){
+						 eastPanel.remove(eItems.get(le),true);
+		    	    	}
+				    }
+		    	    basePanel.setHidden(false);
 					//验证泳道池是否存在 如果存在则基本信息为第一个泳道池中流程信息  
 					validatePOOL(graph);
                 }

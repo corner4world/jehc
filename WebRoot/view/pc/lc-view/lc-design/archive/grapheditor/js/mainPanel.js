@@ -303,6 +303,13 @@ MainPanel = function(graph, history){
 		    	this.filename = null;
 				this.modified = false;
 				eastPanel.form.reset();//清空基础表单
+				var eItems =eastPanel.items;
+	    	    for(var le = 0; le < eItems.length; le++){
+	    	    	if(le > 0){
+	    	    		eastPanel.remove(eItems.get(le),true);
+	    	    	}
+			    }
+	    	    basePanel.setHidden(false);
 		    	updateTitle();
 		    	//验证泳道是否存在 如果存在则基本信息为第一个泳道中流程信息  
 				validatePOOL(graph);
@@ -449,16 +456,13 @@ MainPanel = function(graph, history){
         		graph.removeCells();
         		//验证泳道是否存在 如果存在则基本信息为第一个泳道中流程信息  
 				validatePOOL(graph);
-				
-				 var eItems =eastPanel.items;
-//		    	   console.info(eItems.length);
-		    	   for(var le = 0; le < eItems.length; le++){
-					 if(le > 0){
-//						 console.info(eItems.get(le));
-						 eastPanel.remove(eItems.get(le),true);
-					 }
-				   }
-		    	   basePanel.setHidden(false);
+				var eItems =eastPanel.items;
+	    	    for(var le = 0; le < eItems.length; le++){
+	    	    	if(le > 0){
+	    	    		eastPanel.remove(eItems.get(le),true);
+	    	    	}
+			    }
+	    	    basePanel.setHidden(false);
         	},
             scope:this
         },
