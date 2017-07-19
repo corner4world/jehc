@@ -171,6 +171,7 @@ Ext.onReady(function(){
 		tbar:[
 			 {
 				tooltip:'添加',
+				text:'添加',
 				cls:'addBtn',
 				icon:addIcon,
 				handler:function(){
@@ -179,6 +180,7 @@ Ext.onReady(function(){
 			 },
 			 {
 				tooltip:'编辑',
+				text:'编辑',
 				cls:'updateBtn',
 				icon:editIcon,
 				handler:function(){
@@ -187,6 +189,7 @@ Ext.onReady(function(){
 			 },
 			 {
 				tooltip:'配置拷贝索引字段',
+				text:'配置拷贝索引字段',
 				cls:'updateBtn',
 				icon:editIcon,
 				handler:function(){
@@ -195,6 +198,7 @@ Ext.onReady(function(){
 			 },
 			 {
 				tooltip:'删除',
+				text:'删除',
 				cls:'delBtn',
 				icon:delIcon,
 				handler:function(){
@@ -203,6 +207,7 @@ Ext.onReady(function(){
 			 },
 			 {
 				tooltip:'返回',
+				text:'返回',
 				cls:'backBtn',
 				icon:backIcon,
 				handler:function(){
