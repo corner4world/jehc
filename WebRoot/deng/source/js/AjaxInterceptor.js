@@ -106,3 +106,14 @@ function showErrorLog(message){
 	errorLogWin.show();
 	top.Ext.getCmp('message').setValue(message);
 }
+//js错误捕捉
+window.onerror = function (msg, url, line, col, error) {
+    var errors = [];
+    errors.push('消息：' + msg);
+    errors.push('网址：' + url);
+    errors.push('行：' + line);
+    errors.push('列：' + col);
+    top.Ext.example.msg('提示',errors.join('<br/>'));
+    return true;
+};
+

@@ -100,12 +100,39 @@ Ext.onReady(function(){
 					region:'north',
 					split:false,
 					border:false,
-					tools:[{
-				        	xtype:'label',
-				        	cls:'label',
-				        	text:"当前用户 "+sys_pt_user_name
+					tools:[
+					       {
+			            	 	 width:220,
+								 xtype:'textfield',
+					             emptyText:"请输入关键字",
+					             triggerCls:'x-form-ss-trigger', 
+							     onTriggerClick:function(){search(this.value)},
+							     listeners:{
+									specialkey:function(field, e){
+										if(e.getKey() == Ext.EventObject.ENTER){
+											search(this.value);
+										}
+									}
+								 },
+					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
 					       },
 					       {
+					        	 icon:indexLingdang,
+				                 xtype:'button',
+					             handler:function(button){
+					             	msgTishi("该功能还未开放！");
+								 },
+					             style:{background:'#ffffff'}
+					        },
+					        {
+					        	 icon:indexMail,
+				                 xtype:'button',
+					             handler:function(button){
+					             	msgTishi("该功能还未开放！");
+								 },
+					             style:{background:'#ffffff'}
+					        },
+					        {
 				            xtype:'button',
 				            icon:indexlist,
 					 		iconAlign:'top',
@@ -187,58 +214,32 @@ Ext.onReady(function(){
 					                }
 								 }
 							 ]
-					        },
-					        {
-					        	 icon:indexLingdang,
-				                 xtype:'button',
-					             handler:function(button){
-					             	msgTishi("该功能还未开放！");
-								 },
-					             style:{background:'#ffffff'}
-					        },
-					        {
-					        	 icon:indexMail,
-				                 xtype:'button',
-					             handler:function(button){
-					             	msgTishi("该功能还未开放！");
-								 },
-					             style:{background:'#ffffff'}
-					        },
-					    	{
-			            	 	 width:220,
-								 xtype:'textfield',
-					             emptyText:"请输入关键字",
-					             triggerCls:'x-form-ss-trigger', 
-							     onTriggerClick:function(){search(this.value)},
-							     listeners:{
-									specialkey:function(field, e){
-										if(e.getKey() == Ext.EventObject.ENTER){
-											search(this.value);
-										}
-									}
-								 },
-					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
-					    	}
+					         },
+					    	 {
+				                xtype:'box', 
+								width:35, 
+								height:35, 
+								cls:'borderRadius',
+								margin:'2 5 4 0', 
+								autoEl:{
+									tag:'img',
+									tooltip:{
+						        		text:"当前用户 "+sys_pt_user_name,
+					                 	width:150
+					                },
+									src:userIcon
+								},
+					        	style:{background:'#ffffff',marginRight:'0px'}
+						      } 
 			        ],
 		            header:{
 		            	itemPosition:0,
 		            	height:100,
 				        items:[
-//				        {
-//			                 icon:collapsibleIcon,
-//			                 scale:'large',
-//			                 xtype:'button',
-//				             handler:function(button){
-//								collapsibleCE();
-//							 },
-//				             style:{background:'#ffffff'}
-//				        },
 				        {
 				        	xtype:'label',
 				        	cls:'label',
 				        	text:sys_pt_index
-//				        	xtype:'displayfield',
-//				        	value:"<font style = 'font-size:18px;' color=#5fa2dd>"+sys_pt_index+"</font>"
 				        }
 			        ]
 				}

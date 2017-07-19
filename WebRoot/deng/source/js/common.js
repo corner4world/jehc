@@ -45,6 +45,8 @@ var uploadimg = '../deng/images/common/uploadFFF.png';
 var uploadfaliimg = '../deng/images/default/upload_fail.png';
 var uploadsucessimg = '../deng/images/default/upload_sucess.png';
 
+var userIcon = '../deng/images/default/user.png';
+
 /**
  * 设置Cookie
  * @param {} name

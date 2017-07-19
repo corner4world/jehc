@@ -332,7 +332,7 @@
 				content:"";
 			}
 			.x-form-usergroupselect-trigger-default.x-form-usergroupselect-trigger-over.x-form-usergroupselect-trigger-focus {
-			background-position:right;
+				background-position:right;
 			}
 			.x-form-usergroupselect-trigger-default.x-form-usergroupselect-trigger-focus {
 				background-position:right;
@@ -412,6 +412,10 @@
 	        /* .tbar{ background-color:#5fa2dd;background-image:url();} */
 	        
 	        .label{color:#35baf6;background-color:#ffffff}  
+	        
+	        .borderRadius{
+	        	border-radius:50%;
+			}
 		</style>
 	</head>
 </html>
