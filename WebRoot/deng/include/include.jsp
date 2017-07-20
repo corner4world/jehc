@@ -416,6 +416,9 @@
 	        .borderRadius{
 	        	border-radius:50%;
 			}
+			.x-body {
+			    background: #ffffff;
+			}
 		</style>
 	</head>
 </html>
