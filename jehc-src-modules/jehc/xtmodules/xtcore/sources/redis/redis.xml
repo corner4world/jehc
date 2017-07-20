@@ -47,6 +47,7 @@
 		<property name="maxIdle" value="${pool.maxIdle}" />
 		<property name="minIdle" value="${pool.minIdle}" />
      </bean> 
+    
      <!-- 配置CoonnectionFactory JedisConnectionFactory-->
      <bean id="connFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
           <property name="hostName" value="${redis.host}"></property>
@@ -63,8 +64,6 @@
             <bean class="org.springframework.data.redis.serializer.StringRedisSerializer" />  
         </property>
      </bean>
-     
-     
      
      <!-- 方式一采用 -->
     <!-- 使用spring-session把http session放到redis里 -->
@@ -91,4 +90,25 @@
         <property name="httpSessionStrategy" ref="httpSessonStrategy"/>
     </bean>
      -->
+     
+     
+     
+     
+     
+     
+     <!-- 自定义jedis操作开始 -->
+     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
+        <property  name="maxTotal" value="${pool.maxTotal}" />  
+        <property  name="maxIdle" value="${pool.maxIdle}" />  
+        <property name="minIdle" value="${pool.minIdle}" />
+    </bean>
+    <bean id="redisPool" class="jehc.xtmodules.xtcore.cache.redis.RedisPool"  init-method="init">
+        <property name="config" ref="jedisPoolConfig" />
+        <property name="serverIp" value="${redis.host}" />
+        <property name="port" value="${redis.port}" />
+    </bean>
+    <bean id="redisUtil" class="jehc.xtmodules.xtcore.cache.redis.RedisUtil">  
+        <property name="redisPool" ref="redisPool" />  
+    </bean>
+    <!-- 自定义jedis操作结束 -->
 </beans>

@@ -27,8 +27,7 @@ public class Xt_UserinfoJunit extends BaseJunit{
 	@Autowired
 	private Xt_UserinfoService xt_UserinfoService;
 	@Test
-	public void getXtUserinfoById(){
-//		Xt_UserinfoService service =(Xt_UserinfoService)GetApplicationContext.getBean("xt_UserinfoService");
+	public void getXtUserinfoList(){
 		Map<String, Object> condition = new HashMap<String, Object>();
 		System.out.println(xt_UserinfoService.getXtUserinfoList(condition).size());
 	}
