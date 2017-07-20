@@ -10,9 +10,15 @@ import org.springframework.test.context.web.WebAppConfiguration;
  * @author 邓纯杰
  *
  */
-@ContextConfiguration(locations = { "classpath*:/jehc/xtmodules/xtcore/sources/spring/spring.xml" })
-@WebAppConfiguration
-@RunWith(SpringJUnit4ClassRunner.class)
+//@RunWith(SpringJUnit4ClassRunner.class)
+//@ContextConfiguration(locations = { "classpath*:/jehc/xtmodules/xtcore/sources/spring/spring.xml" })
+//@WebAppConfiguration
+
+@RunWith(SpringJUnit4ClassRunner.class)   
+@ContextConfiguration(
+locations = {
+	"classpath*:/jehc/xtmodules/xtcore/sources/spring/spring.xml"
+})
 public class BaseJunit {
 	
 }
