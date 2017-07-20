@@ -45,7 +45,6 @@ public class RedisCache implements Cache {
 	 * 从缓存中获取key
 	 */
 	public ValueWrapper get(Object key) {
-		System.out.println("get key");
 		final String keyf = key.toString();
 		Object object = null;
 		object = redisTemplate.execute(new RedisCallback<Object>() {
@@ -66,7 +65,6 @@ public class RedisCache implements Cache {
 	 * 将一个新的key保存到缓存中 先拿到需要缓存key名称和对象，然后将其转成ByteArray
 	 */
 	public void put(Object key, Object value) {
-		System.out.println("put key");
 		final String keyf = key.toString();
 		final Object valuef = value;
 		final long liveTime = 86400;
@@ -119,7 +117,6 @@ public class RedisCache implements Cache {
 	 * 删除key
 	 */
 	public void evict(Object key) {
-		System.out.println("del key");
 		final String keyf = key.toString();
 		redisTemplate.execute(new RedisCallback<Long>() {
 			public Long doInRedis(RedisConnection connection)
@@ -132,7 +129,6 @@ public class RedisCache implements Cache {
 	 * 清空key
 	 */
 	public void clear() {
-		System.out.println("clear key");
 		redisTemplate.execute(new RedisCallback<String>() {
 			public String doInRedis(RedisConnection connection)
 					throws DataAccessException {
