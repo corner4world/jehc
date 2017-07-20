@@ -21,18 +21,18 @@ Ext.Ajax.on('requestcomplete',function(conn,response,options){
 		    	top.Ext.MessageBox.alert('提示',"您的请求访问，已经列入到黑名单中，我们建议您联系管理员，谢谢！");
 		    }else if(status==500){
 		    	//4.系统出现异常
-		     	top.Ext.MessageBox.alert('提示',"您操作的模块内容服务器出现异常!请与管理员联系!");
-		     	top.Ext.Msg.confirm('提示','您操作的模块内容服务器出现异常!请与管理员联系!是否查看异常明细？',function(btn){
-					if(btn == 'yes'){
-						showErrorLog(obj.xt_pt_error_msg);
-					}
-				});
+//		    	top.Ext.example.msg('提示', "您操作的模块出现异常、查看明细？");
+		    	showErrorLog(obj.xt_pt_error_msg);
+//		    	top.Ext.Msg.confirm('提示','您操作的模块出现异常、查看明细？',function(btn){
+//					if(btn == 'yes'){
+//						showErrorLog(obj.xt_pt_error_msg);
+//					}
+//				});
 		    }
 		}
     }catch(e){
     	if(typeof(e.message) != "undefined" && (e.message).indexOf("You're trying to decode an invalid JSON String:")>0){
-			top.Ext.MessageBox.alert('提示',"您操作的模块内容服务器出现异常!请与管理员联系!");
-	     	top.Ext.Msg.confirm('提示','您操作的模块内容服务器出现异常!请与管理员联系!是否查看异常明细？',function(btn){
+	     	top.Ext.Msg.confirm('提示','您操作的模块出现异常、查看明细？',function(btn){
 				if(btn == 'yes'){
 					showErrorLog(e);
 				}
@@ -47,12 +47,12 @@ Ext.Ajax.on('requestexception',function(conn,response,options){
  	try{
  		if(status == 500){
  			//1.系统出现异常
-	     	top.Ext.MessageBox.alert('提示',"您操作的模块内容服务器出现异常!请与管理员联系!");
-	     	top.Ext.Msg.confirm('提示','您操作的模块内容服务器出现异常!请与管理员联系!是否查看异常明细？',function(btn){
-				if(btn == 'yes'){
-					showErrorLog(obj);
-				}
-			});
+//	     	top.Ext.Msg.confirm('提示','您操作的模块出现异常、查看明细？',function(btn){
+//				if(btn == 'yes'){
+//					showErrorLog(obj);
+//				}
+//			});
+ 			top.Ext.example.msg('提示',"服务器出现异常!");
      	}else if(status == 404){
  	 		//2.404异常
 	     	top.Ext.example.msg('提示',"无法找到页面请稍后再试!");
@@ -67,12 +67,13 @@ Ext.Ajax.on('requestexception',function(conn,response,options){
 	    	top.Ext.example.msg('提示',"其他异常!错误状态信息:"+status);
 	    }
  	}catch(e){
- 		top.Ext.MessageBox.alert('提示',"您操作的模块内容服务器出现异常!请与管理员联系!");
-     	top.Ext.Msg.confirm('提示','您操作的模块内容服务器出现异常!请与管理员联系!是否查看异常明细？',function(btn){
-			if(btn == 'yes'){
-				showErrorLog(e);
-			}
-		});
+// 		top.Ext.MessageBox.alert('提示',"您操作的模块内容服务器出现异常!请与管理员联系!");
+//     	top.Ext.Msg.confirm('提示','您操作的模块出现异常、查看明细？',function(btn){
+//			if(btn == 'yes'){
+//				showErrorLog(e);
+//			}
+//		});
+ 		top.Ext.example.msg('提示',"服务器出现异常!");
  	}
 });
 /**
@@ -82,26 +83,26 @@ var errorLogWin;
 function showErrorLog(message){
 	errorLogWin = new top.Ext.Window({
 		layout:'fit',
-		width:800,
-		height:400,
+		width:600,
+		height:150,
 		maximizable:true,
-		minimizable:true,
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
-		title:'异常明细信息',
+		title:'异常信息',
+		headerPosition:'left',
 		items:[{
 			xtype:'textareafield',
 			id:'message',
 			anchor:'100%'
-		}],
+		}]/*,
 		buttons:[{
 			text:'关闭',
 			itemId:'close',
 			handler:function(button){
 				button.up('window').close();
 			}
-		}]
+		}]*/
 	});
 	errorLogWin.show();
 	top.Ext.getCmp('message').setValue(message);

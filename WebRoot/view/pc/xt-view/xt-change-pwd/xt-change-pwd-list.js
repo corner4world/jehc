@@ -142,47 +142,26 @@ Ext.onReady(function(){
 			},
 			{
 				header:'用户名称',
-				flex:1,
 				dataIndex:'user_name'
 			},
 			{
 				header:'登录账号',
-				flex:1,
 				dataIndex:'login_id'
 			},
 			{
 				header:'手机号码',
-				flex:1,
 				dataIndex:'phone'
 			},
 			{
-				header:'性别',
-				flex:1,
-				dataIndex:'sex'
-			},
-			{
 				header:'邮箱地址',
-				flex:1,
 				dataIndex:'mail'
 			},
 			{
-				header:'居住地址',
-				flex:1,
-				dataIndex:'address'
-			},
-			{
-				header:'证件照片',
-				flex:1,
-				dataIndex:'xt_attachment_id'
-			},
-			{
 				header:'创建时间',
-				flex:1,
 				dataIndex:'ctime'
 			},
 			{
 				header:'状态',
-				flex:1,
 				dataIndex:'status'
 			}
 		],
