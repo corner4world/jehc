@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import jehc.solrmodules.solrmodel.Solr_Core;
 import jehc.solrmodules.solrservice.Solr_CoreService;
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.Xt_Constant;
 import jehc.xtmodules.xtmodel.Xt_Data_Dictionary;
 import jehc.xtmodules.xtmodel.Xt_Functioninfo;
@@ -63,7 +63,7 @@ public class Xt_Ehcache_Task extends Thread{
 		flag = CacheManagerUtil.remove(cacheManager, "XtIpFrozenCache", "XtIpFrozenCache");
 		logger.info(sdf.format(new Date())+"--->删除IP黑户结束，状态:"+flag);
     	long millis1 = System.currentTimeMillis();
-    	Xt_Data_DictionaryService xt_Data_DictionaryService = (Xt_Data_DictionaryService)GetApplicationContext.getBean("xt_Data_DictionaryService");
+    	Xt_Data_DictionaryService xt_Data_DictionaryService = (Xt_Data_DictionaryService)SpringUtil.getBean("xt_Data_DictionaryService");
     	Map<String, Object> condition = new HashMap<String, Object>();
     	List<Xt_Data_Dictionary> Xt_Data_DictionaryList = xt_Data_DictionaryService.getXtDataDictionaryListAllByCondition(condition);
 		Cache XtDataDictionaryCache = CacheManagerUtil.getCache("XtDataDictionaryCache");
@@ -81,7 +81,7 @@ public class Xt_Ehcache_Task extends Thread{
 		millis1 = System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取平台路径开始");
 		condition = new HashMap<String, Object>();
-		Xt_PathService xt_PathService = (Xt_PathService)GetApplicationContext.getBean("xt_PathService");
+		Xt_PathService xt_PathService = (Xt_PathService)SpringUtil.getBean("xt_PathService");
 		List<Xt_Path> xt_Path_List = xt_PathService.getXtPathListAllByCondition(condition);
 		Element XtPathEle=new Element("XtPathCache", xt_Path_List); 
 		Cache XtPathCache = CacheManagerUtil.getCache("XtPathCache");
@@ -95,7 +95,7 @@ public class Xt_Ehcache_Task extends Thread{
 		logger.info(sdf.format(new Date())+"--->读取IP黑户开始");
 		condition = new HashMap<String, Object>();
 		condition.put("xt_ip_frozen_status", 2);
-		Xt_Ip_FrozenService xt_Ip_FrozenService = (Xt_Ip_FrozenService)GetApplicationContext.getBean("xt_Ip_FrozenService");
+		Xt_Ip_FrozenService xt_Ip_FrozenService = (Xt_Ip_FrozenService)SpringUtil.getBean("xt_Ip_FrozenService");
 		List<Xt_Ip_Frozen> xt_Ip_FrozenList = xt_Ip_FrozenService.getXtIpFrozenListAllByCondition(condition);
 		Element XtIpFrozenEle=new Element("XtIpFrozenCache", xt_Ip_FrozenList); 
 		Cache XtIpFrozenCache = CacheManagerUtil.getCache("XtIpFrozenCache");
@@ -108,7 +108,7 @@ public class Xt_Ehcache_Task extends Thread{
 		millis1 = System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取平台常量开始");
 		condition = new HashMap<String, Object>();
-		Xt_ConstantService xt_ConstantService = (Xt_ConstantService)GetApplicationContext.getBean("xt_ConstantService");
+		Xt_ConstantService xt_ConstantService = (Xt_ConstantService)SpringUtil.getBean("xt_ConstantService");
 		List<Xt_Constant> xt_ConstantList = xt_ConstantService.getXtConstantListAllByCondition(condition);
 		Element XtConstantEle=new Element("XtConstantCache", xt_ConstantList); 
 		//取得配置文件中预先，定义的XtConstantEle设置，生成一个Cache 该XtConstantEle为ehcache.xml定义好的名称
@@ -124,8 +124,8 @@ public class Xt_Ehcache_Task extends Thread{
      * 加载公共功能到内存中
      */
     public void loadXtFunctioninfoCommon(){
-    	Xt_Functioninfo_CommonService xt_Functioninfo_CommonService = (Xt_Functioninfo_CommonService)GetApplicationContext.getBean("xt_Functioninfo_CommonService");
-    	Xt_FunctioninfoService xt_FunctioninfoService = (Xt_FunctioninfoService)GetApplicationContext.getBean("xt_FunctioninfoService");
+    	Xt_Functioninfo_CommonService xt_Functioninfo_CommonService = (Xt_Functioninfo_CommonService)SpringUtil.getBean("xt_Functioninfo_CommonService");
+    	Xt_FunctioninfoService xt_FunctioninfoService = (Xt_FunctioninfoService)SpringUtil.getBean("xt_FunctioninfoService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
@@ -163,7 +163,7 @@ public class Xt_Ehcache_Task extends Thread{
      * 加载Solr实例到缓存中
      */
     public void loadSolrCore(){
-    	Solr_CoreService solr_CoreService = (Solr_CoreService)GetApplicationContext.getBean("solr_CoreService");
+    	Solr_CoreService solr_CoreService = (Solr_CoreService)SpringUtil.getBean("solr_CoreService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();

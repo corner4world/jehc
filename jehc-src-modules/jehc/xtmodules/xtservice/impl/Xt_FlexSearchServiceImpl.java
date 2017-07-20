@@ -6,7 +6,7 @@ import org.hsqldb.lib.StringUtil;
 
 import jehc.xtmodules.xtcore.base.BaseService;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtdao.Xt_DbinfoDao;
 import jehc.xtmodules.xtdao.Xt_FlexSearchDao;
 import jehc.xtmodules.xtdao.impl.Xt_FlexSearchDaoImpl;
@@ -33,7 +33,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	 */
 	public String getXtFlexSearchQuery(String sql,Object[]param,String xt_dbinfo_id){
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			return xt_FlexSearchDao.getXtFlexSearchQuery(sql, param,xt_Dbinfo);
@@ -52,7 +52,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	public String getXtFlexSearchListQuery(String sql, Object[] param,String xt_dbinfo_id){
 		try {
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			return xt_FlexSearchDao.getXtFlexSearchListQuery(sql, param,xt_Dbinfo);
 		} catch (Exception e) {
@@ -73,7 +73,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 		StringBuffer columModle = new StringBuffer();
         StringBuffer data = new StringBuffer();
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			int result = xt_FlexSearchDao.executeUpdate(sql, param,xt_Dbinfo);
@@ -113,7 +113,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	 */
 	public List<Xt_Db_TableAttribute> getXtDbTableAttributeForFlex(String xt_dbinfo_id){
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			return xt_FlexSearchDao.getXtDbTableAttributeForFlex(backSql(xt_Dbinfo,6,null), xt_Dbinfo);
@@ -128,7 +128,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	*/
 	public List<Xt_Db_TableIndex> getXtDbTableIndexForFlex(String xt_dbinfo_id,String tableName){
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			return xt_FlexSearchDao.getXtDbTableIndexForFlex(backSql(xt_Dbinfo,2,tableName), xt_Dbinfo);
@@ -144,7 +144,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	*/
 	public  List<Xt_Db_Proc> getXtDbProcListForFlex(String xt_dbinfo_id){
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			return xt_FlexSearchDao.getXtDbProcListForFlex(backSql(xt_Dbinfo,5,null), xt_Dbinfo);
@@ -161,7 +161,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	*/
 	public  List<Xt_Db_Fun> getXtDbFunListForFlex(String xt_dbinfo_id){
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			return xt_FlexSearchDao.getXtDbFunListForFlex(backSql(xt_Dbinfo,3,null), xt_Dbinfo);
@@ -178,7 +178,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	*/
 	public  List<Xt_Db_View> getXtDbViewListForFlex(String xt_dbinfo_id){
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			return xt_FlexSearchDao.getXtDbViewListForFlex(backSql(xt_Dbinfo,1,null), xt_Dbinfo);
@@ -193,7 +193,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	*/
 	public  List<Xt_Db_Tri> getXtDbTriListForFlex(String xt_dbinfo_id){
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			return xt_FlexSearchDao.getXtDbTriListForFlex(backSql(xt_Dbinfo,4,null), xt_Dbinfo);
@@ -212,7 +212,7 @@ public class Xt_FlexSearchServiceImpl extends BaseService implements Xt_FlexSear
 	 */
 	public List<Xt_Db_Structure> getXtDbStructureForFlex(String xt_dbinfo_id,String tableName){
 		try {
-			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)GetApplicationContext.getBean("xt_DbinfoDao");
+			Xt_DbinfoDao xt_DbinfoDao = (Xt_DbinfoDao)SpringUtil.getBean("xt_DbinfoDao");
 			Xt_Dbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
 			Xt_FlexSearchDao xt_FlexSearchDao = new Xt_FlexSearchDaoImpl();
 			return xt_FlexSearchDao.getXtDbStructureForFlex(backSql(xt_Dbinfo,7,tableName), xt_Dbinfo);

@@ -85,7 +85,13 @@ public class Lc_Deployment_HisDaoImpl  extends BaseDaoImpl implements Lc_Deploym
 	 * @param condition
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public Lc_Deployment_His getLcDeploymentHisNewUnique(Map<String,Object> condition){
-		return (Lc_Deployment_His)this.getList("getLcDeploymentHisUnique",condition).get(0);
+		List<Lc_Deployment_His> his = (List<Lc_Deployment_His>)this.getList("getLcDeploymentHisNewUnique",condition);
+		if(null != his && !his.isEmpty()){
+			return his.get(0);
+		}else{
+			return new Lc_Deployment_His();
+		}
 	}
 }

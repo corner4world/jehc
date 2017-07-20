@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.Log4jUtil;
 import jehc.xtmodules.xtcore.util.UUID;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtdao.Xt_Data_AuthorityDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_DefaultDao;
 import jehc.xtmodules.xtdao.Xt_Data_Authority_DepartDao;
@@ -79,11 +79,11 @@ public class BaseService extends Log4jUtil{
 	 * 统一推送数据权限至执行表中
 	 */
 	public void addPushDataAuthority(){
-		Xt_Data_Authority_DepartDao xt_Data_Authority_DepartDao = (Xt_Data_Authority_DepartDao)GetApplicationContext.getBean("xt_Data_Authority_DepartDao");
-		Xt_Data_Authority_PostDao xt_Data_Authority_PostDao = (Xt_Data_Authority_PostDao)GetApplicationContext.getBean("xt_Data_Authority_PostDao");
-		Xt_Data_Authority_DefaultDao xt_Data_Authority_DefaultDao = (Xt_Data_Authority_DefaultDao)GetApplicationContext.getBean("xt_Data_Authority_DefaultDao");
-		Xt_UserinfoDao xt_UserinfoDao = (Xt_UserinfoDao)GetApplicationContext.getBean("xt_UserinfoDao");
-		Xt_Data_AuthorityDao xt_Data_AuthorityDao = (Xt_Data_AuthorityDao)GetApplicationContext.getBean("xt_Data_AuthorityDao");
+		Xt_Data_Authority_DepartDao xt_Data_Authority_DepartDao = (Xt_Data_Authority_DepartDao)SpringUtil.getBean("xt_Data_Authority_DepartDao");
+		Xt_Data_Authority_PostDao xt_Data_Authority_PostDao = (Xt_Data_Authority_PostDao)SpringUtil.getBean("xt_Data_Authority_PostDao");
+		Xt_Data_Authority_DefaultDao xt_Data_Authority_DefaultDao = (Xt_Data_Authority_DefaultDao)SpringUtil.getBean("xt_Data_Authority_DefaultDao");
+		Xt_UserinfoDao xt_UserinfoDao = (Xt_UserinfoDao)SpringUtil.getBean("xt_UserinfoDao");
+		Xt_Data_AuthorityDao xt_Data_AuthorityDao = (Xt_Data_AuthorityDao)SpringUtil.getBean("xt_Data_AuthorityDao");
 		//1推送默认（初始化数据权限）
 		Map<String, Object> condition = new HashMap<String, Object>();
 		List<Xt_Data_Authority_Default> defaultList = xt_Data_Authority_DefaultDao.getXtDataAuthorityDefaultListByCondition(condition);

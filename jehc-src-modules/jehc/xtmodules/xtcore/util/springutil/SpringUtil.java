@@ -8,7 +8,7 @@ import org.springframework.web.context.WebApplicationContext;
  * @author 邓纯杰
  *
  */
-public class GetApplicationContext {
+public class SpringUtil {
 	/**
 	  * 获取对象   
 	  * @param name

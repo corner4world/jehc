@@ -7,7 +7,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import jehc.xtmodules.xtcore.base.BaseJunit;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 public class MqJunit extends BaseJunit{
 	@Autowired
 	AmqpTemplate rabbitTemplate;

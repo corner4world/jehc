@@ -14,7 +14,7 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.util.CharsetUtil;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -109,7 +109,7 @@ public class TcpServer {
 	 * @return
 	 */
 	public TcpServerHandler getTcpServerHandler(){
-		return (TcpServerHandler)GetApplicationContext.getBean("tcpServerHandler");
+		return (TcpServerHandler)SpringUtil.getBean("tcpServerHandler");
 	}
 	
 	 /**

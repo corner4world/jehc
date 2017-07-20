@@ -66,7 +66,7 @@ import jehc.xtmodules.xtcore.solr.utils.model.SolrAutocomplete;
 import jehc.xtmodules.xtcore.solr.utils.pages.PageSolr;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.Xt_Data_Dictionary;
 
 
@@ -179,8 +179,8 @@ public class SolrUtil extends BaseAction{
 	 */
 	private static void updateDataConfig(String dataConfigPath,Solr_Core solr_Core,Solr_Document solr_Document) {
 		try {
-			Solr_EntityService solr_EntityService = (Solr_EntityService)GetApplicationContext.getBean("solr_EntityService");
-			Solr_Data_ConfigService solr_Data_ConfigService = (Solr_Data_ConfigService)GetApplicationContext.getBean("solr_Data_ConfigService");
+			Solr_EntityService solr_EntityService = (Solr_EntityService)SpringUtil.getBean("solr_EntityService");
+			Solr_Data_ConfigService solr_Data_ConfigService = (Solr_Data_ConfigService)SpringUtil.getBean("solr_Data_ConfigService");
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("solr_document_id", solr_Document.getSolr_document_id());
 			List<Solr_Entity> solrEntityList = solr_EntityService.getSolrEntityListByCondition(condition);
@@ -216,8 +216,8 @@ public class SolrUtil extends BaseAction{
 	 * @return
 	 */
 	public static String solrEntity(List<Solr_Entity> solrEntityList,String solr_entity_pid){
-		Solr_Index_SqlService solr_Index_SqlService = (Solr_Index_SqlService)GetApplicationContext.getBean("solr_Index_SqlService");
-		Solr_Index_Sql_FiledService solr_Index_Sql_FiledService = (Solr_Index_Sql_FiledService)GetApplicationContext.getBean("solr_Index_Sql_FiledService");
+		Solr_Index_SqlService solr_Index_SqlService = (Solr_Index_SqlService)SpringUtil.getBean("solr_Index_SqlService");
+		Solr_Index_Sql_FiledService solr_Index_Sql_FiledService = (Solr_Index_Sql_FiledService)SpringUtil.getBean("solr_Index_Sql_FiledService");
 		List<Xt_Data_Dictionary> xtDataDictionaryList = CommonUtils.getXtDataDictionaryCache("solr_index_sql_type");
 		StringBuffer sbf = new StringBuffer();
 		for(int i = 0; i < solrEntityList.size(); i++){
@@ -482,7 +482,7 @@ public class SolrUtil extends BaseAction{
 	@SuppressWarnings("unchecked")
 	public static void updateSchema(String path,Solr_Core solr_Core,List<Solr_Index> solrIndexList,List<Solr_Filed_Copy> solr_Filed_CopyList){
 		try {
-			Solr_Schema_TempletService solr_Schema_TempletService = (Solr_Schema_TempletService)GetApplicationContext.getBean("solr_Schema_TempletService");
+			Solr_Schema_TempletService solr_Schema_TempletService = (Solr_Schema_TempletService)SpringUtil.getBean("solr_Schema_TempletService");
 			Solr_Schema_Templet solr_Schema_Templet = solr_Schema_TempletService.getSolrSchemaTempletById(solr_Core.getSolr_schema_templet_id());
 			List<Xt_Data_Dictionary> xtDataDictionaryList = CommonUtils.getXtDataDictionaryCache("solr_index_type");
 			Map<String, Object> condition = new HashMap<String, Object>();

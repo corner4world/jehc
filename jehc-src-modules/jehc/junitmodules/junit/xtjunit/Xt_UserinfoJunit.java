@@ -9,7 +9,7 @@ import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 
 import jehc.xtmodules.xtcore.base.BaseJunit;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.Xt_Userinfo;
 import jehc.xtmodules.xtservice.Xt_UserinfoService;
 

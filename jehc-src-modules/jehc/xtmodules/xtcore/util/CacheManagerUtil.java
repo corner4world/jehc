@@ -13,7 +13,7 @@ import net.sf.json.JSONArray;
 
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 
 /**
  * 缓存统一处理
@@ -31,7 +31,7 @@ public class CacheManagerUtil {
 //		URL url = getClass().getResource("/xtCore/sources/ehcache/ehcache.xml");
 //		CacheManager cacheManager = CacheManager.create(url);
 ////	CacheManager cacheManager = CacheManager.create();
-		EhCacheCacheManager cacheManager = (EhCacheCacheManager)GetApplicationContext.getBean("ehcacheManager");
+		EhCacheCacheManager cacheManager = (EhCacheCacheManager)SpringUtil.getBean("ehcacheManager");
 		return cacheManager.getCacheManager();
 	}
 	

@@ -78,7 +78,6 @@ public class Xt_Change_PwdServiceImpl extends BaseService implements Xt_Change_P
 				i = 0;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
 			throw new ExceptionUtil(e.getMessage(),e.getCause());

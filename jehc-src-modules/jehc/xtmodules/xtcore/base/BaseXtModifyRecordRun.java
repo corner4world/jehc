@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.ReflectUtil;
 import jehc.xtmodules.xtcore.util.logger.Log4j;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.Xt_Modify_Record;
 import jehc.xtmodules.xtservice.Xt_Modify_RecordService;
 
@@ -44,7 +44,7 @@ public class BaseXtModifyRecordRun  extends Thread {
 	
 	public void addXtModifyRecord(){
 		try {
-			Xt_Modify_RecordService xt_Modify_RecordService = (Xt_Modify_RecordService)GetApplicationContext.getBean("xt_Modify_RecordService");
+			Xt_Modify_RecordService xt_Modify_RecordService = (Xt_Modify_RecordService)SpringUtil.getBean("xt_Modify_RecordService");
 			if(null != recordList && recordList.size() > 0){
 				log.info("----------开始记录变更记录日志--------------");
 				xt_Modify_RecordService.putBatchXtModifyRecord(recordList);

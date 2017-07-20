@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.Xt_Generator;
 import jehc.xtmodules.xtmodel.Xt_Generator_Grid_Column;
 import jehc.xtmodules.xtmodel.Xt_Generator_Search_Filed;
@@ -55,7 +55,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @return
 	 */
 	public String createPageList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		StringBuffer sb = new StringBuffer();
 		//定义对象
 		sb.append("var store;\r\n");
@@ -142,7 +142,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @return
 	 */
 	public String createPageContentList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String list_url = "get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ListByCondition";
 		String export_url = "export"+uprepchar(xt_Generator.getXt_generator_tbname())+"";
@@ -853,7 +853,7 @@ public class GeneratorPage extends GeneratorUtil{
 	public String createPageContentAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String add_url = "add"+uprepchar(xt_Generator.getXt_generator_tbname());
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		StringBuffer sb = new StringBuffer();
 		//添加定义
 		sb.append("var "+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"WinAdd;\r\n");
@@ -1289,7 +1289,7 @@ public class GeneratorPage extends GeneratorUtil{
 	public String createPageContentUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String obj_url = "get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ById";
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		String update_url = "update"+uprepchar(xt_Generator.getXt_generator_tbname());
 		StringBuffer sb = new StringBuffer();
 		//添加定义
@@ -1743,7 +1743,7 @@ public class GeneratorPage extends GeneratorUtil{
 	public String createPageContentDetail(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String obj_url = "get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ById";
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		StringBuffer sb = new StringBuffer();
 		//添加定义
 		sb.append("var "+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"WinDetail;\r\n");
@@ -2410,7 +2410,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @return
 	 */
 	public String createOneToManyUsingAddBaseForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		StringBuffer sb = new StringBuffer();
 		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		//////////////////////生成Form模块开始/////////////////////////////
@@ -2732,7 +2732,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @return
 	 */
 	public String createOneToManyUsingAddForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
@@ -3058,7 +3058,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @return
 	 */
 	public String createOneToManyUsingUpdateBaseForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		StringBuffer sb = new StringBuffer();
 		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		//////////////////////生成Form模块开始/////////////////////////////
@@ -3387,7 +3387,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @return
 	 */
 	public String createOneToManyUsingEditForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
@@ -3786,7 +3786,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @return
 	 */
 	public String createOneToManyUsingDetailBaseForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		StringBuffer sb = new StringBuffer();
 		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		//////////////////////生成Form模块开始/////////////////////////////
@@ -4118,7 +4118,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @return
 	 */
 	public String createOneToManyUsingDetailForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)GetApplicationContext.getBean("xt_ScriptService");
+		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
 		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){

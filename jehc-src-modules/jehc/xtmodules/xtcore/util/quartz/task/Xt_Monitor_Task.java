@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.Xt_Monitor;
 import jehc.xtmodules.xtmodel.Xt_Monitor_Cpu;
 import jehc.xtmodules.xtmodel.Xt_Monitor_Mem;
@@ -58,7 +58,7 @@ public class Xt_Monitor_Task extends Thread{
 		Runtime r = Runtime.getRuntime();
         Properties props = System.getProperties();
         InetAddress addr;
-        Xt_MonitorService xt_MonitorService = (Xt_MonitorService)GetApplicationContext.getBean("xt_MonitorService");
+        Xt_MonitorService xt_MonitorService = (Xt_MonitorService)SpringUtil.getBean("xt_MonitorService");
         try {
 			addr = InetAddress.getLocalHost();
 			String ip = addr.getHostAddress();
@@ -95,7 +95,7 @@ public class Xt_Monitor_Task extends Thread{
 	 * 内存监控
 	 */
 	public void addXtMonitorMEM(){
-		Xt_Monitor_MemService xt_Monitor_MemService = (Xt_Monitor_MemService)GetApplicationContext.getBean("xt_Monitor_MemService");
+		Xt_Monitor_MemService xt_Monitor_MemService = (Xt_Monitor_MemService)SpringUtil.getBean("xt_Monitor_MemService");
 		Sigar sigar = new Sigar();
         Mem mem;
 		try {
@@ -125,7 +125,7 @@ public class Xt_Monitor_Task extends Thread{
 	 * CPU监控
 	 */
 	public void addXtMonitorCPU(){
-		Xt_Monitor_CpuService xt_Monitor_CpuService = (Xt_Monitor_CpuService)GetApplicationContext.getBean("xt_Monitor_CpuService");
+		Xt_Monitor_CpuService xt_Monitor_CpuService = (Xt_Monitor_CpuService)SpringUtil.getBean("xt_Monitor_CpuService");
 		String libs = System.getProperty("java.library.path");
         System.setProperty("java.library.path", libs);
         Sigar sigar = new Sigar();

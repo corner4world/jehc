@@ -145,6 +145,24 @@
 		WHERE 1=1
 		AND lc_process.xt_constant_id=#{xt_constant_id}
 		AND lc_deployment_his_status = 0
+	</select>
+	
+	<!--查询最新唯一一个对象-->
+	<select id="getLcDeploymentHisNewUnique" resultType="jehc.lcmodules.lcmodel.Lc_Deployment_His" parameterType="map">
+		SELECT
+			lc_deployment_his.`id`,
+			lc_deployment_his.`lc_deployment_his_id`,
+			lc_deployment_his.`lc_deployment_his_name`,
+			lc_deployment_his.`lc_deployment_his_time`,
+			lc_deployment_his.`lc_deployment_his_tenantId`,
+			lc_deployment_his.`lc_process_id`,
+			lc_process.`xt_constant_id`,
+			lc_deployment_his.`lc_deployment_his_status`
+		FROM 
+			lc_deployment_his lc_deployment_his LEFT JOIN lc_process lc_process ON lc_deployment_his.lc_process_id = lc_process.lc_process_id
+		WHERE 1=1
+		AND lc_process.xt_constant_id=#{xt_constant_id}
+		AND lc_deployment_his_status = 0
 		ORDER BY lc_deployment_his.`lc_deployment_his_time` DESC
 	</select>
 </mapper>

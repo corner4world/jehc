@@ -3,7 +3,7 @@ package jehc.xtmodules.xtcore.base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.Xt_Operate_Business_Logs;
 import jehc.xtmodules.xtservice.Xt_Operate_Business_LogsService;
 /**
@@ -91,7 +91,7 @@ public class BaseXtOperateBusinessLogsRun extends Thread {
 		Xt_Operate_Business_Logs xt_Operate_Business_Logs = new Xt_Operate_Business_Logs();
 		try {
 			logger.info("----------开始记录日志--------------");
-			Xt_Operate_Business_LogsService xt_Operate_Business_LogsService = (Xt_Operate_Business_LogsService)GetApplicationContext.getBean("xt_Operate_Business_LogsService");
+			Xt_Operate_Business_LogsService xt_Operate_Business_LogsService = (Xt_Operate_Business_LogsService)SpringUtil.getBean("xt_Operate_Business_LogsService");
 //			xt_Operate_Business_Logs.setXt_operate_business_logsTime(CommonUtils.getSimpleDateFormat());
 //			xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
 //			xt_Operate_Business_Logs.setXt_operate_business_logsModules(this.xt_operate_business_logsModules);

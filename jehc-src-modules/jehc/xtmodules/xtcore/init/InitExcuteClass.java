@@ -27,7 +27,7 @@ import jehc.xtmodules.xtcore.util.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.ReadProperties;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.quartz.QuartzInit;
-import jehc.xtmodules.xtcore.util.springutil.GetApplicationContext;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.Xt_Constant;
 import jehc.xtmodules.xtmodel.Xt_Data_Dictionary;
 import jehc.xtmodules.xtmodel.Xt_Functioninfo;
@@ -141,7 +141,7 @@ public class InitExcuteClass implements ServletContextListener{
 	 * @param xt_Start_Stop_Log
 	 */
 	public void addOrUpdateXtStartStopLog(Xt_Start_Stop_Log xt_Start_Stop_Log,int status){
-		Xt_Start_Stop_LogService xt_Start_Stop_LogService = (Xt_Start_Stop_LogService)GetApplicationContext.getBean("xt_Start_Stop_LogService");;
+		Xt_Start_Stop_LogService xt_Start_Stop_LogService = (Xt_Start_Stop_LogService)SpringUtil.getBean("xt_Start_Stop_LogService");;
 		if(1==status){
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("offset", "0");
@@ -162,8 +162,8 @@ public class InitExcuteClass implements ServletContextListener{
         Timer timer = new Timer("loadQuarzInit", true);
         timer.schedule(new TimerTask() {
             public void run() {
-            	Xt_QuartzService xt_QuartzService = (Xt_QuartzService)GetApplicationContext.getBean("xt_QuartzService");
-            	Scheduler scheduler = (Scheduler) GetApplicationContext.getBean("schedulerFactoryBean");
+            	Xt_QuartzService xt_QuartzService = (Xt_QuartzService)SpringUtil.getBean("xt_QuartzService");
+            	Scheduler scheduler = (Scheduler) SpringUtil.getBean("schedulerFactoryBean");
             	Map<String, Object> condition = new HashMap<String, Object>();
             	condition.put("jobStatus", "NORMAL");
         		List<Xt_Quartz> xtQuartzList = xt_QuartzService.getXtQuartzListAllByCondition(condition);
@@ -180,10 +180,10 @@ public class InitExcuteClass implements ServletContextListener{
      * @param ehCache
      */
 	private void loadXtDataDictionary(){
-    	Xt_Data_DictionaryService xt_Data_DictionaryService = (Xt_Data_DictionaryService)GetApplicationContext.getBean("xt_Data_DictionaryService");
-    	Xt_PathService xt_PathService = (Xt_PathService)GetApplicationContext.getBean("xt_PathService");
-    	Xt_Ip_FrozenService xt_Ip_FrozenService = (Xt_Ip_FrozenService)GetApplicationContext.getBean("xt_Ip_FrozenService");
-    	Xt_ConstantService xt_ConstantService = (Xt_ConstantService)GetApplicationContext.getBean("xt_ConstantService");
+    	Xt_Data_DictionaryService xt_Data_DictionaryService = (Xt_Data_DictionaryService)SpringUtil.getBean("xt_Data_DictionaryService");
+    	Xt_PathService xt_PathService = (Xt_PathService)SpringUtil.getBean("xt_PathService");
+    	Xt_Ip_FrozenService xt_Ip_FrozenService = (Xt_Ip_FrozenService)SpringUtil.getBean("xt_Ip_FrozenService");
+    	Xt_ConstantService xt_ConstantService = (Xt_ConstantService)SpringUtil.getBean("xt_ConstantService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
@@ -250,8 +250,8 @@ public class InitExcuteClass implements ServletContextListener{
      * 加载公共功能到内存中
      */
     public void loadXtFunctioninfoCommon(){
-    	Xt_Functioninfo_CommonService xt_Functioninfo_CommonService = (Xt_Functioninfo_CommonService)GetApplicationContext.getBean("xt_Functioninfo_CommonService");
-    	Xt_FunctioninfoService xt_FunctioninfoService = (Xt_FunctioninfoService)GetApplicationContext.getBean("xt_FunctioninfoService");
+    	Xt_Functioninfo_CommonService xt_Functioninfo_CommonService = (Xt_Functioninfo_CommonService)SpringUtil.getBean("xt_Functioninfo_CommonService");
+    	Xt_FunctioninfoService xt_FunctioninfoService = (Xt_FunctioninfoService)SpringUtil.getBean("xt_FunctioninfoService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
@@ -289,9 +289,9 @@ public class InitExcuteClass implements ServletContextListener{
      * 加载Solr实例到缓存中
      */
     public void loadSolrCore(){
-    	Solr_Index_AttributeService solr_Index_AttributeService = (Solr_Index_AttributeService)GetApplicationContext.getBean("solr_Index_AttributeService");
-    	Solr_CoreService solr_CoreService = (Solr_CoreService)GetApplicationContext.getBean("solr_CoreService");
-    	Solr_SortService solr_SortService = (Solr_SortService)GetApplicationContext.getBean("solr_SortService");
+    	Solr_Index_AttributeService solr_Index_AttributeService = (Solr_Index_AttributeService)SpringUtil.getBean("solr_Index_AttributeService");
+    	Solr_CoreService solr_CoreService = (Solr_CoreService)SpringUtil.getBean("solr_CoreService");
+    	Solr_SortService solr_SortService = (Solr_SortService)SpringUtil.getBean("solr_SortService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
