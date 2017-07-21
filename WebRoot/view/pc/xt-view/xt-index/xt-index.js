@@ -80,7 +80,7 @@ Ext.onReady(function(){
 			titleCollapse:true,
 			/**自定义样式**/
 			header:{
-//				height:100,
+//				height:100,//也可以放开 也挺好的
 				cls:'x-panel-header-defined'
 			},
 			/**
@@ -234,7 +234,7 @@ Ext.onReady(function(){
 			        ],
 		            header:{
 		            	itemPosition:0,
-		            	height:100,
+//		            	height:100,//也可以放开 也挺好的
 				        items:[
 				        {
 				        	xtype:'label',
