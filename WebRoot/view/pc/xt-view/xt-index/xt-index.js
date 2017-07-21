@@ -67,7 +67,7 @@ Ext.onReady(function(){
  		layout:'border',
 		items:[{
 			region:'west',
-			title:'<font color=#ffffff>快捷导航</font>',
+			title:'<font color=#ffffff>目录索引</font>',
 			icon:indexNav,
 			width:255,
 			split:false,
@@ -80,7 +80,7 @@ Ext.onReady(function(){
 			titleCollapse:true,
 			/**自定义样式**/
 			header:{
-				height:100,
+//				height:100,
 				cls:'x-panel-header-defined'
 			},
 			/**
