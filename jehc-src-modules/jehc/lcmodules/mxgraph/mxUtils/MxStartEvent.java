@@ -67,93 +67,97 @@ public class MxStartEvent {
         start_node += "<extensionElements>";
         //表单配置开始
         if(null != form_node_value && !"".equals(form_node_value)){
-        	String[] form_node_valueGrid = form_node_value.split("#");
+        	String[] form_node_valueGrid = form_node_value.split("#",-1);
         	for(int i = 0; i < form_node_valueGrid.length; i++){
-        		String[] cell = form_node_valueGrid[i].split("@");
-        		String cell0 = cell[0];
-        		String cell1 = cell[1];
-        		String cell2 = cell[2];
-        		String cell3 = cell[3];
-        		String cell4 = cell[4];
-        		String cell5 = cell[5];
-        		String cell6 = cell[6];
-        		String cell7 = cell[7];
-        		String cell8 = cell[8];
-        		String cell9 = cell[9];
-        		if(!StringUtil.isEmpty(cell0) && !"undefined".equals(cell0)){
-        			cell0 = " id='"+cell0+"'";
-        		}else{
-        			cell0 =" ";
-        		}
-        		if(!StringUtil.isEmpty(cell1) && !"undefined".equals(cell1)){
-        			cell1 = " name='"+cell1+"'";
-        		}else{
-        			cell1 = " ";
-        		}
-        		if(!StringUtil.isEmpty(cell2) && !"undefined".equals(cell2)){
-        			cell2 = " type='"+cell2+"'";
-        		}else{
-        			cell2 = " ";
-        		}
-        		if(!StringUtil.isEmpty(cell3) && !"undefined".equals(cell3)){
-        			cell3 = " expression='"+cell3+"'";
-        		}else{
-        			cell3 = " ";
-        		}
-        		if(!StringUtil.isEmpty(cell4) && !"undefined".equals(cell4)){
-        			cell4 = " variable='"+cell4+"'";
-        		}else{
-        			cell4 = " ";
-        		}
-        		if(!StringUtil.isEmpty(cell5) && !"undefined".equals(cell5)){
-        			cell5 = " default='"+cell5+"'";
-        		}else{
-        			cell5 = " ";
-        		}
-        		if(!StringUtil.isEmpty(cell6) && !"undefined".equals(cell6)){
-        			cell6 = " datePattern='"+cell6+"'";
-        		}else{
-        			cell6 =  " ";
-        		}
-        		if(!StringUtil.isEmpty(cell7) && !"undefined".equals(cell7)){
-        			cell7 = " readable='"+cell7+"'";
-        		}else{
-        			cell7 = " ";
-        		}
-        		if(!StringUtil.isEmpty(cell8) && !"undefined".equals(cell8)){
-        			cell8 = " writable='"+cell8+"'";
-        		}else{
-        			cell8 = " ";
-        		}
-        		if(!StringUtil.isEmpty(cell9) && !"undefined".equals(cell9)){
-        			cell9 = " required='"+cell9+"'";
-        		}else{
-        			cell9 = " ";
-        		}
-        		String cellStr = cell0+cell1+cell2+cell3+cell4+cell5+cell6+cell7+cell8+cell9;
-//        		start_node += "<activiti:formProperty id='"+cell[0]+"' name='"+cell[1]+"' type='"+cell[2]+"' expression='"+cell[3]+"' variable='"+cell[4]+"' default='"+cell[5]+"' datePattern='"+cell[6]+"' readable='"+cell[7]+"' writable='"+cell[8]+"' required='"+cell[9]+"'>";
-        		start_node += "<activiti:formProperty "+cellStr+">";
-                //字段
-        		if(!"undefined".equals(cell[10])){
-        			String[] field = cell[10].split("$");
-            		for(int j = 0; j < field.length; j++){
-            			String [] fieldValue = field[j].split("&");
-            			String fieldValue0 = fieldValue[0];
-            			String fieldValue1 = fieldValue[1];
-            			if(!StringUtil.isEmpty(fieldValue0) && !"undefined".equals(fieldValue0)){
-            				fieldValue0 = " id='"+fieldValue0+"'";
-            			}else{
-            				fieldValue0 = " ";
-            			}
-            			if(!StringUtil.isEmpty(fieldValue1) && !"undefined".equals(fieldValue1)){
-            				fieldValue1 = " name='"+fieldValue1+"'";
-            			}else{
-            				fieldValue1 = " ";
-            			}
-            			start_node += "<activiti:value "+fieldValue0+fieldValue1+"></activiti:value>";
+        		if(!StringUtil.isEmpty(form_node_valueGrid[i])){
+        			String[] cell = form_node_valueGrid[i].split("@",-1);
+            		String cell0 = cell[0];
+            		String cell1 = cell[1];
+            		String cell2 = cell[2];
+            		String cell3 = cell[3];
+            		String cell4 = cell[4];
+            		String cell5 = cell[5];
+            		String cell6 = cell[6];
+            		String cell7 = cell[7];
+            		String cell8 = cell[8];
+            		String cell9 = cell[9];
+            		if(!StringUtil.isEmpty(cell0) && !"undefined".equals(cell0)){
+            			cell0 = " id='"+cell0+"'";
+            		}else{
+            			cell0 =" ";
             		}
+            		if(!StringUtil.isEmpty(cell1) && !"undefined".equals(cell1)){
+            			cell1 = " name='"+cell1+"'";
+            		}else{
+            			cell1 = " ";
+            		}
+            		if(!StringUtil.isEmpty(cell2) && !"undefined".equals(cell2)){
+            			cell2 = " type='"+cell2+"'";
+            		}else{
+            			cell2 = " ";
+            		}
+            		if(!StringUtil.isEmpty(cell3) && !"undefined".equals(cell3)){
+            			cell3 = " expression='"+cell3+"'";
+            		}else{
+            			cell3 = " ";
+            		}
+            		if(!StringUtil.isEmpty(cell4) && !"undefined".equals(cell4)){
+            			cell4 = " variable='"+cell4+"'";
+            		}else{
+            			cell4 = " ";
+            		}
+            		if(!StringUtil.isEmpty(cell5) && !"undefined".equals(cell5)){
+            			cell5 = " default='"+cell5+"'";
+            		}else{
+            			cell5 = " ";
+            		}
+            		if(!StringUtil.isEmpty(cell6) && !"undefined".equals(cell6)){
+            			cell6 = " datePattern='"+cell6+"'";
+            		}else{
+            			cell6 =  " ";
+            		}
+            		if(!StringUtil.isEmpty(cell7) && !"undefined".equals(cell7)){
+            			cell7 = " readable='"+cell7+"'";
+            		}else{
+            			cell7 = " ";
+            		}
+            		if(!StringUtil.isEmpty(cell8) && !"undefined".equals(cell8)){
+            			cell8 = " writable='"+cell8+"'";
+            		}else{
+            			cell8 = " ";
+            		}
+            		if(!StringUtil.isEmpty(cell9) && !"undefined".equals(cell9)){
+            			cell9 = " required='"+cell9+"'";
+            		}else{
+            			cell9 = " ";
+            		}
+            		String cellStr = cell0+cell1+cell2+cell3+cell4+cell5+cell6+cell7+cell8+cell9;
+//            		start_node += "<activiti:formProperty id='"+cell[0]+"' name='"+cell[1]+"' type='"+cell[2]+"' expression='"+cell[3]+"' variable='"+cell[4]+"' default='"+cell[5]+"' datePattern='"+cell[6]+"' readable='"+cell[7]+"' writable='"+cell[8]+"' required='"+cell[9]+"'>";
+            		start_node += "<activiti:formProperty "+cellStr+">";
+                    //字段
+            		if(cell.length == 11 && !StringUtil.isEmpty(cell[10]) && !"undefined".equals(cell[10])){
+            			String[] field = cell[10].split("$",-1);
+                		for(int j = 0; j < field.length; j++){
+                			String [] fieldValue = field[j].split("&",-1);
+                			if(null != fieldValue && fieldValue.length == 2){
+                				String fieldValue0 = fieldValue[0];
+                    			String fieldValue1 = fieldValue[1];
+                    			if(!StringUtil.isEmpty(fieldValue0) && !"undefined".equals(fieldValue0)){
+                    				fieldValue0 = " id='"+fieldValue0+"'";
+                    			}else{
+                    				fieldValue0 = " ";
+                    			}
+                    			if(!StringUtil.isEmpty(fieldValue1) && !"undefined".equals(fieldValue1)){
+                    				fieldValue1 = " name='"+fieldValue1+"'";
+                    			}else{
+                    				fieldValue1 = " ";
+                    			}
+                    			start_node += "<activiti:value "+fieldValue0+fieldValue1+"></activiti:value>";
+                			}
+                		}
+            		}
+                    start_node += "</activiti:formProperty>";
         		}
-                start_node += "</activiti:formProperty>";
         	}
         }
         //表单配置结束
@@ -162,29 +166,33 @@ public class MxStartEvent {
         //1监听的类开始
         if(null != event_node_value && !"".equals(event_node_value)){
         	//主列表
-        	String[] eventGrid = event_node_value.split("#");
+        	String[] eventGrid = event_node_value.split("#",-1);
         	for(int i = 0; i < eventGrid.length; i++){
-        		String[] cell = eventGrid[i].split("@");
-        		String excuteStr=null;
-        		//javaclass类型
-        		if(null != cell[1] && !"".equals(cell[1]) && "javaclass".equals(cell[1])){
-        			excuteStr = "class='"+cell[0]+"'";
+        		if(!StringUtil.isEmpty(eventGrid[i])){
+        			String[] cell = eventGrid[i].split("@",-1);
+            		String excuteStr=null;
+            		//javaclass类型
+            		if(null != cell[1] && !"".equals(cell[1]) && "javaclass".equals(cell[1])){
+            			excuteStr = "class='"+cell[0]+"'";
+            		}
+            		start_node += "<activiti:executionListener event='start' "+excuteStr+">";
+                    //1-1字段开始 子循环操作
+            		if(null != cell[1] && !"".equals(cell[1]) && ("javaclass".equals(cell[1]) || "express".equals(cell[1]))){
+            			//此时存在字段 字段位置在最后一个
+            			String[] field = cell[3].split("$",-1);
+            			for(int j = 0; j < field.length; j++){
+            				if(!StringUtil.isEmpty(field[j])){
+            					String[] fieldV = field[j].split("&",-1);
+                				start_node += "<activiti:field name='"+fieldV[0]+"'>";
+                                start_node += "<activiti:string><![CDATA["+fieldV[1]+"]]></activiti:string>";
+                                start_node += "</activiti:field>";
+            				}
+            			}
+            		}
+                    //1-1字段结束
+                    start_node += "</activiti:executionListener>";
+                    //1监听的类结束
         		}
-        		start_node += "<activiti:executionListener event='start' "+excuteStr+">";
-                //1-1字段开始 子循环操作
-        		if(null != cell[1] && !"".equals(cell[1]) && ("javaclass".equals(cell[1]) || "express".equals(cell[1]))){
-        			//此时存在字段 字段位置在最后一个
-        			String[] field = cell[3].split("$");
-        			for(int j = 0; j < field.length; j++){
-        				String[] fieldV = field[j].split("&");
-        				start_node += "<activiti:field name='"+fieldV[0]+"'>";
-                        start_node += "<activiti:string><![CDATA["+fieldV[1]+"]]></activiti:string>";
-                        start_node += "</activiti:field>";
-        			}
-        		}
-                //1-1字段结束
-                start_node += "</activiti:executionListener>";
-                //1监听的类结束
         	}
         }        
         //监听器配置结束

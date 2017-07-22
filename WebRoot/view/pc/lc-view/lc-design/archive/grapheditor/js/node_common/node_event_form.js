@@ -16,10 +16,54 @@ function initform_grid(cell){
 			var form_node_val = form_node_valueArray[i];
 			if("undefined" != typeof(form_node_val)){
 				var form_node_v = form_node_val.split("@");
+				var fv0 = form_node_v[0];
+				var fv1 = form_node_v[1];
+				var fv2 = form_node_v[2];
+				var fv3 = form_node_v[3];
+				var fv4 = form_node_v[4];
+				var fv5 = form_node_v[5];
+				var fv6 = form_node_v[6];
+				var fv7 = form_node_v[7];
+				var fv8 = form_node_v[8];
+				var fv9 = form_node_v[9];
+				var fv10 = form_node_v[10];
 				if(null == form_data_value || "" == form_data_value){
-					form_data_value = "['"+form_node_v[0]+"','"+form_node_v[1]+"','"+form_node_v[2]+"','"+form_node_v[3]+"','"+form_node_v[4]+"','"+form_node_v[5]+"','"+form_node_v[6]+"','"+form_node_v[7]+"','"+form_node_v[8]+"','"+form_node_v[9]+"','"+form_node_v[10]+"']";
+					if("undefined" == typeof(fv0) || "undefined" == fv0){
+						fv0 = '';
+					}
+					if("undefined" == typeof(fv1) || "undefined" == fv1){
+						fv1 = '';
+					}
+					if("undefined" == typeof(fv2) || "undefined" == fv2){
+						fv2 = '';
+					}
+					if("undefined" == typeof(fv3) || "undefined" == fv3){
+						fv3 = '';
+					}
+					if("undefined" == typeof(fv4) || "undefined" == fv4){
+						fv4 = '';
+					}
+					if("undefined" == typeof(fv5) || "undefined" == fv5){
+						fv5 = '';
+					}
+					if("undefined" == typeof(fv6) || "undefined" == fv6){
+						fv6 = '';
+					}
+					if("undefined" == typeof(fv7) || "undefined" == fv7){
+						fv7 = '';
+					}
+					if("undefined" == typeof(fv8) || "undefined" == fv8){
+						fv8 = '';
+					}
+					if("undefined" == typeof(fv9) || "undefined" == fv9){
+						fv9 = '';
+					}
+					if("undefined" == typeof(fv10) || "undefined" == fv10){
+						fv10 = '';
+					}
+					form_data_value = "['"+fv0+"','"+fv1+"','"+fv2+"','"+fv3+"','"+fv4+"','"+fv5+"','"+fv6+"','"+fv7+"','"+fv8+"','"+fv9+"','"+fv10+"']";
 				}else{
-					form_data_value = form_data_value+","+"['"+form_node_v[0]+"','"+form_node_v[1]+"','"+form_node_v[2]+"','"+form_node_v[3]+"','"+form_node_v[4]+"','"+form_node_v[5]+"','"+form_node_v[6]+"','"+form_node_v[7]+"','"+form_node_v[8]+"','"+form_node_v[9]+"','"+form_node_v[10]+"',]";
+					form_data_value = form_data_value+","+"['"+fv0+"','"+fv1+"','"+fv2+"','"+fv3+"','"+fv4+"','"+fv5+"','"+fv6+"','"+fv7+"','"+fv8+"','"+fv9+"','"+fv10+"',]";
 				}
 			}
 		}

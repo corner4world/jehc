@@ -628,29 +628,33 @@ public class MxUtils {
         //1监听的类开始
         if(null != event_node_value && !"".equals(event_node_value)){
         	//主列表
-        	String[] eventGrid = event_node_value.split("#");
+        	String[] eventGrid = event_node_value.split("#",-1);
         	for(int i = 0; i < eventGrid.length; i++){
-        		String[] cell = eventGrid[i].split("@");
-        		String excuteStr=null;
-        		//javaclass类型
-        		if(null != cell[1] && !"".equals(cell[1]) && "javaclass".equals(cell[1])){
-        			excuteStr = "class='"+cell[0]+"'";
+        		if(!StringUtil.isEmpty(eventGrid[i])){
+        			String[] cell = eventGrid[i].split("@",-1);
+            		String excuteStr=null;
+            		//javaclass类型
+            		if(null != cell[1] && !"".equals(cell[1]) && "javaclass".equals(cell[1])){
+            			excuteStr = "class='"+cell[0]+"'";
+            		}
+            		eventListenerNode += "<activiti:executionListener event='start' "+excuteStr+">";
+                    //1-1字段开始 子循环操作
+            		if(null != cell[1] && !"".equals(cell[1]) && ("javaclass".equals(cell[1]) || "express".equals(cell[1]))){
+            			//此时存在字段 字段位置在最后一个
+            			String[] field = cell[3].split("$",-1);
+            			for(int j = 0; j < field.length; j++){
+            				if(!StringUtil.isEmpty(field[j])){
+            					String[] fieldV = field[j].split("&",-1);
+                				eventListenerNode += "<activiti:field name='"+fieldV[0]+"'>";
+                				eventListenerNode += "<activiti:string><![CDATA["+fieldV[1]+"]]></activiti:string>";
+                				eventListenerNode += "</activiti:field>";
+            				}
+            			}
+            		}
+                    //1-1字段结束
+            		eventListenerNode += "</activiti:executionListener>";
+                    //1监听的类结束
         		}
-        		eventListenerNode += "<activiti:executionListener event='start' "+excuteStr+">";
-                //1-1字段开始 子循环操作
-        		if(null != cell[1] && !"".equals(cell[1]) && ("javaclass".equals(cell[1]) || "express".equals(cell[1]))){
-        			//此时存在字段 字段位置在最后一个
-        			String[] field = cell[3].split("$");
-        			for(int j = 0; j < field.length; j++){
-        				String[] fieldV = field[j].split("&");
-        				eventListenerNode += "<activiti:field name='"+fieldV[0]+"'>";
-        				eventListenerNode += "<activiti:string><![CDATA["+fieldV[1]+"]]></activiti:string>";
-        				eventListenerNode += "</activiti:field>";
-        			}
-        		}
-                //1-1字段结束
-        		eventListenerNode += "</activiti:executionListener>";
-                //1监听的类结束
         	}
         }        
         //监听器配置结束
@@ -739,9 +743,9 @@ public class MxUtils {
 		String form_node_value = mxCell.attributeValue("form_node_value");/**表单属性**/
 		//表单配置开始
         if(null != form_node_value && !"".equals(form_node_value)){
-        	String[] form_node_valueGrid = form_node_value.split("#");
+        	String[] form_node_valueGrid = form_node_value.split("#",-1);
         	for(int i = 0; i < form_node_valueGrid.length; i++){
-        		String[] cell = form_node_valueGrid[i].split("@");
+        		String[] cell = form_node_valueGrid[i].split("@",-1);
         		String cell0 = cell[0];
         		String cell1 = cell[1];
         		String cell2 = cell[2];
@@ -806,25 +810,28 @@ public class MxUtils {
         		node += "<activiti:formProperty "+cellStr+" >";
 //        		node += "<activiti:formProperty id='"+cell[0]+"' name='"+cell[1]+"' type='"+cell[2]+"' expression='"+cell[3]+"' variable='"+cell[4]+"' default='"+cell[5]+"' datePattern='"+cell[6]+"' readable='"+cell[7]+"' writable='"+cell[8]+"' required='"+cell[9]+"'>";
                 //字段
-        		
-        		if(!"undefined".equals(cell[10])){
-        			String[] field = cell[10].split("$");
+        		if(!StringUtil.isEmpty(cell[10]) && !"undefined".equals(cell[10])){
+        			String[] field = cell[10].split("$",-1);
         			for(int j = 0; j < field.length; j++){
-            			String [] fieldValue = field[j].split("&");
-            			String fieldValue0 = fieldValue[0];
-            			String fieldValue1 = fieldValue[1];
-            			if(!StringUtil.isEmpty(fieldValue0) && !"undefined".equals(fieldValue0)){
-            				fieldValue0 = " id='"+fieldValue0+"'";
-            			}else{
-            				fieldValue0 = " ";
-            			}
-            			if(!StringUtil.isEmpty(fieldValue1) && !"undefined".equals(fieldValue1)){
-            				fieldValue1 = " name='"+fieldValue1+"'";
-            			}else{
-            				fieldValue1 = " ";
-            			}
-            			node += "<activiti:value "+fieldValue0+fieldValue1+"></activiti:value>";
-//            			node += "<activiti:value id='"+fieldValue[0]+"' name='"+fieldValue[1]+"'></activiti:value>";
+        				if(!StringUtil.isEmpty(field[j])){
+        					String [] fieldValue = field[j].split("&",-1);
+                			if(null != fieldValue){
+                				String fieldValue0 = fieldValue[0];
+                    			String fieldValue1 = fieldValue[1];
+                    			if(!StringUtil.isEmpty(fieldValue0) && !"undefined".equals(fieldValue0)){
+                    				fieldValue0 = " id='"+fieldValue0+"'";
+                    			}else{
+                    				fieldValue0 = " ";
+                    			}
+                    			if(!StringUtil.isEmpty(fieldValue1) && !"undefined".equals(fieldValue1)){
+                    				fieldValue1 = " name='"+fieldValue1+"'";
+                    			}else{
+                    				fieldValue1 = " ";
+                    			}
+                    			node += "<activiti:value "+fieldValue0+fieldValue1+"></activiti:value>";
+//                    			node += "<activiti:value id='"+fieldValue[0]+"' name='"+fieldValue[1]+"'></activiti:value>";
+                			}
+        				}
             		}
         		}
         		node += "</activiti:formProperty>";
@@ -870,10 +877,12 @@ public class MxUtils {
 		String callActivity_input_value = mxCell.attributeValue("callActivity_input_value");
         if(null != callActivity_input_value && !"".equals(callActivity_input_value)){
         	//主列表
-        	String[] inputGrid = callActivity_input_value.split("#");
+        	String[] inputGrid = callActivity_input_value.split("#",-1);
         	for(int i = 0; i < inputGrid.length; i++){
-        		String[] cell = inputGrid[i].split("@");
-        		inputNode += "<activiti:in source='"+cell[0]+"' sourceExpression='"+cell[1]+"' target='"+cell[2]+"'></activiti:in>";
+        		if(!StringUtil.isEmpty(inputGrid[i])){
+        			String[] cell = inputGrid[i].split("@",-1);
+            		inputNode += "<activiti:in source='"+cell[0]+"' sourceExpression='"+cell[1]+"' target='"+cell[2]+"'></activiti:in>";
+        		}
         	}
         }        
         return inputNode;
@@ -889,10 +898,12 @@ public class MxUtils {
 		String callActivity_out_value = mxCell.attributeValue("callActivity_out_value");
         if(null != callActivity_out_value && !"".equals(callActivity_out_value)){
         	//主列表
-        	String[] outGrid = callActivity_out_value.split("#");
+        	String[] outGrid = callActivity_out_value.split("#",-1);
         	for(int i = 0; i < outGrid.length; i++){
-        		String[] cell = outGrid[i].split("@");
-        		outNode += "<activiti:in source='"+cell[0]+"' sourceExpression='"+cell[1]+"' target='"+cell[2]+"'></activiti:in>";
+        		if(!StringUtil.isEmpty(outGrid[i])){
+        			String[] cell = outGrid[i].split("@",-1);
+            		outNode += "<activiti:in source='"+cell[0]+"' sourceExpression='"+cell[1]+"' target='"+cell[2]+"'></activiti:in>";
+        		}
         	}
         }        
         return outNode;
@@ -908,12 +919,14 @@ public class MxUtils {
 		String serviceNodeAttributeField_value = mxCell.attributeValue("serviceNodeAttributeField_value");
         if(null != serviceNodeAttributeField_value && !"".equals(serviceNodeAttributeField_value)){
         	//主列表
-        	String[] outGrid = serviceNodeAttributeField_value.split("#");
+        	String[] outGrid = serviceNodeAttributeField_value.split("#",-1);
         	for(int i = 0; i < outGrid.length; i++){
-        		String[] cell = outGrid[i].split("@");
-        		outNode += "<activiti:field name='"+cell[0]+"'>";
-        		outNode += "<activiti:string><![CDATA["+cell[1]+"]]></activiti:string>";
-        		outNode += "</activiti:field>";
+        		if(!StringUtil.isEmpty(outGrid[i])){
+        			String[] cell = outGrid[i].split("@",-1);
+            		outNode += "<activiti:field name='"+cell[0]+"'>";
+            		outNode += "<activiti:string><![CDATA["+cell[1]+"]]></activiti:string>";
+            		outNode += "</activiti:field>";
+        		}
         	}
         }        
         return outNode;
