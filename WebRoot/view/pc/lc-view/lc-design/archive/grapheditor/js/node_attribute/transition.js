@@ -128,9 +128,17 @@ function transitionNodeAttributePanel(cell,flag,graph_refresh){
 		        split:true, 
 		        region:"center",
 		        tabPosition:'left',
+		        tabRotation:0,
 		        items:[
 		        	{title:'一般配置',items:nodeNormalForm},
-		        	{title:'基本配置',items:transitionNodeAttributeForm}
+		        	{title:'基本配置',items:transitionNodeAttributeForm,
+		        		autoScroll:true,
+		                /**新方法使用开始**/  
+		                scrollable:true,  
+		                scrollable:'x',
+		                scrollable:'y',
+		                /**新方法使用结束**/ 	
+		        	}
 		        ],
 		        buttons:[{  
 		          	text:'确 定',  
@@ -186,9 +194,17 @@ function transitionNodeAttributePanel(cell,flag,graph_refresh){
 		        split:true, 
 		        region:"center",
 		        tabPosition:'left',
+		        tabRotation:0,
 		        items:[
 		        	{title:'一般配置',items:nodeNormalForm},
-		        	{title:'基本配置',items:transitionNodeAttributeForm},
+		        	{title:'基本配置',items:transitionNodeAttributeForm,
+		        		autoScroll:true,
+		                /**新方法使用开始**/  
+		                scrollable:true,  
+		                scrollable:'x',
+		                scrollable:'y',
+		                /**新方法使用结束**/ 	
+		        	},
 		            {title:'事件配置',items:event_grid,layout:'border'}
 		        ],
 		        buttons:[{  
@@ -245,6 +261,7 @@ function transitionNodeAttributePanel(cell,flag,graph_refresh){
 		        split:true, 
 		        region:"center",
 		        tabPosition:'left',
+		        tabRotation:0,
 		        items:[
 		        	{title:'一般配置',items:nodeNormalForm},
 		        	{title:'基本配置',items:transitionNodeAttributeForm},
@@ -264,6 +281,7 @@ function transitionNodeAttributePanel(cell,flag,graph_refresh){
 		        split:true, 
 		        region:"center",
 		        tabPosition:'left',
+		        tabRotation:0,
 		        items:[
 		        	{title:'一般配置',items:nodeNormalForm},
 		        	{title:'基本配置',items:transitionNodeAttributeForm},

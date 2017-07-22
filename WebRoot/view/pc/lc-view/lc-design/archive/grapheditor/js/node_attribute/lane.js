@@ -69,8 +69,16 @@ function lanePanel(cell,graph_refresh){
 	        split:true, 
 	        region:"center",
 	        tabPosition:'top',
+	        tabRotation:0,
 	        items:[
-	        	{title:'一般配置',items:nodeNormalForm}
+	        	{title:'一般配置',items:nodeNormalForm,
+	        		autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	        	}
 	        ],
 	         buttons:[{  
 		         	text:'确 定',  
@@ -103,6 +111,7 @@ function lanePanel(cell,graph_refresh){
 	        split:true, 
 	        region:"center",
 	        tabPosition:'top',
+	        tabRotation:0,
 	        items:[
 	        	{title:'一般配置',items:nodeNormalForm}
 	        ]

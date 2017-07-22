@@ -82,8 +82,16 @@ function exclusiveGatewayNodeAttributePanel(cell,graph_refresh){
 	        split:true, 
 	        region:"center",
 	        tabPosition:'left',
+	        tabRotation:0,
 	        items:[
-	        	{title:'一般配置',items:nodeNormalForm},
+	        	{title:'一般配置',items:nodeNormalForm,
+	        		autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	        	},
 	            {title:'事件配置',items:event_grid,layout:'border'}
 	        ],
 	         buttons:[{  
@@ -126,6 +134,7 @@ function exclusiveGatewayNodeAttributePanel(cell,graph_refresh){
 	        split:true, 
 	        region:"center",
 	        tabPosition:'left',
+	        tabRotation:0,
 	        items:[
 	        	{title:'一般配置',items:nodeNormalForm},
 	            {title:'事件配置',items:event_grid,layout:'border'}

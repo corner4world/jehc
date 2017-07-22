@@ -140,9 +140,24 @@ function timerStartEventPanel(cell,graph_refresh){
 	        split:true,
 	        region:"center",
 	        tabPosition:'left',
+	        tabRotation:0,
 	        items:[
-	            {title:'一般配置',items:nodeNormalForm},
-	            {title:'基本配置',items:timerStartEventForm},
+	            {title:'一般配置',items:nodeNormalForm,
+	            	autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	            },
+	            {title:'基本配置',items:timerStartEventForm,
+	            	autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	            },
 	            {title:'表单配置',items:form_grid,layout:'border'},
 	            {title:'事件配置',items:event_grid,layout:'border'}
 	        ],
@@ -204,8 +219,16 @@ function timerStartEventPanel(cell,graph_refresh){
 	        split:true,
 	        region:"center",
 	        tabPosition:'left',
+	        tabRotation:0,
 	        items:[
-	            {title:'一般配置',items:nodeNormalForm},
+	            {title:'一般配置',items:nodeNormalForm,
+	            	autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	            },
 	            {title:'基本配置',items:timerStartEventForm},
 	            {title:'表单配置',items:form_grid,layout:'border'},
 	            {title:'事件配置',items:event_grid,layout:'border'}

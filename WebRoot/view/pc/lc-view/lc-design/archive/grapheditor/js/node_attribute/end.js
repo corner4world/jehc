@@ -83,9 +83,17 @@ function endNodeAttributePanel(cell,graph_refresh){
 	        height:clientHeight*0.95,
 	        split:true,
 	        tabPosition:'left',
+	        tabRotation:0,
 	        region:"center",
 	        items:[
-	            {title:'一般配置',items:nodeNormalForm},
+	            {title:'一般配置',items:nodeNormalForm,
+	            	autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	            },
 	            {title:'事件配置',items:event_grid,layout:'border'}
 	        ],
 	         buttons:[{  
@@ -123,8 +131,16 @@ function endNodeAttributePanel(cell,graph_refresh){
 	        split:true,
 	        tabPosition:'left',
 	        region:"center",
+	        tabRotation:0,
 	        items:[
-	            {title:'一般配置',items:nodeNormalForm},
+	            {title:'一般配置',items:nodeNormalForm,
+	            	autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	            },
 	            {title:'事件配置',items:event_grid,layout:'border'}
 	        ]
 	    });

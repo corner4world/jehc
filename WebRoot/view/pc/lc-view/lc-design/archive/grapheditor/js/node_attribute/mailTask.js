@@ -211,11 +211,27 @@ function mailTaskNodeAttributePanel(cell,graph_refresh){
 	        split:true, 
 	        region:"center",
 	        tabPosition:'left',
+	        tabRotation:0,
 	        items:[
-	        	{title:'一般配置',items:nodeNormalForm},
-	        	{title:'基本配置',items:mailTaskNodeAttributeFormMain},
+	        	{title:'一般配置',items:nodeNormalForm,
+	        		autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	        	},
+	        	{title:'基本配置',items:mailTaskNodeAttributeFormMain	
+	        	},
 	            {title:'事件配置',items:event_grid,layout:'border'},
-	            {title:'会签配置',items:multiInstanceLoopCharacteristicForm}
+	            {title:'会签配置',items:multiInstanceLoopCharacteristicForm,
+	            	autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	            }
 	        ],
 	         buttons:[{  
 		         	text:'确 定',  
@@ -293,6 +309,7 @@ function mailTaskNodeAttributePanel(cell,graph_refresh){
 	        split:true, 
 	        region:"center",
 	        tabPosition:'left',
+	        tabRotation:0,
 	        items:[
 	        	{title:'一般配置',items:nodeNormalForm},
 	        	{title:'基本配置',items:mailTaskNodeAttributeFormMain},

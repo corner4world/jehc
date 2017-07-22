@@ -103,9 +103,24 @@ function errorBoundaryEventNodeAttributePanel(cell,graph_refresh){
 	        split:true, 
 	        region:"center",
 	        tabPosition:'left',
+	        tabRotation:0,
 	        items:[
-	        	{title:'一般配置',items:nodeNormalForm},
-	        	{title:'基本配置',items:errorBoundaryEventNodeAttributeForm},
+	        	{title:'一般配置',items:nodeNormalForm,
+	        		autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	        	},
+	        	{title:'基本配置',items:errorBoundaryEventNodeAttributeForm,
+	        		autoScroll:true,
+	                /**新方法使用开始**/  
+	                scrollable:true,  
+	                scrollable:'x',
+	                scrollable:'y',
+	                /**新方法使用结束**/ 	
+	        	},
 	            {title:'事件配置',items:event_grid,layout:'border'}
 	        ],
 	         buttons:[{  
@@ -152,6 +167,7 @@ function errorBoundaryEventNodeAttributePanel(cell,graph_refresh){
 	        split:true, 
 	        region:"center",
 	        tabPosition:'left',
+	        tabRotation:0,
 	        items:[
 	        	{title:'一般配置',items:nodeNormalForm},
 	        	{title:'基本配置',items:errorBoundaryEventNodeAttributeForm},
