@@ -32,6 +32,7 @@ function initEastPanel(graph){
 				xtype:'textfield',
 				name:'processId',
 				id:'processId',
+				hidden:true,
 				trigger1Cls:'x-form-cl-trigger',
 				value:'process'+processNo,
 				onTrigger1Click:function(){this.setValue(''); this.fireEvent('clear', this)},
@@ -107,7 +108,7 @@ function initEastPanel(graph){
 				xtype:'textareafield',
 				name:'remark',
 				id:'remark',
-				height:120,
+				height:80,
 				maxLength:255,
 				width:'100%'
 			},
@@ -212,7 +213,7 @@ function initEastPanel(graph){
         scrollable:'y',
         /**新方法使用结束**/ 
         width:320,
-        height:clientHeight*0.5,
+        height:clientHeight*0.4,
         border:false,
         split:false,
         collapsible:true,
