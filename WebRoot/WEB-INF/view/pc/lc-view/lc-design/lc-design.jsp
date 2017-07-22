@@ -136,6 +136,75 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<%
 	}
 	%>
+	
+	.x-panel-default-framed-outer-border-rbl {
+	    border-right-color: #ffffff!important;
+	    border-right-width: 1px !important;
+	    border-bottom-color: #ffffff!important;
+	    border-bottom-width: 1px !important;
+	    border-left-color: #ffffff!important;
+	    border-left-width: 1px !important;
+	}
+	
+	.x-panel-default-framed-outer-border-trl {
+	    border-top-color: #ffffff!important;
+	    border-top-width: 1px !important;
+	    border-right-color: #ffffff!important;
+	    border-right-width: 1px !important;
+	    border-left-color: #ffffff!important;
+	    border-left-width: 1px !important;
+	}
+	
+	.x-panel-default-framed-outer-border-rl {
+	    border-right-color: #ffffff!important;
+	    border-right-width: 1px !important;
+	    border-left-color: #ffffff!important;
+	    border-left-width: 1px !important;
+	}
+	
+	
+	.x-panel-default-framed {
+	    -moz-border-radius-topleft: 0;
+	    -webkit-border-top-left-radius: 0;
+	    border-top-left-radius: 0;
+	    -moz-border-radius-topright: 0;
+	    -webkit-border-top-right-radius: 0;
+	    border-top-right-radius: 0;
+	    -moz-border-radius-bottomright: 0;
+	    -webkit-border-bottom-right-radius: 0;
+	    border-bottom-right-radius: 0;
+	    -moz-border-radius-bottomleft: 0;
+	    -webkit-border-bottom-left-radius: 0;
+	    border-bottom-left-radius: 0;
+	    padding: 0 0 0 0;
+	    border-width: 0px;
+	    border-style: solid;
+	    background-color: #ffffff;
+	}
+	.x-panel-default {
+	    border-color: #ffffff;
+	    padding: 0;
+	}
+	.x-panel-body-default {
+	    background: rgb(255, 255, 255);
+	    border-color: #ffffff;
+	    color: rgb(64, 64, 64);
+	    font-size: 13px;
+	    font-weight: 300;
+	    font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+	    border-width: 1px;
+	    border-style: solid;
+	}
+	.x-panel-body-default {
+	    background: rgb(255, 255, 255);
+	    border-color: #ffffff;
+	    color: rgb(64, 64, 64);
+	    font-size: 13px;
+	    font-weight: 300;
+	    font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
+	    border-width: 1px;
+	    border-style: solid;
+	}
     </style>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/js/mxClient.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/css/grapheditor.css" />
