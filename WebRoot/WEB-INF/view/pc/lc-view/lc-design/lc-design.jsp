@@ -127,16 +127,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/**tbar字体颜色结束**/
 	.x-tab-bar-default-top .x-box-scroller-tab-bar-default {
 	}
-	<%
-	if(null != cookieC && cookieC.getValue().indexOf("triton")>=0){
+	<%-- <%
+	if((null != cookieC && cookieC.getValue().indexOf("triton")>=0) || null == cookieC){
 	%>
 	.x-accordion-item .x-accordion-hd {
 	    padding: 3px 10px;
 	}
 	<%
+	}else{
+		
 	}
-	%>
-	
+	%> --%>
+	.x-accordion-item .x-accordion-hd {
+	    padding: 4px 10px;
+	}
 	.x-panel-default-framed-outer-border-rbl {
 	    border-right-color: #ffffff!important;
 	    border-right-width: 1px !important;
