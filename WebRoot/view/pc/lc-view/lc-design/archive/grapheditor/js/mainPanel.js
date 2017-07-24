@@ -480,85 +480,82 @@ MainPanel = function(graph, history){
         {
         	id:'redo',
             text:'重做',
-            hidden:true,
             iconCls:'redo-icon',
             tooltip:'重做',
+            hidden:true,
             handler:function(){
         		history.redo();
             },
             scope:this
-        }],
-        bbar:[
-        {
-           text:'放大',
-           hidden:true,
-           iconCls:'zoomin-icon',
-           scope:this,
-           handler:function(item)
-           {
-			graph.zoomIn();
-           }
         },
         {
-           text:'放小',
-           hidden:true,
-           iconCls:'zoomout-icon',
-           scope:this,
-           handler:function(item)
-           {
-               graph.zoomOut();
-           }
-        },
-        {
-           text:'.实际尺寸',
-           hidden:true,
-           iconCls:'zoomactual-icon',
-           scope:this,
-           handler:function(item)
-           {
-               graph.zoomActual();
-           }
-        },
-        {
-           text:'全屏',
-           hidden:true,
-           iconCls:'zoom-icon',
-           scope:this,
-           handler:function(item)
-           {
-               graph.fit();
-           }
-        },
-        {
-             text:'全选',
-             scope:this,
-             hidden:true,
-             iconCls:'select-all-icon',
-             handler:function()
-             {
-              graph.selectAll();
-             }
+            text:'全屏',
+            iconCls:'zoom-icon',
+            scope:this,
+            hidden:true,
+            handler:function(item)
+            {
+                graph.fit();
+            }
          },
          {
-             text:'全选节点',
-             scope:this,
-             hidden:true,
-             iconCls:'select-node-icon',
-             handler:function()
-             {
- 				graph.selectVertices();
-             }
+              text:'全选',
+              scope:this,
+              hidden:true,
+              iconCls:'select-all-icon',
+              handler:function()
+              {
+               graph.selectAll();
+              }
           },
           {
-             text:'全选连线',
-             scope:this,
-             hidden:true,
-             iconCls:'select-line-icon',
-             handler:function()
-             {
-        		graph.selectEdges();
-             }
-          },
+              text:'全选节点',
+              scope:this,
+              hidden:true,
+              iconCls:'select-node-icon',
+              handler:function()
+              {
+  				graph.selectVertices();
+              }
+           },
+           {
+              text:'全选连线',
+              scope:this,
+              hidden:true,
+              iconCls:'select-line-icon',
+              handler:function()
+              {
+         		graph.selectEdges();
+              }
+           },
+           {
+               text:'放大',
+               iconCls:'zoomin-icon',
+               scope:this,
+               handler:function(item)
+               {
+    			graph.zoomIn();
+               }
+            },
+            {
+               text:'放小',
+               iconCls:'zoomout-icon',
+               scope:this,
+               handler:function(item)
+               {
+                   graph.zoomOut();
+               }
+            },
+            {
+               text:'.实际尺寸',
+               iconCls:'zoomactual-icon',
+               scope:this,
+               handler:function(item)
+               {
+                   graph.zoomActual();
+               }
+            }],
+        bbar:[
 //        {
 //            text:'设计器脚步',
 //            scope:this,
