@@ -204,8 +204,9 @@ function initEastPanel(graph){
     reGetWidthAndHeight();
     eastPanel = new Ext.FormPanel({
     	region:'south',
-    	hideCollapseTool:false,
+    	hideCollapseTool:true,
    		title:'基本信息',
+   		header:false,  
    		headerPosition:'top',
    		autoScroll:true,
         /**新方法使用开始**/  

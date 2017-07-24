@@ -772,7 +772,8 @@ MainPanel = function(graph, history){
                     text:'重做',
                     iconCls:'undo-icon',
                     disabled:!history.canUndo(),
-                    scope: this,
+                    scope:this,
+                    hidden:true,
                     handler:function(){
                         history.undo();
                     }
@@ -780,6 +781,7 @@ MainPanel = function(graph, history){
                 {
                     text:'剪切',
                     iconCls:'cut-icon',
+                    hidden:true,
                     disabled:!selected,
                     scope: this,
                     handler:function(){
@@ -790,6 +792,7 @@ MainPanel = function(graph, history){
                     text:'拷贝',
                     iconCls:'copy-icon',
                     disabled:!selected,
+                    hidden:true,
                     scope:this,
                     handler:function(){
                     	mxClipboard.copy(graph);
@@ -800,6 +803,7 @@ MainPanel = function(graph, history){
                     iconCls:'paste-icon',
                     disabled:mxClipboard.isEmpty(),
                     scope:this,
+                    hidden:true,
                     handler:function(){
                     	mxClipboard.paste(graph);
                     }
@@ -959,6 +963,7 @@ MainPanel = function(graph, history){
                     text:'导出',
                     iconCls:'select-line-icon',
                     scope: this,
+                    hidden:true,
                     handler:function(){
                     	var enc = new mxCodec(mxUtils.createXmlDocument());  
 						var node1 = enc.encode(graph.getModel());  
