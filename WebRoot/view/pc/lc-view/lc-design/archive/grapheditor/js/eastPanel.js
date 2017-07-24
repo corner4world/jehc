@@ -55,6 +55,7 @@ function initEastPanel(graph){
 			{
 				fieldLabel:'命名空间',
 				xtype:'textfield',
+				hidden:true,
 				trigger1Cls:'x-form-cl-trigger',
 				value:'http://www.activiti.org/test',
 				onTrigger1Click:function(){this.setValue(''); this.fireEvent('clear', this)},
@@ -108,7 +109,7 @@ function initEastPanel(graph){
 				xtype:'textareafield',
 				name:'remark',
 				id:'remark',
-				height:80,
+				height:40,
 				maxLength:255,
 				width:'100%'
 			},
