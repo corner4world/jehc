@@ -1,3 +1,5 @@
+<%@page import="javax.faces.application.Application"%>
+<%@page import="jehc.xtmodules.xtcore.allutils.file.FileUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld" %>
 <%@ taglib prefix="fmt" uri="/WEB-INF/tld/fmt.tld" %>
@@ -15,7 +17,7 @@
 		<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
 		<input type="hidden" value="${xt_functioninfoMethod }" id="xtFunctionInfoBtnStr">
 	   	<!-- 主题技术Extjs支持 -->
-		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>	
+		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
 	   	<script type="text/javascript">
 	    	var basePath = "${syspath}";

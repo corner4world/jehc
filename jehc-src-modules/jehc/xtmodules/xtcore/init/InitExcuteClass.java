@@ -23,6 +23,8 @@ import jehc.solrmodules.solrmodel.Solr_Core;
 import jehc.solrmodules.solrservice.Solr_CoreService;
 import jehc.solrmodules.solrservice.Solr_Index_AttributeService;
 import jehc.solrmodules.solrservice.Solr_SortService;
+import jehc.xtmodules.xtcore.allutils.AllUtils;
+import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.ReadProperties;
 import jehc.xtmodules.xtcore.util.UUID;
@@ -54,6 +56,7 @@ import net.sf.ehcache.Element;
  */
 public class InitExcuteClass implements ServletContextListener{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
+	static final String extjs = "/deng/source/plugins/e6/ext-all.js";
 	/**
 	 * 停止时执行的方法
 	 */
@@ -94,7 +97,7 @@ public class InitExcuteClass implements ServletContextListener{
 			ApplicationContext ac = (ApplicationContext) new FileSystemXmlApplicationContext(contextConfigLocationpath);
 			**/
 	        
-	        loadQuarzInit();
+	        
 	    	loadXtDataDictionary();
 	    	loadXtFunctioninfoCommon();
 	    	loadSolrCore();
@@ -121,7 +124,11 @@ public class InitExcuteClass implements ServletContextListener{
 			sc.setAttribute("lc_design_displaywin_for_edit", map.get("lc_design_displaywin_for_edit"));
 			logger.info(sdf.format(new Date())+"--->装载Config配置结束"); 
 			logger.info(sdf.format(new Date())+"--->开始初始化调度任务"); 
+			loadQuarzInit();
 			logger.info(sdf.format(new Date())+"--->结束初始化调度任务"); 
+			
+			//加载ext-all.js文件内容只缓存中
+//			sc.setAttribute("ext_all",FileUtil.compress(FileUtil.readFile(AllUtils.getWebRootAbsolutePath()+extjs)));
 			xt_Start_Stop_Log.setXt_start_stop_log_iserror("0");
 		} catch (Exception e) {
 			xt_Start_Stop_Log.setXt_start_stop_log_iserror("1");

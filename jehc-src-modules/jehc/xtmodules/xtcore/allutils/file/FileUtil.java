@@ -4,6 +4,8 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Field;
@@ -31,6 +34,8 @@ import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.GZIPOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -973,16 +978,74 @@ public class FileUtil {
     	String prefix=fileName.substring(fileName.lastIndexOf(".")+1);
     	return prefix;
     }
-
-	// =====================文件压缩=========================
-	/*
-	 * //把文件压缩成zip File zipFile = new File("E:/demo.zip"); //定义输入文件流 InputStream
-	 * input = new FileInputStream(file); //定义压缩输出流 ZipOutputStream zipOut =
-	 * null; //实例化压缩输出流,并制定压缩文件的输出路径 就是E盘下,名字叫 demo.zip zipOut = new
-	 * ZipOutputStream(new FileOutputStream(zipFile)); zipOut.putNextEntry(new
-	 * ZipEntry(file.getName())); //设置注释 zipOut.setComment("www.demo.com"); int
-	 * temp = 0; while((temp = input.read()) != -1) { zipOut.write(temp); }
-	 * input.close(); zipOut.close();
-	 */
-	// ==============================================
+    
+    /**
+     * 将文本文件中的内容读入到buffer中
+     * @param buffer buffer
+     * @param filePath 文件路径
+     * @throws IOException 异常
+     */
+    public static void readToBuffer(StringBuffer buffer, String filePath) throws IOException {
+        InputStream is = new FileInputStream(filePath);
+        String line; // 用来保存每行读取的内容
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        line = reader.readLine(); // 读取第一行
+        while (line != null) { // 如果 line 为空说明读完了
+            buffer.append(line); // 将读到的内容添加到 buffer 中
+            buffer.append("\n"); // 添加换行符
+            line = reader.readLine(); // 读取下一行
+        }
+        reader.close();
+        is.close();
+    }
+    
+    /**
+     * 读取文本文件内容
+     * @param filePath 文件所在路径
+     * @return 文本内容
+     * @throws IOException 异常
+     */
+    public static String readFile(String filePath) throws IOException {
+        StringBuffer sb = new StringBuffer();
+        FileUtil.readToBuffer(sb, filePath);
+        return sb.toString();
+    }
+    
+    /**
+     * 压缩字符串  
+     * @param str
+     * @return
+     * @throws IOException
+     */
+    public static String compress(String str) throws IOException {   
+       if (str == null || str.length() == 0) {   
+    	   return str;   
+       }   
+       ByteArrayOutputStream out = new ByteArrayOutputStream();   
+       GZIPOutputStream gzip = new GZIPOutputStream(out);   
+       gzip.write(str.getBytes());   
+       gzip.close();   
+       return out.toString("ISO-8859-1");   
+     }
+    
+    /**
+     * 解压缩   
+     * @param str
+     * @return
+     * @throws IOException
+     */
+    public static String uncompress(String str) throws IOException {   
+        if (str == null || str.length() == 0) {   
+        	return str;   
+        }   
+        ByteArrayOutputStream out = new ByteArrayOutputStream();   
+        ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes("ISO-8859-1"));   
+        GZIPInputStream gunzip = new GZIPInputStream(in);   
+        byte[] buffer = new byte[256];   
+        int n;   
+        while ((n = gunzip.read(buffer))>= 0) {   
+        	out.write(buffer, 0, n);   
+        }   
+        return out.toString();   
+      }   
 }
