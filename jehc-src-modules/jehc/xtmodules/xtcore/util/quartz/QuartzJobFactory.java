@@ -13,13 +13,13 @@ import jehc.xtmodules.xtcore.util.quartz.task.Xt_DbinfoBack_Task;
 import jehc.xtmodules.xtcore.util.quartz.task.Xt_Ehcache_Task;
 import jehc.xtmodules.xtcore.util.quartz.task.Xt_Monitor_Task;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Quartz_Log;
-import jehc.xtmodules.xtservice.Xt_Quartz_LogService;
+import jehc.xtmodules.xtmodel.XtQuartzLog;
+import jehc.xtmodules.xtservice.XtQuartzLogService;
 
 public class QuartzJobFactory implements Job {
 	public void execute(JobExecutionContext context) throws JobExecutionException {
-		Xt_Quartz_LogService xt_Quartz_LogService = (Xt_Quartz_LogService)SpringUtil.getBean("xt_Quartz_LogService");
-		Xt_Quartz_Log xt_Quartz_Log = new Xt_Quartz_Log();
+		XtQuartzLogService xtQuartzLogService = (XtQuartzLogService)SpringUtil.getBean("xtQuartzLogService");
+		XtQuartzLog xt_Quartz_Log = new XtQuartzLog();
 		ScheduleJob scheduleJob = (ScheduleJob) context.getMergedJobDataMap().get("scheduleJob");
 		String name = scheduleJob.getJobName();
 		String id = scheduleJob.getJobId();
@@ -52,6 +52,6 @@ public class QuartzJobFactory implements Job {
 			xt_Data_Authority_Task.service();
 		}
 		xt_Quartz_Log.setXt_quartz_log_etime(CommonUtils.getSimpleDateFormat());
-		xt_Quartz_LogService.addXtQuartzLog(xt_Quartz_Log);
+		xtQuartzLogService.addXtQuartzLog(xt_Quartz_Log);
 	}
 }

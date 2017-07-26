@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.lcmodules.lcmodel.LcProcess">
+	<!--初始化分页-->
+	<select id="getLcProcessListByCondition" resultType="jehc.lcmodules.lcmodel.LcProcess" parameterType="map">
+		SELECT
+			lc_process.`lc_process_id`,
+			lc_process.`lc_process_path`,
+			DATE_FORMAT(lc_process.`lc_process_mtime`,'%Y-%m-%d %H:%i:%s') AS `lc_process_mtime`,
+			DATE_FORMAT(lc_process.`lc_process_ctime`,'%Y-%m-%d %H:%i:%s') AS `lc_process_ctime`,
+			lc_process.`xt_userinfo_id`,
+			lc_process.`lc_process_uid`,
+			lc_process.`lc_process_uk`,
+			lc_process.`lc_process_bpmn`,
+			lc_process.`lc_process_title`,
+			lc_process.`lc_process_bpmn_path`,
+			lc_process.`lc_process_img_path`,
+			lc_process.`lc_process_status`,
+			lc_process.`lc_process_mxgraphxml`,
+			lc_process.`lc_process_mxgraph_style`,
+			lc_process.`xt_constant_id`,
+			lc_process.`lc_process_flag`,
+			lc_process.`xt_attachment`,
+			lc_process.`lc_process_remark`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			lc_process lc_process LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_process.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != lc_process_title">
+			AND instr(lc_process_title,#{lc_process_title})
+		</if>
+		<if test="null != lc_process_status">
+			AND lc_process_status = #{lc_process_status}
+		</if>
+		<if test="null != lc_process_flag">
+			AND lc_process_flag = #{lc_process_flag}
+		</if>
+		<if test="null != lc_process_remark">
+			AND instr(lc_process_remark,#{lc_process_remark})
+		</if>
+		<if test="null != xt_constant_id">
+			AND xt_constant_id = #{xt_constant_id}
+		</if>
+			AND lc_processment_isdelete = 0
+		ORDER BY lc_process_mtime DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getLcProcessById" resultType="jehc.lcmodules.lcmodel.LcProcess" parameterType="string">
+		SELECT
+			lc_process.`lc_process_id`,
+			lc_process.`lc_process_path`,
+			DATE_FORMAT(lc_process.`lc_process_mtime`,'%Y-%m-%d %H:%i:%s') AS `lc_process_mtime`,
+			DATE_FORMAT(lc_process.`lc_process_ctime`,'%Y-%m-%d %H:%i:%s') AS `lc_process_ctime`,
+			lc_process.`xt_userinfo_id`,
+			lc_process.`lc_process_uid`,
+			lc_process.`lc_process_uk`,
+			lc_process.`lc_process_bpmn`,
+			lc_process.`lc_process_title`,
+			lc_process.`lc_process_bpmn_path`,
+			lc_process.`lc_process_img_path`,
+			lc_process.`lc_process_status`,
+			lc_process.`lc_process_mxgraphxml`,
+			lc_process.`lc_process_mxgraph_style`,
+			lc_process.`xt_constant_id`,
+			lc_process.`lc_process_flag`,
+			lc_process.`xt_attachment`,
+			lc_process.`lc_process_remark`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			lc_process lc_process LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_process.xt_userinfo_id
+		WHERE lc_process.lc_process_id=#{lc_process_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addLcProcess" parameterType="jehc.lcmodules.lcmodel.LcProcess">
+		INSERT INTO
+			lc_process
+			(
+			`lc_process_id`,
+			`lc_process_path`,
+			`lc_process_mtime`,
+			`lc_process_ctime`,
+			`xt_userinfo_id`,
+			`lc_process_uid`,
+			`lc_process_uk`,
+			`lc_process_bpmn`,
+			`lc_process_title`,
+			`lc_process_bpmn_path`,
+			`lc_process_img_path`,
+			`lc_process_status`,
+			`lc_process_mxgraphxml`,
+			`lc_process_mxgraph_style`,
+			`lc_processment_isdelete`,
+			`xt_constant_id`,
+			`lc_process_flag`,
+			`xt_attachment`,
+			`lc_process_remark`
+			)
+			VALUES
+			(
+			#{lc_process_id},
+			#{lc_process_path},
+			#{lc_process_mtime},
+			#{lc_process_ctime},
+			#{xt_userinfo_id},
+			#{lc_process_uid},
+			#{lc_process_uk},
+			#{lc_process_bpmn},
+			#{lc_process_title},
+			#{lc_process_bpmn_path},
+			#{lc_process_img_path},
+			#{lc_process_status},
+			#{lc_process_mxgraphxml},
+			#{lc_process_mxgraph_style},
+			0,
+			#{xt_constant_id},
+			#{lc_process_flag},
+			#{xt_attachment},
+			#{lc_process_remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateLcProcess" parameterType="jehc.lcmodules.lcmodel.LcProcess">
+		UPDATE
+			lc_process
+		<set>
+			<if test="lc_process_path != null">
+				`lc_process_path` = #{lc_process_path},
+			</if>
+			<if test="lc_process_mtime != null">
+				`lc_process_mtime` = #{lc_process_mtime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				`xt_userinfo_id` = #{xt_userinfo_id},
+			</if>
+			<if test="lc_process_uid != null">
+				`lc_process_uid` = #{lc_process_uid},
+			</if>
+			<if test="lc_process_uk != null">
+				`lc_process_uk` = #{lc_process_uk},
+			</if>
+			<if test="lc_process_bpmn != null">
+				`lc_process_bpmn` = #{lc_process_bpmn},
+			</if>
+			<if test="lc_process_title != null">
+				`lc_process_title` = #{lc_process_title},
+			</if>
+			<if test="lc_process_bpmn_path != null">
+				`lc_process_bpmn_path` = #{lc_process_bpmn_path},
+			</if>
+			<if test="lc_process_img_path != null">
+				`lc_process_img_path` = #{lc_process_img_path},
+			</if>
+			<if test="lc_process_status != null">
+				`lc_process_status` = #{lc_process_status},
+			</if>
+			<if test="lc_process_mxgraphxml != null">
+				`lc_process_mxgraphxml` = #{lc_process_mxgraphxml},
+			</if>
+			<if test="lc_process_mxgraph_style != null">
+				`lc_process_mxgraph_style` = #{lc_process_mxgraph_style},
+			</if>
+			<if test="xt_constant_id != null">
+				`xt_constant_id` = #{xt_constant_id},
+			</if>
+			<if test="lc_process_flag != null">
+				`lc_process_flag` = #{lc_process_flag},
+			</if>
+			<if test="xt_attachment != null">
+				`xt_attachment` = #{xt_attachment},
+			</if>
+			<if test="lc_process_remark != null">
+				`lc_process_remark` = #{lc_process_remark},
+			</if>
+		</set>
+		WHERE lc_process_id=#{lc_process_id}
+	</update>
+
+	<!--删除-->
+	<update id="delLcProcess" parameterType="map">
+		UPDATE lc_process SET lc_processment_isdelete = 1 WHERE lc_process_id IN
+		<foreach item="item" index="index" collection="lc_process_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<!--批量添加-->
+	<insert id="addBatchLcProcess" parameterType="list">
+		INSERT INTO
+			lc_process
+			(
+			`lc_process_id`,
+			`lc_process_path`,
+			`lc_process_mtime`,
+			`lc_process_ctime`,
+			`xt_userinfo_id`,
+			`lc_process_uid`,
+			`lc_process_uk`,
+			`lc_process_bpmn`,
+			`lc_process_title`,
+			`lc_process_bpmn_path`,
+			`lc_process_img_path`,
+			`lc_process_status`,
+			`lc_process_mxgraphxml`,
+			`lc_process_mxgraph_style`,
+			`lc_processment_isdelete`,
+			`xt_constant_id`,
+			`lc_process_flag`,
+			`xt_attachment`,
+			`lc_process_remark`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.lc_process_id},
+			#{item.lc_process_path},
+			#{item.lc_process_mtime},
+			#{item.lc_process_ctime},
+			#{item.xt_userinfo_id},
+			#{item.lc_process_uid},
+			#{item.lc_process_uk},
+			#{item.lc_process_bpmn},
+			#{item.lc_process_title},
+			#{item.lc_process_bpmn_path},
+			#{item.lc_process_img_path},
+			#{item.lc_process_status},
+			#{item.lc_process_mxgraphxml},
+			#{item.lc_process_mxgraph_style},
+			#{item.lc_processment_isdelete},
+			#{item.xt_constant_id},
+			#{item.lc_process_flag},
+			#{item.xt_attachment},
+			#{item.lc_process_remark}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchLcProcess" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				lc_process
+			SET
+				`lc_process_id` = #{item.lc_process_id},
+				`lc_process_path` = #{item.lc_process_path},
+				`lc_process_mtime` = #{item.lc_process_mtime},
+				`lc_process_ctime` = #{item.lc_process_ctime},
+				`xt_userinfo_id` = #{item.xt_userinfo_id},
+				`lc_process_uid` = #{item.lc_process_uid},
+				`lc_process_uk` = #{item.lc_process_uk},
+				`lc_process_bpmn` = #{item.lc_process_bpmn},
+				`lc_process_title` = #{item.lc_process_title},
+				`lc_process_bpmn_path` = #{item.lc_process_bpmn_path},
+				`lc_process_img_path` = #{item.lc_process_img_path},
+				`lc_process_status` = #{item.lc_process_status},
+				`lc_process_mxgraphxml` = #{item.lc_process_mxgraphxml},
+				`lc_process_mxgraph_style` = #{item.lc_process_mxgraph_style},
+				`lc_processment_isdelete` = #{item.lc_processment_isdelete},
+				`xt_constant_id` = #{item.xt_constant_id},
+				`lc_process_flag` = #{item.lc_process_flag},
+				`xt_attachment` = #{item.xt_attachment},
+				`lc_process_remark` = #{item.lc_process_remark}
+			WHERE lc_process_id=#{item.lc_process_id}
+		</foreach>
+	</update>
+	
+	<!-- 发布或关闭流程 -->
+	<update id="updateLcProcessStatus" parameterType="map">
+		UPDATE
+			lc_process
+		SET
+			`lc_process_status` = #{lc_process_status}
+		WHERE lc_process_id=#{lc_process_id}
+	</update>
+</mapper>

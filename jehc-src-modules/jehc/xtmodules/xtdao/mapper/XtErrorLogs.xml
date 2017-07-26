@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtErrorLogs">
+	<!--初始化分页-->
+	<select id="getXtErrorLogsListByCondition" resultType="jehc.xtmodules.xtmodel.XtErrorLogs" parameterType="map">
+		SELECT
+			xt_error_logs.`xt_error_log_id`,
+			xt_error_logs.`xt_error_logContent`,
+			xt_error_logs.`xt_error_logType`,
+			xt_error_logs.`xt_error_logTime`,
+			xt_error_logs.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_error_logs xt_error_logs LEFT JOIN xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_error_logs.xt_userinfo_id
+		WHERE 1=1
+		ORDER BY xt_error_logTime DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtErrorLogsById" resultType="jehc.xtmodules.xtmodel.XtErrorLogs" parameterType="string">
+		SELECT
+			xt_error_logs.`xt_error_log_id`,
+			xt_error_logs.`xt_error_logContent`,
+			xt_error_logs.`xt_error_logType`,
+			xt_error_logs.`xt_error_logTime`,
+			xt_error_logs.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_error_logs xt_error_logs LEFT JOIN xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_error_logs.xt_userinfo_id
+		WHERE xt_error_logs.xt_error_log_id=#{xt_error_log_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtErrorLogs" parameterType="jehc.xtmodules.xtmodel.XtErrorLogs">
+		INSERT INTO
+			xt_error_logs
+			(
+			`xt_error_log_id`,
+			`xt_error_logContent`,
+			`xt_error_logType`,
+			`xt_error_logTime`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{xt_error_log_id},
+			#{xt_error_logContent},
+			#{xt_error_logType},
+			#{xt_error_logTime},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtErrorLogs" parameterType="jehc.xtmodules.xtmodel.XtErrorLogs">
+		UPDATE
+			xt_error_logs
+		SET
+			`xt_error_log_id` = #{xt_error_log_id},
+			`xt_error_logContent` = #{xt_error_logContent},
+			`xt_error_logType` = #{xt_error_logType},
+			`xt_error_logTime` = #{xt_error_logTime},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE xt_error_log_id=#{xt_error_log_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtErrorLogs" parameterType="map">
+		delete from xt_error_logs where xt_error_log_id in
+		<foreach item="item" index="index" collection="xt_error_log_id" open="(" separator="," close=")">
+        	#{item}
+        </foreach>
+	</delete>
+</mapper>

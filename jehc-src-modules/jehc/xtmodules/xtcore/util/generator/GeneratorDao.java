@@ -13,9 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtmodel.Xt_Generator;
-import jehc.xtmodules.xtmodel.Xt_Generator_Search_Filed;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
+import jehc.xtmodules.xtmodel.XtGenerator;
+import jehc.xtmodules.xtmodel.XtGeneratorSearchFiled;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 
 /**
  * 生成数据层代码(包括接口Dao,实现类DaoImpl,Mybatis等代码)
@@ -29,7 +29,7 @@ public class GeneratorDao extends GeneratorUtil{
 	 * @param xt_Generator_Table_ColumnList
 	 * @param xt_Generator
 	 */
-	 public void createDaoAll(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	 public void createDaoAll(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	//MyBatis
 		createMyBatis(xt_Generator_Table_ColumnList, xt_Generator);
 		//Dao接口
@@ -41,7 +41,7 @@ public class GeneratorDao extends GeneratorUtil{
 	/**
      * 创建MyBatis主体
      */
-    public String createMyBatis(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatis(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//拼接XML头部模块
     	sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\r\n");
@@ -118,7 +118,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisList(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--初始化分页-->");
@@ -128,7 +128,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\r\n\t\tSELECT\r\n");
     	//追加COLUMN列
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
     			if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("datetime")){
     				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%Y-%m-%d %H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
@@ -156,10 +156,10 @@ public class GeneratorDao extends GeneratorUtil{
 		//追加条件模块
     	sb.append("\t\tWHERE 1=1\r\n");
     	if(xt_Generator.isIs_main_table()){
-    		List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
+    		List<XtGeneratorSearchFiled> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
         	if(!xt_generator_search_filedList.isEmpty() && xt_generator_search_filedList.size()>0){
         		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
-        			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
+        			XtGeneratorSearchFiled xt_generator_search_filed = xt_generator_search_filedList.get(i);
         			String xt_generator_search_name = xt_generator_search_filed.getXt_generator_search_name();
         			String xt_generator_search_flag = xt_generator_search_filed.getXt_generator_search_flag();
         			String search_type = xt_generator_search_filed.getXt_generator_search_type();
@@ -233,7 +233,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisListCount(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisListCount(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--初始化分页统计-->");
@@ -248,10 +248,10 @@ public class GeneratorDao extends GeneratorUtil{
 		//追加条件模块
     	sb.append("\t\tWHERE 1=1 \r\n");
     	if(xt_Generator.isIs_main_table()){
-    		List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
+    		List<XtGeneratorSearchFiled> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
         	if(!xt_generator_search_filedList.isEmpty() && xt_generator_search_filedList.size()>0){
         		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
-        			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
+        			XtGeneratorSearchFiled xt_generator_search_filed = xt_generator_search_filedList.get(i);
         			String xt_generator_search_name = xt_generator_search_filed.getXt_generator_search_name();
         			String xt_generator_search_flag = xt_generator_search_filed.getXt_generator_search_flag();
         			String search_type = xt_generator_search_filed.getXt_generator_search_type();
@@ -312,7 +312,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisObj(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisObj(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--查询对象-->");
@@ -322,7 +322,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\r\n\t\tSELECT\r\n");
     	//追加COLUMN列
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
     			if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("datetime")){
     				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%Y-%m-%d %H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
@@ -360,7 +360,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisAdd(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--添加-->");
@@ -371,7 +371,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\t\t\t"+xt_Generator.getXt_generator_tbname()+"\r\n\t\t\t(\r\n");
     	//追加列
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
     			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
     		}else{
@@ -382,7 +382,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\t\t\tVALUES\r\n");
     	sb.append("\t\t\t(\r\n");
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
     			sb.append("\t\t\t#{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
     		}else{
@@ -400,7 +400,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisUpdate(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--修改-->");
@@ -412,7 +412,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\r\n\t\tSET\r\n");
     	//追加列
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
 	    		if(i == xt_Generator_Table_ColumnList.size()-1){
 	    			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
@@ -433,7 +433,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisUpdateBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisUpdateBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--修改（根据动态条件）-->");
@@ -445,7 +445,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\r\n\t\t<set>\r\n");
     	//追加列
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
     			sb.append("\t\t\t<if test=\""+xt_Generator_Table_Column.getCOLUMN_NAME()+" != null\">\r\n");
     			sb.append("\t\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
@@ -464,7 +464,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisDel(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisDel(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--删除-->");
@@ -487,7 +487,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisAddBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--批量添加-->");
@@ -498,7 +498,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\t\t\t"+xt_Generator.getXt_generator_tbname()+"\r\n\t\t\t(\r\n");
     	//追加列
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
     			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
     		}else{
@@ -510,7 +510,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\t\t<foreach collection=\"list\" item=\"item\" index=\"index\" separator=\",\">\r\n");
     	sb.append("\t\t\t(\r\n");
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
     			sb.append("\t\t\t#{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
     		}else{
@@ -529,7 +529,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisUpdateBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisUpdateBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--批量修改-->");
@@ -542,7 +542,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\r\n\t\t\tSET\r\n");
     	//追加列
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
     			if(i == xt_Generator_Table_ColumnList.size()-1){
         			sb.append("\t\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
@@ -565,7 +565,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisUpdateBatchBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisUpdateBatchBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--批量修改（根据动态条件）-->");
@@ -578,7 +578,7 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\r\n\t\t\t<set>\r\n");
     	//追加列
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
     			sb.append("\t\t\t\t<if test=\"item."+xt_Generator_Table_Column.getCOLUMN_NAME()+" != null\">\r\n");
     			sb.append("\t\t\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
@@ -598,7 +598,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createMyBatisDelByForeignKey(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createMyBatisDelByForeignKey(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//追加注释
     	sb.append("\r\n\t<!--根据外键删除-->");
@@ -614,7 +614,7 @@ public class GeneratorDao extends GeneratorUtil{
     
     
     //////////////////////////////////////2.生成数据层接口(Dao)部分开始//////////////////////////////////////////
-    public String createDao(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDao(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	StringBuffer sb = new StringBuffer();
     	sb.append("package "+xt_Generator.getXt_generator_dao_package()+";\r\n");
@@ -695,7 +695,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoList(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -713,7 +713,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoListCount(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoListCount(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -731,7 +731,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoObj(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoObj(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -749,7 +749,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoAdd(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -767,7 +767,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoUpdate(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -785,7 +785,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoUpdateBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoUpdateBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -803,7 +803,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoDel(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoDel(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -821,7 +821,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoAddBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -839,7 +839,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoUpdateBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoUpdateBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -858,7 +858,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoUpdateBatchBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoUpdateBatchBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -877,7 +877,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoDelByForeignKey(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoDelByForeignKey(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -895,7 +895,7 @@ public class GeneratorDao extends GeneratorUtil{
     
     
     //////////////////////////////////////3.生成数据层实现类(DaoImpl)部分开始//////////////////////////////////////////
-    public String createDaoImpl(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImpl(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	StringBuffer sb = new StringBuffer();
     	sb.append("package "+xt_Generator.getXt_generator_dao_package()+".impl;\r\n");
@@ -981,7 +981,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplList(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1003,7 +1003,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplListCount(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplListCount(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1024,7 +1024,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplObj(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplObj(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1044,7 +1044,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplAdd(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1064,7 +1064,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplUpdate(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1084,7 +1084,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplUpdateBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplUpdateBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1104,7 +1104,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplDel(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplDel(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1125,7 +1125,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplAddBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1146,7 +1146,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplUpdateBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplUpdateBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1167,7 +1167,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplUpdateBatchBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplUpdateBatchBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -1187,7 +1187,7 @@ public class GeneratorDao extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createDaoImplDelByForeignKey(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createDaoImplDelByForeignKey(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");

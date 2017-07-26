@@ -29,23 +29,23 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
-import jehc.solrmodules.solrmodel.Solr_Core;
+import jehc.solrmodules.solrmodel.SolrCore;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.base.BaseXtModifyRecordRun;
 import jehc.xtmodules.xtcore.base.BaseXtOperateBusinessLogsRun;
 import jehc.xtmodules.xtcore.util.logger.Log4j;
-import jehc.xtmodules.xtmodel.Xt_Attachment;
-import jehc.xtmodules.xtmodel.Xt_Constant;
-import jehc.xtmodules.xtmodel.Xt_Data_Dictionary;
-import jehc.xtmodules.xtmodel.Xt_Departinfo;
-import jehc.xtmodules.xtmodel.Xt_Ip_Frozen;
-import jehc.xtmodules.xtmodel.Xt_Modify_Record;
-import jehc.xtmodules.xtmodel.Xt_Operate_Business_Logs;
-import jehc.xtmodules.xtmodel.Xt_Path;
-import jehc.xtmodules.xtmodel.Xt_Post;
-import jehc.xtmodules.xtmodel.Xt_Userinfo;
-import jehc.xtmodules.xtservice.Xt_Operate_Business_LogsService;
+import jehc.xtmodules.xtmodel.XtAttachment;
+import jehc.xtmodules.xtmodel.XtConstant;
+import jehc.xtmodules.xtmodel.XtDataDictionary;
+import jehc.xtmodules.xtmodel.XtDepartinfo;
+import jehc.xtmodules.xtmodel.XtIpFrozen;
+import jehc.xtmodules.xtmodel.XtModifyRecord;
+import jehc.xtmodules.xtmodel.XtOperateBusinessLogs;
+import jehc.xtmodules.xtmodel.XtPath;
+import jehc.xtmodules.xtmodel.XtPost;
+import jehc.xtmodules.xtmodel.XtUserinfo;
+import jehc.xtmodules.xtservice.XtOperateBusinessLogsService;
 
 /**
  * 公用类获取平台信息方法如获取登录用户信息,当前用户部门,当前用户岗位等一系列信息
@@ -67,7 +67,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			Xt_Userinfo xtUserinfo = (Xt_Userinfo) session.getAttribute("xtUserinfo");
+			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
 			if (null != xtUserinfo) {
 				return xtUserinfo.getXt_userinfo_realName();
 			}
@@ -90,7 +90,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			Xt_Userinfo xtUserinfo = (Xt_Userinfo) session.getAttribute("xtUserinfo");
+			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
 			if (null != xtUserinfo) {
 				return xtUserinfo.getXt_userinfo_name();
 			}
@@ -113,7 +113,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			Xt_Userinfo xtUserinfo = (Xt_Userinfo) session.getAttribute("xtUserinfo");
+			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
 			if (null != xtUserinfo) {
 				return xtUserinfo.getXt_userinfo_id();
 			}
@@ -164,7 +164,7 @@ public class CommonUtils extends UUID{
 	 * 
 	 * @return
 	 */
-	public static Xt_Userinfo getXtU() {
+	public static XtUserinfo getXtU() {
 		try {
 			RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 			HttpServletRequest request = ((ServletRequestAttributes) ra).getRequest();
@@ -172,7 +172,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			Xt_Userinfo xtUserinfo = (Xt_Userinfo) session.getAttribute("xtUserinfo");
+			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
 			return xtUserinfo;
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
@@ -184,7 +184,7 @@ public class CommonUtils extends UUID{
 	 * 
 	 * @return
 	 */
-	public static List<Xt_Departinfo> getXtUd() {
+	public static List<XtDepartinfo> getXtUd() {
 		return null;
 	}
 
@@ -193,7 +193,7 @@ public class CommonUtils extends UUID{
 	 * 
 	 * @return
 	 */
-	public static List<Xt_Post> getXtUp() {
+	public static List<XtPost> getXtUp() {
 		return null;
 	}
 
@@ -299,7 +299,7 @@ public class CommonUtils extends UUID{
 		if(null == session){
 			return false;
 		}
-		Xt_Userinfo xtUserinfo = (Xt_Userinfo) session.getAttribute("xtUserinfo");
+		XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
 		if (xtUserinfo.getXt_userinfo_isAdmin() == 1) {
 			return true;
 		} else {
@@ -342,14 +342,14 @@ public class CommonUtils extends UUID{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<Xt_Path> getXtPathCache(String key) {
+	public static List<XtPath> getXtPathCache(String key) {
 		Cache ehCache = CacheManagerUtil.getCache("XtPathCache");
 		Element xtPathCacheEle = ehCache.get("XtPathCache");
 		if(null != xtPathCacheEle){
-			List<Xt_Path> xtPathList = (List<Xt_Path>) xtPathCacheEle.getObjectValue();
-			List<Xt_Path> list = new ArrayList<Xt_Path>();
+			List<XtPath> xtPathList = (List<XtPath>) xtPathCacheEle.getObjectValue();
+			List<XtPath> list = new ArrayList<XtPath>();
 			for (int i = 0; i < xtPathList.size(); i++) {
-				Xt_Path xtPath = xtPathList.get(i);
+				XtPath xtPath = xtPathList.get(i);
 				if (key.equals(xtPath.getXt_value())) {
 					list.add(xtPath);
 				}
@@ -366,13 +366,13 @@ public class CommonUtils extends UUID{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static Xt_Constant getXtConstantCache(String key) {
+	public static XtConstant getXtConstantCache(String key) {
 		Cache ehCache = CacheManagerUtil.getCache("XtConstantCache");
 		Element XtConstantEle = ehCache.get("XtConstantCache");
 		if(null != XtConstantEle){
-			List<Xt_Constant> xtConstantList = (List<Xt_Constant>) XtConstantEle.getObjectValue();
+			List<XtConstant> xtConstantList = (List<XtConstant>) XtConstantEle.getObjectValue();
 			for (int i = 0; i < xtConstantList.size(); i++) {
-				Xt_Constant xtConstant = xtConstantList.get(i);
+				XtConstant xtConstant = xtConstantList.get(i);
 				if (key.equals(xtConstant.getXt_constantName())) {
 					return xtConstant;
 				}
@@ -388,22 +388,22 @@ public class CommonUtils extends UUID{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<Xt_Data_Dictionary> getXtDataDictionaryCache(String key) {
+	public static List<XtDataDictionary> getXtDataDictionaryCache(String key) {
 		Cache ehCache = CacheManagerUtil.getCache("XtDataDictionaryCache");
 		Element xtDataDictionaryCacheEle = ehCache.get("XtDataDictionaryCache");
 		if(null != xtDataDictionaryCacheEle){
-			List<Xt_Data_Dictionary> xtDataDictionaryList = (List<Xt_Data_Dictionary>) xtDataDictionaryCacheEle.getObjectValue();
-			List<Xt_Data_Dictionary> list = new ArrayList<Xt_Data_Dictionary>();
+			List<XtDataDictionary> xtDataDictionaryList = (List<XtDataDictionary>) xtDataDictionaryCacheEle.getObjectValue();
+			List<XtDataDictionary> list = new ArrayList<XtDataDictionary>();
 			String id ="";
 			for (int i = 0; i < xtDataDictionaryList.size(); i++) {
-				Xt_Data_Dictionary xtDataDictionary = xtDataDictionaryList.get(i);
+				XtDataDictionary xtDataDictionary = xtDataDictionaryList.get(i);
 				if(key.equals(xtDataDictionary.getXt_data_dictionary_value())){
 					id = xtDataDictionary.getXt_data_dictionary_id();
 					break;
 				}
 			}
 			for (int i = 0; i < xtDataDictionaryList.size(); i++) {
-				Xt_Data_Dictionary xtDataDictionary = xtDataDictionaryList.get(i);
+				XtDataDictionary xtDataDictionary = xtDataDictionaryList.get(i);
 				if (id.equals(xtDataDictionary.getXt_data_dictionary_pid()) && !"".equals(id)) {
 					list.add(xtDataDictionary);
 				}
@@ -423,9 +423,9 @@ public class CommonUtils extends UUID{
 		Cache ehCache = CacheManagerUtil.getCache("XtIpFrozenCache");
 		Element XtIpFrozenCacheEle = ehCache.get("XtIpFrozenCache");
 		if(null != XtIpFrozenCacheEle){
-			List<Xt_Ip_Frozen> xtIpFrozenList = (List<Xt_Ip_Frozen>) XtIpFrozenCacheEle.getObjectValue();
+			List<XtIpFrozen> xtIpFrozenList = (List<XtIpFrozen>) XtIpFrozenCacheEle.getObjectValue();
 			for (int i = 0; i < xtIpFrozenList.size(); i++) {
-				Xt_Ip_Frozen xtIpFrozen = xtIpFrozenList.get(i);
+				XtIpFrozen xtIpFrozen = xtIpFrozenList.get(i);
 				if(ip.equals(xtIpFrozen.getXt_ip_frozen_address())){
 					return false;
 				}
@@ -450,13 +450,13 @@ public class CommonUtils extends UUID{
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public static Solr_Core getSolrCoreByUseonlynumbercode(String useonlynumbercode){
+	public static SolrCore getSolrCoreByUseonlynumbercode(String useonlynumbercode){
 		Cache ehCache = CacheManagerUtil.getCache("SolrCoreCache");
 		Element SolrCoreEle = ehCache.get("SolrCoreCache");
 		if(null != SolrCoreEle){
-			List<Solr_Core> solrCoreList = (List<Solr_Core>) SolrCoreEle.getObjectValue();
+			List<SolrCore> solrCoreList = (List<SolrCore>) SolrCoreEle.getObjectValue();
 			for (int i = 0; i < solrCoreList.size(); i++) {
-				Solr_Core solrCore = solrCoreList.get(i);
+				SolrCore solrCore = solrCoreList.get(i);
 				if (useonlynumbercode.equals(solrCore.getUseonlynumbercode())) {
 					return solrCore;
 				}
@@ -478,8 +478,8 @@ public class CommonUtils extends UUID{
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
-	public static List<Xt_Attachment> upLoad(HttpServletRequest request,String path,String relative_path,String validateparameter,String validateSize,String xt_path_absolutek,String xt_path_relativek,String xt_path_urlk) throws IllegalStateException, IOException{
-		List<Xt_Attachment> list = new ArrayList<Xt_Attachment>();
+	public static List<XtAttachment> upLoad(HttpServletRequest request,String path,String relative_path,String validateparameter,String validateSize,String xt_path_absolutek,String xt_path_relativek,String xt_path_urlk) throws IllegalStateException, IOException{
+		List<XtAttachment> list = new ArrayList<XtAttachment>();
 		File filePath = new File(path);
 		if(!filePath.exists()){
 			filePath.mkdirs();
@@ -503,7 +503,7 @@ public class CommonUtils extends UUID{
 						//File localFile = new File(path);
 						//file.transferTo(localFile);
 						FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,newName));  
-						Xt_Attachment xt_Attachment = new Xt_Attachment();
+						XtAttachment xt_Attachment = new XtAttachment();
 						xt_Attachment.setXt_attachment_id(UUID.toUUID());
 						xt_Attachment.setXt_attachmentCtime(getSimpleDateFormat());
 						xt_Attachment.setXt_attachmentName(newName);
@@ -583,7 +583,7 @@ public class CommonUtils extends UUID{
 	 * @param message
 	 */
 	public void aBLogs(String classname,String method,String message){
-		Xt_Operate_Business_Logs xt_Operate_Business_Logs = new Xt_Operate_Business_Logs();
+		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
 		xt_Operate_Business_Logs.setXt_operate_business_logsTime(CommonUtils.getSimpleDateFormat());
 		xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
 		xt_Operate_Business_Logs.setXt_operate_business_logsModules(classname);
@@ -604,7 +604,7 @@ public class CommonUtils extends UUID{
 	 * @param parm
 	 */
 	public void aBLogs(String classname,String method,String message,String parm){
-		Xt_Operate_Business_Logs xt_Operate_Business_Logs = new Xt_Operate_Business_Logs();
+		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
 		xt_Operate_Business_Logs.setXt_operate_business_logsTime(CommonUtils.getSimpleDateFormat());
 		xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
 		xt_Operate_Business_Logs.setXt_operate_business_logsModules(classname);
@@ -631,14 +631,14 @@ public class CommonUtils extends UUID{
 		try {
 			JSONObject oldJson = JsonUtil.toJsonObj(oldT);
 			JSONObject newJson = JsonUtil.toJsonObj(newT);
-			List<Xt_Modify_Record> list = new ArrayList<Xt_Modify_Record>();
+			List<XtModifyRecord> list = new ArrayList<XtModifyRecord>();
 			Iterator iterator = oldJson.keys();
 			while(iterator.hasNext()){
 	            String key = (String) iterator.next();
 	            String oldV = oldJson.getString(key);
 	            String newV = newJson.getString(key);
 	            if(!oldV.equals(newV)){
-	            	Xt_Modify_Record record = new Xt_Modify_Record();
+	            	XtModifyRecord record = new XtModifyRecord();
 	            	record.setXt_modify_record_aftervalue(""+newV);
 	            	record.setXt_modify_record_beforevalue(""+oldV);
 	            	record.setXt_modify_record_ctime(CommonUtils.getSimpleDateFormat());
@@ -669,7 +669,7 @@ public class CommonUtils extends UUID{
 		try {
 			JSONObject oldJson = JsonUtil.toJsonObj(oldT);
 			JSONObject newJson = JsonUtil.toJsonObj(newT);
-			List<Xt_Modify_Record> list = new ArrayList<Xt_Modify_Record>();
+			List<XtModifyRecord> list = new ArrayList<XtModifyRecord>();
 			Iterator iterator = oldJson.keys();
 			while(iterator.hasNext()){
 	            String key = (String) iterator.next();
@@ -679,7 +679,7 @@ public class CommonUtils extends UUID{
 	            			String oldV = oldJson.getString(key);
 	        	            String newV = newJson.getString(key);
 	        	            if(!oldV.equals(newV)){
-	        	            	Xt_Modify_Record record = new Xt_Modify_Record();
+	        	            	XtModifyRecord record = new XtModifyRecord();
 	        	            	record.setXt_modify_record_aftervalue(""+newV);
 	        	            	record.setXt_modify_record_beforevalue(""+oldV);
 	        	            	record.setXt_modify_record_ctime(CommonUtils.getSimpleDateFormat());

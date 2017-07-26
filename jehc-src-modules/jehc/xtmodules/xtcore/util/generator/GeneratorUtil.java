@@ -6,9 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_ColumnMany_To_One;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column_Form;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumnForm;
 
 /**
  * 代码生成支持类共用
@@ -33,7 +33,7 @@ public class GeneratorUtil {
         return new String(ch);
     }
     /**
-     * 将字符中"_"后面第一个字母转换成大写
+     * 将字符中"_"后面第一个字母转换成大写 （并去除所有"_"）
      * 在类名上使用和类文件
      * @param str
      * @return
@@ -55,18 +55,18 @@ public class GeneratorUtil {
         			if((i+1)==strList.length){
         				
         			}else{
-        				sb.append("_");
+//        				sb.append("_");
         			}
     			}else{
     				//此时数据库表结构规则如:_xt_userinfo,xt_userinfo_,_xt_userinfo_,xtuserinfo_,_xtuserinfo,_xtuserinfo_等等
-        			sb.append("_");
+//        			sb.append("_");
     			}
     		}
     	}
     	String lastchar = str.substring(str.length()-1, str.length());
-    	if("_".equals(lastchar)){
-    		sb.append("_");
-    	}
+//    	if("_".equals(lastchar)){
+//    		sb.append("_");
+//    	}
 //    	System.out.println(sb.toString());
     	return sb.toString();
     }
@@ -114,7 +114,7 @@ public class GeneratorUtil {
     } 
     
     /**
-     * 转换第一个字母为小写
+     * 转换第一个字母为小写并去除所有"_"
      * @param str
      * @return
      */
@@ -125,7 +125,7 @@ public class GeneratorUtil {
     		sb.append(str.substring(0,1).toLowerCase());
     		sb.append(str.substring(1,str.length()));
     	}
-    	return sb.toString();
+    	return sb.toString().replaceAll("_", "");
     }
     
     /**
@@ -229,9 +229,9 @@ public class GeneratorUtil {
      * @param xt_Generator_Table_ColumnList
      * @return
      */
-    public String getColumnKey(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList){
+    public String getColumnKey(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList){
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if("PRI".equals(xt_Generator_Table_Column.getCOLUMN_KEY())){
     			return xt_Generator_Table_Column.getCOLUMN_NAME();
     		}
@@ -244,9 +244,9 @@ public class GeneratorUtil {
      * @param xt_Generator_Table_Column_FormList
      * @return
      */
-    public String getColumnFormKey(List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList){
+    public String getColumnFormKey(List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList){
     	for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-    		Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+    		XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
     		if("PRI".equals(xt_Generator_Table_Column_Form.getColumn_key())){
     			return xt_Generator_Table_Column_Form.getColumn_name();
     		}
@@ -259,10 +259,10 @@ public class GeneratorUtil {
      * @param xt_Generator_Table_ColumnList
      * @return
      */
-    public String getColumnKeyUpOneChar(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList){
+    public String getColumnKeyUpOneChar(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList){
     	StringBuffer sb = new StringBuffer();
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if("PRI".equals(xt_Generator_Table_Column.getCOLUMN_KEY())){
     			String key = xt_Generator_Table_Column.getCOLUMN_NAME();
     			sb.append(key.substring(0, 1).toUpperCase());
@@ -278,9 +278,9 @@ public class GeneratorUtil {
      * @param xt_Generator_Table_Column_FormList
      * @return
      */
-    public String getOneToManyColumnFormKey(List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_Column_FormList){
+    public String getOneToManyColumnFormKey(List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_Column_FormList){
     	for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-    		Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+    		XtGeneratorTableColumnManyToOne xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
     		if("PRI".equals(xt_Generator_Table_Column_Form.getCOLUMN_KEY())){
     			return xt_Generator_Table_Column_Form.getCOLUMN_NAME();
     		}
@@ -293,10 +293,10 @@ public class GeneratorUtil {
      * @param xt_Generator_Table_ColumnList
      * @return
      */
-    public String getOneToManyColumnKeyUpOneChar(List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnList){
+    public String getOneToManyColumnKeyUpOneChar(List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnList){
     	StringBuffer sb = new StringBuffer();
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumnManyToOne xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if("PRI".equals(xt_Generator_Table_Column.getCOLUMN_KEY())){
     			String key = xt_Generator_Table_Column.getCOLUMN_NAME();
     			sb.append(key.substring(0, 1).toUpperCase());
@@ -356,9 +356,9 @@ public class GeneratorUtil {
      * @param xt_Generator_Table_ColumnList
      * @return
      */
-    public String sqlDatePage(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList){
+    public String sqlDatePage(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList){
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		Xt_Generator_Table_Column xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("datetime")||xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("date")){
     			return "import java.util.Date;\r\n";
     		}

@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtmodel.Xt_Generator;
-import jehc.xtmodules.xtmodel.Xt_Generator_TableMany_To_One;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_ColumnMany_To_One;
+import jehc.xtmodules.xtmodel.XtGenerator;
+import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
 
 public class Gutil {
 	/**
      * 总生成代码
      * @return
      */
-    public int createCode(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public int createCode(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	GeneratorModel generatorModel = new GeneratorModel();
     	GeneratorDao generatorDao = new GeneratorDao();
     	GeneratorService generatorService = new GeneratorService();
@@ -51,7 +51,7 @@ public class Gutil {
      * 一对多子表生成
      * @param xt_Generator
      */
-    private void commonManyToOne(Xt_Generator xt_Generator){
+    private void commonManyToOne(XtGenerator xt_Generator){
     	//设置为非主表
     	xt_Generator.setIs_main_table(false);
     	GeneratorModel generatorModel = new GeneratorModel();
@@ -60,14 +60,14 @@ public class Gutil {
     	GeneratorWeb generatorWeb = new GeneratorWeb();
     	//如果是一对多则对子表生成代码直到控制层（Model，Dao，Service，Web层需要生成）
 		if(xt_Generator.getIs_one_to_many().equals("1")){
-			List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+			List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 			for(int j = 0; j < xt_Generator_TableMany_To_OneList.size(); j++){
-				Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(j);
-				List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
-				List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnManyToOneList = new ArrayList<Xt_Generator_Table_Column>();
+				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(j);
+				List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+				List<XtGeneratorTableColumn> xt_Generator_Table_ColumnManyToOneList = new ArrayList<XtGeneratorTableColumn>();
 				for(int h = 0; h < xt_Generator_Table_ColumnMany_To_OneList.size(); h++){
-					Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(h);
-					Xt_Generator_Table_Column xt_Generator_Table_Column = new Xt_Generator_Table_Column();
+					XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(h);
+					XtGeneratorTableColumn xt_Generator_Table_Column = new XtGeneratorTableColumn();
 					xt_Generator_Table_Column.setCHARACTER_MAXIMUM_LENGTH(xt_Generator_Table_ColumnMany_To_One.getCHARACTER_MAXIMUM_LENGTH());
 					xt_Generator_Table_Column.setCOLUMN_COMMENT(xt_Generator_Table_ColumnMany_To_One.getCOLUMN_COMMENT());
 					xt_Generator_Table_Column.setCOLUMN_KEY(xt_Generator_Table_ColumnMany_To_One.getCOLUMN_KEY());

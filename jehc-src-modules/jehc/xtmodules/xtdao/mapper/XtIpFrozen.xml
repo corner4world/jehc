@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtIpFrozen">
+	<!--初始化分页-->
+	<select id="getXtIpFrozenListByCondition" resultType="jehc.xtmodules.xtmodel.XtIpFrozen" parameterType="map">
+		SELECT
+			xt_ip_frozen.`xt_ip_frozen_id`,
+			xt_ip_frozen.`xt_ip_frozen_address`,
+			xt_ip_frozen.`xt_ip_frozen_status`,
+			xt_ip_frozen.`xt_ip_frozen_content`,
+			DATE_FORMAT(xt_ip_frozen.`xt_ip_frozen_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_ctime`,
+			DATE_FORMAT(xt_ip_frozen.`xt_ip_frozen_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_mtime`,
+			xt_ip_frozen.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_ip_frozen xt_ip_frozen LEFT JOIN xt_userinfo xt_userinfo ON xt_ip_frozen.`xt_userinfo_id` = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_ip_frozen_address">
+			AND instr(xt_ip_frozen.xt_ip_frozen_address,#{xt_ip_frozen_address})
+		</if>
+	</select>
+
+	<!-- 获取所有集合 -->
+	<select id="getXtIpFrozenListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtIpFrozen" parameterType="map">
+		SELECT
+			xt_ip_frozen.`xt_ip_frozen_id`,
+			xt_ip_frozen.`xt_ip_frozen_address`,
+			xt_ip_frozen.`xt_ip_frozen_status`,
+			xt_ip_frozen.`xt_ip_frozen_content`,
+			DATE_FORMAT(xt_ip_frozen.`xt_ip_frozen_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_ctime`,
+			DATE_FORMAT(xt_ip_frozen.`xt_ip_frozen_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_mtime`,
+			xt_ip_frozen.`xt_userinfo_id`
+		FROM 
+			xt_ip_frozen xt_ip_frozen 
+		WHERE 1=1
+		<if test="null != xt_ip_frozen_status">
+			AND xt_ip_frozen_status=#{xt_ip_frozen_status}
+		</if>
+	</select>
+	
+	<!--查询对象-->
+	<select id="getXtIpFrozenById" resultType="jehc.xtmodules.xtmodel.XtIpFrozen" parameterType="string">
+		SELECT
+			`xt_ip_frozen_id`,
+			`xt_ip_frozen_address`,
+			`xt_ip_frozen_status`,
+			`xt_ip_frozen_content`,
+			DATE_FORMAT(`xt_ip_frozen_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_ctime`,
+			DATE_FORMAT(`xt_ip_frozen_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_mtime`,
+			`xt_userinfo_id`
+		FROM 
+			xt_ip_frozen
+		WHERE xt_ip_frozen_id=#{xt_ip_frozen_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtIpFrozen" parameterType="jehc.xtmodules.xtmodel.XtIpFrozen">
+		INSERT INTO
+			xt_ip_frozen
+			(
+			`xt_ip_frozen_id`,
+			`xt_ip_frozen_address`,
+			`xt_ip_frozen_status`,
+			`xt_ip_frozen_content`,
+			`xt_ip_frozen_ctime`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{xt_ip_frozen_id},
+			#{xt_ip_frozen_address},
+			#{xt_ip_frozen_status},
+			#{xt_ip_frozen_content},
+			#{xt_ip_frozen_ctime},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtIpFrozen" parameterType="jehc.xtmodules.xtmodel.XtIpFrozen">
+		UPDATE
+			xt_ip_frozen
+		SET
+			`xt_ip_frozen_id` = #{xt_ip_frozen_id},
+			`xt_ip_frozen_address` = #{xt_ip_frozen_address},
+			`xt_ip_frozen_status` = #{xt_ip_frozen_status},
+			`xt_ip_frozen_content` = #{xt_ip_frozen_content},
+			`xt_ip_frozen_mtime` = #{xt_ip_frozen_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE xt_ip_frozen_id=#{xt_ip_frozen_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtIpFrozen" parameterType="map">
+		DELETE FROM xt_ip_frozen WHERE xt_ip_frozen_id IN
+		<foreach item="item" index="index" collection="xt_ip_frozen_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

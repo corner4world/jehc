@@ -66,18 +66,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jehc.lcmodules.activitiutil.util.Variable;
-import jehc.lcmodules.lcmodel.Lc_Apply;
-import jehc.lcmodules.lcmodel.Lc_Deployment_His;
-import jehc.lcmodules.lcservice.Lc_ApplyService;
-import jehc.lcmodules.lcservice.Lc_Deployment_HisService;
+import jehc.lcmodules.lcmodel.LcApply;
+import jehc.lcmodules.lcmodel.LcDeploymentHis;
+import jehc.lcmodules.lcservice.LcApplyService;
+import jehc.lcmodules.lcservice.LcDeploymentHisService;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.allutils.file.ImageAnd64Binary;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Constant;
-import jehc.xtmodules.xtservice.Xt_ConstantService;
+import jehc.xtmodules.xtmodel.XtConstant;
+import jehc.xtmodules.xtservice.XtConstantService;
 /**
  * activiti核心引擎
  * @author邓纯杰
@@ -964,16 +964,16 @@ public class ActivitiUtil {
      * @param variables变量（可选）
      * @return
      */
-	public boolean addApply(String id,String businessKey,Map<String, Object> variables,Lc_Apply lc_Apply){
+	public boolean addApply(String id,String businessKey,Map<String, Object> variables,LcApply lc_Apply){
 		try {
-			Xt_ConstantService xt_ConstantService = (Xt_ConstantService)SpringUtil.getBean("xt_ConstantService");
-			Lc_Deployment_HisService lc_Deployment_HisService = (Lc_Deployment_HisService)SpringUtil.getBean("lc_Deployment_HisService");
+			XtConstantService xt_ConstantService = (XtConstantService)SpringUtil.getBean("xtConstantService");
+			LcDeploymentHisService lc_Deployment_HisService = (LcDeploymentHisService)SpringUtil.getBean("lcDeploymentHisService");
 			if(StringUtil.isEmpty(id)){
 				throw new ExceptionUtil("未能获取到最新流程部署"); 
 			}
-			Lc_Deployment_His lc_Deployment_His = lc_Deployment_HisService.getLcDeploymentHisById(id);
-			Xt_Constant xtConstant = xt_ConstantService.getXtConstantById(lc_Deployment_His.getXt_constant_id());
-			Lc_ApplyService lc_ApplyService = (Lc_ApplyService)SpringUtil.getBean("lc_ApplyService");
+			LcDeploymentHis lc_Deployment_His = lc_Deployment_HisService.getLcDeploymentHisById(id);
+			XtConstant xtConstant = xt_ConstantService.getXtConstantById(lc_Deployment_His.getXt_constant_id());
+			LcApplyService lc_ApplyService = (LcApplyService)SpringUtil.getBean("lcApplyService");
 			ProcessDefinition processDefinition = getProcessDefinition(lc_Deployment_His.getLc_deployment_his_id());
 			ProcessInstance procesInstance = startProcessInstanceByKey(processDefinition.getKey(), businessKey, variables);
 			/**Activiti发起实例模块(即提交发起申请)开始**/
@@ -1008,13 +1008,13 @@ public class ActivitiUtil {
      * @param variables变量（可选）
      * @return
      */
-	public boolean addApplySetAssignee(String id,String businessKey,Map<String, Object> variables,Lc_Apply lc_Apply){
+	public boolean addApplySetAssignee(String id,String businessKey,Map<String, Object> variables,LcApply lc_Apply){
 		try {
-			Xt_ConstantService xt_ConstantService = (Xt_ConstantService)SpringUtil.getBean("xt_ConstantService");
-			Lc_Deployment_HisService lc_Deployment_HisService = (Lc_Deployment_HisService)SpringUtil.getBean("lc_Deployment_HisService");
-			Lc_Deployment_His lc_Deployment_His = lc_Deployment_HisService.getLcDeploymentHisById(id);
-			Xt_Constant xtConstant = xt_ConstantService.getXtConstantById(lc_Deployment_His.getXt_constant_id());
-			Lc_ApplyService lc_ApplyService = (Lc_ApplyService)SpringUtil.getBean("lc_ApplyService");
+			XtConstantService xt_ConstantService = (XtConstantService)SpringUtil.getBean("xtConstantService");
+			LcDeploymentHisService lc_Deployment_HisService = (LcDeploymentHisService)SpringUtil.getBean("lcDeploymentHisService");
+			LcDeploymentHis lc_Deployment_His = lc_Deployment_HisService.getLcDeploymentHisById(id);
+			XtConstant xtConstant = xt_ConstantService.getXtConstantById(lc_Deployment_His.getXt_constant_id());
+			LcApplyService lc_ApplyService = (LcApplyService)SpringUtil.getBean("lcApplyService");
 			ProcessDefinition processDefinition = getProcessDefinition(lc_Deployment_His.getLc_deployment_his_id());
 			ProcessInstance procesInstance = startProcessInstanceByKey(processDefinition.getKey(), businessKey, variables);
 			/**Activiti发起实例模块(即提交发起申请)开始**/

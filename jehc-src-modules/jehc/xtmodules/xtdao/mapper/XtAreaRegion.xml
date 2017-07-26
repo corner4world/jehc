@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtAreaRegion">
+	<!--初始化分页-->
+	<select id="getXtAreaRegionListByCondition" resultType="jehc.xtmodules.xtmodel.XtAreaRegion" parameterType="map">
+		SELECT
+			`ID`,
+			`PARENT_ID`,
+			`CODE`,
+			`NAME`,
+			`REGION_LEVEL`,
+			`NAME_EN`,
+			`LONGITUDE`,
+			`LATITUDE`
+		FROM 
+			xt_area_region
+		WHERE 1=1
+		<if test="null != parentId">
+			AND PARENT_ID = #{parentId}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtAreaRegionById" resultType="jehc.xtmodules.xtmodel.XtAreaRegion" parameterType="string">
+		SELECT
+			`ID`,
+			`PARENT_ID`,
+			`CODE`,
+			`NAME`,
+			`REGION_LEVEL`,
+			`NAME_EN`,
+			`LONGITUDE`,
+			`LATITUDE`
+		FROM 
+			xt_area_region
+		WHERE ID=#{ID}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtAreaRegion" parameterType="jehc.xtmodules.xtmodel.XtAreaRegion">
+		INSERT INTO
+			xt_area_region
+			(
+			`ID`,
+			`PARENT_ID`,
+			`CODE`,
+			`NAME`,
+			`REGION_LEVEL`,
+			`NAME_EN`,
+			`LONGITUDE`,
+			`LATITUDE`
+			)
+			VALUES
+			(
+			#{ID},
+			#{PARENT_ID},
+			#{CODE},
+			#{NAME},
+			#{REGION_LEVEL},
+			#{NAME_EN},
+			#{LONGITUDE},
+			#{LATITUDE}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtAreaRegion" parameterType="jehc.xtmodules.xtmodel.XtAreaRegion">
+		UPDATE
+			xt_area_region
+		SET
+			`PARENT_ID` = #{PARENT_ID},
+			`CODE` = #{CODE},
+			`NAME` = #{NAME},
+			`REGION_LEVEL` = #{REGION_LEVEL},
+			`NAME_EN` = #{NAME_EN},
+			`LONGITUDE` = #{LONGITUDE},
+			`LATITUDE` = #{LATITUDE}
+		WHERE ID=#{ID}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtAreaRegionBySelective" parameterType="jehc.xtmodules.xtmodel.XtAreaRegion">
+		UPDATE
+			xt_area_region
+		<set>
+			<if test="PARENT_ID != null">
+				`PARENT_ID` = #{PARENT_ID},
+			</if>
+			<if test="CODE != null">
+				`CODE` = #{CODE},
+			</if>
+			<if test="NAME != null">
+				`NAME` = #{NAME},
+			</if>
+			<if test="REGION_LEVEL != null">
+				`REGION_LEVEL` = #{REGION_LEVEL},
+			</if>
+			<if test="NAME_EN != null">
+				`NAME_EN` = #{NAME_EN},
+			</if>
+			<if test="LONGITUDE != null">
+				`LONGITUDE` = #{LONGITUDE},
+			</if>
+			<if test="LATITUDE != null">
+				`LATITUDE` = #{LATITUDE},
+			</if>
+		</set>
+		WHERE ID=#{ID}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtAreaRegion" parameterType="map">
+		DELETE FROM xt_area_region WHERE ID IN
+		<foreach item="item" index="index" collection="ID" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtAreaRegion" parameterType="list">
+		INSERT INTO
+			xt_area_region
+			(
+			`ID`,
+			`PARENT_ID`,
+			`CODE`,
+			`NAME`,
+			`REGION_LEVEL`,
+			`NAME_EN`,
+			`LONGITUDE`,
+			`LATITUDE`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.ID},
+			#{item.PARENT_ID},
+			#{item.CODE},
+			#{item.NAME},
+			#{item.REGION_LEVEL},
+			#{item.NAME_EN},
+			#{item.LONGITUDE},
+			#{item.LATITUDE}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtAreaRegion" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_area_region
+			SET
+				`PARENT_ID` = #{item.PARENT_ID},
+				`CODE` = #{item.CODE},
+				`NAME` = #{item.NAME},
+				`REGION_LEVEL` = #{item.REGION_LEVEL},
+				`NAME_EN` = #{item.NAME_EN},
+				`LONGITUDE` = #{item.LONGITUDE},
+				`LATITUDE` = #{item.LATITUDE}
+			WHERE ID=#{item.ID}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtAreaRegionBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_area_region
+			<set>
+				<if test="PARENT_ID != null">
+					`PARENT_ID` = #{item.PARENT_ID},
+				</if>
+				<if test="CODE != null">
+					`CODE` = #{item.CODE},
+				</if>
+				<if test="NAME != null">
+					`NAME` = #{item.NAME},
+				</if>
+				<if test="REGION_LEVEL != null">
+					`REGION_LEVEL` = #{item.REGION_LEVEL},
+				</if>
+				<if test="NAME_EN != null">
+					`NAME_EN` = #{item.NAME_EN},
+				</if>
+				<if test="LONGITUDE != null">
+					`LONGITUDE` = #{item.LONGITUDE},
+				</if>
+				<if test="LATITUDE != null">
+					`LATITUDE` = #{item.LATITUDE},
+				</if>
+			</set>
+			WHERE ID=#{item.ID}
+		</foreach>
+	</update>
+</mapper>

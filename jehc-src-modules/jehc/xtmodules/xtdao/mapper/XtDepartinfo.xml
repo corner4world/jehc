@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDepartinfo">
+	<!--初始化分页-->
+	<select id="getXtDepartinfoListByCondition" resultType="jehc.xtmodules.xtmodel.XtDepartinfo" parameterType="map">
+		SELECT
+			`xt_departinfo_id`,
+			`xt_company_id`,
+			`xt_departinfo_parentId`,
+			`xt_departinfo_name`,
+			`xt_departinfo_connectTelNo`,
+			`xt_departinfo_connectMobileTelNo`,
+			`xt_departinfo_faxes`,
+			`xt_departinfo_desc`,
+			`xt_departinfo_image`,
+			`xt_departinfo_leaf`,
+			`xt_departinfo_isdelete`,
+			`xt_departinfo_time`,
+			`xt_departinfo_type`
+		FROM 
+			xt_departinfo
+		WHERE 1=1
+		<if test="null != xt_departinfo_isdelete">
+			AND xt_departinfo_isdelete = #{xt_departinfo_isdelete}
+		</if>
+		<if test="null != xt_departinfo_name">
+			AND instr(xt_departinfo_name,#{xt_departinfo_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtDepartinfoById" resultType="jehc.xtmodules.xtmodel.XtDepartinfo" parameterType="string">
+		SELECT
+			`xt_departinfo_id`,
+			`xt_company_id`,
+			`xt_departinfo_parentId`,
+			`xt_departinfo_name`,
+			`xt_departinfo_connectTelNo`,
+			`xt_departinfo_connectMobileTelNo`,
+			`xt_departinfo_faxes`,
+			`xt_departinfo_desc`,
+			`xt_departinfo_image`,
+			`xt_departinfo_leaf`,
+			`xt_departinfo_isdelete`,
+			`xt_departinfo_time`,
+			`xt_departinfo_type`
+		FROM 
+			xt_departinfo
+		WHERE xt_departinfo_id=#{xt_departinfo_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtDepartinfo" parameterType="jehc.xtmodules.xtmodel.XtDepartinfo">
+		INSERT INTO
+			xt_departinfo
+			(
+			`xt_departinfo_id`,
+			`xt_company_id`,
+			`xt_departinfo_parentId`,
+			`xt_departinfo_name`,
+			`xt_departinfo_connectTelNo`,
+			`xt_departinfo_connectMobileTelNo`,
+			`xt_departinfo_faxes`,
+			`xt_departinfo_desc`,
+			`xt_departinfo_image`,
+			`xt_departinfo_leaf`,
+			`xt_departinfo_isdelete`,
+			`xt_departinfo_time`,
+			`xt_departinfo_type`
+			)
+			VALUES
+			(
+			#{xt_departinfo_id},
+			#{xt_company_id},
+			#{xt_departinfo_parentId},
+			#{xt_departinfo_name},
+			#{xt_departinfo_connectTelNo},
+			#{xt_departinfo_connectMobileTelNo},
+			#{xt_departinfo_faxes},
+			#{xt_departinfo_desc},
+			#{xt_departinfo_image},
+			#{xt_departinfo_leaf},
+			#{xt_departinfo_isdelete},
+			#{xt_departinfo_time},
+			#{xt_departinfo_type}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtDepartinfo" parameterType="jehc.xtmodules.xtmodel.XtDepartinfo">
+		UPDATE
+			xt_departinfo
+		SET
+			`xt_departinfo_id` = #{xt_departinfo_id},
+			`xt_company_id` = #{xt_company_id},
+			`xt_departinfo_parentId` = #{xt_departinfo_parentId},
+			`xt_departinfo_name` = #{xt_departinfo_name},
+			`xt_departinfo_connectTelNo` = #{xt_departinfo_connectTelNo},
+			`xt_departinfo_connectMobileTelNo` = #{xt_departinfo_connectMobileTelNo},
+			`xt_departinfo_faxes` = #{xt_departinfo_faxes},
+			`xt_departinfo_desc` = #{xt_departinfo_desc},
+			`xt_departinfo_image` = #{xt_departinfo_image},
+			`xt_departinfo_leaf` = #{xt_departinfo_leaf},
+			`xt_departinfo_isdelete` = #{xt_departinfo_isdelete},
+			`xt_departinfo_time` = #{xt_departinfo_time},
+			`xt_departinfo_type` = #{xt_departinfo_type}
+		WHERE xt_departinfo_id=#{xt_departinfo_id}
+	</update>
+
+	<!--删除-->
+	<update id="delXtDepartinfo" parameterType="map">
+		UPDATE
+			xt_departinfo
+		SET 
+			xt_departinfo_isdelete = 1 
+		WHERE xt_departinfo_id IN
+		<foreach item="item" index="index" collection="xt_departinfo_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 部门根目录集合 -->
+	<select id="getXtDepartinfoList" resultType="jehc.xtmodules.xtmodel.XtDepartinfo">
+		SELECT
+			`xt_departinfo_id`,
+			`xt_company_id`,
+			`xt_departinfo_parentId`,
+			`xt_departinfo_name`,
+			`xt_departinfo_connectTelNo`,
+			`xt_departinfo_connectMobileTelNo`,
+			`xt_departinfo_faxes`,
+			`xt_departinfo_desc`,
+			`xt_departinfo_image`,
+			`xt_departinfo_leaf`,
+			`xt_departinfo_isdelete`,
+			`xt_departinfo_time`,
+			`xt_departinfo_type`
+		FROM 
+			xt_departinfo
+		WHERE (xt_departinfo_parentId = '0' OR ISNULL(xt_departinfo_parentId))
+	</select>
+	
+	<!-- 查找子集合 -->
+	<select id="getXtDepartinfoListChild" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDepartinfo">
+		SELECT
+			`xt_departinfo_id`,
+			`xt_company_id`,
+			`xt_departinfo_parentId`,
+			`xt_departinfo_name`,
+			`xt_departinfo_connectTelNo`,
+			`xt_departinfo_connectMobileTelNo`,
+			`xt_departinfo_faxes`,
+			`xt_departinfo_desc`,
+			`xt_departinfo_image`,
+			`xt_departinfo_leaf`,
+			`xt_departinfo_isdelete`,
+			`xt_departinfo_time`,
+			`xt_departinfo_type`
+		FROM 
+			xt_departinfo
+		WHERE 
+			xt_departinfo_parentId = #{xt_departinfo_parentId }
+		<if test="null != xt_departinfo_isdelete">
+			AND xt_departinfo_isdelete = #{xt_departinfo_isdelete}
+		</if>
+	</select>
+	
+	<!-- 查找所有集合 -->
+	<select id="getXtDepartinfoListAll" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDepartinfo">
+		SELECT
+			`xt_departinfo_id`,
+			`xt_company_id`,
+			`xt_departinfo_parentId`,
+			`xt_departinfo_name`,
+			`xt_departinfo_connectTelNo`,
+			`xt_departinfo_connectMobileTelNo`,
+			`xt_departinfo_faxes`,
+			`xt_departinfo_desc`,
+			`xt_departinfo_image`,
+			`xt_departinfo_leaf`,
+			`xt_departinfo_isdelete`,
+			`xt_departinfo_time`,
+			`xt_departinfo_type`
+		FROM 
+			xt_departinfo
+		WHERE 1=1
+	</select>
+	
+	<!-- 根据各种情况查找集合不分页（流程设计器中处理组 发起组等使用） -->
+	<select id="queryXtDepartinfoList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDepartinfo">
+		SELECT
+			`xt_departinfo_id`,
+			`xt_company_id`,
+			`xt_departinfo_parentId`,
+			`xt_departinfo_name`,
+			`xt_departinfo_connectTelNo`,
+			`xt_departinfo_connectMobileTelNo`,
+			`xt_departinfo_faxes`,
+			`xt_departinfo_desc`,
+			`xt_departinfo_image`,
+			`xt_departinfo_leaf`,
+			`xt_departinfo_isdelete`,
+			`xt_departinfo_time`,
+			`xt_departinfo_type`
+		FROM 
+			xt_departinfo
+		WHERE 1=1
+		<if test="null != xt_departinfo_id">
+			AND xt_departinfo_id IN
+			<foreach item="item" index="index" collection="xt_departinfo_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+</mapper>

@@ -19,8 +19,8 @@ import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
-import jehc.xtmodules.xtmodel.Xt_Error_Logs;
-import jehc.xtmodules.xtservice.Xt_Error_LogsService;
+import jehc.xtmodules.xtmodel.XtErrorLogs;
+import jehc.xtmodules.xtservice.XtErrorLogsService;
 
 /**
  * 捕捉平台所有发生异常拦截
@@ -29,7 +29,7 @@ import jehc.xtmodules.xtservice.Xt_Error_LogsService;
  */
 public class ExceptionHandler extends SimpleMappingExceptionResolver implements HandlerExceptionResolver{
 	@Autowired
-	private Xt_Error_LogsService xt_Error_LogsService;
+	private XtErrorLogsService xt_Error_LogsService;
 	/**
 	 * 控制层异常拦截
 	 */
@@ -42,7 +42,7 @@ public class ExceptionHandler extends SimpleMappingExceptionResolver implements 
         System.out.println("异常信息--------------------"+ex.getMessage());
         System.out.println("异常原因--------------------"+ex.getCause());
         **/
-        Xt_Error_Logs xt_Error_Logs = new Xt_Error_Logs();
+        XtErrorLogs xt_Error_Logs = new XtErrorLogs();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         xt_Error_Logs.setXt_error_log_id(UUID.toUUID());
         xt_Error_Logs.setXt_error_logContent(ex.getMessage());

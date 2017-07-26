@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtModifyRecord">
+	<!--初始化分页-->
+	<select id="getXtModifyRecordListByCondition" resultType="jehc.xtmodules.xtmodel.XtModifyRecord" parameterType="map">
+		SELECT
+			`xt_modify_record_id`,
+			DATE_FORMAT(`xt_modify_record_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_modify_record_ctime`,
+			`xt_modify_record_beforevalue`,
+			`xt_modify_record_aftervalue`,
+			`xt_modify_record_modules`,
+			`xt_modify_record_field`,
+			xt_userinfo.`xt_userinfo_id`,
+			`business_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_modify_record xt_modify_record LEFT JOIN xt_userinfo xt_userinfo ON xt_modify_record.xt_userinfo_id=xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_modify_record_modules">
+			AND instr(xt_modify_record_modules,#{xt_modify_record_modules})
+		</if>
+		<if test="null != xt_modify_record_field">
+			AND instr(xt_modify_record_field,#{xt_modify_record_field})
+		</if>
+		ORDER BY xt_modify_record_ctime DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtModifyRecordById" resultType="jehc.xtmodules.xtmodel.XtModifyRecord" parameterType="string">
+		SELECT
+			`xt_modify_record_id`,
+			DATE_FORMAT(`xt_modify_record_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_modify_record_ctime`,
+			`xt_modify_record_beforevalue`,
+			`xt_modify_record_aftervalue`,
+			`xt_modify_record_modules`,
+			`xt_modify_record_field`,
+			xt_userinfo.`xt_userinfo_id`,
+			`business_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_modify_record xt_modify_record LEFT JOIN xt_userinfo xt_userinfo ON xt_modify_record.xt_userinfo_id=xt_userinfo.xt_userinfo_id
+		WHERE xt_modify_record_id=#{xt_modify_record_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtModifyRecord" parameterType="jehc.xtmodules.xtmodel.XtModifyRecord">
+		INSERT INTO
+			xt_modify_record
+			(
+			`xt_modify_record_id`,
+			`xt_modify_record_ctime`,
+			`xt_modify_record_beforevalue`,
+			`xt_modify_record_aftervalue`,
+			`xt_modify_record_modules`,
+			`xt_modify_record_field`,
+			`xt_userinfo_id`,
+			`business_id`
+			)
+			VALUES
+			(
+			#{xt_modify_record_id},
+			#{xt_modify_record_ctime},
+			#{xt_modify_record_beforevalue},
+			#{xt_modify_record_aftervalue},
+			#{xt_modify_record_modules},
+			#{xt_modify_record_field},
+			#{xt_userinfo_id},
+			#{business_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtModifyRecord" parameterType="jehc.xtmodules.xtmodel.XtModifyRecord">
+		UPDATE
+			xt_modify_record
+		SET
+			`xt_modify_record_id` = #{xt_modify_record_id},
+			`xt_modify_record_ctime` = #{xt_modify_record_ctime},
+			`xt_modify_record_beforevalue` = #{xt_modify_record_beforevalue},
+			`xt_modify_record_aftervalue` = #{xt_modify_record_aftervalue},
+			`xt_modify_record_modules` = #{xt_modify_record_modules},
+			`xt_modify_record_field` = #{xt_modify_record_field},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`business_id` = #{business_id}
+		WHERE xt_modify_record_id=#{xt_modify_record_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtModifyRecord" parameterType="map">
+		DELETE FROM xt_modify_record WHERE xt_modify_record_id IN
+		<foreach item="item" index="index" collection="xt_modify_record_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtModifyRecord" parameterType="list">
+		INSERT INTO
+			xt_modify_record
+			(
+			`xt_modify_record_id`,
+			`xt_modify_record_ctime`,
+			`xt_modify_record_beforevalue`,
+			`xt_modify_record_aftervalue`,
+			`xt_modify_record_modules`,
+			`xt_modify_record_field`,
+			`xt_userinfo_id`,
+			`business_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_modify_record_id},
+			#{item.xt_modify_record_ctime},
+			#{item.xt_modify_record_beforevalue},
+			#{item.xt_modify_record_aftervalue},
+			#{item.xt_modify_record_modules},
+			#{item.xt_modify_record_field},
+			#{item.xt_userinfo_id},
+			#{item.business_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtModifyRecord" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_modify_record
+			SET
+				`xt_modify_record_id` = #{item.xt_modify_record_id},
+				`xt_modify_record_ctime` = #{item.xt_modify_record_ctime},
+				`xt_modify_record_beforevalue` = #{item.xt_modify_record_beforevalue},
+				`xt_modify_record_aftervalue` = #{item.xt_modify_record_aftervalue},
+				`xt_modify_record_modules` = #{item.xt_modify_record_modules},
+				`xt_modify_record_field` = #{item.xt_modify_record_field},
+				`xt_userinfo_id` = #{item.xt_userinfo_id},
+				`business_id` = #{item.business_id}
+			WHERE xt_modify_record_id=#{item.xt_modify_record_id}
+		</foreach>
+	</update>
+</mapper>

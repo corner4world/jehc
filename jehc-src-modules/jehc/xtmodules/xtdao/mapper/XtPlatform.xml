@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtPlatform">
+	<!--初始化分页-->
+	<select id="getXtPlatformListByCondition" resultType="jehc.xtmodules.xtmodel.XtPlatform" parameterType="map">
+		SELECT
+			`xt_platform_id`,
+			`xt_platform_title`,
+			`xt_platform_status`,
+			`xt_userinfo_id`,
+			`xt_platform_remark`,
+			DATE_FORMAT(`xt_platform_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_platform_ctime`,
+			DATE_FORMAT(`xt_platform_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_platform_mtime`
+		FROM 
+			xt_platform
+		WHERE 1=1
+		<if test="null != xt_platform_status">
+			AND xt_platform_status = #{xt_platform_status}
+		</if>
+		<if test="null != xt_platform_title">
+			AND xt_platform_title like '%${xt_platform_title}%'
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtPlatformById" resultType="jehc.xtmodules.xtmodel.XtPlatform" parameterType="string">
+		SELECT
+			`xt_platform_id`,
+			`xt_platform_title`,
+			`xt_platform_status`,
+			`xt_userinfo_id`,
+			`xt_platform_remark`,
+			DATE_FORMAT(`xt_platform_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_platform_ctime`,
+			DATE_FORMAT(`xt_platform_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_platform_mtime`
+		FROM 
+			xt_platform
+		WHERE xt_platform_id=#{xt_platform_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtPlatform" parameterType="jehc.xtmodules.xtmodel.XtPlatform">
+		INSERT INTO
+			xt_platform
+			(
+			`xt_platform_id`,
+			`xt_platform_title`,
+			`xt_platform_status`,
+			`xt_userinfo_id`,
+			`xt_platform_remark`,
+			`xt_platform_ctime`,
+			`xt_platform_mtime`
+			)
+			VALUES
+			(
+			#{xt_platform_id},
+			#{xt_platform_title},
+			#{xt_platform_status},
+			#{xt_userinfo_id},
+			#{xt_platform_remark},
+			#{xt_platform_ctime},
+			#{xt_platform_mtime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtPlatform" parameterType="jehc.xtmodules.xtmodel.XtPlatform">
+		UPDATE
+			xt_platform
+		SET
+			`xt_platform_id` = #{xt_platform_id},
+			`xt_platform_title` = #{xt_platform_title},
+			`xt_platform_status` = #{xt_platform_status},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_platform_remark` = #{xt_platform_remark},
+			`xt_platform_ctime` = #{xt_platform_ctime},
+			`xt_platform_mtime` = #{xt_platform_mtime}
+		WHERE xt_platform_id=#{xt_platform_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtPlatform" parameterType="map">
+		DELETE FROM xt_platform WHERE xt_platform_id IN
+		<foreach item="item" index="index" collection="xt_platform_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

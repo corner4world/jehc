@@ -10,8 +10,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 import jehc.xtmodules.xtcore.base.BaseJunit;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Userinfo;
-import jehc.xtmodules.xtservice.Xt_UserinfoService;
+import jehc.xtmodules.xtmodel.XtUserinfo;
+import jehc.xtmodules.xtservice.XtUserinfoService;
 
 public class Xt_UserinfoJunit extends BaseJunit{
 //	//模拟request,response  
@@ -25,7 +25,7 @@ public class Xt_UserinfoJunit extends BaseJunit{
 //        response = new MockHttpServletResponse();      
 //    } 
 	@Autowired
-	private Xt_UserinfoService xt_UserinfoService;
+	private XtUserinfoService xt_UserinfoService;
 	@Test
 	public void getXtUserinfoList(){
 		Map<String, Object> condition = new HashMap<String, Object>();

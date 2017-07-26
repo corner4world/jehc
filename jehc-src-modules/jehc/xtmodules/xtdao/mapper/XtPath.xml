@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtPath">
+	<!--初始化分页-->
+	<select id="getXtPathListByCondition" resultType="jehc.xtmodules.xtmodel.XtPath" parameterType="map">
+		SELECT
+			`xt_path_id`,
+			`xt_path_name`,
+			`xt_path`,
+			`xt_value`,
+			`xt_type`,
+			DATE_FORMAT(`xt_time`,'%Y-%m-%d %H:%i:%s') AS `xt_time`
+		FROM 
+			xt_path
+		WHERE 1=1
+		<if test="null != xt_path_name">
+			AND instr(xt_path_name,#{xt_path_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtPathById" resultType="jehc.xtmodules.xtmodel.XtPath" parameterType="string">
+		SELECT
+			`xt_path_id`,
+			`xt_path_name`,
+			`xt_path`,
+			`xt_value`,
+			`xt_type`,
+			DATE_FORMAT(`xt_time`,'%Y-%m-%d %H:%i:%s') AS `xt_time`
+		FROM 
+			xt_path
+		WHERE xt_path_id=#{xt_path_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtPath" parameterType="jehc.xtmodules.xtmodel.XtPath">
+		INSERT INTO
+			xt_path
+			(
+			`xt_path_id`,
+			`xt_path_name`,
+			`xt_path`,
+			`xt_value`,
+			`xt_type`,
+			`xt_time`
+			)
+			VALUES
+			(
+			#{xt_path_id},
+			#{xt_path_name},
+			#{xt_path},
+			#{xt_value},
+			#{xt_type},
+			#{xt_time}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtPath" parameterType="jehc.xtmodules.xtmodel.XtPath">
+		UPDATE
+			xt_path
+		SET
+			`xt_path_id` = #{xt_path_id},
+			`xt_path_name` = #{xt_path_name},
+			`xt_path` = #{xt_path},
+			`xt_value` = #{xt_value},
+			`xt_type` = #{xt_type},
+			`xt_time` = #{xt_time}
+		WHERE xt_path_id=#{xt_path_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtPath" parameterType="map">
+		DELETE FROM xt_path WHERE xt_path_id IN
+		<foreach item="item" index="index" collection="xt_path_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 查找所有平台路径 -->
+	<select id="getXtPathListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtPath" parameterType="map">
+		SELECT
+			`xt_path_id`,
+			`xt_path_name`,
+			`xt_path`,
+			`xt_value`,
+			`xt_type`,
+			DATE_FORMAT(`xt_time`,'%Y-%m-%d %H:%i:%s') AS `xt_time`
+		FROM 
+			xt_path
+		WHERE 1=1
+	</select>
+</mapper>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrUrl">
+	<!--初始化分页-->
+	<select id="getSolrUrlListByCondition" resultType="jehc.solrmodules.solrmodel.SolrUrl" parameterType="map">
+		SELECT
+			solr_url.`solr_url_id`,
+			solr_url.`solr_url_url`,
+			solr_url.`solr_url_ctime`,
+			solr_url.`solr_url_mtime`,
+			solr_url.`xt_userinfo_id`,
+			solr_url.`solr_url_content`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_url AS solr_url LEFT JOIN xt_userinfo ON solr_url.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrUrlById" resultType="jehc.solrmodules.solrmodel.SolrUrl" parameterType="string">
+		SELECT
+			solr_url.`solr_url_id`,
+			solr_url.`solr_url_url`,
+			solr_url.`solr_url_ctime`,
+			solr_url.`solr_url_mtime`,
+			solr_url.`xt_userinfo_id`,
+			solr_url.`solr_url_content`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_url AS solr_url LEFT JOIN xt_userinfo ON solr_url.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE solr_url.solr_url_id=#{solr_url_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrUrl" parameterType="jehc.solrmodules.solrmodel.SolrUrl">
+		INSERT INTO
+			solr_url
+			(
+			`solr_url_id`,
+			`solr_url_url`,
+			`solr_url_ctime`,
+			`solr_url_mtime`,
+			`xt_userinfo_id`,
+			`solr_url_content`
+			)
+			VALUES
+			(
+			#{solr_url_id},
+			#{solr_url_url},
+			#{solr_url_ctime},
+			#{solr_url_mtime},
+			#{xt_userinfo_id},
+			#{solr_url_content}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrUrl" parameterType="jehc.solrmodules.solrmodel.SolrUrl">
+		UPDATE
+			solr_url
+		SET
+			`solr_url_id` = #{solr_url_id},
+			`solr_url_url` = #{solr_url_url},
+			`solr_url_ctime` = #{solr_url_ctime},
+			`solr_url_mtime` = #{solr_url_mtime},
+			`solr_url_content` = #{solr_url_content},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE solr_url_id=#{solr_url_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrUrl" parameterType="map">
+		DELETE FROM solr_url WHERE solr_url_id IN
+		<foreach item="item" index="index" collection="solr_url_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

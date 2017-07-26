@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDbStructure">
+	<!-- 获取数据库表结构 -->
+	<select id="getXtDbStructureByCondition" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbStructure">
+   		SHOW FULL FIELDS FROM  ${tableName}
+	</select>
+	
+	<!-- 显示建表语句 -->
+	<select id="getTablePhrases" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbStructure">
+		SHOW CREATE TABLE ${tableName}
+	</select>
+	
+	<!-- 获取更多表信息 -->
+	<select id="getXtDbTableAttribute" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbTableAttribute">
+		SHOW TABLE STATUS FROM ${dbName}
+	</select>
+	
+	<!-- 表索引 -->
+	<select id="getXtDbTableIndex" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbTableIndex">
+		<!-- select distinct 
+		 lower(index_name) index_name, 
+		 lower(index_type) type 
+		from 
+		information_schema.statistics 
+		where 
+		table_schema = #tableName# 
+		and table_name = #tableName# -->
+		show index from ${tableName}
+	</select>
+	
+	<!-- 表大小 -->
+	<select id="getXtDbTableSize" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbTableSize">
+		select 
+				table_name,
+				data_length,
+				index_length,
+				table_rows 
+		from information_schema.tables 
+		where 
+			 table_schema=#{dbName} and table_name=#{tableName}
+	</select>
+	
+	<!-- 创建索引 -->
+	<update id="addXtDbTableIndex" parameterType="map">
+	    ${sql} 
+	</update>
+	<!-- 删除索引 -->
+	<update id="delXtDbTableIndex" parameterType="map">
+	    ${sql} 
+	</update>
+	
+	<!-- 查询存储过程 -->
+	<select id="getXtDbProcList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbProc">
+		SELECT * FROM mysql.proc WHERE db = #{dbName} AND `type` = 'PROCEDURE'
+	</select>
+	
+	<!-- 查询函数 -->
+	<select id="getXtDbFunList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbFun">
+		SELECT * FROM mysql.proc WHERE db = #{dbName} AND `type` = 'FUNCTION'
+	</select>
+	
+	<!-- 查询视图 -->
+	<select id="getXtDbViewList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbView">
+		SELECT * FROM information_schema.tables WHERE table_schema=#{dbName} AND table_type='view';
+	</select>
+	
+	<!-- 查询触发器 -->
+	<select id="getXtDbTriList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbTri">
+		${sql}
+	</select>
+</mapper>

@@ -43,22 +43,22 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
-import jehc.solrmodules.solrmodel.Solr_Core;
-import jehc.solrmodules.solrmodel.Solr_Data_Config;
-import jehc.solrmodules.solrmodel.Solr_Document;
-import jehc.solrmodules.solrmodel.Solr_Entity;
-import jehc.solrmodules.solrmodel.Solr_Filed_Copy;
-import jehc.solrmodules.solrmodel.Solr_Index;
-import jehc.solrmodules.solrmodel.Solr_Index_Attribute;
-import jehc.solrmodules.solrmodel.Solr_Index_Sql;
-import jehc.solrmodules.solrmodel.Solr_Index_Sql_Filed;
-import jehc.solrmodules.solrmodel.Solr_Schema_Templet;
-import jehc.solrmodules.solrmodel.Solr_Sort;
-import jehc.solrmodules.solrservice.Solr_Data_ConfigService;
-import jehc.solrmodules.solrservice.Solr_EntityService;
-import jehc.solrmodules.solrservice.Solr_Index_SqlService;
-import jehc.solrmodules.solrservice.Solr_Index_Sql_FiledService;
-import jehc.solrmodules.solrservice.Solr_Schema_TempletService;
+import jehc.solrmodules.solrmodel.SolrCore;
+import jehc.solrmodules.solrmodel.SolrDataConfig;
+import jehc.solrmodules.solrmodel.SolrDocument;
+import jehc.solrmodules.solrmodel.SolrEntity;
+import jehc.solrmodules.solrmodel.SolrFiledCopy;
+import jehc.solrmodules.solrmodel.SolrIndex;
+import jehc.solrmodules.solrmodel.SolrIndexAttribute;
+import jehc.solrmodules.solrmodel.SolrIndexSql;
+import jehc.solrmodules.solrmodel.SolrIndexSqlFiled;
+import jehc.solrmodules.solrmodel.SolrSchemaTemplet;
+import jehc.solrmodules.solrmodel.SolrSort;
+import jehc.solrmodules.solrservice.SolrDataConfigService;
+import jehc.solrmodules.solrservice.SolrEntityService;
+import jehc.solrmodules.solrservice.SolrIndexSqlService;
+import jehc.solrmodules.solrservice.SolrIndexSqlFiledService;
+import jehc.solrmodules.solrservice.SolrSchemaTempletService;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -67,7 +67,7 @@ import jehc.xtmodules.xtcore.solr.utils.pages.PageSolr;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Data_Dictionary;
+import jehc.xtmodules.xtmodel.XtDataDictionary;
 
 
 /**
@@ -87,7 +87,7 @@ public class SolrUtil extends BaseAction{
 	 * @throws SolrServerException
 	 * @throws IOException
 	 */
-	public static void createCore(String baseURL,Solr_Core solr_Core,Solr_Document solr_Document,List<Solr_Index> solr_IndexList) throws SolrServerException,IOException {
+	public static void createCore(String baseURL,SolrCore solr_Core,SolrDocument solr_Document,List<SolrIndex> solr_IndexList) throws SolrServerException,IOException {
 		//连接solr服务器
 		HttpSolrServer server = new HttpSolrServer(baseURL);
 		//获得solr.xml配置好的cores作为默认，获得默认core的路径
@@ -152,7 +152,7 @@ public class SolrUtil extends BaseAction{
 	 * @throws SolrServerException
 	 * @throws IOException
 	 */
-	public static void updateCore(String baseURL,Solr_Core solr_Core,Solr_Document solr_Document,List<Solr_Index> solr_IndexList,List<Solr_Filed_Copy> solr_Filed_CopyList) throws SolrServerException,IOException {
+	public static void updateCore(String baseURL,SolrCore solr_Core,SolrDocument solr_Document,List<SolrIndex> solr_IndexList,List<SolrFiledCopy> solr_Filed_CopyList) throws SolrServerException,IOException {
 		//连接solr服务器
 		HttpSolrServer server = new HttpSolrServer(baseURL);
 		//获得solr.xml配置好的cores作为默认，获得默认core的路径
@@ -177,15 +177,15 @@ public class SolrUtil extends BaseAction{
 	 * @param dataConfigPath
 	 * @param solr_Core
 	 */
-	private static void updateDataConfig(String dataConfigPath,Solr_Core solr_Core,Solr_Document solr_Document) {
+	private static void updateDataConfig(String dataConfigPath,SolrCore solr_Core,SolrDocument solr_Document) {
 		try {
-			Solr_EntityService solr_EntityService = (Solr_EntityService)SpringUtil.getBean("solr_EntityService");
-			Solr_Data_ConfigService solr_Data_ConfigService = (Solr_Data_ConfigService)SpringUtil.getBean("solr_Data_ConfigService");
+			SolrEntityService solr_EntityService = (SolrEntityService)SpringUtil.getBean("solrEntityService");
+			SolrDataConfigService solr_Data_ConfigService = (SolrDataConfigService)SpringUtil.getBean("solrDataConfigService");
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("solr_document_id", solr_Document.getSolr_document_id());
-			List<Solr_Entity> solrEntityList = solr_EntityService.getSolrEntityListByCondition(condition);
+			List<SolrEntity> solrEntityList = solr_EntityService.getSolrEntityListByCondition(condition);
 			/**数据源配置文件**/
-			Solr_Data_Config solr_Data_Config = solr_Data_ConfigService.getSolrDataConfigById(solr_Core.getSolr_data_config_id());
+			SolrDataConfig solr_Data_Config = solr_Data_ConfigService.getSolrDataConfigById(solr_Core.getSolr_data_config_id());
 			/**递归实体循环**/
 			String solrEntity = solrEntity(solrEntityList,"0");
 			OutputStream out = null;  
@@ -215,29 +215,29 @@ public class SolrUtil extends BaseAction{
 	 * @param solrEntityList
 	 * @return
 	 */
-	public static String solrEntity(List<Solr_Entity> solrEntityList,String solr_entity_pid){
-		Solr_Index_SqlService solr_Index_SqlService = (Solr_Index_SqlService)SpringUtil.getBean("solr_Index_SqlService");
-		Solr_Index_Sql_FiledService solr_Index_Sql_FiledService = (Solr_Index_Sql_FiledService)SpringUtil.getBean("solr_Index_Sql_FiledService");
-		List<Xt_Data_Dictionary> xtDataDictionaryList = CommonUtils.getXtDataDictionaryCache("solr_index_sql_type");
+	public static String solrEntity(List<SolrEntity> solrEntityList,String solr_entity_pid){
+		SolrIndexSqlService solr_Index_SqlService = (SolrIndexSqlService)SpringUtil.getBean("solrIndexSqlService");
+		SolrIndexSqlFiledService solr_Index_Sql_FiledService = (SolrIndexSqlFiledService)SpringUtil.getBean("solrIndexSqlFiledService");
+		List<XtDataDictionary> xtDataDictionaryList = CommonUtils.getXtDataDictionaryCache("solr_index_sql_type");
 		StringBuffer sbf = new StringBuffer();
 		for(int i = 0; i < solrEntityList.size(); i++){
-			Solr_Entity solrEntity = solrEntityList.get(i);
+			SolrEntity solrEntity = solrEntityList.get(i);
 			String pid = solrEntity.getSolr_entity_pid();
 			String id = solrEntity.getSolr_entity_id();
 			if(solr_entity_pid.equals(pid)){
 				//可以采用循环sql做法原因 数据很小
 				Map<String, Object> condition = new HashMap<String, Object>();
 				condition.put("solr_entity_id", solrEntity.getSolr_entity_id());
-				List<Solr_Index_Sql> solr_Index_SqlList = solr_Index_SqlService.getSolrIndexSqlListByCondition(condition);
-				List<Solr_Index_Sql_Filed> solr_Index_Sql_FiledList = solr_Index_Sql_FiledService.getSolrIndexSqlFiledListByCondition(condition);
+				List<SolrIndexSql> solr_Index_SqlList = solr_Index_SqlService.getSolrIndexSqlListByCondition(condition);
+				List<SolrIndexSqlFiled> solr_Index_Sql_FiledList = solr_Index_Sql_FiledService.getSolrIndexSqlFiledListByCondition(condition);
 				//1-1实体开区间
 				sbf.append("<entity name=\""+solrEntity.getSolr_entity_name()+"\" pk=\"id\" ");
 				//2循环SQL语句
 				for(int j = 0; j < solr_Index_SqlList.size(); j++){
-					Solr_Index_Sql solr_Index_Sql = solr_Index_SqlList.get(j);
+					SolrIndexSql solr_Index_Sql = solr_Index_SqlList.get(j);
 					String type = "";
 					for(int l = 0; l < xtDataDictionaryList.size(); l++){
-						Xt_Data_Dictionary xt_Data_Dictionary = xtDataDictionaryList.get(l);
+						XtDataDictionary xt_Data_Dictionary = xtDataDictionaryList.get(l);
 						if(xt_Data_Dictionary.getXt_data_dictionary_id().equals(solr_Index_Sql.getSolr_index_sql_type())){
 							type = xt_Data_Dictionary.getXt_data_dictionary_value();
 							break;
@@ -248,7 +248,7 @@ public class SolrUtil extends BaseAction{
 				sbf.append(">");
 				//3循环数据库映射索引字段
 				for(int j = 0; j < solr_Index_Sql_FiledList.size(); j++){
-					Solr_Index_Sql_Filed solr_Index_Sql_Filed = solr_Index_Sql_FiledList.get(j);
+					SolrIndexSqlFiled solr_Index_Sql_Filed = solr_Index_Sql_FiledList.get(j);
 					sbf.append("<field column=\""+solr_Index_Sql_Filed.getSolr_index_sql_filed_name()+"\" name=\""+solr_Index_Sql_Filed.getSolr_index_filed_name()+"\"/>");
 				}
 				sbf.append(solrEntity(solrEntityList,id));
@@ -480,25 +480,25 @@ public class SolrUtil extends BaseAction{
 	 * @param coreName
 	 */
 	@SuppressWarnings("unchecked")
-	public static void updateSchema(String path,Solr_Core solr_Core,List<Solr_Index> solrIndexList,List<Solr_Filed_Copy> solr_Filed_CopyList){
+	public static void updateSchema(String path,SolrCore solr_Core,List<SolrIndex> solrIndexList,List<SolrFiledCopy> solr_Filed_CopyList){
 		try {
-			Solr_Schema_TempletService solr_Schema_TempletService = (Solr_Schema_TempletService)SpringUtil.getBean("solr_Schema_TempletService");
-			Solr_Schema_Templet solr_Schema_Templet = solr_Schema_TempletService.getSolrSchemaTempletById(solr_Core.getSolr_schema_templet_id());
-			List<Xt_Data_Dictionary> xtDataDictionaryList = CommonUtils.getXtDataDictionaryCache("solr_index_type");
+			SolrSchemaTempletService solr_Schema_TempletService = (SolrSchemaTempletService)SpringUtil.getBean("solrSchemaTempletService");
+			SolrSchemaTemplet solr_Schema_Templet = solr_Schema_TempletService.getSolrSchemaTempletById(solr_Core.getSolr_schema_templet_id());
+			List<XtDataDictionary> xtDataDictionaryList = CommonUtils.getXtDataDictionaryCache("solr_index_type");
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("solr_core_id", solr_Core.getSolr_core_id());
 			StringBuffer sbf = new StringBuffer();
 			//拷贝索引字段配置
 			for(int i = 0; i < solr_Filed_CopyList.size(); i++){
-				Solr_Filed_Copy solr_filed_copy = solr_Filed_CopyList.get(i);
+				SolrFiledCopy solr_filed_copy = solr_Filed_CopyList.get(i);
 				sbf.append("<copyField source=\""+solr_filed_copy.getSolr_filed_copy_source_name()+"\" dest=\""+solr_filed_copy.getSolr_filed_copy_dest_name()+"\"/>");
 			}
 			//索引配置
 			for(int i = 0; i < solrIndexList.size(); i++){
 				String type = "";
-				Solr_Index solr_Index = solrIndexList.get(i);
+				SolrIndex solr_Index = solrIndexList.get(i);
 				for(int j = 0; j < xtDataDictionaryList.size(); j++){
-					Xt_Data_Dictionary xtDataDictionary = xtDataDictionaryList.get(j);
+					XtDataDictionary xtDataDictionary = xtDataDictionaryList.get(j);
 					if(xtDataDictionary.getXt_data_dictionary_id().equals(solr_Index.getSolr_index_type())){
 						type = xtDataDictionary.getXt_data_dictionary_value();
 						break;
@@ -651,15 +651,15 @@ public class SolrUtil extends BaseAction{
      * @param solrCore实例对象
      * @param pageSolr
      */
-    public static String solrSimpleQueryPage(Solr_Core solrCore,PageSolr pageSolr){
-    	List<Solr_Index_Attribute> solr_index_attribute_list = solrCore.getSolr_index_attribute_list();
-        List<Solr_Sort> solr_sort_list = solrCore.getSolr_sort_list();
+    public static String solrSimpleQueryPage(SolrCore solrCore,PageSolr pageSolr){
+    	List<SolrIndexAttribute> solr_index_attribute_list = solrCore.getSolr_index_attribute_list();
+        List<SolrSort> solr_sort_list = solrCore.getSolr_sort_list();
     	SolrQuery query = new SolrQuery();
         //初始化查询对象  
         query = new SolrQuery(); 
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < solr_index_attribute_list.size(); i++) {  
-        	Solr_Index_Attribute Solr_Index_Attribute = solr_index_attribute_list.get(i);
+        	SolrIndexAttribute Solr_Index_Attribute = solr_index_attribute_list.get(i);
         	String solr_index_name = solr_index_attribute_list.get(i).getSolr_index_name();
         	Object solr_index_value = pageSolr.getConditions().get(solr_index_name);
         	if(null != solr_index_value && !"".equals(solr_index_value)){
@@ -681,7 +681,7 @@ public class SolrUtil extends BaseAction{
         query.setRows(pageSolr.getSize());  
         //设置排序  
         for(int i = 0; i < solr_sort_list.size(); i++){  
-        	Solr_Sort solr_Sort = solr_sort_list.get(i);
+        	SolrSort solr_Sort = solr_sort_list.get(i);
             if(("asc").equals(solr_Sort.getSolr_sort_code())){  
                 query.addSort(solr_Sort.getSolr_index_name(), SolrQuery.ORDER.asc);  
             }else if(("desc").equals(solr_Sort.getSolr_sort_code())){  
@@ -723,9 +723,9 @@ public class SolrUtil extends BaseAction{
      * @param solrCore实例对象
      * @param pageSolr
      */
-    public static String solrSimpleQueryFullTextPage(Solr_Core solrCore,PageSolr pageSolr){
-    	List<Solr_Index_Attribute> solr_index_attribute_list = solrCore.getSolr_index_attribute_list();
-        List<Solr_Sort> solr_sort_list = solrCore.getSolr_sort_list();
+    public static String solrSimpleQueryFullTextPage(SolrCore solrCore,PageSolr pageSolr){
+    	List<SolrIndexAttribute> solr_index_attribute_list = solrCore.getSolr_index_attribute_list();
+        List<SolrSort> solr_sort_list = solrCore.getSolr_sort_list();
     	SolrQuery query = new SolrQuery();
         //初始化查询对象  
     	String keywords = "";
@@ -745,7 +745,7 @@ public class SolrUtil extends BaseAction{
         query.setRows(pageSolr.getSize());  
         //设置排序  
         for(int i = 0; i < solr_sort_list.size(); i++){  
-        	Solr_Sort solr_Sort = solr_sort_list.get(i);
+        	SolrSort solr_Sort = solr_sort_list.get(i);
             if(("asc").equals(solr_Sort.getSolr_sort_code())){  
                 query.addSort(solr_Sort.getSolr_index_name(), SolrQuery.ORDER.asc);  
             }else if(("desc").equals(solr_Sort.getSolr_sort_code())){  
@@ -789,9 +789,9 @@ public class SolrUtil extends BaseAction{
      * @param pageSolr分页信息
      * 过滤器查询，可以提高性能 filter 类似多个条件组合，如and
      */
-    public static String solrSimpleQueryFilterPage(Solr_Core solrCore,PageSolr pageSolr) {
-    	List<Solr_Index_Attribute> solr_index_attribute_list = solrCore.getSolr_index_attribute_list();
-        List<Solr_Sort> solr_sort_list = solrCore.getSolr_sort_list();
+    public static String solrSimpleQueryFilterPage(SolrCore solrCore,PageSolr pageSolr) {
+    	List<SolrIndexAttribute> solr_index_attribute_list = solrCore.getSolr_index_attribute_list();
+        List<SolrSort> solr_sort_list = solrCore.getSolr_sort_list();
         //初始化查询对象 
         SolrQuery query = new SolrQuery();
         ///////////////////////关键代码 执行过滤操作////////////////////
@@ -808,7 +808,7 @@ public class SolrUtil extends BaseAction{
         query.setRows(pageSolr.getSize());  
         //设置排序  
         for(int i = 0; i < solr_sort_list.size(); i++){  
-        	Solr_Sort solr_Sort = solr_sort_list.get(i);
+        	SolrSort solr_Sort = solr_sort_list.get(i);
             if(("asc").equals(solr_Sort.getSolr_sort_code())){  
                 query.addSort(solr_Sort.getSolr_index_name(), SolrQuery.ORDER.asc);  
             }else if(("desc").equals(solr_Sort.getSolr_sort_code())){  
@@ -876,7 +876,7 @@ public class SolrUtil extends BaseAction{
      * prefix为前缀，min为最大返回结果数  
      * field需要查询并返回不全的字段，prefix需要查询并返回的字段不全值 
      */
-    public static List<SolrAutocomplete> autoCompleteByFacet(Solr_Core solrCore,String field, String prefix, Integer min,Integer facetLimit) {  
+    public static List<SolrAutocomplete> autoCompleteByFacet(SolrCore solrCore,String field, String prefix, Integer min,Integer facetLimit) {  
     	SolrServer server = SolrUtils.server(solrCore.getSolr_url_url()+"/"+solrCore.getSolr_core_name());
     	List<Count> countList = null;  
     	List<SolrAutocomplete> solrAutocompleteList = new ArrayList<SolrAutocomplete>();
@@ -925,7 +925,7 @@ public class SolrUtil extends BaseAction{
      * 按Group自动补全
      * Group的一个应用：自动补全  
      */
-    public static List<SolrAutocomplete> autoCompleteByGroup(Solr_Core solrCore,String field, String prefix,Integer rows) {  
+    public static List<SolrAutocomplete> autoCompleteByGroup(SolrCore solrCore,String field, String prefix,Integer rows) {  
     	SolrServer server = SolrUtils.server(solrCore.getSolr_url_url()+"/"+solrCore.getSolr_core_name());
     	List<SolrAutocomplete> solrAutocompleteList = new ArrayList<SolrAutocomplete>();
         SolrQuery query;  

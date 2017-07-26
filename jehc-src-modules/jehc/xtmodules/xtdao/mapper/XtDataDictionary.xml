@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDataDictionary">
+	<!--初始化分页-->
+	<select id="getXtDataDictionaryListByCondition" resultType="jehc.xtmodules.xtmodel.XtDataDictionary" parameterType="map">
+		SELECT
+			`xt_data_dictionary_id`,
+			`xt_data_dictionary_name`,
+			`xt_data_dictionary_pid`,
+			`xt_data_dictionary_remark`,
+			`xt_data_dictionary_value`,
+			`xt_data_dictionary_state`,
+			`xt_data_dictionary_soft`
+		FROM 
+			xt_data_dictionary
+		WHERE 1=1
+		<choose>
+			<when test="null != xt_data_dictionary_pid and '' != xt_data_dictionary_pid">
+				AND xt_data_dictionary_pid = #{xt_data_dictionary_pid}
+			</when>
+			<otherwise>
+				AND (xt_data_dictionary_pid = '' OR ISNULL(xt_data_dictionary_pid))
+			</otherwise>
+		</choose>
+		ORDER BY xt_data_dictionary_soft DESC
+	</select>
+	
+	<!--加载ListAll不分页-->
+	<select id="getXtDataDictionaryListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtDataDictionary" parameterType="map">
+		SELECT
+			`xt_data_dictionary_id`,
+			`xt_data_dictionary_name`,
+			`xt_data_dictionary_pid`,
+			`xt_data_dictionary_remark`,
+			`xt_data_dictionary_value`,
+			`xt_data_dictionary_state`,
+			`xt_data_dictionary_soft`
+		FROM 
+			xt_data_dictionary
+		WHERE 1=1
+		AND xt_data_dictionary_state = '0'
+		ORDER BY xt_data_dictionary_soft DESC
+	</select>
+	
+	<!--查询对象-->
+	<select id="getXtDataDictionaryById" resultType="jehc.xtmodules.xtmodel.XtDataDictionary" parameterType="string">
+		SELECT
+			`xt_data_dictionary_id`,
+			`xt_data_dictionary_name`,
+			`xt_data_dictionary_pid`,
+			`xt_data_dictionary_remark`,
+			`xt_data_dictionary_value`,
+			`xt_data_dictionary_state`,
+			`xt_data_dictionary_soft`
+		FROM 
+			xt_data_dictionary
+		WHERE xt_data_dictionary_id=#{xt_data_dictionary_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtDataDictionary" parameterType="jehc.xtmodules.xtmodel.XtDataDictionary">
+		INSERT INTO
+			xt_data_dictionary
+			(
+			`xt_data_dictionary_id`,
+			`xt_data_dictionary_name`,
+			`xt_data_dictionary_pid`,
+			`xt_data_dictionary_remark`,
+			`xt_data_dictionary_value`,
+			`xt_data_dictionary_state`,
+			`xt_data_dictionary_soft`
+			)
+			VALUES
+			(
+			#{xt_data_dictionary_id},
+			#{xt_data_dictionary_name},
+			#{xt_data_dictionary_pid},
+			#{xt_data_dictionary_remark},
+			#{xt_data_dictionary_value},
+			#{xt_data_dictionary_state},
+			#{xt_data_dictionary_soft}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtDataDictionary" parameterType="jehc.xtmodules.xtmodel.XtDataDictionary">
+		UPDATE
+			xt_data_dictionary
+		SET
+			`xt_data_dictionary_id` = #{xt_data_dictionary_id},
+			`xt_data_dictionary_name` = #{xt_data_dictionary_name},
+			`xt_data_dictionary_pid` = #{xt_data_dictionary_pid},
+			`xt_data_dictionary_remark` = #{xt_data_dictionary_remark},
+			`xt_data_dictionary_value` = #{xt_data_dictionary_value},
+			`xt_data_dictionary_state` = #{xt_data_dictionary_state},
+			`xt_data_dictionary_soft` = #{xt_data_dictionary_soft}
+		WHERE xt_data_dictionary_id=#{xt_data_dictionary_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtDataDictionary" parameterType="map">
+		delete from xt_data_dictionary where xt_data_dictionary_id in (#{xt_data_dictionary_id})
+	</delete>
+</mapper>

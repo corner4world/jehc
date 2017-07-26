@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrCore">
+	<!--初始化分页-->
+	<select id="getSolrCoreListByCondition" resultType="jehc.solrmodules.solrmodel.SolrCore" parameterType="map">
+		SELECT
+			solr_core.`solr_core_id`,
+			solr_core.`solr_core_name`,
+			solr_core.`solr_core_ctime`,
+			solr_core.`solr_core_uptime`,
+			solr_core.`xt_userinfo_id`,
+			solr_core.`solr_url_id`,
+			xt_userinfo.`xt_userinfo_realName`,
+			solr_url.`solr_url_url`,
+			solr_core.`solr_core_text`,
+			solr_document.`solr_document_name`,
+			solr_document.`solr_document_id`,
+			solr_core.`solr_schema_templet_id`,
+			solr_core.`solr_data_config_id`,
+			solr_core.`useonlynumbercode`
+		FROM 
+			solr_core AS solr_core LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_core.xt_userinfo_id
+		LEFT JOIN solr_url AS solr_url ON solr_url.solr_url_id=solr_core.`solr_url_id`
+		LEFT JOIN solr_document solr_document ON solr_document.`solr_core_id` = solr_core.`solr_core_id`
+		WHERE 1=1
+		<if test="null != solr_url_id">
+			AND solr_url.solr_url_id=#{solr_url_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrCoreById" resultType="jehc.solrmodules.solrmodel.SolrCore" parameterType="string">
+		SELECT
+			solr_core.`solr_core_id`,
+			solr_core.`solr_core_name`,
+			solr_core.`solr_core_ctime`,
+			solr_core.`solr_core_uptime`,
+			solr_core.`xt_userinfo_id`,
+			solr_core.`solr_url_id`,
+			xt_userinfo.`xt_userinfo_realName`,
+			solr_url.`solr_url_url`,
+			solr_core.`solr_core_text`,
+			solr_document.`solr_document_name`,
+			solr_document.`solr_document_id`,
+			solr_core.`solr_schema_templet_id`,
+			solr_core.`solr_data_config_id`,
+			solr_core.`useonlynumbercode`
+		FROM 
+			solr_core AS solr_core LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_core.xt_userinfo_id
+		LEFT JOIN solr_url AS solr_url ON solr_url.solr_url_id=solr_core.`solr_url_id`
+		LEFT JOIN solr_document solr_document ON  solr_document.`solr_core_id` = solr_core.`solr_core_id`
+		WHERE solr_core.solr_core_id=#{solr_core_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrCore" parameterType="jehc.solrmodules.solrmodel.SolrCore">
+		INSERT INTO
+			solr_core
+			(
+			`solr_core_id`,
+			`solr_core_name`,
+			`solr_core_ctime`,
+			`solr_core_uptime`,
+			`xt_userinfo_id`,
+			`solr_url_id`,
+			`solr_core_text`,
+			`solr_schema_templet_id`,
+			`solr_data_config_id`,
+			`useonlynumbercode`
+			)
+			VALUES
+			(
+			#{solr_core_id},
+			#{solr_core_name},
+			#{solr_core_ctime},
+			#{solr_core_uptime},
+			#{xt_userinfo_id},
+			#{solr_url_id},
+			#{solr_core_text},
+			#{solr_schema_templet_id},
+			#{solr_data_config_id},
+			#{useonlynumbercode}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrCore" parameterType="jehc.solrmodules.solrmodel.SolrCore">
+		UPDATE
+			solr_core
+		SET
+			`solr_core_id` = #{solr_core_id},
+			`solr_core_name` = #{solr_core_name},
+			`solr_core_ctime` = #{solr_core_ctime},
+			`solr_core_uptime` = #{solr_core_uptime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`solr_url_id` = #{solr_url_id},
+			`solr_core_text` = #{solr_core_text},
+			`solr_schema_templet_id` = #{solr_schema_templet_id},
+			`solr_data_config_id` = #{solr_data_config_id},
+			`useonlynumbercode` = #{useonlynumbercode}
+		WHERE solr_core_id=#{solr_core_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrCore" parameterType="map">
+		DELETE FROM solr_core WHERE solr_core_id IN
+		<foreach item="item" index="index" collection="solr_core_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtConstant">
+	<!--初始化分页-->
+	<select id="getXtConstantListByCondition" resultType="jehc.xtmodules.xtmodel.XtConstant" parameterType="map">
+		SELECT
+			`xt_constant_id`,
+			`xt_constantValue`,
+			`xt_constantType`,
+			`xt_constantRemark`,
+			`xt_constantName`,
+			`xt_constantURL`
+		FROM 
+			xt_constant
+		WHERE 1=1
+		<if test="null != xt_constantType">
+			AND xt_constantType = #{xt_constantType}
+		</if>
+		<if test="null != xt_constantName">
+			AND instr(xt_constantName,#{xt_constantName})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtConstantById" resultType="jehc.xtmodules.xtmodel.XtConstant" parameterType="string">
+		SELECT
+			`xt_constant_id`,
+			`xt_constantValue`,
+			`xt_constantType`,
+			`xt_constantRemark`,
+			`xt_constantName`,
+			`xt_constantURL`
+		FROM 
+			xt_constant
+		WHERE xt_constant_id=#{xt_constant_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtConstant" parameterType="jehc.xtmodules.xtmodel.XtConstant">
+		INSERT INTO
+			xt_constant
+			(
+			`xt_constant_id`,
+			`xt_constantValue`,
+			`xt_constantType`,
+			`xt_constantRemark`,
+			`xt_constantName`,
+			`xt_constantURL`
+			)
+			VALUES
+			(
+			#{xt_constant_id},
+			#{xt_constantValue},
+			#{xt_constantType},
+			#{xt_constantRemark},
+			#{xt_constantName},
+			#{xt_constantURL}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtConstant" parameterType="jehc.xtmodules.xtmodel.XtConstant">
+		UPDATE
+			xt_constant
+		SET
+			`xt_constant_id` = #{xt_constant_id},
+			`xt_constantValue` = #{xt_constantValue},
+			`xt_constantType` = #{xt_constantType},
+			`xt_constantRemark` = #{xt_constantRemark},
+			`xt_constantName` = #{xt_constantName},
+			`xt_constantURL` = #{xt_constantURL}
+		WHERE xt_constant_id=#{xt_constant_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtConstant" parameterType="map">
+		DELETE FROM xt_constant WHERE xt_constant_id IN
+		<foreach item="item" index="index" collection="xt_constant_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--读取所有常量-->
+	<select id="getXtConstantListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtConstant" parameterType="map">
+		SELECT
+			`xt_constant_id`,
+			`xt_constantValue`,
+			`xt_constantType`,
+			`xt_constantRemark`,
+			`xt_constantName`,
+			`xt_constantURL`
+		FROM 
+			xt_constant
+		WHERE 1=1
+	</select>
+</mapper>

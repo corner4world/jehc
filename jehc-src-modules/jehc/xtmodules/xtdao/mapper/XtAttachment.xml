@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtAttachment">
+	<!--初始化分页-->
+	<select id="getXtAttachmentListByCondition" resultType="jehc.xtmodules.xtmodel.XtAttachment" parameterType="map">
+		SELECT
+			xt_attachment.`xt_attachment_id`,
+			xt_attachment.`xt_attachmentType`,
+			xt_attachment.`xt_attachmentCtime`,
+			xt_attachment.`xt_attachmentSize`,
+			xt_attachment.`xt_attachmentPath`,
+			xt_attachment.`xt_attachmentIsDelete`,
+			xt_attachment.`xt_attachmentName`,
+			xt_attachment.`xt_userinfo_id`,
+			xt_attachment.`xt_modules_id`,
+			xt_attachment.`xt_modules_order`,
+			xt_attachment.`xt_attachmentTitle`,
+			xt_attachment.`xt_path_absolutek`,
+			xt_attachment.`xt_path_urlk`,
+			xt_attachment.`xt_path_relativek`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_attachment xt_attachment LEFT JOIN xt_userinfo xt_userinfo ON xt_attachment.`xt_userinfo_id` = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_attachmentTitle">
+			AND xt_attachment.`xt_attachmentTitle` = #{xt_attachmentTitle}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtAttachmentById" resultType="jehc.xtmodules.xtmodel.XtAttachment" parameterType="string">
+		SELECT
+			xt_attachment.`xt_attachment_id`,
+			xt_attachment.`xt_attachmentType`,
+			xt_attachment.`xt_attachmentCtime`,
+			xt_attachment.`xt_attachmentSize`,
+			xt_attachment.`xt_attachmentPath`,
+			xt_attachment.`xt_attachmentIsDelete`,
+			xt_attachment.`xt_attachmentName`,
+			xt_attachment.`xt_userinfo_id`,
+			xt_attachment.`xt_modules_id`,
+			xt_attachment.`xt_modules_order`,
+			xt_attachment.`xt_attachmentTitle`,
+			xt_attachment.`xt_path_absolutek`,
+			xt_attachment.`xt_path_relativek`,
+			xt_attachment.`xt_path_urlk`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_attachment xt_attachment LEFT JOIN xt_userinfo xt_userinfo ON xt_attachment.`xt_userinfo_id` = xt_userinfo.xt_userinfo_id
+		WHERE xt_attachment_id=#{xt_attachment_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtAttachment" parameterType="jehc.xtmodules.xtmodel.XtAttachment">
+		INSERT INTO
+			xt_attachment
+			(
+			`xt_attachment_id`,
+			`xt_attachmentType`,
+			`xt_attachmentCtime`,
+			`xt_attachmentSize`,
+			`xt_attachmentPath`,
+			`xt_attachmentIsDelete`,
+			`xt_attachmentName`,
+			`xt_userinfo_id`,
+			`xt_modules_id`,
+			`xt_modules_order`,
+			`xt_attachmentTitle`,
+			`xt_path_absolutek`,
+			`xt_path_relativek`,
+			`xt_path_urlk`
+			)
+			VALUES
+			(
+			#{xt_attachment_id},
+			#{xt_attachmentType},
+			#{xt_attachmentCtime},
+			#{xt_attachmentSize},
+			#{xt_attachmentPath},
+			#{xt_attachmentIsDelete},
+			#{xt_attachmentName},
+			#{xt_userinfo_id},
+			#{xt_modules_id},
+			#{xt_modules_order},
+			#{xt_attachmentTitle},
+			#{xt_path_absolutek},
+			#{xt_path_relativek},
+			#{xt_path_urlk}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtAttachment" parameterType="jehc.xtmodules.xtmodel.XtAttachment">
+		UPDATE
+			xt_attachment
+		SET
+			`xt_attachment_id` = #{xt_attachment_id},
+			`xt_attachmentType` = #{xt_attachmentType},
+			`xt_attachmentCtime` = #{xt_attachmentCtime},
+			`xt_attachmentSize` = #{xt_attachmentSize},
+			`xt_attachmentPath` = #{xt_attachmentPath},
+			`xt_attachmentIsDelete` = #{xt_attachmentIsDelete},
+			`xt_attachmentName` = #{xt_attachmentName},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_modules_id` = #{xt_modules_id},
+			`xt_modules_order` = #{xt_modules_order},
+			`xt_attachmentTitle` = #{xt_attachmentTitle},
+			`xt_path_absolutek` = #{xt_path_absolutek},
+			`xt_path_relativek` = #{xt_path_relativek}, 
+			`xt_path_urlk` = #{xt_path_urlk}
+		WHERE xt_attachment_id=#{xt_attachment_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtAttachment" parameterType="map">
+		DELETE FROM xt_attachment WHERE xt_attachment_id IN
+		<foreach item="item" index="index" collection="xt_attachment_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 根据如编号数组批量查询集合 -->
+	<select id="getXtAttachmentList" resultType="jehc.xtmodules.xtmodel.XtAttachment" parameterType="map">
+		SELECT
+			xt_attachment.`xt_attachment_id`,
+			xt_attachment.`xt_attachmentType`,
+			xt_attachment.`xt_attachmentCtime`,
+			xt_attachment.`xt_attachmentSize`,
+			xt_attachment.`xt_attachmentPath`,
+			xt_attachment.`xt_attachmentIsDelete`,
+			xt_attachment.`xt_attachmentName`,
+			xt_attachment.`xt_userinfo_id`,
+			xt_attachment.`xt_modules_id`,
+			xt_attachment.`xt_modules_order`,
+			xt_attachment.`xt_attachmentTitle`,
+			xt_attachment.`xt_path_absolutek`,
+			xt_attachment.`xt_path_relativek`,
+			xt_attachment.`xt_path_urlk`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_attachment xt_attachment LEFT JOIN xt_userinfo xt_userinfo ON xt_attachment.`xt_userinfo_id` = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_attachment_id">
+			AND xt_attachment_id IN
+			<foreach item="item" index="index" collection="xt_attachment_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+</mapper>

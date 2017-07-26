@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtMR">
+	<!--初始化分页-->
+	<select id="getXtMRListByCondition" resultType="jehc.xtmodules.xtmodel.XtMR" parameterType="map">
+		SELECT
+			`xt_m_r_id`,
+			`xt_menuinfo_id`,
+			`xt_role_id`
+		FROM 
+			xt_m_r
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtMRById" resultType="jehc.xtmodules.xtmodel.XtMR" parameterType="string">
+		SELECT
+			`xt_m_r_id`,
+			`xt_menuinfo_id`,
+			`xt_role_id`
+		FROM 
+			xt_m_r
+		WHERE xt_m_r_id=#{xt_m_r_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtMR" parameterType="jehc.xtmodules.xtmodel.XtMR">
+		INSERT INTO
+			xt_m_r
+			(
+			`xt_m_r_id`,
+			`xt_menuinfo_id`,
+			`xt_role_id`
+			)
+			VALUES
+			(
+			#{xt_m_r_id},
+			#{xt_menuinfo_id},
+			#{xt_role_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtMR" parameterType="jehc.xtmodules.xtmodel.XtMR">
+		UPDATE
+			xt_m_r
+		SET
+			`xt_m_r_id` = #{xt_m_r_id},
+			`xt_menuinfo_id` = #{xt_menuinfo_id},
+			`xt_role_id` = #{xt_role_id}
+		WHERE xt_m_r_id=#{xt_m_r_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtMR" parameterType="map">
+		delete from xt_m_r where xt_role_id = #{xt_role_id}
+	</delete>
+	
+	<!--批量添加-->
+	<insert id="addBatchXtMR" parameterType="list">
+		INSERT INTO
+			xt_m_r
+			(
+			`xt_m_r_id`,
+			`xt_menuinfo_id`,
+			`xt_role_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_m_r_id},
+			#{item.xt_menuinfo_id},
+			#{item.xt_role_id}
+			)
+		</foreach>
+	</insert>
+</mapper>

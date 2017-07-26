@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtRoleinfo">
+	<!--初始化分页-->
+	<select id="getXtRoleinfoListByCondition" resultType="jehc.xtmodules.xtmodel.XtRoleinfo" parameterType="map">
+		SELECT
+			`xt_role_id`,
+			`xt_role_name`,
+			`xt_role_desc`,
+			`xt_role_type`,
+			`xt_role_createTime`,
+			`xt_role_updateTime`,
+			`xt_role_isdelete`
+		FROM 
+			xt_roleinfo
+		WHERE 1=1
+		<if test="null != xt_role_isdelete">
+			AND xt_role_isdelete = #{xt_role_isdelete}
+		</if>
+		<if test="null != xt_role_name">
+			AND instr(xt_role_name,#{xt_role_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtRoleinfoById" resultType="jehc.xtmodules.xtmodel.XtRoleinfo" parameterType="string">
+		SELECT
+			`xt_role_id`,
+			`xt_role_name`,
+			`xt_role_desc`,
+			`xt_role_type`,
+			`xt_role_createTime`,
+			`xt_role_updateTime`,
+			`xt_role_isdelete`
+		FROM 
+			xt_roleinfo
+		WHERE xt_role_id=#{xt_role_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtRoleinfo" parameterType="jehc.xtmodules.xtmodel.XtRoleinfo">
+		INSERT INTO
+			xt_roleinfo
+			(
+			`xt_role_id`,
+			`xt_role_name`,
+			`xt_role_desc`,
+			`xt_role_type`,
+			`xt_role_createTime`,
+			`xt_role_updateTime`,
+			`xt_role_isdelete`
+			)
+			VALUES
+			(
+			#{xt_role_id},
+			#{xt_role_name},
+			#{xt_role_desc},
+			#{xt_role_type},
+			#{xt_role_createTime},
+			#{xt_role_updateTime},
+			#{xt_role_isdelete}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtRoleinfo" parameterType="jehc.xtmodules.xtmodel.XtRoleinfo">
+		UPDATE
+			xt_roleinfo
+		SET
+			`xt_role_id` = #{xt_role_id},
+			`xt_role_name` = #{xt_role_name},
+			`xt_role_desc` = #{xt_role_desc},
+			`xt_role_type` = #{xt_role_type},
+			`xt_role_createTime` = #{xt_role_createTime},
+			`xt_role_updateTime` = #{xt_role_updateTime},
+			`xt_role_isdelete` = #{xt_role_isdelete}
+		WHERE xt_role_id=#{xt_role_id}
+	</update>
+
+	<!--删除-->
+	<update id="delXtRoleinfo" parameterType="map">
+		UPDATE 
+			xt_roleinfo 
+		SET 
+			xt_role_isdelete = 1
+		WHERE xt_role_id IN
+		<foreach item="item" index="index" collection="xt_role_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!--恢复-->
+	<update id="recoverXtRoleinfo" parameterType="map">
+		UPDATE xt_roleinfo SET xt_role_isdelete = 0 WHERE xt_role_id in
+		<foreach item="item" index="index" collection="xt_role_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+</mapper>

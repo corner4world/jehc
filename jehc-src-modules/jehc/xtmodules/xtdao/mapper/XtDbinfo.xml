@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDbinfo">
+	<!--初始化分页-->
+	<select id="getXtDbinfoListByCondition" resultType="jehc.xtmodules.xtmodel.XtDbinfo" parameterType="map">
+		SELECT
+			`xt_dbinfo_id`,
+			`xt_dbinfoName`,
+			`xt_dbinfoUName`,
+			`xt_dbinfoPwd`,
+			`xt_dbinfoIp`,
+			`xt_dbinfoPort`,
+			`xt_dbinfoType`
+		FROM 
+			xt_dbinfo
+		WHERE 1=1
+		<if test="null != xt_dbinfoName">
+			AND instr(xt_dbinfoName,#{xt_dbinfoName})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtDbinfoById" resultType="jehc.xtmodules.xtmodel.XtDbinfo" parameterType="string">
+		SELECT
+			`xt_dbinfo_id`,
+			`xt_dbinfoName`,
+			`xt_dbinfoUName`,
+			`xt_dbinfoPwd`,
+			`xt_dbinfoIp`,
+			`xt_dbinfoPort`,
+			`xt_dbinfoType`
+		FROM 
+			xt_dbinfo
+		WHERE xt_dbinfo_id=#{xt_dbinfo_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtDbinfo" parameterType="jehc.xtmodules.xtmodel.XtDbinfo">
+		INSERT INTO
+			xt_dbinfo
+			(
+			`xt_dbinfo_id`,
+			`xt_dbinfoName`,
+			`xt_dbinfoUName`,
+			`xt_dbinfoPwd`,
+			`xt_dbinfoIp`,
+			`xt_dbinfoPort`,
+			`xt_dbinfoType`
+			)
+			VALUES
+			(
+			#{xt_dbinfo_id},
+			#{xt_dbinfoName},
+			#{xt_dbinfoUName},
+			#{xt_dbinfoPwd},
+			#{xt_dbinfoIp},
+			#{xt_dbinfoPort},
+			#{xt_dbinfoType}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtDbinfo" parameterType="jehc.xtmodules.xtmodel.XtDbinfo">
+		UPDATE
+			xt_dbinfo
+		SET
+			`xt_dbinfo_id` = #{xt_dbinfo_id},
+			`xt_dbinfoName` = #{xt_dbinfoName},
+			`xt_dbinfoUName` = #{xt_dbinfoUName},
+			`xt_dbinfoPwd` = #{xt_dbinfoPwd},
+			`xt_dbinfoIp` = #{xt_dbinfoIp},
+			`xt_dbinfoPort` = #{xt_dbinfoPort},
+			`xt_dbinfoType` = #{xt_dbinfoType}
+		WHERE xt_dbinfo_id=#{xt_dbinfo_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtDbinfo" parameterType="map">
+		DELETE FROM xt_dbinfo WHERE xt_dbinfo_id IN
+		<foreach item="item" index="index" collection="xt_dbinfo_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

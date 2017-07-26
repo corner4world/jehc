@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtOperateBusinessLogs">
+	<!--初始化分页-->
+	<select id="getXtOperateBusinessLogsListByCondition" resultType="jehc.xtmodules.xtmodel.XtOperateBusinessLogs" parameterType="map">
+		SELECT
+			xt_operate_business_logs.`xt_operate_business_logs_id`,
+			xt_operate_business_logs.`xt_operate_business_logsTime`,
+			xt_operate_business_logs.`xt_userinfo_id`,
+			xt_operate_business_logs.`xt_operate_business_logsModules`,
+			xt_operate_business_logs.`xt_operate_business_logsMethod`,
+			xt_operate_business_logs.`xt_operate_business_logsMethodPar`,
+			xt_operate_business_logs.`xt_operate_business_logsResult`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_operate_business_logs LEFT JOIN xt_userinfo AS xt_userinfo ON xt_operate_business_logs.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_operate_business_logsResult">
+			AND xt_operate_business_logs.xt_operate_business_logsResult like '%${xt_operate_business_logsResult}%'
+		</if>
+		<if test="null != xt_operate_business_logsMethodPar">
+			AND xt_operate_business_logs.xt_operate_business_logsMethodPar like '%${xt_operate_business_logsMethodPar}%'
+		</if>
+		<if test="null != xt_operate_business_logsMethod">
+			AND xt_operate_business_logs.xt_operate_business_logsMethod like '%${xt_operate_business_logsMethod}%'
+		</if>
+		<if test="null != xt_operate_business_logsModules">
+			AND xt_operate_business_logs.xt_operate_business_logsModules like '%${xt_operate_business_logsModules}%'
+		</if>
+		ORDER BY xt_operate_business_logs.`xt_operate_business_logsTime` DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtOperateBusinessLogsById" resultType="jehc.xtmodules.xtmodel.XtOperateBusinessLogs" parameterType="string">
+		SELECT
+			xt_operate_business_logs.`xt_operate_business_logs_id`,
+			xt_operate_business_logs.`xt_operate_business_logsTime`,
+			xt_operate_business_logs.`xt_userinfo_id`,
+			xt_operate_business_logs.`xt_operate_business_logsModules`,
+			xt_operate_business_logs.`xt_operate_business_logsMethod`,
+			xt_operate_business_logs.`xt_operate_business_logsMethodPar`,
+			xt_operate_business_logs.`xt_operate_business_logsResult`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_operate_business_logs LEFT JOIN xt_userinfo AS xt_userinfo ON xt_operate_business_logs.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE xt_operate_business_logs.xt_operate_business_logs_id=#{xt_operate_business_logs_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtOperateBusinessLogs" parameterType="jehc.xtmodules.xtmodel.XtOperateBusinessLogs">
+		INSERT INTO
+			xt_operate_business_logs
+			(
+			`xt_operate_business_logs_id`,
+			`xt_operate_business_logsTime`,
+			`xt_userinfo_id`,
+			`xt_operate_business_logsModules`,
+			`xt_operate_business_logsMethod`,
+			`xt_operate_business_logsMethodPar`,
+			`xt_operate_business_logsResult`
+			)
+			VALUES
+			(
+			#{xt_operate_business_logs_id},
+			#{xt_operate_business_logsTime},
+			#{xt_userinfo_id},
+			#{xt_operate_business_logsModules},
+			#{xt_operate_business_logsMethod},
+			#{xt_operate_business_logsMethodPar},
+			#{xt_operate_business_logsResult}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtOperateBusinessLogs" parameterType="jehc.xtmodules.xtmodel.XtOperateBusinessLogs">
+		UPDATE
+			xt_operate_business_logs
+		SET
+			`xt_operate_business_logs_id` = #{xt_operate_business_logs_id},
+			`xt_operate_business_logsTime` = #{xt_operate_business_logsTime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_operate_business_logsModules` = #{xt_operate_business_logsModules},
+			`xt_operate_business_logsMethod` = #{xt_operate_business_logsMethod},
+			`xt_operate_business_logsMethodPar` = #{xt_operate_business_logsMethodPar},
+			`xt_operate_business_logsResult` = #{xt_operate_business_logsResult}
+		WHERE xt_operate_business_logs_id=#{xt_operate_business_logs_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtOperateBusinessLogs" parameterType="map">
+		DELETE FROM xt_operate_business_logs WHERE xt_operate_business_logs_id IN
+		<foreach item="item" index="index" collection="xt_operate_business_logs_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

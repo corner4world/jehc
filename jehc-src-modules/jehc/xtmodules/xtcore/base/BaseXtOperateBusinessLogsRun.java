@@ -4,8 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Operate_Business_Logs;
-import jehc.xtmodules.xtservice.Xt_Operate_Business_LogsService;
+import jehc.xtmodules.xtmodel.XtOperateBusinessLogs;
+import jehc.xtmodules.xtservice.XtOperateBusinessLogsService;
 /**
  * 异日
  * @author Administrator
@@ -13,8 +13,8 @@ import jehc.xtmodules.xtservice.Xt_Operate_Business_LogsService;
  */
 public class BaseXtOperateBusinessLogsRun extends Thread {
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	private Xt_Operate_Business_Logs xt_Operate_Business_Logs;
-	public BaseXtOperateBusinessLogsRun(Xt_Operate_Business_Logs xt_Operate_Business_Logs){
+	private XtOperateBusinessLogs xt_Operate_Business_Logs;
+	public BaseXtOperateBusinessLogsRun(XtOperateBusinessLogs xt_Operate_Business_Logs){
 		this.xt_Operate_Business_Logs = xt_Operate_Business_Logs;
 	}
 	
@@ -88,10 +88,10 @@ public class BaseXtOperateBusinessLogsRun extends Thread {
 	 * @param message
 	 */
 	public void putXtOperateBusinessLogs(){
-		Xt_Operate_Business_Logs xt_Operate_Business_Logs = new Xt_Operate_Business_Logs();
+		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
 		try {
 			logger.info("----------开始记录日志--------------");
-			Xt_Operate_Business_LogsService xt_Operate_Business_LogsService = (Xt_Operate_Business_LogsService)SpringUtil.getBean("xt_Operate_Business_LogsService");
+			XtOperateBusinessLogsService xtOperateBusinessLogsService = (XtOperateBusinessLogsService)SpringUtil.getBean("xtOperateBusinessLogsService");
 //			xt_Operate_Business_Logs.setXt_operate_business_logsTime(CommonUtils.getSimpleDateFormat());
 //			xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
 //			xt_Operate_Business_Logs.setXt_operate_business_logsModules(this.xt_operate_business_logsModules);
@@ -99,7 +99,7 @@ public class BaseXtOperateBusinessLogsRun extends Thread {
 //			xt_Operate_Business_Logs.setXt_userinfo_id(CommonUtils.getXtUid());
 //			xt_Operate_Business_Logs.setXt_operate_business_logsResult(this.xt_operate_business_logsResult);
 //			xt_Operate_Business_Logs.setXt_operate_business_logsMethodPar(this.xt_operate_business_logsMethodPar);
-	        xt_Operate_Business_LogsService.putXtOperateBusinessLogs(this.xt_Operate_Business_Logs);
+			xtOperateBusinessLogsService.putXtOperateBusinessLogs(this.xt_Operate_Business_Logs);
 	        logger.info("----------结束记录日志--------------");
 		} catch (Exception e) {
 			logger.info("----------记录日志失败:"+xt_Operate_Business_Logs.toString()+"--------------");

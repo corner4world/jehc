@@ -14,15 +14,15 @@ import org.slf4j.LoggerFactory;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Generator;
-import jehc.xtmodules.xtmodel.Xt_Generator_Grid_Column;
-import jehc.xtmodules.xtmodel.Xt_Generator_Search_Filed;
-import jehc.xtmodules.xtmodel.Xt_Generator_TableMany_To_One;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_ColumnMany_To_One;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column_Form;
-import jehc.xtmodules.xtmodel.Xt_Script;
-import jehc.xtmodules.xtservice.Xt_ScriptService;
+import jehc.xtmodules.xtmodel.XtGenerator;
+import jehc.xtmodules.xtmodel.XtGeneratorGridColumn;
+import jehc.xtmodules.xtmodel.XtGeneratorSearchFiled;
+import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumnForm;
+import jehc.xtmodules.xtmodel.XtScript;
+import jehc.xtmodules.xtservice.XtScriptService;
 
 /**
  * 生成页面层代码（包括JS，JSP代码）
@@ -36,7 +36,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator_Table_ColumnList
 	 * @param xt_Generator
 	 */
-	public void createPageAll(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public void createPageAll(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		createPageList(xt_Generator_Table_ColumnList, xt_Generator);
 		createPageAdd(xt_Generator_Table_ColumnList, xt_Generator);
 		createPageUpdate(xt_Generator_Table_ColumnList, xt_Generator);
@@ -54,33 +54,33 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createPageList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
+	public String createPageList(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
 		StringBuffer sb = new StringBuffer();
 		//定义对象
 		sb.append("var store;\r\n");
 		sb.append("var grid;\r\n");
-		List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+		List<XtGeneratorSearchFiled> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		List<String> xt_script_idList = new ArrayList<String>();
 		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
-			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
+			XtGeneratorSearchFiled xt_generator_search_filed = xt_generator_search_filedList.get(i);
 			String xt_script_id = xt_generator_search_filed.getXt_script_id();
 			if(null != xt_script_id && !"".equals(xt_script_id)){
 				xt_script_idList.add(xt_script_id);
 			}
 		}
 		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-			Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 			String xt_script_id = xt_Generator_Table_Column_Form.getXt_script_id();
 			if(null != xt_script_id && !"".equals(xt_script_id)){
 				xt_script_idList.add(xt_script_id);
 			}
 		}
-		for(Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One:xt_Generator_TableMany_To_OneList){
-			List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
-			for(Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One:xt_Generator_Table_ColumnMany_To_OneList){
+		for(XtGeneratorTableManyToOne xt_Generator_TableMany_To_One:xt_Generator_TableMany_To_OneList){
+			List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+			for(XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One:xt_Generator_Table_ColumnMany_To_OneList){
 				String xt_script_id = xt_Generator_Table_ColumnMany_To_One.getXt_script_id();
 				if(null != xt_script_id && !"".equals(xt_script_id)){
 					xt_script_idList.add(xt_script_id);
@@ -89,7 +89,7 @@ public class GeneratorPage extends GeneratorUtil{
 		}
 		xt_script_idList = AllUtils.getNList(xt_script_idList);
 		for(int i = 0; i < xt_script_idList.size(); i++){
-			Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_idList.get(i));
+			XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_idList.get(i));
 			String xt_script_key = xtScript.getXt_script_key();
 			sb.append("var "+xt_script_key +";\r\n");
 		}
@@ -141,21 +141,21 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createPageContentList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
+	public String createPageContentList(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String list_url = "get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ListByCondition";
 		String export_url = "export"+uprepchar(xt_Generator.getXt_generator_tbname())+"";
 		StringBuffer sb = new StringBuffer();
 		//创建下拉框远程数据或本地数据
 		//查询模块
-		List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+		List<XtGeneratorSearchFiled> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		List<String> xt_script_idList = new ArrayList<String>();
-		for(Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One:xt_Generator_TableMany_To_OneList){
-			List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
-			for(Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One:xt_Generator_Table_ColumnMany_To_OneList){
+		for(XtGeneratorTableManyToOne xt_Generator_TableMany_To_One:xt_Generator_TableMany_To_OneList){
+			List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+			for(XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One:xt_Generator_Table_ColumnMany_To_OneList){
 				String xt_script_id = xt_Generator_Table_ColumnMany_To_One.getXt_script_id();
 				if(null != xt_script_id && !"".equals(xt_script_id)){
 					xt_script_idList.add(xt_script_id);
@@ -163,14 +163,14 @@ public class GeneratorPage extends GeneratorUtil{
 			}
 		}
 		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
-			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
+			XtGeneratorSearchFiled xt_generator_search_filed = xt_generator_search_filedList.get(i);
 			String xt_script_id = xt_generator_search_filed.getXt_script_id();
 			if(null != xt_script_id && !"".equals(xt_script_id)){
 				xt_script_idList.add(xt_script_id);
 			}
 		}
 		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-			Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 			String xt_script_id = xt_Generator_Table_Column_Form.getXt_script_id();
 			if(null != xt_script_id && !"".equals(xt_script_id)){
 				xt_script_idList.add(xt_script_id);
@@ -180,7 +180,7 @@ public class GeneratorPage extends GeneratorUtil{
 		for(int i = 0; i < xt_script_idList.size(); i++){
 			String xt_script_id = xt_script_idList.get(i);
 			if(null != xt_script_id && !"".equals(xt_script_id)){
-				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				String xt_script_text = xtScript.getXt_script_text();
 				String xt_script_key = xtScript.getXt_script_key();
 				sb.append("\t"+xt_script_key + " = " + xt_script_text+"\r\n");
@@ -203,7 +203,7 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("\t\titems:[\r\n");
     	if(!xt_generator_search_filedList.isEmpty() && xt_generator_search_filedList.size()>0){
     		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
-    			Xt_Generator_Search_Filed xt_generator_search_filed = xt_generator_search_filedList.get(i);
+    			XtGeneratorSearchFiled xt_generator_search_filed = xt_generator_search_filedList.get(i);
     			String xt_generator_search_name = xt_generator_search_filed.getXt_generator_search_name();
     			String xt_generator_search_label = xt_generator_search_filed.getXt_generator_search_label();
     			String xt_generator_search_type = xt_generator_search_filed.getXt_generator_search_type();
@@ -214,7 +214,7 @@ public class GeneratorPage extends GeneratorUtil{
     			String xt_script_valuefield="";
     			String xt_script_displayfield="";
     			if(null != xt_script_id && !"".equals(xt_script_id)){
-    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
         			xt_script_key = xtScript.getXt_script_key();
         			xt_script_valuefield = xtScript.getXt_script_valuefield();
         			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -481,9 +481,9 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("\t\t\t\twidth:77,\r\n");
 		sb.append("\t\t\t\txtype:'rownumberer'\r\n");
 		sb.append("\t\t\t},\r\n");	
-		List<Xt_Generator_Grid_Column> xt_Generator_Grid_ColumnList = xt_Generator.getXt_Generator_Grid_ColumnList();
+		List<XtGeneratorGridColumn> xt_Generator_Grid_ColumnList = xt_Generator.getXt_Generator_Grid_ColumnList();
 		for(int i = 0; i < xt_Generator_Grid_ColumnList.size(); i++){
-			Xt_Generator_Grid_Column xt_Generator_Grid_Column = xt_Generator_Grid_ColumnList.get(i);
+			XtGeneratorGridColumn xt_Generator_Grid_Column = xt_Generator_Grid_ColumnList.get(i);
 			if(i == (xt_Generator_Grid_ColumnList.size()-1)){
 				sb.append("\t\t\t{\r\n");
 				sb.append("\t\t\t\theader:'"+xt_Generator_Grid_Column.getXt_generator_grid_column_label()+"',\r\n");
@@ -677,7 +677,7 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("\tstore.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store,searchForm));});\r\n");
 		return sb.toString();
 	}
-	public String createPageDel(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageDel(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String del_url = "del"+uprepchar(xt_Generator.getXt_generator_tbname());
 		StringBuffer sb = new StringBuffer();
@@ -706,7 +706,7 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("}\r\n");
 		return sb.toString();
 	}
-	public String createPageCopy(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageCopy(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String copy_url = "copy"+uprepchar(xt_Generator.getXt_generator_tbname());
 		StringBuffer sb = new StringBuffer();
@@ -726,7 +726,7 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("}\r\n");
 		return sb.toString();
 	}
-	public String createExport(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createExport(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		StringBuffer sb = new StringBuffer();
 		sb.append("/**导出**/\r\n");
 		sb.append("function export"+uprepchar(xt_Generator.getXt_generator_tbname())+"(grid,url){\r\n");
@@ -734,7 +734,7 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("}\r\n");
 		return sb.toString();
 	}
-	public String createPageInitRight(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageInitRight(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String export_url = "export"+uprepchar(xt_Generator.getXt_generator_tbname())+"";
 		StringBuffer sb = new StringBuffer();
@@ -813,7 +813,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createPageAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageAdd(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		StringBuffer sb = new StringBuffer();
 		sb.append(createPageContentAdd(xt_Generator_Table_ColumnList, xt_Generator));
 		String path = xt_Generator.getXt_generator_path();
@@ -850,10 +850,10 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createPageContentAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageContentAdd(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String add_url = "add"+uprepchar(xt_Generator.getXt_generator_tbname());
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
 		StringBuffer sb = new StringBuffer();
 		//添加定义
 		sb.append("var "+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"WinAdd;\r\n");
@@ -863,9 +863,9 @@ public class GeneratorPage extends GeneratorUtil{
 			if(xt_Generator.getOne_to_many_type().equals("1")){
 				sb.append("var "+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"FormAddFieldSet;\r\n");
 				//定义子表fileset
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("var "+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormAddFieldSet;\r\n");
 				}
 			}
@@ -877,9 +877,9 @@ public class GeneratorPage extends GeneratorUtil{
 		//子表操作init 开始
 		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
 			if(xt_Generator.getOne_to_many_type().equals("0")){
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("\tinit"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Grid(0);\r\n");
 				}
 			}
@@ -916,9 +916,9 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("\t\t\thandler:function(button){\r\n");
 		/////////////子表信息获取////////////////////
 		if(xt_Generator.isIs_main_table() && xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.getOne_to_many_type().equals("0")){
-			List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+			List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 			for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-				Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 				sb.append("\t\t\t\tvar "+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"JsonArray = [];\r\n");
 				sb.append("\t\t\t\tfor(var i = 0; i < "+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"Grid.getStore().getCount();i++){\r\n");
 				sb.append("\t\t\t\t\t"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"JsonArray.push("+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"Grid.store.getAt(i).data); \r\n");
@@ -986,9 +986,9 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t\t\tmargin:'2 5 4 5'\r\n"); 
 			sb.append("\t\t},\r\n"); 
 			sb.append("\t\titems:[\r\n");
-			List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+			List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 			for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-				Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+				XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 				String column_comment=xt_Generator_Table_Column_Form.getColumn_comment();
 				if(null != column_comment && !"".equals(column_comment)){
 					column_comment = column_comment.replaceAll("amp;", "");
@@ -1010,7 +1010,7 @@ public class GeneratorPage extends GeneratorUtil{
 				    			String xt_script_valuefield="";
 				    			String xt_script_displayfield="";
 				    			if(null != xt_script_id && !"".equals(xt_script_id)){
-				    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				        			xt_script_key = xtScript.getXt_script_key();
 				        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 				        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -1116,7 +1116,7 @@ public class GeneratorPage extends GeneratorUtil{
 				    			String xt_script_valuefield="";
 				    			String xt_script_displayfield="";
 				    			if(null != xt_script_id && !"".equals(xt_script_id)){
-				    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				        			xt_script_key = xtScript.getXt_script_key();
 				        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 				        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -1201,10 +1201,10 @@ public class GeneratorPage extends GeneratorUtil{
 			}
 			////////////////////子表Grid配置
 			if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList= xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList= xt_Generator.getXt_Generator_TableMany_To_OneList();
 				//遍历子表GridJson值元素
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("\t\t{\r\n");
 					sb.append("\t\t\tfieldLabel:'"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"',\r\n");
 					sb.append("\t\t\txtype:'textfield',\r\n");
@@ -1216,7 +1216,7 @@ public class GeneratorPage extends GeneratorUtil{
 				
 				//遍历子表Grid元素
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					if(i == (xt_Generator_TableMany_To_OneList.size()-1)){
 						sb.append("\t\t"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"Grid\r\n");
 					}else{
@@ -1240,12 +1240,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createPageUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageUpdate(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		//回显附件使用
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_Form_AttachmentList = new ArrayList<Xt_Generator_Table_Column_Form>();
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_Form_AttachmentList = new ArrayList<XtGeneratorTableColumnForm>();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-			Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 			if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
 				xt_Generator_Table_Column_Form_AttachmentList.add(xt_Generator_Table_Column_Form);
 			}
@@ -1286,10 +1286,10 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createPageContentUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageContentUpdate(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String obj_url = "get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ById";
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
 		String update_url = "update"+uprepchar(xt_Generator.getXt_generator_tbname());
 		StringBuffer sb = new StringBuffer();
 		//添加定义
@@ -1300,9 +1300,9 @@ public class GeneratorPage extends GeneratorUtil{
 			if(xt_Generator.getOne_to_many_type().equals("1")){
 				sb.append("var "+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"FormEditFieldSet;\r\n");
 				//定义子表fileset
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("var "+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormEditFieldSet;\r\n");
 				}
 			}
@@ -1320,9 +1320,9 @@ public class GeneratorPage extends GeneratorUtil{
 		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
 			//只有为表单方式一对多则定义该对象
 			if(xt_Generator.getOne_to_many_type().equals("0")){
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("\tinit"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Grid(record.items[0].data."+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
 				}
 			}
@@ -1361,9 +1361,9 @@ public class GeneratorPage extends GeneratorUtil{
 		/////////////子表信息获取////////////////////
 		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
 			if(xt_Generator.getOne_to_many_type().equals("0")){
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("\t\t\t\tvar "+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"JsonArray = [];\r\n");
 					sb.append("\t\t\t\tfor(var i = 0; i < "+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"Grid.getStore().getCount();i++){\r\n");
 					sb.append("\t\t\t\t\t"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"JsonArray.push("+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"Grid.store.getAt(i).data); \r\n");
@@ -1441,9 +1441,9 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t\t},\r\n"); 
 			//创建列字段 开始
 			sb.append("\t\titems:[\r\n");
-			List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+			List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 			for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-				Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+				XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 				String column_comment=xt_Generator_Table_Column_Form.getColumn_comment();
 				if(null != column_comment && !"".equals(column_comment)){
 					column_comment = column_comment.replaceAll("amp;", "");
@@ -1464,7 +1464,7 @@ public class GeneratorPage extends GeneratorUtil{
 			    			String xt_script_valuefield="";
 			    			String xt_script_displayfield="";
 			    			if(null != xt_script_id && !"".equals(xt_script_id)){
-			    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+			    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 			        			xt_script_key = xtScript.getXt_script_key();
 			        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 			        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -1573,7 +1573,7 @@ public class GeneratorPage extends GeneratorUtil{
 			    			String xt_script_valuefield="";
 			    			String xt_script_displayfield="";
 			    			if(null != xt_script_id && !"".equals(xt_script_id)){
-			    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+			    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 			        			xt_script_key = xtScript.getXt_script_key();
 			        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 			        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -1660,10 +1660,10 @@ public class GeneratorPage extends GeneratorUtil{
 			}
 			////////////////////子表Grid配置
 			if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList= xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList= xt_Generator.getXt_Generator_TableMany_To_OneList();
 				//遍历子表GridJson值元素
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("\t\t{\r\n");
 					sb.append("\t\t\tfieldLabel:'"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"',\r\n");
 					sb.append("\t\t\txtype:'textfield',\r\n");
@@ -1675,7 +1675,7 @@ public class GeneratorPage extends GeneratorUtil{
 				
 				//遍历子表Grid元素
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					if(i == (xt_Generator_TableMany_To_OneList.size()-1)){
 						sb.append("\t\t"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"Grid\r\n");
 					}else{
@@ -1703,7 +1703,7 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createPageDetail(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageDetail(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		StringBuffer sb = new StringBuffer();
 		sb.append(createPageContentDetail(xt_Generator_Table_ColumnList, xt_Generator));
 		String path = xt_Generator.getXt_generator_path();
@@ -1740,10 +1740,10 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createPageContentDetail(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createPageContentDetail(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String obj_url = "get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ById";
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
 		StringBuffer sb = new StringBuffer();
 		//添加定义
 		sb.append("var "+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"WinDetail;\r\n");
@@ -1753,9 +1753,9 @@ public class GeneratorPage extends GeneratorUtil{
 			if(xt_Generator.getOne_to_many_type().equals("1")){
 				sb.append("var "+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"FormDetailFieldSet;\r\n");
 				//定义子表fileset
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("var "+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormDetailFieldSet;\r\n");
 				}
 			}
@@ -1776,9 +1776,9 @@ public class GeneratorPage extends GeneratorUtil{
 			if(xt_Generator.getOne_to_many_type().equals("0")){
 				//子表操作init 开始
 				if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
-					List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+					List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 					for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-						Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+						XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 						sb.append("\tinit"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Grid(record.items[0].data."+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
 					}
 				}
@@ -1877,9 +1877,9 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t\t},\r\n"); 
 			//创建列字段 开始
 			sb.append("\t\titems:[\r\n");
-			List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+			List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 			for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-				Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+				XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 				String column_comment=xt_Generator_Table_Column_Form.getColumn_comment();
 				if(null != column_comment && !"".equals(column_comment)){
 					column_comment = column_comment.replaceAll("amp;", "");
@@ -1900,7 +1900,7 @@ public class GeneratorPage extends GeneratorUtil{
 			    			String xt_script_valuefield="";
 			    			String xt_script_displayfield="";
 			    			if(null != xt_script_id && !"".equals(xt_script_id)){
-			    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+			    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 			        			xt_script_key = xtScript.getXt_script_key();
 			        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 			        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -2006,7 +2006,7 @@ public class GeneratorPage extends GeneratorUtil{
 			    			String xt_script_valuefield="";
 			    			String xt_script_displayfield="";
 			    			if(null != xt_script_id && !"".equals(xt_script_id)){
-			    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+			    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 			        			xt_script_key = xtScript.getXt_script_key();
 			        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 			        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -2090,10 +2090,10 @@ public class GeneratorPage extends GeneratorUtil{
 			}
 			////////////////////子表Grid配置
 			if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
-				List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList= xt_Generator.getXt_Generator_TableMany_To_OneList();
+				List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList= xt_Generator.getXt_Generator_TableMany_To_OneList();
 				//遍历子表GridJson值元素
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					sb.append("\t\t{\r\n");
 					sb.append("\t\t\tfieldLabel:'"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"',\r\n");
 					sb.append("\t\t\txtype:'textfield',\r\n");
@@ -2105,7 +2105,7 @@ public class GeneratorPage extends GeneratorUtil{
 				
 				//遍历子表Grid元素
 				for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-					Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+					XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 					if(i == (xt_Generator_TableMany_To_OneList.size()-1)){
 						sb.append("\t\t"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"Grid\r\n");
 					}else{
@@ -2129,7 +2129,7 @@ public class GeneratorPage extends GeneratorUtil{
 	/**
 	 * 创建查询操作
 	 */
-	private String createPageSearch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator) {
+	private String createPageSearch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator) {
 		String root_url = lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"Controller";
 		String list_url = "get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ListByCondition";
 		StringBuffer sb = new StringBuffer();
@@ -2171,11 +2171,11 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createAttachmentObject(Xt_Generator xt_Generator){
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+	public String createAttachmentObject(XtGenerator xt_Generator){
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 		boolean isExistFile=false;
 		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-			Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 			if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
 				isExistFile=true;
 				break;
@@ -2189,7 +2189,7 @@ public class GeneratorPage extends GeneratorUtil{
 			String kv ="";
 			String filed_name="";
 			for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-				Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+				XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 				if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
 					if(null != kv && !"".equals(kv)){
 						kv = kv+"+','+"+"record.items[0].data."+xt_Generator_Table_Column_Form.getColumn_name();
@@ -2216,12 +2216,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * isUpAndDelete 1表示拥有上传和删除功能 即新增编辑页面使用2表示不拥有上传和删除功能 即明细页面使用
 	 * @return
 	 */
-	public String createAttachmentRight(Xt_Generator xt_Generator,int isUpAndDelete){
+	public String createAttachmentRight(XtGenerator xt_Generator,int isUpAndDelete){
 		StringBuffer sb = new StringBuffer();
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 		boolean isExistFile=false;
 		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-			Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 			if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
 				isExistFile=true;
 				break;
@@ -2235,7 +2235,7 @@ public class GeneratorPage extends GeneratorUtil{
 				sb.append("/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/\r\n");
 			}
 			for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-				Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+				XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 				if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
 					if(isUpAndDelete == 2){
 						sb.append("\tinitFileRight('"+xt_Generator_Table_Column_Form.getColumn_name()+"','"+xt_Generator_Table_Column_Form.getColumn_name()+"_pic',1,2);\r\n");
@@ -2257,12 +2257,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToMany(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToMany(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		//1定义grid、store
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			String root_url = lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Controller";
 			String list_url = "get"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"ListByCondition";
 			String grid = xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"Grid";
@@ -2308,9 +2308,9 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t\t\t\twidth:77,\r\n");
 			sb.append("\t\t\t\txtype:'rownumberer'\r\n");
 			sb.append("\t\t\t},\r\n");	
-			List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+			List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
 			for(int j = 0; j < xt_Generator_Table_ColumnMany_To_OneList.size(); j++){
-				Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
 				if(j == (xt_Generator_Table_ColumnMany_To_OneList.size()-1)){
 					sb.append("\t\t\t{\r\n");
 					sb.append("\t\t\t\theader:'"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_COMMENT()+"',\r\n");
@@ -2409,10 +2409,10 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingAddBaseForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
+	public String createOneToManyUsingAddBaseForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
 		StringBuffer sb = new StringBuffer();
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		//////////////////////生成Form模块开始/////////////////////////////
 		///////创建基本信息FieldSet信息
 		sb.append("function init"+uprepchar(xt_Generator.getXt_generator_tbname())+"FormAdd(){\r\n");
@@ -2427,9 +2427,9 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("\t\tscrollable:'x',\r\n");
 		sb.append("\t\tscrollable:'y',\r\n");
 		sb.append("\t\titems:[\r\n");
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-			Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 			String column_comment=xt_Generator_Table_Column_Form.getColumn_comment();
 			if(null != column_comment && !"".equals(column_comment)){
 				column_comment = column_comment.replaceAll("amp;", "");
@@ -2451,7 +2451,7 @@ public class GeneratorPage extends GeneratorUtil{
 			    			String xt_script_valuefield="";
 			    			String xt_script_displayfield="";
 			    			if(null != xt_script_id && !"".equals(xt_script_id)){
-			    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+			    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 			        			xt_script_key = xtScript.getXt_script_key();
 			        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 			        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -2558,7 +2558,7 @@ public class GeneratorPage extends GeneratorUtil{
 			    			String xt_script_valuefield="";
 			    			String xt_script_displayfield="";
 			    			if(null != xt_script_id && !"".equals(xt_script_id)){
-			    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+			    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 			        			xt_script_key = xtScript.getXt_script_key();
 			        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 			        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -2644,7 +2644,7 @@ public class GeneratorPage extends GeneratorUtil{
 		}
 		/////////追加标识符新增和删除
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			//////////新增标记
 			sb.append("\t\t{\r\n");
 			sb.append("\t\t\txtype:'numberfield',\r\n");
@@ -2711,7 +2711,7 @@ public class GeneratorPage extends GeneratorUtil{
 		////////////////////追加子表Form///////////
 		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
 			for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-				Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One= xt_Generator_TableMany_To_OneList.get(i);
+				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One= xt_Generator_TableMany_To_OneList.get(i);
 				if((xt_Generator_TableMany_To_OneList.size()-1) == i){
 					sb.append("\t\t\t"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormAddFieldSet\r\n");
 				}else{
@@ -2731,12 +2731,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingAddForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToManyUsingAddForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			sb.append("function add"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormAdd(){\r\n");
 			sb.append("\tvar numbers = gfiValue("+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"FormAddFieldSet,'"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormNumber');\r\n");
 			sb.append("\tsfiValue("+lowOneCharAll_(xt_Generator.getXt_generator_tbname())+"FormAddFieldSet,'"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormNumber',numbers+1);\r\n");
@@ -2757,9 +2757,9 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t\t\tmargin:'2 5 4 5'\r\n");
 			sb.append("\t\t},\r\n");
 			sb.append("\t\titems:[\r\n");
-			List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+			List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
 			for(int j = 0;j < xt_Generator_Table_ColumnMany_To_OneList.size();j++){
-				Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
 				String column_comment=xt_Generator_Table_ColumnMany_To_One.getCOLUMN_COMMENT();
 				if(null != column_comment && !"".equals(column_comment)){
 					column_comment = column_comment.replaceAll("amp;", "");
@@ -2781,7 +2781,7 @@ public class GeneratorPage extends GeneratorUtil{
 				    			String xt_script_valuefield="";
 				    			String xt_script_displayfield="";
 				    			if(null != xt_script_id && !"".equals(xt_script_id)){
-				    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				        			xt_script_key = xtScript.getXt_script_key();
 				        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 				        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -2887,7 +2887,7 @@ public class GeneratorPage extends GeneratorUtil{
 				    			String xt_script_valuefield="";
 				    			String xt_script_displayfield="";
 				    			if(null != xt_script_id && !"".equals(xt_script_id)){
-				    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				        			xt_script_key = xtScript.getXt_script_key();
 				        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 				        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -3023,11 +3023,11 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingAddFieldSetForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToManyUsingAddFieldSetForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			//如果是最外层则需要加top
 			sb.append("\t"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormAddFieldSet = Ext.create('Ext.form.FieldSet',{\r\n");
 			sb.append("\t\tanchor:'100%',\r\n");
@@ -3057,10 +3057,10 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingUpdateBaseForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
+	public String createOneToManyUsingUpdateBaseForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
 		StringBuffer sb = new StringBuffer();
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		//////////////////////生成Form模块开始/////////////////////////////
 		///////创建基本信息FieldSet信息
 		sb.append("function init"+uprepchar(xt_Generator.getXt_generator_tbname())+"FormEdit(){\r\n");
@@ -3075,9 +3075,9 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("\t\tscrollable:'x',\r\n");
 		sb.append("\t\tscrollable:'y',\r\n");
 		sb.append("\t\titems:[\r\n");
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-			Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 			String column_comment=xt_Generator_Table_Column_Form.getColumn_comment();
 			if(null != column_comment && !"".equals(column_comment)){
 				column_comment = column_comment.replaceAll("amp;", "");
@@ -3098,7 +3098,7 @@ public class GeneratorPage extends GeneratorUtil{
 		    			String xt_script_valuefield="";
 		    			String xt_script_displayfield="";
 		    			if(null != xt_script_id && !"".equals(xt_script_id)){
-		    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+		    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 		        			xt_script_key = xtScript.getXt_script_key();
 		        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 		        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -3208,7 +3208,7 @@ public class GeneratorPage extends GeneratorUtil{
 		    			String xt_script_valuefield="";
 		    			String xt_script_displayfield="";
 		    			if(null != xt_script_id && !"".equals(xt_script_id)){
-		    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+		    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 		        			xt_script_key = xtScript.getXt_script_key();
 		        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 		        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -3296,7 +3296,7 @@ public class GeneratorPage extends GeneratorUtil{
 		}
 		/////////追加标识符新增和删除
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			//////////新增标记
 			sb.append("\t\t{\r\n");
 			sb.append("\t\t\txtype:'numberfield',\r\n");
@@ -3363,7 +3363,7 @@ public class GeneratorPage extends GeneratorUtil{
 		////////////////////追加子表Form///////////
 		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
 			for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-				Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One= xt_Generator_TableMany_To_OneList.get(i);
+				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One= xt_Generator_TableMany_To_OneList.get(i);
 				if((xt_Generator_TableMany_To_OneList.size()-1) == i){
 					sb.append("\t\t\t"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormEditFieldSet\r\n");
 				}else{
@@ -3386,12 +3386,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingEditForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToManyUsingEditForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			sb.append("function addUpdate"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormEdit(data){\r\n");
 			//定义删除子表URL
 			String root_url = lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Controller";
@@ -3416,9 +3416,9 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t\t\tmargin:'2 5 4 5'\r\n");
 			sb.append("\t\t},\r\n");
 			sb.append("\t\titems:[\r\n");
-			List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+			List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
 			for(int j = 0;j < xt_Generator_Table_ColumnMany_To_OneList.size();j++){
-				Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
 				String column_comment=xt_Generator_Table_ColumnMany_To_One.getCOLUMN_COMMENT();
 				if(null != column_comment && !"".equals(column_comment)){
 					column_comment = column_comment.replaceAll("amp;", "");
@@ -3440,7 +3440,7 @@ public class GeneratorPage extends GeneratorUtil{
 				    			String xt_script_valuefield="";
 				    			String xt_script_displayfield="";
 				    			if(null != xt_script_id && !"".equals(xt_script_id)){
-				    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				        			xt_script_key = xtScript.getXt_script_key();
 				        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 				        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -3550,7 +3550,7 @@ public class GeneratorPage extends GeneratorUtil{
 				    			String xt_script_valuefield="";
 				    			String xt_script_displayfield="";
 				    			if(null != xt_script_id && !"".equals(xt_script_id)){
-				    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				        			xt_script_key = xtScript.getXt_script_key();
 				        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 				        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -3732,11 +3732,11 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingUpdateFieldSetForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToManyUsingUpdateFieldSetForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			//如果是最外层则需要加top
 			sb.append("\t"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormEditFieldSet = Ext.create('Ext.form.FieldSet',{\r\n");
 			sb.append("\t\tanchor:'100%',\r\n");
@@ -3763,12 +3763,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingUpdateFormCallFn(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToManyUsingUpdateFormCallFn(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		sb.append("function callFnUpdate(form, action){\r\n");
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			sb.append("\tvar "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+" = action.result.data."+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+";\r\n");
 			sb.append("\tfor(var i = 0; i < "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+".length; i++){\r\n");
 			sb.append("\t\taddUpdate"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormEdit("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"[i]);\r\n");
@@ -3785,10 +3785,10 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingDetailBaseForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
+	public String createOneToManyUsingDetailBaseForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
 		StringBuffer sb = new StringBuffer();
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		//////////////////////生成Form模块开始/////////////////////////////
 		///////创建基本信息FieldSet信息
 		sb.append("function init"+uprepchar(xt_Generator.getXt_generator_tbname())+"FormDetail(){\r\n");
@@ -3803,9 +3803,9 @@ public class GeneratorPage extends GeneratorUtil{
 		sb.append("\t\tscrollable:'x',\r\n");
 		sb.append("\t\tscrollable:'y',\r\n");
 		sb.append("\t\titems:[\r\n");
-		List<Xt_Generator_Table_Column_Form> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
-			Xt_Generator_Table_Column_Form xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 			String column_comment=xt_Generator_Table_Column_Form.getColumn_comment();
 			if(null != column_comment && !"".equals(column_comment)){
 				column_comment = column_comment.replaceAll("amp;", "");
@@ -3827,7 +3827,7 @@ public class GeneratorPage extends GeneratorUtil{
 			    			String xt_script_valuefield="";
 			    			String xt_script_displayfield="";
 			    			if(null != xt_script_id && !"".equals(xt_script_id)){
-			    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+			    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 			        			xt_script_key = xtScript.getXt_script_key();
 			        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 			        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -3937,7 +3937,7 @@ public class GeneratorPage extends GeneratorUtil{
 			    			String xt_script_valuefield="";
 			    			String xt_script_displayfield="";
 			    			if(null != xt_script_id && !"".equals(xt_script_id)){
-			    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+			    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 			        			xt_script_key = xtScript.getXt_script_key();
 			        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 			        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -4026,7 +4026,7 @@ public class GeneratorPage extends GeneratorUtil{
 		}
 		/////////追加标识符新增和删除
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			//////////新增标记
 			sb.append("\t\t{\r\n");
 			sb.append("\t\t\txtype:'numberfield',\r\n");
@@ -4094,7 +4094,7 @@ public class GeneratorPage extends GeneratorUtil{
 		////////////////////追加子表Form///////////
 		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
 			for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-				Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One= xt_Generator_TableMany_To_OneList.get(i);
+				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One= xt_Generator_TableMany_To_OneList.get(i);
 				if((xt_Generator_TableMany_To_OneList.size()-1) == i){
 					sb.append("\t\t\t"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormDetailFieldSet\r\n");
 				}else{
@@ -4117,12 +4117,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingDetailForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		Xt_ScriptService xt_ScriptService = (Xt_ScriptService)SpringUtil.getBean("xt_ScriptService");
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToManyUsingDetailForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		XtScriptService xt_ScriptService = (XtScriptService)SpringUtil.getBean("xtScriptService");
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			sb.append("function addDetail"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormDetail(data){\r\n");
 			//定义删除子表URL
 			String root_url = lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Controller";
@@ -4148,9 +4148,9 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("\t\t\tmargin:'2 5 4 5'\r\n");
 			sb.append("\t\t},\r\n");
 			sb.append("\t\titems:[\r\n");
-			List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+			List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
 			for(int j = 0;j < xt_Generator_Table_ColumnMany_To_OneList.size();j++){
-				Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
 				String column_comment=xt_Generator_Table_ColumnMany_To_One.getCOLUMN_COMMENT();
 				if(null != column_comment && !"".equals(column_comment)){
 					column_comment = column_comment.replaceAll("amp;", "");
@@ -4172,7 +4172,7 @@ public class GeneratorPage extends GeneratorUtil{
 				    			String xt_script_valuefield="";
 				    			String xt_script_displayfield="";
 				    			if(null != xt_script_id && !"".equals(xt_script_id)){
-				    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				        			xt_script_key = xtScript.getXt_script_key();
 				        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 				        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -4280,7 +4280,7 @@ public class GeneratorPage extends GeneratorUtil{
 				    			String xt_script_valuefield="";
 				    			String xt_script_displayfield="";
 				    			if(null != xt_script_id && !"".equals(xt_script_id)){
-				    				Xt_Script xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
+				    				XtScript xtScript = xt_ScriptService.getXtScriptById(xt_script_id);
 				        			xt_script_key = xtScript.getXt_script_key();
 				        			xt_script_valuefield = xtScript.getXt_script_valuefield();
 				        			xt_script_displayfield = xtScript.getXt_script_displayfield();
@@ -4413,11 +4413,11 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingDetailFieldSetForm(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToManyUsingDetailFieldSetForm(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			//如果是最外层则需要加top
 			sb.append("\t"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormDetailFieldSet = Ext.create('Ext.form.FieldSet',{\r\n");
 			sb.append("\t\tanchor:'100%',\r\n");
@@ -4433,12 +4433,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createOneToManyUsingDetailFormCallFn(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
-		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+	public String createOneToManyUsingDetailFormCallFn(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
+		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
 		StringBuffer sb = new StringBuffer();
 		sb.append("function callFnDetail(form, action){\r\n");
 		for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-			Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+			XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
 			sb.append("\tvar "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+" = action.result.data."+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+";\r\n");
 			sb.append("\tfor(var i = 0; i < "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+".length; i++){\r\n");
 			sb.append("\t\taddDetail"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormDetail("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"[i]);\r\n");
@@ -4454,12 +4454,12 @@ public class GeneratorPage extends GeneratorUtil{
 	 * isUpAndDelete 1表示拥有上传和删除功能 即新增编辑页面使用2表示不拥有上传和删除功能 即明细页面使用
 	 * @return
 	 */
-	public String createAttachmentOneToManyRight(Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One,int isUpAndDelete){
+	public String createAttachmentOneToManyRight(XtGeneratorTableManyToOne xt_Generator_TableMany_To_One,int isUpAndDelete){
 		StringBuffer sb = new StringBuffer();
-		List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+		List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
 		boolean isExistFile=false;
 		for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
-			Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
+			XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
 			if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
 				isExistFile=true;
 				break;
@@ -4473,7 +4473,7 @@ public class GeneratorPage extends GeneratorUtil{
 				sb.append("/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/\r\n");
 			}
 			for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
-				Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
 				if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
 					if(isUpAndDelete == 2){
 						sb.append("\tinitFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"['+numbers+']."+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"['+numbers+']."+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',1,2);\r\n");
@@ -4499,11 +4499,11 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param isAddUpdateOrDetail新增编辑 还是明细
 	 * @return
 	 */
-	public String createAttachmentOneToManyObject(Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One,String addUpdateDetailType,int isAddUpdateOrDetail){
-		List<Xt_Generator_Table_ColumnMany_To_One> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+	public String createAttachmentOneToManyObject(XtGeneratorTableManyToOne xt_Generator_TableMany_To_One,String addUpdateDetailType,int isAddUpdateOrDetail){
+		List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
 		boolean isExistFile=false;
 		for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
-			Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
+			XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
 			if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
 				isExistFile=true;
 				break;
@@ -4514,7 +4514,7 @@ public class GeneratorPage extends GeneratorUtil{
 			//回显附件使用
 			sb.append("\t\t\t\t\t/**配置附件回显方法开始**/\r\n");
 			for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
-				Xt_Generator_Table_ColumnMany_To_One xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
 				if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
 					sb.append("\t\t\t\t\tif("+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Form"+addUpdateDetailType+"YField == '"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"'){\r\n");
 					sb.append("\t\t\t\t\t\tvar params = {xt_attachment_id:data[dataKey],field_name:"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Form"+addUpdateDetailType+"Field};\r\n");

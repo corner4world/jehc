@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtServiceCenterParameter">
+	<!--初始化分页-->
+	<select id="getXtServiceCenterParameterListByCondition" resultType="jehc.xtmodules.xtmodel.XtServiceCenterParameter" parameterType="map">
+		SELECT
+			`xt_service_center_parameter_id`,
+			`xt_service_center_id`,
+			`xt_service_center_parameter_name`,
+			`xt_service_center_parameter_type`,
+			`xt_service_center_parameter_remark`,
+			`xt_userinfo_id`,
+			`xt_service_center_parameter_status`,
+			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
+			DATE_FORMAT(`mtime`,'%Y-%m-%d %H:%i:%s') AS `mtime`,
+			`attach_filetype`,
+			`attach_fileconfig`
+		FROM 
+			xt_service_center_parameter
+		WHERE 1=1
+		<if test="null != xt_service_center_status">
+			AND xt_service_center_status = #{xt_service_center_status}
+		</if>
+		<if test="null != xt_service_center_type">
+			AND xt_service_center_type = #{xt_service_center_type}
+		</if>
+		<if test="null != xt_service_center_name">
+			AND instr(xt_service_center_name,#{xt_service_center_name})
+		</if>
+		<if test = "null != xt_service_center_id">
+			AND xt_service_center_id = #{xt_service_center_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtServiceCenterParameterById" resultType="jehc.xtmodules.xtmodel.XtServiceCenterParameter" parameterType="string">
+		SELECT
+			`xt_service_center_parameter_id`,
+			`xt_service_center_id`,
+			`xt_service_center_parameter_name`,
+			`xt_service_center_parameter_type`,
+			`xt_service_center_parameter_remark`,
+			`xt_userinfo_id`,
+			`xt_service_center_parameter_status`,
+			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
+			DATE_FORMAT(`mtime`,'%Y-%m-%d %H:%i:%s') AS `mtime`,
+			`attach_filetype`,
+			`attach_fileconfig`
+		FROM 
+			xt_service_center_parameter
+		WHERE xt_service_center_parameter_id=#{xt_service_center_parameter_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtServiceCenterParameter" parameterType="jehc.xtmodules.xtmodel.XtServiceCenterParameter">
+		INSERT INTO
+			xt_service_center_parameter
+			(
+			`xt_service_center_parameter_id`,
+			`xt_service_center_id`,
+			`xt_service_center_parameter_name`,
+			`xt_service_center_parameter_type`,
+			`xt_service_center_parameter_remark`,
+			`xt_userinfo_id`,
+			`xt_service_center_parameter_status`,
+			`ctime`,
+			`mtime`,
+			`attach_filetype`,
+			`attach_fileconfig`
+			)
+			VALUES
+			(
+			#{xt_service_center_parameter_id},
+			#{xt_service_center_id},
+			#{xt_service_center_parameter_name},
+			#{xt_service_center_parameter_type},
+			#{xt_service_center_parameter_remark},
+			#{xt_userinfo_id},
+			#{xt_service_center_parameter_status},
+			#{ctime},
+			#{mtime},
+			#{attach_filetype},
+			#{attach_fileconfig}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtServiceCenterParameter" parameterType="jehc.xtmodules.xtmodel.XtServiceCenterParameter">
+		UPDATE
+			xt_service_center_parameter
+		SET
+			`xt_service_center_parameter_id` = #{xt_service_center_parameter_id},
+			`xt_service_center_id` = #{xt_service_center_id},
+			`xt_service_center_parameter_name` = #{xt_service_center_parameter_name},
+			`xt_service_center_parameter_type` = #{xt_service_center_parameter_type},
+			`xt_service_center_parameter_remark` = #{xt_service_center_parameter_remark},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_service_center_parameter_status` = #{xt_service_center_parameter_status},
+			`ctime` = #{ctime},
+			`mtime` = #{mtime},
+			`attach_filetype` = #{attach_filetype},
+			`attach_fileconfig` = #{attach_fileconfig}
+		WHERE xt_service_center_parameter_id=#{xt_service_center_parameter_id}
+	</update>
+	
+	<!-- 修改（根据动态条件） -->
+	<update id="updateXtServiceCenterParameterBySelective" parameterType="jehc.xtmodules.xtmodel.XtServiceCenterParameter">
+		UPDATE
+			xt_service_center_parameter
+		<set>
+			<if test="xt_service_center_parameter_id != null">
+                `xt_service_center_parameter_id` = #{xt_service_center_parameter_id},
+            </if>
+            <if test="xt_service_center_id !=  null">
+            	`xt_service_center_id` = #{xt_service_center_id},
+            </if>
+            <if test="xt_service_center_parameter_name !=  null">
+            	`xt_service_center_parameter_name` = #{xt_service_center_parameter_name},
+            </if>
+            <if test="xt_service_center_parameter_type !=  null">
+            	`xt_service_center_parameter_type` = #{xt_service_center_parameter_type},
+            </if>
+            <if test="xt_service_center_parameter_remark !=  null">
+            	`xt_service_center_parameter_remark` = #{xt_service_center_parameter_remark},
+            </if>
+            <if test="xt_userinfo_id !=  null">
+            	`xt_userinfo_id` = #{xt_userinfo_id},
+            </if>
+            <if test="xt_service_center_parameter_status !=  null">
+            	`xt_service_center_parameter_status` = #{xt_service_center_parameter_status},
+            </if>
+            <if test="ctime !=  null">
+            	`ctime` = #{ctime},
+            </if>
+            <if test="mtime !=  null">
+            	`mtime` = #{mtime},
+            </if>
+            <if test="attach_filetype !=  null">
+            	`attach_filetype` = #{attach_filetype},
+            </if>
+            <if test="attach_fileconfig !=  null">
+            	`attach_fileconfig` = #{attach_fileconfig},
+            </if>
+		</set>
+		WHERE xt_service_center_parameter_id=#{xt_service_center_parameter_id}
+	</update>
+	
+	<!--删除-->
+	<delete id="delXtServiceCenterParameter" parameterType="map">
+		DELETE FROM xt_service_center_parameter WHERE xt_service_center_parameter_id IN
+		<foreach item="item" index="index" collection="xt_service_center_parameter_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtServiceCenterParameter" parameterType="list">
+		INSERT INTO
+			xt_service_center_parameter
+			(
+			`xt_service_center_parameter_id`,
+			`xt_service_center_id`,
+			`xt_service_center_parameter_name`,
+			`xt_service_center_parameter_type`,
+			`xt_service_center_parameter_remark`,
+			`xt_userinfo_id`,
+			`xt_service_center_parameter_status`,
+			`ctime`,
+			`mtime`,
+			`attach_filetype`,
+			`attach_fileconfig`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_service_center_parameter_id},
+			#{item.xt_service_center_id},
+			#{item.xt_service_center_parameter_name},
+			#{item.xt_service_center_parameter_type},
+			#{item.xt_service_center_parameter_remark},
+			#{item.xt_userinfo_id},
+			#{item.xt_service_center_parameter_status},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.attach_filetype},
+			#{item.attach_fileconfig}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtServiceCenterParameter" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_service_center_parameter
+			SET
+				`xt_service_center_parameter_id` = #{item.xt_service_center_parameter_id},
+				`xt_service_center_id` = #{item.xt_service_center_id},
+				`xt_service_center_parameter_name` = #{item.xt_service_center_parameter_name},
+				`xt_service_center_parameter_type` = #{item.xt_service_center_parameter_type},
+				`xt_service_center_parameter_remark` = #{item.xt_service_center_parameter_remark},
+				`xt_userinfo_id` = #{item.xt_userinfo_id},
+				`xt_service_center_parameter_status` = #{item.xt_service_center_parameter_status},
+				`ctime` = #{item.ctime},
+				`mtime` = #{item.mtime},
+				`attach_filetype` = #{item.attach_filetype},
+				`attach_fileconfig` = #{item.attach_fileconfig}
+			WHERE xt_service_center_parameter_id=#{item.xt_service_center_parameter_id}
+		</foreach>
+	</update>
+	
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtServiceCenterParameterBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_service_center_parameter
+			<set>
+				<if test="xt_service_center_parameter_id != null">
+	                `xt_service_center_parameter_id` = #{item.xt_service_center_parameter_id},
+	            </if>
+	            <if test="xt_service_center_id !=  null">
+	            	`xt_service_center_id` = #{item.xt_service_center_id},
+	            </if>
+	            <if test="xt_service_center_parameter_name !=  null">
+	            	`xt_service_center_parameter_name` = #{item.xt_service_center_parameter_name},
+	            </if>
+	            <if test="xt_service_center_parameter_type !=  null">
+	            	`xt_service_center_parameter_type` = #{item.xt_service_center_parameter_type},
+	            </if>
+	            <if test="xt_service_center_parameter_remark !=  null">
+	            	`xt_service_center_parameter_remark` = #{item.xt_service_center_parameter_remark},
+	            </if>
+	            <if test="xt_userinfo_id !=  null">
+	            	`xt_userinfo_id` = #{item.xt_userinfo_id},
+	            </if>
+	            <if test="xt_service_center_parameter_status !=  null">
+	            	`xt_service_center_parameter_status` = #{item.xt_service_center_parameter_status},
+	            </if>
+	            <if test="ctime !=  null">
+	            	`ctime` = #{item.ctime},
+	            </if>
+	            <if test="mtime !=  null">
+	            	`mtime` = #{item.mtime},
+	            </if>
+	            <if test="attach_filetype !=  null">
+	            	`attach_filetype` =#{item.attach_filetype},
+	            </if>
+	            <if test="attach_fileconfig !=  null">
+	            	`attach_fileconfig` = #{item.attach_fileconfig},
+	            </if>
+			</set>
+			WHERE xt_service_center_parameter_id=#{item.xt_service_center_parameter_id}
+		</foreach>
+	</update>
+
+	<!--根据外键删除-->
+	<delete id="delXtServiceCenterParameterByForeignKey" parameterType="string">
+		DELETE FROM xt_service_center_parameter WHERE xt_service_center_id = #{xt_service_center_id}
+	</delete>
+</mapper>

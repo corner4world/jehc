@@ -13,10 +13,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtmodel.Xt_Generator;
-import jehc.xtmodules.xtmodel.Xt_Generator_Search_Filed;
-import jehc.xtmodules.xtmodel.Xt_Generator_TableMany_To_One;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
+import jehc.xtmodules.xtmodel.XtGenerator;
+import jehc.xtmodules.xtmodel.XtGeneratorSearchFiled;
+import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 
 /**
  * 生成控制层代码
@@ -29,7 +29,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	 * @param xt_Generator_Table_ColumnList
 	 * @param xt_Generator
 	 */
-	 public String createWeb(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	 public String createWeb(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	StringBuffer sb = new StringBuffer();
     	sb.append("package "+xt_Generator.getXt_generator_web_package()+";\r\n");
@@ -48,9 +48,9 @@ public class GeneratorWeb extends GeneratorUtil{
         	if(xt_Generator.getOne_to_many_type().equals("0")){
         		sb.append("import xtCore.util.JsonUtil;\r\n");
         	}
-        	List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        	List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
         	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-        		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+        		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
         		sb.append("import "+ xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_model_package()+"."+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+";\r\n");
         		sb.append("import "+ xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_service_package()+"."+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service;\r\n");
         	}
@@ -97,9 +97,9 @@ public class GeneratorWeb extends GeneratorUtil{
         sb.append("\tprivate "+ toUpperCase(xt_Generator.getXt_generator_tbname())+"Service "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Service;\r\n");
         //判断是否为一对多并且是主表 如果为一对多则注解子表接口
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
-        	List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        	List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
         	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-        		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+        		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
         		sb.append("\t@Autowired\r\n");
         		sb.append("\tprivate "+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service;\r\n");
         	}
@@ -156,7 +156,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	  * @param xt_Generator
 	  * @return
 	  */
-	public String createWebLoadPage(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createWebLoadPage(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -178,7 +178,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createWebList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator) {
+	public String createWebList(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator) {
 		StringBuffer sb = new StringBuffer();
 		//添加注释模块
 		sb.append("\t/**\r\n");
@@ -186,7 +186,7 @@ public class GeneratorWeb extends GeneratorUtil{
     	sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+" \r\n");
         sb.append("\t* @param request \r\n");
         sb.append("\t*/\r\n");
-        List<Xt_Generator_Search_Filed> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
+        List<XtGeneratorSearchFiled> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
         //添加方法模块
         sb.append("\t@ResponseBody\r\n");
         sb.append("\t@RequestMapping(value=\"/get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ListByCondition\",method={RequestMethod.POST,RequestMethod.GET})\r\n");
@@ -233,7 +233,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	* @param xt_Generator
 	* @return
 	*/
-	public String createWebObj(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator) {
+	public String createWebObj(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator) {
 		StringBuffer sb = new StringBuffer();
 		//添加注释模块
 		sb.append("\t/**\r\n");
@@ -257,7 +257,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createWebAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator) {
+	public String createWebAdd(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator) {
 		StringBuffer sb = new StringBuffer();
 		if(xt_Generator.getIs_one_to_many().equals("1")){
 			
@@ -300,7 +300,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createWebUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator) {
+	public String createWebUpdate(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator) {
 		StringBuffer sb = new StringBuffer();
 		//添加注释模块
 		sb.append("\t/**\r\n");
@@ -336,7 +336,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createWebeDel(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator) {
+	public String createWebeDel(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator) {
 		StringBuffer sb = new StringBuffer();
 		//添加注释模块
 		sb.append("\t/**\r\n");
@@ -374,7 +374,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createWebCopy(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator) {
+	public String createWebCopy(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator) {
 		StringBuffer sb = new StringBuffer();
 		//添加注释模块
 		sb.append("\t/**\r\n");
@@ -395,9 +395,9 @@ public class GeneratorWeb extends GeneratorUtil{
         //判断是否为一对多 并且是主表 如果为一对多则导入实体
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
     		//设置从表
-            List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+            List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
         	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-        		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+        		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
         		if(i == 0){
         			sb.append("\t\t\tMap<String, Object> condition = new HashMap<String, Object>();\r\n");
         			sb.append("\t\t\tcondition.put(\""+getColumnKey(xt_Generator_Table_ColumnList)+"\", "+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
@@ -425,7 +425,7 @@ public class GeneratorWeb extends GeneratorUtil{
 	 * @param xt_Generator
 	 * @return
 	 */
-	public String createExport(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	public String createExport(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		StringBuffer sb = new StringBuffer();
 		//添加注释模块
 		sb.append("\t/**\r\n");

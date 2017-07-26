@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrSchemaTemplet">
+	<!--初始化分页-->
+	<select id="getSolrSchemaTempletListByCondition" resultType="jehc.solrmodules.solrmodel.SolrSchemaTemplet" parameterType="map">
+		SELECT
+			solr_schema_templet.`solr_schema_templet_id`,
+			solr_schema_templet.`solr_schema_templet_content`,
+			solr_schema_templet.`solr_schema_templet_ctime`,
+			solr_schema_templet.`solr_schema_templet_mtime`,
+			solr_schema_templet.`xt_userinfo_id`,
+			solr_schema_templet.`solr_schema_templet_status`,
+			solr_schema_templet.`solr_schema_templet_title`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_schema_templet solr_schema_templet LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_schema_templet.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != solr_schema_templet_status">
+			AND solr_schema_templet.solr_schema_templet_status = #{solr_schema_templet_status}
+		</if>
+		<if test="null != solr_schema_templet_title">
+			AND solr_schema_templet.solr_schema_templet_title like '%${solr_schema_templet_title}%'
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrSchemaTempletById" resultType="jehc.solrmodules.solrmodel.SolrSchemaTemplet" parameterType="string">
+		SELECT
+			solr_schema_templet.`solr_schema_templet_id`,
+			solr_schema_templet.`solr_schema_templet_content`,
+			solr_schema_templet.`solr_schema_templet_ctime`,
+			solr_schema_templet.`solr_schema_templet_mtime`,
+			solr_schema_templet.`xt_userinfo_id`,
+			solr_schema_templet.`solr_schema_templet_status`,
+			solr_schema_templet.`solr_schema_templet_title`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_schema_templet solr_schema_templet LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_schema_templet.xt_userinfo_id
+		WHERE solr_schema_templet.solr_schema_templet_id=#{solr_schema_templet_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrSchemaTemplet" parameterType="jehc.solrmodules.solrmodel.SolrSchemaTemplet">
+		INSERT INTO
+			solr_schema_templet
+			(
+			`solr_schema_templet_id`,
+			`solr_schema_templet_content`,
+			`solr_schema_templet_ctime`,
+			`xt_userinfo_id`,
+			`solr_schema_templet_status`,
+			`solr_schema_templet_title`
+			)
+			VALUES
+			(
+			#{solr_schema_templet_id},
+			#{solr_schema_templet_content},
+			#{solr_schema_templet_ctime},
+			#{xt_userinfo_id},
+			#{solr_schema_templet_status},
+			#{solr_schema_templet_title}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrSchemaTemplet" parameterType="jehc.solrmodules.solrmodel.SolrSchemaTemplet">
+		UPDATE
+			solr_schema_templet
+		SET
+			`solr_schema_templet_id` = #{solr_schema_templet_id},
+			`solr_schema_templet_content` = #{solr_schema_templet_content},
+			`solr_schema_templet_mtime` = #{solr_schema_templet_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`solr_schema_templet_status` = #{solr_schema_templet_status},
+			`solr_schema_templet_title` = #{solr_schema_templet_title}
+		WHERE solr_schema_templet_id=#{solr_schema_templet_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrSchemaTemplet" parameterType="map">
+		DELETE FROM solr_schema_templet WHERE solr_schema_templet_id IN
+		<foreach item="item" index="index" collection="solr_schema_templet_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

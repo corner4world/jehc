@@ -1,0 +1,42 @@
+package jehc.xtmodules.xtservice;
+import java.util.List;
+import java.util.Map;
+
+import jehc.xtmodules.xtmodel.XtSms;
+
+/**
+* 短信配置表 
+* 2015-06-04 13:35:07  邓纯杰
+*/
+public interface XtSmsService{
+	/**
+	* 分页
+	* @param condition 
+	* @return
+	*/
+	public List<XtSms> getXtSmsListByCondition(Map<String,Object> condition);
+	/**
+	* 查询对象
+	* @param xt_sms_id 
+	* @return
+	*/
+	public XtSms getXtSmsById(String xt_sms_id);
+	/**
+	* 添加
+	* @param xt_sms 
+	* @return
+	*/
+	public int addXtSms(XtSms xt_Sms);
+	/**
+	* 修改
+	* @param xt_sms 
+	* @return
+	*/
+	public int updateXtSms(XtSms xt_Sms);
+	/**
+	* 删除
+	* @param condition 
+	* @return
+	*/
+	public int delXtSms(Map<String,Object> condition);
+}

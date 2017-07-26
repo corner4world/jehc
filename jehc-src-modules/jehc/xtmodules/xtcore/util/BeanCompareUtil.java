@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.base.BaseXtModifyRecordRun;
 import jehc.xtmodules.xtcore.util.logger.Log4j;
-import jehc.xtmodules.xtmodel.Xt_Modify_Record;
+import jehc.xtmodules.xtmodel.XtModifyRecord;
 
 /**
  * 实体比较
@@ -66,7 +66,7 @@ public class BeanCompareUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> List callBackListUpdateInfo(T oldT, T newT, Class<?> c) throws Exception{
-		List<Xt_Modify_Record> list = new ArrayList<Xt_Modify_Record>();
+		List<XtModifyRecord> list = new ArrayList<XtModifyRecord>();
         Class onwClass = c.getClass();
         Field[] fields = onwClass.getDeclaredFields();
         for (Field f : fields) {
@@ -94,7 +94,7 @@ public class BeanCompareUtil {
             }
 //            if (nValue != null && !nValue.equals(oValue) && StringUtils.isNotBlank(oValue.toString())) {
             if (!nValue.equals(oValue)) {
-            	Xt_Modify_Record record = new Xt_Modify_Record();
+            	XtModifyRecord record = new XtModifyRecord();
             	record.setXt_modify_record_aftervalue(""+newV);
             	record.setXt_modify_record_beforevalue(""+oldV);
             	record.setXt_modify_record_ctime(CommonUtils.getSimpleDateFormat());
@@ -147,14 +147,14 @@ public class BeanCompareUtil {
 		try {
 			JSONObject oldJson = JsonUtil.toJsonObj(oldT);
 			JSONObject newJson = JsonUtil.toJsonObj(newT);
-			List<Xt_Modify_Record> list = new ArrayList<Xt_Modify_Record>();
+			List<XtModifyRecord> list = new ArrayList<XtModifyRecord>();
 			Iterator iterator = oldJson.keys();
 			while(iterator.hasNext()){
 	            String key = (String) iterator.next();
 	            String oldV = oldJson.getString(key);
 	            String newV = newJson.getString(key);
 	            if(!oldV.equals(newV)){
-	            	Xt_Modify_Record record = new Xt_Modify_Record();
+	            	XtModifyRecord record = new XtModifyRecord();
 	            	record.setXt_modify_record_aftervalue(""+newV);
 	            	record.setXt_modify_record_beforevalue(""+oldV);
 	            	record.setXt_modify_record_ctime(CommonUtils.getSimpleDateFormat());
@@ -185,7 +185,7 @@ public class BeanCompareUtil {
 		try {
 			JSONObject oldJson = JsonUtil.toJsonObj(oldT);
 			JSONObject newJson = JsonUtil.toJsonObj(newT);
-			List<Xt_Modify_Record> list = new ArrayList<Xt_Modify_Record>();
+			List<XtModifyRecord> list = new ArrayList<XtModifyRecord>();
 			Iterator iterator = oldJson.keys();
 			while(iterator.hasNext()){
 	            String key = (String) iterator.next();
@@ -195,7 +195,7 @@ public class BeanCompareUtil {
 	            			String oldV = oldJson.getString(key);
 	        	            String newV = newJson.getString(key);
 	        	            if(!oldV.equals(newV)){
-	        	            	Xt_Modify_Record record = new Xt_Modify_Record();
+	        	            	XtModifyRecord record = new XtModifyRecord();
 	        	            	record.setXt_modify_record_aftervalue(""+newV);
 	        	            	record.setXt_modify_record_beforevalue(""+oldV);
 	        	            	record.setXt_modify_record_ctime(CommonUtils.getSimpleDateFormat());

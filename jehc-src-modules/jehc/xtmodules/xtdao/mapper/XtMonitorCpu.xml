@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtMonitorCpu">
+	<!--初始化分页-->
+	<select id="getXtMonitorCpuListByCondition" resultType="jehc.xtmodules.xtmodel.XtMonitorCpu" parameterType="map">
+		SELECT
+			`xt_monitor_cpu_id`,
+			`xt_monitor_cpu_totalMHz`,
+			`xt_monitor_cpu_producer`,
+			`xt_monitor_cpu_cache`,
+			`xt_monitor_cpu_user_use_rate`,
+			`xt_monitor_cpu_sys_use_rate`,
+			`xt_monitor_cpu_wait_use_rate`,
+			`xt_monitor_cpu_error_use_rate`,
+			`xt_monitor_cpu_currently_idle`,
+			`xt_monitor_cpu_use_rate`,
+			`xt_monitorNum`,
+			`xt_monitor_cpuTime`
+		FROM 
+			xt_monitor_cpu 
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtMonitorCpuById" resultType="jehc.xtmodules.xtmodel.XtMonitorCpu" parameterType="string">
+		SELECT
+			`xt_monitor_cpu_id`,
+			`xt_monitor_cpu_totalMHz`,
+			`xt_monitor_cpu_producer`,
+			`xt_monitor_cpu_cache`,
+			`xt_monitor_cpu_user_use_rate`,
+			`xt_monitor_cpu_sys_use_rate`,
+			`xt_monitor_cpu_wait_use_rate`,
+			`xt_monitor_cpu_error_use_rate`,
+			`xt_monitor_cpu_currently_idle`,
+			`xt_monitor_cpu_use_rate`,
+			`xt_monitorNum`,
+			`xt_monitor_cpuTime`
+		FROM 
+			xt_monitor_cpu
+		WHERE xt_monitor_cpu_id=#{xt_monitor_cpu_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtMonitorCpu" parameterType="jehc.xtmodules.xtmodel.XtMonitorCpu">
+		INSERT INTO
+			xt_monitor_cpu
+			(
+			`xt_monitor_cpu_id`,
+			`xt_monitor_cpu_totalMHz`,
+			`xt_monitor_cpu_producer`,
+			`xt_monitor_cpu_cache`,
+			`xt_monitor_cpu_user_use_rate`,
+			`xt_monitor_cpu_sys_use_rate`,
+			`xt_monitor_cpu_wait_use_rate`,
+			`xt_monitor_cpu_error_use_rate`,
+			`xt_monitor_cpu_currently_idle`,
+			`xt_monitor_cpu_use_rate`,
+			`xt_monitorNum`,
+			`xt_monitor_cpuTime`
+			)
+			VALUES
+			(
+			#{xt_monitor_cpu_id},
+			#{xt_monitor_cpu_totalMHz},
+			#{xt_monitor_cpu_producer},
+			#{xt_monitor_cpu_cache},
+			#{xt_monitor_cpu_user_use_rate},
+			#{xt_monitor_cpu_sys_use_rate},
+			#{xt_monitor_cpu_wait_use_rate},
+			#{xt_monitor_cpu_error_use_rate},
+			#{xt_monitor_cpu_currently_idle},
+			#{xt_monitor_cpu_use_rate},
+			#{xt_monitorNum},
+			#{xt_monitor_cpuTime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtMonitorCpu" parameterType="jehc.xtmodules.xtmodel.XtMonitorCpu">
+		UPDATE
+			xt_monitor_cpu
+		SET
+			`xt_monitor_cpu_id` = #{xt_monitor_cpu_id},
+			`xt_monitor_cpu_totalMHz` = #{xt_monitor_cpu_totalMHz},
+			`xt_monitor_cpu_producer` = #{xt_monitor_cpu_producer},
+			`xt_monitor_cpu_cache` = #{xt_monitor_cpu_cache},
+			`xt_monitor_cpu_user_use_rate` = #{xt_monitor_cpu_user_use_rate},
+			`xt_monitor_cpu_sys_use_rate` = #{xt_monitor_cpu_sys_use_rate},
+			`xt_monitor_cpu_wait_use_rate` = #{xt_monitor_cpu_wait_use_rate},
+			`xt_monitor_cpu_error_use_rate` = #{xt_monitor_cpu_error_use_rate},
+			`xt_monitor_cpu_currently_idle` = #{xt_monitor_cpu_currently_idle},
+			`xt_monitor_cpu_use_rate` = #{xt_monitor_cpu_use_rate},
+			`xt_monitorNum` = #{xt_monitorNum},
+			`xt_monitor_cpuTime` = #{xt_monitor_cpuTime}
+		WHERE xt_monitor_cpu_id=#{xt_monitor_cpu_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtMonitorCpu" parameterType="map">
+		DELETE FROM xt_monitor_cpu WHERE xt_monitor_cpu_id IN
+		<foreach item="item" index="index" collection="xt_monitor_cpu_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

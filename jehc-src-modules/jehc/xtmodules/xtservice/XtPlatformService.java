@@ -1,0 +1,42 @@
+package jehc.xtmodules.xtservice;
+import java.util.List;
+import java.util.Map;
+
+import jehc.xtmodules.xtmodel.XtPlatform;
+
+/**
+* 平台信息发布 
+* 2016-08-30 22:18:44  邓纯杰
+*/
+public interface XtPlatformService{
+	/**
+	* 分页
+	* @param condition 
+	* @return
+	*/
+	public List<XtPlatform> getXtPlatformListByCondition(Map<String,Object> condition);
+	/**
+	* 查询对象
+	* @param xt_platform_id 
+	* @return
+	*/
+	public XtPlatform getXtPlatformById(String xt_platform_id);
+	/**
+	* 添加
+	* @param xt_platform 
+	* @return
+	*/
+	public int addXtPlatform(XtPlatform xt_Platform);
+	/**
+	* 修改
+	* @param xt_platform 
+	* @return
+	*/
+	public int updateXtPlatform(XtPlatform xt_Platform);
+	/**
+	* 删除
+	* @param condition 
+	* @return
+	*/
+	public int delXtPlatform(Map<String,Object> condition);
+}

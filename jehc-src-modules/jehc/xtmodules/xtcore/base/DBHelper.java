@@ -20,7 +20,7 @@ import org.apache.commons.dbcp.BasicDataSourceFactory;
 
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtmodel.Xt_Dbinfo;
+import jehc.xtmodules.xtmodel.XtDbinfo;
 /**
  * 做自定义表单使用
  * @author邓纯杰
@@ -189,7 +189,7 @@ public class DBHelper {
      * @param xt_dbinfo_id
      * @return
      */
-    public static Connection getConnection(Xt_Dbinfo xt_Dbinfo) {
+    public static Connection getConnection(XtDbinfo xt_Dbinfo) {
         Connection conn = null;
         try {
         	String xt_dbinfoType = xt_Dbinfo.getXt_dbinfoType();
@@ -253,7 +253,7 @@ public class DBHelper {
      * @return 对象的List集合 List对象为Object类型
      */
     @SuppressWarnings("unchecked")
-    public <T> List executdQueryForObject(String sql,Object[]param,Class<T> clazz,Xt_Dbinfo xt_Dbinfo){
+    public <T> List executdQueryForObject(String sql,Object[]param,Class<T> clazz,XtDbinfo xt_Dbinfo){
         List<Object> ls = null;
         Connection connection = getConnection(xt_Dbinfo);
         PreparedStatement pStatement = null;
@@ -292,7 +292,7 @@ public class DBHelper {
      * @param rp ResultParse接口对象
      * @return 对象的List集合 List对象为Object类型
      */
-    public <T> String executdQueryJosnForFlex(String sql,Object[]param,Class<T> clazz,Xt_Dbinfo xt_Dbinfo){
+    public <T> String executdQueryJosnForFlex(String sql,Object[]param,Class<T> clazz,XtDbinfo xt_Dbinfo){
         Connection connection = getConnection(xt_Dbinfo);
         PreparedStatement pStatement = null;
         ResultSet resultSet = null;
@@ -369,7 +369,7 @@ public class DBHelper {
      * @param param 参数列表
      * @return 受影响的行数
      */
-    public int executeUpdateForFlex(String sql,Object[]param,Xt_Dbinfo xt_Dbinfo) {
+    public int executeUpdateForFlex(String sql,Object[]param,XtDbinfo xt_Dbinfo) {
         int num = 0;
         Connection connection = getConnection(xt_Dbinfo);
         PreparedStatement pStatement = null;

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtQuartz">
+	<!--初始化分页-->
+	<select id="getXtQuartzListByCondition" resultType="jehc.xtmodules.xtmodel.XtQuartz" parameterType="map">
+		SELECT
+			`id`,
+			`jobId`,
+			`jobName`,
+			`jobGroup`,
+			`jobStatus`,
+			`cronExpression`,
+			`desc`,
+			`targetMethod`,
+			`targetClass`
+		FROM 
+			xt_quartz
+		WHERE 1=1
+		<if test="null != jobName">
+			AND instr(jobName,#{jobName})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtQuartzById" resultType="jehc.xtmodules.xtmodel.XtQuartz" parameterType="string">
+		SELECT
+			`id`,
+			`jobId`,
+			`jobName`,
+			`jobGroup`,
+			`jobStatus`,
+			`cronExpression`,
+			`desc`,
+			`targetMethod`,
+			`targetClass`
+		FROM 
+			xt_quartz
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtQuartz" parameterType="jehc.xtmodules.xtmodel.XtQuartz">
+		INSERT INTO
+			xt_quartz
+			(
+			`id`,
+			`jobId`,
+			`jobName`,
+			`jobGroup`,
+			`jobStatus`,
+			`cronExpression`,
+			`desc`,
+			`targetMethod`,
+			`targetClass`
+			)
+			VALUES
+			(
+			#{id},
+			#{jobId},
+			#{jobName},
+			#{jobGroup},
+			#{jobStatus},
+			#{cronExpression},
+			#{desc},
+			#{targetMethod},
+			#{targetClass}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtQuartz" parameterType="jehc.xtmodules.xtmodel.XtQuartz">
+		UPDATE
+			xt_quartz
+		SET
+			`id` = #{id},
+			`jobId` = #{jobId},
+			`jobName` = #{jobName},
+			`jobGroup` = #{jobGroup},
+			`jobStatus` = #{jobStatus},
+			`cronExpression` = #{cronExpression},
+			`desc` = #{desc},
+			`targetMethod` = #{targetMethod},
+			`targetClass` = #{targetClass}
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtQuartz" parameterType="map">
+		DELETE FROM xt_quartz WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--查找集合-->
+	<select id="getXtQuartzListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtQuartz" parameterType="map">
+		SELECT
+			`id`,
+			`jobId`,
+			`jobName`,
+			`jobGroup`,
+			`jobStatus`,
+			`cronExpression`,
+			`desc`,
+			`targetMethod`,
+			`targetClass`
+		FROM 
+			xt_quartz
+		WHERE 1=1
+		<if test="null != jobId">
+			AND jobId=#{jobId}
+		</if>
+		<if test="null != jobName">
+			AND jobName=#{jobName}
+		</if>
+		<if test="null != jobGroup">
+			AND jobGroup=#{jobGroup}
+		</if>
+		<if test="null != targetMethod">
+			AND targetMethod=#{targetMethod}
+		</if>
+		<if test="null != jobStatus">
+			AND jobStatus=#{jobStatus}
+		</if>
+		<if test="null != targetClass">
+			AND targetClass=#{targetClass}
+		</if>
+	</select>
+</mapper>

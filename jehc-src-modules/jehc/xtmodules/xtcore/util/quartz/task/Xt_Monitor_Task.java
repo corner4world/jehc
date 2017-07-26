@@ -17,12 +17,12 @@ import org.slf4j.LoggerFactory;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Monitor;
-import jehc.xtmodules.xtmodel.Xt_Monitor_Cpu;
-import jehc.xtmodules.xtmodel.Xt_Monitor_Mem;
-import jehc.xtmodules.xtservice.Xt_MonitorService;
-import jehc.xtmodules.xtservice.Xt_Monitor_CpuService;
-import jehc.xtmodules.xtservice.Xt_Monitor_MemService;
+import jehc.xtmodules.xtmodel.XtMonitor;
+import jehc.xtmodules.xtmodel.XtMonitorCpu;
+import jehc.xtmodules.xtmodel.XtMonitorMem;
+import jehc.xtmodules.xtservice.XtMonitorService;
+import jehc.xtmodules.xtservice.XtMonitorCpuService;
+import jehc.xtmodules.xtservice.XtMonitorMemService;
 
 
 /**
@@ -58,14 +58,14 @@ public class Xt_Monitor_Task extends Thread{
 		Runtime r = Runtime.getRuntime();
         Properties props = System.getProperties();
         InetAddress addr;
-        Xt_MonitorService xt_MonitorService = (Xt_MonitorService)SpringUtil.getBean("xt_MonitorService");
+        XtMonitorService xt_MonitorService = (XtMonitorService)SpringUtil.getBean("xtMonitorService");
         try {
 			addr = InetAddress.getLocalHost();
 			String ip = addr.getHostAddress();
 	        Map<String, String> map = System.getenv();
 	        String userName = map.get("USERNAME");//获取用户名
 	        String computerName = map.get("COMPUTERNAME");//获取计算机名
-			Xt_Monitor xtMonitor = new Xt_Monitor();
+			XtMonitor xtMonitor = new XtMonitor();
 			xtMonitor.setXt_monitor_userName(userName);
 			xtMonitor.setXt_monitor_accountName(props.getProperty("user.name"));
 			xtMonitor.setXt_monitor_comName(computerName);
@@ -95,13 +95,13 @@ public class Xt_Monitor_Task extends Thread{
 	 * 内存监控
 	 */
 	public void addXtMonitorMEM(){
-		Xt_Monitor_MemService xt_Monitor_MemService = (Xt_Monitor_MemService)SpringUtil.getBean("xt_Monitor_MemService");
+		XtMonitorMemService xt_Monitor_MemService = (XtMonitorMemService)SpringUtil.getBean("xtMonitorMemService");
 		Sigar sigar = new Sigar();
         Mem mem;
 		try {
 			mem = sigar.getMem();
 	        Swap swap = sigar.getSwap();
-			Xt_Monitor_Mem xt_Monitor_Mem = new Xt_Monitor_Mem();
+			XtMonitorMem xt_Monitor_Mem = new XtMonitorMem();
 			xt_Monitor_Mem.setXt_monitor_memTotal(""+mem.getTotal() / 1024L);
 			xt_Monitor_Mem.setXt_monitor_memCurrUse(""+mem.getUsed() / 1024L);
 			xt_Monitor_Mem.setXt_monitor_memCurrSy(""+mem.getFree() / 1024L);
@@ -125,7 +125,7 @@ public class Xt_Monitor_Task extends Thread{
 	 * CPU监控
 	 */
 	public void addXtMonitorCPU(){
-		Xt_Monitor_CpuService xt_Monitor_CpuService = (Xt_Monitor_CpuService)SpringUtil.getBean("xt_Monitor_CpuService");
+		XtMonitorCpuService xt_Monitor_CpuService = (XtMonitorCpuService)SpringUtil.getBean("xtMonitorCpuService");
 		String libs = System.getProperty("java.library.path");
         System.setProperty("java.library.path", libs);
         Sigar sigar = new Sigar();
@@ -135,7 +135,7 @@ public class Xt_Monitor_Task extends Thread{
 			CpuPerc cpuList[] = null;
 	        cpuList = sigar.getCpuPercList();
 	        for(int i = 0; i < infos.length; i++) {
-	        	Xt_Monitor_Cpu xt_Monitor_Cpu = new Xt_Monitor_Cpu();
+	        	XtMonitorCpu xt_Monitor_Cpu = new XtMonitorCpu();
 	            CpuInfo info = infos[i];
 	            CpuPerc cpu = cpuList[i];
 	            xt_Monitor_Cpu.setXt_monitor_cpu_totalMHz(info.getMhz());

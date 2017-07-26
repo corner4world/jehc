@@ -9,22 +9,22 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jehc.solrmodules.solrmodel.Solr_Core;
-import jehc.solrmodules.solrservice.Solr_CoreService;
+import jehc.solrmodules.solrmodel.SolrCore;
+import jehc.solrmodules.solrservice.SolrCoreService;
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Constant;
-import jehc.xtmodules.xtmodel.Xt_Data_Dictionary;
-import jehc.xtmodules.xtmodel.Xt_Functioninfo;
-import jehc.xtmodules.xtmodel.Xt_Functioninfo_Common;
-import jehc.xtmodules.xtmodel.Xt_Ip_Frozen;
-import jehc.xtmodules.xtmodel.Xt_Path;
-import jehc.xtmodules.xtservice.Xt_ConstantService;
-import jehc.xtmodules.xtservice.Xt_Data_DictionaryService;
-import jehc.xtmodules.xtservice.Xt_FunctioninfoService;
-import jehc.xtmodules.xtservice.Xt_Functioninfo_CommonService;
-import jehc.xtmodules.xtservice.Xt_Ip_FrozenService;
-import jehc.xtmodules.xtservice.Xt_PathService;
+import jehc.xtmodules.xtmodel.XtConstant;
+import jehc.xtmodules.xtmodel.XtDataDictionary;
+import jehc.xtmodules.xtmodel.XtFunctioninfo;
+import jehc.xtmodules.xtmodel.XtFunctioninfoCommon;
+import jehc.xtmodules.xtmodel.XtIpFrozen;
+import jehc.xtmodules.xtmodel.XtPath;
+import jehc.xtmodules.xtservice.XtConstantService;
+import jehc.xtmodules.xtservice.XtDataDictionaryService;
+import jehc.xtmodules.xtservice.XtFunctioninfoService;
+import jehc.xtmodules.xtservice.XtFunctioninfoCommonService;
+import jehc.xtmodules.xtservice.XtIpFrozenService;
+import jehc.xtmodules.xtservice.XtPathService;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
@@ -63,9 +63,9 @@ public class Xt_Ehcache_Task extends Thread{
 		flag = CacheManagerUtil.remove(cacheManager, "XtIpFrozenCache", "XtIpFrozenCache");
 		logger.info(sdf.format(new Date())+"--->删除IP黑户结束，状态:"+flag);
     	long millis1 = System.currentTimeMillis();
-    	Xt_Data_DictionaryService xt_Data_DictionaryService = (Xt_Data_DictionaryService)SpringUtil.getBean("xt_Data_DictionaryService");
+    	XtDataDictionaryService xtDataDictionaryService = (XtDataDictionaryService)SpringUtil.getBean("xtDataDictionaryService");
     	Map<String, Object> condition = new HashMap<String, Object>();
-    	List<Xt_Data_Dictionary> Xt_Data_DictionaryList = xt_Data_DictionaryService.getXtDataDictionaryListAllByCondition(condition);
+    	List<XtDataDictionary> Xt_Data_DictionaryList = xtDataDictionaryService.getXtDataDictionaryListAllByCondition(condition);
 		Cache XtDataDictionaryCache = CacheManagerUtil.getCache("XtDataDictionaryCache");
 		Element XtDataDictionaryEle=new Element("XtDataDictionaryCache", Xt_Data_DictionaryList); 
 		XtDataDictionaryCache.put(XtDataDictionaryEle);
@@ -81,8 +81,8 @@ public class Xt_Ehcache_Task extends Thread{
 		millis1 = System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取平台路径开始");
 		condition = new HashMap<String, Object>();
-		Xt_PathService xt_PathService = (Xt_PathService)SpringUtil.getBean("xt_PathService");
-		List<Xt_Path> xt_Path_List = xt_PathService.getXtPathListAllByCondition(condition);
+		XtPathService xtPathService = (XtPathService)SpringUtil.getBean("xtPathService");
+		List<XtPath> xt_Path_List = xtPathService.getXtPathListAllByCondition(condition);
 		Element XtPathEle=new Element("XtPathCache", xt_Path_List); 
 		Cache XtPathCache = CacheManagerUtil.getCache("XtPathCache");
 		XtPathCache.put(XtPathEle);
@@ -95,8 +95,8 @@ public class Xt_Ehcache_Task extends Thread{
 		logger.info(sdf.format(new Date())+"--->读取IP黑户开始");
 		condition = new HashMap<String, Object>();
 		condition.put("xt_ip_frozen_status", 2);
-		Xt_Ip_FrozenService xt_Ip_FrozenService = (Xt_Ip_FrozenService)SpringUtil.getBean("xt_Ip_FrozenService");
-		List<Xt_Ip_Frozen> xt_Ip_FrozenList = xt_Ip_FrozenService.getXtIpFrozenListAllByCondition(condition);
+		XtIpFrozenService xt_Ip_FrozenService = (XtIpFrozenService)SpringUtil.getBean("xtIpFrozenService");
+		List<XtIpFrozen> xt_Ip_FrozenList = xt_Ip_FrozenService.getXtIpFrozenListAllByCondition(condition);
 		Element XtIpFrozenEle=new Element("XtIpFrozenCache", xt_Ip_FrozenList); 
 		Cache XtIpFrozenCache = CacheManagerUtil.getCache("XtIpFrozenCache");
 		XtIpFrozenCache.put(XtIpFrozenEle);
@@ -108,8 +108,8 @@ public class Xt_Ehcache_Task extends Thread{
 		millis1 = System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取平台常量开始");
 		condition = new HashMap<String, Object>();
-		Xt_ConstantService xt_ConstantService = (Xt_ConstantService)SpringUtil.getBean("xt_ConstantService");
-		List<Xt_Constant> xt_ConstantList = xt_ConstantService.getXtConstantListAllByCondition(condition);
+		XtConstantService xt_ConstantService = (XtConstantService)SpringUtil.getBean("xtConstantService");
+		List<XtConstant> xt_ConstantList = xt_ConstantService.getXtConstantListAllByCondition(condition);
 		Element XtConstantEle=new Element("XtConstantCache", xt_ConstantList); 
 		//取得配置文件中预先，定义的XtConstantEle设置，生成一个Cache 该XtConstantEle为ehcache.xml定义好的名称
 		Cache XtConstantCache = CacheManagerUtil.getCache("XtConstantCache");
@@ -124,19 +124,19 @@ public class Xt_Ehcache_Task extends Thread{
      * 加载公共功能到内存中
      */
     public void loadXtFunctioninfoCommon(){
-    	Xt_Functioninfo_CommonService xt_Functioninfo_CommonService = (Xt_Functioninfo_CommonService)SpringUtil.getBean("xt_Functioninfo_CommonService");
-    	Xt_FunctioninfoService xt_FunctioninfoService = (Xt_FunctioninfoService)SpringUtil.getBean("xt_FunctioninfoService");
+    	XtFunctioninfoCommonService xt_Functioninfo_CommonService = (XtFunctioninfoCommonService)SpringUtil.getBean("xtFunctioninfo_CommonService");
+    	XtFunctioninfoService xt_FunctioninfoService = (XtFunctioninfoService)SpringUtil.getBean("xtFunctioninfoService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
     	condition.put("xt_functioninfo_common_status", "0");
-    	List<Xt_Functioninfo_Common> xt_Functioninfo_CommonList = xt_Functioninfo_CommonService.getXtFunctioninfoCommonListByCondition(condition);
+    	List<XtFunctioninfoCommon> xt_Functioninfo_CommonList = xt_Functioninfo_CommonService.getXtFunctioninfoCommonListByCondition(condition);
     	long millis2 =  System.currentTimeMillis();
     	logger.info(sdf.format(new Date())+"--->读取公共功能数量:"+xt_Functioninfo_CommonList.size()+"个");
 		logger.info(sdf.format(new Date())+"--->读取公共功能耗时:"+(millis2-millis1)+"毫秒");
 		logger.info(sdf.format(new Date())+"--->加载公共功能缓存开始");
 		StringBuffer sbf = new StringBuffer();
-		for(Xt_Functioninfo_Common xt_Functioninfo_Common:xt_Functioninfo_CommonList){
+		for(XtFunctioninfoCommon xt_Functioninfo_Common:xt_Functioninfo_CommonList){
 			if(null != sbf && !"".equals(sbf.toString()) && null != (sbf.toString())){
 				sbf.append(xt_Functioninfo_Common.getXt_functioninfo_common_url()+",");
 			}else{
@@ -145,9 +145,9 @@ public class Xt_Ehcache_Task extends Thread{
 		}
 		condition = new HashMap<String, Object>();
 		condition.put("xt_functioninfoType", "0");
-		List<Xt_Functioninfo> xtFunctioninfoList = xt_FunctioninfoService.getXtFunctioninfoList(condition);
+		List<XtFunctioninfo> xtFunctioninfoList = xt_FunctioninfoService.getXtFunctioninfoList(condition);
 		logger.info(sdf.format(new Date())+"--->读取非公共功能无需拦截数量:"+xtFunctioninfoList.size()+"个");
-		for(Xt_Functioninfo xtFunctioninfo:xtFunctioninfoList){
+		for(XtFunctioninfo xtFunctioninfo:xtFunctioninfoList){
 			sbf.append(xtFunctioninfo.getXt_functioninfoURL()+",");
 		}
 		Element XtFunctioninfoCommonEle=new Element("XtFunctioninfoCommonCache", sbf.toString()); 
@@ -163,11 +163,11 @@ public class Xt_Ehcache_Task extends Thread{
      * 加载Solr实例到缓存中
      */
     public void loadSolrCore(){
-    	Solr_CoreService solr_CoreService = (Solr_CoreService)SpringUtil.getBean("solr_CoreService");
+    	SolrCoreService solr_CoreService = (SolrCoreService)SpringUtil.getBean("solrCoreService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
-    	List<Solr_Core> solr_CoreList = solr_CoreService.getSolrCoreListByCondition(condition);
+    	List<SolrCore> solr_CoreList = solr_CoreService.getSolrCoreListByCondition(condition);
     	long millis2 =  System.currentTimeMillis();
     	logger.info(sdf.format(new Date())+"--->读取SOLR实例数量:"+solr_CoreList.size()+"个");
 		logger.info(sdf.format(new Date())+"--->读取SOLR实例耗时:"+(millis2-millis1)+"毫秒");

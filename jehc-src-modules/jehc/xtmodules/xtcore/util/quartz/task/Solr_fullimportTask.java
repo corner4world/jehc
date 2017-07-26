@@ -7,10 +7,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jehc.solrmodules.solrmodel.Solr_Core;
-import jehc.solrmodules.solrmodel.Solr_Url;
-import jehc.solrmodules.solrservice.Solr_CoreService;
-import jehc.solrmodules.solrservice.Solr_UrlService;
+import jehc.solrmodules.solrmodel.SolrCore;
+import jehc.solrmodules.solrmodel.SolrUrl;
+import jehc.solrmodules.solrservice.SolrCoreService;
+import jehc.solrmodules.solrservice.SolrUrlService;
 import jehc.xtmodules.xtcore.solr.utils.SolrUtil;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 
@@ -38,12 +38,12 @@ public class Solr_fullimportTask extends Thread{
 	
 	public void excute(){
 		logger.info("----------开始进行增量索引--------------");
-		Solr_CoreService solr_CoreService = (Solr_CoreService)SpringUtil.getBean("solr_CoreService");
-		Solr_UrlService solr_UrlService = (Solr_UrlService)SpringUtil.getBean("solr_UrlService");
+		SolrCoreService solrCoreService = (SolrCoreService)SpringUtil.getBean("solrCoreService");
+		SolrUrlService solrUrlService = (SolrUrlService)SpringUtil.getBean("solrUrlService");
 		Map<String, Object> condition = new HashMap<String, Object>();
-		List<Solr_Core> solr_CoreList = solr_CoreService.getSolrCoreListByCondition(condition);
+		List<SolrCore> solr_CoreList = solrCoreService.getSolrCoreListByCondition(condition);
 		for(int i = 0; i < solr_CoreList.size(); i++){
-			Solr_Url solr_url = solr_UrlService.getSolrUrlById(solr_CoreList.get(i).getSolr_url_id());
+			SolrUrl solr_url = solrUrlService.getSolrUrlById(solr_CoreList.get(i).getSolr_url_id());
 			SolrUtil.fullimport(solr_url.getSolr_url_url(), solr_CoreList.get(i).getSolr_core_name());
 		}
 	}

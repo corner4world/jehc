@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
-import jehc.xtmodules.xtmodel.Xt_Userinfo;
+import jehc.xtmodules.xtmodel.XtUserinfo;
 
 
 
@@ -118,8 +118,8 @@ public class SortList<E> {
 	}
 	
 	public static void main(String[]args){
-		SortList<Xt_Userinfo> sortList = new SortList<Xt_Userinfo>();  
-		List<Xt_Userinfo> xt_UserinfoList = new ArrayList<Xt_Userinfo>();
+		SortList<XtUserinfo> sortList = new SortList<XtUserinfo>();  
+		List<XtUserinfo> xt_UserinfoList = new ArrayList<XtUserinfo>();
 		sortList.Sort(xt_UserinfoList, "xt_userinfo_workYear", "desc");
 		System.out.println(xt_UserinfoList.get(xt_UserinfoList.size()-1).getXt_userinfo_workYear());  
 	}

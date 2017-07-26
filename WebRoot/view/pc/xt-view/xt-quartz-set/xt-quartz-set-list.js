@@ -189,6 +189,7 @@ Ext.onReady(function(){
 		],
 		tbar:[
 			{
+				text:'启动默认任务',
 				tooltip:'启动默认任务',
 				icon:runIcon,
 				handler:function(){
@@ -196,6 +197,7 @@ Ext.onReady(function(){
 				}
 			 },
 			 {
+				text:'添加调度任务',
 				tooltip:'添加调度任务',
 				icon:addIcon,
 				handler:function(){
@@ -203,6 +205,7 @@ Ext.onReady(function(){
 				}
 			 },
 			 {
+				text:'参考样例设置',
 				tooltip:'参考样例设置',
 				icon:lingdangIcon,
 				handler:function(){

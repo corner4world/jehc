@@ -13,9 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
-import jehc.xtmodules.xtmodel.Xt_Generator;
-import jehc.xtmodules.xtmodel.Xt_Generator_TableMany_To_One;
-import jehc.xtmodules.xtmodel.Xt_Generator_Table_Column;
+import jehc.xtmodules.xtmodel.XtGenerator;
+import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 
 /**
  * 生成业务层代码(包括Service,ServiceImpl)
@@ -29,7 +29,7 @@ public class GeneratorService extends GeneratorUtil{
 	 * @param xt_Generator_Table_ColumnList
 	 * @param xt_Generator
 	 */
-	 public void createServiceAll(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+	 public void createServiceAll(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
 		//Service接口
     	createService(xt_Generator_Table_ColumnList, xt_Generator);
     	//Service实现类
@@ -37,7 +37,7 @@ public class GeneratorService extends GeneratorUtil{
      }
     
     //////////////////////////////////////1.生成业务层接口(Service)部分开始//////////////////////////////////////////
-    public String createService(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createService(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	StringBuffer sb = new StringBuffer();
     	sb.append("package "+xt_Generator.getXt_generator_service_package()+";\r\n");
@@ -120,7 +120,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceList(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -138,7 +138,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceListCount(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceListCount(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -156,7 +156,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceObj(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceObj(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -174,7 +174,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceAdd(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -192,7 +192,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceUpdate(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -210,7 +210,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceUpdateBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceUpdateBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -228,7 +228,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceDel(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceDel(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -246,7 +246,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceAddBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -264,7 +264,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceUpdateBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceUpdateBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -282,7 +282,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceUpdateBatchBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceUpdateBatchBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -300,7 +300,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceDelByForeignKey(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceDelByForeignKey(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -318,7 +318,7 @@ public class GeneratorService extends GeneratorUtil{
     
     
     //////////////////////////////////////2.生成业务层实现类(ServiceImpl)部分开始//////////////////////////////////////////
-    public String createServiceImpl(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImpl(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	StringBuffer sb = new StringBuffer();
     	sb.append("package "+xt_Generator.getXt_generator_service_package()+".impl;\r\n");
@@ -334,9 +334,9 @@ public class GeneratorService extends GeneratorUtil{
         	if(xt_Generator.getOne_to_many_type().equals("0")){
         		sb.append("import jehc.xtmodules.xtcore.util.JsonUtil;\r\n");
         	}
-        	List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        	List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
         	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-        		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+        		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
         		sb.append("import "+ xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_model_package()+"."+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+";\r\n");
         		sb.append("import "+ xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_service_package()+"."+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service;\r\n");
         	}
@@ -365,9 +365,9 @@ public class GeneratorService extends GeneratorUtil{
         sb.append("\tprivate "+toUpperCase(xt_Generator.getXt_generator_tbname())+"Dao "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao;\r\n");
         //判断是否为一对多并且是主表 如果为一对多则注解子表接口
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
-        	List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        	List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
         	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-        		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+        		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
         		sb.append("\t@Autowired\r\n");
         		sb.append("\tprivate "+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service;\r\n");
         	}
@@ -438,7 +438,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplList(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplList(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -464,7 +464,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplListCount(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplListCount(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -490,7 +490,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplObj(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplObj(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -507,9 +507,9 @@ public class GeneratorService extends GeneratorUtil{
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
     		if(xt_Generator.getOne_to_many_type().equals("1")){
     			sb.append("\t\t\tMap<String, Object> condition = new HashMap<String, Object>();\r\n");
-    			List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+    			List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
     			for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-    				Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+    				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
     				sb.append("\t\t\tcondition.put(\""+(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_fkey())+"\", "+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
     				sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+" = "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.get"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"ListByCondition(condition);\r\n");
     				sb.append("\t\t\t"+lowfristchar(xt_Generator.getXt_generator_tbname())+".set"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+");\r\n");
@@ -530,7 +530,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplAdd(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplAdd(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -549,9 +549,9 @@ public class GeneratorService extends GeneratorUtil{
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
         	if(xt_Generator.getOne_to_many_type().equals("1")){
         		//表单添加方式
-        		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
             	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-            		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+            		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"TempList = "+lowfristchar(xt_Generator.getXt_generator_tbname())+".get"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"();\r\n");
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List = new ArrayList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+">();\r\n");
             		sb.append("\t\t\tfor(int j = 0; j < "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"TempList.size(); j++){\r\n");
@@ -570,9 +570,9 @@ public class GeneratorService extends GeneratorUtil{
             	}
         	}else{
         		/////////////列表添加方式
-        		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
             	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-            		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+            		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List = JsonUtil.toList("+lowfristchar(xt_Generator.getXt_generator_tbname())+".get"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List(), "+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+".class);\r\n");
             		sb.append("\t\t\tfor(int j = 0; j < "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List.size(); j++){\r\n");
             		//对子表主键设置UUID
@@ -601,7 +601,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplUpdate(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplUpdate(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -620,9 +620,9 @@ public class GeneratorService extends GeneratorUtil{
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
         	if(xt_Generator.getOne_to_many_type().equals("1")){
         		//表单添加方式
-        		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
             	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-            		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+            		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
             		//获取子表集合
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List = "+lowfristchar(xt_Generator.getXt_generator_tbname())+".get"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"();\r\n");
             		//定义子表需添加集合
@@ -654,9 +654,9 @@ public class GeneratorService extends GeneratorUtil{
             		sb.append("\t\t\t}\r\n");
             	}
         	}else{
-        		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
             	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-            		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+            		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List = JsonUtil.toList("+lowfristchar(xt_Generator.getXt_generator_tbname())+".get"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List(), "+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+".class);\r\n");
             		//定义新增集合
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList = new ArrayList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+">();\r\n");
@@ -697,7 +697,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplUpdateBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplUpdateBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -716,9 +716,9 @@ public class GeneratorService extends GeneratorUtil{
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
         	if(xt_Generator.getOne_to_many_type().equals("1")){
         		//表单添加方式
-        		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
             	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-            		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+            		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
             		//获取子表集合
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List = "+lowfristchar(xt_Generator.getXt_generator_tbname())+".get"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"();\r\n");
             		//定义子表需添加集合
@@ -750,9 +750,9 @@ public class GeneratorService extends GeneratorUtil{
             		sb.append("\t\t\t}\r\n");
             	}
         	}else{
-        		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+        		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
             	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-            		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+            		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List = JsonUtil.toList("+lowfristchar(xt_Generator.getXt_generator_tbname())+".get"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List(), "+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+".class);\r\n");
             		//定义新增集合
             		sb.append("\t\t\tList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"> "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList = new ArrayList<"+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+">();\r\n");
@@ -793,7 +793,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplDel(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplDel(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -810,11 +810,11 @@ public class GeneratorService extends GeneratorUtil{
     	sb.append("\t\t\ti = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao.del"+uprepchar(xt_Generator.getXt_generator_tbname())+"(condition);\r\n");
     	/////////删除子表
     	if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
-    		List<Xt_Generator_TableMany_To_One> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+    		List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
     		sb.append("\t\t\tString[] "+getColumnKey(xt_Generator_Table_ColumnList)+"List= (String[])condition.get(\""+getColumnKey(xt_Generator_Table_ColumnList)+"\");\r\n");
     		sb.append("\t\t\tfor(String "+getColumnKey(xt_Generator_Table_ColumnList)+":"+getColumnKey(xt_Generator_Table_ColumnList)+"List){\r\n");
         	for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
-        		Xt_Generator_TableMany_To_One xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+        		XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
         		sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.del"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"ByForeignKey("+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
         	}
     		sb.append("\t\t\t}\r\n");
@@ -834,7 +834,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplAddBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -864,7 +864,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplUpdateBatch(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplUpdateBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -894,7 +894,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplUpdateBatchBySelective(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplUpdateBatchBySelective(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");
@@ -924,7 +924,7 @@ public class GeneratorService extends GeneratorUtil{
      * @param xt_Generator
      * @return
      */
-    public String createServiceImplDelByForeignKey(List<Xt_Generator_Table_Column> xt_Generator_Table_ColumnList,Xt_Generator xt_Generator){
+    public String createServiceImplDelByForeignKey(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
     	//添加注释
     	sb.append("\t/**\r\n");

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtServiceCenter">
+	<!--初始化分页-->
+	<select id="getXtServiceCenterListByCondition" resultType="jehc.xtmodules.xtmodel.XtServiceCenter" parameterType="map">
+		SELECT
+			`xt_service_center_id`,
+			`xt_service_center_location`,
+			`xt_service_center_name`,
+			`xt_service_center_remark`,
+			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
+			DATE_FORMAT(`mtime`,'%Y-%m-%d %H:%i:%s') AS `mtime`,
+			`xt_userinfo_id`,
+			`xt_service_center_type`,
+			`xt_service_center_status`
+		FROM 
+			xt_service_center
+		WHERE 1=1
+		<if test="null != xt_service_center_status">
+			AND xt_service_center_status = #{xt_service_center_status}
+		</if>
+		<if test="null != xt_service_center_type">
+			AND xt_service_center_type = #{xt_service_center_type}
+		</if>
+		<if test="null != xt_service_center_name">
+			AND instr(xt_service_center_name,#{xt_service_center_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtServiceCenterById" resultType="jehc.xtmodules.xtmodel.XtServiceCenter" parameterType="string">
+		SELECT
+			`xt_service_center_id`,
+			`xt_service_center_location`,
+			`xt_service_center_name`,
+			`xt_service_center_remark`,
+			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
+			DATE_FORMAT(`mtime`,'%Y-%m-%d %H:%i:%s') AS `mtime`,
+			`xt_userinfo_id`,
+			`xt_service_center_type`,
+			`xt_service_center_status`
+		FROM 
+			xt_service_center
+		WHERE xt_service_center_id=#{xt_service_center_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtServiceCenter" parameterType="jehc.xtmodules.xtmodel.XtServiceCenter">
+		INSERT INTO
+			xt_service_center
+			(
+			`xt_service_center_id`,
+			`xt_service_center_location`,
+			`xt_service_center_name`,
+			`xt_service_center_remark`,
+			`ctime`,
+			`mtime`,
+			`xt_userinfo_id`,
+			`xt_service_center_type`,
+			`xt_service_center_status`
+			)
+			VALUES
+			(
+			#{xt_service_center_id},
+			#{xt_service_center_location},
+			#{xt_service_center_name},
+			#{xt_service_center_remark},
+			#{ctime},
+			#{mtime},
+			#{xt_userinfo_id},
+			#{xt_service_center_type},
+			#{xt_service_center_status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtServiceCenter" parameterType="jehc.xtmodules.xtmodel.XtServiceCenter">
+		UPDATE
+			xt_service_center
+		SET
+			`xt_service_center_id` = #{xt_service_center_id},
+			`xt_service_center_location` = #{xt_service_center_location},
+			`xt_service_center_name` = #{xt_service_center_name},
+			`xt_service_center_remark` = #{xt_service_center_remark},
+			`ctime` = #{ctime},
+			`mtime` = #{mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_service_center_type` = #{xt_service_center_type},
+			`xt_service_center_status` = #{xt_service_center_status}
+		WHERE xt_service_center_id=#{xt_service_center_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtServiceCenter" parameterType="map">
+		DELETE FROM xt_service_center WHERE xt_service_center_id IN
+		<foreach item="item" index="index" collection="xt_service_center_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtServiceCenter" parameterType="list">
+		INSERT INTO
+			xt_service_center
+			(
+			`xt_service_center_id`,
+			`xt_service_center_location`,
+			`xt_service_center_name`,
+			`xt_service_center_remark`,
+			`ctime`,
+			`mtime`,
+			`xt_userinfo_id`,
+			`xt_service_center_type`,
+			`xt_service_center_status`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_service_center_id},
+			#{item.xt_service_center_location},
+			#{item.xt_service_center_name},
+			#{item.xt_service_center_remark},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.xt_userinfo_id},
+			#{item.xt_service_center_type},
+			#{item.xt_service_center_status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtServiceCenter" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_service_center
+			SET
+				`xt_service_center_id` = #{item.xt_service_center_id},
+				`xt_service_center_location` = #{item.xt_service_center_location},
+				`xt_service_center_name` = #{item.xt_service_center_name},
+				`xt_service_center_remark` = #{item.xt_service_center_remark},
+				`ctime` = #{item.ctime},
+				`mtime` = #{item.mtime},
+				`xt_userinfo_id` = #{item.xt_userinfo_id},
+				`xt_service_center_type` = #{item.xt_service_center_type},
+				`xt_service_center_status` = #{item.xt_service_center_status}
+			WHERE xt_service_center_id=#{item.xt_service_center_id}
+		</foreach>
+	</update>
+</mapper>

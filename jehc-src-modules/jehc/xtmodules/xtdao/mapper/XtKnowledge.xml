@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtKnowledge">
+	<!--初始化分页-->
+	<select id="getXtKnowledgeListByCondition" resultType="jehc.xtmodules.xtmodel.XtKnowledge" parameterType="map">
+		SELECT
+			xt_knowledge.`xt_knowledge_id`,
+			xt_knowledge.`xt_knowledge_title`,
+			xt_knowledge.`xt_userinfo_id`,
+			xt_knowledge.`xt_type`,
+			DATE_FORMAT(`xt_time`,'%Y-%m-%d %H:%i:%s') AS `xt_time`,
+			DATE_FORMAT(`xt_uptime`,'%Y-%m-%d %H:%i:%s') AS `xt_uptime`,
+			xt_knowledge.`xt_state`,
+			xt_knowledge.`xt_level`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_knowledge xt_knowledge LEFT JOIN xt_userinfo xt_userinfo ON xt_knowledge.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="keywords != null">
+			AND xt_knowledge.xt_knowledge_content like '%${keywords}%'
+			OR xt_knowledge.xt_knowledge_title like '%${keywords}%'
+		</if>
+		ORDER BY xt_time DESC ,xt_uptime DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtKnowledgeById" resultType="jehc.xtmodules.xtmodel.XtKnowledge" parameterType="string">
+		SELECT
+			xt_knowledge.`xt_knowledge_id`,
+			xt_knowledge.`xt_knowledge_title`,
+			xt_knowledge.`xt_knowledge_content`,
+			xt_knowledge.`xt_userinfo_id`,
+			xt_knowledge.`xt_type`,
+			DATE_FORMAT(`xt_time`,'%Y-%m-%d %H:%i:%s') AS `xt_time`,
+			DATE_FORMAT(`xt_uptime`,'%Y-%m-%d %H:%i:%s') AS `xt_uptime`,
+			xt_knowledge.`xt_state`,
+			xt_knowledge.`xt_level`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_knowledge xt_knowledge LEFT JOIN xt_userinfo xt_userinfo ON xt_knowledge.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE xt_knowledge.xt_knowledge_id=#{xt_knowledge_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtKnowledge" parameterType="jehc.xtmodules.xtmodel.XtKnowledge">
+		INSERT INTO
+			xt_knowledge
+			(
+			`xt_knowledge_id`,
+			`xt_knowledge_title`,
+			`xt_knowledge_content`,
+			`xt_userinfo_id`,
+			`xt_type`,
+			`xt_time`,
+			`xt_uptime`,
+			`xt_state`,
+			`xt_level`
+			)
+			VALUES
+			(
+			#{xt_knowledge_id},
+			#{xt_knowledge_title},
+			#{xt_knowledge_content},
+			#{xt_userinfo_id},
+			#{xt_type},
+			#{xt_time},
+			#{xt_uptime},
+			#{xt_state},
+			#{xt_level}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtKnowledge" parameterType="jehc.xtmodules.xtmodel.XtKnowledge">
+		UPDATE
+			xt_knowledge
+		SET
+			`xt_knowledge_id` = #{xt_knowledge_id},
+			`xt_knowledge_title` = #{xt_knowledge_title},
+			`xt_knowledge_content` = #{xt_knowledge_content},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_type` = #{xt_type},
+			`xt_time` = #{xt_time},
+			`xt_uptime` = #{xt_uptime},
+			`xt_state` = #{xt_state},
+			`xt_level` = #{xt_level}
+		WHERE xt_knowledge_id=#{xt_knowledge_id}
+	</update>
+	<!--删除-->
+	<delete id="delXtKnowledge" parameterType="map">
+		DELETE FROM xt_knowledge WHERE xt_knowledge_id IN
+		<foreach item="item" index="index" collection="xt_knowledge_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

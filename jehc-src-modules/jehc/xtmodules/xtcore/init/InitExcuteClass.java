@@ -19,10 +19,10 @@ import org.quartz.Scheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import jehc.solrmodules.solrmodel.Solr_Core;
-import jehc.solrmodules.solrservice.Solr_CoreService;
-import jehc.solrmodules.solrservice.Solr_Index_AttributeService;
-import jehc.solrmodules.solrservice.Solr_SortService;
+import jehc.solrmodules.solrmodel.SolrCore;
+import jehc.solrmodules.solrservice.SolrCoreService;
+import jehc.solrmodules.solrservice.SolrIndexAttributeService;
+import jehc.solrmodules.solrservice.SolrSortService;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
@@ -30,22 +30,22 @@ import jehc.xtmodules.xtcore.util.ReadProperties;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.quartz.QuartzInit;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-import jehc.xtmodules.xtmodel.Xt_Constant;
-import jehc.xtmodules.xtmodel.Xt_Data_Dictionary;
-import jehc.xtmodules.xtmodel.Xt_Functioninfo;
-import jehc.xtmodules.xtmodel.Xt_Functioninfo_Common;
-import jehc.xtmodules.xtmodel.Xt_Ip_Frozen;
-import jehc.xtmodules.xtmodel.Xt_Path;
-import jehc.xtmodules.xtmodel.Xt_Quartz;
-import jehc.xtmodules.xtmodel.Xt_Start_Stop_Log;
-import jehc.xtmodules.xtservice.Xt_ConstantService;
-import jehc.xtmodules.xtservice.Xt_Data_DictionaryService;
-import jehc.xtmodules.xtservice.Xt_FunctioninfoService;
-import jehc.xtmodules.xtservice.Xt_Functioninfo_CommonService;
-import jehc.xtmodules.xtservice.Xt_Ip_FrozenService;
-import jehc.xtmodules.xtservice.Xt_PathService;
-import jehc.xtmodules.xtservice.Xt_QuartzService;
-import jehc.xtmodules.xtservice.Xt_Start_Stop_LogService;
+import jehc.xtmodules.xtmodel.XtConstant;
+import jehc.xtmodules.xtmodel.XtDataDictionary;
+import jehc.xtmodules.xtmodel.XtFunctioninfo;
+import jehc.xtmodules.xtmodel.XtFunctioninfoCommon;
+import jehc.xtmodules.xtmodel.XtIpFrozen;
+import jehc.xtmodules.xtmodel.XtPath;
+import jehc.xtmodules.xtmodel.XtQuartz;
+import jehc.xtmodules.xtmodel.XtStartStopLog;
+import jehc.xtmodules.xtservice.XtConstantService;
+import jehc.xtmodules.xtservice.XtDataDictionaryService;
+import jehc.xtmodules.xtservice.XtFunctioninfoService;
+import jehc.xtmodules.xtservice.XtFunctioninfoCommonService;
+import jehc.xtmodules.xtservice.XtIpFrozenService;
+import jehc.xtmodules.xtservice.XtPathService;
+import jehc.xtmodules.xtservice.XtQuartzService;
+import jehc.xtmodules.xtservice.XtStartStopLogService;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
@@ -65,7 +65,7 @@ public class InitExcuteClass implements ServletContextListener{
 	    sc.removeAttribute("syspath");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		logger.info("------------------------"+sdf.format(new Date())+"--->服务器容器已销毁------------------------");
-		Xt_Start_Stop_Log xt_Start_Stop_Log = new Xt_Start_Stop_Log();
+		XtStartStopLog xt_Start_Stop_Log = new XtStartStopLog();
 		xt_Start_Stop_Log.setXt_start_stop_log_stoptime(sdf.format(new Date()));
 		addOrUpdateXtStartStopLog(xt_Start_Stop_Log,1);
 	}
@@ -80,7 +80,7 @@ public class InitExcuteClass implements ServletContextListener{
         String contextConfigLocationpath = event.getServletContext().getInitParameter("contextConfigLocation");
 		ApplicationContext ac = (ApplicationContext) new ClassPathXmlApplicationContext(contextConfigLocationpath);
 		*/
-		Xt_Start_Stop_Log xt_Start_Stop_Log = new Xt_Start_Stop_Log();
+		XtStartStopLog xt_Start_Stop_Log = new XtStartStopLog();
 		try {
 	        sc.setAttribute("syspath", getContextPath(sc));
 	        logger.info(""+sdf.format(new Date())+"--->业务平台路径:"+getContextPath(sc));
@@ -147,19 +147,19 @@ public class InitExcuteClass implements ServletContextListener{
 	 * 添加或修改启动日志
 	 * @param xt_Start_Stop_Log
 	 */
-	public void addOrUpdateXtStartStopLog(Xt_Start_Stop_Log xt_Start_Stop_Log,int status){
-		Xt_Start_Stop_LogService xt_Start_Stop_LogService = (Xt_Start_Stop_LogService)SpringUtil.getBean("xt_Start_Stop_LogService");;
+	public void addOrUpdateXtStartStopLog(XtStartStopLog xtStartStopLog,int status){
+		XtStartStopLogService xtStartStopLogService = (XtStartStopLogService)SpringUtil.getBean("xtStartStopLogService");;
 		if(1==status){
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("offset", "0");
 			condition.put("pageSize", "1");
-			List<Xt_Start_Stop_Log> list = xt_Start_Stop_LogService.getXtStartStopLogListByCondition(condition);
+			List<XtStartStopLog> list = xtStartStopLogService.getXtStartStopLogListByCondition(condition);
 			if(!list.isEmpty()){
-				xt_Start_Stop_LogService.updateXtStartStopLog(list.get(0));
+				xtStartStopLogService.updateXtStartStopLog(list.get(0));
 			}
 		}else{
-			xt_Start_Stop_Log.setXt_start_stop_log_id(UUID.toUUID());
-			xt_Start_Stop_LogService.addXtStartStopLog(xt_Start_Stop_Log);
+			xtStartStopLog.setXt_start_stop_log_id(UUID.toUUID());
+			xtStartStopLogService.addXtStartStopLog(xtStartStopLog);
 		}
 	}
 	/**
@@ -169,13 +169,13 @@ public class InitExcuteClass implements ServletContextListener{
         Timer timer = new Timer("loadQuarzInit", true);
         timer.schedule(new TimerTask() {
             public void run() {
-            	Xt_QuartzService xt_QuartzService = (Xt_QuartzService)SpringUtil.getBean("xt_QuartzService");
+            	XtQuartzService xtQuartzService = (XtQuartzService)SpringUtil.getBean("xtQuartzService");
             	Scheduler scheduler = (Scheduler) SpringUtil.getBean("schedulerFactoryBean");
             	Map<String, Object> condition = new HashMap<String, Object>();
             	condition.put("jobStatus", "NORMAL");
-        		List<Xt_Quartz> xtQuartzList = xt_QuartzService.getXtQuartzListAllByCondition(condition);
+        		List<XtQuartz> xtQuartzList = xtQuartzService.getXtQuartzListAllByCondition(condition);
         		for(int i = 0; i < xtQuartzList.size(); i++){
-        			Xt_Quartz xtQuartz = xtQuartzList.get(i);
+        			XtQuartz xtQuartz = xtQuartzList.get(i);
         			new QuartzInit(scheduler,xtQuartz.getId(),xtQuartz.getJobName(),xtQuartz.getJobGroup(),xtQuartz.getCronExpression(),xtQuartz.getDesc(),xtQuartz.getTargetMethod(),xtQuartz.getTargetClass()).run();
         		}
             }
@@ -187,24 +187,24 @@ public class InitExcuteClass implements ServletContextListener{
      * @param ehCache
      */
 	private void loadXtDataDictionary(){
-    	Xt_Data_DictionaryService xt_Data_DictionaryService = (Xt_Data_DictionaryService)SpringUtil.getBean("xt_Data_DictionaryService");
-    	Xt_PathService xt_PathService = (Xt_PathService)SpringUtil.getBean("xt_PathService");
-    	Xt_Ip_FrozenService xt_Ip_FrozenService = (Xt_Ip_FrozenService)SpringUtil.getBean("xt_Ip_FrozenService");
-    	Xt_ConstantService xt_ConstantService = (Xt_ConstantService)SpringUtil.getBean("xt_ConstantService");
+    	XtDataDictionaryService xtDataDictionaryService = (XtDataDictionaryService)SpringUtil.getBean("xtDataDictionaryService");
+    	XtPathService xtPathService = (XtPathService)SpringUtil.getBean("xtPathService");
+    	XtIpFrozenService xtIpFrozenService = (XtIpFrozenService)SpringUtil.getBean("xtIpFrozenService");
+    	XtConstantService xtConstantService = (XtConstantService)SpringUtil.getBean("xtConstantService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
-    	List<Xt_Data_Dictionary> Xt_Data_DictionaryList = xt_Data_DictionaryService.getXtDataDictionaryListAllByCondition(condition);
+    	List<XtDataDictionary> XtDataDictionaryList = xtDataDictionaryService.getXtDataDictionaryListAllByCondition(condition);
 		//2取得配置文件中预先，定义的XtDataDictionaryCache设置，生成一个Cache 该XtDataDictionaryCache为ehcache.xml定义好的名称
 		Cache XtDataDictionaryCache = CacheManagerUtil.getCache("XtDataDictionaryCache");
 		//3在缓存中放元素
-		Element XtDataDictionaryEle=new Element("XtDataDictionaryCache", Xt_Data_DictionaryList); 
+		Element XtDataDictionaryEle=new Element("XtDataDictionaryCache", XtDataDictionaryList); 
 		XtDataDictionaryCache.put(XtDataDictionaryEle);
 		long millis2 =  System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取数据字典耗时:"+(millis2-millis1)+"毫秒"); 
 		logger.info(sdf.format(new Date())+"--->加载缓存配置开始");
 		millis2 =  System.currentTimeMillis();
-		logger.info(sdf.format(new Date())+"--->一共加载了:"+Xt_Data_DictionaryList.size()+"条数据字典数据");
+		logger.info(sdf.format(new Date())+"--->一共加载了:"+XtDataDictionaryList.size()+"条数据字典数据");
 		logger.info(sdf.format(new Date())+"--->将数据存入缓存耗时:"+(millis2-millis1)+"毫秒");
 		logger.info(sdf.format(new Date())+"--->加载缓存配置结束");
 		
@@ -212,7 +212,7 @@ public class InitExcuteClass implements ServletContextListener{
 		millis1 = System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取平台路径开始");
 		condition = new HashMap<String, Object>();
-		List<Xt_Path> xt_Path_List = xt_PathService.getXtPathListAllByCondition(condition);
+		List<XtPath> xt_Path_List = xtPathService.getXtPathListAllByCondition(condition);
 		Element XtPathEle=new Element("XtPathCache", xt_Path_List); 
 		//取得配置文件中预先，定义的XtPathCache设置，生成一个Cache 该XtPathCache为ehcache.xml定义好的名称
 		Cache XtPathCache = CacheManagerUtil.getCache("XtPathCache");
@@ -227,7 +227,7 @@ public class InitExcuteClass implements ServletContextListener{
 		logger.info(sdf.format(new Date())+"--->读取IP黑户开始");
 		condition = new HashMap<String, Object>();
 		condition.put("xt_ip_frozen_status", 2);
-		List<Xt_Ip_Frozen> xt_Ip_FrozenList = xt_Ip_FrozenService.getXtIpFrozenListAllByCondition(condition);
+		List<XtIpFrozen> xt_Ip_FrozenList = xtIpFrozenService.getXtIpFrozenListAllByCondition(condition);
 		if(!xt_Ip_FrozenList.isEmpty() && xt_Ip_FrozenList.size() > 0){
 			Element XtIpFrozenEle=new Element("XtIpFrozenCache", xt_Ip_FrozenList); 
 			//取得配置文件中预先，定义的XtIpFrozenCache设置，生成一个Cache 该XtIpFrozenCache为ehcache.xml定义好的名称
@@ -242,14 +242,14 @@ public class InitExcuteClass implements ServletContextListener{
 		millis1 = System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取平台常量开始");
 		condition = new HashMap<String, Object>();
-		List<Xt_Constant> xt_ConstantList = xt_ConstantService.getXtConstantListAllByCondition(condition);
-		Element XtConstantEle=new Element("XtConstantCache", xt_ConstantList); 
+		List<XtConstant> xtConstantList = xtConstantService.getXtConstantListAllByCondition(condition);
+		Element XtConstantEle=new Element("XtConstantCache", xtConstantList); 
 		//取得配置文件中预先，定义的XtConstantEle设置，生成一个Cache 该XtConstantEle为ehcache.xml定义好的名称
 		Cache XtConstantCache = CacheManagerUtil.getCache("XtConstantCache");
 		//在缓存中放元素
 		XtConstantCache.put(XtConstantEle);
 		millis2 =  System.currentTimeMillis();
-		logger.info(sdf.format(new Date())+"--->一共加载了:"+xt_ConstantList.size()+"条平台常量数据");
+		logger.info(sdf.format(new Date())+"--->一共加载了:"+xtConstantList.size()+"条平台常量数据");
 		logger.info(sdf.format(new Date())+"--->读取平台常量缓存耗时:"+(millis2-millis1)+"毫秒");
     }
     
@@ -257,19 +257,19 @@ public class InitExcuteClass implements ServletContextListener{
      * 加载公共功能到内存中
      */
     public void loadXtFunctioninfoCommon(){
-    	Xt_Functioninfo_CommonService xt_Functioninfo_CommonService = (Xt_Functioninfo_CommonService)SpringUtil.getBean("xt_Functioninfo_CommonService");
-    	Xt_FunctioninfoService xt_FunctioninfoService = (Xt_FunctioninfoService)SpringUtil.getBean("xt_FunctioninfoService");
+    	XtFunctioninfoCommonService xtFunctioninfoCommonService = (XtFunctioninfoCommonService)SpringUtil.getBean("xtFunctioninfoCommonService");
+    	XtFunctioninfoService xtFunctioninfoService = (XtFunctioninfoService)SpringUtil.getBean("xtFunctioninfoService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
     	condition.put("xt_functioninfo_common_status", "0");
-    	List<Xt_Functioninfo_Common> xt_Functioninfo_CommonList = xt_Functioninfo_CommonService.getXtFunctioninfoCommonListByCondition(condition);
+    	List<XtFunctioninfoCommon> xt_Functioninfo_CommonList = xtFunctioninfoCommonService.getXtFunctioninfoCommonListByCondition(condition);
     	long millis2 =  System.currentTimeMillis();
     	logger.info(sdf.format(new Date())+"--->读取公共功能数量:"+xt_Functioninfo_CommonList.size()+"个");
 		logger.info(sdf.format(new Date())+"--->读取公共功能耗时:"+(millis2-millis1)+"毫秒");
 		logger.info(sdf.format(new Date())+"--->加载公共功能缓存开始");
 		StringBuffer sbf = new StringBuffer();
-		for(Xt_Functioninfo_Common xt_Functioninfo_Common:xt_Functioninfo_CommonList){
+		for(XtFunctioninfoCommon xt_Functioninfo_Common:xt_Functioninfo_CommonList){
 			if(null != sbf && !"".equals(sbf.toString()) && null != (sbf.toString())){
 				sbf.append(xt_Functioninfo_Common.getXt_functioninfo_common_url()+",");
 			}else{
@@ -278,9 +278,9 @@ public class InitExcuteClass implements ServletContextListener{
 		}
 		condition = new HashMap<String, Object>();
 		condition.put("xt_functioninfoType", "0");
-		List<Xt_Functioninfo> xtFunctioninfoList = xt_FunctioninfoService.getXtFunctioninfoList(condition);
+		List<XtFunctioninfo> xtFunctioninfoList = xtFunctioninfoService.getXtFunctioninfoList(condition);
 		logger.info(sdf.format(new Date())+"--->读取非公共功能无需拦截数量:"+xtFunctioninfoList.size()+"个");
-		for(Xt_Functioninfo xtFunctioninfo:xtFunctioninfoList){
+		for(XtFunctioninfo xtFunctioninfo:xtFunctioninfoList){
 			sbf.append(xtFunctioninfo.getXt_functioninfoURL()+",");
 		}
 		Element XtFunctioninfoCommonEle=new Element("XtFunctioninfoCommonCache", sbf.toString()); 
@@ -296,25 +296,25 @@ public class InitExcuteClass implements ServletContextListener{
      * 加载Solr实例到缓存中
      */
     public void loadSolrCore(){
-    	Solr_Index_AttributeService solr_Index_AttributeService = (Solr_Index_AttributeService)SpringUtil.getBean("solr_Index_AttributeService");
-    	Solr_CoreService solr_CoreService = (Solr_CoreService)SpringUtil.getBean("solr_CoreService");
-    	Solr_SortService solr_SortService = (Solr_SortService)SpringUtil.getBean("solr_SortService");
+    	SolrIndexAttributeService solrIndexAttributeService = (SolrIndexAttributeService)SpringUtil.getBean("solrIndexAttributeService");
+    	SolrCoreService solrCoreService = (SolrCoreService)SpringUtil.getBean("solrCoreService");
+    	SolrSortService solrSortService = (SolrSortService)SpringUtil.getBean("solrSortService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
-    	List<Solr_Core> solr_CoreList = solr_CoreService.getSolrCoreListByCondition(condition);
-    	for(int i = 0; i < solr_CoreList.size(); i++){
+    	List<SolrCore> solrCoreList = solrCoreService.getSolrCoreListByCondition(condition);
+    	for(int i = 0; i < solrCoreList.size(); i++){
     		condition = new HashMap<String, Object>();
-    		Solr_Core solr_Core = solr_CoreList.get(i);
-    		condition.put("solr_core_id", solr_Core.getSolr_core_id());
-    		solr_CoreList.get(i).setSolr_index_attribute_list(solr_Index_AttributeService.getSolrIndexAttributeList(condition));
-    		solr_CoreList.get(i).setSolr_sort_list(solr_SortService.getSolrSortList(condition));
+    		SolrCore solrCore = solrCoreList.get(i);
+    		condition.put("solr_core_id", solrCore.getSolr_core_id());
+    		solrCoreList.get(i).setSolr_index_attribute_list(solrIndexAttributeService.getSolrIndexAttributeList(condition));
+    		solrCoreList.get(i).setSolr_sort_list(solrSortService.getSolrSortList(condition));
     	}
     	long millis2 =  System.currentTimeMillis();
-    	logger.info(sdf.format(new Date())+"--->读取SOLR实例数量:"+solr_CoreList.size()+"个");
+    	logger.info(sdf.format(new Date())+"--->读取SOLR实例数量:"+solrCoreList.size()+"个");
 		logger.info(sdf.format(new Date())+"--->读取SOLR实例耗时:"+(millis2-millis1)+"毫秒");
 		logger.info(sdf.format(new Date())+"--->加载SOLR实例缓存开始");
-		Element SolrCoreCacheEle=new Element("SolrCoreCache", solr_CoreList); 
+		Element SolrCoreCacheEle=new Element("SolrCoreCache", solrCoreList); 
 		Cache SolrCoreCache = CacheManagerUtil.getCache("SolrCoreCache");
 		//在缓存中放元素
 		SolrCoreCache.put(SolrCoreCacheEle);

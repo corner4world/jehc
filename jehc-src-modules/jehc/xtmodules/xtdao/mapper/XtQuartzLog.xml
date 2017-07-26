@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtQuartzLog">
+	<!--初始化分页-->
+	<select id="getXtQuartzLogListByCondition" resultType="jehc.xtmodules.xtmodel.XtQuartzLog" parameterType="map">
+		SELECT
+			`xt_quartz_log_id`,
+			`xt_quartz_log_name`,
+			`xt_quartz_log_key`,
+			`xt_quartz_log_content`,
+			`xt_quartz_log_ctime`,
+			`xt_quartz_log_etime`,
+			`xt_userinfo_id`,
+			`xt_quartz_log_flag`
+		FROM 
+			xt_quartz_log
+		WHERE 1=1
+		<if test="null != xt_quartz_log_name">
+			AND instr(xt_quartz_log_name,#{xt_quartz_log_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtQuartzLogById" resultType="jehc.xtmodules.xtmodel.XtQuartzLog" parameterType="string">
+		SELECT
+			`xt_quartz_log_id`,
+			`xt_quartz_log_name`,
+			`xt_quartz_log_key`,
+			`xt_quartz_log_content`,
+			`xt_quartz_log_ctime`,
+			`xt_quartz_log_etime`,
+			`xt_userinfo_id`,
+			`xt_quartz_log_flag`
+		FROM 
+			xt_quartz_log
+		WHERE xt_quartz_log_id=#{xt_quartz_log_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtQuartzLog" parameterType="jehc.xtmodules.xtmodel.XtQuartzLog">
+		INSERT INTO
+			xt_quartz_log
+			(
+			`xt_quartz_log_id`,
+			`xt_quartz_log_name`,
+			`xt_quartz_log_key`,
+			`xt_quartz_log_content`,
+			`xt_quartz_log_ctime`,
+			`xt_quartz_log_etime`,
+			`xt_userinfo_id`,
+			`xt_quartz_log_flag`
+			)
+			VALUES
+			(
+			#{xt_quartz_log_id},
+			#{xt_quartz_log_name},
+			#{xt_quartz_log_key},
+			#{xt_quartz_log_content},
+			#{xt_quartz_log_ctime},
+			#{xt_quartz_log_etime},
+			#{xt_userinfo_id},
+			#{xt_quartz_log_flag}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtQuartzLog" parameterType="jehc.xtmodules.xtmodel.XtQuartzLog">
+		UPDATE
+			xt_quartz_log
+		SET
+			`xt_quartz_log_id` = #{xt_quartz_log_id},
+			`xt_quartz_log_name` = #{xt_quartz_log_name},
+			`xt_quartz_log_key` = #{xt_quartz_log_key},
+			`xt_quartz_log_content` = #{xt_quartz_log_content},
+			`xt_quartz_log_ctime` = #{xt_quartz_log_ctime},
+			`xt_quartz_log_etime` = #{xt_quartz_log_etime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_quartz_log_flag` = #{xt_quartz_log_flag}
+		WHERE xt_quartz_log_id=#{xt_quartz_log_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtQuartzLog" parameterType="map">
+		DELETE FROM xt_quartz_log WHERE xt_quartz_log_id IN
+		<foreach item="item" index="index" collection="xt_quartz_log_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

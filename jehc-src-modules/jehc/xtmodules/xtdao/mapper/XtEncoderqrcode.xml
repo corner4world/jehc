@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtEncoderqrcode">
+	<!--初始化分页-->
+	<select id="getXtEncoderqrcodeListByCondition" resultType="jehc.xtmodules.xtmodel.XtEncoderqrcode" parameterType="map">
+		SELECT
+			xt_encoderqrcode.`xt_encoderqrcode_id`,
+			xt_encoderqrcode.`xt_encoderqrcode_url`,
+			DATE_FORMAT(xt_encoderqrcode.`xt_encoderqrcode_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_encoderqrcode_ctime`,
+			DATE_FORMAT(xt_encoderqrcode.`xt_encoderqrcode_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_encoderqrcode_mtime`,
+			xt_encoderqrcode.`xt_encoderqrcode_title`,
+			xt_encoderqrcode.`xt_encoderqrcode_content`,
+			xt_userinfo.`xt_userinfo_realName`,
+			xt_attachment.*
+		FROM 
+			xt_encoderqrcode xt_encoderqrcode LEFT JOIN xt_userinfo AS xt_userinfo ON xt_encoderqrcode.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_encoderqrcode.`xt_attachment_id` = xt_attachment.xt_attachment_id
+		WHERE 1=1
+		<if test="null != xt_encoderqrcode_title">
+			AND instr(xt_encoderqrcode.xt_encoderqrcode_title,#{xt_encoderqrcode_title})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtEncoderqrcodeById" resultType="jehc.xtmodules.xtmodel.XtEncoderqrcode" parameterType="string">
+		SELECT
+			`xt_encoderqrcode_id`,
+			`xt_encoderqrcode_url`,
+			DATE_FORMAT(`xt_encoderqrcode_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_encoderqrcode_ctime`,
+			DATE_FORMAT(`xt_encoderqrcode_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_encoderqrcode_mtime`,
+			`xt_encoderqrcode_title`,
+			`xt_encoderqrcode_content`,
+			`xt_userinfo_id`,
+			`xt_attachment_id`
+		FROM 
+			xt_encoderqrcode
+		WHERE xt_encoderqrcode_id=#{xt_encoderqrcode_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtEncoderqrcode" parameterType="jehc.xtmodules.xtmodel.XtEncoderqrcode">
+		INSERT INTO
+			xt_encoderqrcode
+			(
+			`xt_encoderqrcode_id`,
+			`xt_encoderqrcode_url`,
+			`xt_encoderqrcode_ctime`,
+			`xt_encoderqrcode_title`,
+			`xt_encoderqrcode_content`,
+			`xt_userinfo_id`,
+			`xt_attachment_id`
+			)
+			VALUES
+			(
+			#{xt_encoderqrcode_id},
+			#{xt_encoderqrcode_url},
+			#{xt_encoderqrcode_ctime},
+			#{xt_encoderqrcode_title},
+			#{xt_encoderqrcode_content},
+			#{xt_userinfo_id},
+			#{xt_attachment_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtEncoderqrcode" parameterType="jehc.xtmodules.xtmodel.XtEncoderqrcode">
+		UPDATE
+			xt_encoderqrcode
+		SET
+			`xt_encoderqrcode_id` = #{xt_encoderqrcode_id},
+			`xt_encoderqrcode_url` = #{xt_encoderqrcode_url},
+			`xt_encoderqrcode_mtime` = #{xt_encoderqrcode_mtime},
+			`xt_encoderqrcode_title` = #{xt_encoderqrcode_title},
+			`xt_encoderqrcode_content` = #{xt_encoderqrcode_content},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_attachment_id` = #{xt_attachment_id}
+		WHERE xt_encoderqrcode_id=#{xt_encoderqrcode_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtEncoderqrcode" parameterType="map">
+		DELETE FROM xt_encoderqrcode WHERE xt_encoderqrcode_id IN
+		<foreach item="item" index="index" collection="xt_encoderqrcode_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

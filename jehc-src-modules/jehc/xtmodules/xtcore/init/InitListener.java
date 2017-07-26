@@ -24,16 +24,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.ServletContextAware;
 
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
-import jehc.xtmodules.xtmodel.Xt_Constant;
-import jehc.xtmodules.xtmodel.Xt_Data_Dictionary;
-import jehc.xtmodules.xtmodel.Xt_Ip_Frozen;
-import jehc.xtmodules.xtmodel.Xt_Path;
-import jehc.xtmodules.xtmodel.Xt_Quartz;
-import jehc.xtmodules.xtservice.Xt_ConstantService;
-import jehc.xtmodules.xtservice.Xt_Data_DictionaryService;
-import jehc.xtmodules.xtservice.Xt_Ip_FrozenService;
-import jehc.xtmodules.xtservice.Xt_PathService;
-import jehc.xtmodules.xtservice.Xt_QuartzService;
+import jehc.xtmodules.xtmodel.XtConstant;
+import jehc.xtmodules.xtmodel.XtDataDictionary;
+import jehc.xtmodules.xtmodel.XtIpFrozen;
+import jehc.xtmodules.xtmodel.XtPath;
+import jehc.xtmodules.xtmodel.XtQuartz;
+import jehc.xtmodules.xtservice.XtConstantService;
+import jehc.xtmodules.xtservice.XtDataDictionaryService;
+import jehc.xtmodules.xtservice.XtIpFrozenService;
+import jehc.xtmodules.xtservice.XtPathService;
+import jehc.xtmodules.xtservice.XtQuartzService;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 /**
@@ -47,15 +47,15 @@ public class InitListener implements ApplicationContextAware, ServletContextAwar
 	@Autowired
 	private SchedulerFactoryBean schedulerFactoryBean;
 	@Autowired
-	private Xt_QuartzService xt_QuartzService;
+	private XtQuartzService xtQuartzService;
 	@Autowired
-	private Xt_Data_DictionaryService xt_Data_DictionaryService;
+	private XtDataDictionaryService xtDataDictionaryService;
 	@Autowired
-	private Xt_PathService xt_PathService;
+	private XtPathService xtPathService;
 	@Autowired
-	private Xt_Ip_FrozenService xt_Ip_FrozenService;
+	private XtIpFrozenService xtIpFrozenService;
 	@Autowired
-	private Xt_ConstantService xt_ConstantService;
+	private XtConstantService xtConstantService;
     public void setApplicationContext(ApplicationContext ctx) throws BeansException {
         logger.info("1 => StartupListener.setApplicationContext");
     }
@@ -92,9 +92,9 @@ public class InitListener implements ApplicationContextAware, ServletContextAwar
             public void run() {
             	Map<String, Object> condition = new HashMap<String, Object>();
             	condition.put("jobStatus", "NORMAL");
-        		List<Xt_Quartz> xtQuartzList = xt_QuartzService.getXtQuartzListAllByCondition(condition);
+        		List<XtQuartz> xtQuartzList = xtQuartzService.getXtQuartzListAllByCondition(condition);
         		for(int i = 0; i < xtQuartzList.size(); i++){
-        			Xt_Quartz xtQuartz = xtQuartzList.get(i);
+        			XtQuartz xtQuartz = xtQuartzList.get(i);
 //        			new QuartzInit(schedulerFactoryBean,xtQuartz.getId(),xtQuartz.getJobName(),xtQuartz.getJobGroup(),xtQuartz.getCronExpression(),xtQuartz.getDesc(),xtQuartz.getTargetMethod(),xtQuartz.getTargetClass()).run();
         		}
             }
@@ -110,7 +110,7 @@ public class InitListener implements ApplicationContextAware, ServletContextAwar
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
-    	List<Xt_Data_Dictionary> Xt_Data_DictionaryList = xt_Data_DictionaryService.getXtDataDictionaryListAllByCondition(condition);
+    	List<XtDataDictionary> Xt_Data_DictionaryList = xtDataDictionaryService.getXtDataDictionaryListAllByCondition(condition);
 //    	//1创建缓存管理器
 //    	URL url = getClass().getResource("/xtCore/sources/ehcache/ehcache.xml");
 //		CacheManager cacheManager = CacheManager.create(url);
@@ -136,7 +136,7 @@ public class InitListener implements ApplicationContextAware, ServletContextAwar
 		millis1 = System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取平台路径开始");
 		condition = new HashMap<String, Object>();
-		List<Xt_Path> xt_Path_List = xt_PathService.getXtPathListAllByCondition(condition);
+		List<XtPath> xt_Path_List = xtPathService.getXtPathListAllByCondition(condition);
 		Element XtPathEle=new Element("XtPathCache", xt_Path_List); 
 		//取得配置文件中预先，定义的XtPathCache设置，生成一个Cache 该XtPathCache为ehcache.xml定义好的名称
 		Cache XtPathCache = CacheManagerUtil.getCache("XtPathCache");
@@ -151,7 +151,7 @@ public class InitListener implements ApplicationContextAware, ServletContextAwar
 		logger.info(sdf.format(new Date())+"--->读取IP黑户开始");
 		condition = new HashMap<String, Object>();
 		condition.put("xt_ip_frozen_status", 2);
-		List<Xt_Ip_Frozen> xt_Ip_FrozenList = xt_Ip_FrozenService.getXtIpFrozenListAllByCondition(condition);
+		List<XtIpFrozen> xt_Ip_FrozenList = xtIpFrozenService.getXtIpFrozenListAllByCondition(condition);
 		if(!xt_Ip_FrozenList.isEmpty() && xt_Ip_FrozenList.size() > 0){
 			Element XtIpFrozenEle=new Element("XtIpFrozenCache", xt_Ip_FrozenList); 
 			//取得配置文件中预先，定义的XtIpFrozenCache设置，生成一个Cache 该XtIpFrozenCache为ehcache.xml定义好的名称
@@ -165,7 +165,7 @@ public class InitListener implements ApplicationContextAware, ServletContextAwar
 		millis1 = System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取平台常量开始");
 		condition = new HashMap<String, Object>();
-		List<Xt_Constant> xt_ConstantList = xt_ConstantService.getXtConstantListAllByCondition(condition);
+		List<XtConstant> xt_ConstantList = xtConstantService.getXtConstantListAllByCondition(condition);
 		Element XtConstantEle=new Element("XtConstantCache", xt_ConstantList); 
 		//取得配置文件中预先，定义的XtConstantEle设置，生成一个Cache 该XtConstantEle为ehcache.xml定义好的名称
 		Cache XtConstantCache = CacheManagerUtil.getCache("XtConstantCache");

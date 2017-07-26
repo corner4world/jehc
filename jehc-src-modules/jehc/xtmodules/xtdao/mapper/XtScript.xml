@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtScript">
+	<!--初始化分页-->
+	<select id="getXtScriptListByCondition" resultType="jehc.xtmodules.xtmodel.XtScript" parameterType="map">
+		SELECT
+			xt_script.`xt_script_id`,
+			xt_script.`xt_script_key`,
+			xt_script.`xt_script_text`,
+			xt_script.`xt_script_type`,
+			xt_script.`xt_script_status`,
+			xt_script.`xt_script_ctime`,
+			xt_script.`xt_script_mtime`,
+			xt_script.`xt_userinfo_id`,
+			xt_script.`xt_script_title`,
+			xt_script.`xt_script_content`,
+			xt_script.`xt_script_search_filed`,
+			xt_userinfo.`xt_userinfo_realName`,
+			xt_script.`xt_script_valuefield`,
+			xt_script.`xt_script_displayfield`
+		FROM 
+			xt_script xt_script LEFT JOIN xt_userinfo AS xt_userinfo ON xt_script.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_script_status and -1 != xt_script_status">
+			AND xt_script_status = #{xt_script_status}
+		</if>
+		<if test="null != xt_script_type and -1 != xt_script_type">
+			AND xt_script_type = #{xt_script_type}
+		</if>
+		<if test="null != xt_script_key">
+			AND xt_script_key = #{xt_script_key}
+		</if>
+		ORDER BY xt_script.`xt_script_ctime` DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtScriptById" resultType="jehc.xtmodules.xtmodel.XtScript" parameterType="string">
+		SELECT
+			xt_script.`xt_script_id`,
+			xt_script.`xt_script_key`,
+			xt_script.`xt_script_text`,
+			xt_script.`xt_script_type`,
+			xt_script.`xt_script_status`,
+			xt_script.`xt_script_ctime`,
+			xt_script.`xt_script_mtime`,
+			xt_script.`xt_userinfo_id`,
+			xt_script.`xt_script_title`,
+			xt_script.`xt_script_content`,
+			xt_script.`xt_script_search_filed`,
+			xt_userinfo.`xt_userinfo_realName`,
+			xt_script.`xt_script_valuefield`,
+			xt_script.`xt_script_displayfield`
+		FROM 
+			xt_script xt_script LEFT JOIN xt_userinfo AS xt_userinfo ON xt_script.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE xt_script.xt_script_id=#{xt_script_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtScript" parameterType="jehc.xtmodules.xtmodel.XtScript">
+		INSERT INTO
+			xt_script
+			(
+			`xt_script_id`,
+			`xt_script_key`,
+			`xt_script_text`,
+			`xt_script_type`,
+			`xt_script_status`,
+			`xt_script_ctime`,
+			`xt_userinfo_id`,
+			`xt_script_title`,
+			`xt_script_content`,
+			`xt_script_search_filed`,
+			`xt_script_valuefield`,
+			`xt_script_displayfield`
+			)
+			VALUES
+			(
+			#{xt_script_id},
+			#{xt_script_key},
+			#{xt_script_text},
+			#{xt_script_type},
+			#{xt_script_status},
+			#{xt_script_ctime},
+			#{xt_userinfo_id},
+			#{xt_script_title},
+			#{xt_script_content},
+			#{xt_script_search_filed},
+			#{xt_script_valuefield},
+			#{xt_script_displayfield}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtScript" parameterType="jehc.xtmodules.xtmodel.XtScript">
+		UPDATE
+			xt_script
+		SET
+			`xt_script_id` = #{xt_script_id},
+			`xt_script_key` = #{xt_script_key},
+			`xt_script_text` = #{xt_script_text},
+			`xt_script_type` = #{xt_script_type},
+			`xt_script_status` = #{xt_script_status},
+			`xt_script_mtime` = #{xt_script_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_script_title` = #{xt_script_title},
+			`xt_script_content` = #{xt_script_content},
+			`xt_script_search_filed` = #{xt_script_search_filed},
+			`xt_script_valuefield` = #{xt_script_valuefield},
+			`xt_script_displayfield` = #{xt_script_displayfield}
+		WHERE xt_script_id=#{xt_script_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtScript" parameterType="map">
+		DELETE FROM xt_script WHERE xt_script_id IN
+		<foreach item="item" index="index" collection="xt_script_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

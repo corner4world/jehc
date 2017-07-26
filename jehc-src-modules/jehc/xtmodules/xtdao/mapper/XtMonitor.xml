@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtMonitor">
+	<!--初始化分页-->
+	<select id="getXtMonitorListByCondition" resultType="jehc.xtmodules.xtmodel.XtMonitor" parameterType="map">
+		SELECT
+			`xt_monitor_id`,
+			`xt_monitor_userName`,
+			`xt_monitor_accountName`,
+			`xt_monitor_comName`,
+			`xt_monitor_localName`,
+			`xt_monitor_jvm_totalMem`,
+			`xt_monitor_jvm_Mem`,
+			`xt_monitor_operate_sysName`,
+			`xt_monitor_operate_org`,
+			`xt_monitor_jvm_cup_count`,
+			`xt_monitorIP`,
+			`xt_monitor_environment`,
+			`xt_monitorPath`,
+			`xt_monitorTime`
+		FROM 
+			xt_monitor
+		WHERE 1=1
+		ORDER BY `xt_monitorTime` DESC
+	</select>
+	<!--查询对象-->
+	<select id="getXtMonitorById" resultType="jehc.xtmodules.xtmodel.XtMonitor" parameterType="string">
+		SELECT
+			`xt_monitor_id`,
+			`xt_monitor_userName`,
+			`xt_monitor_accountName`,
+			`xt_monitor_comName`,
+			`xt_monitor_localName`,
+			`xt_monitor_jvm_totalMem`,
+			`xt_monitor_jvm_Mem`,
+			`xt_monitor_operate_sysName`,
+			`xt_monitor_operate_org`,
+			`xt_monitor_jvm_cup_count`,
+			`xt_monitorIP`,
+			`xt_monitor_environment`,
+			`xt_monitorPath`,
+			`xt_monitorTime`
+		FROM 
+			xt_monitor
+		WHERE xt_monitor_id=#{xt_monitor_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtMonitor" parameterType="jehc.xtmodules.xtmodel.XtMonitor">
+		INSERT INTO
+			xt_monitor
+			(
+			`xt_monitor_id`,
+			`xt_monitor_userName`,
+			`xt_monitor_accountName`,
+			`xt_monitor_comName`,
+			`xt_monitor_localName`,
+			`xt_monitor_jvm_totalMem`,
+			`xt_monitor_jvm_Mem`,
+			`xt_monitor_operate_sysName`,
+			`xt_monitor_operate_org`,
+			`xt_monitor_jvm_cup_count`,
+			`xt_monitorIP`,
+			`xt_monitor_environment`,
+			`xt_monitorPath`,
+			`xt_monitorTime`
+			)
+			VALUES
+			(
+			#{xt_monitor_id},
+			#{xt_monitor_userName},
+			#{xt_monitor_accountName},
+			#{xt_monitor_comName},
+			#{xt_monitor_localName},
+			#{xt_monitor_jvm_totalMem},
+			#{xt_monitor_jvm_Mem},
+			#{xt_monitor_operate_sysName},
+			#{xt_monitor_operate_org},
+			#{xt_monitor_jvm_cup_count},
+			#{xt_monitorIP},
+			#{xt_monitor_environment},
+			#{xt_monitorPath},
+			#{xt_monitorTime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtMonitor" parameterType="jehc.xtmodules.xtmodel.XtMonitor">
+		UPDATE
+			xt_monitor
+		SET
+			`xt_monitor_id` = #{xt_monitor_id},
+			`xt_monitor_userName` = #{xt_monitor_userName},
+			`xt_monitor_accountName` = #{xt_monitor_accountName},
+			`xt_monitor_comName` = #{xt_monitor_comName},
+			`xt_monitor_localName` = #{xt_monitor_localName},
+			`xt_monitor_jvm_totalMem` = #{xt_monitor_jvm_totalMem},
+			`xt_monitor_jvm_Mem` = #{xt_monitor_jvm_Mem},
+			`xt_monitor_operate_sysName` = #{xt_monitor_operate_sysName},
+			`xt_monitor_operate_org` = #{xt_monitor_operate_org},
+			`xt_monitor_jvm_cup_count` = #{xt_monitor_jvm_cup_count},
+			`xt_monitorIP` = #{xt_monitorIP},
+			`xt_monitor_environment` = #{xt_monitor_environment},
+			`xt_monitorPath` = #{xt_monitorPath}
+		WHERE xt_monitor_id=#{xt_monitor_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtMonitor" parameterType="map">
+		DELETE FROM xt_monitor WHERE xt_monitor_id IN
+		<foreach item="item" index="index" collection="xt_monitor_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>
