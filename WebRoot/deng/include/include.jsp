@@ -1,5 +1,3 @@
-<%@page import="javax.faces.application.Application"%>
-<%@page import="jehc.xtmodules.xtcore.allutils.file.FileUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld" %>
 <%@ taglib prefix="fmt" uri="/WEB-INF/tld/fmt.tld" %>
