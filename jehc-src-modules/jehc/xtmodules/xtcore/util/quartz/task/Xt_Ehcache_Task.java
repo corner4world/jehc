@@ -124,7 +124,7 @@ public class Xt_Ehcache_Task extends Thread{
      * 加载公共功能到内存中
      */
     public void loadXtFunctioninfoCommon(){
-    	XtFunctioninfoCommonService xt_Functioninfo_CommonService = (XtFunctioninfoCommonService)SpringUtil.getBean("xtFunctioninfo_CommonService");
+    	XtFunctioninfoCommonService xt_Functioninfo_CommonService = (XtFunctioninfoCommonService)SpringUtil.getBean("xtFunctioninfoCommonService");
     	XtFunctioninfoService xt_FunctioninfoService = (XtFunctioninfoService)SpringUtil.getBean("xtFunctioninfoService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();

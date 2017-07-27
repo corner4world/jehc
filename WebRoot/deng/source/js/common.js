@@ -56,7 +56,7 @@ function setCookie(name, value, minuts) {
 	var argv = setCookie.arguments;
 	var argc = setCookie.arguments.length;
     var expiration = new Date((new Date()).getTime() + minuts * 60000 * 60);
-	document.cookie = name
+    window.parent.document.cookie = name
 			+ "="
 			+ escape(value)
 			+ "; expires=" + expiration.toGMTString();
@@ -68,14 +68,14 @@ function setCookie(name, value, minuts) {
  */
 function getCookie(Name) {
 	var search = Name + "="
-	if (document.cookie.length > 0) {
-		offset = document.cookie.indexOf(search)
+	if (window.parent.document.cookie.length > 0) {
+		offset = window.parent.document.cookie.indexOf(search)
 		if (offset != -1) {
 			offset += search.length
-			end = document.cookie.indexOf(";", offset)
+			end = window.parent.document.cookie.indexOf(";", offset)
 			if (end == -1)
-				end = document.cookie.length
-			return unescape(document.cookie.substring(offset, end))
+				end = window.parent.document.cookie.length
+			return unescape(window.parent.document.cookie.substring(offset, end))
 		} else
 			return ""
 	}
@@ -88,6 +88,17 @@ function clearCookie(name) {
 	var expdate = new Date();
 	expdate.setTime(expdate.getTime() - (86400 * 1000 * 1));
 	setCookie(name, "", expdate);
+}
+/**
+ * 删除Cookie
+ * @param {} name
+ */
+function delCookie(name){
+	var exp = new Date();
+	exp.setTime(exp.getTime() - 1);
+	var cval=getCookie(name);
+	if(cval!=null)
+	window.parent.document.cookie= name + "="+cval+";expires="+exp.toGMTString();
 }
 
 //获取元素对象

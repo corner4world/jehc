@@ -61,7 +61,7 @@ Ext.Ajax.on('requestexception',function(conn,response,options){
 	     	top.Ext.example.msg('提示',"访问超时,可能存在网络异常,检查后请重试!");
 	    }else if(status == 0){
 	    	//4.其他异常
-	    	top.Ext.example.msg('提示',"无法连接网络!可能您访问的服务器已经关闭或者当机!请联系管理员!");
+	    	top.Ext.example.msg('提示',"无法连接网络!");
 	    }else{
 	    	//5.其他异常
 	    	top.Ext.example.msg('提示',"其他异常!错误状态信息:"+status);
@@ -109,12 +109,12 @@ function showErrorLog(message){
 }
 //js错误捕捉
 window.onerror = function (msg, url, line, col, error) {
-    var errors = [];
-    errors.push('消息：' + msg);
-    errors.push('网址：' + url);
-    errors.push('行：' + line);
-    errors.push('列：' + col);
-    top.Ext.example.msg('提示',errors.join('<br/>'));
+//    var errors = [];
+//    errors.push('消息：' + msg);
+//    errors.push('网址：' + url);
+//    errors.push('行：' + line);
+//    errors.push('列：' + col);
+//    top.Ext.example.msg('提示',errors.join('<br/>'));
     return true;
 };
 

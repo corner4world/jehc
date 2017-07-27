@@ -675,7 +675,7 @@ function initLockSystem(flag){
 					}
 				}]
 	});
-	if(getCookie("syslock") == '1'){
+	if(getCookie("syslock") == 1){
 		lockWindow.show();
 	}else{
 		if(flag == 1){

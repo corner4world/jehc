@@ -217,6 +217,7 @@ function login(){
 						setCookie('XTUSERPASSWORDCOOKIE',Ext.getCmp('password').getValue(),240);
 					}
 				}
+				delCookie('syslock');
 				showLoading("身份校验成功，开始进入...");
 				window.location.href="../index/index.html";
 			},
