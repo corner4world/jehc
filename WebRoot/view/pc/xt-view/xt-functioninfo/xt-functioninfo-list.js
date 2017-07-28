@@ -159,18 +159,18 @@ function initGrid(){
             renderer:function(value){
             	var val = value.split(",");
             	if(val[1] == 0){
-            		return "无需拦截---初始化该功能无需拦截"
+            		return "无需拦截"
             	}else if(val[1] == 1){
-            		return "<font color='red'>必须拦截---初始化该功能必须拦截</font>";
+            		return "<font color='red'>必须拦截</font>";
             	}
             }
-        },{
+        }/*,{
             text:'备注',
             dataIndex:'content',
             renderer:function(value){
             	return value;
             }
-        }]
+        }*/]
     });
     refresh();
     /**选择父节点选中子节点**/
