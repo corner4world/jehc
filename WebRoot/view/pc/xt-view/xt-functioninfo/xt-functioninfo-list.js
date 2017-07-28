@@ -156,7 +156,6 @@ function initGrid(){
             text:'拦截类型',
             dataIndex:'integerappend',
             sortable:true,
-            flex:1,
             renderer:function(value){
             	var val = value.split(",");
             	if(val[1] == 0){
@@ -167,7 +166,6 @@ function initGrid(){
             }
         },{
             text:'备注',
-            flex:1,
             dataIndex:'content',
             renderer:function(value){
             	return value;
