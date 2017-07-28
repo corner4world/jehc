@@ -30,7 +30,7 @@
 	    	var grid_toolbar_gaps = "${grid_toolbar_gaps}";
 	    	var grid_toolbar_moretext_gaps = "${grid_toolbar_moretext_gaps}";
 	    	var JSESSIONID;
-	    	var collapsibleDefined=false;
+	    	var collapsibleDefined=true;
 	    	var tbarBtnMinWidth=0;
 	    	var hideCollapseToolFlag=true;
 	    	var lc_design_displaywin_for_edit = ${lc_design_displaywin_for_edit};
@@ -96,7 +96,7 @@
 				if(cookieC.getValue().indexOf("triton")>=0){
 				%>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
-		<script type="text/javascript">collapsibleDefined=true;hideCollapseToolFlag=false;</script>
+		<script type="text/javascript">/* collapsibleDefined=true; */hideCollapseToolFlag=false;</script>
 				<%
 				}else{
 				%>
@@ -109,7 +109,7 @@
 	    }else{
 	    	%>
 	    <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
-		<script type="text/javascript">collapsibleDefined=true;hideCollapseToolFlag=false;</script>
+		<script type="text/javascript">/* collapsibleDefined=true; */hideCollapseToolFlag=false;</script>
 	    	<%
 	    }
         %>
@@ -407,7 +407,6 @@
 			}
 			.x-accordion-item .x-accordion-hd-fff{
 			    background-image: none;
-			    background: #fff;
 			}
 	        /* .tbar{ background-color:#5fa2dd;background-image:url();} */
 	        
@@ -418,6 +417,10 @@
 			}
 			.x-body {
 			    background: #ffffff;
+			}
+			.x-accordion-item .x-accordion-hd {
+			    background: #ffffff;
+			    border-color: #ffffff #ffffff #f5f5f5;
 			}
 		</style>
 	</head>

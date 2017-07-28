@@ -1,4 +1,4 @@
-ï»¿body{background-color: #F3F3F3}
+body{background-color: #FFFFFF}
 *{
   font-family:courier;
 }
@@ -68,14 +68,14 @@
 
 
 
-/*å¹´ä»½ï¼Œæœˆä»½åˆ‡æ¢*/
+/*Äê·İ£¬ÔÂ·İÇĞ»»*/
 .year_select{
   display:inline-block;padding-right: 23px;
 }
 .home_select{
   display:inline-block; padding-right: 18px;
 }
-/*æ¸…é™¤ieçš„é»˜è®¤é€‰æ‹©æ¡†æ ·å¼æ¸…é™¤ï¼Œéšè—ä¸‹æ‹‰ç®­å¤´*/
+/*Çå³ıieµÄÄ¬ÈÏÑ¡Ôñ¿òÑùÊ½Çå³ı£¬Òş²ØÏÂÀ­¼ıÍ·*/
 select::-ms-expand { display: none; }
 .ch{
   background-color:#5fa2dd;
@@ -89,7 +89,7 @@ select {
 
 
 
-/*æ—¥å†å¤´éƒ¨*/
+/*ÈÕÀúÍ·²¿*/
 
 .table_head{
     background-color: #5fa2dd;width: 347px;margin-left: -2px;text-align: center;

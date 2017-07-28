@@ -1,11 +1,3 @@
-Ext.require([
-    'Ext.tab.*',
-    'Ext.window.*',
-    'Ext.tip.*',
-    'Ext.layout.container.Border',
-    'Ext.Button',
-    'Ext.window.MessageBox'
-]);
 document.onreadystatechange = overLoad; 
 Ext.onReady(function(){
 	reGetWidthAndHeight();
@@ -17,7 +9,7 @@ Ext.onReady(function(){
 	         },
 	         proxy:{  
 	                type:'ajax',  
-	                url:'../xtIndexController/loadIndexMenu',
+	                url:'../index/index_menu.html',
 	                extraParams:{id:id},
 	                reader:{  
 	                    type:'json',  
@@ -32,13 +24,31 @@ Ext.onReady(function(){
 	        autoEncode:true,
 	        rootVisible:false, 
 	        useArrows:collapsibleDefined,
+	        xtype:'filtered-tree',
+	        tbar:[
+        		{
+        		   width:220,
+        		   xtype:'triggerfield',
+        		   emptyText:'输入关键字（如“订单”等）',
+        	       triggerCls:'x-form-clear-trigger',
+        	       onTriggerClick:function(){
+        	           this.reset();
+        	       },
+        	       listeners:{
+        	           change:function(){
+        	           	filterBy(treePanel,this.getValue(),'text');
+        	           },
+        	           buffer:250
+        	       }
+        		}
+        	],
 	        listeners:{  
 	            beforeitemexpand:function(node,optd){
 	                var id=node.data.id;  
 	                store.setProxy({   
 	                	   //异步从服务器上加载数据  extjs会自动帮我们解析  
 	                       type:'ajax',  
-	                       url:'../xtIndexController/loadIndexMenu',  
+	                       url:'../index/index_menu.html',  
 	                       extraParams:{id:id}
 	                 });  
 	            },
@@ -53,21 +63,24 @@ Ext.onReady(function(){
 		return treePanel;
 	}
 	/**布局**/
-	new Ext.Viewport({
+	Ext.create('Ext.Viewport',{  
  		layout:'border',
 		items:[{
 			region:'west',
-			title:"<font color='white'>导航目录</font>",
-			icon:indexlist,
+			title:'<font color=#ffffff>目录索引</font>',
+			icon:indexNav,
 			width:255,
 			split:false,
-			border:true,
+			border:false,
 			collapsible:collapsibleDefined,
-			hideCollapseTool:true,
+			hideCollapseTool:hideCollapseToolFlag,
+			/**
 			floatable:false,
+			 **/
 			titleCollapse:true,
 			/**自定义样式**/
 			header:{
+//				height:100,//也可以放开 也挺好的
 				cls:'x-panel-header-defined'
 			},
 			/**
@@ -75,16 +88,9 @@ Ext.onReady(function(){
 			**/
             collapseDirection:'left',
             id:'leftPanel',
-            /**
-            dockedItems:{
-            	xtype:'button',
-            	text:'dockedItems test'
-		    },
-		    **/
             layout:{
 				type:'accordion',
 				animate:true,
-				hideCollapseTool:hideCollapseToolFlag,
 				activeOnTop:true
 			}
 		},{
@@ -92,149 +98,161 @@ Ext.onReady(function(){
 			layout:'border',
 			items:[{
 					region:'north',
-					xtype:'panel',
-					height:'auto',
 					split:false,
 					border:false,
-					autoScroll:false, 
-		            collapsible:false, 
-		            title:sys_pt_index,
-		            tools:[
-					    	{
-		            	 	 width:220,
-							 xtype:'textfield',
-				             emptyText:"请输入关键字",
-				             triggerCls:'x-form-ss-trigger', 
-						     onTriggerClick:function(){search(this.value)},
-						     listeners:{
-								specialkey:function(field, e){
-									if(e.getKey() == Ext.EventObject.ENTER){
-										search(this.value);
+					tools:[
+					       {
+			            	 	 width:220,
+								 xtype:'textfield',
+					             emptyText:"请输入关键字",
+					             triggerCls:'x-form-ss-trigger', 
+							     onTriggerClick:function(){search(this.value)},
+							     listeners:{
+									specialkey:function(field, e){
+										if(e.getKey() == Ext.EventObject.ENTER){
+											search(this.value);
+										}
 									}
-								}
-							 },
-				             style:{background:'#fff',marginRight:'0px',marginLeft:'0px'}
-					    	 }
+								 },
+					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
+					       },
+					       {
+					        	 icon:indexLingdang,
+				                 xtype:'button',
+					             handler:function(button){
+					             	msgTishi("该功能还未开放！");
+								 },
+					             style:{background:'#ffffff'}
+					        },
+					        {
+					        	 icon:indexMail,
+				                 xtype:'button',
+					             handler:function(button){
+					             	msgTishi("该功能还未开放！");
+								 },
+					             style:{background:'#ffffff'}
+					        },
+					        {
+				            xtype:'button',
+				            icon:indexlist,
+					 		iconAlign:'top',
+					 		style:{background:'#ffffff',marginRight:'0px'},
+				            menu:[{
+									tooltip:{title:'注销平台',width:80},
+					                text:'注销',
+					                glyph:0xf014,
+								    handler:function(){
+								     	loginout();
+								    }
+								 },
+								 {
+								 	handler:function(){
+								 		initPerpetualcalendar()
+								    },
+								    text:'日历',
+								    glyph:0xf073,
+								    tooltip:{
+					                 	title:'万年历',
+					                 	width:80
+					                }
+								 },
+								 {
+								    text:'关闭浏览器缓存',
+								    glyph:0xf0ec,
+								    tooltip:{
+					                 	title:'关闭浏览器缓存',
+					                 	width:80
+					                },
+								    handler:function(){
+								     	jQuery.ajaxSetup({cache:false});
+								     	msgTishi("关闭浏览器缓存成功");
+								    }
+								 },
+								 {
+								    text:'开启浏览器缓存',
+								    glyph:0xf0ec,
+								    tooltip:{
+					                 	title:'开启浏览器缓存',
+					                 	width:80
+					                },
+								    handler:function(){
+								     	jQuery.ajaxSetup({cache:true});
+								     	msgTishi("开启浏览器缓存成功");
+								    }
+								 },
+								 {
+						             text:'修改密码',
+						             glyph:0xf044,
+						             handler:function(){
+						             	updatePwd();
+								     },
+								     tooltip:{
+					                 	title:'修改密码',
+					                 	width:80
+					                 }
+								 },
+								 {
+						             handler:function(){
+						             	changeTheme();
+								     },
+								     text:'更换主题',
+								     glyph:0xf022,
+								     tooltip:{
+					                 	title:'更换主题',
+					                 	width:80
+					                 }
+								 },
+								 {
+								 	handler:function(){
+								 		 window.location.href=basePath+"/index/index.html";
+								    },
+								    text:'刷新整个页面',
+								    glyph:0xf021,
+								    tooltip:{
+					                 	title:'刷新整个页面',
+					                 	width:80
+					                }
+								 }
+							 ]
+					         },
+					    	 {
+				                xtype:'box', 
+								width:35, 
+								height:35, 
+								cls:'borderRadius',
+								margin:'2 5 4 0', 
+								autoEl:{
+									tag:'img',
+									tooltip:{
+						        		text:"当前用户 "+sys_pt_user_name,
+					                 	width:150
+					                },
+									src:userIcon
+								},
+					        	style:{background:'#ffffff',marginRight:'0px'}
+						      } 
 			        ],
 		            header:{
 		            	itemPosition:0,
-				        items:[{
-			                 icon:indexCollapseIcon,
-			                 scale:'large',
-			                 xtype:'button',
-				             handler:function(button){
-								collapsibleCE();
-							 },
-				             style:{background:'#fff'}
-				        },
-						{
-			            xtype:'button',
-			            icon:indexRopot,
-				 		iconAlign:'right',
-				 		style:{background:'#fff',marginLeft:'0px'},
-			            menu:[
-						 	{
-								tooltip:{
-				                 	title:'注销平台',
-				                 	width:80
-				                 },
-				                 text:'注销',
-				                 glyph:0xf014,
-							     handler:function(){
-							     	loginout();
-							     }
-							 },
-							 {
-							    text:'关闭浏览器缓存',
-							    glyph:0xf0ec,
-							    tooltip:{
-				                 	title:'关闭浏览器缓存',
-				                 	width:80
-				                },
-							    handler:function(){
-							     	jQuery.ajaxSetup ({cache:false})
-							    }
-							 },
-							 {
-							    text:'开启浏览器缓存',
-							    glyph:0xf0ec,
-							    tooltip:{
-				                 	title:'开启浏览器缓存',
-				                 	width:80
-				                },
-							    handler:function(){
-							     	jQuery.ajaxSetup ({cache:true})
-							    }
-							 },
-							 {
-					             text:'修改密码',
-					             glyph:0xf044,
-					             handler:function(){
-					             	updatePwd();
-							     },
-							     tooltip:{
-				                 	title:'修改密码',
-				                 	width:80
-				                 }
-							 },
-							 {
-					             handler:function(){
-					             	changeTheme();
-							     },
-							     text:'更换主题',
-							     glyph:0xf022,
-							     tooltip:{
-				                 	title:'更换主题',
-				                 	width:80
-				                 }
-							 },
-							 /**
-							 {
-							 	handler:function(){
-							 		window.location.reload();
-							    },
-							    text:'初始化关闭左边菜单',
-							    glyph:0xf029,
-							    tooltip:{
-				                 	title:'初始化关闭左边菜单',
-				                 	width:80
-				                }
-							 },
-							 **/
-							 {
-							 	handler:function(){
-							 		 window.location.href=basePath+"/xtIndexController/loadIndex";
-							    },
-							    text:'刷新整个页面',
-							    glyph:0xf021,
-							    tooltip:{
-				                 	title:'刷新整个页面',
-				                 	width:80
-				                }
-							 }
-						 ]
-			        },
-			        {
-					   	 tooltip:{
-		                 	title:'当前用户:'+sys_pt_user_name,
-		                 	width:150
-		                 },	
-		                 scale:'large',
-		                 icon:indexUserIcon,
-			             xtype:'button',
-			             style:{background:'#fff'},
-					     frame:false
-				    }]
+//		            	height:100,//也可以放开 也挺好的
+				        items:[
+				        {
+				        	xtype:'label',
+				        	cls:'label',
+				        	text:sys_pt_index
+				        }
+			        ]
 				}
 			},{
 				region:'center',
 				xtype:'tabpanel',
 				id:'tabpanelCenter',
-				tabPosition:'bottom',
+				tabPosition:'top',
 				items:[{
 					title:'个人首页',
 					icon:homeIcon,
-					html:'<iframe scrolling="auto" frameborder="0" width="100%" height="100%" src="../xtIndexController/loadDesk"></iframe>'
+					id:'tab_home',
+					html:'<iframe scrolling="auto" id=xtIframehome frameborder="0" width="100%" height="100%" src="../index/desk.html"></iframe>'
 				}],plugins:new Ext.ux.TabCloseMenu()
 			}]
 		},{
@@ -255,7 +273,7 @@ Ext.onReady(function(){
 			            xtype:'button',
 			            id:'xtMessageBtn',
 			            icon:messageIcon,
-			            style:{background:'#90c258',marginRight:'4px',marginLeft:'4px'},
+			            style:{background:'#90c258',marginRight:'0px',marginLeft:'10px'},
 			            tooltip:{
 		                 	title:'短消息'
 		                },
@@ -264,13 +282,12 @@ Ext.onReady(function(){
 						}
 			      },
 			      {
-			            /**ui:'default-toolbar',**/
 			            xtype:'button',
 			            icon:lockIcon,
 			            tooltip:{
 		                 	title:'锁屏'
 		                },
-			            style:{background:'#e3495a',marginRight:'4px',marginLeft:'4px'},
+			            style:{background:'#e3495a',marginRight:'4px',marginLeft:'2px'},
 			            handler:function(button){
 			            	initLockSystem(1);
 							setCookie("syslock", '1', 240);
@@ -284,7 +301,7 @@ Ext.onReady(function(){
 			collapsible:false,  
 			split:false
 		}]
- 	}).show();
+ 	});
  	setInterval(function(){Ext.getCmp('timeLabel').setText(dt());},1000);
 	var menus;
 	if(menuJSON != "" && menuJSON != null && menuJSON != "]"){
@@ -309,10 +326,10 @@ Ext.onReady(function(){
             scrollable:'y',
             /**新方法使用结束**/ 
             bodyStyle:{    
-                /**padding:'10px'**/  
+                padding:'0px'
             },   
             border:false,
-            //frame:true,
+            frame:false,
             icon:group.icon,
             listeners:{  
                  'afterrender':function(){
@@ -332,10 +349,15 @@ Ext.onReady(function(){
     	var id = node.data.id;
     	/**开启多个Tab目的**/
         var tabid = 'tab_' + id;
+        var itemsLength = tabpanelCenter.items.length;
         if(tabpanelCenter.getComponent(tabid)){
         	tabpanelCenter.getComponent(tabid).isfrist = 1;
             tabpanelCenter.setActiveTab(tabid);
         }else{
+        	if(itemsLength >= 7){
+            	msgTishi("您开启的选项卡太多请关闭一些在打开");
+            	return;
+            }
         	showLoading("正在拼命载入中，请耐心等待...");
             var panel = Ext.create('Ext.Panel',{
                 id:tabid,
@@ -344,10 +366,13 @@ Ext.onReady(function(){
                 title:text,
                 closable:true,
                 icon:node.data.icon,
-                layoutOnTabChange:true,
+                layoutOnTabChange:false,
                 href:url,
                 isfrist:0,
-				html:'<iframe width=100% height=100% id=xtIframe'+id+' name="xtIframe" src="../'+url+'" frameborder="0" style="overflow:hidden;"/>'
+                fitToFrame:true,
+                autoDestroy:true,
+                closeAction:'destory', 
+				html:'<iframe width=100% height=100% id="xtIframe'+id+'" name="xtIframe" src="../'+url+'" frameborder="0" style="overflow:hidden;"/>'
             });
             tabpanelCenter.add(panel).show();
             loadXtIframeComplete(tabid,id,dt1,text);
@@ -375,6 +400,7 @@ function loadXtIframeComplete(tabid,id,dt1,text){
 					hideWaitMsg();
 					//执行监控页面信息操作
 					loadinfo(text,dt1,dt2);
+					tabpanelCenter.getComponent(tabid).isfrist = 1;
 					return;
 		        }
 			}); 
@@ -386,6 +412,7 @@ function loadXtIframeComplete(tabid,id,dt1,text){
 					hideWaitMsg();
 					//执行监控页面信息操作
 					loadinfo(text,dt1,dt2);
+					tabpanelCenter.getComponent(tabid).isfrist =1;
 					return;
 		        }
 			}; 
@@ -459,7 +486,7 @@ function loginout(){
 	Ext.Msg.confirm("提示", "确定退出平台？",function(btn){
 		if(btn == 'yes'){
 			Ext.Ajax.request({  
-			    url:'../xtLonginController/loginout',
+			    url:'../login/loginout',
 			    success:function(response,opts){
 			    	top.Ext.Msg.alert('提示', "注销登录平台用户成功!平台将您转发到登录页面!",function(){
 						var win = top;
@@ -531,6 +558,7 @@ function updatePwd(){
 		modal:true,
 		closable:false,
 		title:'修改密码',
+		headerPosition:'left',
 		items:pwdForm,
 		buttons:[{
 			text:'保存',
@@ -546,7 +574,7 @@ function updatePwd(){
 						return Ext.getCmp('oldPwd').focus();
 					}
 					Ext.getCmp('pwdForm').form.submit({
-						url:basePath+'/xtIndexController/updatePwd',
+						url:basePath+'/index/updatePwd',
 						waitTitle:'提示',
 						method:'POST',
 						waitMsg:'正在操作中',
@@ -647,7 +675,7 @@ function initLockSystem(flag){
 					}
 				}]
 	});
-	if(getCookie("syslock") == '1'){
+	if(getCookie("syslock") == 1){
 		lockWindow.show();
 	}else{
 		if(flag == 1){
@@ -661,7 +689,7 @@ function initLockSystem(flag){
 function unlockSystem() {
 	if(lockForm.form.isValid()){
 		lockForm.form.submit({
-			url:basePath+'/xtIndexController/validatePassword',
+			url:basePath+'/index/validatePassword',
 			waitTitle:'提示',
 			method:'POST',
 			waitMsg:'正在验证密码中...',
@@ -686,11 +714,11 @@ var collapsibleflag= 1;
 function collapsibleCE(){
 	if (collapsibleflag=== 1) {  
         Ext.getCmp('leftPanel').collapse();//panel收缩
-        Ext.getCmp('leftPanel').setTitle('<font color="#5fa2dd">导航目录</font>');
+        Ext.getCmp('leftPanel').setTitle(sys_pt_index);
         collapsibleflag= 0;
     } else {  
         Ext.getCmp('leftPanel').expand();//panel展开
-        Ext.getCmp('leftPanel').setTitle('<font color="#fff">导航目录</font>');
+        Ext.getCmp('leftPanel').setTitle(sys_pt_index);
         collapsibleflag = 1;
     }
 }
@@ -698,3 +726,27 @@ function collapsibleCE(){
 function search(keywords){
 	addTabContent('xtSearchController/loadXtSearch?keywords='+encodeURI(keywords),'10000','关键字搜索结果',indexSearchIcon);
 }
+
+
+//////////////////初始化锁屏开始//////////////
+var perpetualcalendarWin;
+function initPerpetualcalendar(){
+	reGetWidthAndHeight();
+	perpetualcalendarWin = Ext.create('Ext.Window',{
+		title:'万年历',
+		layout:'fit',
+		width:700,
+		height:clientHeight,
+		autoHeight:true,
+		collapsible:true,
+		closable:true,
+		maximizable:true,
+		draggable:true,
+		modal:true,
+		constrain:true,
+		resizable:true,
+		html:'<iframe scrolling="auto" frameborder="0" width="100%" height="100%" src="../index/perpetualcalendar"></iframe>'
+	});
+	perpetualcalendarWin.show();
+}
+//////////////////万年历//////////////

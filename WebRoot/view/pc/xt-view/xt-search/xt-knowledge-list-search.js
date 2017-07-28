@@ -18,6 +18,7 @@ Ext.onReady(function(){
 			columnLines:false,
 			hideHeaders:false,
 			header:{
+				cls:'x-panel-header-defined'
 				//style:'background-color:#5fa2dd;background-image:none;',
 				//height:110
 			},
