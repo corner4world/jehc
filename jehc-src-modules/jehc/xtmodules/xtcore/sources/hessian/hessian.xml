@@ -15,7 +15,7 @@
 
 	<bean class="org.springframework.web.servlet.mvc.HttpRequestHandlerAdapter" />
 
-	<bean name="/SpaceHessian"
+	<!-- <bean name="/SpaceHessian"
 		class="org.springframework.remoting.caucho.HessianServiceExporter"
 		p:serviceInterface="jehc.xtmodules.xtcore.hession.SpaceService"
 		p:service-ref="spaceService">
@@ -27,7 +27,7 @@
 		p:service-ref="spaceService">
 	</bean>
 
-	<!-- 可以采用Spring代理方式配置URL -->
+	可以采用Spring代理方式配置URL
 	<bean id="spaceServiceHessian" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
 		<property name="serviceUrl" value="http://localhost:8080/jehc/SpaceHessian" />
 		<property name="serviceInterface" value="jehc.xtmodules.xtcore.hession.SpaceService" />
@@ -35,5 +35,5 @@
 	<bean id="spaceServiceBurlap" class="org.springframework.remoting.caucho.BurlapProxyFactoryBean">
 		<property name="serviceUrl" value="http://localhost:8080/jehc/SpaceBurlap" />
 		<property name="serviceInterface" value="jehc.xtmodules.xtcore.hession.SpaceService" />
-	</bean>
+	</bean> -->
 </beans>

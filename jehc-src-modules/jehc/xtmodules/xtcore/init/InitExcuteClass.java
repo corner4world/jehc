@@ -23,13 +23,12 @@ import jehc.solrmodules.solrmodel.SolrCore;
 import jehc.solrmodules.solrservice.SolrCoreService;
 import jehc.solrmodules.solrservice.SolrIndexAttributeService;
 import jehc.solrmodules.solrservice.SolrSortService;
-import jehc.xtmodules.xtcore.allutils.AllUtils;
-import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.ReadProperties;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.quartz.QuartzInit;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
+import jehc.xtmodules.xtmodel.XtAreaRegion;
 import jehc.xtmodules.xtmodel.XtConstant;
 import jehc.xtmodules.xtmodel.XtDataDictionary;
 import jehc.xtmodules.xtmodel.XtFunctioninfo;
@@ -38,10 +37,11 @@ import jehc.xtmodules.xtmodel.XtIpFrozen;
 import jehc.xtmodules.xtmodel.XtPath;
 import jehc.xtmodules.xtmodel.XtQuartz;
 import jehc.xtmodules.xtmodel.XtStartStopLog;
+import jehc.xtmodules.xtservice.XtAreaRegionService;
 import jehc.xtmodules.xtservice.XtConstantService;
 import jehc.xtmodules.xtservice.XtDataDictionaryService;
-import jehc.xtmodules.xtservice.XtFunctioninfoService;
 import jehc.xtmodules.xtservice.XtFunctioninfoCommonService;
+import jehc.xtmodules.xtservice.XtFunctioninfoService;
 import jehc.xtmodules.xtservice.XtIpFrozenService;
 import jehc.xtmodules.xtservice.XtPathService;
 import jehc.xtmodules.xtservice.XtQuartzService;
@@ -76,31 +76,14 @@ public class InitExcuteClass implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent event) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		ServletContext sc = event.getServletContext();
-		/*
-        String contextConfigLocationpath = event.getServletContext().getInitParameter("contextConfigLocation");
-		ApplicationContext ac = (ApplicationContext) new ClassPathXmlApplicationContext(contextConfigLocationpath);
-		*/
 		XtStartStopLog xt_Start_Stop_Log = new XtStartStopLog();
 		try {
 	        sc.setAttribute("syspath", getContextPath(sc));
 	        logger.info(""+sdf.format(new Date())+"--->业务平台路径:"+getContextPath(sc));
-			/**
-			String realPath = event.getServletContext().getRealPath(File.separator);
-			String contextConfigLocationpath = event.getServletContext().getRealPath(File.separator)+event.getServletContext().getInitParameter("contextConfigLocation");
-			System.out.println("------------------------"+sdf.format(new Date())+"--->业务平台服务器路径:"+realPath+"------------------------");
-			System.out.println("------------------------"+sdf.format(new Date())+"--->业务平台配置路径:"+contextConfigLocationpath+"------------------------");
-			**/
-			
-			/**
-			ApplicationContext ac = (ApplicationContext) new ClassPathXmlApplicationContext(new String[]{"/WEB-INF/context/spring.xml","/WEB-INF/context/springmvc.xml"});
-			ApplicationContext ac = (ApplicationContext) new FileSystemXmlApplicationContext(new String[]{event.getServletContext().getRealPath(File.separator)+"/WEB-INF/context/spring.xml",event.getServletContext().getRealPath(File.separator)+"/WEB-INF/context/springmvc.xml"});
-			ApplicationContext ac = (ApplicationContext) new FileSystemXmlApplicationContext(contextConfigLocationpath);
-			**/
-	        
-	        
-	    	loadXtDataDictionary();
-	    	loadXtFunctioninfoCommon();
-	    	loadSolrCore();
+	        cacheXtDataDictionary();
+	    	cacheXtFunctioninfoCommon();
+	    	cacheSolrCore();
+	    	cacheXtAreaRegion();
 	        logger.info(sdf.format(new Date())+"--->进入类加载");
 	        logger.info(sdf.format(new Date())+"--->装载配置文件"); 
 			Map<String, Object> map = ReadProperties.readProperties(event);
@@ -124,7 +107,7 @@ public class InitExcuteClass implements ServletContextListener{
 			sc.setAttribute("lc_design_displaywin_for_edit", map.get("lc_design_displaywin_for_edit"));
 			logger.info(sdf.format(new Date())+"--->装载Config配置结束"); 
 			logger.info(sdf.format(new Date())+"--->开始初始化调度任务"); 
-			loadQuarzInit();
+			cacheQuarzInit();
 			logger.info(sdf.format(new Date())+"--->结束初始化调度任务"); 
 			
 			//加载ext-all.js文件内容只缓存中
@@ -165,7 +148,7 @@ public class InitExcuteClass implements ServletContextListener{
 	/**
      * 加载调度器设置
      */
-    private void loadQuarzInit() {
+    private void cacheQuarzInit() {
         Timer timer = new Timer("loadQuarzInit", true);
         timer.schedule(new TimerTask() {
             public void run() {
@@ -186,7 +169,7 @@ public class InitExcuteClass implements ServletContextListener{
      * 加载数据字典，平台常量及平台路径到缓存中
      * @param ehCache
      */
-	private void loadXtDataDictionary(){
+	private void cacheXtDataDictionary(){
     	XtDataDictionaryService xtDataDictionaryService = (XtDataDictionaryService)SpringUtil.getBean("xtDataDictionaryService");
     	XtPathService xtPathService = (XtPathService)SpringUtil.getBean("xtPathService");
     	XtIpFrozenService xtIpFrozenService = (XtIpFrozenService)SpringUtil.getBean("xtIpFrozenService");
@@ -256,7 +239,7 @@ public class InitExcuteClass implements ServletContextListener{
     /**
      * 加载公共功能到内存中
      */
-    public void loadXtFunctioninfoCommon(){
+    public void cacheXtFunctioninfoCommon(){
     	XtFunctioninfoCommonService xtFunctioninfoCommonService = (XtFunctioninfoCommonService)SpringUtil.getBean("xtFunctioninfoCommonService");
     	XtFunctioninfoService xtFunctioninfoService = (XtFunctioninfoService)SpringUtil.getBean("xtFunctioninfoService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -295,7 +278,7 @@ public class InitExcuteClass implements ServletContextListener{
     /**
      * 加载Solr实例到缓存中
      */
-    public void loadSolrCore(){
+    public void cacheSolrCore(){
     	SolrIndexAttributeService solrIndexAttributeService = (SolrIndexAttributeService)SpringUtil.getBean("solrIndexAttributeService");
     	SolrCoreService solrCoreService = (SolrCoreService)SpringUtil.getBean("solrCoreService");
     	SolrSortService solrSortService = (SolrSortService)SpringUtil.getBean("solrSortService");
@@ -319,6 +302,27 @@ public class InitExcuteClass implements ServletContextListener{
 		//在缓存中放元素
 		SolrCoreCache.put(SolrCoreCacheEle);
 		logger.info(sdf.format(new Date())+"--->加载SOLR实例缓存结束");
+		millis2 =  System.currentTimeMillis();
+    }
+    
+    /**
+     * 初始化区域至缓存中
+     */
+    public void cacheXtAreaRegion(){
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    	long millis1 = System.currentTimeMillis();
+    	Map<String, Object> condition = new HashMap<String,Object>();
+    	XtAreaRegionService xtAreaRegionService = (XtAreaRegionService)SpringUtil.getBean("xtAreaRegionService");
+    	List<XtAreaRegion> list = xtAreaRegionService.getXtAreaRegionListByCondition(condition);
+    	long millis2 =  System.currentTimeMillis();
+    	logger.info(sdf.format(new Date())+"--->读取行政区域实例数量:"+list.size()+"个");
+		logger.info(sdf.format(new Date())+"--->读取行政区域实例耗时:"+(millis2-millis1)+"毫秒");
+		logger.info(sdf.format(new Date())+"--->加载行政区域实例缓存开始");
+		Element XtAreaRegionCacheEle=new Element("XtAreaRegionCache", list); 
+		Cache XtAreaRegionCache = CacheManagerUtil.getCache("XtAreaRegionCache");
+		//在缓存中放元素
+		XtAreaRegionCache.put(XtAreaRegionCacheEle);
+		logger.info(sdf.format(new Date())+"--->加载行政区域实例缓存结束");
 		millis2 =  System.currentTimeMillis();
     }
 }

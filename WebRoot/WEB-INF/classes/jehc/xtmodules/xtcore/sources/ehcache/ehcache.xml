@@ -53,4 +53,10 @@
 		overflowToDisk="true" diskSpoolBufferSizeMB="30"
 		maxElementsOnDisk="10000000" diskPersistent="false"
 		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />	
+	<!-- 8.行政区域 -->
+	<cache name="XtAreaRegionCache" maxElementsInMemory="10000"
+		eternal="true" timeToIdleSeconds="0" timeToLiveSeconds="0"
+		overflowToDisk="true" diskSpoolBufferSizeMB="30"
+		maxElementsOnDisk="10000000" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />	
 </ehcache>
