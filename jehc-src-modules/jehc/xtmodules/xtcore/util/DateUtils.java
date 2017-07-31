@@ -187,9 +187,13 @@ public class DateUtils extends org.apache.commons.lang3.time.DateUtils {
 	 * @throws ParseException
 	 */
 	public static void main(String[] args) throws ParseException {
-		System.out.println(formatDate(parseDate("2010/3/6")));
-		System.out.println(getDate("yyyy年MM月dd日 E"));
-		long time = new Date().getTime()-parseDate("2012-11-19").getTime();
-		System.out.println(time/(24*60*60*1000));
+//		System.out.println(formatDate(parseDate("2010/3/6")));
+//		System.out.println(getDate("yyyy年MM月dd日 E"));
+//		long time = new Date().getTime()-parseDate("2012-11-19").getTime();
+//		System.out.println(time/(24*60*60*1000));
+		Date date=new Date("Sat Jul 29 00:00:00 CST 2017");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String sDate=sdf.format(date);
+		System.out.println(sDate);
 	}
 }
