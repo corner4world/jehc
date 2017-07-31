@@ -10,7 +10,7 @@ function detailXtUserinfo(){
 	reGetWidthAndHeight();
 	xtUserinfoWinDetail = Ext.create('top.Ext.Window',{
 		layout:'fit',
-		width:clientWidth*0.9,                    
+		width:clientWidth,                    
 		height:clientHeight, 
 		maximizable:true,
 		minimizable:true,
