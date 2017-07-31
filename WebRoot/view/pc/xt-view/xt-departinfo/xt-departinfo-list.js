@@ -34,6 +34,7 @@ Ext.onReady(function(){
 		store:store,
 		title:'查询结果',
 		columnLines:true,
+		border:true,
 		selType:'cellmodel',
 		multiSelect:true,
 		selType:'checkboxmodel',

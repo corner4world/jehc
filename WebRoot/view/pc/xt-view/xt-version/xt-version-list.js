@@ -252,6 +252,7 @@ Ext.onReady(function(){
 		region:'center',
 		store:store,
 		title:'查询结果',
+		border:true,
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,

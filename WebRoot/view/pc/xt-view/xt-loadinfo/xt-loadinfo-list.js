@@ -11,7 +11,6 @@ Ext.onReady(function(){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		border:true,
 		selType:'checkboxmodel',
 		title:'查询结果',
 		viewConfig:{
