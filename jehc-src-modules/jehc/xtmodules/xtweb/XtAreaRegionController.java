@@ -191,9 +191,7 @@ public class XtAreaRegionController extends BaseAction{
 	@ResponseBody
 	@RequestMapping(value="/getPList",method={RequestMethod.POST,RequestMethod.GET})
 	public String getPList(HttpServletRequest request){
-		Map<String, Object> condition = new HashMap<String, Object>();
-		condition.put("parentId", 1);
-		List<XtAreaRegion> list = xtAreaRegionService.getXtAreaRegionListByCondition(condition);
+		List<XtAreaRegion> list = getXtAreaRegionCache(null);
 		return outItemsStr(list);
 	}
 	
@@ -209,9 +207,7 @@ public class XtAreaRegionController extends BaseAction{
 		if(StringUtil.isEmpty(parentId)){
 			throw new ExceptionUtil("未能获取到省份编号");
 		}
-		Map<String, Object> condition = new HashMap<String, Object>();
-		condition.put("parentId", parentId);
-		List<XtAreaRegion> list = xtAreaRegionService.getXtAreaRegionListByCondition(condition);
+		List<XtAreaRegion> list = getXtAreaRegionCache(parentId);
 		return outItemsStr(list);
 	}
 	
@@ -227,9 +223,7 @@ public class XtAreaRegionController extends BaseAction{
 		if(StringUtil.isEmpty(parentId)){
 			throw new ExceptionUtil("未能获取到城市编号");
 		}
-		Map<String, Object> condition = new HashMap<String, Object>();
-		condition.put("parentId", parentId);
-		List<XtAreaRegion> list = xtAreaRegionService.getXtAreaRegionListByCondition(condition);
+		List<XtAreaRegion> list = getXtAreaRegionCache(parentId);
 		return outItemsStr(list);
 	}
 }

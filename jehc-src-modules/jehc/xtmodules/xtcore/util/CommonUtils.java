@@ -31,10 +31,12 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import jehc.solrmodules.solrmodel.SolrCore;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
+import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.base.BaseXtModifyRecordRun;
 import jehc.xtmodules.xtcore.base.BaseXtOperateBusinessLogsRun;
 import jehc.xtmodules.xtcore.util.logger.Log4j;
+import jehc.xtmodules.xtmodel.XtAreaRegion;
 import jehc.xtmodules.xtmodel.XtAttachment;
 import jehc.xtmodules.xtmodel.XtConstant;
 import jehc.xtmodules.xtmodel.XtDataDictionary;
@@ -381,6 +383,37 @@ public class CommonUtils extends UUID{
 		return null;
 	}
 
+	/**
+	 * 根据key获取行政区域集合
+	 * @param key
+	 * @return
+	 */
+	public static List<XtAreaRegion> getXtAreaRegionCache(String key) {
+		Cache ehCache = CacheManagerUtil.getCache("XtAreaRegionCache");
+		Element XtAreaRegionCache = ehCache.get("XtAreaRegionCache");
+		List<XtAreaRegion> arList = new ArrayList<XtAreaRegion>();
+		if(null != XtAreaRegionCache){
+			@SuppressWarnings("unchecked")
+			List<XtAreaRegion> list = (List<XtAreaRegion>) XtAreaRegionCache.getObjectValue();
+			if(StringUtil.isEmpty(key)){
+				for (int i = 0; i < list.size(); i++) {
+					XtAreaRegion xtAreaRegion = list.get(i);
+					if (xtAreaRegion.getPARENT_ID() ==  1) {
+						arList.add(xtAreaRegion);
+					}
+				}
+			}else{
+				for (int i = 0; i < list.size(); i++) {
+					XtAreaRegion xtAreaRegion = list.get(i);
+					if (key.equals(xtAreaRegion.getPARENT_ID())) {
+						arList.add(xtAreaRegion);
+					}
+				}
+			}
+		}
+		return arList;
+	}
+	
 	/**
 	 * 根据KEY获取平台字典
 	 * 
