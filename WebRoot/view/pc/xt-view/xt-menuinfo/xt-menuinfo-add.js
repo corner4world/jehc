@@ -5,7 +5,7 @@ function addXtMenuinfo(){
 	xtMenuinfoWinAdd =  Ext.create('Ext.Window',{                   
 		layout:'fit',                    
 		width:800,                    
-		height:400, 
+		height:410, 
 		maximizable:true,
 		minimizable:true,
 		animateTarget:document.body,            
