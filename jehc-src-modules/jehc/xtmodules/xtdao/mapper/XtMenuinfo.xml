@@ -165,6 +165,7 @@
 				WHERE 1=1
 				AND xt_m_r.xt_role_id = #{xt_role_id}
 				AND xt_menuinfo_status = '0'
+				AND xt_menuinfo.`xt_menuinfo_sys` = '0'
 				ORDER BY xt_menuinfo_sort ASC				
 			</when>
 			<!-- 非权限 -->
@@ -183,6 +184,9 @@
 				FROM
 				  `xt_menuinfo`
 				WHERE 1=1
+				<if test="null != xt_menuinfo_sys">
+					AND xt_menuinfo.`xt_menuinfo_sys` = '0'
+				</if>
 				ORDER BY xt_menuinfo_sort ASC
 			</otherwise>
 		</choose>

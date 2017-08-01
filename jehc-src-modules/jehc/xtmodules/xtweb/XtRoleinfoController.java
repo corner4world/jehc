@@ -251,6 +251,7 @@ public class XtRoleinfoController extends BaseAction{
 		String expanded = request.getParameter("expanded");
 		String singleClickExpand = request.getParameter("singleClickExpand");
 		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
+		condition.put("xt_menuinfo_sys", "0");
 		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinfoListAll(condition);
 		condition = new HashMap<String, Object>();
 		condition.put("xt_functioninfoType", "1");
