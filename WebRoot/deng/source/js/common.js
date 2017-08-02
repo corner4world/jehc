@@ -39,6 +39,7 @@ var indexMail = '../deng/images/top/indexMail.png';
 var indexIcon = '../deng/images/home/index.png';
 
 var chattingIcon = '../deng/images/icons/user.png';
+var designIcon = '../deng/images/icons/system.png';
 var getpwdIcon = '../deng/images/grid/otp/getpwd.png';
 var bsdefimg= basePath+"/deng/images/default/add_d.png";
 var uploadimg = '../deng/images/common/uploadFFF.png';

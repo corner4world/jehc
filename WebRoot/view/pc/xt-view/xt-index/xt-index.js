@@ -114,29 +114,63 @@ Ext.onReady(function(){
 										}
 									}
 								 },
-					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
+					             style:{/*background:'#ffffff',*/marginRight:'5px',marginLeft:'5px'}
+					       },
+//					       {
+//					        	 icon:indexMail,
+//				                 xtype:'button',
+//					             handler:function(button){
+//					             	msgTishi("该功能还未开放！");
+//								 },
+//					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
+//					       },
+					       {
+					        	 icon:indexlist,
+				                 xtype:'splitbutton',
+//				                 iconAlign:'top',
+//				                 arrowAlign:'bottom',
+								 menu:[
+								 {
+					                text:'向上',
+					                glyph:0xf062,
+								    handler:function(){
+								    	indexTab(1);
+								    }
+								 },
+								 {
+									 text:'向下',
+					                 glyph:0xf063,
+								     handler:function(){
+								    	 indexTab(2);
+								     }
+								 },
+								 {
+									 text:'向左',
+					                 glyph:0xf060,
+								     handler:function(){
+								    	 indexTab(3);
+								     }
+								 },
+								 {
+									 text:'向右',
+					                 glyph:0xf061,
+								     handler:function(){
+								    	 indexTab(4);
+								     }
+								 }
+								 ],
+					             style:{background:'#f5f5f5',marginRight:'5px'}
 					       },
 					       {
-					        	 icon:indexLingdang,
-				                 xtype:'button',
-					             handler:function(button){
-					             	msgTishi("该功能还未开放！");
-								 },
-					             style:{background:'#ffffff'}
-					        },
-					        {
-					        	 icon:indexMail,
-				                 xtype:'button',
-					             handler:function(button){
-					             	msgTishi("该功能还未开放！");
-								 },
-					             style:{background:'#ffffff'}
-					        },
-					        {
-				            xtype:'button',
-				            icon:indexlist,
+				            xtype:'splitbutton',
+				            icon:designIcon,
 					 		iconAlign:'top',
-					 		style:{background:'#ffffff',marginRight:'0px'},
+//					 		arrowAlign:'bottom',
+					 		tooltip:{
+			                 	title:'更多操作',
+			                 	width:80
+			                },
+					 		style:{background:'#f5f5f5',marginRight:'5px'},
 				            menu:[{
 									tooltip:{title:'注销平台',width:80},
 					                text:'注销',
@@ -247,7 +281,7 @@ Ext.onReady(function(){
 				region:'center',
 				xtype:'tabpanel',
 				id:'tabpanelCenter',
-				tabPosition:'top',
+				tabPosition:'bottom',
 				items:[{
 					title:'个人首页',
 					icon:homeIcon,
@@ -381,6 +415,8 @@ Ext.onReady(function(){
     }
     Ext.QuickTips.init();
     initLockSystem();
+    var indexTabPosition = getCookie("indexTabPosition");
+    indexTab(indexTabPosition);
 });
 //判断iframe是否加载完毕
 var xtIframe;
@@ -751,3 +787,21 @@ function initPerpetualcalendar(){
 	perpetualcalendarWin.show();
 }
 //////////////////万年历//////////////
+
+function indexTab(value){
+	if(value == 1){
+		Ext.getCmp('tabpanelCenter').setTabPosition("top");
+		setCookie("indexTabPosition", '1', 240);
+	}else if(value == 2){
+		Ext.getCmp('tabpanelCenter').setTabPosition("bottom");
+		setCookie("indexTabPosition", '2', 240);
+	}else if(value == 3){
+		Ext.getCmp('tabpanelCenter').setTabPosition("left");
+		setCookie("indexTabPosition", '3', 240);
+	}else if(value == 4){
+		Ext.getCmp('tabpanelCenter').setTabPosition("right");
+		setCookie("indexTabPosition", '4', 240);
+	}else{
+		Ext.getCmp('tabpanelCenter').setTabPosition("top");
+	}
+}
