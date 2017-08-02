@@ -179,6 +179,7 @@ function addTabContent(url,id,text,icon){
          title:text,
          closable:true,
          icon:icon,
+         href:url,
          layoutOnTabChange:true,
 		html:'<iframe width=100% height=100% id=xtIframe'+id+' name="xtIframe" src="../'+url+'" frameborder="0" style="overflow:hidden;"/>'
     });
