@@ -18,6 +18,7 @@ function detailXtUserinfo(){
 		plain:true,
 		modal:true,
 		title:'明细信息',
+		headerPosition:'left',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){

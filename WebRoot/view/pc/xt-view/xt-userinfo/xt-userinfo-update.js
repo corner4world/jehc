@@ -18,6 +18,7 @@ function updateXtUserinfo(){
 		plain:true,
 		modal:true,
 		title:'编辑信息',
+		headerPosition:'left',
 		items:xtUserinfoFormEdit,
 		listeners:{
 			minimize:function(win,opts){

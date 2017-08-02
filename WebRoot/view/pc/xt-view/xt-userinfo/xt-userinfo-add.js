@@ -14,6 +14,7 @@ function addXtUserinfo(){
 		modal:true,
 		title:'添加信息',
 		items:xtUserinfoFormAdd,
+		headerPosition:'left',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){
