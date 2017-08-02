@@ -14,22 +14,23 @@ Ext.onReady(function(){
 			flex:1,
 			margin:'2 5 4 5'
 		},
+		layout:'table',
 		items:[
+		{
+			fieldLabel:'表名',
+			xtype:'textfield',
+			labelWidth:70,
+			id:'xt_generator_forbidtable_table',
+			name:'xt_generator_forbidtable_table',
+			anchor:'30%',
+			labelAlign:'top'
+		},
 		{
 			fieldLabel:'备注',
 			xtype:'textfield',
 			labelWidth:70,
 			id:'xt_generator_forbidtable_remark',
 			name:'xt_generator_forbidtable_remark',
-			anchor:'30%',
-			labelAlign:'top'
-		},
-		{
-			fieldLabel:'表名',
-			xtype:'textareafield',
-			labelWidth:70,
-			id:'xt_generator_forbidtable_table',
-			name:'xt_generator_forbidtable_table',
 			anchor:'30%',
 			labelAlign:'top'
 		}
