@@ -229,7 +229,7 @@ Ext.onReady(function(){
 			anchor:'20%'
 		},
 		{
-			layout:'table',
+			layout:'hbox',
 			xtype:'form',
 			anchor:'100%',
 			items:[{
@@ -249,7 +249,12 @@ Ext.onReady(function(){
 				         select:function(combo,records,options){
 				         	Ext.getCmp('xt_cityID').setValue("");
 				         	Ext.getCmp('xt_districtID').setValue("");
-				            xtCityList.reload({params:{parentId:this.value}});
+				            xtCityList.load({params:{parentId:this.value}});
+				            parms = {parentId:this.value};
+				    	    beforeloadstoreByStore(xtCityList,parms);
+				            xtDistrictList.load();
+				            parms = {parentId:null};
+				    	    beforeloadstoreByStore(xtDistrictList,parms);
 				         }
 				     }
 				},
@@ -266,10 +271,13 @@ Ext.onReady(function(){
 				    displayField:'NAME',  
 				    editable:false, 
 					maxLength:32,
+					labelWidth:40,
 					listeners:{
 				         select:function(combo,records,options){
 				         	Ext.getCmp('xt_districtID').setValue("");
-				            xtDistrictList.reload({params:{parentId:this.value}});
+				            xtDistrictList.load({params:{parentId:this.value}});
+				            parms = {parentId:null};
+				    	    beforeloadstoreByStore(xtDistrictList,parms);
 				         }
 				     }
 				},
@@ -279,6 +287,7 @@ Ext.onReady(function(){
 					id:'xt_districtID',
 					name:'xt_districtID',
 					xtype:"combo",
+					labelWidth:40,
 					store:xtDistrictList, 
 				    emptyText:'请选择',  
 				    mode:'local',  
@@ -292,8 +301,7 @@ Ext.onReady(function(){
 					fieldLabel:'详细地址',
 					xtype:'textfield',
 					name:'xt_company_address',
-					maxLength:200,
-					anchor:'100%'
+					maxLength:200
 				}]
 		},
 		{
@@ -323,10 +331,10 @@ Ext.onReady(function(){
 		}]
 	});
 	loadFormDataCallBack(xtCompanyFormEdit,'../xtCompanyController/getXtCompany',function(form, action){
-		xtCityList.reload({params:{parentId:action.result.data.xt_provinceID}});
+		xtCityList.load({params:{parentId:action.result.data.xt_provinceID}});
 		var parm = {parentId:action.result.data.xt_provinceID};
 	    beforeloadstoreByStore(xtCityList,parm);
-		xtDistrictList.reload({params:{parentId:action.result.data.xt_cityID}});
+		xtDistrictList.load({params:{parentId:action.result.data.xt_cityID}});
 		parms = {parentId:action.result.data.xt_cityID};
 	    beforeloadstoreByStore(xtDistrictList,parms);
 	});
