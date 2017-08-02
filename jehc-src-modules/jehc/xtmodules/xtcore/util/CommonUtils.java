@@ -405,7 +405,7 @@ public class CommonUtils extends UUID{
 			}else{
 				for (int i = 0; i < list.size(); i++) {
 					XtAreaRegion xtAreaRegion = list.get(i);
-					if (key.equals(xtAreaRegion.getPARENT_ID())) {
+					if (key.equals(""+xtAreaRegion.getPARENT_ID())) {
 						arList.add(xtAreaRegion);
 					}
 				}

@@ -21,6 +21,9 @@ public class XtCompany implements Serializable{
 	private String xt_company_images;/****/
 	private String xt_company_ceo;/**公司总体负责人**/
 	private int xt_company_isdelete;/**是否删除0表示未删除1表示已删除**/
+	private String xt_provinceID;/**省份**/
+	private String xt_cityID;/**城市**/
+	private String xt_districtID;/**区县**/
 	public void setXt_company_id(String xt_company_id){
 		this.xt_company_id=xt_company_id;
 	}
@@ -99,4 +102,23 @@ public class XtCompany implements Serializable{
 	public int getXt_company_isdelete(){
 		return xt_company_isdelete;
 	}
+	public String getXt_provinceID() {
+		return xt_provinceID;
+	}
+	public void setXt_provinceID(String xt_provinceID) {
+		this.xt_provinceID = xt_provinceID;
+	}
+	public String getXt_cityID() {
+		return xt_cityID;
+	}
+	public void setXt_cityID(String xt_cityID) {
+		this.xt_cityID = xt_cityID;
+	}
+	public String getXt_districtID() {
+		return xt_districtID;
+	}
+	public void setXt_districtID(String xt_districtID) {
+		this.xt_districtID = xt_districtID;
+	}
+	
 }

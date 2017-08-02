@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,10 +16,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import jehc.xtmodules.xtcore.allutils.StringUtil;
+import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
-import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtmodel.XtAreaRegion;
@@ -30,6 +31,7 @@ import jehc.xtmodules.xtservice.XtAreaRegionService;
 */
 @Controller
 @RequestMapping("/xtAreaRegionController")
+@Scope("prototype")
 public class XtAreaRegionController extends BaseAction{
 	@Autowired
 	private XtAreaRegionService xtAreaRegionService;
@@ -190,6 +192,7 @@ public class XtAreaRegionController extends BaseAction{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getPList",method={RequestMethod.POST,RequestMethod.GET})
+	@AuthUneedLogin
 	public String getPList(HttpServletRequest request){
 		List<XtAreaRegion> list = getXtAreaRegionCache(null);
 		return outItemsStr(list);
@@ -203,11 +206,14 @@ public class XtAreaRegionController extends BaseAction{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getCList",method={RequestMethod.POST,RequestMethod.GET})
+	@AuthUneedLogin
 	public String getCList(String parentId,HttpServletRequest request){
+		List<XtAreaRegion> list = new ArrayList<XtAreaRegion>();
 		if(StringUtil.isEmpty(parentId)){
-			throw new ExceptionUtil("未能获取到省份编号");
+//			throw new ExceptionUtil("未能获取到省份编号");
+			return outItemsStr(list);
 		}
-		List<XtAreaRegion> list = getXtAreaRegionCache(parentId);
+		list = getXtAreaRegionCache(parentId);
 		return outItemsStr(list);
 	}
 	
@@ -219,11 +225,14 @@ public class XtAreaRegionController extends BaseAction{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getDList",method={RequestMethod.POST,RequestMethod.GET})
+	@AuthUneedLogin
 	public String getDList(String parentId,HttpServletRequest request){
+		List<XtAreaRegion> list = new ArrayList<XtAreaRegion>();
 		if(StringUtil.isEmpty(parentId)){
-			throw new ExceptionUtil("未能获取到城市编号");
+//			throw new ExceptionUtil("未能获取到城市编号");
+			return outItemsStr(list);
 		}
-		List<XtAreaRegion> list = getXtAreaRegionCache(parentId);
+		list = getXtAreaRegionCache(parentId);
 		return outItemsStr(list);
 	}
 }

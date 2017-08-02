@@ -17,7 +17,10 @@
 			`xt_company_isLeaf`,
 			`xt_company_images`,
 			`xt_company_ceo`,
-			`xt_company_isdelete`
+			`xt_company_isdelete`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`
 		FROM 
 			xt_company
 		WHERE 1=1
@@ -48,7 +51,10 @@
 			`xt_company_isLeaf`,
 			`xt_company_images`,
 			`xt_company_ceo`,
-			`xt_company_isdelete`
+			`xt_company_isdelete`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`
 		FROM 
 			xt_company
 		WHERE xt_company_id=#{xt_company_id}
@@ -71,7 +77,10 @@
 			`xt_company_isLeaf`,
 			`xt_company_images`,
 			`xt_company_ceo`,
-			`xt_company_isdelete`
+			`xt_company_isdelete`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`
 			)
 			VALUES
 			(
@@ -87,7 +96,10 @@
 			#{xt_company_isLeaf},
 			#{xt_company_images},
 			#{xt_company_ceo},
-			#{xt_company_isdelete}
+			#{xt_company_isdelete},
+			#{xt_provinceID},
+			#{xt_cityID},
+			#{xt_districtID}
 			)
 	</insert>
 
@@ -108,7 +120,10 @@
 			`xt_company_isLeaf` = #{xt_company_isLeaf},
 			`xt_company_images` = #{xt_company_images},
 			`xt_company_ceo` = #{xt_company_ceo},
-			`xt_company_isdelete` = #{xt_company_isdelete}
+			`xt_company_isdelete` = #{xt_company_isdelete},
+			`xt_provinceID` = #{xt_provinceID},
+			`xt_cityID` = #{xt_cityID},
+			`xt_districtID` = #{xt_districtID}
 		WHERE xt_company_id=#{xt_company_id}
 	</update>
 

@@ -120,8 +120,45 @@ Ext.onReady(function(){
 	}
 });
 **/
+var xtProvinceList;
+var xtCityList;
+var xtDistrictList;
 Ext.onReady(function(){
 	reGetWidthAndHeight();
+	/**省份**/
+	xtProvinceList = new Ext.data.Store({
+		proxy:new Ext.data.HttpProxy({ 
+			url:'../xtAreaRegionController/getPList',
+			reader:new Ext.data.JsonReader({
+				root:'items',
+				type:'json'
+			})
+		}),
+		fields:['ID', 'NAME'],
+		autoLoad:true 
+	});
+	/**城市**/
+	xtCityList = new Ext.data.Store({
+		proxy:new Ext.data.HttpProxy({ 
+			url:'../xtAreaRegionController/getCList',
+			reader:new Ext.data.JsonReader({
+				root:'items',
+				type:'json'
+			})
+		}),
+		fields:['ID', 'NAME']
+	});
+	/**区县**/
+	xtDistrictList = new Ext.data.Store({
+		proxy:new Ext.data.HttpProxy({ 
+			url:'../xtAreaRegionController/getDList',
+			reader:new Ext.data.JsonReader({
+				root:'items',
+				type:'json'
+			})
+		}),
+		fields:['ID', 'NAME']
+	});
 	var xtCompanyFormEdit = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		region:'center',
@@ -192,11 +229,72 @@ Ext.onReady(function(){
 			anchor:'20%'
 		},
 		{
-			fieldLabel:'公司地址',
-			xtype:'textfield',
-			name:'xt_company_address',
-			maxLength:200,
-			anchor:'40%'
+			layout:'table',
+			xtype:'form',
+			anchor:'100%',
+			items:[{
+					fieldLabel:'省&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份',
+					name:'xt_provinceID',
+					xtype:"combo",
+					store:xtProvinceList, 
+				    emptyText:'请选择',  
+				    mode:'local',  
+				    triggerAction:'all',  
+				    valueField:'ID',  
+				    displayField:'NAME',  
+				    editable:false, 
+					allowBlank:false,
+					maxLength:32,
+					listeners:{
+				         select:function(combo,records,options){
+				         	Ext.getCmp('xt_cityID').setValue("");
+				         	Ext.getCmp('xt_districtID').setValue("");
+				            xtCityList.reload({params:{parentId:this.value}});
+				         }
+				     }
+				},
+				{
+					fieldLabel:'城市',
+					id:'xt_cityID',
+					name:'xt_cityID',
+					xtype:"combo",
+					store:xtCityList, 
+				    emptyText:'请选择',  
+				    mode:'local',  
+				    triggerAction:'all',  
+				    valueField:'ID',  
+				    displayField:'NAME',  
+				    editable:false, 
+					maxLength:32,
+					listeners:{
+				         select:function(combo,records,options){
+				         	Ext.getCmp('xt_districtID').setValue("");
+				            xtDistrictList.reload({params:{parentId:this.value}});
+				         }
+				     }
+				},
+				{
+					fieldLabel:'区县',
+					xtype:'textfield',
+					id:'xt_districtID',
+					name:'xt_districtID',
+					xtype:"combo",
+					store:xtDistrictList, 
+				    emptyText:'请选择',  
+				    mode:'local',  
+				    triggerAction:'all',  
+				    valueField:'ID',  
+				    displayField:'NAME',  
+				    editable:false, 
+					maxLength:32
+				},
+				{
+					fieldLabel:'详细地址',
+					xtype:'textfield',
+					name:'xt_company_address',
+					maxLength:200,
+					anchor:'100%'
+				}]
 		},
 		{
 			fieldLabel:'公司简介',
@@ -224,7 +322,14 @@ Ext.onReady(function(){
 			}
 		}]
 	});
-	loadFormData(xtCompanyFormEdit,'../xtCompanyController/getXtCompany');
+	loadFormDataCallBack(xtCompanyFormEdit,'../xtCompanyController/getXtCompany',function(form, action){
+		xtCityList.reload({params:{parentId:action.result.data.xt_provinceID}});
+		var parm = {parentId:action.result.data.xt_provinceID};
+	    beforeloadstoreByStore(xtCityList,parm);
+		xtDistrictList.reload({params:{parentId:action.result.data.xt_cityID}});
+		parms = {parentId:action.result.data.xt_cityID};
+	    beforeloadstoreByStore(xtDistrictList,parms);
+	});
 	/**
 	var xtCompanyWin = Ext.create('Ext.Window',{
 		layout:'border',
