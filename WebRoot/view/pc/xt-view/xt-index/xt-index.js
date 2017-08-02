@@ -125,9 +125,10 @@ Ext.onReady(function(){
 //					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
 //					       },
 					       {
-					        	 icon:indexlist,
-				                 xtype:'splitbutton',
-//				                 iconAlign:'top',
+					        	 icon:designIcon,
+//				                 xtype:'splitbutton',
+				                 xtype:'button',
+				                 iconAlign:'top',
 //				                 arrowAlign:'bottom',
 								 menu:[
 								 {
@@ -159,18 +160,19 @@ Ext.onReady(function(){
 								     }
 								 }
 								 ],
-					             style:{background:'#f5f5f5',marginRight:'5px'}
+					             style:{background:'#ffffff',marginRight:'0px'}
 					       },
 					       {
-				            xtype:'splitbutton',
-				            icon:designIcon,
+//				            xtype:'splitbutton',
+				            xtype:'button',
+				            icon:indexlist,
 					 		iconAlign:'top',
 //					 		arrowAlign:'bottom',
 					 		tooltip:{
 			                 	title:'更多操作',
 			                 	width:80
 			                },
-					 		style:{background:'#f5f5f5',marginRight:'5px'},
+					 		style:{background:'#ffffff',marginRight:'0px'},
 				            menu:[{
 									tooltip:{title:'注销平台',width:80},
 					                text:'注销',
