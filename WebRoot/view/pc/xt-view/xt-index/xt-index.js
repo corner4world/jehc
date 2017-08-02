@@ -252,6 +252,7 @@ Ext.onReady(function(){
 					title:'个人首页',
 					icon:homeIcon,
 					id:'tab_home',
+					href:'index/desk.html',
 					html:'<iframe scrolling="auto" id=xtIframehome frameborder="0" width="100%" height="100%" src="../index/desk.html"></iframe>'
 				}],plugins:new Ext.ux.TabCloseMenu()
 			}]
