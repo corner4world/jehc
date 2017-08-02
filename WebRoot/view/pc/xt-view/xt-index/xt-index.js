@@ -132,28 +132,28 @@ Ext.onReady(function(){
 //				                 arrowAlign:'bottom',
 								 menu:[
 								 {
-					                text:'向上',
+					                text:'顶部',
 					                glyph:0xf062,
 								    handler:function(){
 								    	indexTab(1);
 								    }
 								 },
 								 {
-									 text:'向下',
+									 text:'底部',
 					                 glyph:0xf063,
 								     handler:function(){
 								    	 indexTab(2);
 								     }
 								 },
 								 {
-									 text:'向左',
+									 text:'左边',
 					                 glyph:0xf060,
 								     handler:function(){
 								    	 indexTab(3);
 								     }
 								 },
 								 {
-									 text:'向右',
+									 text:'右边',
 					                 glyph:0xf061,
 								     handler:function(){
 								    	 indexTab(4);
