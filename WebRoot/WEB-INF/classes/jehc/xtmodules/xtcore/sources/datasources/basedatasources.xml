@@ -125,15 +125,15 @@
 	  <aop:advisor pointcut-ref="ep" advice-ref="txAdvice" />
 	  <aop:advisor pointcut-ref="ep" advice-ref="dataSourceAdvice" />
 	  
-	  <!-- 测试多数据源拦截通知
+	  <!-- 测试多数据源拦截通知-->
 	  <aop:advisor pointcut-ref="ep" advice-ref="txAdviceTest" />
-	   -->
+	   
 	</aop:config>
 	<bean id="logFilter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter"> 
 	  <property name="statementExecutableSqlLogEnable" value="false" /> 
 	</bean>
 	
-	<!-- 导入测试多数据源xml文件
+	<!-- 导入测试多数据源xml文件-->
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/datasources/datasourcestest.xml"/>
-	-->
+	
 </beans>

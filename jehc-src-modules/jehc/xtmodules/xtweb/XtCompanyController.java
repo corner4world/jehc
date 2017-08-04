@@ -71,7 +71,6 @@ public class XtCompanyController extends BaseAction{
 	@RequestMapping(value="/getXtCompany",method={RequestMethod.POST,RequestMethod.GET})
 	public String getXtCompany(HttpServletRequest request){
 		Map<String, Object> condition = new HashMap<String, Object>();
-		commonPager(condition,request);
 		List<XtCompany> XtCompanyList = xtCompanyService.getXtCompanyListByCondition(condition);
 		XtCompany xt_Company = new XtCompany();
 		if(!XtCompanyList.isEmpty()){

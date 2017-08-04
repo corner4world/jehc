@@ -24,16 +24,6 @@
 		FROM 
 			xt_company
 		WHERE 1=1
-		LIMIT #{offset},#{pageSize}
-	</select>
-
-	<!--初始化分页统计-->
-	<select id="getXtCompanyListCountByCondition" resultType="Integer" parameterType="jehc.xtmodules.xtmodel.XtCompany">
- 		SELECT 
-			COUNT(0)
-		FROM 
-			xt_company
-		WHERE 1=1 
 	</select>
 
 	<!--查询对象-->
