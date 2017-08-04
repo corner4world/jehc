@@ -1,6 +1,7 @@
 package jehc.xtmodules.xtdao.impl;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.stereotype.Repository;
 
 import jehc.xtmodules.xtcore.base.impl.BaseDaoImpl;

@@ -11,7 +11,9 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
  * @author 邓纯杰
  *
  */
-public class BaseMDS extends SqlSessionDaoSupport{
+public class MBaseDao extends SqlSessionDaoSupport{
+	static final String SQLSESSIONFACTORY_TEST = "sqlSessionFactoryOverrideMapper";//测试多数据源
+	
 	/**
 	 * 
 	 * 查询所有数据.

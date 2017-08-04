@@ -19,31 +19,33 @@
 		default-lazy-init="true">
     <!-- 配置数据源 -->
 	<!-- 定义数据源 BoneCPDataSouce配置 测试多数据源使用-->
-  	<bean id="dataSourceTest" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-	    <property name="driverClass" value="${driverClassTest}"/>
-        <property name="jdbcUrl" value="${urlTest}"/>
+  	<bean id="dataSourceTest" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <property name="driverClassName" value="${driverClassTest}"/>
+        <property name="url" value="${urlTest}"/>
         <property name="username" value="${usernameTest}"/>
         <property name="password" value="${passwordTest}"/>
-	    <!-- 检查数据库连接池中空闲连接的间隔时间，单位是分，默认值：240，如果要取消则设置为0  -->
-	    <property name="idleConnectionTestPeriod" value="60"/>
-	    <!-- 连接池中未使用的链接最大存活时间，单位是分，默认值：60，如果要永远存活设置为0  -->
-	    <property name="idleMaxAge" value="240"/>
-	    <!-- 每个分区最大的连接数  -->
-	    <property name="maxConnectionsPerPartition" value="30"/>
-	    <!-- 每个分区最小的连接数  -->
-	    <property name="minConnectionsPerPartition" value="10"/>
-	    <!-- 分区数 ，默认值2，最小1，推荐3-4，视应用而定 -->
-	    <property name="partitionCount" value="3"/>
-	    <!-- 每次去拿数据库连接的时候一次性要拿几个,默认值：2 --> 
-	    <property name="acquireIncrement" value="2"/>
-	    <!-- 缓存prepared statements的大小，默认值：0  -->
-	    <property name="statementCacheSize" value="100"/>
-	    <!-- 每个分区释放链接助理进程的数量，默认值：3，除非你的一个数据库连接的时间内做了很多工作，不然过多的助理进程会影响你的性能 --> 
-	    <property name="releaseHelperThreads" value="3"/>
+	    <property name="filters" value="${filters}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxWait" value="${maxWait}" />
+		<property name="minIdle" value="${minIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testWhileIdle" value="${testWhileIdle}" />
+		<property name="testOnBorrow" value="${testOnBorrow}" />
+		<property name="testOnReturn" value="${testOnReturn}" />
+		<property name="poolPreparedStatements" value="${poolPreparedStatements}" />
+		<property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}" />
+		<property name="proxyFilters"> 
+		   <list> 
+		    <ref bean="logFilter" /> 
+		   </list> 
+		</property> 
 	</bean>
 	
 	<!-- 配置工厂 -->
-	<bean id="sqlSessionFactory.overrideMapper" class="org.mybatis.spring.SqlSessionFactoryBean">  
+	<bean id="sqlSessionFactoryOverrideMapper" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSourceTest" />  
         <property name="typeAliasesPackage" value="*" />
         <property name="mapperLocations" value="classpath:/**/**/*dao/mapper/*.xml"/>
@@ -70,10 +72,10 @@
 		</tx:attributes>
 	</tx:advice>
 	
-	<!-- 面向切面 -->
+	<!-- 面向切面 统一放入basedatasource.xml中配置
 	<aop:config proxy-target-class="true">
 	  <aop:pointcut id="epTest" expression="execution(* *.*.*service.impl.*.*(..)) ||execution(* com.phone.*.service.*.*(..))"/>
 	  <aop:advisor pointcut-ref="epTest" advice-ref="txAdviceTest" />
-	  <!-- 不再使用通知信息妈的原因根本就进入不了通知方法可能AOP拦截通知在该版本中不在使用 -->
 	</aop:config>
+	 -->
 </beans>

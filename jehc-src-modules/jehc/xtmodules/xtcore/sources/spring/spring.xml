@@ -42,12 +42,7 @@
 		</property>
 	</bean>
     <import resource="classpath:/jehc/xtmodules/xtcore/sources/datasources/basedatasources.xml"/>
-    <!-- 导入测试多数据源xml文件 
-	<import resource="classpath:/jehc/xtmodules/xtcore/sources/datasources/datasourcestest.xml"/>
-	--> 
-	
-	
-	
+    
 	<!-- 以下为插件及其他支持【开始】 -->
 	<!-- spring上下文应用环境 -->
     <bean id="SpringContextUtil" class="jehc.xtmodules.xtcore.util.springutil.SpringContextUtil"/>
