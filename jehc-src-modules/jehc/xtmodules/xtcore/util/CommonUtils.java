@@ -33,6 +33,7 @@ import jehc.solrmodules.solrmodel.SolrCore;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
+import jehc.xtmodules.xtcore.allutils.file.ftp.FtpUtil;
 import jehc.xtmodules.xtcore.base.BaseXtModifyRecordRun;
 import jehc.xtmodules.xtcore.base.BaseXtOperateBusinessLogsRun;
 import jehc.xtmodules.xtcore.util.logger.Log4j;
@@ -535,7 +536,8 @@ public class CommonUtils extends UUID{
 						//写文件到本地
 						//File localFile = new File(path);
 						//file.transferTo(localFile);
-						FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,newName));  
+						FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,newName));//采用文件拷贝模式上传
+//						FtpUtil.uploadFile(path, newName, file.getInputStream());//此处可以修改成Ftp操作如下:
 						XtAttachment xt_Attachment = new XtAttachment();
 						xt_Attachment.setXt_attachment_id(UUID.toUUID());
 						xt_Attachment.setXt_attachmentCtime(getSimpleDateFormat());
