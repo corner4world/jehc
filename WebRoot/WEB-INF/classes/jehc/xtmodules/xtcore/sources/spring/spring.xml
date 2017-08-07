@@ -57,9 +57,9 @@
 	<!-- Activiti核心工作流引擎 -->
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/activiti/activiti.xml"/>
 	
-	<!-- redis整合
+	<!-- redis整合 -->
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/redis/redis.xml"/>
-	-->
+	
 	<!-- ehcache整合 -->
 	<import resource="classpath:/jehc/xtmodules/xtcore/sources/ehcache/ehcache-spring.xml"/>
 	

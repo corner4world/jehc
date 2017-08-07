@@ -96,7 +96,7 @@
      
      
      
-     <!-- 自定义jedis操作开始 -->
+     <!-- 二、自定义jedis操作开始 -->
      <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">  
         <property  name="maxTotal" value="${pool.maxTotal}" />  
         <property  name="maxIdle" value="${pool.maxIdle}" />  
@@ -111,4 +111,22 @@
         <property name="redisPool" ref="redisPool" />  
     </bean>
     <!-- 自定义jedis操作结束 -->
+    
+    <!-- 三、分布式jedis操作开始 -->
+    <bean id="shardedJedisPool" class="redis.clients.jedis.ShardedJedisPool">
+    	<!-- 引用上面自定义jedis操作中配置 -->
+    	<constructor-arg index="0" ref="jedisPoolConfig"/>
+    	<constructor-arg index="1">
+    		<list>
+    			<bean class="redis.clients.jedis.JedisShardInfo">
+    				<constructor-arg index="0" value="${redis.host}"/>
+    				<constructor-arg index="1" value="${redis.port}" type="int"/>
+    			</bean>
+    		</list>
+    	</constructor-arg>
+    </bean>
+    <bean id="shardedRedisUtil" class="jehc.xtmodules.xtcore.cache.sharedjedis.ShardedRedisUtil">  
+        <property name="shardedJedisPool" ref="shardedJedisPool" />  
+    </bean>
+    <!-- 分布式jedis操作结束 -->
 </beans>
