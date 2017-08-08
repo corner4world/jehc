@@ -125,11 +125,33 @@ Ext.onReady(function(){
 //					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
 //					       },
 					       {
+					    	   handler:function(){
+					    		   changeTheme();
+					    	   },
+					    	   xtype:'button',
+					    	   icon:iphoneIcon,
+					    	   style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'},
+					    	   tooltip:{
+					    		   title:'更换主题',
+					    		   width:80
+					    	   }
+					       },
+					       {
+								tooltip:{title:'注销平台',width:80},
+				                xtype:'button',
+				                icon:onoffIcon,
+				                style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'},
+							    handler:function(){
+							     	loginout();
+							    }
+						   },
+					       {
 					        	 icon:designIcon,
 //				                 xtype:'splitbutton',
 				                 xtype:'button',
 				                 iconAlign:'top',
 //				                 arrowAlign:'bottom',
+				                 tooltip:{title:'设置位置',width:80},
 								 menu:[
 								 {
 					                text:'顶部',
@@ -160,7 +182,7 @@ Ext.onReady(function(){
 								     }
 								 }
 								 ],
-					             style:{background:'#ffffff',marginRight:'0px'}
+					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
 					       },
 					       {
 //				            xtype:'splitbutton',
@@ -172,15 +194,8 @@ Ext.onReady(function(){
 			                 	title:'更多操作',
 			                 	width:80
 			                },
-					 		style:{background:'#ffffff',marginRight:'0px'},
-				            menu:[{
-									tooltip:{title:'注销平台',width:80},
-					                text:'注销',
-					                glyph:0xf014,
-								    handler:function(){
-								     	loginout();
-								    }
-								 },
+					 		style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'},
+				            menu:[
 								 {
 								 	handler:function(){
 								 		initPerpetualcalendar()
@@ -228,17 +243,6 @@ Ext.onReady(function(){
 					                 }
 								 },
 								 {
-						             handler:function(){
-						             	changeTheme();
-								     },
-								     text:'更换主题',
-								     glyph:0xf022,
-								     tooltip:{
-					                 	title:'更换主题',
-					                 	width:80
-					                 }
-								 },
-								 {
 								 	handler:function(){
 								 		 window.location.href=basePath+"/index/index.html";
 								    },
@@ -265,7 +269,7 @@ Ext.onReady(function(){
 					                },
 									src:userIcon
 								},
-					        	style:{background:'#ffffff',marginRight:'0px'}
+					        	style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
 						      } 
 			        ],
 		            header:{
@@ -509,6 +513,7 @@ function changeTheme(){
 		modal:true,
 		closable:false,
 		title:'更换主题',
+		headerPosition:'left',
 		items:themeForm,
 		buttons:[{
 			text:'关闭',
