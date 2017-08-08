@@ -11,7 +11,7 @@
 		<!-- 360 浏览器使用 webkit -->
 		<meta name="renderer" content="webkit"/>
 	   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-		<link rel="icon" type="image/ico" href="${syspath }/deng/images/logo/logo.png" />
+		<link rel="icon" type="image/ico" href="${syspath }/deng/images/icons/system.png" />
 		<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
 		<input type="hidden" value="${xt_functioninfoMethod }" id="xtFunctionInfoBtnStr">
 	   	<!-- 主题技术Extjs支持 -->
