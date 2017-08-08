@@ -73,7 +73,6 @@ function initListDeleted(){
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		border:true,
 		selType:'checkboxmodel',
 		title:'查询结果',
 		viewConfig:{
@@ -137,17 +136,6 @@ function initListDeleted(){
 				}
 			},
 			{
-				header:'到期时间',
-				dataIndex:'xt_userinfo_contractTime',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
-			},
-			{
 				header:'岗位',
 				dataIndex:'xt_post_name'
 			},
@@ -155,17 +143,6 @@ function initListDeleted(){
 				header:'部门',
 				flex:1,
 				dataIndex:'xt_departinfo_name'
-			},
-			{
-				header:'状态',
-				dataIndex:'xt_userinfo_isDelete',
-				renderer:function(value){
-					if(value == 0){
-						return '在职'
-					}else{
-						return '离职'
-					}
-				}
 			}
 		],
 		tbar:[
@@ -255,6 +232,7 @@ function initListDeleted(){
 		height:clientHeight, 
 		maximizable:true,
 		minimizable:true,
+		headerPosition:'left',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){

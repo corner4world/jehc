@@ -325,7 +325,7 @@ Ext.onReady(function(){
 				}
 			 },
 			 {
-				text:'已删除用户列表',
+				text:'已删除用户',
 				tooltip:'已删除用户列表',
 				cls:'detailBtn',
 				icon:listIcon,
