@@ -1,0 +1,62 @@
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false"
+	monitoring="autodetect" dynamicConfig="true">
+	<!-- 
+	<diskStore path="java.io.tmpdir" />
+	 -->
+	<defaultCache maxElementsInMemory="10000" eternal="true"
+		timeToIdleSeconds="120" timeToLiveSeconds="120" overflowToDisk="true"
+		diskSpoolBufferSizeMB="30" maxElementsOnDisk="10000000"
+		diskPersistent="false" diskExpiryThreadIntervalSeconds="120"
+		memoryStoreEvictionPolicy="LRU" />
+	<!-- 1.System XtDataDictionaryCache -->
+	<cache name="XtDataDictionaryCache" maxElementsInMemory="10000"
+		eternal="true" timeToIdleSeconds="0" timeToLiveSeconds="0"
+		overflowToDisk="true" diskSpoolBufferSizeMB="30"
+		maxElementsOnDisk="10000000" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />
+	<!-- 2.System XtPathCache -->
+	<cache name="XtPathCache" maxElementsInMemory="10000"
+		eternal="true" timeToIdleSeconds="0" timeToLiveSeconds="0"
+		overflowToDisk="true" diskSpoolBufferSizeMB="30"
+		maxElementsOnDisk="10000000" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />
+	<!-- 3.System SimplePageCachingFilter -->
+	<cache name="SimplePageCachingFilter" 
+       maxElementsInMemory="10000" 
+       eternal="false"
+       overflowToDisk="false" 
+       timeToIdleSeconds="900" 
+       timeToLiveSeconds="1800"
+       memoryStoreEvictionPolicy="LFU" />
+    <!-- 4.System XtIpFrozenCache -->
+	<cache name="XtIpFrozenCache" maxElementsInMemory="10000"
+		eternal="true" timeToIdleSeconds="0" timeToLiveSeconds="0"
+		overflowToDisk="true" diskSpoolBufferSizeMB="30"
+		maxElementsOnDisk="10000000" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />
+	<!-- 5.System XtConstantCache -->
+	<cache name="XtConstantCache" maxElementsInMemory="10000"
+		eternal="true" timeToIdleSeconds="0" timeToLiveSeconds="0"
+		overflowToDisk="true" diskSpoolBufferSizeMB="30"
+		maxElementsOnDisk="10000000" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />
+	<!-- 6.System XtFunctioninfoCommonCache -->
+	<cache name="XtFunctioninfoCommonCache" maxElementsInMemory="10000"
+		eternal="true" timeToIdleSeconds="0" timeToLiveSeconds="0"
+		overflowToDisk="true" diskSpoolBufferSizeMB="30"
+		maxElementsOnDisk="10000000" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />
+	<!-- 7.SOLR SolrCoreCache -->
+	<cache name="SolrCoreCache" maxElementsInMemory="10000"
+		eternal="true" timeToIdleSeconds="0" timeToLiveSeconds="0"
+		overflowToDisk="true" diskSpoolBufferSizeMB="30"
+		maxElementsOnDisk="10000000" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />	
+	<!-- 8.行政区域 -->
+	<cache name="XtAreaRegionCache" maxElementsInMemory="10000"
+		eternal="true" timeToIdleSeconds="0" timeToLiveSeconds="0"
+		overflowToDisk="true" diskSpoolBufferSizeMB="30"
+		maxElementsOnDisk="10000000" diskPersistent="false"
+		diskExpiryThreadIntervalSeconds="12000000" memoryStoreEvictionPolicy="LRU" />	
+</ehcache>
