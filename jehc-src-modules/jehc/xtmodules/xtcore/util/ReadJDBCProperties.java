@@ -16,7 +16,7 @@ public class ReadJDBCProperties {
 	public static Properties readProperties(){
 		Properties pro = new Properties();
 		try {
-			pro.load(ReadJDBCProperties.class.getClassLoader().getResourceAsStream("jehc/xtmodules/xtcore/sources/jdbc.properties"));
+			pro.load(ReadJDBCProperties.class.getClassLoader().getResourceAsStream("sources/jdbc.properties"));
 		} catch (IOException e) {
 			System.out.println("未找到配置文件！！！");
 		}

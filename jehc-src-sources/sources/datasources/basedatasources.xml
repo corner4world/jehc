@@ -85,7 +85,7 @@
         <property name="dataSource" ref="dataSource"/>   
         <property name="typeAliasesPackage" value="*" />
         <property name="mapperLocations" value="classpath:/**/**/*dao/mapper/*.xml"/>
-		<property name="configLocation" value="classpath:/jehc/xtmodules/xtcore/sources/mybatis/mybatis.xml"></property>
+		<property name="configLocation" value="classpath:/sources/mybatis/mybatis.xml"></property>
     </bean>  
 	<!-- 事物配置 -->
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -134,6 +134,6 @@
 	</bean>
 	
 	<!-- 导入测试多数据源xml文件-->
-	<import resource="classpath:/jehc/xtmodules/xtcore/sources/datasources/datasourcestest.xml"/>
+	<import resource="classpath:/sources/datasources/datasourcestest.xml"/>
 	
 </beans>

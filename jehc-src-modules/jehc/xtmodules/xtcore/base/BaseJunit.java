@@ -17,7 +17,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @RunWith(SpringJUnit4ClassRunner.class)   
 @ContextConfiguration(
 locations = {
-	"classpath*:/jehc/xtmodules/xtcore/sources/spring/spring.xml"
+	"classpath*:/sources/spring/spring.xml"
 })
 public class BaseJunit {
 	

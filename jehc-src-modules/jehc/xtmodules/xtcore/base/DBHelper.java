@@ -30,7 +30,7 @@ public class DBHelper {
 	public static DataSource ds = null;
     public static Properties properties = null;
     static{
-        InputStream is = DBHelper.class.getClassLoader().getResourceAsStream("jehc/xtmodules/xtcore/sources/jdbc.properties");
+        InputStream is = DBHelper.class.getClassLoader().getResourceAsStream("sources/jdbc.properties");
         properties = new Properties();
         try {
         	//properties.getProperty("charSet", System.getProperty("file.encoding"));

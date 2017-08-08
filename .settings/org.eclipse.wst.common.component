@@ -2,6 +2,7 @@
     <wb-module deploy-name="jehc">
         <wb-resource deploy-path="/" source-path="/WebRoot"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/jehc-src-modules"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/jehc-src-sources"/>
         <property name="context-root" value="jehc"/>
         <property name="java-output-path" value="/jehc/WebRoot/WEB-INF/classes"/>
     </wb-module>

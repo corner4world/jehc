@@ -60,33 +60,7 @@
         <property name="prefix" value="/WEB-INF/view/"/>
 	    <property name="suffix" value=".jsp"/>
 	</bean>
-	
-	<!-- JSON解析对象 
-	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<bean class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
-				<bean class="org.springframework.http.converter.StringHttpMessageConverter">
-					<property name="supportedMediaTypes">
-						<list>
-							<value>text/plain;charset=UTF-8</value>
-						</list>
-					</property>
-				</bean>
-			</list>
-		</property>
-	</bean>
-	-->
-	<!-- 输出JSON字符串 
-	<bean id="jsonConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-		<property name="supportedMediaTypes">
-			<list>
-				<value>text/html;charset=UTF-8</value>
-			</list>
-		</property>
-	</bean>
-	-->
+
 	<!-- 支持文件上传 id="multipartResolver"不能省-->
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="utf-8" />
