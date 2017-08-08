@@ -40,7 +40,7 @@ public class ShardedRedisLockJunit extends BaseJunit {
 						// 如果获取不到锁则停止
 						if(!SharedRedisLockUtils.locksharded("string_test",0))return;
 						//获取到锁操作
-						logger.info("已获取锁：{}", Thread.currentThread().getName());
+//						logger.info("已获取锁：{}", Thread.currentThread().getName());
 						redisUtil.set("string_test", "string_test_线程" + task);
 						// 释放锁
 						SharedRedisLockUtils.unlocksharded("string_test");

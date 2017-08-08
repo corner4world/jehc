@@ -70,6 +70,7 @@ public class SharedRedisLockUtils {
 				if (result == 1) {
 					//成功返回true
 					lockSuccess = true;
+					logger.info("shardedRedisUtil.lock【已加锁】-->lockedKey=‘{}’", lockKey);
 					break;
 				} else {
 					//判断是否死锁
@@ -85,6 +86,7 @@ public class SharedRedisLockUtils {
 							if (StringUtils.isNoneBlank(beforeStr) && beforeStr.equals(lockTimeStr)) {
 								//表明锁由该线程获得
 								lockSuccess = true;
+								logger.info("shardedRedisUtil.lock【已加锁】-->lockedKey=‘{}’", lockKey);
 								break;
 							}
 						}
@@ -96,8 +98,6 @@ public class SharedRedisLockUtils {
 				}
 				// 等待300ms继续加锁
 				Thread.sleep(300);
-				logger.debug("-----------------1：",System.currentTimeMillis() - start);
-				logger.debug("-----------------2：",(System.currentTimeMillis() - start)<timeout);
 			} while ((System.currentTimeMillis() - start) < timeout);
 		} catch (Exception e) {
 			shardedRedisUtil.returnResource(shardedJedis, true);
@@ -118,7 +118,7 @@ public class SharedRedisLockUtils {
 		ShardedJedis shardedJedis = shardedRedisUtil.getRedisClient();
 		try {
 			Long del = shardedJedis.del(lockedKey);
-			logger.info("shardedRedisUtil.unlock-->lockedKey=‘{}’ ,del lock={}", lockedKey, del);
+			logger.info("shardedRedisUtil.unlock【已解锁】-->lockedKey=‘{}’ ,del lock={}", lockedKey, del);
 		} catch (Exception e) {
 			shardedRedisUtil.returnResource(shardedJedis, true);
 		} finally {
