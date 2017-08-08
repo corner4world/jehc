@@ -49,7 +49,7 @@
         <property name="dataSource" ref="dataSourceTest" />  
         <property name="typeAliasesPackage" value="*" />
         <property name="mapperLocations" value="classpath:/**/**/*dao/mapper/*.xml"/>
-		<property name="configLocation" value="classpath:/sources/mybatis/mybatistest.xml"></property>
+		<property name="configLocation" value="classpath:/config/mybatis/mybatistest.xml"></property>
     </bean> 
 	
 	<!-- 事物配置 -->

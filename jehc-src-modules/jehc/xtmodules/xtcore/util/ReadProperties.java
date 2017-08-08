@@ -27,7 +27,7 @@ public class ReadProperties {
 		Map<String, Object> map = new HashMap<String, Object>();
         FileInputStream fis;
 		try {
-			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/sources/properties/zh.properties";
+			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/config/properties/zh.properties";
 			fis = new FileInputStream(path);
 			try {
 				prop.load(fis);
@@ -55,7 +55,7 @@ public class ReadProperties {
 		Map<String, Object> map = new HashMap<String, Object>();
         FileInputStream fis;
 		try {
-			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/sources/properties/message.properties";
+			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/config/properties/message.properties";
 			fis = new FileInputStream(path);
 			try {
 				prop.load(fis);
@@ -95,7 +95,7 @@ public class ReadProperties {
 		Map<String, Object> map = new HashMap<String, Object>();
         FileInputStream fis;
 		try {
-			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/sources/properties/config.properties";
+			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/config/properties/config.properties";
 			fis = new FileInputStream(path);
 			try {
 				prop.load(fis);
@@ -124,7 +124,7 @@ public class ReadProperties {
 		Properties prop = new Properties();
         FileInputStream fis;
 		try {
-			String path = AllUtils.getWebRootAbsolutePath()+"/WEB-INF/classes/sources/properties/config.properties";
+			String path = AllUtils.getWebRootAbsolutePath()+"/WEB-INF/classes/config/properties/config.properties";
 			fis = new FileInputStream(path);
 			try {
 				prop.load(fis);

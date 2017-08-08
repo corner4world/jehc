@@ -44,7 +44,7 @@
 	<plugins>
 		<!-- 1、分表插件 不推荐使用与PageHelper不兼容
 	    <plugin interceptor="com.google.code.shardbatis.plugin.ShardPlugin">  
-        	<property name="shardingConfig" value="jehc/xtmodules/xtcore/sources/sharding/shard.xml"/>  
+        	<property name="shardingConfig" value="config/sharding/shard.xml"/>  
         </plugin>
          -->
         <!-- 2、分页拦截器 -->

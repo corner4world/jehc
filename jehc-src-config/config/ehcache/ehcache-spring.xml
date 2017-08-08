@@ -25,7 +25,7 @@
 	<cache:annotation-driven cache-manager="ehcacheManager"/>
 	<!-- cacheManager工厂类，指定ehcache.xml的位置 -->
 	<bean id="ehcacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean" >
-		<property name="configLocation" value="classpath:/sources/ehcache/ehcache.xml" />
+		<property name="configLocation" value="classpath:/config/ehcache/ehcache.xml" />
 		<property name="shared" value="true" />
 	</bean>
 	<!-- 声明cacheManager -->

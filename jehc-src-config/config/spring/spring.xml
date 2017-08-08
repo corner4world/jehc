@@ -29,21 +29,21 @@
 		<property name="locations">
 			<list>
 				<!-- 引入jdbc配置文件-->
-				<value>classpath:/sources/jdbc.properties</value>
+				<value>classpath:/config/jdbc.properties</value>
 				<!-- 引入redis配置文件-->
-				<value>classpath:/sources/redis/redis.properties</value>
+				<value>classpath:/config/redis/redis.properties</value>
 				<!-- 引入连接池配置文件-->
-				<value>classpath:/sources/pool/pool.properties</value>
+				<value>classpath:/config/pool/pool.properties</value>
 				<!-- 引入netty配置文件-->
-				<value>classpath:/sources/netty/netty.properties</value>
+				<value>classpath:/config/netty/netty.properties</value>
 				<!-- 引入rabbit配置文件-->
-				<value>classpath:/sources/mq/rabbitmq.properties</value>
+				<value>classpath:/config/mq/rabbitmq.properties</value>
 				<!-- 引入ftp配置文件 -->
-				<value>classpath:/sources/ftp/ftp.properties</value>
+				<value>classpath:/config/ftp/ftp.properties</value>
 			</list>
 		</property>
 	</bean>
-    <import resource="classpath:/sources/datasources/basedatasources.xml"/>
+    <import resource="classpath:/config/datasources/basedatasources.xml"/>
     
 	<!-- 以下为插件及其他支持【开始】 -->
 	<!-- spring上下文应用环境 -->
@@ -52,32 +52,32 @@
 	<bean id="exceptionResolver" class="jehc.xtmodules.xtcore.interceptor.ExceptionHandler"/>
 	
 	<!-- 配置调度器 -->
-	<import resource="classpath:/sources/quartz/quartz.xml"/>
+	<import resource="classpath:/config/quartz/quartz.xml"/>
 	
 	<!-- Activiti核心工作流引擎 -->
-	<import resource="classpath:/sources/activiti/activiti.xml"/>
+	<import resource="classpath:/config/activiti/activiti.xml"/>
 	
 	<!-- redis整合 -->
-	<import resource="classpath:/sources/redis/redis.xml"/>
+	<import resource="classpath:/config/redis/redis.xml"/>
 	
 	<!-- ehcache整合 -->
-	<import resource="classpath:/sources/ehcache/ehcache-spring.xml"/>
+	<import resource="classpath:/config/ehcache/ehcache-spring.xml"/>
 	
 	<!-- 连接池整合 -->
-	<import resource="classpath:/sources/pool/pool.xml"/>
+	<import resource="classpath:/config/pool/pool.xml"/>
 	
 	<!-- RabbitMq消息中间键 
-	<import resource="classpath:/sources/mq/rabbit.xml"/>
+	<import resource="classpath:/config/mq/rabbit.xml"/>
 	-->
 	
 	<!-- netty整合
-	<import resource="classpath:/sources/netty/netty.xml"/>
+	<import resource="classpath:/config/netty/netty.xml"/>
 	 -->
 	 
 	<!-- Hession整合 -->
-	<import resource="classpath:/sources/hessian/hessian.xml"/>
+	<import resource="classpath:/config/hessian/hessian.xml"/>
 	<!-- 以上为插件及其他支持【结束】 -->
 	
 	<!-- FTP上传 -->
-	<import resource="classpath:/sources/ftp/ftp.xml"/>
+	<import resource="classpath:/config/ftp/ftp.xml"/>
 </beans>
