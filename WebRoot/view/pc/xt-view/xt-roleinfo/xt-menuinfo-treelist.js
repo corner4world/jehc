@@ -10,7 +10,6 @@ function addXtMenuinfo(xt_role_id,xt_role_name){
 		height:clientHeight, 
 		maximizable:true,
 		minimizable:true,
-		animateTarget:document.body,
 		plain:true,
 		modal:true,
 		title:'导入资源',

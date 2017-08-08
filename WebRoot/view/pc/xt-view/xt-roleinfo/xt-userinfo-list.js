@@ -9,14 +9,16 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 	initXtUserinfoGrid(xt_role_id);
 	initXtUserinfoGrided(xt_role_id);
 	initXtDpPanel(xt_role_id);
+	reGetWidthAndHeight();
 	xtUserinfoWin = Ext.create('top.Ext.Window',{
 		layout:'border', 
 		maximizable:true,
 		minimizable:true,
 		maximized:true,
-		animateTarget:document.body,
 		plain:true,
 		modal:true,
+		width:clientWidth,                    
+		height:clientHeight, 
 		headerPosition:'right',
 		title:'导入用户',
 		listeners:{
