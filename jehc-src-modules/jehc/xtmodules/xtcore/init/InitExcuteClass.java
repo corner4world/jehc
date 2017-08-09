@@ -56,7 +56,6 @@ import net.sf.ehcache.Element;
  */
 public class InitExcuteClass implements ServletContextListener{
 	Logger logger = LoggerFactory.getLogger(this.getClass());
-	static final String extjs = "/deng/source/plugins/e6/ext-all.js";
 	/**
 	 * 停止时执行的方法
 	 */
@@ -64,7 +63,7 @@ public class InitExcuteClass implements ServletContextListener{
 		ServletContext sc = event.getServletContext();
 	    sc.removeAttribute("syspath");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		logger.info("------------------------"+sdf.format(new Date())+"--->服务器容器已销毁------------------------");
+		logger.info(sdf.format(new Date())+"--->服务器容器销毁成功");
 		XtStartStopLog xt_Start_Stop_Log = new XtStartStopLog();
 		xt_Start_Stop_Log.setXt_start_stop_log_stoptime(sdf.format(new Date()));
 		addOrUpdateXtStartStopLog(xt_Start_Stop_Log,1);
@@ -109,9 +108,6 @@ public class InitExcuteClass implements ServletContextListener{
 			logger.info(sdf.format(new Date())+"--->开始初始化调度任务"); 
 			cacheQuarzInit();
 			logger.info(sdf.format(new Date())+"--->结束初始化调度任务"); 
-			
-			//加载ext-all.js文件内容只缓存中
-//			sc.setAttribute("ext_all",FileUtil.compress(FileUtil.readFile(AllUtils.getWebRootAbsolutePath()+extjs)));
 			xt_Start_Stop_Log.setXt_start_stop_log_iserror("0");
 		} catch (Exception e) {
 			xt_Start_Stop_Log.setXt_start_stop_log_iserror("1");

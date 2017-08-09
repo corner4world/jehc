@@ -37,7 +37,6 @@
 	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 	    </mvc:message-converters>
 	</mvc:annotation-driven>
-	
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	
 	<!-- 注解探测器,在JUnit测试的时候需要-->
@@ -67,10 +66,8 @@
         <property name="maxUploadSize" value="10485760000" />
         <property name="maxInMemorySize" value="40960" />
 	</bean>
-	
 	<!-- 按bean的名字去解析  查看rssViewer视图 -->
 	<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
-	
 	<!-- 移动端开发 -->
 	<!-- 注解移动端 -->
 	<context:component-scan base-package="com.phone.*.web" >
@@ -84,9 +81,5 @@
 		    <bean class="jehc.xtmodules.xtcore.interceptor.AuthHandler">
 		    </bean>
 		</mvc:interceptor>
-		
 	</mvc:interceptors>
-	
-	<!-- 通过Spring配置启动时候加载类（该bean不能放入spring.xml中 因为junit4使用不方便） -->
-    <bean class="jehc.xtmodules.xtcore.init.InitListener"></bean>
 </beans>

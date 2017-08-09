@@ -2,18 +2,6 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="JEHC" version="2.5">
-	<!--SpringSession共享策略
-	<filter>
-		<filter-name>springSessionRepositoryFilter</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>springSessionRepositoryFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
-		<dispatcher>ERROR</dispatcher>
-	</filter-mapping>
- 	-->
 	<!-- spring监听器配置 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -21,7 +9,7 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			classpath*:/config/spring/*.xml
+			classpath*:/config/spring/spring.xml
 		</param-value>
 	</context-param>
 
@@ -89,13 +77,6 @@
 	<listener>
 		<listener-class>jehc.xtmodules.xtcore.init.InitExcuteClass</listener-class>
 	</listener>
-
-	<!-- web工程启动完成执行的类 -->
-	<servlet>
-		<servlet-name>init</servlet-name>
-		<servlet-class>jehc.xtmodules.xtcore.init.InitEndExecuteClass</servlet-class>
-		<load-on-startup>3</load-on-startup>
-	</servlet>
 
 	<!-- 配置log4j -->
 	<context-param>
