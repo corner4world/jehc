@@ -15,6 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 //@WebAppConfiguration
 
 @RunWith(SpringJUnit4ClassRunner.class)   
+@WebAppConfiguration
 @ContextConfiguration(
 locations = {
 	"classpath*:/config/spring/spring.xml"

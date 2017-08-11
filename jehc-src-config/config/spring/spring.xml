@@ -51,15 +51,12 @@
 	<!-- 异常统一处理类 -->
 	<bean id="exceptionResolver" class="jehc.xtmodules.xtcore.interceptor.ExceptionHandler"/>
 	
-	<!-- 配置调度器 -->
-	<import resource="classpath:/config/quartz/quartz.xml"/>
-	 
 	<!-- Activiti核心工作流引擎 -->
 	<import resource="classpath:/config/activiti/activiti.xml"/>
-	 
+	
 	<!-- redis整合  -->
 	<import resource="classpath:/config/redis/redis.xml"/>
-	 
+	
 	<!-- ehcache整合  -->
 	<import resource="classpath:/config/ehcache/ehcache-spring.xml"/>
 	
@@ -73,11 +70,13 @@
 	<!-- netty整合 -->
 	<import resource="classpath:/config/netty/netty.xml"/>
 	 
-	 
 	<!-- Hession整合-->
 	<import resource="classpath:/config/hessian/hessian.xml"/> 
 	<!-- 以上为插件及其他支持【结束】 -->
 	
 	<!-- FTP上传 -->
 	<import resource="classpath:/config/ftp/ftp.xml"/>
+	
+	<!-- 配置调度器 -->
+	<import resource="classpath:/config/quartz/quartz.xml"/>
 </beans>
