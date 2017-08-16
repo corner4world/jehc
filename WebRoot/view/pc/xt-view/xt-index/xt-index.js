@@ -88,6 +88,8 @@ Ext.onReady(function(){
 			**/
             collapseDirection:'left',
             id:'leftPanel',
+            collapseToolText:'收缩',
+            expandToolText:'展开',
             layout:{
 				type:'accordion',
 				animate:true,
@@ -366,6 +368,8 @@ Ext.onReady(function(){
             },   
             border:false,
             frame:false,
+            collapseToolText:'收缩',
+            expandToolText:'展开',
             icon:group.icon,
             listeners:{  
                  'afterrender':function(){
