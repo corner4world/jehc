@@ -22,6 +22,7 @@ import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.md5.MD5;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
+import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtmodel.XtDataAuthority;
 import jehc.xtmodules.xtmodel.XtFunctioninfoRight;
 import jehc.xtmodules.xtmodel.XtLoginLogs;
@@ -80,7 +81,7 @@ public class XtLoginController extends BaseAction{
 		String xt_userinfo_passWord = request.getParameter("password");
 		MD5 md5 = new MD5();
 		//获得的当前正确的验证码
-		String rand = (String) request.getSession(false).getAttribute("validateCode");
+		String rand = (String) request.getSession(false).getAttribute(SessionConstant.VALIDATECODE);
 		StringBuffer sbf = new StringBuffer();
 		if((null != code && !"".equals(code))){
 			code = code.trim();
@@ -135,10 +136,10 @@ public class XtLoginController extends BaseAction{
 						sbfMethod.append(","+xt_Functioninfo_Right.getXt_functioninfoMethod()+",");
 					}
 				}
-				request.getSession(false).setAttribute("xtUserinfo", xtUserinfo);
-				request.getSession(false).setAttribute("xt_role_id", xt_role_id);
-				request.getSession(false).setAttribute("xt_functioninfoURL", sbfURL.toString());
-				request.getSession(false).setAttribute("xt_functioninfoMethod", sbfMethod.toString());
+				request.getSession(false).setAttribute(SessionConstant.XTUSERINFO, xtUserinfo);
+				request.getSession(false).setAttribute(SessionConstant.XT_ROLE_ID, xt_role_id);
+				request.getSession(false).setAttribute(SessionConstant.XT_FUNCTIONINFOURL, sbfURL.toString());
+				request.getSession(false).setAttribute(SessionConstant.XT_FUNCTIONINFOMETHOD, sbfMethod.toString());
 				dataAuthority(request);
 			}else{
 				flag = 2;
@@ -216,7 +217,7 @@ public class XtLoginController extends BaseAction{
 			systemUandM.add(xtDataAuthority.getXtUID()+"#"+xtDataAuthority.getXt_functioninfoURL());
 		}
 		//将数据及数据功能权限等信息放入到里面
-		request.getSession(false).setAttribute("systemUandM", systemUandM);//用户及功能URL
+		request.getSession(false).setAttribute(SessionConstant.SYSTEMUANDM, systemUandM);//用户及功能URL
 		/////////////////////////////////
 		/////////////////////////操作数据及数据功能权限 结束
 		/////////////////////////////////	

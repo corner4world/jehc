@@ -26,6 +26,7 @@ import jehc.solrmodules.solrservice.SolrSortService;
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.ReadProperties;
 import jehc.xtmodules.xtcore.util.UUID;
+import jehc.xtmodules.xtcore.util.constant.CacheConstant;
 import jehc.xtmodules.xtcore.util.quartz.QuartzInit;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.XtAreaRegion;
@@ -175,9 +176,9 @@ public class InitExcuteClass implements ServletContextListener{
     	Map<String, Object> condition = new HashMap<String, Object>();
     	List<XtDataDictionary> XtDataDictionaryList = xtDataDictionaryService.getXtDataDictionaryListAllByCondition(condition);
 		//2取得配置文件中预先，定义的XtDataDictionaryCache设置，生成一个Cache 该XtDataDictionaryCache为ehcache.xml定义好的名称
-		Cache XtDataDictionaryCache = CacheManagerUtil.getCache("XtDataDictionaryCache");
+		Cache XtDataDictionaryCache = CacheManagerUtil.getCache(CacheConstant.XTDATADICTIONARYCACHE);
 		//3在缓存中放元素
-		Element XtDataDictionaryEle=new Element("XtDataDictionaryCache", XtDataDictionaryList); 
+		Element XtDataDictionaryEle=new Element(CacheConstant.XTDATADICTIONARYCACHE, XtDataDictionaryList); 
 		XtDataDictionaryCache.put(XtDataDictionaryEle);
 		long millis2 =  System.currentTimeMillis();
 		logger.info(sdf.format(new Date())+"--->读取数据字典耗时:"+(millis2-millis1)+"毫秒"); 
@@ -192,9 +193,9 @@ public class InitExcuteClass implements ServletContextListener{
 		logger.info(sdf.format(new Date())+"--->读取平台路径开始");
 		condition = new HashMap<String, Object>();
 		List<XtPath> xt_Path_List = xtPathService.getXtPathListAllByCondition(condition);
-		Element XtPathEle=new Element("XtPathCache", xt_Path_List); 
+		Element XtPathEle=new Element(CacheConstant.XTPATHCACHE, xt_Path_List); 
 		//取得配置文件中预先，定义的XtPathCache设置，生成一个Cache 该XtPathCache为ehcache.xml定义好的名称
-		Cache XtPathCache = CacheManagerUtil.getCache("XtPathCache");
+		Cache XtPathCache = CacheManagerUtil.getCache(CacheConstant.XTPATHCACHE);
 		//在缓存中放元素
 		XtPathCache.put(XtPathEle);
 		millis2 =  System.currentTimeMillis();
@@ -208,9 +209,9 @@ public class InitExcuteClass implements ServletContextListener{
 		condition.put("xt_ip_frozen_status", 2);
 		List<XtIpFrozen> xt_Ip_FrozenList = xtIpFrozenService.getXtIpFrozenListAllByCondition(condition);
 		if(!xt_Ip_FrozenList.isEmpty() && xt_Ip_FrozenList.size() > 0){
-			Element XtIpFrozenEle=new Element("XtIpFrozenCache", xt_Ip_FrozenList); 
+			Element XtIpFrozenEle=new Element(CacheConstant.XTIPFROZENCACHE, xt_Ip_FrozenList); 
 			//取得配置文件中预先，定义的XtIpFrozenCache设置，生成一个Cache 该XtIpFrozenCache为ehcache.xml定义好的名称
-			Cache XtIpFrozenCache = CacheManagerUtil.getCache("XtIpFrozenCache");
+			Cache XtIpFrozenCache = CacheManagerUtil.getCache(CacheConstant.XTIPFROZENCACHE);
 			//在缓存中放元素
 			XtIpFrozenCache.put(XtIpFrozenEle);
 			millis2 =  System.currentTimeMillis();
@@ -222,9 +223,9 @@ public class InitExcuteClass implements ServletContextListener{
 		logger.info(sdf.format(new Date())+"--->读取平台常量开始");
 		condition = new HashMap<String, Object>();
 		List<XtConstant> xtConstantList = xtConstantService.getXtConstantListAllByCondition(condition);
-		Element XtConstantEle=new Element("XtConstantCache", xtConstantList); 
+		Element XtConstantEle=new Element(CacheConstant.XTCONSTANTCACHE, xtConstantList); 
 		//取得配置文件中预先，定义的XtConstantEle设置，生成一个Cache 该XtConstantEle为ehcache.xml定义好的名称
-		Cache XtConstantCache = CacheManagerUtil.getCache("XtConstantCache");
+		Cache XtConstantCache = CacheManagerUtil.getCache(CacheConstant.XTCONSTANTCACHE);
 		//在缓存中放元素
 		XtConstantCache.put(XtConstantEle);
 		millis2 =  System.currentTimeMillis();
@@ -262,9 +263,9 @@ public class InitExcuteClass implements ServletContextListener{
 		for(XtFunctioninfo xtFunctioninfo:xtFunctioninfoList){
 			sbf.append(xtFunctioninfo.getXt_functioninfoURL()+",");
 		}
-		Element XtFunctioninfoCommonEle=new Element("XtFunctioninfoCommonCache", sbf.toString()); 
+		Element XtFunctioninfoCommonEle=new Element(CacheConstant.XTFUNCTIONINFOCOMMONCACHE, sbf.toString()); 
 		//取得配置文件中预先，定义的XtFunctioninfoCommonCache设置，生成一个Cache 该XtFunctioninfoCommonCache为ehcache.xml定义好的名称
-		Cache XtFunctioninfoCommonCache = CacheManagerUtil.getCache("XtFunctioninfoCommonCache");
+		Cache XtFunctioninfoCommonCache = CacheManagerUtil.getCache(CacheConstant.XTFUNCTIONINFOCOMMONCACHE);
 		//在缓存中放元素
 		XtFunctioninfoCommonCache.put(XtFunctioninfoCommonEle);
 		logger.info(sdf.format(new Date())+"--->加载公共功能缓存结束");
@@ -293,8 +294,8 @@ public class InitExcuteClass implements ServletContextListener{
     	logger.info(sdf.format(new Date())+"--->读取SOLR实例数量:"+solrCoreList.size()+"个");
 		logger.info(sdf.format(new Date())+"--->读取SOLR实例耗时:"+(millis2-millis1)+"毫秒");
 		logger.info(sdf.format(new Date())+"--->加载SOLR实例缓存开始");
-		Element SolrCoreCacheEle=new Element("SolrCoreCache", solrCoreList); 
-		Cache SolrCoreCache = CacheManagerUtil.getCache("SolrCoreCache");
+		Element SolrCoreCacheEle=new Element(CacheConstant.SOLRCORECACHE, solrCoreList); 
+		Cache SolrCoreCache = CacheManagerUtil.getCache(CacheConstant.SOLRCORECACHE);
 		//在缓存中放元素
 		SolrCoreCache.put(SolrCoreCacheEle);
 		logger.info(sdf.format(new Date())+"--->加载SOLR实例缓存结束");
@@ -314,8 +315,8 @@ public class InitExcuteClass implements ServletContextListener{
     	logger.info(sdf.format(new Date())+"--->读取行政区域实例数量:"+list.size()+"个");
 		logger.info(sdf.format(new Date())+"--->读取行政区域实例耗时:"+(millis2-millis1)+"毫秒");
 		logger.info(sdf.format(new Date())+"--->加载行政区域实例缓存开始");
-		Element XtAreaRegionCacheEle=new Element("XtAreaRegionCache", list); 
-		Cache XtAreaRegionCache = CacheManagerUtil.getCache("XtAreaRegionCache");
+		Element XtAreaRegionCacheEle=new Element(CacheConstant.XTAREAREGIONCACHE, list); 
+		Cache XtAreaRegionCache = CacheManagerUtil.getCache(CacheConstant.XTAREAREGIONCACHE);
 		//在缓存中放元素
 		XtAreaRegionCache.put(XtAreaRegionCacheEle);
 		logger.info(sdf.format(new Date())+"--->加载行政区域实例缓存结束");

@@ -36,6 +36,8 @@ import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.allutils.file.ftp.FtpUtil;
 import jehc.xtmodules.xtcore.base.BaseXtModifyRecordRun;
 import jehc.xtmodules.xtcore.base.BaseXtOperateBusinessLogsRun;
+import jehc.xtmodules.xtcore.util.constant.CacheConstant;
+import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtcore.util.logger.Log4j;
 import jehc.xtmodules.xtmodel.XtAreaRegion;
 import jehc.xtmodules.xtmodel.XtAttachment;
@@ -70,7 +72,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
+			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
 			if (null != xtUserinfo) {
 				return xtUserinfo.getXt_userinfo_realName();
 			}
@@ -93,7 +95,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
+			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
 			if (null != xtUserinfo) {
 				return xtUserinfo.getXt_userinfo_name();
 			}
@@ -116,7 +118,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
+			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
 			if (null != xtUserinfo) {
 				return xtUserinfo.getXt_userinfo_id();
 			}
@@ -175,7 +177,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
+			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
 			return xtUserinfo;
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
@@ -284,7 +286,7 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			return (String) session.getAttribute("systemUandM");
+			return (String) session.getAttribute(SessionConstant.SYSTEMUANDM);
 		} catch (Exception e) {
 			throw new ExceptionUtil("获取systemUandM出现异常："+e.getMessage());
 		}
@@ -302,7 +304,7 @@ public class CommonUtils extends UUID{
 		if(null == session){
 			return false;
 		}
-		XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute("xtUserinfo");
+		XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
 		if (xtUserinfo.getXt_userinfo_isAdmin() == 1) {
 			return true;
 		} else {
@@ -346,8 +348,8 @@ public class CommonUtils extends UUID{
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<XtPath> getXtPathCache(String key) {
-		Cache ehCache = CacheManagerUtil.getCache("XtPathCache");
-		Element xtPathCacheEle = ehCache.get("XtPathCache");
+		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTPATHCACHE);
+		Element xtPathCacheEle = ehCache.get(CacheConstant.XTPATHCACHE);
 		if(null != xtPathCacheEle){
 			List<XtPath> xtPathList = (List<XtPath>) xtPathCacheEle.getObjectValue();
 			List<XtPath> list = new ArrayList<XtPath>();
@@ -370,8 +372,8 @@ public class CommonUtils extends UUID{
 	 */
 	@SuppressWarnings("unchecked")
 	public static XtConstant getXtConstantCache(String key) {
-		Cache ehCache = CacheManagerUtil.getCache("XtConstantCache");
-		Element XtConstantEle = ehCache.get("XtConstantCache");
+		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTCONSTANTCACHE);
+		Element XtConstantEle = ehCache.get(CacheConstant.XTCONSTANTCACHE);
 		if(null != XtConstantEle){
 			List<XtConstant> xtConstantList = (List<XtConstant>) XtConstantEle.getObjectValue();
 			for (int i = 0; i < xtConstantList.size(); i++) {
@@ -390,8 +392,8 @@ public class CommonUtils extends UUID{
 	 * @return
 	 */
 	public static List<XtAreaRegion> getXtAreaRegionCache(String key) {
-		Cache ehCache = CacheManagerUtil.getCache("XtAreaRegionCache");
-		Element XtAreaRegionCache = ehCache.get("XtAreaRegionCache");
+		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTAREAREGIONCACHE);
+		Element XtAreaRegionCache = ehCache.get(CacheConstant.XTAREAREGIONCACHE);
 		List<XtAreaRegion> arList = new ArrayList<XtAreaRegion>();
 		if(null != XtAreaRegionCache){
 			@SuppressWarnings("unchecked")
@@ -423,8 +425,8 @@ public class CommonUtils extends UUID{
 	 */
 	@SuppressWarnings("unchecked")
 	public static List<XtDataDictionary> getXtDataDictionaryCache(String key) {
-		Cache ehCache = CacheManagerUtil.getCache("XtDataDictionaryCache");
-		Element xtDataDictionaryCacheEle = ehCache.get("XtDataDictionaryCache");
+		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTDATADICTIONARYCACHE);
+		Element xtDataDictionaryCacheEle = ehCache.get(CacheConstant.XTDATADICTIONARYCACHE);
 		if(null != xtDataDictionaryCacheEle){
 			List<XtDataDictionary> xtDataDictionaryList = (List<XtDataDictionary>) xtDataDictionaryCacheEle.getObjectValue();
 			List<XtDataDictionary> list = new ArrayList<XtDataDictionary>();
@@ -454,8 +456,8 @@ public class CommonUtils extends UUID{
 	 */
 	@SuppressWarnings("unchecked")
 	public static boolean getXtIpFrozenCache(String ip){
-		Cache ehCache = CacheManagerUtil.getCache("XtIpFrozenCache");
-		Element XtIpFrozenCacheEle = ehCache.get("XtIpFrozenCache");
+		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTIPFROZENCACHE);
+		Element XtIpFrozenCacheEle = ehCache.get(CacheConstant.XTIPFROZENCACHE);
 		if(null != XtIpFrozenCacheEle){
 			List<XtIpFrozen> xtIpFrozenList = (List<XtIpFrozen>) XtIpFrozenCacheEle.getObjectValue();
 			for (int i = 0; i < xtIpFrozenList.size(); i++) {
@@ -473,8 +475,8 @@ public class CommonUtils extends UUID{
 	 * @return
 	 */
 	public static String getXtFunctioninfoCommonCache(){
-		Cache ehCache = CacheManagerUtil.getCache("XtFunctioninfoCommonCache");
-		Element XtFunctioninfoCommonCacheEle = ehCache.get("XtFunctioninfoCommonCache");
+		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTFUNCTIONINFOCOMMONCACHE);
+		Element XtFunctioninfoCommonCacheEle = ehCache.get(CacheConstant.XTFUNCTIONINFOCOMMONCACHE);
 		return ""+XtFunctioninfoCommonCacheEle.getObjectValue();
 	}
 	
@@ -485,8 +487,8 @@ public class CommonUtils extends UUID{
 	 */
 	@SuppressWarnings("unchecked")
 	public static SolrCore getSolrCoreByUseonlynumbercode(String useonlynumbercode){
-		Cache ehCache = CacheManagerUtil.getCache("SolrCoreCache");
-		Element SolrCoreEle = ehCache.get("SolrCoreCache");
+		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.SOLRCORECACHE);
+		Element SolrCoreEle = ehCache.get(CacheConstant.SOLRCORECACHE);
 		if(null != SolrCoreEle){
 			List<SolrCore> solrCoreList = (List<SolrCore>) SolrCoreEle.getObjectValue();
 			for (int i = 0; i < solrCoreList.size(); i++) {

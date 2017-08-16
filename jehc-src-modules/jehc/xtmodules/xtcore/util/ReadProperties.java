@@ -10,6 +10,7 @@ import java.util.Properties;
 import javax.servlet.ServletContextEvent;
 
 import jehc.xtmodules.xtcore.allutils.AllUtils;
+import jehc.xtmodules.xtcore.util.constant.PathConstant;
 
 /**
  * 读取properties文件
@@ -27,7 +28,7 @@ public class ReadProperties {
 		Map<String, Object> map = new HashMap<String, Object>();
         FileInputStream fis;
 		try {
-			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/config/properties/zh.properties";
+			String path = event.getServletContext().getRealPath("/")+PathConstant.ZN_PROPERTIES_PATH;
 			fis = new FileInputStream(path);
 			try {
 				prop.load(fis);
@@ -55,7 +56,7 @@ public class ReadProperties {
 		Map<String, Object> map = new HashMap<String, Object>();
         FileInputStream fis;
 		try {
-			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/config/properties/message.properties";
+			String path = event.getServletContext().getRealPath("/")+PathConstant.MESSAGE_PROPERTIES_PATH;
 			fis = new FileInputStream(path);
 			try {
 				prop.load(fis);
@@ -95,7 +96,7 @@ public class ReadProperties {
 		Map<String, Object> map = new HashMap<String, Object>();
         FileInputStream fis;
 		try {
-			String path = event.getServletContext().getRealPath("/")+"WEB-INF/classes/config/properties/config.properties";
+			String path = event.getServletContext().getRealPath("/")+PathConstant.CONFIG_PROPERTIES_PATH;
 			fis = new FileInputStream(path);
 			try {
 				prop.load(fis);
@@ -124,7 +125,7 @@ public class ReadProperties {
 		Properties prop = new Properties();
         FileInputStream fis;
 		try {
-			String path = AllUtils.getWebRootAbsolutePath()+"/WEB-INF/classes/config/properties/config.properties";
+			String path = AllUtils.getWebRootAbsolutePath()+PathConstant.CONFIG_PROPERTIES_PATH_;
 			fis = new FileInputStream(path);
 			try {
 				prop.load(fis);

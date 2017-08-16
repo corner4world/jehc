@@ -19,6 +19,8 @@ import com.alibaba.fastjson.support.spring.FastJsonJsonView;
 
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
+import jehc.xtmodules.xtcore.util.constant.PathConstant;
+import jehc.xtmodules.xtcore.util.constant.StatusConstant;
 import jehc.xtmodules.xtmodel.XtErrorLogs;
 import jehc.xtmodules.xtservice.XtErrorLogsService;
 
@@ -35,7 +37,7 @@ public class ExceptionHandler extends SimpleMappingExceptionResolver implements 
 	 */
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) {  
         Map<String, Object> model = new HashMap<String, Object>();  
-        model.put("ex", ex); 
+        model.put(StatusConstant.EX, ex); 
         /**
         System.out.println("--------------控制层进入异常发生------------------"); 
         System.out.println("异常类型--------------------"+ex);
@@ -70,25 +72,17 @@ public class ExceptionHandler extends SimpleMappingExceptionResolver implements 
         String head = request.getHeader("x-requested-with");
 		//XMLHttpRequest为异步 Ext.basex为同步
 		if(null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) { 
-//			response.setContentType("text/html;charset=utf-8");  
-//        	try {
-//				response.getWriter().print("{xt_pt_status:500,xt_pt_error_msg:\""+ex.getMessage()+"\"}");
-//				response.getWriter().flush();
-//				return null;  
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
 			/* 使用FastJson提供的FastJsonJsonView视图返回，不需要捕获异常   */
 			ModelAndView mv = new ModelAndView();  
             FastJsonJsonView view = new FastJsonJsonView();  
             Map<String, Object> attributes = new HashMap<String, Object>();  
-            attributes.put("xt_pt_status", "500");  
-            attributes.put("xt_pt_error_msg", ex.getMessage());  
+            attributes.put(StatusConstant.XT_PT_STATUS, StatusConstant.XT_PT_STATUS_VAL_500);  
+            attributes.put(StatusConstant.XT_PT_ERROR_MSG, ex.getMessage());  
             view.setAttributesMap(attributes);  
             mv.setView(view);  
             return mv;
 		}
         /**向数据库中插入数据**/
-        return new ModelAndView("pc/xt-view/xt-error/xt-error", model);  
+        return new ModelAndView(PathConstant.XT_ERROR_JSP_PATH, model);  
     }  
 }

@@ -17,6 +17,9 @@ import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.Logback4jUtil;
+import jehc.xtmodules.xtcore.util.constant.PathConstant;
+import jehc.xtmodules.xtcore.util.constant.SessionConstant;
+import jehc.xtmodules.xtcore.util.constant.StatusConstant;
 
 /**
  * 采用自定义注解做权限
@@ -41,17 +44,17 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		long beginTime = System.currentTimeMillis();
 		//线程绑定变量（该数据只有当前请求的线程可见） 
         startTimeThreadLocal.set(beginTime);
-        String exportOrDownloadSysFlag = request.getParameter("exportOrDownloadSysFlag");
+        String exportOrDownloadSysFlag = request.getParameter(StatusConstant.EXPORTORDOWNLOADSYSFLAG);
         ///////////////////拦截IP黑户开始（优先级最高）///////////////////////
 		if(!validateIP(request)) {  
 			String head = request.getHeader("x-requested-with");
 			//XMLHttpRequest为异步 Ext.basex为同步
-			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || "exportOrDownloadSysFlag".equals(exportOrDownloadSysFlag)) { 
+			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || StatusConstant.EXPORTORDOWNLOADSYSFLAG.equals(exportOrDownloadSysFlag)) { 
 				response.setContentType("text/html;charset=utf-8");  
-	        	response.getWriter().print("{xt_pt_status:001}");
+	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_001+"}");
 	        	response.getWriter().flush();
 			}else{
-				request.getRequestDispatcher("/WEB-INF/view/pc/xt-view/xt-illegal/xt-illegal.jsp").forward(request, response);  
+				request.getRequestDispatcher(PathConstant.XT_ILLEGAL_JSP_PATH).forward(request, response);  
 			}
 			return false; 
 		}
@@ -70,7 +73,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		
 		//过滤druid
 		 if(((request.getRequestURI().indexOf(("druid"))> 0 ) && null == CommonUtils.getXtU())){
-			 request.getRequestDispatcher("/WEB-INF/view/pc/xt-view/xt-session/xt-session.jsp").forward(request, response);  
+			 request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
 			 return false;
 		 }
 		
@@ -87,17 +90,17 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
     			return true;
     		}
     		//非超级管理员则进行功能权限验证
-    		String xt_functioninfoURL = (String)request.getSession(false).getAttribute("xt_functioninfoURL");
+    		String xt_functioninfoURL = (String)request.getSession(false).getAttribute(SessionConstant.XT_FUNCTIONINFOURL);
     		if(xt_functioninfoURL.indexOf(","+requestUrl+",")<0){
     			String head = request.getHeader("x-requested-with");
     			//XMLHttpRequest为异步 Ext.basex为同步 则Ajax拦截
-    			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || "exportOrDownloadSysFlag".equals(exportOrDownloadSysFlag)) { 
+    			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || StatusConstant.EXPORTORDOWNLOADSYSFLAG.equals(exportOrDownloadSysFlag)) { 
     				response.setContentType("text/html;charset=utf-8");  
-    	        	response.getWriter().print("{xt_pt_status:777}");
+    	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_777+"}");
     	        	response.getWriter().flush();
     			}else{
     				//发送至拦截页面
-    				request.getRequestDispatcher("/WEB-INF/view/pc/xt-view/xt-no-role/xt-no-role.jsp").forward(request, response);  
+    				request.getRequestDispatcher(PathConstant.XT_NO_ROLE_JSP_PATH).forward(request, response);  
     			}
     			return false;  
     		}else{
@@ -109,12 +112,12 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		    //重定向到登录页面  
 			String head = request.getHeader("x-requested-with");
 			//XMLHttpRequest为异步 Ext.basex为同步
-			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || "exportOrDownloadSysFlag".equals(exportOrDownloadSysFlag)) { 
+			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || StatusConstant.EXPORTORDOWNLOADSYSFLAG.equals(exportOrDownloadSysFlag)) { 
 				response.setContentType("text/html;charset=utf-8");  
-	        	response.getWriter().print("{xt_pt_status:888}");
+	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_888+"}");
 	        	response.getWriter().flush();
 			}else{
-				request.getRequestDispatcher("/WEB-INF/view/pc/xt-view/xt-session/xt-session.jsp").forward(request, response);  
+				request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
 			}
 			return false;
         }
@@ -184,7 +187,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 	@SuppressWarnings("unchecked")
 	public boolean dataAuth(HttpServletRequest request,HttpServletResponse response,String requestUrl) throws IOException{
 		String[] paramNames = (String[])request.getParameterValues("systemUID");//唯一标志systemUID
-		List<String> systemUandM = (List<String>)request.getSession(false).getAttribute("systemUandM");
+		List<String> systemUandM = (List<String>)request.getSession(false).getAttribute(SessionConstant.SYSTEMUANDM);
 		List<String> sysUID = new ArrayList<String>();
 		//如果系统唯一标志不为空 说明系统采用了数据权限
 		if(null != paramNames){

@@ -3,6 +3,8 @@ package jehc.xtmodules.xtcore.util;
 import java.io.IOException;
 import java.util.Properties;
 
+import jehc.xtmodules.xtcore.util.constant.PathConstant;
+
 /**
  * 读取JDBC配置文件
  * @author 邓纯杰
@@ -16,7 +18,7 @@ public class ReadJDBCProperties {
 	public static Properties readProperties(){
 		Properties pro = new Properties();
 		try {
-			pro.load(ReadJDBCProperties.class.getClassLoader().getResourceAsStream("config/jdbc.properties"));
+			pro.load(ReadJDBCProperties.class.getClassLoader().getResourceAsStream(PathConstant.JDBC_PROPERTIES_PATH));
 		} catch (IOException e) {
 			System.out.println("未找到配置文件！！！");
 		}
