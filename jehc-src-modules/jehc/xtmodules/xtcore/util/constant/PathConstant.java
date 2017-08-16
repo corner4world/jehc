@@ -24,4 +24,6 @@ public class PathConstant {
 	public static final String CONFIG_PROPERTIES_PATH = "WEB-INF/classes/config/properties/config.properties";//配置文件
 	
 	public static final String CONFIG_PROPERTIES_PATH_ = "/WEB-INF/classes/config/properties/config.properties";//配置文件
+	
+	public static final String BASE_JUNIT_PATH = "classpath*:/config/spring/spring.xml";//spring配置文件路径
 }

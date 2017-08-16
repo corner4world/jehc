@@ -5,6 +5,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import jehc.xtmodules.xtcore.util.constant.PathConstant;
+
 /**
  * 基础注解测试
  * @author 邓纯杰
@@ -18,7 +20,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 @WebAppConfiguration
 @ContextConfiguration(
 locations = {
-	"classpath*:/config/spring/spring.xml"
+		PathConstant.BASE_JUNIT_PATH
 })
 public class BaseJunit {
 	
