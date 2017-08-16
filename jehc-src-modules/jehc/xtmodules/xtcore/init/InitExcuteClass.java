@@ -6,8 +6,10 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,6 +26,7 @@ import jehc.solrmodules.solrservice.SolrCoreService;
 import jehc.solrmodules.solrservice.SolrIndexAttributeService;
 import jehc.solrmodules.solrservice.SolrSortService;
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
+import jehc.xtmodules.xtcore.util.MapUtils;
 import jehc.xtmodules.xtcore.util.ReadProperties;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.constant.CacheConstant;
@@ -87,24 +90,15 @@ public class InitExcuteClass implements ServletContextListener{
 	        logger.info(sdf.format(new Date())+"--->进入类加载");
 	        logger.info(sdf.format(new Date())+"--->装载配置文件"); 
 			Map<String, Object> map = ReadProperties.readProperties(event);
-			sc.setAttribute("sys_pt_login", map.get("sys_pt_login"));
-			sc.setAttribute("sys_pt_index", map.get("sys_pt_index"));
-			sc.setAttribute("sys_pt_index_foot", map.get("sys_pt_index_foot"));
-			sc.setAttribute("sys_pt_index_top", map.get("sys_pt_index_top"));
-			sc.setAttribute("sys_pt_session", map.get("sys_pt_session"));
+			MapUtils.setKvToServletContext(map, sc);		
+			
 			map = ReadProperties.readMessageProperties(event);
-			sc.setAttribute("sys_message", map);
+			MapUtils.setKvToServletContext(map, sc);
 			logger.info(sdf.format(new Date())+"--->装载配置结束"); 
 			
 			logger.info(sdf.format(new Date())+"--->装载Config配置开始"); 
 			map = ReadProperties.readConfigProperties(event);
-			sc.setAttribute("grid_toolbar_text_is_view", map.get("grid_toolbar_text_is_view"));
-			sc.setAttribute("moretext", map.get("moretext"));
-			sc.setAttribute("moretexttooltip", map.get("moretexttooltip"));
-			sc.setAttribute("grid_toolbar_gaps", map.get("grid_toolbar_gaps"));
-			sc.setAttribute("grid_toolbar_moretext_gaps", map.get("grid_toolbar_moretext_gaps"));
-			sc.setAttribute("solr_home_path", map.get("solr_home_path"));
-			sc.setAttribute("lc_design_displaywin_for_edit", map.get("lc_design_displaywin_for_edit"));
+			MapUtils.setKvToServletContext(map, sc);
 			logger.info(sdf.format(new Date())+"--->装载Config配置结束"); 
 			logger.info(sdf.format(new Date())+"--->开始初始化调度任务"); 
 			cacheQuarzInit();

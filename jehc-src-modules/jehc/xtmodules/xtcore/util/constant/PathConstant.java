@@ -26,4 +26,8 @@ public class PathConstant {
 	public static final String CONFIG_PROPERTIES_PATH_ = "/WEB-INF/classes/config/properties/config.properties";//配置文件
 	
 	public static final String BASE_JUNIT_PATH = "classpath*:/config/spring/spring.xml";//spring配置文件路径
+	
+	public static final String LOG4J_PATH = "WEB-INF/classes/config/log4j.properties";//log4j配置路径
+	
+	public static final String LOGBACK_PATH = "WEB-INF/classes/config/logback.xml";//logback路径
 }

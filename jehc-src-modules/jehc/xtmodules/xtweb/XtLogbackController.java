@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jehc.xtmodules.xtcore.allutils.JdomXmlUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.util.constant.PathConstant;
 
 /**
  * Logback日志
@@ -39,7 +40,7 @@ public class XtLogbackController extends BaseAction{
 	*/
 	@RequestMapping(value="/loadXtLogbackEditor",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView loadXtLogbackEditor(HttpServletRequest request,Model model) throws IOException{
-		String path = request.getSession().getServletContext().getRealPath("/")+"WEB-INF/classes/jehc/xtmodules/xtcore/sources/logback.xml";
+		String path = request.getSession().getServletContext().getRealPath("/")+PathConstant.LOGBACK_PATH;
 		JdomXmlUtil jdomXmlUtil = new JdomXmlUtil(path);
 		String xtLogbackContent = jdomXmlUtil.XmlToString();
 		model.addAttribute("xtLogbackContent", xtLogbackContent);

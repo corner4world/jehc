@@ -317,13 +317,13 @@ public class CommonUtils extends UUID{
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static Object getCache(String key) {
 		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 		HttpServletRequest request = ((ServletRequestAttributes) ra).getRequest();
 		ServletContext sc = request.getSession(false).getServletContext();
-		Map<String, Object> map = (Map<String, Object>) sc.getAttribute("sys_message");
-		return map.get(key);
+//		Map<String, Object> map = (Map<String, Object>) sc.getAttribute("sys_message");
+//		return map.get(key);
+		return (String)sc.getAttribute(key);
 	}
 
 	/**
@@ -331,13 +331,13 @@ public class CommonUtils extends UUID{
 	 * 
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public static String getCacheStr(String key) {
 		RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 		HttpServletRequest request = ((ServletRequestAttributes) ra).getRequest();
 		ServletContext sc = request.getSession().getServletContext();
-		Map<String, Object> map = (Map<String, Object>) sc.getAttribute("sys_message");
-		return (String) map.get(key);
+//		Map<String, Object> map = (Map<String, Object>) sc.getAttribute("sys_message");
+//		return (String) map.get(key);
+		return (String)sc.getAttribute(key);
 	}
 
 	/**

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.util.constant.PathConstant;
 
 /**
  * Log4j动态修改 重启服务
@@ -49,7 +50,7 @@ public class XtLog4jController extends BaseAction {
 	public ModelAndView loadLog4jEditor(HttpServletRequest request,Model model) throws IOException{
 		StringBuffer sbf = new StringBuffer();
         //获得类加载器，然后把文件作为一个流获取
-        String path = request.getSession().getServletContext().getRealPath("/")+"WEB-INF/classes/jehc/xtmodules/xtcore/sources/log4j.properties";
+        String path = request.getSession().getServletContext().getRealPath("/")+PathConstant.LOG4J_PATH;
         FileInputStream fis = new FileInputStream(path);
         //创建Properties实例
         Properties prop = new Properties();

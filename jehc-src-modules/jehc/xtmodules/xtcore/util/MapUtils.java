@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import javax.servlet.ServletContext;
+
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import net.sf.json.JSONNull;
 
@@ -177,5 +179,18 @@ public class MapUtils {
 			}
 		}
 		return map;
+	}
+	
+	/**
+	 * 设置map值至ServletContext中
+	 * @param map
+	 * @param sc
+	 */
+	public static void setKvToServletContext(Map<String, Object> map,ServletContext sc){
+		Set<Map.Entry<String, Object>> set = map.entrySet();
+		for(Iterator<Map.Entry<String, Object>> it = set.iterator(); it.hasNext();) {
+			Map.Entry<String, Object> entry = (Map.Entry<String, Object>) it.next();
+			sc.setAttribute(entry.getKey(), entry.getValue());
+		}
 	}
 }
