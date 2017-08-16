@@ -100,8 +100,7 @@ Ext.onReady(function(){
 					region:'north',
 					split:false,
 					border:false,
-					tools:[
-					       {
+					tools:[{
 			            	 	 width:220,
 								 xtype:'textfield',
 					             emptyText:"请输入关键字",
@@ -115,16 +114,16 @@ Ext.onReady(function(){
 									}
 								 },
 					             style:{/*background:'#ffffff',*/marginRight:'5px',marginLeft:'5px'}
-					       },
-//					       {
+					        },
+//					        {
 //					        	 icon:indexMail,
 //				                 xtype:'button',
 //					             handler:function(button){
 //					             	msgTishi("该功能还未开放！");
 //								 },
 //					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
-//					       },
-					       {
+//					        },
+					        {
 					    	   handler:function(){
 					    		   changeTheme();
 					    	   },
@@ -135,8 +134,8 @@ Ext.onReady(function(){
 					    		   title:'更换主题',
 					    		   width:80
 					    	   }
-					       },
-					       {
+					        },
+					        {
 								tooltip:{title:'注销平台',width:80},
 				                xtype:'button',
 				                icon:onoffIcon,
@@ -144,117 +143,7 @@ Ext.onReady(function(){
 							    handler:function(){
 							     	loginout();
 							    }
-						   },
-					       {
-					        	 icon:designIcon,
-//				                 xtype:'splitbutton',
-				                 xtype:'button',
-				                 iconAlign:'top',
-//				                 arrowAlign:'bottom',
-				                 tooltip:{title:'设置位置',width:80},
-								 menu:[
-								 {
-					                text:'顶部',
-					                glyph:0xf062,
-								    handler:function(){
-								    	indexTab(1);
-								    }
-								 },
-								 {
-									 text:'底部',
-					                 glyph:0xf063,
-								     handler:function(){
-								    	 indexTab(2);
-								     }
-								 },
-								 {
-									 text:'左边',
-					                 glyph:0xf060,
-								     handler:function(){
-								    	 indexTab(3);
-								     }
-								 },
-								 {
-									 text:'右边',
-					                 glyph:0xf061,
-								     handler:function(){
-								    	 indexTab(4);
-								     }
-								 }
-								 ],
-					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
-					       },
-					       {
-//				            xtype:'splitbutton',
-				            xtype:'button',
-				            icon:indexlist,
-					 		iconAlign:'top',
-//					 		arrowAlign:'bottom',
-					 		tooltip:{
-			                 	title:'更多操作',
-			                 	width:80
-			                },
-					 		style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'},
-				            menu:[
-								 {
-								 	handler:function(){
-								 		initPerpetualcalendar()
-								    },
-								    text:'日历',
-								    glyph:0xf073,
-								    tooltip:{
-					                 	title:'万年历',
-					                 	width:80
-					                }
-								 },
-								 {
-								    text:'关闭浏览器缓存',
-								    glyph:0xf0ec,
-								    tooltip:{
-					                 	title:'关闭浏览器缓存',
-					                 	width:80
-					                },
-								    handler:function(){
-								     	jQuery.ajaxSetup({cache:false});
-								     	msgTishi("关闭浏览器缓存成功");
-								    }
-								 },
-								 {
-								    text:'开启浏览器缓存',
-								    glyph:0xf0ec,
-								    tooltip:{
-					                 	title:'开启浏览器缓存',
-					                 	width:80
-					                },
-								    handler:function(){
-								     	jQuery.ajaxSetup({cache:true});
-								     	msgTishi("开启浏览器缓存成功");
-								    }
-								 },
-								 {
-						             text:'修改密码',
-						             glyph:0xf044,
-						             handler:function(){
-						             	updatePwd();
-								     },
-								     tooltip:{
-					                 	title:'修改密码',
-					                 	width:80
-					                 }
-								 },
-								 {
-								 	handler:function(){
-								 		 window.location.href=basePath+"/index/index.html";
-								    },
-								    text:'刷新整个页面',
-								    glyph:0xf021,
-								    tooltip:{
-					                 	title:'刷新整个页面',
-					                 	width:80
-					                }
-								 }
-							 ]
-					         },
+						   	 },
 					    	 {
 				                xtype:'box', 
 								width:35, 
@@ -297,7 +186,7 @@ Ext.onReady(function(){
 				}],plugins:new Ext.ux.TabCloseMenu()
 			}]
 		},{
-			title:"<font style='font-size:14px;'>"+sys_pt_index_foot+"</font>",
+			title:"<font style='font-size:16px;'>"+sys_pt_index_foot+"</font>",
 			header:{
                   titlePosition:2,
                   titleAlign:'center',
@@ -310,11 +199,117 @@ Ext.onReady(function(){
 			            text:dt()
 			      },
 			      {
+						 icon:designIcon,
+						 xtype:'splitbutton',
+//						 ui:'default-toolbar',
+					     tooltip:{title:'设置位置'},
+						 menu:[
+						 {
+							 text:'顶部',
+							 glyph:0xf062,
+						     handler:function(){
+						    	indexTab(1);
+						     }
+						 },
+						 {
+							 text:'底部',
+							 glyph:0xf063,
+						     handler:function(){
+						    	 indexTab(2);
+						     }
+						 },
+						 {
+							 text:'左边',
+					       glyph:0xf060,
+						     handler:function(){
+						    	 indexTab(3);
+						     }
+						 },
+						 {
+							 text:'右边',
+							 glyph:0xf061,
+						     handler:function(){
+						    	 indexTab(4);
+						     }
+						 }
+						 ],
+					     style:{/*background:'#f5f5f5',*/marginLeft:'2px'}
+				  },
+				  {
+			            xtype:'splitbutton',
+			            icon:indexlist,
+			            ui:'default-toolbar',
+				 		tooltip:{
+		                 	title:'更多操作',
+		                 	width:80
+		                },
+				 		style:{marginRight:'0px',marginLeft:'2px'},
+			            menu:[
+							 {
+							 	handler:function(){
+							 		initPerpetualcalendar()
+							    },
+							    text:'日历',
+							    glyph:0xf073,
+							    tooltip:{
+				                 	title:'万年历',
+				                 	width:80
+				                }
+							 },
+							 {
+							    text:'关闭浏览器缓存',
+							    glyph:0xf0ec,
+							    tooltip:{
+				                 	title:'关闭浏览器缓存',
+				                 	width:80
+				                },
+							    handler:function(){
+							     	jQuery.ajaxSetup({cache:false});
+							     	msgTishi("关闭浏览器缓存成功");
+							    }
+							 },
+							 {
+							    text:'开启浏览器缓存',
+							    glyph:0xf0ec,
+							    tooltip:{
+				                 	title:'开启浏览器缓存',
+				                 	width:80
+				                },
+							    handler:function(){
+							     	jQuery.ajaxSetup({cache:true});
+							     	msgTishi("开启浏览器缓存成功");
+							    }
+							 },
+							 {
+					             text:'修改密码',
+					             glyph:0xf044,
+					             handler:function(){
+					             	updatePwd();
+							     },
+							     tooltip:{
+				                 	title:'修改密码',
+				                 	width:80
+				                 }
+							 },
+							 {
+							 	handler:function(){
+							 		 window.location.href=basePath+"/index/index.html";
+							    },
+							    text:'刷新整个页面',
+							    glyph:0xf021,
+							    tooltip:{
+				                 	title:'刷新整个页面',
+				                 	width:80
+				                }
+							 }
+						 ]
+				  },
+			      {
 			            /**ui:'default-toolbar',**/
 			            xtype:'button',
 			            id:'xtMessageBtn',
 			            icon:messageIcon,
-			            style:{background:'#90c258',marginRight:'0px',marginLeft:'10px'},
+			            style:{background:'#90c258',marginRight:'0px',marginLeft:'2px'},
 			            tooltip:{
 		                 	title:'短消息'
 		                },
@@ -328,7 +323,7 @@ Ext.onReady(function(){
 			            tooltip:{
 		                 	title:'锁屏'
 		                },
-			            style:{background:'#e3495a',marginRight:'4px',marginLeft:'2px'},
+			            style:{background:'#e3495a',marginRight:'0px',marginLeft:'2px'},
 			            handler:function(button){
 			            	initLockSystem(1);
 							setCookie("syslock", '1', 240);
