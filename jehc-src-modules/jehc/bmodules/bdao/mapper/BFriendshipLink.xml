@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BFriendshipLink">
+	<!--初始化分页-->
+	<select id="getBFriendshipLinkListByCondition" resultType="jehc.bmodules.bmodel.BFriendshipLink" parameterType="map">
+		SELECT
+			b_friendship_link.`b_friendship_link_id`,
+			b_friendship_link.`b_friendship_link_name`,
+			b_friendship_link.`b_friendship_link_url`,
+			DATE_FORMAT(b_friendship_link.`b_friendship_link_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_friendship_link_ctime`,
+			DATE_FORMAT(b_friendship_link.`b_friendship_link_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_friendship_link_mtime`,
+			b_friendship_link.`xt_userinfo_id`,
+			b_friendship_link.`b_friendship_link_status`,
+			b_friendship_link.`b_friendship_link_sort`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_friendship_link b_friendship_link LEFT JOIN xt_userinfo xt_userinfo ON b_friendship_link.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != b_friendship_link_name">
+			AND instr(b_friendship_link.b_friendship_link_name,#{b_friendship_link_name})
+		</if>
+		<if test="null != b_friendship_link_url">
+			AND instr(b_friendship_link.b_friendship_link_url,#{b_friendship_link_url})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getBFriendshipLinkById" resultType="jehc.bmodules.bmodel.BFriendshipLink" parameterType="string">
+		SELECT
+			b_friendship_link.`b_friendship_link_id`,
+			b_friendship_link.`b_friendship_link_name`,
+			b_friendship_link.`b_friendship_link_url`,
+			DATE_FORMAT(b_friendship_link.`b_friendship_link_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_friendship_link_ctime`,
+			DATE_FORMAT(b_friendship_link.`b_friendship_link_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_friendship_link_mtime`,
+			b_friendship_link.`xt_userinfo_id`,
+			b_friendship_link.`b_friendship_link_status`,
+			b_friendship_link.`b_friendship_link_sort`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_friendship_link b_friendship_link LEFT JOIN xt_userinfo xt_userinfo ON b_friendship_link.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE b_friendship_link_id=#{b_friendship_link_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBFriendshipLink" parameterType="jehc.bmodules.bmodel.BFriendshipLink">
+		INSERT INTO
+			b_friendship_link
+			(
+			`b_friendship_link_id`,
+			`b_friendship_link_name`,
+			`b_friendship_link_url`,
+			`b_friendship_link_ctime`,
+			`b_friendship_link_mtime`,
+			`xt_userinfo_id`,
+			`b_friendship_link_status`,
+			`b_friendship_link_sort`
+			)
+			VALUES
+			(
+			#{b_friendship_link_id},
+			#{b_friendship_link_name},
+			#{b_friendship_link_url},
+			#{b_friendship_link_ctime},
+			#{b_friendship_link_mtime},
+			#{xt_userinfo_id},
+			#{b_friendship_link_status},
+			#{b_friendship_link_sort}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBFriendshipLink" parameterType="jehc.bmodules.bmodel.BFriendshipLink">
+		UPDATE
+			b_friendship_link
+		SET
+			`b_friendship_link_id` = #{b_friendship_link_id},
+			`b_friendship_link_name` = #{b_friendship_link_name},
+			`b_friendship_link_url` = #{b_friendship_link_url},
+			`b_friendship_link_mtime` = #{b_friendship_link_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_friendship_link_status` = #{b_friendship_link_status},
+			`b_friendship_link_sort` = #{b_friendship_link_sort}
+		WHERE b_friendship_link_id=#{b_friendship_link_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBFriendshipLink" parameterType="map">
+		DELETE FROM b_friendship_link WHERE b_friendship_link_id IN
+		<foreach item="item" index="index" collection="b_friendship_link_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

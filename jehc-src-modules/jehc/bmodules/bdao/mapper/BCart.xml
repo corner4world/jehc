@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BCart">
+	<!--初始化分页-->
+	<select id="getBCartListByCondition" resultType="jehc.bmodules.bmodel.BCart" parameterType="map">
+		SELECT
+			b_cart.`b_cart_id`,
+			DATE_FORMAT(b_cart.`b_cart_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_ctime`,
+			DATE_FORMAT(b_cart.`b_cart_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_mtime`,
+			b_cart.`b_cart_total_price`,
+			b_cart.`b_cart_orderkey`,
+			b_cart.`b_cart_from`,
+			b_cart.`b_cart_sessionid`,
+			b_cart.`b_cart_remark`,
+			b_cart.`b_cart_total_number`,
+			b_cart.`b_invoice_id`,
+			b_invoice.`b_invoice_type`,
+			b_invoice.`b_invoice_name`,
+			b_invoice.`b_invoice_status`,
+			b_cart_order_address.*
+		FROM 
+			b_cart b_cart LEFT JOIN b_invoice b_invoice ON b_cart.b_invoice_id = b_invoice.b_invoice_id
+			LEFT JOIN b_cart_order_address ON b_cart.b_cart_order_address_id = b_cart_order_address.b_cart_order_address_id
+		<if test="null != b_cart_orderkey">
+			AND instr(b_cart.b_cart_orderkey,#{b_cart_orderkey})
+		</if>
+		<if test="null != b_invoice_name">
+			AND instr(b_invoice.b_invoice_name,#{b_invoice_name})
+		</if>
+		<if test="null != b_invoice_type">
+			AND b_invoice.b_invoice_type = #{b_invoice_type}
+		</if>
+		ORDER BY b_cart.`b_cart_ctime` DESC,b_cart.`b_cart_mtime` DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getBCartById" resultType="jehc.bmodules.bmodel.BCart" parameterType="string">
+		SELECT
+			b_cart.`b_cart_id`,
+			b_cart.`b_member_id`,
+			DATE_FORMAT(b_cart.`b_cart_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_ctime`,
+			DATE_FORMAT(b_cart.`b_cart_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_mtime`,
+			b_cart.`b_cart_total_price`,
+			b_cart.`b_cart_orderkey`,
+			b_cart.`b_cart_from`,
+			b_cart.`b_cart_sessionid`,
+			b_cart.`b_cart_remark`,
+			b_cart.`b_cart_total_number`,
+			b_cart.`b_invoice_id`,
+			b_cart.`b_cart_order_address_id`,
+			b_invoice.`b_invoice_type`,
+			b_invoice.`b_invoice_name`,
+			b_invoice.`b_invoice_status`,
+			b_cart_order_address.*
+		FROM 
+			b_cart b_cart LEFT JOIN b_invoice b_invoice ON b_cart.b_invoice_id = b_invoice.b_invoice_id
+			LEFT JOIN b_cart_order_address ON b_cart.b_cart_order_address_id = b_cart_order_address.b_cart_order_address_id
+		WHERE b_cart.b_cart_id=#{b_cart_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBCart" parameterType="jehc.bmodules.bmodel.BCart">
+		INSERT INTO
+			b_cart
+			(
+			`b_cart_id`,
+			`b_member_id`,
+			`b_cart_ctime`,
+			`b_cart_mtime`,
+			`b_cart_total_price`,
+			`b_cart_orderkey`,
+			`b_cart_from`,
+			`b_cart_sessionid`,
+			`b_cart_remark`,
+			`b_cart_total_number`,
+			`b_invoice_id`,
+			`b_cart_order_address_id`
+			)
+			VALUES
+			(
+			#{b_cart_id},
+			#{b_member_id},
+			#{b_cart_ctime},
+			#{b_cart_mtime},
+			#{b_cart_total_price},
+			#{b_cart_orderkey},
+			#{b_cart_from},
+			#{b_cart_sessionid},
+			#{b_cart_remark},
+			#{b_cart_total_number},
+			#{b_invoice_id},
+			#{b_cart_order_address_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBCart" parameterType="jehc.bmodules.bmodel.BCart">
+		UPDATE
+			b_cart
+		SET
+			`b_cart_id` = #{b_cart_id},
+			`b_member_id` = #{b_member_id},
+			`b_cart_mtime` = #{b_cart_mtime},
+			`b_cart_total_price` = #{b_cart_total_price},
+			`b_cart_orderkey` = #{b_cart_orderkey},
+			`b_cart_from` = #{b_cart_from},
+			`b_cart_sessionid` = #{b_cart_sessionid},
+			`b_cart_remark` = #{b_cart_remark},
+			`b_cart_total_number` = #{b_cart_total_number},
+			`b_invoice_id` = #{b_invoice_id},
+			`b_cart_order_address_id` = #{b_cart_order_address_id}
+		WHERE b_cart_id=#{b_cart_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBCart" parameterType="map">
+		DELETE FROM b_cart WHERE b_cart_id IN
+		<foreach item="item" index="index" collection="b_cart_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--根据购物车编号获取购物车订单地址集合编号-->
+	<select id="getBCartOrderAddressIdByCondition" resultType="string" parameterType="map">
+		SELECT
+			b_cart.`b_cart_order_address_id`
+		FROM 
+			b_cart b_cart 
+		WHERE b_cart_id IN
+		<foreach item="item" index="index" collection="b_cart_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+	<!--根据购物车编号集合-->
+	<select id="getBCartList" resultType="jehc.bmodules.bmodel.BCart" parameterType="map">
+		SELECT
+			b_cart.`b_cart_id`,
+			b_cart.`b_member_id`,
+			DATE_FORMAT(b_cart.`b_cart_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_ctime`,
+			DATE_FORMAT(b_cart.`b_cart_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_mtime`,
+			b_cart.`b_cart_total_price`,
+			b_cart.`b_cart_orderkey`,
+			b_cart.`b_cart_from`,
+			b_cart.`b_cart_sessionid`,
+			b_cart.`b_cart_remark`,
+			b_cart.`b_cart_total_number`,
+			b_cart.`b_invoice_id`,
+			b_cart.`b_cart_order_address_id`,
+			b_invoice.`b_invoice_type`,
+			b_invoice.`b_invoice_name`,
+			b_invoice.`b_invoice_status`,
+			b_cart_order_address.*
+		FROM 
+			b_cart b_cart LEFT JOIN b_invoice b_invoice ON b_cart.b_invoice_id = b_invoice.b_invoice_id
+			LEFT JOIN b_cart_order_address ON b_cart.b_cart_order_address_id = b_cart_order_address.b_cart_order_address_id
+		WHERE b_cart.b_cart_id IN
+		<foreach item="item" index="index" collection="b_cart_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</select>
+</mapper>

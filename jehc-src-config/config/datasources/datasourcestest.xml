@@ -61,6 +61,8 @@
 	<tx:advice id="txAdviceTest" transaction-manager="transactionManagerTest">
 		 <!--事务属性定义-->
 		<tx:attributes>
+			<tx:method name="*Poulators" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="recover*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
 			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
 			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
 			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BInvoice">
+	<!--初始化分页-->
+	<select id="getBInvoiceListByCondition" resultType="jehc.bmodules.bmodel.BInvoice" parameterType="map">
+		SELECT
+			b_invoice.`b_invoice_id`,
+			b_invoice.`b_invoice_type`,
+			b_invoice.`b_invoice_name`,
+			b_invoice.`b_invoice_company`,
+			b_invoice.`b_invoice_num`,
+			b_invoice.`b_invoice_status`,
+			b_invoice.`b_member_id`,
+			b_invoice.`b_invoice_bank`,
+			b_invoice.`b_invoice_bank_num`,
+			b_invoice.`b_invoice_tel`,
+			DATE_FORMAT(b_invoice.`b_invoice_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_invoice_ctime`,
+			DATE_FORMAT(b_invoice.`b_invoice_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_invoice_mtime`,
+			b_invoice.`xt_provinceID`,
+			b_invoice.`xt_cityID`,
+			b_invoice.`xt_districtID`,
+			b_invoice.`b_invoice_address`,
+			xt_province.`xt_provinceName`,
+			xt_city.`xt_cityName`,
+			xt_district.`xt_districtName`
+		FROM 
+			b_invoice b_invoice LEFT JOIN xt_province xt_province ON  b_invoice.xt_provinceID = xt_province.xt_provinceID
+			LEFT JOIN xt_city xt_city ON xt_city.xt_cityID = b_invoice.xt_cityID
+			LEFT JOIN xt_district xt_district ON xt_district.xt_districtID = b_invoice.xt_districtID
+		WHERE 1=1
+		AND b_invoice.b_member_id=#{b_member_id}
+	</select>
+
+	<!--查询对象-->
+	<select id="getBInvoiceById" resultType="jehc.bmodules.bmodel.BInvoice" parameterType="string">
+		SELECT
+			`b_invoice_id`,
+			`b_invoice_type`,
+			`b_invoice_name`,
+			`b_invoice_company`,
+			`b_invoice_num`,
+			`b_invoice_status`,
+			`b_member_id`,
+			`b_invoice_bank`,
+			`b_invoice_bank_num`,
+			`b_invoice_tel`,
+			DATE_FORMAT(`b_invoice_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_invoice_ctime`,
+			DATE_FORMAT(`b_invoice_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_invoice_mtime`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`,
+			`b_invoice_address`
+		FROM 
+			b_invoice
+		WHERE b_invoice_id=#{b_invoice_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBInvoice" parameterType="jehc.bmodules.bmodel.BInvoice">
+		INSERT INTO
+			b_invoice
+			(
+			`b_invoice_id`,
+			`b_invoice_type`,
+			`b_invoice_name`,
+			`b_invoice_company`,
+			`b_invoice_num`,
+			`b_invoice_status`,
+			`b_member_id`,
+			`b_invoice_bank`,
+			`b_invoice_bank_num`,
+			`b_invoice_tel`,
+			`b_invoice_ctime`,
+			`b_invoice_mtime`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`,
+			`b_invoice_address`
+			)
+			VALUES
+			(
+			#{b_invoice_id},
+			#{b_invoice_type},
+			#{b_invoice_name},
+			#{b_invoice_company},
+			#{b_invoice_num},
+			#{b_invoice_status},
+			#{b_member_id},
+			#{b_invoice_bank},
+			#{b_invoice_bank_num},
+			#{b_invoice_tel},
+			#{b_invoice_ctime},
+			#{b_invoice_mtime},
+			#{xt_provinceID},
+			#{xt_cityID},
+			#{xt_districtID},
+			#{b_invoice_address}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBInvoice" parameterType="jehc.bmodules.bmodel.BInvoice">
+		UPDATE
+			b_invoice
+		SET
+			`b_invoice_id` = #{b_invoice_id},
+			`b_invoice_type` = #{b_invoice_type},
+			`b_invoice_name` = #{b_invoice_name},
+			`b_invoice_company` = #{b_invoice_company},
+			`b_invoice_num` = #{b_invoice_num},
+			`b_invoice_status` = #{b_invoice_status},
+			`b_member_id` = #{b_member_id},
+			`b_invoice_bank` = #{b_invoice_bank},
+			`b_invoice_bank_num` = #{b_invoice_bank_num},
+			`b_invoice_tel` = #{b_invoice_tel},
+			`b_invoice_mtime` = #{b_invoice_mtime},
+			`xt_provinceID` = #{xt_provinceID},
+			`xt_cityID` = #{xt_cityID},
+			`xt_districtID` = #{xt_districtID},
+			`b_invoice_address` = #{b_invoice_address}
+		WHERE b_invoice_id=#{b_invoice_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBInvoice" parameterType="map">
+		DELETE FROM b_invoice WHERE b_invoice_id IN
+		<foreach item="item" index="index" collection="b_invoice_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

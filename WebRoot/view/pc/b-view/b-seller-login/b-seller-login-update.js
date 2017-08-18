@@ -1,0 +1,178 @@
+var bSellerLoginWinEdit;
+var bSellerLoginFormEdit;
+/**
+function updateBSellerLogin(){
+	var record = grid.getSelectionModel().selected;
+	if(record.length == 0){
+		msgTishi('请选择要修改的一项！');
+		return;
+	}
+	initBSellerLoginFormEdit();
+	bSellerLoginWinEdit = Ext.create('Ext.Window',{
+		layout:'fit',
+		width:800,
+		height:400,
+		maximizable:true,
+		minimizable:true,
+		animateTarget:document.body,
+		plain:true,
+		modal:true,
+		title:'编辑信息',
+		listeners:{
+			minimize:function(win,opts){
+				win.collapse();
+			}
+		},
+		items:bSellerLoginFormEdit,
+		buttons:[{
+			text:'保存',
+			itemId:'save',
+			glyph:0xf0c7,
+			handler:function(button){
+				submitForm(bSellerLoginFormEdit,'../bSellerLoginController/updateBSellerLogin',grid,bSellerLoginWinEdit,false,true);
+			}
+		},{
+			text:'关闭',
+			itemId:'close',
+			glyph:0xf148,
+			handler:function(button){
+				button.up('window').close();
+			}
+		}]
+	});
+	bSellerLoginWinEdit.show();
+	loadFormData(bSellerLoginFormEdit,'../bSellerLoginController/getBSellerLoginById?b_seller_login_id='+ record.items[0].data.b_seller_login_id);
+}
+function initBSellerLoginFormEdit(){
+	bSellerLoginFormEdit = Ext.create('Ext.FormPanel',{
+		xtype:'form',
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:70,
+			labelAlign:'left',
+			flex:1,
+			margin:'2 5 4 5'
+		},
+		items:[
+		{
+			fieldLabel:'卖家账号编号',
+			xtype:'textfield',
+			hidden:true,
+			name:'b_seller_login_id',
+			allowBlank:false,
+			maxLength:32,
+			anchor:'100%'
+		},
+		{
+			fieldLabel:'卖家登陆账号',
+			xtype:'textfield',
+			name:'b_seller_login_name',
+			maxLength:64,
+			anchor:'100%'
+		},
+		{
+			fieldLabel:'卖家登陆密码',
+			xtype:'textfield',
+			name:'b_seller_login_pwd',
+			maxLength:64,
+			anchor:'100%'
+		},
+		{
+			fieldLabel:'卖家状态0正常1禁用',
+			xtype:'textfield',
+			name:'b_seller_login_status',
+			maxLength:2,
+			anchor:'100%'
+		}
+		]
+	});
+}
+**/
+
+Ext.onReady(function(){
+	bSellerLoginFormEdit = Ext.create('Ext.FormPanel',{
+		xtype:'form',
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:70,
+			labelAlign:'left',
+			flex:1,
+			margin:'2 5 4 5'
+		},
+		items:[
+		{
+			fieldLabel:'卖家账号编号',
+			xtype:'textfield',
+			hidden:true,
+			name:'b_seller_login_id',
+			id:'b_seller_login_id',
+			maxLength:32,
+			anchor:'100%'
+		},
+		{
+			fieldLabel:'卖家编号',
+			xtype:'textfield',
+			hidden:true,
+			name:'b_seller_id',
+			id:'b_seller_id_',
+			allowBlank:false,
+			maxLength:32,
+			anchor:'100%'
+		},
+		{
+			fieldLabel:'登陆账号',
+			xtype:'textfield',
+			name:'b_seller_login_name',
+			maxLength:64,
+			allowBlank:false,
+			anchor:'100%'
+		},
+		{
+			fieldLabel:'登陆密码',
+			xtype:'textfield',
+			name:'b_seller_login_pwd',
+			inputType:'password',
+			maxLength:64,
+			allowBlank:false,
+			anchor:'100%'
+		},
+		{
+			fieldLabel:'账号状态',
+			name:'b_seller_login_status',
+			xtype:"combo",
+            store:[["0","正常"],["1","禁用"]],
+            emptyText:"请选择",
+            mode:"local",
+            value:'0',
+            triggerAction:"all",
+            editable:false,
+			hiddenName:'b_seller_login_status',
+			allowBlank:false,
+			maxLength:2,
+		}
+		],
+		buttonAlign:'center',
+		buttons:[{
+			text:'保 存',
+			itemId:'save',
+			handler:function(button){
+				if(null != Ext.getCmp('b_seller_login_id').getValue() && '' != Ext.getCmp('b_seller_login_id').getValue()){
+					submitFormCallBack(bSellerLoginFormEdit,'../bSellerLoginController/updateBSellerLogin',null,null,false,true,true,'../bSellerLoginController/getBSellerLogin?b_seller_id='+$('#b_seller_id').val(),bSellerLoginFormEdit);
+				}else{
+					submitFormCallBack(bSellerLoginFormEdit,'../bSellerLoginController/addBSellerLogin',null,null,false,true,true,'../bSellerLoginController/getBSellerLogin?b_seller_id='+$('#b_seller_id').val(),bSellerLoginFormEdit);
+				}
+			}
+		}]
+	});
+	Ext.getCmp('b_seller_id_').setValue($('#b_seller_id').val());
+	loadFormData(bSellerLoginFormEdit,'../bSellerLoginController/getBSellerLogin?b_seller_id='+$('#b_seller_id').val());
+	Ext.create('Ext.Viewport',{
+		layout:'fit',
+		xtype:'viewport',
+		items:bSellerLoginFormEdit
+	});
+});

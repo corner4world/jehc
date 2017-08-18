@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BSellerProduct">
+	<!--初始化分页-->
+	<select id="getBSellerProductListByCondition" resultType="jehc.bmodules.bmodel.BSellerProduct" parameterType="map">
+		SELECT
+			b_product.`b_product_name`,
+			b_category.`b_category_name`,
+			b_brand.`b_brand_name`,
+			b_seller_product.`b_seller_product_id`,
+			b_seller_product.`b_seller_id`,
+			b_seller_product.`b_product_id`,
+			b_seller_product.`b_seller_product_status`,
+			b_seller.`b_seller_name`
+		FROM 
+			b_product b_product LEFT JOIN xt_userinfo xt_userinfo ON b_product.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN b_brand b_brand ON b_product.b_brand_id = b_brand.b_brand_id
+		LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
+		LEFT JOIN b_seller_product b_seller_product ON b_seller_product.b_product_id = b_product.b_product_id
+		LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_seller_product.b_seller_id
+		WHERE 1=1
+		<if test="null != b_product_name">
+			AND instr(b_product.b_product_name,#{b_product_name})
+		</if>
+		<if test="null != b_seller_product_status">
+			AND b_seller_product.b_seller_product_status = #{b_seller_product_status}
+		</if>
+		AND b_seller_product.`b_seller_id` = #{b_seller_id}
+	</select>
+
+	<!--查询对象-->
+	<select id="getBSellerProductById" resultType="jehc.bmodules.bmodel.BSellerProduct" parameterType="string">
+		SELECT
+			b_seller_product.`b_seller_product_id`,
+			b_seller_product.`b_seller_id`,
+			b_seller_product.`b_product_id`,
+			b_seller_product.`b_seller_product_status`,
+			b_product_price.*
+		FROM 
+			b_seller_product b_seller_product LEFT JOIN b_product_price ON b_product_price.b_seller_product_id = b_seller_product.b_seller_product_id
+		WHERE b_seller_product.b_seller_product_id=#{b_seller_product_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBSellerProduct" parameterType="jehc.bmodules.bmodel.BSellerProduct">
+		INSERT INTO
+			b_seller_product
+			(
+			`b_seller_product_id`,
+			`b_seller_id`,
+			`b_product_id`,
+			`b_seller_product_status`
+			)
+			VALUES
+			(
+			#{b_seller_product_id},
+			#{b_seller_id},
+			#{b_product_id},
+			#{b_seller_product_status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBSellerProduct" parameterType="jehc.bmodules.bmodel.BSellerProduct">
+		UPDATE
+			b_seller_product
+		SET
+			`b_seller_product_id` = #{b_seller_product_id},
+			`b_seller_id` = #{b_seller_id},
+			`b_product_id` = #{b_product_id},
+			`b_seller_product_status` = #{b_seller_product_status}
+		WHERE b_seller_product_id=#{b_seller_product_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBSellerProduct" parameterType="map">
+		DELETE FROM b_seller_product WHERE b_seller_product_id IN
+		<foreach item="item" index="index" collection="b_seller_product_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	
+	<!--查询库存使用商户商品并分页-->
+	<select id="getBSellerProductStockListByCondition" resultType="jehc.bmodules.bmodel.BSellerProduct" parameterType="map">
+		SELECT
+			b_product.`b_product_name`,
+			b_category.`b_category_name`,
+			b_brand.`b_brand_name`,
+			b_seller_product.`b_seller_product_id`,
+			b_seller_product.`b_seller_id`,
+			b_seller_product.`b_product_id`,
+			b_seller_product.`b_seller_product_status`,
+			b_seller.`b_seller_name`
+		FROM 
+			b_product b_product LEFT JOIN xt_userinfo xt_userinfo ON b_product.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN b_brand b_brand ON b_product.b_brand_id = b_brand.b_brand_id
+		LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
+		LEFT JOIN b_seller_product b_seller_product ON b_seller_product.b_product_id = b_product.b_product_id
+		INNER JOIN b_seller b_seller ON b_seller.b_seller_id = b_seller_product.b_seller_id
+		WHERE 1=1
+		LIMIT #{offset},#{pageSize}
+	</select>
+
+	<!--查询库存使用商户商品并分页统计-->
+	<select id="getBSellerProductStockListCountByCondition" resultType="Integer" parameterType="map">
+ 		SELECT 
+			COUNT(0)
+		FROM 
+			b_product b_product LEFT JOIN xt_userinfo xt_userinfo ON b_product.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN b_brand b_brand ON b_product.b_brand_id = b_brand.b_brand_id
+		LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
+		LEFT JOIN b_seller_product b_seller_product ON b_seller_product.b_product_id = b_product.b_product_id
+		INNER JOIN b_seller b_seller ON b_seller.b_seller_id = b_seller_product.`b_seller_id`
+		WHERE 1=1
+	</select>
+</mapper>

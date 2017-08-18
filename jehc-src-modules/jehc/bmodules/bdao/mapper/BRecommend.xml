@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BRecommend">
+	<!--初始化分页-->
+	<select id="getBRecommendListByCondition" resultType="jehc.bmodules.bmodel.BRecommend" parameterType="map">
+		SELECT
+			b_recommend.`b_recommend_id`,
+			b_recommend.`b_recommend_title`,
+			b_recommend.`b_recommend_url`,
+			b_recommend.`b_recommend_sort`,
+			b_recommend.`b_recommend_remark`,
+			b_recommend.`b_recommend_width`,
+			b_recommend.`b_recommend_height`,
+			DATE_FORMAT(b_recommend.`b_recommend_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_recommend_ctime`,
+			DATE_FORMAT(b_recommend.`b_recommend_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_recommend_mtime`,
+			b_recommend.`b_recommend_status`,
+			xt_userinfo.`xt_userinfo_realName`,
+			xt_attachment.*
+		FROM 
+			b_recommend b_recommend LEFT JOIN xt_userinfo xt_userinfo ON b_recommend.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN xt_attachment xt_attachment ON b_recommend.`xt_attachment_id` = xt_attachment.xt_attachment_id
+		WHERE 1=1
+		<if test="null != b_recommend_title">
+			AND instr(b_recommend.b_recommend_title,#{b_recommend_title})
+		</if>
+		<if test="null != b_recommend_url">
+			AND instr(b_recommend.b_recommend_url,#{b_recommend_url})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getBRecommendById" resultType="jehc.bmodules.bmodel.BRecommend" parameterType="string">
+		SELECT
+			b_recommend.`b_recommend_id`,
+			b_recommend.`b_recommend_title`,
+			b_recommend.`b_recommend_url`,
+			b_recommend.`b_recommend_sort`,
+			b_recommend.`b_recommend_remark`,
+			b_recommend.`xt_userinfo_id`,
+			b_recommend.`b_recommend_width`,
+			b_recommend.`b_recommend_height`,
+			DATE_FORMAT(b_recommend.`b_recommend_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_recommend_ctime`,
+			DATE_FORMAT(b_recommend.`b_recommend_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_recommend_mtime`,
+			b_recommend.`b_recommend_status`,
+			b_recommend.`xt_attachment_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_recommend b_recommend LEFT JOIN xt_userinfo xt_userinfo ON b_recommend.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN xt_attachment xt_attachment ON b_recommend.`xt_attachment_id` = xt_attachment.xt_attachment_id
+		WHERE b_recommend.b_recommend_id=#{b_recommend_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBRecommend" parameterType="jehc.bmodules.bmodel.BRecommend">
+		INSERT INTO
+			b_recommend
+			(
+			`b_recommend_id`,
+			`b_recommend_title`,
+			`b_recommend_url`,
+			`b_recommend_sort`,
+			`b_recommend_remark`,
+			`xt_userinfo_id`,
+			`b_recommend_width`,
+			`b_recommend_height`,
+			`b_recommend_ctime`,
+			`b_recommend_mtime`,
+			`b_recommend_status`,
+			`xt_attachment_id`
+			)
+			VALUES
+			(
+			#{b_recommend_id},
+			#{b_recommend_title},
+			#{b_recommend_url},
+			#{b_recommend_sort},
+			#{b_recommend_remark},
+			#{xt_userinfo_id},
+			#{b_recommend_width},
+			#{b_recommend_height},
+			#{b_recommend_ctime},
+			#{b_recommend_mtime},
+			#{b_recommend_status},
+			#{xt_attachment_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBRecommend" parameterType="jehc.bmodules.bmodel.BRecommend">
+		UPDATE
+			b_recommend
+		SET
+			`b_recommend_id` = #{b_recommend_id},
+			`b_recommend_title` = #{b_recommend_title},
+			`b_recommend_url` = #{b_recommend_url},
+			`b_recommend_sort` = #{b_recommend_sort},
+			`b_recommend_remark` = #{b_recommend_remark},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_recommend_width` = #{b_recommend_width},
+			`b_recommend_height` = #{b_recommend_height},
+			`b_recommend_mtime` = #{b_recommend_mtime},
+			`b_recommend_status` = #{b_recommend_status},
+			`xt_attachment_id` = #{xt_attachment_id}
+		WHERE b_recommend_id=#{b_recommend_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBRecommend" parameterType="map">
+		DELETE FROM b_recommend WHERE b_recommend_id IN
+		<foreach item="item" index="index" collection="b_recommend_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

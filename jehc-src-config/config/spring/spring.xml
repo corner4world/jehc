@@ -51,9 +51,12 @@
 	<!-- 异常统一处理类 -->
 	<bean id="exceptionResolver" class="jehc.xtmodules.xtcore.interceptor.ExceptionHandler"/>
 	
+	
 	<!-- Activiti核心工作流引擎 -->
 	<import resource="classpath:/config/activiti/activiti.xml"/>
 	
+	
+	 
 	<!-- redis整合  -->
 	<import resource="classpath:/config/redis/redis.xml"/>
 	
@@ -69,6 +72,7 @@
 	
 	<!-- netty整合 -->
 	<import resource="classpath:/config/netty/netty.xml"/>
+	 
 	 
 	<!-- Hession整合-->
 	<import resource="classpath:/config/hessian/hessian.xml"/> 

@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BSeller">
+	<!--初始化分页-->
+	<select id="getBSellerListByCondition" resultType="jehc.bmodules.bmodel.BSeller" parameterType="map">
+		SELECT
+			b_seller.`b_seller_id`,
+			b_seller.`b_seller_name`,
+			b_seller.`b_seller_status`,
+			b_seller.`b_seller_tel`,
+			b_seller.`b_seller_level`,
+			b_seller.`xt_userinfo_id`,
+			b_seller.`b_seller_login_id`,
+			b_seller.`b_seller_bank`,
+			b_seller.`b_seller_bank_num`,
+			b_seller.`b_seller_official`,
+			b_seller.`b_seller_address`,
+			DATE_FORMAT(b_seller.`b_seller_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_ctime`,
+			DATE_FORMAT(b_seller.`b_seller_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_mtime`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_seller b_seller JOIN xt_userinfo xt_userinfo ON b_seller.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE 1=1
+		<if test="null != b_seller_tel">
+			AND instr(b_seller.b_seller_tel,#{b_seller_tel})
+		</if>
+		<if test="null != b_seller_official">
+			AND b_seller.b_seller_official = #{b_seller_official}
+		</if>
+		<if test="null != b_seller_name">
+			AND instr(b_seller.b_seller_name,#{b_seller_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getBSellerById" resultType="jehc.bmodules.bmodel.BSeller" parameterType="string">
+		SELECT
+			b_seller.`b_seller_id`,
+			b_seller.`b_seller_name`,
+			b_seller.`b_seller_status`,
+			b_seller.`b_seller_tel`,
+			b_seller.`b_seller_level`,
+			b_seller.`xt_userinfo_id`,
+			b_seller.`b_seller_login_id`,
+			b_seller.`b_seller_bank`,
+			b_seller.`b_seller_bank_num`,
+			b_seller.`b_seller_official`,
+			b_seller.`b_seller_address`,
+			DATE_FORMAT(b_seller.`b_seller_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_ctime`,
+			DATE_FORMAT(b_seller.`b_seller_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_mtime`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_seller b_seller JOIN xt_userinfo xt_userinfo ON b_seller.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE b_seller_id=#{b_seller_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBSeller" parameterType="jehc.bmodules.bmodel.BSeller">
+		INSERT INTO
+			b_seller
+			(
+			`b_seller_id`,
+			`b_seller_name`,
+			`b_seller_status`,
+			`b_seller_tel`,
+			`b_seller_level`,
+			`xt_userinfo_id`,
+			`b_seller_login_id`,
+			`b_seller_bank`,
+			`b_seller_bank_num`,
+			`b_seller_official`,
+			`b_seller_address`,
+			`b_seller_ctime`,
+			`b_seller_mtime`
+			)
+			VALUES
+			(
+			#{b_seller_id},
+			#{b_seller_name},
+			#{b_seller_status},
+			#{b_seller_tel},
+			#{b_seller_level},
+			#{xt_userinfo_id},
+			#{b_seller_login_id},
+			#{b_seller_bank},
+			#{b_seller_bank_num},
+			#{b_seller_official},
+			#{b_seller_address},
+			#{b_seller_ctime},
+			#{b_seller_mtime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBSeller" parameterType="jehc.bmodules.bmodel.BSeller">
+		UPDATE
+			b_seller
+		SET
+			`b_seller_id` = #{b_seller_id},
+			`b_seller_name` = #{b_seller_name},
+			`b_seller_status` = #{b_seller_status},
+			`b_seller_tel` = #{b_seller_tel},
+			`b_seller_level` = #{b_seller_level},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_seller_login_id` = #{b_seller_login_id},
+			`b_seller_bank` = #{b_seller_bank},
+			`b_seller_bank_num` = #{b_seller_bank_num},
+			`b_seller_official` = #{b_seller_official},
+			`b_seller_address` = #{b_seller_address},
+			`b_seller_mtime` = #{b_seller_mtime}
+		WHERE b_seller_id=#{b_seller_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBSeller" parameterType="map">
+		DELETE FROM b_seller WHERE b_seller_id IN
+		<foreach item="item" index="index" collection="b_seller_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

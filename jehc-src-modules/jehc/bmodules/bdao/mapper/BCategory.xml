@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BCategory">
+	<!--初始化分页-->
+	<select id="getBCategoryListByCondition" resultType="jehc.bmodules.bmodel.BCategory" parameterType="map">
+		SELECT
+			b_category.`b_category_id`,
+			b_category.`b_category_name`,
+			b_category.`b_category_pid`,
+			b_category.`b_category_path`,
+			DATE_FORMAT(b_category.`b_category_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_category_ctime`,
+			DATE_FORMAT(b_category.`b_category_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_category_mtime`,
+			b_category.`b_category_status`,
+			b_category.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getBCategoryById" resultType="jehc.bmodules.bmodel.BCategory" parameterType="string">
+		SELECT
+			b_category.`b_category_id`,
+			b_category.`b_category_name`,
+			b_category.`b_category_pid`,
+			b_category.`b_category_path`,
+			DATE_FORMAT(b_category.`b_category_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_category_ctime`,
+			DATE_FORMAT(b_category.`b_category_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_category_mtime`,
+			b_category.`b_category_status`,
+			b_category.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE b_category.b_category_id=#{b_category_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBCategory" parameterType="jehc.bmodules.bmodel.BCategory">
+		INSERT INTO
+			b_category
+			(
+			`b_category_id`,
+			`b_category_name`,
+			`b_category_pid`,
+			`b_category_path`,
+			`b_category_ctime`,
+			`b_category_mtime`,
+			`b_category_status`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{b_category_id},
+			#{b_category_name},
+			#{b_category_pid},
+			#{b_category_path},
+			#{b_category_ctime},
+			#{b_category_mtime},
+			#{b_category_status},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBCategory" parameterType="jehc.bmodules.bmodel.BCategory">
+		UPDATE
+			b_category
+		SET
+			`b_category_id` = #{b_category_id},
+			`b_category_name` = #{b_category_name},
+			`b_category_pid` = #{b_category_pid},
+			`b_category_path` = #{b_category_path},
+			`b_category_ctime` = #{b_category_ctime},
+			`b_category_mtime` = #{b_category_mtime},
+			`b_category_status` = #{b_category_status},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE b_category_id=#{b_category_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBCategory" parameterType="map">
+		DELETE FROM b_category WHERE b_category_id IN
+		<foreach item="item" index="index" collection="b_category_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--读取所有数据根据条件-->
+	<select id="getBCategoryListAllByCondition" resultType="jehc.bmodules.bmodel.BCategory" parameterType="map">
+		SELECT
+			b_category.`b_category_id`,
+			b_category.`b_category_name`,
+			b_category.`b_category_pid`,
+			b_category.`b_category_path`,
+			DATE_FORMAT(b_category.`b_category_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_category_ctime`,
+			DATE_FORMAT(b_category.`b_category_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_category_mtime`,
+			b_category.`b_category_status`,
+			b_category.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE 1=1
+	</select>
+</mapper>

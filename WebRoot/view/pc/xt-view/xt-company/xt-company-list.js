@@ -276,7 +276,7 @@ Ext.onReady(function(){
 				         select:function(combo,records,options){
 				         	Ext.getCmp('xt_districtID').setValue("");
 				            xtDistrictList.load({params:{parentId:this.value}});
-				            parms = {parentId:this.value};
+				            parms = {parentId:null};
 				    	    beforeloadstoreByStore(xtDistrictList,parms);
 				         }
 				     }

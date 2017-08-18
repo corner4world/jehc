@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BMemberAccount">
+	<!--初始化分页-->
+	<select id="getBMemberAccountListByCondition" resultType="jehc.bmodules.bmodel.BMemberAccount" parameterType="map">
+		SELECT
+			`b_member_account_id`,
+			`b_member_account_status`,
+			DATE_FORMAT(`b_member_account_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_account_ctime`,
+			`b_member_account_code`,
+			`b_member_id`
+		FROM 
+			b_member_account
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getBMemberAccountById" resultType="jehc.bmodules.bmodel.BMemberAccount" parameterType="string">
+		SELECT
+			`b_member_account_id`,
+			`b_member_account_status`,
+			DATE_FORMAT(`b_member_account_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_account_ctime`,
+			`b_member_account_code`,
+			`b_member_id`
+		FROM 
+			b_member_account
+		WHERE b_member_account_id=#{b_member_account_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBMemberAccount" parameterType="jehc.bmodules.bmodel.BMemberAccount">
+		INSERT INTO
+			b_member_account
+			(
+			`b_member_account_id`,
+			`b_member_account_status`,
+			`b_member_account_ctime`,
+			`b_member_account_code`,
+			`b_member_id`
+			)
+			VALUES
+			(
+			#{b_member_account_id},
+			#{b_member_account_status},
+			#{b_member_account_ctime},
+			#{b_member_account_code},
+			#{b_member_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBMemberAccount" parameterType="jehc.bmodules.bmodel.BMemberAccount">
+		UPDATE
+			b_member_account
+		SET
+			`b_member_account_id` = #{b_member_account_id},
+			`b_member_account_status` = #{b_member_account_status},
+			`b_member_account_ctime` = #{b_member_account_ctime},
+			`b_member_account_code` = #{b_member_account_code},
+			`b_member_id` = #{b_member_id}
+		WHERE b_member_account_id=#{b_member_account_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBMemberAccount" parameterType="map">
+		DELETE FROM b_member_account WHERE b_member_account_id IN
+		<foreach item="item" index="index" collection="b_member_account_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

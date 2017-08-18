@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BWarehouseLocation">
+	<!--初始化分页-->
+	<select id="getBWarehouseLocationListByCondition" resultType="jehc.bmodules.bmodel.BWarehouseLocation" parameterType="map">
+		SELECT
+			b_warehouse_location.`b_warehouse_location_id`,
+			b_warehouse_location.`b_warehouse_location_name`,
+			b_warehouse_location.`b_warehouse_location_space`,
+			b_warehouse_location.`b_warehouse_location_width`,
+			b_warehouse_location.`b_warehouse_location_height`,
+			b_warehouse_location.`b_warehouse_location_length`,
+			b_warehouse_location.`b_warehouse_id`,
+			b_warehouse.`b_warehouse_name`,
+			b_seller.`b_seller_name`
+		FROM 
+			b_warehouse_location b_warehouse_location LEFT JOIN b_warehouse b_warehouse ON b_warehouse.b_warehouse_id=b_warehouse_location.b_warehouse_id
+			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_warehouse.b_seller_id
+		WHERE 1=1
+		<if test="null != b_seller_name">
+			AND instr(b_seller.b_seller_name,#{b_seller_name})
+		</if>
+		<if test="null != b_seller_name">
+			AND b_seller.b_seller_name = #{b_warehouse_type}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getBWarehouseLocationById" resultType="jehc.bmodules.bmodel.BWarehouseLocation" parameterType="string">
+		SELECT
+			b_warehouse_location.`b_warehouse_location_id`,
+			b_warehouse_location.`b_warehouse_location_name`,
+			b_warehouse_location.`b_warehouse_location_space`,
+			b_warehouse_location.`b_warehouse_location_width`,
+			b_warehouse_location.`b_warehouse_location_height`,
+			b_warehouse_location.`b_warehouse_location_length`,
+			b_warehouse_location.`b_warehouse_id`,
+			b_warehouse.`b_warehouse_name`,
+			b_seller.`b_seller_name`
+		FROM 
+			b_warehouse_location b_warehouse_location LEFT JOIN b_warehouse b_warehouse ON b_warehouse.b_warehouse_id=b_warehouse_location.b_warehouse_id
+			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_warehouse.b_seller_id
+		WHERE b_warehouse_location.b_warehouse_location_id=#{b_warehouse_location_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBWarehouseLocation" parameterType="jehc.bmodules.bmodel.BWarehouseLocation">
+		INSERT INTO
+			b_warehouse_location
+			(
+			`b_warehouse_location_id`,
+			`b_warehouse_location_name`,
+			`b_warehouse_location_space`,
+			`b_warehouse_location_width`,
+			`b_warehouse_location_height`,
+			`b_warehouse_location_length`,
+			`b_warehouse_id`
+			)
+			VALUES
+			(
+			#{b_warehouse_location_id},
+			#{b_warehouse_location_name},
+			#{b_warehouse_location_space},
+			#{b_warehouse_location_width},
+			#{b_warehouse_location_height},
+			#{b_warehouse_location_length},
+			#{b_warehouse_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBWarehouseLocation" parameterType="jehc.bmodules.bmodel.BWarehouseLocation">
+		UPDATE
+			b_warehouse_location
+		SET
+			`b_warehouse_location_id` = #{b_warehouse_location_id},
+			`b_warehouse_location_name` = #{b_warehouse_location_name},
+			`b_warehouse_location_space` = #{b_warehouse_location_space},
+			`b_warehouse_location_width` = #{b_warehouse_location_width},
+			`b_warehouse_location_height` = #{b_warehouse_location_height},
+			`b_warehouse_location_length` = #{b_warehouse_location_length},
+			`b_warehouse_id` = #{b_warehouse_id}
+		WHERE b_warehouse_location_id=#{b_warehouse_location_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBWarehouseLocation" parameterType="map">
+		DELETE FROM b_warehouse_location WHERE b_warehouse_location_id IN
+		<foreach item="item" index="index" collection="b_warehouse_location_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

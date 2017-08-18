@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BMember">
+	<!--初始化分页-->
+	<select id="getBMemberListByCondition" resultType="jehc.bmodules.bmodel.BMember" parameterType="map">
+		SELECT
+			b_member.`b_member_id`,
+			b_member.`b_member_name`,
+			b_member.`b_member_tel`,
+			b_member.`b_member_status`,
+			b_member.`b_member_level`,
+			b_member.`b_member_address`,
+			b_member.`xt_provinceID`,
+			b_member.`xt_cityID`,
+			b_member.`xt_districtID`,
+			b_member.`b_member_sex`,
+			b_member.`b_member_pwd`,
+			b_member.`b_member_email`,
+			b_member.`b_member_qq`,
+			b_member.`b_member_wb`,
+			b_member.`b_member_type`,
+			DATE_FORMAT(b_member.`b_member_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_ctime`,
+			DATE_FORMAT(b_member.`b_member_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_member_mtime`,
+			xt_province.`NAME` AS xt_provinceName,
+			xt_city.`NAME` AS xt_cityName,
+			xt_district.`NAME` AS xt_districtName
+		FROM 
+			b_member b_member LEFT JOIN xt_area_region xt_province ON  b_member.xt_provinceID = xt_province.ID
+			LEFT JOIN xt_area_region xt_city ON xt_city.ID = b_member.xt_cityID
+			LEFT JOIN xt_area_region xt_district ON xt_district.ID = b_member.xt_districtID
+		WHERE 1=1
+		<if test="null != b_member_name">
+			AND instr(b_member.b_member_name,#{b_member_name})
+		</if>
+		<if test="null != b_member_type">
+			AND b_member.b_member_type = #{b_member_type}
+		</if>
+		<if test="null != b_member_tel">
+			AND instr(b_member.b_member_tel,#{b_member_tel})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getBMemberById" resultType="jehc.bmodules.bmodel.BMember" parameterType="string">
+		SELECT
+			`b_member_id`,
+			`b_member_name`,
+			`b_member_tel`,
+			`b_member_status`,
+			`b_member_level`,
+			`b_member_address`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`,
+			`b_member_sex`,
+			`b_member_pwd`,
+			`b_member_email`,
+			`b_member_qq`,
+			`b_member_wb`,
+			`b_member_type`,
+			DATE_FORMAT(`b_member_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_ctime`,
+			DATE_FORMAT(`b_member_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_member_mtime`
+		FROM 
+			b_member
+		WHERE b_member_id=#{b_member_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBMember" parameterType="jehc.bmodules.bmodel.BMember">
+		INSERT INTO
+			b_member
+			(
+			`b_member_id`,
+			`b_member_name`,
+			`b_member_tel`,
+			`b_member_status`,
+			`b_member_level`,
+			`b_member_address`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`,
+			`b_member_sex`,
+			`b_member_pwd`,
+			`b_member_email`,
+			`b_member_qq`,
+			`b_member_wb`,
+			`b_member_type`,
+			`b_member_ctime`,
+			`b_member_mtime`
+			)
+			VALUES
+			(
+			#{b_member_id},
+			#{b_member_name},
+			#{b_member_tel},
+			#{b_member_status},
+			#{b_member_level},
+			#{b_member_address},
+			#{xt_provinceID},
+			#{xt_cityID},
+			#{xt_districtID},
+			#{b_member_sex},
+			#{b_member_pwd},
+			#{b_member_email},
+			#{b_member_qq},
+			#{b_member_wb},
+			#{b_member_type},
+			#{b_member_ctime},
+			#{b_member_mtime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBMember" parameterType="jehc.bmodules.bmodel.BMember">
+		UPDATE
+			b_member
+		SET
+			`b_member_id` = #{b_member_id},
+			`b_member_name` = #{b_member_name},
+			`b_member_tel` = #{b_member_tel},
+			`b_member_status` = #{b_member_status},
+			`b_member_level` = #{b_member_level},
+			`b_member_address` = #{b_member_address},
+			`xt_provinceID` = #{xt_provinceID},
+			`xt_cityID` = #{xt_cityID},
+			`xt_districtID` = #{xt_districtID},
+			`b_member_sex` = #{b_member_sex},
+			`b_member_pwd` = #{b_member_pwd},
+			`b_member_email` = #{b_member_email},
+			`b_member_qq` = #{b_member_qq},
+			`b_member_wb` = #{b_member_wb},
+			`b_member_type` = #{b_member_type},
+			`b_member_mtime` = #{b_member_mtime}
+		WHERE b_member_id=#{b_member_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBMember" parameterType="map">
+		DELETE FROM b_member WHERE b_member_id IN
+		<foreach item="item" index="index" collection="b_member_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

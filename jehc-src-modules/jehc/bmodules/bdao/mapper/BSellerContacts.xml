@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BSellerContacts">
+	<!--初始化分页-->
+	<select id="getBSellerContactsListByCondition" resultType="jehc.bmodules.bmodel.BSellerContacts" parameterType="map">
+		SELECT
+			`b_seller_contacts_id`,
+			`b_seller_id`,
+			`b_seller_contacts_uname`,
+			`b_seller_contacts_tel`,
+			`b_seller_contacts_sex`,
+			`b_seller_contacts_type`,
+			`b_seller_contacts_turnover`
+		FROM 
+			b_seller_contacts
+		WHERE 1=1
+		<if test="null != b_seller_contacts_uname">
+			AND instr(b_seller_contacts_uname,#{b_seller_contacts_uname})
+		</if>
+		<if test="null != b_seller_contacts_tel">
+			AND b_seller_contacts_tel = #{b_seller_contacts_tel}
+		</if>
+		AND b_seller_id = #{b_seller_id}
+	</select>
+
+	<!--查询对象-->
+	<select id="getBSellerContactsById" resultType="jehc.bmodules.bmodel.BSellerContacts" parameterType="string">
+		SELECT
+			`b_seller_contacts_id`,
+			`b_seller_id`,
+			`b_seller_contacts_uname`,
+			`b_seller_contacts_tel`,
+			`b_seller_contacts_sex`,
+			`b_seller_contacts_type`,
+			`b_seller_contacts_turnover`
+		FROM 
+			b_seller_contacts
+		WHERE b_seller_contacts_id=#{b_seller_contacts_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBSellerContacts" parameterType="jehc.bmodules.bmodel.BSellerContacts">
+		INSERT INTO
+			b_seller_contacts
+			(
+			`b_seller_contacts_id`,
+			`b_seller_id`,
+			`b_seller_contacts_uname`,
+			`b_seller_contacts_tel`,
+			`b_seller_contacts_sex`,
+			`b_seller_contacts_type`,
+			`b_seller_contacts_turnover`
+			)
+			VALUES
+			(
+			#{b_seller_contacts_id},
+			#{b_seller_id},
+			#{b_seller_contacts_uname},
+			#{b_seller_contacts_tel},
+			#{b_seller_contacts_sex},
+			#{b_seller_contacts_type},
+			#{b_seller_contacts_turnover}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBSellerContacts" parameterType="jehc.bmodules.bmodel.BSellerContacts">
+		UPDATE
+			b_seller_contacts
+		SET
+			`b_seller_contacts_id` = #{b_seller_contacts_id},
+			`b_seller_id` = #{b_seller_id},
+			`b_seller_contacts_uname` = #{b_seller_contacts_uname},
+			`b_seller_contacts_tel` = #{b_seller_contacts_tel},
+			`b_seller_contacts_sex` = #{b_seller_contacts_sex},
+			`b_seller_contacts_type` = #{b_seller_contacts_type},
+			`b_seller_contacts_turnover` = #{b_seller_contacts_turnover}
+		WHERE b_seller_contacts_id=#{b_seller_contacts_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBSellerContacts" parameterType="map">
+		DELETE FROM b_seller_contacts WHERE b_seller_contacts_id IN
+		<foreach item="item" index="index" collection="b_seller_contacts_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

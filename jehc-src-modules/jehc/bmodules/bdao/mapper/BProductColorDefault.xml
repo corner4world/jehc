@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BProductColorDefault">
+	<!--初始化分页-->
+	<select id="getBProductColorDefaultListByCondition" resultType="jehc.bmodules.bmodel.BProductColorDefault" parameterType="map">
+		SELECT
+			b_product_color_default.`b_product_color_default_id`,
+			b_product_color_default.`b_product_color_default_name`,
+			DATE_FORMAT(b_product_color_default.`b_product_color_default_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_color_default_ctime`,
+			DATE_FORMAT(b_product_color_default.`b_product_color_default_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_color_default_mtime`,
+			b_product_color_default.`b_product_color_default_width`,
+			b_product_color_default.`b_product_color_default_height`,
+			b_product_color_default.`b_product_color_default_sort`,
+			b_product_color_default.`b_product_color_default_status`,
+			b_product_color_default.`b_product_id`,
+			b_product_color_default.`b_product_color_default_remark`,
+			xt_userinfo.`xt_userinfo_realName`,
+			xt_attachment.*
+		FROM 
+			b_product_color_default b_product_color_default LEFT JOIN xt_userinfo xt_userinfo ON b_product_color_default.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN xt_attachment xt_attachment ON b_product_color_default.`xt_attachment_id` = xt_attachment.xt_attachment_id
+		WHERE 1=1
+		<if test="null != b_product_id">
+			AND b_product_color_default.b_product_id=#{b_product_id}
+		</if>
+		<if test="null != b_product_color_default_name">
+			AND instr(b_product_color_default.b_product_color_default_name,#{b_product_color_default_name})
+		</if>
+		<if test="null != b_product_color_default_status">
+			AND b_product_color_default.b_product_color_default_status = #{b_product_color_default_status}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getBProductColorDefaultById" resultType="jehc.bmodules.bmodel.BProductColorDefault" parameterType="string">
+		SELECT
+			b_product_color_default.`b_product_color_default_id`,
+			b_product_color_default.`b_product_color_default_name`,
+			DATE_FORMAT(b_product_color_default.`b_product_color_default_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_color_default_ctime`,
+			DATE_FORMAT(b_product_color_default.`b_product_color_default_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_color_default_mtime`,
+			b_product_color_default.`b_product_color_default_width`,
+			b_product_color_default.`b_product_color_default_height`,
+			b_product_color_default.`xt_userinfo_id`,
+			b_product_color_default.`b_product_color_default_sort`,
+			b_product_color_default.`b_product_color_default_status`,
+			b_product_color_default.`xt_attachment_id`,
+			b_product_color_default.`b_product_id`,
+			b_product_color_default.`b_product_color_default_remark`,
+			xt_userinfo.`xt_userinfo_realName`,
+			xt_attachment.*
+		FROM 
+			b_product_color_default b_product_color_default LEFT JOIN xt_userinfo xt_userinfo ON b_product_color_default.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN xt_attachment xt_attachment ON b_product_color_default.`xt_attachment_id` = xt_attachment.xt_attachment_id
+		WHERE b_product_color_default.b_product_color_default_id=#{b_product_color_default_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBProductColorDefault" parameterType="jehc.bmodules.bmodel.BProductColorDefault">
+		INSERT INTO
+			b_product_color_default
+			(
+			`b_product_color_default_id`,
+			`b_product_color_default_name`,
+			`b_product_color_default_ctime`,
+			`b_product_color_default_mtime`,
+			`b_product_color_default_width`,
+			`b_product_color_default_height`,
+			`xt_userinfo_id`,
+			`b_product_color_default_sort`,
+			`b_product_color_default_status`,
+			`xt_attachment_id`,
+			`b_product_id`,
+			`b_product_color_default_remark`
+			)
+			VALUES
+			(
+			#{b_product_color_default_id},
+			#{b_product_color_default_name},
+			#{b_product_color_default_ctime},
+			#{b_product_color_default_mtime},
+			#{b_product_color_default_width},
+			#{b_product_color_default_height},
+			#{xt_userinfo_id},
+			#{b_product_color_default_sort},
+			#{b_product_color_default_status},
+			#{xt_attachment_id},
+			#{b_product_id},
+			#{b_product_color_default_remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBProductColorDefault" parameterType="jehc.bmodules.bmodel.BProductColorDefault">
+		UPDATE
+			b_product_color_default
+		SET
+			`b_product_color_default_id` = #{b_product_color_default_id},
+			`b_product_color_default_name` = #{b_product_color_default_name},
+			`b_product_color_default_mtime` = #{b_product_color_default_mtime},
+			`b_product_color_default_width` = #{b_product_color_default_width},
+			`b_product_color_default_height` = #{b_product_color_default_height},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_product_color_default_sort` = #{b_product_color_default_sort},
+			`b_product_color_default_status` = #{b_product_color_default_status},
+			`xt_attachment_id` = #{xt_attachment_id},
+			`b_product_id` = #{b_product_id},
+			`b_product_color_default_remark` = #{b_product_color_default_remark}
+		WHERE b_product_color_default_id=#{b_product_color_default_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBProductColorDefault" parameterType="map">
+		DELETE FROM b_product_color_default WHERE b_product_color_default_id IN
+		<foreach item="item" index="index" collection="b_product_color_default_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

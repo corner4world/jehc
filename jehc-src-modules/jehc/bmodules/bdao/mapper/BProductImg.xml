@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BProductImg">
+	<!--初始化分页-->
+	<select id="getBProductImgListByCondition" resultType="jehc.bmodules.bmodel.BProductImg" parameterType="map">
+		SELECT
+			b_product_img.`b_product_img_id`,
+			b_product_img.`b_product_img_name`,
+			DATE_FORMAT(b_product_img.`b_product_img_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_ctime`,
+			DATE_FORMAT(b_product_img.`b_product_img_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_mtime`,
+			b_product_img.`b_product_img_type`,
+			b_product_img.`b_product_img_status`,
+			b_product_img.`b_product_id`,
+			b_product_img.`b_seller_id`,
+			b_product_img.`xt_attachment_id`,
+			b_product_img.`b_product_img_width`,
+			b_product_img.`b_product_img_height`,
+			b_product_img.`xt_userinfo_id`,
+			b_product_img.`b_product_img_remark`,
+			xt_userinfo.`xt_userinfo_realName`,
+			b_seller.`b_seller_name`
+		FROM 
+			b_product_img b_product_img LEFT JOIN xt_userinfo xt_userinfo ON b_product_img.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_product_img.b_seller_id
+		WHERE 1=1
+		<if test="null != b_product_img_name">
+			AND instr(b_product_img.b_product_img_name,#{b_product_img_name})
+		</if>
+		<if test="null != b_product_img_status">
+			AND b_product_img.b_product_img_status = #{b_product_img_status}
+		</if>
+		<if test="null != b_product_img_type">
+			AND b_product_img_type = #{b_product_img_type}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getBProductImgById" resultType="jehc.bmodules.bmodel.BProductImg" parameterType="string">
+		SELECT
+			b_product_img.`b_product_img_id`,
+			b_product_img.`b_product_img_name`,
+			DATE_FORMAT(b_product_img.`b_product_img_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_ctime`,
+			DATE_FORMAT(b_product_img.`b_product_img_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_mtime`,
+			b_product_img.`b_product_img_type`,
+			b_product_img.`b_product_img_status`,
+			b_product_img.`b_product_id`,
+			b_product_img.`b_seller_id`,
+			b_product_img.`xt_attachment_id`,
+			b_product_img.`b_product_img_width`,
+			b_product_img.`b_product_img_height`,
+			b_product_img.`xt_userinfo_id`,
+			b_product_img.`b_product_img_remark`,
+			xt_userinfo.`xt_userinfo_realName`,
+			b_seller.`b_seller_name`
+		FROM 
+			b_product_img b_product_img LEFT JOIN xt_userinfo xt_userinfo ON b_product_img.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_product_img.b_seller_id
+		WHERE b_product_img_id=#{b_product_img_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBProductImg" parameterType="jehc.bmodules.bmodel.BProductImg">
+		INSERT INTO
+			b_product_img
+			(
+			`b_product_img_id`,
+			`b_product_img_name`,
+			`b_product_img_ctime`,
+			`b_product_img_mtime`,
+			`b_product_img_type`,
+			`b_product_img_status`,
+			`b_product_id`,
+			`b_seller_id`,
+			`xt_attachment_id`,
+			`b_product_img_width`,
+			`b_product_img_height`,
+			`xt_userinfo_id`,
+			`b_product_img_remark`
+			)
+			VALUES
+			(
+			#{b_product_img_id},
+			#{b_product_img_name},
+			#{b_product_img_ctime},
+			#{b_product_img_mtime},
+			#{b_product_img_type},
+			#{b_product_img_status},
+			#{b_product_id},
+			#{b_seller_id},
+			#{xt_attachment_id},
+			#{b_product_img_width},
+			#{b_product_img_height},
+			#{xt_userinfo_id},
+			#{b_product_img_remark}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBProductImg" parameterType="jehc.bmodules.bmodel.BProductImg">
+		UPDATE
+			b_product_img
+		SET
+			`b_product_img_id` = #{b_product_img_id},
+			`b_product_img_name` = #{b_product_img_name},
+			`b_product_img_mtime` = #{b_product_img_mtime},
+			`b_product_img_type` = #{b_product_img_type},
+			`b_product_img_status` = #{b_product_img_status},
+			`b_product_id` = #{b_product_id},
+			`b_seller_id` = #{b_seller_id},
+			`xt_attachment_id` = #{xt_attachment_id},
+			`b_product_img_width` = #{b_product_img_width},
+			`b_product_img_height` = #{b_product_img_height},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_product_img_remark` = #{b_product_img_remark}
+		WHERE b_product_img_id=#{b_product_img_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBProductImg" parameterType="map">
+		DELETE FROM b_product_img WHERE b_product_img_id IN
+		<foreach item="item" index="index" collection="b_product_img_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

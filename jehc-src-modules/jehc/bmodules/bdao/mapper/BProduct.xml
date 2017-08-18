@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BProduct">
+	<!--初始化分页-->
+	<select id="getBProductListByCondition" resultType="jehc.bmodules.bmodel.BProduct" parameterType="map">
+		SELECT
+			b_product.`b_product_id`,
+			b_product.`b_product_name`,
+			b_product.`b_category_id`,
+			b_product.`b_brand_id`,
+			b_product.`b_product_barcode`,
+			b_product.`b_product_code`,
+			b_product.`b_product_qr_code`,
+			b_product.`b_product_status`,
+			DATE_FORMAT(b_product.`b_product_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_ctime`,
+			DATE_FORMAT(b_product.`b_product_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_mtime`,
+			b_product.`xt_userinfo_id`,
+			b_product.`b_product_model`,
+			b_product.`b_product_model_name`,
+			b_product.`b_product_color`,
+			b_product.`b_product_features`,
+			b_product.`b_product_origin`,
+			b_product.`b_product_qualitylevel`,
+			b_product.`b_product_gross_weight`,
+			b_product.`b_product_net_weight`,
+			b_product.`b_product_size_length`,
+			b_product.`b_product_size_width`,
+			b_product.`b_product_size_height`,
+			xt_userinfo.`xt_userinfo_realName`,
+			b_category.`b_category_name`,
+			b_brand.`b_brand_name`
+		FROM 
+			b_product b_product LEFT JOIN xt_userinfo xt_userinfo ON b_product.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN b_brand b_brand ON b_product.b_brand_id = b_brand.b_brand_id
+		LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
+		WHERE 1=1
+		<if test="null != b_product_name">
+			AND instr(b_product.b_product_name,#{b_product_name})
+		</if>
+		<if test="null != b_product_status">
+			AND b_product.b_product_status = #{b_product_status}
+		</if>
+		ORDER BY b_product.`b_product_ctime` DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getBProductById" resultType="jehc.bmodules.bmodel.BProduct" parameterType="string">
+		SELECT
+			b_product.`b_product_id`,
+			b_product.`b_product_name`,
+			b_product.`b_category_id`,
+			b_product.`b_brand_id`,
+			b_product.`b_product_barcode`,
+			b_product.`b_product_code`,
+			b_product.`b_product_qr_code`,
+			b_product.`b_product_status`,
+			DATE_FORMAT(b_product.`b_product_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_ctime`,
+			DATE_FORMAT(b_product.`b_product_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_mtime`,
+			b_product.`xt_userinfo_id`,
+			b_product.`b_product_model`,
+			b_product.`b_product_model_name`,
+			b_product.`b_product_color`,
+			b_product.`b_product_features`,
+			b_product.`b_product_origin`,
+			b_product.`b_product_qualitylevel`,
+			b_product.`b_product_gross_weight`,
+			b_product.`b_product_net_weight`,
+			b_product.`b_product_size_length`,
+			b_product.`b_product_size_width`,
+			b_product.`b_product_size_height`,
+			xt_userinfo.`xt_userinfo_realName`,
+			b_category.`b_category_name`,
+			b_brand.`b_brand_name`
+		FROM 
+			b_product b_product LEFT JOIN xt_userinfo xt_userinfo ON b_product.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN b_brand b_brand ON b_product.b_brand_id = b_brand.b_brand_id
+		LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
+		WHERE b_product.b_product_id=#{b_product_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBProduct" parameterType="jehc.bmodules.bmodel.BProduct">
+		INSERT INTO
+			b_product
+			(
+			`b_product_id`,
+			`b_product_name`,
+			`b_category_id`,
+			`b_brand_id`,
+			`b_product_barcode`,
+			`b_product_code`,
+			`b_product_qr_code`,
+			`b_product_status`,
+			`b_product_ctime`,
+			`b_product_mtime`,
+			`xt_userinfo_id`,
+			`b_product_model`,
+			`b_product_model_name`,
+			`b_product_color`,
+			`b_product_features`,
+			`b_product_origin`,
+			`b_product_qualitylevel`,
+			`b_product_gross_weight`,
+			`b_product_net_weight`,
+			`b_product_size_length`,
+			`b_product_size_width`,
+			`b_product_size_height`
+			)
+			VALUES
+			(
+			#{b_product_id},
+			#{b_product_name},
+			#{b_category_id},
+			#{b_brand_id},
+			#{b_product_barcode},
+			#{b_product_code},
+			#{b_product_qr_code},
+			#{b_product_status},
+			#{b_product_ctime},
+			#{b_product_mtime},
+			#{xt_userinfo_id},
+			#{b_product_model},
+			#{b_product_model_name},
+			#{b_product_color},
+			#{b_product_features},
+			#{b_product_origin},
+			#{b_product_qualitylevel},
+			#{b_product_gross_weight},
+			#{b_product_net_weight},
+			#{b_product_size_length},
+			#{b_product_size_width},
+			#{b_product_size_height}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBProduct" parameterType="jehc.bmodules.bmodel.BProduct">
+		UPDATE
+			b_product
+		SET
+			`b_product_id` = #{b_product_id},
+			`b_product_name` = #{b_product_name},
+			`b_category_id` = #{b_category_id},
+			`b_brand_id` = #{b_brand_id},
+			`b_product_barcode` = #{b_product_barcode},
+			`b_product_code` = #{b_product_code},
+			`b_product_qr_code` = #{b_product_qr_code},
+			`b_product_status` = #{b_product_status},
+			`b_product_mtime` = #{b_product_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_product_model` = #{b_product_model},
+			`b_product_model_name` = #{b_product_model_name},
+			`b_product_color` = #{b_product_color},
+			`b_product_features` = #{b_product_features},
+			`b_product_origin` = #{b_product_origin},
+			`b_product_qualitylevel` = #{b_product_qualitylevel},
+			`b_product_gross_weight` = #{b_product_gross_weight},
+			`b_product_net_weight` = #{b_product_net_weight},
+			`b_product_size_length` = #{b_product_size_length},
+			`b_product_size_width` = #{b_product_size_width},
+			`b_product_size_height` = #{b_product_size_height}
+		WHERE b_product_id=#{b_product_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBProduct" parameterType="map">
+		DELETE FROM b_product WHERE b_product_id IN
+		<foreach item="item" index="index" collection="b_product_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BWarehouse">
+	<!--初始化分页-->
+	<select id="getBWarehouseListByCondition" resultType="jehc.bmodules.bmodel.BWarehouse" parameterType="map">
+		SELECT
+			b_warehouse.`b_warehouse_id`,
+			b_warehouse.`b_warehouse_name`,
+			b_warehouse.`b_warehouse_address`,
+			b_warehouse.`xt_provinceID`,
+			b_warehouse.`xt_cityID`,
+			b_warehouse.`xt_districtID`,
+			DATE_FORMAT(b_warehouse.`b_warehouse_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_warehouse_ctime`,
+			DATE_FORMAT(b_warehouse.`b_warehouse_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_warehouse_mtime`,
+			b_warehouse.`xt_userinfo_id`,
+			b_warehouse.`b_warehouse_type`,
+			xt_province.`NAME` AS xt_provinceName,
+			xt_city.`NAME` AS xt_cityName,
+			xt_district.`NAME` AS xt_districtName,
+			b_warehouse.`b_seller_id`,
+			b_seller.`b_seller_name`
+		FROM 
+			b_warehouse b_warehouse LEFT JOIN xt_area_region xt_province ON  b_warehouse.xt_provinceID = xt_province.ID
+			LEFT JOIN xt_area_region xt_city ON xt_city.ID = b_warehouse.xt_cityID
+			LEFT JOIN xt_area_region xt_district ON xt_district.ID = b_warehouse.xt_districtID
+			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_warehouse.b_seller_id
+		WHERE 1=1
+		<if test="null != b_warehouse_name">
+			AND instr(b_warehouse.b_warehouse_name,#{b_warehouse_name})
+		</if>
+		<if test="null != b_warehouse_type">
+			AND b_warehouse.b_warehouse_type = #{b_warehouse_type}
+		</if>
+		<if test="null != b_seller_name">
+			AND instr(b_seller.b_seller_name,#{b_seller_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getBWarehouseById" resultType="jehc.bmodules.bmodel.BWarehouse" parameterType="string">
+		SELECT
+			b_warehouse.`b_warehouse_id`,
+			b_warehouse.`b_warehouse_name`,
+			b_warehouse.`b_warehouse_address`,
+			b_warehouse.`xt_provinceID`,
+			b_warehouse.`xt_cityID`,
+			b_warehouse.`xt_districtID`,
+			DATE_FORMAT(b_warehouse.`b_warehouse_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_warehouse_ctime`,
+			DATE_FORMAT(b_warehouse.`b_warehouse_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_warehouse_mtime`,
+			b_warehouse.`xt_userinfo_id`,
+			b_warehouse.`b_warehouse_type`,
+			b_warehouse.`b_seller_id`,
+			b_seller.`b_seller_name`
+		FROM 
+			b_warehouse b_warehouse LEFT JOIN b_seller ON b_seller.b_seller_id = b_warehouse.b_seller_id
+		WHERE b_warehouse_id=#{b_warehouse_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBWarehouse" parameterType="jehc.bmodules.bmodel.BWarehouse">
+		INSERT INTO
+			b_warehouse
+			(
+			`b_warehouse_id`,
+			`b_warehouse_name`,
+			`b_warehouse_address`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`,
+			`b_warehouse_ctime`,
+			`xt_userinfo_id`,
+			`b_warehouse_type`,
+			`b_seller_id`
+			)
+			VALUES
+			(
+			#{b_warehouse_id},
+			#{b_warehouse_name},
+			#{b_warehouse_address},
+			#{xt_provinceID},
+			#{xt_cityID},
+			#{xt_districtID},
+			#{b_warehouse_ctime},
+			#{xt_userinfo_id},
+			#{b_warehouse_type},
+			#{b_seller_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBWarehouse" parameterType="jehc.bmodules.bmodel.BWarehouse">
+		UPDATE
+			b_warehouse
+		SET
+			`b_warehouse_id` = #{b_warehouse_id},
+			`b_warehouse_name` = #{b_warehouse_name},
+			`b_warehouse_address` = #{b_warehouse_address},
+			`xt_provinceID` = #{xt_provinceID},
+			`xt_cityID` = #{xt_cityID},
+			`xt_districtID` = #{xt_districtID},
+			`b_warehouse_mtime` = #{b_warehouse_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_warehouse_type` = #{b_warehouse_type},
+			`b_seller_id` = #{b_seller_id}
+		WHERE b_warehouse_id=#{b_warehouse_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBWarehouse" parameterType="map">
+		DELETE FROM b_warehouse WHERE b_warehouse_id IN
+		<foreach item="item" index="index" collection="b_warehouse_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

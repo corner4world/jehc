@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BOrderPay">
+	<!--初始化分页-->
+	<select id="getBOrderPayListByCondition" resultType="jehc.bmodules.bmodel.BOrderPay" parameterType="map">
+		SELECT
+			`b_order_pay_id`,
+			`b_order_id`,
+			`b_order_pay_money`,
+			`b_member_id`,
+			DATE_FORMAT(`b_order_pay_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_order_pay_ctime`,
+			`b_order_pay_isall`,
+			`xt_userinfo_id`,
+			`b_seller_id`
+		FROM 
+			b_order_pay
+		WHERE 1=1
+		AND b_order_id = #{b_order_id}
+		ORDER BY b_order_pay_ctime DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getBOrderPayById" resultType="jehc.bmodules.bmodel.BOrderPay" parameterType="string">
+		SELECT
+			`b_order_pay_id`,
+			`b_order_id`,
+			`b_order_pay_money`,
+			`b_member_id`,
+			DATE_FORMAT(`b_order_pay_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_order_pay_ctime`,
+			`b_order_pay_isall`,
+			`xt_userinfo_id`,
+			`b_seller_id`
+		FROM 
+			b_order_pay
+		WHERE b_order_pay_id=#{b_order_pay_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBOrderPay" parameterType="jehc.bmodules.bmodel.BOrderPay">
+		INSERT INTO
+			b_order_pay
+			(
+			`b_order_pay_id`,
+			`b_order_id`,
+			`b_order_pay_money`,
+			`b_member_id`,
+			`b_order_pay_ctime`,
+			`b_order_pay_isall`,
+			`xt_userinfo_id`,
+			`b_seller_id`
+			)
+			VALUES
+			(
+			#{b_order_pay_id},
+			#{b_order_id},
+			#{b_order_pay_money},
+			#{b_member_id},
+			#{b_order_pay_ctime},
+			#{b_order_pay_isall},
+			#{xt_userinfo_id},
+			#{b_seller_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBOrderPay" parameterType="jehc.bmodules.bmodel.BOrderPay">
+		UPDATE
+			b_order_pay
+		SET
+			`b_order_pay_id` = #{b_order_pay_id},
+			`b_order_id` = #{b_order_id},
+			`b_order_pay_money` = #{b_order_pay_money},
+			`b_member_id` = #{b_member_id},
+			`b_order_pay_ctime` = #{b_order_pay_ctime},
+			`b_order_pay_isall` = #{b_order_pay_isall},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_seller_id` = #{b_seller_id}
+		WHERE b_order_pay_id=#{b_order_pay_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBOrderPay" parameterType="map">
+		DELETE FROM b_order_pay WHERE b_order_pay_id IN
+		<foreach item="item" index="index" collection="b_order_pay_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 计算订单已付总金额 -->
+	<select id="getBOrderPayTotalPrice"  resultType="double" parameterType="map">
+		SELECT
+			COALESCE(SUM(`b_order_pay_money`),0) AS b_order_pay_money
+		FROM 
+			b_order_pay
+		WHERE 1=1
+		AND b_order_id = #{b_order_id}
+	</select>
+</mapper>
