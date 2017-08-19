@@ -30,4 +30,6 @@ public class PathConstant {
 	public static final String LOG4J_PATH = "WEB-INF/classes/config/log4j.properties";//log4j配置路径
 	
 	public static final String LOGBACK_PATH = "WEB-INF/classes/config/logback.xml";//logback路径
+	
+	public static final String EHCACHE_PATH = "/config/ehcache/ehcache.xml";//ehcache缓存路径
 }

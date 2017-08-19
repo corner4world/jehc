@@ -1,0 +1,140 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+			http://mybatis.org/schema/mybatis-spring 
+			http://mybatis.org/schema/mybatis-spring-1.2.xsd 
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-lazy-init="true">
+    <!-- 配置主数据源 -->
+    <!-- 定义数据源 DruidDataSource配置 -->
+	<bean id="dataSourceMaster" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <property name="driverClassName" value="${driverClassName}" />
+	    <property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="filters" value="${filters}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxWait" value="${maxWait}" />
+		<property name="minIdle" value="${minIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testWhileIdle" value="${testWhileIdle}" />
+		<property name="testOnBorrow" value="${testOnBorrow}" />
+		<property name="testOnReturn" value="${testOnReturn}" />
+		<property name="poolPreparedStatements" value="${poolPreparedStatements}" />
+		<property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}" />
+		<property name="proxyFilters"> 
+		   <list> 
+		    <ref bean="logFilter" /> 
+		   </list> 
+		</property> 
+	</bean>
+	
+	<!-- 读写分离采用的从库连接数据源 -->
+	<bean id="dataSourceSlave" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <property name="driverClassName" value="${slave.driverClassName}" />
+	    <property name="url" value="${slave.url}" />
+		<property name="username" value="${slave.username}" />
+		<property name="password" value="${slave.password}" />
+		<property name="filters" value="${filters}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxWait" value="${maxWait}" />
+		<property name="minIdle" value="${minIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testWhileIdle" value="${testWhileIdle}" />
+		<property name="testOnBorrow" value="${testOnBorrow}" />
+		<property name="testOnReturn" value="${testOnReturn}" />
+		<property name="poolPreparedStatements" value="${poolPreparedStatements}" />
+		<property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}" />
+		<property name="proxyFilters"> 
+		   <list> 
+		    <ref bean="logFilter" /> 
+		   </list> 
+		</property> 
+	</bean>
+	<!-- 使用读写数据源 -->
+	<bean id="dataSource" class="jehc.xtmodules.xtcore.base.readwritedata.DynamicDataSource">
+        <property name="targetDataSources">
+            <map key-type="java.lang.String">
+                <entry key="dataSourceMaster" value-ref="dataSourceMaster" />
+                <entry key="dataSourceSlave" value-ref="dataSourceSlave" />
+            </map>
+        </property>
+        <property name="defaultTargetDataSource" ref="dataSourceMaster" />
+    </bean>
+    
+	<!-- 配置工厂 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSource"/>   
+        <property name="typeAliasesPackage" value="*" />
+        <property name="mapperLocations" value="classpath:/**/**/*dao/mapper/*.xml"/>
+		<property name="configLocation" value="classpath:/config/mybatis/mybatis.xml"></property>
+    </bean>  
+	<!-- 事物配置 -->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!--事务增强--> 
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		 <!--事务属性定义-->
+		<tx:attributes>
+			<tx:method name="*Poulators" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="recover*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="add*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="get*" propagation="REQUIRED" isolation="DEFAULT" read-only="true" timeout="-1" />  
+			<tx:method name="put*" propagation="REQUIRED" isolation="DEFAULT" read-only="false"/> 
+			<tx:method name="*"  propagation="REQUIRED" isolation="DEFAULT" read-only="true" timeout="-1" />
+		</tx:attributes>
+	</tx:advice>
+	<!-- 定义切换至从库方法条件 -->
+	<bean id="dataSourceAdvice" class="jehc.xtmodules.xtcore.base.readwritedata.DataSourceAdvice">
+		<property name="slaveMethods">
+			<list>
+				<value>get</value>
+				<value>query</value>
+				<value>list</value>
+				<value>load</value>
+				<value>find</value>
+				<value>select</value>
+			</list>
+		</property>
+	</bean>
+	<!-- 面向切面 -->
+	<aop:config proxy-target-class="false">
+	  <aop:pointcut id="ep" expression="execution(* *.*.*service.impl.*.*(..)) ||execution(* com.phone.*.service.*.*(..))"/>
+	  <aop:advisor pointcut-ref="ep" advice-ref="txAdvice" />
+	  <aop:advisor pointcut-ref="ep" advice-ref="dataSourceAdvice" />
+	  
+	  <!-- 测试多数据源拦截通知-->
+	  <aop:advisor pointcut-ref="ep" advice-ref="txAdviceTest" />
+	   
+	</aop:config>
+	<bean id="logFilter" class="com.alibaba.druid.filter.logging.Slf4jLogFilter"> 
+	  <property name="statementExecutableSqlLogEnable" value="false" /> 
+	</bean>
+	
+	<!-- 导入测试多数据源xml文件-->
+	<import resource="classpath:/config/datasources/datasourcestest.xml"/>
+	
+</beans>

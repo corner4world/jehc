@@ -72,13 +72,12 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
-
 	<!-- 启动时执行系统类 -->
 	<listener>
-		<listener-class>jehc.xtmodules.xtcore.init.InitExcuteClass</listener-class>
+		<listener-class>jehc.xtmodules.xtcore.init.InitSetup</listener-class>
 	</listener>
-
-	<!-- 配置log4j -->
+ 	
+	<!-- 配置log4j 
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
 		<param-value>
@@ -89,6 +88,7 @@
 		<display-name>log4jConfigLocation</display-name>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>
+	-->
 	<servlet>
 		<description>验证码</description>
 		<servlet-name>VerifyCodeServlet</servlet-name>

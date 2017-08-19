@@ -1,11 +1,11 @@
 package jehc.xtmodules.xtcore.util;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
+import jehc.xtmodules.xtcore.util.constant.PathConstant;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.Element;
@@ -13,26 +13,34 @@ import net.sf.json.JSONArray;
 
 import org.springframework.cache.ehcache.EhCacheCacheManager;
 
-import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
-
 /**
  * 缓存统一处理
  * @author 邓纯杰
  *
  */
 public class CacheManagerUtil {
-//	@Resource
-//	EhCacheCacheManager cacheManager;
+	EhCacheCacheManager ehcacheManager;
+	
+	public EhCacheCacheManager getEhcacheManager() {
+		return ehcacheManager;
+	}
+
+	public void setEhcacheManager(EhCacheCacheManager ehcacheManager) {
+		this.ehcacheManager = ehcacheManager;
+	}
+
 	/**
 	 * 通过URL创建缓存管理器
 	 * @return
 	 */
 	public CacheManager getCacheManager(){
-//		URL url = getClass().getResource("/xtCore/sources/ehcache/ehcache.xml");
-//		CacheManager cacheManager = CacheManager.create(url);
-////	CacheManager cacheManager = CacheManager.create();
-		EhCacheCacheManager cacheManager = (EhCacheCacheManager)SpringUtil.getBean("ehcacheManager");
-		return cacheManager.getCacheManager();
+		try {
+			URL url = getClass().getResource(PathConstant.EHCACHE_PATH);
+			CacheManager cacheManager = CacheManager.create(url);
+			return cacheManager; 
+		} catch (Exception e) {
+			throw new ExceptionUtil("ehcache----连接缓存读取出现异常----"+e.getMessage());
+		}
 	}
 	
 	/**

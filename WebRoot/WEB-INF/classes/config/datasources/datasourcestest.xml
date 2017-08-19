@@ -1,0 +1,83 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+			http://mybatis.org/schema/mybatis-spring 
+			http://mybatis.org/schema/mybatis-spring-1.2.xsd 
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+		default-lazy-init="true">
+    <!-- 配置数据源 -->
+	<!-- 定义数据源 BoneCPDataSouce配置 测试多数据源使用-->
+  	<bean id="dataSourceTest" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+	    <property name="driverClassName" value="${driverClassTest}"/>
+        <property name="url" value="${urlTest}"/>
+        <property name="username" value="${usernameTest}"/>
+        <property name="password" value="${passwordTest}"/>
+	    <property name="filters" value="${filters}" />
+		<property name="maxActive" value="${maxActive}" />
+		<property name="initialSize" value="${initialSize}" />
+		<property name="maxWait" value="${maxWait}" />
+		<property name="minIdle" value="${minIdle}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${timeBetweenEvictionRunsMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${minEvictableIdleTimeMillis}" />
+		<property name="validationQuery" value="${validationQuery}" />
+		<property name="testWhileIdle" value="${testWhileIdle}" />
+		<property name="testOnBorrow" value="${testOnBorrow}" />
+		<property name="testOnReturn" value="${testOnReturn}" />
+		<property name="poolPreparedStatements" value="${poolPreparedStatements}" />
+		<property name="maxOpenPreparedStatements" value="${maxOpenPreparedStatements}" />
+		<property name="proxyFilters"> 
+		   <list> 
+		    <ref bean="logFilter" /> 
+		   </list> 
+		</property> 
+	</bean>
+	
+	<!-- 配置工厂 -->
+	<bean id="sqlSessionFactoryOverrideMapper" class="org.mybatis.spring.SqlSessionFactoryBean">  
+        <property name="dataSource" ref="dataSourceTest" />  
+        <property name="typeAliasesPackage" value="*" />
+        <property name="mapperLocations" value="classpath:/**/**/*dao/mapper/*.xml"/>
+		<property name="configLocation" value="classpath:/config/mybatis/mybatistest.xml"></property>
+    </bean> 
+	
+	<!-- 事物配置 -->
+	<bean id="transactionManagerTest" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceTest" />
+	</bean>
+	
+	<!--事务增强--> 
+	<tx:advice id="txAdviceTest" transaction-manager="transactionManagerTest">
+		 <!--事务属性定义-->
+		<tx:attributes>
+			<tx:method name="*Poulators" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="recover*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="add*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="save*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />  
+			<tx:method name="*" propagation="SUPPORTS" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<!-- 面向切面 统一放入basedatasource.xml中配置
+	<aop:config proxy-target-class="true">
+	  <aop:pointcut id="epTest" expression="execution(* *.*.*service.impl.*.*(..)) ||execution(* com.phone.*.service.*.*(..))"/>
+	  <aop:advisor pointcut-ref="epTest" advice-ref="txAdviceTest" />
+	</aop:config>
+	 -->
+</beans>

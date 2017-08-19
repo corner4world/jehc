@@ -1,37 +1,21 @@
 package jehc.xtmodules.xtcore.init;
 
-/**
-import java.io.File;
-**/
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
-
-import org.quartz.Scheduler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import jehc.solrmodules.solrmodel.SolrCore;
 import jehc.solrmodules.solrservice.SolrCoreService;
 import jehc.solrmodules.solrservice.SolrIndexAttributeService;
 import jehc.solrmodules.solrservice.SolrSortService;
 import jehc.xtmodules.xtcore.util.CacheManagerUtil;
-import jehc.xtmodules.xtcore.util.MapUtils;
-import jehc.xtmodules.xtcore.util.ReadProperties;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.constant.CacheConstant;
 import jehc.xtmodules.xtcore.util.quartz.QuartzInit;
-import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtmodel.XtAreaRegion;
 import jehc.xtmodules.xtmodel.XtConstant;
 import jehc.xtmodules.xtmodel.XtDataDictionary;
@@ -53,76 +37,73 @@ import jehc.xtmodules.xtservice.XtStartStopLogService;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.Element;
 
-/**
- * 让服务器启动或停止时自动执行代码
- * @author 邓纯杰
- *
- */
-public class InitExcuteClass implements ServletContextListener{
-	Logger logger = LoggerFactory.getLogger(this.getClass());
-	/**
-	 * 停止时执行的方法
-	 */
-	public void contextDestroyed(ServletContextEvent event) {
-		ServletContext sc = event.getServletContext();
-	    sc.removeAttribute("syspath");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		logger.info(sdf.format(new Date())+"--->服务器容器销毁成功");
-		XtStartStopLog xt_Start_Stop_Log = new XtStartStopLog();
-		xt_Start_Stop_Log.setXt_start_stop_log_stoptime(sdf.format(new Date()));
-		addOrUpdateXtStartStopLog(xt_Start_Stop_Log,1);
-	}
+import org.quartz.Scheduler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 
-	/**
-	 * 启动时执行方法
-	 */
-	public void contextInitialized(ServletContextEvent event) {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		ServletContext sc = event.getServletContext();
+public class InitBean implements ApplicationListener<ContextRefreshedEvent>{
+	Logger logger = LoggerFactory.getLogger(this.getClass());
+	@Autowired
+	XtDataDictionaryService xtDataDictionaryService;
+	@Autowired
+	XtPathService xtPathService;
+	@Autowired
+	XtIpFrozenService xtIpFrozenService;
+	@Autowired
+	XtConstantService xtConstantService;
+	@Autowired
+	XtStartStopLogService xtStartStopLogService;
+	@Autowired
+	XtQuartzService xtQuartzService;
+	@Autowired
+	Scheduler schedulerFactoryBean;
+	@Autowired
+	XtFunctioninfoCommonService xtFunctioninfoCommonService;
+	@Autowired
+	XtFunctioninfoService xtFunctioninfoService;
+	@Autowired
+	SolrIndexAttributeService solrIndexAttributeService;
+	@Autowired
+    SolrCoreService solrCoreService;
+	@Autowired
+    SolrSortService solrSortService;
+	@Autowired
+	XtAreaRegionService xtAreaRegionService;
+	
+	public void onApplicationEvent(ContextRefreshedEvent event) {
+		if(event.getApplicationContext().getParent() == null){
+			initdata();
+		}
+	}
+	
+	public void initdata(){
 		XtStartStopLog xt_Start_Stop_Log = new XtStartStopLog();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		try {
-	        sc.setAttribute("syspath", getContextPath(sc));
-	        logger.info(""+sdf.format(new Date())+"--->业务平台路径:"+getContextPath(sc));
-	        cacheXtDataDictionary();
+			cacheXtDataDictionary();
 	    	cacheXtFunctioninfoCommon();
 	    	cacheSolrCore();
 	    	cacheXtAreaRegion();
-	        logger.info(sdf.format(new Date())+"--->进入类加载");
-	        logger.info(sdf.format(new Date())+"--->装载配置文件"); 
-			Map<String, Object> map = ReadProperties.readProperties(event);
-			MapUtils.setKvToServletContext(map, sc);		
-			
-			map = ReadProperties.readMessageProperties(event);
-			MapUtils.setKvToServletContext(map, sc);
-			logger.info(sdf.format(new Date())+"--->装载配置结束"); 
-			
-			logger.info(sdf.format(new Date())+"--->装载Config配置开始"); 
-			map = ReadProperties.readConfigProperties(event);
-			MapUtils.setKvToServletContext(map, sc);
-			logger.info(sdf.format(new Date())+"--->装载Config配置结束"); 
-			logger.info(sdf.format(new Date())+"--->开始初始化调度任务"); 
+	    	logger.info(sdf.format(new Date())+"--->开始初始化调度任务"); 
 			cacheQuarzInit();
 			logger.info(sdf.format(new Date())+"--->结束初始化调度任务"); 
-			xt_Start_Stop_Log.setXt_start_stop_log_iserror("0");
 		} catch (Exception e) {
+			e.printStackTrace();
 			xt_Start_Stop_Log.setXt_start_stop_log_iserror("1");
 		}
 		xt_Start_Stop_Log.setXt_start_stop_log_starttime(sdf.format(new Date()));
 		xt_Start_Stop_Log.setXt_start_stop_log_content("1.业务平台路径 2加载工厂耗 3.读取数据字典 4.加载缓存配置5.装载config配置");
 		addOrUpdateXtStartStopLog(xt_Start_Stop_Log,0);
-		logger.info(sdf.format(new Date())+"--->结束类加载"); 
-		
 	}
-	private String getContextPath(ServletContext sc) {
-        return sc.getContextPath();
-    }
 	
 	/**
 	 * 添加或修改启动日志
 	 * @param xt_Start_Stop_Log
 	 */
 	public void addOrUpdateXtStartStopLog(XtStartStopLog xtStartStopLog,int status){
-		XtStartStopLogService xtStartStopLogService = (XtStartStopLogService)SpringUtil.getBean("xtStartStopLogService");;
 		if(1==status){
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("offset", "0");
@@ -143,14 +124,12 @@ public class InitExcuteClass implements ServletContextListener{
         Timer timer = new Timer("loadQuarzInit", true);
         timer.schedule(new TimerTask() {
             public void run() {
-            	XtQuartzService xtQuartzService = (XtQuartzService)SpringUtil.getBean("xtQuartzService");
-            	Scheduler scheduler = (Scheduler) SpringUtil.getBean("schedulerFactoryBean");
             	Map<String, Object> condition = new HashMap<String, Object>();
             	condition.put("jobStatus", "NORMAL");
         		List<XtQuartz> xtQuartzList = xtQuartzService.getXtQuartzListAllByCondition(condition);
         		for(int i = 0; i < xtQuartzList.size(); i++){
         			XtQuartz xtQuartz = xtQuartzList.get(i);
-        			new QuartzInit(scheduler,xtQuartz.getId(),xtQuartz.getJobName(),xtQuartz.getJobGroup(),xtQuartz.getCronExpression(),xtQuartz.getDesc(),xtQuartz.getTargetMethod(),xtQuartz.getTargetClass()).run();
+        			new QuartzInit(schedulerFactoryBean,xtQuartz.getId(),xtQuartz.getJobName(),xtQuartz.getJobGroup(),xtQuartz.getCronExpression(),xtQuartz.getDesc(),xtQuartz.getTargetMethod(),xtQuartz.getTargetClass()).run();
         		}
             }
         }, 1 * 10);
@@ -161,10 +140,6 @@ public class InitExcuteClass implements ServletContextListener{
      * @param ehCache
      */
 	private void cacheXtDataDictionary(){
-    	XtDataDictionaryService xtDataDictionaryService = (XtDataDictionaryService)SpringUtil.getBean("xtDataDictionaryService");
-    	XtPathService xtPathService = (XtPathService)SpringUtil.getBean("xtPathService");
-    	XtIpFrozenService xtIpFrozenService = (XtIpFrozenService)SpringUtil.getBean("xtIpFrozenService");
-    	XtConstantService xtConstantService = (XtConstantService)SpringUtil.getBean("xtConstantService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
@@ -231,8 +206,6 @@ public class InitExcuteClass implements ServletContextListener{
      * 加载公共功能到内存中
      */
     public void cacheXtFunctioninfoCommon(){
-    	XtFunctioninfoCommonService xtFunctioninfoCommonService = (XtFunctioninfoCommonService)SpringUtil.getBean("xtFunctioninfoCommonService");
-    	XtFunctioninfoService xtFunctioninfoService = (XtFunctioninfoService)SpringUtil.getBean("xtFunctioninfoService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
@@ -270,9 +243,6 @@ public class InitExcuteClass implements ServletContextListener{
      * 加载Solr实例到缓存中
      */
     public void cacheSolrCore(){
-    	SolrIndexAttributeService solrIndexAttributeService = (SolrIndexAttributeService)SpringUtil.getBean("solrIndexAttributeService");
-    	SolrCoreService solrCoreService = (SolrCoreService)SpringUtil.getBean("solrCoreService");
-    	SolrSortService solrSortService = (SolrSortService)SpringUtil.getBean("solrSortService");
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String, Object>();
@@ -303,7 +273,6 @@ public class InitExcuteClass implements ServletContextListener{
     	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     	long millis1 = System.currentTimeMillis();
     	Map<String, Object> condition = new HashMap<String,Object>();
-    	XtAreaRegionService xtAreaRegionService = (XtAreaRegionService)SpringUtil.getBean("xtAreaRegionService");
     	List<XtAreaRegion> list = xtAreaRegionService.getXtAreaRegionListByCondition(condition);
     	long millis2 =  System.currentTimeMillis();
     	logger.info(sdf.format(new Date())+"--->读取行政区域实例数量:"+list.size()+"个");
@@ -316,4 +285,5 @@ public class InitExcuteClass implements ServletContextListener{
 		logger.info(sdf.format(new Date())+"--->加载行政区域实例缓存结束");
 		millis2 =  System.currentTimeMillis();
     }
+    
 }
