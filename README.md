@@ -2,8 +2,6 @@
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
 
-交流群：330370132
-
 效果图片如下：
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0720/083949_bebb2d0c_1341290.png "sjq1.png")
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0720/084043_6b1c28b6_1341290.png "sjq2.png")
@@ -45,6 +43,3 @@ jEhc能做什么
 
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
-
-交流群：330370132
-这里输入代码
