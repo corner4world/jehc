@@ -1,21 +1,29 @@
 document.onreadystatechange = overLoad;
 Ext.onReady(function(){
-	if(getnavigator()==9 || getnavigator()==8 || getnavigator()==7 || getnavigator() == 6 || getnavigator() == 0){
-		//Ext.example.msg('提示',"平台已经抛弃IE9以下版本!请切换成IE10及以上版本或者谷歌,火狐,360等浏览器");
+	if(getnavigator()==7 || getnavigator() == 6 || getnavigator() == 0){
 		document.write("平台支持IE10及以上浏览器或谷歌，火狐，360等浏览器");
 		return;
 	}
 	Ext.QuickTips.init();
 	var panel = Ext.create('Ext.FormPanel',{
+		title:"<font color='#ffffff'>"+sys_pt_login+"</font>",
 		region:'center',
 		id:'loginForm',
+		width:400,
+		height:525,
+		border:true,
+		renderTo:Ext.getBody(),
 		style:'padding:0px 5px 0px 5px',
 		fieldDefaults:{
 			labelWidth:60,
 			labelSeparator:'',
 			labelAlign:'top'
 		},
-		headerPosition:'bottom',
+		header:{
+			height:70,
+			cls:'x-panel-header-defined'
+		},
+		headerPosition:'top',
 		/**
 		header:{
 		     items:[
@@ -37,9 +45,6 @@ Ext.onReady(function(){
 			xtype:'textfield',
 			name:'userName',
 			id:'userName',
-			/**这种也不错 只不过没有trigger效果
-			fieldCls:'user',
-			**/
 			hideTrigger:false,//不隐藏触发按钮  
 			triggerCls:'user-trigger',
 			grow:true,
@@ -50,9 +55,6 @@ Ext.onReady(function(){
 			allowBlank:false,
 			anchor:'100%',
 			msgTarget:'under',/**qtip、title、under、side、none**/
-			onTriggerClick:function(){  
-               
-            },
 			listeners:{
 				specialkey:function(field, e) {
 					if(e.getKey() == Ext.EventObject.ENTER) {
@@ -83,9 +85,6 @@ Ext.onReady(function(){
 			maxLengthText:'密码的最大长度为20个字符',
 			allowBlank:false,
 			anchor:'100%',
-			/**这种也不错 只不过没有trigger效果
-			fieldCls:'pwd',
-			**/
 			triggerCls:'pwd-trigger',
 			msgTarget:'under',/**qtip、title、under、side、none**/
 			listeners:{
@@ -145,8 +144,8 @@ Ext.onReady(function(){
 			},
 			{
 				xtype:'panel',
-				height:50,
 				width:200,
+				height:70,
 	            html:'<img src="\VerifyCodeServlet?\'+new Date()" id="safecode" onclick="this.src=\'VerifyCodeServlet?\'+new Date()"/><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:clickYZM()">看不清请点击图片</a>'
 			}]
 		},
@@ -163,32 +162,24 @@ Ext.onReady(function(){
 			anchor:'100%',
             text:'登 录',
             scale:'large',
+            /*ui:'default-toolbar',*/
             handler:function(){
 				login();
 			}
 		}
 		]
 	});
-	reGetWidthAndHeight();
-	loginWin = Ext.create('Ext.Window',{
-		title:sys_pt_login,
-		renderTo:Ext.getBody(),
+	Ext.create('Ext.Viewport',{
 		layout:'fit',
-		width:400,
-		height:525,
-		closeAction:'hide',
-		closable:false, 
-		plain:true,
-		draggable:false,
-		resizable:false,
-		frame:false,
-		items:panel		
+		xtype:'viewport',
+		layout:{
+	        align:'middle',
+	        pack:'center',
+	        type:'hbox'
+	    },
+		items:panel
 	});
-	loginWin.show();
 	Ext.getCmp('userName').focus();
-	loginWin.on('show', function() {
-		
-	},this);
 	if(getCookie('readme') == 'readme'){
 		Ext.getCmp('readme').setValue(true);
 		Ext.getCmp('userName').setValue(getCookie('XTUSERNAMECOOKIE'));

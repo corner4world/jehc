@@ -15,7 +15,6 @@
 <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
 <script type="text/javascript" src="deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
 <script type="text/javascript" src="deng/source/js/common.js"></script>
-<script type="text/javascript" src="view/pc/xt-view/xt-login/xt-login.js"></script> 
 <script type="text/javascript">
    	var basePath = "${syspath}";
    	var sys_pt_login = "${sys_pt_login}";
@@ -99,29 +98,15 @@
 	.pwd-trigger-click {
 		background-position:right;
 	}
-	.x-window-header-default {
-		border-width: 0px !important;
+	.x-panel-header-defined{
+	    background-image:none;
+	    background-color:#5fa2dd;
 	}
-	.x-window-header-default-top {
-		-moz-border-radius-topleft: 0;
-		-webkit-border-top-left-radius: 0;
-		border-top-left-radius: 0;
-		-moz-border-radius-topright: 0;
-		-webkit-border-top-right-radius: 0;
-		border-top-right-radius: 0;
-		-moz-border-radius-bottomright: 0;
-		-webkit-border-bottom-right-radius: 0;
-		border-bottom-right-radius: 0;
-		-moz-border-radius-bottomleft: 0;
-		-webkit-border-bottom-left-radius: 0;
-		border-bottom-left-radius: 0;
-		padding: 20px 14px 20px 14px;
-		border-width: 2px 2px 2px 2px;
-		border-style: solid;
-		background-color: #5fa2dd;
-	}
-	.x-window-header-title-default {
-		color: #fff;
+	.x-btn-default-toolbar-large {
+	    -webkit-border-radius: 0px;
+	    -moz-border-radius: 0px;
+	    -ms-border-radius: 0px;
+	    -o-border-radius: 0px;
 	}
 </style> 
 </head>  
@@ -139,7 +124,9 @@
 		</div>
 	</div>
 </body>  
+<script type="text/javascript" src="view/pc/xt-view/xt-login/xt-login.js"></script> 
 <script type="text/javascript">Ext.get('load-status').update('正在拼命加载平台登录页面...')</script>
 <link rel="stylesheet" href="deng/source/plugins/e6/packages/shared/example.css" type="text/css" />
 <script type="text/javascript" src="deng/source/plugins/e6/packages/shared/examples.js"></script>
+
 </html> 
