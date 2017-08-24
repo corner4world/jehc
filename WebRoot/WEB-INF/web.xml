@@ -146,7 +146,7 @@
 
 	<!-- 首页 -->
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 	<!-- GZIPFilter压缩定义 设置此项时tk-filters.properties的GZIPFilter.Enabled=true才可用-->
 	<filter>

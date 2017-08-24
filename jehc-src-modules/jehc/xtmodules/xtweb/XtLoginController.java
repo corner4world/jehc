@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -56,15 +55,15 @@ public class XtLoginController extends BaseAction{
 	@Autowired
 	private XtDataAuthorityService xtDataAuthorityService;
 	/**
-	 * 载入登录页面
+	 * 载入登录页面（已废弃）
 	 * @param request
 	 * @return
 	 */
-	@AuthUneedLogin
-	@RequestMapping(value="/login.html",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadLogin(HttpServletRequest request) {
-		return new ModelAndView("pc/xt-view/xt-login/xt-login");
-	}
+//	@AuthUneedLogin
+//	@RequestMapping(value="/login.html",method={RequestMethod.POST,RequestMethod.GET})
+//	public ModelAndView loadLogin(HttpServletRequest request) {
+//		return new ModelAndView("pc/xt-view/xt-login/xt-login");
+//	}
 	/**
 	 * 登录
 	 * @param request

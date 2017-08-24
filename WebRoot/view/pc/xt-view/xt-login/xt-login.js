@@ -1,7 +1,8 @@
 document.onreadystatechange = overLoad;
 Ext.onReady(function(){
 	if(getnavigator()==9 || getnavigator()==8 || getnavigator()==7 || getnavigator() == 6 || getnavigator() == 0){
-		Ext.example.msg('提示',"平台已经抛弃IE9以下版本!请切换成IE10及以上版本或者谷歌,火狐,360等浏览器");
+		//Ext.example.msg('提示',"平台已经抛弃IE9以下版本!请切换成IE10及以上版本或者谷歌,火狐,360等浏览器");
+		document.write("平台支持IE10及以上浏览器或谷歌，火狐，360等浏览器");
 		return;
 	}
 	Ext.QuickTips.init();
@@ -15,20 +16,19 @@ Ext.onReady(function(){
 			labelAlign:'top'
 		},
 		headerPosition:'bottom',
+		/**
 		header:{
 		     items:[
 		     {
 	           ui:'default-toolbar',
 	           xtype:'button',
 	           tooltip:{title:'找回密码'},
-	           icon:getpwdIcon,
 	           handler:function(button){
-	           		window.location.href="../index/forget_pwd.html";
+	           		window.location.href="index/forget_pwd.html";
 	           }
 		     }
 		     ]
         },
-        /**
         title:sys_pt_index_foot,
         titleAlign:'center',
         **/
@@ -115,9 +115,12 @@ Ext.onReady(function(){
 					xtype:'textfield',
 					name:'validateCode',
 					maxLength:6,
+					minLength:6,
+					width:180,
 					blankText:'验证码不能为空',
 					emptyText:'请输入验证码',
-					maxLengthText:'账号的最大长度为6个字符',
+					maxLengthText:'该项长度只能为6位',
+					minLengthText:'该项长度只能为6位',
 					id:"VerifyCode",  
 					allowBlank:false,
 					msgTarget:'under',/**qtip、title、under、side、none**/
@@ -144,7 +147,7 @@ Ext.onReady(function(){
 				xtype:'panel',
 				height:50,
 				width:200,
-	            html:'<img src="\../VerifyCodeServlet?\'+new Date()" id="safecode" onclick="this.src=\'../VerifyCodeServlet?\'+new Date()"/><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:clickYZM()">看不清请点击图片</a>'
+	            html:'<img src="\VerifyCodeServlet?\'+new Date()" id="safecode" onclick="this.src=\'VerifyCodeServlet?\'+new Date()"/><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:clickYZM()">看不清请点击图片</a>'
 			}]
 		},
 		{
@@ -163,9 +166,6 @@ Ext.onReady(function(){
             handler:function(){
 				login();
 			}
-		},
-		{
-			html:''
 		}
 		]
 	});
@@ -202,7 +202,7 @@ Ext.onReady(function(){
 function login(){
 	if(Ext.getCmp('loginForm').form.isValid()){
 		Ext.getCmp('loginForm').form.submit({
-			url:'../login/login',
+			url:'login/login',
 			waitTitle:'提示',
 			method:'POST',
 			waitMsg:'正在验证您的身份,请稍候.....',
@@ -219,10 +219,11 @@ function login(){
 				}
 				delCookie('syslock');
 				showLoading("身份校验成功，开始进入...");
-				window.location.href="../index/index.html";
+				window.location.href="index/index.html";
 			},
 			failure:function(form, action) {
 				try{
+					console.info();
 					if('undefined' == typeof(action.result.msg)){
 						location.reload();
 						return;
@@ -233,15 +234,14 @@ function login(){
 				}catch(e){
 					clickYZM();
 					Ext.getCmp("VerifyCode").setValue('');
-					console.log(e);
 				}
 			}
 		});
 	}else{
-		Ext.example.msg('提示','请输入必填项!');
+		Ext.example.msg('提示','请输入合法项!');
 	}
 }
 //刷新验证码
 function clickYZM(){
-	document.getElementById('safecode').src = "../VerifyCodeServlet?"+new Date();
+	document.getElementById('safecode').src = "VerifyCodeServlet?"+new Date();
 }
