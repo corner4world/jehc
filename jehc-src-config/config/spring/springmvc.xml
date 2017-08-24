@@ -47,9 +47,9 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />  
     </context:component-scan>
     
-	<!-- 设置默认的页面  请求转发到login.jsp -->
+	<!-- 设置默认的页面  请求转发到login.jsp 
 	<mvc:view-controller path="/" view-name="redirect:/login/login.html"/>
-	
+	-->
 	<!-- 放行静态资源
 	<mvc:resources location="/**" mapping="/**"/>
 	-->
