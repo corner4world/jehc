@@ -71,10 +71,13 @@ public class XtLoginController extends BaseAction{
 	@AuthUneedLogin
 	@ResponseBody
 	@RequestMapping(value="/login",method={RequestMethod.POST,RequestMethod.GET})
-	public String login(String code,String xt_userinfo_name,String xt_userinfo_passWord, HttpServletRequest request){
+	public String login(HttpServletRequest request){
 		int flag = 0;
 		Map<String, Object> condition = new HashMap<String, Object>();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String code = request.getParameter("validateCode");
+		String xt_userinfo_name = request.getParameter("userName");
+		String xt_userinfo_passWord = request.getParameter("password");
 		MD5 md5 = new MD5();
 		//获得的当前正确的验证码
 		String rand = (String) request.getSession(false).getAttribute(SessionConstant.VALIDATECODE);
