@@ -32,7 +32,7 @@ Ext.onReady(function(){
 	           xtype:'button',
 	           tooltip:{title:'找回密码'},
 	           handler:function(button){
-	           		window.location.href="index/forget_pwd.html";
+	           		window.location.href=basePath+"/index/forget_pwd.html";
 	           }
 		     }
 		     ]
@@ -146,7 +146,7 @@ Ext.onReady(function(){
 				xtype:'panel',
 				width:200,
 				height:70,
-	            html:'<img src="\VerifyCodeServlet?\'+new Date()" id="safecode" onclick="this.src=\'VerifyCodeServlet?\'+new Date()"/><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:clickYZM()">看不清请点击图片</a>'
+	            html:'<img src="'+basePath+'/VerifyCodeServlet?\'+new Date()" id="safecode" onclick="this.src='+basePath+'/VerifyCodeServlet?\'+new Date()"/><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:clickYZM()">看不清请点击图片</a>'
 			}]
 		},
 		{
@@ -193,7 +193,7 @@ Ext.onReady(function(){
 function login(){
 	if(Ext.getCmp('loginForm').form.isValid()){
 		Ext.getCmp('loginForm').form.submit({
-			url:'login/login',
+			url:basePath+'/login/login',
 			waitTitle:'提示',
 			method:'POST',
 			waitMsg:'正在验证您的身份,请稍候.....',
@@ -210,7 +210,7 @@ function login(){
 				}
 				delCookie('syslock');
 				showLoading("身份校验成功，开始进入...");
-				window.location.href="index/index.html";
+				window.location.href=basePath+"/index/index.html";
 			},
 			failure:function(form, action) {
 				try{
@@ -234,5 +234,5 @@ function login(){
 }
 //刷新验证码
 function clickYZM(){
-	document.getElementById('safecode').src = "VerifyCodeServlet?"+new Date();
+	document.getElementById('safecode').src = basePath+"/VerifyCodeServlet?"+new Date();
 }

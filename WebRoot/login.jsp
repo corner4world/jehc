@@ -9,12 +9,12 @@
 <meta name="format-detection" content="telephone=no">
 <meta name="renderer" content="webkit">
 <meta http-equiv="Cache-Control" content="no-siteapp" />
-<link rel="stylesheet" href="deng/source/plugins/e6/classic/theme-crisp-touch/resources/theme-crisp-touch-all.css" type="text/css" />
+<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-crisp-touch/resources/theme-crisp-touch-all.css" type="text/css" />
 <link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/triton.css" />
-<script type="text/javascript" src="deng/source/plugins/e6/ext-all.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>
 <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
-<script type="text/javascript" src="deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
-<script type="text/javascript" src="deng/source/js/common.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/js/common.js"></script>
 <script type="text/javascript">
    	var basePath = "${syspath}";
    	var sys_pt_login = "${sys_pt_login}";
@@ -53,7 +53,7 @@
 		cursor: pointer;
 		overflow: hidden;
 		background-position:right;
-		background-image:url(deng/images/login/user.png)!important;
+		background-image:url(${syspath}/deng/images/login/user.png)!important;
 		background-repeat: no-repeat;
 		text-align: center;
 		line-height: 0;
@@ -85,7 +85,7 @@
 		cursor: pointer;
 		overflow: hidden;
 		background-position:right;
-		background-image:url(deng/images/login/password.png)!important;
+		background-image:url(${syspath}/deng/images/login/password.png)!important;
 		background-repeat: no-repeat;
 		text-align: center;
 		line-height: 0;
@@ -117,16 +117,16 @@
 			<div>
 				欢迎使用业务平台
 			</div>
-			<img src="deng/images/load/loading.gif" width="18" height="18" style="margin-right: 5px;" align="absmiddle" />
+			<img src="${syspath}/deng/images/load/loading.gif" width="18" height="18" style="margin-right: 5px;" align="absmiddle" />
 			<span id="load-status" style="font-weight: normal;filter:alpha(opacity=70);">正在拼命加载平台初始化页面...</span>
 			<br/>
 			<span style="font-weight: normal;">请稍候</span>
 		</div>
 	</div>
 </body>  
-<script type="text/javascript" src="view/pc/xt-view/xt-login/xt-login.js"></script> 
+<script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-login/xt-login.js"></script> 
 <script type="text/javascript">Ext.get('load-status').update('正在拼命加载平台登录页面...')</script>
-<link rel="stylesheet" href="deng/source/plugins/e6/packages/shared/example.css" type="text/css" />
-<script type="text/javascript" src="deng/source/plugins/e6/packages/shared/examples.js"></script>
+<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/packages/shared/example.css" type="text/css" />
+<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/packages/shared/examples.js"></script>
 
 </html> 
