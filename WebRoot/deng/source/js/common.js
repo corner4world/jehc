@@ -40,7 +40,7 @@ var indexIcon = '../deng/images/home/index.png';
 
 var chattingIcon = '../deng/images/icons/user.png';
 var designIcon = '../deng/images/icons/cog.png';
-var iphoneIcon = '../deng/images/icons/iphone.png';
+var iphoneIcon = '../deng/images/icons/battery_full.png';
 var onoffIcon = "../deng/images/icons/on-off.png";
 var bsdefimg= "../deng/images/default/add_d.png";
 var uploadimg = '../deng/images/common/uploadFFF.png';

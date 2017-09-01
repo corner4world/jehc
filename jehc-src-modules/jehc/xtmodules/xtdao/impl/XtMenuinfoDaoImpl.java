@@ -134,4 +134,13 @@ public class XtMenuinfoDaoImpl extends BaseDaoImpl implements XtMenuinfoDao {
 	public List<XtMenuinfo> getXtMenuinfoChildForRole(Map<String, Object> condition){
 		return (List<XtMenuinfo>)this.getList("getXtMenuinfoChildForRole", condition);
 	}
+	
+	/**
+	 * 查找所有菜单供主页面使用
+	 * @param condition
+	 */
+	@SuppressWarnings("unchecked")
+	public List<XtMenuinfo> getXtMenuinListForRole(Map<String, Object> condition){
+		return (List<XtMenuinfo>)this.getList("getXtMenuinListForRole", condition);
+	}
 }

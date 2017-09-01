@@ -209,4 +209,17 @@ public class XtMenuinfoServiceImpl extends BaseService implements XtMenuinfoServ
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
+	
+	/**
+	 * 查找所有菜单供主页面使用
+	 * @param condition
+	 */
+	public List<XtMenuinfo> getXtMenuinListForRole(Map<String, Object> condition){
+		try {
+			return xtMenuinfoDao.getXtMenuinListForRole(condition);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
 }

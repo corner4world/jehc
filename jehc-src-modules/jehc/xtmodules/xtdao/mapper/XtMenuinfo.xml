@@ -274,4 +274,31 @@
         AND xt_menuinfo_status = '0'
         ORDER BY xt_menuinfo.xt_menuinfo_sort ASC
 	</select>
+	
+	
+	<!--  查找所有菜单供主页面使用  -->
+	<select id="getXtMenuinListForRole" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtMenuinfo" >
+		SELECT
+		  distinct(xt_menuinfo.`xt_menuinfo_id`) xt_menuinfo_id,
+		  xt_menuinfo.`xt_menuinfo_parentId`,
+		  xt_menuinfo.`xt_menuinfo_title`,
+		  xt_menuinfo.`xt_menuinfo_url`,
+		  xt_menuinfo.`xt_menuinfo_iconCls`,
+		  xt_menuinfo.`xt_menuinfo_leaf`,
+		  xt_menuinfo.`xt_menuinfo_images`,
+		  xt_menuinfo.`xt_menuinfo_sort`,
+		  xt_menuinfo.`xt_menuinfo_sys`,
+		  xt_menuinfo.`xt_menuinfo_status`
+		FROM
+		  `xt_menuinfo` xt_menuinfo LEFT JOIN xt_m_r xt_m_r ON xt_menuinfo.xt_menuinfo_id = xt_m_r.xt_menuinfo_id
+		WHERE 1=1
+		<if test="null != xt_role_id">
+			AND xt_m_r.`xt_role_id` IN 
+			<foreach item="item" index="index" collection="xt_role_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		AND xt_menuinfo_status = '0'
+        ORDER BY xt_menuinfo.xt_menuinfo_sort ASC
+	</select>
 </mapper>

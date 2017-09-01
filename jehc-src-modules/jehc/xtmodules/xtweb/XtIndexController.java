@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,8 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseTreeEntity;
 import jehc.xtmodules.xtcore.md5.MD5;
 import jehc.xtmodules.xtcore.util.CommonUtils;
+import jehc.xtmodules.xtcore.util.IndexTree;
 import jehc.xtmodules.xtcore.util.SortList;
 import jehc.xtmodules.xtmodel.XtMenuinfo;
 import jehc.xtmodules.xtmodel.XtUserinfo;
@@ -46,9 +49,15 @@ public class XtIndexController extends BaseAction{
 	 */
 	@SuppressWarnings("static-access")
 	@RequestMapping(value="/index.html",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadIndex(HttpServletRequest request) {
+	public ModelAndView loadIndex(Model model,HttpServletRequest request) {
 		Map<String, Object> condition = new HashMap<String, Object>();
 		commonM(condition,request);
+		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinListForRole(condition);
+		SortList<XtMenuinfo> sortList = new SortList<XtMenuinfo>();
+		sortList.Sort(xtMenuinfoList, "xt_menuinfo_sort", "asc");
+		IndexTree tree = new IndexTree(xtMenuinfoList);  
+        model.addAttribute("MenuList", tree.buildTree());
+		/*邓纯杰 注释 
 		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinfoRootForRole(condition);
 		SortList<XtMenuinfo> sortList = new SortList<XtMenuinfo>();
 		sortList.Sort(xtMenuinfoList, "xt_menuinfo_sort", "asc");
@@ -63,6 +72,7 @@ public class XtIndexController extends BaseAction{
 		}
 		msg.append("]");
 		request.setAttribute("msg", msg.toString());
+		*/
 		return new ModelAndView("pc/xt-view/xt-index/xt-index");
 	}
 	

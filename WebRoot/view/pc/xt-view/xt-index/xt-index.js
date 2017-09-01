@@ -74,18 +74,12 @@ Ext.onReady(function(){
 			border:false,
 			collapsible:collapsibleDefined,
 			hideCollapseTool:hideCollapseToolFlag,
-			/**
-			floatable:false,
-			 **/
 			titleCollapse:true,
 			/**自定义样式**/
 			header:{
-//				height:100,//也可以放开 也挺好的
+				height:109,//也可以放开 也挺好的
 				cls:'x-panel-header-defined'
 			},
-			/**
-			collapsed:true,
-			**/
             collapseDirection:'left',
             id:'leftPanel',
             collapseToolText:'收缩',
@@ -117,36 +111,33 @@ Ext.onReady(function(){
 								 },
 					             style:{/*background:'#ffffff',*/marginRight:'5px',marginLeft:'5px'}
 					        },
-//					        {
-//					        	 icon:indexMail,
-//				                 xtype:'button',
-//					             handler:function(button){
-//					             	msgTishi("该功能还未开放！");
-//								 },
-//					             style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
-//					        },
 					        {
-					    	   handler:function(){
-					    		   changeTheme();
-					    	   },
-					    	   xtype:'button',
-					    	   icon:iphoneIcon,
-					    	   style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'},
-					    	   tooltip:{
-					    		   title:'更换主题',
-					    		   width:80
-					    	   }
-					        },
-					        {
+							    handler:function(){
+								   changeTheme();
+							    },
+							    xtype:'button',
+							    icon:iphoneIcon,
+							    style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'},
+							    tooltip:{
+								   title:'更换主题',
+								   width:80
+							    }
+							 },
+							 {
 								tooltip:{title:'注销平台',width:80},
-				                xtype:'button',
-				                icon:onoffIcon,
-				                style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'},
+								xtype:'button',
+								icon:onoffIcon,
+								style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'},
 							    handler:function(){
 							     	loginout();
 							    }
-						   	 },
-					    	 {
+							},
+						    {
+			                   xtype:'tbtext',
+			                   text:sys_pt_user_name ,
+			                   cls:'top-user-name'
+			                },
+					    	{
 				                xtype:'box', 
 								width:35, 
 								height:35, 
@@ -161,7 +152,7 @@ Ext.onReady(function(){
 									src:userIcon
 								},
 					        	style:{background:'#ffffff',marginRight:'0px',marginLeft:'0px'}
-						      } 
+						     } 
 			        ],
 		            header:{
 		            	itemPosition:0,
@@ -203,7 +194,6 @@ Ext.onReady(function(){
 			      {
 						 icon:designIcon,
 						 xtype:'splitbutton',
-//						 ui:'default-toolbar',
 					     tooltip:{title:'设置位置'},
 						 menu:[
 						 {
