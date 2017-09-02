@@ -10,3 +10,10 @@
 2、使用ehcache缓存所需jar如下:
 1)ehcache-1.6.2.jar
 2)spring.jar
+
+
+3、jehc.sql为一个不包含activity工作流表  
+
+（jehc-include-activiti-tables.sql是包含activity工作流表）
+
+特地说明 执行jehc.sql脚本 启动jehc服务时 activity会自动执行
