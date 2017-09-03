@@ -7,7 +7,10 @@ http://git.oschina.net/jehc/jehc
 ### 开发前部署老出现问题 
 一般出现环境问题（主要是编译问题较多）
 建议如下操作
-
+一、
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0903/121008_95886692_1341290.png "clean.png")
+ **或** 
+二、
 1.自己创建一个工程取名按照自己的来
 
 2.修改工程编码utf8
@@ -18,6 +21,7 @@ http://git.oschina.net/jehc/jehc
 
 
 效果图片如下：
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0903/120711_27ee2214_1341290.png "首页.png")
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0902/091353_1b610b91_1341290.png "在线设计器.png")
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0901/161324_991f99c4_1341290.png "首页_1.png")
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0901/161335_03d75795_1341290.png "首页_2.png")
@@ -54,7 +58,10 @@ http://git.oschina.net/jehc/jehc
 ### 开发前部署老出现问题 
 一般出现环境问题（主要是编译问题较多）
 建议如下操作
-
+一、
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0903/121008_95886692_1341290.png "clean.png")
+ **或** 
+二、
 1.自己创建一个工程取名按照自己的来
 2.修改工程编码utf8
 3.拷贝如下几个目录全部拷贝并覆盖
