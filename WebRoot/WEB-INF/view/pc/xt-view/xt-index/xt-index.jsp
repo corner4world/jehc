@@ -583,6 +583,30 @@
 			} 
 			.x-body{background:#4d5b69;} 
 			*/
+			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+			    color: #888;
+			    /* background-color: 44b6ae; */
+			    border-color: #e7505a;
+			    color: #e7505a;
+			    background: 0 0;
+			    border-radius: 15px 15px 15px 15px!important; 
+			}
+			a:hover {
+			    cursor: pointer;
+			    color: #fff;
+			}
+			a {
+			    text-shadow: none;
+			    color: #ffffff;
+			}
+			.nav>li>a {
+			    padding: 5px 15px;
+			}
+			.nav-pills>li>a, .nav-tabs>li>a {
+			    font-size: 18px;
+			    background: #44b6ae;
+			    border-radius: 15px 15px 15px 15px!important;
+			}
    		</style>
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
