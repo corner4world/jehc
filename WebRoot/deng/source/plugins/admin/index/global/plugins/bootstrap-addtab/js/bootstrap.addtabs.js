@@ -175,7 +175,7 @@ window.Addtabs = {
                 content.append(data);
             });
         }
-
+        $('#tab_' + id).find('.close-tab').hide();
         //激活TAB
         $('#tab_' + id).addClass('active');
         $('#' + id).addClass('active');
