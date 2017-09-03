@@ -586,9 +586,9 @@
 			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
 			    color: #888;
 			    /* background-color: 44b6ae; */
-			    border-color: #e7505a;
-			    color: #e7505a;
-			    background: 0 0;
+			    border-color: #44b6ae;
+			    color: #ffffff;
+			    background: #44b6ae;
 			    border-radius: 15px 15px 15px 15px!important; 
 			}
 			a:hover {
@@ -604,7 +604,8 @@
 			}
 			.nav-pills>li>a, .nav-tabs>li>a {
 			    font-size: 18px;
-			    background: #44b6ae;
+			    background: 0 0;
+			    border-color: #e7505a;
 			    border-radius: 15px 15px 15px 15px!important;
 			}
    		</style>
