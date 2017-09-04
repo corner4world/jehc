@@ -248,6 +248,7 @@ Ext.onReady(function(){
 	initDataGrid(grid);
 	/**调用右键**/
 	initRight();
+	store.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store,searchForm));});
 });
 /**删除操作**/
 function delSolrDataConfig(){
@@ -346,15 +347,5 @@ function initRight(){
 }
 /**查询操作**/
 function search(){
-	var solr_data_config_title = Ext.getCmp("solr_data_config_title").getValue();
-	var solr_data_config_status = Ext.getCmp("solr_data_config_status").getValue();
-	store.load({
-		url:'../solrDataConfigController/getSolrDataConfigListByCondition',
-		params:{
-			start:0,
-			limit:getGridBBar(store).pageSize,
-			solr_data_config_title:solr_data_config_title,
-			solr_data_config_status:solr_data_config_status
-		}
-	});
+	initSearch(store,'../solrDataConfigController/getSolrDataConfigListByCondition',searchForm); 
 }

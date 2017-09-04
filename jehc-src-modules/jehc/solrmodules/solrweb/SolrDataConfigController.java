@@ -16,6 +16,7 @@ import com.github.pagehelper.PageInfo;
 import jehc.solrmodules.solrmodel.SolrDataConfig;
 import jehc.solrmodules.solrservice.SolrDataConfigService;
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
@@ -45,11 +46,9 @@ public class SolrDataConfigController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getSolrDataConfigListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getSolrDataConfigListByCondition(SolrDataConfig solr_Data_Config,HttpServletRequest request){
-		Map<String, Object> condition = new HashMap<String, Object>();
+	public String getSolrDataConfigListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		condition.put("solr_data_config_title",request.getParameter("solr_data_config_title"));
-		condition.put("solr_data_config_status",request.getParameter("solr_data_config_status"));
 		List<SolrDataConfig> solr_Data_ConfigList = solrDataConfigService.getSolrDataConfigListByCondition(condition);
 		PageInfo<SolrDataConfig> page = new PageInfo<SolrDataConfig>(solr_Data_ConfigList);
 		return outPageStr(page,request);
