@@ -100,7 +100,8 @@
 	}
 	.x-panel-header-defined{
 	    background-image:none;
-	    background-color:#5fa2dd;
+	   /*  background-color:#5fa2dd; */
+	    background-color:#364150;
 	}
 	.x-btn-default-toolbar-large {
 	    -webkit-border-radius: 0px;
@@ -108,6 +109,7 @@
 	    -ms-border-radius: 0px;
 	    -o-border-radius: 0px;
 	}
+	
 </style> 
 </head>  
 <body>
@@ -128,5 +130,23 @@
 <script type="text/javascript">Ext.get('load-status').update('正在拼命加载平台登录页面...')</script>
 <link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/packages/shared/example.css" type="text/css" />
 <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/packages/shared/examples.js"></script>
-
+<style>
+	.x-body {
+    	background: #364150!important;
+	}
+	.x-btn-default-large {
+	    border-color: #32c5d2;
+	}
+	.x-btn-default-large {
+	    -webkit-border-radius: 3px;
+	    -moz-border-radius: 0px;
+	    -ms-border-radius: 3px;
+	    -o-border-radius: 0px;
+	    border-radius: 0px;
+	    padding: 5px 4px 5px 4px;
+	    border-width: 1px;
+	    border-style: solid;
+	    background-color: #32c5d2;
+	}
+</sty>
 </html> 

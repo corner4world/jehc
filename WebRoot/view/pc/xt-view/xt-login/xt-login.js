@@ -12,6 +12,7 @@ Ext.onReady(function(){
 		width:400,
 		height:525,
 		border:true,
+		titleAlign:'center',
 		renderTo:Ext.getBody(),
 		style:'padding:0px 5px 0px 5px',
 		fieldDefaults:{
