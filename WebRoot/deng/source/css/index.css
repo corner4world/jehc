@@ -424,3 +424,9 @@ background-color: #5fa2dd;
 /**tbar×ÖÌåÑÕÉ«½áÊø**/
 .x-tab-bar-default-top .x-box-scroller-tab-bar-default {
 }
+
+
+.x-panel-body-default {
+    background: #ffffff;
+    border-color: #ffffff;
+}

@@ -17,9 +17,6 @@
 	   	<!-- 主题技术Extjs支持 -->
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
-		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-crisp-touch/resources/theme-crisp-touch-all.css" type="text/css" />
-		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/css/font-awesome.css" type="text/css" />
-		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/index.css" />
 	   	<script type="text/javascript">
 	    	var basePath = "${syspath}";
 	    	var sys_pt_login = "${sys_pt_login}";
@@ -44,11 +41,78 @@
 			xt_userinfo_id = '${xtUserinfo.xt_userinfo_id}';
 			</script>
 		</c:if>
+        <%
+        Cookie cookies[]=request.getCookies(); 
+		Cookie cookieC=null; 
+		if(null != cookies){
+			for(int i=0;i < cookies.length;i++){
+			    if(("css").equals(cookies[i].getName())){ 
+		      		cookieC=cookies[i]; 
+		      		break; 
+		      	}
+		    }
+		}
+	    if(null != cookieC){
+		    if(cookieC.getValue().indexOf("touch")>=0){
+				%>
+		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-crisp-touch/resources/theme-crisp-touch-all.css" type="text/css" />
+		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/index.css" />
+				<%
+			}else{
+				if(cookieC.getValue().indexOf("triton")>=0){
+				%>
+		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-triton/resources/theme-triton-all.css" type="text/css" />
+		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/triton.css" />
+				<%
+				}else{
+				%>
+		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-crisp/resources/theme-crisp-all.css" type="text/css" />
+		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/index.css" />
+				<%
+				}
+			}
+	    	%>
+	    	<%
+	    }else{
+	    	%>
+	    <link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-triton/resources/theme-triton-all.css" type="text/css" />
+	    <link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/triton.css" />
+	    	<%
+	    }
+        %>
+		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/css/font-awesome.css" type="text/css" />
+		<%
+		if(null != cookieC){
+			if(cookieC.getValue().indexOf("touch")>=0){
+				%>
+		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-crisp-touch/theme-crisp-touch.js"></script>
 		<style type="text/css">
 			.x-column-header-checkbox .x-column-header-inner, .x-grid-checkcolumn-cell-inner {
 	    		padding: 0px 0px 0px 0px;
 			}
 		</style>
+				<%
+			}else{
+				if(cookieC.getValue().indexOf("triton")>=0){
+				%>
+		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
+		<script type="text/javascript">/* collapsibleDefined=true; */hideCollapseToolFlag=false;</script>
+				<%
+				}else{
+				%>
+		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-crisp/theme-crisp.js"></script>
+				<%
+				}
+			}
+	    	%>
+	    	<%
+	    }else{
+	    	%>
+	    <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
+		<script type="text/javascript">/* collapsibleDefined=true; */hideCollapseToolFlag=false;</script>
+	    	<%
+	    }
+        %>
         <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ux/ProgressBarPager.js"></script>
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/common.js"></script>
@@ -300,6 +364,23 @@
 			}
 			/**定义用户组织机构选择样式结束**/
 			
+			<%
+			if(null != cookieC && cookieC.getValue().indexOf("triton")>=0){
+			%>
+			.x-panel-header-defined{
+			    background-image:none;
+			    background-color:#5fa2dd;
+			}
+			<%
+			}else if(null == cookieC){
+				%>
+			.x-panel-header-defined{
+			    background-image:none;
+			    background-color:#5fa2dd;
+			}	
+				<%
+			}else{
+				%>
 			/*Panel自定义样式*/
 			.x-panel-header-defined{
 			    background-image:none;
@@ -318,6 +399,9 @@
 			.x-tab-bar-default{
 				background-color:#fff;
 			}
+				<%
+			}
+			%>
 			.x-title-text {
 			    cursor: pointer;
 			}
