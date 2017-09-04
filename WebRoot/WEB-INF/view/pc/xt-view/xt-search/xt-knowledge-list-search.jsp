@@ -38,6 +38,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    background-color: #fff;
 		    border-bottom: 1px solid #fff;
 		}
+		.x-panel-header-defined {
+		    background-image: none;
+		    background-color: #32c5d2;
+		}
 	</style>
 </head>  
 <body>  
