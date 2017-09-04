@@ -101,7 +101,7 @@
 	.x-panel-header-defined{
 	    background-image:none;
 	   /*  background-color:#5fa2dd; */
-	    background-color:#364150;
+	    background-color:#32c5d2;
 	}
 	.x-btn-default-toolbar-large {
 	    -webkit-border-radius: 0px;
@@ -109,7 +109,6 @@
 	    -ms-border-radius: 0px;
 	    -o-border-radius: 0px;
 	}
-	
 </style> 
 </head>  
 <body>
