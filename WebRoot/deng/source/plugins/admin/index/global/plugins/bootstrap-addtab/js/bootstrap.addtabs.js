@@ -240,6 +240,13 @@ window.Addtabs = {
         Addtabs.drop();
         $('#popMenu').fadeOut();
     },
+    tabList:  function(){
+    	var i = 0;
+    	$.each(obj.find('li[id]'), function () {
+          i = i +1;
+        });
+    	return i;
+    },
     closeAll: function () {
         $.each(obj.find('li[id]'), function () {
             var id = $(this).children('a').attr('aria-controls');

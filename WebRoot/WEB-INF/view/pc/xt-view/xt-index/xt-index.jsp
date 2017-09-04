@@ -217,12 +217,12 @@
                                 <ul class="dropdown-menu dropdown-menu-default">
                                     <li>
                                         <a href="javascript:closeAllTab()">
-                                            <i class="icon-user"></i>关闭全部标签
+                                            <i class="icon-trash"></i>关闭全部标签
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:closeCruTab()">
-                                            <i class="icon-calendar"></i>关闭当前项
+                                            <i class="icon-close"></i>关闭当前项
                                         </a>
                                     </li>
                                 </ul>

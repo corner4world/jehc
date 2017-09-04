@@ -19,6 +19,11 @@ $(function () {
 	}) 
 
 function clickAddTab(url,title,id,close){
+	var tabNumbs = Addtabs.tabList();
+	if(tabNumbs > 5){
+		msgTishi("打开的选项卡标签不能超过6个，请关闭一些在操作!");
+		return;
+	}
 	if(null == url || url == ''){
 		return;
 	}
