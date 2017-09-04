@@ -208,6 +208,26 @@
                                     </li>
                                 </ul>
                             </li>
+                            <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                            <li class="dropdown dropdown-user">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                   <span class="username username-hide-on-mobile"> 关闭选项卡</span>
+                                   <i class="fa fa-angle-down"></i>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-default">
+                                    <li>
+                                        <a href="javascript:closeAllTab()">
+                                            <i class="icon-user"></i>关闭全部标签
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:closeCruTab()">
+                                            <i class="icon-calendar"></i>关闭当前项
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- END QUICK SIDEBAR TOGGLER -->
                             <!-- BEGIN USER LOGIN DROPDOWN -->
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -238,12 +258,6 @@
                                 </ul>
                             </li>
                             <!-- END USER LOGIN DROPDOWN -->
-                            <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                            <li class="dropdown dropdown-extended quick-sidebar-toggler">
-                                <span class="sr-only">Toggle Quick Sidebar</span>
-                                <i class="icon-logout"></i>
-                            </li>
-                            <!-- END QUICK SIDEBAR TOGGLER -->
                         </ul>
                     </div>
                     <!-- END TOP NAVIGATION MENU -->

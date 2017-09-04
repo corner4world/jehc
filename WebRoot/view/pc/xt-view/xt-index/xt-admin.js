@@ -273,8 +273,39 @@ function updateUserPic(){
 	msgTishi('暂未开放');
 }
 
+//关闭所有选项卡
+function closeAllTab(){
+	Addtabs.closeAll();
+}
 
+//关闭当前选项卡
+function closeCruTab(){
+	var id = $("li.active").children("a")[0].href.split("#")[1];
+	if(id != 'home'){
+		Addtabs.close(id);
+	    Addtabs.drop();
+	    $('#popMenu').fadeOut();
+	}
+}
 
+//关闭左侧选项卡
+function closeLeftTab(){
+	
+}
+//关闭右侧选项卡
+function closeRightTab(){
+	var tab_id = $("li.active").children("a")[0].href.split("#")[1];
+	if(tab_id != 'home'){
+	    $('#tab_' + tab_id).nextUntil().each(function () {
+	        var id = $(this).attr('id');
+	        if (id && id != 'tab_' + tab_id) {
+	            Addtabs.close($(this).children('a').attr('aria-controls'));
+	        }
+	    });
+	    Addtabs.drop();
+	    $('#popMenu').fadeOut();
+	}
+}
 
 ///**
 // * 增加标签页

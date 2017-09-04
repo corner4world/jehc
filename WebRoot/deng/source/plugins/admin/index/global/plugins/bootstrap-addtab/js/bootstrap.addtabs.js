@@ -230,6 +230,16 @@ window.Addtabs = {
         Addtabs.drop();
         Addtabs.options.callback();
     },
+    closeRight: function (tab_id) {
+        $('#tab_' + tab_id).nextUntil().each(function () {
+            var id = $(this).attr('id');
+            if (id && id != 'tab_' + tab_id) {
+                Addtabs.close($(this).children('a').attr('aria-controls'));
+            }
+        });
+        Addtabs.drop();
+        $('#popMenu').fadeOut();
+    },
     closeAll: function () {
         $.each(obj.find('li[id]'), function () {
             var id = $(this).children('a').attr('aria-controls');
