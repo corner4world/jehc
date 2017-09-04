@@ -42,7 +42,7 @@ Ext.onReady(function(){
         titleAlign:'center',
         **/
 		items:[{
-			fieldLabel:'<font style="font-size:14px;font-family:楷体;">输入登录信息时，请注意周边环境</font>',
+			fieldLabel:'<font style="font-size:18px;font-family:楷体;color:#4db3a5;">输入登录信息时，请注意周边环境</font>',
 			xtype:'textfield',
 			name:'userName',
 			id:'userName',
