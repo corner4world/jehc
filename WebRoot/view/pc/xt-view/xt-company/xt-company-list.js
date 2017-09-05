@@ -247,7 +247,7 @@ Ext.onReady(function(){
 					maxLength:32,
 					listeners:{
 				         select:function(combo,records,options){
-				         	Ext.getCmp('xt_cityID').setValue("");
+				        	Ext.getCmp('xt_cityID').setValue("");
 				         	Ext.getCmp('xt_districtID').setValue("");
 				            xtCityList.load({params:{parentId:this.value}});
 				            parms = {parentId:this.value};
@@ -274,9 +274,9 @@ Ext.onReady(function(){
 					labelWidth:40,
 					listeners:{
 				         select:function(combo,records,options){
-				         	Ext.getCmp('xt_districtID').setValue("");
+				        	Ext.getCmp('xt_districtID').setValue("");
 				            xtDistrictList.load({params:{parentId:this.value}});
-				            parms = {parentId:null};
+				            parms = {parentId:this.value};
 				    	    beforeloadstoreByStore(xtDistrictList,parms);
 				         }
 				     }
