@@ -14,12 +14,12 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 		layout:'border', 
 		maximizable:true,
 		minimizable:true,
-		maximized:true,
+//		maximized:true,
 		plain:true,
 		modal:true,
-		width:clientWidth,                    
-		height:clientHeight, 
-		headerPosition:'right',
+		width:clientWidth*0.8,                    
+		height:clientHeight*0.7, 
+		headerPosition:'left',
 		title:'导入用户',
 		listeners:{
 			minimize:function(win,opts){
@@ -72,12 +72,13 @@ function initXtUserinfoGrid(xt_role_id){
 	xtUserinfoGrid = Ext.create('top.Ext.grid.Panel',{
 		region:'north',
 		store:xtUserinfoStore,
-		height:document.documentElement.clientHeight*0.6,
+		height:document.documentElement.clientHeight*0.4,
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
 		collapsible:false,
 		autoScroll:true,
+		border:false,
 		selType:'checkboxmodel',
 		title:'待导入用户',
 		viewConfig:{
@@ -192,14 +193,13 @@ function initXtUserinfoGrided(xt_role_id){
 	xtUserinfoGrided = Ext.create('top.Ext.grid.Panel',{
 		region:'center',
 		store:xtUserinfoStoreed,
-		height:document.documentElement.clientHeight*0.7,
+		height:document.documentElement.clientHeight*0.3,
 		style:'margin-left:auto;margin-right:auto;margin-bottom:auto;',
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
-		collapsible:false,
 		autoScroll:true,
-		border:false,
+		border:true,
 		selType:'checkboxmodel',
 		/**新方法使用开始**/  
         scrollable:true,  
@@ -338,7 +338,7 @@ function initXtDpPanel(xt_role_id){
         autoEncode:true,//提交时是否自动编码   
         rootVisible:false,  
         width:200,
-        collapsible:true,
+        collapsible:false,
         title:'组织机构',
         /**新方法使用开始**/  
         scrollable:true,  

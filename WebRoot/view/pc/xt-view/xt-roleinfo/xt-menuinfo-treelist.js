@@ -7,12 +7,13 @@ function addXtMenuinfo(xt_role_id,xt_role_name){
 	xtMenuinfoWin = Ext.create('top.Ext.Window',{
 		layout:'fit',
 		width:clientWidth*0.8,                    
-		height:clientHeight, 
+		height:clientHeight*0.7, 
 		maximizable:true,
 		minimizable:true,
 		plain:true,
 		modal:true,
 		title:'导入资源',
+		headerPosition:'left',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){
