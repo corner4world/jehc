@@ -50,17 +50,21 @@ http://git.oschina.net/jehc/jehc
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/154620_2aed4456_1341290.png "调度器执行.png")
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/154630_37119ad3_1341290.png "图表饼状图.png")
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/154638_73270f9b_1341290.png "图表散点图.png")
-
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165757_eabb797a_1341290.png "图表线状图.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165818_e7c59e41_1341290.png "用户管理列表.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165831_33e15dbb_1341290.png "组织机构.png")
 
 
 jEhc能做什么
 电商后端及前端
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0902/091722_32890fdf_1341290.png "订单管理.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0902/091732_7014bec7_1341290.png "购物车管理.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0902/091749_e85d15ae_1341290.png "会员管理.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0902/091800_9f3b7790_1341290.png "商户管理.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0902/091809_17cdb963_1341290.png "商品信息.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0902/091825_87b4d3b4_1341290.png "库存管理.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165841_932f89c8_1341290.png "仓库管理.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165854_2f85c497_1341290.png "电商会员.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165901_143de6e6_1341290.png "电商商户.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165911_8d03b525_1341290.png "电商商品.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165921_04d562cc_1341290.png "订单管理.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165935_b280b392_1341290.png "购物车管理.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0905/165946_cb67214d_1341290.png "库存管理.png")
+
 
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
