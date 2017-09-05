@@ -275,7 +275,14 @@ function search(){
 }
 
 function updateUserPic(){
-	msgTishi('暂未开放');
+//	zeroModal.alert('该功能暂未开放!');
+	zeroModal.alert({
+        content:'操作提示!',
+        contentDetail:'该功能暂未开放!',
+        okFn:function(){
+        	zeroModal.alert('您选择了确认按钮');
+        }
+    });
 }
 
 //关闭所有选项卡

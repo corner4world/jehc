@@ -625,4 +625,7 @@
    		</style>
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
+    <!-- 对话框插件 -->
+	<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.css" />
+	<script src="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.min.js"></script>
 </html>

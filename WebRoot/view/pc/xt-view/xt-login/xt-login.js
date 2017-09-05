@@ -1,7 +1,7 @@
 document.onreadystatechange = overLoad;
 Ext.onReady(function(){
-	if(getnavigator()==7 || getnavigator() == 6 || getnavigator() == 0){
-		document.write("平台支持IE8及以上浏览器或谷歌，火狐，360等浏览器");
+	if(getnavigator()==7 || getnavigator()==8 || getnavigator()==9 || getnavigator() == 6 || getnavigator() == 0){
+		document.write("平台支持IE10及以上浏览器或谷歌，火狐，360等浏览器");
 		return;
 	}
 	Ext.QuickTips.init();
