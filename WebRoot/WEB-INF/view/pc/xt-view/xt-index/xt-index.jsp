@@ -617,7 +617,7 @@
 			    padding: 5px 15px;
 			}
 			.nav-pills>li>a, .nav-tabs>li>a {
-			    font-size: 18px;
+			    font-size: 13px;
 			    background: 0 0;
 			    border-color: #e7505a;
 			    border-radius: 15px 15px 15px 15px!important;
