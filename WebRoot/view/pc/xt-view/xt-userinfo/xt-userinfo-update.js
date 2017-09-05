@@ -10,7 +10,7 @@ function updateXtUserinfo(){
 	reGetWidthAndHeight();
 	xtUserinfoWinEdit = Ext.create('top.Ext.Window',{
 		layout:'fit',
-		width:clientWidth*1.1,                    
+		width:clientWidth,                    
 		height:clientHeight, 
 		maximizable:true,
 		minimizable:true,
