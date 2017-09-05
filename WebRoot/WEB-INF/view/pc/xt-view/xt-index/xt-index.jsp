@@ -622,6 +622,10 @@
 			    border-color: #e7505a;
 			    border-radius: 15px 15px 15px 15px!important;
 			}
+			
+			/* .page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
+			    font-size: 16px;
+			} */
    		</style>
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
