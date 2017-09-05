@@ -30,7 +30,7 @@
 </script>
 <style type="text/css">
 	.x-form-text-default {
-		color: #000;
+		color: #000000;
 		padding: 3px 6px 2px;
 		background-color: #fff;
 		font: 300 15px/25px helvetica, arial, verdana, sans-serif;
@@ -101,7 +101,7 @@
 	.x-panel-header-defined{
 	    background-image:none;
 	   /*  background-color:#5fa2dd; */
-	    background-color:#32c5d2;
+	    background-color:#ffffff;
 	}
 	.x-btn-default-toolbar-large {
 	    -webkit-border-radius: 0px;

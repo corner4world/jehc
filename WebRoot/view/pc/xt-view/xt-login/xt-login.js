@@ -6,13 +6,13 @@ Ext.onReady(function(){
 	}
 	Ext.QuickTips.init();
 	var panel = Ext.create('Ext.FormPanel',{
-		title:"<font color='#ffffff'>"+sys_pt_login+"</font>",
+		title:"<font style='font-size:20px;font-family:楷体;color:#4db3a5;'>"+sys_pt_login+"</font>",
 		region:'center',
 		id:'loginForm',
 		width:400,
 		height:525,
 		border:true,
-		titleAlign:'left',
+		titleAlign:'center',
 		renderTo:Ext.getBody(),
 		style:'padding:0px 5px 0px 5px',
 		fieldDefaults:{
