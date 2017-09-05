@@ -142,7 +142,7 @@
 	text-align: left;
 }
 
-.x-panel-header-default {
+/* .x-panel-header-default {
     background-image: none;
     background-color: #fff;
 }
@@ -185,7 +185,7 @@
     outline: 0;
     background-color: #fff;
     border-bottom: 1px solid #cfcfcf;
-}
+} */
 /**panel头部肤色结束**/
 /* .x-toolbar-footer {
 	padding: 6px 0 6px 6px;
@@ -198,7 +198,7 @@
 
 
 
-/**Panel字体颜色开始**/
+/**Panel字体颜色开始 也可注释掉**/
 .x-panel-header-title-default {
     color: #17C4BB;
     font-size: 18px;
@@ -221,7 +221,7 @@
     font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
     line-height: 20px;
 } */
-.x-panel-header-default-framed-top {
+/* .x-panel-header-default-framed-top {
     -moz-border-radius-topleft: 0;
     -webkit-border-top-left-radius: 0;
     border-top-left-radius: 0;
@@ -237,9 +237,9 @@
     padding: 10px 14px 10px 14px;
     border-width: 0px 0px 0 0px;
     border-style: solid;
-    /** Panel背景颜色采用默认
+    * Panel背景颜色采用默认
     background-color: #fff;
-    **/
+    *
 }
 .x-panel-default-framed {
     -moz-border-radius-topleft: 0;
@@ -257,13 +257,13 @@
     padding: 0 0 0 0;
     border-width: 0px;
     border-style: solid;
-    /**Panel背景颜色采用经典蓝**/
+    *Panel背景颜色采用经典蓝*
     background-color: #5fa2dd;
-}
+} */
 img {
     cursor: pointer;
 }
-/**
+/**新注释掉
 .x-tab-bar-default-left > .x-tab-bar-body-default {
 padding: 0px 0 0px 0px;
 }
