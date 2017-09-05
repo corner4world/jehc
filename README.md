@@ -10,6 +10,7 @@ http://git.oschina.net/jehc/jehc
 一、
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0903/121008_95886692_1341290.png "clean.png")
  **或** 
+
 二、
 1.自己创建一个工程取名按照自己的来
 
@@ -72,6 +73,7 @@ http://git.oschina.net/jehc/jehc
 一、
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0903/121008_95886692_1341290.png "clean.png")
  **或** 
+
 二、
 1.自己创建一个工程取名按照自己的来
 2.修改工程编码utf8
