@@ -146,5 +146,12 @@
 	    border-style: solid;
 	    background-color: #32c5d2;
 	}
+	.x-panel-header-default-horizontal.x-header-noborder {
+	    border-radius: 30px 30px 0px 0px;
+	}
+	
+	.x-panel-body-default {
+	    border-radius: 0px 0px 30px 30px;
+	}
 </sty>
 </html> 
