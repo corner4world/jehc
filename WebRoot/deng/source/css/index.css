@@ -444,3 +444,6 @@ background-color: #5fa2dd;
     background-color: #17C4BB;
     color:#ffffff
 }
+.x-grid-cell-inner-row-expander {
+    padding: 7px 10px 6px 2px;
+}

@@ -69,44 +69,37 @@ function initXtUserinfoFormAdd(){
 			xtype:'fieldset',
 			title:'基础信息',
 			items:[{
-					layout:"column",
+					layout:'table',
+					xtype:'form',
+					anchor:'100%',
 					items:[
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'所属公司',
-							xtype:'textfield',
-							name:'xt_company_name',
-							maxLength:32,
-							value:'宏舜信息技术有限公司',
-							readOnly:true,
-							anchor:'100%'
-						}]
+						fieldLabel:'所属公司',
+						xtype:'textfield',
+						name:'xt_company_name',
+						maxLength:32,
+						value:'宏舜信息技术有限公司',
+						readOnly:true,
+						anchor:'100%'
 					},
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'所属部门',
-							xtype:'textfield',
-							readOnly:true,
-							id:'xt_departinfo_name',
-							name:'xt_departinfo_name',
-							maxLength:32,
-							anchor:'100%'
-						}]
+						fieldLabel:'所属部门',
+						xtype:'textfield',
+						readOnly:true,
+						id:'xt_departinfo_name',
+						name:'xt_departinfo_name',
+						maxLength:32,
+						anchor:'100%'
 					},
 					{
-						columnWidth:.4,
-						items:[{
-							fieldLabel:'所属岗位',
-							xtype:'textfield',
-							id:'xt_post_name',
-							itemId:'xt_post_name',
-							name:'xt_post_name',
-							readOnly:true,
-							maxLength:32,
-							anchor:'100%'
-						}]
+						fieldLabel:'所属岗位',
+						xtype:'textfield',
+						id:'xt_post_name',
+						itemId:'xt_post_name',
+						name:'xt_post_name',
+						readOnly:true,
+						maxLength:32,
+						anchor:'100%'
 					}
 					]
 				}]
@@ -150,188 +143,160 @@ function initXtUserinfoFormAdd(){
 					anchor:'100%'
 				},
 				{
-					layout:"column",
+					layout:'table',
+					xtype:'form',
+					anchor:'100%',
 					items:[
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'用&nbsp;户&nbsp;&nbsp;名',
-							xtype:'textfield',
-							name:'xt_userinfo_name',
-							id:'xt_userinfo_name',
-							allowBlank:false,
-							maxLength:50,
-							anchor:'20%',
-							listeners:{
-						  		'blur':function(obj) {
-						  			Ext.Ajax.request({
-										url:'../xtUserinfoController/validateUser',
-										method:'post',  
-										params:{
-									        xt_userinfo_name:top.Ext.getCmp('xt_userinfo_name').getValue()
-									    },
-										success:function(response, opts) {
-											var obj=Ext.decode(response.responseText); 
-											if(obj.msg == 1){
-												msgTishi('该用户名已经被注册，请重新输入!');
-												top.Ext.getCmp("xt_userinfo_name").setValue("");  
-												top.Ext.getCmp("xt_userinfo_name").focus();
-											}
-										},
-										failure:function(response, opts) {
-											var obj=Ext.decode(response.responseText); 
-											msgTishi(obj.msg);
-											Ext.getCmp("xt_userinfo_name").setValue("");  
-											Ext.getCmp("xt_userinfo_name").focus();
+						fieldLabel:'用&nbsp;户&nbsp;&nbsp;名',
+						xtype:'textfield',
+						name:'xt_userinfo_name',
+						id:'xt_userinfo_name',
+						allowBlank:false,
+						maxLength:50,
+						anchor:'20%',
+						listeners:{
+					  		'blur':function(obj) {
+					  			Ext.Ajax.request({
+									url:'../xtUserinfoController/validateUser',
+									method:'post',  
+									params:{
+								        xt_userinfo_name:top.Ext.getCmp('xt_userinfo_name').getValue()
+								    },
+									success:function(response, opts) {
+										var obj=Ext.decode(response.responseText); 
+										if(obj.msg == 1){
+											msgTishi('该用户名已经被注册，请重新输入!');
+											top.Ext.getCmp("xt_userinfo_name").setValue("");  
+											top.Ext.getCmp("xt_userinfo_name").focus();
 										}
-									});
-								}
-						  	}
-						}]
+									},
+									failure:function(response, opts) {
+										var obj=Ext.decode(response.responseText); 
+										msgTishi(obj.msg);
+										Ext.getCmp("xt_userinfo_name").setValue("");  
+										Ext.getCmp("xt_userinfo_name").focus();
+									}
+								});
+							}
+					  	}
 					},
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别',
-							xtype:"combo",
-		            		queryMode:'local', 
-							store:xtUserinfoSexList,
-							name:'xt_userinfo_sex',
-							triggerAction:"all",
-				            editable:false,
-				            emptyText:'请选择',
-				            valueField:"xt_data_dictionary_id",
-				            displayField:"xt_data_dictionary_name",
-							anchor:'20%'
-						}]
+						fieldLabel:'性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别',
+						xtype:"combo",
+	            		queryMode:'local', 
+						store:xtUserinfoSexList,
+						name:'xt_userinfo_sex',
+						triggerAction:"all",
+			            editable:false,
+			            emptyText:'请选择',
+			            valueField:"xt_data_dictionary_id",
+			            displayField:"xt_data_dictionary_name",
+						anchor:'20%'
 					},
 					{
-						columnWidth:.4,
-						items:[{
-							fieldLabel:'出生年月',
-							xtype:'datefield',
-							format:'Y-m-d',
-							name:'xt_userinfo_birthday',
-							maxLength:20,
-							anchor:'20%'
-						}]
+						fieldLabel:'出生年月',
+						xtype:'datefield',
+						format:'Y-m-d',
+						name:'xt_userinfo_birthday',
+						maxLength:20,
+						anchor:'20%'
 					}
 					]
 				},
 				{
-					layout:"column",
+					layout:'table',
+					xtype:'form',
+					anchor:'100%',
 					items:[
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'真实姓名',
-							xtype:'textfield',
-							name:'xt_userinfo_realName',
-							maxLength:30,
-							anchor:'100%'
-						}]
+						fieldLabel:'真实姓名',
+						xtype:'textfield',
+						name:'xt_userinfo_realName',
+						maxLength:30,
+						anchor:'100%'
 					},
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'是否已婚',
-							xtype:"combo",
-							queryMode:'local', 
-							store:xtUserinfoIsmarriedList,
-							triggerAction:"all",
-				            editable:false,
-				            emptyText:'请选择',
-				            valueField:"xt_data_dictionary_id",
-				            displayField:"xt_data_dictionary_name",
-							name:'xt_userinfo_ismarried',
-							anchor:'100%'
-						}]
+						fieldLabel:'是否已婚',
+						xtype:"combo",
+						queryMode:'local', 
+						store:xtUserinfoIsmarriedList,
+						triggerAction:"all",
+			            editable:false,
+			            emptyText:'请选择',
+			            valueField:"xt_data_dictionary_id",
+			            displayField:"xt_data_dictionary_name",
+						name:'xt_userinfo_ismarried',
+						anchor:'100%'
 					},
 					{
-						columnWidth:.4,
-						items:[{
-							fieldLabel:'身份证号',
-							xtype:'textfield',
-							name:'xt_userinfo_card',
-							maxLength:20,
-							anchor:'100%'
-						}]
+						fieldLabel:'身份证号',
+						xtype:'textfield',
+						name:'xt_userinfo_card',
+						maxLength:20,
+						anchor:'100%'
 					}
 					]
 				},
 				{
-					layout:"column",
+					layout:'table',
+					xtype:'form',
+					anchor:'100%',
 					items:[
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族',
-							xtype:"combo",
-							queryMode:'local', 
-							store:xtUserinfoNationList,
-							name:'xt_userinfo_nation',
-							triggerAction:"all",
-				            editable:false,
-				            emptyText:'请选择',
-				            valueField:"xt_data_dictionary_id",
-				            displayField:"xt_data_dictionary_name",
-							anchor:'20%'
-						}]
+						fieldLabel:'名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族',
+						xtype:"combo",
+						queryMode:'local', 
+						store:xtUserinfoNationList,
+						name:'xt_userinfo_nation',
+						triggerAction:"all",
+			            editable:false,
+			            emptyText:'请选择',
+			            valueField:"xt_data_dictionary_id",
+			            displayField:"xt_data_dictionary_name",
+						anchor:'20%'
 					},
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯',
-							xtype:'textfield',
-							name:'xt_userinfo_origo',
-							maxLength:20,
-							anchor:'20%'
-						}]
+						fieldLabel:'籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯',
+						xtype:'textfield',
+						name:'xt_userinfo_origo',
+						maxLength:20,
+						anchor:'20%'
 					},
 					{
-						columnWidth:.4,
-						items:[{
-							fieldLabel:'毕业学校',
-							xtype:'textfield',
-							name:'xt_userinfo_schoolName',
-							maxLength:20,
-							anchor:'25%'
-						}]
+						fieldLabel:'毕业学校',
+						xtype:'textfield',
+						name:'xt_userinfo_schoolName',
+						maxLength:20,
+						anchor:'25%'
 					}
 					]
 				},
 				{
-					layout:"column",
+					layout:'table',
+					xtype:'form',
+					anchor:'100%',
 					items:[
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'联系电话',
-							xtype:'textfield',
-							name:'xt_userinfo_phone',
-							maxLength:30,
-							anchor:'35%'
-						}]
+						fieldLabel:'联系电话',
+						xtype:'textfield',
+						name:'xt_userinfo_phone',
+						maxLength:30,
+						anchor:'35%'
 					},
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'移动电话',
-							xtype:'textfield',
-							name:'xt_userinfo_mobile',
-							maxLength:20,
-							anchor:'35%'
-						}]
+						fieldLabel:'移动电话',
+						xtype:'textfield',
+						name:'xt_userinfo_mobile',
+						maxLength:20,
+						anchor:'35%'
 					},
 					{
-						columnWidth:.4,
-						items:[{
-							fieldLabel:'其他电话',
-							xtype:'textfield',
-							name:'xt_userinfo_ortherTel',
-							maxLength:20,
-							anchor:'35%'
-						}]
+						fieldLabel:'其他电话',
+						xtype:'textfield',
+						name:'xt_userinfo_ortherTel',
+						maxLength:20,
+						anchor:'35%'
 					}
 					]
 				},
@@ -351,84 +316,68 @@ function initXtUserinfoFormAdd(){
 					anchor:'100%'
 				},
 				{
-					layout:"column",
+					layout:'table',
+					xtype:'form',
+					anchor:'100%',
 					items:[
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'入职时间',
-							xtype:'datefield',
-							format:'Y-m-d',
-							name:'xt_userinfo_intime',
-							maxLength:20,
-							anchor:'100%'
-						}]
+						fieldLabel:'入职时间',
+						xtype:'datefield',
+						format:'Y-m-d',
+						name:'xt_userinfo_intime',
+						maxLength:20,
+						anchor:'100%'
 					},
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'离职时间',
-							xtype:'datefield',
-							format:'Y-m-d',
-							name:'xt_userinfo_outTime',
-							maxLength:20,
-							anchor:'100%'
-						}]
+						fieldLabel:'离职时间',
+						xtype:'datefield',
+						format:'Y-m-d',
+						name:'xt_userinfo_outTime',
+						maxLength:20,
+						anchor:'100%'
 					},
 					{
-						columnWidth:.4,
-						items:[{
-							fieldLabel:'到期时间',
-							xtype:'datefield',
-							format:'Y-m-d',
-							name:'xt_userinfo_contractTime',
-							maxLength:20,
-							anchor:'100%'
-						}]
+						fieldLabel:'到期时间',
+						xtype:'datefield',
+						format:'Y-m-d',
+						name:'xt_userinfo_contractTime',
+						maxLength:20,
+						anchor:'100%'
 					}
 					]
 				},
 				{
-					layout:"column",
-					baseCls:'x-plain',
-					xtype:'panel',
+					layout:'table',
+					xtype:'form',
+					anchor:'100%',
 					items:[
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'QQ&nbsp;号码',
-							xtype:'textfield',
-							name:'xt_userinfo_qq',
-							maxLength:12,
-							anchor:'35%'
-						}]
+						fieldLabel:'QQ&nbsp;号码',
+						xtype:'textfield',
+						name:'xt_userinfo_qq',
+						maxLength:12,
+						anchor:'35%'
 					},
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'电子邮件',
-							xtype:'textfield',
-							name:'xt_userinfo_email',
-							maxLength:50,
-							anchor:'35%'
-						}]
+						fieldLabel:'电子邮件',
+						xtype:'textfield',
+						name:'xt_userinfo_email',
+						maxLength:50,
+						anchor:'35%'
 					},
 					{
-						columnWidth:.4,
-						items:[{
-							fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
-							xtype:"combo",
-							queryMode:'local', 
-							store:xtUserinfoStateListList,
-							triggerAction:"all",
-				            editable:false,
-				            emptyText:'请选择',
-				            valueField:"xt_data_dictionary_id",
-				            displayField:"xt_data_dictionary_name",
-							name:'xt_userinfo_state',
-							allowBlank:false,
-							anchor:'20%'
-						}]
+						fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
+						xtype:"combo",
+						queryMode:'local', 
+						store:xtUserinfoStateListList,
+						triggerAction:"all",
+			            editable:false,
+			            emptyText:'请选择',
+			            valueField:"xt_data_dictionary_id",
+			            displayField:"xt_data_dictionary_name",
+						name:'xt_userinfo_state',
+						allowBlank:false,
+						anchor:'20%'
 					}
 					]
 				}]
@@ -436,51 +385,44 @@ function initXtUserinfoFormAdd(){
 			xtype:'fieldset',
 			title:'其他信息',
 			items:[{
-					layout:"column",
+					layout:'table',
+					xtype:'form',
+					anchor:'100%',
 					items:[
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'政治面貌',
-							xtype:'textfield',
-							name:'xt_userinfo_politicalStatus',
-							maxLength:20,
-							anchor:'100%'
-						}]
+						fieldLabel:'政治面貌',
+						xtype:'textfield',
+						name:'xt_userinfo_politicalStatus',
+						maxLength:20,
+						anchor:'100%'
 					},
 					{
-						columnWidth:.3,
-						items:[{
-							fieldLabel:'文化程度',
-							xtype:"combo",
-							queryMode:'local', 
-							store:xtUserinfoHighestDegreeList,
-							triggerAction:"all",
-				            editable:false,
-				            emptyText:'请选择',
-				            valueField:"xt_data_dictionary_id",
-				            displayField:"xt_data_dictionary_name",
-							name:'xt_userinfo_highestDegree',
-							maxLength:20,
-							anchor:'100%'
-						}]
+						fieldLabel:'文化程度',
+						xtype:"combo",
+						queryMode:'local', 
+						store:xtUserinfoHighestDegreeList,
+						triggerAction:"all",
+			            editable:false,
+			            emptyText:'请选择',
+			            valueField:"xt_data_dictionary_id",
+			            displayField:"xt_data_dictionary_name",
+						name:'xt_userinfo_highestDegree',
+						maxLength:20,
+						anchor:'100%'
 					},
 					{
-						columnWidth:.4,
-						items:[{
-							fieldLabel:'工作年限',
-							xtype:"combo",
-							queryMode:'local', 
-							store:xtUserinfoWorkYearList,
-							triggerAction:"all",
-				            editable:false,
-				            emptyText:'请选择',
-				            valueField:"xt_data_dictionary_id",
-				            displayField:"xt_data_dictionary_name",
-							name:'xt_userinfo_workYear',
-							maxLength:20,
-							anchor:'100%'
-						}]
+						fieldLabel:'工作年限',
+						xtype:"combo",
+						queryMode:'local', 
+						store:xtUserinfoWorkYearList,
+						triggerAction:"all",
+			            editable:false,
+			            emptyText:'请选择',
+			            valueField:"xt_data_dictionary_id",
+			            displayField:"xt_data_dictionary_name",
+						name:'xt_userinfo_workYear',
+						maxLength:20,
+						anchor:'100%'
 					}
 					]
 				},

@@ -240,7 +240,7 @@ function initCacheData(CacheType,CacheName){
         columnLines:true,
         frame:true,
         width:600,
-        height:200,
+        height:150,
         plugins:{
 			ptype:'cellediting',
         	clicksToEdit:1
