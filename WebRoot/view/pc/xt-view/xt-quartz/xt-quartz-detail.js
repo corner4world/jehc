@@ -45,6 +45,11 @@ function initXtQuartzFormDetail(){
 		waitMsgTarget:true,
 		defaultType:'textfield',
 		autoScroll:true,
+		/**新方法使用开始**/  
+        scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',
+        /**新方法使用结束**/ 
 		fieldDefaults:{
 			labelWidth:140,
 			labelAlign:'right',

@@ -51,6 +51,11 @@ function initXtQuartzFormAdd(){
 			flex:1,
 			margin:'2 5 4 5'
 		},
+		/**新方法使用开始**/  
+        scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',
+        /**新方法使用结束**/ 
 		items:[
 		{
 			fieldLabel:'任务编号',
