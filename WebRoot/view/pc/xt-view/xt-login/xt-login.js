@@ -6,13 +6,13 @@ Ext.onReady(function(){
 	}
 	Ext.QuickTips.init();
 	var panel = Ext.create('Ext.FormPanel',{
-		title:"<font style='font-size:20px;font-family:楷体;color:#4db3a5;'>"+sys_pt_login+"</font>",
+		title:"<font style='font-size:20px;font-family:楷体;color:#ffffff;'>"+sys_pt_login+"</font>",
 		region:'center',
 		id:'loginForm',
 		width:400,
 		height:525,
-		border:true,
-		titleAlign:'center',
+		border:false,
+		titleAlign:'LEFT',
 		renderTo:Ext.getBody(),
 		style:'padding:0px 5px 0px 5px',
 		fieldDefaults:{
@@ -42,7 +42,7 @@ Ext.onReady(function(){
         titleAlign:'center',
         **/
 		items:[{
-			fieldLabel:'<font style="font-size:18px;font-family:楷体;color:#4db3a5;">输入登录信息时，请注意周边环境</font>',
+			fieldLabel:'<font style="font-size:16px;font-family:楷体;color:#CFCFCF;">输入登录信息时，请注意周边环境</font>',
 			xtype:'textfield',
 			name:'userName',
 			id:'userName',
