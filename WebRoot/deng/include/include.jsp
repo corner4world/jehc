@@ -303,7 +303,7 @@
 			/*Panel自定义样式*/
 			.x-panel-header-defined{
 			    background-image:none;
-			    background-color:#5fa2dd;/**#35baf6**/
+			    background-color:#17C4BB;/**#35baf6**/
 			}
 			.x-panel-header-default .x-tool-img{
 				background-color:#fff;/**0e90d2,#dd514c**/
