@@ -35,7 +35,7 @@ Ext.onReady(function(){
 	store = getGridJsonStore('../solrCoreController/getSolrCoreListByCondition?solr_url_id='+$("#solr_url_id_").val(),[]);
 	expander = Ext.create('Ext.ux.RowExpander',{
 	    rowBodyTpl:Ext.create('Ext.XTemplate',
-	    	'<div id="solr_entity{solr_core_id}-body" style="border:1px solid #5fa2dd;width:602px"></div>'
+	    	'<div id="solr_entity{solr_core_id}-body" style="border:0px solid #5fa2dd;width:602px"></div>'
 	    ),
 	    lazyRender:true,  
        	enableCaching:false 
@@ -439,9 +439,10 @@ function initSolrEntity(solr_core_id,solr_document_id){
         animate:false,
         columnLines:true,
         frame:true,
-        width:600,
+        width:700,
         bufferedRenderer:false,
         title:'实体列表',
+        headerPosition:'left',
         viewConfig:{
 			emptyText:'暂无数据',
 			stripeRows:true

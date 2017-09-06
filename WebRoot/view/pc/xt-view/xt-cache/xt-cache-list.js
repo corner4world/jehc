@@ -5,7 +5,7 @@ Ext.onReady(function(){
 	store = getGridJsonStore('../xtCacheController/getXtCacheListByCondition',[]);
 	expander = new Ext.ux.RowExpander({
 		rowBodyTpl:new Ext.XTemplate(
-	    	'<div width="100%" style="margin:0 auto;border:1px solid #5fa2dd;width:602px" id="cache_data{CacheType}{CacheName}"></div>'
+	    	'<div width="100%" style="margin:0 auto;border:0px solid #5fa2dd;width:602px" id="cache_data{CacheType}{CacheName}"></div>'
 	    )
 		/**,
        	toggleRow:function(row){  
@@ -246,6 +246,7 @@ function initCacheData(CacheType,CacheName){
         	clicksToEdit:1
 		},
         title:'数据列表',
+        headerPosition:'left',
         viewConfig:{
 			emptyText:'暂无数据',
 			stripeRows:true

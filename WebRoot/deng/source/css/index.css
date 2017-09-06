@@ -430,6 +430,17 @@ background-color: #5fa2dd;
     border-color: #f5f5f5; 
 } 
 .x-column-header {
-    background-color: #cfcfcf;
+	border-right: 0px solid #17C4BB;
+    background-color: #17C4BB;
+    color:#ffffff
+}
+.x-column-header-over {
+	border-right: 0px solid #e7505a;
+    background-color: #e7505a;
+    color:#ffffff
+}
+.x-column-header.x-column-header-focus{
+	border-right: 0px solid #17C4BB;
+    background-color: #17C4BB;
     color:#ffffff
 }
