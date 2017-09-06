@@ -50,6 +50,11 @@ function initXtPostFormEdit(){
 		labelWidth:50,
 		waitMsgTarget:true,
 		defaultType:'textfield',
+		/**新方法使用开始**/  
+        scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',
+        /**新方法使用结束**/ 
 		autoScroll:true,
 		fieldDefaults:{
 	        labelWidth:70,
