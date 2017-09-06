@@ -211,7 +211,7 @@
                             <!-- BEGIN QUICK SIDEBAR TOGGLER -->
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                   <span class="username username-hide-on-mobile"> 关闭选项卡</span>
+                                   <span class="username username-hide-on-mobile"> 选项卡操作</span>
                                    <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
@@ -223,6 +223,11 @@
                                     <li>
                                         <a href="javascript:closeCruTab()">
                                             <i class="icon-close"></i>关闭当前项
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:refreshCruTab()">
+                                            <i class="icon-reload"></i>刷新当前选项卡标签
                                         </a>
                                     </li>
                                 </ul>

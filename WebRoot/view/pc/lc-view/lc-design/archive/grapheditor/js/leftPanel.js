@@ -10,9 +10,10 @@ function initLeftPanel(){
         collapsible:true,
         border:false,
         /**新方法使用开始**/  
-        scrollable:true,  
+        /*scrollable:true,  
         scrollable:'x',
-        scrollable:'y',
+        scrollable:'y',*/
+        autoScroll:false,
         /**新方法使用结束**/ 
         layout:{
 			type:'accordion',

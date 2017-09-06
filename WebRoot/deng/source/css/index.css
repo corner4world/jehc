@@ -426,8 +426,10 @@ background-color: #5fa2dd;
 .x-tab-bar-default-top .x-box-scroller-tab-bar-default {
 }
 
-
 .x-panel-body-default {
-    background: #ffffff;
-    border-color: #ffffff;
+    border-color: #f5f5f5; 
+} 
+.x-column-header {
+    background-color: #cfcfcf;
+    color:#ffffff
 }

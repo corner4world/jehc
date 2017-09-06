@@ -300,6 +300,15 @@ function closeCruTab(){
 	}
 }
 
+function refreshCruTab(){
+	var jehchref = $($("li.active").children("a")[0]).attr('jehchref');
+	var jehcid = $($("li.active").children("a")[0]).attr('jehcid');
+	if(null == jehchref){
+		return;
+	}
+	Addtabs.add({'id':jehcid,'url':jehchref});
+}
+
 //关闭左侧选项卡
 function closeLeftTab(){
 	

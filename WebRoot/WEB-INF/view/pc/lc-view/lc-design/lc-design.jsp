@@ -141,7 +141,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	.x-accordion-item .x-accordion-hd {
 	    padding: 4px 10px;
 	}
-	.x-panel-default-framed-outer-border-rbl {
+	/* .x-panel-default-framed-outer-border-rbl {
 	    border-right-color: #ffffff!important;
 	    border-right-width: 1px !important;
 	    border-bottom-color: #ffffff!important;
@@ -208,7 +208,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
 	    border-width: 1px;
 	    border-style: solid;
-	}
+	} */
     </style>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/js/mxClient.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/css/grapheditor.css" />

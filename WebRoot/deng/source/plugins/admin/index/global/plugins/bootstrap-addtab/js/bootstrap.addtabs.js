@@ -125,13 +125,17 @@ window.Addtabs = {
             var title = $('<li>', {
                 'role': 'presentation',
                 'id': 'tab_' + id,
-                'aria-url':opts.url
+                'aria-url':opts.url,
+                'jehchref':opts.url,
+                'jehcid':opts.id
             }).append(
                 $('<a>', {
                     'href': '#' + id,
                     'aria-controls': id,
                     'role': 'tab',
-                    'data-toggle': 'tab'
+                    'data-toggle': 'tab',
+                    'jehchref':opts.url,
+                    'jehcid':opts.id
                 }).html(opts.title)
             );
 
@@ -165,6 +169,7 @@ window.Addtabs = {
                 $('<iframe>', {
                     'class': 'iframeClass',
                     'height': Addtabs.options.iframeHeight,
+                    /*'id':id,*/
                     'frameborder': "no",
                     'border': "0",
                     'src': opts.url

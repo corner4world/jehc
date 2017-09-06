@@ -11,10 +11,15 @@ function initEastPanel(graph){
 	var processNo = new Date().getTime();
 	basePanel = new Ext.TabPanel({
         region:'center',
-		autoScroll:true,
+		autoScroll:false,
 		tabPosition:'left',
 		tabRotation:0,
 		activeTab:1,  
+		/**新方法使用开始**/  
+        /*scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',*/
+        /**新方法使用结束**/ 
         items:[{
 	        	title:'事件配置',
 	        	items:event_main_grid,layout:'border'
