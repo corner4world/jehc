@@ -69,7 +69,7 @@ function initXtUserinfoFormDetail(){
 		},
 		items:[{
 				xtype:'fieldset',
-				title:'个人信息',
+				title:'组织机构',
 				items:[{
 					layout:'table',
 					xtype:'form',

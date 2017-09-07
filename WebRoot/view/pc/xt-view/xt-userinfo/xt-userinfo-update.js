@@ -83,7 +83,7 @@ function initXtUserinfoFormEdit(){
 		},
 		items:[{
 				xtype:'fieldset',
-				title:'基础信息',
+				title:'组织机构',
 				items:[{
 					layout:'table',
 					xtype:'form',
