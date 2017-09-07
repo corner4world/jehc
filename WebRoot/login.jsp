@@ -2,6 +2,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>  
 <head>  
+<!-- IE 浏览作用 兼容模式打开页面。 chrome=1 开启 chrome 支持，适用多个核的浏览器。 -->
+<meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1" />
 <meta charset="UTF-8">  
 <title>${sys_pt_login }</title>  
 <link rel="icon" type="image/ico" href="${syspath}/deng/images/icons/system.png" />
