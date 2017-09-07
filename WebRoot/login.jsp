@@ -100,7 +100,7 @@
 	}
 	.x-panel-header-defined{
 	    background-image:none;
-	    background-color:#FB5557;
+	    background-color:#32c5d2;
 	}
 	.x-btn-default-toolbar-large {
 	    -webkit-border-radius: 0px;
@@ -130,7 +130,7 @@
 <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/packages/shared/examples.js"></script>
 <style>
 	.x-body {
-    	background: #364150!important;
+    	background: #f5f5f5!important;
 	}
 	.x-btn-default-large {
 	    border-color: #FFFFFF;
@@ -147,11 +147,11 @@
 	    background-color: #32c5d2;
 	}
 	.x-panel-header-default-horizontal.x-header-noborder {
-	    border-radius: 30px 30px 0px 0px;
+	    border-radius: 5px 5px 0px 0px;
 	}
 	
 	.x-panel-body-default {
-	    border-radius: 0px 0px 30px 30px;
+	    border-radius: 0px 0px 5px 5px;
 	}
 </sty>
 </html> 

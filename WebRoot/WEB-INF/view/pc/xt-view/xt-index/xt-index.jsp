@@ -426,7 +426,7 @@
 				                                </div>
 				                                <div class="tile double bg-blue-madison">
 				                                    <div class="tile-body">
-				                                        <img src="${syspath}/deng/source/plugins/admin/index//pages/media/profile/photo1.jpg" alt="">
+				                                        <img src="${syspath}/deng/source/plugins/admin/index/pages/media/profile/photo1.jpg" alt="">
 				                                        <h4>开源社区jEhc</h4>
 				                                        <p> 让你二次开发 快速入手... </p>
 				                                    </div>

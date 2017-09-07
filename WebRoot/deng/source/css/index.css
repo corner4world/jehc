@@ -447,3 +447,7 @@ background-color: #5fa2dd;
 .x-grid-cell-inner-row-expander {
     padding: 7px 10px 6px 2px;
 }
+.x-column-header-open {
+   border-right: 0px solid #e7505a;
+   background-color: #e7505a;
+}
