@@ -435,20 +435,19 @@ background-color: #5fa2dd;
     color:#ffffff
 }
 .x-column-header-over {
-	border-right: 0px solid #e7505a;
-    background-color: #e7505a;
+	border-right: 0px solid #ff9900;
+    background-color: #ff9900;
     color:#ffffff
 }
 .x-column-header.x-column-header-focus{
-	border-right: 0px solid #17C4BB;
-    background-color: #17C4BB;
+	border-right: 0px solid #ff9900;
+    background-color: #ff9900;
     color:#ffffff
 }
 .x-grid-cell-inner-row-expander {
     padding: 7px 10px 6px 2px;
 }
 .x-column-header-open {
-   border-right: 0px solid #e7505a;
+   border-right: 0px solid #ff9900;
    background-color: #e7505a;
 }
-5px 10px 6px 2px
