@@ -4,22 +4,6 @@ http://git.oschina.net/jehc/jehc
 
  **QQ讨论群:330370132** 
 
-### 开发前部署老出现问题 
-一般出现环境问题（主要是编译问题较多）
-建议如下操作
-一、
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0903/121008_95886692_1341290.png "clean.png")
- **或** 
-
-二、
-1.自己创建一个工程取名按照自己的来
-
-2.修改工程编码utf8
-
-3.拷贝如下几个目录全部拷贝并覆盖
-** 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0819/113650_c37e551c_1341290.png "[ON1R~`4U[R90ED5CB~B(]H.png")
-
 
 效果图片如下：
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0907/140435_79617dae_1341290.jpeg "首页.jpg")
