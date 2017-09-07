@@ -554,7 +554,7 @@
 			.nav-pills>li>a, .nav-tabs>li>a {
 			    font-size: 13px;
 			    background: 0 0;
-			    border-color: #e7505a;
+			    border-color: #ff9900;
 			    border-radius: 15px 15px 15px 15px!important;
 			}
 			
