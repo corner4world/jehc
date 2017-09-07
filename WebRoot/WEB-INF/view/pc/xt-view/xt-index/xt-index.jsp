@@ -1,12 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/deng/include/include.jsp"%>
+<%@ include file="/deng/include/includeboot.jsp"%>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
-<!--[if !IE]><!-->
 <html lang="en">
-    <!--<![endif]-->
-    <!-- BEGIN HEAD -->
     <head>
         <meta charset="utf-8" />
         <title>${sys_pt_index_top}</title>
@@ -15,38 +11,6 @@
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta content="" name="description" />
         <meta content="" name="author" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
-        <!-- END GLOBAL MANDATORY STYLES -->
-        <!-- BEGIN THEME GLOBAL STYLES -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-        <!-- END THEME GLOBAL STYLES -->
-        <!-- BEGIN THEME LAYOUT STYLES -->
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
-		<script type="text/javascript">
-    	var basePath = "${syspath}";
-    	var sys_pt_login = "${sys_pt_login}";
-    	var sys_pt_index = "${sys_pt_index}";
-    	var sys_pt_index_foot = "${sys_pt_index_foot}";
-    	var sys_pt_index_top = "${sys_pt_index_top}";
-    	var sys_pt_session = "${sys_pt_session}";
-    	var sys_pt_user_name = "${xtUserinfo.xt_userinfo_realName}";
-    	var moretext = "${moretext}";
-    	var moretexttooltip = "${moretexttooltip}";
-    	var grid_toolbar_gaps = "${grid_toolbar_gaps}";
-    	var grid_toolbar_moretext_gaps = "${grid_toolbar_moretext_gaps}";
-    	var JSESSIONID;
-    	var collapsibleDefined=true;
-    	var tbarBtnMinWidth=0;
-    	var hideCollapseToolFlag=true;
-    	var lc_design_displaywin_for_edit = ${lc_design_displaywin_for_edit};
-    	var xt_userinfo_id; 
-		</script>
 	</head>
     <!-- END HEAD -->
     <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
@@ -535,11 +499,9 @@
 		                </div>
 		            </div>
                     <!-- END PAGE HEADER-->
-                    
                 <!-- END CONTENT BODY -->
             </div>
             <!-- END CONTENT -->
-            
         </div>
         <!-- END CONTAINER -->
         <!-- BEGIN FOOTER -->
@@ -551,38 +513,6 @@
                 <i class="icon-arrow-up"></i>
             </div>
         </div>
-        <!-- END FOOTER -->
-        <!--[if lt IE 9]>
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/respond.min.js"></script>
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/excanvas.min.js"></script> 
-		<![endif]-->
-        <!-- BEGIN CORE PLUGINS -->
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-        <!-- END CORE PLUGINS -->
-        <!-- BEGIN PAGE LEVEL PLUGINS -->
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js" type="text/javascript"></script>
-        <!-- END PAGE LEVEL PLUGINS -->
-        <!-- BEGIN THEME GLOBAL SCRIPTS -->
-        <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/app.min.js" type="text/javascript"></script>
-        <!-- END THEME GLOBAL SCRIPTS -->
-        <!-- BEGIN PAGE LEVEL SCRIPTS -->
-        <script src="${syspath}/deng/source/plugins/admin/index/apps/scripts/inbox.min.js" type="text/javascript"></script>
-        <!-- END PAGE LEVEL SCRIPTS -->
-        <!-- BEGIN THEME LAYOUT SCRIPTS -->
-        <script src="${syspath}/deng/source/plugins/admin/index/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-        <!-- END THEME LAYOUT SCRIPTS -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/css/bootstrap.addtabs.css" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/js/bootstrap.addtabs.js" type="text/javascript"></script>
    		<style type="text/css">
    			/* .nav-tabs {border-bottom: 1px solid #4d5b69;} */
 			/* .page-container-bg-solid .page-content {background: #4d5b69;} */
@@ -634,7 +564,4 @@
    		</style>
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
-    <!-- 对话框插件 -->
-	<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.css" />
-	<script src="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.min.js"></script>
 </html>
