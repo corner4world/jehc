@@ -46,7 +46,7 @@
 		</c:if>
 		<style type="text/css">
 			.x-column-header-checkbox .x-column-header-inner, .x-grid-checkcolumn-cell-inner {
-	    		padding: 0px 0px 0px 0px;
+	    		padding: 5px 12px 6px 1px;
 			}
 		</style>
         <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ux/ProgressBarPager.js"></script>
