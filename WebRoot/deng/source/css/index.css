@@ -451,3 +451,6 @@ background-color: #5fa2dd;
    border-right: 0px solid #cc9933;
    background-color: #cc9933;
 }
+.x-panel-header-title-default-framed {
+    color: rgb(23, 196, 187);
+}

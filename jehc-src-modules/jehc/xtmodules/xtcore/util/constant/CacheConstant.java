@@ -12,4 +12,7 @@ public class CacheConstant {
 	public static final String XTFUNCTIONINFOCOMMONCACHE="XtFunctioninfoCommonCache";//公共功能
 	public static final String SOLRCORECACHE="SolrCoreCache";//SOLR实例缓存
 	public static final String XTAREAREGIONCACHE = "XtAreaRegionCache";//行政区域实例缓存
+	
+	public static final String XTPATHCACHE_XTDbSTRUCTURE_FILE_PATH = "XTPATHCACHE_XTDbSTRUCTURE_FILE_PATH";//数据库表结构word导出路径
+			
 }

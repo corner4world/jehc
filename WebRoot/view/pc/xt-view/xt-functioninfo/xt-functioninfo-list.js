@@ -3,15 +3,46 @@ var store;
 Ext.onReady(function(){	
 	initGrid();
 	Ext.create('Ext.Viewport', {
-		layout:'fit',
+		layout:'border',
 		xtype:'viewport',
-		items:[grid]
+		items:[searchForm,grid]
 	});
 });
 /**
 *初始化资源模块
 **/
 function initGrid(){
+	/**查询区域可扩展**/
+	var items = Ext.create('Ext.FormPanel',{
+		xtype:'form',
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:70,
+			labelAlign:'left',
+			flex:1,
+			margin:'2 5 4 5'
+		},
+		items:[
+			{
+			    xtype:'triggerfield',
+			    emptyText:'请输入关键字（如菜单、平台等）',
+			    triggerCls:'x-form-clear-trigger',
+			    width:260,
+			    onTriggerClick:function(){
+			        this.reset();
+			    },
+			    listeners:{
+			        change:function(){
+			            filterBy(grid,this.getValue(),'text');
+			        },
+			        buffer:250
+			    }
+			 }
+		]
+	});
+	initSearchForm('north',items,false,'left');
 	store = Ext.create('Ext.data.TreeStore',{
     	root:{
 			name:'一级',
@@ -41,24 +72,10 @@ function initGrid(){
         id:'treeGrid',
         animate:false,
         columnLines:true,
-        frame:true,
+        frame:false,
+        title:'查询结果',
         bufferedRenderer:false,
-        bbar:['->',
-        	{
-		        xtype:'triggerfield',
-		        emptyText:'请输入关键字（如菜单、平台等）',
-		        triggerCls:'x-form-clear-trigger',
-		        width:260,
-		        onTriggerClick:function(){
-		            this.reset();
-		        },
-		        listeners:{
-		            change:function(){
-		                filterBy(grid,this.getValue(),'text');
-		            },
-		            buffer:250
-			    }
-			 },
+        tbar:[
 			 {
 				text:'添 加',
 				tooltip:'添 加',

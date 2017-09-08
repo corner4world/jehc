@@ -158,6 +158,16 @@ Ext.onReady(function(){
 				}
 			 },
 			 {
+				text:'导出数据字典',
+				tooltip:'导出数据字典',
+				scope:this,
+				minWidth:tbarBtnMinWidth,
+				icon:dcIcon,
+				handler:function(){
+					exportXtDbTableAttribute(grid,'../xtDbStructureController/exportXtDbTableAttribute');
+				}
+			 },
+			 {
 				text:'打 印',
 				tooltip:'打 印',
 				scope:this,
@@ -191,6 +201,10 @@ Ext.onReady(function(){
 function exportXtDbStructure(grid,url){
 	exportExcel(grid,url);
 }
+/**导出数据字典**/
+function exportXtDbTableAttribute(grid,url){
+	exportExcel(grid,url);
+}
 /**初始化右键**/
 function initRight(){
 	var contextmenu = new Ext.menu.Menu({
@@ -200,6 +214,12 @@ function initRight(){
 			glyph:0xf1c3,
 			handler:function(){
 				exportXtDbStructure(grid,'../xtDbStructureController/exportXtDbStructure');
+			}
+		},{
+			text:'导 出数据字典',
+			glyph:0xf1c3,
+			handler:function(){
+				exportXtDbTableAttribute(grid,'../xtDbStructureController/exportXtDbTableAttribute');
 			}
 		},{
 			text:'打 印',

@@ -17,6 +17,11 @@ function updateXtAppkeyAppsecret(){
 		plain:true,
 		modal:true,
 		title:'编辑信息',
+		/**新方法使用开始**/  
+        scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',
+        /**新方法使用结束**/ 
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){

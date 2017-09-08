@@ -12,7 +12,38 @@ Ext.require([
 var store;
 var grid;
 Ext.onReady(function(){
-   store = Ext.create('Ext.data.TreeStore',{
+	/**查询区域可扩展**/
+	var items = Ext.create('Ext.FormPanel',{
+		xtype:'form',
+		waitMsgTarget:true,
+		defaultType:'textfield',
+		autoScroll:true,
+		fieldDefaults:{
+			labelWidth:70,
+			labelAlign:'left',
+			flex:1,
+			margin:'2 5 4 0'
+		},
+		items:[
+			{
+			    width:260,
+			    xtype:'triggerfield',
+			    emptyText:'请输入关键字（如菜单、平台等）',
+			    triggerCls:'x-form-clear-trigger',
+			    onTriggerClick:function(){
+			        this.reset();
+			    },
+			    listeners:{
+			        change:function(){
+			        	filterBy(grid,this.getValue(),'text');
+			        },
+			        buffer:250
+			    }
+			}
+		]
+	});
+    initSearchForm('north',items,false,'left');
+    store = Ext.create('Ext.data.TreeStore',{
     	root:{
 			name:'一级',
 			id:'0',
@@ -43,28 +74,14 @@ Ext.onReady(function(){
         id:'treeGrid',
         animate:true,
         columnLines:true,
-        frame:true,
+        frame:false,
         bufferedRenderer:false,
+        title:'查询结果',
         viewConfig:{
 			emptyText:'暂无数据',
 			stripeRows:true
 		},
-		bbar:['->',
-		{
-		   width:260,
-		   xtype:'triggerfield',
-		   emptyText:'请输入关键字（如菜单、平台等）',
-	       triggerCls:'x-form-clear-trigger',
-	       onTriggerClick:function(){
-	           this.reset();
-	       },
-	       listeners:{
-	           change:function(){
-	           	filterBy(grid,this.getValue(),'text');
-	           },
-	           buffer:250
-	       }
-		},
+		tbar:[
 		{
             text:'添 加',
 			tooltip:'添 加',
@@ -153,7 +170,7 @@ Ext.onReady(function(){
     Ext.create('Ext.Viewport', {
 		layout:'border',
 		xtype:'viewport',
-		items:[grid]
+		items:[searchForm,grid]
 	});
 	showWaitMsg("正在加载数据...");
 	refresh();

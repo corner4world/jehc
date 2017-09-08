@@ -51,6 +51,11 @@ function initXtAttachmentFormEdit(){
 			flex:1,
 			margin:'4 5 4 5'
 		},
+		/**新方法使用开始**/  
+        scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',
+        /**新方法使用结束**/ 
 		items:[
 		{
 			fieldLabel:'附件编号',
@@ -79,7 +84,6 @@ function initXtAttachmentFormEdit(){
 			fieldLabel:'件文类型',
 			xtype:'textfield',
 			name:'xt_attachmentType',
-			maxLength:20,
 			anchor:'100%'
 		},
 		{

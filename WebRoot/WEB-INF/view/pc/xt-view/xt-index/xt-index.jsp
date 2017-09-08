@@ -558,6 +558,15 @@
 			    border-radius: 15px 15px 15px 15px!important;
 			}
 			
+			.nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
+			    color: #888;
+			    /* background-color: 44b6ae; */
+			    border-color: #ff9900;
+			    color: #ffffff;
+			    background: #ff9900;
+			    border-radius: 15px 15px 15px 15px!important; 
+			}
+			
 			/* .page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
 			    font-size: 16px;
 			} */
