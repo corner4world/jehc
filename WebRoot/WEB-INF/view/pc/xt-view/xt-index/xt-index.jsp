@@ -317,7 +317,7 @@
                     </div>
                     <!-- END THEME PANEL -->
 		            <div class="main">
-		                <div id="tabs">
+		                <div id="tabs" class="row">
 		                    <!-- Nav tabs -->
 		                    <ul class="nav nav-tabs" role="tablist">
 		                        <li role="presentation" class="active">
@@ -513,9 +513,8 @@
                 <i class="icon-arrow-up"></i>
             </div>
         </div>
+        <!-- 
    		<style type="text/css">
-   			/* .nav-tabs {border-bottom: 1px solid #4d5b69;} */
-			/* .page-container-bg-solid .page-content {background: #4d5b69;} */
 			.nav-pills>li>a, .nav-tabs>li>a {
 			    font-size: 16px;
 			}
@@ -526,15 +525,8 @@
 			.page-header.navbar .page-top {
 			    box-shadow: 0 1px 0px 0 rgba(50,50,50,.2);
 			}
-			/* 
-			.page-container-bg-solid {
-			    background: #4d5b69;
-			} 
-			.x-body{background:#4d5b69;} 
-			*/
 			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
 			    color: #888;
-			    /* background-color: 44b6ae; */
 			    border-color: #44b6ae;
 			    color: #ffffff;
 			    background: #44b6ae;
@@ -550,27 +542,124 @@
 			}
 			.nav>li>a {
 			    padding: 5px 15px;
-			}
+			} 
 			.nav-pills>li>a, .nav-tabs>li>a {
-			    font-size: 13px;
-			    background: 0 0;
 			    border-color: #ff9900;
 			    border-radius: 15px 15px 15px 15px!important;
 			}
 			
 			.nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
 			    color: #888;
-			    /* background-color: 44b6ae; */
 			    border-color: #ff9900;
 			    color: #ffffff;
 			    background: #ff9900;
 			    border-radius: 15px 15px 15px 15px!important; 
 			}
-			
-			/* .page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
-			    font-size: 16px;
-			} */
    		</style>
+   		 -->
+   		<style type="text/css">
+			a:hover,a:focus{
+				outline: none;
+				text-decoration: none;
+			}
+			.nav-tabs{
+				border: 0px solid #17C4BB;
+			}
+			.nav-tabs li{
+				margin: 0;
+			}
+			.nav-tabs li a{
+				font-size: 14px;
+				color: #888999;
+				background: #f5f5f5;
+				margin: 0;
+				padding: 10px 5px;
+				border-radius: 0;
+				border: none;
+				border-right: 1px solid #fff;
+				text-transform: capitalize;/**capitalize(不改变英文大小写) lowercase(改变为小写) uppercase（改变为小写）**/
+				position: relative;
+			}
+			.nav-tabs li a:hover{
+				border-top: none;
+				border-bottom: none;
+				border-right-color: #ddd;
+			}
+			.nav-tabs li.active a,
+			.nav-tabs li.active a:hover{
+				color: #fff;
+				border: none;
+				background: #17C4BB;
+				border-right: 1px solid #ddd;
+			}
+			.nav-tabs li.active a:before{
+				content: "";
+				width: 58%;
+				height: 4px;
+				background: #fff;
+				position: absolute;
+				top: 0;
+				left: 0;
+				right: 0;
+				margin: 0 auto;
+			}
+			.nav-tabs li.active a:after{
+				content: "";
+				border-top: 10px solid #17C4BB;
+				border-left: 10px solid transparent;
+				border-right: 10px solid transparent;
+				position: absolute;
+				bottom: -10px;
+				left: 43%;
+			}
+			.nav-tabs li a:after{
+				content: "";
+				border-top: 10px solid #f5f5f5;
+				border-left: 10px solid transparent;
+				border-right: 10px solid transparent;
+				position: absolute;
+				bottom: -10px;
+				left: 43%;
+			} 
+			/* .tab-content{
+				font-size: 13px;
+				color: #999898;
+				line-height: 25px;
+				background: #fff;
+				padding: 20px;
+				border: 0px solid #17C4BB;
+				border-top: none;
+			}
+			.tab-content h3{
+				font-size: 24px;
+				color: #999898;
+				margin-top: 0;
+			} */
+			@media only screen and (max-width: 480px){
+				.nav-tabs li{
+					width: 100%;
+					text-align: center;
+				}
+				.nav-tabs li.active a,
+				.nav-tabs li.active a:after,
+				.nav-tabs li.active a:hover{
+					border: none;
+				}
+			}
+			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+			    color: #FFFFFF;
+			    background-color: #17C4BB;
+			    border: 1px solid #17C4BB;
+			    border-bottom-color: transparent;
+			    cursor: default;
+			}
+			/* 
+			.page-container-bg-solid {
+			    background: #4d5b69;
+			} 
+			.x-body{background:#4d5b69;} 
+			*/
+		</style>
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
 </html>
