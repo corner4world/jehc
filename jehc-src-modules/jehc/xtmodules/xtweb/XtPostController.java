@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
+import com.github.pagehelper.util.StringUtil;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
@@ -79,6 +80,9 @@ public class XtPostController extends BaseAction{
 		int i = 0;
 		if(null != xt_Post && !"".equals(xt_Post)){
 			xt_Post.setXt_post_id(UUID.toUUID());
+			if(StringUtil.isEmpty(xt_Post.getXt_post_parentId())){
+				xt_Post.setXt_post_parentId("0");
+			}
 			i=xtPostService.addXtPost(xt_Post);
 		}
 		if(i>0){
@@ -97,6 +101,9 @@ public class XtPostController extends BaseAction{
 	public String updateXtPost(XtPost xt_Post,HttpServletRequest request){
 		int i = 0;
 		if(null != xt_Post && !"".equals(xt_Post)){
+			if(StringUtil.isEmpty(xt_Post.getXt_post_parentId())){
+				xt_Post.setXt_post_parentId("0");
+			}
 			i=xtPostService.updateXtPost(xt_Post);
 		}
 		if(i>0){

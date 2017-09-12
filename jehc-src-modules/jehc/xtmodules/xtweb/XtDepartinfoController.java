@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
+import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
@@ -79,6 +80,9 @@ public class XtDepartinfoController extends BaseAction{
 		int i = 0;
 		if(null != xt_Departinfo && !"".equals(xt_Departinfo)){
 			xt_Departinfo.setXt_departinfo_id(UUID.toUUID());
+			if(StringUtil.isEmpty(xt_Departinfo.getXt_departinfo_parentId())){
+				xt_Departinfo.setXt_departinfo_parentId("0");
+			}
 			i=xtDepartinfoService.addXtDepartinfo(xt_Departinfo);
 		}
 		if(i>0){
@@ -97,6 +101,9 @@ public class XtDepartinfoController extends BaseAction{
 	public String updateXtDepartinfo(XtDepartinfo xt_Departinfo,HttpServletRequest request){
 		int i = 0;
 		if(null != xt_Departinfo && !"".equals(xt_Departinfo)){
+			if(StringUtil.isEmpty(xt_Departinfo.getXt_departinfo_parentId())){
+				xt_Departinfo.setXt_departinfo_parentId("0");
+			}
 			i=xtDepartinfoService.updateXtDepartinfo(xt_Departinfo);
 		}
 		if(i>0){
