@@ -593,7 +593,7 @@
 				border-right: 1px solid #ddd;
 			}
 			.nav-tabs li.active a:before{
-				content: "";
+				
 				width: 58%;
 				height: 4px;
 				background: #fff;
@@ -604,7 +604,7 @@
 				margin: 0 auto;
 			}
 			.nav-tabs li.active a:after{
-				content: "";
+				
 				border-top: 10px solid #17C4BB;
 				border-left: 10px solid transparent;
 				border-right: 10px solid transparent;

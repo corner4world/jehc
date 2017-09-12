@@ -2,7 +2,7 @@ function initLeftPanel(){
 	leftPanel = new Ext.Panel({
         region:'west',
         hideCollapseTool:hideCollapseToolFlag,
-        title:'<font color=red>工作流设计器</font>',
+        title:'<font color=#ffffff>工作流设计器</font>',
         layout:'border',
         id:'leftPanel',
         split:false,
@@ -20,7 +20,8 @@ function initLeftPanel(){
 			animate:true
 		},
 		header:{
-        	titleAlign:'center'
+        	titleAlign:'center',
+        	cls:'x-panel-header-defined'
         },
 		items:[
 			  /**
