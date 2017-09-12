@@ -169,7 +169,7 @@ window.Addtabs = {
                 $('<iframe>', {
                     'class': 'iframeClass',
                     'height': Addtabs.options.iframeHeight-107,
-                    /*'id':id,*/
+                    'iframe_id_':id,
                     'frameborder': "no",
                     'border': "0",
                     'src': opts.url

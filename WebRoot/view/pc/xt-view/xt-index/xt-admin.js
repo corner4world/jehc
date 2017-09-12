@@ -33,12 +33,14 @@ function clickAddTab(url,title,id,close){
 	}else{
 		closeable=true;
 	}
+	var dt1 = nowTimestamp();
 	Addtabs.add({
         id:id,
         title:title,
         close:closeable,
         url:"../"+url
     })
+    loadXtIframeComplete(id,dt1,title);
 }
 
 /**注销**/
@@ -374,3 +376,54 @@ function closeRightTab(){
 //    var tab = $("#"+tabMainName+" > #tab_li_"+tabName);
 //    return tab.length > 0;
 //}
+
+
+//判断iframe是否加载完毕
+var xtIframe;
+function loadXtIframeComplete(id,dt1,text){
+	/**开启多个Tab目的**/
+	xtIframe = document.getElementById("iframe_id_"+id);
+	if(xtIframe == null){
+		var dt2 = nowTimestamp();
+		//执行监控页面信息操作
+		loadinfo(text,dt1,dt2);
+	}else{
+		if(xtIframe.attachEvent){ 
+			xtIframe.attachEvent("onload", function(){ 
+				//执行监控页面信息操作
+				loadinfo(text,dt1,dt2);
+			}); 
+		}else{ 
+			xtIframe.onload = function(){ 
+				var dt2 = nowTimestamp();
+				//执行监控页面信息操作
+				loadinfo(text,dt1,dt2);
+			}; 
+		} 
+	}
+}
+
+//返回当前时间戳
+function nowTimestamp(){
+	return new Date().getTime();
+}
+function dt(){
+	var date = new Date();
+	var year = date.getFullYear();
+	var month = date.getMonth()+1;
+	var day = date.getDate();
+	var hour = date.getHours();
+	var minute = date.getMinutes();
+	var second = date.getSeconds();
+	var dts = year+'-'+month+'-'+day+' '+hour+':'+minute+':'+second;
+	return dts;
+}
+//执行监控页面信息操作
+function loadinfo(text,dt1,dt2){
+	Ext.Ajax.request({  
+	    url:'../xtLoadinfoController/addXtLoadinfo',
+	    params:{xt_loadinfo_begtime:dt1,xt_loadinfo_endtime:dt2,xt_loadinfo_modules:text},
+	    success:function(response,opts){},
+	    failure:function(response,opts){}
+	});
+}
