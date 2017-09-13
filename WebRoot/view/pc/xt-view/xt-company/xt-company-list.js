@@ -164,7 +164,7 @@ Ext.onReady(function(){
 		region:'center',
 		defaultType:'textfield',
 		autoScroll:true,
-		title:'宏舜信息电子商务平台公司信息',
+		title:'jEhc信息技术有限公司',
 		titleAlign:'left',
 		fieldDefaults:{
 	        labelWidth:70,
