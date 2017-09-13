@@ -21,11 +21,14 @@
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
 	<!-- 将Controller的注解排除掉 -->	
 	<!-- 
+	1.
 	<context:component-scan base-package="*.*.*web,*.*.*service,*.*.*dao,jehc.xtmodules.xtcore.util.quartz.task,activitiUtil,jehc.xtmodules.xtcore.util"> 
-	-->
+	2.
 	<context:component-scan base-package="jehc.*modules.*web,jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"> 
-	  <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
 	</context:component-scan>
+	-->
+	<context:component-scan base-package="jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"/> 
     <!-- properties 文件位置 -->
 	<bean id="propertyConfigurer"
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

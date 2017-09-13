@@ -42,12 +42,15 @@
     <!-- 扫描所有的controller 但是不扫描service,不然事务将没有作用.在JUnit测试的时候不必如此配置 --> 
     <!-- 扫描所有的controller 但是不扫描service--> 
     <!-- 
+    1.
     <context:component-scan base-package="jehc.*modules.*web,jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"> 
-    -->
+    2.
     <context:component-scan base-package="*.*.*web,*.*.*service,*.*.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util">
-		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />  
+	    <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />  
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />  
-    </context:component-scan>
+	</context:component-scan>
+    -->
+    <context:component-scan base-package="*.*.*web,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util" />
     
 	<!-- 定义一个视图解析器 -->  
     <bean id="viewResolver"  
