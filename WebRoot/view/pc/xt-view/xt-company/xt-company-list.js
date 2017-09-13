@@ -164,10 +164,8 @@ Ext.onReady(function(){
 		region:'center',
 		defaultType:'textfield',
 		autoScroll:true,
-		/**
 		title:'宏舜信息电子商务平台公司信息',
-		titleAlign:'center',
-		**/
+		titleAlign:'left',
 		fieldDefaults:{
 	        labelWidth:70,
 	        labelAlign:"left",
