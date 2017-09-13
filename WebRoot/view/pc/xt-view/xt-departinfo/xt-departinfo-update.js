@@ -68,6 +68,7 @@ function initXtDepartinfoFormEdit(){
 			xtype:'textfield',
 			hidden:true,
 			name:'xt_departinfo_id',
+			id:'xt_departinfo_id',
 			allowBlank:false,
 			maxLength:32,
 			anchor:'100%'
@@ -90,6 +91,13 @@ function initXtDepartinfoFormEdit(){
 			minPickerHeight:200,
 			maxHeight:200,
 			editable:false,
+			readOnly:true,
+			listeners:{
+				select:function(combo,record,opts){  
+					if(gValue('xt_departinfo_id') == record.id){
+					}
+				} 
+			},
 			store:Ext.create('Ext.data.TreeStore',{
 				fields:['id','text'],
 				root:{
