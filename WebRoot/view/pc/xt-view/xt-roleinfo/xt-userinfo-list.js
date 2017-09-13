@@ -17,8 +17,8 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 //		maximized:true,
 		plain:true,
 		modal:true,
-		width:clientWidth*0.8,                    
-		height:clientHeight*0.7, 
+		width:clientWidth,                    
+		height:clientHeight, 
 		headerPosition:'left',
 		title:'导入用户',
 		listeners:{
@@ -72,7 +72,7 @@ function initXtUserinfoGrid(xt_role_id){
 	xtUserinfoGrid = Ext.create('top.Ext.grid.Panel',{
 		region:'north',
 		store:xtUserinfoStore,
-		height:document.documentElement.clientHeight*0.4,
+		height:document.documentElement.clientHeight*0.5,
 		columnLines:true,
 		selType:'cellmodel',
 		multiSelect:true,
@@ -193,7 +193,7 @@ function initXtUserinfoGrided(xt_role_id){
 	xtUserinfoGrided = Ext.create('top.Ext.grid.Panel',{
 		region:'center',
 		store:xtUserinfoStoreed,
-		height:document.documentElement.clientHeight*0.3,
+		height:document.documentElement.clientHeight*0.4,
 		style:'margin-left:auto;margin-right:auto;margin-bottom:auto;',
 		columnLines:true,
 		selType:'cellmodel',
