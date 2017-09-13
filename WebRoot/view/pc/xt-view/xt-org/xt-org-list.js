@@ -63,10 +63,9 @@ Ext.onReady(function() {
 			emptyText:'暂无数据',
 			stripeRows:true
 		},
-		bbar:[
-			 '->',
+		tbar:[
 			 {
-			   width:260,
+			   width:310,
 			   xtype:'triggerfield',
 			   emptyText:'请输入关键字（如研发部、技术总监等）',
 		       triggerCls:'x-form-clear-trigger',
