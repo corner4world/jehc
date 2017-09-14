@@ -159,6 +159,7 @@ function initBOrderFormDetail(b_order_id){
 					},
 					{
 						layout:"column",
+						border:false,
 						items:[{
 								columnWidth:.3,
 								baseCls:'x-plain',
