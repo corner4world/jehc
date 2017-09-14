@@ -410,9 +410,9 @@ background-color: #5fa2dd;
     -ms-border-radius: 0px;
     -o-border-radius: 0px;
     border-radius: 0px;
-    border-width: 1px;
+    border-width: 0px;
     border-style: solid;
-   /*  background-color: #5fa2dd; */
+    background-color: #17C4BB;
 }
 /**button选项默认样式结束**/
 /**tbar字体颜色开始**/
