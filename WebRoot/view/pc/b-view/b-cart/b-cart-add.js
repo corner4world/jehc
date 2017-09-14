@@ -77,7 +77,6 @@ function initBCartFormAdd(){
 						xtype:"combo",
 						id:'b_member_id',
 						name:'b_member_id',
-						pageSize:10, 
 			            emptyText:'请选择',  
 			            mode:'local',  
 			            triggerAction:'all',  

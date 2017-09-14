@@ -173,7 +173,7 @@ Ext.onReady(function(){
 				cls:'searchBtn',
 				icon:searchIcon,
 				handler:function(){
-					grid.getStore().reload();
+					search()
 				}
 			 },
 			 {
@@ -376,4 +376,9 @@ function initRight(){
 		}]
 	});
 	initrightgridcontextmenu(grid,contextmenu,['updateBBrandItem','delBBrandItem','copyBBrandItem','detailBBrandItem']);
+}
+
+/**查询操作**/
+function search(){
+	initSearch(store,'../bBrandController/getBBrandListByCondition',searchForm); 
 }

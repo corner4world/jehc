@@ -80,11 +80,10 @@ public class BWarehouseLocationController extends BaseAction{
 			i=bWarehouseLocationService.addBWarehouseLocation(b_Warehouse_Location);
 		}
 		if(i>0){
-			outAudStr(true);
+			return outAudStr(true);
 		}else{
-			outAudStr(false);
+			return outAudStr(false);
 		}
-		return null;
 	}
 	/**
 	* 修改

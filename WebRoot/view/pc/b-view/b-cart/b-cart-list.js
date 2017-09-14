@@ -71,7 +71,6 @@ Ext.onReady(function(){
 				type:'json'
 			})
 		}),
-		pageSize:10,  
 		fields:['b_member_id', 'b_member_name'],
 		autoLoad:true 
 	});
@@ -262,7 +261,7 @@ Ext.onReady(function(){
 				cls:'searchBtn',
 				icon:searchIcon,
 				handler:function(){
-					grid.getStore().reload();
+					search();
 				}
 			 },
 			 {
@@ -358,7 +357,7 @@ Ext.onReady(function(){
 					tooltip:'检 索',
 					glyph:0xf002,
 					handler:function(){
-						grid.getStore().reload();
+						search()
 					}
 				 },
 				 {
@@ -424,6 +423,12 @@ function copyBCart(){
 		}
 	});
 }
+
+/**查询操作**/
+function search(){
+	initSearch(store,'../bCartController/getBCartListByCondition',searchForm); 
+}
+
 /**导出**/
 function exportBCart(grid,url){
 	exportExcel(grid,url);

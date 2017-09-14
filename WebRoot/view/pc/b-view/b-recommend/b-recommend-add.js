@@ -35,6 +35,9 @@ function addBRecommend(){
 		}]
 	});
 	bRecommendWinAdd.show();
+	/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/
+	initFileRight('xt_attachment_id','xt_attachment_id_pic',1,1);
+	/**初始化附件右键菜单结束**/
 }
 function initBRecommendFormAdd(){
 	bRecommendFormAdd = Ext.create('Ext.FormPanel',{
@@ -115,6 +118,24 @@ function initBRecommendFormAdd(){
 					width:200
 				},
 				{
+					title:'附件',
+					xtype:'fieldset',
+					items:{
+						xtype:'box', 
+						width:80, 
+						height:60, 
+						id:'xt_attachment_id_pic', 
+						margin:'2 5 4 70', 
+						autoEl:{
+							tag:'img',
+							/** 不采用右键时候直接用点击事件触发
+							onclick:"optupload('xt_attachment_id','xt_attachment_id_pic',1)",
+							**/
+							src:bsdefimg
+						}
+					}
+				 }/*,
+				{
 					title:'上传图片',
 				    xtype:'box',//或者xtype:'component',  
 					fieldLabel:"图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片",
@@ -126,7 +147,7 @@ function initBRecommendFormAdd(){
 				        onclick:'clickHandler()',    
 				        src:basePath+"/deng/images/default/default.jpg"
 				    } 
-				}
+				}*/
 		]
 	});
 	/**初次赋值改变容器中路径用该方法**/

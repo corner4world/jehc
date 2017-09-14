@@ -280,7 +280,7 @@ Ext.onReady(function(){
 				cls:'searchBtn',
 				icon:searchIcon,
 				handler:function(){
-					grid.getStore().reload();
+					search();
 				}
 			 },
 			 {
@@ -367,7 +367,7 @@ Ext.onReady(function(){
 					tooltip:'检 索',
 					glyph:0xf002,
 					handler:function(){
-						grid.getStore().reload();
+						search()
 					}
 				 },
 				 {
@@ -436,6 +436,10 @@ function copyBOrder(){
 /**导出**/
 function exportBOrder(grid,url){
 	exportExcel(grid,url);
+}
+/**查询操作**/
+function search(){
+	initSearch(store,'../bOrderController/getBOrderListByCondition',searchForm); 
 }
 /**初始化右键**/
 function initRight(){

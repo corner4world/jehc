@@ -22,6 +22,7 @@
 		FROM 
 			b_cart b_cart LEFT JOIN b_invoice b_invoice ON b_cart.b_invoice_id = b_invoice.b_invoice_id
 			LEFT JOIN b_cart_order_address ON b_cart.b_cart_order_address_id = b_cart_order_address.b_cart_order_address_id
+		WHERE 1=1 
 		<if test="null != b_cart_orderkey">
 			AND instr(b_cart.b_cart_orderkey,#{b_cart_orderkey})
 		</if>

@@ -37,8 +37,16 @@ function detailBRecommend(){
 	/**初次赋值改变容器中路径用该方法
 	Ext.getCmp('pic').autoEl.src = record.items[0].data.hsimg_base_url+record.items[0].data.xt_attachmentPath;
 	**/
-	console.info(record.items[0].data.hsimg_base_url+record.items[0].data.xt_attachmentPath);
-	Ext.getCmp('pic').getEl().dom.src = record.items[0].data.hsimg_base_url+record.items[0].data.xt_attachmentPath;
+	/*console.info(record.items[0].data.hsimg_base_url+record.items[0].data.xt_attachmentPath);
+	Ext.getCmp('pic').getEl().dom.src = record.items[0].data.hsimg_base_url+record.items[0].data.xt_attachmentPath;*/
+	/**初始化附件右键菜单开始 参数4为1表示不拥有上传和删除功能 即明细页面使用**/
+	initFileRight('xt_attachment_id','xt_attachment_id_pic',1,2);
+	/**初始化附件右键菜单结束**/
+
+	/**配置附件回显方法开始**/
+	var params = {xt_attachment_id:record.items[0].data.xt_attachment_id,field_name:'xt_attachment_id'};
+	ajaxFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params,1);
+	/**配置附件回显方法结束**/
 	loadFormData(bRecommendFormDetail,'../bRecommendController/getBRecommendById?b_recommend_id='+ record.items[0].data.b_recommend_id);
 }
 function initBRecommendFormDetail(){
@@ -151,16 +159,22 @@ function initBRecommendFormDetail(){
 			width:300
 		},
 		{
-			title:'上传图片',
-		    xtype:'box',//或者xtype:'box',  
-			fieldLabel:"图&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片",
-			id:'pic',
-			anchor:'60%',
-			padding:'2 5 4 80',
-			autoEl:{  
-		        tag:'img',			    
-		        src:basePath+"/deng/images/default/default.jpg"
-		    } 
+			title:'附件',
+			xtype:'fieldset',
+			items:{
+				xtype:'box', 
+				width:80, 
+				height:60, 
+				id:'xt_attachment_id_pic', 
+				margin:'2 5 4 70', 
+				autoEl:{
+					tag:'img',
+					/** 不采用右键时候直接用点击事件触发
+					onclick:"optupload('xt_attachment_id','xt_attachment_id_pic',1)",
+					**/
+					src:bsdefimg
+				}
+			}
 		}
 		]
 	});

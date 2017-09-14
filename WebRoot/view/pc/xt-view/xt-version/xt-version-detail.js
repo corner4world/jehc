@@ -129,7 +129,7 @@ function initXtVersionFormDetail(){
 			anchor:'100%'
 		},
 		{
-			title:'附件编号',
+			title:'附件',
 			xtype:'fieldset',
 			items:{
 				xtype:'box', 
