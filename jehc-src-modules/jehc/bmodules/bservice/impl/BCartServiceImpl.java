@@ -242,6 +242,7 @@ public class BCartServiceImpl extends BaseService implements BCartService{
 			List<BCart> bCartList = bCartDao.getBCartListByCondition(condition);
 			for(BCart b_cart:bCartList){
 				BOrder b_order = new BOrder();
+				condition.put("b_cart_id", b_cart.getB_cart_id());
 				List<BCartDetail> b_Cart_DetailList = bCartDetailService.getBCartDetailListByCondition(condition);
 				BCartOrderAddress b_Cart_Order_Address = bCartOrderAddressService.getBCartOrderAddressById(b_cart.getB_cart_order_address_id());
 				b_Cart_Order_Address.setB_cart_order_address_id(UUID.toUUID());
@@ -275,10 +276,10 @@ public class BCartServiceImpl extends BaseService implements BCartService{
 					b_Order_Detail.setB_order_id(b_order.getB_order_id());
 					bOrderDetailService.addBOrderDetail(b_Order_Detail);
 				}
-				condition.put("b_cart_id", b_cart_id.split(","));
-				//删除
-				delBCart(condition);
 			}
+			condition.put("b_cart_id", b_cart_id.split(","));
+			//删除
+			delBCart(condition);
 			i = 1;
 		} catch (Exception e) {
 			i = 0;
