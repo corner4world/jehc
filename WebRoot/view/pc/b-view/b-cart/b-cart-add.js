@@ -14,8 +14,8 @@ function addBCart(){
 		animateTarget:document.body,            
 		plain:true,   
 		modal:true,       
-		title:'添加信息',
-		headerPosition:'right',
+		title:'添加购物车信息',
+		headerPosition:'top',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){
@@ -57,7 +57,12 @@ function initBCartFormAdd(){
 		xtype:'tabpanel',
 		tabPosition:'left',
 		layout:'fit', 
-		title:'添加购物车信息',
+//		title:'添加购物车信息',
+		/**新方法使用开始**/  
+        scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',
+        /**新方法使用结束**/ 
 		items:[
 		{
 			title:'基础信息',
@@ -65,6 +70,7 @@ function initBCartFormAdd(){
 			items:[{
 					xtype:'fieldset',
 					title:'基本信息',
+					border:false,
 					items:[{
 						fieldLabel:'会&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;员',
 						store:b_memberList,
@@ -150,6 +156,7 @@ function initBCartFormAdd(){
 					},
 					{
 						layout:"column",
+						border:false,
 						items:[{
 								columnWidth:.3,
 								baseCls:'x-plain',
@@ -214,6 +221,7 @@ function initBCartFormAdd(){
 				{
 					xtype:'fieldset',
 					title:'配送地址信息',
+					border:false,
 					items:[
 						{
 						fieldLabel:'省&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份',
@@ -294,6 +302,7 @@ function initBCartFormAdd(){
 					},
 					{
 						layout:"column",
+						border:false,
 						items:[{
 								columnWidth:.3,
 								baseCls:'x-plain',
@@ -331,8 +340,8 @@ function initBCartFormAdd(){
 		]
 	});
 	bCartFormAdd = Ext.create('top.Ext.FormPanel',{
-		autoScroll:true,
 		layout:'fit',
+		border:false,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',

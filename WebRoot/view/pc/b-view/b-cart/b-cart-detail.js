@@ -62,6 +62,7 @@ function initBCartFormDetail(b_cart_id){
 			autoScroll:true,
 			items:[{
 					xtype:'fieldset',
+					border:false,
 					title:'基本信息',
 					items:[{
 						fieldLabel:'购物车编号',
@@ -206,6 +207,7 @@ function initBCartFormDetail(b_cart_id){
 				},
 				{
 					xtype:'fieldset',
+					border:false,
 					title:'配送地址信息',
 					items:[
 						{

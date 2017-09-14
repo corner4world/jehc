@@ -72,6 +72,7 @@ function initBOrderFormDetail(b_order_id){
 					{
 					xtype:'fieldset',
 					title:'基本信息',
+					border:false,
 					items:[{
 						fieldLabel:'会&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;员',
 						store:b_memberList,
@@ -228,6 +229,7 @@ function initBOrderFormDetail(b_order_id){
 				{
 					xtype:'fieldset',
 					title:'配送地址信息',
+					border:false,
 					items:[
 						{
 						fieldLabel:'省&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份',
@@ -315,6 +317,7 @@ function initBOrderFormDetail(b_order_id){
 					},
 					{
 						layout:"column",
+						border:false,
 						items:[{
 								columnWidth:.3,
 								baseCls:'x-plain',

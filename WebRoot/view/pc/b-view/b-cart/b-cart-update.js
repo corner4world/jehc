@@ -73,6 +73,7 @@ function initBCartFormEdit(b_cart_id){
 			items:[{
 					xtype:'fieldset',
 					title:'基本信息',
+					border:false,
 					items:[{
 						fieldLabel:'购物车编号',
 						xtype:'textfield',
@@ -174,6 +175,7 @@ function initBCartFormEdit(b_cart_id){
 					},
 					{
 						layout:"column",
+						border:false,
 						items:[{
 								columnWidth:.3,
 								baseCls:'x-plain',
@@ -238,6 +240,7 @@ function initBCartFormEdit(b_cart_id){
 				{
 					xtype:'fieldset',
 					title:'配送地址信息',
+					border:false,
 					items:[
 						{
 						fieldLabel:'省&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份',
@@ -326,6 +329,7 @@ function initBCartFormEdit(b_cart_id){
 					},
 					{
 						layout:"column",
+						border:false,
 						items:[{
 								columnWidth:.3,
 								baseCls:'x-plain',

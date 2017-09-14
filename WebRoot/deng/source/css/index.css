@@ -454,3 +454,8 @@ background-color: #5fa2dd;
 .x-panel-header-title-default-framed {
     color: rgb(23, 196, 187);
 }
+
+.x-fieldset-header-default > .x-fieldset-header-text {
+    color: #17C4BB;
+    font-weight:900;
+}

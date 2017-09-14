@@ -1335,6 +1335,7 @@ function initBOrderPayFormAdd(b_order_id){
 			{
 			xtype:'fieldset',
 			title:'订单信息',
+			border:false,
 			/**
 			disabled:true,
 			**/
@@ -1450,6 +1451,7 @@ function initBOrderPayFormAdd(b_order_id){
 		{
 			xtype:'fieldset',
 			title:'支付记录',
+			border:false,
 			items:[bOrderPayGrid]
 		}
 		]

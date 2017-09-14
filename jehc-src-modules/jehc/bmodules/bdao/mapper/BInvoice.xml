@@ -21,13 +21,13 @@
 			b_invoice.`xt_cityID`,
 			b_invoice.`xt_districtID`,
 			b_invoice.`b_invoice_address`,
-			xt_province.`xt_provinceName`,
-			xt_city.`xt_cityName`,
-			xt_district.`xt_districtName`
+			xt_province.`NAME` AS xt_provinceName,
+			xt_city.`NAME` AS xt_cityName,
+			xt_district.`NAME` AS xt_districtName
 		FROM 
-			b_invoice b_invoice LEFT JOIN xt_province xt_province ON  b_invoice.xt_provinceID = xt_province.xt_provinceID
-			LEFT JOIN xt_city xt_city ON xt_city.xt_cityID = b_invoice.xt_cityID
-			LEFT JOIN xt_district xt_district ON xt_district.xt_districtID = b_invoice.xt_districtID
+			b_invoice b_invoice LEFT JOIN xt_area_region xt_province ON  b_invoice.xt_provinceID = xt_province.ID
+			LEFT JOIN xt_area_region xt_city ON xt_city.ID = b_invoice.xt_cityID
+			LEFT JOIN xt_area_region xt_district ON xt_district.ID = b_invoice.xt_districtID
 		WHERE 1=1
 		AND b_invoice.b_member_id=#{b_member_id}
 	</select>

@@ -67,6 +67,7 @@ function initBOrderFormAdd(){
 			items:[{
 					xtype:'fieldset',
 					title:'基本信息',
+					border:false,
 					items:[{
 						fieldLabel:'会&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;员',
 						store:b_memberList,
@@ -154,6 +155,7 @@ function initBOrderFormAdd(){
 					},
 					{
 						layout:"column",
+						border:false,
 						items:[{
 								columnWidth:.3,
 								xtype:'panel',
@@ -231,6 +233,7 @@ function initBOrderFormAdd(){
 				{
 					xtype:'fieldset',
 					title:'配送地址信息',
+					border:false,
 					items:[
 						{
 						fieldLabel:'省&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份',
@@ -319,6 +322,7 @@ function initBOrderFormAdd(){
 					},
 					{
 						layout:"column",
+						border:false,
 						items:[{
 								columnWidth:.3,
 								baseCls:'x-plain',

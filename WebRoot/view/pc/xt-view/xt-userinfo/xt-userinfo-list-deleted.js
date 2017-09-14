@@ -229,7 +229,7 @@ function initListDeleted(){
 		layout:'border',
 		title:'已删除用户列表',
 		width:clientWidth,                    
-		height:clientHeight*0.6, 
+		height:clientHeight, 
 		maximizable:true,
 		minimizable:true,
 		headerPosition:'left',

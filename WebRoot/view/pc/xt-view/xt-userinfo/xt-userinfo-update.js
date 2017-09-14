@@ -84,10 +84,12 @@ function initXtUserinfoFormEdit(){
 		items:[{
 				xtype:'fieldset',
 				title:'组织机构',
+				border:false,
 				items:[{
 					layout:'table',
 					xtype:'form',
 					anchor:'100%',
+					border:false,
 					items:[
 					{
 						fieldLabel:'所属公司',
@@ -121,6 +123,7 @@ function initXtUserinfoFormEdit(){
 			},{
 			xtype:'fieldset',
 			title:'个人信息',
+			border:false,
 			items:[
 				{
 					fieldLabel:'用&nbsp;户&nbsp;&nbsp;ID',
@@ -185,6 +188,7 @@ function initXtUserinfoFormEdit(){
 					layout:'table',
 					xtype:'form',
 					anchor:'100%',
+					border:false,
 					items:[
 					{
 						fieldLabel:'用&nbsp;户&nbsp;&nbsp;名',
@@ -249,6 +253,7 @@ function initXtUserinfoFormEdit(){
 					layout:'table',
 					xtype:'form',
 					anchor:'100%',
+					border:false,
 					items:[
 					{
 						fieldLabel:'真实姓名',
@@ -283,6 +288,7 @@ function initXtUserinfoFormEdit(){
 					layout:'table',
 					xtype:'form',
 					anchor:'100%',
+					border:false,
 					items:[
 					{
 						fieldLabel:'名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族',
@@ -317,6 +323,7 @@ function initXtUserinfoFormEdit(){
 					layout:'table',
 					xtype:'form',
 					anchor:'100%',
+					border:false,
 					items:[
 					{
 						fieldLabel:'联系电话',
@@ -360,6 +367,7 @@ function initXtUserinfoFormEdit(){
 					layout:'table',
 					xtype:'form',
 					anchor:'100%',
+					border:false,
 					items:[
 					{
 						fieldLabel:'入职时间',
@@ -391,6 +399,7 @@ function initXtUserinfoFormEdit(){
 					layout:'table',
 					xtype:'form',
 					anchor:'100%',
+					border:false,
 					items:[
 					{
 						fieldLabel:'QQ&nbsp;号码',
@@ -424,10 +433,12 @@ function initXtUserinfoFormEdit(){
 		},{
 			xtype:'fieldset',
 			title:'其他信息',
+			border:false,
 			items:[{
 					layout:'table',
 					xtype:'form',
 					anchor:'100%',
+					border:false,
 					items:[
 					{
 						fieldLabel:'政治面貌',
@@ -480,6 +491,7 @@ function initXtUserinfoFormEdit(){
 		{
 			title:'图片信息',
 			xtype:'fieldset',
+			border:false,
 			items:{
 				xtype:'box', 
 				id:'xt_userinfo_pic_pic', 
