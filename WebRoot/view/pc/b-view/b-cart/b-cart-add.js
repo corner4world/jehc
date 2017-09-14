@@ -14,8 +14,8 @@ function addBCart(){
 		animateTarget:document.body,            
 		plain:true,   
 		modal:true,       
-		title:'添加购物车信息',
-		headerPosition:'top',
+		title:'添加信息',
+		headerPosition:'right',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){
@@ -52,17 +52,11 @@ function initBCartFormAdd(){
 	initBCartDetailGrid();
 	addTab = Ext.create('top.Ext.TabPanel',{
 		activeTab:0,
-		autoScroll:true,
 		region:'center',
 		xtype:'tabpanel',
 		tabPosition:'left',
 		layout:'fit', 
-//		title:'添加购物车信息',
-		/**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        /**新方法使用结束**/ 
+		title:'添加购物车信息',
 		items:[
 		{
 			title:'基础信息',
@@ -341,6 +335,7 @@ function initBCartFormAdd(){
 	bCartFormAdd = Ext.create('top.Ext.FormPanel',{
 		layout:'fit',
 		border:false,
+		autoScroll:false,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',

@@ -370,7 +370,7 @@ function initBCartFormEdit(b_cart_id){
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
+		autoScroll:false,
 		layout:'fit',
 		fieldDefaults:{
 			labelWidth:70,

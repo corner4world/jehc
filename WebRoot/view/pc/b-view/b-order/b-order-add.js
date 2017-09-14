@@ -13,6 +13,7 @@ function addBOrder(){
 		animateTarget:document.body,
 		plain:true,
 		modal:true,
+		autoScroll:false,
 		closeToolText:'关闭窗体',
 		collapseToolText:'收缩',
 		headerPosition:'right',
@@ -363,7 +364,7 @@ function initBOrderFormAdd(){
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
+		autoScroll:false,
 		layout:'fit',
 		fieldDefaults:{
 			labelWidth:70,
