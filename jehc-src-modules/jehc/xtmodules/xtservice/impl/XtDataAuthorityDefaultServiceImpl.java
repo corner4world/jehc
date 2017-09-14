@@ -146,7 +146,7 @@ public class XtDataAuthorityDefaultServiceImpl extends BaseService implements Xt
 			xtDataAuthorityDao.delXtDataAuthorityByCondition(condition);
 			xtDataAuthorityDefaultDao.delXtDataAuthorityDefaultAllByCondition(condition);
 			//3添加 最新
-			if(null != xt_Data_Authority_DefaultList){
+			if(null != xt_Data_Authority_DefaultList && xt_Data_Authority_DefaultList.size()>0){
 				xtDataAuthorityDefaultDao.addBatchXtDataAuthorityDefault(xt_Data_Authority_DefaultList);
 			}
 			//4统一推送
