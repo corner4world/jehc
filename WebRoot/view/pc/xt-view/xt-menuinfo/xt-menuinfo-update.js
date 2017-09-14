@@ -140,27 +140,24 @@ function initXtMenuinfoFormEdit(){
 			   	itemId:'xt_menuinfo_images',
 			   	allowBlank:false
 			  },{
-				layout:"column",
-				xtype:'panel',
+				layout:"table",
+				border:false,
+				xtype:'form',
+				anchor:'50%',
 				items:[{
-					columnWidth:.1,
-					items:[{
 						xtype:'label',
 				        text:'菜单图标:',
-				        margin:'0 0 0 5'
-					}]
-				},{
-					columnWidth:.15,
-					items:[{
+				        margin:'0 0 0 5',
+						},
+						{
 						xtype:'button',
 						text:'选择图标',
-						margin:'0 0 0 0',
+						margin:'0 0 0 10',
 						id:'selectBtn',
 						handler:function(){  
 							img_select();
 			            } 
 					}]
-				}]
 		     },{
 		   		fieldLabel:'图像样式',
 			   	anchor:'60%',
