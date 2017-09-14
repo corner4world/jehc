@@ -293,6 +293,7 @@ Ext.onReady(function(){
 					tooltip:'批量购物车转订单',
 					glyph:0xf09b,
 					handler:function(){
+						batchBCartTBOrderPoulators();
 					}
 				 },
 				 '-',
@@ -1235,6 +1236,29 @@ function singleBCartTBOrderPoulators(){
 		if(btn == 'yes'){
 			var params = {b_cart_id:b_cart_id};
 			ajaxRequest('../bCartController/singleBCartTBOrderPoulators',grid,params,'正在执行转换操作中！请稍后...');
+		}
+	});
+}
+
+/**批量购物车转订单转换**/
+function batchBCartTBOrderPoulators(){
+	var model = grid.getSelectionModel();
+	if(model.selected.length == 0){
+		msgTishi('请选择后在生成');
+		return;
+	}
+	var b_cart_id;
+	for(var i = 0; i < model.selected.length; i++){
+		if(null == b_cart_id){
+			b_cart_id=model.selected.items[i].data.b_cart_id;
+		}else{
+			b_cart_id=b_cart_id+","+model.selected.items[i].data.b_cart_id;
+		}
+	}
+	Ext.Msg.confirm('提示','确定要将选择的购物车转换成订单吗？',function(btn){
+		if(btn == 'yes'){
+			var params = {b_cart_id:b_cart_id};
+			ajaxRequest('../bCartController/batchBCartTBOrderPoulators',grid,params,'正在执行转换操作中！请稍后...');
 		}
 	});
 }

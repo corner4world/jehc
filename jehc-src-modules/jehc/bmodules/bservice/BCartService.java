@@ -52,7 +52,6 @@ public interface BCartService{
 	 * @param condition
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<BCart> getBCartList(Map<String,Object> condition);
 	
 	/**

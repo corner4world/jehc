@@ -239,6 +239,46 @@ public class BCartServiceImpl extends BaseService implements BCartService{
 		try {
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("b_cart_id", b_cart_id.split(","));
+			List<BCart> bCartList = bCartDao.getBCartListByCondition(condition);
+			for(BCart b_cart:bCartList){
+				BOrder b_order = new BOrder();
+				List<BCartDetail> b_Cart_DetailList = bCartDetailService.getBCartDetailListByCondition(condition);
+				BCartOrderAddress b_Cart_Order_Address = bCartOrderAddressService.getBCartOrderAddressById(b_cart.getB_cart_order_address_id());
+				b_Cart_Order_Address.setB_cart_order_address_id(UUID.toUUID());
+				b_order.setB_cart_order_address_id(b_cart.getB_cart_order_address_id());
+				b_order.setB_order_name("购物车转订单");
+				b_order.setB_invoice_id(b_cart.getB_invoice_id());
+				b_order.setB_order_ctime(CommonUtils.getSimpleDateFormat());
+				b_order.setB_order_from(b_cart.getB_cart_from());
+				b_order.setB_order_id(UUID.toUUID());
+				b_order.setB_order_key(b_cart.getB_cart_orderkey());
+				b_order.setB_order_remark(b_cart.getB_cart_remark());
+				b_order.setB_order_sessionid(b_cart.getB_cart_sessionid());
+				b_order.setB_order_status("0");/**正常订单**/
+				b_order.setB_order_total_number(b_cart.getB_cart_total_number());
+				b_order.setB_order_total_price(b_cart.getB_cart_total_price());
+				b_order.setB_cart_order_address_id(b_Cart_Order_Address.getB_cart_order_address_id());
+				b_order.setB_member_id(b_cart.getB_member_id());
+				b_order.setB_order_type("0");/**待付订单**/
+				bCartOrderAddressService.addBCartOrderAddress(b_Cart_Order_Address);
+				bOrderService.addBOrder(b_order);
+				for(int j = 0; j < b_Cart_DetailList.size(); j++){
+					BCartDetail b_Cart_Detail = b_Cart_DetailList.get(j);
+					BOrderDetail b_Order_Detail = new BOrderDetail();
+					b_Order_Detail.setB_order_detail_id(UUID.toUUID());
+					b_Order_Detail.setB_order_detail_ctime(CommonUtils.getSimpleDateFormat());
+					b_Order_Detail.setB_order_detail_discount(b_Cart_Detail.getB_cart_detail_discount());
+					b_Order_Detail.setB_order_detail_number(b_Cart_Detail.getB_cart_detail_number());
+					b_Order_Detail.setB_order_detail_price(b_Cart_Detail.getB_cart_detail_price());
+					b_Order_Detail.setB_product_id(b_Cart_Detail.getB_product_id());
+					b_Order_Detail.setB_seller_id(b_Cart_Detail.getB_seller_id());
+					b_Order_Detail.setB_order_id(b_order.getB_order_id());
+					bOrderDetailService.addBOrderDetail(b_Order_Detail);
+				}
+				condition.put("b_cart_id", b_cart_id.split(","));
+				//删除
+				delBCart(condition);
+			}
 			i = 1;
 		} catch (Exception e) {
 			i = 0;

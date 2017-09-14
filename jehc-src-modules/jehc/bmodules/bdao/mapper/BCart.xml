@@ -32,6 +32,12 @@
 		<if test="null != b_invoice_type">
 			AND b_invoice.b_invoice_type = #{b_invoice_type}
 		</if>
+		<if test="null != b_cart_id">
+			AND b_cart_id IN
+			<foreach item="item" index="index" collection="b_cart_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
 		ORDER BY b_cart.`b_cart_ctime` DESC,b_cart.`b_cart_mtime` DESC
 	</select>
 

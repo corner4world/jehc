@@ -241,4 +241,23 @@ public class BCartController extends BaseAction{
 			return outAudStr(false);
 		}
 	}
+	
+	/**
+	* 批量购物车转订单转换
+	* @param b_cart_id 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/batchBCartTBOrderPoulators",method={RequestMethod.POST,RequestMethod.GET})
+	public String batchBCartTBOrderPoulators(String b_cart_id,HttpServletRequest request){
+		int i = 0;
+		if(null != b_cart_id && !"".equals(b_cart_id)){
+			i=bCartService.batchBCartTBOrderPoulators(b_cart_id);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
 }
