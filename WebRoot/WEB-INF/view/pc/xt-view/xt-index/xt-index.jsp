@@ -327,7 +327,7 @@
 		                    <!-- Tab panes -->
 		                    <div class="tab-content">
 		                        <div role="tabpanel" class="tab-pane active" id="home">
-		                        	<h3 class="page-title"> 开源平台
+		                        	<h3 class="page-title"> ${sys_pt_index}
 				                        <small>扁平化例子...</small>
 				                    </h3>
 		                        	<div class="portlet light ">
