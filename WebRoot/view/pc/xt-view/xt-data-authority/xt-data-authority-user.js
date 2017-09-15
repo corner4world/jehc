@@ -46,7 +46,9 @@ function initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title){
 		maxHeight:220,
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
+		scrollable:true,
+		scrollable:'x',
+		scrollable:'y',
 		fieldDefaults:{
 			labelWidth:40,
 			labelAlign:'left',
