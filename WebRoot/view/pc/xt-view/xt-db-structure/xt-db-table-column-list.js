@@ -4,7 +4,7 @@ function getXtDbStructureByCondition(xtDbTableName){
 	initXtDbStructureGrid(xtDbTableName);
 	xtDbStructureWin = new Ext.Window({
 		layout:'fit',                    
-		width:clientWidth*0.9,      
+		width:clientWidth*0.95,      
 		height:clientHeight*0.85,
 		modal:true,               
 		closeAction:'close',                    

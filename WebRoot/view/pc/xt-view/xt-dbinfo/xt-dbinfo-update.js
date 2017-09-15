@@ -50,7 +50,6 @@ function initXtDbinfoFormEdit(){
 		labelWidth:50,
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',
@@ -100,7 +99,7 @@ function initXtDbinfoFormEdit(){
 			xtype:'textfield',
 			name:'xt_dbinfoPort',
 			maxLength:255,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'类&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;型',
@@ -117,7 +116,7 @@ function initXtDbinfoFormEdit(){
 			displayField:'text',
 			name:'xt_dbinfoType',
 			maxLength:255,
-			anchor:'100%'
+			anchor:'40%'
 		}
 		]
 	});
