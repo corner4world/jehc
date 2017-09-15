@@ -127,7 +127,7 @@
                                             <li>
                                                 <a href="#">
                                                     <span class="photo">
-                                                        <img src="${syspath}/deng/source/plugins/admin/index/layouts/layout2/img/avatar3_small.jpg" class="img-circle" alt=""> </span>
+                                                        <img src="${syspath}/deng/images/default/user.png" class="img-circle" alt=""> </span>
                                                     <span class="subject">
                                                         <span class="from"> 邓纯杰 </span>
                                                         <span class="time">刚刚 </span>
@@ -200,7 +200,7 @@
                             <!-- BEGIN USER LOGIN DROPDOWN -->
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <img alt="" class="img-circle" src="${syspath}/deng/source/plugins/admin/index/layouts/layout2/img/avatar3_small.jpg" />
+                                    <img alt="" class="img-circle" src="${syspath}/deng/images/default/user.png" />
                                     <span class="username username-hide-on-mobile"> ${xtUserinfo.xt_userinfo_realName }</span>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
