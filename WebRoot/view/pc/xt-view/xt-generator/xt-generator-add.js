@@ -133,11 +133,6 @@ function initXtGeneratorTab(){
 		xtype:'tabpanel',
 		tabPosition:'bottom',
 		layout:'fit', 
-		/**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        /**新方法使用结束**/  
 		items:[{
 			title:'后台配置',
 			defaultType:'textfield',
