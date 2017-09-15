@@ -129,11 +129,15 @@ function addXtGenerator(generatorFlag){
 function initXtGeneratorTab(){
  	xtGeneratorTab = Ext.create('Ext.TabPanel',{
 		activeTab:0,
-		autoScroll:true,
 		region:'center',
 		xtype:'tabpanel',
 		tabPosition:'bottom',
-		layout:'fit',    
+		layout:'fit', 
+		/**新方法使用开始**/  
+        scrollable:true,  
+        scrollable:'x',
+        scrollable:'y',
+        /**新方法使用结束**/  
 		items:[{
 			title:'后台配置',
 			defaultType:'textfield',
@@ -219,6 +223,7 @@ function initXtGeneratorTab(){
 				  	layout:"column",
 					baseCls:'x-plain',
 					xtype:'panel',
+					border:false,
 					items:[{
 							columnWidth:.3,
 							items:[{
@@ -307,6 +312,7 @@ function initXtGeneratorTab(){
 				  	layout:"column",
 					baseCls:'x-plain',
 					xtype:'panel',
+					border:false,
 					items:[{
 							columnWidth:.2,
 							xtype:'checkboxfield',
@@ -383,6 +389,7 @@ function initXtGeneratorTab(){
 				  	layout:"column",
 					baseCls:'x-plain',
 					xtype:'panel',
+					border:false,
 					items:[{
 							columnWidth:.35,
 							fieldLabel:'平台是否默认生成批量添加、修改、根据动态条件批量修改功能:是',
@@ -413,10 +420,11 @@ function initXtGeneratorTab(){
 					baseCls:'x-plain',
 					xtype:'panel',
 					id:'one_to_many_typeFlag',
+					border:false,
 					items:[{
 							columnWidth:.25,
 							fieldLabel:'<font color=red>【一对多】多的一方采用动态添加列表方式</font>',
-							labelWidth:280,
+							labelWidth:295,
 							xtype:'radio',
 							name:'one_to_many_type',
 							inputValue:'0'
@@ -570,7 +578,6 @@ function initXtGeneratorFormAdd(){
 	initXtGeneratorColumn();
 	initXtGeneratorTab();
 	xtGeneratorFormAdd = Ext.create('Ext.FormPanel',{
-		autoScroll:true,
 		fieldDefaults:{
 	        labelWidth:80,
 	        labelAlign:"right",
