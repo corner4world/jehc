@@ -53,7 +53,6 @@ function initBMemberAddressFormEdit(){
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		fieldDefaults:{
 			labelWidth:170,
 			labelAlign:'right',
