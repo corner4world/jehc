@@ -57,6 +57,11 @@ function initSolrSchemaTempletFormEdit(){
 			flex:1,
 			margin:'2 5 4 5'
 		},
+		/**新方法使用开始**/
+		scrollable:true,
+		scrollable:'x',
+		scrollable:'y',
+		/**新方法使用结束**/
 		items:[
 		{
 			fieldLabel:'标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题',

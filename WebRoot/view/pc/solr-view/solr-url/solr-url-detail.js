@@ -43,7 +43,6 @@ function initSolrUrlFormDetail(){
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',
@@ -69,20 +68,6 @@ function initSolrUrlFormDetail(){
 			anchor:'100%'
 		},
 		{
-			fieldLabel:'创建时间',
-			xtype:'textfield',
-			name:'solr_url_ctime',
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'修改时间',
-			xtype:'textfield',
-			name:'solr_url_mtime',
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
 			fieldLabel:'备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注',
 			xtype:'textarea',
 			name:'solr_url_content',
@@ -90,11 +75,25 @@ function initSolrUrlFormDetail(){
 			anchor:'100%'
 		},
 		{
+			fieldLabel:'创建时间',
+			xtype:'textfield',
+			name:'solr_url_ctime',
+			maxLength:32,
+			anchor:'30%'
+		},
+		{
+			fieldLabel:'修改时间',
+			xtype:'textfield',
+			name:'solr_url_mtime',
+			maxLength:32,
+			anchor:'30%'
+		},
+		{
 			fieldLabel:'创&nbsp;&nbsp;建&nbsp;人',
 			xtype:'textfield',
 			name:'xt_userinfo_realName',
 			maxLength:32,
-			anchor:'100%'
+			anchor:'30%'
 		}
 		]
 	});

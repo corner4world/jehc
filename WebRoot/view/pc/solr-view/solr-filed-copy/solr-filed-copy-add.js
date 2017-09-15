@@ -45,9 +45,8 @@ function initSolrFiledCopyFormAdd(){
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		fieldDefaults:{
-			labelWidth:90,
+			labelWidth:100,
 			labelAlign:'right',
 			flex:1,
 			margin:'2 5 4 5'

@@ -44,9 +44,8 @@ function initSolrFiledCopyFormDetail(){
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		fieldDefaults:{
-			labelWidth:90,
+			labelWidth:100,
 			labelAlign:'right',
 			flex:1,
 			readOnly:true,
@@ -120,7 +119,7 @@ function initSolrFiledCopyFormDetail(){
 			xtype:'textfield',
 			name:'xt_userinfo_realName',
 			maxLength:32,
-			anchor:'100%'
+			anchor:'40%'
 		},
 		{
 			fieldLabel:'实例编号',
