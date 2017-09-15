@@ -47,7 +47,6 @@ function initBSellerFormEdit(){
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',
