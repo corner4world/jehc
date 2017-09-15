@@ -331,7 +331,7 @@
 				                        <small>扁平化例子...</small>
 				                    </h3>
 		                        	<div class="portlet light ">
-				                        <div class="portlet-title">
+				                        <!-- <div class="portlet-title">
 				                            <div class="caption">
 				                                <span class="caption-subject font-green-sharp sbold">快捷入口</span>
 				                            </div>
@@ -342,7 +342,7 @@
 				                                    </a>
 				                                </div>
 				                            </div>
-				                        </div>
+				                        </div> -->
 				                        <div class="portlet-body">
 				                            <div class="tiles">
 				                                <div class="tile double-down bg-blue-hoki">
