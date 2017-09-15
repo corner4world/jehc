@@ -50,7 +50,6 @@ function initSolrEntityFormAdd(solr_document_id,id,text){
 	solrEntityFormAdd = Ext.create('Ext.FormPanel',{
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:false,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',
@@ -58,9 +57,6 @@ function initSolrEntityFormAdd(solr_document_id,id,text){
 			margin:'2 5 4 5'
 		},
 		title:'实体配置',
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
 		items:[{
 			fieldLabel:'文档编号',
 			xtype:'textfield',

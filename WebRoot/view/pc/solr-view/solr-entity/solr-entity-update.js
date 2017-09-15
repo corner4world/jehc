@@ -56,9 +56,6 @@ function initSolrEntityFormEdit(){
 			margin:'2 5 4 5'
 		},
 		title:'实体配置',  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
 		items:[{
 			fieldLabel:'文档编号',
 			xtype:'textfield',
