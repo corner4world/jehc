@@ -10,7 +10,7 @@ function detailBSeller(){
 	bSellerWinDetail = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:800,
-		height:400,
+		height:440,
 //		maximized:true,
 		maximizable:true,
 		minimizable:true,
