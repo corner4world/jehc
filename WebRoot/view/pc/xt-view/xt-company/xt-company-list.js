@@ -163,7 +163,6 @@ Ext.onReady(function(){
 		xtype:'form',
 		region:'center',
 		defaultType:'textfield',
-		autoScroll:true,
 		title:'jEhc信息技术有限公司',
 		titleAlign:'left',
 		fieldDefaults:{
@@ -230,6 +229,7 @@ Ext.onReady(function(){
 			layout:'hbox',
 			xtype:'form',
 			anchor:'100%',
+			border:false,
 			items:[{
 					fieldLabel:'省&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;份',
 					name:'xt_provinceID',

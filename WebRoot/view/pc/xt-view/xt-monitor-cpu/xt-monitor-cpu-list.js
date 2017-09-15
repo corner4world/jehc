@@ -77,25 +77,6 @@ Ext.onReady(function(){
 				}
 			 },
 			 {
-				text:'检索',
-				tooltip:'检索',
-				minWidth:tbarBtnMinWidth,
-				cls:'searchBtn',
-				icon:searchIcon,
-				handler:function(){
-					search();
-				}
-			 },
-			 {
-				text:'重置',
-				tooltip:'重置',
-				minWidth:tbarBtnMinWidth,
-				icon:clearSearchIcon,
-				handler:function(){
-					searchForm.reset();
-				}
-			 },
-			 {
 				text:'监控',
 				tooltip:'监控',
 				minWidth:tbarBtnMinWidth,
@@ -157,22 +138,6 @@ Ext.onReady(function(){
 					glyph:0xf021,
 					handler:function(){
 						grid.getStore().reload();
-					}
-				 },
-				 {
-					text:'检 索',
-					tooltip:'检 索',
-					glyph:0xf002,
-					handler:function(){
-						search();
-					}
-				 },
-				 {
-					text:'重 置',
-					tooltip:'重 置',
-					glyph:0xf014,
-					handler:function(){
-						searchForm.reset();
 					}
 				 }
 				 ]
