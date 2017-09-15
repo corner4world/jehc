@@ -239,7 +239,6 @@ function initBProductFormEdit(){
 		waitMsgTarget:true,
 		defaultType:'textfield',
 		layout:"fit",
-		autoScroll:true,
 		fieldDefaults:{
 			labelWidth:70,
 			labelAlign:'left',

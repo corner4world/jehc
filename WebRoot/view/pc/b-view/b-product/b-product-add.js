@@ -226,7 +226,6 @@ function initBProductFormAdd(){
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		layout:"fit",
 		fieldDefaults:{
 			labelWidth:70,
