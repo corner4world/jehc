@@ -24,7 +24,6 @@ function initListDeleted(){
 		maxHeight:220,
 		waitMsgTarget:true,
 		defaultType:'textfield',
-		autoScroll:true,
 		fieldDefaults:{
 			labelWidth:40,
 			labelAlign:'left',
