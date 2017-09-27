@@ -3,6 +3,7 @@
 http://git.oschina.net/jehc/jehc
 
  **QQ讨论群:330370132** 
+
  **1. 如果需要maven版本加Q获取** 
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0927/090642_48f6f76e_1341290.png "jehcmaven.png")
 
@@ -33,6 +34,7 @@ jEhc能做什么
 http://git.oschina.net/jehc/jehc
 
  **QQ讨论群:330370132** 
+
  **1. 如果需要maven版本加Q获取** 
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0927/090642_48f6f76e_1341290.png "jehcmaven.png")
 
