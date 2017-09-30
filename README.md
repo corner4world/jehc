@@ -5,7 +5,7 @@ http://git.oschina.net/jehc/jehc
  **QQ讨论群:330370132** 
 
  **1. 如果需要maven版本加Q获取** 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0927/090642_48f6f76e_1341290.png "jehcmaven.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0930/093645_31e04b39_1341290.png "maven版本.png")
 
 效果图片如下：
 
@@ -36,7 +36,7 @@ http://git.oschina.net/jehc/jehc
  **QQ讨论群:330370132** 
 
  **1. 如果需要maven版本加Q获取** 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0927/090642_48f6f76e_1341290.png "jehcmaven.png")
+![输入图片说明](https://git.oschina.net/uploads/images/2017/0930/093645_31e04b39_1341290.png "maven版本.png")
 
 ### 开发前部署老出现问题 
 一般出现环境问题（主要是编译问题较多）
