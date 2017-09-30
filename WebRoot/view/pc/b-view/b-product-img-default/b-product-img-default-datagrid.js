@@ -19,7 +19,7 @@ Ext.onReady(function() {
         tpl:[
             '<tpl for=".">',
                 '<div class="thumb-wrap" id="{name:stripTags}">',
-                    '<div class="thumb"><img src="{hsimg_base_path_url}" title="{b_product_img_name}"></div>',
+                    '<div class="thumb"><img src="{jehcimg_base_path_url}" title="{b_product_img_name}"></div>',
                     '<span class="x-editable"><font color="#ddd">名称:</font><font color="#ddd">{b_product_img_nameShort:htmlEncode}</span>',
                     '<span class="x-editable"><font color="#ddd">大小:</font><font color="#ddd">{xt_attachmentSizeShort:htmlEncode}KB</span>',
                     '<span class="x-editable"><font color="#ddd">时间:</font><font color="#ddd">{xt_attachmentCtimeShort:htmlEncode}</span>',

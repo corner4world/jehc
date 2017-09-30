@@ -60,10 +60,10 @@ public class BProductColorDefaultController extends BaseAction{
 	public String getBProductColorDefaultListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		String hsimg_base_url = CommonUtils.getXtPathCache("hsimg_base_url").get(0).getXt_path();
+		String jehcimg_base_url = CommonUtils.getXtPathCache("jehcimg_base_url").get(0).getXt_path();
 		List<BProductColorDefault> b_Product_Color_DefaultList = bProductColorDefaultService.getBProductColorDefaultListByCondition(condition);
 		for(int i = 0; i < b_Product_Color_DefaultList.size(); i++){
-			b_Product_Color_DefaultList.get(i).setHsimg_base_url(hsimg_base_url);
+			b_Product_Color_DefaultList.get(i).setJehcimg_base_url(jehcimg_base_url);
 		}
 		PageInfo<BProductColorDefault> page = new PageInfo<BProductColorDefault>(b_Product_Color_DefaultList);
 		return outPageStr(page,request);
@@ -193,7 +193,7 @@ public class BProductColorDefaultController extends BaseAction{
 			if(i > 0){
 				baseJson.setJsonID(xtAttachmentList.get(0).getXt_attachment_id());
 				baseJson.setMsg("上传成功");
-				baseJson.setJsonValue(CommonUtils.getXtPathCache("hsimg_base_url").get(0).getXt_path()+ xtAttachmentList.get(0).getXt_attachmentPath());
+				baseJson.setJsonValue(CommonUtils.getXtPathCache("jehcimg_base_url").get(0).getXt_path()+ xtAttachmentList.get(0).getXt_attachmentPath());
 			}else{
 				baseJson.setMsg("上传失败");
 			}

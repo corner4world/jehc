@@ -52,10 +52,10 @@ public class XtEncoderqrcodeController extends BaseAction{
 	public String getXtEncoderqrcodeListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		String hssources_base_url = CommonUtils.getXtPathCache("hssources_base_url").get(0).getXt_path();
+		String jehcsources_base_url = CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path();
 		List<XtEncoderqrcode> xt_EncoderqrcodeList = xtEncoderqrcodeService.getXtEncoderqrcodeListByCondition(condition);
 		for(int i = 0; i < xt_EncoderqrcodeList.size(); i++){
-			xt_EncoderqrcodeList.get(i).setHssources_base_url(hssources_base_url);
+			xt_EncoderqrcodeList.get(i).setJehcsources_base_url(jehcsources_base_url);
 		}
 		PageInfo<XtEncoderqrcode> page = new PageInfo<XtEncoderqrcode>(xt_EncoderqrcodeList);
 		return outPageStr(page,request);

@@ -60,9 +60,9 @@ public class XtSourcesController extends BaseAction{
 			condition.put("xt_sources_title",request.getParameter("xt_sources_title"));
 		}
 		List<XtSources> xt_SourcesList = xtSourcesService.getXtSourcesListByCondition(condition);
-		String hssources_base_url = CommonUtils.getXtPathCache("hssources_base_url").get(0).getXt_path();
+		String jehcsources_base_url = CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path();
 		for(int i = 0; i < xt_SourcesList.size(); i++){
-			xt_SourcesList.get(i).setHssources_base_url(hssources_base_url);
+			xt_SourcesList.get(i).setJehcsources_base_url(jehcsources_base_url);
 		}
 		PageInfo<XtSources> page = new PageInfo<XtSources>(xt_SourcesList);
 		return outPageStr(page,request);

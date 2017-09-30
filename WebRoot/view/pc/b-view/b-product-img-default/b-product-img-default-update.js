@@ -40,7 +40,7 @@ function updateBProductImgDefault(){
 	});
 	bProductImgDefaultWinEdit.show();
 	Ext.getCmp('b_product_id').setValue($('#b_product_id_').val());
-	Ext.getCmp('pic').getEl().dom.src = record.items[0].data.hsimg_base_url+record.items[0].data.xt_attachmentPath;
+	Ext.getCmp('pic').getEl().dom.src = record.items[0].data.jehcimg_base_url+record.items[0].data.xt_attachmentPath;
 	loadFormData(bProductImgDefaultFormEdit,'../bProductImgDefaultController/getBProductImgDefaultById?b_product_img_default_id='+ record.items[0].data.b_product_img_default_id);
 }
 function initBProductImgDefaultFormEdit(){
