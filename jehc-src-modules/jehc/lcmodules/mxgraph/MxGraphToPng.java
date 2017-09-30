@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.Hashtable;
 
 import javax.imageio.ImageIO;
