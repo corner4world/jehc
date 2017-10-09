@@ -103,7 +103,7 @@ $.fn.addtabs = function (options) {
     });
 
     obj.on('mouseleave', 'li[role = "presentation"]', function () {
-        $(this).find('.close-tab').hide();
+//        $(this).find('.close-tab').hide();
     });
 
     $(window).resize(function () {
@@ -180,7 +180,7 @@ window.Addtabs = {
                 content.append(data);
             });
         }
-        $('#tab_' + id).find('.close-tab').hide();
+        //$('#tab_' + id).find('.close-tab').hide();
         //激活TAB
         $('#tab_' + id).addClass('active');
         $('#' + id).addClass('active');

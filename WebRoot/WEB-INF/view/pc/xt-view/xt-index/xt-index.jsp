@@ -570,10 +570,10 @@
 			}
 			.nav-tabs li a{
 				font-size: 14px;
-				color: #888999;
+				/* color: #888999; */
 				background: #f5f5f5;
 				margin: 0;
-				padding: 10px 5px;
+				/* padding: 10px 5px; */
 				border-radius: 0;
 				border: none;
 				border-right: 1px solid #fff;
@@ -614,7 +614,7 @@
 			}
 			.nav-tabs li a:after{
 				content: "";
-				border-top: 10px solid #f5f5f5;
+				/* border-top: 10px solid #f5f5f5; */
 				border-left: 10px solid transparent;
 				border-right: 10px solid transparent;
 				position: absolute;
@@ -649,7 +649,7 @@
 			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
 			    color: #FFFFFF;
 			    background-color: #17C4BB;
-			    border: 1px solid #17C4BB;
+			    border: 0px solid #17C4BB;
 			    border-bottom-color: transparent;
 			    cursor: default;
 			}
