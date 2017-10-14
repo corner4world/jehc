@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.oamodules.oamodel.OaNotice">
+	<!--初始化分页-->
+	<select id="getOaNoticeListByCondition" resultType="jehc.oamodules.oamodel.OaNotice" parameterType="map">
+		SELECT
+			`oa_noticeID`,
+			`xt_userinfo_id`,
+			`oa_noticeTitle`,
+			`oa_noticeContent`,
+			`oa_noticeCreateTime`,
+			`oa_noticeIsDelete`,
+			`oa_noticeType`
+		FROM 
+			oa_notice
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getOaNoticeById" resultType="jehc.oamodules.oamodel.OaNotice" parameterType="string">
+		SELECT
+			`oa_noticeID`,
+			`xt_userinfo_id`,
+			`oa_noticeTitle`,
+			`oa_noticeContent`,
+			`oa_noticeCreateTime`,
+			`oa_noticeIsDelete`,
+			`oa_noticeType`
+		FROM 
+			oa_notice
+		WHERE oa_noticeID=#{oa_noticeID}
+	</select>
+
+	<!--添加-->
+	<insert id="addOaNotice" parameterType="jehc.oamodules.oamodel.OaNotice">
+		INSERT INTO
+			oa_notice
+			(
+			`oa_noticeID`,
+			`xt_userinfo_id`,
+			`oa_noticeTitle`,
+			`oa_noticeContent`,
+			`oa_noticeCreateTime`,
+			`oa_noticeIsDelete`,
+			`oa_noticeType`
+			)
+			VALUES
+			(
+			#{oa_noticeID},
+			#{xt_userinfo_id},
+			#{oa_noticeTitle},
+			#{oa_noticeContent},
+			#{oa_noticeCreateTime},
+			#{oa_noticeIsDelete},
+			#{oa_noticeType}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateOaNotice" parameterType="jehc.oamodules.oamodel.OaNotice">
+		UPDATE
+			oa_notice
+		SET
+			`oa_noticeID` = #{oa_noticeID},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`oa_noticeTitle` = #{oa_noticeTitle},
+			`oa_noticeContent` = #{oa_noticeContent},
+			`oa_noticeCreateTime` = #{oa_noticeCreateTime},
+			`oa_noticeIsDelete` = #{oa_noticeIsDelete},
+			`oa_noticeType` = #{oa_noticeType}
+		WHERE oa_noticeID=#{oa_noticeID}
+	</update>
+
+	<!--删除-->
+	<delete id="delOaNotice" parameterType="map">
+		DELETE FROM oa_notice WHERE oa_noticeID IN
+		<foreach item="item" index="index" collection="oa_noticeID" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

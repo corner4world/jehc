@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BProductPrice">
+	<!--初始化分页-->
+	<select id="getBProductPriceListByCondition" resultType="jehc.bmodules.bmodel.BProductPrice" parameterType="map">
+		SELECT
+			`b_product_price_id`,
+			`base_price`,
+			`suggested_price`,
+			`b_seller_product_id`,
+			`original_price`
+		FROM 
+			b_product_price
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getBProductPriceById" resultType="jehc.bmodules.bmodel.BProductPrice" parameterType="string">
+		SELECT
+			`b_product_price_id`,
+			`base_price`,
+			`suggested_price`,
+			`b_seller_product_id`,
+			`original_price`
+		FROM 
+			b_product_price
+		WHERE b_product_price_id=#{b_product_price_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBProductPrice" parameterType="jehc.bmodules.bmodel.BProductPrice">
+		INSERT INTO
+			b_product_price
+			(
+			`b_product_price_id`,
+			`base_price`,
+			`suggested_price`,
+			`b_seller_product_id`,
+			`original_price`
+			)
+			VALUES
+			(
+			#{b_product_price_id},
+			#{base_price},
+			#{suggested_price},
+			#{b_seller_product_id},
+			#{original_price}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBProductPrice" parameterType="jehc.bmodules.bmodel.BProductPrice">
+		UPDATE
+			b_product_price
+		SET
+			`b_product_price_id` = #{b_product_price_id},
+			`base_price` = #{base_price},
+			`suggested_price` = #{suggested_price},
+			`b_seller_product_id` = #{b_seller_product_id},
+			`original_price` = #{original_price}
+		WHERE b_product_price_id=#{b_product_price_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBProductPrice" parameterType="map">
+		DELETE FROM b_product_price WHERE b_product_price_id IN
+		<foreach item="item" index="index" collection="b_product_price_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--根据卖家商品编号查询对象-->
+	<select id="getBProductPriceByBSellerProductId" resultType="jehc.bmodules.bmodel.BProductPrice" parameterType="string">
+		SELECT
+			`b_product_price_id`,
+			`base_price`,
+			`suggested_price`,
+			`b_seller_product_id`,
+			`original_price`
+		FROM 
+			b_product_price
+		WHERE b_seller_product_id=#{b_seller_product_id}
+	</select>
+</mapper>

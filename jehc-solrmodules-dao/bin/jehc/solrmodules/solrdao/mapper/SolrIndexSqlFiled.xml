@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrIndexSqlFiled">
+	<!--初始化分页-->
+	<select id="getSolrIndexSqlFiledListByCondition" resultType="jehc.solrmodules.solrmodel.SolrIndexSqlFiled" parameterType="map">
+		SELECT
+			`solr_index_sql_filed_id`,
+			`solr_index_sql_filed_name`,
+			`solr_index_sql_filed_zh`,
+			`solr_entity_id`,
+			`solr_index_filed_name`,
+			DATE_FORMAT(`solr_index_sql_filed_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_sql_filed_ctime`,
+			DATE_FORMAT(`solr_index_sql_filed_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_sql_filed_mtime`,
+			`xt_userinfo_id`
+		FROM 
+			solr_index_sql_filed
+		WHERE 1=1
+		<if test="null != solr_entity_id">
+			AND solr_entity_id = #{solr_entity_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrIndexSqlFiledById" resultType="jehc.solrmodules.solrmodel.SolrIndexSqlFiled" parameterType="string">
+		SELECT
+			`solr_index_sql_filed_id`,
+			`solr_index_sql_filed_name`,
+			`solr_index_sql_filed_zh`,
+			`solr_entity_id`,
+			`solr_index_filed_name`,
+			DATE_FORMAT(`solr_index_sql_filed_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_sql_filed_ctime`,
+			DATE_FORMAT(`solr_index_sql_filed_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_sql_filed_mtime`,
+			`xt_userinfo_id`
+		FROM 
+			solr_index_sql_filed
+		WHERE solr_index_sql_filed_id=#{solr_index_sql_filed_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrIndexSqlFiled" parameterType="jehc.solrmodules.solrmodel.SolrIndexSqlFiled">
+		INSERT INTO
+			solr_index_sql_filed
+			(
+			`solr_index_sql_filed_id`,
+			`solr_index_sql_filed_name`,
+			`solr_index_sql_filed_zh`,
+			`solr_entity_id`,
+			`solr_index_sql_filed_ctime`,
+			`solr_index_sql_filed_mtime`,
+			`xt_userinfo_id`,
+			`solr_index_filed_name`
+			)
+			VALUES
+			(
+			#{solr_index_sql_filed_id},
+			#{solr_index_sql_filed_name},
+			#{solr_index_sql_filed_zh},
+			#{solr_entity_id},
+			#{solr_index_sql_filed_ctime},
+			#{solr_index_sql_filed_mtime},
+			#{xt_userinfo_id},
+			#{solr_index_filed_name}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrIndexSqlFiled" parameterType="jehc.solrmodules.solrmodel.SolrIndexSqlFiled">
+		UPDATE
+			solr_index_sql_filed
+		SET
+			`solr_index_sql_filed_id` = #{solr_index_sql_filed_id},
+			`solr_index_sql_filed_name` = #{solr_index_sql_filed_name},
+			`solr_index_sql_filed_zh` = #{solr_index_sql_filed_zh},
+			`solr_entity_id` = #{solr_entity_id},
+			`solr_index_sql_filed_ctime` = #{solr_index_sql_filed_ctime},
+			`solr_index_sql_filed_mtime` = #{solr_index_sql_filed_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`solr_index_filed_name` = #{solr_index_filed_name}
+		WHERE solr_index_sql_filed_id=#{solr_index_sql_filed_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrIndexSqlFiled" parameterType="map">
+		DELETE FROM solr_index_sql_filed WHERE solr_index_sql_filed_id IN
+		<foreach item="item" index="index" collection="solr_index_sql_filed_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BOrder">
+	<!--初始化分页-->
+	<select id="getBOrderListByCondition" resultType="jehc.bmodules.bmodel.BOrder" parameterType="map">
+		SELECT
+			b_order.`b_order_id`,
+			b_order.`b_order_name`,
+			b_order.`b_order_key`,
+			DATE_FORMAT(b_order.`b_order_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_order_ctime`,
+			DATE_FORMAT(b_order.`b_order_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_order_mtime`,
+			b_order.`b_order_total_price`,
+			b_order.`b_order_from`,
+			b_order.`b_order_sessionid`,
+			b_order.`b_order_remark`,
+			b_order.`b_order_total_number`,
+			b_order.`b_invoice_id`,
+			b_order.`b_order_type`,
+			b_order.`b_order_status`,
+			b_invoice.`b_invoice_type`,
+			b_invoice.`b_invoice_name`,
+			b_invoice.`b_invoice_status`,
+			b_cart_order_address.*,
+			b_member.`b_member_name`
+		FROM 
+			b_order b_order LEFT JOIN b_invoice b_invoice ON b_order.b_invoice_id = b_invoice.b_invoice_id
+			LEFT JOIN b_cart_order_address ON b_order.b_cart_order_address_id = b_cart_order_address.b_cart_order_address_id
+			LEFT JOIN b_member b_member ON b_member.b_member_id = b_order.b_member_id
+		WHERE 1=1
+		<if test="null != b_order_key">
+			AND instr(b_order.b_order_key,#{b_order_key})
+		</if>
+		<if test="null != b_invoice_name">
+			AND b_invoice.b_invoice_name = #{b_invoice_name}
+		</if>
+		<if test="null != b_invoice_type">
+			AND instr(b_invoice.b_invoice_type,#{b_invoice_type})
+		</if>
+		ORDER BY b_order.`b_order_ctime` DESC,b_order.`b_order_mtime` DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getBOrderById" resultType="jehc.bmodules.bmodel.BOrder" parameterType="string">
+		SELECT
+			b_order.`b_order_id`,
+			b_order.`b_order_name`,
+			b_order.`b_order_key`,
+			DATE_FORMAT(b_order.`b_order_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_order_ctime`,
+			DATE_FORMAT(b_order.`b_order_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_order_mtime`,
+			b_order.`b_order_total_price`,
+			b_order.`b_order_from`,
+			b_order.`b_order_sessionid`,
+			b_order.`b_order_remark`,
+			b_order.`b_order_total_number`,
+			b_order.`b_invoice_id`,
+			b_order.`b_cart_order_address_id`,
+			b_order.`b_order_type`,
+			b_order.`b_order_status`,
+			b_invoice.`b_invoice_type`,
+			b_invoice.`b_invoice_name`,
+			b_invoice.`b_invoice_status`,
+			b_order.`b_member_id`,
+			b_cart_order_address.*,
+			b_member.`b_member_name`
+		FROM 
+			b_order b_order LEFT JOIN b_invoice b_invoice ON b_order.b_invoice_id = b_invoice.b_invoice_id
+			LEFT JOIN b_cart_order_address ON b_order.b_cart_order_address_id = b_cart_order_address.b_cart_order_address_id
+			LEFT JOIN b_member b_member ON b_member.b_member_id = b_order.b_member_id
+		WHERE b_order.b_order_id=#{b_order_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBOrder" parameterType="jehc.bmodules.bmodel.BOrder">
+		INSERT INTO
+			b_order
+			(
+			`b_order_id`,
+			`b_order_name`,
+			`b_order_key`,
+			`b_order_ctime`,
+			`b_order_mtime`,
+			`b_order_total_price`,
+			`b_order_from`,
+			`b_order_sessionid`,
+			`b_order_remark`,
+			`b_order_total_number`,
+			`b_invoice_id`,
+			`b_cart_order_address_id`,
+			`b_order_type`,
+			`b_order_status`,
+			`b_member_id`
+			)
+			VALUES
+			(
+			#{b_order_id},
+			#{b_order_name},
+			#{b_order_key},
+			#{b_order_ctime},
+			#{b_order_mtime},
+			#{b_order_total_price},
+			#{b_order_from},
+			#{b_order_sessionid},
+			#{b_order_remark},
+			#{b_order_total_number},
+			#{b_invoice_id},
+			#{b_cart_order_address_id},
+			#{b_order_type},
+			#{b_order_status},
+			#{b_member_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBOrder" parameterType="jehc.bmodules.bmodel.BOrder">
+		UPDATE
+			b_order
+		SET
+			`b_order_id` = #{b_order_id},
+			`b_order_name` = #{b_order_name},
+			`b_order_key` = #{b_order_key},
+			`b_order_mtime` = #{b_order_mtime},
+			`b_order_total_price` = #{b_order_total_price},
+			`b_order_from` = #{b_order_from},
+			`b_order_sessionid` = #{b_order_sessionid},
+			`b_order_remark` = #{b_order_remark},
+			`b_order_total_number` = #{b_order_total_number},
+			`b_invoice_id` = #{b_invoice_id},
+			`b_cart_order_address_id` = #{b_cart_order_address_id},
+			`b_order_type` = #{b_order_type},
+			`b_order_status` = #{b_order_status},
+			`b_member_id` = #{b_member_id}
+		WHERE b_order_id=#{b_order_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBOrder" parameterType="map">
+		DELETE FROM b_order WHERE b_order_id IN
+		<foreach item="item" index="index" collection="b_order_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--修改支付类型-->
+	<update id="updateBOrderType" parameterType="jehc.bmodules.bmodel.BOrder">
+		UPDATE
+			b_order
+		SET
+			`b_order_mtime` = #{b_order_mtime},
+			`b_order_type` = #{b_order_type}
+		WHERE b_order_id=#{b_order_id}
+	</update>
+</mapper>

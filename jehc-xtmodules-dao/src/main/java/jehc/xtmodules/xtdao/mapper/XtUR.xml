@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtUR">
+	<!--初始化分页-->
+	<select id="getXtURListByCondition" resultType="jehc.xtmodules.xtmodel.XtUserinfo" parameterType="map">
+		SELECT
+			xt_userinfo.`xt_userinfo_id`,
+			xt_userinfo.`xt_company_id`,
+			xt_userinfo.`xt_departinfo_id`,
+			xt_userinfo.`xt_post_id`,
+			xt_userinfo.`xt_userinfo_name`,
+			xt_userinfo.`xt_userinfo_passWord`,
+			xt_userinfo.`xt_userinfo_address`,
+			xt_userinfo.`xt_userinfo_state`,
+			xt_userinfo.`xt_userinfo_isDelete`,
+			xt_userinfo.`xt_userinfo_image`,
+			xt_userinfo.`xt_userinfo_status`,
+			xt_userinfo.`xt_userinfo_realName`,
+			xt_userinfo.`xt_userinfo_phone`,
+			xt_userinfo.`xt_userinfo_card`,
+			xt_userinfo.`xt_userinfo_sex`,
+			xt_userinfo.`xt_userinfo_ismarried`,
+			xt_userinfo.`xt_userinfo_isAdmin`,
+			xt_userinfo.`xt_userinfo_nation`,
+			xt_userinfo.`xt_userinfo_origo`,
+			xt_userinfo.`xt_userinfo_pic`,
+			xt_userinfo.`xt_userinfo_mobile`,
+			xt_userinfo.`xt_userinfo_ortherTel`,
+			xt_userinfo.`xt_userinfo_intime`,
+			xt_userinfo.`xt_userinfo_outTime`,
+			xt_userinfo.`xt_userinfo_contractTime`,
+			xt_userinfo.`xt_userinfo_remark`,
+			xt_userinfo.`xt_userinfo_birthday`,
+			xt_userinfo.`xt_userinfo_qq`,
+			xt_userinfo.`xt_userinfo_email`,
+			xt_userinfo.`xt_userinfo_politicalStatus`,
+			xt_userinfo.`xt_userinfo_highestDegree`,
+			xt_userinfo.`xt_userinfo_schoolName`,
+			xt_userinfo.`xt_userinfo_workYear`,
+			xt_departinfo.`xt_departinfo_name`,
+			xt_post.`xt_post_name`
+		FROM 
+			xt_userinfo xt_userinfo LEFT JOIN xt_post xt_post ON xt_userinfo.xt_post_id = xt_post.xt_post_id
+			LEFT JOIN xt_departinfo xt_departinfo ON xt_userinfo.xt_departinfo_id = xt_departinfo.xt_departinfo_id
+		WHERE 1=1
+		AND xt_userinfo.`xt_userinfo_isAdmin` = 0
+		<if test="null != xt_roleinfo_id and '' != xt_roleinfo_id">
+			<if test="flag == 1">
+				AND xt_userinfo.xt_userinfo_id IN(SELECT xt_userinfo_id FROM xt_u_r WHERE xt_roleinfo_id=#{xt_roleinfo_id})
+			</if>
+			<if test="flag == 2">
+				AND xt_userinfo.xt_userinfo_id NOT IN(SELECT xt_userinfo_id FROM xt_u_r WHERE xt_roleinfo_id=#{xt_roleinfo_id})
+			</if>
+		</if>
+		<if test="null != type and '' != type">
+			<if test="'岗位' == type and '' != id and null != id">
+				AND xt_userinfo.xt_post_id = #{id}
+			</if>
+			<if test="'部门' == type and '' != id and null != id">
+				AND xt_userinfo.xt_departinfo_id = #{id}
+			</if>
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtURById" resultType="jehc.xtmodules.xtmodel.XtUR" parameterType="string">
+		SELECT
+			`xt_u_r_id`,
+			`xt_userinfo_id`,
+			`xt_roleinfo_id`
+		FROM 
+			xt_u_r
+		WHERE xt_u_r_id=#{xt_u_r_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtUR" parameterType="jehc.xtmodules.xtmodel.XtUR">
+		INSERT INTO
+			xt_u_r
+			(
+			`xt_u_r_id`,
+			`xt_userinfo_id`,
+			`xt_roleinfo_id`
+			)
+			VALUES
+			(
+			#{xt_u_r_id},
+			#{xt_userinfo_id},
+			#{xt_roleinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtUR" parameterType="jehc.xtmodules.xtmodel.XtUR">
+		UPDATE
+			xt_u_r
+		SET
+			`xt_u_r_id` = #{xt_u_r_id},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_roleinfo_id` = #{xt_roleinfo_id}
+		WHERE xt_u_r_id=#{xt_u_r_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtUR" parameterType="map">
+		delete from xt_u_r where xt_userinfo_id in
+		<foreach item="item" index="index" collection="xt_userinfo_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		and xt_roleinfo_id = #{xt_roleinfo_id}
+	</delete>
+	
+	<!-- 根据用户ID查找角色 -->
+	<select id="getXtURList" resultType="jehc.xtmodules.xtmodel.XtUR" parameterType="map">
+		SELECT
+			`xt_roleinfo_id`
+		FROM 
+			xt_u_r
+		WHERE 1=1
+		<if test="null != xt_userinfo_id">
+			AND xt_userinfo_id = #{xt_userinfo_id}
+		</if>
+	</select>
+	
+	<!-- 根据用户编号查找角色权限集合 -->
+	<select id="getXtRoleinfoListByUserinfoId" resultType="jehc.xtmodules.xtmodel.XtUR" parameterType="map">
+		SELECT
+			DISTINCT	
+					xt_roleinfo.`xt_role_name`,
+					xt_u_r.xt_roleinfo_id
+		FROM 
+			xt_u_r xt_u_r LEFT JOIN xt_userinfo xt_userinfo ON xt_u_r.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN xt_roleinfo xt_roleinfo ON xt_roleinfo.xt_role_id = xt_u_r.xt_roleinfo_id 
+		WHERE 1=1
+		<if test="null != xt_userinfo_id">
+			AND xt_u_r.xt_userinfo_id = #{xt_userinfo_id}
+		</if>
+	</select>
+</mapper>

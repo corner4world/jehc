@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+	<!-- spring监听器配置 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			<!-- classpath:/config/spring/spring.xml -->
+			classpath*:/config/spring/spring.xml
+		</param-value>
+	</context-param>
+
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>
+			org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	<!-- 支持session scope的Spring bean -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+	<!-- 监听Request会话清空ThreadLocal变量 -->
+	<listener>
+		<listener-class>
+			jehc.xtmodules.xtcore.threadlocalutil.ServletRequestListener</listener-class>
+	</listener>
+
+	<!-- Logback日志配置 -->
+	<context-param>
+		<param-name>logbackConfigLocation</param-name>
+		<param-value>classpath:/config/logback.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+	</listener>
+
+	<!-- 编码过滤器配置 -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- springmvc视图转发器配置 -->
+	<servlet>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				classpath*:config/spring/springmvc.xml
+			</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcherServlet</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<!-- 启动时执行系统类 -->
+	<listener>
+		<listener-class>jehc.xtmodules.xtcore.init.InitSetup</listener-class>
+	</listener>
+ 	
+	<!-- 配置log4j 
+	<context-param>
+		<param-name>log4jConfigLocation</param-name>
+		<param-value>
+			classpath:/config/log4j.properties
+		</param-value>
+	</context-param>
+	<listener>
+		<display-name>log4jConfigLocation</display-name>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener>
+	-->
+	<servlet>
+		<description>验证码</description>
+		<servlet-name>VerifyCodeServlet</servlet-name>
+		<servlet-class>jehc.xtmodules.xtcore.util.VerifyCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>VerifyCodeServlet</servlet-name>
+		<url-pattern>/VerifyCodeServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- web异常页面处理 <error-page> <exception-type>java.lang.Throwable</exception-type> 
+		<location>/error_500</location> </error-page> <error-page> <exception-type>java.lang.Exception</exception-type> 
+		<location>/error_404</location> </error-page> <error-page> <error-code>500</error-code> 
+		<location>/error_500</location> </error-page> <error-page> <error-code>501</error-code> 
+		<location>/error_500</location> </error-page> <error-page> <error-code>502</error-code> 
+		<location>/error_500</location> </error-page> <error-page> <error-code>404</error-code> 
+		<location>/error_404</location> </error-page> <error-page> <error-code>403</error-code> 
+		<location>/error_404</location> </error-page> <error-page> <error-code>400</error-code> 
+		<location>/error_404</location> </error-page> -->
+	<!-- <sessionState mode="Off" /> -->
+	<servlet>
+		<servlet-name>DruidStatView</servlet-name>
+		<servlet-class>com.alibaba.druid.support.http.StatViewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DruidStatView</servlet-name>
+		<url-pattern>/druid/*</url-pattern>
+	</servlet-mapping>
+	<filter>
+		<filter-name>druidWebStatFilter</filter-name>
+		<filter-class>com.alibaba.druid.support.http.WebStatFilter</filter-class>
+		<init-param>
+			<param-name>exclusions</param-name>
+			<param-value>
+				/public/*,*.js,*.css,/druid*,*.jsp,*.swf
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>principalSessionName</param-name>
+			<param-value>sessionInfo</param-value>
+		</init-param>
+		<init-param>
+			<param-name>profileEnable</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>druidWebStatFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- session超时配置 -->
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
+
+	<!-- 首页 -->
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	<!-- GZIPFilter压缩定义 设置此项时tk-filters.properties的GZIPFilter.Enabled=true才可用-->
+	<filter>
+		<filter-name>GZIPFilter</filter-name>
+		<filter-class>
+			com.tacitknowledge.filters.gzipfilter.GZIPFilter
+		</filter-class>
+	</filter>
+	<!-- GZIPFilter 设置自己想要压缩的文件类型-->
+	<filter-mapping>
+		<filter-name>GZIPFilter</filter-name>
+		<url-pattern>/deng/*</url-pattern>
+		<url-pattern>/view/*</url-pattern>
+	</filter-mapping>
+	<!-- CacheFilter缓存定义 设置此项时tk-filters.properties的CacheFilter.Enabled=true才可用 -->
+	<filter>
+		<filter-name>CacheFilter</filter-name>
+		<filter-class>
+			com.tacitknowledge.filters.cache.CacheHeaderFilter
+		</filter-class>
+	</filter>
+	<!-- CacheFilter 设置自己想要缓存的文件类型-->
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.gif</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.jpg</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.png</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.js</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.css</url-pattern>
+	</filter-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/deng/*</url-pattern>
+		<url-pattern>/view/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 屏蔽javax.naming.NameNotFoundException错误 -->
+	<context-param>  
+	    <param-name>spring.profiles.active</param-name>  
+	    <param-value>dev</param-value>  
+	</context-param>  
+	<context-param>  
+	    <param-name>spring.profiles.default</param-name>  
+	    <param-value>dev</param-value>  
+	</context-param>  
+	<context-param>  
+	    <param-name>spring.liveBeansView.mbeanDomain</param-name>  
+	    <param-value>dev</param-value>  
+	</context-param> 
+	
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>jehc-web</param-value>
+	</context-param>
+</web-app>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtFunctioninfoRight">
+	<!--初始化分页-->
+	<select id="getXtFunctioninfoRightListByCondition" resultType="jehc.xtmodules.xtmodel.XtFunctioninfoRight" parameterType="map">
+		SELECT
+			xt_functioninfo_right.`xt_functioninfo_right_id`,
+			xt_functioninfo_right.`xt_functioninfo_id`,
+			xt_functioninfo_right.`xt_role_id`,
+			xt_functioninfo_right.`xt_menuinfo_id`,
+			xt_functioninfo.`xt_functioninfoURL`,
+			xt_functioninfo.`xt_functioninfoMethod`,
+			xt_functioninfo.`xt_functioninfoType`,
+			xt_functioninfo.`xt_functioninfoIsAuthority`
+		FROM 
+			xt_functioninfo_right xt_functioninfo_right LEFT JOIN xt_functioninfo xt_functioninfo ON xt_functioninfo.xt_functioninfo_id = xt_functioninfo_right.xt_functioninfo_id
+		WHERE 1=1
+		AND xt_functioninfo.xt_functioninfoStatus = 0
+		AND xt_functioninfo.xt_functioninfoType = 1
+		<if test="null != xt_role_id">
+			AND xt_functioninfo_right.xt_role_id IN 
+			<foreach item="item" index="index" collection="xt_role_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+		<if test="null != xt_functioninfo_id">
+			AND xt_functioninfo_right.xt_functioninfo_id = #{xt_functioninfo_id}
+		</if>
+		<if test="null != xt_menuinfo_id">
+			AND xt_functioninfo_right.xt_menuinfo_id = #{xt_menuinfo_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtFunctioninfoRightById" resultType="jehc.xtmodules.xtmodel.XtFunctioninfoRight" parameterType="string">
+		SELECT
+			`xt_functioninfo_right_id`,
+			`xt_functioninfo_id`,
+			`xt_role_id`,
+			`xt_menuinfo_id`
+		FROM 
+			xt_functioninfo_right
+		WHERE xt_functioninfo_right_id=#{xt_functioninfo_right_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtFunctioninfoRight" parameterType="jehc.xtmodules.xtmodel.XtFunctioninfoRight">
+		INSERT INTO
+			xt_functioninfo_right
+			(
+			`xt_functioninfo_right_id`,
+			`xt_functioninfo_id`,
+			`xt_role_id`,
+			`xt_menuinfo_id`
+			)
+			VALUES
+			(
+			#{xt_functioninfo_right_id},
+			#{xt_functioninfo_id},
+			#{xt_role_id},
+			#{xt_menuinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtFunctioninfoRight" parameterType="jehc.xtmodules.xtmodel.XtFunctioninfoRight">
+		UPDATE
+			xt_functioninfo_right
+		SET
+			`xt_functioninfo_right_id` = #{xt_functioninfo_right_id},
+			`xt_functioninfo_id` = #{xt_functioninfo_id},
+			`xt_role_id` = #{xt_role_id},
+			`xt_menuinfo_id` = #{xt_menuinfo_id}
+		WHERE xt_functioninfo_right_id=#{xt_functioninfo_right_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtFunctioninfoRight" parameterType="map">
+		DELETE FROM xt_functioninfo_right WHERE xt_role_id = #{xt_role_id}
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtFunctioninfoRight" parameterType="list">
+		INSERT INTO
+			xt_functioninfo_right
+			(
+			`xt_functioninfo_right_id`,
+			`xt_functioninfo_id`,
+			`xt_role_id`,
+			`xt_menuinfo_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_functioninfo_right_id},
+			#{item.xt_functioninfo_id},
+			#{item.xt_role_id},
+			#{item.xt_menuinfo_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtFunctioninfoRight" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_functioninfo_right
+			SET
+				`xt_functioninfo_right_id` = #{item.xt_functioninfo_right_id},
+				`xt_functioninfo_id` = #{item.xt_functioninfo_id},
+				`xt_role_id` = #{item.xt_role_id},
+				`xt_menuinfo_id` = #{item.xt_menuinfo_id}
+			WHERE xt_functioninfo_right_id=#{item.xt_functioninfo_right_id}
+		</foreach>
+	</update>
+</mapper>

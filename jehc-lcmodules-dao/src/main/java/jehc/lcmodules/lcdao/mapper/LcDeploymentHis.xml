@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.lcmodules.lcmodel.LcDeploymentHis">
+	<!--初始化分页-->
+	<select id="getLcDeploymentHisListByCondition" resultType="jehc.lcmodules.lcmodel.LcDeploymentHis" parameterType="map">
+		SELECT
+			`id`,
+			`lc_deployment_his_id`,
+			`lc_deployment_his_name`,
+			`lc_deployment_his_time`,
+			`lc_deployment_his_tenantId`,
+			`lc_process_id`,
+			`lc_deployment_his_status`
+		FROM 
+			lc_deployment_his
+		WHERE 1=1
+		<if test="null != lc_process_id">
+			AND lc_process_id = #{lc_process_id}
+		</if>
+		ORDER BY lc_deployment_his_time DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getLcDeploymentHisById" resultType="jehc.lcmodules.lcmodel.LcDeploymentHis" parameterType="string">
+		SELECT
+			lc_deployment_his.`id`,
+			lc_deployment_his.`lc_deployment_his_id`,
+			lc_deployment_his.`lc_deployment_his_name`,
+			lc_deployment_his.`lc_deployment_his_time`,
+			lc_deployment_his.`lc_deployment_his_tenantId`,
+			lc_deployment_his.`lc_process_id`,
+			lc_process.`xt_constant_id`,
+			`lc_deployment_his_status`
+		FROM 
+			lc_deployment_his lc_deployment_his LEFT JOIN lc_process lc_process ON lc_deployment_his.lc_process_id = lc_process.lc_process_id
+		WHERE lc_deployment_his.id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addLcDeploymentHis" parameterType="jehc.lcmodules.lcmodel.LcDeploymentHis">
+		INSERT INTO
+			lc_deployment_his
+			(
+			`id`,
+			`lc_deployment_his_id`,
+			`lc_deployment_his_name`,
+			`lc_deployment_his_time`,
+			`lc_deployment_his_tenantId`,
+			`lc_process_id`,
+			`lc_deployment_his_status`
+			)
+			VALUES
+			(
+			#{id},
+			#{lc_deployment_his_id},
+			#{lc_deployment_his_name},
+			#{lc_deployment_his_time},
+			#{lc_deployment_his_tenantId},
+			#{lc_process_id},
+			#{lc_deployment_his_status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateLcDeploymentHis" parameterType="jehc.lcmodules.lcmodel.LcDeploymentHis">
+		UPDATE
+			lc_deployment_his
+		SET
+			`id` = #{id},
+			`lc_deployment_his_id` = #{lc_deployment_his_id},
+			`lc_deployment_his_name` = #{lc_deployment_his_name},
+			`lc_deployment_his_time` = #{lc_deployment_his_time},
+			`lc_deployment_his_tenantId` = #{lc_deployment_his_tenantId},
+			`lc_process_id` = #{lc_process_id},
+			`lc_deployment_his_status` = #{lc_deployment_his_status}
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delLcDeploymentHis" parameterType="map">
+		DELETE FROM lc_deployment_his WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchLcDeploymentHis" parameterType="list">
+		INSERT INTO
+			lc_deployment_his
+			(
+			`id`,
+			`lc_deployment_his_id`,
+			`lc_deployment_his_name`,
+			`lc_deployment_his_time`,
+			`lc_deployment_his_tenantId`,
+			`lc_process_id`,
+			`lc_deployment_his_status`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.lc_deployment_his_id},
+			#{item.lc_deployment_his_name},
+			#{item.lc_deployment_his_time},
+			#{item.lc_deployment_his_tenantId},
+			#{item.lc_process_id},
+			#{lc_deployment_his_status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchLcDeploymentHis" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				lc_deployment_his
+			SET
+				`id` = #{item.id},
+				`lc_deployment_his_id` = #{item.lc_deployment_his_id},
+				`lc_deployment_his_name` = #{item.lc_deployment_his_name},
+				`lc_deployment_his_time` = #{item.lc_deployment_his_time},
+				`lc_deployment_his_tenantId` = #{item.lc_deployment_his_tenantId},
+				`lc_process_id` = #{item.lc_process_id},
+				`lc_deployment_his_status` = #{lc_deployment_his_status}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+	
+	<!--查询唯一一个对象-->
+	<select id="getLcDeploymentHisUnique" resultType="jehc.lcmodules.lcmodel.LcDeploymentHis" parameterType="map">
+		SELECT
+			lc_deployment_his.`id`,
+			lc_deployment_his.`lc_deployment_his_id`,
+			lc_deployment_his.`lc_deployment_his_name`,
+			lc_deployment_his.`lc_deployment_his_time`,
+			lc_deployment_his.`lc_deployment_his_tenantId`,
+			lc_deployment_his.`lc_process_id`,
+			lc_process.`xt_constant_id`,
+			lc_deployment_his.`lc_deployment_his_status`
+		FROM 
+			lc_deployment_his lc_deployment_his LEFT JOIN lc_process lc_process ON lc_deployment_his.lc_process_id = lc_process.lc_process_id
+		WHERE 1=1
+		AND lc_process.xt_constant_id=#{xt_constant_id}
+		AND lc_deployment_his_status = 0
+	</select>
+	
+	<!--查询最新唯一一个对象-->
+	<select id="getLcDeploymentHisNewUnique" resultType="jehc.lcmodules.lcmodel.LcDeploymentHis" parameterType="map">
+		SELECT
+			lc_deployment_his.`id`,
+			lc_deployment_his.`lc_deployment_his_id`,
+			lc_deployment_his.`lc_deployment_his_name`,
+			lc_deployment_his.`lc_deployment_his_time`,
+			lc_deployment_his.`lc_deployment_his_tenantId`,
+			lc_deployment_his.`lc_process_id`,
+			lc_process.`xt_constant_id`,
+			lc_deployment_his.`lc_deployment_his_status`
+		FROM 
+			lc_deployment_his lc_deployment_his LEFT JOIN lc_process lc_process ON lc_deployment_his.lc_process_id = lc_process.lc_process_id
+		WHERE 1=1
+		AND lc_process.xt_constant_id=#{xt_constant_id}
+		AND lc_deployment_his_status = 0
+		ORDER BY lc_deployment_his.`lc_deployment_his_time` DESC
+	</select>
+</mapper>

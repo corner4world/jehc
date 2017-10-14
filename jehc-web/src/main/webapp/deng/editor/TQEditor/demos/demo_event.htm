@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script><br>
+<textarea id="e1" rows="12" cols="100" ></textarea>
+<br>
+<br> 
+事件俘获测试
+<br>
+<textarea name="testResult" id="testResult" cols="45" rows="20"></textarea>
+<input type="button" name="button" id="button" value="清除结果" onClick="document.getElementById('testResult').value=''; return false;">
+<script type="text/javascript" defer="true"> 
+function testInit()
+{
+	document.getElementById('testResult').value = 'oninit';
+}
+function testFocus(e)
+{
+	document.getElementById('testResult').value += '\nonfocus';
+}
+function testBlur(e)
+{
+	document.getElementById('testResult').value += '\nonblur';
+}
+function testKeydown(e)
+{
+	var o=document.getElementById('testResult');
+	o.value += '\nonkeydown(';
+	if(e.ctrlKey) o.value+='Ctrl + ';
+	if(e.shiftKey) o.value+='Shift + ';
+	if(e.altKey) o.value+='Alt + ';
+	var key = e.keyCode || e.which;
+	o.value += key +')'
+	
+}
+function testKeyup(e)
+{
+	var o=document.getElementById('testResult');
+	o.value += '\nonkeyup(';
+	if(e.ctrlKey) o.value+='Ctrl + ';
+	if(e.shiftKey) o.value+='Shift + ';
+	if(e.altKey) o.value+='Alt + ';
+	var key = e.keyCode || e.which;
+	o.value += key +')'
+
+}
+function testContent(code)
+{
+	document.getElementById('testResult').value += '\nongetcontent';
+	return code;
+}
+function testSetContent(code)
+{
+	document.getElementById('testResult').value += '\nonsetcontent';
+	return code;
+}
+
+var e= new tqEditor('e1',{'oninit':testInit,'onfocus':testFocus,'onblur':testBlur,'onkeydown':testKeydown,'onkeyup':testKeyup,'ongetcontent':testContent,'onsetcontent':testSetContent}); 
+</script>
+<table border="1" cellspacing="3" cellpadding="3">
+	<tr>
+		<td>事件</td>
+		<td>触发条件</td>
+		<td>说明</td>
+	</tr>
+	<tr>
+		<td> onfocus<br></td>
+		<td>获取焦点</td>
+		<td>回调函数的参数是真正的事件对象</td>
+	</tr>
+	<tr>
+		<td>onblur</td>
+		<td>失去焦点</td>
+		<td>回调函数的参数是真正的事件对象</td>
+	</tr>
+	<tr>
+		<td>onkeydown</td>
+		<td>按下键盘按键</td>
+		<td>回调函数的参数是真正的事件对象</td>
+	</tr>
+	<tr>
+		<td>onkeyup</td>
+		<td>释放键盘按键</td>
+		<td>回调函数的参数是真正的事件对象</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>oninit</td>
+		<td>初始化</td>
+		<td>无参数</td>
+	</tr>
+	<tr>
+		<td>ongetcontent</td>
+		<td>可视化模式取代码</td>
+		<td>回调函数的参数是代码,必须返回处理后的代码 </td>
+	</tr>
+	<tr>
+		<td>onsetcontent</td>
+		<td>对可视化模式设置代码</td>
+		<td>回调函数的参数是代码,必须返回处理后的代码</td>
+	</tr>
+</table>
+<br />
+</body>
+</html>

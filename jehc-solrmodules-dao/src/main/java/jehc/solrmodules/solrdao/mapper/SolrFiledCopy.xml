@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrFiledCopy">
+	<!--初始化分页-->
+	<select id="getSolrFiledCopyListByCondition" resultType="jehc.solrmodules.solrmodel.SolrFiledCopy" parameterType="map">
+		SELECT
+			solr_filed_copy.`solr_filed_copy_id`,
+			solr_filed_copy.`solr_filed_copy_remark`,
+			solr_filed_copy.`solr_filed_copy_source_id`,
+			solr_filed_copy.`solr_filed_copy_dest_id`,
+			solr_filed_copy.`solr_filed_copy_ctime`,
+			solr_filed_copy.`solr_filed_copy_mtime`,
+			solr_filed_copy.`xt_userinfo_id`,
+			solr_filed_copy.`solr_core_id`,
+			solr_filed_copy_source.solr_index_name as solr_filed_copy_source_name,
+			solr_filed_copy_source.solr_index_remark as solr_filed_copy_source_index,
+			solr_filed_copy_dest.solr_index_name as solr_filed_copy_dest_name,
+			solr_filed_copy_dest.solr_index_remark as solr_filed_copy_dest_index,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_filed_copy solr_filed_copy LEFT JOIN solr_index solr_filed_copy_source ON solr_filed_copy_source.solr_index_id = solr_filed_copy.solr_filed_copy_source_id
+		LEFT JOIN solr_index solr_filed_copy_dest ON solr_filed_copy_dest.solr_index_id = solr_filed_copy.solr_filed_copy_dest_id
+		LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_filed_copy.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != solr_core_id and '' != solr_core_id">
+			AND solr_filed_copy.solr_core_id = #{solr_core_id}
+		</if>
+		<if test="null != solr_filed_copy_source_id and '' != solr_filed_copy_source_id">
+			AND solr_filed_copy.solr_filed_copy_source_id = #{solr_filed_copy_source_id}
+		</if>
+		<if test="null != solr_filed_copy_dest_id and '' != solr_filed_copy_dest_id">
+			AND solr_filed_copy.solr_filed_copy_dest_id = #{solr_filed_copy_dest_id}
+		</if>
+		<if test="null != solr_filed_copy_remark and '' != solr_filed_copy_remark">
+			AND solr_filed_copy.solr_filed_copy_remark like CONCAT('%','${solr_filed_copy_remark}','%' )  
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrFiledCopyById" resultType="jehc.solrmodules.solrmodel.SolrFiledCopy" parameterType="string">
+		SELECT
+			solr_filed_copy.`solr_filed_copy_id`,
+			solr_filed_copy.`solr_filed_copy_remark`,
+			solr_filed_copy.`solr_filed_copy_source_id`,
+			solr_filed_copy.`solr_filed_copy_dest_id`,
+			solr_filed_copy.`solr_filed_copy_ctime`,
+			solr_filed_copy.`solr_filed_copy_mtime`,
+			solr_filed_copy.`xt_userinfo_id`,
+			solr_filed_copy.`solr_core_id`,
+			solr_filed_copy_source.solr_index_name as solr_filed_copy_source_name,
+			solr_filed_copy_source.solr_index_remark as solr_filed_copy_source_index,
+			solr_filed_copy_dest.solr_index_name as solr_filed_copy_dest_name,
+			solr_filed_copy_dest.solr_index_remark as solr_filed_copy_dest_index,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_filed_copy solr_filed_copy LEFT JOIN solr_index solr_filed_copy_source ON solr_filed_copy_source.solr_index_id = solr_filed_copy.solr_filed_copy_source_id
+		LEFT JOIN solr_index solr_filed_copy_dest ON solr_filed_copy_dest.solr_index_id = solr_filed_copy.solr_filed_copy_dest_id
+		LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_filed_copy.xt_userinfo_id
+		WHERE solr_filed_copy.solr_filed_copy_id=#{solr_filed_copy_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrFiledCopy" parameterType="jehc.solrmodules.solrmodel.SolrFiledCopy">
+		INSERT INTO
+			solr_filed_copy
+			(
+			`solr_filed_copy_id`,
+			`solr_filed_copy_remark`,
+			`solr_filed_copy_source_id`,
+			`solr_filed_copy_dest_id`,
+			`solr_filed_copy_ctime`,
+			`xt_userinfo_id`,
+			`solr_core_id`
+			)
+			VALUES
+			(
+			#{solr_filed_copy_id},
+			#{solr_filed_copy_remark},
+			#{solr_filed_copy_source_id},
+			#{solr_filed_copy_dest_id},
+			#{solr_filed_copy_ctime},
+			#{xt_userinfo_id},
+			#{solr_core_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrFiledCopy" parameterType="jehc.solrmodules.solrmodel.SolrFiledCopy">
+		UPDATE
+			solr_filed_copy
+		SET
+			`solr_filed_copy_id` = #{solr_filed_copy_id},
+			`solr_filed_copy_remark` = #{solr_filed_copy_remark},
+			`solr_filed_copy_source_id` = #{solr_filed_copy_source_id},
+			`solr_filed_copy_dest_id` = #{solr_filed_copy_dest_id},
+			`solr_filed_copy_mtime` = #{solr_filed_copy_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`solr_core_id` = #{solr_core_id}
+		WHERE solr_filed_copy_id=#{solr_filed_copy_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrFiledCopy" parameterType="map">
+		DELETE FROM solr_filed_copy WHERE solr_filed_copy_id IN
+		<foreach item="item" index="index" collection="solr_filed_copy_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchSolrFiledCopy" parameterType="list">
+		INSERT INTO
+			solr_filed_copy
+			(
+			`solr_filed_copy_id`,
+			`solr_filed_copy_remark`,
+			`solr_filed_copy_source_id`,
+			`solr_filed_copy_dest_id`,
+			`solr_filed_copy_ctime`,
+			`solr_filed_copy_mtime`,
+			`xt_userinfo_id`,
+			`solr_core_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.solr_filed_copy_id},
+			#{item.solr_filed_copy_remark},
+			#{item.solr_filed_copy_source_id},
+			#{item.solr_filed_copy_dest_id},
+			#{item.solr_filed_copy_ctime},
+			#{item.solr_filed_copy_mtime},
+			#{item.xt_userinfo_id},
+			#{item.solr_core_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchSolrFiledCopy" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				solr_filed_copy
+			SET
+				`solr_filed_copy_id` = #{item.solr_filed_copy_id},
+				`solr_filed_copy_remark` = #{item.solr_filed_copy_remark},
+				`solr_filed_copy_source_id` = #{item.solr_filed_copy_source_id},
+				`solr_filed_copy_dest_id` = #{item.solr_filed_copy_dest_id},
+				`solr_filed_copy_ctime` = #{item.solr_filed_copy_ctime},
+				`solr_filed_copy_mtime` = #{item.solr_filed_copy_mtime},
+				`xt_userinfo_id` = #{item.xt_userinfo_id},
+				`solr_core_id` = #{item.solr_core_id}
+			WHERE solr_filed_copy_id=#{item.solr_filed_copy_id}
+		</foreach>
+	</update>
+</mapper>

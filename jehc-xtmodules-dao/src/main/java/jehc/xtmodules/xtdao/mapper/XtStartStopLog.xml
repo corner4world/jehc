@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtStartStopLog">
+	<!--初始化分页-->
+	<select id="getXtStartStopLogListByCondition" resultType="jehc.xtmodules.xtmodel.XtStartStopLog" parameterType="map">
+		SELECT
+			`xt_start_stop_log_id`,
+			`xt_start_stop_log_starttime`,
+			`xt_start_stop_log_stoptime`,
+			`xt_start_stop_log_iserror`,
+			`xt_start_stop_log_content`
+		FROM 
+			xt_start_stop_log
+		WHERE 1=1
+		ORDER BY xt_start_stop_log_starttime DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtStartStopLogById" resultType="jehc.xtmodules.xtmodel.XtStartStopLog" parameterType="string">
+		SELECT
+			`xt_start_stop_log_id`,
+			`xt_start_stop_log_starttime`,
+			`xt_start_stop_log_stoptime`,
+			`xt_start_stop_log_iserror`,
+			`xt_start_stop_log_content`
+		FROM 
+			xt_start_stop_log
+		WHERE xt_start_stop_log_id=#{xt_start_stop_log_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtStartStopLog" parameterType="jehc.xtmodules.xtmodel.XtStartStopLog">
+		INSERT INTO
+			xt_start_stop_log
+			(
+			`xt_start_stop_log_id`,
+			`xt_start_stop_log_starttime`,
+			`xt_start_stop_log_stoptime`,
+			`xt_start_stop_log_iserror`,
+			`xt_start_stop_log_content`
+			)
+			VALUES
+			(
+			#{xt_start_stop_log_id},
+			#{xt_start_stop_log_starttime},
+			#{xt_start_stop_log_stoptime},
+			#{xt_start_stop_log_iserror},
+			#{xt_start_stop_log_content}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtStartStopLog" parameterType="jehc.xtmodules.xtmodel.XtStartStopLog">
+		UPDATE
+			xt_start_stop_log
+		SET
+			`xt_start_stop_log_id` = #{xt_start_stop_log_id},
+			`xt_start_stop_log_starttime` = #{xt_start_stop_log_starttime},
+			`xt_start_stop_log_stoptime` = #{xt_start_stop_log_stoptime},
+			`xt_start_stop_log_iserror` = #{xt_start_stop_log_iserror},
+			`xt_start_stop_log_content` = #{xt_start_stop_log_content}
+		WHERE xt_start_stop_log_id=#{xt_start_stop_log_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtStartStopLog" parameterType="map">
+		DELETE FROM xt_start_stop_log WHERE xt_start_stop_log_id IN
+		<foreach item="item" index="index" collection="xt_start_stop_log_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

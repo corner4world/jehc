@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BOrderDetail">
+	<!--初始化分页-->
+	<select id="getBOrderDetailListByCondition" resultType="jehc.bmodules.bmodel.BOrderDetail" parameterType="map">
+		SELECT
+			b_order_detail.`b_order_detail_id`,
+			b_order_detail.`b_product_id`,
+			b_order_detail.`b_seller_id`,
+			b_order_detail.`b_order_detail_number`,
+			b_order_detail.`b_order_detail_price`,
+			b_order_detail.`b_order_detail_discount`,
+			DATE_FORMAT(b_order_detail.`b_order_detail_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_order_detail_ctime`,
+			DATE_FORMAT(b_order_detail.`b_order_detail_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_order_detail_mtime`,
+			b_order_detail.`b_order_id`,
+			b_product.`b_product_name`,
+			b_product.b_product_id,
+			b_seller.`b_seller_name`,
+			b_category.`b_category_name`,
+			b_brand.`b_brand_name`,
+			((b_order_detail.`b_order_detail_price` * b_order_detail.`b_order_detail_number` * b_order_detail.`b_order_detail_discount`)/100)AS b_order_detail_total_price
+		FROM 
+			b_order_detail b_order_detail LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_order_detail.b_seller_id
+			LEFT JOIN b_product b_product ON b_order_detail.b_product_id = b_product.b_product_id
+			LEFT JOIN b_brand b_brand ON b_product.b_brand_id = b_brand.b_brand_id
+			LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
+		WHERE 1=1
+		AND b_order_detail.b_order_id = #{b_order_id}
+	</select>
+
+	<!--查询对象-->
+	<select id="getBOrderDetailById" resultType="jehc.bmodules.bmodel.BOrderDetail" parameterType="string">
+		SELECT
+			`b_order_detail_id`,
+			`b_product_id`,
+			`b_seller_id`,
+			`b_order_detail_number`,
+			`b_order_detail_price`,
+			`b_order_detail_discount`,
+			DATE_FORMAT(`b_order_detail_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_order_detail_ctime`,
+			DATE_FORMAT(`b_order_detail_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_order_detail_mtime`
+		FROM 
+			b_order_detail
+		WHERE b_order_detail_id=#{b_order_detail_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBOrderDetail" parameterType="jehc.bmodules.bmodel.BOrderDetail">
+		INSERT INTO
+			b_order_detail
+			(
+			`b_order_detail_id`,
+			`b_product_id`,
+			`b_seller_id`,
+			`b_order_detail_number`,
+			`b_order_detail_price`,
+			`b_order_detail_discount`,
+			`b_order_detail_ctime`,
+			`b_order_id`
+			)
+			VALUES
+			(
+			#{b_order_detail_id},
+			#{b_product_id},
+			#{b_seller_id},
+			#{b_order_detail_number},
+			#{b_order_detail_price},
+			#{b_order_detail_discount},
+			#{b_order_detail_ctime},
+			#{b_order_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBOrderDetail" parameterType="jehc.bmodules.bmodel.BOrderDetail">
+		UPDATE
+			b_order_detail
+		SET
+			`b_order_detail_id` = #{b_order_detail_id},
+			`b_product_id` = #{b_product_id},
+			`b_seller_id` = #{b_seller_id},
+			`b_order_detail_number` = #{b_order_detail_number},
+			`b_order_detail_price` = #{b_order_detail_price},
+			`b_order_detail_discount` = #{b_order_detail_discount},
+			`b_order_detail_mtime` = #{b_order_detail_mtime},
+			`b_order_id` = #{b_order_id}
+		WHERE b_order_detail_id=#{b_order_detail_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBOrderDetail" parameterType="map">
+		DELETE FROM b_order_detail WHERE b_order_detail_id IN
+		<foreach item="item" index="index" collection="b_order_detail_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	<!-- 根据订单获取其下总金额 -->
+	<select id="getBOrderDetailTotalPriceByCondition" resultType="double" parameterType="map">
+		SELECT
+			(SUM(b_order_detail.`b_order_detail_price` * b_order_detail.`b_order_detail_number` * b_order_detail.`b_order_detail_discount`)/100)AS b_order_detail_total_price
+		FROM 
+			b_order_detail b_order_detail
+		WHERE 1=1
+		AND b_order_detail.b_order_id = #{b_order_id}
+	</select>
+</mapper>

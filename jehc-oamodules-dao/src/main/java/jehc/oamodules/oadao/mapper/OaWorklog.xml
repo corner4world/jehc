@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.oamodules.oamodel.OaWorklog">
+	<!--初始化分页-->
+	<select id="getOaWorklogListByCondition" resultType="jehc.oamodules.oamodel.OaWorklog" parameterType="map">
+		SELECT
+			oa_worklog.`oa_worklogID`,
+			oa_worklog.`oa_worklogTitle`,
+			oa_worklog.`oa_worklogContent`,
+			oa_worklog.`oa_worklogCreateTime`,
+			oa_worklog.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			oa_worklog as oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE 1=1
+		<if test="null != oa_worklogTitle">
+			AND instr(oa_worklogTitle,#{oa_worklogTitle})
+		</if>
+		<if test="null != oa_worklogCreateTime_st and oa_worklogCreateTime_st != ''">
+			AND oa_worklogCreateTime &gt;=STR_TO_DATE(#{oa_worklogCreateTime_st},'%Y-%m-%d')
+		</if>
+		<if test="null != oa_worklogCreateTime_et and oa_worklogCreateTime_et != ''">
+			AND oa_worklogCreateTime &lt;=STR_TO_DATE(#{oa_worklogCreateTime_et},'%Y-%m-%d')
+		</if>
+		<!-- 
+		LIMIT #{offset},#{pageSize}
+		-->
+	</select>
+
+	<!--初始化分页统计-->
+	<select id="getOaWorklogListCountByCondition" resultType="Integer" parameterType="map">
+ 		SELECT 
+			COUNT(0)
+		FROM 
+			oa_worklog as oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getOaWorklogById" resultType="jehc.oamodules.oamodel.OaWorklog" parameterType="string">
+		SELECT
+			oa_worklog.`oa_worklogID`,
+			oa_worklog.`oa_worklogTitle`,
+			oa_worklog.`oa_worklogContent`,
+			oa_worklog.`oa_worklogCreateTime`,
+			oa_worklog.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			oa_worklog as oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE oa_worklogID=#{oa_worklogID}
+	</select>
+
+	<!--添加-->
+	<insert id="addOaWorklog" parameterType="jehc.oamodules.oamodel.OaWorklog">
+		INSERT INTO
+			oa_worklog
+			(
+			`oa_worklogID`,
+			`oa_worklogTitle`,
+			`oa_worklogContent`,
+			`oa_worklogCreateTime`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{oa_worklogID},
+			#{oa_worklogTitle},
+			#{oa_worklogContent},
+			#{oa_worklogCreateTime},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateOaWorklog" parameterType="jehc.oamodules.oamodel.OaWorklog">
+		UPDATE
+			oa_worklog
+		SET
+			`oa_worklogID` = #{oa_worklogID},
+			`oa_worklogTitle` = #{oa_worklogTitle},
+			`oa_worklogContent` = #{oa_worklogContent},
+			`oa_worklogCreateTime` = #{oa_worklogCreateTime},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE oa_worklogID=#{oa_worklogID}
+	</update>
+
+	<!--删除-->
+	<delete id="delOaWorklog" parameterType="map">
+		DELETE FROM oa_worklog WHERE oa_worklogID IN
+		<foreach item="item" index="index" collection="oa_worklogID" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

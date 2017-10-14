@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrIndexAttribute">
+	<!--初始化分页-->
+	<select id="getSolrIndexAttributeListByCondition" resultType="jehc.solrmodules.solrmodel.SolrIndexAttribute" parameterType="map">
+		SELECT
+			`solr_index_attribute_id`,
+			`solr_index_attribute_facet`,
+			`solr_index_attribute_boost`,
+			`solr_index_attribute_spellcheck`,
+			`solr_index_attribute_status`,
+			`solr_index_attribute_issearch`,
+			`solr_index_id`,
+			DATE_FORMAT(`solr_index_attribute_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_ctime`,
+			DATE_FORMAT(`solr_index_attribute_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_mtime`,
+			`xt_userinfo_id`,
+			sor_index_highlight
+		FROM 
+			solr_index_attribute
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrIndexAttributeById" resultType="jehc.solrmodules.solrmodel.SolrIndexAttribute" parameterType="string">
+		SELECT
+			`solr_index_attribute_id`,
+			`solr_index_attribute_facet`,
+			`solr_index_attribute_boost`,
+			`solr_index_attribute_spellcheck`,
+			`solr_index_attribute_status`,
+			`solr_index_attribute_issearch`,
+			`solr_index_id`,
+			DATE_FORMAT(`solr_index_attribute_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_ctime`,
+			DATE_FORMAT(`solr_index_attribute_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_mtime`,
+			`xt_userinfo_id`,
+			sor_index_highlight
+		FROM 
+			solr_index_attribute
+		WHERE solr_index_attribute_id=#{solr_index_attribute_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrIndexAttribute" parameterType="jehc.solrmodules.solrmodel.SolrIndexAttribute">
+		INSERT INTO
+			solr_index_attribute
+			(
+			`solr_index_attribute_id`,
+			`solr_index_attribute_facet`,
+			`solr_index_attribute_boost`,
+			`solr_index_attribute_spellcheck`,
+			`solr_index_attribute_status`,
+			`solr_index_attribute_issearch`,
+			`solr_index_id`,
+			`solr_index_attribute_ctime`,
+			`solr_index_attribute_mtime`,
+			`xt_userinfo_id`,
+			sor_index_highlight
+			)
+			VALUES
+			(
+			#{solr_index_attribute_id},
+			#{solr_index_attribute_facet},
+			#{solr_index_attribute_boost},
+			#{solr_index_attribute_spellcheck},
+			#{solr_index_attribute_status},
+			#{solr_index_attribute_issearch},
+			#{solr_index_id},
+			#{solr_index_attribute_ctime},
+			#{solr_index_attribute_mtime},
+			#{xt_userinfo_id},
+			#{sor_index_highlight}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrIndexAttribute" parameterType="jehc.solrmodules.solrmodel.SolrIndexAttribute">
+		UPDATE
+			solr_index_attribute
+		SET
+			`solr_index_attribute_id` = #{solr_index_attribute_id},
+			`solr_index_attribute_facet` = #{solr_index_attribute_facet},
+			`solr_index_attribute_boost` = #{solr_index_attribute_boost},
+			`solr_index_attribute_spellcheck` = #{solr_index_attribute_spellcheck},
+			`solr_index_attribute_status` = #{solr_index_attribute_status},
+			`solr_index_attribute_issearch` = #{solr_index_attribute_issearch},
+			`solr_index_id` = #{solr_index_id},
+			`solr_index_attribute_mtime` = #{solr_index_attribute_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			sor_index_highlight = #{sor_index_highlight}
+		WHERE solr_index_attribute_id=#{solr_index_attribute_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrIndexAttribute" parameterType="map">
+		DELETE FROM solr_index_attribute WHERE solr_index_attribute_id IN
+		<foreach item="item" index="index" collection="solr_index_attribute_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	
+	<!--根据实例编号查找其下面属性字段-->
+	<select id="getSolrIndexAttributeList" resultType="jehc.solrmodules.solrmodel.SolrIndexAttribute" parameterType="map">
+		SELECT
+			solr_index_attribute.`solr_index_attribute_id`,
+			solr_index_attribute.`solr_index_attribute_facet`,
+			solr_index_attribute.`solr_index_attribute_boost`,
+			solr_index_attribute.`solr_index_attribute_spellcheck`,
+			solr_index_attribute.`solr_index_attribute_status`,
+			solr_index_attribute.`solr_index_attribute_issearch`,
+			solr_index_attribute.`solr_index_id`,
+			DATE_FORMAT(`solr_index_attribute_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_ctime`,
+			DATE_FORMAT(`solr_index_attribute_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_mtime`,
+			solr_index.`solr_index_name`,
+			sor_index_highlight
+		FROM 
+			solr_index_attribute AS solr_index_attribute LEFT JOIN solr_index AS solr_index ON solr_index.solr_index_id = solr_index_attribute.solr_index_id
+		WHERE 1=1
+			AND solr_index_attribute.solr_index_attribute_status = 0
+		<if test="null != solr_core_id">
+		 	AND solr_index.solr_core_id = #{solr_core_id}
+		</if>
+		<if test="null != solr_index_attribute_issearch">
+			AND solr_index_attribute.solr_index_attribute_issearch = #{solr_index_attribute_issearch}
+		</if>
+	</select>
+</mapper>

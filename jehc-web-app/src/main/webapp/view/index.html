@@ -1,0 +1,1034 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="x-ua-compatible" content="ie=8,9,10,11" /> 
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>蛋糕商城网上超市</title>
+	<link href="../deng/css/style.css" rel="stylesheet"  type="text/css"/>
+	<link href="../deng/css/cake.css" rel="stylesheet" type="text/css"/>
+	<script type="text/javascript" src="../deng/js/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="../deng/js/index.js"></script>
+	<script type="text/javascript" src="../deng/js/cake.js"></script>
+	<script type="text/javascript" src="../deng/js/Jdropdown.js"></script>
+</head>
+<body id="dingbu">
+<div class="header">
+	<div class="headerT">
+		<div class="width">
+			<p class="topL"><a href="" class="a1">微博登陆</a><span></span><a href="" class="a2">QQ登陆</a><span></span><a href="" class="a3">请登录</a><a href="" class="a3">免费登陆</a></p>
+			<p class="topR"><a href="" class="a4">喜欢我们</a><span></span><a href="" class="a5">客服热线：025-8888-8888</a><span></span><a href="" class="a5 a6">卖家报名</a></p>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="logoBar">
+		<div class="width">
+			<a href="" class="logo"><img src="../deng/images/logo.png" alt=""></a>
+			<!-- 
+			<div class="logoR"><a href="#" class="a1">已签到</a><a href="#" class="a2">收藏</a><a href="#" class="a3">最近</a></div>
+			<div class="search"><input type="text" value="请输入商品名称、地址等"/></div>
+			 -->
+			<div class="search-form">
+				<div id="search-bd" class="search-bd">
+					<ul>
+						<li class="selected">找商品</li>
+						<li>找商家</li>
+					</ul>
+				</div>
+				<div id="search-hd" class="search-hd">
+					<div class="search-bg"></div>
+					<input type="text" id="s1" class="search-input"/>
+					<input type="text" id="s2" class="search-input"/>
+					<span class="s1 pholder">食品酒水半价抢疯</span>
+					<span class="s2 pholder">搜商家名称</span>
+					<button id="submit" class="btn-search" value="搜索">搜索</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<!-- 分类开始 -->
+	<div id="nav">
+		<div class="area clearfix">
+			<div class="separate"></div>
+			<div class="category-content">
+				<div>
+					<span class="all-goods">热门分类<em>（686310）</em></span>
+				</div>
+				<div class="category">
+					<ul class="category-list">
+						<li class="js_toggle">
+							<div class="category-info list-nz">
+								<h3 class="category-name">
+									<i></i>
+									<a href="http://www.17sucai.com" class="ml-22">女装</a>
+								</h3>
+								<p class="c-category-list">
+									<a href="http://www.17sucai.com">连衣裙</a>
+									<a href="http://www.17sucai.com">针织衫</a>
+									<a href="http://www.17sucai.com">T恤</a>
+									<a href="http://www.17sucai.com">牛仔裤</a>
+								</p>
+								<em>&gt;</em>
+							</div>
+							<div class="menu-item menu-in">
+								<div class="area-bg">
+									
+								</div>
+							</div>
+						</li>
+						<li class="js_toggle">
+							<div class="category-info list-nanz">
+								<h3 class="category-name">
+									<i></i>
+									<a href="http://www.17sucai.com" class="ml-22">男装</a>
+								</h3>
+								<p class="c-category-list">
+									<a href="http://www.17sucai.com">T恤</a>
+									<a href="http://www.17sucai.com">衬衫</a>
+									<a href="http://www.17sucai.com">牛仔裤</a>
+									<a href="http://www.17sucai.com">休闲裤</a>
+								</p>
+								<em>&gt;</em>
+							</div>
+							<div class="menu-item menu-in">
+								<div class="area-bg">
+										
+								</div>
+							</div>
+						</li>
+						<li class="js_toggle">
+							<div class="category-info list-tz">
+								<h3 class="category-name">
+									<i></i>
+									<a href="http://www.17sucai.com" class="ml-22">童装</a>
+								</h3>
+								<p class="c-category-list">
+									<a href="http://www.17sucai.com">T恤</a>
+									<a href="http://www.17sucai.com">裙装</a>
+									<a href="http://www.17sucai.com">童装裤子</a>
+									<a href="http://www.17sucai.com">套装</a>
+								</p>
+								<em>&gt;</em>
+							</div>
+							<div class="menu-item menu-in">
+								<div class="area-bg">
+										
+								</div>
+							</div>
+						</li>
+						<li class="js_toggle">
+							<div class="category-info list-ny">
+								<h3 class="category-name">
+									<i></i>
+									<a href="http://www.17sucai.com" class="ml-22">内衣</a>
+								</h3>
+								<p class="c-category-list">
+									<a href="http://www.17sucai.com">文胸</a>
+									<a href="http://www.17sucai.com">内裤</a>
+									<a href="http://www.17sucai.com">情趣内衣</a>
+									<a href="http://www.17sucai.com">睡衣</a>
+								</p>
+								<em>&gt;</em>
+							</div>
+							<div class="menu-item menu-in">
+								<div class="area-bg">
+										
+								</div>
+							</div>
+						</li>
+						<li class="js_toggle">
+							<div class="category-info list-xb">
+								<h3 class="category-name">
+									<i></i>
+									<a href="http://www.17sucai.com" class="ml-22">箱包</a>
+								</h3>
+								<p class="c-category-list">
+									<a href="http://www.17sucai.com">围巾</a>
+									<a href="http://www.17sucai.com">手套</a>
+									<a href="http://www.17sucai.com">单肩包</a>
+									<a href="http://www.17sucai.com">手提包</a>
+								</p>
+								<em>&gt;</em>
+							</div>
+							<div class="menu-item menu-in">
+								<div class="area-bg">
+										
+								</div>
+							</div>
+						</li>
+						<li class="js_toggle">
+							<div class="category-info list-xl">
+								<h3 class="category-name">
+									<i></i>
+									<a href="http://www.17sucai.com" class="ml-22">鞋类</a>
+								</h3>
+								<p class="c-category-list">
+									<a href="http://www.17sucai.com">单鞋</a>
+									<a href="http://www.17sucai.com">女靴子</a>
+									<a href="http://www.17sucai.com">运动/休闲服</a>
+								</p>
+								<em>&gt;</em>
+							</div>
+							<div class="menu-item menu-in">
+								<div class="area-bg">
+									<ul class="sublist clearfix">
+										<li>
+											<h3 class="mcate-item-hd"><span>服饰内衣</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">女装</a>
+												<a href="http://www.17sucai.com">男装</a>
+												<a href="http://www.17sucai.com">内衣</a>
+												<a href="http://www.17sucai.com">家居服</a>
+												<a href="http://www.17sucai.com">配件</a>
+												<a href="http://www.17sucai.com">羽绒</a>
+												<a href="http://www.17sucai.com">呢大衣</a>
+												<a href="http://www.17sucai.com">毛衣</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>鞋 箱包</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">女鞋</a>
+												<a href="http://www.17sucai.com">男鞋</a>
+												<a href="http://www.17sucai.com">箱包</a>
+												<a href="http://www.17sucai.com">女包</a>
+												<a href="http://www.17sucai.com">男包</a>
+												<a href="http://www.17sucai.com">旅行箱</a>
+												<a href="http://www.17sucai.com">钱包 </a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>珠宝、手表</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">饰品</a>
+												<a href="http://www.17sucai.com">项链</a>
+												<a href="http://www.17sucai.com">珠宝</a>
+												<a href="http://www.17sucai.com">钻石</a>
+												<a href="http://www.17sucai.com">手表</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>化妆品</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">护肤</a>
+												<a href="http://www.17sucai.com">彩妆</a>
+												<a href="http://www.17sucai.com">香水</a>
+												<a href="http://www.17sucai.com">男士</a>
+												<a href="http://www.17sucai.com">精油</a>
+												<a href="http://www.17sucai.com">假发</a>
+												<a href="http://www.17sucai.com">美体</a>
+												<a href="http://www.17sucai.com">试用服务</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>运动 户外</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">运动鞋</a>
+												<a href="http://www.17sucai.com">运动服</a>
+												<a href="http://www.17sucai.com">运动用品</a>
+												<a href="http://www.17sucai.com">户外</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>手机 数码</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">手机</a>
+												<a href="http://www.17sucai.com">笔记本</a>
+												<a href="http://www.17sucai.com">相机</a>
+												<a href="http://www.17sucai.com">平板电脑</a>
+												<a href="http://www.17sucai.com">配件</a>
+												<a href="http://www.17sucai.com">电脑硬件</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>家用电器</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">大家电</a>
+												<a href="http://www.17sucai.com">影音电器</a>
+												<a href="http://www.17sucai.com">生活电器</a>
+												<a href="http://www.17sucai.com">厨房电器</a>
+												<a href="http://www.17sucai.com">健康护理</a>
+												<a href="http://www.17sucai.com">剃须刀</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>家具 建材</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">家具</a>
+												<a href="http://www.17sucai.com">卫浴</a>
+												<a href="http://www.17sucai.com">地板</a>
+												<a href="http://www.17sucai.com">灯具</a>
+												<a href="http://www.17sucai.com">五金</a>
+												<a href="http://www.17sucai.com">开关</a>
+												<a href="http://www.17sucai.com">装修设计</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>家纺 居家</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">家纺</a>
+												<a href="http://www.17sucai.com">磨毛套件</a>
+												<a href="http://www.17sucai.com">羽绒被</a>
+												<a href="http://www.17sucai.com">枕头</a>
+												<a href="http://www.17sucai.com">软饰</a>
+												<a href="http://www.17sucai.com">居家</a>
+												<a href="http://www.17sucai.com">厨房</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>食品</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">零食</a>
+												<a href="http://www.17sucai.com">进口</a>
+												<a href="http://www.17sucai.com">茶叶</a>
+												<a href="http://www.17sucai.com">冲饮</a>
+												<a href="http://www.17sucai.com">酒水</a>
+												<a href="http://www.17sucai.com">粮油</a>
+												<a href="http://www.17sucai.com">干货</a>
+												<a href="http://www.17sucai.com">生鲜</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>医药保健</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">保健</a>
+												<a href="http://www.17sucai.com">滋补</a>
+												<a href="http://www.17sucai.com">蛋白粉</a>
+												<a href="http://www.17sucai.com">阿胶</a>
+												<a href="http://www.17sucai.com">药品</a>
+												<a href="http://www.17sucai.com">血压仪</a>
+												<a href="http://www.17sucai.com">计生</a>
+												<a href="http://www.17sucai.com">体检</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>母婴用品</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">玩具</a>
+												<a href="http://www.17sucai.com">宝宝食品</a>
+												<a href="http://www.17sucai.com">用品</a>
+												<a href="http://www.17sucai.com">童装</a>
+												<a href="http://www.17sucai.com">孕装</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>汽车 配件</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">新车</a>
+												<a href="http://www.17sucai.com">座垫</a>
+												<a href="http://www.17sucai.com">脚垫</a>
+												<a href="http://www.17sucai.com">GPS</a>
+												<a href="http://www.17sucai.com">车衣</a>
+												<a href="http://www.17sucai.com">洗车机</a>
+												<a href="http://www.17sucai.com">水枪</a>
+											</p>
+										</li>
+										<li>
+											<h3 class="mcate-item-hd"><span>文化 玩乐</span></h3>
+											<p class="mcate-item-bd">
+												<a href="http://www.17sucai.com">电子凭证</a>
+												<a href="http://www.17sucai.com">图书</a>
+												<a href="http://www.17sucai.com">乐器</a>
+												<a href="http://www.17sucai.com">旅游</a>
+												<a href="http://www.17sucai.com">鲜花</a>
+											</p>
+										</li>
+									</ul>	
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- 分类结束 -->
+	<div class="navBar">
+		<div class="width">
+			<ul>
+				<li><a href="index.html" class="xz">首页</a></li>
+				<li><a href="mulu.html">蛋糕目录</a></li>
+				<li><a href="zhuti.html">促销活动</a></li>
+				<li><a href="xq.html">积分商城</a></li>
+				<li><a href="zhuti.html">特价区</a></li>
+				<li class="sj"><a href=""><img src="../deng/images/sj.gif" alt=""/>商家入驻</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="banner">
+	<div class="width">
+		<div id="btnL"></div>
+		<div id="btnR"></div>
+		<div class="bannerBox" id="gundong">
+			<ul class="hd">
+				<li>
+					<h2>
+						<span class="baokuan">今日爆款推荐</span><p class="time-item">距特卖结束
+					    <span id="day_show">0</span>天
+					    <strong id="hour_show">0</strong>时
+					    <strong id="minute_show">0</strong>分
+					    <strong id="second_show">0</strong>秒
+					</p>
+					</h2>
+					<p class="p1">好吃的蛋糕巧克力蛋糕</p>
+					<p class="p2">好吃的蛋糕巧克力蛋糕好吃的蛋糕巧克力蛋糕好吃的蛋糕巧克力蛋糕好吃的蛋糕巧克力蛋糕...</p>
+					<p class="p3"><b><i>￥</i>88.0</b><span class="sp1">￥1200.0 <i class="zhekou">1.8折</i></span><span><font style="color:#FFB857;">8888</font> 人已开抢</span><button></button></p>
+				</li>
+				<li>
+					<h2><span class="baokuan">今日爆款推荐1</span><p class="time-item">距特卖结束
+					    <span id="day_show">0</span>天
+					    <strong id="hour_show">0</strong>时
+					    <strong id="minute_show">0</strong>分
+					    <strong id="second_show">0</strong>秒
+					</p>
+					</h2>
+					<p class="p1">好吃的蛋糕巧克力蛋糕</p>
+					<p class="p2">好吃的蛋糕巧克力蛋糕好吃的蛋糕巧克力蛋糕好吃的蛋糕巧克力蛋糕好吃的蛋糕巧克力蛋糕...</p>
+					<p class="p3"><b><i>￥</i>88.0</b><span class="sp1">￥1200.0 <i class="zhekou">1.8折</i></span><span><font style="color:#FFB857;">8888</font> 人已开抢</span><button></button></p>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<div class="picnews" id="box-163css">
+		<div class="lef_rt_f">
+			<div class="leftsor hd"></div>
+			<div class="rightsor hd"></div>
+	 	</div>
+		<div class="soar_mid">    
+			<div class="sor_1" style="display: block; ">
+				<div class="sor_bg1">
+					<a href="#" target="_blank"></a>			
+				</div>
+			</div>    
+	        <div class="sor_1" style="display: none; ">
+				<div class="sor_bg1 sor_bg2">
+					<a href="#" target="_blank"></a>
+				</div>
+			</div>
+		    <div class="sor_1" style="display: none; ">
+				<div class="sor_bg1 sor_bg3">
+					<a href="#" target="_blank"></a>
+				</div>
+			</div>
+			<div class="sor_1" style="display: none; ">
+				<div class="sor_bg1 sor_bg4">
+					<a href="#" target="_blank"></a>
+				</div>
+			</div>
+			<div class="sor_1" style="display: none; ">
+				<div class="sor_bg1 sor_bg5">
+					<a href="#" target="_blank"></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(function(){
+			$('#box-163css .sor_1').soChange({
+				botPrev: '#box-163css .leftsor',
+				botNext: '#box-163css .rightsor',
+				thumbNowClass: 'cur',
+				slideTime: 300,
+				changeTime: 3000,
+				autoChange: false,
+				delayTime: 600
+			});
+		});
+	</script>
+</div>
+<div class="clear"></div>
+<div class="te">
+	<div class="width">
+		<ul>
+			<li><a href=""><img src="../deng/images/tb01.png" alt=""><h2>主题购物</h2><p>十一出游装扮</p></a></li>
+			<li><a href=""><img src="../deng/images/tb02.png" alt=""><h2>免费申领</h2><p>免费领取大奖</p></a></li>
+			<li><a href=""><img src="../deng/images/tb03.png" alt=""><h2>猜价赢奖品</h2><p>猜对奖品拿走</p></a></li>
+			<li><a href=""><img src="../deng/images/tb04.png" alt=""><h2>我要爆料</h2><p>优质商品推荐</p></a></li>
+			<li><a href=""><img src="../deng/images/tb05.png" alt=""><h2>邀请好友</h2><p>获取手机话费</p></a></li>
+		</ul>
+		<div class="piao fd">
+			<a href="#shengri" class="a1"><img src="../deng/images/i01.png" alt=""><b>生日蛋糕</b></a>
+			<a href="#zhushou" class="a2"><img src="../deng/images/i06.png" alt=""><b>祝寿蛋糕</b></a>
+			<a href="#aiqing" class="a3"><img src="../deng/images/i03.png" alt=""><b>爱情蛋糕</b></a>
+			<a href="#ertong" class="a4"><img src="../deng/images/i04.png" alt=""><b>儿童蛋糕</b></a>
+			<a href="#hunli" class="a5"><img src="../deng/images/i05.png" alt=""><b>婚礼蛋糕</b></a>
+			<a href="#qindian" class="a6"><img src="../deng/images/i07.png" alt=""><b>庆典蛋糕</b></a>
+			<button onclick="pageScroll()" id="back-to-top" style="background:#FE5842;float:left;width:37px;height:37px;border:0;color:#fff;">返回顶部</button>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="tehui">
+	<div class="width">
+		<div class="tit"><a href="" class="name">特惠专区</a></div>
+		<div class="ctt">
+			<div class="tejiaBox">
+				<div class="tejia">
+					<div class="topImg"><img src="../deng/images/img01.png" alt=""></div>
+					<h2>上周特价展示</h2>
+					<div class="more">
+						<ul>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li class="lli"><a href=""><b>118</b>商品</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="tejia">
+					<div class="topImg"><img src="../deng/images/img01.png" alt=""></div>
+					<h2>上周特价展示</h2>
+					<div class="more">
+						<ul>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li class="lli"><a href=""><b>118</b>商品</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="tejia">
+					<div class="topImg"><img src="../deng/images/img01.png" alt=""></div>
+					<h2>上周特价展示</h2>
+					<div class="more">
+						<ul>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li><a href=""><img src="../deng/images/img02.png" alt=""></a></li>
+							<li class="lli"><a href=""><b>118</b>商品</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="box" id="shengri">
+	<div class="width">
+		<div class="tit">
+			<a class="name" href="#">生日蛋糕</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="" class="more">更多···></a>
+		</div>
+		<div class="ctt">
+			<ul>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="box" id="zhushou">
+	<div class="width">
+		<div class="tit">
+			<a class="name" href="#">祝寿蛋糕</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="" class="more">更多···></a>
+		</div>
+		<div class="ctt">
+			<ul>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="box" id="aiqing">
+	<div class="width">
+		<div class="tit">
+			<a class="name" href="#">爱情蛋糕</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="" class="more">更多···></a>
+		</div>
+		<div class="ctt">
+			<ul>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="box" id="ertong">
+	<div class="width">
+		<div class="tit">
+			<a class="name" href="#">儿童蛋糕</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="" class="more">更多···></a>
+		</div>
+		<div class="ctt">
+			<ul>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="box" id="hunli">
+	<div class="width">
+		<div class="tit">
+			<a class="name" href="#">婚礼蛋糕</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="" class="more">更多···></a>
+		</div>
+		<div class="ctt">
+			<ul>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="box" id="qindian">
+	<div class="width">
+		<div class="tit">
+			<a class="name" href="#">庆典蛋糕</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="">测试信息</a>
+			<a href="" class="more">更多···></a>
+		</div>
+		<div class="ctt">
+			<ul>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+				<li>
+					<div class="biaoqian"><img src="../deng/images/biaoqian1.png" alt=""></div>
+					<a href="">
+						<div class="imgT"><img src="../deng/images/img01.png" alt=""><span>测试信息标题测试信息标题</span></div>
+						<h2><span class="sp1">￥27.0</span><span class="sp2">1.7折</span><span class="sp3">2658</span></h2>
+						<p><span class="sp1">caketuan旗舰店</span><span class="sp2"><b>8888</b>人已开抢</span></p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>
+<div class="footer">
+	<div class="width">
+		<dl class="dl1">
+			<dt><a href="">关于我们</a></dt>
+			<dd>
+				<a href="">cake团简介</a>
+				<a href="">联系我们</a>
+				<a href="">加入我们</a>
+			</dd>
+		</dl>
+		<dl class="dl2">
+			<dt><a href="">关注我们</a></dt>
+			<dd>
+				<a href="">加入收藏</a>
+				<a href="">下载桌面快捷方式</a>
+				<a href="">意见建议</a>
+			</dd>
+		</dl>
+		<dl class="dl4">
+			<dt><a href="">帮助中心</a></dt>
+			<dd>
+				<a href="">新手上路</a>
+				<a href="">服务条款</a>
+			</dd>
+		</dl>
+		<dl class="dl3">
+			<dt><a href="">商务合作</a></dt>
+			<dd>
+				<a href="">商家报名</a>
+				<a href="">在线客服</a>
+				<a href="">友情链接</a>
+			</dd>
+		</dl>
+		<div class="flogo">
+			<img src="../deng/images/logo.png" alt=""/>
+			<img src="../deng/images/erweima.png" alt="" class="erweima"/>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="copy">copy right 2014-2015 caketuan.com版权所有 All Rights Reserver  陕ICP备00000000号</div>
+</div>
+</body>
+</html>

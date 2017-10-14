@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BSellerAccount">
+	<!--初始化分页-->
+	<select id="getBSellerAccountListByCondition" resultType="jehc.bmodules.bmodel.BSellerAccount" parameterType="map">
+		SELECT
+			`b_seller_account_id`,
+			`b_seller_id`
+		FROM 
+			b_seller_account
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getBSellerAccountById" resultType="jehc.bmodules.bmodel.BSellerAccount" parameterType="string">
+		SELECT
+			`b_seller_account_id`,
+			`b_seller_id`
+		FROM 
+			b_seller_account
+		WHERE b_seller_account_id=#{b_seller_account_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBSellerAccount" parameterType="jehc.bmodules.bmodel.BSellerAccount">
+		INSERT INTO
+			b_seller_account
+			(
+			`b_seller_account_id`,
+			`b_seller_id`
+			)
+			VALUES
+			(
+			#{b_seller_account_id},
+			#{b_seller_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBSellerAccount" parameterType="jehc.bmodules.bmodel.BSellerAccount">
+		UPDATE
+			b_seller_account
+		SET
+			`b_seller_account_id` = #{b_seller_account_id},
+			`b_seller_id` = #{b_seller_id}
+		WHERE b_seller_account_id=#{b_seller_account_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBSellerAccount" parameterType="map">
+		DELETE FROM b_seller_account WHERE b_seller_account_id IN
+		<foreach item="item" index="index" collection="b_seller_account_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

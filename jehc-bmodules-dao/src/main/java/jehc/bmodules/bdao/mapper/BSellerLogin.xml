@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BSellerLogin">
+	<!--初始化分页-->
+	<select id="getBSellerLoginListByCondition" resultType="jehc.bmodules.bmodel.BSellerLogin" parameterType="map">
+		SELECT
+			`b_seller_login_id`,
+			`b_seller_login_name`,
+			`b_seller_login_pwd`,
+			`b_seller_login_status`,
+			`b_seller_id`
+		FROM 
+			b_seller_login
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getBSellerLoginById" resultType="jehc.bmodules.bmodel.BSellerLogin" parameterType="string">
+		SELECT
+			`b_seller_login_id`,
+			`b_seller_login_name`,
+			`b_seller_login_pwd`,
+			`b_seller_login_status`,
+			`b_seller_id`
+		FROM 
+			b_seller_login
+		WHERE b_seller_login_id=#{b_seller_login_id}
+	</select>
+	<!--查询对象-->
+	<select id="getBSellerLogin" resultType="jehc.bmodules.bmodel.BSellerLogin" parameterType="string">
+		SELECT
+			`b_seller_login_id`,
+			`b_seller_login_name`,
+			`b_seller_login_pwd`,
+			`b_seller_login_status`,
+			`b_seller_id`
+		FROM 
+			b_seller_login
+		WHERE `b_seller_id` = #{b_seller_id}
+	</select>
+	<!--添加-->
+	<insert id="addBSellerLogin" parameterType="jehc.bmodules.bmodel.BSellerLogin">
+		INSERT INTO
+			b_seller_login
+			(
+			`b_seller_login_id`,
+			`b_seller_login_name`,
+			`b_seller_login_pwd`,
+			`b_seller_login_status`,
+			`b_seller_id`
+			)
+			VALUES
+			(
+			#{b_seller_login_id},
+			#{b_seller_login_name},
+			#{b_seller_login_pwd},
+			#{b_seller_login_status},
+			#{b_seller_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBSellerLogin" parameterType="jehc.bmodules.bmodel.BSellerLogin">
+		UPDATE
+			b_seller_login
+		SET
+			`b_seller_login_id` = #{b_seller_login_id},
+			`b_seller_login_name` = #{b_seller_login_name},
+			`b_seller_login_status` = #{b_seller_login_status},
+			`b_seller_id` = #{b_seller_id}
+		WHERE b_seller_login_id=#{b_seller_login_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBSellerLogin" parameterType="map">
+		DELETE FROM b_seller_login WHERE b_seller_login_id IN
+		<foreach item="item" index="index" collection="b_seller_login_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

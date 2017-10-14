@@ -1,0 +1,16 @@
+数据库脚本位置：WebRoot/deng/version/db
+
+开发文档所在位置：WebRoot/deng/version
+
+
+或就在工程目录下
+jehc-include-activiti-tables.sql为包含工作流脚本
+
+jehc.sql为非包含工作流脚本
+
+建议执行jehc即可
+
+启动程序 activity工作流脚本会自动创建（目的解决 有些版本数据库不支持问题）
+
+
+说明 建议mysql5.6++

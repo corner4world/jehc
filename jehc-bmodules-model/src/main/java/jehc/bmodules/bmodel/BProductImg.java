@@ -1,0 +1,101 @@
+package jehc.bmodules.bmodel;
+import java.io.Serializable;
+
+/**
+* b_product_img 基础商品图片 
+* 2016-07-07 20:50:43  邓纯杰
+*/
+public class BProductImg extends BSeller implements Serializable{
+	private static final long serialVersionUID = 1L;
+	private String b_product_img_id;/**商品图片编号**/
+	private String b_product_img_name;/**商品图片名称**/
+	private String b_product_img_ctime;/**创建时间**/
+	private String b_product_img_mtime;/**修改时间**/
+	private String b_product_img_type;/**图片类型:0大图片1小图片**/
+	private String b_product_img_status;/**状态:0可用1禁用**/
+	private String b_product_id;/**商品编号**/
+	private String b_seller_id;/**商家编号**/
+	private String xt_attachment_id;/**附件编号**/
+	private int b_product_img_width;/**商品图片宽度**/
+	private int b_product_img_height;/**商品图片高度**/
+	private String xt_userinfo_id;/**操作者**/
+	private String b_product_img_remark;/**图片使用说明**/
+	public void setB_product_img_id(String b_product_img_id){
+		this.b_product_img_id=b_product_img_id;
+	}
+	public String getB_product_img_id(){
+		return b_product_img_id;
+	}
+	public void setB_product_img_name(String b_product_img_name){
+		this.b_product_img_name=b_product_img_name;
+	}
+	public String getB_product_img_name(){
+		return b_product_img_name;
+	}
+	public void setB_product_img_ctime(String b_product_img_ctime){
+		this.b_product_img_ctime=b_product_img_ctime;
+	}
+	public String getB_product_img_ctime(){
+		return b_product_img_ctime;
+	}
+	public void setB_product_img_mtime(String b_product_img_mtime){
+		this.b_product_img_mtime=b_product_img_mtime;
+	}
+	public String getB_product_img_mtime(){
+		return b_product_img_mtime;
+	}
+	public void setB_product_img_type(String b_product_img_type){
+		this.b_product_img_type=b_product_img_type;
+	}
+	public String getB_product_img_type(){
+		return b_product_img_type;
+	}
+	public void setB_product_img_status(String b_product_img_status){
+		this.b_product_img_status=b_product_img_status;
+	}
+	public String getB_product_img_status(){
+		return b_product_img_status;
+	}
+	public void setB_product_id(String b_product_id){
+		this.b_product_id=b_product_id;
+	}
+	public String getB_product_id(){
+		return b_product_id;
+	}
+	public void setB_seller_id(String b_seller_id){
+		this.b_seller_id=b_seller_id;
+	}
+	public String getB_seller_id(){
+		return b_seller_id;
+	}
+	public void setXt_attachment_id(String xt_attachment_id){
+		this.xt_attachment_id=xt_attachment_id;
+	}
+	public String getXt_attachment_id(){
+		return xt_attachment_id;
+	}
+	public void setB_product_img_width(int b_product_img_width){
+		this.b_product_img_width=b_product_img_width;
+	}
+	public int getB_product_img_width(){
+		return b_product_img_width;
+	}
+	public void setB_product_img_height(int b_product_img_height){
+		this.b_product_img_height=b_product_img_height;
+	}
+	public int getB_product_img_height(){
+		return b_product_img_height;
+	}
+	public void setXt_userinfo_id(String xt_userinfo_id){
+		this.xt_userinfo_id=xt_userinfo_id;
+	}
+	public String getXt_userinfo_id(){
+		return xt_userinfo_id;
+	}
+	public void setB_product_img_remark(String b_product_img_remark){
+		this.b_product_img_remark=b_product_img_remark;
+	}
+	public String getB_product_img_remark(){
+		return b_product_img_remark;
+	}
+}

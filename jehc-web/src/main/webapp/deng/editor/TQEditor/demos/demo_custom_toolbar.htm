@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script>
+
+工具栏定义
+<textarea id="e1" rows="12" cols="100" >{toolbar:['bold','italic','underline','|','forecolor','backcolor'],toolbarRight:['help']}</textarea>
+<script type="text/javascript" defer="true"> 
+ new tqEditor('e1',{toolbar:['bold','italic','underline','|','forecolor','backcolor'],toolbarRight:['help']}); 
+</script>
+
+当前所有工具栏按钮<br />
+paragraph:段落<br />
+fontname:字体<br />
+fontsize:文字大小<br />
+
+forecolor:文本颜色<br />
+backcolor:背景色<br />
+bold:粗体<br />
+italic:斜体<br />
+underline:下划线<br />
+strikethrough:删除线<br />
+removeformat:消除格式<br />
+moreformat:更多不常用格式菜单<br />
+
+subscript:下标<br />
+superscript:上标<br />
+
+align:对齐菜单<br />
+justifyleft:左对齐<br />
+justifycenter:居中对齐<br />
+justifyright:右对齐<br />
+
+list:列表菜单<br />
+unorderedlist:项目列表<br />
+orderedlist:数目列表<br />
+
+iodent:缩进菜单<br />
+outdent:减少缩进<br />
+indent:增加缩进<br />
+inserthorizontalrule:插入水平线<br />
+
+createlink:添加链接<br />
+unlink:删除链接<br />
+inserttable:插入表格<br />
+
+insertimage:插入图片<br />
+insertface:插入表情<br />
+
+insertmusic:插入音乐<br />
+insertflash:插入Flash<br />
+insertflv:插入flv<br />
+
+
+cleanword:清理Word代码<br />
+mode:查看源码<br />
+splitpage:插入分页符<br />
+
+group:工具栏分组,可以用"||"代替换<br />
+separator:工具栏分隔,可以用"|"代替换<br />
+
+fullscreen:全屏<br />
+
+help:帮助<br />
+
+
+</body>
+</html>

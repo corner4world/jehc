@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"       
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="jehc.xtmodules.xtmodel.XtGenerator">
+	<!-- 查询所有生成信息并分页 -->
+	<select id="getXtGeneratorListByCondition" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtGenerator">
+		SELECT
+		  xt_generator.`xt_generator_id`,
+		  xt_generator.`xt_generator_tbname`,
+		  xt_generator.`xt_generator_tbcomment`,
+		  xt_generator.`xt_userinfo_id`,
+		  xt_generator.`xt_generator_time`,
+		  xt_generator.`xt_generator_state`,
+		  xt_generator.`xt_generator_path`,
+		  xt_generator.`xt_generator_model_package`,
+		  xt_generator.`xt_generator_dao_package`,
+		  xt_generator.`xt_generator_service_package`,
+		  xt_generator.`xt_generator_web_package`,
+		  xt_generator.`xt_generator_page_package`,
+		  xt_generator.`xt_generator_page_max`,
+		  xt_generator.`xt_generator_page_width`,
+		  xt_generator.`xt_generator_page_height`,
+		  xt_userinfo.`xt_userinfo_realName`,
+		  xt_generator.`is_one_to_many`
+		FROM
+		  `xt_generator` AS xt_generator LEFT JOIN xt_userinfo AS xt_userinfo ON xt_generator.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		ORDER BY xt_generator_time DESC
+	</select>
+	
+	<!-- 生成代码成功之后添加信息 -->
+	<insert id="addXtGenerator" parameterType="jehc.xtmodules.xtmodel.XtGenerator">
+		INSERT INTO 
+			xt_generator
+		    (xt_generator_id,
+			 xt_generator_tbname,
+			 xt_generator_tbcomment,
+			 xt_userinfo_id,
+			 xt_generator_time,
+			 xt_generator_state,
+			 xt_generator_path,
+			 xt_generator_model_package,
+			 xt_generator_dao_package,
+			 xt_generator_service_package,
+			 xt_generator_web_package,
+			 xt_generator_page_package,
+			 xt_generator_page_max,
+			 xt_generator_page_width,
+			 xt_generator_page_height,
+			 is_one_to_many
+			)
+		VALUES
+		  (
+		   #{xt_generator_id},
+		   #{xt_generator_tbname},
+		   #{xt_generator_tbcomment},
+		   #{xt_userinfo_id},
+		   #{xt_generator_time},
+		   #{xt_generator_state},
+		   #{xt_generator_path},
+		   #{xt_generator_model_package},
+		   #{xt_generator_dao_package},
+		   #{xt_generator_service_package},
+		   #{xt_generator_web_package},
+		   #{xt_generator_page_package},
+		   #{xt_generator_page_max},
+		   #{xt_generator_page_width},
+		   #{xt_generator_page_height},
+		   #{is_one_to_many}
+		  )
+	</insert>
+	
+	<!--删除-->
+	<delete id="delXtGenerator" parameterType="map">
+		DELETE FROM xt_generator WHERE xt_generator_id IN
+		<foreach item="item" index="index" collection="xt_generator_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

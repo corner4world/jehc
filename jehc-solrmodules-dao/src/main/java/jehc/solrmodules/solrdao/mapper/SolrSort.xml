@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrSort">
+	<!--初始化分页-->
+	<select id="getSolrSortListByCondition" resultType="jehc.solrmodules.solrmodel.SolrSort" parameterType="map">
+		SELECT
+			solr_sort.`solr_sort_id`,
+			solr_sort.`solr_sort_name`,
+			DATE_FORMAT(solr_sort.`solr_sort_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_ctime`,
+			DATE_FORMAT(solr_sort.`solr_sort_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_mtime`,
+			solr_sort.`solr_sort_code`,
+			solr_sort.`solr_sort_useboost`,
+			solr_sort.`solr_index_id`,
+			solr_sort.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_sort solr_sort LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_sort.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != solr_index_id">
+			AND solr_sort.solr_index_id=#{solr_index_id}
+		</if>
+		<if test="null != solr_sort_name">
+			AND solr_sort.solr_sort_name like '%${solr_sort_name}%'
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrSortById" resultType="jehc.solrmodules.solrmodel.SolrSort" parameterType="string">
+		SELECT
+			solr_sort.`solr_sort_id`,
+			solr_sort.`solr_sort_name`,
+			DATE_FORMAT(solr_sort.`solr_sort_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_ctime`,
+			DATE_FORMAT(solr_sort.`solr_sort_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_mtime`,
+			solr_sort.`solr_sort_code`,
+			solr_sort.`solr_sort_useboost`,
+			solr_sort.`solr_index_id`,
+			solr_sort.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_sort solr_sort LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_sort.xt_userinfo_id
+		WHERE solr_sort.solr_sort_id=#{solr_sort_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrSort" parameterType="jehc.solrmodules.solrmodel.SolrSort">
+		INSERT INTO
+			solr_sort
+			(
+			`solr_sort_id`,
+			`solr_sort_name`,
+			`solr_sort_ctime`,
+			`solr_sort_mtime`,
+			`solr_sort_code`,
+			`solr_sort_useboost`,
+			`solr_index_id`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{solr_sort_id},
+			#{solr_sort_name},
+			#{solr_sort_ctime},
+			#{solr_sort_mtime},
+			#{solr_sort_code},
+			#{solr_sort_useboost},
+			#{solr_index_id},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrSort" parameterType="jehc.solrmodules.solrmodel.SolrSort">
+		UPDATE
+			solr_sort
+		SET
+			`solr_sort_id` = #{solr_sort_id},
+			`solr_sort_name` = #{solr_sort_name},
+			`solr_sort_mtime` = #{solr_sort_mtime},
+			`solr_sort_code` = #{solr_sort_code},
+			`solr_sort_useboost` = #{solr_sort_useboost},
+			`solr_index_id` = #{solr_index_id},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE solr_sort_id=#{solr_sort_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrSort" parameterType="map">
+		DELETE FROM solr_sort WHERE solr_sort_id IN
+		<foreach item="item" index="index" collection="solr_sort_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 根据实例编号查找其下面排序字段 -->
+	<select id="getSolrSortList" parameterType="map" resultType="jehc.solrmodules.solrmodel.SolrSort">
+		SELECT 
+			solr_sort.`solr_sort_id`,
+			solr_sort.`solr_sort_name`,
+			DATE_FORMAT(solr_sort.`solr_sort_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_ctime`,
+			DATE_FORMAT(solr_sort.`solr_sort_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_mtime`,
+			solr_sort.`solr_sort_code`,
+			solr_sort.`solr_sort_useboost`,
+			solr_sort.`solr_index_id`,
+			solr_sort.`xt_userinfo_id`,
+			solr_index.`solr_index_name`
+		 FROM 
+			solr_sort AS solr_sort LEFT JOIN solr_index AS solr_index ON solr_index.solr_index_id = solr_sort.solr_index_id
+		 WHERE 1=1
+		 <if test="null != solr_core_id">
+		 	AND solr_index.solr_core_id = #{solr_core_id}
+		 </if>
+	</select>
+</mapper>

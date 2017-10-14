@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrDocument">
+	<!--初始化分页-->
+	<select id="getSolrDocumentListByCondition" resultType="jehc.solrmodules.solrmodel.SolrDocument" parameterType="map">
+		SELECT
+			`solr_document_id`,
+			`solr_document_name`,
+			`solr_core_id`,
+			DATE_FORMAT(`solr_document_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_document_ctime`,
+			DATE_FORMAT(`solr_document_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_document_mtime`,
+			`xt_userinfo_id`
+		FROM 
+			solr_document
+		WHERE 1=1
+		<if test="null != solr_core_id">
+			solr_core_id = #{solr_core_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrDocumentById" resultType="jehc.solrmodules.solrmodel.SolrDocument" parameterType="string">
+		SELECT
+			`solr_document_id`,
+			`solr_document_name`,
+			`solr_core_id`,
+			DATE_FORMAT(`solr_document_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_document_ctime`,
+			DATE_FORMAT(`solr_document_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_document_mtime`,
+			`xt_userinfo_id`
+		FROM 
+			solr_document
+		WHERE solr_document_id=#{solr_document_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrDocument" parameterType="jehc.solrmodules.solrmodel.SolrDocument">
+		INSERT INTO
+			solr_document
+			(
+			`solr_document_id`,
+			`solr_document_name`,
+			`solr_core_id`,
+			`solr_document_ctime`,
+			`solr_document_mtime`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{solr_document_id},
+			#{solr_document_name},
+			#{solr_core_id},
+			#{solr_document_ctime},
+			#{solr_document_mtime},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrDocument" parameterType="jehc.solrmodules.solrmodel.SolrDocument">
+		UPDATE
+			solr_document
+		SET
+			`solr_document_id` = #{solr_document_id},
+			`solr_document_name` = #{solr_document_name},
+			`solr_core_id` = #{solr_core_id},
+			`solr_document_ctime` = #{solr_document_ctime},
+			`solr_document_mtime` = #{solr_document_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE solr_document_id=#{solr_document_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrDocument" parameterType="map">
+		DELETE FROM solr_document WHERE solr_document_id IN
+		<foreach item="item" index="index" collection="solr_document_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

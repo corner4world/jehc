@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BBrand">
+	<!--初始化分页-->
+	<select id="getBBrandListByCondition" resultType="jehc.bmodules.bmodel.BBrand" parameterType="map">
+		SELECT
+			b_brand.`b_brand_id`,
+			b_brand.`b_brand_name`,
+			b_brand.`b_brand_status`,
+			DATE_FORMAT(b_brand.`b_brand_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_brand_ctime`,
+			DATE_FORMAT(b_brand.`b_brand_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_brand_mtime`,
+			b_brand.`xt_userinfo_id`,
+			b_brand.`b_brand_type`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_brand b_brand LEFT JOIN xt_userinfo xt_userinfo ON b_brand.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE 1=1
+		<if test="null != b_brand_name">
+			AND instr(b_brand.b_brand_name,#{b_brand_name})
+		</if>
+		<if test="null != b_brand_status">
+			AND b_brand.b_brand_status = #{b_brand_status}
+		</if>
+		<if test="null != b_brand_type">
+			AND b_brand.b_brand_type = #{b_brand_type}
+		</if>
+		ORDER BY b_brand_soft ASC
+	</select>
+
+	<!--查询对象-->
+	<select id="getBBrandById" resultType="jehc.bmodules.bmodel.BBrand" parameterType="string">
+		SELECT
+			b_brand.`b_brand_id`,
+			b_brand.`b_brand_name`,
+			b_brand.`b_brand_status`,
+			DATE_FORMAT(b_brand.`b_brand_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_brand_ctime`,
+			DATE_FORMAT(b_brand.`b_brand_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_brand_mtime`,
+			b_brand.`xt_userinfo_id`,
+			b_brand.`b_brand_type`,
+			b_brand.`b_brand_soft`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			b_brand b_brand LEFT JOIN xt_userinfo xt_userinfo ON b_brand.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE b_brand.b_brand_id=#{b_brand_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBBrand" parameterType="jehc.bmodules.bmodel.BBrand">
+		INSERT INTO
+			b_brand
+			(
+			`b_brand_id`,
+			`b_brand_name`,
+			`b_brand_status`,
+			`b_brand_ctime`,
+			`b_brand_mtime`,
+			`xt_userinfo_id`,
+			`b_brand_type`,
+			`b_brand_soft`
+			)
+			VALUES
+			(
+			#{b_brand_id},
+			#{b_brand_name},
+			#{b_brand_status},
+			#{b_brand_ctime},
+			#{b_brand_mtime},
+			#{xt_userinfo_id},
+			#{b_brand_type},
+			#{b_brand_soft}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBBrand" parameterType="jehc.bmodules.bmodel.BBrand">
+		UPDATE
+			b_brand
+		SET
+			`b_brand_id` = #{b_brand_id},
+			`b_brand_name` = #{b_brand_name},
+			`b_brand_status` = #{b_brand_status},
+			`b_brand_ctime` = #{b_brand_ctime},
+			`b_brand_mtime` = #{b_brand_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`b_brand_type` = #{b_brand_type},
+			`b_brand_soft` = #{b_brand_soft}
+		WHERE b_brand_id=#{b_brand_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBBrand" parameterType="map">
+		DELETE FROM b_brand WHERE b_brand_id IN
+		<foreach item="item" index="index" collection="b_brand_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

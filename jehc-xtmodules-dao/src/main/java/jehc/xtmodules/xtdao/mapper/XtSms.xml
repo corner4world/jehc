@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtSms">
+	<!--初始化分页-->
+	<select id="getXtSmsListByCondition" resultType="jehc.xtmodules.xtmodel.XtSms" parameterType="map">
+		SELECT
+			`xt_sms_id`,
+			`xt_smsName`,
+			`xt_smsPWD`,
+			`xt_smsURL`,
+			`xt_smsCtime`,
+			`xt_smsCompany`,
+			`xt_smsCompanTel`,
+			`xt_smsValue`,
+			`xt_smsCompanyAddress`,
+			`xt_smsCompanyContacts`,
+			`xt_smsType`,
+			`xt_smsDelete`,
+			`xt_smsState`
+		FROM 
+			xt_sms
+		WHERE 1=1
+		<if test="null != xt_smsName">
+			AND instr(xt_smsName,#{xt_smsName})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtSmsById" resultType="jehc.xtmodules.xtmodel.XtSms" parameterType="string">
+		SELECT
+			`xt_sms_id`,
+			`xt_smsName`,
+			`xt_smsPWD`,
+			`xt_smsURL`,
+			`xt_smsCtime`,
+			`xt_smsCompany`,
+			`xt_smsCompanTel`,
+			`xt_smsValue`,
+			`xt_smsCompanyAddress`,
+			`xt_smsCompanyContacts`,
+			`xt_smsType`,
+			`xt_smsDelete`,
+			`xt_smsState`
+		FROM 
+			xt_sms
+		WHERE xt_sms_id=#{xt_sms_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtSms" parameterType="jehc.xtmodules.xtmodel.XtSms">
+		INSERT INTO
+			xt_sms
+			(
+			`xt_sms_id`,
+			`xt_smsName`,
+			`xt_smsPWD`,
+			`xt_smsURL`,
+			`xt_smsCtime`,
+			`xt_smsCompany`,
+			`xt_smsCompanTel`,
+			`xt_smsValue`,
+			`xt_smsCompanyAddress`,
+			`xt_smsCompanyContacts`,
+			`xt_smsType`,
+			`xt_smsDelete`,
+			`xt_smsState`
+			)
+			VALUES
+			(
+			#{xt_sms_id},
+			#{xt_smsName},
+			#{xt_smsPWD},
+			#{xt_smsURL},
+			#{xt_smsCtime},
+			#{xt_smsCompany},
+			#{xt_smsCompanTel},
+			#{xt_smsValue},
+			#{xt_smsCompanyAddress},
+			#{xt_smsCompanyContacts},
+			#{xt_smsType},
+			#{xt_smsDelete},
+			#{xt_smsState}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtSms" parameterType="jehc.xtmodules.xtmodel.XtSms">
+		UPDATE
+			xt_sms
+		SET
+			`xt_sms_id` = #{xt_sms_id},
+			`xt_smsName` = #{xt_smsName},
+			`xt_smsPWD` = #{xt_smsPWD},
+			`xt_smsURL` = #{xt_smsURL},
+			`xt_smsCtime` = #{xt_smsCtime},
+			`xt_smsCompany` = #{xt_smsCompany},
+			`xt_smsCompanTel` = #{xt_smsCompanTel},
+			`xt_smsValue` = #{xt_smsValue},
+			`xt_smsCompanyAddress` = #{xt_smsCompanyAddress},
+			`xt_smsCompanyContacts` = #{xt_smsCompanyContacts},
+			`xt_smsType` = #{xt_smsType},
+			`xt_smsDelete` = #{xt_smsDelete},
+			`xt_smsState` = #{xt_smsState}
+		WHERE xt_sms_id=#{xt_sms_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtSms" parameterType="map">
+		DELETE FROM xt_sms WHERE xt_sms_id IN
+		<foreach item="item" index="index" collection="xt_sms_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

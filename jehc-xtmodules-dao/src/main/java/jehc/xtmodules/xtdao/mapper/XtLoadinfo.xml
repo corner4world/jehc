@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtLoadinfo">
+	<!--初始化分页-->
+	<select id="getXtLoadinfoListByCondition" resultType="jehc.xtmodules.xtmodel.XtLoadinfo" parameterType="map">
+		SELECT
+			xt_loadinfo.`xt_loadinfo_id`,
+			xt_loadinfo.`xt_loadinfo_modules`,
+			xt_loadinfo.`xt_loadinfo_time`,
+			DATE_FORMAT(xt_loadinfo.`xt_loadinfo_begtime`,'%Y-%m-%d %H:%i:%s') AS `xt_loadinfo_begtime`,
+			DATE_FORMAT(xt_loadinfo.`xt_loadinfo_endtime`,'%Y-%m-%d %H:%i:%s') AS `xt_loadinfo_endtime`,
+			xt_loadinfo.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_loadinfo xt_loadinfo LEFT JOIN xt_userinfo xt_userinfo ON xt_loadinfo.xt_userinfo_id=xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		ORDER BY xt_loadinfo_begtime DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtLoadinfoById" resultType="jehc.xtmodules.xtmodel.XtLoadinfo" parameterType="string">
+		SELECT
+			xt_loadinfo.`xt_loadinfo_id`,
+			xt_loadinfo.`xt_loadinfo_modules`,
+			xt_loadinfo.`xt_loadinfo_time`,
+			DATE_FORMAT(xt_loadinfo.`xt_loadinfo_begtime`,'%Y-%m-%d %H:%i:%s') AS `xt_loadinfo_begtime`,
+			DATE_FORMAT(xt_loadinfo.`xt_loadinfo_endtime`,'%Y-%m-%d %H:%i:%s') AS `xt_loadinfo_endtime`,
+			xt_loadinfo.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_loadinfo xt_loadinfo LEFT JOIN xt_userinfo xt_userinfo ON xt_loadinfo.xt_userinfo_id=xt_userinfo.xt_userinfo_id
+		WHERE xt_loadinfo_id=#{xt_loadinfo_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtLoadinfo" parameterType="jehc.xtmodules.xtmodel.XtLoadinfo">
+		INSERT INTO
+			xt_loadinfo
+			(
+			`xt_loadinfo_id`,
+			`xt_loadinfo_modules`,
+			`xt_loadinfo_time`,
+			`xt_loadinfo_begtime`,
+			`xt_loadinfo_endtime`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{xt_loadinfo_id},
+			#{xt_loadinfo_modules},
+			#{xt_loadinfo_time},
+			#{xt_loadinfo_begtime},
+			#{xt_loadinfo_endtime},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtLoadinfo" parameterType="jehc.xtmodules.xtmodel.XtLoadinfo">
+		UPDATE
+			xt_loadinfo
+		SET
+			`xt_loadinfo_id` = #{xt_loadinfo_id},
+			`xt_loadinfo_modules` = #{xt_loadinfo_modules},
+			`xt_loadinfo_time` = #{xt_loadinfo_time},
+			`xt_loadinfo_begtime` = #{xt_loadinfo_begtime},
+			`xt_loadinfo_endtime` = #{xt_loadinfo_endtime},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE xt_loadinfo_id=#{xt_loadinfo_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtLoadinfo" parameterType="map">
+		delete from xt_loadinfo where xt_loadinfo_id in 
+		<foreach item="item" index="index" collection="xt_loadinfo_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 分组统计并平均值算法 -->
+	<select id="getXtLoadingGroupList" resultType="jehc.xtmodules.xtmodel.XtLoadinfo" parameterType="map">
+		SELECT
+			xt_loadinfo_modules,
+			FORMAT(AVG(`xt_loadinfo_time`), 0) xt_loadinfo_time
+		FROM 
+			xt_loadinfo
+		WHERE 1=1
+		GROUP BY `xt_loadinfo_modules`
+	</select>
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.solrmodules.solrmodel.SolrDataConfig">
+	<!--初始化分页-->
+	<select id="getSolrDataConfigListByCondition" resultType="jehc.solrmodules.solrmodel.SolrDataConfig" parameterType="map">
+		SELECT
+			solr_data_config.`solr_data_config_id`,
+			solr_data_config.`solr_data_config_title`,
+			solr_data_config.`solr_data_config_datasource`,
+			DATE_FORMAT(solr_data_config.`solr_data_config_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_data_config_ctime`,
+			DATE_FORMAT(solr_data_config.`solr_data_config_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_data_config_mtime`,
+			solr_data_config.`xt_userinfo_id`,
+			solr_data_config.`solr_data_config_status`,
+			solr_data_config.`solr_data_config_content`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_data_config solr_data_config LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_data_config.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != solr_data_config_title">
+			AND solr_data_config.solr_data_config_title like '%${solr_data_config_title}%'
+		</if>
+		<if test="null != solr_data_config_status">
+			AND solr_data_config.solr_data_config_status = #{solr_data_config_status}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getSolrDataConfigById" resultType="jehc.solrmodules.solrmodel.SolrDataConfig" parameterType="string">
+		SELECT
+			solr_data_config.`solr_data_config_id`,
+			solr_data_config.`solr_data_config_title`,
+			solr_data_config.`solr_data_config_datasource`,
+			DATE_FORMAT(solr_data_config.`solr_data_config_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_data_config_ctime`,
+			DATE_FORMAT(solr_data_config.`solr_data_config_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_data_config_mtime`,
+			solr_data_config.`xt_userinfo_id`,
+			solr_data_config.`solr_data_config_status`,
+			solr_data_config.`solr_data_config_content`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			solr_data_config solr_data_config LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_data_config.xt_userinfo_id
+		WHERE solr_data_config_id=#{solr_data_config_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addSolrDataConfig" parameterType="jehc.solrmodules.solrmodel.SolrDataConfig">
+		INSERT INTO
+			solr_data_config
+			(
+			`solr_data_config_id`,
+			`solr_data_config_title`,
+			`solr_data_config_datasource`,
+			`solr_data_config_ctime`,
+			`solr_data_config_mtime`,
+			`xt_userinfo_id`,
+			`solr_data_config_status`,
+			`solr_data_config_content`
+			)
+			VALUES
+			(
+			#{solr_data_config_id},
+			#{solr_data_config_title},
+			#{solr_data_config_datasource},
+			#{solr_data_config_ctime},
+			#{solr_data_config_mtime},
+			#{xt_userinfo_id},
+			#{solr_data_config_status},
+			#{solr_data_config_content}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateSolrDataConfig" parameterType="jehc.solrmodules.solrmodel.SolrDataConfig">
+		UPDATE
+			solr_data_config
+		SET
+			`solr_data_config_id` = #{solr_data_config_id},
+			`solr_data_config_title` = #{solr_data_config_title},
+			`solr_data_config_datasource` = #{solr_data_config_datasource},
+			`solr_data_config_mtime` = #{solr_data_config_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`solr_data_config_status` = #{solr_data_config_status},
+			`solr_data_config_content` = #{solr_data_config_content}
+		WHERE solr_data_config_id=#{solr_data_config_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delSolrDataConfig" parameterType="map">
+		DELETE FROM solr_data_config WHERE solr_data_config_id IN
+		<foreach item="item" index="index" collection="solr_data_config_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

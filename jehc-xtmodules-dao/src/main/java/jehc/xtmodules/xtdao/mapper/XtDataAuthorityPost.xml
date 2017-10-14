@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDataAuthorityPost">
+	<!--初始化分页-->
+	<select id="getXtDataAuthorityPostListByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityPost" parameterType="map">
+		SELECT
+			`xt_data_authority_post_id`,
+			`xtPID`,
+			`xt_post_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`
+		FROM 
+			xt_data_authority_post
+		WHERE 1=1
+		<if test="null != xt_post_id">
+			AND xt_post_id = #{xt_post_id}
+		</if>
+		<if test="null != xt_menuinfo_id">
+			AND xt_menuinfo_id = #{xt_menuinfo_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtDataAuthorityPostById" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityPost" parameterType="string">
+		SELECT
+			`xt_data_authority_post_id`,
+			`xtPID`,
+			`xt_post_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`
+		FROM 
+			xt_data_authority_post
+		WHERE xt_data_authority_post_id=#{xt_data_authority_post_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtDataAuthorityPost" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityPost">
+		INSERT INTO
+			xt_data_authority_post
+			(
+			`xt_data_authority_post_id`,
+			`xtPID`,
+			`xt_post_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`
+			)
+			VALUES
+			(
+			#{xt_data_authority_post_id},
+			#{xtPID},
+			#{xt_post_id},
+			#{xt_functioninfo_id},
+			#{xt_menuinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtDataAuthorityPost" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityPost">
+		UPDATE
+			xt_data_authority_post
+		SET
+			`xtPID` = #{xtPID},
+			`xt_post_id` = #{xt_post_id},
+			`xt_functioninfo_id` = #{xt_functioninfo_id},
+			`xt_menuinfo_id` = #{xt_menuinfo_id}
+		WHERE xt_data_authority_post_id=#{xt_data_authority_post_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtDataAuthorityPostBySelective" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityPost">
+		UPDATE
+			xt_data_authority_post
+		<set>
+			<if test="xtPID != null">
+				`xtPID` = #{xtPID},
+			</if>
+			<if test="xt_post_id != null">
+				`xt_post_id` = #{xt_post_id},
+			</if>
+			<if test="xt_functioninfo_id != null">
+				`xt_functioninfo_id` = #{xt_functioninfo_id},
+			</if>
+			<if test="xt_menuinfo_id != null">
+				`xt_menuinfo_id` = #{xt_menuinfo_id},
+			</if>
+		</set>
+		WHERE xt_data_authority_post_id=#{xt_data_authority_post_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtDataAuthorityPost" parameterType="map">
+		DELETE FROM xt_data_authority_post WHERE xt_data_authority_post_id IN
+		<foreach item="item" index="index" collection="xt_data_authority_post_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 删除集合根据拥有者及菜单编号 -->
+	<delete id="delXtDataAuthorityPostList" parameterType="map">
+		DELETE FROM xt_data_authority_post
+		WHERE 1=1
+		<if test="null != xt_post_id">
+			AND xt_post_id = #{xt_post_id}
+		</if>
+		<if test="null != xt_menuinfo_id">
+			AND `xt_menuinfo_id` = #{xt_menuinfo_id}
+		</if>
+		<if test="null != xt_functioninfo_id">
+			AND xt_functioninfo_id = #{xt_functioninfo_id}
+		</if>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtDataAuthorityPost" parameterType="list">
+		INSERT INTO
+			xt_data_authority_post
+			(
+			`xt_data_authority_post_id`,
+			`xtPID`,
+			`xt_post_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_data_authority_post_id},
+			#{item.xtPID},
+			#{item.xt_post_id},
+			#{item.xt_functioninfo_id},
+			#{item.xt_menuinfo_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtDataAuthorityPost" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_data_authority_post
+			SET
+				`xtPID` = #{item.xtPID},
+				`xt_post_id` = #{item.xt_post_id},
+				`xt_functioninfo_id` = #{item.xt_functioninfo_id},
+				`xt_menuinfo_id` = #{item.xt_menuinfo_id}
+			WHERE xt_data_authority_post_id=#{item.xt_data_authority_post_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtDataAuthorityPostBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_data_authority_post
+			<set>
+				<if test="item.xtPID != null">
+					`xtPID` = #{item.xtPID},
+				</if>
+				<if test="item.xt_post_id != null">
+					`xt_post_id` = #{item.xt_post_id},
+				</if>
+				<if test="item.xt_functioninfo_id != null">
+					`xt_functioninfo_id` = #{item.xt_functioninfo_id},
+				</if>
+				<if test="item.xt_menuinfo_id != null">
+					`xt_menuinfo_id` = #{item.xt_menuinfo_id},
+				</if>
+			</set>
+			WHERE xt_data_authority_post_id=#{item.xt_data_authority_post_id}
+		</foreach>
+	</update>
+</mapper>

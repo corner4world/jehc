@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtVersion">
+	<!--初始化分页-->
+	<select id="getXtVersionListByCondition" resultType="jehc.xtmodules.xtmodel.XtVersion" parameterType="map">
+		SELECT
+			xt_version.`xt_version_id`,
+			xt_version.`xt_version_name`,
+			xt_version.`xt_version_ctime`,
+			xt_version.`xt_version_mtime`,
+			xt_version.`xt_version_number`,
+			xt_version.`xt_userinfo_id`,
+			xt_version.`xt_version_remark`,
+			xt_version.`xt_attachment_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_version xt_version LEFT JOIN xt_userinfo xt_userinfo ON xt_version.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_version_name">
+			AND instr(xt_version.xt_version_name,#{xt_version_name})
+		</if>
+		<if test="null != xt_version_ctime_st and xt_version_ctime_st != ''">
+			AND xt_version_ctime &gt;=STR_TO_DATE(#{xt_version_ctime_st},'%Y-%m-%d')
+		</if>
+		<if test="null != xt_version_ctime_et and xt_version_ctime_et != ''">
+			AND xt_version_ctime &lt;=STR_TO_DATE(#{xt_version_ctime_et},'%Y-%m-%d')
+		</if>
+		<if test="null != xt_version_mtime_st and xt_version_mtime_st != ''">
+			AND xt_version_mtime &gt;=STR_TO_DATE(#{xt_version_mtime_st},'%Y-%m-%d')
+		</if>
+		<if test="null != xt_version_mtime_et and xt_version_mtime_et != ''">
+			AND xt_version_mtime &lt;=STR_TO_DATE(#{xt_version_mtime_et},'%Y-%m-%d')
+		</if>
+		<if test="null != xt_version_number_cs and xt_version_number_cs != '' and xt_version_number != null">
+			<choose>
+				<!-- 等于 -->
+				<when test="xt_version_number_cs == 1">
+					AND xt_version_number = #{xt_version_number}
+				</when>
+				<!-- 大于等于 -->
+				<when test="xt_version_number_cs == 2">
+					AND xt_version_number &gt;= #{xt_version_number}
+				</when>
+				<!-- 小于等于 -->
+				<when test="xt_version_number_cs == 3">
+					AND xt_version_number &lt;= #{xt_version_number}
+				</when>
+				<!-- 大于 -->
+				<when test="xt_version_number_cs == 4">
+					AND xt_version_number &gt; #{xt_version_number}
+				</when>
+				<!-- 小于 -->
+				<when test="xt_version_number_cs == 5">
+					AND xt_version_number &lt; #{xt_version_number}
+				</when>
+			</choose>
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtVersionById" resultType="jehc.xtmodules.xtmodel.XtVersion" parameterType="string">
+		SELECT
+			xt_version.`xt_version_id`,
+			xt_version.`xt_version_name`,
+			xt_version.`xt_version_ctime`,
+			xt_version.`xt_version_mtime`,
+			xt_version.`xt_version_number`,
+			xt_version.`xt_userinfo_id`,
+			xt_version.`xt_version_remark`,
+			xt_version.`xt_attachment_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_version xt_version LEFT JOIN xt_userinfo xt_userinfo ON xt_version.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE xt_version.xt_version_id=#{xt_version_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtVersion" parameterType="jehc.xtmodules.xtmodel.XtVersion">
+		INSERT INTO
+			xt_version
+			(
+			`xt_version_id`,
+			`xt_version_name`,
+			`xt_version_ctime`,
+			`xt_version_mtime`,
+			`xt_version_number`,
+			`xt_userinfo_id`,
+			`xt_version_remark`,
+			`xt_attachment_id`
+			)
+			VALUES
+			(
+			#{xt_version_id},
+			#{xt_version_name},
+			#{xt_version_ctime},
+			#{xt_version_mtime},
+			#{xt_version_number},
+			#{xt_userinfo_id},
+			#{xt_version_remark},
+			#{xt_attachment_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtVersion" parameterType="jehc.xtmodules.xtmodel.XtVersion">
+		UPDATE
+			xt_version
+		SET
+			`xt_version_name` = #{xt_version_name},
+			`xt_version_ctime` = #{xt_version_ctime},
+			`xt_version_mtime` = #{xt_version_mtime},
+			`xt_version_number` = #{xt_version_number},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_version_remark` = #{xt_version_remark},
+			`xt_attachment_id` = #{xt_attachment_id}
+		WHERE xt_version_id=#{xt_version_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtVersionBySelective" parameterType="jehc.xtmodules.xtmodel.XtVersion">
+		UPDATE
+			xt_version
+		<set>
+			<if test="xt_version_name != null">
+				`xt_version_name` = #{xt_version_name},
+			</if>
+			<if test="xt_version_ctime != null">
+				`xt_version_ctime` = #{xt_version_ctime},
+			</if>
+			<if test="xt_version_mtime != null">
+				`xt_version_mtime` = #{xt_version_mtime},
+			</if>
+			<if test="xt_version_number != null">
+				`xt_version_number` = #{xt_version_number},
+			</if>
+			<if test="xt_userinfo_id != null">
+				`xt_userinfo_id` = #{xt_userinfo_id},
+			</if>
+			<if test="xt_version_remark != null">
+				`xt_version_remark` = #{xt_version_remark},
+			</if>
+			<if test="xt_attachment_id != null">
+				`xt_attachment_id` = #{xt_attachment_id},
+			</if>
+		</set>
+		WHERE xt_version_id=#{xt_version_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtVersion" parameterType="map">
+		DELETE FROM xt_version WHERE xt_version_id IN
+		<foreach item="item" index="index" collection="xt_version_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtVersion" parameterType="list">
+		INSERT INTO
+			xt_version
+			(
+			`xt_version_id`,
+			`xt_version_name`,
+			`xt_version_ctime`,
+			`xt_version_mtime`,
+			`xt_version_number`,
+			`xt_userinfo_id`,
+			`xt_version_remark`,
+			`xt_attachment_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_version_id},
+			#{item.xt_version_name},
+			#{item.xt_version_ctime},
+			#{item.xt_version_mtime},
+			#{item.xt_version_number},
+			#{item.xt_userinfo_id},
+			#{item.xt_version_remark},
+			#{item.xt_attachment_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtVersion" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_version
+			SET
+				`xt_version_name` = #{item.xt_version_name},
+				`xt_version_ctime` = #{item.xt_version_ctime},
+				`xt_version_mtime` = #{item.xt_version_mtime},
+				`xt_version_number` = #{item.xt_version_number},
+				`xt_userinfo_id` = #{item.xt_userinfo_id},
+				`xt_version_remark` = #{item.xt_version_remark},
+				`xt_attachment_id` = #{item.xt_attachment_id}
+			WHERE xt_version_id=#{item.xt_version_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtVersionBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_version
+			<set>
+				<if test="xt_version_name != null">
+					`xt_version_name` = #{item.xt_version_name},
+				</if>
+				<if test="xt_version_ctime != null">
+					`xt_version_ctime` = #{item.xt_version_ctime},
+				</if>
+				<if test="xt_version_mtime != null">
+					`xt_version_mtime` = #{item.xt_version_mtime},
+				</if>
+				<if test="xt_version_number != null">
+					`xt_version_number` = #{item.xt_version_number},
+				</if>
+				<if test="xt_userinfo_id != null">
+					`xt_userinfo_id` = #{item.xt_userinfo_id},
+				</if>
+				<if test="xt_version_remark != null">
+					`xt_version_remark` = #{item.xt_version_remark},
+				</if>
+				<if test="xt_attachment_id != null">
+					`xt_attachment_id` = #{item.xt_attachment_id},
+				</if>
+			</set>
+			WHERE xt_version_id=#{item.xt_version_id}
+		</foreach>
+	</update>
+</mapper>

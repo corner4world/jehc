@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+<link href="demo.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script>
+上传
+<textarea id="e1" rows="12" cols="100" >{toolbar:'full', imageUploadUrl:'./upload.php', flashUploadUrl:'./upload.php', videoUploadUrl:'./upload.php', musicUploadUrl:'./upload.php', linkUploadUrl:'./upload.php'}</textarea>
+<script type="text/javascript" defer="true"> 
+ new tqEditor('e1', {toolbar:'full', imageUploadUrl:'./upload.php', flashUploadUrl:'./upload.php', videoUploadUrl:'./upload.php', musicUploadUrl:'./upload.php', linkUploadUrl:'./upload.php'}); 
+</script><br /> 
+为了安全, 本演示不管上传任意文件, 服务器都不处理. 只是随机返回表情图片. 
+<br />
+上传相关参数<br />
+<div class="params"> <span class="paramName">'uploadFieldName'</span>:<span class="string">'file'</span>,<span class="comment">//上传表单名<br />
+	<br />
+</span><span class="paramName">'imageUploadUrl'</span>:<span class="string">''</span>,<span class="comment">//接收上传图片网址, 留空表示不允许上传, 以#开头, 表示点击上传按扭后的界面网址</span><br />
+	<span class="paramName">'imageFileTypes'</span>:<span class="string">'*.jpg;*.gif;*.png;*.jpeg'</span>,<span class="comment">//允许上传的图片后缀</span><br />
+	<span class="paramName">'imageFileSize'</span>:<span class="string">'2MB'</span>,<span class="comment">//允许上传文件大小</span><br />
+	<span class="paramName">'directInsertUploadImage'</span>:<span class="boolean">true</span>,<span class="comment">//直接将上传的图片插入编辑器中</span><br />
+	<br />
+	<span class="paramName">'linkUploadUrl'</span>:<span class="string">''</span>,<span class="comment">//接收上传网址, 留空表示不允许上传, 以#开头, 表示点击上传按扭后的界面网址</span><br />
+	<span class="paramName">'linkFileTypes'</span>:<span class="string">'*.*'</span>,<span class="comment">//允许上传的后缀</span><br />
+<span class="paramName">'linkFileSize'</span>:<span class="string">'2MB'</span>,<span class="comment">//允许上传文件大小</span><br />
+	<br />
+	<span class="paramName">'flashUploadUrl'</span>:<span class="string">''</span>,<span class="comment">//接收上传Flash网址, 留空表示不允许上传, 以#开头, 表示点击上传按扭后的界面网址</span><br />
+	<span class="paramName">'flashFileTypes'</span>:<span class="string">'*.swf'</span>,<span class="comment">//允许上传的图片后缀</span><br />
+	<span class="paramName">'flashFileSize'</span>:<span class="string">'2MB'</span>,<span class="comment">//允许上传文件大小</span><br />
+	<br />
+	<span class="paramName">'musicUploadUrl'</span>:<span class="string">''</span>,<span class="comment">//接收上传音频文件网址, 留空表示不允许上传, 以#开头, 表示点击上传按扭后的界面网址</span><br />
+	<span class="paramName">'musicFileTypes'</span>:<span class="string">'*.mp3;*.wma'</span>,<span class="comment">//允许上传音频文件后缀</span><br />
+	<span class="paramName">'musicFileSize'</span>:<span class="string">'2MB'</span>,<span class="comment">//允许上传文件大小</span><br />
+	<br />
+	<span class="paramName">'videoUploadUrl'</span>:<span class="string">''</span>,<span class="comment">//接收上传视频文件网址, 留空表示不允许上传, 以#开头, 表示点击上传按扭后的界面网址</span><br />
+	<span class="paramName">'videoFileTypes'</span>:<span class="string">'*.flv;.mp4;*.mkv;*.wmv;*.asf;*.avi;*.rmvb;*.rm'</span>,<span class="comment">//允许上传视频文件后缀</span><br />
+	<span class="paramName">'videoFileSize'</span>:<span class="string">'2MB'</span>,<span class="comment">//允许上传文件大小</span><br />
+	<br />
+</div>
+<p>非定义接收网址时,返值为JSON字符串, 对不符合的数据将提示出错. JSON数据为:{url:'网址',  error:'出错代码, 成功时为0,非0表示出错',message:'出错提示信息, 为空时出错不提示'}.</p>
+</body>
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtConcordat">
+	<!--初始化分页-->
+	<select id="getXtConcordatListByCondition" resultType="jehc.xtmodules.xtmodel.XtConcordat" parameterType="map">
+		SELECT
+			`xt_concordat_id`,
+			`xt_concordatName`,
+			`xt_concordatDesc`
+		FROM 
+			xt_concordat
+		WHERE 1=1
+		<if test="null != xt_concordatName">
+			AND instr(xt_concordatName,#{xt_concordatName})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtConcordatById" resultType="jehc.xtmodules.xtmodel.XtConcordat" parameterType="string">
+		SELECT
+			`xt_concordat_id`,
+			`xt_concordatName`,
+			`xt_concordatDesc`
+		FROM 
+			xt_concordat
+		WHERE xt_concordat_id=#{xt_concordat_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtConcordat" parameterType="jehc.xtmodules.xtmodel.XtConcordat">
+		INSERT INTO
+			xt_concordat
+			(
+			`xt_concordat_id`,
+			`xt_concordatName`,
+			`xt_concordatDesc`
+			)
+			VALUES
+			(
+			#{xt_concordat_id},
+			#{xt_concordatName},
+			#{xt_concordatDesc}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtConcordat" parameterType="jehc.xtmodules.xtmodel.XtConcordat">
+		UPDATE
+			xt_concordat
+		SET
+			`xt_concordat_id` = #{xt_concordat_id},
+			`xt_concordatName` = #{xt_concordatName},
+			`xt_concordatDesc` = #{xt_concordatDesc}
+		WHERE xt_concordat_id=#{xt_concordat_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtConcordat" parameterType="map">
+		DELETE FROM xt_concordat WHERE xt_concordat_id IN
+		<foreach item="item" index="index" collection="xt_concordat_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

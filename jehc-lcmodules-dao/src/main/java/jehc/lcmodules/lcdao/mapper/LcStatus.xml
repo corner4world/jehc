@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.lcmodules.lcmodel.LcStatus">
+	<!--初始化分页-->
+	<select id="getLcStatusListByCondition" resultType="jehc.lcmodules.lcmodel.LcStatus" parameterType="map">
+		SELECT
+			lc_status.`lc_status_id`,
+			lc_status.`lc_status_name`,
+			lc_status.`lc_status_remark`,
+			lc_status.`lc_status_constant`,
+			lc_status.`lc_status_ctime`,
+			lc_status.`lc_status_mtime`,
+			lc_status.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			lc_status lc_status LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_status.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != lc_status_name">
+			AND instr(lc_status_name,#{lc_status_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getLcStatusById" resultType="jehc.lcmodules.lcmodel.LcStatus" parameterType="string">
+		SELECT
+			lc_status.`lc_status_id`,
+			lc_status.`lc_status_name`,
+			lc_status.`lc_status_remark`,
+			lc_status.`lc_status_constant`,
+			lc_status.`lc_status_ctime`,
+			lc_status.`lc_status_mtime`,
+			lc_status.`xt_userinfo_id`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			lc_status lc_status LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_status.xt_userinfo_id
+		WHERE lc_status.lc_status_id=#{lc_status_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addLcStatus" parameterType="jehc.lcmodules.lcmodel.LcStatus">
+		INSERT INTO
+			lc_status
+			(
+			`lc_status_id`,
+			`lc_status_name`,
+			`lc_status_remark`,
+			`lc_status_constant`,
+			`lc_status_ctime`,
+			`lc_status_mtime`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{lc_status_id},
+			#{lc_status_name},
+			#{lc_status_remark},
+			#{lc_status_constant},
+			#{lc_status_ctime},
+			#{lc_status_mtime},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateLcStatus" parameterType="jehc.lcmodules.lcmodel.LcStatus">
+		UPDATE
+			lc_status
+		SET
+			`lc_status_id` = #{lc_status_id},
+			`lc_status_name` = #{lc_status_name},
+			`lc_status_remark` = #{lc_status_remark},
+			`lc_status_constant` = #{lc_status_constant},
+			`lc_status_mtime` = #{lc_status_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE lc_status_id=#{lc_status_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delLcStatus" parameterType="map">
+		DELETE FROM lc_status WHERE lc_status_id IN
+		<foreach item="item" index="index" collection="lc_status_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

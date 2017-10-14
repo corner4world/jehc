@@ -1,0 +1,12 @@
+////////////////////////////获取表格Hearder信息/////////////////////////////
+var records = grid.getSelectionModel().getSelection(); 
+var fields = grid.getStore().fields;   
+console.info( grid.columns);
+for(var i = 0; i < records.length; i++){
+
+}
+var columns = grid.columns;
+for(var i = 0; i < columns.length; i++){
+console.info("字段名加别名:"+columns[i].dataIndex+"AS"+columns[i].text+"宽度:"+columns[i].width+"是否隐藏列:"+columns[i].hidden+"是否隐藏列并注销列但该列可以使用"+columns[i].hiddenAncestor);
+console.info();
+}

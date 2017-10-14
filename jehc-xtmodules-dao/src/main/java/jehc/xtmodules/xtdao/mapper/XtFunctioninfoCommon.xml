@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtFunctioninfoCommon">
+	<!--初始化分页-->
+	<select id="getXtFunctioninfoCommonListByCondition" resultType="jehc.xtmodules.xtmodel.XtFunctioninfoCommon" parameterType="map">
+		SELECT
+			xt_functioninfo_common.`xt_functioninfo_common_id`,
+			xt_functioninfo_common.`xt_functioninfo_common_title`,
+			xt_functioninfo_common.`xt_functioninfo_common_url`,
+			xt_functioninfo_common.`xt_functioninfo_common_method`,
+			DATE_FORMAT(xt_functioninfo_common.`xt_functioninfo_common_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_functioninfo_common_mtime`,
+			xt_functioninfo_common.`xt_userinfo_id`,
+			xt_functioninfo_common.`xt_functioninfo_common_status`,
+			xt_functioninfo_common.`xt_functioninfo_common_content`,
+			DATE_FORMAT(xt_functioninfo_common.`xt_functioninfo_common_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_functioninfo_common_ctime`,
+		  	xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_functioninfo_common xt_functioninfo_common LEFT JOIN xt_userinfo AS xt_userinfo ON xt_functioninfo_common.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_functioninfo_common_title">
+			AND xt_functioninfo_common.xt_functioninfo_common_title like '%${xt_functioninfo_common_title}%'
+		</if>
+		<if test="null != xt_functioninfo_common_status and -1 != xt_functioninfo_common_status">
+			AND xt_functioninfo_common.xt_functioninfo_common_status = #{xt_functioninfo_common_status}
+		</if>
+		<if test="null != xt_functioninfo_common_method">
+			AND xt_functioninfo_common.xt_functioninfo_common_method like '%${xt_functioninfo_common_method}%'
+		</if>
+		<if test="null != xt_functioninfo_common_url">
+			AND xt_functioninfo_common.xt_functioninfo_common_url like '%${xt_functioninfo_common_url}%'
+		</if>
+		ORDER BY xt_functioninfo_common.`xt_functioninfo_common_ctime` DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtFunctioninfoCommonById" resultType="jehc.xtmodules.xtmodel.XtFunctioninfoCommon" parameterType="string">
+		SELECT
+			xt_functioninfo_common.`xt_functioninfo_common_id`,
+			xt_functioninfo_common.`xt_functioninfo_common_title`,
+			xt_functioninfo_common.`xt_functioninfo_common_url`,
+			xt_functioninfo_common.`xt_functioninfo_common_method`,
+			DATE_FORMAT(xt_functioninfo_common.`xt_functioninfo_common_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_functioninfo_common_mtime`,
+			xt_functioninfo_common.`xt_userinfo_id`,
+			xt_functioninfo_common.`xt_functioninfo_common_status`,
+			xt_functioninfo_common.`xt_functioninfo_common_content`,
+			DATE_FORMAT(xt_functioninfo_common.`xt_functioninfo_common_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_functioninfo_common_ctime`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_functioninfo_common xt_functioninfo_common LEFT JOIN xt_userinfo AS xt_userinfo ON xt_functioninfo_common.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE xt_functioninfo_common.xt_functioninfo_common_id=#{xt_functioninfo_common_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtFunctioninfoCommon" parameterType="jehc.xtmodules.xtmodel.XtFunctioninfoCommon">
+		INSERT INTO
+			xt_functioninfo_common
+			(
+			`xt_functioninfo_common_id`,
+			`xt_functioninfo_common_title`,
+			`xt_functioninfo_common_url`,
+			`xt_functioninfo_common_method`,
+			`xt_functioninfo_common_mtime`,
+			`xt_userinfo_id`,
+			`xt_functioninfo_common_status`,
+			`xt_functioninfo_common_content`,
+			`xt_functioninfo_common_ctime`
+			)
+			VALUES
+			(
+			#{xt_functioninfo_common_id},
+			#{xt_functioninfo_common_title},
+			#{xt_functioninfo_common_url},
+			#{xt_functioninfo_common_method},
+			#{xt_functioninfo_common_mtime},
+			#{xt_userinfo_id},
+			#{xt_functioninfo_common_status},
+			#{xt_functioninfo_common_content},
+			#{xt_functioninfo_common_ctime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtFunctioninfoCommon" parameterType="jehc.xtmodules.xtmodel.XtFunctioninfoCommon">
+		UPDATE
+			xt_functioninfo_common
+		SET
+			`xt_functioninfo_common_id` = #{xt_functioninfo_common_id},
+			`xt_functioninfo_common_title` = #{xt_functioninfo_common_title},
+			`xt_functioninfo_common_url` = #{xt_functioninfo_common_url},
+			`xt_functioninfo_common_method` = #{xt_functioninfo_common_method},
+			`xt_functioninfo_common_mtime` = #{xt_functioninfo_common_mtime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_functioninfo_common_status` = #{xt_functioninfo_common_status},
+			`xt_functioninfo_common_content` = #{xt_functioninfo_common_content}
+		WHERE xt_functioninfo_common_id=#{xt_functioninfo_common_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtFunctioninfoCommon" parameterType="map">
+		DELETE FROM xt_functioninfo_common WHERE xt_functioninfo_common_id IN
+		<foreach item="item" index="index" collection="xt_functioninfo_common_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans
+                http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+            http://www.springframework.org/schema/context
+                http://www.springframework.org/schema/context/spring-context-3.2.xsd
+            http://www.springframework.org/schema/rabbit  
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.4.xsd  
+            http://www.springframework.org/schema/task 
+            	http://www.springframework.org/schema/task/spring-task.xsd
+            	http://www.springframework.org/schema/rabbit
+    			http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd
+                ">
+	<!-- 1.1连接服务配置  -->
+	<rabbit:connection-factory id="rabbitConnectionFactory" host="${rabbitmq.host}" username="${rabbitmq.username}" password="${rabbitmq.password}" port="${rabbitmq.port}" publisher-confirms="true" />
+	
+	<rabbit:admin connection-factory="rabbitConnectionFactory" />
+	
+	<!-- 1.3声明queue队列 （durable:是否持久化 ，exclusive: 仅创建者可以使用的私有队列，断开后自动删除，auto_delete: 当所有消费客户端连接断开后，是否自动删除队列）-->
+	<rabbit:queue id="queue1" name="queue1" durable="true" auto-delete="false" exclusive="false"/>
+	
+	<!-- 1.4绑定exchange queue binging key （定义exchange模式为direct目的为消息与一个特定的路由键完全匹配，才会转发 注模式一共有fanout,direct,topic,header四种）-->
+	<rabbit:direct-exchange name="myexchange" durable="true" auto-delete="false">
+		<!-- 设置消息queue匹配的key -->
+		<rabbit:bindings>
+			<rabbit:binding queue="queue1" key="queue1k" />
+		</rabbit:bindings>
+	</rabbit:direct-exchange>
+	<!-- 申明 rabbitTemplate -->
+	<rabbit:template id="rabbitTemplate" connection-factory="rabbitConnectionFactory" exchange="myexchange"/>  
+
+	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<!-- 核心线程数 -->
+		<property name="corePoolSize" value="5" />
+		<!-- 最大线程数 -->
+		<property name="maxPoolSize" value="50" />
+		<!-- 队列最大长度 -->
+		<property name="queueCapacity" value="1000" />
+		<!-- 线程池维护线程所允许的空闲时间，默认为60s -->
+		<property name="keepAliveSeconds" value="60" />
+	</bean>
+
+	<!-- 2.默认消息处理类，可以重写 -->
+	<bean id="queueListenter" class="jehc.xtmodules.xtcore.mq.rabbit.QueueListenter"/>
+	
+	<!-- 5.queue listener 监听模式 当消息到达时会通知监听在对应的队列上的监听对 -->
+	<rabbit:listener-container connection-factory="rabbitConnectionFactory" acknowledge="auto" task-executor="taskExecutor" >
+		<rabbit:listener queues="queue1" ref="queueListenter"  method="receiveMessage"/>
+	</rabbit:listener-container>
+</beans>

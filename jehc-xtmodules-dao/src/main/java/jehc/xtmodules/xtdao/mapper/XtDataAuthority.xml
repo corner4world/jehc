@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDataAuthority">
+	<!--初始化分页-->
+	<select id="getXtDataAuthorityListByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthority" parameterType="map">
+		SELECT
+			`xt_data_authority_id`,
+			`xtUID`,
+			`xt_userinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`,
+			`xt_data_authorityType`
+		FROM 
+			xt_data_authority
+		WHERE 1=1
+		<if test="null != xt_userinfo_id">
+			AND xt_userinfo_id = #{xt_userinfo_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtDataAuthorityById" resultType="jehc.xtmodules.xtmodel.XtDataAuthority" parameterType="string">
+		SELECT
+			`xt_data_authority_id`,
+			`xtUID`,
+			`xt_userinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`,
+			`xt_data_authorityType`
+		FROM 
+			xt_data_authority
+		WHERE xt_data_authority_id=#{xt_data_authority_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtDataAuthority" parameterType="jehc.xtmodules.xtmodel.XtDataAuthority">
+		INSERT INTO
+			xt_data_authority
+			(
+			`xt_data_authority_id`,
+			`xtUID`,
+			`xt_userinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`,
+			`xt_data_authorityType`
+			)
+			VALUES
+			(
+			#{xt_data_authority_id},
+			#{xtUID},
+			#{xt_userinfo_id},
+			#{xt_functioninfo_id},
+			#{xt_menuinfo_id},
+			#{xt_data_authorityType}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtDataAuthority" parameterType="jehc.xtmodules.xtmodel.XtDataAuthority">
+		UPDATE
+			xt_data_authority
+		SET
+			`xt_data_authority_id` = #{xt_data_authority_id},
+			`xtUID` = #{xtUID},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_functioninfo_id` = #{xt_functioninfo_id},
+			`xt_menuinfo_id` = #{xt_menuinfo_id},
+			`xt_data_authorityType` = #{xt_data_authorityType}
+		WHERE xt_data_authority_id=#{xt_data_authority_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtDataAuthority" parameterType="map">
+		DELETE FROM xt_data_authority WHERE xt_data_authority_id IN
+		<foreach item="item" index="index" collection="xt_data_authority_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--读取所有数据-->
+	<select id="getXtDataAuthorityListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthority" parameterType="map">
+		SELECT
+			`xt_data_authority_id`,
+			`xtUID`,
+			`xt_userinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`,
+			`xt_data_authorityType`
+		FROM 
+			xt_data_authority
+		WHERE 1=1
+		<if test="null != xt_userinfo_id">
+			AND xt_userinfo_id = #{xt_userinfo_id}
+		</if>
+		<if test="null != xt_menuinfo_id">
+			AND xt_menuinfo_id = #{xt_menuinfo_id}
+		</if>
+		<if test="null != xt_data_authorityType">
+			AND xt_data_authorityType = #{xt_data_authorityType}
+		</if>
+	</select>
+	
+	<!--根据情况删除-->
+	<delete id="delXtDataAuthorityByCondition" parameterType="map">
+		DELETE FROM 
+			xt_data_authority 
+		WHERE 1=1
+		<if test="null != xt_userinfo_id">
+			AND	xt_userinfo_id=#{xt_userinfo_id} 
+		</if>
+		<if test="null != xt_menuinfo_id">
+			AND xt_menuinfo_id=#{xt_menuinfo_id}
+		</if>
+		<if test="null != xt_functioninfo_id">
+			AND xt_functioninfo_id = #{xt_functioninfo_id}
+		</if>
+		<if test="null != xt_data_authorityType">
+			AND xt_data_authorityType = #{xt_data_authorityType}
+		</if>
+	</delete>
+	
+	<!-- 获取所有为登录使用 -->
+	<select id="getXtDataAuthorityListForLogin" resultType="jehc.xtmodules.xtmodel.XtDataAuthority" parameterType="map">
+		SELECT
+			xt_data_authority.`xtUID`,				
+			xt_functioninfo.`xt_functioninfoURL`
+		FROM 
+			xt_data_authority xt_data_authority LEFT JOIN xt_functioninfo xt_functioninfo ON xt_functioninfo.xt_functioninfo_id = xt_data_authority.xt_functioninfo_id
+		WHERE 1=1
+		<if test="null != xt_userinfo_id">
+			AND xt_data_authority.xt_userinfo_id = #{xt_userinfo_id}
+		</if>
+		GROUP BY xt_data_authority.`xtUID`,xt_functioninfo.`xt_functioninfoURL`
+	</select>
+	
+	<!--批量添加-->
+	<insert id="addBatchXtDataAuthority" parameterType="list">
+		INSERT INTO
+			xt_data_authority
+			(
+			`xt_data_authority_id`,
+			`xtUID`,
+			`xt_userinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`,
+			`xt_data_authorityType`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_data_authority_id},
+			#{item.xtUID},
+			#{item.xt_userinfo_id},
+			#{item.xt_functioninfo_id},
+			#{item.xt_menuinfo_id},
+			#{item.xt_data_authorityType}
+			)
+		</foreach>
+	</insert>
+</mapper>

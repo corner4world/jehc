@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtLoginLogs">
+	<!--初始化分页-->
+	<select id="getXtLoginLogsListByCondition" resultType="jehc.xtmodules.xtmodel.XtLoginLogs" parameterType="map">
+		SELECT
+			xt_login_logs.`xt_login_log_id`,
+			xt_login_logs.`xt_userinfo_id`,
+			xt_login_logs.`xt_login_logIP`,
+			xt_login_logs.`xt_login_logtime`,
+			xt_login_logs.`xt_login_logContent`,
+			xt_login_logs.`xt_login_log_browser_type`,
+			xt_login_logs.`xt_login_log_browser_name`,
+			xt_login_logs.`xt_login_log_browser_version`,
+			xt_login_logs.`xt_login_log_system`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_login_logs xt_login_logs LEFT JOIN xt_userinfo xt_userinfo ON xt_login_logs.xt_userinfo_id=xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != xt_userinfo_id">
+			AND xt_login_logs.`xt_userinfo_id` = #{xt_userinfo_id}
+		</if>
+		ORDER BY xt_login_logs.`xt_login_logtime` DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtLoginLogsById" resultType="jehc.xtmodules.xtmodel.XtLoginLogs" parameterType="string">
+		SELECT
+			xt_login_logs.`xt_login_log_id`,
+			xt_login_logs.`xt_userinfo_id`,
+			xt_login_logs.`xt_login_logIP`,
+			xt_login_logs.`xt_login_logtime`,
+			xt_login_logs.`xt_login_logContent`,
+			xt_login_logs.`xt_login_log_browser_type`,
+			xt_login_logs.`xt_login_log_browser_name`,
+			xt_login_logs.`xt_login_log_browser_version`,
+			xt_login_logs.`xt_login_log_system`,
+			xt_userinfo.`xt_userinfo_realName`
+		FROM 
+			xt_login_logs xt_login_logs LEFT JOIN xt_userinfo xt_userinfo ON xt_login_logs.xt_userinfo_id=xt_userinfo.xt_userinfo_id
+		WHERE xt_login_log_id=#{xt_login_log_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtLoginLogs" parameterType="jehc.xtmodules.xtmodel.XtLoginLogs">
+		INSERT INTO
+			xt_login_logs
+			(
+			`xt_login_log_id`,
+			`xt_userinfo_id`,
+			`xt_login_logIP`,
+			`xt_login_logtime`,
+			`xt_login_logContent`,
+			`xt_login_log_browser_type`,
+			`xt_login_log_browser_name`,
+			`xt_login_log_browser_version`,
+			`xt_login_log_system`
+			)
+			VALUES
+			(
+			#{xt_login_log_id},
+			#{xt_userinfo_id},
+			#{xt_login_logIP},
+			#{xt_login_logtime},
+			#{xt_login_logContent},
+			#{xt_login_log_browser_type},
+			#{xt_login_log_browser_name},
+			#{xt_login_log_browser_version},
+			#{xt_login_log_system}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtLoginLogs" parameterType="jehc.xtmodules.xtmodel.XtLoginLogs">
+		UPDATE
+			xt_login_logs
+		SET
+			`xt_login_log_id` = #{xt_login_log_id},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_login_logIP` = #{xt_login_logIP},
+			`xt_login_logtime` = #{xt_login_logtime},
+			`xt_login_logContent` = #{xt_login_logContent},
+			`xt_login_log_browser_type` = #{xt_login_log_browser_type},
+			`xt_login_log_browser_name` = #{xt_login_log_browser_name},
+			`xt_login_log_browser_version` = #{xt_login_log_browser_version},
+			`xt_login_log_system` = #{xt_login_log_system}
+		WHERE xt_login_log_id=#{xt_login_log_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtLoginLogs" parameterType="map">
+		DELETE FROM xt_login_logs WHERE xt_login_log_id IN
+		<foreach item="item" index="index" collection="xt_login_log_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 统计出每个人登录的次数 -->
+	<select id="getGroupXtLoginLogsList" resultType="jehc.xtmodules.xtmodel.XtLoginLogs" parameterType="map">
+		SELECT 
+			COUNT(0) AS count,
+			xt_login_logs.xt_userinfo_id ,
+			xt_userinfo.xt_userinfo_realName 
+		FROM xt_login_logs  xt_login_logs LEFT JOIN `xt_userinfo` xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_login_logs.xt_userinfo_id
+		WHERE !ISNULL(xt_login_logs.xt_userinfo_id)
+		GROUP BY xt_login_logs.xt_userinfo_id
+		ORDER BY count DESC
+	</select>
+</mapper>

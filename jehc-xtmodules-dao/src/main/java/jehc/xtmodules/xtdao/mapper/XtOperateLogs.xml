@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtOperateLogs">
+	<!--初始化分页-->
+	<select id="getXtOperateLogsListByCondition" resultType="jehc.xtmodules.xtmodel.XtOperateLogs" parameterType="map">
+		SELECT
+			`xt_operate_log_id`,
+			`xt_operate_logBegTime`,
+			`xt_userinfo_id`,
+			`xt_operate_logClasseName`,
+			`xt_operate_logMethod`,
+			`xt_operate_logMethodPar`,
+			`xt_operate_logResult`,
+			`xt_operate_logTotalTime`,
+			`xt_operate_logEndTime`,
+			`xt_operate_logType`,
+			`xt_operate_logUri`,
+			`xt_operate_logMaxMemory`,
+			`xt_operate_logTotalMemory`,
+			`xt_operate_logFreeMemory`,
+			`xt_operate_logUseMemory`
+		FROM 
+			xt_operate_logs
+		WHERE 1=1
+		<if test="null != xt_operate_logClasseName">
+			AND instr(xt_operate_logClasseName,#{xt_operate_logClasseName})
+		</if>
+		ORDER BY xt_operate_logBegTime DESC
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtOperateLogsById" resultType="jehc.xtmodules.xtmodel.XtOperateLogs" parameterType="string">
+		SELECT
+			`xt_operate_log_id`,
+			`xt_operate_logBegTime`,
+			`xt_userinfo_id`,
+			`xt_operate_logClasseName`,
+			`xt_operate_logMethod`,
+			`xt_operate_logMethodPar`,
+			`xt_operate_logResult`,
+			`xt_operate_logTotalTime`,
+			`xt_operate_logEndTime`,
+			`xt_operate_logType`,
+			`xt_operate_logUri`,
+			`xt_operate_logMaxMemory`,
+			`xt_operate_logTotalMemory`,
+			`xt_operate_logFreeMemory`,
+			`xt_operate_logUseMemory`
+		FROM 
+			xt_operate_logs
+		WHERE xt_operate_log_id=#{xt_operate_log_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtOperateLogs" parameterType="jehc.xtmodules.xtmodel.XtOperateLogs">
+		INSERT INTO
+			xt_operate_logs
+			(
+			`xt_operate_log_id`,
+			`xt_operate_logBegTime`,
+			`xt_userinfo_id`,
+			`xt_operate_logClasseName`,
+			`xt_operate_logMethod`,
+			`xt_operate_logMethodPar`,
+			`xt_operate_logResult`,
+			`xt_operate_logTotalTime`,
+			`xt_operate_logEndTime`,
+			`xt_operate_logType`,
+			`xt_operate_logUri`,
+			`xt_operate_logMaxMemory`,
+			`xt_operate_logTotalMemory`,
+			`xt_operate_logFreeMemory`,
+			`xt_operate_logUseMemory`
+			)
+			VALUES
+			(
+			#{xt_operate_log_id},
+			#{xt_operate_logBegTime},
+			#{xt_userinfo_id},
+			#{xt_operate_logClasseName},
+			#{xt_operate_logMethod},
+			#{xt_operate_logMethodPar},
+			#{xt_operate_logResult},
+			#{xt_operate_logTotalTime},
+			#{xt_operate_logEndTime},
+			#{xt_operate_logType},
+			#{xt_operate_logUri},
+			#{xt_operate_logMaxMemory},
+			#{xt_operate_logTotalMemory},
+			#{xt_operate_logFreeMemory},
+			#{xt_operate_logUseMemory}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtOperateLogs" parameterType="jehc.xtmodules.xtmodel.XtOperateLogs">
+		UPDATE
+			xt_operate_logs
+		SET
+			`xt_operate_log_id` = #{xt_operate_log_id},
+			`xt_operate_logBegTime` = #{xt_operate_logBegTime},
+			`xt_userinfo_id` = #{xt_userinfo_id},
+			`xt_operate_logClasseName` = #{xt_operate_logClasseName},
+			`xt_operate_logMethod` = #{xt_operate_logMethod},
+			`xt_operate_logMethodPar` = #{xt_operate_logMethodPar},
+			`xt_operate_logResult` = #{xt_operate_logResult},
+			`xt_operate_logTotalTime` = #{xt_operate_logTotalTime},
+			`xt_operate_logEndTime` = #{xt_operate_logEndTime},
+			`xt_operate_logType` = #{xt_operate_logType},
+			`xt_operate_logUri` = #{xt_operate_logUri},
+			`xt_operate_logMaxMemory` = #{xt_operate_logMaxMemory},
+			`xt_operate_logTotalMemory` = #{xt_operate_logTotalMemory},
+			`xt_operate_logFreeMemory` = #{xt_operate_logFreeMemory},
+			`xt_operate_logUseMemory` = #{xt_operate_logUseMemory}
+		WHERE xt_operate_log_id=#{xt_operate_log_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtOperateLogs" parameterType="map">
+		delete from xt_operate_logs where xt_operate_log_id in
+		<foreach item="item" index="index" collection="xt_operate_log_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

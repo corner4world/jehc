@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDataAuthorityDepart">
+	<!--初始化分页-->
+	<select id="getXtDataAuthorityDepartListByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityDepart" parameterType="map">
+		SELECT
+			`xt_data_authority_depart_id`,
+			`xtDID`,
+			`xt_departinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`
+		FROM 
+			xt_data_authority_depart
+		WHERE 1=1
+		<if test="null != xt_departinfo_id">
+			AND xt_departinfo_id = #{xt_departinfo_id}
+		</if>
+		<if test="null != xt_menuinfo_id">
+			AND xt_menuinfo_id = #{xt_menuinfo_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtDataAuthorityDepartById" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityDepart" parameterType="string">
+		SELECT
+			`xt_data_authority_depart_id`,
+			`xtDID`,
+			`xt_departinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`
+		FROM 
+			xt_data_authority_depart
+		WHERE xt_data_authority_depart_id=#{xt_data_authority_depart_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtDataAuthorityDepart" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityDepart">
+		INSERT INTO
+			xt_data_authority_depart
+			(
+			`xt_data_authority_depart_id`,
+			`xtDID`,
+			`xt_departinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`
+			)
+			VALUES
+			(
+			#{xt_data_authority_depart_id},
+			#{xtDID},
+			#{xt_departinfo_id},
+			#{xt_functioninfo_id},
+			#{xt_menuinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtDataAuthorityDepart" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityDepart">
+		UPDATE
+			xt_data_authority_depart
+		SET
+			`xtDID` = #{xtDID},
+			`xt_departinfo_id` = #{xt_departinfo_id},
+			`xt_functioninfo_id` = #{xt_functioninfo_id},
+			`xt_menuinfo_id` = #{xt_menuinfo_id}
+		WHERE xt_data_authority_depart_id=#{xt_data_authority_depart_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtDataAuthorityDepartBySelective" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityDepart">
+		UPDATE
+			xt_data_authority_depart
+		<set>
+			<if test="xtDID != null">
+				`xtDID` = #{xtDID},
+			</if>
+			<if test="xt_departinfo_id != null">
+				`xt_departinfo_id` = #{xt_departinfo_id},
+			</if>
+			<if test="xt_functioninfo_id != null">
+				`xt_functioninfo_id` = #{xt_functioninfo_id},
+			</if>
+			<if test="xt_menuinfo_id != null">
+				`xt_menuinfo_id` = #{xt_menuinfo_id},
+			</if>
+		</set>
+		WHERE xt_data_authority_depart_id=#{xt_data_authority_depart_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtDataAuthorityDepart" parameterType="map">
+		DELETE FROM xt_data_authority_depart WHERE xt_data_authority_depart_id IN
+		<foreach item="item" index="index" collection="xt_data_authority_depart_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!-- 删除集合根据拥有者及菜单编号 -->
+	<delete id="delXtDataAuthorityDepartList" parameterType="map">
+		DELETE FROM xt_data_authority_depart
+		WHERE 1=1
+		<if test="null != xt_departinfo_id">
+			AND xt_departinfo_id = #{xt_departinfo_id}
+		</if>
+		<if test="null != xt_menuinfo_id">
+			AND `xt_menuinfo_id` = #{xt_menuinfo_id}
+		</if>
+		<if test="null != xt_functioninfo_id">
+			AND xt_functioninfo_id = #{xt_functioninfo_id}
+		</if>
+	</delete>
+	
+	<!--批量添加-->
+	<insert id="addBatchXtDataAuthorityDepart" parameterType="list">
+		INSERT INTO
+			xt_data_authority_depart
+			(
+			`xt_data_authority_depart_id`,
+			`xtDID`,
+			`xt_departinfo_id`,
+			`xt_functioninfo_id`,
+			`xt_menuinfo_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_data_authority_depart_id},
+			#{item.xtDID},
+			#{item.xt_departinfo_id},
+			#{item.xt_functioninfo_id},
+			#{item.xt_menuinfo_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtDataAuthorityDepart" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_data_authority_depart
+			SET
+				`xtDID` = #{item.xtDID},
+				`xt_departinfo_id` = #{item.xt_departinfo_id},
+				`xt_functioninfo_id` = #{item.xt_functioninfo_id},
+				`xt_menuinfo_id` = #{item.xt_menuinfo_id}
+			WHERE xt_data_authority_depart_id=#{item.xt_data_authority_depart_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtDataAuthorityDepartBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_data_authority_depart
+			<set>
+				<if test="item.xtDID != null">
+					`xtDID` = #{item.xtDID},
+				</if>
+				<if test="item.xt_departinfo_id != null">
+					`xt_departinfo_id` = #{item.xt_departinfo_id},
+				</if>
+				<if test="item.xt_functioninfo_id != null">
+					`xt_functioninfo_id` = #{item.xt_functioninfo_id},
+				</if>
+				<if test="item.xt_menuinfo_id != null">
+					`xt_menuinfo_id` = #{item.xt_menuinfo_id},
+				</if>
+			</set>
+			WHERE xt_data_authority_depart_id=#{item.xt_data_authority_depart_id}
+		</foreach>
+	</update>
+</mapper>

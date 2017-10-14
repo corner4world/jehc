@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtCompany">
+	<!--初始化分页-->
+	<select id="getXtCompanyListByCondition" resultType="jehc.xtmodules.xtmodel.XtCompany" parameterType="map">
+		SELECT
+			`xt_company_id`,
+			`xt_company_parentId`,
+			`xt_company_name`,
+			`xt_company_tel`,
+			`xt_company_remark`,
+			`xt_company_userName`,
+			`xt_company_address`,
+			`xt_company_type`,
+			`xt_company_upTime`,
+			`xt_company_isLeaf`,
+			`xt_company_images`,
+			`xt_company_ceo`,
+			`xt_company_isdelete`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`
+		FROM 
+			xt_company
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtCompanyById" resultType="jehc.xtmodules.xtmodel.XtCompany" parameterType="string">
+		SELECT
+			`xt_company_id`,
+			`xt_company_parentId`,
+			`xt_company_name`,
+			`xt_company_tel`,
+			`xt_company_remark`,
+			`xt_company_userName`,
+			`xt_company_address`,
+			`xt_company_type`,
+			`xt_company_upTime`,
+			`xt_company_isLeaf`,
+			`xt_company_images`,
+			`xt_company_ceo`,
+			`xt_company_isdelete`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`
+		FROM 
+			xt_company
+		WHERE xt_company_id=#{xt_company_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtCompany" parameterType="jehc.xtmodules.xtmodel.XtCompany">
+		INSERT INTO
+			xt_company
+			(
+			`xt_company_id`,
+			`xt_company_parentId`,
+			`xt_company_name`,
+			`xt_company_tel`,
+			`xt_company_remark`,
+			`xt_company_userName`,
+			`xt_company_address`,
+			`xt_company_type`,
+			`xt_company_upTime`,
+			`xt_company_isLeaf`,
+			`xt_company_images`,
+			`xt_company_ceo`,
+			`xt_company_isdelete`,
+			`xt_provinceID`,
+			`xt_cityID`,
+			`xt_districtID`
+			)
+			VALUES
+			(
+			#{xt_company_id},
+			#{xt_company_parentId},
+			#{xt_company_name},
+			#{xt_company_tel},
+			#{xt_company_remark},
+			#{xt_company_userName},
+			#{xt_company_address},
+			#{xt_company_type},
+			#{xt_company_upTime},
+			#{xt_company_isLeaf},
+			#{xt_company_images},
+			#{xt_company_ceo},
+			#{xt_company_isdelete},
+			#{xt_provinceID},
+			#{xt_cityID},
+			#{xt_districtID}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtCompany" parameterType="jehc.xtmodules.xtmodel.XtCompany">
+		UPDATE
+			xt_company
+		SET
+			`xt_company_id` = #{xt_company_id},
+			`xt_company_parentId` = #{xt_company_parentId},
+			`xt_company_name` = #{xt_company_name},
+			`xt_company_tel` = #{xt_company_tel},
+			`xt_company_remark` = #{xt_company_remark},
+			`xt_company_userName` = #{xt_company_userName},
+			`xt_company_address` = #{xt_company_address},
+			`xt_company_type` = #{xt_company_type},
+			`xt_company_upTime` = #{xt_company_upTime},
+			`xt_company_isLeaf` = #{xt_company_isLeaf},
+			`xt_company_images` = #{xt_company_images},
+			`xt_company_ceo` = #{xt_company_ceo},
+			`xt_company_isdelete` = #{xt_company_isdelete},
+			`xt_provinceID` = #{xt_provinceID},
+			`xt_cityID` = #{xt_cityID},
+			`xt_districtID` = #{xt_districtID}
+		WHERE xt_company_id=#{xt_company_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtCompany" parameterType="map">
+		delete from xt_company where xt_company_id in (#{xt_company_id})
+	</delete>
+</mapper>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE shardingConfig PUBLIC "-//shardbatis.googlecode.com//DTD Shardbatis 2.0//EN"
+"http://shardbatis.googlecode.com/dtd/shardbatis-config.dtd">  
+<shardingConfig>
+	<!-- parseList可选配置如果配置了parseList,只有在parseList范围内并且不再ignoreList内的sql才会被解析和修改  -->  
+	<parseList>
+		<value>jehc.xtmodules.xtmodel.Xt_Monitor_Cpu.addXtMonitorCpu</value>
+	</parseList>  
+	<!--  配置分表策略  -->  
+	<strategy tableName="xt_monitor_cpu" strategyClass="jehc.xtmodules.xtcore.sharding.Xt_Monitor_CpuShardStrategyImpl"/> 
+</shardingConfig>
+

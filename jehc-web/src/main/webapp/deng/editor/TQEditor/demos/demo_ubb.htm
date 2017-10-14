@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript"></script>
+<script src="../plugin/ubb.js" type="text/javascript"></script>
+<!--<link href="../TQEditor.fire.css" id="TQEditorSkinCSS" rel="stylesheet" type="text/css">-->
+</head>
+
+<body>
+<!--#include file="_nav.htm" -->
+<script src="demo.js" type="text/javascript"></script><br>
+<textarea id="e1" rows="12" cols="100" >
+[b]粗体字[/b]
+
+[u]下划线文字[/u]
+[i]斜体字[/i]
+[s]删除字[/s]
+[size=6]size=6的字[/size]
+[color=red]红色文字[/color]
+
+[bg=#ffff00][color=green]黄色底文字[/color][/bg]
+
+[code]
+    [b]code内部文字[/b]
+[/code]
+
+[left]左对齐文字[/left]
+
+[center]居中对齐文字[/center]
+
+[right]右对齐文字[/right]
+
+[code=php]
+    <?php echo "php string."; ?>
+[/code]
+[img]http://www.vt.com/demo/img/1.jpg[/img]
+[img=400,300]http://www.vt.com/demo/img/2.jpg[/img]
+[list]
+[*]一般列表项1
+[*]一般列表项2
+[*]一般列表项3
+[*]一般列表项4
+[*]一般列表项5
+[/list]
+[numlist]
+[*]数字列表项1, "[*]"不是在行开始位置的不算列表项
+[*]数字列表项2
+内容是允许换行的
+[*]数字列表项3
+[*]数字列表项4
+[*]数字列表项5
+[/numlist]
+[mp3]http://www.vt.com/demo/test.mp3[/mp3]
+[:1][:2][:3][:4][:5][:6]
+[flv=320,240,0]http://www.vt.com/demo/test.flv[/flv]
+[flv=640,480]http://www.vt.com/demo/test.flv[/flv]
+[flv=320,240]http://www.vt.com/demo/test.flv[/flv]
+<font size=8>网页源码</font>[table][tr][td]1,1[/td][td]1,2[/td][/tr][tr][td]2,1[/td][td]2,2[/td][/tr][/table]
+</textarea>
+<script type="text/javascript" defer="true"> 
+ new tqEditor('e1',{toolbar:'full',ongetcontent:html2ubb, onsetcontent:ubb2html}); 
+</script>
+<br>
+<br>
+UBB可视化编辑<br>
+需要插件plugin/ubb.js支持
+</body>
+</html>

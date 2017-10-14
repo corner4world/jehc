@@ -1,0 +1,19 @@
+1.0版本
+
+
+1、使用BoneCPDataSource连接所需jar如下:
+1）bonecp-0.7.0.jar
+2）google-collect-1.0.jar
+
+
+
+2、使用ehcache缓存所需jar如下:
+1)ehcache-1.6.2.jar
+2)spring.jar
+
+
+3、jehc.sql为一个不包含activity工作流表  
+
+（jehc-include-activiti-tables.sql是包含activity工作流表）
+
+特地说明 执行jehc.sql脚本 启动jehc服务时 activity会自动执行

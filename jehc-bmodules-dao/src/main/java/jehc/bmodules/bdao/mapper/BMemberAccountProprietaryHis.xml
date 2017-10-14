@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.bmodules.bmodel.BMemberAccountProprietaryHis">
+	<!--初始化分页-->
+	<select id="getBMemberAccountProprietaryHisListByCondition" resultType="jehc.bmodules.bmodel.BMemberAccountProprietaryHis" parameterType="map">
+		SELECT
+			`b_member_account_proprietary_his_id`,
+			`b_member_account_proprietary_id`,
+			`b_member_account_proprietary_his_money`,
+			DATE_FORMAT(`b_member_account_proprietary_his_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_account_proprietary_his_ctime`,
+			`b_member_account_proprietary_his_type`,
+			`b_member_account_proprietary_his_log`,
+			`b_member_id`,
+			`xt_userinfo_id`
+		FROM 
+			b_member_account_proprietary_his
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getBMemberAccountProprietaryHisById" resultType="jehc.bmodules.bmodel.BMemberAccountProprietaryHis" parameterType="string">
+		SELECT
+			`b_member_account_proprietary_his_id`,
+			`b_member_account_proprietary_id`,
+			`b_member_account_proprietary_his_money`,
+			DATE_FORMAT(`b_member_account_proprietary_his_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_account_proprietary_his_ctime`,
+			`b_member_account_proprietary_his_type`,
+			`b_member_account_proprietary_his_log`,
+			`b_member_id`,
+			`xt_userinfo_id`
+		FROM 
+			b_member_account_proprietary_his
+		WHERE b_member_account_proprietary_his_id=#{b_member_account_proprietary_his_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addBMemberAccountProprietaryHis" parameterType="jehc.bmodules.bmodel.BMemberAccountProprietaryHis">
+		INSERT INTO
+			b_member_account_proprietary_his
+			(
+			`b_member_account_proprietary_his_id`,
+			`b_member_account_proprietary_id`,
+			`b_member_account_proprietary_his_money`,
+			`b_member_account_proprietary_his_ctime`,
+			`b_member_account_proprietary_his_type`,
+			`b_member_account_proprietary_his_log`,
+			`b_member_id`,
+			`xt_userinfo_id`
+			)
+			VALUES
+			(
+			#{b_member_account_proprietary_his_id},
+			#{b_member_account_proprietary_id},
+			#{b_member_account_proprietary_his_money},
+			#{b_member_account_proprietary_his_ctime},
+			#{b_member_account_proprietary_his_type},
+			#{b_member_account_proprietary_his_log},
+			#{b_member_id},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateBMemberAccountProprietaryHis" parameterType="jehc.bmodules.bmodel.BMemberAccountProprietaryHis">
+		UPDATE
+			b_member_account_proprietary_his
+		SET
+			`b_member_account_proprietary_his_id` = #{b_member_account_proprietary_his_id},
+			`b_member_account_proprietary_id` = #{b_member_account_proprietary_id},
+			`b_member_account_proprietary_his_money` = #{b_member_account_proprietary_his_money},
+			`b_member_account_proprietary_his_ctime` = #{b_member_account_proprietary_his_ctime},
+			`b_member_account_proprietary_his_type` = #{b_member_account_proprietary_his_type},
+			`b_member_account_proprietary_his_log` = #{b_member_account_proprietary_his_log},
+			`b_member_id` = #{b_member_id},
+			`xt_userinfo_id` = #{xt_userinfo_id}
+		WHERE b_member_account_proprietary_his_id=#{b_member_account_proprietary_his_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delBMemberAccountProprietaryHis" parameterType="map">
+		DELETE FROM b_member_account_proprietary_his WHERE b_member_account_proprietary_his_id IN
+		<foreach item="item" index="index" collection="b_member_account_proprietary_his_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

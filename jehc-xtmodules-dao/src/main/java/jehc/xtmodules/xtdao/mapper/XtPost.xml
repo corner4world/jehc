@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtPost">
+	<!--初始化分页-->
+	<select id="getXtPostListByCondition" resultType="jehc.xtmodules.xtmodel.XtPost" parameterType="map">
+		SELECT
+			xt_post.`xt_post_id`,
+			xt_post.`xt_departinfo_id`,
+			xt_post.`xt_post_parentId`,
+			xt_post.`xt_post_name`,
+			xt_post.`xt_post_desc`,
+			xt_post.`xt_post_maxNum`,
+			xt_post.`xt_post_isLeaf`,
+			xt_post.`xt_post_image`,
+			xt_post.`xt_post_grade`,
+			xt_departinfo.`xt_departinfo_name`
+		FROM 
+			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
+		WHERE 1=1
+		<if test="null != xt_post_isdelete">
+			AND xt_post.xt_post_isdelete = #{xt_post_isdelete}
+		</if>
+		<if test="null != xt_departinfo_id">
+			AND xt_post.`xt_departinfo_id` = #{xt_departinfo_id}
+		</if>
+		<if test="null != xt_post_name">
+			AND instr(xt_post_name,#{xt_post_name})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtPostById" resultType="jehc.xtmodules.xtmodel.XtPost" parameterType="string">
+		SELECT
+			`xt_post_id`,
+			`xt_departinfo_id`,
+			`xt_post_parentId`,
+			`xt_post_name`,
+			`xt_post_desc`,
+			`xt_post_maxNum`,
+			`xt_post_isLeaf`,
+			`xt_post_image`,
+			`xt_post_grade`
+		FROM 
+			xt_post
+		WHERE xt_post_id=#{xt_post_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtPost" parameterType="jehc.xtmodules.xtmodel.XtPost">
+		INSERT INTO
+			xt_post
+			(
+			`xt_post_id`,
+			`xt_departinfo_id`,
+			`xt_post_parentId`,
+			`xt_post_name`,
+			`xt_post_desc`,
+			`xt_post_maxNum`,
+			`xt_post_isLeaf`,
+			`xt_post_image`,
+			`xt_post_grade`,
+			`xt_post_isdelete`
+			)
+			VALUES
+			(
+			#{xt_post_id},
+			#{xt_departinfo_id},
+			#{xt_post_parentId},
+			#{xt_post_name},
+			#{xt_post_desc},
+			#{xt_post_maxNum},
+			#{xt_post_isLeaf},
+			#{xt_post_image},
+			#{xt_post_grade},
+			0
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtPost" parameterType="jehc.xtmodules.xtmodel.XtPost">
+		UPDATE
+			xt_post
+		SET
+			`xt_post_id` = #{xt_post_id},
+			`xt_departinfo_id` = #{xt_departinfo_id},
+			`xt_post_parentId` = #{xt_post_parentId},
+			`xt_post_name` = #{xt_post_name},
+			`xt_post_desc` = #{xt_post_desc},
+			`xt_post_maxNum` = #{xt_post_maxNum},
+			`xt_post_isLeaf` = #{xt_post_isLeaf},
+			`xt_post_image` = #{xt_post_image},
+			`xt_post_grade` = #{xt_post_grade}
+		WHERE xt_post_id=#{xt_post_id}
+	</update>
+
+	<!--删除-->
+	<update id="delXtPost" parameterType="map">
+		UPDATE
+			xt_post 
+		SET
+			xt_post_isdelete = 1
+		WHERE xt_post_id IN
+		<foreach item="item" index="index" collection="xt_post_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 岗位根目录集合 -->
+	<select id="getXtPostinfoList" resultType="jehc.xtmodules.xtmodel.XtPost" parameterType="map">
+		SELECT
+			xt_post.`xt_post_id`,
+			xt_post.`xt_departinfo_id`,
+			xt_post.`xt_post_parentId`,
+			xt_post.`xt_post_name`,
+			xt_post.`xt_post_desc`,
+			xt_post.`xt_post_maxNum`,
+			xt_post.`xt_post_isLeaf`,
+			xt_post.`xt_post_image`,
+			xt_post.`xt_post_grade`,
+			xt_departinfo.`xt_departinfo_name`
+		FROM 
+			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
+		WHERE (xt_post_parentId = '0' OR ISNULL(xt_post_parentId))
+		<if test="null != xt_departinfo_id and '' != xt_departinfo_id">
+			AND xt_post.`xt_departinfo_id` = #{xt_departinfo_id}
+		</if>
+	</select>
+	
+	<!-- 查找子集合 -->
+	<select id="getXtPostListChild" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtPost">
+		SELECT
+			xt_post.`xt_post_id`,
+			xt_post.`xt_departinfo_id`,
+			xt_post.`xt_post_parentId`,
+			xt_post.`xt_post_name`,
+			xt_post.`xt_post_desc`,
+			xt_post.`xt_post_maxNum`,
+			xt_post.`xt_post_isLeaf`,
+			xt_post.`xt_post_image`,
+			xt_post.`xt_post_grade`,
+			xt_departinfo.`xt_departinfo_name`
+		FROM 
+			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
+		WHERE xt_post.xt_post_parentId = #{xt_post_parentId}
+		<if test="null != xt_post_isdelete">
+			AND xt_post.xt_post_isdelete = #{xt_post_isdelete}
+		</if>
+	</select>
+	
+	<!-- 查找所有集合 -->
+	<select id="getXtPostListAll" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtPost">
+		SELECT
+			xt_post.`xt_post_id`,
+			xt_post.`xt_departinfo_id`,
+			xt_post.`xt_post_parentId`,
+			xt_post.`xt_post_name`,
+			xt_post.`xt_post_desc`,
+			xt_post.`xt_post_maxNum`,
+			xt_post.`xt_post_isLeaf`,
+			xt_post.`xt_post_image`,
+			xt_post.`xt_post_grade`,
+			xt_departinfo.`xt_departinfo_name`
+		FROM 
+			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
+		WHERE 1=1
+	</select>
+	
+	<!-- 根据各种情况查找集合不分页（流程设计器中处理组 发起组等使用） -->
+	<select id="getXtPostList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtPost">
+		SELECT
+			xt_post.`xt_post_id`,
+			xt_post.`xt_departinfo_id`,
+			xt_post.`xt_post_parentId`,
+			xt_post.`xt_post_name`,
+			xt_post.`xt_post_desc`,
+			xt_post.`xt_post_maxNum`,
+			xt_post.`xt_post_isLeaf`,
+			xt_post.`xt_post_image`,
+			xt_post.`xt_post_grade`,
+			xt_departinfo.`xt_departinfo_name`
+		FROM 
+			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
+		WHERE 1=1
+		<if test="null != xt_post_id">
+			AND xt_post_id IN
+			<foreach item="item" index="index" collection="xt_post_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+</mapper>

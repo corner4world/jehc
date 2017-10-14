@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtChangePwd">
+	<!--初始化分页-->
+	<select id="getXtChangePwdListByCondition" resultType="jehc.xtmodules.xtmodel.XtChangePwd" parameterType="map">
+		SELECT
+			`xt_change_pwd_id`,
+			`user_name`,
+			`login_id`,
+			`sex`,
+			`phone`,
+			`mail`,
+			`address`,
+			`xt_attachment_id`,
+			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
+			`status`
+		FROM 
+			xt_change_pwd
+		WHERE 1=1
+		<if test="null != user_name">
+			AND instr(user_name,#{user_name})
+		</if>
+		<if test="null != login_id">
+			AND instr(login_id,#{login_id})
+		</if>
+		<if test="null != sex">
+			AND sex = #{sex}
+		</if>
+		<if test="null != phone">
+			AND instr(phone,#{phone})
+		</if>
+		<if test="null != ctime">
+			AND instr(ctime,#{ctime})
+		</if>
+		<if test="null != address">
+			AND instr(address,#{address})
+		</if>
+		<if test="null != mail">
+			AND instr(mail,#{mail})
+		</if>
+		<if test="null != status">
+			AND status = #{status}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtChangePwdById" resultType="jehc.xtmodules.xtmodel.XtChangePwd" parameterType="string">
+		SELECT
+			`xt_change_pwd_id`,
+			`user_name`,
+			`login_id`,
+			`sex`,
+			`phone`,
+			`mail`,
+			`address`,
+			`xt_attachment_id`,
+			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
+			`status`
+		FROM 
+			xt_change_pwd
+		WHERE xt_change_pwd_id=#{xt_change_pwd_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtChangePwd" parameterType="jehc.xtmodules.xtmodel.XtChangePwd">
+		INSERT INTO
+			xt_change_pwd
+			(
+			`xt_change_pwd_id`,
+			`user_name`,
+			`login_id`,
+			`sex`,
+			`phone`,
+			`mail`,
+			`address`,
+			`xt_attachment_id`,
+			`ctime`,
+			`status`
+			)
+			VALUES
+			(
+			#{xt_change_pwd_id},
+			#{user_name},
+			#{login_id},
+			#{sex},
+			#{phone},
+			#{mail},
+			#{address},
+			#{xt_attachment_id},
+			#{ctime},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtChangePwd" parameterType="jehc.xtmodules.xtmodel.XtChangePwd">
+		UPDATE
+			xt_change_pwd
+		SET
+			`xt_change_pwd_id` = #{xt_change_pwd_id},
+			`user_name` = #{user_name},
+			`login_id` = #{login_id},
+			`sex` = #{sex},
+			`phone` = #{phone},
+			`mail` = #{mail},
+			`address` = #{address},
+			`xt_attachment_id` = #{xt_attachment_id},
+			`ctime` = #{ctime},
+			`status` = #{status}
+		WHERE xt_change_pwd_id=#{xt_change_pwd_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtChangePwd" parameterType="map">
+		DELETE FROM xt_change_pwd WHERE xt_change_pwd_id IN
+		<foreach item="item" index="index" collection="xt_change_pwd_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

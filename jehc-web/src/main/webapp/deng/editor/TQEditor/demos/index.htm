@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>tq htmleditor demo</title>
+<script src="../TQEditor.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+body{ font-size:14px; line-height:18px; font-family:"微软雅黑", "新宋体"}
+.pageFoot { height: 200px; }
+.nav { background: #F7F7F7; padding: 5px; margin-bottom: 2px; border-bottom: 1px solid #333; }
+.nav a {
+	padding: 5px;
+	font-size: large;
+}
+.t{ background:#CCC;}
+.t tr{ background:#fff;}
+.t td{padding:5px;}
+</style>
+</head>
+
+<body>
+<div class="nav" id="nav">
+	<a href="http://www.e512.net">首页</a> | <a href="#">编辑器首页</a> | <!--<a href="#about">关于tqEditor </a> | --> <a href="demo_toolbar.htm">在线演示</a> | <a href="#download">免费下载</a>  | <a href="#manual">技术手册</a> | <a href="#service">版本区别</a> | <a href="#case">应用案例</a> | <a href="#faq">常见问题</a> | <a href="#donate">捐赠</a> | <a href="#service">商业服务</a><br>	
+</div>
+<script type="text/javascript">
+var navHTML='<div class="nav" >'+document.getElementById('nav').innerHTML+'</div>';
+function echoNav(){
+	document.write(navHTML);
+}
+</script>
+
+<!--<div style="font-size:12px;background-color:#F7F7F7;padding:5px;border-bottom:1px solid #333; text-decoration:none;"><a href="index.htm">demo首页</a>
+| <a href="demo_toolbar.htm">默认模式</a>
+| <a href="demo_custom_toolbar.htm">工具栏定义</a>
+| <a href="demo_splitpage.htm">自定分页代码</a>
+| <a href="demo_media_tpl.htm">自定插入媒体代码</a>
+| <a href="demo_upload.htm">上传</a>
+| <a href="demo_custom_upload_ui.htm">自定上传界面</a>
+| <a href="demo_clean_word.htm">自动清理Word代码</a>
+| <a href="demo_typeset.htm">自动排版</a>
+| <a href="demo_style.htm">自定可视化背景色与文字色</a>
+| <a href="demo_skin.htm">皮肤</a>
+| <a href="demo_ubb.htm">UBB插件(未完成)</a>
+| <a href="demo_extend.htm">扩展功能</a>
+| <a href="demo_api.htm">API交互</a>
+</div> -->
+<p>开发TQEditor的原因是不满意当前的在线编辑器, 要么功能强大,但体积也超大, 要么体积小了, 功能却不能满足需要. <br> 
+	这是国内第一个兼容IE9的在线编辑器, 也是一个功能体积比最优的的在线编辑器. 为你提供一个功能强大, 体积小, 全浏览器兼容的在线编辑器.<br>
+	目标: 最好用的在线编辑器</p>
+<p>当前最新版 <strong>v2.0.0 stable 正式版</strong> 与 <strong><em>2.1.0 beta版</em></strong><br>
+2.1.0版更新内容:</p>
+<p>1. UBB插件<a href="demo_event.htm">点击查看</a><br>
+	2. 完善事件 (oninit, onfocus, onblur, onkeydown, onkeyup, ongetcontent, onsetcontent) <a href="demo_event.htm">点击查看</a><br>
+	3. 扩展的接口(提取图片/Flash/flv, 删除链接/图片/Flash/Object对象)
+<a href="demo_apiex.htm">点击查看</a><br>
+4. 皮肤优化, 插件优化<br>
+</p>
+<h3>	特点：</h3>
+<ol>
+	<li>小身材,JS(56k)+CSS(8k)+图标(7k) 总计71K, 启用gz压缩后不到30K</li>
+	<li>全浏览器支持, 当前支持 IE6, 7, 8, 9, chrome 8+, FF 3+, Opera 10+, Safari5+</li>
+	<li>Word代码清理,有效清理从word中粘贴的代码同时保留格式</li>
+	<li>默认使用SWFUpload组件处理上传, 用户体验超好</li>
+	<li>自带源码格式化</li>
+	<li>支持皮肤功能, 只需修改一个CSS即可自定义皮肤</li>
+	<li>一键自动排版功能,内置自动图文排版, 默认即适合大多数的文章内容排版形式</li>
+	<li>灵活的扩展功能, 方便按业务需要扩展功能</li>
+	<li>可视化的UBB编辑功能</li>
+	<li>方便的事件,接口调用</li>
+</ol>
+未来特性, 具体实现时间未定:
+<ol>
+	<li>屏幕截图 (需要插件支持, 且只支持IE)</li>
+	<li>直接粘贴Word文档的图片 (需要插件支持, 且只支持IE)</li>
+	<li>表格功能增强(方便的设置表格./行/列/单元格属性, 合并单元格等)</li>
+	<li>其它语言包</li>
+</ol>
+
+copyright © e512.net | <A href="#about">关于我们</A> |  <A href="#">收藏本站</A> | <A href="#links">友情链接</A> | 粤ICP备05085528号
+<div class="pageFoot"></div>
+<a name="service"></a>
+<script type="text/javascript">
+echoNav();
+</script>
+<h3>TQEditor版本区别</h3>
+<table border="0" cellspacing="1" class="t">
+	<caption>
+TQEditor版本/授权说明
+</caption>
+	<tr>
+		<td>&nbsp;</td>
+		<td>免费版</td>
+		<td>标准商业授权</td>
+		<td>高级企业版</td>
+		<td>全功能旗舰版</td>
+	</tr>
+	<tr>
+		<td>客户端源代码[?]</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>商业环境使用</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>php内容分页组件[?]</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>php上传处理组件[?]</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>屏幕截图[?]</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;(未完成)</td>
+	</tr>
+	<tr>
+		<td>直接从word粘贴图片[?]</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;(未完成)</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>去除前台版权</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>官方授权认证</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>授权域名数量[?]</td>
+		<td>无限</td>
+		<td>1个</td>
+		<td>2</td>
+		<td>10</td>
+	</tr>
+	<tr>
+		<td>授权年限</td>
+		<td>终身</td>
+		<td>终身</td>
+		<td>终身</td>
+		<td>终身</td>
+	</tr>
+	<tr>
+		<td>升级年限</td>
+		<td>终身</td>
+		<td>终身</td>
+		<td>终身</td>
+		<td>终身</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>服务范围</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>Email支持</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>QQ支持</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>电话支持</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>服务时间</td>
+		<td>&times;</td>
+		<td>5&times;8小时</td>
+		<td>7&times;24小时</td>
+		<td>7&times;24小时</td>
+	</tr>
+	<tr>
+		<td>响应时间</td>
+		<td>&times;</td>
+		<td>一个工作日</td>
+		<td>8个工时</td>
+		<td>2个工时</td>
+	</tr>
+	<tr>
+		<td>安装指导</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>服务器端对接指导</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>二级开发技术咨询</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>操作指导</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>意见优先响应</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>升级通知</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>升级指导</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>Bug高速响应修正</td>
+		<td>&times;</td>
+		<td>&times;</td>
+		<td>&radic;</td>
+		<td>&radic;</td>
+	</tr>
+	<tr>
+		<td>协议文件</td>
+		<td>LGPL v3</td>
+		<td><a href="#licence">TQEditor 商业授权协议</a></td>
+		<td><a href="#licence">TQEditor 商业授权协议 </a></td>
+		<td><a href="#licence">TQEditor 商业授权协议 </a></td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+	<tr>
+		<td>服务价格(元/年)</td>
+		<td>0</td>
+		<td>365</td>
+		<td>980</td>
+		<td>2800</td>
+	</tr>
+	<tr>
+		<td>服务续费价格(元/年)</td>
+		<td>0</td>
+		<td>300</td>
+		<td>500</td>
+		<td>800</td>
+	</tr>
+</table>
+<h3><br>
+定制开发 </h3>
+<p>价格依定制功能不同双访商定</p>
+<div>
+	<p>说明①： "×" 表示不支持该项功能或服务，"√" 表示支持该项功能或服务</p>
+	<p>说明②： 对于免费授权用户，我们不保证提供任何技术支持和服务</p>
+	<p>说明③： 商业授权终身只需购买一次，无需重复购买</p>
+	<p>说明④： 未购买商业授权的情况下私自去除TQEditor版权标识，官方不提供任何的技术支持和BUG反馈服务，并且我们将对您保留法律诉讼的权利</p>
+</div>
+<div class="pageFoot"></div>
+<a name="licence" id="licence"></a>
+<script type="text/javascript">
+echoNav();
+	</script><h3>
+	
+TQEditor 商业授权协议 </h3>
+<p>版权所有 (c) 2010-2011，TQEditor 开发团队 保留所有权利。 </p>
+<p>TQEditor 由 TQEditor 开发团队独立开发，源代码的版权归 TQEditor 开发团队所有，官方网站网址为 http://www.e512.net/。<br>
+	未经商业授权，使用 TQEditor 必须遵守LGPL开源协议。获得商业授权之后，您不受LGPL开源协议的约束和限制，使用 TQEditor 需要遵守本授权协议。<br>
+	本授权协议适用于 TQEditor 任何版本，TQEditor 开发团队拥有对本授权协议的最终解释权和修改权。<br>
+</p>
+<p>一、协议的权利 <br>
+	1.您可以把 TQEditor 直接使用在自己的商业或者非商业网站或者软件产品中。<br>
+	2.您可以对 TQEditor 进行必要的修改和美化，可以去除 TQEditor 外在的版权标识（关于按钮），无需公开您修改或美化过的 TQEditor 源代码。<br>
+	3.商业授权只需要购买一次，适用于 TQEditor 现有版本和所有后续版本，终生有效。<br>
+	4.您享有反映和提出意见的优先权，相关意见将被作为首要考虑。<br>
+	<br>
+	二、协议的约束和限制 <br>
+	1.商业授权将授权给一个公司或个人，不得对商业授权进行出租、出售、抵押或发放子许可证。<br>
+	2.不得基于 TQEditor 的基础，修改包装而成一个与 TQEditor 功能类似的程序，进行销售或发布，参与同类软件产品市场的竞争。<br>
+	3.自行修改或使用非原始 TQEditor 程序代码产生的问题不在技术支持服务范围内。<br>
+	4.如果您未能遵守本协议的条款，您的授权将被终止，所被许可的权利将被收回，并承担相应法律责任。<br>
+	<br>
+	三、免责声明 <br>
+	1.本软件及所附带的文件是作为不提供任何明确的或隐含的赔偿或担保的形式提供的。<br>
+	2.用户出于自愿而使用本软件，您必须了解使用本软件的风险，我们不承担任何因使用本软件而产生问题的相关责任。<br>
+	<br>
+	有关 TQEditor 授权的详细内容，均由 TQEditor 官方网站独家提供。<br>
+	TQEditor 开发团队拥有在不事先通知的情况下，修改授权协议和服务价目表的权力，修改后的协议或价目表对自改变之日起的新授权用户生效。 </p>
+<p>TQEditor 开发团队<br>
+2011年04月16日 最后修改 </p>
+
+<div class="pageFoot"></div>
+<a name="faq"></a>
+<script type="text/javascript">
+echoNav();
+</script>
+<h3>常见问题 </h3>
+<p>问 : GBK编码的网页如何引用UTF-8编码的TQEditor.js ?<br>
+	答 : &lt;script type=&quot;text/javascript&quot; src=&quot;TQEditor.js&quot; charset='utf-8'&gt;&lt;/script&gt;<br>
+</p>
+<p>问 : 如何实现Ctrl+Enter 提交表单?<br>
+	答 : 请<a href="demo_check_form.htm">参考这个示例</a><br>
+</p>
+<div class="pageFoot"></div>
+<a name="about"></a>
+<script type="text/javascript">
+echoNav();
+</script>
+<h3>关于我</h3>
+<p>作者: 李腾秋, 一个在php界里的C/C++,delphi的高手, 在C/C++,Delphi圈子里的PHP牛人, 还会一点点JavaScript, 再懂一点ActionScript的皮毛.<br>
+</p>
+<div class="pageFoot"></div>
+<a name="case"></a>
+<script type="text/javascript">
+echoNav();
+</script>
+<h3>应用案例</h3>
+<table border="0" cellspacing="5" cellpadding="5">
+	<tr>
+		<td><a href="http://www.cosedm.com" target="_blank"><img src="case/cosmo.gif" width="220" height="60" border="0"></a><br></td>
+		<td><a href="http://bbs.zhujinet.com" target="_blank"><img src="case/zhujinet.com.gif" width="220" height="60" border="0"></a><br></td>
+		<td><a href="http://www.vico.cn" target="_blank"><img src="case/vico.gif" width="220" height="60" border="0"></a><br></td>
+	</tr>
+</table>
+<p><br>
+</p>
+<div class="pageFoot"></div>
+<a name="donate"></a>
+<script type="text/javascript">
+echoNav();
+</script>
+<h3>捐助 </h3>
+
+<p>我们需要您的帮助</p>
+<p>TQEditor 开发团队专注于可视化编辑器领域，为打造世界一流的编辑器而坚持不懈地努力。<br>
+	我们坚持开源并提供免费使用，帮助企业节省成本，帮助网站改善用户体验。<br>
+	如果您认同我们的工作并且觉得 TQEditor 对您有所帮助，可以用任何方式资助我们，我们愿意接受来自各方面的捐赠。<br>
+</p>
+<p>您的捐款会用于<br>
+	•为项目开发人员提供生活保障，以进行持续和深入的开发<br>
+	•解决项目网站域名注册、服务器托管、带宽租用等运营成本<br>
+•奖励开发团队中的杰出贡献者</p>
+<p>一旦收到您的捐赠，经过您的同意，将第一时间在本页面公布捐赠明细。<br>
+</p>
+<p>捐赠方式<br>
+	您可以选择以下任意一种支付方式捐赠我们：<br>
+	•支付宝账号：litqqs@gmail.com<br>
+•工商银行账号：9558-8036-0210-9715-342 （户名：李腾秋　开户行：工商银行广州五山支行）<br>
+•招商银行账号：6225-8820-1182-4221 （户名：李腾秋　开户行：招商银行广州五山支行）<br>
+</p>
+<p>捐赠后请联系我们<br>
+	•联系邮箱：litqqs # 163.com (请将#改为@)<br>
+	•联系QQ：7775038 <br>
+</p>
+<p>支付后请及时通过上方的联系方式通知我们，经过您的同意，我们会及时将您的捐赠细节列于下方捐款名单中。</p>
+<p>特别说明: 以上联系方式不接受任何技术咨询，仅供业务联系用。<br>
+	<br>
+	<br>
+</p>
+<div class="pageFoot"></div>
+<a name="download" id="download"></a>
+<script type="text/javascript">
+echoNav();
+</script>
+<h3>下载:</h3>
+<p>
+<a href="../TQEditor.2.1.0.beta.zip">TQEditor 2.1.0 beta版</a> 包含完整的示例代码, 最新版本<br>
+<a href="../TQEditor.2.0.0.stable.zip">TQEditor 2.0 stable版完整版</a> 包含完整的示例代码, 适合学习/研究/调试用<br>
+<a href="../TQEditor.2.0.0.stable.min.zip">TQEditor 2.0 stable版压缩版</a> 只含必要的代码, 且相关的JS已压缩过,适合生产环境用</p>
+<p>其他下载:</p>
+<p>
+<a href="../TQEditor.dev.zip">TQEditor 开发版</a> 不定时更新, 会随时修正原来的bug,添加新功能, 但同时也可能会带来新的bug.<br> 
+<a href="../TQScreenCapture.zip">TQScreenCapture</a> 一个截屏小工具<!--, 支持 win 2000 / win xp / vista / win7 --></p>
+<div class="pageFoot"></div>
+<div class="pageFoot"></div>
+<p>&nbsp;</p>
+<div class="pageFoot"></div>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><br>
+</p>
+</body>
+</html>

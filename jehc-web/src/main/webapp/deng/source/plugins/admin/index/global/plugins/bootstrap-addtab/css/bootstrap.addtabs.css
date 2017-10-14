@@ -1,0 +1,44 @@
+/* 
+    Created on : 2015-8-11, 16:18:09
+    Author     : joe
+*/
+
+.close-tab {
+    font-size: 10px;
+    position:absolute;
+    right: 0px;
+    top: 15px;
+    /* padding-right: 0px; */
+    z-index: 100;
+    cursor: hand;
+    cursor: pointer;
+    color: #f5f5f5;
+    display: block;
+}
+
+.nav-tabs {position: relative;}
+.nav-tabs li{position: relative;}
+
+.iframeClass {
+    z-index: 1;
+    visibility: inherit;
+    width: 100%;
+    frameborder: 'no';
+    border: 0;
+    marginwidth: 0;
+    marginheight: 0;
+    scrolling-x: 'no';
+    scrolling-y: auto;
+    allowtransparency: true;
+}
+
+.tab-drop {
+    margin-right: 30px;
+}
+
+.rightMenu {
+    position:absolute;
+    width: 150px;
+    z-index: 99;
+    display: none;
+}

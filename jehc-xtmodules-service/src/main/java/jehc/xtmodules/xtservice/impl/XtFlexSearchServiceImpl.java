@@ -1,0 +1,387 @@
+package jehc.xtmodules.xtservice.impl;
+
+import java.util.List;
+
+import org.hsqldb.lib.StringUtil;
+
+import jehc.xtmodules.xtcore.base.BaseService;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
+import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
+import jehc.xtmodules.xtdao.XtDbinfoDao;
+import jehc.xtmodules.xtdao.XtFlexSearchDao;
+import jehc.xtmodules.xtdao.impl.XtFlexSearchDaoImpl;
+import jehc.xtmodules.xtmodel.XtDbFun;
+import jehc.xtmodules.xtmodel.XtDbProc;
+import jehc.xtmodules.xtmodel.XtDbStructure;
+import jehc.xtmodules.xtmodel.XtDbTableAttribute;
+import jehc.xtmodules.xtmodel.XtDbTableIndex;
+import jehc.xtmodules.xtmodel.XtDbTri;
+import jehc.xtmodules.xtmodel.XtDbView;
+import jehc.xtmodules.xtmodel.XtDbinfo;
+import jehc.xtmodules.xtservice.XtFlexSearchService;
+/**
+ * 查询工具
+ * @author 邓纯杰
+ *
+ */
+public class XtFlexSearchServiceImpl extends BaseService implements XtFlexSearchService {
+	/**
+	 * 查询返回结果集
+	 * @param sql
+	 * @param param
+	 * @return
+	 */
+	public String getXtFlexSearchQuery(String sql,Object[]param,String xt_dbinfo_id){
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			return xt_FlexSearchDao.getXtFlexSearchQuery(sql, param,xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	/**
+	 * 查询返回结果集
+	 * @param sql
+	 * @param param
+	 * @return
+	 */
+	public String getXtFlexSearchListQuery(String sql, Object[] param,String xt_dbinfo_id){
+		try {
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			return xt_FlexSearchDao.getXtFlexSearchListQuery(sql, param,xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	/**
+	 * 执行非查询结果集操作语句
+	 * @param sql
+	 * @param param
+	 * @return
+	 */
+	public String executeUpdate(String sql, Object[] param,String xt_dbinfo_id){
+		StringBuffer fieldsNames = new StringBuffer();
+		StringBuffer jsonStr = new StringBuffer();
+		StringBuffer columModle = new StringBuffer();
+        StringBuffer data = new StringBuffer();
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			int result = xt_FlexSearchDao.executeUpdate(sql, param,xt_Dbinfo);
+            //fieldsNames
+            fieldsNames.append("'fieldsNames':[");
+            columModle.append("'columModle':[");
+            fieldsNames.append("{name:'result'},");
+            String dataIndex = "result";
+            String header = "result";
+            columModle.append("{'header':'"+header+"','dataIndex':'"+dataIndex+"',flex:1},");
+            columModle.append("]");
+            fieldsNames.append("]");
+            //data
+            data.append("'data':[");
+            data.append("{");
+        	data.append("'result':'执行的影响行数<font color=red>"+result+"</font>条'");
+        	data.append("}");
+            data.append("]");
+            jsonStr.append("{success:true,");
+            jsonStr.append(data+",");
+            jsonStr.append(columModle+",");
+            jsonStr.append(fieldsNames);
+            jsonStr.append("}");
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return jsonStr.toString();
+	}
+	
+	////////////////////////////为菜单服务///////////////////////
+	/**
+	 * 获取所有表
+	 * @param sql
+	 * @param xt_Dbinfo
+	 * @return
+	 */
+	public List<XtDbTableAttribute> getXtDbTableAttributeForFlex(String xt_dbinfo_id){
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			return xt_FlexSearchDao.getXtDbTableAttributeForFlex(backSql(xt_Dbinfo,6,null), xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
+	* 查询表索引
+	* @return
+	*/
+	public List<XtDbTableIndex> getXtDbTableIndexForFlex(String xt_dbinfo_id,String tableName){
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			return xt_FlexSearchDao.getXtDbTableIndexForFlex(backSql(xt_Dbinfo,2,tableName), xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	/**
+	* 查询存储过程
+	* @return
+	*/
+	public  List<XtDbProc> getXtDbProcListForFlex(String xt_dbinfo_id){
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			return xt_FlexSearchDao.getXtDbProcListForFlex(backSql(xt_Dbinfo,5,null), xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	/**
+	* 查询函数
+	* @param sql
+	* @return
+	*/
+	public  List<XtDbFun> getXtDbFunListForFlex(String xt_dbinfo_id){
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			return xt_FlexSearchDao.getXtDbFunListForFlex(backSql(xt_Dbinfo,3,null), xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	/**
+	* 查询视图
+	* @param sql
+	* @return
+	*/
+	public  List<XtDbView> getXtDbViewListForFlex(String xt_dbinfo_id){
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			return xt_FlexSearchDao.getXtDbViewListForFlex(backSql(xt_Dbinfo,1,null), xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	/**
+	* 查询触发器
+	*/
+	public  List<XtDbTri> getXtDbTriListForFlex(String xt_dbinfo_id){
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			return xt_FlexSearchDao.getXtDbTriListForFlex(backSql(xt_Dbinfo,4,null), xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	
+	/**
+	 * 查询字段
+	 * @param sql
+	 * @param xt_Dbinfo
+	 * @return
+	 */
+	public List<XtDbStructure> getXtDbStructureForFlex(String xt_dbinfo_id,String tableName){
+		try {
+			XtDbinfoDao xt_DbinfoDao = (XtDbinfoDao)SpringUtil.getBean("xtDbinfoDao");
+			XtDbinfo xt_Dbinfo = xt_DbinfoDao.getXtDbinfoById(xt_dbinfo_id);
+			XtFlexSearchDao xt_FlexSearchDao = new XtFlexSearchDaoImpl();
+			return xt_FlexSearchDao.getXtDbStructureForFlex(backSql(xt_Dbinfo,7,tableName), xt_Dbinfo);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	
+	/**
+	 * 返回sql语句
+	 * @param xt_Dbinfo
+	 * @param flag 1视图 2索引  3函数 4触发器  5存储过程 6表 7字段
+	 * @return
+	 */
+	public String backSql(XtDbinfo xt_Dbinfo,int flag,String tableName){
+		String sql = "";
+		String dbType = xt_Dbinfo.getXt_dbinfoType();
+		String dbName = xt_Dbinfo.getXt_dbinfoName();
+		if(StringUtil.isEmpty(dbType)){
+			throw new ExceptionUtil("未能获取到数据库类型");
+		}
+		if("mysql".equals(dbType)){
+			if(flag == 1){
+				//视图
+				sql = "SELECT * FROM information_schema.tables WHERE table_type='view'";
+			}else if(flag == 2){
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
+				sql = "show index from "+tableName;
+			}else if(flag == 3){
+				//函数
+				sql = "SELECT * FROM mysql.proc WHERE `type` = 'FUNCTION'";
+			}else if(flag == 4){
+				//触发器
+				sql = "SHOW TRIGGERS FROM "+dbName;
+			}else if(flag == 5){
+				//存储过程
+				sql = "SELECT * FROM mysql.proc WHERE `type` = 'PROCEDURE'";
+			}else if(flag == 6){
+				//表
+				sql = "SHOW TABLE STATUS FROM "+dbName;
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				sql = "SHOW FULL FIELDS FROM "+tableName;
+			}
+		}else if("sqlserver".equals(dbType)){
+			if(flag == 1){
+				//视图
+				sql = "select * from information_schema.views";
+			}else if(flag == 2){
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
+				sql = "show index from "+tableName;
+			}else if(flag == 3){
+				//函数
+				sql = "select * from sys.all_objects where type='FN'";
+			}else if(flag == 4){
+				//触发器
+				sql = "SELECT * FROM Sysobjects WHERE xtype = 'TR'";
+			}else if(flag == 5){
+				//存储过程
+				sql = "select  * from sys.procedures";
+			}else if(flag == 6){
+				//表
+				sql = "select name from sysobjects where type='U'";
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				sql = "Select name from syscolumns Where ID=OBJECT_ID('"+tableName+"')";
+			}
+		}else if("oracle".equals(dbType)){
+			if(flag == 1){
+				//视图
+				sql = "SELECT view_name FROM user_views";
+			}else if(flag == 2){
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
+				sql = "SELECT * FROM user_indexes WHERE TABLE="+tableName;
+			}else if(flag == 3){
+				//函数
+				sql = "SELECT OWNER, NAME, TYPE, TEXT FROM ALL_SOURCE WHERE TYPE = 'FUNCTION'";
+			}else if(flag == 4){
+				//触发器
+				sql = "SELECT OWNER, NAME, TYPE, TEXT FROM ALL_SOURCE WHERE TYPE = 'TRIGGER'";
+			}else if(flag == 5){
+				//存储过程
+				sql = "SELECT OWNER, NAME, TYPE, TEXT FROM ALL_SOURCE WHERE TYPE = 'PROCEDURE'";
+			}else if(flag == 6){
+				//表
+				sql = "SELECT * FROM user_tables";
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				sql = "SELECT * FROM user_tab_columns WHERE Table_Name='"+tableName+"' ORDER BY column_name";
+			}
+		}else if("sybase".equals(dbType)){
+			if(flag == 1){
+				//视图
+				sql = "select name from "+dbName+".sysobjects  where type='V' order by name";
+			}else if(flag == 2){
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
+				sql = "";
+			}else if(flag == 3){
+				//函数
+				sql = "";
+			}else if(flag == 4){
+				//触发器
+				sql = "select name from "+dbName+".sysobjects  where type='TR' order by name";
+			}else if(flag == 5){
+				//存储过程
+				sql = "select name from "+dbName+".sysobjects  where type='P' order by name";
+			}else if(flag == 6){
+				//表
+				sql = "select name from "+dbName+".sysobjects  where type='U' order by name";
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//d.name = 表名&视图名&存储过程'
+				sql = "SELECT a.name, b.name FROM syscolumns a LEFT JOIN systypes b ON a.usertype = b.usertype INNER JOIN sysobjects d ON a.id = d.id AND d.name <> 'dtproperties' LEFT JOIN syscomments e ON a.cdefault = e.id WHERE d.name = '"+tableName+"'";
+			}
+		}else if("db2".equals(dbType)){
+			if(flag == 1){
+				//视图
+				sql = "SELECT * FROM syscat.views";
+			}else if(flag == 2){
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				//索引
+				sql = "SELECT * FROM SYSCAT.INDEXES  WHERE TABNAME='"+tableName+"'";
+			}else if(flag == 3){
+				//函数
+				sql = "SELECT * FROM syscat.functions WHERE funcschema='PAS'";
+			}else if(flag == 4){
+				//触发器
+				sql = "SELECT * FROM syscat.triggers";
+			}else if(flag == 5){
+				//存储过程
+				sql = "SELECT * FROM syscat.procedures WHERE procschema='PAS'";
+			}else if(flag == 6){
+				//表
+				sql = "SELECT tabname FROM syscat.tables";
+			}else if(flag == 7){
+				//字段
+				if(StringUtil.isEmpty(tableName)){
+					throw new ExceptionUtil("未能获取到数据库表名");
+				}
+				sql = "SELECT COLNAME FROM SYSCAT.COLUMNS WHERE TABNAME='"+tableName+"' AND TABSCHEMA='SCHEMA';";
+			}
+		}
+		return sql;
+	}
+}

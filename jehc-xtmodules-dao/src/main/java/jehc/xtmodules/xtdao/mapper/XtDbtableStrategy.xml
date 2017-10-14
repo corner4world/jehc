@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDbtableStrategy">
+	<!--初始化分页-->
+	<select id="getXtDbtableStrategyListByCondition" resultType="jehc.xtmodules.xtmodel.XtDbtableStrategy" parameterType="map">
+		SELECT
+			`xt_dbtable_strategy_id`,
+			`tableName`,
+			DATE_FORMAT(`cTime`,'%Y-%m-%d %H:%i:%s') AS `cTime`,
+			`onlyModulesFlag`
+		FROM 
+			xt_dbtable_strategy
+		WHERE 1=1
+		<if test="null != onlyModulesFlag">
+			AND instr(onlyModulesFlag,#{onlyModulesFlag})
+		</if>
+		<if test="null != tableName">
+			AND instr(tableName,#{tableName})
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtDbtableStrategyById" resultType="jehc.xtmodules.xtmodel.XtDbtableStrategy" parameterType="string">
+		SELECT
+			`xt_dbtable_strategy_id`,
+			`tableName`,
+			DATE_FORMAT(`cTime`,'%Y-%m-%d %H:%i:%s') AS `cTime`,
+			`onlyModulesFlag`
+		FROM 
+			xt_dbtable_strategy
+		WHERE xt_dbtable_strategy_id=#{xt_dbtable_strategy_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtDbtableStrategy" parameterType="jehc.xtmodules.xtmodel.XtDbtableStrategy">
+		INSERT INTO
+			xt_dbtable_strategy
+			(
+			`xt_dbtable_strategy_id`,
+			`tableName`,
+			`cTime`,
+			`onlyModulesFlag`
+			)
+			VALUES
+			(
+			#{xt_dbtable_strategy_id},
+			#{tableName},
+			#{cTime},
+			#{onlyModulesFlag}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtDbtableStrategy" parameterType="jehc.xtmodules.xtmodel.XtDbtableStrategy">
+		UPDATE
+			xt_dbtable_strategy
+		SET
+			`xt_dbtable_strategy_id` = #{xt_dbtable_strategy_id},
+			`tableName` = #{tableName},
+			`cTime` = #{cTime},
+			`onlyModulesFlag` = #{onlyModulesFlag}
+		WHERE xt_dbtable_strategy_id=#{xt_dbtable_strategy_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtDbtableStrategy" parameterType="map">
+		DELETE FROM xt_dbtable_strategy WHERE xt_dbtable_strategy_id IN
+		<foreach item="item" index="index" collection="xt_dbtable_strategy_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

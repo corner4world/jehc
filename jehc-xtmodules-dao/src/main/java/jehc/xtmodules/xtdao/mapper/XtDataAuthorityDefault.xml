@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtDataAuthorityDefault">
+	<!--初始化分页-->
+	<select id="getXtDataAuthorityDefaultListByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityDefault" parameterType="map">
+		SELECT
+			`xt_data_authority_default_id`,
+			`xt_data_authority_default_value`,
+			`xt_menuinfo_id`,
+			`xt_functioninfo_id`
+		FROM 
+			xt_data_authority_default
+		WHERE 1=1
+		<if test="null != xt_menuinfo_id">
+			AND xt_menuinfo_id = #{xt_menuinfo_id}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtDataAuthorityDefaultById" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityDefault" parameterType="string">
+		SELECT
+			`xt_data_authority_default_id`,
+			`xt_data_authority_default_value`,
+			`xt_menuinfo_id`,
+			`xt_functioninfo_id`
+		FROM 
+			xt_data_authority_default
+		WHERE xt_data_authority_default_id=#{xt_data_authority_default_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtDataAuthorityDefault" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityDefault">
+		INSERT INTO
+			xt_data_authority_default
+			(
+			`xt_data_authority_default_id`,
+			`xt_data_authority_default_value`,
+			`xt_menuinfo_id`,
+			`xt_functioninfo_id`
+			)
+			VALUES
+			(
+			#{xt_data_authority_default_id},
+			#{xt_data_authority_default_value},
+			#{xt_menuinfo_id},
+			#{xt_functioninfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtDataAuthorityDefault" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityDefault">
+		UPDATE
+			xt_data_authority_default
+		SET
+			`xt_data_authority_default_value` = #{xt_data_authority_default_value},
+			`xt_menuinfo_id` = #{xt_menuinfo_id},
+			`xt_functioninfo_id` = #{xt_functioninfo_id}
+		WHERE xt_data_authority_default_id=#{xt_data_authority_default_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtDataAuthorityDefaultBySelective" parameterType="jehc.xtmodules.xtmodel.XtDataAuthorityDefault">
+		UPDATE
+			xt_data_authority_default
+		<set>
+			<if test="xt_data_authority_default_value != null">
+				`xt_data_authority_default_value` = #{xt_data_authority_default_value},
+			</if>
+			<if test="xt_menuinfo_id != null">
+				`xt_menuinfo_id` = #{xt_menuinfo_id},
+			</if>
+			<if test="xt_functioninfo_id != null">
+				`xt_functioninfo_id` = #{xt_functioninfo_id},
+			</if>
+		</set>
+		WHERE xt_data_authority_default_id=#{xt_data_authority_default_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtDataAuthorityDefault" parameterType="map">
+		DELETE FROM xt_data_authority_default WHERE xt_data_authority_default_id IN
+		<foreach item="item" index="index" collection="xt_data_authority_default_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!--根据情况删除-->
+	<delete id="delXtDataAuthorityDefaultAllByCondition" parameterType="map">
+		DELETE FROM 
+			xt_data_authority_default 
+		WHERE 1=1
+		<if test="null != xt_menuinfo_id">
+			AND xt_menuinfo_id = #{xt_menuinfo_id}
+		</if>
+		<if test="null != xt_functioninfo_id">
+			AND xt_functioninfo_id = #{xt_functioninfo_id}
+		</if>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtDataAuthorityDefault" parameterType="list">
+		INSERT INTO
+			xt_data_authority_default
+			(
+			`xt_data_authority_default_id`,
+			`xt_data_authority_default_value`,
+			`xt_menuinfo_id`,
+			`xt_functioninfo_id`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_data_authority_default_id},
+			#{item.xt_data_authority_default_value},
+			#{item.xt_menuinfo_id},
+			#{item.xt_functioninfo_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtDataAuthorityDefault" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_data_authority_default
+			SET
+				`xt_data_authority_default_value` = #{item.xt_data_authority_default_value},
+				`xt_menuinfo_id` = #{item.xt_menuinfo_id},
+				`xt_functioninfo_id` = #{item.xt_functioninfo_id}
+			WHERE xt_data_authority_default_id=#{item.xt_data_authority_default_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtDataAuthorityDefaultBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_data_authority_default
+			<set>
+				<if test="item.xt_data_authority_default_value != null">
+					`xt_data_authority_default_value` = #{item.xt_data_authority_default_value},
+				</if>
+				<if test="item.xt_menuinfo_id != null">
+					`xt_menuinfo_id` = #{item.xt_menuinfo_id},
+				</if>
+				<if test="item.xt_functioninfo_id != null">
+					`xt_functioninfo_id` = #{item.xt_functioninfo_id},
+				</if>
+			</set>
+			WHERE xt_data_authority_default_id=#{item.xt_data_authority_default_id}
+		</foreach>
+	</update>
+</mapper>
