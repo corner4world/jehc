@@ -439,7 +439,7 @@ $(function(){
     //设置jQuery Ajax全局的参数  
     $.ajaxSetup({  
         type:"POST",  
-        complete:(jqXHR,status){
+        complete:function(jqXHR,status){
         	//处理sucess和error之后的方法
         	try{
         		var obj = eval("(" + jqXHR.responseText + ")");
