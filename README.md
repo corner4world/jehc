@@ -35,10 +35,3 @@ http://git.oschina.net/jehc/jehc
  **QQ讨论群:330370132** 
 
  **
-
-二、
-1.自己创建一个工程取名按照自己的来
-2.修改工程编码utf8
-3.拷贝如下几个目录全部拷贝并覆盖
-** 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0819/113650_c37e551c_1341290.png "[ON1R~`4U[R90ED5CB~B(]H.png")
