@@ -574,9 +574,7 @@
 			}
 			.nav-tabs li a{
 				font-size:14px;
-				/*
-				color:#888999; 
-				*/
+				color:#1e232f; 
 				background:#fff;
 				margin:0;
 				/* 
