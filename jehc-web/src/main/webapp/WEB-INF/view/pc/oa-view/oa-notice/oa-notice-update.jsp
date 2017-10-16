@@ -48,6 +48,7 @@
 						<label class="col-lg-3 control-label"></label>
 						<div class="col-lg-4">
 							<button type="button" class="btn green" onclick="updateOaNotice()">保存</button>
+							<button type="button" class="btn btn-warning" onclick="updateOaNotice(1)">保存并提交</button>
 							<button type="button" class="btn default" onclick="goback()">返回</button>
 						</div>
 					</div>

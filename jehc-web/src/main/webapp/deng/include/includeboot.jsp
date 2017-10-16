@@ -112,5 +112,14 @@
 		<!-- jquery验证框架结束 -->
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.js"></script>
+		<style type="text/css">
+			table.dataTable.no-footer {
+			    border-bottom: 1px solid #ffffff;
+			}
+			.uneditable-input {
+			    padding: 6px 12px;
+			    min-width: 56px;
+			}
+		</style>
 	</head>
 </html>

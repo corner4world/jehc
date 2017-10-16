@@ -161,12 +161,12 @@ function getnavigator(){
 //bootstrap datatables 国际化分页提示信息
 function callLang(){
 	var lang = {
-			"sLengthMenu":"每页显示 _MENU_ 条记录",
+			//"sLengthMenu":"每页显示 _MENU_ 条记录",
 			"sZeroRecords":"对不起，查询不到任何相关数据",
 			"sInfo":"当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
 			"sInfoEmtpy":"找不到相关数据",
 			"sInfoFiltered":"数据表中共为 _MAX_ 条记录)",
-			"sProcessing":"<i class='fa fa-coffee'></i>正在加载中...",
+			"sProcessing":"<i class='glyphicon glyphicon-dashboard'></i>正在加载中...",
 			"sLoadingRecords":"载入中...",
 			"sSearch":"搜索",
 			"bAutoWidth":true,
@@ -198,9 +198,10 @@ var DataTablesPaging = {
      */
     pagingOptions:function(settings) {
         var options = {
-        		"sScrollX":"100%",//表格的宽度
+//        		"sScrollX":"100%",//表格的宽度
     			"sScrollXInner":"100%",//表格的内容宽度
     			"bScrollCollapse":false,//当显示的数据不足以支撑表格的默认的高度时，依然显示纵向的滚动条。(默认是false) 
+    			"bScrollCollapse":true,
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
     			"bInfo":true,//显示表格信息
@@ -216,9 +217,7 @@ var DataTablesPaging = {
     			"pageLength":10,//首次加载的数据条数
     			"bLengthChange":true,//每页显示的记录数
     			"sPaginationType":"full_numbers",//分页，一共两种样式，full_numbers和two_button(默认)
-    			/**
-    			"aLengthMenu":[[10, 25, 50, -1, 0 ],["10条", "25条","50条", "显示所有数据","不显示数据" ]],//设置每页显示记录的下拉菜单也可以设置为pageList
-    			**/
+    			"aLengthMenu":[[10, 25, 50, 100, 500 ],["10", "25","50", "100","500" ]],//设置每页显示记录的下拉菜单也可以设置为pageList
     			height:tableHeight(),//高度调整
     			bJQueryUI:true,//采用jQueryUI样式
 	            order:settings.order,//[index,'asc|desc']
@@ -278,6 +277,10 @@ function datatablesCallBack(data, callback, settings,url,opt){
 				 
 			 }
 		  }
+	});
+	//datatables每页显示数量下拉框样式
+	$("[class=dataTables_length]").find("select").each(function(index,element){
+		$(element).attr("class","uneditable-input")
 	});
 }
 
