@@ -664,6 +664,15 @@
 			} 
 			.x-body{background:#4d5b69;} 
 			*/
+			
+			<!--滚动条-->
+			.page-sidebar-menu.page-sidebar-menu-hover-submenu>li:last-child:hover>.sub-menu{
+				margin-top: -283px;
+			}
+			.page-sidebar-menu.page-sidebar-menu-hover-submenu>li:last-child:hover>.sub-menu>li .sub-menu{
+				height:200px;
+				overflow-y:auto;
+			}
 		</style>
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
