@@ -21,6 +21,7 @@
 				</div>
 				<form class="form-horizontal" id="defaultForm" method="post">
 					<input class="form-control" type="hidden" name="oa_noticeID" value="${oaNotice.oa_noticeID }">
+					<input class="form-control" type="hidden" name="submitType" id="submitType" value="0">
 					<div class="form-group">
 						<label class="col-lg-3 control-label">标题</label>
 						<div class="col-lg-4">

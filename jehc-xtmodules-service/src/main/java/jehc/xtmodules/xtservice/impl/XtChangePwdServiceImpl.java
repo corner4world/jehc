@@ -1,19 +1,14 @@
 package jehc.xtmodules.xtservice.impl;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jehc.lcmodules.activitiutil.ActivitiUtil;
-import jehc.lcmodules.lcdao.LcDeploymentHisDao;
-import jehc.lcmodules.lcmodel.LcApply;
 import jehc.xtmodules.xtcore.base.BaseService;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtdao.XtChangePwdDao;
 import jehc.xtmodules.xtmodel.XtChangePwd;
-import jehc.xtmodules.xtmodel.XtConstant;
 import jehc.xtmodules.xtservice.XtChangePwdService;
 
 /**
@@ -24,11 +19,6 @@ import jehc.xtmodules.xtservice.XtChangePwdService;
 public class XtChangePwdServiceImpl extends BaseService implements XtChangePwdService{
 	@Autowired
 	private XtChangePwdDao xtChangePwdDao;
-	
-	@Autowired
-	ActivitiUtil activitiUtil;
-	@Autowired
-	private LcDeploymentHisDao lc_Deployment_HisDao;
 	/**
 	* 分页
 	* @param condition 
@@ -63,20 +53,7 @@ public class XtChangePwdServiceImpl extends BaseService implements XtChangePwdSe
 	public int addXtChangePwd(XtChangePwd xt_Change_Pwd){
 		int i = 0;
 		try {
-			//处理工作流
-			XtConstant Xt_Constant = getXtConstantCache("XtChangePwd");
-			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("xt_constant_id", Xt_Constant.getXt_constant_id());
-			String id = lc_Deployment_HisDao.getLcDeploymentHisNewUnique(condition).getId();
-			LcApply lc_Apply = new LcApply();
-			lc_Apply.setLc_apply_title(xt_Change_Pwd.getUser_name()+"于"+getSimpleDateFormat()+"，提交了一条密码找回申请流程");
-			lc_Apply.setLc_apply_model_biz_id(xt_Change_Pwd.getXt_change_pwd_id());
-			if(activitiUtil.addApply(id, null, null,lc_Apply)){
-				//处理业务
-				i = xtChangePwdDao.addXtChangePwd(xt_Change_Pwd);
-			}else{
-				i = 0;
-			}
+			i = xtChangePwdDao.addXtChangePwd(xt_Change_Pwd);
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

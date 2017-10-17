@@ -20,6 +20,7 @@
 					<h3>创建公告</h3>
 				</div>
 				<form class="form-horizontal" id="defaultForm" method="post">
+					<input class="form-control" type="hidden" id="submitType" name="submitType" value="0">
 					<div class="form-group">
 						<label class="col-lg-3 control-label">标题</label>
 						<div class="col-lg-4">

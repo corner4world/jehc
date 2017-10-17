@@ -41,6 +41,9 @@ $('#defaultForm').bootstrapValidator({
 });
 
 //保存
-function updateOaNotice(){
+function updateOaNotice(flag){
+	if(flag == 1){
+		$('#submitType').val(flag);
+	}
 	submitBForm('defaultForm','../oaNoticeController/updateOaNotice','../oaNoticeController/loadOaNotice');
 }

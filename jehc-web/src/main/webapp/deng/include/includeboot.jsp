@@ -120,6 +120,9 @@
 			    padding: 6px 12px;
 			    min-width: 56px;
 			}
+			.dataTables_wrapper .dataTables_processing {
+			    padding-top: 7px;
+			}
 		</style>
 	</head>
 </html>

@@ -26,17 +26,19 @@ Ext.onReady(function(){
 			},
 			{
 				header:'任务名称',
-				flex:1,
+				width:300,
 				dataIndex:'name'
 			},
+			/*
 			{
 				header:'描述',
 				flex:1,
 				dataIndex:'description'
 			},
+			*/
 			{
 				header:'提交时间',
-				flex:1,
+				width:180,
 				dataIndex:'createTime',
 				renderer:function(value){
 					return Ext.util.Format.date(value, "Y-m-d H:i:s")
@@ -44,6 +46,24 @@ Ext.onReady(function(){
 			}
 		],
 		tbar:[
+			 {
+			 	text:'审批',
+				tooltip:'审批',
+				cls:'updateBtn',
+				icon:editIcon,
+				minWidth:tbarBtnMinWidth,
+				handler:function(){
+				}
+			 },
+			 {
+			 	text:'查看表单',
+				tooltip:'查看表单',
+				cls:'updateBtn',
+				icon:detailIcon,
+				minWidth:tbarBtnMinWidth,
+				handler:function(){
+				}
+			 },
 			 grid_toolbar_moretext_gaps,
 			 {
 				 text:moretext,
