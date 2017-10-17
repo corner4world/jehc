@@ -24,8 +24,7 @@ jEhc能做什么
 电商后端及前端
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105818_6f945e30_1341290.png "购物车.png")
 ![输入图片说明](https://gitee.com/uploads/images/2017/1017/113343_59431b4b_1341290.png "订单.png")
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105829_31fecdf0_1341290.png "订单中心-支付.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/113424_ee8faebf_1341290.png "订单支付.png")
 
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
