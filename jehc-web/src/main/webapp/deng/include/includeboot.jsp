@@ -120,6 +120,9 @@
 			    padding: 6px 12px;
 			    min-width: 56px;
 			}
+			.panel-default>.panel-heading {
+			    color: #17C4BB;
+			}
 		</style>
 	</head>
 </html>

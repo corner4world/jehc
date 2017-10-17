@@ -17,9 +17,17 @@
 	   	<!-- 主题技术Extjs支持 -->
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
+		
 		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-crisp-touch/resources/theme-crisp-touch-all.css" type="text/css" />
+		<%-- 
+		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-triton/resources/theme-triton-all.css" type="text/css" />
+		--%>
 		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/css/font-awesome.css" type="text/css" />
+		
 		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/index.css" />
+		<%-- 
+		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/triton.css" />
+		--%>
 	   	<script type="text/javascript">
 	    	var basePath = "${syspath}";
 	    	var sys_pt_login = "${sys_pt_login}";
@@ -45,17 +53,20 @@
 			</script>
 		</c:if>
 		<style type="text/css">
+			/*样式采用theme-crisp-touch-all.css则放开此处注释*/
 			.x-column-header-checkbox .x-column-header-inner, .x-grid-checkcolumn-cell-inner {
 	    		padding: 5px 12px 6px 1px;
 			}
+			 
 		</style>
         <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ux/ProgressBarPager.js"></script>
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/common.js"></script>
 		<!-- 数据	权限按钮操作 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/xtFunctionInfoStr.js"></script>
-		<!-- 主题切换 -->
+		<!-- 主题切换
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/theme.js"></script>
+		 -->
 		<!-- 时间精确时分秒 -->
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ux/datetimefield/Ext.ux.DateTimePicker.js"></script>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ux/datetimefield/Ext.ux.DateTimeField.js"></script>

@@ -187,17 +187,17 @@ public class XtCommonController extends BaseAction{
 						if(!StringUtils.isEmpty(xt_path_urlk)){
 							baseJson.setJsonValue(CommonUtils.getXtPathCache(xt_path_urlk).get(0).getXt_path()+ xtAttachmentList.get(0).getXt_attachmentPath());
 						}else{
-							baseJson.setJsonValue(CommonUtils.getXtPathCache("hssources_base_url").get(0).getXt_path()+ xtAttachmentList.get(0).getXt_attachmentPath());
+							baseJson.setJsonValue(CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path()+ xtAttachmentList.get(0).getXt_attachmentPath());
 						}
 					}else{
 						//非图片格式让其显示成功图标即可
-						baseJson.setJsonValue(CommonUtils.getXtPathCache("hs_upload_sucess").get(0).getXt_path());
+						baseJson.setJsonValue(CommonUtils.getXtPathCache("jehc_upload_sucess").get(0).getXt_path());
 					}
 				}else{
-					baseJson.setJsonValue(CommonUtils.getXtPathCache("hs_upload_fail").get(0).getXt_path());
+					baseJson.setJsonValue(CommonUtils.getXtPathCache("jehc_upload_fail").get(0).getXt_path());
 				}
 			}else{
-				baseJson.setJsonValue(CommonUtils.getXtPathCache("hs_upload_fail").get(0).getXt_path());
+				baseJson.setJsonValue(CommonUtils.getXtPathCache("jehc_upload_fail").get(0).getXt_path());
 				baseJson.setMsg("上传失败");
 			}
 			return outDataStr(baseJson);
@@ -222,7 +222,7 @@ public class XtCommonController extends BaseAction{
 	public String getAttachmentPathPP(String xt_attachment_id,String field_name, HttpServletRequest request,HttpServletResponse response){
 		Map<String, Object> condition = new HashMap<String, Object>();
 		JSONArray jsonArray = new JSONArray();  
-		String path = CommonUtils.getXtPathCache("hssources_base_url").get(0).getXt_path();
+		String path = CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path();
 		Map<String, Object> model = new HashMap<String, Object>();
 		if(null != xt_attachment_id && !"".equals(xt_attachment_id) && null != field_name && !"".equals(field_name)){
 			if(xt_attachment_id.split(",").length>0){
@@ -249,7 +249,7 @@ public class XtCommonController extends BaseAction{
 								model.put("xt_attachmentPath", path+xtAttachment.getXt_attachmentPath());
 							}else{
 								//非图片格式让其显示成功图标即可
-								model.put("xt_attachmentPath", CommonUtils.getXtPathCache("hs_upload_sucess").get(0).getXt_path());
+								model.put("xt_attachmentPath", CommonUtils.getXtPathCache("jehc_upload_sucess").get(0).getXt_path());
 							}
 							//整个路径如http://www.jehc.com/images/img.png
 							model.put("xt_all_url", path+xtAttachment.getXt_attachmentPath());
