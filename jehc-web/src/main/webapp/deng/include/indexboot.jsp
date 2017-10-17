@@ -85,5 +85,13 @@
 		<script src="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.min.js"></script>
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.js"></script>
+		<style type="text/css">
+		.page-boxed .page-footer .page-footer-inner, .page-footer-fixed .page-footer .page-footer-inner {
+		    color: #ffffff;
+		}
+		.page-footer-fixed .page-boxed .page-footer, .page-footer-fixed .page-footer {
+		    background-color: #388E8E;
+		}
+		</style>
 	</head>
 </html>
