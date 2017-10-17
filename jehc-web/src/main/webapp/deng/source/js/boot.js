@@ -321,8 +321,8 @@ function tableHeight(){
 
 //bootstrap提示
 function toastrBoot(flag,msg){
-	toastr.options = {
-	  "closeButton":true,//是否显示关闭按钮
+	window.parent.toastr.options = {
+	  "closeButton":false,//是否显示关闭按钮
 	  "debug":false,//是否使用debug模式
 	  "positionClass":"toast-top-center",//弹出窗的位置
 	  "onclick":null,
@@ -559,7 +559,7 @@ function submitBForm(formid,url,callUrl){
 	        })
 		})
 	}else{
-		toastrBoot(4,"存在不合法的字段!");
+		window.parent.toastrBoot(4,"存在不合法的字段!");
 	}
 }
 
