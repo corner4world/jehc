@@ -658,11 +658,13 @@
 			<artifactId>itext</artifactId>
 			<version>${itext.version}</version>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>iTextAsian</artifactId>
 			<version>${iTextAsian.version}</version>
 		</dependency>
+		 -->
 		<dependency>
 		    <groupId>com.itextpdf</groupId>
 		    <artifactId>itextpdf</artifactId>
