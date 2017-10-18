@@ -131,24 +131,26 @@
 		<module>jehc-xtmodules-service</module>
 
 		<!-- 工作流模块 -->
+		<module>jehc-lcmodules-model</module>
 		<module>jehc-lcmodules-dao</module>
 		<module>jehc-lcmodules-service</module>
-		<module>jehc-lcmodules-model</module>
 
 		<!-- 全文检索模块 -->
+		<module>jehc-solrmodules-model</module>
 		<module>jehc-solrmodules-dao</module>
 		<module>jehc-solrmodules-service</module>
-		<module>jehc-solrmodules-model</module>
+		
 
 		<!-- 电商模块 -->
+		<module>jehc-bmodules-model</module>
 		<module>jehc-bmodules-dao</module>
 		<module>jehc-bmodules-service</module>
-		<module>jehc-bmodules-model</module>
+		
 		
 		<!-- OA模块 -->
+		<module>jehc-oamodules-model</module>
 		<module>jehc-oamodules-dao</module>
 		<module>jehc-oamodules-service</module>
-		<module>jehc-oamodules-model</module>
 		
 		<!-- web模块 -->
 		<module>jehc-web</module>
