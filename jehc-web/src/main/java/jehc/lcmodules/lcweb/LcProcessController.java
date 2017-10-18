@@ -37,7 +37,6 @@ import jehc.lcmodules.lcservice.LcProcessService;
 import jehc.lcmodules.mxgraph.MxGraphModel;
 import jehc.lcmodules.mxgraph.MxGraphToBPMN;
 import jehc.lcmodules.mxgraph.MxGraphToPng;
-import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -257,8 +256,8 @@ public class LcProcessController  extends BaseAction{
 	public LcProcess generateBpmnAndImg(String url,String imgxml,String bpmn,String processName,String w,String h,HttpServletResponse response,LcProcess lc_Process) throws UnsupportedEncodingException{
 		//生成BPMN文件
 		String attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path()+processName+"/");
-		String bpmnAttachPath = attachPath+AllUtils.getPinYinHeadChar(processName).toUpperCase()+".bpmn";
-		String imgAttachPath =  attachPath+AllUtils.getPinYinHeadChar(processName).toUpperCase()+".png";
+		String bpmnAttachPath = attachPath+processName+".bpmn";
+		String imgAttachPath =  attachPath+processName+".png";
 		try {
 			OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(bpmnAttachPath),"UTF8");
 			out.write(bpmn);
@@ -277,12 +276,12 @@ public class LcProcessController  extends BaseAction{
 		try{
 			File jpdlAttachPathFile = new File(bpmnAttachPath);
 			File imgAttachPathFile = new File(imgAttachPath);
-			File zipFile = new File(attachPath+AllUtils.getPinYinHeadChar(processName).toUpperCase()+".zip");
+			File zipFile = new File(attachPath+processName+".zip");
 			File[] srcfile={jpdlAttachPathFile,imgAttachPathFile};
 			FileUtil.zipFiles(srcfile,zipFile);
-			lc_Process.setLc_process_bpmn_path(AllUtils.getPinYinHeadChar(processName).toUpperCase()+".bpmn");
-			lc_Process.setLc_process_path(AllUtils.getPinYinHeadChar(processName).toUpperCase()+".zip");
-			lc_Process.setLc_process_img_path(AllUtils.getPinYinHeadChar(processName).toUpperCase()+".png");
+			lc_Process.setLc_process_bpmn_path(processName+".bpmn");
+			lc_Process.setLc_process_path(processName+".zip");
+			lc_Process.setLc_process_img_path(processName+".png");
 		}catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}

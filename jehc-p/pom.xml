@@ -75,7 +75,6 @@
 		<poi.version>3.14</poi.version>
 		<cxf.version>2.5.2</cxf.version>
 		<ftp.version>3.4</ftp.version>
-		<pinyin4j.version>2.5.0</pinyin4j.version>
 		<memcached-java-client.version>3.0.2</memcached-java-client.version>
 		<jest.version>2.0.3</jest.version>
 		<elasticsearch.version>2.2.0</elasticsearch.version>
@@ -628,14 +627,6 @@
 			<classifier>ftp</classifier>
 		</dependency>
 		<!-- ftp结束 -->
-		
-		<!-- pinyin4j开始 -->
-		<dependency>
-			<groupId>pinyin4j</groupId>
-			<artifactId>pinyin4j</artifactId>
-			<version>${pinyin4j.version}</version>
-		</dependency>
-		<!-- pinyin4j结束 -->
 		
 		<!-- json开始 -->
 		<dependency>
