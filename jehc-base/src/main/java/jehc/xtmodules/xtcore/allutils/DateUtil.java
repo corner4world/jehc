@@ -3,8 +3,12 @@ package jehc.xtmodules.xtcore.allutils;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DateUtil {
 	private final static SimpleDateFormat sdfYear = new SimpleDateFormat("yyyy");
@@ -169,9 +173,126 @@ public class DateUtil {
         return dateStr;
     }
     
+    /**
+     * 判断时间是否在时间段内（不包含边界点）
+     * @param nowTime
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
+    public static boolean belongCalendar(Date nowTime, Date beginTime, Date endTime) {
+        if(nowTime.getTime() > beginTime.getTime() && nowTime.getTime() < endTime.getTime()){
+     	   return true;
+        }else{
+     	   return false;
+        }
+    }
+    
+    /**
+     * 判断时间是否在时间段内（包含边界点）
+     * @param nowTime
+     * @param beginTime
+     * @param endTime
+     * @return
+     */
+    public static boolean belongCalendarInOv(Date nowTime, Date beginTime, Date endTime) {
+        if(nowTime.getTime() >= beginTime.getTime() && nowTime.getTime() <= endTime.getTime()){
+     	   return true;
+        }else{
+     	   return false;
+        }
+    }
+    /* 
+     * 将时间转换为时间戳
+     */    
+    public static long dateToStamp(String s) throws ParseException{
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        Date date = simpleDateFormat.parse(s);
+        long ts = date.getTime();
+        return ts;
+    }
+    /* 
+     * 将时间戳转换为时间
+     */
+    public static String stampToDate(long start){
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        long lt = new Long(start);
+        Date date = new Date(lt);
+        res = simpleDateFormat.format(date);
+        return res;
+    }
+    
+    /**
+     * 平均计算开始时间 结束时间的平均时间段
+     * @param startTime开始时间
+     * @param endtime结束时间
+     * @param num 段数
+     * @return
+     */
+    public List<Map<String,Object>> avgTimes(String startTime,String endtime,int num){
+    	//平均划分时间段
+    	List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
+		try {
+			long start = DateUtil.dateToStamp(startTime);
+			long end = DateUtil.dateToStamp(endtime);
+			long start_end = end-start;//当前时间与开始时间差
+			long ceTims = start_end/num;//当前时间距离结束时间的需要执行的次数
+			for(int i = 0; i < num; i++){
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("st1", DateUtil.stampToDate(start));
+				map.put("st2", DateUtil.stampToDate(start+ceTims));
+				list.add(map);
+				start = start+ceTims;
+			}
+		} catch (ParseException e) {
+		}
+		return list;
+    }
+    
+    /**
+	 * 格式化日期
+	 * 
+	 * @return
+	 */
+	public static Date fomatHMDate(String date) {
+		DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			return fmt.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
     public static void main(String[] args) {
     	System.out.println(getDays());
     	System.out.println(getAfterDayWeek("3"));
+    	
+    	//平均划分时间段
+    	try {
+			int num = 10;
+			long start = DateUtil.dateToStamp("2017-10-20 00:00");
+			long end = DateUtil.dateToStamp("2017-10-20 10:00");
+			long start_end = end-start;//当前时间与开始时间差
+			long ceTims = start_end/num;//当前时间距离结束时间的需要执行的次数
+			for(int i = 0; i < num; i++){
+				System.out.println("时间段:-----------"+DateUtil.stampToDate(start)+"-----"+DateUtil.stampToDate(start+ceTims)+"------------");
+				start = start+ceTims;
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
+    	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
+    	try {
+			Date date = sdf.parse("2017-10-19 11:35:01");
+			boolean flag = DateUtil.belongCalendar(date, DateUtil.fomatHMDate("2017-10-19 11:15"), DateUtil.fomatHMDate("2017-10-19 11:33"));
+	    	System.out.println(flag);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
 }
