@@ -8,6 +8,10 @@ http://git.oschina.net/jehc/jehc
 eclipse-jee-mars-1
 或STS
 
+ **非maven版本地址：** 
+
+https://gitee.com/jehc/jehc-none-maven
+
 效果图片如下：
 ![输入图片说明](https://gitee.com/uploads/images/2017/1017/112845_b21ad51e_1341290.png "首页.png")
 ![输入图片说明](https://gitee.com/uploads/images/2017/1017/112859_68b0ff42_1341290.png "在线设计.png")
@@ -36,3 +40,7 @@ http://git.oschina.net/jehc/jehc
  **开发工具：** 
 eclipse-jee-mars-1
 或STS
+
+ **非maven版本地址：** 
+
+https://gitee.com/jehc/jehc-none-maven
