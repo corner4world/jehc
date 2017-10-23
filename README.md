@@ -4,7 +4,9 @@ http://git.oschina.net/jehc/jehc
 
  **QQ讨论群:330370132** 
 
- **
+ **开发工具：** 
+eclipse-jee-mars-1
+或STS
 
 效果图片如下：
 ![输入图片说明](https://gitee.com/uploads/images/2017/1017/112845_b21ad51e_1341290.png "首页.png")
@@ -31,4 +33,6 @@ http://git.oschina.net/jehc/jehc
 
  **QQ讨论群:330370132** 
 
- **
+ **开发工具：** 
+eclipse-jee-mars-1
+或STS
