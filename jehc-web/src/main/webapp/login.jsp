@@ -14,7 +14,6 @@
 <link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-crisp-touch/resources/theme-crisp-touch-all.css" type="text/css" />
 <link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/index.css" />
 <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>
-<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
 <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
 <script type="text/javascript" src="${syspath}/deng/source/js/common.js"></script>
 <script type="text/javascript">
