@@ -11,7 +11,6 @@ function indexHome(){
 }
 $(function () {  
 	  $('#myTab a:last').tab('show');//初始化显示哪个tab  
-	  
 	  $('#myTab a').click(function (e) {  
 	    e.preventDefault();//阻止a链接的跳转行为  
 	    $(this).tab('show');//显示当前选中的链接及关联的content  
@@ -45,207 +44,122 @@ function clickAddTab(url,title,id,close){
 
 /**注销**/
 function loginout(){
-	Ext.Msg.confirm("提示", "确定退出平台？",function(btn){
-		if(btn == 'yes'){
-			Ext.Ajax.request({  
-			    url:'../login/loginout',
-			    success:function(response,opts){
-			    	top.Ext.Msg.alert('提示', "注销登录平台用户成功!平台将您转发到登录页面!",function(){
-						var win = top;
-						if(window.opener != null) {win=opener.top; window.close();}
-						win.location.href=basePath;
-					});
-			    },
-			    failure:function(response,opts){
-			    	msgTishi("注销登录平台用户失败!")
-			    }
-			});
-		}
-	});
+	msgTishCallFnBoot("确定要注销平台？",function(){
+		$.ajax({
+			url:'../login/loginout',
+	        type:'POST',
+	        success:function(result){
+	        	toastrBoot(3,"注销平台失败!");
+	        	var win = top;
+				if(window.opener != null) {win=opener.top; window.close();}
+				win.location.href=basePath;
+	        }, 
+	        error:function(){
+	        	toastrBoot(4,"注销平台失败!");
+	        }
+	    })
+	})
 }
 
 /////////////修改密码开始///////////////////
-var pwdWin;
-var pwdForm;
 function updatePwd(){
-	pwdForm = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		region:'center',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		id:'pwdForm',
-		autoScroll:true,
-		fieldDefaults:{
-	        labelWidth:70,
-	        labelAlign:"left",
-	        flex:1,
-	        margin:'4 5 4 5'
-	    },
-	    /**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        /**新方法使用结束**/ 
-		items:[
-		{
-			fieldLabel:'原有密码',
-			xtype:'textfield',
-			inputType:'password',
-			allowBlank:false,
-			maxLength:50,
-			anchor:'100%',
-			name:'oldPwd',
-			id:'oldPwd'
-		},{
-			fieldLabel:'新&nbsp;&nbsp;密&nbsp;&nbsp;码',
-			xtype:'textfield',
-			inputType:'password',
-			allowBlank:false,
-			maxLength:50,
-			anchor:'100%',
-	        name:"newPwd",
-	        id:'newPwd'
-		},{
-			fieldLabel:'确认密码',
-			xtype:'textfield',
-			inputType:'password',
-			allowBlank:false,
-			maxLength:50,
-			anchor:'100%',
-		   	name:"surePwd",
-		   	id:'surePwd'
-		}]
+	$('#updatePwdModal').modal();
+	$('#updatePwdForm').bootstrapValidator({
+	  message:'此值不是有效的',
+	  feedbackIcons:{
+	  },
+	  fields:{
+		  oldPwd:{
+	          validators:{
+	              notEmpty:{
+	                  message:'旧密码不能为空'
+	              },
+	              stringLength:{
+	                  min:1,
+	                  max:30,
+	                  message:'用户账号字符长度不能超过30个'
+	              }
+	          }
+	      },
+	      newPwd:{
+	         validators:{
+	             notEmpty:{
+	                 message:'新密码不能为空'
+	             },
+	             stringLength:{
+	                 min:1,
+	                 max:20,
+	                 message:'新密码长度不能超过20个'
+	             }
+	         }
+	     },
+	     surePwd:{
+	         validators:{
+	             notEmpty:{
+	                 message:'确认密码不能为空'
+	             },
+	             stringLength:{
+	            	 min:1,
+	                 max:20,
+	                 message:'确认密码长度不能超过20个'
+	             }
+	         }
+	     }
+	  }
 	});
-	pwdWin = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:400,
-		autoHeight:true,
-		plain:true,
-		modal:true,
-		closable:false,
-		title:'修改密码',
-		headerPosition:'left',
-		items:pwdForm,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				var oldPwd = Ext.getCmp('oldPwd');
-				var newPwd = Ext.getCmp('newPwd');
-				var surePwd = Ext.getCmp('surePwd');
-				if(pwdForm.form.isValid()){
-					if(newPwd.getValue() != surePwd.getValue()){
-						msgTishi("两次输入的密码不一样,请重新输入!");
-						Ext.getCmp('pwdForm').form.reset();
-						return Ext.getCmp('oldPwd').focus();
-					}
-					Ext.getCmp('pwdForm').form.submit({
-						url:basePath+'/index/updatePwd',
-						waitTitle:'提示',
-						method:'POST',
-						waitMsg:'正在操作中',
-						success:function(form, action){
-							top.Ext.Msg.alert('提示', "修改密码成功!请重新登录该平台",function(){
-								var win = top;
-								if(window.opener != null){win=opener.top; window.close();}
-								win.location.href=basePath;
-							});
-						},
-						failure:function(form, action) {
-							Ext.example.msg('提示', action.result.msg,function(){
-							Ext.getCmp('pwdForm').form.reset();
-						});
-					  }
-					});
-				}else{Ext.example.msg('提示', '请输入必填项');}
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	pwdWin.show();
-	pwdWin.on('show', function(){
-		setTimeout(function(){
-			Ext.getCmp('oldPwd').focus();
-		}, 200);
-	},this);
+}
+function doUpdate(){
+	var updatePwdForm =  $('#updatePwdForm');
+	if(typeof(updatePwdForm) == "undefined" ||null == updatePwdForm || '' == updatePwdForm){
+		window.parent.toastrBoot(4,"未能获取到form对象!");
+		return;
+	}
+	var boostrapValidator =updatePwdForm.data('bootstrapValidator');
+	boostrapValidator.validate();
+	//验证有效开启发送异步请求
+	if(boostrapValidator.isValid()){
+		var newPwd = $('#newPwd').val();
+		var surePwd = $('#surePwd').val();
+		if(newPwd != surePwd){
+			window.parent.toastrBoot(4,"两次输入的密码不一样,请重新输入!");
+			return;
+		}
+		msgTishCallFnBoot("确定要修改密码？",function(){
+			$.ajax({
+				url:basePath+'/index/updatePwd',
+	            type:'POST',//PUT DELETE POST
+	            data:updatePwdForm.serialize(),
+	            success:function(result){
+	            	var obj = eval("(" + result + ")");
+	            	console.info(obj);
+	            	if(obj.success == false){
+	            		window.parent.toastrBoot(4,obj.msg);
+	            		return;
+	            	}
+	            	msgTishCallFnBoot("修改密码成功，请重新登录该平台！",function(){
+	            		var win = top;
+						if(window.opener != null){win=opener.top; window.close();}
+						win.location.href=basePath;
+	            	})
+	            }, 
+	            error:function(){
+	            	window.parent.toastrBoot(4,"修改密码失败!");
+	            }
+	        })
+		});
+	}else{
+		window.parent.toastrBoot(4,"存在不合法的字段!");
+	}
 }
 //////////////////修改密码结束////////////////
 //////////////////初始化锁屏开始//////////////
-var lockForm;
-var lockWindow;
 function initLockSystem(flag){
-	//解锁表单
-	lockForm = Ext.create('Ext.FormPanel',{
-		id:'lockForm',
-		style:'padding:5px 5px 5px 5px',
-		fieldDefaults:{
-			labelWidth:60,
-			labelSeparator:'',
-			labelAlign:'top'
-		},
-		items:[{
-				name:'password',
-				inputType:'password',
-				id:'password',
-				xtype:'textfield',
-				allowBlank:false,
-				/** 不使用该方法
-				fieldCls:'fieldPwd',
-				cls:'pwd',
-				**/
-				cls:'pwd',
-				trigger1Cls:'x-form-pwd-trigger', 
-				msgTarget:'side',/**qtip、title、under、side、none**/
-				emptyText:'请输入您的账号密码',
-				maxLength:32,
-				anchor:'100%',
-				size:10,
-				listeners:{
-					specialkey:function(field, e) {
-						if(e.getKey() == Ext.EventObject.ENTER){
-							unlockSystem();
-						}
-					}
-				}
-			}]
-	});
-	//执行锁屏
-	lockWindow = Ext.create('Ext.Window',{
-		title:'用户<font color=red>'+sys_pt_user_name+'</font>已被锁定中...',
-		layout:'fit',
-		width:300,
-		autoHeight:true,
-		collapsible:true,
-		closable:false,
-		maximizable:false,
-		draggable:false,
-		modal:true,
-		constrain:true,
-		resizable:false ,
-		items:[lockForm],
-		listeners:{
-			'show':function(obj) {
-				Ext.getCmp('password').focus();
-			}
-		},
-		buttons:[{
-					text:'解锁',
-					handler:function(){
-						unlockSystem();
-					}
-				}]
-	});
 	if(getCookie("syslock") == 1){
-		lockWindow.show();
+		$('#lockModal').modal({backdrop: 'static', keyboard: false});
 		setCookie("syslock", '1', 240);
 	}else{
 		if(flag == 1){
-			lockWindow.show();
+			$('#lockModal').modal({backdrop: 'static', keyboard: false});
 			setCookie("syslock", '1', 240);
 		}
 	}
@@ -254,25 +168,29 @@ function initLockSystem(flag){
 
 //////////////////执行解锁功能开始////////////
 function unlockSystem() {
-	if(lockForm.form.isValid()){
-		lockForm.form.submit({
-			url:basePath+'/index/validatePassword',
-			waitTitle:'提示',
-			method:'POST',
-			waitMsg:'正在验证密码中...',
-			success:function(form, action){
-				if(action.result.msg == "1"){
-					lockForm.reset();
-					lockWindow.close();
-					setCookie("syslock", '0', 240);
-				}else{
-					msgTishi('账户密码不正确,请重新输入!');
-					lockForm.reset();
-					Ext.getCmp('password').focus();
-				}
-			}
-		});
-	}else{msgTishi('请输入解锁密码');}
+	var lockForm =  $('#lockForm');
+	var password = $('#password').val();
+	if(null == password || '' == password){
+		window.parent.toastrBoot(4,"请输入解锁密码！");
+		return;
+	}
+	$.ajax({
+		url:basePath+'/index/validatePassword',
+        type:'POST',//PUT DELETE POST
+        data:lockForm.serialize(),
+        success:function(result){
+        	var obj = eval("(" + result + ")");
+        	if(obj.msg == '1'){
+        		setCookie("syslock", '0', 240);
+        		$('#lockModal').modal('hide');
+        	}else{
+        		window.parent.toastrBoot(4,"密码错误！");
+        	}
+        }, 
+        error:function(){
+        	window.parent.toastrBoot(4,"解锁失败!");
+        }
+    })
 }
 //////////////////解锁结束///////////////////
 //关键字搜索
@@ -424,10 +342,13 @@ function dt(){
 }
 //执行监控页面信息操作
 function loadinfo(text,dt1,dt2){
-	Ext.Ajax.request({  
-	    url:'../xtLoadinfoController/addXtLoadinfo',
-	    params:{xt_loadinfo_begtime:dt1,xt_loadinfo_endtime:dt2,xt_loadinfo_modules:text},
-	    success:function(response,opts){},
-	    failure:function(response,opts){}
-	});
+	$.ajax({
+        url:'../xtLoadinfoController/addXtLoadinfo',
+        type:'POST',
+        data:{xt_loadinfo_begtime:dt1,xt_loadinfo_endtime:dt2,xt_loadinfo_modules:text},
+        success:function(result){
+        }, 
+        error:function(){
+        }
+    })
 }

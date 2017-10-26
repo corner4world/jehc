@@ -80,6 +80,10 @@
         <script src="${syspath}/deng/source/plugins/admin/index/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/css/bootstrap.addtabs.css" rel="stylesheet" type="text/css" />
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/js/bootstrap.addtabs.js" type="text/javascript"></script>
+        <!-- bootstrap验证框架开始 -->
+		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.css" />
+		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
+		<!-- bootstrap验证框架结束 -->
         <!-- 对话框插件 -->
 		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.css" />
 		<script src="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.min.js"></script>
@@ -92,6 +96,9 @@
 		.page-footer-fixed .page-boxed .page-footer, .page-footer-fixed .page-footer {
 		    background-color: #388E8E;
 		}
+		.modal.in .modal-dialog{-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);-o-transform:translate(0,-50%);transform:translate(0,-50%)}
+		.modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;top:50%;}
+		@media (min-width:768px){.modal-dialog{width:768px}
 		</style>
 	</head>
 </html>

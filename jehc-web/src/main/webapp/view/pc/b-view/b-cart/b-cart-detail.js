@@ -14,7 +14,7 @@ function detailBCart(){
 	parms = {parentId:record.items[0].data.xt_cityID};
     beforeloadstoreByStore(xtDistrictList,parms);
     reGetWidthAndHeight();
-	bCartWinDetail = Ext.create('top.Ext.Window',{
+	bCartWinDetail = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight,
@@ -46,11 +46,11 @@ function detailBCart(){
 	});
 	bCartWinDetail.show();
 	loadFormData(bCartFormDetail,'../bCartController/getBCartById?b_cart_id='+ record.items[0].data.b_cart_id);
-	top.Ext.getCmp('summoney').setText("汇总金额:"+record.items[0].data.b_cart_total_price+"元/单位");
+	Ext.getCmp('summoney').setText("汇总金额:"+record.items[0].data.b_cart_total_price+"元/单位");
 }
 function initBCartFormDetail(b_cart_id){
 	initBCartDetailGrid(b_cart_id);
-	var detailTab = Ext.create('top.Ext.TabPanel',{
+	var detailTab = Ext.create('Ext.TabPanel',{
 		activeTab:0,
 		region:'center',
 		tabPosition:'left',
@@ -92,7 +92,7 @@ function initBCartFormDetail(b_cart_id){
 		                select:function(combo,records,options){
 		                		initBInvoiceWin(this.value);
 		                		/**
-			                 	top.Ext.getCmp('b_invoice_id').setValue("");
+			                 	Ext.getCmp('b_invoice_id').setValue("");
 			                    b_invoiceList.reload({params:{b_member_id:this.value}});
 			                    var parm = {start:getCP(b_invoiceList)[0],limit:getCP(b_invoiceList)[1],b_member_id:this.value};
 							    beforeloadstoreByStore(b_invoiceList,parm)
@@ -226,8 +226,8 @@ function initBCartFormDetail(b_cart_id){
 						anchor:'60%',
 						listeners:{
 			                 select:function(combo,records,options){
-			                	top.Ext.getCmp('xt_cityID').setValue("");
-			                	top.Ext.getCmp('xt_districtID').setValue("");
+			                	Ext.getCmp('xt_cityID').setValue("");
+			                	Ext.getCmp('xt_districtID').setValue("");
 					            xtCityList.load({params:{parentId:this.value}});
 					            parms = {parentId:this.value};
 					    	    beforeloadstoreByStore(xtCityList,parms);
@@ -262,7 +262,7 @@ function initBCartFormDetail(b_cart_id){
 						anchor:'60%',
 						listeners:{
 			                 select:function(combo,records,options){
-			                	top.Ext.getCmp('xt_districtID').setValue("");
+			                	Ext.getCmp('xt_districtID').setValue("");
 					            xtDistrictList.load({params:{parentId:this.value}});
 					            parms = {parentId:this.value};
 					    	    beforeloadstoreByStore(xtDistrictList,parms);
@@ -325,7 +325,7 @@ function initBCartFormDetail(b_cart_id){
 		}
 		]
 	});
-	bCartFormDetail = Ext.create('top.Ext.FormPanel',{
+	bCartFormDetail = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',

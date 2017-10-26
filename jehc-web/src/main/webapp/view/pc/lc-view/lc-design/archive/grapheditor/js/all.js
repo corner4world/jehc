@@ -332,7 +332,7 @@ var xtUserinfoIsmarriedList = new Ext.data.Store({
 function initassignee(flag,type){
 	userStore = getGridJsonStore('../xtUserinfoController/getXtUserinfoListByCondition',[{}]);
 	/**查询区域可扩展**/
-	var formItems = Ext.create('top.Ext.FormPanel',{
+	var formItems = Ext.create('Ext.FormPanel',{
 		maxHeight:220,
 		waitMsgTarget:true,
 		defaultType:'textfield',
@@ -383,7 +383,7 @@ function initassignee(flag,type){
 		]
 	});
 	formSearc = initSearchFormByUserdefined('north',formItems,true,'left');
-	userGrid = Ext.create('top.Ext.grid.Panel',{
+	userGrid = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
 		store:userStore,
@@ -432,7 +432,7 @@ function initassignee(flag,type){
 								xt_userinfo_realName=xt_userinfo_realName+","+model.selected.items[i].data.xt_userinfo_realName;
 							}
 						}
-						top.Ext.Msg.confirm('提示','确定要选择:<br>'+xt_userinfo_realName+'？',function(btn){
+						Ext.Msg.confirm('提示','确定要选择:<br>'+xt_userinfo_realName+'？',function(btn){
 							if(btn == 'yes'){
 								Ext.getCmp('candidateUsers').setValue(xt_userinfo_id);
 								Ext.getCmp('candidateUsers_Text').setValue(xt_userinfo_realName);
@@ -555,7 +555,7 @@ function initassignee(flag,type){
 				//Usertask中处理人选择
 				if(flag == 1 && type == 1){
 					var str = "[<font color=red><br>用户姓名:"+xt_userinfo_realName+"<br>所属部门:"+xt_departinfo_name+"<br>所属岗位:"+xt_post_name+"<br></font>]";
-					top.Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
+					Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
 						if(btn == 'yes'){
 							Ext.getCmp('assignee').setValue(xt_userinfo_id);
 							Ext.getCmp('assignee_text').setValue(xt_userinfo_realName);
@@ -566,7 +566,7 @@ function initassignee(flag,type){
 				//“流程基本信息使用”中处理人选择
 				if(flag == 1 && type == 2){
 					var str = "[<font color=red><br>用户姓名:"+xt_userinfo_realName+"<br>所属部门:"+xt_departinfo_name+"<br>所属岗位:"+xt_post_name+"<br></font>]";
-					top.Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
+					Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
 						if(btn == 'yes'){
 							Ext.getCmp('candidateStarterUsers').setValue(xt_userinfo_id);
 							Ext.getCmp('candidateStarterUsers_Text').setValue(xt_userinfo_realName);
@@ -577,7 +577,7 @@ function initassignee(flag,type){
 				//泳道中使用 处理人选择
 				if(flag == 1 && type == 3){
 					var str = "[<font color=red><br>用户姓名:"+xt_userinfo_realName+"<br>所属部门:"+xt_departinfo_name+"<br>所属岗位:"+xt_post_name+"<br></font>]";
-					top.Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
+					Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
 						if(btn == 'yes'){
 							Ext.getCmp('candidateStarterUsers_').setValue(xt_userinfo_id);
 							Ext.getCmp('candidateStarterUsers_Text_').setValue(xt_userinfo_realName);
@@ -591,7 +591,7 @@ function initassignee(flag,type){
 	});
 	userStore.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(userStore,formSearc));});
 	reGetWidthAndHeight();
-	userWin = Ext.create('top.Ext.Window',{
+	userWin = Ext.create('Ext.Window',{
 		layout:'border',
 		title:'用户列表',
 		width:clientWidth,                    
@@ -615,7 +615,7 @@ function initassignee(flag,type){
 		
 	}else{
 		//隐藏按钮
-		top.Ext.getCmp('userGridBtn').setVisible(false);
+		Ext.getCmp('userGridBtn').setVisible(false);
 	}
 }
 

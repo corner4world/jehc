@@ -336,7 +336,7 @@ public class LcProcessController  extends BaseAction{
 	@RequestMapping(value="/getProcessInstance",method={RequestMethod.POST,RequestMethod.GET})
 	public String getProcessInstance(String lc_deployment_his_id){
 		ProcessDefinition processDefinition = activitiUtil.getProcessDefinition(lc_deployment_his_id);
-		List<ProcessInstance> list = activitiUtil.getProcessInstaceList(processDefinition.getKey());
+		List<ProcessInstance> list = activitiUtil.getProcessInstaceListById(processDefinition.getId());
 		JSONArray jsonArray = new JSONArray();  
 		Map<String, Object> model = new HashMap<String, Object>();
 		for(int i = 0; i < list.size(); i++){

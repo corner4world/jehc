@@ -521,7 +521,7 @@ function loginout(){
 			Ext.Ajax.request({  
 			    url:'../login/loginout',
 			    success:function(response,opts){
-			    	top.Ext.Msg.alert('提示', "注销登录平台用户成功!平台将您转发到登录页面!",function(){
+			    	Ext.Msg.alert('提示', "注销登录平台用户成功!平台将您转发到登录页面!",function(){
 						var win = top;
 						if(window.opener != null) {win=opener.top; window.close();}
 						win.location.href=basePath;
@@ -612,7 +612,7 @@ function updatePwd(){
 						method:'POST',
 						waitMsg:'正在操作中',
 						success:function(form, action){
-							top.Ext.Msg.alert('提示', "修改密码成功!请重新登录该平台",function(){
+							Ext.Msg.alert('提示', "修改密码成功!请重新登录该平台",function(){
 								var win = top;
 								if(window.opener != null){win=opener.top; window.close();}
 								win.location.href=basePath;

@@ -3,7 +3,7 @@ var gridXtUserinfoRoleInfo;
 var winXtUserinfoRoleInfo;
 function initRoleinfo(xt_userinfo_id){
 	storeXtUserinfoRoleInfo = getGridJsonStore('../xtUserinfoController/getXtRoleinfoListByUserinfoId?xt_userinfo_id='+xt_userinfo_id,[]);
-	gridXtUserinfoRoleInfo = Ext.create('top.Ext.grid.Panel',{
+	gridXtUserinfoRoleInfo = Ext.create('Ext.grid.Panel',{
 		store:storeXtUserinfoRoleInfo,
 		style:'margin-left:auto;margin-right:auto',
 		columnLines:true,
@@ -91,7 +91,7 @@ function initRoleinfo(xt_userinfo_id){
 		}
 	});
 	reGetWidthAndHeight();
-	winXtUserinfoRoleInfo = Ext.create('top.Ext.Window',{
+	winXtUserinfoRoleInfo = Ext.create('Ext.Window',{
 		layout:'fit',
 		title:'角色权限列表',
 		width:clientWidth*0.8,                    

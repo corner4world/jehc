@@ -4,7 +4,7 @@ var postWin;
 function showPostWin(xt_menuinfo_id,xt_menuinfo_title){
 	initPost(xt_menuinfo_id,xt_menuinfo_title);
 	reGetTopWidthAndHeight();
-	postWin = Ext.create('top.Ext.Window',{
+	postWin = Ext.create('Ext.Window',{
 		layout:'fit', 
 		width:clientWidth*0.8,                    
 		height:clientHeight*0.8, 
@@ -48,7 +48,7 @@ function initPost(xt_menuinfo_id,xt_menuinfo_title){
         },
         lazyFill:true
     });
-    postGrid = Ext.create('top.Ext.tree.Panel', {
+    postGrid = Ext.create('Ext.tree.Panel', {
         reserveScrollbar:true,
         collapsible:false,
         loadMask:true,

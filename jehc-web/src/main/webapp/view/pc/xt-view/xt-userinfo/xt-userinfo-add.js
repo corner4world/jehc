@@ -3,7 +3,7 @@ var xtUserinfoFormAdd;
 function addXtUserinfo(){
 	initXtUserinfoFormAdd();
 	reGetWidthAndHeight();
-	xtUserinfoWinAdd = Ext.create('top.Ext.Window',{
+	xtUserinfoWinAdd = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -50,7 +50,7 @@ function addXtUserinfo(){
 	/**初始化附件右键菜单结束**/
 }
 function initXtUserinfoFormAdd(){
-	xtUserinfoFormAdd = Ext.create('top.Ext.FormPanel',{
+	xtUserinfoFormAdd = Ext.create('Ext.FormPanel',{
 		labelWidth:50,
 		waitMsgTarget:true,
 		defaultType:'textfield',
@@ -165,14 +165,14 @@ function initXtUserinfoFormAdd(){
 									url:'../xtUserinfoController/validateUser',
 									method:'post',  
 									params:{
-								        xt_userinfo_name:top.Ext.getCmp('xt_userinfo_name').getValue()
+								        xt_userinfo_name:Ext.getCmp('xt_userinfo_name').getValue()
 								    },
 									success:function(response, opts) {
 										var obj=Ext.decode(response.responseText); 
 										if(obj.msg == 1){
 											msgTishi('该用户名已经被注册，请重新输入!');
-											top.Ext.getCmp("xt_userinfo_name").setValue("");  
-											top.Ext.getCmp("xt_userinfo_name").focus();
+											Ext.getCmp("xt_userinfo_name").setValue("");  
+											Ext.getCmp("xt_userinfo_name").focus();
 										}
 									},
 									failure:function(response, opts) {

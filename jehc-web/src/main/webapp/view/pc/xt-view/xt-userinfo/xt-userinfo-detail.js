@@ -8,7 +8,7 @@ function detailXtUserinfo(){
 	}
 	initXtUserinfoFormDetail();
 	reGetWidthAndHeight();
-	xtUserinfoWinDetail = Ext.create('top.Ext.Window',{
+	xtUserinfoWinDetail = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -49,7 +49,7 @@ function detailXtUserinfo(){
 }
 
 function initXtUserinfoFormDetail(){
-	xtUserinfoFormDetail = Ext.create('top.Ext.FormPanel',{
+	xtUserinfoFormDetail = Ext.create('Ext.FormPanel',{
 		xtype:'fieldset',
 		labelWidth:50,
 		waitMsgTarget:true,

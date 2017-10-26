@@ -9,7 +9,7 @@ function showUserWin(xt_menuinfo_id,xt_menuinfo_title){
 	initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title);
 	initXtDpPanel(xt_menuinfo_id);
 	reGetTopWidthAndHeight();
-	xtUserinfoWin = Ext.create('top.Ext.Window',{
+	xtUserinfoWin = Ext.create('Ext.Window',{
 		layout:'border', 
 		width:clientWidth*0.95,                    
 		height:clientHeight*0.95, 
@@ -42,7 +42,7 @@ function initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title){
 	reGetWidthAndHeight();
 	xtUserinfoStore = getGridJsonStore('../xtDataAuthorityController/getUserinfoListByCondition',[]);
 	/**查询区域可扩展**/
-	var formItems = Ext.create('top.Ext.FormPanel',{
+	var formItems = Ext.create('Ext.FormPanel',{
 		maxHeight:220,
 		waitMsgTarget:true,
 		defaultType:'textfield',
@@ -98,7 +98,7 @@ function initXtUserinfoGrid(xt_menuinfo_id,xt_menuinfo_title){
 		]
 	});
 	formSearc = initSearchFormByUserdefined('north',formItems,true,'left');
-	xtUserinfoGrid = Ext.create('top.Ext.grid.Panel',{
+	xtUserinfoGrid = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		store:xtUserinfoStore,
 		columnLines:true,
@@ -222,7 +222,7 @@ function initXtDpPanel(xt_menuinfo_id){
          }  
 	});  
 	//2创建treePanel
-	xtDpPanel = Ext.create('top.Ext.tree.Panel',{   
+	xtDpPanel = Ext.create('Ext.tree.Panel',{   
 		region:'west',
         store:xtDpStore,  
         autoEncode:true,//提交时是否自动编码   

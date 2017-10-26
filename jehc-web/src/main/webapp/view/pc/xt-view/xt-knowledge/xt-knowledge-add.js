@@ -3,7 +3,7 @@ var xtKnowledgeFormAdd;
 function addXtKnowledge(){
 	initXtKnowledgeFormAdd();
 	reGetWidthAndHeight();
-	xtKnowledgeWinAdd = Ext.create('top.Ext.Window',{
+	xtKnowledgeWinAdd = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth*0.8,                    
 		height:clientHeight, 
@@ -40,7 +40,7 @@ function addXtKnowledge(){
 	xtKnowledgeWinAdd.show();
 }
 function initXtKnowledgeFormAdd(){
-	xtKnowledgeFormAdd = Ext.create('top.Ext.FormPanel',{
+	xtKnowledgeFormAdd = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',

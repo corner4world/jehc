@@ -8,7 +8,7 @@ function updateXtUserinfo(){
 	}
 	initXtUserinfoFormEdit();
 	reGetWidthAndHeight();
-	xtUserinfoWinEdit = Ext.create('top.Ext.Window',{
+	xtUserinfoWinEdit = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -59,12 +59,12 @@ function updateXtUserinfo(){
 	ajaxFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params,2);
 	loadFormData(xtUserinfoFormEdit,'../xtUserinfoController/getXtUserinfoById?xt_userinfo_id='+ record.items[0].data.xt_userinfo_id);
 	new Ext.util.DelayedTask(function(){  
-      top.Ext.getCmp('xt_userinfo_name_').setValue(top.Ext.getCmp('xt_userinfo_name').getValue()); 
+      Ext.getCmp('xt_userinfo_name_').setValue(Ext.getCmp('xt_userinfo_name').getValue()); 
     }).delay(1000);
 }
 
 function initXtUserinfoFormEdit(){
-	xtUserinfoFormEdit = Ext.create('top.Ext.FormPanel',{
+	xtUserinfoFormEdit = Ext.create('Ext.FormPanel',{
 		xtype:'fieldset',
 		labelWidth:50,
 		waitMsgTarget:true,
@@ -200,19 +200,19 @@ function initXtUserinfoFormEdit(){
 						anchor:'20%',
 						listeners:{
 					  		'blur':function(obj) {
-					  			if(top.Ext.getCmp('xt_userinfo_name').getValue() != top.Ext.getCmp('xt_userinfo_name_').getValue()){
+					  			if(Ext.getCmp('xt_userinfo_name').getValue() != Ext.getCmp('xt_userinfo_name_').getValue()){
 						  			Ext.Ajax.request({
 										url:'../xtUserinfoController/validateUser',
 										method:'post',  
 										params:{
-									        xt_userinfo_name:top.Ext.getCmp('xt_userinfo_name').getValue()
+									        xt_userinfo_name:Ext.getCmp('xt_userinfo_name').getValue()
 									    },
 										success:function(response, opts) {
 											var obj=Ext.decode(response.responseText); 
 											if(obj.msg == 1){
 												msgTishi('该用户名已经被注册，请重新输入!');
-												top.Ext.getCmp("xt_userinfo_name").setValue("");  
-												top.Ext.getCmp("xt_userinfo_name").focus();
+												Ext.getCmp("xt_userinfo_name").setValue("");  
+												Ext.getCmp("xt_userinfo_name").focus();
 											}
 										},
 										failure:function(response, opts) {

@@ -8,7 +8,7 @@ function showUserSelectWin(xt_userinfo_realName,xt_userinfo_id,xt_menuinfo_id,xt
 	reGetTopWidthAndHeight();
 	initXtUserinfoSelectGrid(xt_menuinfo_id,xt_userinfo_id);
 //	initXtDpPanelSelect(xt_menuinfo_id);
-	xtUserinfoSelectWin = Ext.create('top.Ext.Window',{
+	xtUserinfoSelectWin = Ext.create('Ext.Window',{
 		layout:'border', 
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -55,7 +55,7 @@ function initXtUserinfoSelectGrid(xt_menuinfo_id,xt_userinfo_id){
 			extraParams:{id:'0',xt_menuinfo_id:xt_menuinfo_id,xt_userinfo_id:xt_userinfo_id,expanded:true}
         }
     });
-    xtUserinfoSelectGrid = Ext.create('top.Ext.tree.Panel', {
+    xtUserinfoSelectGrid = Ext.create('Ext.tree.Panel', {
     	region:'center',
         reserveScrollbar:true,
         collapsible:false,
@@ -151,7 +151,7 @@ function initXtUserinfoSelectGrid(xt_menuinfo_id,xt_userinfo_id){
 //         }  
 //	});  
 //	//2创建treePanel
-//	xtDpPanelSelect = Ext.create('top.Ext.tree.Panel',{   
+//	xtDpPanelSelect = Ext.create('Ext.tree.Panel',{   
 //		region:'west',
 //        store:xtDpStore,  
 //        autoEncode:true,//提交时是否自动编码   
@@ -223,7 +223,7 @@ function addXtDataAuthorityByUser(xt_menuinfo_id,xt_userinfo_id){
 			}
 		}
 	}
-	top.Ext.Msg.confirm('提示','确定保存该数据？',function(btn){
+	Ext.Msg.confirm('提示','确定保存该数据？',function(btn){
 		if(btn == 'yes'){
 			var params = {xt_userinfo_id:xt_userinfo_id,id:id,xt_menuinfo_id:xt_menuinfo_id,delID:delID};
 			ajaxRequest('../xtDataAuthorityController/addXtDataAuthorityByUser',xtUserinfoSelectGrid,params,'正在执行保存操作中！请稍后...');

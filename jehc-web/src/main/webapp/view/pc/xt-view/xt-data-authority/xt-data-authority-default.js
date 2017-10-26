@@ -108,7 +108,7 @@ function addXtDataAuthorityByDefault(xt_menuinfo_id){
 			xt_functioninfo_id=xt_functioninfo_id+","+model.selected.items[i].data.xt_functioninfo_id;
 		}
 	}
-	top.Ext.Msg.confirm('提示','确定保存该数据？',function(btn){
+	Ext.Msg.confirm('提示','确定保存该数据？',function(btn){
 		if(btn == 'yes'){
 			var params = {xt_functioninfo_id:xt_functioninfo_id,xt_menuinfo_id:xt_menuinfo_id};
 			ajaxRequest('../xtDataAuthorityController/addXtDataAuthorityByDefault',null,params,'正在执行保存操作中！请稍后...');

@@ -14,7 +14,7 @@ function updateBOrder(){
 	parms = {parentId:record.items[0].data.xt_cityID};
     beforeloadstoreByStore(xtDistrictList,parms);
     reGetWidthAndHeight();
-	bOrderWinEdit = Ext.create('top.Ext.Window',{
+	bOrderWinEdit = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight,
@@ -56,11 +56,11 @@ function updateBOrder(){
 	});
 	bOrderWinEdit.show();
 	loadFormData(bOrderFormEdit,'../bOrderController/getBOrderById?b_order_id='+ record.items[0].data.b_order_id);
-	top.Ext.getCmp('summoney').setText("汇总金额:"+record.items[0].data.b_order_total_price+"元/单位");
+	Ext.getCmp('summoney').setText("汇总金额:"+record.items[0].data.b_order_total_price+"元/单位");
 }
 function initBOrderFormEdit(b_order_id){
 	initBOrderDetailGrid(b_order_id);
-	var updateTab = Ext.create('top.Ext.TabPanel',{
+	var updateTab = Ext.create('Ext.TabPanel',{
 		activeTab:0,
 		region:'center',
 		tabPosition:'left',
@@ -188,7 +188,7 @@ function initBOrderFormEdit(b_order_id){
 							text:'快速选择发票信息',
 							style:'margin:2px 0px 0px 0px;',
 							handler:function(button){
-								initBInvoiceWin(top.Ext.getCmp('b_member_id').getValue());
+								initBInvoiceWin(Ext.getCmp('b_member_id').getValue());
 							}
 						}]
 					},
@@ -267,8 +267,8 @@ function initBOrderFormEdit(b_order_id){
 						anchor:'60%',
 						listeners:{
 			                 select:function(combo,records,options){
-			                	top.Ext.getCmp('xt_cityID').setValue("");
-			                	top.Ext.getCmp('xt_districtID').setValue("");
+			                	Ext.getCmp('xt_cityID').setValue("");
+			                	Ext.getCmp('xt_districtID').setValue("");
 					            xtCityList.load({params:{parentId:this.value}});
 					            parms = {parentId:this.value};
 					    	    beforeloadstoreByStore(xtCityList,parms);
@@ -303,7 +303,7 @@ function initBOrderFormEdit(b_order_id){
 						anchor:'60%',
 						listeners:{
 			                 select:function(combo,records,options){
-			                	top.Ext.getCmp('xt_districtID').setValue("");
+			                	Ext.getCmp('xt_districtID').setValue("");
 					            xtDistrictList.load({params:{parentId:this.value}});
 					            parms = {parentId:this.value};
 					    	    beforeloadstoreByStore(xtDistrictList,parms);
@@ -360,7 +360,7 @@ function initBOrderFormEdit(b_order_id){
 								text:'快速选择常用收货地址',
 								style:'margin:2px 0px 0px 0px;',
 								handler:function(button){
-									initBMemberAddressWin(top.Ext.getCmp('b_member_id').getValue());
+									initBMemberAddressWin(Ext.getCmp('b_member_id').getValue());
 								}
 						}]
 					}]
@@ -374,7 +374,7 @@ function initBOrderFormEdit(b_order_id){
 		}
 		]
 	});
-	bOrderFormEdit = Ext.create('top.Ext.FormPanel',{
+	bOrderFormEdit = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',

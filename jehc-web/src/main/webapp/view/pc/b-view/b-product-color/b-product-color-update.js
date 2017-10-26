@@ -7,7 +7,7 @@ function updateBProductColor(){
 		return;
 	}
 	initBProductColorFormEdit();
-	bProductColorWinEdit = Ext.create('top.Ext.Window',{
+	bProductColorWinEdit = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:800,
 		height:400,
@@ -50,7 +50,7 @@ function updateBProductColor(){
 	loadFormData(bProductColorFormEdit,'../bProductColorController/getBProductColorById?b_product_color_id='+ record.items[0].data.b_product_color_id);
 }
 function initBProductColorFormEdit(){
-	bProductColorFormEdit = Ext.create('top.Ext.FormPanel',{
+	bProductColorFormEdit = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',

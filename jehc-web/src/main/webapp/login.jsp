@@ -219,7 +219,6 @@ $('#loginForm').bootstrapValidator({
 	
 //提交登录form
 function login(){
-	console.info($('#readme').is(':checked'));
 	var bootform =  $('#loginForm');
 	if(typeof(bootform) == "undefined" ||null == bootform || '' == bootform){
 		window.parent.toastrBoot(4,"未能获取到form对象!");

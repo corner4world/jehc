@@ -2,7 +2,7 @@ var bProductColorWinAdd;
 var bProductColorFormAdd;
 function addBProductColor(){
 	initBProductColorFormAdd();
-	bProductColorWinAdd = Ext.create('top.Ext.Window',{
+	bProductColorWinAdd = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:800,
 		height:400,
@@ -34,14 +34,14 @@ function addBProductColor(){
 		}]
 	});
 	bProductColorWinAdd.show();
-	top.Ext.getCmp('b_product_id').setValue($('#b_product_id_').val());
+	Ext.getCmp('b_product_id').setValue($('#b_product_id_').val());
 	/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/
 	initTopFileRight('xt_attachment_id','xt_attachment_id_pic',1,1);
 	/**初始化附件右键菜单结束**/
 
 }
 function initBProductColorFormAdd(){
-	bProductColorFormAdd = Ext.create('top.Ext.FormPanel',{
+	bProductColorFormAdd = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		region:'center',
 		waitMsgTarget:true,

@@ -838,6 +838,15 @@ public class ActivitiUtil extends BaseService{
 		return list;
 	}
 	
+	/**
+	 * 根据流程定义id查找所有实例
+	 * @param processDefinitionKey
+	 * @return
+	 */
+	public List<ProcessInstance> getProcessInstaceListById(String processDefinitionId){ 
+		List<ProcessInstance> list = runtimeService.createProcessInstanceQuery().processDefinitionId(processDefinitionId).list();  
+		return list;
+	}
 	
 	/**
      * 获取活动任务

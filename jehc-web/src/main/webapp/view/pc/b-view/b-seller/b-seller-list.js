@@ -152,7 +152,7 @@ Ext.onReady(function(){
 						handler:function(rec){
                 			reGetWidthAndHeight();
 			            	var b_seller_id = rec.up('splitbutton').getWidgetRecord().data.b_seller_id;
-			        		var bSellerLoginWin = Ext.create('top.Ext.Window',{
+			        		var bSellerLoginWin = Ext.create('Ext.Window',{
 								layout:'fit',
 								width:clientWidth,                    
 								height:clientHeight, 
@@ -188,7 +188,7 @@ Ext.onReady(function(){
 						handler:function(rec){
 			            	reGetWidthAndHeight();
 			            	var b_seller_id = rec.up('splitbutton').getWidgetRecord().data.b_seller_id;
-			        		var bSellerProductWin = Ext.create('top.Ext.Window',{
+			        		var bSellerProductWin = Ext.create('Ext.Window',{
 								layout:'fit',
 								width:clientWidth,                    
 								height:clientHeight, 
@@ -216,7 +216,7 @@ Ext.onReady(function(){
 						handler:function(rec){
 							reGetWidthAndHeight();
 			            	var b_seller_id = rec.up('splitbutton').getWidgetRecord().data.b_seller_id;
-			            	var bSellerExpressWin = Ext.create('top.Ext.Window',{
+			            	var bSellerExpressWin = Ext.create('Ext.Window',{
 								layout:'fit',
 								width:clientWidth,                    
 								height:clientHeight, 
@@ -244,7 +244,7 @@ Ext.onReady(function(){
 						handler:function(rec){
 							reGetWidthAndHeight();
 			            	var b_seller_id = rec.up('splitbutton').getWidgetRecord().data.b_seller_id;
-			        		var bSellerContactsWin = Ext.create('top.Ext.Window',{
+			        		var bSellerContactsWin = Ext.create('Ext.Window',{
 								layout:'fit',
 								width:clientWidth,                    
 								height:clientHeight, 

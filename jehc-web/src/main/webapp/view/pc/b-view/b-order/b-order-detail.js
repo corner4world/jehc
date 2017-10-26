@@ -14,7 +14,7 @@ function detailBOrder(){
 	parms = {parentId:record.items[0].data.xt_cityID};
     beforeloadstoreByStore(xtDistrictList,parms);
     reGetWidthAndHeight();
-	bOrderWinDetail = Ext.create('top.Ext.Window',{
+	bOrderWinDetail = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight,
@@ -46,11 +46,11 @@ function detailBOrder(){
 	});
 	bOrderWinDetail.show();
 	loadFormData(bOrderFormDetail,'../bOrderController/getBOrderById?b_order_id='+ record.items[0].data.b_order_id);
-	top.Ext.getCmp('summoney').setText("汇总金额:"+record.items[0].data.b_order_total_price+"元/单位");
+	Ext.getCmp('summoney').setText("汇总金额:"+record.items[0].data.b_order_total_price+"元/单位");
 }
 function initBOrderFormDetail(b_order_id){
 	initBOrderDetailGrid(b_order_id);
-	var udetailTab = Ext.create('top.Ext.TabPanel',{
+	var udetailTab = Ext.create('Ext.TabPanel',{
 		activeTab:0,
 		region:'center',
 		tabPosition:'left',
@@ -248,8 +248,8 @@ function initBOrderFormDetail(b_order_id){
 						anchor:'60%',
 						listeners:{
 			                 select:function(combo,records,options){
-			                	top.Ext.getCmp('xt_cityID').setValue("");
-			                	top.Ext.getCmp('xt_districtID').setValue("");
+			                	Ext.getCmp('xt_cityID').setValue("");
+			                	Ext.getCmp('xt_districtID').setValue("");
 					            xtCityList.load({params:{parentId:this.value}});
 					            parms = {parentId:this.value};
 					    	    beforeloadstoreByStore(xtCityList,parms);
@@ -284,7 +284,7 @@ function initBOrderFormDetail(b_order_id){
 						anchor:'60%',
 						listeners:{
 			                 select:function(combo,records,options){
-			                	top.Ext.getCmp('xt_districtID').setValue("");
+			                	Ext.getCmp('xt_districtID').setValue("");
 					            xtDistrictList.load({params:{parentId:this.value}});
 					            parms = {parentId:this.value};
 					    	    beforeloadstoreByStore(xtDistrictList,parms);
@@ -347,7 +347,7 @@ function initBOrderFormDetail(b_order_id){
 		}
 		]
 	});
-	bOrderFormDetail = Ext.create('top.Ext.FormPanel',{
+	bOrderFormDetail = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',

@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="/deng/include/include.jsp"%>
 <%@ include file="/deng/include/indexboot.jsp"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -674,6 +673,74 @@
 				overflow-y:auto;
 			}
 		</style>
+		<!-- 修改密码模态框（Modal）开始 -->
+		<div class="modal fade" id="updatePwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">
+							修改密码
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form id="updatePwdForm" method="post">
+			                <div class="form-group">
+			                    <label class="control-label">旧&nbsp;&nbsp;密&nbsp;&nbsp;码</label>
+			                    <div class="input-icon">
+			                    <i class="fa fa-lock"></i>
+			                    <input class="form-control placeholder-no-fix" type="password" placeholder="请输入旧密码" name="oldPwd" id="oldPwd"/> 
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="control-label">新&nbsp;&nbsp;密&nbsp;&nbsp;码</label>
+			                    <div class="input-icon">
+			                    <i class="fa fa-lock"></i>
+			                    <input class="form-control placeholder-no-fix" type="password" placeholder="请输入新密码" name="newPwd" id="newPwd"/> 
+			                    </div>
+			                </div>
+			                <div class="form-group">
+			                    <label class="control-label">确认密码</label>
+			                    <div class="input-icon">
+			                    <i class="fa fa-lock"></i>
+			                    <input class="form-control placeholder-no-fix" type="password" placeholder="请再次输入新密码" name="surePwd" id="surePwd"/> 
+			                    </div>
+			                </div>
+		                </form>
+					</div>
+					<div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="button" class="btn btn-primary" onclick="doUpdate()">提交更改</button>
+		            </div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+		<!-- 修改密码模态框（Modal）结束 -->
+		<!-- 锁屏模态框（Modal）开始 -->
+		<div class="modal fade" id="lockModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop=”static”  aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="myModalLabel">
+							用户<font color=red>${xtUserinfo.xt_userinfo_realName}</font>已被锁定中...
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form id="lockForm" method="post">
+			                <div class="form-group">
+			                    <div class="input-icon">
+			                    <i class="fa fa-lock"></i>
+			                    <input class="form-control placeholder-no-fix" type="password" placeholder="请输入密码" name="password" id="password"/> 
+			                    </div>
+			                </div>
+		                </form>
+					</div>
+					<div class="modal-footer">
+		                <button type="button" class="btn btn-primary" onclick="unlockSystem()">执行解锁</button>
+		            </div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+		<!-- 锁屏模态框（Modal）结束 -->
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
 </html>

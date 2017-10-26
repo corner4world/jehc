@@ -404,7 +404,7 @@ var bsellerstore;
 var bsellergrid;
 function initBsellerGrid(){
 	bsellerstore = getGridJsonStore('../bSellerController/getBSellerListByCondition',[]);
-	bsellergrid = Ext.create('top.Ext.grid.Panel',{
+	bsellergrid = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
 		store:bsellerstore,
@@ -484,7 +484,7 @@ function initBsellerGrid(){
 				var b_seller_name = bsellergrid.getSelectionModel().selected.items[0].data.b_seller_name;
 				var b_seller_id = bsellergrid.getSelectionModel().selected.items[0].data.b_seller_id;
 				var str = "[<font color=red><br>商家、卖家:"+b_seller_name+"<br></font>]";
-				top.Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
+				Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
 					if(btn == 'yes'){
 						Ext.getCmp('b_seller_name').setValue(b_seller_name);
 						Ext.getCmp('b_seller_id').setValue(b_seller_id);
@@ -495,7 +495,7 @@ function initBsellerGrid(){
 		}
 	});
 	reGetWidthAndHeight();
-	bsellerWin = Ext.create('top.Ext.Window',{
+	bsellerWin = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight, 

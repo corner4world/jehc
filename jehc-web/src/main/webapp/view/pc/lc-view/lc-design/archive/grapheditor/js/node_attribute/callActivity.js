@@ -141,10 +141,10 @@ function initCallActivityNodeAttributeInputParm(cell){
 	callActivityNodeAttributeInputParmGrid = Ext.create('Ext.grid.Panel',{
 			store:callActivityNodeAttributeInputParm_store,
 			requires:[
-		        'top.Ext.grid.plugin.CellEditing',
-		        'top.Ext.form.field.Text',
-		        'top.Ext.form.field.TextArea',
-		        'top.Ext.toolbar.TextItem'
+		        'Ext.grid.plugin.CellEditing',
+		        'Ext.form.field.Text',
+		        'Ext.form.field.TextArea',
+		        'Ext.toolbar.TextItem'
 		    ],
 			columnLines:true,
 	        multiSelect:true,
@@ -221,7 +221,7 @@ function initCallActivityNodeAttributeInputParm(cell){
 						msgTishi("请选择要删除的项");
 						return;
 					 }
-				     top.Ext.MessageBox.confirm('确定删除', '确定要删除所选项吗？', function(btn) {  
+				     Ext.MessageBox.confirm('确定删除', '确定要删除所选项吗？', function(btn) {  
 				       if(btn == 'yes'){  
 				           callActivityNodeAttributeInputParmGrid.getStore().remove(callActivityNodeAttributeInputParmGrid.getSelectionModel().getSelection());  
 				           callActivityNodeAttributeInputParmGrid.getStore().sync();  
@@ -278,10 +278,10 @@ function initCallActivityNodeAttributeOutParm(cell){
 	callActivityNodeAttributeOutParmGrid = Ext.create('Ext.grid.Panel',{
 			store:callActivityNodeAttributeOutParm_store,
 			requires:[
-		        'top.Ext.grid.plugin.CellEditing',
-		        'top.Ext.form.field.Text',
-		        'top.Ext.form.field.TextArea',
-		        'top.Ext.toolbar.TextItem'
+		        'Ext.grid.plugin.CellEditing',
+		        'Ext.form.field.Text',
+		        'Ext.form.field.TextArea',
+		        'Ext.toolbar.TextItem'
 		    ],
 			columnLines:true,
 	        multiSelect:true,
@@ -357,7 +357,7 @@ function initCallActivityNodeAttributeOutParm(cell){
 						msgTishi("请选择要删除的项");
 						return;
 					 }
-				     top.Ext.MessageBox.confirm('确定删除', '确定要删除所选项吗？', function(btn) {  
+				     Ext.MessageBox.confirm('确定删除', '确定要删除所选项吗？', function(btn) {  
 				       if(btn == 'yes'){  
 				           callActivityNodeAttributeOutParmGrid.getStore().remove(callActivityNodeAttributeOutParmGrid.getSelectionModel().getSelection());  
 				           callActivityNodeAttributeOutParmGrid.getStore().sync();  

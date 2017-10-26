@@ -5,7 +5,7 @@ var xtDepartSelectStore;
 function updateXtDepart(xt_departinfo_name,xt_departinfo_id,xt_menuinfo_id,xt_menuinfo_title){
 	reGetWidthAndHeight();
 	initDepartGridSelect(xt_menuinfo_id,xt_menuinfo_title,xt_departinfo_id);
-	xtDepartSelectWin = Ext.create('top.Ext.Window',{
+	xtDepartSelectWin = Ext.create('Ext.Window',{
 		layout:'border', 
 		width:clientWidth*0.8,                    
 		height:clientHeight, 
@@ -49,7 +49,7 @@ function initDepartGridSelect(xt_menuinfo_id,xt_menuinfo_title,xt_departinfo_id)
 			extraParams:{id:'0',xt_departinfo_id:xt_departinfo_id,type:encodeURI('部门'),xt_menuinfo_id:xt_menuinfo_id}
         }
     });
-	xtDepartSelectGrid = Ext.create('top.Ext.tree.Panel', {
+	xtDepartSelectGrid = Ext.create('Ext.tree.Panel', {
         reserveScrollbar:true,
         id:'xtDepartinfoSelectGrid',
         region:'center',
@@ -158,7 +158,7 @@ function addXtDataAuthorityByDepart(xt_menuinfo_id,xt_departinfo_id){
 			}
 		}
 	}
-	top.Ext.Msg.confirm('提示','确定保存该数据？',function(btn){
+	Ext.Msg.confirm('提示','确定保存该数据？',function(btn){
 		if(btn == 'yes'){
 			var params = {xt_departinfo_id:xt_departinfo_id,id:id,xt_menuinfo_id:xt_menuinfo_id,delID:delID};
 			ajaxRequest('../xtDataAuthorityController/addXtDataAuthorityByDepart',xtDepartSelectGrid,params,'正在执行保存操作中！请稍后...');

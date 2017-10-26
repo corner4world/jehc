@@ -10,7 +10,7 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 	initXtUserinfoGrided(xt_role_id);
 	initXtDpPanel(xt_role_id);
 	reGetWidthAndHeight();
-	xtUserinfoWin = Ext.create('top.Ext.Window',{
+	xtUserinfoWin = Ext.create('Ext.Window',{
 		layout:'border', 
 		maximizable:true,
 		minimizable:true,
@@ -69,7 +69,7 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 function initXtUserinfoGrid(xt_role_id){
 	reGetWidthAndHeight();
 	xtUserinfoStore = getGridJsonStore('../xtRoleinfoController/getUserinfoListByCondition?flag=2&xt_role_id='+xt_role_id,[]);
-	xtUserinfoGrid = Ext.create('top.Ext.grid.Panel',{
+	xtUserinfoGrid = Ext.create('Ext.grid.Panel',{
 		region:'north',
 		store:xtUserinfoStore,
 		height:document.documentElement.clientHeight*0.5,
@@ -190,7 +190,7 @@ function initXtUserinfoGrid(xt_role_id){
 function initXtUserinfoGrided(xt_role_id){
 	reGetWidthAndHeight();
 	xtUserinfoStoreed = getGridJsonStore('../xtRoleinfoController/getUserinfoListByCondition?flag=1&xt_role_id='+xt_role_id,[]);
-	xtUserinfoGrided = Ext.create('top.Ext.grid.Panel',{
+	xtUserinfoGrided = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		store:xtUserinfoStoreed,
 		height:document.documentElement.clientHeight*0.4,
@@ -332,7 +332,7 @@ function initXtDpPanel(xt_role_id){
          }  
 	});  
 	//2创建treePanel
-	xtDpPanel = Ext.create('top.Ext.tree.Panel',{   
+	xtDpPanel = Ext.create('Ext.tree.Panel',{   
 		region:'west',
         store:xtDpStore,  
         autoEncode:true,//提交时是否自动编码   
@@ -379,7 +379,7 @@ function addXtUr(xt_role_id){
 			xt_userinfo_id=xt_userinfo_id+","+model.selected.items[i].data.xt_userinfo_id;
 		}
 	}
-	top.Ext.Msg.confirm('提示','确定导入所选用户？',function(btn){
+	Ext.Msg.confirm('提示','确定导入所选用户？',function(btn){
 		if(btn == 'yes'){
 			var params = {xt_userinfo_id:xt_userinfo_id,xt_role_id:xt_role_id};
 			showWaitMsg("正在导入中...");
@@ -390,7 +390,7 @@ function addXtUr(xt_role_id){
 			    success:function(response,opts){
 			    	hideWaitMsg();
 			    	var obj=Ext.decode(response.responseText);  
-	       			top.Ext.example.msg('提示', obj.msg);//提示之后消失
+	       			Ext.example.msg('提示', obj.msg);//提示之后消失
 					xtUserinfoGrid.getStore().reload();
 					xtUserinfoGrided.getStore().reload();
 			    },  
@@ -418,7 +418,7 @@ function delXtUR(xt_role_id){
 			xt_userinfo_id=xt_userinfo_id+","+model.selected.items[i].data.xt_userinfo_id;
 		}
 	}
-	top.Ext.Msg.confirm('提示','确定移除所选用户？',function(btn){
+	Ext.Msg.confirm('提示','确定移除所选用户？',function(btn){
 		if(btn == 'yes'){
 			var params = {xt_userinfo_id:xt_userinfo_id,xt_role_id:xt_role_id};
 			showWaitMsg("正在移除用户中...");
@@ -429,7 +429,7 @@ function delXtUR(xt_role_id){
 			    success:function(response,opts){
 			    	hideWaitMsg();
 			    	var obj=Ext.decode(response.responseText);  
-	       			top.Ext.example.msg('提示', obj.msg);//提示之后消失
+	       			Ext.example.msg('提示', obj.msg);//提示之后消失
 					xtUserinfoGrid.getStore().reload();
 					xtUserinfoGrided.getStore().reload();
 			    },  

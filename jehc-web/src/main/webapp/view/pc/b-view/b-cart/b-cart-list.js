@@ -516,7 +516,7 @@ var bInvoiceGrid;
 function initBInvoiceWin(b_member_id){
 	reGetWidthAndHeight();
 	initBInvoiceGrid(b_member_id);
-	bInvoiceWin = Ext.create('top.Ext.Window',{
+	bInvoiceWin = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -532,7 +532,7 @@ function initBInvoiceWin(b_member_id){
 }
 function initBInvoiceGrid(b_member_id){
 	bInvoiceStore = getGridJsonStore('../bInvoiceController/getBInvoiceListByCondition?b_member_id='+b_member_id,[]);
-	bInvoiceGrid = Ext.create('top.Ext.grid.Panel',{
+	bInvoiceGrid = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
 		store:bInvoiceStore,
@@ -649,10 +649,10 @@ function initBInvoiceGrid(b_member_id){
 					b_invoice_type = "增值税发票";
 				}
 				var str = "[<font color=red><br>发票名称:"+b_invoice_name+"<br>"+"发票类型:"+b_invoice_type+"<br></font>]";
-				top.Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
+				Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
 					if(btn == 'yes'){
-						top.Ext.getCmp('b_invoice_id').setValue(b_invoice_id);
-						top.Ext.getCmp('b_invoice_name').setValue(b_invoice_name);
+						Ext.getCmp('b_invoice_id').setValue(b_invoice_id);
+						Ext.getCmp('b_invoice_name').setValue(b_invoice_name);
 						bInvoiceWin.close();
 						initBMemberAddressWin(b_member_id);
 					}
@@ -674,7 +674,7 @@ function initBMemberAddressWin(b_member_id){
 	}
 	reGetWidthAndHeight();
 	initBMemberAddressGrid(b_member_id);
-	bMemberAddressWin = Ext.create('top.Ext.Window',{
+	bMemberAddressWin = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -690,7 +690,7 @@ function initBMemberAddressWin(b_member_id){
 }
 function initBMemberAddressGrid(b_member_id){
 	bMemberAddressStore = getGridJsonStore('../bMemberAddressController/getBMemberAddressListByCondition?b_member_id='+b_member_id,[]);
-	bMemberAddressGrid = Ext.create('top.Ext.grid.Panel',{
+	bMemberAddressGrid = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
 		store:bMemberAddressStore,
@@ -768,7 +768,7 @@ function initBMemberAddressGrid(b_member_id){
 				var xt_cityName = bMemberAddressGrid.getSelectionModel().selected.items[0].data.xt_cityName;
 				var xt_districtName = bMemberAddressGrid.getSelectionModel().selected.items[0].data.xt_districtName;
 				var str = "[<font color=red><br>省份:"+xt_provinceName+"<br>城市:"+xt_cityName+"<br>区县:"+xt_districtName+"<br>详细地址:"+b_member_address_detail+"<br>邮编:"+postcode+"<br></font>]";
-				top.Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
+				Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
 					if(btn == 'yes'){
 						xtCityList.reload({params:{parentId:xt_provinceID}});
 					    var parm = {parentId:xt_provinceID};
@@ -776,10 +776,10 @@ function initBMemberAddressGrid(b_member_id){
 						xtDistrictList.load({params:{parentId:xt_cityID}});
 					    var parms = {parentId:xt_cityID};
 					    beforeloadstoreByStore(xtDistrictList,parms);
-						top.Ext.getCmp('xt_cityID').setValue(xt_cityID);
-						top.Ext.getCmp('xt_provinceID').setValue(xt_provinceID);
-						top.Ext.getCmp('xt_districtID').setValue(xt_districtID);
-						top.Ext.getCmp('b_cart_order_address_address').setValue(b_member_address_detail);
+						Ext.getCmp('xt_cityID').setValue(xt_cityID);
+						Ext.getCmp('xt_provinceID').setValue(xt_provinceID);
+						Ext.getCmp('xt_districtID').setValue(xt_districtID);
+						Ext.getCmp('b_cart_order_address_address').setValue(b_member_address_detail);
 						bMemberAddressWin.close();
 					}
 				});
@@ -793,10 +793,10 @@ function initBMemberAddressGrid(b_member_id){
 /**购物车明细**/
 function initBCartDetailGrid(b_cart_id){
 	b_cart_detail_store = getGridJsonStore('../bCartDetailController/getBCartDetailListByCondition?b_cart_id='+b_cart_id,[]);
-	this.editing = Ext.create('top.Ext.grid.plugin.CellEditing',{
+	this.editing = Ext.create('Ext.grid.plugin.CellEditing',{
     	clicksToEdit:1
     });
-	b_cart_detail_grid = Ext.create('top.Ext.grid.Panel',{
+	b_cart_detail_grid = Ext.create('Ext.grid.Panel',{
 		requires:[
 	        'Ext.grid.plugin.CellEditing',
 	        'Ext.form.field.Text',
@@ -889,9 +889,9 @@ function initBCartDetailGrid(b_cart_id){
 								summoney += record.data.b_cart_detail_total_price;
 								b_cart_total_number += record.data.b_cart_detail_number;
 							} 
-							top.Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
-							top.Ext.getCmp('b_cart_total_price').setValue(summoney);
-							top.Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
+							Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
+							Ext.getCmp('b_cart_total_price').setValue(summoney);
+							Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
 				  		}
 				  	}
                 }
@@ -928,9 +928,9 @@ function initBCartDetailGrid(b_cart_id){
 								summoney += record.data.b_cart_detail_total_price;
 								b_cart_total_number+=record.data.b_cart_detail_number;
 							} 
-							top.Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
-							top.Ext.getCmp('b_cart_total_price').setValue(summoney);
-							top.Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
+							Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
+							Ext.getCmp('b_cart_total_price').setValue(summoney);
+							Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
 				  		}
 				  	}
                 }
@@ -997,11 +997,11 @@ function initBCartDetailGrid(b_cart_id){
 							summoney += record.data.b_cart_detail_total_price;
 							b_cart_total_number+=record.data.b_cart_detail_number;
 					    } 
-					    top.Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
-					    top.Ext.getCmp('b_cart_total_price').setValue(summoney);
-					    top.Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
+					    Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
+					    Ext.getCmp('b_cart_total_price').setValue(summoney);
+					    Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
 				   	}else{
-					   	top.Ext.MessageBox.confirm('确定删除', '该条数据已经在数据中存在，确定要删除所选项吗？', function(btn) {  
+					   	Ext.MessageBox.confirm('确定删除', '该条数据已经在数据中存在，确定要删除所选项吗？', function(btn) {  
 					       if(btn == 'yes'){  
 					       		var params = {b_cart_detail_id:b_cart_detail_id}
 					       		showTopLoading("正在执行删除操作，请稍后..");
@@ -1020,9 +1020,9 @@ function initBCartDetailGrid(b_cart_id){
 											summoney += record.data.b_cart_detail_total_price;
 											b_cart_total_number+=record.data.b_cart_detail_number;
 									    } 
-									    top.Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
-									    top.Ext.getCmp('b_cart_total_price').setValue(summoney);
-									    top.Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
+									    Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
+									    Ext.getCmp('b_cart_total_price').setValue(summoney);
+									    Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
 									    hideTopWaitMsg();
 								    },  
 								    failure:function(response,opts){  
@@ -1056,7 +1056,7 @@ var bSellerStore;
 function initBProductWin(){
 	reGetWidthAndHeight();
 	initBProductGrid();
-	bProductWin = Ext.create('top.Ext.Window',{
+	bProductWin = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -1073,7 +1073,7 @@ function initBProductWin(){
 
 function initBProductGrid(){
 	bProductStore = getGridJsonStore('../bStockController/getBStockListByCondition',[]);
-	bProductGrid = Ext.create('top.Ext.grid.Panel',{
+	bProductGrid = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
 		store:bProductStore,
@@ -1100,7 +1100,7 @@ function initBProductGrid(){
 				var b_brand_name = bProductGrid.getSelectionModel().selected.items[0].data.b_brand_name;
 				var suggested_price = bProductGrid.getSelectionModel().selected.items[0].data.suggested_price;
 				var str = "[<font color=red><br>商家、卖家:"+b_seller_name+"<br>商品名称:"+b_product_name+"<br>品牌:"+b_brand_name+"<br>品类:"+b_category_name+"<br></font>]";
-				top.Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
+				Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
 					if(btn == 'yes'){
 						var model = Ext.create(b_cart_detail_grid.getStore().model);  
 					    model.set('b_seller_name',b_seller_name);  
@@ -1122,9 +1122,9 @@ function initBProductGrid(){
 							summoney += record.data.b_cart_detail_total_price;
 							b_cart_total_number+=record.data.b_cart_detail_number;
 						} 
-						top.Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
-						top.Ext.getCmp('b_cart_total_price').setValue(summoney);
-						top.Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
+						Ext.getCmp('summoney').setText("汇总金额:"+summoney+"元/单位");
+						Ext.getCmp('b_cart_total_price').setValue(summoney);
+						Ext.getCmp('b_cart_total_number').setValue(b_cart_total_number);
 						bProductWin.close();
 					}
 				});

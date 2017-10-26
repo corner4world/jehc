@@ -8,7 +8,7 @@ function detailXtKnowledge(){
 		return;
 	}
 	initXtKnowledgeFormDetail();
-	xtKnowledgeWinDetail = Ext.create('top.Ext.Window',{
+	xtKnowledgeWinDetail = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth*0.8,                    
 		height:clientHeight, 
@@ -40,7 +40,7 @@ function detailXtKnowledge(){
 	loadFormData(xtKnowledgeFormDetail,'../xtKnowledgeController/getXtKnowledgeById?xt_knowledge_id='+ record.items[0].data.xt_knowledge_id);
 }
 function initXtKnowledgeFormDetail(){
-	xtKnowledgeFormDetail = Ext.create('top.Ext.FormPanel',{
+	xtKnowledgeFormDetail = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',

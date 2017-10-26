@@ -475,7 +475,7 @@ function initXtTriPanel(){
 
 
 function backPanel(record){
-	var flexSearchFormDetail = Ext.create('top.Ext.FormPanel',{
+	var flexSearchFormDetail = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',
@@ -495,13 +495,13 @@ function backPanel(record){
 		]
 	});
 	for(var dataKey in record){
-		var subgroup =  Ext.create('top.Ext.form.TextField',{
+		var subgroup =  Ext.create('Ext.form.TextField',{
 			fieldLabel:dataKey,
 			value:record[dataKey]
 		});
 		flexSearchFormDetail.add(flexSearchFormDetail.items.getCount(),subgroup);
 	}
-	var flexSearchWinDetail = Ext.create('top.Ext.Window',{
+	var flexSearchWinDetail = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:800,
 		height:400,

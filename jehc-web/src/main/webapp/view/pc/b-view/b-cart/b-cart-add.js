@@ -4,7 +4,7 @@ var b_cart_detail_grid;
 function addBCart(){
 	reGetWidthAndHeight();
 	initBCartFormAdd();
-	bCartWinAdd = Ext.create('top.Ext.Window',{
+	bCartWinAdd = Ext.create('Ext.Window',{
 		layout:'fit',                    
 		width:clientWidth,                    
 		height:clientHeight,
@@ -45,12 +45,12 @@ function addBCart(){
 		}]
 	});
 	bCartWinAdd.show();
-	top.Ext.getCmp('b_cart_sessionid').setValue(JSESSIONID);
+	Ext.getCmp('b_cart_sessionid').setValue(JSESSIONID);
 }
 var addTab;
 function initBCartFormAdd(){
 	initBCartDetailGrid();
-	addTab = Ext.create('top.Ext.TabPanel',{
+	addTab = Ext.create('Ext.TabPanel',{
 		activeTab:0,
 		region:'center',
 		xtype:'tabpanel',
@@ -84,7 +84,7 @@ function initBCartFormAdd(){
 		                select:function(combo,records,options){
 		                		initBInvoiceWin(this.value);
 		                		/**
-			                 	top.Ext.getCmp('b_invoice_id').setValue("");
+			                 	Ext.getCmp('b_invoice_id').setValue("");
 			                    b_invoiceList.reload({params:{b_member_id:this.value}});
 			                    var parm = {start:getCP(b_invoiceList)[0],limit:getCP(b_invoiceList)[1],b_member_id:this.value};
 							    beforeloadstoreByStore(b_invoiceList,parm)
@@ -168,7 +168,7 @@ function initBCartFormAdd(){
 							text:'快速选择发票信息',
 							style:'margin:2px 0px 0px 0px;',
 							handler:function(button){
-								initBInvoiceWin(top.Ext.getCmp('b_member_id').getValue());
+								initBInvoiceWin(Ext.getCmp('b_member_id').getValue());
 							}
 						}]
 					},
@@ -233,8 +233,8 @@ function initBCartFormAdd(){
 						anchor:'60%',
 						listeners:{
 			                 select:function(combo,records,options){
-			                	top.Ext.getCmp('xt_cityID').setValue("");
-			                	top.Ext.getCmp('xt_districtID').setValue("");
+			                	Ext.getCmp('xt_cityID').setValue("");
+			                	Ext.getCmp('xt_districtID').setValue("");
 					            xtCityList.load({params:{parentId:this.value}});
 					            parms = {parentId:this.value};
 					    	    beforeloadstoreByStore(xtCityList,parms);
@@ -261,7 +261,7 @@ function initBCartFormAdd(){
 						anchor:'60%',
 						listeners:{
 			                 select:function(combo,records,options){
-			                	top.Ext.getCmp('xt_districtID').setValue("");
+			                	Ext.getCmp('xt_districtID').setValue("");
 					            xtDistrictList.load({params:{parentId:this.value}});
 					            parms = {parentId:this.value};
 					    	    beforeloadstoreByStore(xtDistrictList,parms);
@@ -318,7 +318,7 @@ function initBCartFormAdd(){
 								text:'快速选择常用收货地址',
 								style:'margin:2px 0px 0px 0px;',
 								handler:function(button){
-									initBMemberAddressWin(top.Ext.getCmp('b_member_id').getValue());
+									initBMemberAddressWin(Ext.getCmp('b_member_id').getValue());
 								}
 						}]
 					}]
@@ -332,7 +332,7 @@ function initBCartFormAdd(){
 		}
 		]
 	});
-	bCartFormAdd = Ext.create('top.Ext.FormPanel',{
+	bCartFormAdd = Ext.create('Ext.FormPanel',{
 		layout:'fit',
 		border:false,
 		autoScroll:false,

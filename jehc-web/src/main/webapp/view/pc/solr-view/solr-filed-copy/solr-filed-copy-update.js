@@ -13,7 +13,7 @@ function updateSolrFiledCopy(){
 		height:400,
 		maximizable:true,
 		minimizable:true,
-		animateTarget:top.document.body,
+		animateTarget:document.body,
 		plain:true,
 		modal:true,
 		title:'编辑信息',

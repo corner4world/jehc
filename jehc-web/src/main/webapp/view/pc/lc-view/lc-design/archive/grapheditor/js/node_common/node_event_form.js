@@ -383,7 +383,7 @@ var formValuesGrid;
 var formValuesStore;
 function showFormValuesWin(){
 	initFormValues();
-	formValuesWin = Ext.create('top.Ext.Window',{  
+	formValuesWin = Ext.create('Ext.Window',{  
          title:'配置表单字段属性',  
          layout:'fit', 
          width:600, 
@@ -448,17 +448,17 @@ function initFormValues(){
               }  
           }  
     })
-	this.editing = Ext.create('top.Ext.grid.plugin.CellEditing',{
+	this.editing = Ext.create('Ext.grid.plugin.CellEditing',{
     	clicksToEdit:1
     });
 	//定义grid编辑列
-	formValuesGrid = Ext.create('top.Ext.grid.Panel',{
+	formValuesGrid = Ext.create('Ext.grid.Panel',{
 			store:formValuesStore,
 			requires:[
-		        'top.Ext.grid.plugin.CellEditing',
-		        'top.Ext.form.field.Text',
-		        'top.Ext.form.field.TextArea',
-		        'top.Ext.toolbar.TextItem'
+		        'Ext.grid.plugin.CellEditing',
+		        'Ext.form.field.Text',
+		        'Ext.form.field.TextArea',
+		        'Ext.toolbar.TextItem'
 		    ],
 			columnLines:true,
 	        multiSelect:true,
@@ -521,7 +521,7 @@ function initFormValues(){
 						msgTishi("请选择要删除的项");
 						return;
 					 }
-				     top.Ext.MessageBox.confirm('确定删除', '确定要删除所选项吗？', function(btn) {  
+				     Ext.MessageBox.confirm('确定删除', '确定要删除所选项吗？', function(btn) {  
 				       if(btn == 'yes'){  
 				           formValuesGrid.getStore().remove(formValuesGrid.getSelectionModel().getSelection());  
 				           formValuesGrid.getStore().sync();  

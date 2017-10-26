@@ -5,7 +5,7 @@ var formSearc;
 function initListDeleted(){
 	store_deleted = getGridJsonStore('../xtUserinfoController/getXtUserinfoDeletedListByCondition',[{}]);
 	expander_deleted = new Ext.ux.RowExpander({
-	    rowBodyTpl:new top.Ext.XTemplate(
+	    rowBodyTpl:new Ext.XTemplate(
 	    	'<table border="1" width="100%" style="border-collapse: collapse; border-color:#f5f5f5;">',
 	             '<tr><td width="90"><b>照&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;片</b></td><td><img src="../deng/images/img/552cd6d7b8ec1_32.png"/></td></tr>',
 	             /**'<tr><td><b>学&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</b></td><td>{xt_userinfo_highestDegree}</td></tr>',**/
@@ -20,7 +20,7 @@ function initListDeleted(){
 	    )
 	});
 	/**查询区域可扩展**/
-	var formItems = Ext.create('top.Ext.FormPanel',{
+	var formItems = Ext.create('Ext.FormPanel',{
 		maxHeight:220,
 		waitMsgTarget:true,
 		defaultType:'textfield',
@@ -65,7 +65,7 @@ function initListDeleted(){
 		]
 	});
 	formSearc = initSearchFormByUserdefined('north',formItems,true,'left');
-	grid_deleted = Ext.create('top.Ext.grid.Panel',{
+	grid_deleted = Ext.create('Ext.grid.Panel',{
 		region:'center',
 		xtype:'panel',
 		store:store_deleted,
@@ -224,7 +224,7 @@ function initListDeleted(){
 	});
 	store_deleted.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store_deleted,formSearc));});
 	reGetWidthAndHeight();
-	win_deleted = Ext.create('top.Ext.Window',{
+	win_deleted = Ext.create('Ext.Window',{
 		layout:'border',
 		title:'已删除用户列表',
 		width:clientWidth,                    
@@ -304,7 +304,7 @@ function recoverXtUserinfo(){
 			xt_userinfo_id=xt_userinfo_id+","+model.selected.items[i].data.xt_userinfo_id;
 		}
 	}
-	top.Ext.Msg.confirm('提示','确定要恢复所选数据？',function(btn){
+	Ext.Msg.confirm('提示','确定要恢复所选数据？',function(btn){
 		if(btn == 'yes'){
 			var params = {xt_userinfo_id:xt_userinfo_id};
 			var gridArray = [];

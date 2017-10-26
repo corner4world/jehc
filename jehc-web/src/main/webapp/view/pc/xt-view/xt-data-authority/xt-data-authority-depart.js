@@ -4,7 +4,7 @@ var departWin;
 function showDepartWin(xt_menuinfo_id,xt_menuinfo_title){
 	initDepartTreeGrid(xt_menuinfo_id,xt_menuinfo_title);
 	reGetTopWidthAndHeight();
-	departWin = Ext.create('top.Ext.Window',{
+	departWin = Ext.create('Ext.Window',{
 		layout:'fit', 
 		width:clientWidth*0.8,                    
 		height:clientHeight*0.8, 
@@ -48,7 +48,7 @@ function initDepartTreeGrid(xt_menuinfo_id,xt_menuinfo_title){
         },
         lazyFill:true
     });
-    departGrid = Ext.create('top.Ext.tree.Panel', {
+    departGrid = Ext.create('Ext.tree.Panel', {
         title:'部门树结构',
         reserveScrollbar:true,
         collapsible:false,

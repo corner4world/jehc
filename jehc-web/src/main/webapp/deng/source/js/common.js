@@ -109,7 +109,7 @@ function gValue(id){
 }
 //获取TOP层元素
 function gTopValue(id){
-	return top.Ext.getCmp(id).getValue();
+	return Ext.getCmp(id).getValue();
 }
 //赋值元素对象
 function sValue(id,val){
@@ -117,11 +117,11 @@ function sValue(id,val){
 }
 //赋值TOP层元素
 function sTopValue(id,val){
-	top.Ext.getCmp(id).setValue(val);
+	Ext.getCmp(id).setValue(val);
 }
 //隐藏TOP层按钮
 function hiddenTopBtn(id){
-	top.Ext.getCmp(id).setVisible(false);
+	Ext.getCmp(id).setVisible(false);
 }
 //隐藏层按钮
 function hiddenBtn(id){
@@ -129,7 +129,7 @@ function hiddenBtn(id){
 }
 //显示TOP层按钮
 function showTopBtn(id){
-	top.Ext.getCmp(id).setVisible(true);
+	Ext.getCmp(id).setVisible(true);
 }
 //显示层按钮
 function showBtn(id){
@@ -314,7 +314,7 @@ function getGridBBar(store){
 
 //获取DataGrid的bbar 容器最外层使用
 function getGridTopBBar(store){
-	pagesize_combo = Ext.create('top.Ext.form.ComboBox',{
+	pagesize_combo = Ext.create('Ext.form.ComboBox',{
 		name:'pagesize',
 		hiddenName:'pagesize',
 		typeAhead:true,
@@ -342,7 +342,7 @@ function getGridTopBBar(store){
 		store.load();
 		store.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store,null));});
 	});
-	bbar = Ext.create('top.Ext.PagingToolbar',{
+	bbar = Ext.create('Ext.PagingToolbar',{
         pageSize:page_number,
 		store:store,
 		firstText:'第一页',
@@ -627,7 +627,7 @@ function showTopLoading(msg){
 	var me = this,
              i = 0,
              fn;
-	top.Ext.MessageBox.show({
+	Ext.MessageBox.show({
 		title:'提示',
 		msg:msg == null ? '正在处理数据,请稍候...':msg,
 		progressText:'正在处理数据,请稍候...',
@@ -641,10 +641,10 @@ function showTopLoading(msg){
             me.timer = null;
             ++i;
             if(i === 12){
-                top.Ext.MessageBox.hide();
+                Ext.MessageBox.hide();
             }else{
                 var val = i / 11;
-                top.Ext.MessageBox.updateProgress(val, Math.round(100 * val) + '% 已完成进度');
+                Ext.MessageBox.updateProgress(val, Math.round(100 * val) + '% 已完成进度');
                 me.timer = Ext.defer(fn, 500);
             }
         };
@@ -730,7 +730,7 @@ function hideWaitMsg(){
  * 隐藏请求等待进度条窗口
  */
 function hideTopWaitMsg(){
-	top.Ext.MessageBox.hide();
+	Ext.MessageBox.hide();
 }
 /**
   *刷新显示
@@ -779,7 +779,7 @@ function loadFormData(forms,url){
 		    success:function(form, action){},                      
 	   	    failure:function(form, action){
 	   	    	if( typeof(action.result.msg) != "undefined"){
-	        		top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+	        		Ext.example.msg('提示', action.result.msg);//提示之后消失
 	        	}
 	   	    }                  
 		});
@@ -806,7 +806,7 @@ function loadFormDataCallBack(forms,url,fn){
 	        },                      
 	   	    failure:function(form, action){
 	   	    	if( typeof(action.result.msg) != "undefined"){
-	        		top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+	        		Ext.example.msg('提示', action.result.msg);//提示之后消失
 	        	}
 	   	    }                  
 		});
@@ -825,7 +825,7 @@ function submitForm(subForm,url,grids,win,isHide,isReset){
 			items = Ext.ComponentQuery.query('button',win); 
 		}
 		if(subForm.form.isValid()){   
-			top.Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
+			Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
 				if(btn == 'yes'){
 					///////////禁用window中组件按钮
 					for(var it in items){
@@ -842,7 +842,7 @@ function submitForm(subForm,url,grids,win,isHide,isReset){
 						method:'post', 
 				        waitMsg:'正在保存数据，请稍后...',                      
 				        success:function(form, action){    
-				   			top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+				   			Ext.example.msg('提示', action.result.msg);//提示之后消失
 				      		if(isReset){
 				      			subForm.form.reset();  
 				      		}                       
@@ -863,7 +863,7 @@ function submitForm(subForm,url,grids,win,isHide,isReset){
 				      	},
 				        failure:function(form, action){
 				        	if( typeof(action.result.msg) != "undefined"){
-				        		top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+				        		Ext.example.msg('提示', action.result.msg);//提示之后消失
 				        	}
 				        	///////////激活window中组件按钮
 							for(var it in items){
@@ -892,7 +892,7 @@ function submitFormCallFn(subForm,url,grids,win,isHide,isReset,fn){
 			items = Ext.ComponentQuery.query('button',win); 
 		}
 		if(subForm.form.isValid()){
-			top.Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
+			Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
 				if(btn == 'yes'){
 				 ///////////禁用window中组件按钮
 				 for(var it in items){
@@ -909,7 +909,7 @@ function submitFormCallFn(subForm,url,grids,win,isHide,isReset,fn){
 					method:'post', 
 			        waitMsg:'正在保存数据，请稍后...',                      
 			        success:function(form, action){    
-			   			top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
 			      		if(isReset){
 			      			subForm.form.reset();  
 			      		}                       
@@ -932,7 +932,7 @@ function submitFormCallFn(subForm,url,grids,win,isHide,isReset,fn){
 			      	},
 			        failure:function(form, action){
 			        	if( typeof(action.result.msg) != "undefined"){
-			        		top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
 			        	}
 			        	///////////激活window中组件按钮
 						for(var it in items){
@@ -961,7 +961,7 @@ function submitFormIncludeParams(subForm,url,grids,win,isHide,isReset,params){
 			items = Ext.ComponentQuery.query('button',win); 
 		}
 		if(subForm.form.isValid()){
-			top.Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
+			Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
 				if(btn == 'yes'){
 				 ///////////禁用window中组件按钮
 				 for(var it in items){
@@ -978,7 +978,7 @@ function submitFormIncludeParams(subForm,url,grids,win,isHide,isReset,params){
 			        waitTitle:'提示',
 			        waitMsg:'正在保存数据，请稍后...',                      
 			        success:function(form, action){    
-			   			top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
 			      		if(isReset){
 			      			subForm.form.reset();  
 			      		}                       
@@ -999,7 +999,7 @@ function submitFormIncludeParams(subForm,url,grids,win,isHide,isReset,params){
 			      	},
 			        failure:function(form, action){
 			        	if( typeof(action.result.msg) != "undefined"){
-			        		top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
 			        	}
 			        	///////////激活window中组件按钮
 						for(var it in items){
@@ -1028,7 +1028,7 @@ function submitFormCallBack(subForm,url,grids,win,isHide,isReset,isCallForm,call
 			items = Ext.ComponentQuery.query('button',win); 
 		}
 		if(subForm.form.isValid()){  
-			top.Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
+			Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
 				if(btn == 'yes'){
 				 ///////////禁用window中组件按钮
 				 for(var it in items){
@@ -1045,7 +1045,7 @@ function submitFormCallBack(subForm,url,grids,win,isHide,isReset,isCallForm,call
 			        waitTitle:'提示',
 			        waitMsg:'正在保存数据，请稍后...',                      
 			        success:function(form, action){    
-			   			top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
 			      		if(isReset){
 			      			subForm.form.reset();  
 			      		}                       
@@ -1069,7 +1069,7 @@ function submitFormCallBack(subForm,url,grids,win,isHide,isReset,isCallForm,call
 			      	},
 			        failure:function(form, action){
 			        	if( typeof(action.result.msg) != "undefined"){
-			        		top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
 			        	}
 			        	///////////激活window中组件按钮
 						for(var it in items){
@@ -1098,7 +1098,7 @@ function submitForm(subForm,url,grids,win,isHide,isReset,isExpandAll){
 			items = Ext.ComponentQuery.query('button',win); 
 		}
 		if(subForm.form.isValid()){
-			top.Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
+			Ext.Msg.confirm('提示','确定要提交当前表单信息内容？',function(btn){
 				if(btn == 'yes'){
 				 ///////////禁用window中组件按钮
 				 for(var it in items){
@@ -1115,7 +1115,7 @@ function submitForm(subForm,url,grids,win,isHide,isReset,isExpandAll){
 					method:'post', 
 			        waitMsg:'正在保存数据，请稍后...',                      
 			        success:function(form, action){    
-			   			top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
 			      		if(isReset){
 			      			subForm.form.reset();  
 			      		}                       
@@ -1141,7 +1141,7 @@ function submitForm(subForm,url,grids,win,isHide,isReset,isExpandAll){
 			      	},
 			        failure:function(form, action){
 			        	if( typeof(action.result.msg) != "undefined"){
-			        		top.Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
 			        	}
 			        	///////////激活window中组件按钮
 						for(var it in items){
@@ -1328,13 +1328,13 @@ Ext.define('Ext.ux.ComboGrid',{
  
 //信息提示
 function msgTishi(msg){
-	top.Ext.example.msg('提示', msg);//提示之后消失
+	Ext.example.msg('提示', msg);//提示之后消失
 }
 
 //确定提示
 function confirmTishi(msg){
 	var flag = false;
-	top.Ext.Msg.confirm('提示',msg,function(btn){
+	Ext.Msg.confirm('提示',msg,function(btn){
 		if(btn == 'yes'){
 			flag = true;
 		}else{
@@ -1365,7 +1365,7 @@ function reGetWidthAndHeight(){
 }
 
 function reGetTopWidthAndHeight(){
-	var cvh = top.Ext.getBody().getViewSize();
+	var cvh = Ext.getBody().getViewSize();
 	clientWidth = cvh.width;
 	clientHeight = cvh.height;
 }
@@ -1536,7 +1536,7 @@ var searchForm;
 function initSearchForm(panelPosition,items,isTop,labelPosition){
 	var panelTop = "";
 	if(isTop){
-		panelTop = "top.";
+		panelTop = "";
 	}
 	searchForm = Ext.create(panelTop+'Ext.FormPanel',{
 		collapsible:false,
@@ -1565,7 +1565,7 @@ function initSearchForm(panelPosition,items,isTop,labelPosition){
 function initSearchFormByUserdefined(panelPosition,items,isTop,labelPosition){
 	var panelTop = "";
 	if(isTop){
-		panelTop = "top.";
+		panelTop = "";
 	}
 	return Ext.create(panelTop+'Ext.FormPanel',{
 		collapsible:false,
@@ -1690,7 +1690,7 @@ var optuploadWin;
 var optuploadForm;
 function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk){
 	if(flag == 2){
-		optuploadForm = Ext.create('top.Ext.FormPanel',{
+		optuploadForm = Ext.create('Ext.FormPanel',{
 			waitMsgTarget:true,
 			defaultType:'textfield',
 			autoScroll:true,
@@ -1879,7 +1879,7 @@ function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_abs
 		}
 	}
 	if(flag == 2){
-		optuploadWin = Ext.create('top.Ext.Window',{
+		optuploadWin = Ext.create('Ext.Window',{
 			layout:'fit',
 			width:400,
 			autoHeight:true,
@@ -1927,8 +1927,8 @@ function optupload(fieldid,picid,flag,validateparameter,validateSize,xt_path_abs
 			                    /**动态改变容器中路径用该方法**/
 			                    msgTishi(action.result.data.msg);
 			                    if(action.result.data.jsonID != 0){
-				                    top.Ext.getCmp(picid).getEl().dom.src = action.result.data.jsonValue;
-				                    top.Ext.getCmp(fieldid).setValue(action.result.data.jsonID);
+				                    Ext.getCmp(picid).getEl().dom.src = action.result.data.jsonValue;
+				                    Ext.getCmp(fieldid).setValue(action.result.data.jsonID);
 				                    optuploadWin.close();
 			                    }else{
 			                    	///////////激活window中组件按钮
@@ -2053,8 +2053,8 @@ function ajaxFilePathBackRequest(url,params,flag){
 	        var obj=Ext.decode(response.responseText); 
 	        for(var i = 0; i < obj.items.length; i++){
 	        	if(flag == 2){
-	        		if(typeof(top.Ext.getCmp(obj.items[i].field_name+'_pic')) != 'undefined'){
-	        			top.Ext.getCmp(obj.items[i].field_name+'_pic').getEl().dom.src = obj.items[i].xt_attachmentPath;
+	        		if(typeof(Ext.getCmp(obj.items[i].field_name+'_pic')) != 'undefined'){
+	        			Ext.getCmp(obj.items[i].field_name+'_pic').getEl().dom.src = obj.items[i].xt_attachmentPath;
 	        		}
 	        	}else{
 	        		if(typeof(Ext.getCmp(obj.items[i].field_name+'_pic')) != 'undefined'){
@@ -2096,7 +2096,7 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 					glyph:0xf0c5,
 					handler:function(){
 						var url_path = Ext.getCmp(picid).getEl().dom.src;
-						top.Ext.Msg.alert("复制文件地址",url_path);
+						Ext.Msg.alert("复制文件地址",url_path);
 					}
 				},
 				'-',
@@ -2114,12 +2114,12 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 				contextmenuFile.showAt(e.getXY());
 			});
 		}else{
-			var contextmenuFile = new top.Ext.menu.Menu({
+			var contextmenuFile = new Ext.menu.Menu({
 				items:[{
 					text:'下 载',
 					glyph:0xf019,
 					handler:function(){
-						var xt_attachment_id = top.Ext.getCmp(fieldid).getValue();
+						var xt_attachment_id = Ext.getCmp(fieldid).getValue();
 						downOrExport(basePath+'/xtCommonController/downFile?xt_attachment_id='+xt_attachment_id);
 					}
 				},
@@ -2128,8 +2128,8 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 					text:'复制文件地址',
 					glyph:0xf0c5,
 					handler:function(){
-						var url_path = top.Ext.getCmp(picid).getEl().dom.src;
-						top.Ext.Msg.alert("复制文件地址",url_path);
+						var url_path = Ext.getCmp(picid).getEl().dom.src;
+						Ext.Msg.alert("复制文件地址",url_path);
 					}
 				},
 				'-',
@@ -2137,19 +2137,19 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 					text:'查 看',
 					glyph:0xf1c5,
 					handler:function(){
-						var url_path = top.Ext.getCmp(picid).getEl().dom.src;
+						var url_path = Ext.getCmp(picid).getEl().dom.src;
 						getimghw(url_path);
 					}
 				}]
 			});
-			top.Ext.getCmp(picid).getEl().on('contextmenu',function(e){ 
+			Ext.getCmp(picid).getEl().on('contextmenu',function(e){ 
 				e.preventDefault(); 
 				contextmenuFile.showAt(e.getXY());
 			});
 		}
 	}else{
 		if(flag == 2){
-			var contextmenuFile = new top.Ext.menu.Menu({
+			var contextmenuFile = new Ext.menu.Menu({
 				items:[{
 					text:'上 传',
 					glyph:0xf093,
@@ -2160,7 +2160,7 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 					text:'下 载',
 					glyph:0xf019,
 					handler:function(){
-						var xt_attachment_id = top.Ext.getCmp(fieldid).getValue();
+						var xt_attachment_id = Ext.getCmp(fieldid).getValue();
 						downOrExport(basePath+'/xtCommonController/downFile?xt_attachment_id='+xt_attachment_id);
 					}
 				},
@@ -2169,8 +2169,8 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 					text:'删 除',
 					glyph:0xf014,
 					handler:function(){
-						top.Ext.getCmp(picid).getEl().dom.src = bsdefimg;
-				        top.Ext.getCmp(fieldid).setValue('');
+						Ext.getCmp(picid).getEl().dom.src = bsdefimg;
+				        Ext.getCmp(fieldid).setValue('');
 					}
 				},
 				'-',
@@ -2178,8 +2178,8 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 					text:'复制文件地址',
 					glyph:0xf0c5,
 					handler:function(){
-						var url_path = top.Ext.getCmp(picid).getEl().dom.src;
-						top.Ext.Msg.alert("复制文件地址",url_path);
+						var url_path = Ext.getCmp(picid).getEl().dom.src;
+						Ext.Msg.alert("复制文件地址",url_path);
 					}
 				},
 				'-',
@@ -2187,12 +2187,12 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 					text:'查 看',
 					glyph:0xf1c5,
 					handler:function(){
-						var url_path = top.Ext.getCmp(picid).getEl().dom.src;
+						var url_path = Ext.getCmp(picid).getEl().dom.src;
 						getimghw(url_path);
 					}
 				}]
 			});
-			top.Ext.getCmp(picid).getEl().on('contextmenu',function(e){ 
+			Ext.getCmp(picid).getEl().on('contextmenu',function(e){ 
 				e.preventDefault(); 
 				contextmenuFile.showAt(e.getXY());
 			});
@@ -2227,7 +2227,7 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 					glyph:0xf0c5,
 					handler:function(){
 						var url_path = Ext.getCmp(picid).getEl().dom.src;
-						top.Ext.Msg.alert("复制文件地址",url_path);
+						Ext.Msg.alert("复制文件地址",url_path);
 					}
 				},
 				'-',
@@ -2259,12 +2259,12 @@ function initFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,valida
 **/
 function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk){
 	if(isUpAndDelete == 2){
-		var contextmenuFile = new top.Ext.menu.Menu({
+		var contextmenuFile = new Ext.menu.Menu({
 			items:[{
 				text:'下 载',
 				glyph:0xf019,
 				handler:function(){
-					var xt_attachment_id = top.Ext.getCmp(fieldid).getValue();
+					var xt_attachment_id = Ext.getCmp(fieldid).getValue();
 					downOrExport(basePath+'/xtCommonController/downFile?xt_attachment_id='+xt_attachment_id);
 				}
 			},
@@ -2273,8 +2273,8 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
 				text:'复制文件地址',
 				glyph:0xf0c5,
 				handler:function(){
-					var url_path = top.Ext.getCmp(picid).getEl().dom.src;
-					top.Ext.Msg.alert("复制文件地址",url_path);
+					var url_path = Ext.getCmp(picid).getEl().dom.src;
+					Ext.Msg.alert("复制文件地址",url_path);
 				}
 			},
 			'-',
@@ -2282,17 +2282,17 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
 				text:'查 看',
 				glyph:0xf1c5,
 				handler:function(){
-					var url_path = top.Ext.getCmp(picid).getEl().dom.src;
+					var url_path = Ext.getCmp(picid).getEl().dom.src;
 					getimghw(url_path);
 				}
 			}]
 		});
-		top.Ext.getCmp(picid).getEl().on('contextmenu',function(e){ 
+		Ext.getCmp(picid).getEl().on('contextmenu',function(e){ 
 			e.preventDefault(); 
 			contextmenuFile.showAt(e.getXY());
 		});
 	}else{
-		var contextmenuFile = new top.Ext.menu.Menu({
+		var contextmenuFile = new Ext.menu.Menu({
 			items:[{
 				text:'上 传',
 				glyph:0xf093,
@@ -2303,7 +2303,7 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
 				text:'下 载',
 				glyph:0xf019,
 				handler:function(){
-					var xt_attachment_id = top.Ext.getCmp(fieldid).getValue();
+					var xt_attachment_id = Ext.getCmp(fieldid).getValue();
 					downOrExport(basePath+'/xtCommonController/downFile?xt_attachment_id='+xt_attachment_id);
 				}
 			},
@@ -2312,8 +2312,8 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
 				text:'删 除',
 				glyph:0xf014,
 				handler:function(){
-					top.Ext.getCmp(picid).getEl().dom.src = bsdefimg;
-			        top.Ext.getCmp(fieldid).setValue('');
+					Ext.getCmp(picid).getEl().dom.src = bsdefimg;
+			        Ext.getCmp(fieldid).setValue('');
 				}
 			},
 			'-',
@@ -2321,8 +2321,8 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
 				text:'复制文件地址',
 				glyph:0xf0c5,
 				handler:function(){
-					var url_path = top.Ext.getCmp(picid).getEl().dom.src;
-					top.Ext.Msg.alert("复制文件地址",url_path);
+					var url_path = Ext.getCmp(picid).getEl().dom.src;
+					Ext.Msg.alert("复制文件地址",url_path);
 				}
 			},
 			'-',
@@ -2330,12 +2330,12 @@ function initTopFileRight(fieldid,picid,flag,isUpAndDelete,validateparameter,val
 				text:'查 看',
 				glyph:0xf1c5,
 				handler:function(){
-					var url_path = top.Ext.getCmp(picid).getEl().dom.src;
+					var url_path = Ext.getCmp(picid).getEl().dom.src;
 					getimghw(url_path);
 				}
 			}]
 		});
-		top.Ext.getCmp(picid).getEl().on('contextmenu',function(e){ 
+		Ext.getCmp(picid).getEl().on('contextmenu',function(e){ 
 			e.preventDefault(); 
 			contextmenuFile.showAt(e.getXY());
 		});
@@ -2485,7 +2485,7 @@ function getimghw(src){
 			if(h < 100){
 				h = 200;
 			}
-			Ext.create('top.Ext.Window',{
+			Ext.create('Ext.Window',{
 				width:w,
 				height:h,
 				maximizable:true,

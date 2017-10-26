@@ -8,7 +8,7 @@ function updateXtKnowledge(){
 	}
 	initXtKnowledgeFormEdit();
 	reGetWidthAndHeight();
-	xtKnowledgeWinEdit = Ext.create('top.Ext.Window',{
+	xtKnowledgeWinEdit = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth*0.8,                    
 		height:clientHeight, 
@@ -46,7 +46,7 @@ function updateXtKnowledge(){
 	loadFormData(xtKnowledgeFormEdit,'../xtKnowledgeController/getXtKnowledgeById?xt_knowledge_id='+ record.items[0].data.xt_knowledge_id);
 }
 function initXtKnowledgeFormEdit(){
-	xtKnowledgeFormEdit = Ext.create('top.Ext.FormPanel',{
+	xtKnowledgeFormEdit = Ext.create('Ext.FormPanel',{
 		xtype:'form',
 		waitMsgTarget:true,
 		defaultType:'textfield',

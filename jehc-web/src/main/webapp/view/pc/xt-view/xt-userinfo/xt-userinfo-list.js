@@ -593,7 +593,7 @@ var staticDepartinfoAndPostTreeGrid;
 var staticDepartinfoAndPostStore;
 function selectStaticDepartinfoAndPost(){
 	initStaticDepartinfoAndPostTreeGrid();
-	staticDepartinfoAndPostWin = Ext.create('top.Ext.Window',{
+	staticDepartinfoAndPostWin = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth*0.6,                    
 		height:clientHeight*0.8, 
@@ -627,7 +627,7 @@ function initStaticDepartinfoAndPostTreeGrid(){
         },
         lazyFill:true
     });
-    staticDepartinfoAndPostTreeGrid = Ext.create('top.Ext.tree.Panel', {
+    staticDepartinfoAndPostTreeGrid = Ext.create('Ext.tree.Panel', {
         reserveScrollbar:true,
         collapsible:false,
         loadMask:true,
@@ -659,12 +659,12 @@ function initStaticDepartinfoAndPostTreeGrid(){
 					var xt_departinfo_name = integerappend.substring(33,integerappend.length);
 					var xt_departinfo_id = integerappend.substring(0,32);
 					var dpStr = "[<font color=red><br>部门:"+xt_departinfo_name+"<br>"+"岗位:"+text+"<br></font>]";
-					top.Ext.Msg.confirm('提示','确定要选择:<br>'+dpStr+'？',function(btn){
+					Ext.Msg.confirm('提示','确定要选择:<br>'+dpStr+'？',function(btn){
 						if(btn == 'yes'){
-							top.Ext.getCmp('xt_departinfo_name').setValue(xt_departinfo_name);
-							top.Ext.getCmp('xt_departinfo_id').setValue(xt_departinfo_id);
-							top.Ext.getCmp('xt_post_name').setValue(text);
-							top.Ext.getCmp('xt_post_id').setValue(id);
+							Ext.getCmp('xt_departinfo_name').setValue(xt_departinfo_name);
+							Ext.getCmp('xt_departinfo_id').setValue(xt_departinfo_id);
+							Ext.getCmp('xt_post_name').setValue(text);
+							Ext.getCmp('xt_post_id').setValue(id);
 							staticDepartinfoAndPostWin.close();
 						}
 					});

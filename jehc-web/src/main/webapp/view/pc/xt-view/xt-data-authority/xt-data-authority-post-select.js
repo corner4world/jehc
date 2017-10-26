@@ -5,7 +5,7 @@ var xtPostSelectStore;
 function updateXtPost(xt_post_name,xt_post_id,xt_menuinfo_id,xt_menuinfo_title){
 	reGetWidthAndHeight();
 	initPostGridSelect(xt_menuinfo_id,xt_menuinfo_title,xt_post_id);
-	xtPostSelectWin = Ext.create('top.Ext.Window',{
+	xtPostSelectWin = Ext.create('Ext.Window',{
 		layout:'border', 
 		width:clientWidth*0.8,                    
 		height:clientHeight, 
@@ -49,7 +49,7 @@ function initPostGridSelect(xt_menuinfo_id,xt_menuinfo_title,xt_post_id){
 			extraParams:{xt_post_id:xt_post_id,id:'0',type:encodeURI('岗位'),xt_menuinfo_id:xt_menuinfo_id}
         }
     });
-	xtPostSelectGrid = Ext.create('top.Ext.tree.Panel', {
+	xtPostSelectGrid = Ext.create('Ext.tree.Panel', {
         reserveScrollbar:true,
         id:'xtPostSelectGrid',
         region:'center',
@@ -158,7 +158,7 @@ function addXtDataAuthorityByPost(xt_menuinfo_id,xt_post_id){
 			}
 		}
 	}
-	top.Ext.Msg.confirm('提示','确定保存该数据？',function(btn){
+	Ext.Msg.confirm('提示','确定保存该数据？',function(btn){
 		if(btn == 'yes'){
 			var params = {xt_post_id:xt_post_id,id:id,xt_menuinfo_id:xt_menuinfo_id,delID:delID};
 			ajaxRequest('../xtDataAuthorityController/addXtDataAuthorityByPost',xtPostSelectGrid,params,'正在执行保存操作中！请稍后...');

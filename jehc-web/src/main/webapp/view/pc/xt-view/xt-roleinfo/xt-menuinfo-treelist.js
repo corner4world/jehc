@@ -4,7 +4,7 @@ var xtMenuinfoStore;
 function addXtMenuinfo(xt_role_id,xt_role_name){
 	initXtMenuinfoTreeGrid(xt_role_id);
 	reGetWidthAndHeight();
-	xtMenuinfoWin = Ext.create('top.Ext.Window',{
+	xtMenuinfoWin = Ext.create('Ext.Window',{
 		layout:'fit',
 		width:clientWidth*0.8,                    
 		height:clientHeight*0.7, 
@@ -64,7 +64,7 @@ function initXtMenuinfoTreeGrid(xt_role_id){
 			extraParams:{id:'0',type:encodeURI('菜单'),expanded:true,xt_role_id:xt_role_id}
         }
     });
-    xtMenuinfoGrid = Ext.create('top.Ext.tree.Panel', {
+    xtMenuinfoGrid = Ext.create('Ext.tree.Panel', {
         reserveScrollbar:true,
         collapsible:false,
         loadMask:true,
@@ -149,7 +149,7 @@ function addXtMR(xt_role_id){
 			id = id+','+checkedNodes[i].id;
 		}
 	} 
-	top.Ext.Msg.confirm('提示','确定分配所选资源？',function(btn){
+	Ext.Msg.confirm('提示','确定分配所选资源？',function(btn){
 		if(btn == 'yes'){
 			var params = {id:id,xt_role_id:xt_role_id};
 			ajaxRequest('../xtRoleinfoController/addXtMR',grid,params,'正在执行中...');
