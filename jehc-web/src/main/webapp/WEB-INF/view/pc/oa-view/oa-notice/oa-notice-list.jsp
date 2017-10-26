@@ -12,36 +12,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>公告管理</title>  
 </head>  
 <body>  
-<div class="panel panel-default">
-		<div class="panel-heading">查询条件</div>
-		<div class="panel-body form-group" style="margin-bottom: 0px;">
-			<form method="POST" id="searchForm">
-				<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-6">
+	<div class="panel panel-default">
+		<fieldset>
+		    <legend>查询条件</legend>
+		    <form method="POST" id="searchForm" class="form-inline">
+				<div class="form-group">
 					<label>标题</label> 
-					<input type="text" class="input-sm form-control" name="oa_noticeTitle" placeholder="输入标题">
+					<input type="text" class="form-control" name="oa_noticeTitle" placeholder="输入标题">
 				</div>
-				<div class="form-group col-lg-2 col-md-4 col-sm-4 col-xs-12">
+				<div class="form-group">
 					<label>创建时间</label>
-					<div class="input-daterange input-group" id="date">
+					<div class="input-group" id="date">
 						<input type="text" class="form_datetime form-control" placeholder="起始时间" name="oa_noticeCreateTime_st" />
 						<span class="input-group-addon">至</span> 
-						<input type="text" class="form_datetime form-control" placeholder="结束时间" name="oa_noticeCreateTime_et" />
+						<input type="text" class="form_datetime form-control" placeholder="结束时间" name="oa_noticeCreateTime_et"/>
 					</div>
 				</div>
-				<div class="form-group col-lg-2 col-md-3 col-sm-4 col-xs-12">
-			        <label for="name">审核状态</label>
+				<div class="form-group">
+			        <label class="form-label">审核状态</label>
 				    <select class="form-control show-tick cusp" data-style="btn-white" name="oa_notice_status" id="lc_status_store">
 				    	<option value=''>请选择</option>
 				    </select>
 			    </div>
 			</form>
-			<div class="col-md-offset-0 col-md-6">
-				<button class="btn btn-sm btn-default" onclick="search('datatables')">
+			<div class="form-group" style="margin-left: 32px;margin-top: 15px;">
+		    	<button class="btn btn-default" onclick="search('datatables')">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
 				</button>
-				<button class="btn btn-sm btn-default" onclick="resetAll();">重置</button>
-			</div>
-		</div>
+				<button class="btn btn-default" onclick="resetAll();">重置</button>
+		    </div>
+		</fieldset>
 	</div>
 	<div class="panel-body">
 		<div class="btn-group pull-right" style="margin-right: 20px;">
