@@ -127,7 +127,7 @@
 		                    	 <div class="form-group">
 				                    <div class="input-icon">
 					                    <i class="fa fa-sign-out"></i>
-					                    <input class="form-control placeholder-no-fix" type="text" placeholder="请输入验证码" name="validateCode" id="validateCode"/> 
+					                    <input class="form-control" type="text" placeholder="请输入验证码" name="validateCode" id="validateCode"/> 
 				                    </div>
 			                     </div>
 		                    </div>
@@ -143,9 +143,7 @@
 		                    </label>
 		                </div>
 		                <div class="form-group">
-		                    <button type="button" class="btn btn-primary" style="width: 370px;" onclick="login()">
-								登录
-							</button>
+		                    <input type="button" id="loginBtn" class="btn btn-primary" style="width: 370px;" onclick="login()" value="登录">
 		                </div>
 	                </form>
 				</div>
@@ -155,7 +153,21 @@
 		</div><!-- /.modal -->
 	</div>
 </body>
-<script>
+<script type="text/javascript">
+function callFocus(){
+	var userName = $('#userName').val();
+	var password = $('#password').val();
+	var validateCode = $('#validateCode').val();
+	if(userName == null || userName == ''){
+		return  $('#userName')[0].focus();
+	}
+	if(password == null || password == ''){
+		return  $('#password')[0].focus();
+	}
+	if(validateCode == null || validateCode ==''){
+		return  $('#validateCode')[0].focus();
+	}
+}
 $(document).ready(function() {
 	$('#myModal').modal({backdrop: 'static', keyboard: false});  
 	if(getCookie('readme') == 'readme'){
@@ -173,9 +185,6 @@ function clickYZM(){
 $('#loginForm').bootstrapValidator({
   message:'此值不是有效的',
   feedbackIcons:{
-      //valid:'glyphicon glyphicon-ok',
-      //invalid:'glyphicon glyphicon-remove',
-      //validating:'glyphicon glyphicon-refresh'
   },
   fields:{
 	  userName:{
@@ -216,19 +225,33 @@ $('#loginForm').bootstrapValidator({
      }
   }
 });
-	
+setTimeout(function () { 
+	callFocus();
+}, 500);
+
+$(function(){
+	document.onkeydown = function(e){ 
+	    var ev = document.all ? window.event : e;
+	    if(ev.keyCode==13) {
+	    	login();
+	     }
+	}
+});  
 //提交登录form
 function login(){
+	callFocus();
 	var bootform =  $('#loginForm');
 	if(typeof(bootform) == "undefined" ||null == bootform || '' == bootform){
 		window.parent.toastrBoot(4,"未能获取到form对象!");
 		return;
 	}
 	//验证
-	var boostrapValidator =bootform.data('bootstrapValidator');
+	var boostrapValidator = bootform.data('bootstrapValidator');
 	boostrapValidator.validate();
 	//验证有效开启发送异步请求
 	if(boostrapValidator.isValid()){
+		$("#loginBtn").attr("disabled",true);  
+		$("#loginBtn").val("正在登陆中......")
 		$.ajax({
             url:basePath+'/login/login',
             type:'POST',//PUT DELETE POST
@@ -237,7 +260,8 @@ function login(){
             	call(result);
             }, 
             error:function(){
-            	
+            	$("#loginBtn").val("登陆");
+            	$("#loginBtn").attr("disabled",false); 
             }
         })
 	}else{
@@ -251,6 +275,8 @@ function call(result){
 		if(obj.success == false){
 			clickYZM();
 			window.parent.toastrBoot(4,obj.msg);
+			$("#loginBtn").val("登陆");
+			$("#loginBtn").attr("disabled",false); 
 		}else{
 			clearCookie('readme');
 			clearCookie('XTUSERNAMECOOKIE');
@@ -262,11 +288,13 @@ function call(result){
 					setCookie('XTUSERPASSWORDCOOKIE',$('#password').val(),240);
 				}
 			}
-			window.parent.toastrBoot(3,"身份认证成功，开始进入平台主页面......");
+			$("#loginBtn").val("身份认证成功，开始进入平台......");
+			window.parent.toastrBoot(3,"身份认证成功，开始进入平台......");
 			window.location.href=basePath+"/index/index.html";
 		}
 	}catch(e){
-		
+		$("#loginBtn").val("登陆");
+		$("#loginBtn").attr("disabled",false); 
 	}
 }
 </script>
