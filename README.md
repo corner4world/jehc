@@ -6,7 +6,10 @@ http://git.oschina.net/jehc/jehc
 
  **开发工具：** 
 eclipse-jee-mars-1
+或eclipse-jee-mars-2
+或eclipse-juno
 或STS
+
 
  **非maven版本地址：** 
 
@@ -39,6 +42,8 @@ http://git.oschina.net/jehc/jehc
 
  **开发工具：** 
 eclipse-jee-mars-1
+或eclipse-jee-mars-2
+或eclipse-juno
 或STS
 
  **非maven版本地址：** 
