@@ -4,45 +4,48 @@ http://git.oschina.net/jehc/jehc
 
  **QQ讨论群:330370132** 
 
+ **开发工具：** 
+eclipse-jee-mars-1
+或eclipse-jee-mars-2
+或eclipse-juno
+或STS
+
+
+ **非maven版本地址：** 
+
+https://gitee.com/jehc/jehc-none-maven
 
 效果图片如下：
-
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105434_64d8b0c8_1341290.png "首页.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105453_f69181b8_1341290.png "在线设计.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105529_8cd87acf_1341290.png "用户管理.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105546_668cf2ff_1341290.png "数据权限.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105556_43d574b6_1341290.png "组织结构.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105607_03555196_1341290.png "全文检索.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105618_d38410c2_1341290.png "开发助手相关功能.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105627_173a0add_1341290.png "角色权限导入用户.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105635_b3e5dd30_1341290.png "角色权限.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105650_5ab3dfda_1341290.png "缓存.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105702_68f2686d_1341290.png "代码生成器.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105716_96298d22_1341290.png "报表.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105727_957f308e_1341290.png "操作日志.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105752_b8e98b28_1341290.png "调度器管理.png")
-
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/112845_b21ad51e_1341290.png "首页.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/112859_68b0ff42_1341290.png "在线设计.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/112912_40e49904_1341290.png "用户管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/112922_aa0a3d0c_1341290.png "用户管理编辑.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/112931_444ecbbb_1341290.png "组织机构.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/112940_903e88d8_1341290.png "角色权限导入资源.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/112949_4e03fa4f_1341290.png "角色权限导入用户.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/112959_221a4bee_1341290.png "公告.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/113008_d7f99613_1341290.png "公告新增.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/113018_f0b7a7a3_1341290.png "工作日志新增.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/113025_28e508bd_1341290.png "工作日志详情.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/113046_56efde75_1341290.png "工作日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/113102_e7d5257f_1341290.png "全文检索.png")
 jEhc能做什么
 电商后端及前端
 ![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105818_6f945e30_1341290.png "购物车.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105807_fa759437_1341290.png "订单中心.png")
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0915/105829_31fecdf0_1341290.png "订单中心-支付.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/113343_59431b4b_1341290.png "订单.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1017/113424_ee8faebf_1341290.png "订单支付.png")
 
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
 
  **QQ讨论群:330370132** 
 
-### 开发前部署老出现问题 
-一般出现环境问题（主要是编译问题较多）
-建议如下操作
-一、
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0903/121008_95886692_1341290.png "clean.png")
- **或** 
+ **开发工具：** 
+eclipse-jee-mars-1
+或eclipse-jee-mars-2
+或eclipse-juno
+或STS
 
-二、
-1.自己创建一个工程取名按照自己的来
-2.修改工程编码utf8
-3.拷贝如下几个目录全部拷贝并覆盖
-** 
-![输入图片说明](https://git.oschina.net/uploads/images/2017/0819/113650_c37e551c_1341290.png "[ON1R~`4U[R90ED5CB~B(]H.png")
+ **非maven版本地址：** 
+
+https://gitee.com/jehc/jehc-none-maven
