@@ -767,3 +767,248 @@ function getCounties(num){
     });
 }
 ///////////////////////省市区县统一处理结束//////////////////////////
+
+
+function bUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk){
+	$('#jehcUploadForm').bootstrapValidator({
+	  message:'此值不是有效的',
+	  feedbackIcons:{
+	  },
+	  fields:{
+		  jehcFile:{
+	          validators:{
+	              notEmpty:{
+	                  message:'请选择要上传的附件'
+	              }
+	          }
+	      }
+	  }
+	});
+	var jehcUploadForm =  $('#jehcUploadForm');
+	if(typeof(jehcUploadForm) == "undefined" ||null == jehcUploadForm || '' == jehcUploadForm){
+		window.parent.toastrBoot(4,"未能获取到上传组件form对象!");
+		return;
+	}
+	var boostrapValidator =updatePwdForm.data('bootstrapValidator');
+	boostrapValidator.validate();
+	//验证有效开启发送异步请求
+	if(boostrapValidator.isValid()){
+		$.ajax({
+			url:basePath+'/xtCommonController/upload',
+            type:'POST',//PUT DELETE POST
+            data:updatePwdForm.serialize(),
+            success:function(result){
+            	var obj = eval("(" + result + ")");
+            	console.info(obj);
+            	if(obj.success == false){
+            		window.parent.toastrBoot(4,obj.msg);
+            		return;
+            	}
+            	//赋值
+            	$("#"+picid).attr('src',obj.jsonValue); 
+            	$("#"+fieldid).val(obj.jsonID);
+            	//关闭上传窗口
+            	$('#jehcUploadModal').modal('hide');
+            	//并清空上传控件内容
+            }, 
+            error:function(){
+            }
+        })
+	}else{
+		window.parent.toastrBoot(4,"请选择上传的文件！");
+	}
+}
+
+
+/**
+ * method:上传操作
+ * fieldid:附件编号
+ * picid:附件上传后回显图片对象编号
+ * validateparameter:校验非法参数组装字符串
+ * validateSize:校验大小
+ * xt_path_absolutek:平台路径配置中心键（自定义上传对绝路径使用）
+ * xt_path_urlk:平台路径配置中心键（自定义上传路径 自定义URL地址）
+ * xt_path_relativek:平台路径配置中心键（自定义上传相对路径）
+ * llowedFileExtensions:['jpg','gif','png']
+**/
+
+function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk){
+	var allowedFileExtensions_ = ['jpg','gif','png','xls','xlsx','bmp','zip','docx','pptx','pdf','csv','txt','apk'];
+	var maxFileSize_ = 0;
+	if(null !=validateSize){
+		maxFileSize_ = validateSize;
+	}
+	if(null != validateparameter){
+		allowedFileExtensions_ = validateparameter;
+	}
+	
+	$('#jehcUploadModal').modal({backdrop: 'static', keyboard: false});
+	$("#jehcFile").fileinput({
+        showUpload:false,
+		showCaption:false,
+		showPreview:true,
+		language:'zh',
+        allowedFileExtensions:allowedFileExtensions_,//接收的文件后缀
+        minFileCount:1,
+        showCaption:true,/**是否显示标题**/
+        maxFileSize:maxFileSize_,/**单位为kb，如果为0表示不限制文件大小**/
+        maxFileCount:1,/**表示允许同时上传的最大文件个数**/
+        enctype:'multipart/form-data',
+        validateInitialCount:true,
+        msgFilesTooMany:"选择上传的文件数量({n}) 超过允许的最大数值{m}！"
+     })
+}
+
+/**
+ *初始化附件右键
+ *isUpAndDelete:表示是否拥有上传和删除功能1是2否（即明细页面使用） 如明细不需要上传 和删除功能
+ *validateparameter:校验非法参数组装字符串
+ *validateSize:校验大小
+ *xt_path_absolutek:平台路径配置中心键（自定义上传绝对路径使用）
+ *xt_path_relativek:平台路径配置中心键（自定义上传相对路径使用）
+ *xt_path_urlk:平台路径配置中心键（自定义上传路径 自定义URL地址）
+**/
+function initBFileRight(fieldid,picid,isUpAndDelete,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk){
+	if(isUpAndDelete == 2){
+		var menu = new BootstrapMenu('#'+picid,{
+			  actions:[
+			    {
+			      name:'下载',
+			      iconClass:'fa-download',
+			      onClick:function(){
+			    	  var xt_attachment_id = $('#fieldid').val();
+					  downOrExportB(basePath+'/xtCommonController/downFile?xt_attachment_id='+xt_attachment_id);
+			      }
+			    }, 
+			    {
+			      name:'复制文件地址',
+			      iconClass:'fa-clipboard',
+				  onClick:function(){
+					  var url_path = $("#"+picid)[0].src; 
+					  msgTishCallFnBoot("文件地址："+url_path,function(){});
+				  }
+			    },
+			    {
+			      name:'查看',
+			      iconClass:'fa-file-image-o',
+				  onClick:function(){
+					  var url_path = $("#"+picid)[0].src; 
+					  getBimghw(url_path);
+				  }
+			    }
+			    ]
+		});
+	}else{
+		var menu = new BootstrapMenu('#'+picid,{
+			  actions:[
+			    {
+			      name:'上传',
+			      iconClass:'fa-upload',
+			      onClick:function(){
+			    	  initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk);
+			      }
+			    }, 
+			    {
+			      name:'下载',
+			      iconClass:'fa-download',
+			      onClick:function(){
+			    	  var xt_attachment_id = $('#fieldid').val();
+					  downOrExportB(basePath+'/xtCommonController/downFile?xt_attachment_id='+xt_attachment_id);
+			      }
+			    }, 
+			    {
+			      name:'删除',
+			      iconClass:'fa-trash',
+			      onClick:function(){
+			    	  $("#"+picid).attr('src',bsdefimg); 
+				      $('#'+fieldid).val('');
+			      }
+			    },
+			    {
+			      name:'复制文件地址',
+			      iconClass:'fa-clipboard',
+				  onClick:function(){
+					  var url_path = $("#"+picid)[0].src; 
+					  msgTishCallFnBoot("文件地址："+url_path,function(){});
+				  }
+			    },
+			    {
+			      name:'查看',
+			      iconClass:'fa-file-image-o',
+				  onClick:function(){
+					  var url_path = $("#"+picid)[0].src; 
+					  getBimghw(url_path);
+				  }
+			    }
+			    ]
+		});
+	}
+	
+	$("jehcUploadBtn").click(function(){
+		bUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk);
+	});
+}
+
+/**
+ * 通过iFrame实现类ajax文件下载
+ */
+function downOrExportB(url){
+	/**
+	var exportIframe = document.createElement('iframe');
+	exportIframe.src = url;
+	exportIframe.style.display = "none";
+	document.body.appendChild(exportIframe);
+	**/
+	var frm = document.createElement('form');
+    frm.id = 'frmDownOrExport';
+    frm.name = grid.getId();
+    frm.className = 'x-hidden';
+    document.body.appendChild(frm);
+    
+//    Ext.Ajax.request({
+//        disableCaching:true ,
+//        url:url,
+//        method:'POST',
+//        isUpload:true,
+//        timeout:600000,//十分钟
+//        form:frm,
+//        params:{
+//        	exportOrDownloadSysFlag:'exportOrDownloadSysFlag'
+//        }
+//    });
+}
+
+function getBimghw(src){
+	try{
+		var img_url = src+'?'+Date.parse(new Date());
+		//创建对象
+		var img = new Image();
+		//改变图片的src
+		img.src = img_url;
+		// 加载完成执行
+		img.onload = function(){
+			var w = img.width;
+			var h = img.height;
+			if(w>1000){
+				w = 800;
+			}
+			if(h > 400){
+				h = 400;
+			}
+			if(w < 100){
+			    w = 260;
+			}
+			if(h < 100){
+				h = 200;
+			}
+		};
+		$('#jehcImagePreModal').modal({backdrop: 'static', keyboard: false});
+		$("#jehcImagePre").attr('src',img_url); 
+		img.onerror = function(){
+			window.parent.toastrBoot(4,"该图片不能预览!");
+		};
+	}catch(e){
+		//非法即不满足图片
+		window.parent.toastrBoot(4,"该图片不能预览!");
+	}
+}

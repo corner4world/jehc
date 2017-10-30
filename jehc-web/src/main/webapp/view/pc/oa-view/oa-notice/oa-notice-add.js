@@ -47,3 +47,6 @@ function addOaNotice(flag){
 	}
 	submitBForm('defaultForm','../oaNoticeController/addOaNotice','../oaNoticeController/loadOaNotice');
 }
+
+initBFileRight('xt_attachment_id','xt_attachment_id_pic');
+

@@ -112,6 +112,12 @@
 		<!-- jquery验证框架结束 -->
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.js"></script>
+		<!-- 文件上传通用模块 -->
+		<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/js/fileinput_locale_zh.js" type="text/javascript"></script>
+		<!-- 右键插件 -->
+		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-contextmenu/BootstrapMenu.min.js" type="text/javascript"></script>
 		<style type="text/css">
 			table.dataTable.no-footer {
 			    border-bottom: 1px solid #ffffff;
@@ -128,4 +134,48 @@
 			@media (min-width:768px){.modal-dialog{width:768px}
 		</style>
 	</head>
+	<!-- upload模态框（Modal）开始 -->
+	<div class="modal fade" id="jehcUploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop=”static”  aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">
+						附件上传
+					</h4>
+				</div>
+				<div class="modal-body">
+	                <form role="form" id="jehcUploadForm" method="post" enctype="multipart/form-data">
+                        <input id="jehcFile" name="jehcFile" class="file-loading" type="file" multiple = "false"  data-min-file-count="1" data-max-file-count="1" data-show-upload="false" data-show-preview="false"> <br>
+                    </form>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="button" class="btn btn-primary" id="jehcUploadBtn">开始上传</button>
+	            </div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<!-- upload模态框（Modal）结束 -->
+	
+	<!-- image预览模态框（Modal）开始 -->
+	<div class="modal fade" id="jehcImagePreModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop=”static”  aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="myModalLabel">
+						附件预览
+					</h4>
+				</div>
+				<div class="modal-body">
+					<div class="col-lg-4">
+						<img src = "../deng/images/default/add_d.png" id="jehcImagePre">    
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	            </div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<!-- image预览模态框（Modal）结束 -->
 </html>
