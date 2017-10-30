@@ -767,36 +767,17 @@ function getCounties(num){
     });
 }
 ///////////////////////省市区县统一处理结束//////////////////////////
-
-
 function bUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk){
-	$('#jehcUploadForm').bootstrapValidator({
-	  message:'此值不是有效的',
-	  feedbackIcons:{
-	  },
-	  fields:{
-		  jehcFile:{
-	          validators:{
-	              notEmpty:{
-	                  message:'请选择要上传的附件'
-	              }
-	          }
-	      }
-	  }
-	});
-	var jehcUploadForm =  $('#jehcUploadForm');
-	if(typeof(jehcUploadForm) == "undefined" ||null == jehcUploadForm || '' == jehcUploadForm){
-		window.parent.toastrBoot(4,"未能获取到上传组件form对象!");
-		return;
-	}
-	var boostrapValidator =updatePwdForm.data('bootstrapValidator');
-	boostrapValidator.validate();
+	/**
 	//验证有效开启发送异步请求
-	if(boostrapValidator.isValid()){
+	var jehcFile = $('#jehcFile').val();
+	var jehcUploadForm = $('#jehcUploadForm');
+	console.info(jehcFile);
+	if(null != jehcFile){
 		$.ajax({
 			url:basePath+'/xtCommonController/upload',
             type:'POST',//PUT DELETE POST
-            data:updatePwdForm.serialize(),
+            data:jehcUploadForm.serialize(),
             success:function(result){
             	var obj = eval("(" + result + ")");
             	console.info(obj);
@@ -810,13 +791,16 @@ function bUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,
             	//关闭上传窗口
             	$('#jehcUploadModal').modal('hide');
             	//并清空上传控件内容
+            	$('#jehcFile').val('');
             }, 
             error:function(){
+            	$('#jehcFile').val('');
             }
         })
 	}else{
 		window.parent.toastrBoot(4,"请选择上传的文件！");
 	}
+	**/
 }
 
 
@@ -841,22 +825,48 @@ function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolu
 	if(null != validateparameter){
 		allowedFileExtensions_ = validateparameter;
 	}
-	
 	$('#jehcUploadModal').modal({backdrop: 'static', keyboard: false});
 	$("#jehcFile").fileinput({
-        showUpload:false,
+		showUpload:true, //是否显示上传按钮
 		showCaption:false,
 		showPreview:true,
+		uploadUrl:basePath+'/xtCommonController/upload',
+		enctype:'multipart/form-data',
 		language:'zh',
         allowedFileExtensions:allowedFileExtensions_,//接收的文件后缀
         minFileCount:1,
+        uploadAsync:false,/**默认异步上传**/
         showCaption:true,/**是否显示标题**/
         maxFileSize:maxFileSize_,/**单位为kb，如果为0表示不限制文件大小**/
         maxFileCount:1,/**表示允许同时上传的最大文件个数**/
         enctype:'multipart/form-data',
         validateInitialCount:true,
-        msgFilesTooMany:"选择上传的文件数量({n}) 超过允许的最大数值{m}！"
-     })
+        msgFilesTooMany:"选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+        uploadExtraData:function (previewId, index) {    
+            var data = {
+            	validateparameter:(validateparameter != '' && null != validateparameter && typeof(validateparameter) != "undefined")?validateparameter:'',
+            	validateSize:(validateSize != '' && null != validateSize && typeof(validateSize) != "undefined")?validateSize:'',
+            	xt_path_absolutek:(xt_path_absolutek != '' && null != xt_path_absolutek && typeof(xt_path_absolutek) != "undefined")?xt_path_relativek:'',
+            	xt_path_relativek:(xt_path_relativek != '' && null != xt_path_relativek && typeof(xt_path_relativek) != "undefined")?xt_path_relativek:'',
+            	xt_path_urlk:(xt_path_urlk != '' && null != xt_path_urlk && typeof(xt_path_urlk) != "undefined")?xt_path_urlk:''
+            };
+            return data;
+       }
+     }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
+ 		 var obj = eval("(" + data.response + ")");
+     	 if(obj.data.jsonID != 0){
+     		//赋值
+          	$("#"+picid).attr('src',obj.data.jsonValue); 
+          	$("#"+fieldid).val(obj.data.jsonID);
+      		//关闭上传窗口
+          	$('#jehcUploadModal').modal('hide');
+          	//并清空上传控件内容
+          	$('#jehcFile').val('');
+          	 window.parent.toastrBoot(3,obj.data.msg);
+         }else{
+        	 window.parent.toastrBoot(4,obj.data.msg);
+         }
+     });
 }
 
 /**
@@ -943,10 +953,11 @@ function initBFileRight(fieldid,picid,isUpAndDelete,validateparameter,validateSi
 			    ]
 		});
 	}
-	
-	$("jehcUploadBtn").click(function(){
+	/**
+	$("#jehcUploadBtn").click(function(){
 		bUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk);
 	});
+	**/
 }
 
 /**

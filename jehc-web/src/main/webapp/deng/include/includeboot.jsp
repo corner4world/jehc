@@ -145,12 +145,11 @@
 				</div>
 				<div class="modal-body">
 	                <form role="form" id="jehcUploadForm" method="post" enctype="multipart/form-data">
-                        <input id="jehcFile" name="jehcFile" class="file-loading" type="file" multiple = "false"  data-min-file-count="1" data-max-file-count="1" data-show-upload="false" data-show-preview="false"> <br>
+                        <input id="jehcFile" name="picFile" class="file-loading" type="file" multiple = "false"  data-min-file-count="1" data-max-file-count="1" data-show-upload="true" data-show-preview="false"> <br>
                     </form>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	                <button type="button" class="btn btn-primary" id="jehcUploadBtn">开始上传</button>
 	            </div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
