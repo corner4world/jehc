@@ -253,6 +253,11 @@
                             </a>
                         </li> -->
                         ${MenuList }
+                        <!-- 隐藏最后一个nav-item，解决鼠标移入至最后一个标签出现闪动 -->
+                        <li class="nav-item" style="position: none;" id="lastHref">
+                            <a href="javascript:;" class="nav-link nav-toggle"  style="cursor:default;position: none;" onmouseover="this.style.backgroundColor=''" onmouseout="this.style.backgroundColor=''">
+                            </a>
+                        </li>
                     </ul>
                     <!-- END SIDEBAR MENU -->
                 </div>

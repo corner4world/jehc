@@ -48,7 +48,7 @@
 						<label class="col-lg-3 control-label">附件</label>
 						<div class="col-lg-4">
 							<input class="form-control" type="hidden" name="xt_attachment_id" id="xt_attachment_id">
-							<img src = "../deng/images/default/add_d.png" id="xt_attachment_id_pic">    
+							<img src = "../deng/images/default/add_d.png" class="img" id="xt_attachment_id_pic">    
 						</div>
 					</div>
 					<div class="form-group">

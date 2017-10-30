@@ -18,7 +18,8 @@ public class IndexTree {
 			if ("0".equals(node.getXt_menuinfo_parentId())) {
 				html.append("<li class=\"nav-item\">");
 				//根目录开始
-				html.append("\r\n<a href=\"javascript:clickAddTab('"+node.getXt_menuinfo_url()+"','"+node.getXt_menuinfo_title()+"','"+node.getXt_menuinfo_id()+"');\" class=\"nav-link nav-toggle\">");
+//				html.append("\r\n<a href=\"javascript:clickAddTab('"+node.getXt_menuinfo_url()+"','"+node.getXt_menuinfo_title()+"','"+node.getXt_menuinfo_id()+"');\" class=\"nav-link nav-toggle\">");
+				html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
 				html.append("\r\n<i class=\""+node.getXt_menuinfo_iconCls()+"\"></i>");
 				html.append("\r\n<span class=\"title\">"+node.getXt_menuinfo_title()+"</span>");
 				if(node.getXt_menuinfo_leaf().equals("0")){
@@ -42,7 +43,11 @@ public class IndexTree {
 			html.append("\r\n<ul class=\"sub-menu\">");
 			for (XtMenuinfo child:children) {
 				html.append("\r\n<li class=\"nav-item\">");
-				html.append("\r\n<a href=\"javascript:clickAddTab('"+child.getXt_menuinfo_url()+"','"+child.getXt_menuinfo_title()+"','"+child.getXt_menuinfo_id()+"');\" class=\"nav-link nav-toggle\">");
+				if(!child.getXt_menuinfo_leaf().equals("0")){
+					html.append("\r\n<a href=\"javascript:clickAddTab('"+child.getXt_menuinfo_url()+"','"+child.getXt_menuinfo_title()+"','"+child.getXt_menuinfo_id()+"');\" class=\"nav-link\">");
+				}else{
+					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
+				}
 				html.append("\r\n<i class=\""+child.getXt_menuinfo_iconCls()+"\"></i> "+child.getXt_menuinfo_title()+"");
 				if(child.getXt_menuinfo_leaf().equals("0")){
 					html.append("\r\n<span class=\"arrow\"></span>");

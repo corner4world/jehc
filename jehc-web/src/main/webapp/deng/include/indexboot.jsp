@@ -74,7 +74,6 @@
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootbox.js" type="text/javascript"></script>
         <!-- 提示插件结束 -->
         <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/app.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/apps/scripts/inbox.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
@@ -84,9 +83,6 @@
 		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.css" />
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
 		<!-- bootstrap验证框架结束 -->
-        <!-- 对话框插件 -->
-		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.css" />
-		<script src="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.min.js"></script>
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.js"></script>
 		<style type="text/css">

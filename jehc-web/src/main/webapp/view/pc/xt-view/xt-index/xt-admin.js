@@ -2,6 +2,8 @@ $(function () {
     $('#tabs').addtabs();
     //clickAddTab('/index/desk.html','平台首页','home_index',false);
     initLockSystem();
+    //隐藏最后一个nav-item，解决鼠标移入至最后一个标签出现闪动
+    $("#lastHref").hide();
 })
 
 function indexHome(){
