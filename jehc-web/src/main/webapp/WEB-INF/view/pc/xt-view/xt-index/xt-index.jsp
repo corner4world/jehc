@@ -296,6 +296,22 @@
                                     <option value="compact">左侧对其</option>
                                 </select>
                             </div>
+                            <!-- 
+                            <div class="theme-option">
+                                <span>主题样式</span>
+                                <select class="layout-style-option form-control input-small">
+                                    <option value="square" selected="selected">方角</option>
+                                    <option value="rounded">圆角</option>
+                                </select>
+                            </div>
+                             -->
+                            <div class="theme-option">
+                                <span> 布局风格 </span>
+                                <select class="layout-option form-control input-small">
+                                    <option value="fluid" selected="selected">全屏</option>
+                                    <option value="boxed">非全屏</option>
+                                </select>
+                            </div>
                             <div class="theme-option">
                                 <span> 边栏菜单 </span>
                                 <select class="sidebar-menu-option form-control input-small">
@@ -311,7 +327,7 @@
                                 </select>
                             </div>
                             <div class="theme-option">
-                                <span> 页脚 </span>
+                                <span> 页脚风格 </span>
                                 <select class="page-footer-option form-control input-small">
                                     <option value="fixed">固定</option>
                                     <option value="default" selected="selected">默认</option>
@@ -521,50 +537,7 @@
                 <i class="icon-arrow-up"></i>
             </div>
         </div>
-        <!-- 
-   		<style type="text/css">
-			.nav-pills>li>a, .nav-tabs>li>a {
-			    font-size: 16px;
-			}
-			.page-sidebar-menu.page-sidebar-menu-hover-submenu>li:hover>.sub-menu>li .sub-menu {
-			    margin-left: 194px;
-			    margin-top: -41px!important;
-			}
-			.page-header.navbar .page-top {
-			    box-shadow: 0 1px 0px 0 rgba(50,50,50,.2);
-			}
-			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-			    color: #888;
-			    border-color: #44b6ae;
-			    color: #ffffff;
-			    background: #44b6ae;
-			    border-radius: 15px 15px 15px 15px!important; 
-			}
-			a:hover {
-			    cursor: pointer;
-			    color: #fff;
-			}
-			a {
-			    text-shadow: none;
-			    color: #ffffff;
-			}
-			.nav>li>a {
-			    padding: 5px 15px;
-			} 
-			.nav-pills>li>a, .nav-tabs>li>a {
-			    border-color: #ff9900;
-			    border-radius: 15px 15px 15px 15px!important;
-			}
-			
-			.nav-tabs>li>a:focus, .nav-tabs>li>a:hover {
-			    color: #888;
-			    border-color: #ff9900;
-			    color: #ffffff;
-			    background: #ff9900;
-			    border-radius: 15px 15px 15px 15px!important; 
-			}
-   		</style>
-   		 -->
+       
    		<style type="text/css">
 			a:hover,a:focus{
 				outline: none;
@@ -621,29 +594,7 @@
 				bottom: -10px;
 				left: 43%;
 			}
-			/* .nav-tabs li a:after{
-				content: "";
-				border-top: 10px solid #f5f5f5;
-				border-left: 10px solid transparent;
-				border-right: 10px solid transparent;
-				position: absolute;
-				bottom: -10px;
-				left: 43%;
-			}  */
-			/* .tab-content{
-				font-size: 13px;
-				color: #999898;
-				line-height: 25px;
-				background: #fff;
-				padding: 20px;
-				border: 0px solid #17C4BB;
-				border-top: none;
-			}
-			.tab-content h3{
-				font-size: 24px;
-				color: #999898;
-				margin-top: 0;
-			} */
+			
 			@media only screen and (max-width: 480px){
 				.nav-tabs li{
 					width: 100%;
@@ -662,12 +613,6 @@
 			    border-bottom-color: transparent;
 			    cursor: default;
 			}
-			/* 
-			.page-container-bg-solid {
-			    background: #4d5b69;
-			} 
-			.x-body{background:#4d5b69;} 
-			*/
 			
 			<!--滚动条-->
 			.page-sidebar-menu.page-sidebar-menu-hover-submenu>li:last-child:hover>.sub-menu{
