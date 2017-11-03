@@ -19,7 +19,7 @@ $(function () {
 	  })  
 	}) 
 
-function clickAddTab(url,title,id,close){
+function clickAddTab(url,title,id,rootId,idList,close){
 	var tabNumbs = Addtabs.tabList();
 	if(tabNumbs > 5){
 		toastrBoot(4,"打开选项卡超过6个，请关闭操作!");
@@ -39,9 +39,41 @@ function clickAddTab(url,title,id,close){
         id:id,
         title:title,
         close:closeable,
-        url:"../"+url
+        url:"../"+url,
+        idList:idList
     })
+    doActive(id,idList);
     loadXtIframeComplete(id,dt1,title);
+}
+
+function doActive(id,idList,tabIdList){
+	try{
+    	//清空之前选中样式
+    	if(typeof(tabIdList) == "undefined" || null == tabIdList || '' == tabIdList){
+    		tabIdList = Addtabs.tabIdList();
+    	}
+    	for(var i = 0; i < tabIdList.length; i++){
+    		var tabIdTemp = tabIdList[i];
+    		if(null != tabIdTemp && '' != tabIdTemp){
+    			var tabIdArray = tabIdTemp.split(',');
+    			for(var j = 0; j < tabIdArray.length; j++){
+    				$('#menu'+tabIdArray[j]).removeClass('active open');
+    			}
+    		}
+    	}
+        //选中菜单样式开始
+        if(null != idList && '' != idList){
+        	var idArray = idList.split(',');
+        	for(var i = 0; i < idArray.length; i++){
+        		$('#menu'+idArray[i]).addClass('active open');
+            }
+        }
+        if(null != id && '' != id){
+        	$('#menu'+id).addClass('active open');
+        }
+    	//选中菜单样式结束
+    }catch (e) {
+	}
 }
 
 /**注销**/
@@ -51,7 +83,7 @@ function loginout(){
 			url:'../login/loginout',
 	        type:'POST',
 	        success:function(result){
-	        	toastrBoot(3,"注销平台失败!");
+	        	toastrBoot(3,"注销平台成功!");
 	        	var win = top;
 				if(window.opener != null) {win=opener.top; window.close();}
 				win.location.href=basePath;
@@ -206,22 +238,33 @@ function updateUserPic(){
 
 //关闭所有选项卡
 function closeAllTab(){
+	//清空之前选中样式
+	var tabIdList = Addtabs.tabIdList();
 	Addtabs.closeAll();
+	for(var i = 0; i < tabIdList.length; i++){
+		var tabIdTemp = tabIdList[i];
+		if(null != tabIdTemp && '' != tabIdTemp){
+			var tabIdArray = tabIdTemp.split(',');
+			for(var j = 0; j < tabIdArray.length; j++){
+				$('#menu'+tabIdArray[j]).removeClass('active open');
+			}
+		}
+	}
 }
 
 //关闭当前选项卡
 function closeCruTab(){
-	var id = $("li.active").children("a")[0].href.split("#")[1];
-	if(id != 'home'){
-		Addtabs.close(id);
+	var id = Addtabs.activeTabId();
+	if(typeof(id) != "undefined" && id != 'home'){
+		Addtabs.close(id.replace("tab_tab_",""));
 	    Addtabs.drop();
 	    $('#popMenu').fadeOut();
 	}
 }
 
 function refreshCruTab(){
-	var jehchref = $($("li.active").children("a")[0]).attr('jehchref');
-	var jehcid = $($("li.active").children("a")[0]).attr('jehcid');
+	var jehchref = Addtabs.tabJehchref();
+	var jehcid = Addtabs.tabJehcId();
 	if(null == jehchref){
 		return;
 	}

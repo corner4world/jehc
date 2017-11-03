@@ -16,7 +16,7 @@ public class IndexTree {
 		StringBuffer html = new StringBuffer();
 		for(XtMenuinfo node:nodes){
 			if ("0".equals(node.getXt_menuinfo_parentId())) {
-				html.append("<li class=\"nav-item\">");
+				html.append("<li class=\"nav-item\" id=\"menu"+node.getXt_menuinfo_id()+"\">");
 				//根目录开始
 //				html.append("\r\n<a href=\"javascript:clickAddTab('"+node.getXt_menuinfo_url()+"','"+node.getXt_menuinfo_title()+"','"+node.getXt_menuinfo_id()+"');\" class=\"nav-link nav-toggle\">");
 				html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
@@ -28,7 +28,7 @@ public class IndexTree {
 				html.append("\r\n</a>");
 				//根目录结束
 				//递归子目录开始
-				html.append(build(node));
+				html.append(build(node,node.getXt_menuinfo_id()));
 				//递归子目录结束
 				html.append("\r\n</li>");
 			}
@@ -36,15 +36,15 @@ public class IndexTree {
 		return html.toString();
 	}
 	
-	private String build(XtMenuinfo node) {
+	private String build(XtMenuinfo node,String rootId) {
 		StringBuffer html = new StringBuffer();
 		List<XtMenuinfo> children = getChildren(node);
 		if (!children.isEmpty()) {
 			html.append("\r\n<ul class=\"sub-menu\">");
 			for (XtMenuinfo child:children) {
-				html.append("\r\n<li class=\"nav-item\">");
+				html.append("\r\n<li class=\"nav-item\" id=\"menu"+child.getXt_menuinfo_id()+"\">");
 				if(!child.getXt_menuinfo_leaf().equals("0")){
-					html.append("\r\n<a href=\"javascript:clickAddTab('"+child.getXt_menuinfo_url()+"','"+child.getXt_menuinfo_title()+"','"+child.getXt_menuinfo_id()+"');\" class=\"nav-link\">");
+					html.append("\r\n<a href=\"javascript:clickAddTab('"+child.getXt_menuinfo_url()+"','"+child.getXt_menuinfo_title()+"','"+child.getXt_menuinfo_id()+"','"+rootId+"','"+idBu(child.getXt_menuinfo_parentId())+"');\" class=\"nav-link\">");
 				}else{
 					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
 				}
@@ -54,7 +54,7 @@ public class IndexTree {
 				}
 				html.append("\r\n</a>");
 				//继续递归
-				html.append(build(child));
+				html.append(build(child,rootId));
 				html.append("\r\n</li>");
 			}
 			html.append("\r\n</ul>");
@@ -70,5 +70,24 @@ public class IndexTree {
 			}
 		}
 		return children;
+	}
+	
+	private String idBu(String id){
+		StringBuffer ids = new StringBuffer();
+		return ids.append(idList(id)).toString();
+	}
+	private String idList(String id){
+		StringBuffer ids = new StringBuffer();
+		for(XtMenuinfo node: nodes){
+			if(id.equals(node.getXt_menuinfo_id())){
+				if(null != node.getXt_menuinfo_parentId() && !"0".equals(node.getXt_menuinfo_parentId())){
+					ids.append(node.getXt_menuinfo_id()+",");
+					ids.append(idList(node.getXt_menuinfo_parentId()));
+				}else{
+					ids.append(node.getXt_menuinfo_id());
+				}
+			}
+		}
+		return ids.toString();
 	}
 }

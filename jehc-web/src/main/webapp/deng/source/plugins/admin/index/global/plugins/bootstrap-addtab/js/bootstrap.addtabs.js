@@ -1,11 +1,3 @@
-/**
- * Website: http://git.oschina.net/hbbcs/bootStrap-addTabs
- *
- * Version : 1.0
- *
- * Created by joe on 2016-2-4.
- */
-
 $.fn.addtabs = function (options) {
     obj = $(this);
     Addtabs.options = $.extend({
@@ -41,6 +33,12 @@ $.fn.addtabs = function (options) {
         var url = $(this).attr('aria-url');//dengcj修改
         Addtabs.pop(id, $(this),url);
         return false;
+    });
+    
+    obj.on('click', 'li[role=presentation]', function () {
+        var id = $(this).children('a').attr('aria-controls');
+        var idList = $(this).children('a').attr('idList');
+        doActive(id.replace("tab_",""),idList);
     });
 
     //刷新页面
@@ -127,7 +125,8 @@ window.Addtabs = {
                 'id': 'tab_' + id,
                 'aria-url':opts.url,
                 'jehchref':opts.url,
-                'jehcid':opts.id
+                'jehcid':opts.id,
+                'idList':opts.idList
             }).append(
                 $('<a>', {
                     'href': '#' + id,
@@ -135,7 +134,8 @@ window.Addtabs = {
                     'role': 'tab',
                     'data-toggle': 'tab',
                     'jehchref':opts.url,
-                    'jehcid':opts.id
+                    'jehcid':opts.id,
+                    'idList':opts.idList
                 }).html(opts.title)
             );
 
@@ -223,17 +223,44 @@ window.Addtabs = {
 	        });
         }*/
     },
+    activeTabId:function(){
+    	var id = obj.find("#tabList li.active").attr('id');
+    	return id;
+    },
     close: function (id) {
+    	var tabIdArray = Addtabs.tabIdList();
+    	id = id.replace("tab_tab_","");
+    	id = id.replace("tab_","")
         //如果关闭的是当前激活的TAB，激活他的前一个TAB
-        if (obj.find("li.active").attr('id') === "tab_" + id) {
+        if (obj.find("#tabList li.active").attr('id') === "tab_tab_" + id) {
+            $("#tab_tab_" + id).prev().addClass('active');
             $("#tab_" + id).prev().addClass('active');
-            $("#" + id).prev().addClass('active');
         }
         //关闭TAB
+        $("#tab_tab_" + id).remove();
         $("#tab_" + id).remove();
-        $("#" + id).remove();
         Addtabs.drop();
         Addtabs.options.callback();
+        
+        
+        setTimeout(function () { 
+        	try {
+        		//dengcj获取当前激活标签
+                var idList = obj.find("#tabList li.active").attr('idList');
+                var ids = obj.find("#tabList li.active").attr('id');
+                if(typeof(idList) != "undefined"){
+                }
+            	if(typeof(ids) != "undefined"){
+            		ids = ids.replace("tab_tab_","");
+            		ids = ids.replace("tab_","");
+            	}else{
+            		ids = null;
+            	}
+                doActive(ids,idList,tabIdArray);
+			} catch (e) {
+				
+			}
+        }, 100);
     },
     closeRight: function (tab_id) {
         $('#tab_' + tab_id).nextUntil().each(function () {
@@ -251,6 +278,20 @@ window.Addtabs = {
           i = i +1;
         });
     	return i;
+    },
+    tabJehcId:  function(){
+    	return obj.find("#tabList li.active").attr('jehcid');
+    },
+    tabJehchref:  function(){
+    	return obj.find("#tabList li.active").attr('jehchref');
+    },
+    tabIdList:  function(){
+    	var idList_ = [];
+    	$.each(obj.find('li[id]'), function () {
+    		idList_.push($(this).children('a').attr('idList'));
+    		idList_.push(($(this).attr('id')).replace("tab_tab_",""));
+        });
+    	return idList_;
     },
     closeAll: function () {
         $.each(obj.find('li[id]'), function () {

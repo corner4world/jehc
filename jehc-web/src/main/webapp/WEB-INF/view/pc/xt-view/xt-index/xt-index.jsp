@@ -339,7 +339,7 @@
 		            <div class="main">
 		                <div id="tabs" class="row">
 		                    <!-- Nav tabs -->
-		                    <ul class="nav nav-tabs" role="tablist">
+		                    <ul class="nav nav-tabs" role="tablist" id="tabList">
 		                        <li role="presentation" class="active">
 		                            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">平台首页</a>
 		                        </li>

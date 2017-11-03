@@ -225,9 +225,6 @@ $('#loginForm').bootstrapValidator({
      }
   }
 });
-setTimeout(function () { 
-	callFocus();
-}, 500);
 
 $(function(){
 	document.onkeydown = function(e){ 
@@ -297,5 +294,15 @@ function call(result){
 		$("#loginBtn").attr("disabled",false); 
 	}
 }
+
+
+document.onreadystatechange = pagecomplete;
+function pagecomplete() { 
+	if(document.readyState == "complete") {
+		setTimeout(function () { 
+			callFocus();
+		}, 500);
+	}
+} 
 </script>
 </html> 
