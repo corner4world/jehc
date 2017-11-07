@@ -37,6 +37,7 @@
 	        <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"/>
 	    </mvc:message-converters>
 	</mvc:annotation-driven>
+	<mvc:default-servlet-handler/>
 	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 	
     <!-- 扫描所有的controller 但是不扫描service,不然事务将没有作用.在JUnit测试的时候不必如此配置 --> 
@@ -50,7 +51,11 @@
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service" />  
 	</context:component-scan>
     -->
+    <!-- 
     <context:component-scan base-package="*.*.*web,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util" />
+    -->
+    
+    <context:component-scan base-package="jehc.*modules.*web" />
     
 	<!-- 定义一个视图解析器 -->  
     <bean id="viewResolver"  
