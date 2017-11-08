@@ -19,7 +19,11 @@ public class IndexTree {
 				html.append("<li class=\"nav-item\" id=\"menu"+node.getXt_menuinfo_id()+"\">");
 				//根目录开始
 //				html.append("\r\n<a href=\"javascript:clickAddTab('"+node.getXt_menuinfo_url()+"','"+node.getXt_menuinfo_title()+"','"+node.getXt_menuinfo_id()+"');\" class=\"nav-link nav-toggle\">");
-				html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
+				if(node.getXt_menuinfo_leaf().equals("0")){
+					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
+				}else{
+					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link\">");
+				}
 				html.append("\r\n<i class=\""+node.getXt_menuinfo_iconCls()+"\"></i>");
 				html.append("\r\n<span class=\"title\">"+node.getXt_menuinfo_title()+"</span>");
 				if(node.getXt_menuinfo_leaf().equals("0")){
@@ -44,18 +48,28 @@ public class IndexTree {
 			for (XtMenuinfo child:children) {
 				html.append("\r\n<li class=\"nav-item\" id=\"menu"+child.getXt_menuinfo_id()+"\">");
 				if(!child.getXt_menuinfo_leaf().equals("0")){
+					//不存在下级菜单
 					html.append("\r\n<a href=\"javascript:clickAddTab('"+child.getXt_menuinfo_url()+"','"+child.getXt_menuinfo_title()+"','"+child.getXt_menuinfo_id()+"','"+rootId+"','"+idBu(child.getXt_menuinfo_parentId())+"');\" class=\"nav-link\">");
 				}else{
+					//存在下级菜单
 					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
 				}
 				html.append("\r\n<i class=\""+child.getXt_menuinfo_iconCls()+"\"></i> "+child.getXt_menuinfo_title()+"");
 				if(child.getXt_menuinfo_leaf().equals("0")){
+					//存在下级菜单
 					html.append("\r\n<span class=\"arrow\"></span>");
 				}
 				html.append("\r\n</a>");
 				//继续递归
-				html.append(build(child,rootId));
+				String buildSbf = build(child,rootId);
+				html.append(buildSbf);
 				html.append("\r\n</li>");
+//				if(child.getXt_menuinfo_leaf().equals("0")){
+//					html.append("\r\n<li class=\"nav-item\" style=\"display: none;\">");
+//					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\" >");
+//					html.append("\r\n</a>");
+//					html.append("\r\n</li>");
+//				}
 			}
 			html.append("\r\n</ul>");
 		}

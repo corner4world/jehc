@@ -244,22 +244,23 @@
             <div class="page-sidebar-wrapper">
                 <!-- END SIDEBAR -->
                 <div class="page-sidebar navbar-collapse collapse">
-                    <!-- BEGIN SIDEBAR MENU -->
-                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-hover-submenu " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                        <!-- <li class="nav-item start ">
-                            <a href="javascript:indexHome();" class="nav-link nav-toggle">
-                                <i class="icon-home"></i>
-                                <span class="title">平台首页</span>
-                            </a>
-                        </li> -->
+                   <!-- BEGIN SIDEBAR MENU -->
+                   <!-- 手风琴样式 
+                   <ul class="page-sidebar-menu page-sidebar-menu-light page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 0px">
                         ${MenuList }
-                        <!-- 隐藏最后一个nav-item，解决鼠标移入至最后一个标签出现闪动 -->
-                        <li class="nav-item" style="position: none;" id="lastHref">
-                            <a href="javascript:;" class="nav-link nav-toggle"  style="cursor:default;position: none;" onmouseover="this.style.backgroundColor=''" onmouseout="this.style.backgroundColor=''">
-                            </a>
-                        </li>
-                    </ul>
-                    <!-- END SIDEBAR MENU -->
+                   </ul>
+                   -->
+                   <!-- 鼠标移入样式
+                   <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 0px">
+                        ${MenuList }
+                   </ul>
+                   -->
+                   <!-- 手风琴+侧边样式 -->
+                   <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                   		${MenuList }
+                   </ul>
+                  
+                  <!-- END SIDEBAR MENU -->
                 </div>
                 <!-- END SIDEBAR -->
             </div>
@@ -312,6 +313,7 @@
                                     <option value="boxed">非全屏</option>
                                 </select>
                             </div>
+                            <!-- 
                             <div class="theme-option">
                                 <span> 边栏菜单 </span>
                                 <select class="sidebar-menu-option form-control input-small">
@@ -319,6 +321,7 @@
                                     <option value="hover">鼠标移入</option>
                                 </select>
                             </div>
+                            -->
                             <div class="theme-option">
                                 <span> 侧栏位置 </span>
                                 <select class="sidebar-pos-option form-control input-small">
@@ -347,26 +350,7 @@
 		                    <!-- Tab panes -->
 		                    <div class="tab-content">
 		                        <div role="tabpanel" class="tab-pane active" id="home">
-		                        	<!-- 
-		                        	<h3 class="page-title"> ${sys_pt_index}
-				                        <small>扁平化例子...</small>
-				                    </h3>
-				                    -->
 		                        	<div class="portlet light ">
-		                        		<!-- 
-				                        <div class="portlet-title">
-				                            <div class="caption">
-				                                <span class="caption-subject font-green-sharp sbold">快捷入口</span>
-				                            </div>
-				                            <div class="actions">
-				                                <div class="btn-group">
-				                                    <a class="btn green-haze btn-outline btn-circle btn-sm" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" aria-expanded="true">Action
-				                                        <i class="fa fa-angle-down"></i>
-				                                    </a>
-				                                </div>
-				                            </div>
-				                        </div> 
-				                        -->
 				                        <div class="portlet-body">
 				                            <div class="tiles">
 				                                <div class="tile double-down bg-blue-hoki">
@@ -612,15 +596,6 @@
 			    border: 0px solid #17C4BB;
 			    border-bottom-color: transparent;
 			    cursor: default;
-			}
-			
-			<!--滚动条-->
-			.page-sidebar-menu.page-sidebar-menu-hover-submenu>li:last-child:hover>.sub-menu{
-				margin-top: -283px;
-			}
-			.page-sidebar-menu.page-sidebar-menu-hover-submenu>li:last-child:hover>.sub-menu>li .sub-menu{
-				height:200px;
-				overflow-y:auto;
 			}
 		</style>
 		<!-- 修改密码模态框（Modal）开始 -->

@@ -141,7 +141,6 @@ var QuickSidebar = function () {
             var settingsListHeight;
 
             settingsListHeight = wrapper.height() - wrapper.find('.nav-justified > .nav-tabs').outerHeight();
-
             // alerts list 
             App.destroySlimScroll(settingsList);
             settingsList.attr("data-height", settingsListHeight);

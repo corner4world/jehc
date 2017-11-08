@@ -5,7 +5,7 @@ var Layout = function () {
 
     var layoutImgPath = '../deng/source/plugins/admin/index/layouts/layout2/img/';
 
-    var layoutCssPath = '../dengcj/source/plugins/admin/index/layouts/layout2/css/';
+    var layoutCssPath = '../deng/source/plugins/admin/index/layouts/layout2/css/';
 
     var resBreakpointMd = App.getResponsiveBreakpoint('md');
 

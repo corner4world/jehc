@@ -70,6 +70,7 @@
  		<standar.version>1.1.2</standar.version>
 		<httpclient.version>4.4.1</httpclient.version>
 		<commons-httpclient.version>3.1</commons-httpclient.version>
+		<commons.io.version>2.4</commons.io.version>
 		<userAgent.version>1.14</userAgent.version>
 		<hibernate-validator.version>5.1.1.Final</hibernate-validator.version>
 		<guava.version>18.0</guava.version>
@@ -373,19 +374,6 @@
 		</dependency>
 		<!-- JSP标准标签库结束 -->
 		
-        <!-- 日志相关包开始
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>${log4j.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.api.version}</version>
-        </dependency>
-        -->
-		<!-- 日志相关包结束 -->
 		
 		<!-- logback日志相关包开始 -->
 		<dependency>
@@ -421,13 +409,6 @@
         </dependency>
         <!-- 调度器结束 -->
         
-        <!-- redis开始 -->
-        <dependency>
-          <groupId>redis.clients</groupId>
-          <artifactId>jedis</artifactId>
-          <version>${redis.version}</version>
-        </dependency>
-       <!-- redis结束 -->
        
         <!-- 单元测试相关包开始 -->
         <dependency>
@@ -581,74 +562,6 @@
 				    <groupId>*</groupId>
 				    <artifactId>*</artifactId>
 	        	</exclusion>
-		    	<!-- 去除jetty相关
-	        	<exclusion>
-				    <groupId>org.eclipse.jetty.orbit</groupId>
-				    <artifactId>javax.servlet</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-deploy</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-continuation</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		 <groupId>org.eclipse.jetty</groupId>
-				     <artifactId>jetty-http</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-io</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-jmx</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-security</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-server</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-servlet</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-util</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-webapp</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-xml</artifactId>
-	        	</exclusion>
-	        	-->
-	        	<!-- 去除hadoop 
-	        	<exclusion>
-	        		<groupId>org.apache.hadoop</groupId>
-      				<artifactId>hadoop-annotations</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.hadoop</groupId>
-      				<artifactId>hadoop-auth</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.hadoop</groupId>
-      				<artifactId>hadoop-common</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.hadoop</groupId>
-      				<artifactId>hadoop-hdfs</artifactId>
-	        	</exclusion>
-	        	-->
 	        </exclusions>
 		</dependency>
 		<!-- solr全文检索结束 -->
@@ -677,15 +590,6 @@
 			<version>${jackson-databind.version}</version>
 		</dependency>
 		<!-- jackson-databind结束 -->
-		
-		<!-- commons-lang开始 
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>${commons-lang.version}</version>
-		</dependency>
-		-->
-		<!-- commons-lang结束 -->
 		
 		<!-- fastjson开始 -->
 		<dependency>
@@ -733,11 +637,13 @@
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
 			<version>${jsp-api.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet-api.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<!-- servlet api结束 -->
 		
@@ -772,13 +678,13 @@
 		</dependency>
 		<!-- poi结束 -->
 		
-		<!-- 
+		<!-- jsonp 开始-->	
 		<dependency>
 		    <groupId>org.jsoup</groupId>
 		    <artifactId>jsoup</artifactId>
 		    <version>${jsoup.version}</version>
 		</dependency>
-		-->	
+		<!-- jsonp 结束-->	
 		
 		<!-- ftp开始 -->
 		<dependency>
@@ -819,13 +725,7 @@
 			<artifactId>itext</artifactId>
 			<version>${itext.version}</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>com.lowagie</groupId>
-			<artifactId>iTextAsian</artifactId>
-			<version>${iTextAsian.version}</version>
-		</dependency>
-		 -->
+		
 		<dependency>
 		    <groupId>com.itextpdf</groupId>
 		    <artifactId>itextpdf</artifactId>
@@ -872,7 +772,7 @@
 	    <dependency>
 		    <groupId>commons-io</groupId>
 		    <artifactId>commons-io</artifactId>
-		    <version>2.4</version>
+		    <version>${commons.io.version}</version>
 		</dependency>
 		<!-- commons-io结束 -->	
 		
@@ -942,13 +842,13 @@
 		</dependency>
 		<!-- jackson-core-asl结束 -->
 		
-		<!-- UserAgentUtils开始 -->
+		<!-- UserAgentUtils浏览器判断开始 -->
 		<dependency>
 		    <groupId>nl.bitwalker</groupId>
 		    <artifactId>UserAgentUtils</artifactId>
 		    <version>${UserAgentUtils.version}</version>
 		</dependency>
-		<!-- UserAgentUtils结束 -->
+		<!-- UserAgentUtils浏览器判断结束 -->
 		
 		<!-- 解决编译时候tools rt jce等 开始  
 		<dependency>
