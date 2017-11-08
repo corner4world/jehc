@@ -69,6 +69,7 @@
 		<jstl.version>1.2</jstl.version>
  		<standar.version>1.1.2</standar.version>
 		<httpclient.version>4.4.1</httpclient.version>
+		<httpcore.version>4.4.8</httpcore.version>
 		<commons-httpclient.version>3.1</commons-httpclient.version>
 		<commons.io.version>2.4</commons.io.version>
 		<userAgent.version>1.14</userAgent.version>
@@ -622,6 +623,11 @@
 			<artifactId>httpclient</artifactId>
 			<version>${httpclient.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>${httpcore.version}</version>
+		</dependency>
 		<!-- httpcomponents结束 -->
 		
 		<!-- httpclient开始 -->
@@ -631,6 +637,8 @@
 			<version>${commons-httpclient.version}</version>
 		</dependency>
 		<!-- httpclient结束 -->
+		
+		
 		
 		<!-- servlet api开始 -->
 		<dependency>
