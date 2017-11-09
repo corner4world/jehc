@@ -33,8 +33,20 @@ public class Gutil {
     		generatorService.createServiceAll(xt_Generator_Table_ColumnList, xt_Generator);
     		//4控制层
     		generatorWeb.createWeb(xt_Generator_Table_ColumnList, xt_Generator);
-    		//5页面层
-    		generatorPage.createPageAll(xt_Generator_Table_ColumnList, xt_Generator);
+    		if("0".equals(xt_Generator.getKf_mode())){
+    			//5页面层（Extjs开发模式）
+        		generatorPage.createPageAll(xt_Generator_Table_ColumnList, xt_Generator);
+    		}else{
+    			//5页面层（Bootstrap开发模式）
+    			GeneratorBootPageList generatorBootPageList = new GeneratorBootPageList();
+    			GeneratorBootPageAdd generatorBootPageAdd = new GeneratorBootPageAdd();
+    			GeneratorBootPageUpdate generatorBootPageUpdate = new GeneratorBootPageUpdate();
+    			GeneratorBootPageDetail generatorBootPageDetail = new GeneratorBootPageDetail();
+    			generatorBootPageList.createPageAll(xt_Generator_Table_ColumnList, xt_Generator);
+    			generatorBootPageAdd.createPageAll(xt_Generator_Table_ColumnList, xt_Generator);
+    			generatorBootPageUpdate.createPageAll(xt_Generator_Table_ColumnList, xt_Generator);
+    			generatorBootPageDetail.createPageAll(xt_Generator_Table_ColumnList, xt_Generator);
+    		}
     		///////////////////////////////单表及主表生成结束/////////////////////////
     		//6一对多子表生成代码
     		commonManyToOne(xt_Generator);

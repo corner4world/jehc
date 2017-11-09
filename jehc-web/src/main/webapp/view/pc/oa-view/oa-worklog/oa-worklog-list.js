@@ -75,7 +75,7 @@ $(document).ready(function() {
             	data:"oa_worklogID",
             	width:"150px",
                 render:function(data, type, row, meta) {
-                	 return "<a href=\"javascript:toOaWorklogDetail('"+ data +"')\"><span class=\"glyphicon glyphicon-eye-open\"></span></a>";
+                	 return '<a href="javascript:toOaWorklogDetail('+data+')"><span class="glyphicon glyphicon-eye-open"></span></a>';
                 }
             }
         ]

@@ -1,11 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ include file="/deng/include/includeboot.jsp"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -23,7 +17,7 @@
 				</div>
 				<div class="form-group">
 					<label>创建时间</label>
-					<div class="input-group" id="date">
+					<div class="input-group">
 						<input type="text" class="form_datetime form-control" placeholder="起始时间" name="oa_worklogCreateTime_st" />
 						<span class="input-group-addon">至</span> 
 						<input type="text" class="form_datetime form-control" placeholder="结束时间" name="oa_worklogCreateTime_et" />
@@ -53,8 +47,7 @@
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 			</button>
 		</div>
-		<table id="datatables"
-			class="table table-bordered table-striped table-hover">
+		<table id="datatables" class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr>
 					<th><input type="checkbox" class="checkall" /></th>
