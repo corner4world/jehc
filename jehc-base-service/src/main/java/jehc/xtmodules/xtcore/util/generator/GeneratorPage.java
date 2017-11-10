@@ -2211,12 +2211,12 @@ public class GeneratorPage extends GeneratorUtil{
 	}
 	
 	/**
-	 * 创建附件右键
+	 * 创建附件右键（Extjs风格）
 	 * @param xt_Generator
 	 * isUpAndDelete 1表示拥有上传和删除功能 即新增编辑页面使用2表示不拥有上传和删除功能 即明细页面使用
 	 * @return
 	 */
-	public String createAttachmentRight(XtGenerator xt_Generator,int isUpAndDelete){
+	public static String createAttachmentRight(XtGenerator xt_Generator,int isUpAndDelete){
 		StringBuffer sb = new StringBuffer();
 		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
 		boolean isExistFile=false;
@@ -2245,6 +2245,47 @@ public class GeneratorPage extends GeneratorUtil{
 				}
 			}
 			sb.append("\t/**初始化附件右键菜单结束**/\r\n");
+			return sb.toString();
+		}else{
+			return "";
+		}
+	}
+	
+	/**
+	 * 创建附件右键（Bootstrap风格）
+	 * @param xt_Generator
+	 * isUpAndDelete 1表示拥有上传和删除功能 即新增编辑页面使用2表示不拥有上传和删除功能 即明细页面使用
+	 * @return
+	 */
+	public static String createAttachmentBRight(XtGenerator xt_Generator,int isUpAndDelete){
+		StringBuffer sb = new StringBuffer();
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		boolean isExistFile=false;
+		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
+				isExistFile=true;
+				break;
+			}
+		}
+		if(isExistFile){
+			//回显附件使用
+			if(isUpAndDelete == 2){
+				sb.append("/**初始化附件右键菜单开始 参数4为1表示不拥有上传和删除功能 即明细页面使用**/\r\n");
+			}else if(isUpAndDelete == 1){
+				sb.append("/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/\r\n");
+			}
+			for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
+				XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+				if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
+					if(isUpAndDelete == 2){
+						sb.append("initBFileRight('"+xt_Generator_Table_Column_Form.getColumn_name()+"','"+xt_Generator_Table_Column_Form.getColumn_name()+"_pic',2);\r\n");
+					}else if(isUpAndDelete == 1){
+						sb.append("initBFileRight('"+xt_Generator_Table_Column_Form.getColumn_name()+"','"+xt_Generator_Table_Column_Form.getColumn_name()+"_pic',1);\r\n");
+					}
+				}
+			}
+			sb.append("/**初始化附件右键菜单结束**/\r\n");
 			return sb.toString();
 		}else{
 			return "";

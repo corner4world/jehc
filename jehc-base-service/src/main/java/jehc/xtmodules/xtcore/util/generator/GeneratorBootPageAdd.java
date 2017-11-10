@@ -97,10 +97,15 @@ public class GeneratorBootPageAdd extends GeneratorUtil {
 		//追加返回方法结束
 		
 		
-//		通过jsp页面验证即可 也可采用js验证
+		//验证
+		sb.append("$('#defaultForm').bootstrapValidator({\r\n");
+		sb.append("\tmessage:'此值不是有效的'\r\n");
+		sb.append("});\r\n");
+		
+		//通过jsp页面验证即可 也可采用js验证
 //		//追加验证开始
 //		sb.append("$('#defaultForm').bootstrapValidator({\r\n");
-//		sb.append("\tmessage:'此值不是有效的',\r\n");
+//		sb.append("\tmessage:'此值不是有效的'\r\n");
 //		/*
 //		sb.append("\tfeedbackIcons:{\r\n");
 //		sb.append("\t\tvalid:'glyphicon glyphicon-ok',\r\n");
@@ -148,13 +153,15 @@ public class GeneratorBootPageAdd extends GeneratorUtil {
 //		sb.append("\t}\r\n");
 //		sb.append("});\r\n");
 //		//追加验证结束
-//		
-//		
+		
 		//追加保存方法
 		sb.append("//保存\r\n");
 		sb.append("function add"+uprepchar(xt_Generator.getXt_generator_tbname())+"(){\r\n");
 		sb.append("\tsubmitBForm('defaultForm','../"+root_url+"/add"+uprepchar(xt_Generator.getXt_generator_tbname())+"','../"+root_url+"/load"+uprepchar(xt_Generator.getXt_generator_tbname())+"');\r\n");
 		sb.append("}\r\n");
+		
+		//初始化附件右键（Bootstrap风格）
+		sb.append(GeneratorPage.createAttachmentBRight(xt_Generator, 1)+"\r\n");
 		return sb.toString();
 	}
 	
@@ -249,9 +256,9 @@ public class GeneratorBootPageAdd extends GeneratorUtil {
 			StringBuffer required = new StringBuffer();
 			if(xt_Generator_Table_Column_Form.getIs_nullable().equals("NO")){
 				required.append(" data-bv-notempty data-bv-notempty-message=\"请输入"+column_comment+"\" ");
-				if("int".equals(sqlType2PageType(xt_Generator_Table_Column_Form.getData_type()))){
-					required.append(" data-bv-regexp=\"true\" data-bv-regexp-regexp=\"/^[\\d]+$/\" data-bv-regexp-message=\""+column_comment+"为数字类型\" ");
-				}
+			}
+			if("int".equals(sqlType2PageType(xt_Generator_Table_Column_Form.getData_type()))){
+				required.append(" data-bv-numeric data-bv-numeric-message=\""+column_comment+"为数字类型\" ");
 			}
 			//如果主键 则隐藏
 			if(getColumnFormKey(xt_Generator_Table_Column_FormList).equals(xt_Generator_Table_Column_Form.getColumn_name())){
@@ -287,6 +294,8 @@ public class GeneratorBootPageAdd extends GeneratorUtil {
 					}else if(("5").equals(xt_Generator_Table_Column_Form.getColumn_type())){
 						//文件框
 						//1添加隐含域即附件编号
+						sb.append("\t\t\t\t\t<input class=\"form-control\" type=\"hidden\" name=\""+column_name+"\" id=\""+column_name+"\">\r\n");
+						sb.append("\t\t\t\t\t<img src = \"../deng/images/default/add_d.png\" class=\"img\" id=\""+column_name+"_pic\">\r\n");
 					}else{
 						//文本框
 						sb.append("\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" name=\""+column_name+"\" placeholder=\"请输入"+column_comment+"\">\r\n");

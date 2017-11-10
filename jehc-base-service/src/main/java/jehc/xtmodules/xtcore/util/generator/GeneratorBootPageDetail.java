@@ -95,6 +95,9 @@ public class GeneratorBootPageDetail extends GeneratorUtil {
 		sb.append("\ttlocation(\"../"+root_url+"/load"+uprepchar(xt_Generator.getXt_generator_tbname())+"\");\r\n");
 		sb.append("}\r\n");
 		//追加返回方法结束
+		
+		//初始化附件右键（Bootstrap风格）
+		sb.append(GeneratorPage.createAttachmentBRight(xt_Generator, 2)+"\r\n");
 		return sb.toString();
 	}
 	
@@ -190,9 +193,9 @@ public class GeneratorBootPageDetail extends GeneratorUtil {
 			StringBuffer required = new StringBuffer();
 			if(xt_Generator_Table_Column_Form.getIs_nullable().equals("NO")){
 				required.append(" data-bv-notempty data-bv-notempty-message=\"请输入"+column_comment+"\" ");
-				if("int".equals(sqlType2PageType(xt_Generator_Table_Column_Form.getData_type()))){
-					required.append(" data-bv-regexp=\"true\" data-bv-regexp-regexp=\"/^[\\d]+$/\" data-bv-regexp-message=\""+column_comment+"为数字类型\" ");
-				}
+			}
+			if("int".equals(sqlType2PageType(xt_Generator_Table_Column_Form.getData_type()))){
+				required.append(" data-bv-numeric data-bv-numeric-message=\""+column_comment+"为数字类型\" ");
 			}
 			//如果主键 则隐藏
 			if(getColumnFormKey(xt_Generator_Table_Column_FormList).equals(xt_Generator_Table_Column_Form.getColumn_name())){
@@ -227,6 +230,8 @@ public class GeneratorBootPageDetail extends GeneratorUtil {
 					}else if(("5").equals(xt_Generator_Table_Column_Form.getColumn_type())){
 						//文件框
 						//1添加隐含域即附件编号
+						sb.append("\t\t\t\t\t<input class=\"form-control\" type=\"hidden\" name=\""+column_name+"\" id=\""+column_name+"\" value=\"${"+tbName+"."+column_name+" }\">\r\n");
+						sb.append("\t\t\t\t\t<img src = \"../deng/images/default/add_d.png\" class=\"img\" id=\""+column_name+"_pic\">\r\n");
 					}else{
 						//文本框
 						sb.append("\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" name=\""+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+tbName+"."+column_name+" }\">\r\n");
