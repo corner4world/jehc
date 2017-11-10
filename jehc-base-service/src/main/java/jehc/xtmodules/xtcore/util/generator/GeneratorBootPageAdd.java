@@ -160,6 +160,22 @@ public class GeneratorBootPageAdd extends GeneratorUtil {
 		sb.append("\tsubmitBForm('defaultForm','../"+root_url+"/add"+uprepchar(xt_Generator.getXt_generator_tbname())+"','../"+root_url+"/load"+uprepchar(xt_Generator.getXt_generator_tbname())+"');\r\n");
 		sb.append("}\r\n");
 		
+		//追加初始化日历选择器（需要做判断 判断查询条件中存在日期类型）
+		boolean existDateType = false;
+		List<XtGeneratorTableColumnForm> xtGeneratorTableColumnFormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		for(XtGeneratorTableColumnForm filed:xtGeneratorTableColumnFormList){
+			if("Date".equals(sqlType2PageType(filed.getData_type())) || "datetime".equals(sqlType2PageType(filed.getData_type())) || "time".equals(sqlType2PageType(filed.getData_type()))){
+				existDateType = true;
+				break;
+			}
+		}
+		if(existDateType){
+			sb.append("//初始化日期选择器\r\n");
+			sb.append("$(document).ready(function(){\r\n");
+			sb.append("\tdatetimeInit();\r\n");
+			sb.append("});\r\n");
+		}
+				
 		//初始化附件右键（Bootstrap风格）
 		sb.append(GeneratorPage.createAttachmentBRight(xt_Generator, 1)+"\r\n");
 		return sb.toString();

@@ -98,7 +98,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\tvar options = DataTablesPaging.pagingOptions({\r\n");
 		sb.append("\t\tajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../"+root_url+"/"+list_url+"',opt);},//渲染数据\r\n");
 		sb.append("\t\t\t//在第一位置追加序列号\r\n");
-		sb.append("\t\t\tfnRowCallback:function(nRow, aData, iDisplayIndex){r\n");
+		sb.append("\t\t\tfnRowCallback:function(nRow, aData, iDisplayIndex){\r\n");
 		sb.append("\t\t\t\tjQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  \r\n");
 		sb.append("\t\t\t\treturn nRow;\r\n");
 		sb.append("\t\t},\r\n");
@@ -127,7 +127,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\t\t\t\tdata:\""+getColumnKey(xt_Generator_Table_ColumnList)+"\",\r\n");
 		sb.append("\t\t\t\twidth:\"150px\",\r\n");
 		sb.append("\t\t\t\trender:function(data, type, row, meta) {\r\n");
-		sb.append("\t\t\t\t\treturn '<a href=\"javascript:toOaWorklogDetail('+data+')\"><span class=\"glyphicon glyphicon-eye-open\"></span></a>';\r\n");
+		sb.append("\t\t\t\t\treturn \"<a href=\\\"javascript:to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Detail('\"+ data +\"')\\\"><span class='glyphicon glyphicon-eye-open'></span></a>\";\r\n");
 		sb.append("\t\t\t\t}\r\n");
 		sb.append("\t\t\t}\r\n");
 		//字段显示结束
@@ -177,11 +177,21 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\t})\r\n");
 		sb.append("}\r\n");
 		
-		//追加初始化日历选择器
-		sb.append("//初始化日期选择器\r\n");
-		sb.append("$(document).ready(function(){\r\n");
-		sb.append("\tdatetimeInit();\r\n");
-		sb.append("});\r\n");
+		//追加初始化日历选择器（需要做判断 判断查询条件中存在日期类型）
+		boolean existDateType = false;
+		List<XtGeneratorSearchFiled> xt_generator_search_filedList = xt_Generator.getXt_generator_search_filedList();
+		for(XtGeneratorSearchFiled xtGeneratorSearchFiled:xt_generator_search_filedList){
+			if("4".equals(xtGeneratorSearchFiled.getXt_generator_search_type())){
+				existDateType = true;
+				break;
+			}
+		}
+		if(existDateType){
+			sb.append("//初始化日期选择器\r\n");
+			sb.append("$(document).ready(function(){\r\n");
+			sb.append("\tdatetimeInit();\r\n");
+			sb.append("});\r\n");
+		}
 		return sb.toString();
 	}
 	
