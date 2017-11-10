@@ -177,6 +177,8 @@ public class GeneratorBootPageUpdate extends GeneratorUtil {
 		}
 		//初始化附件右键（Bootstrap风格）
 		sb.append(GeneratorPage.createAttachmentBRight(xt_Generator, 1)+"\r\n");
+		//创建回显
+		sb.append(GeneratorPage.createBAttachmentObject(xt_Generator));
 		return sb.toString();
 	}
 	

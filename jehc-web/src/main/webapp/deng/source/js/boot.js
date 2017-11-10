@@ -803,7 +803,31 @@ function bUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,
 	**/
 }
 
-
+/////////////////////////////////////附件统一上传中心开始///////////////////////////////////
+/**
+ *ajaxBFilePathBackRequest表单中单个或多个附件路径回显
+ *@param {} url,params
+ */
+function ajaxBFilePathBackRequest(url,params){
+	$.ajax({
+        url:url,
+        type:'POST',//PUT DELETE POST
+        data:params == null || '' == params ? {}:params, 
+        success:function(result){
+        	try {
+        		var obj = eval("(" + result + ")");  
+    	        for(var i = 0; i < obj.items.length; i++){
+    	        	if(typeof($('#'+(obj.items[i].field_name+'_pic'))) != 'undefined'){
+	        			$("#"+(obj.items[i].field_name+'_pic')).attr('src',obj.items[i].xt_attachmentPath); 
+	        		}
+    	        } 
+			} catch (e) {
+			}
+        }, 
+        error:function(){
+        }
+    })
+}
 /**
  * method:上传操作
  * fieldid:附件编号
@@ -1023,3 +1047,4 @@ function getBimghw(src){
 		window.parent.toastrBoot(4,"该图片不能预览!");
 	}
 }
+/////////////////////////////////////附件统一上传中心开始///////////////////////////////////

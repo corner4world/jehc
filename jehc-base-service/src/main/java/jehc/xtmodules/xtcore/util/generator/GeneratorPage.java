@@ -2167,7 +2167,7 @@ public class GeneratorPage extends GeneratorUtil{
 	}
 	
 	/**
-	 * 创建附件回显
+	 * 创建附件回显（Extjs风格）
 	 * @param xt_Generator
 	 * @return
 	 */
@@ -2204,6 +2204,50 @@ public class GeneratorPage extends GeneratorUtil{
 			sb.append("};\r\n");
 			sb.append("\tajaxFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params,1);\r\n");
 			sb.append("\t/**配置附件回显方法结束**/\r\n");
+			return sb.toString();
+		}else{
+			return "";
+		}
+	}
+	
+	/**
+	 * 创建附件回显（Bootstrap风格）
+	 * @param xt_Generator
+	 * @return
+	 */
+	public static String createBAttachmentObject(XtGenerator xt_Generator){
+		List<XtGeneratorTableColumnForm> xt_Generator_Table_Column_FormList = xt_Generator.getXt_Generator_Table_Column_FormList();
+		boolean isExistFile=false;
+		for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
+			XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+			if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
+				isExistFile=true;
+				break;
+			}
+		}
+		if(isExistFile){
+			StringBuffer sb = new StringBuffer();
+			//回显附件使用
+			sb.append("/**配置附件回显方法开始**/\r\n");
+			sb.append("var params = {");
+			String kv ="";
+			String filed_name="";
+			for(int i = 0; i < xt_Generator_Table_Column_FormList.size(); i++){
+				XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
+				if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
+					if(null != kv && !"".equals(kv)){
+						kv = kv+"+','+"+"$('#"+xt_Generator_Table_Column_Form.getColumn_name()+"').val();";
+						filed_name = filed_name+","+xt_Generator_Table_Column_Form.getColumn_name();
+					}else{
+						kv = "$('#"+xt_Generator_Table_Column_Form.getColumn_name()+"').val()";
+						filed_name = xt_Generator_Table_Column_Form.getColumn_name();
+					}
+				}
+			}
+			sb.append("xt_attachment_id:"+kv+","+"field_name:'"+filed_name+"'");
+			sb.append("};\r\n");
+			sb.append("ajaxBFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params);\r\n");
+			sb.append("/**配置附件回显方法结束**/\r\n");
 			return sb.toString();
 		}else{
 			return "";
