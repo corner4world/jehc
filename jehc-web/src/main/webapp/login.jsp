@@ -169,6 +169,10 @@ function callFocus(){
 	}
 }
 $(document).ready(function() {
+	if(getnavigator()==7 || getnavigator()==8 || getnavigator()==9 || getnavigator() == 6 || getnavigator() == 0){
+		document.write("平台支持IE10及以上浏览器或谷歌，火狐，360等浏览器");
+		return;
+	}
 	$('#myModal').modal({backdrop: 'static', keyboard: false});  
 	if(getCookie('readme') == 'readme'){
 		$("[name='readme']").attr("checked",'true');
