@@ -14,7 +14,7 @@
 		FROM 
 			xt_platform_feedback
 		WHERE 1=1
-		<if test="null != xt_platform_id">
+		<if test = "null != xt_platform_id">
 			AND xt_platform_id = #{xt_platform_id}
 		</if>
 	</select>
@@ -61,12 +61,35 @@
 		UPDATE
 			xt_platform_feedback
 		SET
-			`xt_platform_feedback_id` = #{xt_platform_feedback_id},
 			`xt_platform_id` = #{xt_platform_id},
 			`xt_platform_feedback_ctime` = #{xt_platform_feedback_ctime},
 			`xt_userinfo_id` = #{xt_userinfo_id},
 			`xt_platform_feedback_remark` = #{xt_platform_feedback_remark},
 			`xt_platform_feedback_status` = #{xt_platform_feedback_status}
+		WHERE xt_platform_feedback_id=#{xt_platform_feedback_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtPlatformFeedbackBySelective" parameterType="jehc.xtmodules.xtmodel.XtPlatformFeedback">
+		UPDATE
+			xt_platform_feedback
+		<set>
+			<if test="xt_platform_id != null">
+				`xt_platform_id` = #{xt_platform_id},
+			</if>
+			<if test="xt_platform_feedback_ctime != null">
+				`xt_platform_feedback_ctime` = #{xt_platform_feedback_ctime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				`xt_userinfo_id` = #{xt_userinfo_id},
+			</if>
+			<if test="xt_platform_feedback_remark != null">
+				`xt_platform_feedback_remark` = #{xt_platform_feedback_remark},
+			</if>
+			<if test="xt_platform_feedback_status != null">
+				`xt_platform_feedback_status` = #{xt_platform_feedback_status},
+			</if>
+		</set>
 		WHERE xt_platform_feedback_id=#{xt_platform_feedback_id}
 	</update>
 
@@ -103,13 +126,12 @@
 		</foreach>
 	</insert>
 
-	<!--修改-->
+	<!--批量修改-->
 	<update id="updateBatchXtPlatformFeedback" parameterType="list">
 		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
 			UPDATE
 				xt_platform_feedback
 			SET
-				`xt_platform_feedback_id` = #{item.xt_platform_feedback_id},
 				`xt_platform_id` = #{item.xt_platform_id},
 				`xt_platform_feedback_ctime` = #{item.xt_platform_feedback_ctime},
 				`xt_userinfo_id` = #{item.xt_userinfo_id},
@@ -118,4 +140,35 @@
 			WHERE xt_platform_feedback_id=#{item.xt_platform_feedback_id}
 		</foreach>
 	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtPlatformFeedbackBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_platform_feedback
+			<set>
+				<if test="item.xt_platform_id != null">
+					`xt_platform_id` = #{item.xt_platform_id},
+				</if>
+				<if test="item.xt_platform_feedback_ctime != null">
+					`xt_platform_feedback_ctime` = #{item.xt_platform_feedback_ctime},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					`xt_userinfo_id` = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.xt_platform_feedback_remark != null">
+					`xt_platform_feedback_remark` = #{item.xt_platform_feedback_remark},
+				</if>
+				<if test="item.xt_platform_feedback_status != null">
+					`xt_platform_feedback_status` = #{item.xt_platform_feedback_status},
+				</if>
+			</set>
+			WHERE xt_platform_feedback_id=#{item.xt_platform_feedback_id}
+		</foreach>
+	</update>
+
+	<!--根据外键删除-->
+	<delete id="delXtPlatformFeedbackByForeignKey" parameterType="string">
+		DELETE FROM xt_platform_feedback WHERE xt_platform_id = #{xt_platform_id}
+	</delete>
 </mapper>

@@ -269,7 +269,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		//查询开始
 		sb.append("\t<div class=\"panel panel-default\">\r\n");
 		sb.append("\t\t<fieldset>\r\n");
-		sb.append("\t\t\t<legend>查询条件</legend>\r\n");
+		sb.append("\t\t\t<legend>查询区域</legend>\r\n");
 		sb.append("\t\t\t<form method=\"POST\" id=\"searchForm\" class=\"form-inline\">\r\n");
 		//查询区域内容开始
 		for(int i = 0; i < xt_generator_search_filedList.size(); i++){

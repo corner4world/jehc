@@ -1,12 +1,11 @@
 package jehc.xtmodules.xtdao;
 import java.util.List;
 import java.util.Map;
-
 import jehc.xtmodules.xtmodel.XtPlatformFeedback;
 
 /**
 * 平台反馈意见 
-* 2016-09-23 22:32:55  邓纯杰
+* 2017-11-13 15:15:38  邓纯杰
 */
 public interface XtPlatformFeedbackDao{
 	/**
@@ -26,13 +25,19 @@ public interface XtPlatformFeedbackDao{
 	* @param xt_platform_feedback 
 	* @return
 	*/
-	public int addXtPlatformFeedback(XtPlatformFeedback xt_Platform_Feedback);
+	public int addXtPlatformFeedback(XtPlatformFeedback xtPlatformFeedback);
 	/**
 	* 修改
 	* @param xt_platform_feedback 
 	* @return
 	*/
-	public int updateXtPlatformFeedback(XtPlatformFeedback xt_Platform_Feedback);
+	public int updateXtPlatformFeedback(XtPlatformFeedback xtPlatformFeedback);
+	/**
+	* 修改（根据动态条件）
+	* @param xt_platform_feedback 
+	* @return
+	*/
+	public int updateXtPlatformFeedbackBySelective(XtPlatformFeedback xtPlatformFeedback);
 	/**
 	* 删除
 	* @param condition 
@@ -44,11 +49,23 @@ public interface XtPlatformFeedbackDao{
 	* @param xt_platform_feedbackList 
 	* @return
 	*/
-	public int addBatchXtPlatformFeedback(List<XtPlatformFeedback> xt_Platform_FeedbackList);
+	public int addBatchXtPlatformFeedback(List<XtPlatformFeedback> xtPlatformFeedbackList);
 	/**
 	* 批量修改
 	* @param xt_platform_feedbackList 
 	* @return
 	*/
-	public int updateBatchXtPlatformFeedback(List<XtPlatformFeedback> xt_Platform_FeedbackList);
+	public int updateBatchXtPlatformFeedback(List<XtPlatformFeedback> xtPlatformFeedbackList);
+	/**
+	* 批量修改（根据动态条件）
+	* @param xt_platform_feedbackList 
+	* @return
+	*/
+	public int updateBatchXtPlatformFeedbackBySelective(List<XtPlatformFeedback> xtPlatformFeedbackList);
+	/**
+	* 根据外键删除方法
+	* @param xt_platform_id
+	* @return
+	*/
+	public int delXtPlatformFeedbackByForeignKey(String xt_platform_id);
 }

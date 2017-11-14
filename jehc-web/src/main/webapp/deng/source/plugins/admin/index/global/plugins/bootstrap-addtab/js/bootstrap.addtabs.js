@@ -5,7 +5,7 @@ $.fn.addtabs = function (options) {
         close: true, //是否可以关闭
         monitor: 'body', //监视的区域
         iframeUse: true, //使用iframe还是ajax
-        iframeHeight: $(document).height() - 107, //固定TAB中IFRAME高度,根据需要自己修改
+        iframeHeight: $(document).height() - 95, //固定TAB中IFRAME高度,根据需要自己修改
         method: 'init',
         callback: function () { //关闭后回调函数
         }
@@ -168,7 +168,7 @@ window.Addtabs = {
             content.append(
                 $('<iframe>', {
                     'class': 'iframeClass',
-                    'height': Addtabs.options.iframeHeight-107,
+                    'height': Addtabs.options.iframeHeight-95,
                     'iframe_id_':id,
                     'frameborder': "no",
                     'border': "0",

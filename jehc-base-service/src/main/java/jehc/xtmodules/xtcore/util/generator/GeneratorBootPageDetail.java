@@ -17,6 +17,8 @@ import jehc.xtmodules.xtmodel.XtGeneratorGridColumn;
 import jehc.xtmodules.xtmodel.XtGeneratorSearchFiled;
 import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 import jehc.xtmodules.xtmodel.XtGeneratorTableColumnForm;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
+import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
 import jehc.xtmodules.xtmodel.XtScript;
 
 /**
@@ -251,6 +253,120 @@ public class GeneratorBootPageDetail extends GeneratorUtil {
 			//字段结束
 		}
 		//遍历字段结束
+		
+		/////////////////////一对多操作（主表中追加子表标识）//////////////////////
+		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){//如果当前类型为一对多方式并且当前对象为主表 则获取其子表并遍历
+			List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+			for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
+				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+				//当前子表单的form标识
+				String remvoed_flag = lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_removed_flag";
+				String formNumber = lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"FormNumber";
+				sb.append("\t\t\t<div class=\"form-group\" style=\"display:none;\">\r\n");
+				sb.append("\t\t\t\t<div class=\"col-lg-6\">\r\n");
+				sb.append("\t\t\t\t\t<input class=\"form-control\" type=\"hidden\" name=\""+remvoed_flag+"\" id=\""+remvoed_flag+"\" >\r\n");
+				sb.append("\t\t\t\t\t<input class=\"form-control\" type=\"hidden\" value=\"${fn:length("+lowfristchar(xt_Generator.getXt_generator_tbname())+"."+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+") }\" name=\""+formNumber+"\" id=\""+formNumber+"\" >\r\n");
+				sb.append("\t\t\t\t</div>\r\n");
+				sb.append("\t\t\t</div>\r\n");
+			}
+		}
+		
+		//////////////////一对多子表字段遍历（初始化显示一个子表单）///////////////////////////
+		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){//如果当前类型为一对多方式并且当前对象为主表 则获取其子表并遍历
+			//操作子表
+			List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+			for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
+				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+				String upcharTableName = uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name());//开头转大写的表名（类名）
+				//获取当前子表单的
+				lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name());
+				String lowfristTableName = lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name());
+				sb.append("\t\t\t<!-- 一对多子表开始（"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"） -->\r\n");
+				sb.append("\t\t\t<div class=\"page-header\">\r\n");
+				sb.append("\t\t\t\t<h4>"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"</h4>\r\n");
+				sb.append("\t\t\t</div>\r\n");
+				List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+				//追加子表字段信息
+				sb.append("\t\t\t<div class=\"form_"+lowfristTableName+"\">\r\n");//标注子表中根目录名称 用于JS操作APPEND 开始
+				
+				//foreach遍历
+				sb.append("\t\t\t<c:forEach var=\""+lowfristTableName+"\" items=\"${"+lowfristchar(xt_Generator.getXt_generator_tbname())+"."+lowfristTableName+" }\" varStatus=\""+lowfristTableName+"Status\">\r\n");
+				sb.append("\t\t\t\t<div id=\"form_"+lowfristTableName+"_${"+lowfristTableName+"Status.index}\">\r\n");
+				sb.append("\t\t\t<fieldset>\r\n");
+				sb.append("\t\t\t<legend><h5>序号${"+lowfristTableName+"Status.index+1}</h5></legend>\r\n");
+				//遍历子表字段开始
+				for(int j = 0;j < xt_Generator_Table_ColumnMany_To_OneList.size();j++){
+					XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
+					String column_comment=xt_Generator_Table_ColumnMany_To_One.getCOLUMN_COMMENT();
+					String column_name= xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME();
+					String column_maxlength = xt_Generator_Table_ColumnMany_To_One.getCHARACTER_MAXIMUM_LENGTH();
+					String column_hidden = xt_Generator_Table_ColumnMany_To_One.getIsHidden();
+					String dataType = xt_Generator_Table_ColumnMany_To_One.getDATA_TYPE();
+					String columne_type = xt_Generator_Table_ColumnMany_To_One.getColumn_type();
+					if(null != column_comment && !"".equals(column_comment)){
+						column_comment = column_comment.replaceAll("amp;", "");
+					}
+					//验证
+					StringBuffer required = new StringBuffer();
+					if(xt_Generator_Table_ColumnMany_To_One.getIS_NULLABLE().equals("NO")){
+						required.append(" data-bv-notempty data-bv-notempty-message=\"请输入"+column_comment+"\" ");
+					}
+					if("int".equals(sqlType2PageType(dataType))){
+						required.append(" data-bv-numeric data-bv-numeric-message=\""+column_comment+"为数字类型\" ");
+					}
+					//如果主键 则隐藏
+					if(getColumnFormKey(xt_Generator_Table_Column_FormList).equals(column_name)){
+						//新增页面 主键 直接过滤
+						continue;
+					}
+					//字段开始（如果该字段隐藏 则div隐藏 并且字段类型为隐含域）
+					if("1".equals(column_hidden)){
+						sb.append("\t\t\t\t\t<div class=\"form-group\" style=\"display:none;\">\r\n");
+						sb.append("\t\t\t\t\t\t<label class=\"col-lg-3 control-label\">"+column_comment+"</label>\r\n");
+						sb.append("\t\t\t\t\t\t<div class=\"col-lg-6\">\r\n");
+						sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"hidden\" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" "+required.toString()+" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+						sb.append("\t\t\t\t\t\t</div>\r\n");
+						sb.append("\t\t\t\t\t</div>\r\n");
+					}else{
+						sb.append("\t\t\t\t\t<div class=\"form-group\">\r\n");
+						sb.append("\t\t\t\t\t\t<label class=\"col-lg-3 control-label\">"+column_comment+"</label>\r\n");
+						sb.append("\t\t\t\t\t\t<div class=\"col-lg-6\">\r\n");
+						//开始判断类型
+						if("String".equals(sqlType2PageType(dataType))){
+							if(("1").equals(columne_type)){
+								//文本域
+								sb.append("\t\t\t\t\t\t\t<textarea class=\"form-control\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\"> ${"+lowfristTableName+"."+column_name+" }</textarea>\r\n");
+							}else if(("3").equals(columne_type)){
+								//下拉框（暂时下拉框采用文本框）
+								sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+							}else if(("5").equals(columne_type)){
+								//文件框
+								//1添加隐含域即附件编号
+								sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"hidden\" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+								sb.append("\t\t\t\t\t\t\t<img src = \"../deng/images/default/add_d.png\" class=\"img\" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"_pic\">\r\n");
+							}else{
+								//文本框
+								sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+							}
+						}else if("Date".equals(sqlType2PageType(dataType)) || "datetime".equals(sqlType2PageType(dataType)) || "time".equals(sqlType2PageType(dataType))){
+							sb.append("\t\t\t\t\t\t\t<input class=\"form_datetime form-control\" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" "+required.toString()+" placeholder=\"请选择时间\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+						}else if("int".equals(sqlType2PageType(dataType))){
+							//数字框
+							sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" maxlength=\""+column_maxlength+"\" value=\"0\" "+required.toString()+" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+						}
+						//结束判断类型
+						sb.append("\t\t\t\t\t\t</div>\r\n");
+						sb.append("\t\t\t\t\t</div>\r\n");
+					}
+				}
+				//遍历子表字段结束
+				sb.append("\t\t\t\t</fieldset>\r\n");
+				sb.append("\t\t\t\t</div>\r\n");
+				sb.append("\t\t\t\t</c:forEach>\r\n");
+				sb.append("\t\t\t</div>\r\n");//标注子表中根目录名称 用于JS操作APPEND 结束
+				sb.append("\t\t\t<!-- 一对多子表结束（"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"） -->\r\n");
+			}
+		}
 		
 		//追加按钮
 		sb.append("\t\t\t<div class=\"form-group\">\r\n");

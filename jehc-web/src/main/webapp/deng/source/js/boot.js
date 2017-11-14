@@ -49,6 +49,15 @@ var uploadsucessimg = '../deng/images/default/upload_sucess.png';
 
 var userIcon = '../deng/images/default/user.png';
 
+function validatorDestroy(formId){
+	$("#"+formId).data('bootstrapValidator').destroy();
+	$('#'+formId).data('bootstrapValidator', null);
+}
+//重新验证表单
+function reValidator(formId){
+	$('#'+formId).bootstrapValidator();
+}
+
 /**
  * 设置Cookie
  * @param {} name

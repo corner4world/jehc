@@ -4534,7 +4534,7 @@ public class GeneratorPage extends GeneratorUtil{
 	}
 	
 	/**
-	 * 创建一对多附件右键
+	 * 创建一对多附件右键（Extjs风格）
 	 * @param xt_Generator
 	 * isUpAndDelete 1表示拥有上传和删除功能 即新增编辑页面使用2表示不拥有上传和删除功能 即明细页面使用
 	 * @return
@@ -4575,10 +4575,50 @@ public class GeneratorPage extends GeneratorUtil{
 	}
 	
 	
+	/**
+	 * 创建一对多附件右键（Bootstrap风格）
+	 * @param xt_Generator
+	 * isUpAndDelete 1表示拥有上传和删除功能 即新增编辑页面使用2表示不拥有上传和删除功能 即明细页面使用
+	 * @return
+	 */
+	public static String createBAttachmentOneToManyRight(XtGeneratorTableManyToOne xt_Generator_TableMany_To_One,int isUpAndDelete){
+		StringBuffer sb = new StringBuffer();
+		List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+		boolean isExistFile=false;
+		for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
+			XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
+			if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
+				isExistFile=true;
+				break;
+			}
+		}
+		if(isExistFile){
+			//回显附件使用
+			if(isUpAndDelete == 2){
+				sb.append("\t/**初始化附件右键菜单开始 参数4为1表示不拥有上传和删除功能 即明细页面使用**/\r\n");
+			}else if(isUpAndDelete == 1){
+				sb.append("\t/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/\r\n");
+			}
+			for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
+				if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
+					if(isUpAndDelete == 2){
+						sb.append("\tinitBFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',2);\r\n");
+					}else if(isUpAndDelete == 1){
+						sb.append("\tinitBFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',1);\r\n");
+					}
+				}
+			}
+			sb.append("\t/**初始化附件右键菜单结束**/\r\n");
+			return sb.toString();
+		}else{
+			return "";
+		}
+	}
 
 
 	/**
-	 *  创建附件回显
+	 *  创建附件回显（Extjs风格）
 	 * @param xt_Generator_TableMany_To_One
 	 * @param addUpdateDetailType 添加Add 修改Edit 详细Detail
 	 * @param isAddUpdateOrDetail新增编辑 还是明细
@@ -4604,6 +4644,44 @@ public class GeneratorPage extends GeneratorUtil{
 					sb.append("\t\t\t\t\tif("+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Form"+addUpdateDetailType+"YField == '"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"'){\r\n");
 					sb.append("\t\t\t\t\t\tvar params = {xt_attachment_id:data[dataKey],field_name:"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Form"+addUpdateDetailType+"Field};\r\n");
 					sb.append("\t\t\t\t\t\tajaxFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params,"+isAddUpdateOrDetail+");\r\n");
+					sb.append("\t\t\t\t\t};\r\n");
+				}
+			}
+			sb.append("\t\t\t\t\t/**配置附件回显方法结束**/\r\n");
+			return sb.toString();
+		}else{
+			return "";
+		}
+	}
+	
+	
+	/**
+	 *  创建附件回显（Bootstrap风格）
+	 * @param xt_Generator_TableMany_To_One
+	 * @param addUpdateDetailType 添加Add 修改Edit 详细Detail
+	 * @param isAddUpdateOrDetail新增编辑 还是明细
+	 * @return
+	 */
+	public String createBAttachmentOneToManyObject(XtGeneratorTableManyToOne xt_Generator_TableMany_To_One,String addUpdateDetailType,int isAddUpdateOrDetail){
+		List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+		boolean isExistFile=false;
+		for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
+			XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
+			if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
+				isExistFile=true;
+				break;
+			}
+		}
+		if(isExistFile){
+			StringBuffer sb = new StringBuffer();
+			//回显附件使用
+			sb.append("\t\t\t\t\t/**配置附件回显方法开始**/\r\n");
+			for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
+				if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
+					sb.append("\t\t\t\t\tif("+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Form"+addUpdateDetailType+"YField == '"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"'){\r\n");
+					sb.append("\t\t\t\t\t\tvar params = {xt_attachment_id:data[dataKey],field_name:"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Form"+addUpdateDetailType+"Field};\r\n");
+					sb.append("\t\t\t\t\t\tajaxBFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params,"+isAddUpdateOrDetail+");\r\n");
 					sb.append("\t\t\t\t\t};\r\n");
 				}
 			}

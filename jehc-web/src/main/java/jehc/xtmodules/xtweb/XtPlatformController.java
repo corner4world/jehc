@@ -1,36 +1,37 @@
 package jehc.xtmodules.xtweb;
-import java.util.HashMap;
 import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
-
+import org.springframework.ui.Model;
+import jehc.xtmodules.xtmodel.XtPlatformFeedback;
+import jehc.xtmodules.xtservice.XtPlatformFeedbackService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.github.pagehelper.PageInfo;
-
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
-import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtmodel.XtPlatform;
 import jehc.xtmodules.xtservice.XtPlatformService;
 
 /**
 * 平台信息发布 
-* 2016-08-30 22:18:44  邓纯杰
+* 2017-11-13 15:15:38  邓纯杰
 */
 @Controller
 @RequestMapping("/xtPlatformController")
 public class XtPlatformController extends BaseAction{
 	@Autowired
 	private XtPlatformService xtPlatformService;
+	@Autowired
+	private XtPlatformFeedbackService xtPlatformFeedbackService;
 	/**
 	* 载入初始化页面
 	* @param xt_platform 
@@ -38,7 +39,7 @@ public class XtPlatformController extends BaseAction{
 	* @return
 	*/
 	@RequestMapping(value="/loadXtPlatform",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadXtPlatform(XtPlatform xt_Platform,HttpServletRequest request){
+	public ModelAndView loadXtPlatform(XtPlatform xtPlatform,HttpServletRequest request){
 		return new ModelAndView("pc/xt-view/xt-platform/xt-platform-list");
 	}
 	/**
@@ -51,11 +52,9 @@ public class XtPlatformController extends BaseAction{
 	public String getXtPlatformListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		condition.put("xt_platform_status",request.getParameter("xt_platform_status"));
-		condition.put("xt_platform_title",request.getParameter("xt_platform_title"));
-		List<XtPlatform> xt_PlatformList = xtPlatformService.getXtPlatformListByCondition(condition);
-		PageInfo<XtPlatform> page = new PageInfo<XtPlatform>(xt_PlatformList);
-		return outPageStr(page,request);
+		List<XtPlatform> xtPlatformList = xtPlatformService.getXtPlatformListByCondition(condition);
+		PageInfo<XtPlatform> page = new PageInfo<XtPlatform>(xtPlatformList);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -65,8 +64,8 @@ public class XtPlatformController extends BaseAction{
 	@ResponseBody
 	@RequestMapping(value="/getXtPlatformById",method={RequestMethod.POST,RequestMethod.GET})
 	public String getXtPlatformById(String xt_platform_id,HttpServletRequest request){
-		XtPlatform xt_Platform = xtPlatformService.getXtPlatformById(xt_platform_id);
-		return outDataStr(xt_Platform);
+		XtPlatform xtPlatform = xtPlatformService.getXtPlatformById(xt_platform_id);
+		return outDataStr(xtPlatform);
 	}
 	/**
 	* 添加
@@ -75,13 +74,11 @@ public class XtPlatformController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/addXtPlatform",method={RequestMethod.POST,RequestMethod.GET})
-	public String addXtPlatform(XtPlatform xt_Platform,HttpServletRequest request){
+	public String addXtPlatform(XtPlatform xtPlatform,HttpServletRequest request){
 		int i = 0;
-		if(null != xt_Platform && !"".equals(xt_Platform)){
-			xt_Platform.setXt_platform_id(UUID.toUUID());
-			xt_Platform.setXt_platform_ctime(getSimpleDateFormat());
-			xt_Platform.setXt_userinfo_id(getXtUid());
-			i=xtPlatformService.addXtPlatform(xt_Platform);
+		if(null != xtPlatform && !"".equals(xtPlatform)){
+			xtPlatform.setXt_platform_id(UUID.toUUID());
+			i=xtPlatformService.addXtPlatform(xtPlatform);
 		}
 		if(i>0){
 			return outAudStr(true);
@@ -94,12 +91,12 @@ public class XtPlatformController extends BaseAction{
 	* @param xt_platform 
 	* @param request 
 	*/
-	@RequestMapping(value="/updateXtPlatform",method={RequestMethod.POST,RequestMethod.GET})
 	@ResponseBody
-	public String updateXtPlatform(XtPlatform xt_Platform,HttpServletRequest request){
+	@RequestMapping(value="/updateXtPlatform",method={RequestMethod.POST,RequestMethod.GET})
+	public String updateXtPlatform(XtPlatform xtPlatform,HttpServletRequest request){
 		int i = 0;
-		if(null != xt_Platform && !"".equals(xt_Platform)){
-			i=xtPlatformService.updateXtPlatform(xt_Platform);
+		if(null != xtPlatform && !"".equals(xtPlatform)){
+			i=xtPlatformService.updateXtPlatform(xtPlatform);
 		}
 		if(i>0){
 			return outAudStr(true);
@@ -136,10 +133,14 @@ public class XtPlatformController extends BaseAction{
 	@RequestMapping(value="/copyXtPlatform",method={RequestMethod.POST,RequestMethod.GET})
 	public String copyXtPlatform(String xt_platform_id,HttpServletRequest request){
 		int i = 0;
-		XtPlatform xt_Platform = xtPlatformService.getXtPlatformById(xt_platform_id);
-		if(null != xt_Platform && !"".equals(xt_Platform)){
-			xt_Platform.setXt_platform_id(UUID.toUUID());
-			i=xtPlatformService.addXtPlatform(xt_Platform);
+		XtPlatform xtPlatform = xtPlatformService.getXtPlatformById(xt_platform_id);
+		if(null != xtPlatform && !"".equals(xtPlatform)){
+			xtPlatform.setXt_platform_id(UUID.toUUID());
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_platform_id", xt_platform_id);
+			List<XtPlatformFeedback> xtPlatformFeedbackList = xtPlatformFeedbackService.getXtPlatformFeedbackListByCondition(condition);
+			xtPlatform.setXtPlatformFeedback(xtPlatformFeedbackList);
+			i=xtPlatformService.addXtPlatform(xtPlatform);
 		}
 		if(i>0){
 			return outAudStr(true);
@@ -159,5 +160,33 @@ public class XtPlatformController extends BaseAction{
 	public void exportXtPlatform(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPlatformAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPlatformAdd(XtPlatform xtPlatform,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-platform/xt-platform-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPlatformUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPlatformUpdate(String xt_platform_id,HttpServletRequest request, Model model){
+		XtPlatform xtPlatform = xtPlatformService.getXtPlatformById(xt_platform_id);
+		model.addAttribute("xtPlatform", xtPlatform);
+		return new ModelAndView("pc/xt-view/xt-platform/xt-platform-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPlatformDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPlatformDetail(String xt_platform_id,HttpServletRequest request, Model model){
+		XtPlatform xtPlatform = xtPlatformService.getXtPlatformById(xt_platform_id);
+		model.addAttribute("xtPlatform", xtPlatform);
+		return new ModelAndView("pc/xt-view/xt-platform/xt-platform-detail");
 	}
 }

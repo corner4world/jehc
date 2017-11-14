@@ -1,22 +1,24 @@
 package jehc.xtmodules.xtmodel;
-import java.io.Serializable;
-
 import jehc.xtmodules.xtcore.base.BaseEntity;
+import java.io.Serializable;
+import jehc.xtmodules.xtmodel.XtPlatformFeedback;
+import java.util.List;
 
 /**
 * xt_platform 平台信息发布 
-* 2016-08-30 22:18:44  邓纯杰
+* 2017-11-13 15:15:38  邓纯杰
 */
 public class XtPlatform extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String xt_platform_id;/**主键**/
-	private String xt_platform_title;/****/
+	private String xt_platform_title;/**标题**/
 	private String xt_platform_status;/**状态0正常1关闭**/
 	private String xt_userinfo_id;/**操作人**/
 	private String xt_platform_remark;/**注备**/
 	private String xt_platform_ctime;/**创建时间**/
 	private String xt_platform_mtime;/**修改时间**/
-	private String xt_Platform_FeedbackList;/**回复信息JSON格式**/
+	private List<XtPlatformFeedback> xtPlatformFeedback;/**平台反馈意见**/
+	private String xtPlatformFeedback_removed_flag;/**平台反馈意见移除标识**/
 	public void setXt_platform_id(String xt_platform_id){
 		this.xt_platform_id=xt_platform_id;
 	}
@@ -59,10 +61,16 @@ public class XtPlatform extends BaseEntity implements Serializable{
 	public String getXt_platform_mtime(){
 		return xt_platform_mtime;
 	}
-	public String getXt_Platform_FeedbackList() {
-		return xt_Platform_FeedbackList;
+	public void setXtPlatformFeedback(List<XtPlatformFeedback> xtPlatformFeedback){
+		this.xtPlatformFeedback=xtPlatformFeedback;
 	}
-	public void setXt_Platform_FeedbackList(String xt_Platform_FeedbackList) {
-		this.xt_Platform_FeedbackList = xt_Platform_FeedbackList;
+	public List<XtPlatformFeedback> getXtPlatformFeedback(){
+		return xtPlatformFeedback;
+	}
+	public void setXtPlatformFeedback_removed_flag(String xtPlatformFeedback_removed_flag){
+		this.xtPlatformFeedback_removed_flag=xtPlatformFeedback_removed_flag;
+	}
+	public String getXtPlatformFeedback_removed_flag(){
+		return xtPlatformFeedback_removed_flag;
 	}
 }

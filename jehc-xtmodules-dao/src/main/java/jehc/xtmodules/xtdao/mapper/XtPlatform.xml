@@ -15,12 +15,6 @@
 		FROM 
 			xt_platform
 		WHERE 1=1
-		<if test="null != xt_platform_status">
-			AND xt_platform_status = #{xt_platform_status}
-		</if>
-		<if test="null != xt_platform_title">
-			AND xt_platform_title like '%${xt_platform_title}%'
-		</if>
 	</select>
 
 	<!--查询对象-->
@@ -68,13 +62,39 @@
 		UPDATE
 			xt_platform
 		SET
-			`xt_platform_id` = #{xt_platform_id},
 			`xt_platform_title` = #{xt_platform_title},
 			`xt_platform_status` = #{xt_platform_status},
 			`xt_userinfo_id` = #{xt_userinfo_id},
 			`xt_platform_remark` = #{xt_platform_remark},
 			`xt_platform_ctime` = #{xt_platform_ctime},
 			`xt_platform_mtime` = #{xt_platform_mtime}
+		WHERE xt_platform_id=#{xt_platform_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtPlatformBySelective" parameterType="jehc.xtmodules.xtmodel.XtPlatform">
+		UPDATE
+			xt_platform
+		<set>
+			<if test="xt_platform_title != null">
+				`xt_platform_title` = #{xt_platform_title},
+			</if>
+			<if test="xt_platform_status != null">
+				`xt_platform_status` = #{xt_platform_status},
+			</if>
+			<if test="xt_userinfo_id != null">
+				`xt_userinfo_id` = #{xt_userinfo_id},
+			</if>
+			<if test="xt_platform_remark != null">
+				`xt_platform_remark` = #{xt_platform_remark},
+			</if>
+			<if test="xt_platform_ctime != null">
+				`xt_platform_ctime` = #{xt_platform_ctime},
+			</if>
+			<if test="xt_platform_mtime != null">
+				`xt_platform_mtime` = #{xt_platform_mtime},
+			</if>
+		</set>
 		WHERE xt_platform_id=#{xt_platform_id}
 	</update>
 
@@ -85,4 +105,76 @@
 			#{item}
 		</foreach>
 	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtPlatform" parameterType="list">
+		INSERT INTO
+			xt_platform
+			(
+			`xt_platform_id`,
+			`xt_platform_title`,
+			`xt_platform_status`,
+			`xt_userinfo_id`,
+			`xt_platform_remark`,
+			`xt_platform_ctime`,
+			`xt_platform_mtime`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_platform_id},
+			#{item.xt_platform_title},
+			#{item.xt_platform_status},
+			#{item.xt_userinfo_id},
+			#{item.xt_platform_remark},
+			#{item.xt_platform_ctime},
+			#{item.xt_platform_mtime}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtPlatform" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_platform
+			SET
+				`xt_platform_title` = #{item.xt_platform_title},
+				`xt_platform_status` = #{item.xt_platform_status},
+				`xt_userinfo_id` = #{item.xt_userinfo_id},
+				`xt_platform_remark` = #{item.xt_platform_remark},
+				`xt_platform_ctime` = #{item.xt_platform_ctime},
+				`xt_platform_mtime` = #{item.xt_platform_mtime}
+			WHERE xt_platform_id=#{item.xt_platform_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtPlatformBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_platform
+			<set>
+				<if test="item.xt_platform_title != null">
+					`xt_platform_title` = #{item.xt_platform_title},
+				</if>
+				<if test="item.xt_platform_status != null">
+					`xt_platform_status` = #{item.xt_platform_status},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					`xt_userinfo_id` = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.xt_platform_remark != null">
+					`xt_platform_remark` = #{item.xt_platform_remark},
+				</if>
+				<if test="item.xt_platform_ctime != null">
+					`xt_platform_ctime` = #{item.xt_platform_ctime},
+				</if>
+				<if test="item.xt_platform_mtime != null">
+					`xt_platform_mtime` = #{item.xt_platform_mtime},
+				</if>
+			</set>
+			WHERE xt_platform_id=#{item.xt_platform_id}
+		</foreach>
+	</update>
 </mapper>

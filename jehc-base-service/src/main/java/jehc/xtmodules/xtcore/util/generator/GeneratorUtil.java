@@ -38,7 +38,7 @@ public class GeneratorUtil {
      * @param str
      * @return
      */
-    public String toUpperCase(String str){
+    public static String toUpperCase(String str){
     	StringBuffer sb = new StringBuffer();
     	String[] strList = str.split("_");
     	if(null != strList){
@@ -118,7 +118,7 @@ public class GeneratorUtil {
      * @param str
      * @return
      */
-    public String lowfristchar(String str){
+    public static String lowfristchar(String str){
     	str = toUpperCase(str);
     	StringBuffer sb = new StringBuffer();
     	if(null != str && !"".equals(str)){

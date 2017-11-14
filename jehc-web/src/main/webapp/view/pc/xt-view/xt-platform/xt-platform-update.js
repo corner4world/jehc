@@ -1,124 +1,82 @@
-var xtPlatformWinEdit;
-var xtPlatformFormEdit;
-function updateXtPlatform(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要修改的一项！');
-		return;
-	}
-	initXtPlatformFormEdit();
-	xtPlatformWinEdit = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'编辑信息',
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		},
-		items:xtPlatformFormEdit,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(xtPlatformFormEdit,'../xtPlatformController/updateXtPlatform',grid,xtPlatformWinEdit,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	xtPlatformWinEdit.show();
-	
-	loadFormData(xtPlatformFormEdit,'../xtPlatformController/getXtPlatformById?xt_platform_id='+ record.items[0].data.xt_platform_id);
+//返回r
+function goback(){
+	tlocation("../xtPlatformController/loadXtPlatform");
 }
-function initXtPlatformFormEdit(){
-	xtPlatformFormEdit = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
-		},
-		items:[
-		{
-			fieldLabel:'主&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;键',
-			xtype:'textfield',
-			hidden:true,
-			name:'xt_platform_id',
-			allowBlank:false,
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'标&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;题',
-			xtype:'textfield',
-			name:'xt_platform_title',
-			maxLength:100,
-			anchor:'80%'
-		},
-		{
-			fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
-			xtype:'combo',
-			emptyText:'请选择',
-			store:xt_platform_combo,
-			mode:'local',
-			triggerAction:'all',
-			editable:false,
-			hiddenName:'xt_platform_status',
-			valueField:'value',
-			displayField:'text',
-			name:'xt_platform_status',
-			maxLength:10,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'操&nbsp;&nbsp;作&nbsp;人',
-			xtype:'textfield',
-			name:'xt_userinfo_id',
-			maxLength:32,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;备',
-			xtype:'textareafield',
-			name:'xt_platform_remark',
-			maxLength:500,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'创建时间',
-			xtype:'datefield',
-			format:'Y-m-d H:i:s',
-			name:'xt_platform_ctime',
-			maxLength:19,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'修改时间',
-			xtype:'datefield',
-			format:'Y-m-d H:i:s',
-			name:'xt_platform_mtime',
-			maxLength:19,
-			anchor:'40%'
-		}
-		]
-	});
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
+function updateXtPlatform(){
+	submitBForm('defaultForm','../xtPlatformController/updateXtPlatform','../xtPlatformController/loadXtPlatform');
+}
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+});
+
+function addXtPlatformFeedbackItems(){
+	validatorDestroy('defaultForm');
+	var numbers = $('#xtPlatformFeedbackFormNumber').val();
+	numbers = parseInt(numbers)+1;
+	$('#xtPlatformFeedbackFormNumber').val(numbers);
+	//点击添加新一行
+	var removeBtn = '<a class="btn btn-danger" href="javascript:delXtPlatformFeedbackItems(this,'+numbers+')" >删除该条信息</a>';
+	var form = 
+		'<div id="form_xtPlatformFeedback_'+numbers+'">'+
+			'<fieldset>'+
+			'<legend><h5>序号'+numbers+'</h5></legend>'+
+			'<div class="form-group"><div class="col-lg-3">'+removeBtn+'</div></div>'+
+			'<div class="form-group">'+
+				'<label class="col-lg-3 control-label">主键编号</label>'+
+				'<div class="col-lg-6">'+
+					'<input class="form-control" type="text" maxlength="32"  data-bv-notempty data-bv-notempty-message="请输入主键编号"  id="xtPlatformFeedback_'+numbers+'_xt_platform_feedback_id" name="xtPlatformFeedback['+numbers+'].xt_platform_feedback_id"  placeholder="请输入主键编号">'+
+				'</div>'+
+			'</div>'+
+			'<div class="form-group">'+
+				'<label class="col-lg-3 control-label">台平发布信息编号</label>'+
+				'<div class="col-lg-6">'+
+					'<input class="form-control" type="text" maxlength="32"  id="xtPlatformFeedback_'+numbers+'_xt_platform_id" name="xtPlatformFeedback['+numbers+'].xt_platform_id"  placeholder="请输入台平发布信息编号">'+
+				'</div>'+
+			'</div>'+
+			'<div class="form-group">'+
+				'<label class="col-lg-3 control-label">创建时间</label>'+
+				'<div class="col-lg-6">'+
+					'<input class="form_datetime form-control" id="xtPlatformFeedback_'+numbers+'_xt_platform_feedback_ctime" name="xtPlatformFeedback['+numbers+'].xt_platform_feedback_ctime" placeholder="请选择时间">'+
+				'</div>'+
+			'</div>'+
+			'<div class="form-group">'+
+				'<label class="col-lg-3 control-label">评论人编号</label>'+
+				'<div class="col-lg-6">'+
+					'<input class="form-control" type="text" maxlength="32"  id="xtPlatformFeedback_'+numbers+'_xt_userinfo_id" name="xtPlatformFeedback['+numbers+'].xt_userinfo_id"  placeholder="请输入评论人编号">'+
+				'</div>'+
+			'</div>'+
+			'<div class="form-group">'+
+				'<label class="col-lg-3 control-label">评论内容</label>'+
+				'<div class="col-lg-6">'+
+					'<textarea class="form-control" maxlength="500"  id="xtPlatformFeedback_'+numbers+'_xt_platform_feedback_remark" name="xtPlatformFeedback['+numbers+'].xt_platform_feedback_remark"  placeholder="请输入评论内容"></textarea>'+
+				'</div>'+
+			'</div>'+
+			'<div class="form-group">'+
+				'<label class="col-lg-3 control-label">状态0正常1隐藏</label>'+
+				'<div class="col-lg-6">'+
+					'<input class="form-control" type="text" maxlength="10"  id="xtPlatformFeedback_'+numbers+'_xt_platform_feedback_status" name="xtPlatformFeedback['+numbers+'].xt_platform_feedback_status"  placeholder="请输入状态0正常1隐藏">'+
+				'</div>'+
+			'</div>'+
+				'</fieldset>'+
+		'</div>'
+	$(".form_xtPlatformFeedback").append(form);
+
+	datetimeInit();
+	reValidator('defaultForm');
+}
+function delXtPlatformFeedbackItems(thiz,numbers){
+	validatorDestroy('defaultForm');
+	$("#form_xtPlatformFeedback_"+numbers).remove();
+	var xtPlatformFeedback_removed_flag = $('#xtPlatformFeedback_removed_flag').val()
+	if(null == xtPlatformFeedback_removed_flag || '' == xtPlatformFeedback_removed_flag){
+		$('#xtPlatformFeedback_removed_flag').val(','+numbers+',');
+	}else{
+		$('#xtPlatformFeedback_removed_flag').val(xtPlatformFeedback_removed_flag+numbers+',')
+	}
+	reValidator('defaultForm');
 }
