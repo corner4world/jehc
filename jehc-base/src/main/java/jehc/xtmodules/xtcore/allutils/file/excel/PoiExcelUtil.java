@@ -1,4 +1,5 @@
 package jehc.xtmodules.xtcore.allutils.file.excel;
+import java.io.File;
 import java.util.ArrayList;
 
 import org.apache.poi.ss.usermodel.Cell;  
@@ -16,36 +17,71 @@ public abstract class PoiExcelUtil {
   
     /** 获取sheet列表，子类必须实现 */  
     public abstract ArrayList<String> getSheetList(String filePath);  
+    public abstract ArrayList<String> getSheetList(File file); 
+    
       
-    /** 读取Excel文件数据 */  
+    /** 1-1读取Excel文件数据 */  
     public ArrayList<ArrayList<String>> readExcel(String filePath, int sheetIndex) {  
         return readExcel(filePath, sheetIndex, "1-", "1-");  
     }  
+    /** 1-2读取Excel文件数据 */  
+    public ArrayList<ArrayList<String>> readExcel(File file, int sheetIndex) {  
+        return readExcel(file, sheetIndex, "1-", "1-");  
+    } 
+    
       
-    /** 读取Excel文件数据 */  
+    /** 2-1读取Excel文件数据 */  
     public ArrayList<ArrayList<String>> readExcel(String filePath, int sheetIndex, String rows) {  
         return readExcel(filePath, sheetIndex, rows, "1-");  
-    }  
+    } 
+    /** 2-2读取Excel文件数据 */  
+    public ArrayList<ArrayList<String>> readExcel(File file, int sheetIndex, String rows) {  
+        return readExcel(file, sheetIndex, rows, "1-");  
+    } 
+    
       
-    /** 读取Excel文件数据 */  
+    /** 3-1读取Excel文件数据 */  
     public ArrayList<ArrayList<String>> readExcel(String filePath, int sheetIndex, String[] columns) {  
         return readExcel(filePath, sheetIndex, "1-", columns);  
+    } 
+    /** 3-2读取Excel文件数据 */  
+    public ArrayList<ArrayList<String>> readExcel(File file, int sheetIndex, String[] columns) {  
+        return readExcel(file, sheetIndex, "1-", columns);  
     }  
+    
+    
       
-    /** 读取Excel文件数据，子类必须实现 */  
+    /** 4-1读取Excel文件数据，子类必须实现 */  
     public abstract ArrayList<ArrayList<String>> readExcel(String filePath, int sheetIndex, String rows, String columns);  
+    /** 4-2读取Excel文件数据，子类必须实现 */  
+    public abstract ArrayList<ArrayList<String>> readExcel(File file, int sheetIndex, String rows, String columns);  
+    
+    
+    
   
-    /** 读取Excel文件数据 */  
+    /** 5-1读取Excel文件数据 */  
     public ArrayList<ArrayList<String>> readExcel(String filePath, int sheetIndex, String rows, String[] columns) {  
         int[] cols = getColumnNumber(columns);  
-          
         return readExcel(filePath, sheetIndex, rows, cols);  
     }  
+    /** 5-2读取Excel文件数据 */ 
+    public ArrayList<ArrayList<String>> readExcel(File file, int sheetIndex, String rows, String[] columns) {  
+        int[] cols = getColumnNumber(columns);  
+        return readExcel(file, sheetIndex, rows, cols);  
+    }  
+    
+    
+    
   
-    /** 读取Excel文件数据，子类必须实现 */  
+    /** 6-1读取Excel文件数据，子类必须实现 */  
     public abstract ArrayList<ArrayList<String>> readExcel(String filePath, int sheetIndex, String rows, int[] cols);  
+    /** 6-2读取Excel文件数据，子类必须实现 */  
+    public abstract ArrayList<ArrayList<String>> readExcel(File file, int sheetIndex, String rows, int[] cols);  
+    
+    
+    
       
-    /** 读取Excel文件内容 */  
+    /** 7-1读取Excel文件内容 */  
     protected ArrayList<ArrayList<String>> readExcel(Sheet sheet, String rows, int[] cols) {  
         ArrayList<ArrayList<String>> dataList = new ArrayList<ArrayList<String>> ();  
         // 处理行信息，并逐行列块读取数据  
@@ -68,13 +104,11 @@ public abstract class PoiExcelUtil {
         return dataList;  
     }  
   
-    /** 获取连续行、列数据 */  
-    protected ArrayList<ArrayList<String>> getRowsValue(Sheet sheet, int startRow, int endRow,  
-            int startCol, int endCol) {  
+    /** 8-1获取连续行、列数据 */  
+    protected ArrayList<ArrayList<String>> getRowsValue(Sheet sheet, int startRow, int endRow, int startCol, int endCol) {  
         if (endRow < startRow || endCol < startCol) {  
             return null;  
         }  
-          
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();  
         for (int i = startRow; i <= endRow; i++) {  
             data.add(getRowValue(sheet, i, startCol, endCol));  
@@ -82,12 +116,11 @@ public abstract class PoiExcelUtil {
         return data;  
     }  
   
-    /** 获取连续行、不连续列数据 */  
+    /** 9-1获取连续行、不连续列数据 */  
     private ArrayList<ArrayList<String>> getRowsValue(Sheet sheet, int startRow, int endRow, int[] cols) {  
         if (endRow < startRow) {  
             return null;  
         }  
-          
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();  
         for (int i = startRow; i <= endRow; i++) {  
             data.add(getRowValue(sheet, i, cols));  
@@ -95,7 +128,7 @@ public abstract class PoiExcelUtil {
         return data;  
     }  
       
-    /** 获取行连续列数据 */  
+    /** 10-1获取行连续列数据 */  
     private ArrayList<String> getRowValue(Sheet sheet, int rowIndex, int startCol, int endCol) {  
         if(endCol < startCol) {  
             return null;  
@@ -109,7 +142,7 @@ public abstract class PoiExcelUtil {
         return rowData;  
     }  
       
-    /** 获取行不连续列数据 */  
+    /** 11-1获取行不连续列数据 */  
     private ArrayList<String> getRowValue(Sheet sheet, int rowIndex, int[] cols) {  
         Row row = sheet.getRow(rowIndex);  
         ArrayList<String> rowData = new ArrayList<String>();  
@@ -120,11 +153,11 @@ public abstract class PoiExcelUtil {
     }  
       
     /** 
+     * 12-1
      * 获取单元格内容 
-     *  
      * @param row 
      * @param column 
-     *            a excel column string like 'A', 'C' or "AA". 
+     * a excel column string like 'A', 'C' or "AA". 
      * @return 
      */  
     protected String getCellValue(Row row, String column) {  
@@ -132,11 +165,11 @@ public abstract class PoiExcelUtil {
     }  
   
     /** 
+     * 13-1
      * 获取单元格内容 
-     *  
      * @param row 
      * @param col 
-     *            a excel column index from 0 to 65535 
+     * a excel column index from 0 to 65535 
      * @return 
      */  
     private String getCellValue(Row row, int col) {  
@@ -148,8 +181,7 @@ public abstract class PoiExcelUtil {
     }  
   
     /** 
-     * 获取单元格内容 
-     *  
+     * 14-1获取单元格内容 
      * @param cell 
      * @return 
      */  
@@ -157,7 +189,6 @@ public abstract class PoiExcelUtil {
         if (cell == null) {  
             return "";  
         }  
-  
         String value = cell.toString().trim();  
         try {  
             // This step is used to prevent Integer string being output with  
@@ -172,10 +203,9 @@ public abstract class PoiExcelUtil {
     }  
   
     /** 
+     * 15-1
      * Change excel column letter to integer number 
-     *  
-     * @param columns 
-     *            column letter of excel file, like A,B,AA,AB 
+     * @param columns  column letter of excel file, like A,B,AA,AB 
      * @return 
      */  
     private int[] getColumnNumber(String[] columns) {  
@@ -187,10 +217,9 @@ public abstract class PoiExcelUtil {
     }  
   
     /** 
+     * 16-1
      * Change excel column letter to integer number 
-     *  
-     * @param column 
-     *            column letter of excel file, like A,B,AA,AB 
+     * @param column  column letter of excel file, like A,B,AA,AB 
      * @return 
      */  
     private int getColumnNumber(String column) {  
@@ -205,12 +234,10 @@ public abstract class PoiExcelUtil {
     }  
   
     /** 
+     * 17-1
      * Change excel column string to integer number array 
-     *  
-     * @param sheet 
-     *            excel sheet 
-     * @param columns 
-     *            column letter of excel file, like A,B,AA,AB 
+     * @param sheet  excel sheet 
+     * @param columns  column letter of excel file, like A,B,AA,AB 
      * @return 
      */  
     protected int[] getColumnNumber(Sheet sheet, String columns) {  
@@ -234,14 +261,12 @@ public abstract class PoiExcelUtil {
                 result.add(Integer.parseInt(colStr) - 1);  
             }  
         }  
-          
         // 将List转换为数组  
         int len = result.size();  
         int[] cols = new int[len];   
         for(int i = 0; i<len; i++) {  
             cols[i] = result.get(i).intValue();  
         }  
-  
         return cols;  
     }  
 }
