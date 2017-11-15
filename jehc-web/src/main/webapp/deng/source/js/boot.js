@@ -1030,27 +1030,35 @@ function getBimghw(src){
 		//改变图片的src
 		img.src = img_url;
 		// 加载完成执行
+		var w =260;
+		var h =200;
 		img.onload = function(){
-			var w = img.width;
-			var h = img.height;
-			if(w>1000){
-				w = 800;
-			}
+			w = img.width;
+			h = img.height;
 			if(h > 400){
 				h = 400;
-			}
-			if(w < 100){
-			    w = 260;
-			}
-			if(h < 100){
+			}else{
 				h = 200;
 			}
+			
+			if(w>1000){
+				w = 708;
+			}else{
+			    w = 260;
+			}
+//			$('#jehcImagePreModal').modal().css({width:w});
+			$('#jehcImagePreModal').modal({backdrop: 'static',keyboard: false});
+			$("#jehcImagePre").attr('src',img_url); 
+			$("#jehcImagePre").css("width", w);
+			$("#jehcImagePre").css("height", h);
+			img.onerror = function(){
+				window.parent.toastrBoot(4,"该图片不能预览!");
+			};
 		};
-		$('#jehcImagePreModal').modal({backdrop: 'static', keyboard: false});
-		$("#jehcImagePre").attr('src',img_url); 
-		img.onerror = function(){
-			window.parent.toastrBoot(4,"该图片不能预览!");
-		};
+//		$('#jehcImagePreModal').css("width",w+50+"px");
+//		$('#jehcImagePreModal').css("height",h+20+"px");
+//		$('#jehcImagePre').css("width",w+"px");
+//		$('#jehcImagePre').css("height",h+"px");
 	}catch(e){
 		//非法即不满足图片
 		window.parent.toastrBoot(4,"该图片不能预览!");

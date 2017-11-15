@@ -167,7 +167,7 @@
 					</h4>
 				</div>
 				<div class="modal-body">
-					<div class="col-lg-4">
+					<div>
 						<img src = "../deng/images/default/add_d.png" id="jehcImagePre">    
 					</div>
 				</div>
