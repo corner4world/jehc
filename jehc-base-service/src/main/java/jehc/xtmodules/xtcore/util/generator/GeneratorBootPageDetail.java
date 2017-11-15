@@ -102,6 +102,19 @@ public class GeneratorBootPageDetail extends GeneratorUtil {
 		sb.append(GeneratorPage.createAttachmentBRight(xt_Generator, 2)+"\r\n");
 		//创建回显
 		sb.append(GeneratorPage.createBAttachmentObject(xt_Generator));
+		
+		/////////////////////一对多操作//////////////////////
+		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){//如果当前类型为一对多方式并且当前对象为主表 则获取其子表并遍历
+			//操作子表
+			List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
+			for(int i = 0; i < xt_Generator_TableMany_To_OneList.size(); i++){
+				XtGeneratorTableManyToOne xt_Generator_TableMany_To_One = xt_Generator_TableMany_To_OneList.get(i);
+				List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList_ = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
+				////////////////////////////////////////追加子表附件回显开始//////////////////////////////////
+				sb.append(GeneratorPage.createBAttachmentOneToManyObject(xt_Generator_Table_ColumnMany_To_OneList_, xt_Generator, xt_Generator_TableMany_To_One, 2));
+				////////////////////////////////////////追加子表附件回显结束//////////////////////////////////
+			}
+		}
 		return sb.toString();
 	}
 	
@@ -378,6 +391,16 @@ public class GeneratorBootPageDetail extends GeneratorUtil {
 		sb.append("\t\t</form>\r\n");
 		sb.append("\t</div>\r\n");
 		sb.append("</body>\r\n");
+		
+		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
+			sb.append("<script type=\"text/javascript\">\r\n");
+			sb.append("\tvar "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Obj = '${"+lowfristchar(xt_Generator.getXt_generator_tbname())+"JSON}';\r\n");
+			sb.append("\ttry{\r\n");
+			sb.append("\t\t"+lowfristchar(xt_Generator.getXt_generator_tbname())+"Obj = eval(\"(\"+"+lowfristchar(xt_Generator.getXt_generator_tbname())+"Obj+\")\");\r\n");
+			sb.append("\t}catch(e){\r\n");
+			sb.append("\t}\r\n");
+			sb.append("</script>\r\n");
+		}
 		//导入JS支持
 		sb.append("<script type=\"text/javascript\" src=\"../view/pc/"+xt_Generator.getXt_generator_page_package()+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"-detail.js\"></script> \r\n");
 		sb.append("</html>\r\n");

@@ -312,7 +312,7 @@ public class GeneratorUtil {
      * @param sqlType
      * @return
      */
-    public String sqlType2PageType(String sqlType) {
+    public static String sqlType2PageType(String sqlType) {
         if(sqlType.equalsIgnoreCase("bit")){
             return "String";
         }else if(sqlType.equalsIgnoreCase("tinyint")){

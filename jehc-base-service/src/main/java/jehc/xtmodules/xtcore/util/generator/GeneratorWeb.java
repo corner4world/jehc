@@ -508,6 +508,9 @@ public class GeneratorWeb extends GeneratorUtil{
         //填写查询对象内容
         sb.append("\t\t"+toUpperCase(xt_Generator.getXt_generator_tbname())+" "+lowfristchar(xt_Generator.getXt_generator_tbname())+" = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Service.get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ById("+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
         sb.append("\t\tmodel.addAttribute(\""+lowfristchar(xt_Generator.getXt_generator_tbname())+"\", "+lowfristchar(xt_Generator.getXt_generator_tbname())+");\r\n");
+        if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
+        	sb.append("\t\tmodel.addAttribute(\""+lowfristchar(xt_Generator.getXt_generator_tbname())+"JSON\", outItemsStr("+lowfristchar(xt_Generator.getXt_generator_tbname())+"));\r\n");
+        }
         sb.append("\t\treturn new ModelAndView(\"pc/"+xt_Generator.getXt_generator_page_package()+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"-update"+"\");\r\n");
         sb.append("\t}\r\n");
 		return sb.toString();
@@ -532,6 +535,9 @@ public class GeneratorWeb extends GeneratorUtil{
         //填写查询对象内容
         sb.append("\t\t"+toUpperCase(xt_Generator.getXt_generator_tbname())+" "+lowfristchar(xt_Generator.getXt_generator_tbname())+" = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Service.get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ById("+getColumnKey(xt_Generator_Table_ColumnList)+");\r\n");
         sb.append("\t\tmodel.addAttribute(\""+lowfristchar(xt_Generator.getXt_generator_tbname())+"\", "+lowfristchar(xt_Generator.getXt_generator_tbname())+");\r\n");
+        if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
+        	sb.append("\t\tmodel.addAttribute(\""+lowfristchar(xt_Generator.getXt_generator_tbname())+"JSON\", outItemsStr("+lowfristchar(xt_Generator.getXt_generator_tbname())+"));\r\n");
+        }
         sb.append("\t\treturn new ModelAndView(\"pc/"+xt_Generator.getXt_generator_page_package()+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"-detail"+"\");\r\n");
         sb.append("\t}\r\n");
 		return sb.toString();

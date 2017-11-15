@@ -271,6 +271,11 @@ public class GeneratorBootPageUpdate extends GeneratorUtil {
 				sb.append("\t}\r\n");
 				sb.append("\treValidator('defaultForm');\r\n");
 				sb.append("}\r\n");
+				
+				
+				////////////////////////////////////////追加子表附件回显开始//////////////////////////////////
+				sb.append(GeneratorPage.createBAttachmentOneToManyObject(xt_Generator_Table_ColumnMany_To_OneList_, xt_Generator, xt_Generator_TableMany_To_One, 1));
+				////////////////////////////////////////追加子表附件回显结束//////////////////////////////////
 			}
 		}
 		return sb.toString();
@@ -559,6 +564,16 @@ public class GeneratorBootPageUpdate extends GeneratorUtil {
 		sb.append("\t\t</form>\r\n");
 		sb.append("\t</div>\r\n");
 		sb.append("</body>\r\n");
+		
+		if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
+			sb.append("<script type=\"text/javascript\">\r\n");
+			sb.append("\tvar "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Obj = '${"+lowfristchar(xt_Generator.getXt_generator_tbname())+"JSON}';\r\n");
+			sb.append("\ttry{\r\n");
+			sb.append("\t\t"+lowfristchar(xt_Generator.getXt_generator_tbname())+"Obj = eval(\"(\"+"+lowfristchar(xt_Generator.getXt_generator_tbname())+"Obj+\")\");\r\n");
+			sb.append("\t}catch(e){\r\n");
+			sb.append("\t}\r\n");
+			sb.append("</script>\r\n");
+		}
 		//导入JS支持
 		sb.append("<script type=\"text/javascript\" src=\"../view/pc/"+xt_Generator.getXt_generator_page_package()+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"-update.js\"></script> \r\n");
 		sb.append("</html>\r\n");

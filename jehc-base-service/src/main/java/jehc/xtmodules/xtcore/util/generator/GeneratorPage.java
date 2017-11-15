@@ -4602,11 +4602,12 @@ public class GeneratorPage extends GeneratorUtil{
 			for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
 				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
 				if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
-					if(isUpAndDelete == 2){
-						sb.append("\tinitBFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',2);\r\n");
-					}else if(isUpAndDelete == 1){
-						sb.append("\tinitBFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',1);\r\n");
-					}
+//					if(isUpAndDelete == 2){
+//						sb.append("\tinitBFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',2);\r\n");
+//					}else if(isUpAndDelete == 1){
+//						
+//					}
+					sb.append("\tinitBFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+numbers+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',"+isUpAndDelete+");\r\n");
 				}
 			}
 			sb.append("\t/**初始化附件右键菜单结束**/\r\n");
@@ -4662,33 +4663,46 @@ public class GeneratorPage extends GeneratorUtil{
 	 * @param isAddUpdateOrDetail新增编辑 还是明细
 	 * @return
 	 */
-	public String createBAttachmentOneToManyObject(XtGeneratorTableManyToOne xt_Generator_TableMany_To_One,String addUpdateDetailType,int isAddUpdateOrDetail){
-		List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList = xt_Generator_TableMany_To_One.getXt_Generator_Table_ColumnMany_To_OneList();
-		boolean isExistFile=false;
-		for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
-			XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
-			if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
-				isExistFile=true;
-				break;
-			}
-		}
-		if(isExistFile){
-			StringBuffer sb = new StringBuffer();
-			//回显附件使用
-			sb.append("\t\t\t\t\t/**配置附件回显方法开始**/\r\n");
-			for(int i = 0; i < xt_Generator_Table_ColumnMany_To_OneList.size(); i++){
-				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(i);
-				if(null != xt_Generator_Table_ColumnMany_To_One.getColumn_type() && !"".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type()) && "5".equals(xt_Generator_Table_ColumnMany_To_One.getColumn_type())){
-					sb.append("\t\t\t\t\tif("+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Form"+addUpdateDetailType+"YField == '"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"'){\r\n");
-					sb.append("\t\t\t\t\t\tvar params = {xt_attachment_id:data[dataKey],field_name:"+lowOneCharAll_(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Form"+addUpdateDetailType+"Field};\r\n");
-					sb.append("\t\t\t\t\t\tajaxBFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params,"+isAddUpdateOrDetail+");\r\n");
-					sb.append("\t\t\t\t\t};\r\n");
+	public static String createBAttachmentOneToManyObject(List<XtGeneratorTableColumnManyToOne> xt_Generator_Table_ColumnMany_To_OneList,XtGenerator xt_Generator,XtGeneratorTableManyToOne xt_Generator_TableMany_To_One,int isAddUpdateOrDetail){
+		StringBuffer sb = new StringBuffer();
+		////////////////////////////////////////追加子表附件回显开始//////////////////////////////////
+		boolean subExistFile = false;
+		for(int j = 0;j < xt_Generator_Table_ColumnMany_To_OneList.size();j++){
+			XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
+			String dataType = xt_Generator_Table_ColumnMany_To_One.getDATA_TYPE();
+			String columne_type = xt_Generator_Table_ColumnMany_To_One.getColumn_type();
+			if("String".equals(sqlType2PageType(dataType))){
+				if(("5").equals(columne_type)){//文件框
+					subExistFile = true;
+					break;
 				}
 			}
-			sb.append("\t\t\t\t\t/**配置附件回显方法结束**/\r\n");
-			return sb.toString();
-		}else{
-			return "";
 		}
+		if(subExistFile){
+			String lowfristTableName = lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name());
+			sb.append("//回调子表（"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"）附件回显操作开始\r\n");
+			sb.append("var "+lowfristTableName+" = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Obj.items[0]."+lowfristTableName+";\r\n");
+			sb.append("for(int i = 0; i < "+lowfristTableName+".length; i++){\r\n");
+			for(int j = 0;j < xt_Generator_Table_ColumnMany_To_OneList.size();j++){
+				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
+				String column_name= xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME();
+				String dataType = xt_Generator_Table_ColumnMany_To_One.getDATA_TYPE();
+				String columne_type = xt_Generator_Table_ColumnMany_To_One.getColumn_type();
+				if("String".equals(sqlType2PageType(dataType))){
+				if(("5").equals(columne_type)){//文件框
+					//追加子表附件右键初始化
+					sb.append("\tinitBFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+i+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+i+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',"+isAddUpdateOrDetail+");\r\n");
+					//回显
+					sb.append("\tvar params = {xt_attachment_id:$('#"+lowfristTableName+"['+i+']."+column_name+"').val(),field_name:'"+lowfristTableName+"['+i+']."+column_name+"'};\r\n");
+					sb.append("\tajaxBFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params);\r\n");
+					
+					}
+				}
+			}
+			sb.append("}\r\n");
+			sb.append("//回调子表（"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"）附件回显操作结束\r\n");
+		}
+		////////////////////////////////////////追加子表附件回显结束//////////////////////////////////
+		return sb.toString();
 	}
 }
