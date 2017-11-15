@@ -56,6 +56,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="/jehc-web/target/classes"/>
-        <property name="context-root" value="jehc-web-app"/>
+        <property name="context-root" value="jehc-file"/>
     </wb-module>
 </project-modules>
