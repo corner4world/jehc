@@ -6,7 +6,7 @@ $('#defaultForm').bootstrapValidator({
 	message:'此值不是有效的'
 });
 //保存
-function addOaNotice(){
+function addOaNotice(flag){
 	if(flag == 1){
 		$('#submitType').val(flag);
 	}
