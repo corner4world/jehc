@@ -94,7 +94,7 @@ public class OaNoticeController extends BaseAction{
 	public String updateOaNotice(OaNotice oaNotice,HttpServletRequest request){
 		int i = 0;
 		if(null != oaNotice && !"".equals(oaNotice)){
-			i=oaNoticeService.updateOaNotice(oaNotice);
+			i=oaNoticeService.updateOaNoticeBySelective(oaNotice);
 		}
 		if(i>0){
 			return outAudStr(true);

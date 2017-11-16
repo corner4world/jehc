@@ -266,7 +266,7 @@ function login(){
             }
         })
 	}else{
-		window.parent.toastrBoot(4,"存在不合法的字段!");
+		//window.parent.toastrBoot(4,"存在不合法的字段!");
 	}
 }
 
