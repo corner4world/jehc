@@ -5,54 +5,56 @@
 	<!--初始化分页-->
 	<select id="getOaNoticeListByCondition" resultType="jehc.oamodules.oamodel.OaNotice" parameterType="map">
 		SELECT
-			`oa_noticeID`,
-			`xt_userinfo_id`,
-			`oa_noticeTitle`,
-			`oa_noticeContent`,
-			DATE_FORMAT(`oa_noticeCreateTime`,'%Y-%m-%d %H:%i:%s') AS `oa_noticeCreateTime`,
-			`oa_noticeIsDelete`,
-			`oa_noticeType`,
-			`oa_notice_status`,
-			`status`,
-			`xt_attachement_id`,
-			`oa_notice_hits`
+			oa_notice.`oa_noticeID`,
+			oa_notice.`xt_userinfo_id`,
+			oa_notice.`oa_noticeTitle`,
+			oa_notice.`oa_noticeContent`,
+			DATE_FORMAT(oa_notice.`oa_noticeCreateTime`,'%Y-%m-%d %H:%i:%s') AS `oa_noticeCreateTime`,
+			oa_notice.`oa_noticeIsDelete`,
+			oa_notice.`oa_noticeType`,
+			oa_notice.`oa_notice_status`,
+			oa_notice.`status`,
+			oa_notice.`xt_attachement_id`,
+			oa_notice.`oa_notice_hits`,
+			xt_userinfo.`xt_userinfo_realName`
 		FROM 
-			oa_notice
+			oa_notice oa_notice LEFT JOIN xt_userinfo xt_userinfo ON oa_notice.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
 		WHERE 1=1
 		<if test="null != oa_noticeTitle">
-			AND instr(oa_noticeTitle,#{oa_noticeTitle})
+			AND instr(oa_notice.oa_noticeTitle,#{oa_noticeTitle})
 		</if>
 		<if test="null != oa_noticeType">
-			AND oa_noticeType = #{oa_noticeType}
+			AND oa_notice.oa_noticeType = #{oa_noticeType}
 		</if>
 		<if test="null != status">
-			AND status = #{status}
+			AND oa_notice.status = #{status}
 		</if>
 		<if test="null != oa_noticeCreateTime_st and oa_noticeCreateTime_st != ''">
-			AND oa_noticeCreateTime &gt;=STR_TO_DATE(#{oa_noticeCreateTime_st},'%Y-%m-%d')
+			AND oa_notice.oa_noticeCreateTime &gt;=STR_TO_DATE(#{oa_noticeCreateTime_st},'%Y-%m-%d')
 		</if>
 		<if test="null != oa_noticeCreateTime_et and oa_noticeCreateTime_et != ''">
-			AND oa_noticeCreateTime &lt;=STR_TO_DATE(#{oa_noticeCreateTime_et},'%Y-%m-%d')
+			AND oa_notice.oa_noticeCreateTime &lt;=STR_TO_DATE(#{oa_noticeCreateTime_et},'%Y-%m-%d')
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getOaNoticeById" resultType="jehc.oamodules.oamodel.OaNotice" parameterType="string">
 		SELECT
-			`oa_noticeID`,
-			`xt_userinfo_id`,
-			`oa_noticeTitle`,
-			`oa_noticeContent`,
-			DATE_FORMAT(`oa_noticeCreateTime`,'%Y-%m-%d %H:%i:%s') AS `oa_noticeCreateTime`,
-			`oa_noticeIsDelete`,
-			`oa_noticeType`,
-			`oa_notice_status`,
-			`status`,
-			`xt_attachement_id`,
-			`oa_notice_hits`
+			oa_notice.`oa_noticeID`,
+			oa_notice.`xt_userinfo_id`,
+			oa_notice.`oa_noticeTitle`,
+			oa_notice.`oa_noticeContent`,
+			DATE_FORMAT(oa_notice.`oa_noticeCreateTime`,'%Y-%m-%d %H:%i:%s') AS `oa_noticeCreateTime`,
+			oa_notice.`oa_noticeIsDelete`,
+			oa_notice.`oa_noticeType`,
+			oa_notice.`oa_notice_status`,
+			oa_notice.`status`,
+			oa_notice.`xt_attachement_id`,
+			oa_notice.`oa_notice_hits`,
+			xt_userinfo.`xt_userinfo_realName`
 		FROM 
-			oa_notice
-		WHERE oa_noticeID=#{oa_noticeID}
+			oa_notice oa_notice LEFT JOIN xt_userinfo xt_userinfo ON oa_notice.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+		WHERE oa_notice.oa_noticeID=#{oa_noticeID}
 	</select>
 
 	<!--添加-->

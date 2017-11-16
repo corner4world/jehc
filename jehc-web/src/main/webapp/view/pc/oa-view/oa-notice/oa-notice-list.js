@@ -68,7 +68,7 @@ $(document).ready(function() {
 				data:'oa_noticeCreateTime'
 			},
 			{
-				data:'xt_userinfo_id'
+				data:'xt_userinfo_realName'
 			},
 			{
 				data:"oa_noticeID",
