@@ -7,6 +7,9 @@ $('#defaultForm').bootstrapValidator({
 });
 //保存
 function updateOaNotice(){
+	if(flag == 1){
+		$('#submitType').val(flag);
+	}
 	submitBForm('defaultForm','../oaNoticeController/updateOaNotice','../oaNoticeController/loadOaNotice');
 }
 //初始化日期选择器
