@@ -19,7 +19,7 @@ $(document).ready(function() {
 				width:"50px",
 				data:"xt_platform_id",
 				render:function (data, type, full, meta) {
-					return '<input type="checkbox" name="checkId" class="checkchild" value="' + data + '" />';
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
 				},
 				bSortable:false
 			},

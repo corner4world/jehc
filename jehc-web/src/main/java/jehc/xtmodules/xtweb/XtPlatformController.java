@@ -23,7 +23,7 @@ import jehc.xtmodules.xtservice.XtPlatformService;
 
 /**
 * 平台信息发布 
-* 2017-11-13 15:15:38  邓纯杰
+* 2017-11-16 09:38:57  邓纯杰
 */
 @Controller
 @RequestMapping("/xtPlatformController")
@@ -177,6 +177,7 @@ public class XtPlatformController extends BaseAction{
 	public ModelAndView toXtPlatformUpdate(String xt_platform_id,HttpServletRequest request, Model model){
 		XtPlatform xtPlatform = xtPlatformService.getXtPlatformById(xt_platform_id);
 		model.addAttribute("xtPlatform", xtPlatform);
+		model.addAttribute("xtPlatformJSON", outItemsStr(xtPlatform));
 		return new ModelAndView("pc/xt-view/xt-platform/xt-platform-update");
 	}
 	/**
@@ -187,6 +188,7 @@ public class XtPlatformController extends BaseAction{
 	public ModelAndView toXtPlatformDetail(String xt_platform_id,HttpServletRequest request, Model model){
 		XtPlatform xtPlatform = xtPlatformService.getXtPlatformById(xt_platform_id);
 		model.addAttribute("xtPlatform", xtPlatform);
+		model.addAttribute("xtPlatformJSON", outItemsStr(xtPlatform));
 		return new ModelAndView("pc/xt-view/xt-platform/xt-platform-detail");
 	}
 }

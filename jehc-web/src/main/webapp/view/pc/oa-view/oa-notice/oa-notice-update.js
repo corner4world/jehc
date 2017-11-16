@@ -1,49 +1,23 @@
-//返回
+//返回r
 function goback(){
 	tlocation("../oaNoticeController/loadOaNotice");
 }
 $('#defaultForm').bootstrapValidator({
-  message:'此值不是有效的',
-  feedbackIcons:{
-      valid:'glyphicon glyphicon-ok',
-      invalid:'glyphicon glyphicon-remove',
-      validating:'glyphicon glyphicon-refresh'
-  },
-  fields:{
-	  oa_noticeTitle:{
-          validators:{
-              notEmpty:{
-                  message:'标题不能为空'
-              },
-              stringLength:{
-                  min:1,
-                  max:100,
-                  message:'标题字符不能超过100个'
-              }
-          }
-      },
-      oa_noticeContent:{
-    	  validators:{
-	    	  stringLength:{
-	              max:255,
-	              message:'公告内容字符不能超过255个'
-	          }
-    	  }
-      },
-      oa_noticeType:{
-          validators:{
-              notEmpty:{
-                  message:'请选择类型'
-              }
-          }
-      }
-  }
+	message:'此值不是有效的'
 });
-
 //保存
-function updateOaNotice(flag){
-	if(flag == 1){
-		$('#submitType').val(flag);
-	}
+function updateOaNotice(){
 	submitBForm('defaultForm','../oaNoticeController/updateOaNotice','../oaNoticeController/loadOaNotice');
 }
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+});
+/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/
+initBFileRight('xt_attachement_id','xt_attachement_id_pic',1);
+/**初始化附件右键菜单结束**/
+
+/**配置附件回显方法开始**/
+var params = {xt_attachment_id:$('#xt_attachement_id').val(),field_name:'xt_attachement_id'};
+ajaxBFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params);
+/**配置附件回显方法结束**/

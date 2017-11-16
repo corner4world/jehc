@@ -1,8 +1,10 @@
 package jehc.oamodules.oaservice.impl;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import jehc.lcmodules.activitiutil.ActivitiUtil;
 import jehc.lcmodules.lcdao.LcDeploymentHisDao;
@@ -15,49 +17,51 @@ import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.SysContanst;
 import jehc.xtmodules.xtmodel.XtConstant;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 /**
- * 公告
- * @author 邓纯杰
- *
- */
+* 公告 
+* 2017-11-16 13:23:07  邓纯杰
+*/
 @Service("oaNoticeService")
-public class OaNoticeServiceImpl extends BaseService implements OaNoticeService {
+public class OaNoticeServiceImpl extends BaseService implements OaNoticeService{
+	@Autowired
+	private OaNoticeDao oaNoticeDao;
 	@Autowired
 	ActivitiUtil activitiUtil;
 	@Autowired
 	private LcDeploymentHisDao lc_Deployment_HisDao;
-	@Autowired
-	private OaNoticeDao oaNoticeDao;
-
 	/**
-	 * 初始化公告集合 
-	 */
-	public List<OaNotice> getOaNoticeListByCondition(Map<String, Object> condition) {
-		try {
-			return this.oaNoticeDao.getOaNoticeListByCondition(condition);
+	* 分页
+	* @param condition 
+	* @return
+	*/
+	public List<OaNotice> getOaNoticeListByCondition(Map<String,Object> condition){
+		try{
+			return oaNoticeDao.getOaNoticeListByCondition(condition);
 		} catch (Exception e) {
-			throw new ExceptionUtil(e.getMessage(), e.getCause());
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
-
 	/**
-	 * 读取公告明细
-	 */
-	public OaNotice getOaNoticeById(String oanoticeID) {
-		try {
-			return this.oaNoticeDao.getOaNoticeById(oanoticeID);
+	* 查询对象
+	* @param oa_noticeID 
+	* @return
+	*/
+	public OaNotice getOaNoticeById(String oa_noticeID){
+		try{
+			OaNotice oaNotice = oaNoticeDao.getOaNoticeById(oa_noticeID);
+			return oaNotice;
 		} catch (Exception e) {
-			throw new ExceptionUtil(e.getMessage(), e.getCause());
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
-
 	/**
-	 * 新增公告
-	 */
-	public int addOaNotice(OaNotice oaNotice) {
+	* 添加
+	* @param oa_notice 
+	* @return
+	*/
+	public int addOaNotice(OaNotice oaNotice){
 		int i = 0;
 		try {
 			if("1".equals(oaNotice.getSubmitType())){
@@ -86,11 +90,12 @@ public class OaNoticeServiceImpl extends BaseService implements OaNoticeService 
 		}
 		return i;
 	}
-
 	/**
-	 * 修改公告
-	 */
-	public int updateOaNotice(OaNotice oaNotice) {
+	* 修改
+	* @param oa_notice 
+	* @return
+	*/
+	public int updateOaNotice(OaNotice oaNotice){
 		int i = 0;
 		try {
 			if("1".equals(oaNotice.getSubmitType())){
@@ -119,18 +124,83 @@ public class OaNoticeServiceImpl extends BaseService implements OaNoticeService 
 		}
 		return i;
 	}
-
 	/**
-	 * 删除公告
-	 */
-	public int delOaNotice(Map<String, Object> condition) {
+	* 修改（根据动态条件）
+	* @param oa_notice 
+	* @return
+	*/
+	public int updateOaNoticeBySelective(OaNotice oaNotice){
 		int i = 0;
 		try {
-			i = this.oaNoticeDao.delOaNotice(condition);
+			i = oaNoticeDao.updateOaNoticeBySelective(oaNotice);
 		} catch (Exception e) {
 			i = 0;
-
-			throw new ExceptionUtil(e.getMessage(), e.getCause());
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 删除
+	* @param condition 
+	* @return
+	*/
+	public int delOaNotice(Map<String,Object> condition){
+		int i = 0;
+		try {
+			i = oaNoticeDao.delOaNotice(condition);
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量添加
+	* @param oa_noticeList 
+	* @return
+	*/
+	public int addBatchOaNotice(List<OaNotice> oaNoticeList){
+		int i = 0;
+		try {
+			i = oaNoticeDao.addBatchOaNotice(oaNoticeList);
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量修改
+	* @param oa_noticeList 
+	* @return
+	*/
+	public int updateBatchOaNotice(List<OaNotice> oaNoticeList){
+		int i = 0;
+		try {
+			i = oaNoticeDao.updateBatchOaNotice(oaNoticeList);
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+		return i;
+	}
+	/**
+	* 批量修改（根据动态条件）
+	* @param oa_noticeList 
+	* @return
+	*/
+	public int updateBatchOaNoticeBySelective(List<OaNotice> oaNoticeList){
+		int i = 0;
+		try {
+			i = oaNoticeDao.updateBatchOaNoticeBySelective(oaNoticeList);
+		} catch (Exception e) {
+			i = 0;
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 		return i;
 	}

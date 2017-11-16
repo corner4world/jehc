@@ -5,36 +5,53 @@
 	<!--初始化分页-->
 	<select id="getOaNoticeListByCondition" resultType="jehc.oamodules.oamodel.OaNotice" parameterType="map">
 		SELECT
-			oa_notice.`oa_noticeID`,
-			oa_notice.`xt_userinfo_id`,
-			oa_notice.`oa_noticeTitle`,
-			oa_notice.`oa_noticeContent`,
-			oa_notice.`oa_noticeCreateTime`,
-			oa_notice.`oa_noticeIsDelete`,
-			oa_notice.`oa_noticeType`,
-			oa_notice.`oa_notice_status`,
-			oa_notice.`status`,
-			xt_userinfo.`xt_userinfo_realName`
+			`oa_noticeID`,
+			`xt_userinfo_id`,
+			`oa_noticeTitle`,
+			`oa_noticeContent`,
+			DATE_FORMAT(`oa_noticeCreateTime`,'%Y-%m-%d %H:%i:%s') AS `oa_noticeCreateTime`,
+			`oa_noticeIsDelete`,
+			`oa_noticeType`,
+			`oa_notice_status`,
+			`status`,
+			`xt_attachement_id`,
+			`oa_notice_hits`
 		FROM 
-			oa_notice oa_notice LEFT JOIN xt_userinfo xt_userinfo ON oa_notice.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			oa_notice
 		WHERE 1=1
+		<if test="null != oa_noticeTitle">
+			AND instr(oa_noticeTitle,#{oa_noticeTitle})
+		</if>
+		<if test="null != oa_noticeType">
+			AND oa_noticeType = #{oa_noticeType}
+		</if>
+		<if test="null != status">
+			AND status = #{status}
+		</if>
+		<if test="null != oa_noticeCreateTime_st and oa_noticeCreateTime_st != ''">
+			AND oa_noticeCreateTime &gt;=STR_TO_DATE(#{oa_noticeCreateTime_st},'%Y-%m-%d')
+		</if>
+		<if test="null != oa_noticeCreateTime_et and oa_noticeCreateTime_et != ''">
+			AND oa_noticeCreateTime &lt;=STR_TO_DATE(#{oa_noticeCreateTime_et},'%Y-%m-%d')
+		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getOaNoticeById" resultType="jehc.oamodules.oamodel.OaNotice" parameterType="string">
 		SELECT
-			oa_notice.`oa_noticeID`,
-			oa_notice.`xt_userinfo_id`,
-			oa_notice.`oa_noticeTitle`,
-			oa_notice.`oa_noticeContent`,
-			oa_notice.`oa_noticeCreateTime`,
-			oa_notice.`oa_noticeIsDelete`,
-			oa_notice.`oa_noticeType`,
-			oa_notice.`oa_notice_status`,
-			oa_notice.`status`,
-			xt_userinfo.`xt_userinfo_realName`
+			`oa_noticeID`,
+			`xt_userinfo_id`,
+			`oa_noticeTitle`,
+			`oa_noticeContent`,
+			DATE_FORMAT(`oa_noticeCreateTime`,'%Y-%m-%d %H:%i:%s') AS `oa_noticeCreateTime`,
+			`oa_noticeIsDelete`,
+			`oa_noticeType`,
+			`oa_notice_status`,
+			`status`,
+			`xt_attachement_id`,
+			`oa_notice_hits`
 		FROM 
-			oa_notice oa_notice LEFT JOIN xt_userinfo xt_userinfo ON oa_notice.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			oa_notice
 		WHERE oa_noticeID=#{oa_noticeID}
 	</select>
 
@@ -51,7 +68,9 @@
 			`oa_noticeIsDelete`,
 			`oa_noticeType`,
 			`oa_notice_status`,
-			`status`
+			`status`,
+			`xt_attachement_id`,
+			`oa_notice_hits`
 			)
 			VALUES
 			(
@@ -63,7 +82,9 @@
 			#{oa_noticeIsDelete},
 			#{oa_noticeType},
 			#{oa_notice_status},
-			#{status}
+			#{status},
+			#{xt_attachement_id},
+			#{oa_notice_hits}
 			)
 	</insert>
 
@@ -72,14 +93,55 @@
 		UPDATE
 			oa_notice
 		SET
-			`oa_noticeID` = #{oa_noticeID},
+			`xt_userinfo_id` = #{xt_userinfo_id},
 			`oa_noticeTitle` = #{oa_noticeTitle},
 			`oa_noticeContent` = #{oa_noticeContent},
 			`oa_noticeCreateTime` = #{oa_noticeCreateTime},
 			`oa_noticeIsDelete` = #{oa_noticeIsDelete},
 			`oa_noticeType` = #{oa_noticeType},
 			`oa_notice_status` = #{oa_notice_status},
-			`status` = #{status}
+			`status` = #{status},
+			`xt_attachement_id` = #{xt_attachement_id},
+			`oa_notice_hits` = #{oa_notice_hits}
+		WHERE oa_noticeID=#{oa_noticeID}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateOaNoticeBySelective" parameterType="jehc.oamodules.oamodel.OaNotice">
+		UPDATE
+			oa_notice
+		<set>
+			<if test="xt_userinfo_id != null">
+				`xt_userinfo_id` = #{xt_userinfo_id},
+			</if>
+			<if test="oa_noticeTitle != null">
+				`oa_noticeTitle` = #{oa_noticeTitle},
+			</if>
+			<if test="oa_noticeContent != null">
+				`oa_noticeContent` = #{oa_noticeContent},
+			</if>
+			<if test="oa_noticeCreateTime != null">
+				`oa_noticeCreateTime` = #{oa_noticeCreateTime},
+			</if>
+			<if test="oa_noticeIsDelete != null">
+				`oa_noticeIsDelete` = #{oa_noticeIsDelete},
+			</if>
+			<if test="oa_noticeType != null">
+				`oa_noticeType` = #{oa_noticeType},
+			</if>
+			<if test="oa_notice_status != null">
+				`oa_notice_status` = #{oa_notice_status},
+			</if>
+			<if test="status != null">
+				`status` = #{status},
+			</if>
+			<if test="xt_attachement_id != null">
+				`xt_attachement_id` = #{xt_attachement_id},
+			</if>
+			<if test="oa_notice_hits != null">
+				`oa_notice_hits` = #{oa_notice_hits},
+			</if>
+		</set>
 		WHERE oa_noticeID=#{oa_noticeID}
 	</update>
 
@@ -90,4 +152,100 @@
 			#{item}
 		</foreach>
 	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchOaNotice" parameterType="list">
+		INSERT INTO
+			oa_notice
+			(
+			`oa_noticeID`,
+			`xt_userinfo_id`,
+			`oa_noticeTitle`,
+			`oa_noticeContent`,
+			`oa_noticeCreateTime`,
+			`oa_noticeIsDelete`,
+			`oa_noticeType`,
+			`oa_notice_status`,
+			`status`,
+			`xt_attachement_id`,
+			`oa_notice_hits`
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.oa_noticeID},
+			#{item.xt_userinfo_id},
+			#{item.oa_noticeTitle},
+			#{item.oa_noticeContent},
+			#{item.oa_noticeCreateTime},
+			#{item.oa_noticeIsDelete},
+			#{item.oa_noticeType},
+			#{item.oa_notice_status},
+			#{item.status},
+			#{item.xt_attachement_id},
+			#{item.oa_notice_hits}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchOaNotice" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_notice
+			SET
+				`xt_userinfo_id` = #{item.xt_userinfo_id},
+				`oa_noticeTitle` = #{item.oa_noticeTitle},
+				`oa_noticeContent` = #{item.oa_noticeContent},
+				`oa_noticeCreateTime` = #{item.oa_noticeCreateTime},
+				`oa_noticeIsDelete` = #{item.oa_noticeIsDelete},
+				`oa_noticeType` = #{item.oa_noticeType},
+				`oa_notice_status` = #{item.oa_notice_status},
+				`status` = #{item.status},
+				`xt_attachement_id` = #{item.xt_attachement_id},
+				`oa_notice_hits` = #{item.oa_notice_hits}
+			WHERE oa_noticeID=#{item.oa_noticeID}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchOaNoticeBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_notice
+			<set>
+				<if test="item.xt_userinfo_id != null">
+					`xt_userinfo_id` = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.oa_noticeTitle != null">
+					`oa_noticeTitle` = #{item.oa_noticeTitle},
+				</if>
+				<if test="item.oa_noticeContent != null">
+					`oa_noticeContent` = #{item.oa_noticeContent},
+				</if>
+				<if test="item.oa_noticeCreateTime != null">
+					`oa_noticeCreateTime` = #{item.oa_noticeCreateTime},
+				</if>
+				<if test="item.oa_noticeIsDelete != null">
+					`oa_noticeIsDelete` = #{item.oa_noticeIsDelete},
+				</if>
+				<if test="item.oa_noticeType != null">
+					`oa_noticeType` = #{item.oa_noticeType},
+				</if>
+				<if test="item.oa_notice_status != null">
+					`oa_notice_status` = #{item.oa_notice_status},
+				</if>
+				<if test="item.status != null">
+					`status` = #{item.status},
+				</if>
+				<if test="item.xt_attachement_id != null">
+					`xt_attachement_id` = #{item.xt_attachement_id},
+				</if>
+				<if test="item.oa_notice_hits != null">
+					`oa_notice_hits` = #{item.oa_notice_hits},
+				</if>
+			</set>
+			WHERE oa_noticeID=#{item.oa_noticeID}
+		</foreach>
+	</update>
 </mapper>

@@ -13,7 +13,7 @@
 			<form method="POST" id="searchForm" class="form-inline">
 			</form>
 			<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-				<button class="btn btn-default" onclick="search('datatables')">
+				<button class="btn btn-primary" onclick="search('datatables')">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
 				</button>
 				<button class="btn btn-default" onclick="resetAll();">重置</button>
@@ -38,7 +38,7 @@
 		<table id="datatables" class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr>
-					<th><input type="checkbox" class="checkall" /></th>
+					<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
 					<th>主键</th>
 					<th>标题</th>
 					<th>状态0正常1关闭</th>

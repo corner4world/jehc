@@ -41,13 +41,15 @@ function addXtPlatformFeedbackItems(){
 			'<div class="form-group">'+
 				'<label class="col-lg-3 control-label">评论人编号</label>'+
 				'<div class="col-lg-6">'+
-					'<input class="form-control" type="text" maxlength="32"  id="xtPlatformFeedback_'+numbers+'_xt_userinfo_id" name="xtPlatformFeedback['+numbers+'].xt_userinfo_id"  placeholder="请输入评论人编号">'+
+					'<input class="form-control" type="hidden" id="xtPlatformFeedback_'+numbers+'_xt_userinfo_id" name="xtPlatformFeedback['+numbers+'].xt_userinfo_id" >'+
+					'<img src = "../deng/images/default/add_d.png" width="96"  height="96" class="img" id="xtPlatformFeedback_'+numbers+'_xt_userinfo_id_pic">'+
 				'</div>'+
 			'</div>'+
 			'<div class="form-group">'+
 				'<label class="col-lg-3 control-label">评论内容</label>'+
 				'<div class="col-lg-6">'+
-					'<textarea class="form-control" maxlength="500"  id="xtPlatformFeedback_'+numbers+'_xt_platform_feedback_remark" name="xtPlatformFeedback['+numbers+'].xt_platform_feedback_remark"  placeholder="请输入评论内容"></textarea>'+
+					'<input class="form-control" type="hidden" id="xtPlatformFeedback_'+numbers+'_xt_platform_feedback_remark" name="xtPlatformFeedback['+numbers+'].xt_platform_feedback_remark" >'+
+					'<img src = "../deng/images/default/add_d.png" width="96"  height="96" class="img" id="xtPlatformFeedback_'+numbers+'_xt_platform_feedback_remark_pic">'+
 				'</div>'+
 			'</div>'+
 			'<div class="form-group">'+
@@ -59,6 +61,10 @@ function addXtPlatformFeedbackItems(){
 				'</fieldset>'+
 		'</div>'
 	$(".form_xtPlatformFeedback").append(form);
+	/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/
+	initBFileRight('xtPlatformFeedback_'+numbers+'_xt_userinfo_id','xtPlatformFeedback_'+numbers+'_xt_userinfo_id_pic',1);
+	initBFileRight('xtPlatformFeedback_'+numbers+'_xt_platform_feedback_remark','xtPlatformFeedback_'+numbers+'_xt_platform_feedback_remark_pic',1);
+	/**初始化附件右键菜单结束**/
 
 	datetimeInit();
 	reValidator('defaultForm');

@@ -84,13 +84,15 @@
 					<div class="form-group">
 						<label class="col-lg-3 control-label">评论人编号</label>
 						<div class="col-lg-6">
-							<input class="form-control" type="text" maxlength="32"  id="xtPlatformFeedback[${xtPlatformFeedbackStatus.index}].xt_userinfo_id" name="xtPlatformFeedback[${xtPlatformFeedbackStatus.index}].xt_userinfo_id" placeholder="请输入评论人编号" value="${xtPlatformFeedback.xt_userinfo_id }">
+							<input class="form-control" type="hidden" id="xtPlatformFeedback_${xtPlatformFeedbackStatus.index}_xt_userinfo_id" name="xtPlatformFeedback[${xtPlatformFeedbackStatus.index}].xt_userinfo_id" value="${xtPlatformFeedback.xt_userinfo_id }">
+							<img src = "../deng/images/default/add_d.png" class="img" width="96"  height="96"  id="xtPlatformFeedback_${xtPlatformFeedbackStatus.index}_xt_userinfo_id_pic">
 						</div>
 					</div>
 					<div class="form-group">
 						<label class="col-lg-3 control-label">评论内容</label>
 						<div class="col-lg-6">
-							<textarea class="form-control" maxlength="500"  id="xtPlatformFeedback_${xtPlatformFeedbackStatus.index}_xt_platform_feedback_remark" name="xtPlatformFeedback[${xtPlatformFeedbackStatus.index}].xt_platform_feedback_remark" placeholder="请输入评论内容"> ${xtPlatformFeedback.xt_platform_feedback_remark }</textarea>
+							<input class="form-control" type="hidden" id="xtPlatformFeedback_${xtPlatformFeedbackStatus.index}_xt_platform_feedback_remark" name="xtPlatformFeedback[${xtPlatformFeedbackStatus.index}].xt_platform_feedback_remark" value="${xtPlatformFeedback.xt_platform_feedback_remark }">
+							<img src = "../deng/images/default/add_d.png" class="img" width="96"  height="96"  id="xtPlatformFeedback_${xtPlatformFeedbackStatus.index}_xt_platform_feedback_remark_pic">
 						</div>
 					</div>
 					<div class="form-group">
@@ -113,5 +115,12 @@
 		</form>
 	</div>
 </body>
+<script type="text/javascript">
+	var xtPlatformObj = '${xtPlatformJSON}';
+	try{
+		xtPlatformObj = eval("("+xtPlatformObj+")");
+	}catch(e){
+	}
+</script>
 <script type="text/javascript" src="../view/pc/xt-view/xt-platform/xt-platform-detail.js"></script> 
 </html>

@@ -116,6 +116,12 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\t\t\t\t},\r\n");
 		sb.append("\t\t\t\tbSortable:false\r\n");
 		sb.append("\t\t\t},\r\n");
+		//序号
+		sb.append("\t\t\t{\r\n");
+		sb.append("\t\t\t\tdata:\""+getColumnKey(xt_Generator_Table_ColumnList)+"\",\r\n");
+		sb.append("\t\t\t\twidth:\"150px\"\r\n");
+		sb.append("\t\t\t},\r\n");
+		
 		List<XtGeneratorGridColumn> xt_Generator_Grid_ColumnList = xt_Generator.getXt_Generator_Grid_ColumnList();
 		for(int i = 0; i < xt_Generator_Grid_ColumnList.size(); i++){
 			XtGeneratorGridColumn xt_Generator_Grid_Column = xt_Generator_Grid_ColumnList.get(i);
@@ -297,7 +303,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 			}else if("1".equals(xt_generator_search_type)){
 				sb.append("\t\t\t\t\t<textarea class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请输入"+xt_generator_search_label+"\"></textarea>\r\n");
 			}else if("3".equals(xt_generator_search_type)){
-				sb.append("\t\t\t\t\t<select type=\"text\" class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请选择\">\r\n");
+				sb.append("\t\t\t\t\t<select class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请选择\"></select>\r\n");
 			}else if("4".equals(xt_generator_search_type)){
 				sb.append("\t\t\t\t\t<div class=\"input-group\">\r\n");
 				sb.append("\t\t\t\t\t\t<input type=\"text\" class=\"form_datetime form-control\" placeholder=\"起始时间\" name=\""+xt_generator_search_name+"_st\" />\r\n");
@@ -341,6 +347,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\t\t\t<thead>\r\n");
 		sb.append("\t\t\t\t<tr>\r\n");
 		sb.append("\t\t\t\t\t<th><label class=\"mt-checkbox mt-checkbox-single mt-checkbox-outline\"><input type=\"checkbox\" class=\"checkall\" /><span></span></label></th>\r\n");//复选框
+		sb.append("\t\t\t\t\t<th>序号</th>\r\n");//序号
 		//遍历字段开始
 		List<XtGeneratorGridColumn> xt_Generator_Grid_ColumnList = xt_Generator.getXt_Generator_Grid_ColumnList();
 		for(int i = 0; i < xt_Generator_Grid_ColumnList.size(); i++){
