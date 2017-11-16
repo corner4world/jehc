@@ -112,7 +112,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\t\t\t\twidth:\"50px\",\r\n");
 		sb.append("\t\t\t\tdata:\""+getColumnKey(xt_Generator_Table_ColumnList)+"\",\r\n");
 		sb.append("\t\t\t\trender:function (data, type, full, meta) {\r\n");
-		sb.append("\t\t\t\t\treturn '<input type=\"checkbox\" name=\"checkId\" class=\"checkchild\" value=\"' + data + '\" />';\r\n");
+		sb.append("\t\t\t\t\treturn '<label class=\"mt-checkbox mt-checkbox-single mt-checkbox-outline\"><input type=\"checkbox\" name=\"checkId\" class=\"checkchild \" value=\"' + data + '\" /><span></span></label>';\r\n");
 		sb.append("\t\t\t\t},\r\n");
 		sb.append("\t\t\t\tbSortable:false\r\n");
 		sb.append("\t\t\t},\r\n");
@@ -310,7 +310,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		//查询区域内容结束
 		sb.append("\t\t\t</form>\r\n");
 		sb.append("\t\t\t<div class=\"form-group\" style=\"margin-left: 35px;margin-top: 25px;\">\r\n");
-		sb.append("\t\t\t\t<button class=\"btn btn-default\" onclick=\"search('datatables')\">\r\n");
+		sb.append("\t\t\t\t<button class=\"btn btn-primary\" onclick=\"search('datatables')\">\r\n");
 		sb.append("\t\t\t\t\t<i class=\"glyphicon glyphicon-search\"></i>&nbsp;检索\r\n");
 		sb.append("\t\t\t\t</button>\r\n");
 		sb.append("\t\t\t\t<button class=\"btn btn-default\" onclick=\"resetAll();\">重置</button>\r\n");
@@ -340,7 +340,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\t\t<table id=\"datatables\" class=\"table table-bordered table-striped table-hover\">\r\n");
 		sb.append("\t\t\t<thead>\r\n");
 		sb.append("\t\t\t\t<tr>\r\n");
-		sb.append("\t\t\t\t\t<th><input type=\"checkbox\" class=\"checkall\" /></th>\r\n");//复选框
+		sb.append("\t\t\t\t\t<th><label class=\"mt-checkbox mt-checkbox-single mt-checkbox-outline\"><input type=\"checkbox\" class=\"checkall\" /><span></span></label></th>\r\n");//复选框
 		//遍历字段开始
 		List<XtGeneratorGridColumn> xt_Generator_Grid_ColumnList = xt_Generator.getXt_Generator_Grid_ColumnList();
 		for(int i = 0; i < xt_Generator_Grid_ColumnList.size(); i++){

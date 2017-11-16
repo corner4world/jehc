@@ -4682,7 +4682,7 @@ public class GeneratorPage extends GeneratorUtil{
 			String lowfristTableName = lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name());
 			sb.append("//回调子表（"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name_zh()+"）附件回显操作开始\r\n");
 			sb.append("var "+lowfristTableName+" = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Obj.items[0]."+lowfristTableName+";\r\n");
-			sb.append("for(int i = 0; i < "+lowfristTableName+".length; i++){\r\n");
+			sb.append("for(var i = 0; i < "+lowfristTableName+".length; i++){\r\n");
 			for(int j = 0;j < xt_Generator_Table_ColumnMany_To_OneList.size();j++){
 				XtGeneratorTableColumnManyToOne xt_Generator_Table_ColumnMany_To_One = xt_Generator_Table_ColumnMany_To_OneList.get(j);
 				String column_name= xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME();
@@ -4693,7 +4693,7 @@ public class GeneratorPage extends GeneratorUtil{
 					//追加子表附件右键初始化
 					sb.append("\tinitBFileRight('"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+i+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"','"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"_'+i+'_"+xt_Generator_Table_ColumnMany_To_One.getCOLUMN_NAME()+"_pic',"+isAddUpdateOrDetail+");\r\n");
 					//回显
-					sb.append("\tvar params = {xt_attachment_id:$('#"+lowfristTableName+"['+i+']."+column_name+"').val(),field_name:'"+lowfristTableName+"['+i+']."+column_name+"'};\r\n");
+					sb.append("\tvar params = {xt_attachment_id:$('#"+lowfristTableName+"_'+i+'_"+column_name+"').val(),field_name:'"+lowfristTableName+"_'+i+'_"+column_name+"'};\r\n");
 					sb.append("\tajaxBFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params);\r\n");
 					
 					}
