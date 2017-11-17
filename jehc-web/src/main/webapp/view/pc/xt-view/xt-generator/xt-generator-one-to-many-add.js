@@ -417,7 +417,7 @@ function oneToManyGridFiledWin(record){
 	});
 	var comboTypeData = Ext.create('Ext.data.SimpleStore',{  
 	    fields:['value','text'],  
-	    data:[['文本域','文本域'],['下拉框','下拉框'],['文件框','文件框']]  
+	    data:[['重置','重置'],['文本域','文本域'],['下拉框','下拉框'],['文件框','文件框']]  
 	});
 	if(null != xt_generator_ontomany_grid && '' != xt_generator_ontomany_grid){
 		oneToManyTableFiledStore = Ext.create('Ext.data.Store',{  
@@ -545,6 +545,11 @@ function oneToManyGridFiledWin(record){
 		            editable:false,
 		            listeners:{
 		            	select:function(combo, record,index){
+		            		if(record.data.value == '重置'){
+		            			this.setValue("");
+		            			oneToManyTableFiledGrid.getSelectionModel().getSelected().items[0].set("column_type","");
+		            			return;
+		            		}
 		            		var DATA_TYPE = oneToManyTableFiledGrid.getSelectionModel().getSelected().items[0].data.DATA_TYPE;
 		            		var column_type = record.data.value;
 		            		var CHARACTER_MAXIMUM_LENGTH = oneToManyTableFiledGrid.getSelectionModel().getSelected().items[0].data.CHARACTER_MAXIMUM_LENGTH;
