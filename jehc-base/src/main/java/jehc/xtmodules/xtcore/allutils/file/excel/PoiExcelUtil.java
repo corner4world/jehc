@@ -189,13 +189,15 @@ public abstract class PoiExcelUtil {
         if (cell == null) {  
             return "";  
         }  
-        String value = cell.toString().trim();  
+        cell.setCellType(Cell.CELL_TYPE_STRING);
+        String value = cell.getStringCellValue().trim();  
+//        String value = cell.toString().trim();  
         try {  
             // This step is used to prevent Integer string being output with  
             // '.0'.  
-            Float.parseFloat(value);  
-            value=value.replaceAll("\\.0$", "");  
-            value=value.replaceAll("\\.0+$", "");  
+//            Float.parseFloat(value);  
+//            value=value.replaceAll("\\.0$", "");  
+//            value=value.replaceAll("\\.0+$", "");  
             return value;  
         } catch (NumberFormatException ex) {  
             return value;  
