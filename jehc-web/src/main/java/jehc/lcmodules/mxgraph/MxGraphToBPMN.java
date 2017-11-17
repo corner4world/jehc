@@ -33,7 +33,9 @@ public class MxGraphToBPMN{
 			bpmnxml = formatXML(bpmnxml);
 //			bpmnxml = paseJson(bpmnxml);
 			if(null != bpmnxml && !"".equals(bpmnxml)){
-				mxGraphModel.setBpmn(bpmnxml);
+				String bpmnxml_ = bpmnxml.toString().replaceAll("<extensionElements/>", "");
+				bpmnxml_ = bpmnxml_.replaceAll("<extensionElements></extensionElements>", "");
+				mxGraphModel.setBpmn(bpmnxml_);
 			}
 		} catch (Exception e) {
 			throw new ExceptionUtil("调用createBPMN出现异常，异常信息："+e.getMessage());

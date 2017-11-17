@@ -45,22 +45,22 @@ public class MxCompensationThrowingEvent {
         if(null != excluded && !"".equals(excluded) && "1".equals(excluded)){
         	excluded = " activiti:exclude='true'";
         }else{
-        	excluded="";
+        	excluded=" ";
         }
         if(null != ruleName && !"".equals(ruleName)){
         	ruleName = " activiti:rules='"+ruleName+"'";
         }else{
-        	ruleName="";
+        	ruleName=" ";
         }
         if(null != ruleVariablesInput && !"".equals(ruleVariablesInput)){
         	ruleVariablesInput = " activiti:ruleVariablesInput='"+ruleVariablesInput+"'";
         }else{
-        	ruleName="";
+        	ruleVariablesInput=" ";
         }
         if(null != resultVariables && !"".equals(resultVariables)){
-        	ruleName = " activiti:resultVariable='"+resultVariables+"'";
+        	resultVariables = " activiti:resultVariable='"+resultVariables+"'";
         }else{
-        	ruleName="";
+        	resultVariables=" ";
         }
 		//开区间
         task_node+="<intermediateThrowEvent id='"+nodeID+"' name='"+name+"' "+MxUtils.normal(mxCell)+excluded+ruleName+ruleVariablesInput+resultVariables+">";

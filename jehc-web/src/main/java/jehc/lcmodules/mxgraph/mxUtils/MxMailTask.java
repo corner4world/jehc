@@ -30,35 +30,35 @@ public class MxMailTask {
  		//节点中其他基本属性
  		String to = mxCell.attributeValue("to");
  		if(StringUtil.isEmpty(to)){
- 			to ="";
+ 			to =" ";
  		}
  		String from = mxCell.attributeValue("from");
  		if(StringUtil.isEmpty(from)){
- 			from ="";
+ 			from =" ";
  		}
  		String subject = mxCell.attributeValue("subject");
  		if(StringUtil.isEmpty(subject)){
- 			subject ="";
+ 			subject =" ";
  		}
  		String cc = mxCell.attributeValue("cc");
  		if(StringUtil.isEmpty(cc)){
- 			cc ="";
+ 			cc =" ";
  		}
  		String bcc = mxCell.attributeValue("bcc");
  		if(StringUtil.isEmpty(bcc)){
- 			bcc ="";
+ 			bcc =" ";
  		}
  		String charset = mxCell.attributeValue("charset");
  		if(StringUtil.isEmpty(charset)){
- 			charset ="";
+ 			charset =" ";
  		}
  		String html = mxCell.attributeValue("html");
  		if(StringUtil.isEmpty(html)){
- 			html ="";
+ 			html =" ";
  		}
  		String nohtml = mxCell.attributeValue("nohtml");
  		if(StringUtil.isEmpty(nohtml)){
- 			nohtml ="";
+ 			nohtml =" ";
  		}
  		//获取mxCell节点下的mxGeometry节点
         Element mxGeometry = mxCell.element("mxGeometry"); 

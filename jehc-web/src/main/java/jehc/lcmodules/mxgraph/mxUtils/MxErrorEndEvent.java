@@ -47,12 +47,12 @@ public class MxErrorEndEvent {
         if(null != errorRef && !"".equals(errorRef)){
         	errorRef = " errorRef='"+errorRef+"' ";
         }else{
-        	errorRef="";
+        	errorRef=" ";
         }
         if(null != asynchronous && !"".equals(asynchronous) && "0".equals(asynchronous)){
         	asynchronous = " activiti:async='true'";
         }else{
-        	asynchronous="";
+        	asynchronous=" ";
         }
         if(null != isForCompensation && !"".equals(isForCompensation) && "1".equals(isForCompensation)){
         	isForCompensation = " isForCompensation='true'";

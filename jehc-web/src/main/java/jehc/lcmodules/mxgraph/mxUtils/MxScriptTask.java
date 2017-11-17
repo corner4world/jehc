@@ -49,7 +49,7 @@ public class MxScriptTask {
         if(null != script && !"".equals(script)){
         	script = " <script>"+script+"</script>";
         }else{
-        	script="";
+        	script=" ";
         }
 		//开区间
         task_node+="<scriptTask id='"+nodeID+"' name='"+name+"' activiti:autoStoreVariables='false' "+MxUtils.normal(mxCell)+scriptLanguage+">";

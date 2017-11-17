@@ -49,22 +49,22 @@ public class MxTimerStartEvent {
         if(null != timeCycle && !"".equals(timeCycle)){
         	timeCycle = " <timeCycle>"+timeCycle+"</timeCycle>";
         }else{
-        	timeCycle="";
+        	timeCycle=" ";
         }
         if(null != timeDate && !"".equals(timeDate)){
         	timeDate = " <timeDate>"+timeDate+"</timeDate>";
         }else{
-        	timeDate="";
+        	timeDate=" ";
         }
         if(null != timeDuration && !"".equals(timeDuration)){
         	timeDuration = " <timeDuration>"+timeDuration+"</timeDuration>";
         }else{
-        	timeDuration="";
+        	timeDuration=" ";
         }
         if(null != asynchronous && !"".equals(asynchronous) && "0".equals(asynchronous)){
         	asynchronous = " activiti:async='true'";
         }else{
-        	asynchronous="";
+        	asynchronous=" ";
         }
         if(null != isForCompensation && !"".equals(isForCompensation) && "1".equals(isForCompensation)){
         	isForCompensation = " isForCompensation='true'";

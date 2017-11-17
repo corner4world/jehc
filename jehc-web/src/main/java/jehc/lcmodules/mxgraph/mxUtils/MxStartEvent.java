@@ -52,12 +52,12 @@ public class MxStartEvent {
         if(null != initiator && !"".equals(initiator)){
         	initiator = " activiti:initiator='"+initiator+"'";
         }else{
-        	initiator="";
+        	initiator=" ";
         }
         if(null != formKey && !"".equals(formKey)){
         	formKey = " activiti:formKey='"+formKey+"'";
         }else{
-        	formKey="";
+        	formKey=" ";
         }
         start_node += "<startEvent id='"+nodeID+"' name='"+nodeName+"' "+asynchronous+" "+initiator+" "+formKey+">";
 		//****开始区间与闭区间属性****//

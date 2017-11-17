@@ -54,22 +54,22 @@ public class MxUserTask {
         if(null != assignee && !"".equals(assignee)){
         	assignee = " activiti:assignee='"+assignee+"'";
         }else{
-        	assignee="";
+        	assignee=" ";
         }
         if(null != candidateUsers && !"".equals(candidateUsers)){
         	candidateUsers = " activiti:candidateUsers='"+candidateUsers+"'";
         }else{
-        	candidateUsers="";
+        	candidateUsers=" ";
         }
         if(null != candidateGroups && !"".equals(candidateGroups)){
         	candidateGroups = " activiti:candidateGroups='"+candidateGroups+"'";
         }else{
-        	candidateGroups="";
+        	candidateGroups=" ";
         }
         if(null != Expression && !"".equals(Expression)){
         	Expression = " aactiviti:skipExpression='"+Expression+"'";
         }else{
-        	Expression="";
+        	Expression=" ";
         }
         if(null != dueDate && !"".equals(dueDate)){
         	dueDate = " activiti:dueDate='"+dueDate+"'";
@@ -79,17 +79,17 @@ public class MxUserTask {
         if(null != formKey && !"".equals(formKey)){
         	formKey = " activiti:formKey='"+formKey+"'";
         }else{
-        	formKey="";
+        	formKey=" ";
         }
         if(null != priority && !"".equals(priority)){
         	priority = " activiti:priority='"+priority+"'";
         }else{
-        	priority="";
+        	priority=" ";
         }
         if(null != asynchronous && !"".equals(asynchronous) && "0".equals(asynchronous)){
         	asynchronous = " activiti:async='true'";
         }else{
-        	asynchronous="";
+        	asynchronous=" ";
         }
         if(null != isForCompensation && !"".equals(isForCompensation) && "1".equals(isForCompensation)){
         	isForCompensation = " isForCompensation='true'";

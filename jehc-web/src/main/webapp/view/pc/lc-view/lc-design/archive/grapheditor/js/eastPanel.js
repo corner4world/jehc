@@ -154,7 +154,7 @@ function initEastPanel(graph){
 				fieldLabel:'lc_process_mxgraph_style',
 				xtype:'textfield',
 				hidden:true,
-				value:'0',
+				value:'1',
 				id:'lc_process_mxgraph_style',
 				name:'lc_process_mxgraph_style',
 				anchor:'100%'

@@ -68,6 +68,9 @@ public class MxServiceTask {
                 	className="";
                 }
         	}
+        }else{
+        	expression=" ";
+        	delegateExpression=" ";	
         }
 		if(null != resultVariable && !"".equals(resultVariable)){
 			resultVariable = " activiti:resultVariableName='"+resultVariable+"'";
@@ -79,6 +82,9 @@ public class MxServiceTask {
 			skipExpression = " activiti:skipExpression='"+skipExpression+"'";
 		}else{
 			skipExpression = "";
+		}
+		if(null == className){
+			className = " ";
 		}
 		//开区间
         task_node+="<serviceTask id='"+nodeID+"' name='"+name+"' "+expression+delegateExpression+className+resultVariable+skipExpression+MxUtils.normal(mxCell)+">";
