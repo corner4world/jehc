@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.md5.MD5;
+import jehc.xtmodules.xtcore.session.OnLinesessionthread;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
@@ -55,16 +57,6 @@ public class XtLoginController extends BaseAction{
 	@Autowired
 	private XtDataAuthorityService xtDataAuthorityService;
 	/**
-	 * 载入登录页面（已废弃）
-	 * @param request
-	 * @return
-	 */
-//	@AuthUneedLogin
-//	@RequestMapping(value="/login.html",method={RequestMethod.POST,RequestMethod.GET})
-//	public ModelAndView loadLogin(HttpServletRequest request) {
-//		return new ModelAndView("pc/xt-view/xt-login/xt-login");
-//	}
-	/**
 	 * 登录
 	 * @param request
 	 */
@@ -81,6 +73,7 @@ public class XtLoginController extends BaseAction{
 		MD5 md5 = new MD5();
 		//获得的当前正确的验证码
 		String rand = (String) request.getSession(false).getAttribute(SessionConstant.VALIDATECODE);
+		HttpSession session = request.getSession();
 		StringBuffer sbf = new StringBuffer();
 		if((null != code && !"".equals(code))){
 			code = code.trim();
@@ -139,6 +132,7 @@ public class XtLoginController extends BaseAction{
 				request.getSession(false).setAttribute(SessionConstant.XT_ROLE_ID, xt_role_id);
 				request.getSession(false).setAttribute(SessionConstant.XT_FUNCTIONINFOURL, sbfURL.toString());
 				request.getSession(false).setAttribute(SessionConstant.XT_FUNCTIONINFOMETHOD, sbfMethod.toString());
+				new OnLinesessionthread(xtUserinfo, session).start();//监控在线用户
 				dataAuthority(request);
 			}else{
 				flag = 2;

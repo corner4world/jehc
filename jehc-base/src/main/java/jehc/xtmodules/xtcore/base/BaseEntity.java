@@ -18,7 +18,7 @@ public class BaseEntity  implements Serializable{
 	private String jehcsources_base_url;/**平台默认资源统一URL**/
 	private String jehcsources_base_path_url;/**平台默认资源路径统一URL+路径（完整路径）**/
 	private String xt_attachmentPath;/**文件相对路径**/
-	
+	private String sessionId;
 	public String toString() {
 		return ToStringBuilder.reflectionToString(this);
 	}
@@ -86,4 +86,13 @@ public class BaseEntity  implements Serializable{
 	public void setItem(Object item) {
 		this.item = item;
 	}
+
+	public String getSessionId() {
+		return sessionId;
+	}
+
+	public void setSessionId(String sessionId) {
+		this.sessionId = sessionId;
+	}
+	
 }

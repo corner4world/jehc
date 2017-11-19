@@ -11,4 +11,7 @@ public class SessionConstant {
 	public static final String XT_FUNCTIONINFOURL= "xt_functioninfoURL";
 	public static final String XT_FUNCTIONINFOMETHOD="xt_functioninfoMethod";
 	public static final String SYSTEMUANDM="systemUandM";
+	
+	public static final String XT_ONLINE_USERLIST ="XtOnLineUserList";//全局session管理集合
 }
+

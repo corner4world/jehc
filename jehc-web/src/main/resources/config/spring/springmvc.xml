@@ -53,9 +53,14 @@
     -->
     <!-- 
     <context:component-scan base-package="*.*.*web,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util" />
-    -->
+    
     
     <context:component-scan base-package="jehc.*modules.*web" />
+    -->
+    <!-- 自动扫描且只扫描@Controller -->
+	<context:component-scan base-package="jehc.*modules.*web" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
     
 	<!-- 定义一个视图解析器 -->  
     <bean id="viewResolver"  
