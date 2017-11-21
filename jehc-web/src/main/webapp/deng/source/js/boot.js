@@ -293,6 +293,111 @@ function datatablesCallBack(data, callback, settings,url,opt){
 	});
 }
 
+
+//bootstrap datatables 国际化分页提示信息
+function callLiLang(){
+	var lang = {
+			//"sLengthMenu":"每页显示 _MENU_ 条记录",
+			"sZeroRecords":"对不起，查询不到任何相关数据",
+			"sInfoEmtpy":"找不到相关数据",
+			"sProcessing":"<i class='glyphicon glyphicon-dashboard'></i>正在加载中...",
+			"sLoadingRecords":"载入中...",
+			"sSearch":"搜索",
+			"bAutoWidth":true,
+		    "sInfoPostFix":"",
+			"sUrl":"", //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
+			"oAria":{
+			 "sSortAscending":":升序",
+			 "sSortDescending":":降序"
+			}
+		};
+	return lang;
+}
+
+//初始化非分页配置
+var DataTablesList = {
+    language:callLang(),
+    /**
+     * 获取ajax分页options设置
+     */
+    listOptions:function(settings) {
+        var options = {
+//        		"sScrollX":"100%",//表格的宽度
+    			"sScrollXInner":"100%",//表格的内容宽度
+    			"bScrollCollapse":false,//当显示的数据不足以支撑表格的默认的高度时，依然显示纵向的滚动条。(默认是false) 
+    			"bScrollCollapse":true,
+    			"bFilter":false,//搜索栏
+    			"bSort":false,//是否支持排序功能
+    			"bInfo":false,//显示表格信息
+    			"destroy":true,//销毁表格对象
+    			"bAutoWidth":false,//自适应宽度
+    			"serverSide":false,//启用服务器端分页
+    			"searching":false,//禁用原生搜索
+    			"orderMulti":false,//启用多列排序
+    			//"aaSorting":[[2,"asc"]],//给列表排序 ，第一个参数表示数组 (由0开始)。1 表示Browser列。第二个参数为 desc或是asc
+    			"bStateSave":true,//保存状态到cookie *************** 很重要 ， 当搜索的时候页面一刷新会导致搜索的消失。使用这个属性就可避免了
+    			"oLanguage":callLiLang(),//多语言配置
+    			"bPaginate":false,//是否显示分页
+    			height:tableHeight(),//高度调整
+    			bJQueryUI:true,//采用jQueryUI样式
+	            order:settings.order,//[index,'asc|desc']
+	            columns:settings.colums,
+	            columnDefs:settings.columsdefs,
+		        striped:true, //是否显示行间隔色
+		        showRefresh:true,//刷新按钮
+		        ajax:settings.ajax,
+		        processing:true,//隐藏加载提示,自行处理
+		        fnRowCallback:settings.fnRowCallback
+        };
+        return options;
+    }
+};
+
+function datatablesListCallBack(data, callback, settings,url,opt){
+	 var formdata;
+	 //缺省采用searchForm
+	 if(null != opt){
+		 formdata = $("#searchForm").serializeArray();
+	 }else{
+		 formdata = $("#"+opt.searchformId).serializeArray();
+	 }
+	 //封装请求参数
+	 var param = {};
+	 var paramdata = {};
+	 for (var i = 0; i < formdata.length; i++) {
+		 paramdata[formdata[i]['name']] = formdata[i]['value'];
+     };
+     param.searchJson = JSON.stringify(paramdata);
+	 //ajax请求数据
+	 $.ajax({
+	 	  type:"GET",
+		  url:url,
+		  cache:false,//禁用缓存
+		  data:param,//传入组装的参数
+		  dataType:"json",
+		  success:function (result){
+			  try {
+				  //setTimeout仅为测试延迟效果
+				  setTimeout(function(){
+					  result = eval("(" + result + ")");
+					  //封装返回数据
+					  var returnData = {};
+					  returnData.data = result.items;//返回的数据列表
+					  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+					  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+					  callback(returnData);
+				   },200);
+			 } catch (e) {
+				 
+			 }
+		  }
+	});
+	//datatables每页显示数量下拉框样式
+	$("[class=dataTables_length]").find("select").each(function(index,element){
+		$(element).attr("class","uneditable-input")
+	});
+}
+
 //筛选数据信息（重新加载查询使用，默认采用grid作为datatables）
 function search(datatablesid){
 	var datatables = $('#'+datatablesid).DataTable();
