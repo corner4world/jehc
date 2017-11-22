@@ -1,129 +1,52 @@
-var xtAreaRegionWinEdit;
-var xtAreaRegionFormEdit;
+//修改行政区域
 function updateXtAreaRegion(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要修改的一项！');
+	$('#updateXtAreaRegionForm')[0].reset();
+	var zTree = $.fn.zTree.getZTreeObj("tree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"选择数据非法");
 		return;
 	}
-	initXtAreaRegionFormEdit();
-	xtAreaRegionWinEdit = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'编辑信息',
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		},
-		items:xtAreaRegionFormEdit,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(xtAreaRegionFormEdit,'../xtAreaRegionController/updateXtAreaRegion',grid,xtAreaRegionWinEdit,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
+	$.ajax({
+	   type:"GET",
+	   url:"../xtAreaRegionController/getXtAreaRegionById",
+	   data:"ID="+nodes[0].id,
+	   success: function(result){
+		   result = eval("(" + result + ")");  
+		   result = result.data;
+		   $("#updateXtAreaRegionForm").find("#PARENT_ID").val(result.PARENT_ID);
+		   $("#updateXtAreaRegionForm").find("#ID").val(result.ID);
+		   $("#updateXtAreaRegionForm").find("#REGION_LEVEL").val(result.REGION_LEVEL);
+		   $("#updateXtAreaRegionForm").find("#NAME").val(result.NAME);
+		   $("#updateXtAreaRegionForm").find("#NAME_EN").val(result.NAME_EN);
+		   $("#updateXtAreaRegionForm").find("#CODE").val(result.CODE);
+		   $("#updateXtAreaRegionForm").find("#LONGITUDE").val(result.LONGITUDE);
+		   $("#updateXtAreaRegionForm").find("#LATITUDE").val(result.LATITUDE);
+		   $('#updateXtAreaRegionModal').modal();
+	   }
 	});
-	xtAreaRegionWinEdit.show();
-	
-	loadFormData(xtAreaRegionFormEdit,'../xtAreaRegionController/getXtAreaRegionById?ID='+ record.items[0].data.id);
+	$('#updateXtAreaRegionForm').bootstrapValidator({
+		message:'此值不是有效的'
+	});
 }
-function initXtAreaRegionFormEdit(){
-	xtAreaRegionFormEdit = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		/**新方法使用开始**/
-		scrollable:true,
-		scrollable:'x',
-		scrollable:'y',
-		/**新方法使用结束**/
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'right',
-			flex:1,
-			margin:'2 5 4 5'
-		},
-		items:[
-		{
-			fieldLabel:'ID编号',
-			xtype:'textfield',
-			hidden:true,
-			name:'ID',
-			allowBlank:false,
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'父级ID',
-			xtype:'numberfield',
-			value:'0',
-			hidden:true,
-			name:'PARENT_ID',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'政行编码',
-			xtype:'textfield',
-			name:'CODE',
-			maxLength:10,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'名称',
-			xtype:'textfield',
-			name:'NAME',
-			maxLength:255,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'行政级别',
-			xtype:'numberfield',
-			value:'0',
-			name:'REGION_LEVEL',
-			maxLength:10,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'中文简称',
-			xtype:'textfield',
-			name:'NAME_EN',
-			maxLength:255,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'经度',
-			xtype:'textfield',
-			name:'LONGITUDE',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'纬度',
-			xtype:'textfield',
-			name:'LATITUDE',
-			maxLength:10,
-			anchor:'100%'
+
+//执行修改操作
+function doUpdateXtAreaRegion(){
+	var updateXtAreaRegionForm =  $('#updateXtAreaRegionForm');
+	submitBFormCallFn('updateXtAreaRegionForm','../xtAreaRegionController/updateXtAreaRegion',function(result){
+		try {
+    		result = eval("(" + result + ")");  
+    		if(typeof(result.success) != "undefined"){
+    			if(result.success){
+            		window.parent.toastrBoot(3,result.msg);
+            		refreshAll();
+            		$('#updateXtAreaRegionModal').modal('hide');
+        		}else{
+        			window.parent.toastrBoot(4,result.msg);
+        		}
+    		}
+		} catch (e) {
+			
 		}
-		]
 	});
 }

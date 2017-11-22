@@ -1,123 +1,28 @@
-var xtAreaRegionWinDetail;
-var xtAreaRegionFormDetail;
+//详情
 function detailXtAreaRegion(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要查看明细的项！');
+	$('#detailXtAreaRegionForm')[0].reset();
+	var zTree = $.fn.zTree.getZTreeObj("tree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"选择数据非法");
 		return;
 	}
-	initXtAreaRegionFormDetail();
-	xtAreaRegionWinDetail = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'明细信息',
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		},
-		items:xtAreaRegionFormDetail,
-		buttons:[{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	xtAreaRegionWinDetail.show();
-	
-	loadFormData(xtAreaRegionFormDetail,'../xtAreaRegionController/getXtAreaRegionById?ID='+ record.items[0].data.ID);
-}
-function initXtAreaRegionFormDetail(){
-	xtAreaRegionFormDetail = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		/**新方法使用开始**/
-		scrollable:true,
-		scrollable:'x',
-		scrollable:'y',
-		/**新方法使用结束**/
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			readOnly:true,
-			margin:'2 5 4 5'
-		},
-		items:[
-		{
-			fieldLabel:'ID编号',
-			xtype:'textfield',
-			hidden:true,
-			name:'ID',
-			allowBlank:false,
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'父级ID',
-			xtype:'numberfield',
-			value:'0',
-			name:'PARENT_ID',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'政行编码',
-			xtype:'textfield',
-			name:'CODE',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'名称',
-			xtype:'textfield',
-			name:'NAME',
-			maxLength:255,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'行政级别',
-			xtype:'numberfield',
-			value:'0',
-			name:'REGION_LEVEL',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'中文简称',
-			xtype:'textfield',
-			name:'NAME_EN',
-			maxLength:255,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'经度',
-			xtype:'textfield',
-			name:'LONGITUDE',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'纬度',
-			xtype:'textfield',
-			name:'LATITUDE',
-			maxLength:10,
-			anchor:'100%'
-		}
-		]
+	$.ajax({
+	   type:"GET",
+	   url:"../xtAreaRegionController/getXtAreaRegionById",
+	   data:"ID="+nodes[0].id,
+	   success: function(result){
+		   result = eval("(" + result + ")");  
+		   result = result.data;
+		   $("#detailXtAreaRegionForm").find("#PARENT_ID").val(result.PARENT_ID);
+		   $("#detailXtAreaRegionForm").find("#ID").val(result.ID);
+		   $("#detailXtAreaRegionForm").find("#REGION_LEVEL").val(result.REGION_LEVEL);
+		   $("#detailXtAreaRegionForm").find("#NAME").val(result.NAME);
+		   $("#detailXtAreaRegionForm").find("#NAME_EN").val(result.NAME_EN);
+		   $("#detailXtAreaRegionForm").find("#CODE").val(result.CODE);
+		   $("#detailXtAreaRegionForm").find("#LONGITUDE").val(result.LONGITUDE);
+		   $("#detailXtAreaRegionForm").find("#LATITUDE").val(result.LATITUDE);
+		   $('#detailXtAreaRegionModal').modal();
+	   }
 	});
 }

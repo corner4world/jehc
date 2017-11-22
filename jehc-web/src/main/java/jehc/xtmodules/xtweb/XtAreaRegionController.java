@@ -18,8 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
-import jehc.xtmodules.xtcore.base.BaseSearch;
-import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
+import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtmodel.XtAreaRegion;
@@ -52,36 +51,39 @@ public class XtAreaRegionController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getXtAreaRegionListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtAreaRegionListByCondition(BaseSearch baseSearch,HttpServletRequest request){
-		Map<String, Object> condition = baseSearch.convert();
+	public String getXtAreaRegionListByCondition(HttpServletRequest request){
 		String expanded = request.getParameter("expanded");
 		String singleClickExpand = request.getParameter("singleClickExpand");
-		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
+		List<BaseZTreeEntity> list = new ArrayList<BaseZTreeEntity>();
+		Map<String,Object> condition = new HashMap<String,Object>();
 		List<XtAreaRegion> xt_Area_RegionList = xtAreaRegionService.getXtAreaRegionListByCondition(condition);
 		for(int i = 0; i < xt_Area_RegionList.size(); i++){
 			XtAreaRegion xt_Area_Region = xt_Area_RegionList.get(i);
-			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
-			BaseTreeGridEntity.setId(xt_Area_Region.getID());
-			BaseTreeGridEntity.setPid(""+xt_Area_Region.getPARENT_ID());
-			BaseTreeGridEntity.setText(xt_Area_Region.getNAME());
-			BaseTreeGridEntity.setIcon("../deng/images/icons/target_point.png");
-			BaseTreeGridEntity.setTempObject("行政编码："+xt_Area_Region.getCODE()+"<br>行政级别："+xt_Area_Region.getREGION_LEVEL());
-			BaseTreeGridEntity.setContent(xt_Area_Region.getNAME_EN());
-			BaseTreeGridEntity.setIntegerappend("经度："+xt_Area_Region.getLONGITUDE()+"<br>纬度："+xt_Area_Region.getLATITUDE());
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xt_Area_Region.getID());
+			BaseZTreeEntity.setPid(""+xt_Area_Region.getPARENT_ID());
+			BaseZTreeEntity.setText(xt_Area_Region.getNAME());
+			BaseZTreeEntity.setTempObject("行政编码："+xt_Area_Region.getCODE()+"<br>行政级别："+xt_Area_Region.getREGION_LEVEL());
+			BaseZTreeEntity.setContent(xt_Area_Region.getNAME_EN());
+			BaseZTreeEntity.setIntegerappend("经度："+xt_Area_Region.getLONGITUDE()+"<br>纬度："+xt_Area_Region.getLATITUDE());
 			if(("true").equals(expanded)){
-				BaseTreeGridEntity.setExpanded(true);
+				if(xt_Area_Region.getREGION_LEVEL() == 0){
+					BaseZTreeEntity.setExpanded(true);
+				}else{
+					BaseZTreeEntity.setExpanded(false);
+				}
 			}else{
-				BaseTreeGridEntity.setExpanded(false);
+				BaseZTreeEntity.setExpanded(false);
 			}
 			if("true".equals(singleClickExpand)){
-				BaseTreeGridEntity.setSingleClickExpand(true);
+				BaseZTreeEntity.setSingleClickExpand(true);
 			}else{
-				BaseTreeGridEntity.setSingleClickExpand(false);
+				BaseZTreeEntity.setSingleClickExpand(false);
 			}
-			BaseTreeGridEntity.setLeaf(true);
-			list.add(BaseTreeGridEntity);
+			BaseZTreeEntity.setLeaf(true);
+			list.add(BaseZTreeEntity);
 		}
-		return outStr(BaseTreeGridEntity.buildTree(list,false));
+		return outStr(BaseZTreeEntity.buildTree(list,false));
 	}
 	/**
 	* 获取对象

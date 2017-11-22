@@ -411,6 +411,12 @@ public class CommonUtils extends UUID{
 		return arList;
 	}
 	
+	public static List<XtAreaRegion> getXtAreaRegionAllCache() {
+		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTAREAREGIONCACHE);
+		Element XtAreaRegionCache = ehCache.get(CacheConstant.XTAREAREGIONCACHE);
+		return  (List<XtAreaRegion>) XtAreaRegionCache.getObjectValue();
+	}
+	
 	/**
 	 * 根据KEY获取平台字典
 	 * 

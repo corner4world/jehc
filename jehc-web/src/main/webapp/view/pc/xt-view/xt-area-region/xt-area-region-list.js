@@ -1,165 +1,95 @@
-var grid;
-var store;
-Ext.onReady(function(){	
-	initGrid();
-	Ext.create('Ext.Viewport', {
-		layout:'fit',
-		xtype:'viewport',
-		items:[grid]
-	});
+var setting = {
+   view:{
+       selectedMulti:false
+   },
+   check:{
+       enable:false
+   },
+   async:{
+       enable:true,//设置 zTree是否开启异步加载模式  加载全部信息
+       url:"../xtAreaRegionController/getXtAreaRegionListByCondition",//Ajax获取数据的 URL地址  
+       otherParam:{ 
+    	 　　'expanded':function(){return 'true'} 
+       } //异步参数
+   },
+   data:{
+	   //必须使用data  
+       simpleData:{
+           enable:true,
+           idKey:"id",//id编号命名 默认  
+           pIdKey:"pId",//父id编号命名 默认   
+           rootPId:0 //用于修正根节点父节点数据，即 pIdKey 指定的属性值  
+       }
+   },
+   edit:{
+       enable:false
+   },  
+   callback:{  
+       onClick:onClick,//单击事件
+       onAsyncSuccess:onAsyncSuccess//加载数据完成事件
+   }  
+};
+$(document).ready(function(){
+	InitztData();
 });
-/**
-*初始化资源模块
-**/
-function initGrid(){
-	store = Ext.create('Ext.data.TreeStore',{
-    	root:{
-			name:'一级',
-			id:'0',
-			expanded:true
-		},
-		/**此处一定要设置否则全部展开节点无效**/
-		autoLoad:false,
-        proxy:{
-            type:'ajax',
-            method:'post',
-			url:'../xtAreaRegionController/getXtAreaRegionListByCondition',
-			reader:{
-				type:'json'
-			},
-			extraParams:{id:'0',expanded:true}
-        }
-    });
-    grid = Ext.create('Ext.tree.Panel', {
-        reserveScrollbar:true,
-        region:'center',
-        loadMask:true,
-        useArrows:true,
-        rootVisible:false,
-        store:store,
-        autoSctroll:true,
-        id:'treeGrid',
-        animate:false,
-        columnLines:true,
-        frame:true,
-        bufferedRenderer:false,
-        loadMask:true,
-        loadMask:{
-			msg:'正在加载...'
-		},
-        bbar:['->',
-        	{
-		        xtype:'triggerfield',
-		        emptyText:'请输入关键字（如省、市、区县等）',
-		        triggerCls:'x-form-clear-trigger',
-		        width:260,
-		        onTriggerClick:function(){
-		            this.reset();
-		        },
-		        listeners:{
-		            change:function(){
-		                filterBy(grid,this.getValue(),'text');
-		            },
-		            buffer:250
-			    }
-			 },
-			 {
-				text:'编 辑',
-				tooltip:'编 辑',
-				xtype:'button',
-				minWidth:tbarBtnMinWidth,
-				cls:'updateBtn',
-				icon:editIcon,
-				handler:function(){
-					updateXtAreaRegion();
-				}
-			 },
-			 {
-				text:'刷 新',
-				tooltip:'刷 新',
-				xtype:'button',
-				minWidth:tbarBtnMinWidth,
-				cls:'refreshBtn',
-				icon:refreshIcon,
-				handler:function(){
-					refresh();
-				}
-			 }
-		],
-        viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
-		},
-        columns:[{
-        	text:'ID',
-            flex:2,
-            hideable:false,
-            hidden:true,
-            sortable:true,
-            dataIndex:'id'
-        },{
-            xtype:'treecolumn',
-            text:'名称',
-            flex:1,
-            sortable:true,
-            dataIndex:'text'
-        },{
-            text:'行政编码、行政级别',
-            flex:1,
-            dataIndex:'tempObject',
-            sortable:true
-        },{
-            text:'经度、纬度',
-            dataIndex:'integerappend',
-            sortable:true,
-            flex:1
-        },{
-            text:'拼音',
-            flex:1,
-            dataIndex:'content',
-            renderer:function(value){
-            	return value;
-            }
-        }]
-    });
-    refresh();
-    /**选择父节点选中子节点**/
-    /**
-    grid.on('checkchange',function(node,checked){  
-	    node.expand();  
-	    node.checked = checked;  
-	    node.eachChild(function(child){  
-	        child.set('checked',checked);  
-	        child.fireEvent('checkchange',child,checked);  
-	    });  
-	}, grid);
-	**/ 
+//初始数据
+function InitztData() {
+	$.fn.zTree.init($("#tree"), setting);
 }
-/**删除操作**/
+
+//刷新
+function refreshAll(){
+	InitztData();
+}
+
+//加载数据完成事件
+function onAsyncSuccess(event, treeId, treeNode, msg){  
+	var length = $('#keyword').val().length;
+	if(length > 0){
+		var zTree = $.fn.zTree.getZTreeObj(treeId);
+	    var nodeList = zTree.getNodesByParamFuzzy("name", $('#keyword').val());
+	    //将找到的nodelist节点更新至Ztree内
+	    $.fn.zTree.init($("#"+treeId), setting, nodeList);
+	}
+}  
+
+//单击事件
+function onClick(event, treeId, treeNode, msg){  
+}  
+
+/**
+ * 搜索树，显示并展示
+ * @param treeId
+ * @param text文本框的id
+ */
+function filter(){
+	InitztData();
+}
+
+//删除
 function delXtAreaRegion(){
-	var model = grid.getSelectionModel();
-	if(model.selected.length == 0){
-		msgTishi('请选择后在删除');
+	var zTree = $.fn.zTree.getZTreeObj("tree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"必须选择一条记录进行删除");
 		return;
 	}
-	var ID;
-	for(var i = 0; i < model.selected.length; i++){
-		if(null == ID){
-			ID=model.selected.items[i].data.ID;
-		}else{
-			ID=ID+","+model.selected.items[i].data.ID;
-		}
-	}
-	Ext.Msg.confirm('提示','确定删除该行数据？',function(btn){
-		if(btn == 'yes'){
-			var params = {ID:ID};
-			ajaxRequest('../xtAreaRegionController/delXtAreaRegion',grid,params,'正在执行删除操作中！请稍后...');
-		}
-	});
-}
-function refresh(){
-	showWaitMsg("正在加载数据...");
-	store.on('load',function(){
-    	hideWaitMsg();
-    });
+	var params = {ID:nodes[0].id};
+	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
+		ajaxBRequestCallFn('../xtAreaRegionController/delXtAreaRegion',params,function(result){
+			try {
+	    		result = eval("(" + result + ")");  
+	    		if(typeof(result.success) != "undefined"){
+	    			if(result.success){
+	            		window.parent.toastrBoot(3,result.msg);
+	            		refreshAll();
+	        		}else{
+	        			window.parent.toastrBoot(4,result.msg);
+	        		}
+	    		}
+			} catch (e) {
+				
+			}
+		});
+	})
 }

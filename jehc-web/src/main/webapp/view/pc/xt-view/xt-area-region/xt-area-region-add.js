@@ -1,114 +1,42 @@
-var xtAreaRegionWinAdd;
-var xtAreaRegionFormAdd;
-function addXtAreaRegion(){
-	initXtAreaRegionFormAdd();
-	xtAreaRegionWinAdd = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'添加信息',
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		},
-		items:xtAreaRegionFormAdd,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(xtAreaRegionFormAdd,'../xtAreaRegionController/addXtAreaRegion',grid,xtAreaRegionWinAdd,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
+//新增行政区域
+function addXtAreaRegion(flag){
+	$('#addXtAreaRegionForm')[0].reset();
+	$('#addXtAreaRegionForm').bootstrapValidator({
+		message:'此值不是有效的'
 	});
-	xtAreaRegionWinAdd.show();
-	
-}
-function initXtAreaRegionFormAdd(){
-	xtAreaRegionFormAdd = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		/**新方法使用开始**/
-		scrollable:true,
-		scrollable:'x',
-		scrollable:'y',
-		/**新方法使用结束**/
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
-		},
-		items:[
-		{
-			fieldLabel:'父级ID',
-			xtype:'numberfield',
-			value:'0',
-			hidden:true,
-			name:'PARENT_ID',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'政行编码',
-			xtype:'textfield',
-			name:'CODE',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'名称',
-			xtype:'textfield',
-			name:'NAME',
-			maxLength:255,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'行政级别',
-			xtype:'numberfield',
-			value:'0',
-			name:'REGION_LEVEL',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'中文简称',
-			xtype:'textfield',
-			name:'NAME_EN',
-			maxLength:255,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'经度',
-			xtype:'textfield',
-			name:'LONGITUDE',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'纬度',
-			xtype:'textfield',
-			name:'LATITUDE',
-			maxLength:10,
-			anchor:'100%'
+	if(flag == 1){
+		var zTree = $.fn.zTree.getZTreeObj("tree"),
+		nodes = zTree.getSelectedNodes();
+		if (nodes.length != 1) {
+			toastrBoot(4,"请选择节点");
+			return;
 		}
-		]
+		if(nodes[0].level == 3){
+			toastrBoot(4,"区县下面不能新增下级行政区域");
+			return;
+		}
+		$('#PARENT_ID').val(nodes[0].id);
+		$('#REGION_LEVEL').val(parseInt(nodes[0].level)+1);
+	}
+	$('#addXtAreaRegionModal').modal();
+}
+
+function doAddXtAreaRegion(){
+	var addXtAreaRegionForm =  $('#addXtAreaRegionForm');
+	submitBFormCallFn('addXtAreaRegionForm','../xtAreaRegionController/addXtAreaRegion',function(result){
+		try {
+    		result = eval("(" + result + ")");  
+    		if(typeof(result.success) != "undefined"){
+    			if(result.success){
+            		window.parent.toastrBoot(3,result.msg);
+            		refreshAll();
+            		$('#addXtAreaRegionModal').modal('hide');
+        		}else{
+        			window.parent.toastrBoot(4,result.msg);
+        		}
+    		}
+		} catch (e) {
+			
+		}
 	});
 }
