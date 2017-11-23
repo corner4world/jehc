@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,7 +58,7 @@ public class XtDepartinfoController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtDepartinfo>XtDepartinfoList = xtDepartinfoService.getXtDepartinfoListByCondition(condition);
 		PageInfo<XtDepartinfo> page = new PageInfo<XtDepartinfo>(XtDepartinfoList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -235,5 +236,33 @@ public class XtDepartinfoController extends BaseAction{
 			list.add(BaseZTreeEntity);
 		}
 		return outStr(BaseZTreeEntity.buildTree(list,false));
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtDepartinfoAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtDepartinfoAdd(XtDepartinfo xtDepartinfo,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-departinfo/xt-departinfo-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtDepartinfoUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtDepartinfoUpdate(String xt_departinfo_id,HttpServletRequest request, Model model){
+		XtDepartinfo xtDepartinfo = xtDepartinfoService.getXtDepartinfoById(xt_departinfo_id);
+		model.addAttribute("xtDepartinfo", xtDepartinfo);
+		return new ModelAndView("pc/xt-view/xt-departinfo/xt-departinfo-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtDepartinfoDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtDepartinfoDetail(String xt_departinfo_id,HttpServletRequest request, Model model){
+		XtDepartinfo xtDepartinfo = xtDepartinfoService.getXtDepartinfoById(xt_departinfo_id);
+		model.addAttribute("xtDepartinfo", xtDepartinfo);
+		return new ModelAndView("pc/xt-view/xt-departinfo/xt-departinfo-detail");
 	}
 }

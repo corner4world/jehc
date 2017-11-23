@@ -1,139 +1,69 @@
-var xtDepartinfoWinAdd;
-var xtDepartinfoFormAdd;
+//返回r
+function goback(){
+	tlocation("../xtDepartinfoController/loadXtDepartinfo");
+}
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+});
+//保存
 function addXtDepartinfo(){
-	initXtDepartinfoFormAdd();
-	xtDepartinfoWinAdd = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'添加信息',
-		items:xtDepartinfoFormAdd,
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		},
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(xtDepartinfoFormAdd,'../xtDepartinfoController/addXtDepartinfo',grid,xtDepartinfoWinAdd,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	xtDepartinfoWinAdd.show();
+	submitBForm('defaultForm','../xtDepartinfoController/addXtDepartinfo','../xtDepartinfoController/loadXtDepartinfo');
 }
-function initXtDepartinfoFormAdd(){
-	xtDepartinfoFormAdd = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		labelWidth:50,
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		fieldDefaults:{
-	        labelWidth:70,
-	        labelAlign:"left",
-	        flex:1,
-	        margin:'4 5 4 5'
-	    },
-	    /**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        /**新方法使用结束**/ 
-		items:[
-		{
-			fieldLabel:'部门名称',
-			xtype:'textfield',
-			name:'xt_departinfo_name',
-			allowBlank:false,
-			maxLength:50,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'上级部门',
-			xtype:'treepicker',
-			displayField:'text',
-			anchor:'40%',
-			hiddenName:'xt_departinfo_parentId',
-			name:'xt_departinfo_parentId',
-			minPickerHeight:200,
-			maxHeight:200,
-			editable:false,
-			store:Ext.create('Ext.data.TreeStore',{
-				fields:['id','text'],
-				root:{
-					text:'一级部门',
-					id:'0',
-					expanded:true
-				},
-				proxy:{
-					type:'ajax',
-					url:'../xtDepartinfoController/getXtDepartinfoTree',
-					reader:{
-						type:'json'
-					}
-				}
-			})
-		},
-		{
-			fieldLabel:'联系电话',
-			xtype:'textfield',
-			name:'xt_departinfo_connectTelNo',
-			maxLength:12,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'移动电话',
-			xtype:'textfield',
-			name:'xt_departinfo_connectMobileTelNo',
-			maxLength:20,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'传&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;真',
-			xtype:'textfield',
-			name:'xt_departinfo_faxes',
-			maxLength:50,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'部门信息',
-			xtype:'textareafield',
-			name:'xt_departinfo_desc',
-			maxLength:200,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'立成时间',
-			xtype:'datefield',
-			format:'Y-m-d',
-			name:'xt_departinfo_time',
-			maxLength:20,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'部门性质',
-			xtype:'textfield',
-			name:'xt_departinfo_type',
-			maxLength:200,
-			anchor:'40%'
-		}
-		]
-	});
+
+/////////////////////部门选择器开始///////////////////
+function departSelect(){
+	$('#departSelectModal').modal();
+	var setting = {
+	   view:{
+	       selectedMulti:false
+	   },
+	   check:{
+	       enable:false
+	   },
+	   async:{
+	       enable:true,//设置 zTree是否开启异步加载模式  加载全部信息
+	       url:"../xtDepartinfoController/getXtDepartinfoBZTree",//Ajax获取数据的 URL地址  
+	       otherParam:{ 
+	    	 　　'expanded':function(){return 'true'} 
+	       } //异步参数
+	   },
+	   data:{
+		   //必须使用data  
+	       simpleData:{
+	           enable:true,
+	           idKey:"id",//id编号命名 默认  
+	           pIdKey:"pId",//父id编号命名 默认   
+	           rootPId:0 //用于修正根节点父节点数据，即 pIdKey 指定的属性值  
+	       }
+	   },
+	   edit:{
+	       enable:false
+	   },  
+	   callback:{  
+	       onClick:onClick//单击事件
+	   }  
+	};
+	$.fn.zTree.init($("#tree"), setting);
 }
+
+//单击事件
+function onClick(event, treeId, treeNode, msg){  
+}  
+function doDepartSelect(){
+	var zTree = $.fn.zTree.getZTreeObj("tree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"请选择一条隶属部门信息");
+		return;
+	}
+	msgTishCallFnBoot("确定要选择【<font color=red>"+nodes[0].name+"</font>】？",function(){
+		$('#xt_departinfo_parentName').val(nodes[0].name);
+		$('#xt_departinfo_parentId').val(nodes[0].id);
+		$('#departSelectModal').modal('hide');
+	})
+}
+/////////////////////部门选择器结束///////////////////

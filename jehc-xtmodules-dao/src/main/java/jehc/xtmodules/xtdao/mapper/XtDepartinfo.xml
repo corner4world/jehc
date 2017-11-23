@@ -20,10 +20,7 @@
 			`xt_departinfo_type`
 		FROM 
 			xt_departinfo
-		WHERE 1=1
-		<if test="null != xt_departinfo_isdelete">
-			AND xt_departinfo_isdelete = #{xt_departinfo_isdelete}
-		</if>
+		WHERE xt_departinfo_isdelete = 0
 		<if test="null != xt_departinfo_name">
 			AND instr(xt_departinfo_name,#{xt_departinfo_name})
 		</if>
@@ -161,9 +158,7 @@
 			xt_departinfo
 		WHERE 
 			xt_departinfo_parentId = #{xt_departinfo_parentId }
-		<if test="null != xt_departinfo_isdelete">
-			AND xt_departinfo_isdelete = #{xt_departinfo_isdelete}
-		</if>
+			AND xt_departinfo_isdelete = 0
 	</select>
 	
 	<!-- 查找所有集合 -->
@@ -184,7 +179,7 @@
 			`xt_departinfo_type`
 		FROM 
 			xt_departinfo
-		WHERE 1=1
+		WHERE xt_departinfo_isdelete = 0
 	</select>
 	
 	<!-- 根据各种情况查找集合不分页（流程设计器中处理组 发起组等使用） -->
@@ -205,7 +200,7 @@
 			`xt_departinfo_type`
 		FROM 
 			xt_departinfo
-		WHERE 1=1
+		WHERE xt_departinfo_isdelete = 0
 		<if test="null != xt_departinfo_id">
 			AND xt_departinfo_id IN
 			<foreach item="item" index="index" collection="xt_departinfo_id" open="(" separator="," close=")">

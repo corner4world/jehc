@@ -120,6 +120,7 @@
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE (xt_post_parentId = '0' OR ISNULL(xt_post_parentId))
+			AND xt_post.xt_post_isdelete = 0
 		<if test="null != xt_departinfo_id and '' != xt_departinfo_id">
 			AND xt_post.`xt_departinfo_id` = #{xt_departinfo_id}
 		</if>
@@ -140,10 +141,9 @@
 			xt_departinfo.`xt_departinfo_name`
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
-		WHERE xt_post.xt_post_parentId = #{xt_post_parentId}
-		<if test="null != xt_post_isdelete">
-			AND xt_post.xt_post_isdelete = #{xt_post_isdelete}
-		</if>
+		WHERE 
+			xt_post.xt_post_parentId = #{xt_post_parentId}
+			AND xt_post.xt_post_isdelete = 0
 	</select>
 	
 	<!-- 查找所有集合 -->
@@ -161,7 +161,7 @@
 			xt_departinfo.`xt_departinfo_name`
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
-		WHERE 1=1
+		WHERE xt_post.xt_post_isdelete = 0
 	</select>
 	
 	<!-- 根据各种情况查找集合不分页（流程设计器中处理组 发起组等使用） -->
@@ -180,6 +180,7 @@
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE 1=1
+			AND xt_post.xt_post_isdelete = 0
 		<if test="null != xt_post_id">
 			AND xt_post_id IN
 			<foreach item="item" index="index" collection="xt_post_id" open="(" separator="," close=")">
