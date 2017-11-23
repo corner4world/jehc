@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,7 @@ import com.github.pagehelper.util.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
+import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtmodel.XtPost;
@@ -56,7 +58,7 @@ public class XtPostController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtPost>XtPostList = xtPostService.getXtPostListByCondition(condition);
 		PageInfo<XtPost> page = new PageInfo<XtPost>(XtPostList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -156,6 +158,31 @@ public class XtPostController extends BaseAction{
 		}
 		return outStr(BaseTreeGridEntity.buildTree(list,false));
 	}
+	
+	/**
+	 * 获取岗位树（bootstrap-ztree风格）
+	 * @param id 部门编号
+	 * @param request
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getXtPostBZTree",method={RequestMethod.POST,RequestMethod.GET})
+	public String getXtPostBZTree(String xt_departinfo_id,HttpServletRequest request){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition.put("xt_departinfo_id", xt_departinfo_id);
+		List<BaseZTreeEntity> list = new ArrayList<BaseZTreeEntity>();
+		List<XtPost> xtPostList = xtPostService.getXtPostListByCondition(condition);
+		for(int i = 0; i < xtPostList.size(); i++){
+			XtPost xtPost = xtPostList.get(i);
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xtPost.getXt_post_id());
+			BaseZTreeEntity.setPid(xtPost.getXt_post_parentId());
+			BaseZTreeEntity.setText(xtPost.getXt_post_name());
+			BaseZTreeEntity.setExpanded(true);
+			BaseZTreeEntity.setSingleClickExpand(true);
+			list.add(BaseZTreeEntity);
+		}
+		return outStr(BaseZTreeEntity.buildTree(list,false));
+	}
 	/**
 	* 复制一行并生成记录
 	* @param xt_post_id 
@@ -206,5 +233,34 @@ public class XtPostController extends BaseAction{
 			list = xtPostService.getXtPostList(condition);
 		}
 		return  outItemsStr(list);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPostAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPostAdd(XtPost xtPost,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-post/xt-post-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPostUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPostUpdate(String xt_post_id,HttpServletRequest request, Model model){
+		XtPost xtPost = xtPostService.getXtPostById(xt_post_id);
+		model.addAttribute("xtPost", xtPost);
+		return new ModelAndView("pc/xt-view/xt-post/xt-post-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPostDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPostDetail(String xt_post_id,HttpServletRequest request, Model model){
+		XtPost xtPost = xtPostService.getXtPostById(xt_post_id);
+		model.addAttribute("xtPost", xtPost);
+		return new ModelAndView("pc/xt-view/xt-post/xt-post-detail");
 	}
 }

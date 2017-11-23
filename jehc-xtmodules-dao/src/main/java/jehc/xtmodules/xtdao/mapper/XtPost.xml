@@ -17,10 +17,7 @@
 			xt_departinfo.`xt_departinfo_name`
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
-		WHERE 1=1
-		<if test="null != xt_post_isdelete">
-			AND xt_post.xt_post_isdelete = #{xt_post_isdelete}
-		</if>
+		WHERE xt_post.xt_post_isdelete = 0
 		<if test="null != xt_departinfo_id">
 			AND xt_post.`xt_departinfo_id` = #{xt_departinfo_id}
 		</if>
@@ -32,17 +29,18 @@
 	<!--查询对象-->
 	<select id="getXtPostById" resultType="jehc.xtmodules.xtmodel.XtPost" parameterType="string">
 		SELECT
-			`xt_post_id`,
-			`xt_departinfo_id`,
-			`xt_post_parentId`,
-			`xt_post_name`,
-			`xt_post_desc`,
-			`xt_post_maxNum`,
-			`xt_post_isLeaf`,
-			`xt_post_image`,
-			`xt_post_grade`
+			xt_post.`xt_post_id`,
+			xt_post.`xt_departinfo_id`,
+			xt_post.`xt_post_parentId`,
+			xt_post.`xt_post_name`,
+			xt_post.`xt_post_desc`,
+			xt_post.`xt_post_maxNum`,
+			xt_post.`xt_post_isLeaf`,
+			xt_post.`xt_post_image`,
+			xt_post.`xt_post_grade`,
+			xt_departinfo.`xt_departinfo_name`
 		FROM 
-			xt_post
+			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE xt_post_id=#{xt_post_id}
 	</select>
 

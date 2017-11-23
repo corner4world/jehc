@@ -289,7 +289,7 @@
                                     <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="亮黑色"> </li>
                                 </ul>
                             </div>
-                            
+                            <!-- 
                             <div class="theme-option">
                                 <span> 侧边样式</span>
                                 <select class="sidebar-style-option form-control input-small">
@@ -297,7 +297,6 @@
                                     <option value="compact">左侧对其</option>
                                 </select>
                             </div>
-                            <!-- 
                             <div class="theme-option">
                                 <span>主题样式</span>
                                 <select class="layout-style-option form-control input-small">

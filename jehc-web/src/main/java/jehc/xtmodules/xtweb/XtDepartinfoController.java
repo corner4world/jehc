@@ -20,6 +20,7 @@ import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
+import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtmodel.XtDepartinfo;
@@ -209,5 +210,30 @@ public class XtDepartinfoController extends BaseAction{
 			list = xtDepartinfoService.queryXtDepartinfoList(condition);
 		}
 		return  outItemsStr(list);
+	}
+	
+	
+	/**
+	 * 读取部门树（Bootstrap---ztree）
+	 * @param xt_departinfo_id
+	 * @param request
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getXtDepartinfoBZTree",method={RequestMethod.POST,RequestMethod.GET})
+	public String getXtDepartinfoBZTree(HttpServletRequest request){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		List<BaseZTreeEntity> list = new ArrayList<BaseZTreeEntity>();
+		List<XtDepartinfo> xtDepartinfoList = xtDepartinfoService.getXtDepartinfoListAll(condition);
+		for(int i = 0; i < xtDepartinfoList.size(); i++){
+			XtDepartinfo xtDepartinfo = xtDepartinfoList.get(i);
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xtDepartinfo.getXt_departinfo_id());
+			BaseZTreeEntity.setPid(xtDepartinfo.getXt_departinfo_parentId());
+			BaseZTreeEntity.setText(xtDepartinfo.getXt_departinfo_name());
+			BaseZTreeEntity.setExpanded(true);
+			BaseZTreeEntity.setSingleClickExpand(true);
+			list.add(BaseZTreeEntity);
+		}
+		return outStr(BaseZTreeEntity.buildTree(list,false));
 	}
 }
