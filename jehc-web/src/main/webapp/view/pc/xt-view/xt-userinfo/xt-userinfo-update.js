@@ -1,509 +1,158 @@
-var xtUserinfoWinEdit;
-var xtUserinfoFormEdit;
+//返回r
+function goback(){
+	tlocation("../xtUserinfoController/loadXtUserinfo");
+}
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
 function updateXtUserinfo(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要修改的一项！');
-		return;
-	}
-	initXtUserinfoFormEdit();
-	reGetWidthAndHeight();
-	xtUserinfoWinEdit = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:clientWidth,                    
-		height:clientHeight, 
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'编辑信息',
-		headerPosition:'left',
-		items:xtUserinfoFormEdit,
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		},
-		buttons:[{
-			text:'选择组织机构',
-			itemId:'selectOrg',
-			handler:function(button){
-				selectStaticDepartinfoAndPost();
-			}
-		},{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(xtUserinfoFormEdit,'../xtUserinfoController/updateXtUserinfo',grid,xtUserinfoWinEdit,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	xtUserinfoWinEdit.show();
-	/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/
-	initFileRight('xt_userinfo_pic','xt_userinfo_pic_pic',2,1);
-	/**初始化附件右键菜单结束**/
-
-	/**配置附件回显方法开始（注xt_attachment_id一定为固定代码 否则后端无法获取到相关值）**/
-	var params = {xt_attachment_id:record.items[0].data.xt_userinfo_pic,field_name:'xt_userinfo_pic'};
-	ajaxFilePathBackRequest('../xtCommonController/getAttachmentPathPP',params,2);
-	loadFormData(xtUserinfoFormEdit,'../xtUserinfoController/getXtUserinfoById?xt_userinfo_id='+ record.items[0].data.xt_userinfo_id);
-	new Ext.util.DelayedTask(function(){  
-      Ext.getCmp('xt_userinfo_name_').setValue(Ext.getCmp('xt_userinfo_name').getValue()); 
-    }).delay(1000);
+	submitBForm('defaultForm','../xtUserinfoController/updateXtUserinfo','../xtUserinfoController/loadXtUserinfo');
 }
 
-function initXtUserinfoFormEdit(){
-	xtUserinfoFormEdit = Ext.create('Ext.FormPanel',{
-		xtype:'fieldset',
-		labelWidth:50,
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		/**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        /**新方法使用结束**/ 
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'4 5 4 5'
-		},
-		items:[{
-				xtype:'fieldset',
-				title:'组织机构',
-				border:false,
-				items:[{
-					layout:'table',
-					xtype:'form',
-					anchor:'100%',
-					border:false,
-					items:[
-					{
-						fieldLabel:'所属公司',
-						xtype:'textfield',
-						readOnly:true,
-						name:'xt_company_name',
-						value:'宏舜信息技术有限公司',
-						maxLength:32,
-						anchor:'100%'
-					},
-					{
-						fieldLabel:'所属部门',
-						xtype:'textfield',
-						readOnly:true,
-						id:'xt_departinfo_name',
-						name:'xt_departinfo_name',
-						maxLength:32,
-						anchor:'100%'
-					},
-					{
-						fieldLabel:'所属岗位',
-						xtype:'textfield',
-						readOnly:true,
-						id:'xt_post_name',
-						name:'xt_post_name',
-						maxLength:32,
-						anchor:'100%'
-					}
-					]
-				}]
-			},{
-			xtype:'fieldset',
-			title:'个人信息',
-			border:false,
-			items:[
-				{
-					fieldLabel:'用&nbsp;户&nbsp;&nbsp;ID',
-					xtype:'textfield',
-					name:'xt_userinfo_id',
-					allowBlank:false,
-					maxLength:50,
-					hidden:true,
-					anchor:'100%'
-				},
-				{
-					fieldLabel:'临时用户名',
-					xtype:'textfield',
-					name:'xt_userinfo_name_',
-					id:'xt_userinfo_name_',
-					allowBlank:false,
-					maxLength:50,
-					anchor:'100%',
-					hidden:true,
-					listeners:{
-					  "afterRender":function(){
-					  	 
-		              }
-					}
-				},
-				{
-					fieldLabel:'用户头像',
-					xtype:'textfield',
-					name:'xt_userinfo_image',
-					maxLength:100,
-					hidden:true,
-					anchor:'100%'
-				},
-				{
-					fieldLabel:'所属公司',
-					xtype:'textfield',
-					id:'xt_company_id',
-					name:'xt_company_id',
-					maxLength:100,
-					hidden:true,
-					anchor:'100%'
-				},
-				{
-					fieldLabel:'所属部门',
-					xtype:'textfield',
-					id:'xt_departinfo_id',
-					name:'xt_departinfo_id',
-					maxLength:100,
-					hidden:true,
-					anchor:'100%'
-				},
-				{
-					fieldLabel:'所属岗位',
-					xtype:'textfield',
-					id:'xt_post_id',
-					name:'xt_post_id',
-					maxLength:100,
-					hidden:true,
-					anchor:'100%'
-				},
-				{
-					layout:'table',
-					xtype:'form',
-					anchor:'100%',
-					border:false,
-					items:[
-					{
-						fieldLabel:'用&nbsp;户&nbsp;&nbsp;名',
-						xtype:'textfield',
-						name:'xt_userinfo_name',
-						id:'xt_userinfo_name',
-						allowBlank:false,
-						maxLength:50,
-						anchor:'20%',
-						listeners:{
-					  		'blur':function(obj) {
-					  			if(Ext.getCmp('xt_userinfo_name').getValue() != Ext.getCmp('xt_userinfo_name_').getValue()){
-						  			Ext.Ajax.request({
-										url:'../xtUserinfoController/validateUser',
-										method:'post',  
-										params:{
-									        xt_userinfo_name:Ext.getCmp('xt_userinfo_name').getValue()
-									    },
-										success:function(response, opts) {
-											var obj=Ext.decode(response.responseText); 
-											if(obj.msg == 1){
-												msgTishi('该用户名已经被注册，请重新输入!');
-												Ext.getCmp("xt_userinfo_name").setValue("");  
-												Ext.getCmp("xt_userinfo_name").focus();
-											}
-										},
-										failure:function(response, opts) {
-											var obj=Ext.decode(response.responseText); 
-											msgTishi(obj.msg);
-											Ext.getCmp("xt_userinfo_name").setValue("");  
-											Ext.getCmp("xt_userinfo_name").focus();
-										}
-									});
-					  			}
-							}
-					  	}
-					},
-					{
-						fieldLabel:'性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别',
-						xtype:"combo",
-	            		queryMode:'local', 
-						store:xtUserinfoSexList,
-						name:'xt_userinfo_sex',
-						triggerAction:"all",
-			            editable:false,
-			            emptyText:'请选择',
-			            valueField:"xt_data_dictionary_id",
-			            displayField:"xt_data_dictionary_name",
-						anchor:'20%'
-					},
-					{
-						fieldLabel:'出生年月',
-						xtype:'datefield',
-						format:'Y-m-d',
-						name:'xt_userinfo_birthday',
-						maxLength:20,
-						anchor:'20%'
-					}
-					]
-				},
-				{
-					layout:'table',
-					xtype:'form',
-					anchor:'100%',
-					border:false,
-					items:[
-					{
-						fieldLabel:'真实姓名',
-						xtype:'textfield',
-						name:'xt_userinfo_realName',
-						maxLength:30,
-						anchor:'100%'
-					},
-					{
-						fieldLabel:'是否已婚',
-						xtype:"combo",
-						queryMode:'local', 
-						store:xtUserinfoIsmarriedList,
-						triggerAction:"all",
-			            editable:false,
-			            emptyText:'请选择',
-			            valueField:"xt_data_dictionary_id",
-			            displayField:"xt_data_dictionary_name",
-						name:'xt_userinfo_ismarried',
-						anchor:'100%'
-					},
-					{
-						fieldLabel:'身份证号',
-						xtype:'textfield',
-						name:'xt_userinfo_card',
-						maxLength:20,
-						anchor:'100%'
-					}
-					]
-				},
-				{
-					layout:'table',
-					xtype:'form',
-					anchor:'100%',
-					border:false,
-					items:[
-					{
-						fieldLabel:'名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族',
-						xtype:"combo",
-						queryMode:'local', 
-						store:xtUserinfoNationList,
-						name:'xt_userinfo_nation',
-						triggerAction:"all",
-			            editable:false,
-			            emptyText:'请选择',
-			            valueField:"xt_data_dictionary_id",
-			            displayField:"xt_data_dictionary_name",
-						anchor:'20%'
-					},
-					{
-						fieldLabel:'籍&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;贯',
-						xtype:'textfield',
-						name:'xt_userinfo_origo',
-						maxLength:20,
-						anchor:'20%'
-					},
-					{
-						fieldLabel:'毕业学校',
-						xtype:'textfield',
-						name:'xt_userinfo_schoolName',
-						maxLength:20,
-						anchor:'25%'
-					}
-					]
-				},
-				{
-					layout:'table',
-					xtype:'form',
-					anchor:'100%',
-					border:false,
-					items:[
-					{
-						fieldLabel:'联系电话',
-						xtype:'textfield',
-						name:'xt_userinfo_phone',
-						maxLength:30,
-						anchor:'35%'
-					},
-					{
-						fieldLabel:'移动电话',
-						xtype:'textfield',
-						name:'xt_userinfo_mobile',
-						maxLength:20,
-						anchor:'35%'
-					},
-					{
-						fieldLabel:'其他电话',
-						xtype:'textfield',
-						name:'xt_userinfo_ortherTel',
-						maxLength:20,
-						anchor:'35%'
-					}
-					]
-				},
-				{
-					fieldLabel:'备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注',
-					xtype:'textareafield',
-					name:'xt_userinfo_remark',
-					maxLength:200,
-					height:20,
-					anchor:'100%'
-				},
-				{
-					fieldLabel:'地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址',
-					xtype:'textfield',
-					name:'xt_userinfo_address',
-					maxLength:500,
-					anchor:'100%'
-				},
-				{
-					layout:'table',
-					xtype:'form',
-					anchor:'100%',
-					border:false,
-					items:[
-					{
-						fieldLabel:'入职时间',
-						xtype:'datefield',
-						format:'Y-m-d',
-						name:'xt_userinfo_intime',
-						maxLength:20,
-						anchor:'100%'
-					},
-					{
-						fieldLabel:'离职时间',
-						xtype:'datefield',
-						format:'Y-m-d',
-						name:'xt_userinfo_outTime',
-						maxLength:20,
-						anchor:'100%'
-					},
-					{
-						fieldLabel:'到期时间',
-						xtype:'datefield',
-						format:'Y-m-d',
-						name:'xt_userinfo_contractTime',
-						maxLength:20,
-						anchor:'100%'
-					}
-					]
-				},
-				{
-					layout:'table',
-					xtype:'form',
-					anchor:'100%',
-					border:false,
-					items:[
-					{
-						fieldLabel:'QQ&nbsp;号码',
-						xtype:'textfield',
-						name:'xt_userinfo_qq',
-						maxLength:12,
-						anchor:'35%'
-					},
-					{
-						fieldLabel:'电子邮件',
-						xtype:'textfield',
-						name:'xt_userinfo_email',
-						maxLength:50,
-						anchor:'35%'
-					},
-					{
-						fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
-						xtype:"combo",
-						queryMode:'local', 
-						store:xtUserinfoStateListList,
-						triggerAction:"all",
-			            editable:false,
-			            emptyText:'请选择',
-			            valueField:"xt_data_dictionary_id",
-			            displayField:"xt_data_dictionary_name",
-						name:'xt_userinfo_state',
-						anchor:'20%'
-					}
-					]
-				}]
-		},{
-			xtype:'fieldset',
-			title:'其他信息',
-			border:false,
-			items:[{
-					layout:'table',
-					xtype:'form',
-					anchor:'100%',
-					border:false,
-					items:[
-					{
-						fieldLabel:'政治面貌',
-						xtype:'textfield',
-						name:'xt_userinfo_politicalStatus',
-						maxLength:20,
-						anchor:'100%'
-					},
-					{
-						fieldLabel:'文化程度',
-						xtype:"combo",
-						queryMode:'local', 
-						store:xtUserinfoHighestDegreeList,
-						triggerAction:"all",
-			            editable:false,
-			            emptyText:'请选择',
-			            valueField:"xt_data_dictionary_id",
-			            displayField:"xt_data_dictionary_name",
-						name:'xt_userinfo_highestDegree',
-						allowBlank:false,
-						maxLength:20,
-						anchor:'100%'
-					},
-					{
-						fieldLabel:'工作年限',
-						xtype:"combo",
-						queryMode:'local', 
-						store:xtUserinfoWorkYearList,
-						triggerAction:"all",
-			            editable:false,
-			            emptyText:'请选择',
-			            valueField:"xt_data_dictionary_id",
-			            displayField:"xt_data_dictionary_name",
-						name:'xt_userinfo_workYear',
-						maxLength:20,
-						anchor:'100%'
-					}
-					]
-				}]
-		},
-		{
-			fieldLabel:'附件编号',
-			xtype:'textfield',
-			hidden:true,
-			id:'xt_userinfo_pic',
-			name:'xt_userinfo_pic',
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			title:'图片信息',
-			xtype:'fieldset',
-			border:false,
-			items:{
-				xtype:'box', 
-				id:'xt_userinfo_pic_pic', 
-				margin:'2 5 4 70', 
-				autoEl:{
-					tag:'img',
-					/** 不采用右键时候直接用点击事件触发
-					onclick:"optupload('xt_userinfo_pic','xt_userinfo_pic_pic',1)",
-					 **/
-					src:bsdefimg
-				}
-			}
-		}]
-	});
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+	InitBDataComboSetV('gender','xt_userinfo_sex','xt_userinfo_sex_');//读取性别数据字典
+	InitBDataComboSetV('xt_userinfo_nation','xt_userinfo_nation','xt_userinfo_nation_');//读取民族数据字典
+	InitBDataComboSetV('xt_userinfo_highestDegree','xt_userinfo_highestDegree','xt_userinfo_highestDegree_');//读取文化程度数据字典
+	InitBDataComboSetV('xt_userinfo_workYear','xt_userinfo_workYear','xt_userinfo_workYear_');//读取工作年限数据字典
+	InitBDataComboSetV('xt_userinfo_state','xt_userinfo_state','xt_userinfo_state_');//读取状态数据字典
+	InitBDataComboSetV('xt_userinfo_ismarried','xt_userinfo_ismarried','xt_userinfo_ismarried_');//读取是否已婚数据字典
+});
+
+/////////////////////部门选择器开始///////////////////
+function departSelect(){
+	$('#departSelectModal').modal();
+	var setting = {
+	   view:{
+	       selectedMulti:false
+	   },
+	   check:{
+	       enable:false
+	   },
+	   async:{
+	       enable:true,//设置 zTree是否开启异步加载模式  加载全部信息
+	       url:"../xtDepartinfoController/getXtDepartinfoBZTree",//Ajax获取数据的 URL地址  
+	       otherParam:{ 
+	    	 　　'expanded':function(){return 'true'} 
+	       } //异步参数
+	   },
+	   data:{
+		   //必须使用data  
+	       simpleData:{
+	           enable:true,
+	           idKey:"id",//id编号命名 默认  
+	           pIdKey:"pId",//父id编号命名 默认   
+	           rootPId:0 //用于修正根节点父节点数据，即 pIdKey 指定的属性值  
+	       }
+	   },
+	   edit:{
+	       enable:false
+	   },  
+	   callback:{  
+	       onClick:onClick//单击事件
+	   }  
+	};
+	$.fn.zTree.init($("#tree"), setting);
+}
+
+//单击事件
+function onClick(event, treeId, treeNode, msg){  
+}  
+function doDepartSelect(){
+	var zTree = $.fn.zTree.getZTreeObj("tree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"请选择一条隶属部门信息");
+		return;
+	}
+	msgTishCallFnBoot("确定要选择【<font color=red>"+nodes[0].name+"</font>】？",function(){
+		$('#xt_departinfo_name').val(nodes[0].name);
+		$('#xt_departinfo_id').val(nodes[0].id);
+		$('#xt_post_name').val("");
+		$('#xt_post_id').val("");
+		$('#departSelectModal').modal('hide');
+	})
+}
+/////////////////////部门选择器结束///////////////////
+
+/////////////////////岗位选择器开始///////////////////
+function postSelect(){
+	var xt_departinfo_id = $('#xt_departinfo_id').val();
+	if(xt_departinfo_id ==  null || xt_departinfo_id == ""){
+		toastrBoot(4,"请选择隶属部门！");
+		return;
+	}
+	$('#postSelectModal').modal();
+	var setting = {
+	   view:{
+	       selectedMulti:false
+	   },
+	   check:{
+	       enable:false
+	   },
+	   async:{
+	       enable:true,//设置 zTree是否开启异步加载模式  加载全部信息
+	       url:"../xtPostController/getXtPostBZTree",//Ajax获取数据的 URL地址  
+	       otherParam:{ 
+	    	 　　'expanded':function(){return 'true'},
+	    	   	 'xt_departinfo_id':function(){ return $('#xt_departinfo_id').val()}
+	       } //异步参数
+	   },
+	   data:{
+		   //必须使用data  
+	       simpleData:{
+	           enable:true,
+	           idKey:"id",//id编号命名 默认  
+	           pIdKey:"pId",//父id编号命名 默认   
+	           rootPId:0 //用于修正根节点父节点数据，即 pIdKey 指定的属性值  
+	       }
+	   },
+	   edit:{
+	       enable:false
+	   },  
+	   callback:{  
+	       onClick:onClick//单击事件
+	   }  
+	};
+	$.fn.zTree.init($("#posttree"), setting);
+}
+
+function doPostSelect(){
+	var zTree = $.fn.zTree.getZTreeObj("posttree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"请选择隶属岗位");
+		return;
+	}
+	msgTishCallFnBoot("确定要选择【<font color=red>"+nodes[0].name+"</font>】？",function(){
+		$('#xt_post_name').val(nodes[0].name);
+		$('#xt_post_id').val(nodes[0].id);
+		$('#postSelectModal').modal('hide');
+	})
+}
+/////////////////////岗位选择器结束///////////////////
+
+//验证用户名是否被注册
+function validateUser(thiz){
+	var value = thiz.value;
+	var xt_userinfo_name_ = $('#xt_userinfo_name_').val();
+	if(null != value && '' != value){
+		if(xt_userinfo_name_ != value){
+			$.ajax({
+				   type:"GET",
+				   url:"../xtUserinfoController/validateUser",
+				   data:"xt_userinfo_name="+value,
+				   success:function(result){
+					   result = eval("(" + result + ")");  
+					   if(result.msg == 1){
+						   toastrBoot(4,"该用户名已经被注册，请重新输入!");
+							$('#xt_userinfo_name').val("");
+							$("#xt_userinfo_name").focus();
+						}
+				   }
+				});
+		}
+	}
 }

@@ -14,8 +14,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -30,11 +28,13 @@ import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseJson;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtmodel.XtAttachment;
+import jehc.xtmodules.xtmodel.XtDataDictionary;
 import jehc.xtmodules.xtmodel.XtDepartinfo;
 import jehc.xtmodules.xtmodel.XtPost;
 import jehc.xtmodules.xtservice.XtAttachmentService;
 import jehc.xtmodules.xtservice.XtDepartinfoService;
 import jehc.xtmodules.xtservice.XtPostService;
+import net.sf.json.JSONArray;
 /**
  * 通用
  * @author邓纯杰
@@ -334,5 +334,17 @@ public class XtCommonController extends BaseAction{
 		}else{
 			response.getWriter().println("<script>top.Ext.Msg.alert('提示','<font color=red>您访问的文件已经不存在，请联系管理员！</font>');</script>");
 		}
+	}
+	
+	/**
+	 * 获取字典集合（根据ckey）
+	 * @param ckey
+	 * @return
+	 */
+	@AuthUneedLogin
+	@ResponseBody
+	@RequestMapping(value="/getXtDataDictionaryList",method={RequestMethod.POST,RequestMethod.GET})
+	public List<XtDataDictionary> getXtDataDictionaryList(String ckey){
+		return CommonUtils.getXtDataDictionaryCache(ckey);
 	}
 }

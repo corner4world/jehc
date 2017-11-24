@@ -1,6 +1,5 @@
 package jehc.xtmodules.xtweb;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -78,7 +78,7 @@ public class XtUserinfoController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtUserinfo>XtUserinfoList = xtUserinfoService.getXtUserinfoListByCondition(condition);
 		PageInfo<XtUserinfo> page = new PageInfo<XtUserinfo>(XtUserinfoList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	
 	/**
@@ -95,7 +95,7 @@ public class XtUserinfoController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtUserinfo>XtUserinfoList = xtUserinfoService.getXtUserinfoDeletedListByCondition(condition);
 		PageInfo<XtUserinfo> page = new PageInfo<XtUserinfo>(XtUserinfoList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -346,7 +346,7 @@ public class XtUserinfoController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtUR> Xt_U_RList = xtURService.getXtRoleinfoListByUserinfoId(condition);
 		PageInfo<XtUR> page = new PageInfo<XtUR>(Xt_U_RList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	
 	/**
@@ -416,5 +416,34 @@ public class XtUserinfoController extends BaseAction{
 			list = xtUserinfoService.getXtUserinfoList(condition);
 		}
 		return  outItemsStr(list);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtUserinfoAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtUserinfoAdd(XtUserinfo xtUserinfo,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-userinfo/xt-userinfo-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtUserinfoUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtUserinfoUpdate(String xt_userinfo_id,HttpServletRequest request, Model model){
+		XtUserinfo xtUserinfo = xtUserinfoService.getXtUserinfoById(xt_userinfo_id);
+		model.addAttribute("xtUserinfo", xtUserinfo);
+		return new ModelAndView("pc/xt-view/xt-userinfo/xt-userinfo-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtUserinfoDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtUserinfoDetail(String xt_userinfo_id,HttpServletRequest request, Model model){
+		XtUserinfo xtUserinfo = xtUserinfoService.getXtUserinfoById(xt_userinfo_id);
+		model.addAttribute("xtUserinfo", xtUserinfo);
+		return new ModelAndView("pc/xt-view/xt-userinfo/xt-userinfo-detail");
 	}
 }

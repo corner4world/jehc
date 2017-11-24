@@ -133,6 +133,11 @@
 			.modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;top:50%;}
 			@media (min-width:768px){.modal-dialog{width:768px}
 			.img{cursor:pointer;}
+			
+			.row {  
+			  margin-top: 4px;  
+			  margin-bottom: 4px;  
+			} 
 		</style>
 	</head>
 	<!-- upload模态框（Modal）开始 -->

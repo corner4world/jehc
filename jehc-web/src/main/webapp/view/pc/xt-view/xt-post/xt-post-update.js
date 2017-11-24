@@ -138,3 +138,23 @@ function doPostSelect(){
 	})
 }
 /////////////////////岗位选择器结束///////////////////
+
+
+function validateUser(thiz){
+	var value = thiz.value;
+	if(null != value && '' != value){
+		$.ajax({
+		   type:"GET",
+		   url:"../xtUserinfoController/validateUser",
+		   data:"xt_userinfo_name="+value,
+		   success:function(result){
+			   result = eval("(" + result + ")");  
+			   if(result.msg == 1){
+				   toastrBoot(4,"该用户名已经被注册，请重新输入!");
+					$('#xt_userinfo_name').val("");
+					$("#xt_userinfo_name").focus();
+				}
+		   }
+		});
+	}
+}

@@ -246,9 +246,13 @@ function datatablesCallBack(data, callback, settings,url,opt){
 	 var formdata;
 	 //缺省采用searchForm
 	 if(null != opt){
-		 formdata = $("#searchForm").serializeArray();
+		 if('undefined' != typeof($("#"+opt.searchformId)) && null !=  $("#"+opt.searchformId) && '' != $("#"+opt.searchformId)){
+			 formdata = $("#"+opt.searchformId).serializeArray();
+		 }else{
+			 formdata = $("#searchForm").serializeArray();
+		 }
 	 }else{
-		 formdata = $("#"+opt.searchformId).serializeArray();
+		 formdata = $("#searchForm").serializeArray();
 	 }
 	 //封装请求参数
 	 var param = {};
@@ -357,7 +361,11 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 	 var formdata;
 	 //缺省采用searchForm
 	 if(null != opt){
-		 formdata = $("#searchForm").serializeArray();
+		 if('undefined' != typeof($("#"+opt.searchformId)) && null !=  $("#"+opt.searchformId) && '' != $("#"+opt.searchformId)){
+			 formdata = $("#"+opt.searchformId).serializeArray();
+		 }else{
+			 formdata = $("#searchForm").serializeArray();
+		 }
 	 }else{
 		 formdata = $("#"+opt.searchformId).serializeArray();
 	 }
@@ -826,7 +834,7 @@ function getProvice(num){
             //将数据添加到省份这个下拉框里面
             $("#provinceId_"+num).append(str);
         },
-        error:function (){ alert("Error");}
+        error:function(){}
     });
 }
 function getCity(num){
@@ -851,7 +859,7 @@ function getCity(num){
             //将数据添加到省份这个下拉框里面
             $("#cityId_"+num).append(str);
         },
-        error:function(){alert("Error");}
+        error:function(){}
     });
 }
 function getCounties(num){
@@ -877,7 +885,7 @@ function getCounties(num){
             //将数据添加到省份这个下拉框里面
             $("#districtId_"+num).append(str);
         },
-        error:function(){alert("Error");}
+        error:function(){}
     });
 }
 ///////////////////////省市区县统一处理结束//////////////////////////
@@ -1170,3 +1178,109 @@ function getBimghw(src){
 	}
 }
 /////////////////////////////////////附件统一上传中心开始///////////////////////////////////
+
+
+//读取数据字典值，供Grid中使用
+function InitBDataCallFn(xt_data_dictionary_id,fn){
+//	var xt_data_dictionary_name="∨";
+	$.ajax({
+	   type:"GET",
+	   url:"../xtDataDictionaryController/getXtDataDictionaryById",
+	   data:"xt_data_dictionary_id="+xt_data_dictionary_id,
+	   success: function(result){
+		   fn(result);
+//		   result = eval("(" + result + ")");  
+//		   result = result.data;
+//		   result.xt_data_dictionary_name;
+	   }
+	});
+//	return xt_data_dictionary_name;
+}
+
+
+/****
+ * 读取数据字典值，下拉框读取数据字典统一方法 并回调
+ * ckey 常量键
+ */
+function InitBDataComboCallFn(ckey,fn){
+	$.ajax({
+	   type:"GET",
+	   url:"../xtCommonController/getXtDataDictionaryList",
+	   data:"ckey="+ckey,
+	   success: function(result){
+		   fn(result);
+	   }
+	});
+}
+
+
+/****
+ * 读取数据字典值，下拉框读取数据字典统一方法 
+ * ckey 常量键
+ * id 下拉框id
+ */
+function InitBDataCombo(ckey,id){
+	var str = "<option value=''>请选择</option>";
+	$.ajax({
+	   type:"GET",
+	   url:"../xtCommonController/getXtDataDictionaryList",
+	   data:"ckey="+ckey,
+	   success: function(data){
+//		   result = eval("(" + result + ")");  
+//		   result = result.data;
+//		   result.xt_data_dictionary_name;
+		   //从服务器获取数据进行绑定
+           $.each(data, function(i, item){
+           	 str += "<option value=" + item.xt_data_dictionary_id + ">" + item.xt_data_dictionary_name + "</option>";
+           })
+           //将数据添加到省份这个下拉框里面
+           $("#"+id).append(str);
+	   }
+	});
+}
+
+
+/****
+ * 读取数据字典值，下拉框读取数据字典统一方法 并设置value值 一般用于回显
+ * ckey 常量键
+ * id 下拉框id
+ * value_id 下拉框对应的值
+ */
+function InitBDataComboSetV(ckey,id,value_id){
+	var str = "<option value=''>请选择</option>";
+	$.ajax({
+	   type:"GET",
+	   url:"../xtCommonController/getXtDataDictionaryList",
+	   data:"ckey="+ckey,
+	   success: function(data){
+//		   result = eval("(" + result + ")");  
+//		   result = result.data;
+//		   result.xt_data_dictionary_name;
+		   //从服务器获取数据进行绑定
+           $.each(data, function(i, item){
+           	 str += "<option value=" + item.xt_data_dictionary_id + ">" + item.xt_data_dictionary_name + "</option>";
+           })
+           //将数据添加到省份这个下拉框里面
+           $("#"+id).append(str);
+           try {
+        	   if(null != value_id && '' != value_id){
+        		   if('undefined' != typeof($('#'+value_id).val()) && null != $('#'+value_id).val() && '' != $('#'+value_id).val() && '请选择' != $('#'+value_id).val()){
+        			   $('#'+id).val($('#'+value_id).val());
+        		   }
+               }
+		   } catch (e) {
+				console.log("读取下拉框为数据字典类型并赋值出现异常，异常信息："+e);
+		   }
+	   }
+	});
+}
+
+
+//获取所有行（验证无效）
+function getDataTablesAllData(table){
+	var nTrs = table.fnGetNodes();//fnGetNodes获取表格所有行，nTrs[i]表示第i行tr对象  
+	console.info(nTrs);
+    for(var i = 0; i < nTrs.length; i++){  
+        console.log('[获取数据]' + table.fnGetData(nTrs[i]));//fnGetData获取一行的数据  
+    }  
+}
