@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -35,7 +36,14 @@ public class XtCompanyController extends BaseAction{
 	* @return
 	*/
 	@RequestMapping(value="/loadXtCompany",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadXtCompany(XtCompany xt_Company,HttpServletRequest request){
+	public ModelAndView loadXtCompany(Model model,HttpServletRequest request){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		List<XtCompany> XtCompanyList = xtCompanyService.getXtCompanyListByCondition(condition);
+		XtCompany xt_Company = new XtCompany();
+		if(!XtCompanyList.isEmpty()){
+			xt_Company = XtCompanyList.get(0);
+		}
+		model.addAttribute("xt_Company", xt_Company);
 		return new ModelAndView("pc/xt-view/xt-company/xt-company-list");
 	}
 	/**

@@ -804,22 +804,22 @@ function CallRegion(num){
 	//默认绑定省
     getProvice(num);
     //绑定事件
-    $("#provinceId_"+num).change(function(){
-    	$("#cityId_"+num).html("");
+    $("#xt_province_id_"+num).change(function(){
+    	$("#xt_city_id_"+num).html("");
 	    var str = "<option value=''>请选择</option>";
-	    $("#cityId_"+num).append(str);
+	    $("#xt_city_id_"+num).append(str);
         getCity(num);
-        $("#districtId_"+num).html("");
+        $("#xt_district_id_"+num).html("");
 	    var str = "<option value=''>请选择</option>";
-	    $("#districtId_"+num).append(str);
+	    $("#xt_district_id_"+num).append(str);
     })
-    $("#cityId_"+num).change(function(){
+    $("#xt_city_id_"+num).change(function(){
     	getCounties(num);
     })
 }
 function getProvice(num){
     //清空下拉数据
-    $("#provinceId_"+num).html("");
+    $("#xt_province_id_"+num).html("");
     var str = "<option value=''>请选择</option>";
     $.ajax({
         type:"POST",
@@ -827,23 +827,30 @@ function getProvice(num){
         dataType:"JSON",
         async:false,
         success:function(data){
+        	data = eval("(" + data + ")");  
+        	data = data.items;
             //从服务器获取数据进行绑定
             $.each(data, function(i, item){
-            	 str += "<option value=" + item.id + ">" + item.name + "</option>";
+            	 str += "<option value='" + item.ID + "'>" + item.NAME + "</option>";
             })
             //将数据添加到省份这个下拉框里面
-            $("#provinceId_"+num).append(str);
+            $("#xt_province_id_"+num).append(str);
         },
         error:function(){}
     });
 }
 function getCity(num){
-    var provinceId = $("#provinceId_"+num).val();
+    var provinceId = $("#xt_province_id_"+num).val();
     //判断省份这个下拉框选中的值是否为空
     if(provinceId == ""){
+    	var str = "<option value=''>请选择</option>";
+    	$("#xt_city_id_"+num).html("");
+    	$("#xt_district_id_"+num).html("");
+    	$("#xt_district_id_"+num).append(str);
+    	$("#xt_city_id_"+num).append(str);
         return;
     }
-    $("#cityId_"+num).html("");
+    $("#xt_city_id_"+num).html("");
     var str = "<option value=''>请选择</option>";
     $.ajax({
         type:"POST",
@@ -852,23 +859,28 @@ function getCity(num){
         dataType:"JSON",
         async:false,
         success:function (data) {
+        	data = eval("(" + data + ")");  
+        	data = data.items;
             //从服务器获取数据进行绑定
             $.each(data,function(i, item){
-                str += "<option value=" + item.id + ">" + item.name + "</option>";
+                str += "<option value='" + item.ID + "'>" + item.NAME + "</option>";
             })
             //将数据添加到省份这个下拉框里面
-            $("#cityId_"+num).append(str);
+            $("#xt_city_id_"+num).append(str);
         },
         error:function(){}
     });
 }
 function getCounties(num){
-    var cityId = $("#cityId_"+num).val();
+    var cityId = $("#xt_city_id_"+num).val();
     //判断市这个下拉框选中的值是否为空
     if(cityId == ""){
+    	$("#xt_district_id_"+num).html("");
+    	var str = "<option value=''>请选择</option>";
+    	$("#xt_district_id_"+num).append(str);
         return;
     }
-    $("#districtId_"+num).html("");
+    $("#xt_district_id_"+num).html("");
     var str = "<option value=''>请选择</option>";
     //将市的ID拿到数据库进行查询，查询出他的下级进行绑定
     $.ajax({
@@ -878,12 +890,14 @@ function getCounties(num){
         dataType:"JSON",
         async:false,
         success:function(data){
+        	data = eval("(" + data + ")");  
+        	data = data.items;
             //从服务器获取数据进行绑定
             $.each(data,function (i, item) {
-            	 str += "<option value=" + item.id + ">" + item.name + "</option>";
+            	 str += "<option value='" + item.ID + "'>" + item.NAME + "</option>";
             })
             //将数据添加到省份这个下拉框里面
-            $("#districtId_"+num).append(str);
+            $("#xt_district_id_"+num).append(str);
         },
         error:function(){}
     });
@@ -1279,7 +1293,6 @@ function InitBDataComboSetV(ckey,id,value_id){
 //获取所有行（验证无效）
 function getDataTablesAllData(table){
 	var nTrs = table.fnGetNodes();//fnGetNodes获取表格所有行，nTrs[i]表示第i行tr对象  
-	console.info(nTrs);
     for(var i = 0; i < nTrs.length; i++){  
         console.log('[获取数据]' + table.fnGetData(nTrs[i]));//fnGetData获取一行的数据  
     }  
