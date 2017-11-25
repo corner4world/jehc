@@ -9,6 +9,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,7 +57,7 @@ public class XtNoticeController extends BaseAction{
 		dataAuthForXtUID(request,"xt_userinfo_id", condition);
 		List<XtNotice> xt_NoticeList = xtNoticeService.getXtNoticeListByCondition(condition);
 		PageInfo<XtNotice> page = new PageInfo<XtNotice>(xt_NoticeList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -166,5 +167,34 @@ public class XtNoticeController extends BaseAction{
 	public void exportXtNotice(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtNoticeAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtNoticeAdd(XtNotice xtNotice,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-notice/xt-notice-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtNoticeUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtNoticeUpdate(String xt_notice_id,HttpServletRequest request, Model model){
+		XtNotice xtNotice = xtNoticeService.getXtNoticeById(xt_notice_id);
+		model.addAttribute("xtNotice", xtNotice);
+		return new ModelAndView("pc/xt-view/xt-notice/xt-notice-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtNoticeDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtNoticeDetail(String xt_notice_id,HttpServletRequest request, Model model){
+		XtNotice xtNotice = xtNoticeService.getXtNoticeById(xt_notice_id);
+		model.addAttribute("xtNotice", xtNotice);
+		return new ModelAndView("pc/xt-view/xt-notice/xt-notice-detail");
 	}
 }

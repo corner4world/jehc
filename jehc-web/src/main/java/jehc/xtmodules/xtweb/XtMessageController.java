@@ -1,18 +1,21 @@
 package jehc.xtmodules.xtweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -53,7 +56,7 @@ public class XtMessageController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtMessage> xt_MessageList = xtMessageService.getXtMessageListByCondition(condition);
 		PageInfo<XtMessage> page = new PageInfo<XtMessage>(xt_MessageList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -218,5 +221,16 @@ public class XtMessageController extends BaseAction{
 		condition.put("isread", 0);
 		List<XtMessage> xtMessageList = xtMessageService.getXtMessageCountByCondition(condition);
 		return outItemsStr(xtMessageList);
+	}
+	
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtMessageDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtMessageDetail(String xt_message_id,HttpServletRequest request, Model model){
+		XtMessage xtMessage = xtMessageService.getXtMessageById(xt_message_id);
+		model.addAttribute("xtMessage", xtMessage);
+		return new ModelAndView("pc/xt-view/xt-message/xt-message-detail");
 	}
 }

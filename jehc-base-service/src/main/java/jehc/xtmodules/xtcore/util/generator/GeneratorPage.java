@@ -2236,7 +2236,7 @@ public class GeneratorPage extends GeneratorUtil{
 				XtGeneratorTableColumnForm xt_Generator_Table_Column_Form = xt_Generator_Table_Column_FormList.get(i);
 				if(null != xt_Generator_Table_Column_Form.getColumn_type() && !"".equals(xt_Generator_Table_Column_Form.getColumn_type()) && "5".equals(xt_Generator_Table_Column_Form.getColumn_type())){
 					if(null != kv && !"".equals(kv)){
-						kv = kv+"+','+"+"$('#"+xt_Generator_Table_Column_Form.getColumn_name()+"').val();";
+						kv = kv+"+','+"+"$('#"+xt_Generator_Table_Column_Form.getColumn_name()+"').val()";
 						filed_name = filed_name+","+xt_Generator_Table_Column_Form.getColumn_name();
 					}else{
 						kv = "$('#"+xt_Generator_Table_Column_Form.getColumn_name()+"').val()";

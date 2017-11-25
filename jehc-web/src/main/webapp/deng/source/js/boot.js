@@ -297,7 +297,6 @@ function datatablesCallBack(data, callback, settings,url,opt){
 	});
 }
 
-
 //bootstrap datatables 国际化分页提示信息
 function callLiLang(){
 	var lang = {
@@ -420,6 +419,27 @@ function resetAll(formid){
 		$('#'+formid)[0].reset();
 	}
 }
+
+
+//获取所有行集合
+function fnDrList(table){
+	var nTrs = table.fnGetNodes();//fnGetNodes获取表格所有行，nTrs[i]表示第i行tr对象  
+	/*
+  for(var i = 0; i < nTrs.length; i++){  
+      console.log('[获取数据]' + table.fnGetData(nTrs[i]));//fnGetData获取一行的数据  
+  }  
+  */
+	return nTrs;
+}
+//获取所有行并返回对象集合
+function getTableContent(table){  
+	var obj = [];
+	var nTrs = fnDrList(table);
+	for(var i = 0; i < nTrs.length; i++){  
+		obj.push(table.fnGetData(nTrs[i]));
+	}  
+	return obj;
+} 
 
 //日期选择器渲染
 function datetimeInit(){
@@ -1289,11 +1309,3 @@ function InitBDataComboSetV(ckey,id,value_id){
 	});
 }
 
-
-//获取所有行（验证无效）
-function getDataTablesAllData(table){
-	var nTrs = table.fnGetNodes();//fnGetNodes获取表格所有行，nTrs[i]表示第i行tr对象  
-    for(var i = 0; i < nTrs.length; i++){  
-        console.log('[获取数据]' + table.fnGetData(nTrs[i]));//fnGetData获取一行的数据  
-    }  
-}

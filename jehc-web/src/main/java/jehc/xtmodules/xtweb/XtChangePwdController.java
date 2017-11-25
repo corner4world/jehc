@@ -64,7 +64,7 @@ public class XtChangePwdController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtChangePwd> xt_Change_PwdList = xtChangePwdService.getXtChangePwdListByCondition(condition);
 		PageInfo<XtChangePwd> page = new PageInfo<XtChangePwd>(xt_Change_PwdList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -147,5 +147,15 @@ public class XtChangePwdController extends BaseAction{
 	public void exportXtChangePwd(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtChangePwdDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtChangePwdDetail(String xt_change_pwd_id,HttpServletRequest request, Model model){
+		XtChangePwd xtChangePwd = xtChangePwdService.getXtChangePwdById(xt_change_pwd_id);
+		model.addAttribute("xtChangePwd", xtChangePwd);
+		return new ModelAndView("pc/xt-view/xt-change-pwd/xt-change-pwd-detail");
 	}
 }

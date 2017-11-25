@@ -613,7 +613,7 @@ function initXtGeneratorColumn(){
 	});
 	var comboTypeData = Ext.create('Ext.data.SimpleStore',{  
 	    fields:['value','text'],  
-	    data:[['文本域','文本域'],['下拉框','下拉框'],['文件框','文件框']]  
+	    data:[['重置','重置'],['文本域','文本域'],['下拉框','下拉框'],['文件框','文件框']]  
 	});
 	xtGeneratorColumnStore = getGridJsonStore('../xtGeneratorController/getXtGeneratorTableColumnListByCondition',[]);
 	xtGeneratorColumnGrid = Ext.create('Ext.grid.Panel',{
@@ -726,6 +726,11 @@ function initXtGeneratorColumn(){
 			            editable:false,
 			            listeners:{
 			            	select:function(combo, record,index){
+			            		if(record.data.value == '重置'){
+			            			this.setValue("");
+			            			xtGeneratorColumnGrid.getSelectionModel().getSelected().items[0].set("column_type","");
+			            			return;
+			            		}
 			            		var DATA_TYPE = xtGeneratorColumnGrid.getSelectionModel().getSelected().items[0].data.DATA_TYPE;
 			            		var column_type = record.data.value;
 			            		console.info(column_type);
