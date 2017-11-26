@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="/WEB-INF/tld/c.tld" %>
 <%@ taglib prefix="fmt" uri="/WEB-INF/tld/fmt.tld" %>
 <%@ taglib prefix="fn" uri="/WEB-INF/tld/fn.tld"%>
+<%@ taglib prefix="jEhcPermissionTag" uri="/WEB-INF/tld/jEhcPermissionTag.tld"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->

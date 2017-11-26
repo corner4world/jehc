@@ -36,15 +36,21 @@
 	</div>
 	<div class="panel-body">
 		<div class="btn-group pull-right" style="margin-right: 20px;">
-			<button class="btn btn-default" onclick="toXtNoticeAdd()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-			</button>
-			<button class="btn btn-default" onclick="toXtNoticeUpdate()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-			</button>
-			<button class="btn btn-default" onclick="delXtNotice()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
+			<jEhcPermissionTag:jehcBtnTag modules="addXtNotice">
+				<button class="btn btn-default" onclick="toXtNoticeAdd()">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+				</button>
+			</jEhcPermissionTag:jehcBtnTag>
+			<jEhcPermissionTag:jehcBtnTag modules="updateXtNotice">
+				<button class="btn btn-default" onclick="toXtNoticeUpdate()">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+				</button>
+			</jEhcPermissionTag:jehcBtnTag>
+			<jEhcPermissionTag:jehcBtnTag modules="delXtNotice">
+				<button class="btn btn-default" onclick="delXtNotice()">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+				</button>
+			</jEhcPermissionTag:jehcBtnTag>
 			<button class="btn btn-default" onclick="search('datatables')">
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 			</button>
