@@ -84,10 +84,8 @@ public class XtDataAuthorityController extends BaseAction{
 	public String getXtFunctioninfoListForData(HttpServletRequest request){
 		Map<String, Object> condition = new HashMap<String, Object>();
 		condition.put("xt_functioninfoIsAuthority", 0);
-		commonHPager(condition,request);
 		List<XtFunctioninfo> xt_FunctioninfoList = xtFunctioninfoService.getXtFunctioninfoListForData(condition);
-		PageInfo<XtFunctioninfo> page = new PageInfo<XtFunctioninfo>(xt_FunctioninfoList);
-		return outPageStr(page,request);
+		return outItemsStr(xt_FunctioninfoList);
 	}
 	/**
 	* 按人员添加
