@@ -1,21 +1,25 @@
 package jehc.solrmodules.solrweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.solrmodules.solrmodel.SolrSchemaTemplet;
 import jehc.solrmodules.solrservice.SolrSchemaTempletService;
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
@@ -45,18 +49,12 @@ public class SolrSchemaTempletController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getSolrSchemaTempletListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getSolrSchemaTempletListByCondition(SolrSchemaTemplet solr_Schema_Templet,HttpServletRequest request){
-		Map<String, Object> condition = new HashMap<String, Object>();
+	public String getSolrSchemaTempletListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		if(null != request.getParameter("solr_schema_templet_status") && !"".equals(request.getParameter("solr_schema_templet_status"))){
-			condition.put("solr_schema_templet_status",request.getParameter("solr_schema_templet_status"));
-		}
-		if(null != request.getParameter("solr_schema_templet_title") && !"".equals(request.getParameter("solr_schema_templet_title"))){
-			condition.put("solr_schema_templet_title",request.getParameter("solr_schema_templet_title"));
-		}
-		List<SolrSchemaTemplet> solr_Schema_TempletList = solrSchemaTempletService.getSolrSchemaTempletListByCondition(condition);
-		PageInfo<SolrSchemaTemplet> page = new PageInfo<SolrSchemaTemplet>(solr_Schema_TempletList);
-		return outPageStr(page,request);
+		List<SolrSchemaTemplet> solrSchemaTempletList = solrSchemaTempletService.getSolrSchemaTempletListByCondition(condition);
+		PageInfo<SolrSchemaTemplet> page = new PageInfo<SolrSchemaTemplet>(solrSchemaTempletList);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -177,5 +175,34 @@ public class SolrSchemaTempletController extends BaseAction{
 		condition.put("solr_schema_templet_status", 0);
 		List<SolrSchemaTemplet> solr_Schema_TempletList = solrSchemaTempletService.getSolrSchemaTempletListByCondition(condition);
 		return outComboDataStr(solr_Schema_TempletList);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrSchemaTempletAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrSchemaTempletAdd(SolrSchemaTemplet solrSchemaTemplet,HttpServletRequest request){
+		return new ModelAndView("pc/solr-view/solr-schema-templet/solr-schema-templet-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrSchemaTempletUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrSchemaTempletUpdate(String solr_schema_templet_id,HttpServletRequest request, Model model){
+		SolrSchemaTemplet solrSchemaTemplet = solrSchemaTempletService.getSolrSchemaTempletById(solr_schema_templet_id);
+		model.addAttribute("solrSchemaTemplet", solrSchemaTemplet);
+		return new ModelAndView("pc/solr-view/solr-schema-templet/solr-schema-templet-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrSchemaTempletDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrSchemaTempletDetail(String solr_schema_templet_id,HttpServletRequest request, Model model){
+		SolrSchemaTemplet solrSchemaTemplet = solrSchemaTempletService.getSolrSchemaTempletById(solr_schema_templet_id);
+		model.addAttribute("solrSchemaTemplet", solrSchemaTemplet);
+		return new ModelAndView("pc/solr-view/solr-schema-templet/solr-schema-templet-detail");
 	}
 }

@@ -1,272 +1,93 @@
-var store;
 var grid;
-Ext.onReady(function(){
-	store = getGridJsonStore('../solrUrlController/getSolrUrlListByCondition',[]);
-	grid = Ext.create('Ext.grid.Panel',{
-		region:'center',
-		xtype:'panel',
-		store:store,
-		title:'查询结果',
-		columnLines:true,
-		selType:'cellmodel',
-		multiSelect:true,
-		selType:'checkboxmodel',
-		viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
+$(document).ready(function() {
+	/////////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用） 如弹窗分页查找根据条件 可能此时的form发生变化 此时 可以解决该类问题
+	var opt = {
+		searchformId:'searchForm'
+	};
+	var options = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../solrUrlController/getSolrUrlListByCondition',opt);},//渲染数据
+			//在第一位置追加序列号
+			fnRowCallback:function(nRow, aData, iDisplayIndex){
+				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+				return nRow;
 		},
-		loadMask:{
-			msg:'正在加载...'
-		},
-		columns:[
+		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		//列表表头字段
+		colums:[
 			{
-				header:'序号',
-				width:77,
-				xtype:'rownumberer'
+				sClass:"text-center",
+				width:"50px",
+				data:"solr_url_id",
+				render:function (data, type, full, meta) {
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
+				},
+				bSortable:false
 			},
 			{
-				header:'访问地址',
-				flex:1,
-				dataIndex:'solr_url_url'
+				data:"solr_url_id",
+				width:"150px"
 			},
 			{
-				header:'备注',
-				flex:1,
-				dataIndex:'solr_url_content'
+				data:'solr_url_url'
 			},
 			{
-				header:'创建时间',
-				width:150,
-				dataIndex:'solr_url_ctime'
+				data:'solr_url_ctime'
 			},
 			{
-				header:'修改时间',
-				width:150,
-				dataIndex:'solr_url_mtime'
+				data:'solr_url_mtime'
 			},
 			{
-				header:'创建人',
-				dataIndex:'xt_userinfo_realName'
+				data:'xt_userinfo_realName'
 			},
 			{
-				header:'操作',
-				align:'center',
-				xtype:'widgetcolumn',
-				width:150,
-				widget:{
-	                xtype:'button',
-	                text:'配置多实例',
-	                icon:detailIcon,
-	                handler:function(rec){
-	                	var solr_url_id = rec.getWidgetRecord().data.solr_url_id;
-	  					window.location.href = '../solrCoreController/loadSolrCore?solr_url_id='+solr_url_id;
-				    }
-	            }
+				data:'solr_url_content'
+			},
+			{
+				data:"solr_url_id",
+				width:"150px",
+				render:function(data, type, row, meta) {
+					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toSolrUrlDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=loadSolrCore("'+data+'")><i class="glyphicon glyphicon-edit"></i>配置多实例</button>';
+					return btn;
+				}
 			}
-		],
-		tbar:[
-			 {
-				text:'添加',
-				tooltip:'添加',
-				minWidth:tbarBtnMinWidth,
-				cls:'addBtn',
-				icon:addIcon,
-				handler:function(){
-					addSolrUrl();
-				}
-			 },
-			 {
-				text:'编辑',
-				tooltip:'编辑',
-				minWidth:tbarBtnMinWidth,
-				cls:'updateBtn',
-				icon:editIcon,
-				handler:function(){
-					updateSolrUrl();
-				}
-			 },
-			 {
-				text:'删除',
-				tooltip:'删除',
-				minWidth:tbarBtnMinWidth,
-				cls:'delBtn',
-				icon:delIcon,
-				handler:function(){
-					delSolrUrl();
-				}
-			 },
-			 grid_toolbar_moretext_gaps,
-			 {
-				 text:moretext,
-				 tooltip:moretexttooltip,
-				 icon:listIcon,
-				 iconAlign:'left',
-				 menu:[
-				 {
-					text:'复制一行并生成记录',
-					tooltip:'复制一行并生成记录',
-					glyph:0xf0ea,
-					handler:function(){
-						copySolrUrl();
-					}
-				 },
-				 {
-					text:'明 细',
-					tooltip:'明 细',
-					glyph:0xf03b,
-					handler:function(){
-						detailSolrUrl();
-					}
-				 },
-				 '-',
-				 {
-					text:'导 出',
-					tooltip:'导 出',
-					glyph:0xf1c3,
-					handler:function(){
-						exportSolrUrl(grid,'../solrUrlController/exportSolrUrl');
-					}
-				 },
-				 {
-					text:'打 印',
-					tooltip:'打 印',
-					glyph:0xf02f,
-					handler:function(){
-						printerGrid(grid);
-					}
-				 },
-				 '-',
-				 {
-					text:'全 选',
-					tooltip:'全 选',
-					glyph:0xf046,
-					handler:function(){selectAll(grid);}
-				 },
-				 {
-					text:'反 选',
-					tooltip:'反 选',
-					glyph:0xf096,
-					handler:function(){unSelectAll(grid);}
-				 },
-				 '-',
-				 {
-					text:'刷 新',
-					tooltip:'刷 新',
-					glyph:0xf021,
-					handler:function(){
-						grid.getStore().reload();
-					}
-				 }
-				 ]
-			 }
-		],
-		bbar:getGridBBar(store),
-		listeners:{
-			'rowdblclick':function(grid, rowIndex, e){
-				detailSolrUrl();
-			}
-		}
+		]
 	});
-	Ext.create('Ext.Viewport',{
-		layout:'border',
-		xtype:'viewport',
-		items:[grid]
-	});
-	/**调用右键**/
-	initRight();
+	grid=$('#datatables').dataTable(options);
+	//实现全选反选
+	docheckboxall('checkall','checkchild');
+	//实现单击行选中
+	clickrowselected('datatables');
 });
-/**删除操作**/
+//新增
+function toSolrUrlAdd(){
+	tlocation('../solrUrlController/toSolrUrlAdd');
+}
+//修改
+function toSolrUrlUpdate(){
+	if($(".checkchild:checked").length != 1){
+		toastrBoot(4,"选择数据非法");
+		return;
+	}
+	var id = $(".checkchild:checked").val();
+	tlocation("../solrUrlController/toSolrUrlUpdate?solr_url_id="+id);
+}
+//详情
+function toSolrUrlDetail(id){
+	tlocation("../solrUrlController/toSolrUrlDetail?solr_url_id="+id);
+}
+function loadSolrCore(id){
+	tlocation("../solrCoreController/loadSolrCore?solr_url_id="+id);
+}
+//删除
 function delSolrUrl(){
-	var model = grid.getSelectionModel();
-	if(model.selected.length == 0){
-		msgTishi('请选择后在删除');
+	if(returncheckedLength('checkchild') <= 0){
+		toastrBoot(4,"请选择要删除的数据");
 		return;
 	}
-	var solr_url_id;
-	for(var i = 0; i < model.selected.length; i++){
-		if(null == solr_url_id){
-			solr_url_id=model.selected.items[i].data.solr_url_id;
-		}else{
-			solr_url_id=solr_url_id+","+model.selected.items[i].data.solr_url_id;
-		}
-	}
-	Ext.Msg.confirm('提示','确定删除该行数据？',function(btn){
-		if(btn == 'yes'){
-			var params = {solr_url_id:solr_url_id};
-			ajaxRequest('../solrUrlController/delSolrUrl',grid,params,'正在执行删除操作中！请稍后...');
-		}
-	});
-}
-/**复制一行并生成记录**/
-function copySolrUrl(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要复制的行！');
-		return;
-	}
-	Ext.Msg.confirm('提示','确定要复制一行并生成记录？',function(btn){
-		if(btn == 'yes'){
-			var params = {solr_url_id:record.items[0].data.solr_url_id};
-			ajaxRequest('../solrUrlController/copySolrUrl',grid,params,'正在执行复制一行并生成记录！请稍后...');
-		}
-	});
-}
-/**导出**/
-function exportSolrUrl(grid,url){
-	exportExcel(grid,url);
-}
-/**初始化右键**/
-function initRight(){
-	var contextmenu = new Ext.menu.Menu({
-		id:'theContextMenu',
-		items:[{
-			text:'添 加',
-			glyph:0xf016,
-			id:'addSolrUrlItem',
-			handler:function(){addSolrUrl();}
-		},{
-			text:'编 辑',
-			glyph:0xf044,
-			id:'updateSolrUrlItem',
-			handler:function(){updateSolrUrl();}
-		},{
-			text:'删 除',
-			glyph:0xf014,
-			id:'delSolrUrlItem',
-			handler:function(){delSolrUrl();}
-		},'-',{
-			text:'复制一行并生成记录',
-			glyph:0xf0ea,
-			id:'copySolrUrlItem',
-			handler:function(){copySolrUrl();}
-		},{
-			text:'明 细',
-			glyph:0xf03b,
-			id:'detailSolrUrlItem',
-			handler:function(){detailSolrUrl();}
-		},{
-			text:'导 出',
-			glyph:0xf1c3,
-			handler:function(){
-				exportSolrUrl(grid,'../solrUrlController/exportSolrUrl');
-			}
-		},{
-			text:'打 印',
-			glyph:0xf02f,
-			handler:function(){printerGrid(grid);}
-		},'-',{
-			text:'全 选',
-			glyph:0xf046,
-			handler:function(){selectAll(grid);}
-		},{
-			text:'反 选',
-			glyph:0xf096,
-			handler:function(){unSelectAll(grid);}
-		},'-',{
-			text:'刷 新',
-			glyph:0xf021,
-			handler:function(){refreshGrid(grid);}
-		}]
-	});
-	initrightgridcontextmenu(grid,contextmenu,['updateSolrUrlItem','delSolrUrlItem','copySolrUrlItem','detailSolrUrlItem']);
+	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
+		var id = returncheckIds('checkId').join(",");
+		var params = {solr_url_id:id};
+		ajaxBReq('../solrUrlController/delSolrUrl',params,['datatables']);
+	})
 }

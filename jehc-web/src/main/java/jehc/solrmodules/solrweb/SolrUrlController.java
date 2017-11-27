@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -60,7 +61,7 @@ public class SolrUrlController extends BaseAction{
 		commonHPager(condition,request);
 		List<SolrUrl> solr_UrlList = solrUrlService.getSolrUrlListByCondition(condition); 
 		PageInfo<SolrUrl> page = new PageInfo<SolrUrl>(solr_UrlList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -177,5 +178,34 @@ public class SolrUrlController extends BaseAction{
 	public void exportSolrUrl(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrUrlAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrUrlAdd(SolrUrl solrUrl,HttpServletRequest request){
+		return new ModelAndView("pc/solr-view/solr-url/solr-url-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrUrlUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrUrlUpdate(String solr_url_id,HttpServletRequest request, Model model){
+		SolrUrl solrUrl = solrUrlService.getSolrUrlById(solr_url_id);
+		model.addAttribute("solrUrl", solrUrl);
+		return new ModelAndView("pc/solr-view/solr-url/solr-url-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrUrlDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrUrlDetail(String solr_url_id,HttpServletRequest request, Model model){
+		SolrUrl solrUrl = solrUrlService.getSolrUrlById(solr_url_id);
+		model.addAttribute("solrUrl", solrUrl);
+		return new ModelAndView("pc/solr-view/solr-url/solr-url-detail");
 	}
 }

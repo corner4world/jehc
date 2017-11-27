@@ -1,16 +1,19 @@
 package jehc.solrmodules.solrweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.solrmodules.solrmodel.SolrDataConfig;
@@ -49,9 +52,9 @@ public class SolrDataConfigController extends BaseAction{
 	public String getSolrDataConfigListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		List<SolrDataConfig> solr_Data_ConfigList = solrDataConfigService.getSolrDataConfigListByCondition(condition);
-		PageInfo<SolrDataConfig> page = new PageInfo<SolrDataConfig>(solr_Data_ConfigList);
-		return outPageStr(page,request);
+		List<SolrDataConfig> solrDataConfigList = solrDataConfigService.getSolrDataConfigListByCondition(condition);
+		PageInfo<SolrDataConfig> page = new PageInfo<SolrDataConfig>(solrDataConfigList);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -175,5 +178,34 @@ public class SolrDataConfigController extends BaseAction{
 		condition.put("solr_data_config_status", 0);
 		List<SolrDataConfig> solr_Data_ConfigList = solrDataConfigService.getSolrDataConfigListByCondition(condition);
 		return outComboDataStr(solr_Data_ConfigList);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrDataConfigAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrDataConfigAdd(SolrDataConfig solrDataConfig,HttpServletRequest request){
+		return new ModelAndView("pc/solr-view/solr-data-config/solr-data-config-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrDataConfigUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrDataConfigUpdate(String solr_data_config_id,HttpServletRequest request, Model model){
+		SolrDataConfig solrDataConfig = solrDataConfigService.getSolrDataConfigById(solr_data_config_id);
+		model.addAttribute("solrDataConfig", solrDataConfig);
+		return new ModelAndView("pc/solr-view/solr-data-config/solr-data-config-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toSolrDataConfigDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toSolrDataConfigDetail(String solr_data_config_id,HttpServletRequest request, Model model){
+		SolrDataConfig solrDataConfig = solrDataConfigService.getSolrDataConfigById(solr_data_config_id);
+		model.addAttribute("solrDataConfig", solrDataConfig);
+		return new ModelAndView("pc/solr-view/solr-data-config/solr-data-config-detail");
 	}
 }

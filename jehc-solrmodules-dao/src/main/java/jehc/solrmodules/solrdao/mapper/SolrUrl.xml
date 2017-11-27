@@ -62,7 +62,6 @@
 		SET
 			`solr_url_id` = #{solr_url_id},
 			`solr_url_url` = #{solr_url_url},
-			`solr_url_ctime` = #{solr_url_ctime},
 			`solr_url_mtime` = #{solr_url_mtime},
 			`solr_url_content` = #{solr_url_content},
 			`xt_userinfo_id` = #{xt_userinfo_id}
