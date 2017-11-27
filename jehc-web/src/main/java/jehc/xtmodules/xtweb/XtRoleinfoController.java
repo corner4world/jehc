@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,8 +33,8 @@ import jehc.xtmodules.xtmodel.XtMenuinfo;
 import jehc.xtmodules.xtmodel.XtRoleinfo;
 import jehc.xtmodules.xtmodel.XtUR;
 import jehc.xtmodules.xtmodel.XtUserinfo;
-import jehc.xtmodules.xtservice.XtFunctioninfoService;
 import jehc.xtmodules.xtservice.XtFunctioninfoRightService;
+import jehc.xtmodules.xtservice.XtFunctioninfoService;
 import jehc.xtmodules.xtservice.XtMRService;
 import jehc.xtmodules.xtservice.XtMenuinfoService;
 import jehc.xtmodules.xtservice.XtRoleinfoService;
@@ -88,7 +89,7 @@ public class XtRoleinfoController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtRoleinfo>XtRoleinfoList = xtRoleinfoService.getXtRoleinfoListByCondition(condition);
 		PageInfo<XtRoleinfo> page = new PageInfo<XtRoleinfo>(XtRoleinfoList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -112,6 +113,7 @@ public class XtRoleinfoController extends BaseAction{
 		int i = 0;
 		if(null != xt_Roleinfo && !"".equals(xt_Roleinfo)){
 			xt_Roleinfo.setXt_role_id(UUID.toUUID());
+			xt_Roleinfo.setXt_role_createTime(getSimpleDateFormat());
 			i=xtRoleinfoService.addXtRoleinfo(xt_Roleinfo);
 		}
 		if(i>0){
@@ -130,6 +132,7 @@ public class XtRoleinfoController extends BaseAction{
 	public String updateXtRoleinfo(XtRoleinfo xt_Roleinfo,HttpServletRequest request){
 		int i = 0;
 		if(null != xt_Roleinfo && !"".equals(xt_Roleinfo)){
+			xt_Roleinfo.setXt_role_updateTime(getSimpleDateFormat());
 			i=xtRoleinfoService.updateXtRoleinfo(xt_Roleinfo);
 		}
 		if(i>0){
@@ -451,5 +454,34 @@ public class XtRoleinfoController extends BaseAction{
 		}else{
 			return outAudStr(false, CommonUtils.getCacheStr("sys_improt_sourcess_error"));
 		}
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtRoleinfoAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtRoleinfoAdd(XtRoleinfo xtRoleinfo,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-roleinfo/xt-roleinfo-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtRoleinfoUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtRoleinfoUpdate(String xt_role_id,HttpServletRequest request, Model model){
+		XtRoleinfo xtRoleinfo = xtRoleinfoService.getXtRoleinfoById(xt_role_id);
+		model.addAttribute("xtRoleinfo", xtRoleinfo);
+		return new ModelAndView("pc/xt-view/xt-roleinfo/xt-roleinfo-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtRoleinfoDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtRoleinfoDetail(String xt_role_id,HttpServletRequest request, Model model){
+		XtRoleinfo xtRoleinfo = xtRoleinfoService.getXtRoleinfoById(xt_role_id);
+		model.addAttribute("xtRoleinfo", xtRoleinfo);
+		return new ModelAndView("pc/xt-view/xt-roleinfo/xt-roleinfo-detail");
 	}
 }

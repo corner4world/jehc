@@ -252,7 +252,7 @@ function login(){
 	//验证有效开启发送异步请求
 	if(boostrapValidator.isValid()){
 		$("#loginBtn").attr("disabled",true);  
-		$("#loginBtn").val("正在登陆中......")
+		$("#loginBtn").val("正在登录中......")
 		$.ajax({
             url:basePath+'/login/login',
             type:'POST',//PUT DELETE POST
@@ -261,7 +261,7 @@ function login(){
             	call(result);
             }, 
             error:function(){
-            	$("#loginBtn").val("登陆");
+            	$("#loginBtn").val("登录");
             	$("#loginBtn").attr("disabled",false); 
             }
         })
@@ -276,7 +276,7 @@ function call(result){
 		if(obj.success == false){
 			clickYZM();
 			window.parent.toastrBoot(4,obj.msg);
-			$("#loginBtn").val("登陆");
+			$("#loginBtn").val("登录");
 			$("#loginBtn").attr("disabled",false); 
 		}else{
 			clearCookie('readme');
@@ -294,7 +294,7 @@ function call(result){
 			window.location.href=basePath+"/index/index.html";
 		}
 	}catch(e){
-		$("#loginBtn").val("登陆");
+		$("#loginBtn").val("登录");
 		$("#loginBtn").attr("disabled",false); 
 	}
 }

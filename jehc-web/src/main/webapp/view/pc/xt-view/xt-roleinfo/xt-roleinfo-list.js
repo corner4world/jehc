@@ -1,365 +1,176 @@
-var store;
 var grid;
-Ext.onReady(function(){
-	/**查询区域可扩展**/
-	var items = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		maxHeight:150,
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
+$(document).ready(function() {
+	/////////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用） 如弹窗分页查找根据条件 可能此时的form发生变化 此时 可以解决该类问题
+	var opt = {
+		searchformId:'searchForm'
+	};
+	var options = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtRoleinfoController/getXtRoleinfoListByCondition?xt_role_isdelete=0',opt);},//渲染数据
+			//在第一位置追加序列号
+			fnRowCallback:function(nRow, aData, iDisplayIndex){
+				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+				return nRow;
 		},
-		items:[
-		{
-			fieldLabel:'角色名称',
-			xtype:'textfield',
-			labelWidth:70,
-			id:'xt_role_name',
-			name:'xt_role_name',
-			anchor:'30%',
-			labelAlign:'top'
-		}
+		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		//列表表头字段
+		colums:[
+			{
+				sClass:"text-center",
+				width:"50px",
+				data:"xt_role_id",
+				render:function (data, type, full, meta) {
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
+				},
+				bSortable:false
+			},
+			{
+				data:"xt_role_id",
+				width:"150px"
+			},
+			{
+				data:'xt_role_name'
+			},
+			{
+				data:'xt_role_desc'
+			},
+			{
+				data:'xt_role_type',
+				render:function(data, type, row, meta) {
+					if(data == 0){
+						return "平台权限";
+					}
+					if(data == 1){
+						return "业务权限";
+					}
+				}
+			},
+			{
+				data:'xt_role_createTime'
+			},
+			{
+				data:'xt_role_updateTime'
+			},
+			{
+				data:"xt_role_id",
+				width:"260px",
+				render:function(data, type, row, meta) {
+					var xt_role_id = row.xt_role_id;
+  					var xt_role_name = row.xt_role_name;
+					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toXtRoleinfoDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=addXtMenuinfo("'+xt_role_id+'","'+xt_role_name+'")><i class="glyphicon glyphicon-edit"></i>导入资源</button>';
+					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=addXtUserinfo("'+xt_role_id+'","'+xt_role_name+'")><i class="glyphicon glyphicon-edit"></i>导入用户</button>';
+					return btn;
+				}
+			}
 		]
 	});
-	initSearchForm('north',items,false,'left');
-	store = getGridJsonStore('../xtRoleinfoController/getXtRoleinfoListByCondition?xt_role_isdelete=0',[]);
-	grid = Ext.create('Ext.grid.Panel',{
-		region:'center',
-		xtype:'panel',
-		store:store,
-		title:'查询结果',
-		style:'margin-left:auto;margin-right:auto',
-		columnLines:true,
-		selType:'cellmodel',
-		multiSelect:true,
-		selType:'checkboxmodel',
-		viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
-		},
-		loadMask:{
-			msg:'正在加载...'
-		},
-		columns:[
-			{
-				header:'序号',
-				width:77,
-				xtype:'rownumberer'
-			},
-			{
-				header:'角色名称',
-				flex:1,
-				dataIndex:'xt_role_name'
-			},
-			{
-				header:'状态',
-				dataIndex:'xt_role_isdelete',
-				renderer:function(value){
-					if(value == 0){
-						return '正在使用中';
-					}else if(value == 1){
-						return '已禁用';
-					}else{
-						return '缺省'
-					}
-				}
-			},
-			{
-				header:'操作',
-				flex:1,
-				columns:[{
-					header:'导入资源',
-					align:'center',
-					xtype:'widgetcolumn',
-					width:150,
-					widget:{
-		                xtype:'button',
-		                text:'导入资源',
-		                /**style:{background:'blue'},**/
-		                icon:addIcon,
-		                handler:function(rec){	
-		  					var xt_role_id = rec.getWidgetRecord().data.xt_role_id;
-		  					var xt_role_name = rec.getWidgetRecord().data.xt_role_name;
-		  					addXtMenuinfo(xt_role_id,xt_role_name);
-					    }
-		            }
-				},{
-					header:'导入用户',
-					align:'center',
-					xtype:'widgetcolumn',
-					width:150,
-					widget:{
-		                xtype:'button',
-		                text:'导入用户',
-		                icon:addIcon,
-		                /**style:{background:'blue'},**/
-		                handler:function(rec){
-		                	var xt_role_id = rec.getWidgetRecord().data.xt_role_id;
-		                	var xt_role_name = rec.getWidgetRecord().data.xt_role_name;
-		                	addXtUserinfo(xt_role_id,xt_role_name);
-		                }
-		            }
-				}]
-			}
-		],
-		tbar:[
-			 {
-				text:'添加',
-				tooltip:'添加',
-				minWidth:tbarBtnMinWidth,
-				cls:'addBtn',
-				icon:addIcon,
-				handler:function(){
-					addXtRoleinfo();
-				}
-			 },
-			 {
-				text:'编辑',
-				tooltip:'编辑',
-				minWidth:tbarBtnMinWidth,
-				cls:'updateBtn',
-				icon:editIcon,
-				handler:function(){
-					updateXtRoleinfo();
-				}
-			 },
-			 {
-				text:'禁用',
-				tooltip:'禁用',
-				minWidth:tbarBtnMinWidth,
-				cls:'delBtn',
-				icon:delIcon,
-				handler:function(){
-					delXtRoleinfo();
-				}
-			 },
-			 {
-				text:'已被禁用角色列表',
-				tooltip:'已被禁用角色列表（即已被删除）',
-				cls:'detailBtn',
-				icon:listIcon,
-				iconAlign:'left',
-				handler:function(){
-					initListDeleted();																			
-				}
-			 },
-			 {
-				text:'检索',
-				tooltip:'检索',
-				minWidth:tbarBtnMinWidth,
-				cls:'searchBtn',
-				icon:searchIcon,
-				handler:function(){
-					search();
-				}
-			 },
-			 {
-				text:'重置',
-				tooltip:'重置件',
-				minWidth:tbarBtnMinWidth,
-				icon:clearSearchIcon,
-				handler:function(){
-					searchForm.reset();
-				}
-			 },
-			 grid_toolbar_moretext_gaps,
-			 {
-				 text:moretext,
-				 tooltip:moretexttooltip,
-				 icon:listIcon,
-				 iconAlign:'left',
-				 menu:[
-				 {
-					text:'复制一行并生成记录',
-					tooltip:'复制一行并生成记录',
-					glyph:0xf0ea,
-					handler:function(){
-						copyXtRoleinfo();
-					}
-				 },
-				 {
-					text:'明 细',
-					tooltip:'明 细',
-					glyph:0xf03b,
-					handler:function(){
-						detailXtRoleinfo();
-					}
-				 },
-				 '-',
-				 {
-					text:'导 出',
-					tooltip:'导 出',
-					glyph:0xf1c3,
-					handler:function(){
-						exportXtRoleinfo(grid,'../xtRoleinfoController/exportXtRoleinfo');
-					}
-				 },
-				 {
-					text:'打 印',
-					tooltip:'打 印',
-					glyph:0xf02f,
-					handler:function(){
-						printerGrid(grid);
-					}
-				 },
-				 '-',
-				 {
-					text:'全 选',
-					tooltip:'全 选',
-					glyph:0xf046,
-					handler:function(){selectAll(grid);}
-				 },
-				 {
-					text:'反 选',
-					tooltip:'反 选',
-					glyph:0xf096,
-					handler:function(){unSelectAll(grid);}
-				 },
-				 '-',
-				 {
-					text:'刷 新',
-					tooltip:'刷 新',
-					glyph:0xf021,
-					handler:function(){
-						grid.getStore().reload();
-					}
-				 },
-				 {
-					text:'检 索',
-					tooltip:'检 索',
-					glyph:0xf002,
-					handler:function(){
-						initSearch(store,'../xtRoleinfoController/getXtRoleinfoListByCondition',searchForm); 
-					}
-				 },
-				 {
-					text:'重 置',
-					tooltip:'重 置',
-					glyph:0xf014,
-					handler:function(){
-						searchForm.reset();
-					}
-				 }
-				 ]
-			 }
-		],
-		bbar:getGridBBar(store),
-		listeners:{
-			'rowdblclick':function(grid, rowIndex, e){
-				detailXtRoleinfo();
-			}
-		}
-	});
-	Ext.create('Ext.Viewport', {
-		layout:'border',
-		xtype:'viewport',
-		items:[searchForm,grid]
-	});
-	/**调用右键**/
-	initRight();
-	store.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store,searchForm));});
+	grid=$('#datatables').dataTable(options);
+	//实现全选反选
+	docheckboxall('checkall','checkchild');
+	//实现单击行选中
+	clickrowselected('datatables');
 });
-/**删除操作**/
+//新增
+function toXtRoleinfoAdd(){
+	tlocation('../xtRoleinfoController/toXtRoleinfoAdd');
+}
+//修改
+function toXtRoleinfoUpdate(){
+	if($(".checkchild:checked").length != 1){
+		toastrBoot(4,"选择数据非法");
+		return;
+	}
+	var id = $(".checkchild:checked").val();
+	tlocation("../xtRoleinfoController/toXtRoleinfoUpdate?xt_role_id="+id);
+}
+//详情
+function toXtRoleinfoDetail(id){
+	tlocation("../xtRoleinfoController/toXtRoleinfoDetail?xt_role_id="+id);
+}
+//删除
 function delXtRoleinfo(){
-	var model = grid.getSelectionModel();
-	if(model.selected.length == 0){
-		msgTishi('请选择后在禁用');
+	if(returncheckedLength('checkchild') <= 0){
+		toastrBoot(4,"请选择要禁用的数据");
 		return;
 	}
-	var xt_role_id;
-	for(var i = 0; i < model.selected.length; i++){
-		if(null == xt_role_id){
-			xt_role_id=model.selected.items[i].data.xt_role_id;
-		}else{
-			xt_role_id=xt_role_id+","+model.selected.items[i].data.xt_role_id;
-		}
-	}
-	Ext.Msg.confirm('提示','确定禁用该行数据？',function(btn){
-		if(btn == 'yes'){
-			var params = {xt_role_id:xt_role_id};
-			ajaxRequest('../xtRoleinfoController/delXtRoleinfo',grid,params,'正在执行禁用操作中！请稍后...');
-		}
-	});
-}
-/**复制一行并生成记录**/
-function copyXtRoleinfo(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要复制的行！');
-		return;
-	}
-	Ext.Msg.confirm('提示','确定要复制一行并生成记录？',function(btn){
-		if(btn == 'yes'){
-			var params = {xt_role_id:record.items[0].data.xt_role_id};
-			ajaxRequest('../xtRoleinfoController/copyXtRoleinfo',grid,params,'正在执行复制一行并生成记录！请稍后...');
-		}
-	});
-}
-/**导出**/
-function exportXtRoleinfo(grid,url){
-	exportExcel(grid,url);
-}
-/**初始化右键**/
-function initRight(){
-	var contextmenu = new Ext.menu.Menu({
-		id:'theContextMenu',
-		items:[{
-			text:'添 加',
-			glyph:0xf016,
-			id:'addXtRoleinfoItem',
-			handler:function(){addXtRoleinfo();}
-		},{
-			text:'编 辑',
-			glyph:0xf044,
-			id:'updateXtRoleinfoItem',
-			handler:function(){updateXtRoleinfo();}
-		},{
-			text:'删 除',
-			glyph:0xf014,
-			id:'delXtRoleinfoItem',
-			handler:function(){delXtRoleinfo();}
-		},'-',{
-			text:'复制一行并生成记录',
-			glyph:0xf0ea,
-			id:'copyXtRoleinfoItem',
-			handler:function(){copyXtRoleinfo();}
-		},{
-			text:'明 细',
-			glyph:0xf03b,
-			id:'detailXtRoleinfoItem',
-			handler:function(){detailXtRoleinfo();}
-		},{
-			text:'导 出',
-			glyph:0xf1c3,
-			handler:function(){
-				exportXtRoleinfo(grid,'../xtRoleinfoController/exportXtRoleinfo');
-			}
-		},{
-			text:'打 印',
-			glyph:0xf02f,
-			handler:function(){printerGrid(grid);}
-		},'-',{
-			text:'全 选',
-			glyph:0xf046,
-			handler:function(){selectAll(grid);}
-		},{
-			text:'反 选',
-			glyph:0xf096,
-			handler:function(){unSelectAll(grid);}
-		},'-',{
-			text:'刷 新',
-			glyph:0xf021,
-			handler:function(){refreshGrid(grid);}
-		}]
-	});
-	initrightgridcontextmenu(grid,contextmenu,['updateXtRoleinfoItem','delXtRoleinfoItem','copyXtRoleinfoItem','detailXtRoleinfoItem']);
+	msgTishCallFnBoot("确定要禁用所选择的数据？",function(){
+		var id = returncheckIds('checkId').join(",");
+		var params = {xt_role_id:id};
+		ajaxBReq('../xtRoleinfoController/delXtRoleinfo',params,['datatables']);
+	})
 }
 
-function search(){
-	initSearch(store,'../xtRoleinfoController/getXtRoleinfoListByCondition',searchForm); 
+
+function initListDeleted(){
+	$('#RoleModal').modal();
+	var options = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtRoleinfoController/getXtRoleinfoListByCondition?xt_role_isdelete=1',null);},//渲染数据
+			//在第一位置追加序列号
+			fnRowCallback:function(nRow, aData, iDisplayIndex){
+				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+				return nRow;
+		},
+		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		//列表表头字段
+		colums:[
+			{
+				sClass:"text-center",
+				width:"50px",
+				data:"xt_role_id",
+				render:function (data, type, full, meta) {
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildRole " value="' + data + '" /><span></span></label>';
+				},
+				bSortable:false
+			},
+			{
+				data:"xt_role_id",
+				width:"150px"
+			},
+			{
+				data:'xt_role_name'
+			},
+			{
+				data:'xt_role_type',
+				render:function(data, type, row, meta) {
+					if(data == 0){
+						return "平台权限";
+					}
+					if(data == 1){
+						return "业务权限";
+					}
+				}
+			},
+			{
+				data:'xt_role_createTime'
+			},
+			{
+				data:'xt_role_updateTime'
+			}
+		]
+	});
+	grid=$('#RoleDatatables').dataTable(options);
+	//实现全选反选
+	docheckboxall('checkallRole','checkchildRole');
+	//实现单击行选中
+	clickrowselected('RoleDatatables');
+}
+
+
+/**恢复操作**/
+function recoverXtRoleinfo(){
+	if(returncheckedLength('checkchildRole') <= 0){
+		toastrBoot(4,"请选择要恢复的角色");
+		return;
+	}
+	msgTishCallFnBoot("确定要恢复所选择的角色？",function(){
+		var id = returncheckIds('checkId').join(",");
+		var params = {xt_role_id:id};
+		ajaxBRequestCallFn('../xtRoleinfoController/recoverXtRoleinfo',params,function(result){
+			result = eval("(" + result + ")");  
+    		if(typeof(result.success) != "undefined"){
+    			$('#RoleModal').modal('hide');
+    			search('datatables');
+    		}
+		});
+	})
 }

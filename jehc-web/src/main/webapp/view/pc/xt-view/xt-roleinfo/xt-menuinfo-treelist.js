@@ -152,7 +152,7 @@ function addXtMR(xt_role_id){
 	Ext.Msg.confirm('提示','确定分配所选资源？',function(btn){
 		if(btn == 'yes'){
 			var params = {id:id,xt_role_id:xt_role_id};
-			ajaxRequest('../xtRoleinfoController/addXtMR',grid,params,'正在执行中...');
+			ajaxRequest('../xtRoleinfoController/addXtMR',null,params,'正在执行中...');
 		}
 	});
 }
