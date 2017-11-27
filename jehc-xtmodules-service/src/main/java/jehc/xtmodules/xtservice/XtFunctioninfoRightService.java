@@ -16,6 +16,12 @@ public interface XtFunctioninfoRightService{
 	*/
 	public List<XtFunctioninfoRight> getXtFunctioninfoRightListByCondition(Map<String,Object> condition);
 	/**
+	 * 初始化分页（for admin all function）
+	 * @param condition
+	 * @return
+	 */
+	public List<XtFunctioninfoRight> getXtFunctioninfoListForAdmin(Map<String,Object> condition);
+	/**
 	* 查询对象
 	* @param xt_functioninfo_right_id 
 	* @return

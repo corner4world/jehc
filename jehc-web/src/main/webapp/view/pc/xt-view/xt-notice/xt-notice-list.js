@@ -57,7 +57,10 @@ $(document).ready(function() {
 				data:"xt_notice_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtNoticeDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					var xt_userinfo_id = row.xt_userinfo_id;
+					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toXtNoticeDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+						btn = btn +'<jEhcPermissionTag:jehcBtnTag modules="updateXtNotice" systemUID="'+xt_userinfo_id+'"><button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toXtNoticeUpdate_("'+data+'")><i class="glyphicon glyphicon-edit"></i>修改</button></jEhcPermissionTag:jehcBtnTag>';
+					return btn;
 				}
 			}
 		]
@@ -79,6 +82,10 @@ function toXtNoticeUpdate(){
 		return;
 	}
 	var id = $(".checkchild:checked").val();
+	tlocation("../xtNoticeController/toXtNoticeUpdate?xt_notice_id="+id);
+}
+//修改
+function toXtNoticeUpdate_(id){
 	tlocation("../xtNoticeController/toXtNoticeUpdate?xt_notice_id="+id);
 }
 //详情

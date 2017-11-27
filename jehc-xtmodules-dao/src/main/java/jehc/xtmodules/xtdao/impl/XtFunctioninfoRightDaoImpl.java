@@ -23,6 +23,15 @@ public class XtFunctioninfoRightDaoImpl  extends BaseDaoImpl implements XtFuncti
 		return (List<XtFunctioninfoRight>)this.getList("getXtFunctioninfoRightListByCondition",condition);
 	}
 	/**
+	 * 初始化分页（for admin all function）
+	 * @param condition
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<XtFunctioninfoRight> getXtFunctioninfoListForAdmin(Map<String,Object> condition){
+		return ((List<XtFunctioninfoRight>)this.getList("getXtFunctioninfoListForAdmin",condition));
+	}
+	/**
 	* 查询对象
 	* @param xt_functioninfo_right_id 
 	* @return

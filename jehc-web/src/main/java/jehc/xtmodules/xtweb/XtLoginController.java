@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -74,7 +75,6 @@ public class XtLoginController extends BaseAction{
 		//获得的当前正确的验证码
 		String rand = (String) request.getSession(false).getAttribute(SessionConstant.VALIDATECODE);
 		HttpSession session = request.getSession();
-		StringBuffer sbf = new StringBuffer();
 		if((null != code && !"".equals(code))){
 			code = code.trim();
 			if(null != code && !"".equals(code)){
@@ -98,24 +98,33 @@ public class XtLoginController extends BaseAction{
 		if(flag != 1){
 			XtUserinfo xtUserinfo = xtUserinfoService.getXtUserinfoByUP(condition);
 			if(null != xtUserinfo){
-				condition = new HashMap<String, Object>();
-				condition.put("xt_userinfo_id", xtUserinfo.getXt_userinfo_id());
-				List<XtUR> xtURList = xtURService.getXtURList(condition);
-				for(int i = 0; i < xtURList.size(); i++){
-					XtUR xtUR = xtURList.get(i);
-					if(null != sbf && !"".equals(sbf.toString()) && null != (sbf.toString())){
-						sbf.append(","+xtUR.getXt_roleinfo_id());
-					}else{
-						sbf.append(xtUR.getXt_roleinfo_id());
+				request.getSession(false).setAttribute(SessionConstant.XTUSERINFO, xtUserinfo);
+				List<XtFunctioninfoRight> xt_Functioninfo_RightList = new ArrayList<XtFunctioninfoRight>();
+				StringBuffer xt_role_id = new StringBuffer();
+				if(isAdmin()){
+					//如果是超级管理员 取出所有功能
+					xt_Functioninfo_RightList = xtFunctioninfoRightService.getXtFunctioninfoListForAdmin(condition);
+				}else{
+					condition = new HashMap<String, Object>();
+					condition.put("xt_userinfo_id", xtUserinfo.getXt_userinfo_id());
+					List<XtUR> xtURList = xtURService.getXtURList(condition);
+					for(int i = 0; i < xtURList.size(); i++){
+						XtUR xtUR = xtURList.get(i);
+						if(null != xt_role_id && !"".equals(xt_role_id.toString()) && null != (xt_role_id.toString())){
+							xt_role_id.append(","+xtUR.getXt_roleinfo_id());
+						}else{
+							xt_role_id.append(xtUR.getXt_roleinfo_id());
+						}
+					}
+					if(!StringUtils.isEmpty(xt_role_id.toString())){
+						/////////////根据角色集合查找该用户下所有功能
+						condition = new HashMap<String, Object>();
+						condition.put("xt_role_id", xt_role_id.toString().split(","));
+						xt_Functioninfo_RightList = xtFunctioninfoRightService.getXtFunctioninfoRightListByCondition(condition);
 					}
 				}
-				String xt_role_id = sbf.toString();
-				/////////////根据角色集合查找该用户下所有功能
-				condition = new HashMap<String, Object>();
-				condition.put("xt_role_id", xt_role_id.split(","));
 				StringBuffer sbfURL = new StringBuffer();
 				StringBuffer sbfMethod = new StringBuffer();
-				List<XtFunctioninfoRight> xt_Functioninfo_RightList = xtFunctioninfoRightService.getXtFunctioninfoRightListByCondition(condition);
 				for(XtFunctioninfoRight xt_Functioninfo_Right:xt_Functioninfo_RightList){
 					if(null != sbfURL && !"".equals(sbfURL.toString()) && null != (sbfURL.toString())){
 						sbfURL.append(xt_Functioninfo_Right.getXt_functioninfoURL()+",");
@@ -128,8 +137,7 @@ public class XtLoginController extends BaseAction{
 						sbfMethod.append(","+xt_Functioninfo_Right.getXt_functioninfoMethod()+",");
 					}
 				}
-				request.getSession(false).setAttribute(SessionConstant.XTUSERINFO, xtUserinfo);
-				request.getSession(false).setAttribute(SessionConstant.XT_ROLE_ID, xt_role_id);
+				request.getSession(false).setAttribute(SessionConstant.XT_ROLE_ID, xt_role_id.toString());
 				request.getSession(false).setAttribute(SessionConstant.XT_FUNCTIONINFOURL, sbfURL.toString());
 				request.getSession(false).setAttribute(SessionConstant.XT_FUNCTIONINFOMETHOD, sbfMethod.toString());
 				new OnLinesessionthread(xtUserinfo, session).start();//监控在线用户

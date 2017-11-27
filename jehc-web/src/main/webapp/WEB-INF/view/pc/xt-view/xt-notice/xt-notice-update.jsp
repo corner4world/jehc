@@ -58,7 +58,9 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label"></label>
 				<div class="col-lg-6">
-					<button type="button" class="btn green" onclick="updateXtNotice()">保存</button>
+					<jEhcPermissionTag:jehcBtnTag modules="updateXtNotice" systemUID="${xtNotice.xt_userinfo_id }">
+						<button type="button" class="btn green" onclick="updateXtNotice()">保存</button>
+					</jEhcPermissionTag:jehcBtnTag>
 					<button type="button" class="btn default" onclick="goback()">返回</button>
 				</div>
 			</div>

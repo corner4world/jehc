@@ -7,18 +7,24 @@
   <tag>
     <name>jehcBtnTag</name>
     <tag-class>jehc.xtmodules.xtcore.tag.JehcPermissionTag</tag-class>
-    <body-content>scriptless</body-content>    
+    <body-content>JSP</body-content>    
     <attribute>
-    	<!-- btn models -->
+    	<!-- btn models（普通权限控制） -->
        <name>modules</name>
        <required>true</required>
-       <rtexprvalue>false</rtexprvalue>  
+       <rtexprvalue>true</rtexprvalue>  
     </attribute>
-     <attribute>
+    <attribute>
     	<!-- btn id -->
        <name>id</name>
        <required>false</required>
-       <rtexprvalue>false</rtexprvalue>  
+       <rtexprvalue>true</rtexprvalue>  
+    </attribute>
+    <attribute>
+    	<!-- btn systemUID（数据权限控制） -->
+       <name>systemUID</name>
+       <required>false</required>
+       <rtexprvalue>true</rtexprvalue>  
     </attribute>
   </tag>
 </taglib>

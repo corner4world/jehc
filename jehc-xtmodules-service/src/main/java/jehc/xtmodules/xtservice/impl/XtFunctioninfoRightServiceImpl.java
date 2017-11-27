@@ -33,6 +33,19 @@ public class XtFunctioninfoRightServiceImpl extends BaseService implements XtFun
 		}
 	}
 	/**
+	 * 初始化分页（for admin all function）
+	 * @param condition
+	 * @return
+	 */
+	public List<XtFunctioninfoRight> getXtFunctioninfoListForAdmin(Map<String,Object> condition){
+		try{
+			return xtFunctioninfoRightDao.getXtFunctioninfoListForAdmin(condition);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
+	/**
 	* 查询对象
 	* @param xt_functioninfo_right_id 
 	* @return
