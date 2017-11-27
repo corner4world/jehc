@@ -16,11 +16,14 @@ eclipse-jee-mars-1
 https://gitee.com/jehc/jehc-none-maven
 
 效果图片如下：
-![输入图片说明](https://gitee.com/uploads/images/2017/1017/112845_b21ad51e_1341290.png "首页.png")
-![输入图片说明](https://gitee.com/uploads/images/2017/1017/112859_68b0ff42_1341290.png "在线设计.png")
-![输入图片说明](https://gitee.com/uploads/images/2017/1017/112912_40e49904_1341290.png "用户管理.png")
-![输入图片说明](https://gitee.com/uploads/images/2017/1017/112922_aa0a3d0c_1341290.png "用户管理编辑.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1127/113650_1f8a132d_1341290.png "首页.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1127/113707_84a8dcfe_1341290.png "流程.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1127/113727_27dcfb66_1341290.png "用户.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1127/113738_b65b8620_1341290.png "公司.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1127/113750_1163a22f_1341290.png "部门.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1127/113801_59c93c91_1341290.png "岗位.png")
 ![输入图片说明](https://gitee.com/uploads/images/2017/1017/112931_444ecbbb_1341290.png "组织机构.png")
+![输入图片说明](https://gitee.com/uploads/images/2017/1127/113818_7066522b_1341290.png "权限.png")
 ![输入图片说明](https://gitee.com/uploads/images/2017/1017/112940_903e88d8_1341290.png "角色权限导入资源.png")
 ![输入图片说明](https://gitee.com/uploads/images/2017/1017/112949_4e03fa4f_1341290.png "角色权限导入用户.png")
 ![输入图片说明](https://gitee.com/uploads/images/2017/1017/112959_221a4bee_1341290.png "公告.png")
