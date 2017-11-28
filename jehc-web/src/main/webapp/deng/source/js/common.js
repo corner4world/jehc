@@ -779,7 +779,8 @@ function loadFormData(forms,url){
 		    success:function(form, action){},                      
 	   	    failure:function(form, action){
 	   	    	if( typeof(action.result.msg) != "undefined"){
-	        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+//	        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+	        		msgTishi(action.result.msg);
 	        	}
 	   	    }                  
 		});
@@ -806,7 +807,8 @@ function loadFormDataCallBack(forms,url,fn){
 	        },                      
 	   	    failure:function(form, action){
 	   	    	if( typeof(action.result.msg) != "undefined"){
-	        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+//	        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+	        		msgTishi(action.result.msg);
 	        	}
 	   	    }                  
 		});
@@ -842,7 +844,8 @@ function submitForm(subForm,url,grids,win,isHide,isReset){
 						method:'post', 
 				        waitMsg:'正在保存数据，请稍后...',                      
 				        success:function(form, action){    
-				   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+//				   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+				        	msgTishi(action.result.msg);
 				      		if(isReset){
 				      			subForm.form.reset();  
 				      		}                       
@@ -863,7 +866,8 @@ function submitForm(subForm,url,grids,win,isHide,isReset){
 				      	},
 				        failure:function(form, action){
 				        	if( typeof(action.result.msg) != "undefined"){
-				        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+//				        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+				        		msgTishi(action.result.msg);
 				        	}
 				        	///////////激活window中组件按钮
 							for(var it in items){
@@ -909,7 +913,8 @@ function submitFormCallFn(subForm,url,grids,win,isHide,isReset,fn){
 					method:'post', 
 			        waitMsg:'正在保存数据，请稍后...',                      
 			        success:function(form, action){    
-			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+//			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        	msgTishi(action.result.msg);
 			      		if(isReset){
 			      			subForm.form.reset();  
 			      		}                       
@@ -932,7 +937,8 @@ function submitFormCallFn(subForm,url,grids,win,isHide,isReset,fn){
 			      	},
 			        failure:function(form, action){
 			        	if( typeof(action.result.msg) != "undefined"){
-			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+//			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        		msgTishi(action.result.msg);
 			        	}
 			        	///////////激活window中组件按钮
 						for(var it in items){
@@ -978,7 +984,8 @@ function submitFormIncludeParams(subForm,url,grids,win,isHide,isReset,params){
 			        waitTitle:'提示',
 			        waitMsg:'正在保存数据，请稍后...',                      
 			        success:function(form, action){    
-			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+//			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        	msgTishi(action.result.msg);
 			      		if(isReset){
 			      			subForm.form.reset();  
 			      		}                       
@@ -999,7 +1006,8 @@ function submitFormIncludeParams(subForm,url,grids,win,isHide,isReset,params){
 			      	},
 			        failure:function(form, action){
 			        	if( typeof(action.result.msg) != "undefined"){
-			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+//			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        		msgTishi(action.result.msg);
 			        	}
 			        	///////////激活window中组件按钮
 						for(var it in items){
@@ -1045,7 +1053,8 @@ function submitFormCallBack(subForm,url,grids,win,isHide,isReset,isCallForm,call
 			        waitTitle:'提示',
 			        waitMsg:'正在保存数据，请稍后...',                      
 			        success:function(form, action){    
-			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+//			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        	msgTishi(action.result.msg);
 			      		if(isReset){
 			      			subForm.form.reset();  
 			      		}                       
@@ -1069,7 +1078,8 @@ function submitFormCallBack(subForm,url,grids,win,isHide,isReset,isCallForm,call
 			      	},
 			        failure:function(form, action){
 			        	if( typeof(action.result.msg) != "undefined"){
-			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+//			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        		msgTishi(action.result.msg);
 			        	}
 			        	///////////激活window中组件按钮
 						for(var it in items){
@@ -1115,7 +1125,8 @@ function submitForm(subForm,url,grids,win,isHide,isReset,isExpandAll){
 					method:'post', 
 			        waitMsg:'正在保存数据，请稍后...',                      
 			        success:function(form, action){    
-			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+//			   			Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        	msgTishi(action.result.msg);
 			      		if(isReset){
 			      			subForm.form.reset();  
 			      		}                       
@@ -1141,7 +1152,8 @@ function submitForm(subForm,url,grids,win,isHide,isReset,isExpandAll){
 			      	},
 			        failure:function(form, action){
 			        	if( typeof(action.result.msg) != "undefined"){
-			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+//			        		Ext.example.msg('提示', action.result.msg);//提示之后消失
+			        		msgTishi(action.result.msg);
 			        	}
 			        	///////////激活window中组件按钮
 						for(var it in items){
@@ -1328,7 +1340,8 @@ Ext.define('Ext.ux.ComboGrid',{
  
 //信息提示
 function msgTishi(msg){
-	Ext.example.msg('提示', msg);//提示之后消失
+//	Ext.example.msg('提示', msg);//提示之后消失
+	top.window.parent.toastrBoot(3,msg);
 }
 
 //确定提示
@@ -1472,7 +1485,7 @@ function exportExcel(grid,url){
         timeout:600000,//十分钟
         form:Ext.fly('frmDummy'),
         params:{
-        	exportOrDownloadSysFlag:'exportOrDownloadSysFlag',
+        	bdownflag:'bdownflag',
             excleData:encodeURIComponent(Ext.encode(data)),
             excleHeader:encodeURIComponent(Ext.encode(headerIndex)),
             excleText:encodeURIComponent(Ext.encode(headText))
@@ -1499,7 +1512,7 @@ function exportExcelByCondition(url,searchForm){
         timeout:600000,//十分钟
         form:Ext.fly('frmDummy'),
         params:{
-        	exportOrDownloadSysFlag:'exportOrDownloadSysFlag',
+        	bdownflag:'bdownflag',
 			searchJson:Ext.encode(searchForm.getForm().getFieldValues())
 		}
     });
@@ -2367,7 +2380,7 @@ function downOrExport(url){
         timeout:600000,//十分钟
         form:Ext.fly('frmDownOrExport'),
         params:{
-        	exportOrDownloadSysFlag:'exportOrDownloadSysFlag'
+        	bdownflag:'bdownflag'
         }
     });
     hideWaitMsg();

@@ -1144,29 +1144,25 @@ function initBFileRight(fieldid,picid,isUpAndDelete,validateparameter,validateSi
  * 通过iFrame实现类ajax文件下载
  */
 function downOrExportB(url){
-	/**
 	var exportIframe = document.createElement('iframe');
-	exportIframe.src = url;
+	exportIframe.src = url+"&bdownflag=bdownflag";
 	exportIframe.style.display = "none";
 	document.body.appendChild(exportIframe);
-	**/
-	var frm = document.createElement('form');
+	
+	/*var frm = document.createElement('form');
     frm.id = 'frmDownOrExport';
-    frm.name = grid.getId();
+    frm.name = 'frmDownOrExport';
     frm.className = 'x-hidden';
     document.body.appendChild(frm);
-    
-//    Ext.Ajax.request({
-//        disableCaching:true ,
-//        url:url,
-//        method:'POST',
-//        isUpload:true,
-//        timeout:600000,//十分钟
-//        form:frm,
-//        params:{
-//        	exportOrDownloadSysFlag:'exportOrDownloadSysFlag'
-//        }
-//    });
+    $.ajax({
+ 	   type:"GET",
+ 	   url:url,
+ 	   form:frm,
+ 	   data:"exportOrDownloadSysFlag=exportOrDownloadSysFlag",
+ 	   success: function(result){
+ 		  
+ 	   }
+ 	});*/
 }
 
 function getBimghw(src){
@@ -1267,7 +1263,6 @@ function InitBDataCombo(ckey,id){
            $.each(data, function(i, item){
            	 str += "<option value=" + item.xt_data_dictionary_id + ">" + item.xt_data_dictionary_name + "</option>";
            })
-           //将数据添加到省份这个下拉框里面
            $("#"+id).append(str);
 	   }
 	});
@@ -1294,7 +1289,6 @@ function InitBDataComboSetV(ckey,id,value_id){
            $.each(data, function(i, item){
            	 str += "<option value=" + item.xt_data_dictionary_id + ">" + item.xt_data_dictionary_name + "</option>";
            })
-           //将数据添加到省份这个下拉框里面
            $("#"+id).append(str);
            try {
         	   if(null != value_id && '' != value_id){
@@ -1309,3 +1303,61 @@ function InitBDataComboSetV(ckey,id,value_id){
 	});
 }
 
+
+
+
+function InitconstantList(ckey,id){
+	var str = "<option value=''>请选择</option>";
+	$.ajax({
+	   type:"GET",
+	   url:"../xtConstantController/getXtConstantList",
+	   data:"xt_constantType="+ckey,
+	   success: function(result){
+		   result = eval("(" + result + ")");  
+		   result = result.items;
+		   //从服务器获取数据进行绑定
+           $.each(result, function(i, item){
+           	 str += "<option value=" + item.xt_constant_id + ">" + item.xt_constantRemark + "</option>";
+           })
+           $("#"+id).append(str);
+	   }
+	});
+}
+
+function InitconstantListSetV(ckey,id,value_id){
+	var str = "<option value=''>请选择</option>";
+	$.ajax({
+	   type:"GET",
+	   url:"../xtConstantController/getXtConstantList",
+	   data:"xt_constantType="+ckey,
+	   success: function(result){
+		   result = eval("(" + result + ")");  
+		   result = result.items;
+		   //从服务器获取数据进行绑定
+           $.each(result, function(i, item){
+           	 str += "<option value=" + item.xt_constant_id + ">" + item.xt_constantRemark + "</option>";
+           })
+           $("#"+id).append(str);
+           try {
+        	   if(null != value_id && '' != value_id){
+        		   if('undefined' != typeof($('#'+value_id).val()) && null != $('#'+value_id).val() && '' != $('#'+value_id).val() && '请选择' != $('#'+value_id).val()){
+        			   $('#'+id).val($('#'+value_id).val());
+        		   }
+               }
+		   } catch (e) {
+				console.log("读取下拉框为常量类型并赋值出现异常，异常信息："+e);
+		   }
+	   }
+	});
+}
+
+function reGetBodyWidth(){
+	return $(document.body).width();
+}
+
+function reGetBodyHeight(){
+//	return $(document).height();
+//	console.info($(document).height());
+//	console.info($(document.body).height());
+	return $(document.body).height();
+}

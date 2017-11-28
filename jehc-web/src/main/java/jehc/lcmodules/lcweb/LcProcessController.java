@@ -83,7 +83,7 @@ public class LcProcessController  extends BaseAction{
 		commonHPager(condition,request);
 		List<LcProcess> lc_ProcessList = lcProcessService.getLcProcessListByCondition(condition);
 		PageInfo<LcProcess> page = new PageInfo<LcProcess>(lc_ProcessList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -624,5 +624,34 @@ public class LcProcessController  extends BaseAction{
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toLcProcessAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toLcProcessAdd(LcProcess lcProcess,HttpServletRequest request){
+		return new ModelAndView("pc/lc-view/lc-process/lc-process-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toLcProcessUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toLcProcessUpdate(String lc_process_id,HttpServletRequest request, Model model){
+		LcProcess lcProcess = lcProcessService.getLcProcessById(lc_process_id);
+		model.addAttribute("lcProcess", lcProcess);
+		return new ModelAndView("pc/lc-view/lc-process/lc-process-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toLcProcessDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toLcProcessDetail(String lc_process_id,HttpServletRequest request, Model model){
+		LcProcess lcProcess = lcProcessService.getLcProcessById(lc_process_id);
+		model.addAttribute("lcProcess", lcProcess);
+		return new ModelAndView("pc/lc-view/lc-process/lc-process-detail");
 	}
 }

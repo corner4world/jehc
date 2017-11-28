@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.method.HandlerMethod;
@@ -44,12 +45,14 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		long beginTime = System.currentTimeMillis();
 		//线程绑定变量（该数据只有当前请求的线程可见） 
         startTimeThreadLocal.set(beginTime);
-        String exportOrDownloadSysFlag = request.getParameter(StatusConstant.EXPORTORDOWNLOADSYSFLAG);
         ///////////////////拦截IP黑户开始（优先级最高）///////////////////////
 		if(!validateIP(request)) {  
+			if(!bDownLoad(request, response)){
+				return false;
+			}
 			String head = request.getHeader("x-requested-with");
 			//XMLHttpRequest为异步 Ext.basex为同步
-			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || StatusConstant.EXPORTORDOWNLOADSYSFLAG.equals(exportOrDownloadSysFlag)) { 
+			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head)))) { 
 				response.setContentType("text/html;charset=utf-8");  
 	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_001+"}");
 	        	response.getWriter().flush();
@@ -92,9 +95,12 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
     		//非超级管理员则进行功能权限验证
     		String xt_functioninfoURL = (String)request.getSession(false).getAttribute(SessionConstant.XT_FUNCTIONINFOURL);
     		if(xt_functioninfoURL.indexOf(","+requestUrl+",")<0){
+    			if(!bDownLoad(request, response)){
+    				return false;
+    			}
     			String head = request.getHeader("x-requested-with");
     			//XMLHttpRequest为异步 Ext.basex为同步 则Ajax拦截
-    			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || StatusConstant.EXPORTORDOWNLOADSYSFLAG.equals(exportOrDownloadSysFlag)) { 
+    			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head)))) { 
     				response.setContentType("text/html;charset=utf-8");  
     	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_777+"}");
     	        	response.getWriter().flush();
@@ -109,17 +115,20 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
     		//////////////////对功能进行拦截结束///////////////////
         }else{
         	//非法请求【超时请求】即这些请求需要登录后才能访问  
-		    //重定向到登录页面  
+        	if(!bDownLoad(request, response)){
+        		return false;
+        	}
+        	//重定向到登录页面  
 			String head = request.getHeader("x-requested-with");
 			//XMLHttpRequest为异步 Ext.basex为同步
-			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) || StatusConstant.EXPORTORDOWNLOADSYSFLAG.equals(exportOrDownloadSysFlag)) { 
+			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head)))) { 
 				response.setContentType("text/html;charset=utf-8");  
 	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_888+"}");
 	        	response.getWriter().flush();
 			}else{
 				request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
 			}
-			return false;
+        	return false;
         }
 	}
 
@@ -165,6 +174,23 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		}
 	}
 	
+	/**
+	 * 是否能够下载文件（jquery模式 非extjs模式）
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws IOException
+	 */
+	public boolean bDownLoad(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		 String bdownflag = request.getParameter(StatusConstant.BDOWNFLAG);
+		 if(!StringUtils.isEmpty(bdownflag)){
+			response.setContentType("text/html;charset=utf-8");  
+        	response.getWriter().print(StatusConstant.BDOWNFLAG_TEXT);
+        	response.getWriter().flush();
+        	return false;
+		}
+		 return true;
+	}
 	/**
 	 * 判断IP是否合法 合法true 不合法false
 	 * @param request

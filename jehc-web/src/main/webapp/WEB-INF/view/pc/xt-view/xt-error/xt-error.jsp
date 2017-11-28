@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/deng/include/include.jsp"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -31,10 +30,10 @@ h2{color:#0188DE; font-size:14px; padding:10px 0px 40px 0px;}
 .button a:hover{ background:#5BBFFF;}
 </style>
 <body>  
-	<div id="page" style="border-style:dotted;border-color:#e4e4e4;line-height:30px;background:url(sorry.png) no-repeat right;">
-		<h1>抱歉，找不到此页面~</h1>
+	<div id="page" style="border-style:dotted;border-color:#e4e4e4;line-height:30px;">
+		<h1>抱歉，出现异常~</h1>
 		<h2>Sorry, the site now can not be accessed. </h2>
-		<font color="#666666">你请求访问的页面，暂时找不到，我们建议你返回首页进行浏览，谢谢！</font><br /><br />
+		<font color="#666666">你请求访问的页面，出现异常，我们建议你返回首页进行浏览，谢谢！</font><br /><br />
 		<div class="button">
 			<a href="#" title="返回" target="_blank">返回</a>
 		</div>

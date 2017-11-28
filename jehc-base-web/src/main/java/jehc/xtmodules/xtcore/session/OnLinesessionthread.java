@@ -89,11 +89,14 @@ public class OnLinesessionthread extends Thread{
 					Iterator<HttpSession> iterator = OnLinesessionlistener.getSet(); 
 				     while (iterator.hasNext()) { 
 				    	 HttpSession sessions = (HttpSession) iterator.next();
-				    	 XtUserinfo xtU = (XtUserinfo)sessions.getAttribute(SessionConstant.XTUSERINFO);
-				    	 String userID = xtUserinfo.getXt_userinfo_id();
-				    	 if(null != xtU && xtU.getXt_userinfo_id().equals(userID)){
-				    		 sessions.removeAttribute(SessionConstant.XTUSERINFO);
+				    	 if(null != sessions.getAttribute(SessionConstant.XTUSERINFO)){
+				    		 XtUserinfo xtU = (XtUserinfo)sessions.getAttribute(SessionConstant.XTUSERINFO);
+					    	 String userID = xtUserinfo.getXt_userinfo_id();
+					    	 if(null != xtU && xtU.getXt_userinfo_id().equals(userID)){
+					    		 sessions.removeAttribute(SessionConstant.XTUSERINFO);
+					    	 }
 				    	 }
+				    	
 				     }
 				}
 				session.setAttribute(SessionConstant.XTUSERINFO, xtUserinfo);
