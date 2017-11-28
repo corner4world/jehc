@@ -3,7 +3,6 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
-	
 	<!-- 加载spring配置文件 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -16,7 +15,6 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
 	
 	<!-- springmvc视图转发器配置 -->
 	<servlet>
@@ -138,27 +136,30 @@
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
-	<!-- GZIPFilter压缩定义 设置此项时tk-filters.properties的GZIPFilter.Enabled=true才可用-->
+	<!-- GZIPFilter压缩定义 设置此项时tk-filters.properties的GZIPFilter.Enabled=true才可用
 	<filter>
 		<filter-name>GZIPFilter</filter-name>
 		<filter-class>
 			com.tacitknowledge.filters.gzipfilter.GZIPFilter
 		</filter-class>
 	</filter>
-	<!-- GZIPFilter 设置自己想要压缩的文件类型-->
+	-->
+	<!-- GZIPFilter 设置自己想要压缩的文件类型
 	<filter-mapping>
 		<filter-name>GZIPFilter</filter-name>
 		<url-pattern>/deng/*</url-pattern>
 		<url-pattern>/view/*</url-pattern>
 	</filter-mapping>
-	<!-- CacheFilter缓存定义 设置此项时tk-filters.properties的CacheFilter.Enabled=true才可用 -->
+	-->
+	<!-- CacheFilter缓存定义 设置此项时tk-filters.properties的CacheFilter.Enabled=true才可用 
 	<filter>
 		<filter-name>CacheFilter</filter-name>
 		<filter-class>
 			com.tacitknowledge.filters.cache.CacheHeaderFilter
 		</filter-class>
 	</filter>
-	<!-- CacheFilter 设置自己想要缓存的文件类型-->
+	-->
+	<!-- CacheFilter 设置自己想要缓存的文件类型
 	<filter-mapping>
 		<filter-name>CacheFilter</filter-name>
 		<url-pattern>*.gif</url-pattern>
@@ -179,7 +180,9 @@
 		<filter-name>CacheFilter</filter-name>
 		<url-pattern>*.css</url-pattern>
 	</filter-mapping>
+	-->
 	
+	<!-- 静态资源放行 -->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>/deng/*</url-pattern>

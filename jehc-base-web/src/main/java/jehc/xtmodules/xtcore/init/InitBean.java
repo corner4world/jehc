@@ -91,7 +91,6 @@ public class InitBean implements ApplicationListener<ContextRefreshedEvent>{
 			cacheQuarzInit();
 			logger.info(sdf.format(new Date())+"--->结束初始化调度任务"); 
 		} catch (Exception e) {
-			e.printStackTrace();
 			xt_Start_Stop_Log.setXt_start_stop_log_iserror("1");
 		}
 		xt_Start_Stop_Log.setXt_start_stop_log_starttime(sdf.format(new Date()));
@@ -129,7 +128,7 @@ public class InitBean implements ApplicationListener<ContextRefreshedEvent>{
         		List<XtQuartz> xtQuartzList = xtQuartzService.getXtQuartzListAllByCondition(condition);
         		for(int i = 0; i < xtQuartzList.size(); i++){
         			XtQuartz xtQuartz = xtQuartzList.get(i);
-        			new QuartzInit(schedulerFactoryBean,xtQuartz.getId(),xtQuartz.getJobName(),xtQuartz.getJobGroup(),xtQuartz.getCronExpression(),xtQuartz.getDesc(),xtQuartz.getTargetMethod(),xtQuartz.getTargetClass()).run();
+        			new QuartzInit(schedulerFactoryBean,xtQuartz.getId(),xtQuartz.getJobName(),xtQuartz.getJobGroup(),xtQuartz.getCronExpression(),xtQuartz.getDesc(),xtQuartz.getTargetMethod(),xtQuartz.getTargetClass()).start();
         		}
             }
         }, 1 * 10);
