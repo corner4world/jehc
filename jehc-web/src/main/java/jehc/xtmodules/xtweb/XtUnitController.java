@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class XtUnitController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtUnit> xt_UnitList = xtUnitService.getXtUnitListByCondition(condition);
 		PageInfo<XtUnit> page = new PageInfo<XtUnit>(xt_UnitList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -155,5 +156,33 @@ public class XtUnitController extends BaseAction{
 	public void exportXtUnit(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtUnitAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtUnitAdd(XtUnit xtUnit,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-unit/xt-unit-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtUnitUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtUnitUpdate(String xt_unit_id,HttpServletRequest request, Model model){
+		XtUnit xtUnit = xtUnitService.getXtUnitById(xt_unit_id);
+		model.addAttribute("xtUnit", xtUnit);
+		return new ModelAndView("pc/xt-view/xt-unit/xt-unit-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtUnitDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtUnitDetail(String xt_unit_id,HttpServletRequest request, Model model){
+		XtUnit xtUnit = xtUnitService.getXtUnitById(xt_unit_id);
+		model.addAttribute("xtUnit", xtUnit);
+		return new ModelAndView("pc/xt-view/xt-unit/xt-unit-detail");
 	}
 }

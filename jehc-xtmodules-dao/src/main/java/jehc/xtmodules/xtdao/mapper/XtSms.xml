@@ -24,6 +24,9 @@
 		<if test="null != xt_smsName">
 			AND instr(xt_smsName,#{xt_smsName})
 		</if>
+		<if test="null != xt_smsCompany">
+			AND instr(xt_smsCompany,#{xt_smsCompany})
+		</if>
 	</select>
 
 	<!--查询对象-->

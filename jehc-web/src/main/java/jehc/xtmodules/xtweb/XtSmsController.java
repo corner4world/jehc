@@ -1,12 +1,14 @@
 package jehc.xtmodules.xtweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -52,7 +54,7 @@ public class XtSmsController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtSms> xt_SmsList = xtSmsService.getXtSmsListByCondition(condition);
 		PageInfo<XtSms> page = new PageInfo<XtSms>(xt_SmsList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -154,5 +156,33 @@ public class XtSmsController extends BaseAction{
 	public void exportXtSms(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtSmsAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtSmsAdd(XtSms xtSms,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-sms/xt-sms-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtSmsUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtSmsUpdate(String xt_sms_id,HttpServletRequest request, Model model){
+		XtSms xtSms = xtSmsService.getXtSmsById(xt_sms_id);
+		model.addAttribute("xtSms", xtSms);
+		return new ModelAndView("pc/xt-view/xt-sms/xt-sms-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtSmsDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtSmsDetail(String xt_sms_id,HttpServletRequest request, Model model){
+		XtSms xtSms = xtSmsService.getXtSmsById(xt_sms_id);
+		model.addAttribute("xtSms", xtSms);
+		return new ModelAndView("pc/xt-view/xt-sms/xt-sms-detail");
 	}
 }

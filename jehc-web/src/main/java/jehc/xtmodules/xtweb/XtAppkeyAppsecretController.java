@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +55,7 @@ public class XtAppkeyAppsecretController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtAppkeyAppsecret> xt_Appkey_AppsecretList = xtAppkeyAppsecretService.getXtAppkeyAppsecretListByCondition(condition);
 		PageInfo<XtAppkeyAppsecret> page = new PageInfo<XtAppkeyAppsecret>(xt_Appkey_AppsecretList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -165,5 +166,34 @@ public class XtAppkeyAppsecretController extends BaseAction{
 	public void exportXtAppkeyAppsecret(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtAppkeyAppsecretAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtAppkeyAppsecretAdd(XtAppkeyAppsecret xtAppkeyAppsecret,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-appkey-appsecret/xt-appkey-appsecret-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtAppkeyAppsecretUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtAppkeyAppsecretUpdate(String xt_appkey_appsecret_id,HttpServletRequest request, Model model){
+		XtAppkeyAppsecret xtAppkeyAppsecret = xtAppkeyAppsecretService.getXtAppkeyAppsecretById(xt_appkey_appsecret_id);
+		model.addAttribute("xtAppkeyAppsecret", xtAppkeyAppsecret);
+		return new ModelAndView("pc/xt-view/xt-appkey-appsecret/xt-appkey-appsecret-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtAppkeyAppsecretDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtAppkeyAppsecretDetail(String xt_appkey_appsecret_id,HttpServletRequest request, Model model){
+		XtAppkeyAppsecret xtAppkeyAppsecret = xtAppkeyAppsecretService.getXtAppkeyAppsecretById(xt_appkey_appsecret_id);
+		model.addAttribute("xtAppkeyAppsecret", xtAppkeyAppsecret);
+		return new ModelAndView("pc/xt-view/xt-appkey-appsecret/xt-appkey-appsecret-detail");
 	}
 }

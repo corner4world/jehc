@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +55,7 @@ public class XtIpFrozenController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtIpFrozen> xt_Ip_FrozenList = xtIpFrozenService.getXtIpFrozenListByCondition(condition);
 		PageInfo<XtIpFrozen> page = new PageInfo<XtIpFrozen>(xt_Ip_FrozenList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -160,5 +161,33 @@ public class XtIpFrozenController extends BaseAction{
 	public void exportXtIpFrozen(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtIpFrozenAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtIpFrozenAdd(XtIpFrozen xtIpFrozen,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-ip-frozen/xt-ip-frozen-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtIpFrozenUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtIpFrozenUpdate(String xt_ip_frozen_id,HttpServletRequest request, Model model){
+		XtIpFrozen xtIpFrozen = xtIpFrozenService.getXtIpFrozenById(xt_ip_frozen_id);
+		model.addAttribute("xtIpFrozen", xtIpFrozen);
+		return new ModelAndView("pc/xt-view/xt-ip-frozen/xt-ip-frozen-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtIpFrozenDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtIpFrozenDetail(String xt_ip_frozen_id,HttpServletRequest request, Model model){
+		XtIpFrozen xtIpFrozen = xtIpFrozenService.getXtIpFrozenById(xt_ip_frozen_id);
+		model.addAttribute("xtIpFrozen", xtIpFrozen);
+		return new ModelAndView("pc/xt-view/xt-ip-frozen/xt-ip-frozen-detail");
 	}
 }
