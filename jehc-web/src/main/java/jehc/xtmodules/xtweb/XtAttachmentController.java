@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -51,7 +52,7 @@ public class XtAttachmentController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtAttachment>XtAttachmentList = xtAttachmentService.getXtAttachmentListByCondition(condition);
 		PageInfo<XtAttachment> page = new PageInfo<XtAttachment>(XtAttachmentList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -120,5 +121,15 @@ public class XtAttachmentController extends BaseAction{
 		}else{
 			return outAudStr(false);
 		}
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtAttachmentDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtAttachmentDetail(String xt_attachment_id,HttpServletRequest request, Model model){
+		XtAttachment xtAttachment = xtAttachmentService.getXtAttachmentById(xt_attachment_id);
+		model.addAttribute("xtAttachment", xtAttachment);
+		return new ModelAndView("pc/xt-view/xt-attachment/xt-attachment-detail");
 	}
 }

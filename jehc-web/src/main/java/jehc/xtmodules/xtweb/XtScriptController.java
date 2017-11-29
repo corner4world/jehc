@@ -1,16 +1,19 @@
 package jehc.xtmodules.xtweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -51,7 +54,7 @@ public class XtScriptController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtScript> xt_ScriptList = xtScriptService.getXtScriptListByCondition(condition);
 		PageInfo<XtScript> page = new PageInfo<XtScript>(xt_ScriptList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -177,5 +180,34 @@ public class XtScriptController extends BaseAction{
 		condition.put("xt_script_status",0);
 		List<XtScript> xt_ScriptList = xtScriptService.getXtScriptListByCondition(condition);
 		return outComboDataStr(xt_ScriptList);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtScriptAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtScriptAdd(XtScript xtScript,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-script/xt-script-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtScriptUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtScriptUpdate(String xt_script_id,HttpServletRequest request, Model model){
+		XtScript xtScript = xtScriptService.getXtScriptById(xt_script_id);
+		model.addAttribute("xtScript", xtScript);
+		return new ModelAndView("pc/xt-view/xt-script/xt-script-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtScriptDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtScriptDetail(String xt_script_id,HttpServletRequest request, Model model){
+		XtScript xtScript = xtScriptService.getXtScriptById(xt_script_id);
+		model.addAttribute("xtScript", xtScript);
+		return new ModelAndView("pc/xt-view/xt-script/xt-script-detail");
 	}
 }

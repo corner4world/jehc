@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class XtConcordatController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtConcordat>XtConcordatList = xtConcordatService.getXtConcordatListByCondition(condition);
 		PageInfo<XtConcordat> page = new PageInfo<XtConcordat>(XtConcordatList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -155,5 +156,34 @@ public class XtConcordatController extends BaseAction{
 	public void exportXtConcordat(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtConcordatAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtConcordatAdd(XtConcordat xtConcordat,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-concordat/xt-concordat-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtConcordatUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtConcordatUpdate(String xt_concordat_id,HttpServletRequest request, Model model){
+		XtConcordat xtConcordat = xtConcordatService.getXtConcordatById(xt_concordat_id);
+		model.addAttribute("xtConcordat", xtConcordat);
+		return new ModelAndView("pc/xt-view/xt-concordat/xt-concordat-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtConcordatDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtConcordatDetail(String xt_concordat_id,HttpServletRequest request, Model model){
+		XtConcordat xtConcordat = xtConcordatService.getXtConcordatById(xt_concordat_id);
+		model.addAttribute("xtConcordat", xtConcordat);
+		return new ModelAndView("pc/xt-view/xt-concordat/xt-concordat-detail");
 	}
 }
