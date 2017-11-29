@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class XtConstantController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtConstant> xt_ConstantList = xtConstantService.getXtConstantListByCondition(condition);
 		PageInfo<XtConstant> page = new PageInfo<XtConstant>(xt_ConstantList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -168,5 +169,34 @@ public class XtConstantController extends BaseAction{
 		condition.put("xt_constantType", xt_constantType);
 		List<XtConstant> xt_ConstantList = xtConstantService.getXtConstantListByCondition(condition);
 		return outItemsStr(xt_ConstantList);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtConstantAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtConstantAdd(XtConstant xtConstant,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-constant/xt-constant-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtConstantUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtConstantUpdate(String xt_constant_id,HttpServletRequest request, Model model){
+		XtConstant xtConstant = xtConstantService.getXtConstantById(xt_constant_id);
+		model.addAttribute("xtConstant", xtConstant);
+		return new ModelAndView("pc/xt-view/xt-constant/xt-constant-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtConstantDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtConstantDetail(String xt_constant_id,HttpServletRequest request, Model model){
+		XtConstant xtConstant = xtConstantService.getXtConstantById(xt_constant_id);
+		model.addAttribute("xtConstant", xtConstant);
+		return new ModelAndView("pc/xt-view/xt-constant/xt-constant-detail");
 	}
 }

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -54,7 +55,7 @@ public class XtPathController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtPath> xt_PathList = xtPathService.getXtPathListByCondition(condition);
 		PageInfo<XtPath> page = new PageInfo<XtPath>(xt_PathList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -158,5 +159,34 @@ public class XtPathController extends BaseAction{
 	public void exportXtPath(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPathAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPathAdd(XtPath xtPath,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-path/xt-path-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPathUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPathUpdate(String xt_path_id,HttpServletRequest request, Model model){
+		XtPath xtPath = xtPathService.getXtPathById(xt_path_id);
+		model.addAttribute("xtPath", xtPath);
+		return new ModelAndView("pc/xt-view/xt-path/xt-path-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtPathDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtPathDetail(String xt_path_id,HttpServletRequest request, Model model){
+		XtPath xtPath = xtPathService.getXtPathById(xt_path_id);
+		model.addAttribute("xtPath", xtPath);
+		return new ModelAndView("pc/xt-view/xt-path/xt-path-detail");
 	}
 }

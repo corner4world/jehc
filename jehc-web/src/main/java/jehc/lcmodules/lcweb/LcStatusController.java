@@ -1,21 +1,25 @@
 package jehc.lcmodules.lcweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.lcmodules.lcmodel.LcStatus;
 import jehc.lcmodules.lcservice.LcStatusService;
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
@@ -46,12 +50,12 @@ public class LcStatusController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getLcStatusListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getLcStatusListByCondition(LcStatus lc_Status,HttpServletRequest request){
-		Map<String, Object> condition = new HashMap<String, Object>();
+	public String getLcStatusListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<LcStatus> lc_StatusList = lcStatusService.getLcStatusListByCondition(condition);
 		PageInfo<LcStatus> page = new PageInfo<LcStatus>(lc_StatusList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -169,5 +173,34 @@ public class LcStatusController extends BaseAction{
 		Map<String, Object> condition = new HashMap<String, Object>();
 		List<LcStatus> lc_StatusList = lcStatusService.getLcStatusListByCondition(condition);
 		return lc_StatusList;
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toLcStatusAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toLcStatusAdd(LcStatus lcStatus,HttpServletRequest request){
+		return new ModelAndView("pc/lc-view/lc-status/lc-status-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toLcStatusUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toLcStatusUpdate(String lc_status_id,HttpServletRequest request, Model model){
+		LcStatus lcStatus = lcStatusService.getLcStatusById(lc_status_id);
+		model.addAttribute("lcStatus", lcStatus);
+		return new ModelAndView("pc/lc-view/lc-status/lc-status-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toLcStatusDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toLcStatusDetail(String lc_status_id,HttpServletRequest request, Model model){
+		LcStatus lcStatus = lcStatusService.getLcStatusById(lc_status_id);
+		model.addAttribute("lcStatus", lcStatus);
+		return new ModelAndView("pc/lc-view/lc-status/lc-status-detail");
 	}
 }

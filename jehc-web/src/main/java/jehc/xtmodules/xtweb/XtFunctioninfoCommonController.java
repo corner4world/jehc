@@ -1,15 +1,19 @@
 package jehc.xtmodules.xtweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -50,7 +54,7 @@ public class XtFunctioninfoCommonController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtFunctioninfoCommon> xt_Functioninfo_CommonList = xtFunctioninfoCommonService.getXtFunctioninfoCommonListByCondition(condition);
 		PageInfo<XtFunctioninfoCommon> page = new PageInfo<XtFunctioninfoCommon>(xt_Functioninfo_CommonList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -156,5 +160,34 @@ public class XtFunctioninfoCommonController extends BaseAction{
 	public void exportXtFunctioninfoCommon(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtFunctioninfoCommonAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtFunctioninfoCommonAdd(XtFunctioninfoCommon xtFunctioninfoCommon,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-functioninfo-common/xt-functioninfo-common-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtFunctioninfoCommonUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtFunctioninfoCommonUpdate(String xt_functioninfo_common_id,HttpServletRequest request, Model model){
+		XtFunctioninfoCommon xtFunctioninfoCommon = xtFunctioninfoCommonService.getXtFunctioninfoCommonById(xt_functioninfo_common_id);
+		model.addAttribute("xtFunctioninfoCommon", xtFunctioninfoCommon);
+		return new ModelAndView("pc/xt-view/xt-functioninfo-common/xt-functioninfo-common-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtFunctioninfoCommonDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtFunctioninfoCommonDetail(String xt_functioninfo_common_id,HttpServletRequest request, Model model){
+		XtFunctioninfoCommon xtFunctioninfoCommon = xtFunctioninfoCommonService.getXtFunctioninfoCommonById(xt_functioninfo_common_id);
+		model.addAttribute("xtFunctioninfoCommon", xtFunctioninfoCommon);
+		return new ModelAndView("pc/xt-view/xt-functioninfo-common/xt-functioninfo-common-detail");
 	}
 }
