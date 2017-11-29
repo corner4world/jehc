@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class XtStartStopLogController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtStartStopLog> xt_Start_Stop_LogList = xtStartStopLogService.getXtStartStopLogListByCondition(condition);
 		PageInfo<XtStartStopLog> page = new PageInfo<XtStartStopLog>(xt_Start_Stop_LogList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -155,5 +156,15 @@ public class XtStartStopLogController extends BaseAction{
 	public void exportXtStartStopLog(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtStartStopLogDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtStartStopLogDetail(String xt_start_stop_log_id,HttpServletRequest request, Model model){
+		XtStartStopLog xtStartStopLog = xtStartStopLogService.getXtStartStopLogById(xt_start_stop_log_id);
+		model.addAttribute("xtStartStopLog", xtStartStopLog);
+		return new ModelAndView("pc/xt-view/xt-start-stop-log/xt-start-stop-log-detail");
 	}
 }

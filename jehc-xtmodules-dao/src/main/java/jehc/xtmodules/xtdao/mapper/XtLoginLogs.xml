@@ -21,6 +21,18 @@
 		<if test="null != xt_userinfo_id">
 			AND xt_login_logs.`xt_userinfo_id` = #{xt_userinfo_id}
 		</if>
+		<if test="null != xt_login_log_browser_name">
+			AND instr(xt_login_log_browser_name,#{xt_login_log_browser_name})
+		</if>
+		<if test="null != xt_login_logtime_st and xt_login_logtime_st != ''">
+			AND xt_login_logtime &gt;=STR_TO_DATE(#{xt_login_logtime_st},'%Y-%m-%d')
+		</if>
+		<if test="null != xt_login_logtime_et and xt_login_logtime_et != ''">
+			AND xt_login_logtime &lt;=STR_TO_DATE(#{xt_login_logtime_et},'%Y-%m-%d')
+		</if>
+		<if test="null != xt_login_logIP">
+			AND instr(xt_login_logIP,#{xt_login_logIP})
+		</if>
 		ORDER BY xt_login_logs.`xt_login_logtime` DESC
 	</select>
 

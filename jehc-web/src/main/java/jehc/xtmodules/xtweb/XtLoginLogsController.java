@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
@@ -48,16 +50,16 @@ public class XtLoginLogsController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getXtLoginLogsListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtLoginLogsListByCondition(XtLoginLogs xt_Login_Logs,HttpServletRequest request){
+	public String getXtLoginLogsListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
 		String flag = request.getParameter("flag");
-		Map<String, Object> condition = new HashMap<String, Object>();
 		if(null != flag){
 			condition.put("xt_userinfo_id", CommonUtils.getXtUid());
 		}
 		commonHPager(condition,request);
 		List<XtLoginLogs>XtLoginLogsList = xtLoginLogsService.getXtLoginLogsListByCondition(condition);
 		PageInfo<XtLoginLogs> page = new PageInfo<XtLoginLogs>(XtLoginLogsList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -171,5 +173,15 @@ public class XtLoginLogsController extends BaseAction{
 	public void exportXtLoginLogs(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtLoginLogsDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtLoginLogsDetail(String xt_login_log_id,HttpServletRequest request, Model model){
+		XtLoginLogs xtLoginLogs = xtLoginLogsService.getXtLoginLogsById(xt_login_log_id);
+		model.addAttribute("xtLoginLogs", xtLoginLogs);
+		return new ModelAndView("pc/xt-view/xt-login-logs/xt-login-logs-detail");
 	}
 }

@@ -1,16 +1,19 @@
 package jehc.xtmodules.xtweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -51,7 +54,7 @@ public class XtQuartzLogController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtQuartzLog> xt_Quartz_LogList = xtQuartzLogService.getXtQuartzLogListByCondition(condition);
 		PageInfo<XtQuartzLog> page = new PageInfo<XtQuartzLog>(xt_Quartz_LogList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -153,5 +156,16 @@ public class XtQuartzLogController extends BaseAction{
 	public void exportXtQuartzLog(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtQuartzLogDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtQuartzLogDetail(String xt_quartz_log_id,HttpServletRequest request, Model model){
+		XtQuartzLog xtQuartzLog = xtQuartzLogService.getXtQuartzLogById(xt_quartz_log_id);
+		model.addAttribute("xtQuartzLog", xtQuartzLog);
+		return new ModelAndView("pc/xt-view/xt-quartz-log/xt-quartz-log-detail");
 	}
 }

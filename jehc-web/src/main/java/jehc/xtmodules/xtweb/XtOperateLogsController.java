@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class XtOperateLogsController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtOperateLogs> xt_Operate_LogsList = xtOperateLogsService.getXtOperateLogsListByCondition(condition);
 		PageInfo<XtOperateLogs> page = new PageInfo<XtOperateLogs>(xt_Operate_LogsList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -155,5 +156,15 @@ public class XtOperateLogsController extends BaseAction{
 	public void exportXtOperateLogs(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtOperateLogsDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtOperateLogsDetail(String xt_operate_log_id,HttpServletRequest request, Model model){
+		XtOperateLogs xtOperateLogs = xtOperateLogsService.getXtOperateLogsById(xt_operate_log_id);
+		model.addAttribute("xtOperateLogs", xtOperateLogs);
+		return new ModelAndView("pc/xt-view/xt-operate-logs/xt-operate-logs-detail");
 	}
 }

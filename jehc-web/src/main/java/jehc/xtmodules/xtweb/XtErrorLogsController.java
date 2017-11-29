@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class XtErrorLogsController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtErrorLogs>XtErrorLogsList = xtErrorLogsService.getXtErrorLogsListByCondition(condition);
 		PageInfo<XtErrorLogs> page = new PageInfo<XtErrorLogs>(XtErrorLogsList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -155,5 +156,15 @@ public class XtErrorLogsController extends BaseAction{
 	public void exportXtErrorLogs(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtErrorLogsDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtErrorLogsDetail(String xt_error_log_id,HttpServletRequest request, Model model){
+		XtErrorLogs xtErrorLogs = xtErrorLogsService.getXtErrorLogsById(xt_error_log_id);
+		model.addAttribute("xtErrorLogs", xtErrorLogs);
+		return new ModelAndView("pc/xt-view/xt-error-logs/xt-error-logs-detail");
 	}
 }
