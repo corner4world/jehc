@@ -12,7 +12,8 @@
         <meta content="" name="author" />
 	</head>
     <!-- END HEAD -->
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid">
+    <!-- <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid"> 非采用滚动条-->
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-fixed"><!-- 采用滚动条menu -->
         <!-- BEGIN HEADER -->
         <div class="page-header navbar navbar-fixed-top">
             <!-- BEGIN HEADER INNER -->
@@ -256,7 +257,7 @@
                    </ul>
                    -->
                    <!-- 手风琴+侧边样式 -->
-                   <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                   <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                    		${MenuList }
                    </ul>
                   
@@ -304,7 +305,7 @@
                                     <option value="rounded">圆角</option>
                                 </select>
                             </div>
-                             -->
+                            
                             <div class="theme-option">
                                 <span> 布局风格 </span>
                                 <select class="layout-option form-control input-small">
@@ -312,7 +313,6 @@
                                     <option value="boxed">非全屏</option>
                                 </select>
                             </div>
-                            <!-- 
                             <div class="theme-option">
                                 <span> 边栏菜单 </span>
                                 <select class="sidebar-menu-option form-control input-small">
@@ -320,7 +320,6 @@
                                     <option value="hover">鼠标移入</option>
                                 </select>
                             </div>
-                            -->
                             <div class="theme-option">
                                 <span> 侧栏位置 </span>
                                 <select class="sidebar-pos-option form-control input-small">
@@ -335,6 +334,7 @@
                                     <option value="default" selected="selected">默认</option>
                                 </select>
                             </div>
+                            -->
                         </div>
                     </div>
                     <!-- END THEME PANEL -->
