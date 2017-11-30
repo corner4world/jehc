@@ -129,7 +129,7 @@ function delLcProcess(){
 
 
 function addLcDesign(lc_process_id,lc_process_title){
-	$('#lcDesignPanelBody').height(reGetBodyHeight()*0.8);
+	$('#lcDesignPanelBody').height(reGetBodyHeight()*0.7);
 	$('#lcDesignModalLabel').html("在线设计---<font color=red>"+lc_process_title+"</font>");
 	$('#lcDesignModal').modal({backdrop:'static',keyboard:false});
 	$("#lcDesignIframe",document.body).attr("src",'../lcProcessController/loadLcDesign?lc_process_id='+lc_process_id) 
@@ -156,7 +156,7 @@ function closeLcProcessWin(){
 	search('datatables');
 }
 function showLcDeploymentHis(lc_process_id,lc_process_title){
-	$('#lcDeploymentHisPanelBody').height(reGetBodyHeight()*0.8);
+	$('#lcDeploymentHisPanelBody').height(reGetBodyHeight()*0.7);
 	$('#lcDeploymentHisModalLabel').html("流程发布历史记录---<font color=red>"+lc_process_title+"</font>");
 	$('#lcDeploymentHisModal').modal({backdrop:'static',keyboard:false});
 	$("#lcDeploymentHisIframe",document.body).attr("src",'../lcDeploymentHisController/loadLcDeploymentHis?lc_process_id='+lc_process_id) 
