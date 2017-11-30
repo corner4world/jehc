@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,7 +59,7 @@ public class XtEncoderqrcodeController extends BaseAction{
 			xt_EncoderqrcodeList.get(i).setJehcsources_base_url(jehcsources_base_url);
 		}
 		PageInfo<XtEncoderqrcode> page = new PageInfo<XtEncoderqrcode>(xt_EncoderqrcodeList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -164,5 +165,34 @@ public class XtEncoderqrcodeController extends BaseAction{
 	public void exportXtEncoderqrcode(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtEncoderqrcodeAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtEncoderqrcodeAdd(XtEncoderqrcode xtEncoderqrcode,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-encoderqrcode/xt-encoderqrcode-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtEncoderqrcodeUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtEncoderqrcodeUpdate(String xt_encoderqrcode_id,HttpServletRequest request, Model model){
+		XtEncoderqrcode xtEncoderqrcode = xtEncoderqrcodeService.getXtEncoderqrcodeById(xt_encoderqrcode_id);
+		model.addAttribute("xtEncoderqrcode", xtEncoderqrcode);
+		return new ModelAndView("pc/xt-view/xt-encoderqrcode/xt-encoderqrcode-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtEncoderqrcodeDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtEncoderqrcodeDetail(String xt_encoderqrcode_id,HttpServletRequest request, Model model){
+		XtEncoderqrcode xtEncoderqrcode = xtEncoderqrcodeService.getXtEncoderqrcodeById(xt_encoderqrcode_id);
+		model.addAttribute("xtEncoderqrcode", xtEncoderqrcode);
+		return new ModelAndView("pc/xt-view/xt-encoderqrcode/xt-encoderqrcode-detail");
 	}
 }

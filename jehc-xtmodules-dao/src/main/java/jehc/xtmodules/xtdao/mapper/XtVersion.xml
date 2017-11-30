@@ -108,7 +108,6 @@
 			xt_version
 		SET
 			`xt_version_name` = #{xt_version_name},
-			`xt_version_ctime` = #{xt_version_ctime},
 			`xt_version_mtime` = #{xt_version_mtime},
 			`xt_version_number` = #{xt_version_number},
 			`xt_userinfo_id` = #{xt_userinfo_id},

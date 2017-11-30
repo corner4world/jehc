@@ -1,15 +1,19 @@
 package jehc.xtmodules.xtweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -50,7 +54,7 @@ public class XtVersionController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtVersion> xt_VersionList = xtVersionService.getXtVersionListByCondition(condition);
 		PageInfo<XtVersion> page = new PageInfo<XtVersion>(xt_VersionList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -156,5 +160,33 @@ public class XtVersionController extends BaseAction{
 	public void exportXtVersion(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtVersionAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtVersionAdd(XtVersion xtVersion,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-version/xt-version-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtVersionUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtVersionUpdate(String xt_version_id,HttpServletRequest request, Model model){
+		XtVersion xtVersion = xtVersionService.getXtVersionById(xt_version_id);
+		model.addAttribute("xtVersion", xtVersion);
+		return new ModelAndView("pc/xt-view/xt-version/xt-version-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtVersionDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtVersionDetail(String xt_version_id,HttpServletRequest request, Model model){
+		XtVersion xtVersion = xtVersionService.getXtVersionById(xt_version_id);
+		model.addAttribute("xtVersion", xtVersion);
+		return new ModelAndView("pc/xt-view/xt-version/xt-version-detail");
 	}
 }

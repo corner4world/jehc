@@ -1,414 +1,95 @@
-var store;
 var grid;
-Ext.onReady(function(){
-	/**查询区域可扩展**/
-	var items = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		maxHeight:220,
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
+$(document).ready(function() {
+	/////////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用） 如弹窗分页查找根据条件 可能此时的form发生变化 此时 可以解决该类问题
+	var opt = {
+		searchformId:'searchForm'
+	};
+	var options = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtVersionController/getXtVersionListByCondition',opt);},//渲染数据
+			//在第一位置追加序列号
+			fnRowCallback:function(nRow, aData, iDisplayIndex){
+				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+				return nRow;
 		},
-		items:[
-		{
-			fieldLabel:'版本名称',
-			xtype:'textfield',
-			labelWidth:70,
-			id:'xt_version_name',
-			name:'xt_version_name',
-			anchor:'47%',
-			labelAlign:'left'
-		},
-		{
-			layout:'table',
-			xtype:'form',
-			anchor:'50%',
-			items:[
+		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		//列表表头字段
+		colums:[
 			{
-				fieldLabel:'上传时间',
-				xtype:'datefield',
-				labelWidth:70,
-				format:'Y-m-d',
-				id:'xt_version_ctime_st',
-				name:'xt_version_ctime_st',
-				width:220,
-				labelAlign:'left'
+				sClass:"text-center",
+				width:"50px",
+				data:"xt_version_id",
+				render:function (data, type, full, meta) {
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
+				},
+				bSortable:false
 			},
 			{
-				fieldLabel:'至',
-				xtype:'datefield',
-				labelWidth:15,
-				format:'Y-m-d',
-				id:'xt_version_ctime_et',
-				name:'xt_version_ctime_et',
-				width:220,
-				labelAlign:'left'
-			}
-			]
-		},
-		{
-			layout:'table',
-			xtype:'form',
-			anchor:'50%',
-			items:[
-			{
-				fieldLabel:'修改时间',
-				xtype:'datefield',
-				labelWidth:70,
-				format:'Y-m-d',
-				id:'xt_version_mtime_st',
-				name:'xt_version_mtime_st',
-				width:220,
-				labelAlign:'left'
+				data:"xt_version_id",
+				width:"150px"
 			},
 			{
-				fieldLabel:'至',
-				xtype:'datefield',
-				labelWidth:15,
-				format:'Y-m-d',
-				id:'xt_version_mtime_et',
-				name:'xt_version_mtime_et',
-				width:220,
-				labelAlign:'left'
-			}
-			]
-		},
-		{
-			layout:'table',
-			xtype:'form',
-			anchor:'50%',
-			items:[
-			{
-				fieldLabel:'下载次数',
-				labelWidth:70,
-				xtype:'combo',
-				emptyText:'请选择',
-				store:cSData(),
-				mode:'local',
-				triggerAction:'all',
-				editable:false,
-				valueField:'value',
-				displayField:'text',
-				id:'xt_version_number_cs',
-				name:'xt_version_number_cs',
-				hiddenName:'xt_version_number_cs',
-				width:220,
-				labelAlign:'left'
+				data:'xt_version_name'
 			},
 			{
-				fieldLabel:'值',
-				xtype:'numberfield',
-				labelWidth:15,
-				id:'xt_version_number',
-				name:'xt_version_number',
-				width:150,
-				labelAlign:'left'
+				data:'xt_version_remark'
+			},
+			{
+				data:'xt_version_number'
+			},
+			{
+				data:'xt_version_ctime'
+			},
+			{
+				data:'xt_version_mtime'
+			},
+			{
+				data:'xt_userinfo_realName'
+			},
+			{
+				data:"xt_version_id",
+				width:"150px",
+				render:function(data, type, row, meta) {
+					return "<a href=\"javascript:toXtVersionDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+				}
 			}
-			]
-		}
 		]
 	});
-	initSearchForm('north',items,false,'left');
-	store = getGridJsonStore('../xtVersionController/getXtVersionListByCondition',[]);
-	var tbar = Ext.create('Ext.Toolbar',{
-		cls:'tbar',
-		items:[
-		{
-			text:'添加',
-			tooltip:'添加',
-			minWidth:tbarBtnMinWidth,
-			cls:'addBtn',
-			icon:addIcon,
-			handler:function(){
-				addXtVersion();
-			}
-		 },
-		 {
-			text:'编辑',
-			tooltip:'编辑',
-			minWidth:tbarBtnMinWidth,
-			cls:'updateBtn',
-			icon:editIcon,
-			handler:function(){
-				updateXtVersion();
-			}
-		 },
-		 {
-			text:'删除',
-			tooltip:'删除',
-			minWidth:tbarBtnMinWidth,
-			cls:'delBtn',
-			icon:delIcon,
-			handler:function(){
-				delXtVersion();
-			}
-		 },
-		 {
-			text:'检索',
-			minWidth:tbarBtnMinWidth,
-			cls:'searchBtn',
-			icon:searchIcon,
-			handler:function(){
-				search();
-			}
-		 },
-		 {
-			text:'重置',
-			tooltip:'重置',
-			minWidth:tbarBtnMinWidth,
-			icon:clearSearchIcon,
-			handler:function(){
-				searchForm.reset();
-			}
-		 },
-		 grid_toolbar_moretext_gaps,
-		 {
-			 text:moretext,
-			 tooltip:moretexttooltip,
-			 icon:listIcon,
-			 iconAlign:'left',
-			 menu:[
-			 {
-				text:'复制一行并生成记录',
-				tooltip:'复制一行并生成记录',
-				glyph:0xf0ea,
-				handler:function(){
-					copyXtVersion();
-				}
-			 },
-			 {
-				text:'明 细',
-				tooltip:'明 细',
-				glyph:0xf03b,
-				handler:function(){
-					detailXtVersion();
-				}
-			 },
-			 '-',
-			 {
-				text:'导 出',
-				tooltip:'导 出',
-				glyph:0xf1c3,
-				handler:function(){
-					exportXtVersion(grid,'../xtVersionController/exportXtVersion');
-				}
-			 },
-			 {
-				text:'打 印',
-				tooltip:'打 印',
-				glyph:0xf02f,
-				handler:function(){
-					printerGrid(grid);
-				}
-			 },
-			 '-',
-			 {
-				text:'全 选',
-				tooltip:'全 选',
-				glyph:0xf046,
-				handler:function(){selectAll(grid);}
-			 },
-			 {
-				text:'反 选',
-				tooltip:'反 选',
-				glyph:0xf096,
-				handler:function(){unSelectAll(grid);}
-			 },
-			 '-',
-			 {
-				text:'刷 新',
-				tooltip:'刷 新',
-				glyph:0xf021,
-				handler:function(){
-					grid.getStore().reload();
-				}
-			 },
-			 {
-				text:'检 索',
-				tooltip:'检 索',
-				glyph:0xf002,
-				handler:function(){
-					search();
-				}
-			 },
-			 {
-				text:'重 置',
-				tooltip:'重 置',
-				glyph:0xf014,
-				handler:function(){
-					searchForm.reset();
-				}
-			 }
-			 ]
-		 }
-		 ]
-    });
-	grid = Ext.create('Ext.grid.Panel',{
-		region:'center',
-		store:store,
-		title:'查询结果',
-		border:true,
-		columnLines:true,
-		selType:'cellmodel',
-		multiSelect:true,
-		selType:'checkboxmodel',
-		viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
-		},
-		loadMask:{
-			msg:'正在加载...'
-		},
-		columns:[
-			{
-				header:'序号',
-				width:77,
-				xtype:'rownumberer'
-			},
-			{
-				header:'版本名称',
-				flex:1,
-				dataIndex:'xt_version_name'
-			},
-			{
-				header:'下载次数',
-				flex:1,
-				dataIndex:'xt_version_number'
-			},
-			{
-				header:'上传时间',
-				flex:1,
-				dataIndex:'xt_version_ctime'
-			},
-			{
-				header:'修改时间',
-				flex:1,
-				dataIndex:'xt_version_mtime'
-			},
-			{
-				header:'上传人',
-				flex:1,
-				dataIndex:'xt_userinfo_realName'
-			}
-		],
-		tbar:tbar,
-		bbar:getGridBBar(store),
-		listeners:{
-			'rowdblclick':function(grid, rowIndex, e){
-				detailXtVersion();
-			}
-		}
-	});
-	Ext.create('Ext.Viewport',{
-		layout:'border',
-		xtype:'viewport',
-		items:[searchForm,grid]
-	});
-	/**调用右键**/
-	initRight();
-	store.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,getParmas(store,searchForm));});
+	grid=$('#datatables').dataTable(options);
+	//实现全选反选
+	docheckboxall('checkall','checkchild');
+	//实现单击行选中
+	clickrowselected('datatables');
 });
-/**删除操作**/
+//新增
+function toXtVersionAdd(){
+	tlocation('../xtVersionController/toXtVersionAdd');
+}
+//修改
+function toXtVersionUpdate(){
+	if($(".checkchild:checked").length != 1){
+		toastrBoot(4,"选择数据非法");
+		return;
+	}
+	var id = $(".checkchild:checked").val();
+	tlocation("../xtVersionController/toXtVersionUpdate?xt_version_id="+id);
+}
+//详情
+function toXtVersionDetail(id){
+	tlocation("../xtVersionController/toXtVersionDetail?xt_version_id="+id);
+}
+//删除
 function delXtVersion(){
-	var model = grid.getSelectionModel();
-	if(model.selected.length == 0){
-		msgTishi('请选择后在删除');
+	if(returncheckedLength('checkchild') <= 0){
+		toastrBoot(4,"请选择要删除的数据");
 		return;
 	}
-	var xt_version_id;
-	for(var i = 0; i < model.selected.length; i++){
-		if(null == xt_version_id){
-			xt_version_id=model.selected.items[i].data.xt_version_id;
-		}else{
-			xt_version_id=xt_version_id+","+model.selected.items[i].data.xt_version_id;
-		}
-	}
-	Ext.Msg.confirm('提示','确定删除该行数据？',function(btn){
-		if(btn == 'yes'){
-			var params = {xt_version_id:xt_version_id};
-			ajaxRequest('../xtVersionController/delXtVersion',grid,params,'正在执行删除操作中！请稍后...');
-		}
-	});
+	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
+		var id = returncheckIds('checkId').join(",");
+		var params = {xt_version_id:id};
+		ajaxBReq('../xtVersionController/delXtVersion',params,['datatables']);
+	})
 }
-/**复制一行并生成记录**/
-function copyXtVersion(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要复制的行！');
-		return;
-	}
-	Ext.Msg.confirm('提示','确定要复制一行并生成记录？',function(btn){
-		if(btn == 'yes'){
-			var params = {xt_version_id:record.items[0].data.xt_version_id};
-			ajaxRequest('../xtVersionController/copyXtVersion',grid,params,'正在执行复制一行并生成记录！请稍后...');
-		}
-	});
-}
-/**导出**/
-function exportXtVersion(grid,url){
-	exportExcel(grid,url);
-}
-/**初始化右键**/
-function initRight(){
-	var contextmenu = new Ext.menu.Menu({
-		id:'theContextMenu',
-		items:[{
-			text:'添 加',
-			glyph:0xf016,
-			id:'addXtVersionItem',
-			handler:function(){addXtVersion();}
-		},{
-			text:'编 辑',
-			glyph:0xf044,
-			id:'updateXtVersionItem',
-			handler:function(){updateXtVersion();}
-		},{
-			text:'删 除',
-			glyph:0xf014,
-			id:'delXtVersionItem',
-			handler:function(){delXtVersion();}
-		},'-',{
-			text:'复制一行并生成记录',
-			glyph:0xf0ea,
-			id:'copyXtVersionItem',
-			handler:function(){copyXtVersion();}
-		},{
-			text:'明 细',
-			glyph:0xf03b,
-			id:'detailXtVersionItem',
-			handler:function(){detailXtVersion();}
-		},{
-			text:'导 出',
-			glyph:0xf1c3,
-			handler:function(){
-				exportXtVersion(grid,'../xtVersionController/exportXtVersion');
-			}
-		},{
-			text:'打 印',
-			glyph:0xf02f,
-			handler:function(){printerGrid(grid);}
-		},'-',{
-			text:'全 选',
-			glyph:0xf046,
-			handler:function(){selectAll(grid);}
-		},{
-			text:'反 选',
-			glyph:0xf096,
-			handler:function(){unSelectAll(grid);}
-		},'-',{
-			text:'刷 新',
-			glyph:0xf021,
-			handler:function(){refreshGrid(grid);}
-		}]
-	});
-	initrightgridcontextmenu(grid,contextmenu,['updateXtVersionItem','delXtVersionItem','copyXtVersionItem','detailXtVersionItem']);
-}
-/**查询操作**/
-function search(){
-	initSearch(store,'../xtVersionController/getXtVersionListByCondition',searchForm);
-}
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+});

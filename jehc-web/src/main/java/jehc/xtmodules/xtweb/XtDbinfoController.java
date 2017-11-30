@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class XtDbinfoController extends BaseAction{
 		commonPager(condition,request);
 		List<XtDbinfo> xt_DbinfoList = xtDbinfoService.getXtDbinfoListByCondition(condition);
 		PageInfo<XtDbinfo> page = new PageInfo<XtDbinfo>(xt_DbinfoList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -155,5 +156,33 @@ public class XtDbinfoController extends BaseAction{
 	public void exportXtDbinfo(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtDbinfoAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtDbinfoAdd(XtDbinfo xtDbinfo,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-dbinfo/xt-dbinfo-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtDbinfoUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtDbinfoUpdate(String xt_dbinfo_id,HttpServletRequest request, Model model){
+		XtDbinfo xtDbinfo = xtDbinfoService.getXtDbinfoById(xt_dbinfo_id);
+		model.addAttribute("xtDbinfo", xtDbinfo);
+		return new ModelAndView("pc/xt-view/xt-dbinfo/xt-dbinfo-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtDbinfoDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtDbinfoDetail(String xt_dbinfo_id,HttpServletRequest request, Model model){
+		XtDbinfo xtDbinfo = xtDbinfoService.getXtDbinfoById(xt_dbinfo_id);
+		model.addAttribute("xtDbinfo", xtDbinfo);
+		return new ModelAndView("pc/xt-view/xt-dbinfo/xt-dbinfo-detail");
 	}
 }
