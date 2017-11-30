@@ -79,7 +79,7 @@
 <div class="modal fade" id="lcDesignModal" tabindex="-1" role="dialog" aria-labelledby="lcDesignModalLabel" aria-hidden="true">
 	<div class="modal-dialog" id="lcDesignModalDialog">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header" style="display: none;">
 				<h4 class="modal-title" id="lcDesignModalLabel">
 					在线设计
 				</h4>
@@ -102,7 +102,7 @@
 <div class="modal fade" id="lcDeploymentHisModal" tabindex="-1" role="dialog" aria-labelledby="lcDeploymentHisModalLabel" aria-hidden="true">
 	<div class="modal-dialog" id="lcDeploymentHisModalDialog">
 		<div class="modal-content">
-			<div class="modal-header">
+			<div class="modal-header" style="display: none;">
 				<h4 class="modal-title" id="lcDeploymentHisModalLabel">
 					流程发布历史记录
 				</h4>
