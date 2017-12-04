@@ -22,6 +22,7 @@ import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeEntity;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
+import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtmodel.XtFunctioninfo;
 import jehc.xtmodules.xtmodel.XtMenuinfo;
@@ -255,6 +256,47 @@ public class XtMenuinfoController extends BaseAction {
 		}
 		return outStr(BaseTreeEntity.buildTree(list));
 	}
+	
+	/**
+	 * 读取所有菜单列表（Bztree风格）
+	 * @param request
+	 * @param response
+	 */
+	@ResponseBody
+	@RequestMapping(value="/getXtMenuinfoBZTree",method={RequestMethod.POST,RequestMethod.GET})
+	public String getXtMenuinfoBZTree(HttpServletRequest request, HttpServletResponse response){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		String expanded = request.getParameter("expanded");
+		String singleClickExpand = request.getParameter("singleClickExpand");
+		List<BaseZTreeEntity> list = new ArrayList<BaseZTreeEntity>();
+		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinfoListAll(condition);
+		for(int i = 0; i < xtMenuinfoList.size(); i++){
+			XtMenuinfo xtMenuinfo = xtMenuinfoList.get(i);
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xtMenuinfo.getXt_menuinfo_id());
+			BaseZTreeEntity.setPid(xtMenuinfo.getXt_menuinfo_parentId());
+			BaseZTreeEntity.setText(xtMenuinfo.getXt_menuinfo_title());
+			BaseZTreeEntity.setIcon("../deng/images/icons/"+xtMenuinfo.getXt_menuinfo_images());
+			if("0".equals(xtMenuinfo.getXt_menuinfo_leaf())){
+				BaseZTreeEntity.setLeaf(false);
+			}else{
+				BaseZTreeEntity.setLeaf(true);
+			}
+			if(("true").equals(expanded)){
+				BaseZTreeEntity.setExpanded(true);
+			}else{
+				BaseZTreeEntity.setExpanded(false);
+			}
+			if("true".equals(singleClickExpand)){
+				BaseZTreeEntity.setSingleClickExpand(true);
+			}else{
+				BaseZTreeEntity.setSingleClickExpand(false);
+			}
+			list.add(BaseZTreeEntity);
+		}
+		return outStr(BaseZTreeEntity.buildTree(list,false));
+	}
+	
 	/**
 	 * 判断菜单下面是否有功能
 	 * @param xtFunctioninfoList

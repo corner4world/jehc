@@ -5,7 +5,7 @@ $(document).ready(function() {
 		searchformId:'searchForm'
 	};
 	var options = DataTablesPaging.pagingOptions({
-		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../lcProcessController/getLcProcessListByCondition',opt);},//渲染数据
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../lcProcessController/getLcProcessBListByCondition',opt);},//渲染数据
 			//在第一位置追加序列号
 			fnRowCallback:function(nRow, aData, iDisplayIndex){
 				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  

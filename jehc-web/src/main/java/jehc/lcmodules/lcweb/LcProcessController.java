@@ -72,6 +72,20 @@ public class LcProcessController  extends BaseAction{
 		return new ModelAndView("pc/lc-view/lc-process/lc-process-list");
 	}
 	/**
+	* 加载初始化列表数据并分页（Bootstrap风格）
+	* @param lc_process 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getLcProcessBListByCondition",method={RequestMethod.POST,RequestMethod.GET})
+	public String getLcProcessBListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
+		commonHPager(condition,request);
+		List<LcProcess> lc_ProcessList = lcProcessService.getLcProcessListByCondition(condition);
+		PageInfo<LcProcess> page = new PageInfo<LcProcess>(lc_ProcessList);
+		return outPageBootStr(page,request);
+	}
+	/**
 	* 加载初始化列表数据并分页
 	* @param lc_process 
 	* @param request 
@@ -83,7 +97,7 @@ public class LcProcessController  extends BaseAction{
 		commonHPager(condition,request);
 		List<LcProcess> lc_ProcessList = lcProcessService.getLcProcessListByCondition(condition);
 		PageInfo<LcProcess> page = new PageInfo<LcProcess>(lc_ProcessList);
-		return outPageBootStr(page,request);
+		return outPageStr(page,request);
 	}
 	/**
 	* 获取对象

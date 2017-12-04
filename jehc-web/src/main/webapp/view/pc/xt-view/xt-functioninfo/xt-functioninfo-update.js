@@ -1,167 +1,59 @@
-var xtFunctioninfoWinEdit;
-var xtFunctioninfoFormEdit;
+
+
+//编辑窗体
 function updateXtFunctioninfo(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要修改的一项！');
+	var zTree = $.fn.zTree.getZTreeObj("tree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"必须选择一条记录");
 		return;
 	}
-	if(record.items[0].data.tempObject == '菜单'){
-		msgTishi('您选择的是菜单不能修改，请选择功能!');
+	if(nodes[0].tempObject != '功能'){
+		toastrBoot(4,"选择的记录必须为功能");
 		return;
 	}
-	initXtFunctioninfoFormEdit();
-	reGetWidthAndHeight();
-	xtFunctioninfoWinEdit = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:clientWidth*0.8,
-		height:clientHeight,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'编辑信息',
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		},
-		items:xtFunctioninfoFormEdit,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(xtFunctioninfoFormEdit,'../xtFunctioninfoController/updateXtFunctioninfo',grid,xtFunctioninfoWinEdit,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
+	$('#updateXtFunctioninfoForm')[0].reset();
+	$('#updateXtFunctioninfoForm').bootstrapValidator({
+		message:'此值不是有效的'
 	});
-	xtFunctioninfoWinEdit.show();
-	loadFormData(xtFunctioninfoFormEdit,'../xtFunctioninfoController/getXtFunctioninfoById?xt_functioninfo_id='+ record.items[0].data.id);
+	$.ajax({
+	   type:"GET",
+	   url:"../xtFunctioninfoController/getXtFunctioninfoById",
+	   data:"xt_functioninfo_id="+nodes[0].id,
+	   success: function(result){
+		   result = eval("(" + result + ")");  
+		   result = result.data;
+		   $("#updateXtFunctioninfoForm").find("#xt_menuinfo_id_").val(result.xt_menuinfo_id);
+		   $("#updateXtFunctioninfoForm").find("#xt_menuinfo_title").val(result.xt_menuinfo_title);
+		   $("#updateXtFunctioninfoForm").find("#xt_functioninfoName").val(result.xt_functioninfoName);
+		   $("#updateXtFunctioninfoForm").find("#xt_functioninfoTitle").val(result.xt_functioninfoTitle);
+		   $("#updateXtFunctioninfoForm").find("#xt_functioninfoURL").val(result.xt_functioninfoURL);
+		   $("#updateXtFunctioninfoForm").find("#xt_functioninfoMethod").val(result.xt_functioninfoMethod);
+		   $("#updateXtFunctioninfoForm").find("#xt_functioninfoType").val(result.xt_functioninfoType);
+		   $("#updateXtFunctioninfoForm").find("#xt_functioninfoIsAuthority").val(result.xt_functioninfoIsAuthority);
+		   $("#updateXtFunctioninfoForm").find("#xt_functioninfoStatus").val(result.xt_functioninfoStatus);
+		   $("#updateXtFunctioninfoForm").find("#xt_functioninfo_id").val(result.xt_functioninfo_id);
+		   $('#updateXtFunctioninfoModal').modal({"backdrop":"static"});
+	   }
+	});
 }
-function initXtFunctioninfoFormEdit(){
-	xtFunctioninfoFormEdit = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		labelWidth:50,
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'4 5 4 5'
-		},
-		/**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        /**新方法使用结束**/ 
-		items:[
-		{
-			fieldLabel:'ID',
-			xtype:'textfield',
-			hidden:true,
-			name:'xt_functioninfo_id',
-			allowBlank:false,
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'功能名称',
-			xtype:'textfield',
-			name:'xt_functioninfoName',
-			allowBlank:false,
-			maxLength:50,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'功能标题',
-			xtype:'textfield',
-			name:'xt_functioninfoTitle',
-			maxLength:200,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'功能URL',
-			xtype:'textfield',
-			name:'xt_functioninfoURL',
-			maxLength:200,
-			anchor:'80%'
-		},
-		{
-			fieldLabel:'所属模块',
-			maxLength:32,
-			anchor:'40%',
-			xtype:'treepicker',
-			displayField:'text',
-			hiddenName:'xt_menuinfo_id',
-			name:'xt_menuinfo_id',
-			minPickerHeight:200,
-			maxHeight:200,
-			editable:false,
-			defaults:{
-	            rootVisible:false,
-	            flex:1
-	        },
-			store:Ext.create('Ext.data.TreeStore',{
-				fields:['id','text'],
-				root:{
-					text:'一级菜单',
-					id:'0',
-					expanded:true
-				},
-				proxy:{
-					type:'ajax',
-					url:'../xtMenuinfoController/getXtMenuinfoTree',
-					reader:{
-						type:'json'
-					}
-				}
-			})
-		},
-		{
-			fieldLabel:'前端方法',
-			xtype:'textfield',
-			name:'xt_functioninfoMethod',
-			maxLength:50,
-			anchor:'40%'
-		},
-		{
-			fieldLabel:'是否拦截',
-	        xtype:'radiogroup',
-	        columns:[80,80],
-	        items:[
-	               {boxLabel:'是',inputValue:'1',name:'xt_functioninfoType'},
-	               {boxLabel:'否',inputValue:'0',checked:true,name:'xt_functioninfoType'}
-	              ]
-		},
-		{
-			fieldLabel:'数据权限',
-			xtype:'radiogroup',
-	        columns:[80,80],
-	        items:[{boxLabel:'是',inputValue:'0',checked:true,name:'xt_functioninfoIsAuthority'},
-	               {boxLabel:'否',inputValue:'1',name:'xt_functioninfoIsAuthority'}
-	              ]
-		},
-		{
-			fieldLabel:'是否可用',
-			xtype:'radiogroup',
-	        columns:[80,80],
-	        items:[{boxLabel:'是',inputValue:'0',name:'xt_functioninfoStatus'},
-	               {boxLabel:'否',inputValue:'1',checked:true,name:'xt_functioninfoStatus'}
-	              ]
+
+function doUpdateXtFunctioninfo(){
+	var updateXtFunctioninfoForm =  $('#updateXtFunctioninfoForm');
+	submitBFormCallFn('updateXtFunctioninfoForm','../xtFunctioninfoController/updateXtFunctioninfo',function(result){
+		try {
+    		result = eval("(" + result + ")");  
+    		if(typeof(result.success) != "undefined"){
+    			if(result.success){
+            		window.parent.toastrBoot(3,result.msg);
+            		refreshAll();
+            		$('#updateXtFunctioninfoModal').modal('hide');
+        		}else{
+        			window.parent.toastrBoot(4,result.msg);
+        		}
+    		}
+		} catch (e) {
+			
 		}
-		]
 	});
 }

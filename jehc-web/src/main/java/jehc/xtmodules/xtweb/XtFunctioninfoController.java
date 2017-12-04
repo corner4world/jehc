@@ -18,6 +18,7 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
+import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtmodel.XtFunctioninfo;
 import jehc.xtmodules.xtmodel.XtMenuinfo;
@@ -140,65 +141,69 @@ public class XtFunctioninfoController extends BaseAction{
 		Map<String, Object> condition = new HashMap<String, Object>();
 		String expanded = request.getParameter("expanded");
 		String singleClickExpand = request.getParameter("singleClickExpand");
-		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
+		List<BaseZTreeEntity> list = new ArrayList<BaseZTreeEntity>();
 		List<XtFunctioninfo> xtFunctioninfoList = xtFunctioninfoService.getXtFunctioninfoList(condition);
 		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinfoListAll(condition);
 		for(int j = 0; j < xtMenuinfoList.size(); j++){
 			XtMenuinfo xtMenuinfo = xtMenuinfoList.get(j);
-			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
-			BaseTreeGridEntity.setId(xtMenuinfo.getXt_menuinfo_id());
-			BaseTreeGridEntity.setPid(xtMenuinfo.getXt_menuinfo_parentId());
-			BaseTreeGridEntity.setText(xtMenuinfo.getXt_menuinfo_title());
-			BaseTreeGridEntity.setContent("");
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xtMenuinfo.getXt_menuinfo_id());
+			BaseZTreeEntity.setPid(xtMenuinfo.getXt_menuinfo_parentId());
+			BaseZTreeEntity.setText(xtMenuinfo.getXt_menuinfo_title());
+			BaseZTreeEntity.setContent("");
 			if("0".equals(xtMenuinfo.getXt_menuinfo_leaf())){
-				BaseTreeGridEntity.setLeaf(false);
+				BaseZTreeEntity.setLeaf(false);
 			}else{
-				BaseTreeGridEntity.setLeaf(true);
+				BaseZTreeEntity.setLeaf(true);
 				//当菜单为末级时判断是否存在功能
 				if(hasLeaf(xtFunctioninfoList, xtMenuinfo.getXt_menuinfo_id())){
-					BaseTreeGridEntity.setLeaf(false);
+					BaseZTreeEntity.setLeaf(false);
 				}else{
-					BaseTreeGridEntity.setLeaf(true);
+					BaseZTreeEntity.setLeaf(true);
 				}
 			}
-			BaseTreeGridEntity.setIcon("../deng/images/icons/target.png");
-			BaseTreeGridEntity.setTempObject("菜单");
-			if(("true").equals(expanded)){
-				BaseTreeGridEntity.setExpanded(true);
-			}else{
-				BaseTreeGridEntity.setExpanded(false);
+//			BaseZTreeEntity.setIcon("../deng/images/icons/target.png");
+			BaseZTreeEntity.setTempObject("菜单");
+			if(xtMenuinfo.getXt_menuinfo_parentId().equals("0")){
+				//展开第一级菜单
+				BaseZTreeEntity.setExpanded(true);
 			}
+//			if(("true").equals(expanded)){
+//				BaseZTreeEntity.setExpanded(true);
+//			}else{
+//				BaseZTreeEntity.setExpanded(false);
+//			}
 			if("true".equals(singleClickExpand)){
-				BaseTreeGridEntity.setSingleClickExpand(true);
+				BaseZTreeEntity.setSingleClickExpand(true);
 			}else{
-				BaseTreeGridEntity.setSingleClickExpand(false);
+				BaseZTreeEntity.setSingleClickExpand(false);
 			}
-			list.add(BaseTreeGridEntity);
+			list.add(BaseZTreeEntity);
 		}
 		for(int i = 0; i < xtFunctioninfoList.size(); i++){
 			XtFunctioninfo xtFunctioninfo = xtFunctioninfoList.get(i);
-			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
-			BaseTreeGridEntity.setId(xtFunctioninfo.getXt_functioninfo_id());
-			BaseTreeGridEntity.setPid(xtFunctioninfo.getXt_menuinfo_id());
-			BaseTreeGridEntity.setText(xtFunctioninfo.getXt_functioninfoTitle());
-			BaseTreeGridEntity.setIcon("../deng/images/icons/target_point.png");
-			BaseTreeGridEntity.setTempObject("功能");
-			BaseTreeGridEntity.setContent(""+xtFunctioninfo.getXt_functioninfoTitle());
-			BaseTreeGridEntity.setIntegerappend(xtFunctioninfo.getXt_functioninfoIsAuthority()+","+xtFunctioninfo.getXt_functioninfoType());
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xtFunctioninfo.getXt_functioninfo_id());
+			BaseZTreeEntity.setPid(xtFunctioninfo.getXt_menuinfo_id());
+			BaseZTreeEntity.setText(xtFunctioninfo.getXt_functioninfoTitle());
+//			BaseZTreeEntity.setIcon("../deng/images/icons/target_point.png");
+			BaseZTreeEntity.setTempObject("功能");
+			BaseZTreeEntity.setContent(""+xtFunctioninfo.getXt_functioninfoTitle());
+			BaseZTreeEntity.setIntegerappend(xtFunctioninfo.getXt_functioninfoIsAuthority()+","+xtFunctioninfo.getXt_functioninfoType());
 			if(("true").equals(expanded)){
-				BaseTreeGridEntity.setExpanded(true);
+				BaseZTreeEntity.setExpanded(true);
 			}else{
-				BaseTreeGridEntity.setExpanded(false);
+				BaseZTreeEntity.setExpanded(false);
 			}
 			if("true".equals(singleClickExpand)){
-				BaseTreeGridEntity.setSingleClickExpand(true);
+				BaseZTreeEntity.setSingleClickExpand(true);
 			}else{
-				BaseTreeGridEntity.setSingleClickExpand(false);
+				BaseZTreeEntity.setSingleClickExpand(false);
 			}
-			BaseTreeGridEntity.setLeaf(true);
-			list.add(BaseTreeGridEntity);
+			BaseZTreeEntity.setLeaf(true);
+			list.add(BaseZTreeEntity);
 		}
-		return outStr(BaseTreeGridEntity.buildTree(list,false));
+		return outStr(BaseZTreeEntity.buildTree(list,false));
 	}
 	
 	/**

@@ -1,237 +1,168 @@
-var grid;
-var store;
-Ext.onReady(function(){	
-	initGrid();
-	Ext.create('Ext.Viewport', {
-		layout:'border',
-		xtype:'viewport',
-		items:[searchForm,grid]
-	});
+var setting = {
+   view:{
+       selectedMulti:false
+   },
+   check:{
+       enable:false
+   },
+   async:{
+       enable:true,//设置 zTree是否开启异步加载模式  加载全部信息
+       url:"../xtFunctioninfoController/getXtFunctioninfoList",//Ajax获取数据的 URL地址  
+       otherParam:{ 
+    	 　　'expanded':function(){return 'false'} 
+       } //异步参数
+   },
+   data:{
+	   //必须使用data  
+       simpleData:{
+           enable:true,
+           idKey:"id",//id编号命名 默认  
+           pIdKey:"pId",//父id编号命名 默认   
+           rootPId:0 //用于修正根节点父节点数据，即 pIdKey 指定的属性值  
+       }
+   },
+   edit:{
+       enable:false
+   },  
+   callback:{  
+       onClick:onClick,//单击事件
+       onAsyncSuccess:onAsyncSuccess//加载数据完成事件
+   }  
+};
+$(document).ready(function(){
+	InitztData();
 });
+//初始数据
+function InitztData() {
+	$.fn.zTree.init($("#tree"), setting);
+}
+
+//刷新
+function refreshAll(){
+	InitztData();
+}
+
+//加载数据完成事件
+function onAsyncSuccess(event, treeId, treeNode, msg){  
+	var length = $('#keyword').val().length;
+	if(length > 0){
+		var zTree = $.fn.zTree.getZTreeObj(treeId);
+	    var nodeList = zTree.getNodesByParamFuzzy("name", $('#keyword').val());
+	    //将找到的nodelist节点更新至Ztree内
+	    $.fn.zTree.init($("#"+treeId), setting, nodeList);
+	}
+}  
+
+//单击事件
+function onClick(event, treeId, treeNode, msg){  
+}  
+
 /**
-*初始化资源模块
-**/
-function initGrid(){
-	/**查询区域可扩展**/
-	var items = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
-		},
-		items:[
-			{
-			    xtype:'triggerfield',
-			    emptyText:'请输入关键字（如菜单、平台等）',
-			    triggerCls:'x-form-clear-trigger',
-			    width:260,
-			    onTriggerClick:function(){
-			        this.reset();
-			    },
-			    listeners:{
-			        change:function(){
-			            filterBy(grid,this.getValue(),'text');
-			        },
-			        buffer:250
-			    }
-			 }
-		]
-	});
-	initSearchForm('north',items,false,'left');
-	store = Ext.create('Ext.data.TreeStore',{
-    	root:{
-			name:'一级',
-			id:'0',
-			expanded:true
-		},
-		/**此处一定要设置否则全部展开节点无效**/
-		autoLoad:false,
-        proxy:{
-            type:'ajax',
-            method:'post',
-			url:'../xtFunctioninfoController/getXtFunctioninfoList',
-			reader:{
-				type:'json'
-			},
-			extraParams:{id:'0',type:encodeURI('菜单'),expanded:true}
-        }
-    });
-    grid = Ext.create('Ext.tree.Panel', {
-        reserveScrollbar:true,
-        region:'center',
-        loadMask:true,
-        useArrows:true,
-        rootVisible:false,
-        store:store,
-        autoSctroll:true,
-        id:'treeGrid',
-        animate:false,
-        columnLines:true,
-        frame:false,
-        title:'查询结果',
-        bufferedRenderer:false,
-        tbar:[
-			 {
-				text:'添 加',
-				tooltip:'添 加',
-				xtype:'button',
-				minWidth:tbarBtnMinWidth,
-				cls:'addBtn',
-				icon:addIcon,
-				handler:function(){
-					addXtFunctioninfo();
-				}
-			 },
-			 {
-				text:'编 辑',
-				tooltip:'编 辑',
-				xtype:'button',
-				minWidth:tbarBtnMinWidth,
-				cls:'updateBtn',
-				icon:editIcon,
-				handler:function(){
-					updateXtFunctioninfo();
-				}
-			 },
-			 {
-				text:'删 除',
-				tooltip:'删 除',
-				xtype:'button',
-				minWidth:tbarBtnMinWidth,
-				cls:'delBtn',
-				icon:delIcon,
-				handler:function(){
-					delXtFunctioninfo();
-				}
-			 },
-			 {
-				text:'刷 新',
-				tooltip:'刷 新',
-				xtype:'button',
-				minWidth:tbarBtnMinWidth,
-				cls:'refreshBtn',
-				icon:refreshIcon,
-				handler:function(){
-					refresh();
-				}
-			 }
-		],
-        /**
-        listeners:{  
-            beforeitemcollapse:function(node,optd){
-                return false;  
-            },
-            itemclick:function(node,optd){
-            	var leaf = optd.data.leaf;
-            	if(leaf == true){
-            	}
-            }
-        },
-        **/
-        viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
-		},
-        columns:[{
-        	text:'ID',
-            flex:2,
-            hideable:false,
-            hidden:true,
-            sortable:true,
-            dataIndex:'id'
-        },{
-            xtype:'treecolumn',
-            text:'名称',
-            flex:1,
-            sortable:true,
-            dataIndex:'text'
-        },{
-            text:'性质',
-            dataIndex:'tempObject',
-            sortable:true,
-            renderer:function(value){
-            	return value;
-            }
-        },{
-            text:'数据权限',
-            dataIndex:'integerappend',
-            sortable:true,
-            renderer:function(value){
-            	var val = value.split(",");
-            	if(val[0] == 0){
-            		return "<font color='red'>是</font>";
-            	}else if(val[0] == 1){
-            		return "否";
-            	}
-            }
-        },{
-            text:'拦截类型',
-            dataIndex:'integerappend',
-            sortable:true,
-            renderer:function(value){
-            	var val = value.split(",");
-            	if(val[1] == 0){
-            		return "无需拦截"
-            	}else if(val[1] == 1){
-            		return "<font color='red'>必须拦截</font>";
-            	}
-            }
-        }/*,{
-            text:'备注',
-            dataIndex:'content',
-            renderer:function(value){
-            	return value;
-            }
-        }*/]
-    });
-    refresh();
-    /**选择父节点选中子节点**/
-    /**
-    grid.on('checkchange',function(node,checked){  
-	    node.expand();  
-	    node.checked = checked;  
-	    node.eachChild(function(child){  
-	        child.set('checked',checked);  
-	        child.fireEvent('checkchange',child,checked);  
-	    });  
-	}, grid);
-	**/ 
+ * 搜索树，显示并展示
+ * @param treeId
+ * @param text文本框的id
+ */
+function filter(){
+	InitztData();
 }
 
+//删除
 function delXtFunctioninfo(){
-	var model = grid.getSelectionModel();
-	if(model.selected.length == 0){
-		msgTishi('请选择后在删除');
+	var zTree = $.fn.zTree.getZTreeObj("tree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"必须选择一条记录进行删除");
 		return;
 	}
-	if(model.selected.items[0].data.tempObject == '菜单'){
-		msgTishi('您选择的是菜单不能删除，请选择功能!');
+	if(nodes[0].tempObject != '功能'){
+		toastrBoot(4,"选择的记录必须为功能才能删除");
 		return;
 	}
-	var rowData = model.selected.items[0].data;
-	Ext.Msg.confirm('提示','确定删除该行数据？',function(btn){
-		if(btn == 'yes'){
-			var xt_functioninfo_id = rowData.id;
-			var params = {xt_functioninfo_id:xt_functioninfo_id};
-			ajaxRequest('../xtFunctioninfoController/delXtFunctioninfo',grid,params,'正在执行删除操作中！请稍后...');
-		}
-	});
+	console.info(nodes[0]);
+	var params = {xt_functioninfo_id:nodes[0].id};
+	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
+		ajaxBRequestCallFn('../xtFunctioninfoController/delXtFunctioninfo',params,function(result){
+			try {
+	    		result = eval("(" + result + ")");  
+	    		if(typeof(result.success) != "undefined"){
+	    			if(result.success){
+	            		window.parent.toastrBoot(3,result.msg);
+	            		refreshAll();
+	        		}else{
+	        			window.parent.toastrBoot(4,result.msg);
+	        		}
+	    		}
+			} catch (e) {
+				
+			}
+		});
+	})
 }
 
-function refresh(){
-	showWaitMsg("正在加载数据...");
-	/**
-	new Ext.util.DelayedTask(function(){  
-       
-    }).delay(1000);
-    **/
-	store.on('load',function(){
-		grid.expandAll();
-	    hideWaitMsg();
-    });
+
+
+
+/////////////////////模块选择器开始///////////////////
+function xtMenuinfoSelect(flag){
+	$('#flag').val(flag);
+	$('#xtMenuinfoBody').height(300);
+	var $modal_dialog = $("#xtMenuinfoSelectDialog");  
+	$modal_dialog.css({'width':'500px'});  
+	$('#xtMenuinfoSelectModal').modal({"backdrop":"static"});
+	var setting = {
+		view:{
+			selectedMulti:false
+		},
+		check:{
+			enable:false
+		},
+		async:{
+			enable:true,//设置 zTree是否开启异步加载模式  加载全部信息
+			url:"../xtMenuinfoController/getXtMenuinfoBZTree",//Ajax获取数据的 URL地址  
+			otherParam:{ 
+			'expanded':function(){return 'true'} 
+			} //异步参数
+		},
+		data:{
+			//必须使用data  
+			simpleData:{
+				enable:true,
+				idKey:"id",//id编号命名 默认  
+				pIdKey:"pId",//父id编号命名 默认   
+				rootPId:0 //用于修正根节点父节点数据，即 pIdKey 指定的属性值  
+			}
+		},
+		edit:{
+			enable:false
+		},  
+		callback:{  
+			onClick:onClick//单击事件
+		}  
+	};
+	$.fn.zTree.init($("#menu"), setting);
 }
+
+//单击事件
+function onClick(event, treeId, treeNode, msg){  
+
+}  
+
+function doXtMenuinfoSelect(){
+	var zTree = $.fn.zTree.getZTreeObj("menu"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"请选择一条隶属模块信息");
+		return;
+	}
+	msgTishCallFnBoot("确定要选择【<font color=red>"+nodes[0].name+"</font>】？",function(){
+		if($('#flag').val() == 1){
+			$("#addXtFunctioninfoForm").find('#xt_menuinfo_title').val(nodes[0].name);
+			$("#addXtFunctioninfoForm").find('#xt_menuinfo_id_').val(nodes[0].id);
+		}else if($('#flag').val() == 2){
+			$("#updateXtFunctioninfoForm").find('#xt_menuinfo_title').val(nodes[0].name);
+			$("#updateXtFunctioninfoForm").find('#xt_menuinfo_id_').val(nodes[0].id);
+		}
+		$('#xtMenuinfoSelectModal').modal('hide');
+	})
+}
+/////////////////////模块选择器结束///////////////////
