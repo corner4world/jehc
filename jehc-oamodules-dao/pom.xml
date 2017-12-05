@@ -6,6 +6,7 @@
 		<groupId>jehc-p</groupId>
 		<artifactId>jehc-p</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../jehc-p/pom.xml</relativePath>
 	</parent>
 
 
@@ -27,4 +28,16 @@
 			<artifactId>jehc-base-dao</artifactId>
 		</dependency>
 	</dependencies>
+	
+	<!-- 解决Idea中mapper.xml编译 -->
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
 </project>

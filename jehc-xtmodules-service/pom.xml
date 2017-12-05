@@ -6,6 +6,7 @@
 		<groupId>jehc-p</groupId>
 		<artifactId>jehc-p</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../jehc-p/pom.xml</relativePath>
 	</parent>
 
 	<artifactId>jehc-xtmodules-service</artifactId>
