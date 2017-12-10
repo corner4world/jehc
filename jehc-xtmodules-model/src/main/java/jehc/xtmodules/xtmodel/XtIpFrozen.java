@@ -11,7 +11,7 @@ public class XtIpFrozen extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String xt_ip_frozen_id;/**IP冻结编号**/
 	private String xt_ip_frozen_address;/**IP地址**/
-	private String xt_ip_frozen_status;/**状态0正常1冻结2黑名单**/
+	private Integer xt_ip_frozen_status;/**状态0正常1冻结2黑名单**/
 	private String xt_ip_frozen_content;/**内容**/
 	private String xt_ip_frozen_ctime;/**创建时间**/
 	private String xt_ip_frozen_mtime;/**修改时间**/
@@ -28,11 +28,11 @@ public class XtIpFrozen extends BaseEntity implements Serializable{
 	public String getXt_ip_frozen_address(){
 		return xt_ip_frozen_address;
 	}
-	public void setXt_ip_frozen_status(String xt_ip_frozen_status){
-		this.xt_ip_frozen_status=xt_ip_frozen_status;
-	}
-	public String getXt_ip_frozen_status(){
+	public Integer getXt_ip_frozen_status() {
 		return xt_ip_frozen_status;
+	}
+	public void setXt_ip_frozen_status(Integer xt_ip_frozen_status) {
+		this.xt_ip_frozen_status = xt_ip_frozen_status;
 	}
 	public void setXt_ip_frozen_content(String xt_ip_frozen_content){
 		this.xt_ip_frozen_content=xt_ip_frozen_content;

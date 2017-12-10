@@ -16,5 +16,4 @@ public class CacheConstant {
 	public static final String ONLINEUSERINFO="OnLineuserinfo";//在线用户监控1表示一个账号不能同时登陆多台设备或多浏览器 其他表示无限制
 	
 	public static final String XTPATHCACHE_XTDbSTRUCTURE_FILE_PATH = "XTPATHCACHE_XTDbSTRUCTURE_FILE_PATH";//数据库表结构word导出路径
-			
 }

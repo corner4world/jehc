@@ -5,9 +5,9 @@
 	<!--初始化分页-->
 	<select id="getXtMRListByCondition" resultType="jehc.xtmodules.xtmodel.XtMR" parameterType="map">
 		SELECT
-			`xt_m_r_id`,
-			`xt_menuinfo_id`,
-			`xt_role_id`
+			xt_m_r_id,
+			xt_menuinfo_id,
+			xt_role_id
 		FROM 
 			xt_m_r
 		WHERE 1=1
@@ -16,9 +16,9 @@
 	<!--查询对象-->
 	<select id="getXtMRById" resultType="jehc.xtmodules.xtmodel.XtMR" parameterType="string">
 		SELECT
-			`xt_m_r_id`,
-			`xt_menuinfo_id`,
-			`xt_role_id`
+			xt_m_r_id,
+			xt_menuinfo_id,
+			xt_role_id
 		FROM 
 			xt_m_r
 		WHERE xt_m_r_id=#{xt_m_r_id}
@@ -29,9 +29,9 @@
 		INSERT INTO
 			xt_m_r
 			(
-			`xt_m_r_id`,
-			`xt_menuinfo_id`,
-			`xt_role_id`
+			xt_m_r_id,
+			xt_menuinfo_id,
+			xt_role_id
 			)
 			VALUES
 			(
@@ -46,9 +46,9 @@
 		UPDATE
 			xt_m_r
 		SET
-			`xt_m_r_id` = #{xt_m_r_id},
-			`xt_menuinfo_id` = #{xt_menuinfo_id},
-			`xt_role_id` = #{xt_role_id}
+			xt_m_r_id = #{xt_m_r_id},
+			xt_menuinfo_id = #{xt_menuinfo_id},
+			xt_role_id = #{xt_role_id}
 		WHERE xt_m_r_id=#{xt_m_r_id}
 	</update>
 
@@ -62,9 +62,9 @@
 		INSERT INTO
 			xt_m_r
 			(
-			`xt_m_r_id`,
-			`xt_menuinfo_id`,
-			`xt_role_id`
+			xt_m_r_id,
+			xt_menuinfo_id,
+			xt_role_id
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">

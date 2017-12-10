@@ -2,11 +2,15 @@ package jehc.xtmodules.xtmodel;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang3.StringUtils;
+
+import jehc.xtmodules.xtcore.base.BaseEntity;
+
 /**
 * xt_path 文件路径设置 
 * 2015-05-15 15:51:40  邓纯杰
 */
-public class XtPath implements Serializable{
+public class XtPath extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = -1466479389299512377L;  
 	private String xt_path_id;/**ID**/
 	private String xt_path_name;/**称名**/
@@ -45,7 +49,9 @@ public class XtPath implements Serializable{
 		return xt_type;
 	}
 	public void setXt_time(String xt_time){
-		this.xt_time=xt_time;
+		if(!StringUtils.isEmpty(xt_time)){
+			this.xt_time=xt_time;
+		}
 	}
 	public String getXt_time(){
 		return xt_time;

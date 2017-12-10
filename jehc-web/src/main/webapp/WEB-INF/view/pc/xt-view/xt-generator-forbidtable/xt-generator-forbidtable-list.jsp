@@ -13,7 +13,7 @@
 			<form method="POST" id="searchForm" class="form-inline">
 				<div class="form-group">
 					<label>表名</label>
-					<input type="text" class="form-control" name="xt_generator_forbidtable_table" placeholder="请输入表名">
+					<input type="text" class="form-control" name="xt_generator_f_table" placeholder="请输入表名">
 				</div>
 			</form>
 			<div class="form-group" style="margin-left: 35px;margin-top: 25px;">

@@ -5,24 +5,24 @@
 	<!--初始化分页-->
 	<select id="getSolrCoreListByCondition" resultType="jehc.solrmodules.solrmodel.SolrCore" parameterType="map">
 		SELECT
-			solr_core.`solr_core_id`,
-			solr_core.`solr_core_name`,
-			solr_core.`solr_core_ctime`,
-			solr_core.`solr_core_uptime`,
-			solr_core.`xt_userinfo_id`,
-			solr_core.`solr_url_id`,
-			xt_userinfo.`xt_userinfo_realName`,
-			solr_url.`solr_url_url`,
-			solr_core.`solr_core_text`,
-			solr_document.`solr_document_name`,
-			solr_document.`solr_document_id`,
-			solr_core.`solr_schema_templet_id`,
-			solr_core.`solr_data_config_id`,
-			solr_core.`useonlynumbercode`
+			solr_core.solr_core_id,
+			solr_core.solr_core_name,
+			solr_core.solr_core_ctime,
+			solr_core.solr_core_uptime,
+			solr_core.xt_userinfo_id,
+			solr_core.solr_url_id,
+			xt_userinfo.xt_userinfo_realName,
+			solr_url.solr_url_url,
+			solr_core.solr_core_text,
+			solr_document.solr_document_name,
+			solr_document.solr_document_id,
+			solr_core.solr_schema_templet_id,
+			solr_core.solr_data_config_id,
+			solr_core.useonlynumbercode
 		FROM 
-			solr_core AS solr_core LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_core.xt_userinfo_id
-		LEFT JOIN solr_url AS solr_url ON solr_url.solr_url_id=solr_core.`solr_url_id`
-		LEFT JOIN solr_document solr_document ON solr_document.`solr_core_id` = solr_core.`solr_core_id`
+			solr_core solr_core LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_core.xt_userinfo_id
+		LEFT JOIN solr_url solr_url ON solr_url.solr_url_id=solr_core.solr_url_id
+		LEFT JOIN solr_document solr_document ON solr_document.solr_core_id = solr_core.solr_core_id
 		WHERE 1=1
 		<if test="null != solr_url_id">
 			AND solr_url.solr_url_id=#{solr_url_id}
@@ -32,24 +32,24 @@
 	<!--查询对象-->
 	<select id="getSolrCoreById" resultType="jehc.solrmodules.solrmodel.SolrCore" parameterType="string">
 		SELECT
-			solr_core.`solr_core_id`,
-			solr_core.`solr_core_name`,
-			solr_core.`solr_core_ctime`,
-			solr_core.`solr_core_uptime`,
-			solr_core.`xt_userinfo_id`,
-			solr_core.`solr_url_id`,
-			xt_userinfo.`xt_userinfo_realName`,
-			solr_url.`solr_url_url`,
-			solr_core.`solr_core_text`,
-			solr_document.`solr_document_name`,
-			solr_document.`solr_document_id`,
-			solr_core.`solr_schema_templet_id`,
-			solr_core.`solr_data_config_id`,
-			solr_core.`useonlynumbercode`
+			solr_core.solr_core_id,
+			solr_core.solr_core_name,
+			solr_core.solr_core_ctime,
+			solr_core.solr_core_uptime,
+			solr_core.xt_userinfo_id,
+			solr_core.solr_url_id,
+			xt_userinfo.xt_userinfo_realName,
+			solr_url.solr_url_url,
+			solr_core.solr_core_text,
+			solr_document.solr_document_name,
+			solr_document.solr_document_id,
+			solr_core.solr_schema_templet_id,
+			solr_core.solr_data_config_id,
+			solr_core.useonlynumbercode
 		FROM 
-			solr_core AS solr_core LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_core.xt_userinfo_id
-		LEFT JOIN solr_url AS solr_url ON solr_url.solr_url_id=solr_core.`solr_url_id`
-		LEFT JOIN solr_document solr_document ON  solr_document.`solr_core_id` = solr_core.`solr_core_id`
+			solr_core solr_core LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_core.xt_userinfo_id
+		LEFT JOIN solr_url solr_url ON solr_url.solr_url_id=solr_core.solr_url_id
+		LEFT JOIN solr_document solr_document ON  solr_document.solr_core_id = solr_core.solr_core_id
 		WHERE solr_core.solr_core_id=#{solr_core_id}
 	</select>
 
@@ -58,16 +58,16 @@
 		INSERT INTO
 			solr_core
 			(
-			`solr_core_id`,
-			`solr_core_name`,
-			`solr_core_ctime`,
-			`solr_core_uptime`,
-			`xt_userinfo_id`,
-			`solr_url_id`,
-			`solr_core_text`,
-			`solr_schema_templet_id`,
-			`solr_data_config_id`,
-			`useonlynumbercode`
+			solr_core_id,
+			solr_core_name,
+			solr_core_ctime,
+			solr_core_uptime,
+			xt_userinfo_id,
+			solr_url_id,
+			solr_core_text,
+			solr_schema_templet_id,
+			solr_data_config_id,
+			useonlynumbercode
 			)
 			VALUES
 			(
@@ -89,16 +89,16 @@
 		UPDATE
 			solr_core
 		SET
-			`solr_core_id` = #{solr_core_id},
-			`solr_core_name` = #{solr_core_name},
-			`solr_core_ctime` = #{solr_core_ctime},
-			`solr_core_uptime` = #{solr_core_uptime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`solr_url_id` = #{solr_url_id},
-			`solr_core_text` = #{solr_core_text},
-			`solr_schema_templet_id` = #{solr_schema_templet_id},
-			`solr_data_config_id` = #{solr_data_config_id},
-			`useonlynumbercode` = #{useonlynumbercode}
+			solr_core_id = #{solr_core_id},
+			solr_core_name = #{solr_core_name},
+			solr_core_ctime = #{solr_core_ctime},
+			solr_core_uptime = #{solr_core_uptime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			solr_url_id = #{solr_url_id},
+			solr_core_text = #{solr_core_text},
+			solr_schema_templet_id = #{solr_schema_templet_id},
+			solr_data_config_id = #{solr_data_config_id},
+			useonlynumbercode = #{useonlynumbercode}
 		WHERE solr_core_id=#{solr_core_id}
 	</update>
 

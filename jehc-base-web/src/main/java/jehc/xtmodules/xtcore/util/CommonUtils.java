@@ -612,7 +612,6 @@ public class CommonUtils extends UUID{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		return sdf.format(new Date());
 	}
-	
 	/**
 	 * 添加平台业务操作日志通用 采用put方法目的不走事务控制
 	 * @param classname
@@ -621,17 +620,17 @@ public class CommonUtils extends UUID{
 	 */
 	public void aBLogs(String classname,String method,String message){
 		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
-		xt_Operate_Business_Logs.setXt_operate_business_logsTime(CommonUtils.getSimpleDateFormat());
-		xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
-		xt_Operate_Business_Logs.setXt_operate_business_logsModules(classname);
-		xt_Operate_Business_Logs.setXt_operate_business_logsMethod(method);
+		xt_Operate_Business_Logs.setXt_operate_b_logsTime(CommonUtils.getSimpleDateFormat());
+		xt_Operate_Business_Logs.setXt_operate_b_logs_id(UUID.toUUID());
+		xt_Operate_Business_Logs.setXt_operate_b_logsModules(classname);
+		xt_Operate_Business_Logs.setXt_operate_b_logsMethod(method);
 		xt_Operate_Business_Logs.setXt_userinfo_id(CommonUtils.getXtUid());
-		xt_Operate_Business_Logs.setXt_operate_business_logsResult(message);
+		xt_Operate_Business_Logs.setXt_operate_b_logsResult(message);
 		//////////为了性能采用异步
 		/**
         xt_Operate_Business_LogsService.putXtOperateBusinessLogs(xt_Operate_Business_Logs);
         **/
-		new BaseXtOperateBusinessLogsRun(xt_Operate_Business_Logs).run();
+		new BaseXtOperateBusinessLogsRun(xt_Operate_Business_Logs).start();
 	}
 	/**
 	 * 添加平台业务操作日志通用 采用put方法目的不走事务控制
@@ -642,18 +641,18 @@ public class CommonUtils extends UUID{
 	 */
 	public void aBLogs(String classname,String method,String message,String parm){
 		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
-		xt_Operate_Business_Logs.setXt_operate_business_logsTime(CommonUtils.getSimpleDateFormat());
-		xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
-		xt_Operate_Business_Logs.setXt_operate_business_logsModules(classname);
-		xt_Operate_Business_Logs.setXt_operate_business_logsMethod(method);
+		xt_Operate_Business_Logs.setXt_operate_b_logsTime(CommonUtils.getSimpleDateFormat());
+		xt_Operate_Business_Logs.setXt_operate_b_logs_id(UUID.toUUID());
+		xt_Operate_Business_Logs.setXt_operate_b_logsModules(classname);
+		xt_Operate_Business_Logs.setXt_operate_b_logsMethod(method);
 		xt_Operate_Business_Logs.setXt_userinfo_id(CommonUtils.getXtUid());
-		xt_Operate_Business_Logs.setXt_operate_business_logsResult(message);
-		xt_Operate_Business_Logs.setXt_operate_business_logsMethodPar(parm);
+		xt_Operate_Business_Logs.setXt_operate_b_logsResult(message);
+		xt_Operate_Business_Logs.setXt_operate_b_logsMethodPar(parm);
 		//////////为了性能采用异步
 		/**
         xt_Operate_Business_LogsService.putXtOperateBusinessLogs(xt_Operate_Business_Logs);
         **/
-        new BaseXtOperateBusinessLogsRun(xt_Operate_Business_Logs).run();
+        new BaseXtOperateBusinessLogsRun(xt_Operate_Business_Logs).start();
 	}
 	
 	/**
@@ -689,7 +688,7 @@ public class CommonUtils extends UUID{
 				list.get(i).setBusiness_id(business_id);
 				list.get(i).setXt_userinfo_id(CommonUtils.getXtUid());
 			}
-			new BaseXtModifyRecordRun(list).run();
+			new BaseXtModifyRecordRun(list).start();
 		} catch (Exception e) {
 		}
 	}
@@ -733,7 +732,7 @@ public class CommonUtils extends UUID{
 				list.get(i).setBusiness_id(business_id);
 				list.get(i).setXt_userinfo_id(CommonUtils.getXtUid());
 			}
-			new BaseXtModifyRecordRun(list).run();
+			new BaseXtModifyRecordRun(list).start();
 		} catch (Exception e) {
 		}
 	}

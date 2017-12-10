@@ -5,40 +5,40 @@
 	<!--初始化分页-->
 	<select id="getXtPostListByCondition" resultType="jehc.xtmodules.xtmodel.XtPost" parameterType="map">
 		SELECT
-			xt_post.`xt_post_id`,
-			xt_post.`xt_departinfo_id`,
-			xt_post.`xt_post_parentId`,
-			xt_post.`xt_post_name`,
-			xt_post.`xt_post_desc`,
-			xt_post.`xt_post_maxNum`,
-			xt_post.`xt_post_isLeaf`,
-			xt_post.`xt_post_image`,
-			xt_post.`xt_post_grade`,
-			xt_departinfo.`xt_departinfo_name`
+			xt_post.xt_post_id,
+			xt_post.xt_departinfo_id,
+			xt_post.xt_post_parentId,
+			xt_post.xt_post_name,
+			xt_post.xt_post_desc,
+			xt_post.xt_post_maxNum,
+			xt_post.xt_post_isLeaf,
+			xt_post.xt_post_image,
+			xt_post.xt_post_grade,
+			xt_departinfo.xt_departinfo_name
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE xt_post.xt_post_isdelete = 0
 		<if test="null != xt_departinfo_id">
-			AND xt_post.`xt_departinfo_id` = #{xt_departinfo_id}
+			AND xt_post.xt_departinfo_id = #{xt_departinfo_id}
 		</if>
 		<if test="null != xt_post_name">
-			AND instr(xt_post_name,#{xt_post_name})
+			AND xt_post.xt_post_name LIKE CONCAT(CONCAT('%',#{xt_post_name}),'%')
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtPostById" resultType="jehc.xtmodules.xtmodel.XtPost" parameterType="string">
 		SELECT
-			xt_post.`xt_post_id`,
-			xt_post.`xt_departinfo_id`,
-			xt_post.`xt_post_parentId`,
-			xt_post.`xt_post_name`,
-			xt_post.`xt_post_desc`,
-			xt_post.`xt_post_maxNum`,
-			xt_post.`xt_post_isLeaf`,
-			xt_post.`xt_post_image`,
-			xt_post.`xt_post_grade`,
-			xt_departinfo.`xt_departinfo_name`
+			xt_post.xt_post_id,
+			xt_post.xt_departinfo_id,
+			xt_post.xt_post_parentId,
+			xt_post.xt_post_name,
+			xt_post.xt_post_desc,
+			xt_post.xt_post_maxNum,
+			xt_post.xt_post_isLeaf,
+			xt_post.xt_post_image,
+			xt_post.xt_post_grade,
+			xt_departinfo.xt_departinfo_name
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE xt_post_id=#{xt_post_id}
@@ -49,16 +49,16 @@
 		INSERT INTO
 			xt_post
 			(
-			`xt_post_id`,
-			`xt_departinfo_id`,
-			`xt_post_parentId`,
-			`xt_post_name`,
-			`xt_post_desc`,
-			`xt_post_maxNum`,
-			`xt_post_isLeaf`,
-			`xt_post_image`,
-			`xt_post_grade`,
-			`xt_post_isdelete`
+			xt_post_id,
+			xt_departinfo_id,
+			xt_post_parentId,
+			xt_post_name,
+			xt_post_desc,
+			xt_post_maxNum,
+			xt_post_isLeaf,
+			xt_post_image,
+			xt_post_grade,
+			xt_post_isdelete
 			)
 			VALUES
 			(
@@ -80,15 +80,15 @@
 		UPDATE
 			xt_post
 		SET
-			`xt_post_id` = #{xt_post_id},
-			`xt_departinfo_id` = #{xt_departinfo_id},
-			`xt_post_parentId` = #{xt_post_parentId},
-			`xt_post_name` = #{xt_post_name},
-			`xt_post_desc` = #{xt_post_desc},
-			`xt_post_maxNum` = #{xt_post_maxNum},
-			`xt_post_isLeaf` = #{xt_post_isLeaf},
-			`xt_post_image` = #{xt_post_image},
-			`xt_post_grade` = #{xt_post_grade}
+			xt_post_id = #{xt_post_id},
+			xt_departinfo_id = #{xt_departinfo_id},
+			xt_post_parentId = #{xt_post_parentId},
+			xt_post_name = #{xt_post_name},
+			xt_post_desc = #{xt_post_desc},
+			xt_post_maxNum = #{xt_post_maxNum},
+			xt_post_isLeaf = #{xt_post_isLeaf},
+			xt_post_image = #{xt_post_image},
+			xt_post_grade = #{xt_post_grade}
 		WHERE xt_post_id=#{xt_post_id}
 	</update>
 
@@ -107,38 +107,38 @@
 	<!-- 岗位根目录集合 -->
 	<select id="getXtPostinfoList" resultType="jehc.xtmodules.xtmodel.XtPost" parameterType="map">
 		SELECT
-			xt_post.`xt_post_id`,
-			xt_post.`xt_departinfo_id`,
-			xt_post.`xt_post_parentId`,
-			xt_post.`xt_post_name`,
-			xt_post.`xt_post_desc`,
-			xt_post.`xt_post_maxNum`,
-			xt_post.`xt_post_isLeaf`,
-			xt_post.`xt_post_image`,
-			xt_post.`xt_post_grade`,
-			xt_departinfo.`xt_departinfo_name`
+			xt_post.xt_post_id,
+			xt_post.xt_departinfo_id,
+			xt_post.xt_post_parentId,
+			xt_post.xt_post_name,
+			xt_post.xt_post_desc,
+			xt_post.xt_post_maxNum,
+			xt_post.xt_post_isLeaf,
+			xt_post.xt_post_image,
+			xt_post.xt_post_grade,
+			xt_departinfo.xt_departinfo_name
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
-		WHERE (xt_post_parentId = '0' OR ISNULL(xt_post_parentId))
+		WHERE (xt_post_parentId = '0' OR xt_post_parentId is null)
 			AND xt_post.xt_post_isdelete = 0
 		<if test="null != xt_departinfo_id and '' != xt_departinfo_id">
-			AND xt_post.`xt_departinfo_id` = #{xt_departinfo_id}
+			AND xt_post.xt_departinfo_id = #{xt_departinfo_id}
 		</if>
 	</select>
 	
 	<!-- 查找子集合 -->
 	<select id="getXtPostListChild" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtPost">
 		SELECT
-			xt_post.`xt_post_id`,
-			xt_post.`xt_departinfo_id`,
-			xt_post.`xt_post_parentId`,
-			xt_post.`xt_post_name`,
-			xt_post.`xt_post_desc`,
-			xt_post.`xt_post_maxNum`,
-			xt_post.`xt_post_isLeaf`,
-			xt_post.`xt_post_image`,
-			xt_post.`xt_post_grade`,
-			xt_departinfo.`xt_departinfo_name`
+			xt_post.xt_post_id,
+			xt_post.xt_departinfo_id,
+			xt_post.xt_post_parentId,
+			xt_post.xt_post_name,
+			xt_post.xt_post_desc,
+			xt_post.xt_post_maxNum,
+			xt_post.xt_post_isLeaf,
+			xt_post.xt_post_image,
+			xt_post.xt_post_grade,
+			xt_departinfo.xt_departinfo_name
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE 
@@ -149,16 +149,16 @@
 	<!-- 查找所有集合 -->
 	<select id="getXtPostListAll" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtPost">
 		SELECT
-			xt_post.`xt_post_id`,
-			xt_post.`xt_departinfo_id`,
-			xt_post.`xt_post_parentId`,
-			xt_post.`xt_post_name`,
-			xt_post.`xt_post_desc`,
-			xt_post.`xt_post_maxNum`,
-			xt_post.`xt_post_isLeaf`,
-			xt_post.`xt_post_image`,
-			xt_post.`xt_post_grade`,
-			xt_departinfo.`xt_departinfo_name`
+			xt_post.xt_post_id,
+			xt_post.xt_departinfo_id,
+			xt_post.xt_post_parentId,
+			xt_post.xt_post_name,
+			xt_post.xt_post_desc,
+			xt_post.xt_post_maxNum,
+			xt_post.xt_post_isLeaf,
+			xt_post.xt_post_image,
+			xt_post.xt_post_grade,
+			xt_departinfo.xt_departinfo_name
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE xt_post.xt_post_isdelete = 0
@@ -167,16 +167,16 @@
 	<!-- 根据各种情况查找集合不分页（流程设计器中处理组 发起组等使用） -->
 	<select id="getXtPostList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtPost">
 		SELECT
-			xt_post.`xt_post_id`,
-			xt_post.`xt_departinfo_id`,
-			xt_post.`xt_post_parentId`,
-			xt_post.`xt_post_name`,
-			xt_post.`xt_post_desc`,
-			xt_post.`xt_post_maxNum`,
-			xt_post.`xt_post_isLeaf`,
-			xt_post.`xt_post_image`,
-			xt_post.`xt_post_grade`,
-			xt_departinfo.`xt_departinfo_name`
+			xt_post.xt_post_id,
+			xt_post.xt_departinfo_id,
+			xt_post.xt_post_parentId,
+			xt_post.xt_post_name,
+			xt_post.xt_post_desc,
+			xt_post.xt_post_maxNum,
+			xt_post.xt_post_isLeaf,
+			xt_post.xt_post_image,
+			xt_post.xt_post_grade,
+			xt_departinfo.xt_departinfo_name
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE 1=1

@@ -5,13 +5,13 @@
 	<!--初始化分页-->
 	<select id="getXtMessageListByCondition" resultType="jehc.xtmodules.xtmodel.XtMessage" parameterType="map">
 		SELECT
-			`xt_message_id`,
-			`from_id`,
-			`to_id`,
-			`xt_meesage_content`,
-			`isread`,
-			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
-			DATE_FORMAT(`readtime`,'%Y-%m-%d %H:%i:%s') AS `readtime`,
+			xt_message_id,
+			from_id,
+			to_id,
+			xt_meesage_content,
+			isread,
+			ctime,
+			readtime,
 		    xt_userinfo.xt_userinfo_realName as fromName,
             xtuserinfo.xt_userinfo_realName as toName
 		FROM 
@@ -53,13 +53,13 @@
 	<!--查询对象-->
 	<select id="getXtMessageById" resultType="jehc.xtmodules.xtmodel.XtMessage" parameterType="string">
 		SELECT
-			`xt_message_id`,
-			`from_id`,
-			`to_id`,
-			`xt_meesage_content`,
-			`isread`,
-			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
-			DATE_FORMAT(`readtime`,'%Y-%m-%d %H:%i:%s') AS `readtime`,
+			xt_message_id,
+			from_id,
+			to_id,
+			xt_meesage_content,
+			isread,
+			ctime,
+			readtime,
 		    xt_userinfo.xt_userinfo_realName as fromName,
             xtuserinfo.xt_userinfo_realName as toName
 		FROM 
@@ -73,13 +73,13 @@
 		INSERT INTO
 			xt_message
 			(
-			`xt_message_id`,
-			`from_id`,
-			`to_id`,
-			`xt_meesage_content`,
-			`isread`,
-			`ctime`,
-			`readtime`
+			xt_message_id,
+			from_id,
+			to_id,
+			xt_meesage_content,
+			isread,
+			ctime,
+			readtime
 			)
 			VALUES
 			(
@@ -98,13 +98,13 @@
 		UPDATE
 			xt_message
 		SET
-			`xt_message_id` = #{xt_message_id},
-			`from_id` = #{from_id},
-			`to_id` = #{to_id},
-			`xt_meesage_content` = #{xt_meesage_content},
-			`isread` = #{isread},
-			`ctime` = #{ctime},
-			`readtime` = #{readtime}
+			xt_message_id = #{xt_message_id},
+			from_id = #{from_id},
+			to_id = #{to_id},
+			xt_meesage_content = #{xt_meesage_content},
+			isread = #{isread},
+			ctime = #{ctime},
+			readtime = #{readtime}
 		WHERE xt_message_id=#{xt_message_id}
 	</update>
 
@@ -121,13 +121,13 @@
 		INSERT INTO
 			xt_message
 			(
-			`xt_message_id`,
-			`from_id`,
-			`to_id`,
-			`xt_meesage_content`,
-			`isread`,
-			`ctime`,
-			`readtime`
+			xt_message_id,
+			from_id,
+			to_id,
+			xt_meesage_content,
+			isread,
+			ctime,
+			readtime
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -149,13 +149,12 @@
 			UPDATE
 				xt_message
 			SET
-				`xt_message_id` = #{item.xt_message_id},
-				`from_id` = #{item.from_id},
-				`to_id` = #{item.to_id},
-				`xt_meesage_content` = #{item.xt_meesage_content},
-				`isread` = #{item.isread},
-				`ctime` = #{item.ctime},
-				`readtime` = #{item.readtime}
+				xt_message_id = #{item.xt_message_id},
+				from_id = #{item.from_id},
+				to_id = #{item.to_id},
+				xt_meesage_content = #{item.xt_meesage_content},
+				isread = #{item.isread},
+				readtime = #{item.readtime}
 			WHERE xt_message_id=#{item.xt_message_id}
 		</foreach>
 	</update>
@@ -165,8 +164,8 @@
 		UPDATE
 			xt_message
 		SET
-			`isread` = #{isread},
-			`readtime` = #{readtime}
+			isread = #{isread},
+			readtime = #{readtime}
 		WHERE 1=1
 		AND isread = 0
 		AND from_id = #{from_id}

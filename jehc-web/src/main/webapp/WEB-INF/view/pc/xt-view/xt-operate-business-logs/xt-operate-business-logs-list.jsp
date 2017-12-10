@@ -13,15 +13,15 @@
 			<form method="POST" id="searchForm" class="form-inline">
 				<div class="form-group">
 					<label>模块</label>
-					<input type="text" class="form-control" name="xt_operate_business_logsModules" placeholder="请输入模块">
+					<input type="text" class="form-control" name="xt_operate_b_logsModules" placeholder="请输入模块">
 				</div>
 				<div class="form-group">
 					<label>执行方法</label>
-					<input type="text" class="form-control" name="xt_operate_business_logsMethod" placeholder="请输入执行方法">
+					<input type="text" class="form-control" name="xt_operate_b_logsMethod" placeholder="请输入执行方法">
 				</div>
 				<div class="form-group">
 					<label>方法参数</label>
-					<input type="text" class="form-control" name="xt_operate_business_logsMethodPar" placeholder="请输入方法参数">
+					<input type="text" class="form-control" name="xt_operate_b_logsMethodPar" placeholder="请输入方法参数">
 				</div>
 			</form>
 			<div class="form-group" style="margin-left: 35px;margin-top: 25px;">

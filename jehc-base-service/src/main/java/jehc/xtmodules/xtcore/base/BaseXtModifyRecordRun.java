@@ -39,7 +39,11 @@ public class BaseXtModifyRecordRun  extends Thread {
 			XtModifyRecordDao xtModifyRecordDao = (XtModifyRecordDao)SpringUtil.getBean("xtModifyRecordDao");
 			if(null != recordList && recordList.size() > 0){
 				log.info("----------开始记录变更记录日志--------------");
-				xtModifyRecordDao.addBatchXtModifyRecord(recordList);
+				//兼容oracle 及mysql 语法 废弃批量
+				for(XtModifyRecord xt_Modify_Record:recordList){
+					xtModifyRecordDao.addXtModifyRecord(xt_Modify_Record);
+				}
+//				xtModifyRecordDao.addBatchXtModifyRecord(recordList);
 				log.info("----------结束记录变更记录日志--------------");
 			}
 		} catch (Exception e) {

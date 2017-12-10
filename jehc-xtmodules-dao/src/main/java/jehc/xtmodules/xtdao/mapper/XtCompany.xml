@@ -5,22 +5,22 @@
 	<!--初始化分页-->
 	<select id="getXtCompanyListByCondition" resultType="jehc.xtmodules.xtmodel.XtCompany" parameterType="map">
 		SELECT
-			`xt_company_id`,
-			`xt_company_parentId`,
-			`xt_company_name`,
-			`xt_company_tel`,
-			`xt_company_remark`,
-			`xt_company_userName`,
-			`xt_company_address`,
-			`xt_company_type`,
-			`xt_company_upTime`,
-			`xt_company_isLeaf`,
-			`xt_company_images`,
-			`xt_company_ceo`,
-			`xt_company_isdelete`,
-			`xt_provinceID`,
-			`xt_cityID`,
-			`xt_districtID`
+			xt_company_id,
+			xt_company_parentId,
+			xt_company_name,
+			xt_company_tel,
+			xt_company_remark,
+			xt_company_userName,
+			xt_company_address,
+			xt_company_type,
+			xt_company_upTime,
+			xt_company_isLeaf,
+			xt_company_images,
+			xt_company_ceo,
+			xt_company_isdelete,
+			xt_provinceID,
+			xt_cityID,
+			xt_districtID
 		FROM 
 			xt_company
 		WHERE 1=1
@@ -29,22 +29,22 @@
 	<!--查询对象-->
 	<select id="getXtCompanyById" resultType="jehc.xtmodules.xtmodel.XtCompany" parameterType="string">
 		SELECT
-			`xt_company_id`,
-			`xt_company_parentId`,
-			`xt_company_name`,
-			`xt_company_tel`,
-			`xt_company_remark`,
-			`xt_company_userName`,
-			`xt_company_address`,
-			`xt_company_type`,
-			`xt_company_upTime`,
-			`xt_company_isLeaf`,
-			`xt_company_images`,
-			`xt_company_ceo`,
-			`xt_company_isdelete`,
-			`xt_provinceID`,
-			`xt_cityID`,
-			`xt_districtID`
+			xt_company_id,
+			xt_company_parentId,
+			xt_company_name,
+			xt_company_tel,
+			xt_company_remark,
+			xt_company_userName,
+			xt_company_address,
+			xt_company_type,
+			xt_company_upTime,
+			xt_company_isLeaf,
+			xt_company_images,
+			xt_company_ceo,
+			xt_company_isdelete,
+			xt_provinceID,
+			xt_cityID,
+			xt_districtID
 		FROM 
 			xt_company
 		WHERE xt_company_id=#{xt_company_id}
@@ -55,22 +55,22 @@
 		INSERT INTO
 			xt_company
 			(
-			`xt_company_id`,
-			`xt_company_parentId`,
-			`xt_company_name`,
-			`xt_company_tel`,
-			`xt_company_remark`,
-			`xt_company_userName`,
-			`xt_company_address`,
-			`xt_company_type`,
-			`xt_company_upTime`,
-			`xt_company_isLeaf`,
-			`xt_company_images`,
-			`xt_company_ceo`,
-			`xt_company_isdelete`,
-			`xt_provinceID`,
-			`xt_cityID`,
-			`xt_districtID`
+			xt_company_id,
+			xt_company_parentId,
+			xt_company_name,
+			xt_company_tel,
+			xt_company_remark,
+			xt_company_userName,
+			xt_company_address,
+			xt_company_type,
+			xt_company_upTime,
+			xt_company_isLeaf,
+			xt_company_images,
+			xt_company_ceo,
+			xt_company_isdelete,
+			xt_provinceID,
+			xt_cityID,
+			xt_districtID
 			)
 			VALUES
 			(
@@ -98,22 +98,22 @@
 		UPDATE
 			xt_company
 		SET
-			`xt_company_id` = #{xt_company_id},
-			`xt_company_parentId` = #{xt_company_parentId},
-			`xt_company_name` = #{xt_company_name},
-			`xt_company_tel` = #{xt_company_tel},
-			`xt_company_remark` = #{xt_company_remark},
-			`xt_company_userName` = #{xt_company_userName},
-			`xt_company_address` = #{xt_company_address},
-			`xt_company_type` = #{xt_company_type},
-			`xt_company_upTime` = #{xt_company_upTime},
-			`xt_company_isLeaf` = #{xt_company_isLeaf},
-			`xt_company_images` = #{xt_company_images},
-			`xt_company_ceo` = #{xt_company_ceo},
-			`xt_company_isdelete` = #{xt_company_isdelete},
-			`xt_provinceID` = #{xt_provinceID},
-			`xt_cityID` = #{xt_cityID},
-			`xt_districtID` = #{xt_districtID}
+			xt_company_id = #{xt_company_id},
+			xt_company_parentId = #{xt_company_parentId},
+			xt_company_name = #{xt_company_name},
+			xt_company_tel = #{xt_company_tel},
+			xt_company_remark = #{xt_company_remark},
+			xt_company_userName = #{xt_company_userName},
+			xt_company_address = #{xt_company_address},
+			xt_company_type = #{xt_company_type},
+			xt_company_upTime = #{xt_company_upTime},
+			xt_company_isLeaf = #{xt_company_isLeaf},
+			xt_company_images = #{xt_company_images},
+			xt_company_ceo = #{xt_company_ceo},
+			xt_company_isdelete = #{xt_company_isdelete},
+			xt_provinceID = #{xt_provinceID},
+			xt_cityID = #{xt_cityID},
+			xt_districtID = #{xt_districtID}
 		WHERE xt_company_id=#{xt_company_id}
 	</update>
 

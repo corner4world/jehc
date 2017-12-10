@@ -5,12 +5,12 @@
 	<!--初始化分页-->
 	<select id="getXtErrorLogsListByCondition" resultType="jehc.xtmodules.xtmodel.XtErrorLogs" parameterType="map">
 		SELECT
-			xt_error_logs.`xt_error_log_id`,
-			xt_error_logs.`xt_error_logContent`,
-			xt_error_logs.`xt_error_logType`,
-			xt_error_logs.`xt_error_logTime`,
-			xt_error_logs.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_error_logs.xt_error_log_id,
+			xt_error_logs.xt_error_logContent,
+			xt_error_logs.xt_error_logType,
+			xt_error_logs.xt_error_logTime,
+			xt_error_logs.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
 			xt_error_logs xt_error_logs LEFT JOIN xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_error_logs.xt_userinfo_id
 		WHERE 1=1
@@ -20,12 +20,12 @@
 	<!--查询对象-->
 	<select id="getXtErrorLogsById" resultType="jehc.xtmodules.xtmodel.XtErrorLogs" parameterType="string">
 		SELECT
-			xt_error_logs.`xt_error_log_id`,
-			xt_error_logs.`xt_error_logContent`,
-			xt_error_logs.`xt_error_logType`,
-			xt_error_logs.`xt_error_logTime`,
-			xt_error_logs.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_error_logs.xt_error_log_id,
+			xt_error_logs.xt_error_logContent,
+			xt_error_logs.xt_error_logType,
+			xt_error_logs.xt_error_logTime,
+			xt_error_logs.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
 			xt_error_logs xt_error_logs LEFT JOIN xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_error_logs.xt_userinfo_id
 		WHERE xt_error_logs.xt_error_log_id=#{xt_error_log_id}
@@ -36,11 +36,11 @@
 		INSERT INTO
 			xt_error_logs
 			(
-			`xt_error_log_id`,
-			`xt_error_logContent`,
-			`xt_error_logType`,
-			`xt_error_logTime`,
-			`xt_userinfo_id`
+			xt_error_log_id,
+			xt_error_logContent,
+			xt_error_logType,
+			xt_error_logTime,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -57,11 +57,11 @@
 		UPDATE
 			xt_error_logs
 		SET
-			`xt_error_log_id` = #{xt_error_log_id},
-			`xt_error_logContent` = #{xt_error_logContent},
-			`xt_error_logType` = #{xt_error_logType},
-			`xt_error_logTime` = #{xt_error_logTime},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			xt_error_log_id = #{xt_error_log_id},
+			xt_error_logContent = #{xt_error_logContent},
+			xt_error_logType = #{xt_error_logType},
+			xt_error_logTime = #{xt_error_logTime},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE xt_error_log_id=#{xt_error_log_id}
 	</update>
 

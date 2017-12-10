@@ -5,31 +5,31 @@
 	<!--初始化分页-->
 	<select id="getXtMonitorMemListByCondition" resultType="jehc.xtmodules.xtmodel.XtMonitorMem" parameterType="map">
 		SELECT
-			`xt_monitor_mem_id`,
-			`xt_monitor_memTotal`,
-			`xt_monitor_memCurrUse`,
-			`xt_monitor_memCurrSy`,
-			`xt_monitor_memJhTotal`,
-			`xt_monitor_memJhCurrUse`,
-			`xt_monitor_memJhSy`,
-			`xt_monitor_memTime`
+			xt_monitor_mem_id,
+			xt_monitor_memTotal,
+			xt_monitor_memCurrUse,
+			xt_monitor_memCurrSy,
+			xt_monitor_memJhTotal,
+			xt_monitor_memJhCurrUse,
+			xt_monitor_memJhSy,
+			xt_monitor_memTime
 		FROM 
 			xt_monitor_mem
 		WHERE 1=1
-		ORDER BY `xt_monitor_memTime` DESC
+		ORDER BY xt_monitor_memTime DESC
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtMonitorMemById" resultType="jehc.xtmodules.xtmodel.XtMonitorMem" parameterType="string">
 		SELECT
-			`xt_monitor_mem_id`,
-			`xt_monitor_memTotal`,
-			`xt_monitor_memCurrUse`,
-			`xt_monitor_memCurrSy`,
-			`xt_monitor_memJhTotal`,
-			`xt_monitor_memJhCurrUse`,
-			`xt_monitor_memJhSy`,
-			`xt_monitor_memTime`
+			xt_monitor_mem_id,
+			xt_monitor_memTotal,
+			xt_monitor_memCurrUse,
+			xt_monitor_memCurrSy,
+			xt_monitor_memJhTotal,
+			xt_monitor_memJhCurrUse,
+			xt_monitor_memJhSy,
+			xt_monitor_memTime
 		FROM 
 			xt_monitor_mem
 		WHERE xt_monitor_mem_id=#{xt_monitor_mem_id}
@@ -40,14 +40,14 @@
 		INSERT INTO
 			xt_monitor_mem
 			(
-			`xt_monitor_mem_id`,
-			`xt_monitor_memTotal`,
-			`xt_monitor_memCurrUse`,
-			`xt_monitor_memCurrSy`,
-			`xt_monitor_memJhTotal`,
-			`xt_monitor_memJhCurrUse`,
-			`xt_monitor_memJhSy`,
-			`xt_monitor_memTime`
+			xt_monitor_mem_id,
+			xt_monitor_memTotal,
+			xt_monitor_memCurrUse,
+			xt_monitor_memCurrSy,
+			xt_monitor_memJhTotal,
+			xt_monitor_memJhCurrUse,
+			xt_monitor_memJhSy,
+			xt_monitor_memTime
 			)
 			VALUES
 			(
@@ -67,14 +67,14 @@
 		UPDATE
 			xt_monitor_mem
 		SET
-			`xt_monitor_mem_id` = #{xt_monitor_mem_id},
-			`xt_monitor_memTotal` = #{xt_monitor_memTotal},
-			`xt_monitor_memCurrUse` = #{xt_monitor_memCurrUse},
-			`xt_monitor_memCurrSy` = #{xt_monitor_memCurrSy},
-			`xt_monitor_memJhTotal` = #{xt_monitor_memJhTotal},
-			`xt_monitor_memJhCurrUse` = #{xt_monitor_memJhCurrUse},
-			`xt_monitor_memJhSy` = #{xt_monitor_memJhSy},
-			`xt_monitor_memTime` = #{xt_monitor_memTime}
+			xt_monitor_mem_id = #{xt_monitor_mem_id},
+			xt_monitor_memTotal = #{xt_monitor_memTotal},
+			xt_monitor_memCurrUse = #{xt_monitor_memCurrUse},
+			xt_monitor_memCurrSy = #{xt_monitor_memCurrSy},
+			xt_monitor_memJhTotal = #{xt_monitor_memJhTotal},
+			xt_monitor_memJhCurrUse = #{xt_monitor_memJhCurrUse},
+			xt_monitor_memJhSy = #{xt_monitor_memJhSy},
+			xt_monitor_memTime = #{xt_monitor_memTime}
 		WHERE xt_monitor_mem_id=#{xt_monitor_mem_id}
 	</update>
 

@@ -5,23 +5,23 @@
 	<!--初始化分页-->
 	<select id="getXtConcordatListByCondition" resultType="jehc.xtmodules.xtmodel.XtConcordat" parameterType="map">
 		SELECT
-			`xt_concordat_id`,
-			`xt_concordatName`,
-			`xt_concordatDesc`
+			xt_concordat_id,
+			xt_concordatName,
+			xt_concordatDesc
 		FROM 
 			xt_concordat
 		WHERE 1=1
 		<if test="null != xt_concordatName">
-			AND instr(xt_concordatName,#{xt_concordatName})
+			AND xt_concordatName LIKE CONCAT(CONCAT('%',#{xt_concordatName}),'%')
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtConcordatById" resultType="jehc.xtmodules.xtmodel.XtConcordat" parameterType="string">
 		SELECT
-			`xt_concordat_id`,
-			`xt_concordatName`,
-			`xt_concordatDesc`
+			xt_concordat_id,
+			xt_concordatName,
+			xt_concordatDesc
 		FROM 
 			xt_concordat
 		WHERE xt_concordat_id=#{xt_concordat_id}
@@ -32,9 +32,9 @@
 		INSERT INTO
 			xt_concordat
 			(
-			`xt_concordat_id`,
-			`xt_concordatName`,
-			`xt_concordatDesc`
+			xt_concordat_id,
+			xt_concordatName,
+			xt_concordatDesc
 			)
 			VALUES
 			(
@@ -49,9 +49,9 @@
 		UPDATE
 			xt_concordat
 		SET
-			`xt_concordat_id` = #{xt_concordat_id},
-			`xt_concordatName` = #{xt_concordatName},
-			`xt_concordatDesc` = #{xt_concordatDesc}
+			xt_concordat_id = #{xt_concordat_id},
+			xt_concordatName = #{xt_concordatName},
+			xt_concordatDesc = #{xt_concordatDesc}
 		WHERE xt_concordat_id=#{xt_concordat_id}
 	</update>
 

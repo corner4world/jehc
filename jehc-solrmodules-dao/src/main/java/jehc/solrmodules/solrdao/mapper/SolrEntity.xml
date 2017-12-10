@@ -5,18 +5,18 @@
 	<!--初始化分页-->
 	<select id="getSolrEntityListByCondition" resultType="jehc.solrmodules.solrmodel.SolrEntity" parameterType="map">
 		SELECT
-			solr_entity.`solr_entity_id`,
-			solr_entity.`solr_entity_name`,
-			solr_entity.`solr_document_id`,
-			DATE_FORMAT(solr_entity.`solr_entity_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_entity_ctime`,
-			DATE_FORMAT(solr_entity.`solr_entity_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_entity_mtime`,
-			solr_entity.`xt_userinfo_id`,
-			solr_entity.`solr_entity_pid`,
-			solr_entity.`solr_entity_text`,
-			xt_userinfo.`xt_userinfo_realName`,
-			solr_entity.`solr_entity_transformer`
+			solr_entity.solr_entity_id,
+			solr_entity.solr_entity_name,
+			solr_entity.solr_document_id,
+			solr_entity.solr_entity_ctime AS solr_entity_ctime,
+			solr_entity.solr_entity_mtime AS solr_entity_mtime,
+			solr_entity.xt_userinfo_id,
+			solr_entity.solr_entity_pid,
+			solr_entity.solr_entity_text,
+			xt_userinfo.xt_userinfo_realName,
+			solr_entity.solr_entity_transformer
 		FROM 
-			solr_entity AS solr_entity LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_entity.xt_userinfo_id
+			solr_entity solr_entity LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_entity.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != solr_document_id">
 			AND solr_entity.solr_document_id = #{solr_document_id}
@@ -26,18 +26,18 @@
 	<!--查询对象-->
 	<select id="getSolrEntityById" resultType="jehc.solrmodules.solrmodel.SolrEntity" parameterType="string">
 		SELECT
-			solr_entity.`solr_entity_id`,
-			solr_entity.`solr_entity_name`,
-			solr_entity.`solr_document_id`,
-			DATE_FORMAT(solr_entity.`solr_entity_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_entity_ctime`,
-			DATE_FORMAT(solr_entity.`solr_entity_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_entity_mtime`,
-			solr_entity.`xt_userinfo_id`,
-			solr_entity.`solr_entity_pid`,
-			solr_entity.`solr_entity_text`,
-			xt_userinfo.`xt_userinfo_realName`,
-			solr_entity.`solr_entity_transformer`
+			solr_entity.solr_entity_id,
+			solr_entity.solr_entity_name,
+			solr_entity.solr_document_id,
+			solr_entity.solr_entity_ctime AS solr_entity_ctime,
+			solr_entity.solr_entity_mtime AS solr_entity_mtime,
+			solr_entity.xt_userinfo_id,
+			solr_entity.solr_entity_pid,
+			solr_entity.solr_entity_text,
+			xt_userinfo.xt_userinfo_realName,
+			solr_entity.solr_entity_transformer
 		FROM 
-			solr_entity solr_entity LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_entity.xt_userinfo_id
+			solr_entity solr_entity LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_entity.xt_userinfo_id
 		WHERE solr_entity_id=#{solr_entity_id}
 	</select>
 
@@ -46,15 +46,15 @@
 		INSERT INTO
 			solr_entity
 			(
-			`solr_entity_id`,
-			`solr_entity_name`,
-			`solr_document_id`,
-			`solr_entity_ctime`,
-			`solr_entity_mtime`,
-			`xt_userinfo_id`,
-			`solr_entity_pid`,
-			`solr_entity_text`,
-			`solr_entity_transformer`
+			solr_entity_id,
+			solr_entity_name,
+			solr_document_id,
+			solr_entity_ctime,
+			solr_entity_mtime,
+			xt_userinfo_id,
+			solr_entity_pid,
+			solr_entity_text,
+			solr_entity_transformer
 			)
 			VALUES
 			(
@@ -75,14 +75,14 @@
 		UPDATE
 			solr_entity
 		SET
-			`solr_entity_id` = #{solr_entity_id},
-			`solr_entity_name` = #{solr_entity_name},
-			`solr_document_id` = #{solr_document_id},
-			`solr_entity_mtime` = #{solr_entity_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`solr_entity_pid` = #{solr_entity_pid},
-			`solr_entity_text` = #{solr_entity_text},
-			`solr_entity_transformer` = #{solr_entity_transformer}
+			solr_entity_id = #{solr_entity_id},
+			solr_entity_name = #{solr_entity_name},
+			solr_document_id = #{solr_document_id},
+			solr_entity_mtime = #{solr_entity_mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			solr_entity_pid = #{solr_entity_pid},
+			solr_entity_text = #{solr_entity_text},
+			solr_entity_transformer = #{solr_entity_transformer}
 		WHERE solr_entity_id=#{solr_entity_id}
 	</update>
 

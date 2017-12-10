@@ -5,11 +5,11 @@
 	<!--初始化分页-->
 	<select id="getBProductPriceListByCondition" resultType="jehc.bmodules.bmodel.BProductPrice" parameterType="map">
 		SELECT
-			`b_product_price_id`,
-			`base_price`,
-			`suggested_price`,
-			`b_seller_product_id`,
-			`original_price`
+			b_product_price_id,
+			base_price,
+			suggested_price,
+			b_seller_product_id,
+			original_price
 		FROM 
 			b_product_price
 		WHERE 1=1
@@ -18,11 +18,11 @@
 	<!--查询对象-->
 	<select id="getBProductPriceById" resultType="jehc.bmodules.bmodel.BProductPrice" parameterType="string">
 		SELECT
-			`b_product_price_id`,
-			`base_price`,
-			`suggested_price`,
-			`b_seller_product_id`,
-			`original_price`
+			b_product_price_id,
+			base_price,
+			suggested_price,
+			b_seller_product_id,
+			original_price
 		FROM 
 			b_product_price
 		WHERE b_product_price_id=#{b_product_price_id}
@@ -33,11 +33,11 @@
 		INSERT INTO
 			b_product_price
 			(
-			`b_product_price_id`,
-			`base_price`,
-			`suggested_price`,
-			`b_seller_product_id`,
-			`original_price`
+			b_product_price_id,
+			base_price,
+			suggested_price,
+			b_seller_product_id,
+			original_price
 			)
 			VALUES
 			(
@@ -54,11 +54,11 @@
 		UPDATE
 			b_product_price
 		SET
-			`b_product_price_id` = #{b_product_price_id},
-			`base_price` = #{base_price},
-			`suggested_price` = #{suggested_price},
-			`b_seller_product_id` = #{b_seller_product_id},
-			`original_price` = #{original_price}
+			b_product_price_id = #{b_product_price_id},
+			base_price = #{base_price},
+			suggested_price = #{suggested_price},
+			b_seller_product_id = #{b_seller_product_id},
+			original_price = #{original_price}
 		WHERE b_product_price_id=#{b_product_price_id}
 	</update>
 
@@ -73,11 +73,11 @@
 	<!--根据卖家商品编号查询对象-->
 	<select id="getBProductPriceByBSellerProductId" resultType="jehc.bmodules.bmodel.BProductPrice" parameterType="string">
 		SELECT
-			`b_product_price_id`,
-			`base_price`,
-			`suggested_price`,
-			`b_seller_product_id`,
-			`original_price`
+			b_product_price_id,
+			base_price,
+			suggested_price,
+			b_seller_product_id,
+			original_price
 		FROM 
 			b_product_price
 		WHERE b_seller_product_id=#{b_seller_product_id}

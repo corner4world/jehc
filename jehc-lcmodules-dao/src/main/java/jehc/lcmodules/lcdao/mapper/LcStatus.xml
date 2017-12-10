@@ -5,16 +5,16 @@
 	<!--初始化分页-->
 	<select id="getLcStatusListByCondition" resultType="jehc.lcmodules.lcmodel.LcStatus" parameterType="map">
 		SELECT
-			lc_status.`lc_status_id`,
-			lc_status.`lc_status_name`,
-			lc_status.`lc_status_remark`,
-			lc_status.`lc_status_constant`,
-			lc_status.`lc_status_ctime`,
-			lc_status.`lc_status_mtime`,
-			lc_status.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			lc_status.lc_status_id,
+			lc_status.lc_status_name,
+			lc_status.lc_status_remark,
+			lc_status.lc_status_constant,
+			lc_status.lc_status_ctime,
+			lc_status.lc_status_mtime,
+			lc_status.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			lc_status lc_status LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_status.xt_userinfo_id
+			lc_status lc_status LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_status.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != lc_status_name">
 			AND instr(lc_status_name,#{lc_status_name})
@@ -24,16 +24,16 @@
 	<!--查询对象-->
 	<select id="getLcStatusById" resultType="jehc.lcmodules.lcmodel.LcStatus" parameterType="string">
 		SELECT
-			lc_status.`lc_status_id`,
-			lc_status.`lc_status_name`,
-			lc_status.`lc_status_remark`,
-			lc_status.`lc_status_constant`,
-			lc_status.`lc_status_ctime`,
-			lc_status.`lc_status_mtime`,
-			lc_status.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			lc_status.lc_status_id,
+			lc_status.lc_status_name,
+			lc_status.lc_status_remark,
+			lc_status.lc_status_constant,
+			lc_status.lc_status_ctime,
+			lc_status.lc_status_mtime,
+			lc_status.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			lc_status lc_status LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_status.xt_userinfo_id
+			lc_status lc_status LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = lc_status.xt_userinfo_id
 		WHERE lc_status.lc_status_id=#{lc_status_id}
 	</select>
 
@@ -42,13 +42,13 @@
 		INSERT INTO
 			lc_status
 			(
-			`lc_status_id`,
-			`lc_status_name`,
-			`lc_status_remark`,
-			`lc_status_constant`,
-			`lc_status_ctime`,
-			`lc_status_mtime`,
-			`xt_userinfo_id`
+			lc_status_id,
+			lc_status_name,
+			lc_status_remark,
+			lc_status_constant,
+			lc_status_ctime,
+			lc_status_mtime,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -67,12 +67,12 @@
 		UPDATE
 			lc_status
 		SET
-			`lc_status_id` = #{lc_status_id},
-			`lc_status_name` = #{lc_status_name},
-			`lc_status_remark` = #{lc_status_remark},
-			`lc_status_constant` = #{lc_status_constant},
-			`lc_status_mtime` = #{lc_status_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			lc_status_id = #{lc_status_id},
+			lc_status_name = #{lc_status_name},
+			lc_status_remark = #{lc_status_remark},
+			lc_status_constant = #{lc_status_constant},
+			lc_status_mtime = #{lc_status_mtime},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE lc_status_id=#{lc_status_id}
 	</update>
 

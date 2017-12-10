@@ -5,12 +5,12 @@
 	<!--初始化分页-->
 	<select id="getSolrDocumentListByCondition" resultType="jehc.solrmodules.solrmodel.SolrDocument" parameterType="map">
 		SELECT
-			`solr_document_id`,
-			`solr_document_name`,
-			`solr_core_id`,
-			DATE_FORMAT(`solr_document_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_document_ctime`,
-			DATE_FORMAT(`solr_document_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_document_mtime`,
-			`xt_userinfo_id`
+			solr_document_id,
+			solr_document_name,
+			solr_core_id,
+			solr_document_ctime solr_document_ctime,
+			solr_document_mtime AS solr_document_mtime,
+			xt_userinfo_id
 		FROM 
 			solr_document
 		WHERE 1=1
@@ -22,12 +22,12 @@
 	<!--查询对象-->
 	<select id="getSolrDocumentById" resultType="jehc.solrmodules.solrmodel.SolrDocument" parameterType="string">
 		SELECT
-			`solr_document_id`,
-			`solr_document_name`,
-			`solr_core_id`,
-			DATE_FORMAT(`solr_document_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_document_ctime`,
-			DATE_FORMAT(`solr_document_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_document_mtime`,
-			`xt_userinfo_id`
+			solr_document_id,
+			solr_document_name,
+			solr_core_id,
+			solr_document_ctime solr_document_ctime,
+			solr_document_mtime AS solr_document_mtime,
+			xt_userinfo_id
 		FROM 
 			solr_document
 		WHERE solr_document_id=#{solr_document_id}
@@ -38,12 +38,12 @@
 		INSERT INTO
 			solr_document
 			(
-			`solr_document_id`,
-			`solr_document_name`,
-			`solr_core_id`,
-			`solr_document_ctime`,
-			`solr_document_mtime`,
-			`xt_userinfo_id`
+			solr_document_id,
+			solr_document_name,
+			solr_core_id,
+			solr_document_ctime,
+			solr_document_mtime,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -61,12 +61,12 @@
 		UPDATE
 			solr_document
 		SET
-			`solr_document_id` = #{solr_document_id},
-			`solr_document_name` = #{solr_document_name},
-			`solr_core_id` = #{solr_core_id},
-			`solr_document_ctime` = #{solr_document_ctime},
-			`solr_document_mtime` = #{solr_document_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			solr_document_id = #{solr_document_id},
+			solr_document_name = #{solr_document_name},
+			solr_core_id = #{solr_core_id},
+			solr_document_ctime = #{solr_document_ctime},
+			solr_document_mtime = #{solr_document_mtime},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE solr_document_id=#{solr_document_id}
 	</update>
 

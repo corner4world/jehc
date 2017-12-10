@@ -147,7 +147,11 @@ public class XtDataAuthorityDefaultServiceImpl extends BaseService implements Xt
 			xtDataAuthorityDefaultDao.delXtDataAuthorityDefaultAllByCondition(condition);
 			//3添加 最新
 			if(null != xt_Data_Authority_DefaultList && xt_Data_Authority_DefaultList.size()>0){
-				xtDataAuthorityDefaultDao.addBatchXtDataAuthorityDefault(xt_Data_Authority_DefaultList);
+				for(XtDataAuthorityDefault xt_Data_Authority_Default :xt_Data_Authority_DefaultList){
+					xtDataAuthorityDefaultDao.addXtDataAuthorityDefault(xt_Data_Authority_Default);
+				}
+				//兼容oracle与mysql语法 废弃批量插入
+//				xtDataAuthorityDefaultDao.addBatchXtDataAuthorityDefault(xt_Data_Authority_DefaultList);
 			}
 			//4统一推送
 			addPushDataAuthority();

@@ -5,46 +5,46 @@
 	<!--初始化分页-->
 	<select id="getXtOperateBusinessLogsListByCondition" resultType="jehc.xtmodules.xtmodel.XtOperateBusinessLogs" parameterType="map">
 		SELECT
-			xt_operate_business_logs.`xt_operate_business_logs_id`,
-			xt_operate_business_logs.`xt_operate_business_logsTime`,
-			xt_operate_business_logs.`xt_userinfo_id`,
-			xt_operate_business_logs.`xt_operate_business_logsModules`,
-			xt_operate_business_logs.`xt_operate_business_logsMethod`,
-			xt_operate_business_logs.`xt_operate_business_logsMethodPar`,
-			xt_operate_business_logs.`xt_operate_business_logsResult`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_operate_business_logs.xt_operate_b_logs_id,
+			xt_operate_business_logs.xt_operate_b_logsTime,
+			xt_operate_business_logs.xt_userinfo_id,
+			xt_operate_business_logs.xt_operate_b_logsModules,
+			xt_operate_business_logs.xt_operate_b_logsMethod,
+			xt_operate_business_logs.xt_operate_b_logsMethodPar,
+			xt_operate_business_logs.xt_operate_b_logsResult,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			xt_operate_business_logs LEFT JOIN xt_userinfo AS xt_userinfo ON xt_operate_business_logs.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			xt_operate_business_logs LEFT JOIN xt_userinfo xt_userinfo ON xt_operate_business_logs.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
-		<if test="null != xt_operate_business_logsResult">
-			AND xt_operate_business_logs.xt_operate_business_logsResult like '%${xt_operate_business_logsResult}%'
+		<if test="null != xt_operate_b_logsResult">
+			AND xt_operate_business_logs.xt_operate_b_logsResult like '%${xt_operate_b_logsResult}%'
 		</if>
-		<if test="null != xt_operate_business_logsMethodPar">
-			AND xt_operate_business_logs.xt_operate_business_logsMethodPar like '%${xt_operate_business_logsMethodPar}%'
+		<if test="null != xt_operate_b_logsMethodPar">
+			AND xt_operate_business_logs.xt_operate_b_logsMethodPar like '%${xt_operate_b_logsMethodPar}%'
 		</if>
-		<if test="null != xt_operate_business_logsMethod">
-			AND xt_operate_business_logs.xt_operate_business_logsMethod like '%${xt_operate_business_logsMethod}%'
+		<if test="null != xt_operate_b_logsMethod">
+			AND xt_operate_business_logs.xt_operate_b_logsMethod like '%${xt_operate_b_logsMethod}%'
 		</if>
-		<if test="null != xt_operate_business_logsModules">
-			AND xt_operate_business_logs.xt_operate_business_logsModules like '%${xt_operate_business_logsModules}%'
+		<if test="null != xt_operate_b_logsModules">
+			AND xt_operate_business_logs.xt_operate_b_logsModules like '%${xt_operate_b_logsModules}%'
 		</if>
-		ORDER BY xt_operate_business_logs.`xt_operate_business_logsTime` DESC
+		ORDER BY xt_operate_business_logs.xt_operate_b_logsTime DESC
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtOperateBusinessLogsById" resultType="jehc.xtmodules.xtmodel.XtOperateBusinessLogs" parameterType="string">
 		SELECT
-			xt_operate_business_logs.`xt_operate_business_logs_id`,
-			xt_operate_business_logs.`xt_operate_business_logsTime`,
-			xt_operate_business_logs.`xt_userinfo_id`,
-			xt_operate_business_logs.`xt_operate_business_logsModules`,
-			xt_operate_business_logs.`xt_operate_business_logsMethod`,
-			xt_operate_business_logs.`xt_operate_business_logsMethodPar`,
-			xt_operate_business_logs.`xt_operate_business_logsResult`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_operate_business_logs.xt_operate_b_logs_id,
+			xt_operate_business_logs.xt_operate_b_logsTime,
+			xt_operate_business_logs.xt_userinfo_id,
+			xt_operate_business_logs.xt_operate_b_logsModules,
+			xt_operate_business_logs.xt_operate_b_logsMethod,
+			xt_operate_business_logs.xt_operate_b_logsMethodPar,
+			xt_operate_business_logs.xt_operate_b_logsResult,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			xt_operate_business_logs LEFT JOIN xt_userinfo AS xt_userinfo ON xt_operate_business_logs.xt_userinfo_id = xt_userinfo.xt_userinfo_id
-		WHERE xt_operate_business_logs.xt_operate_business_logs_id=#{xt_operate_business_logs_id}
+			xt_operate_business_logs LEFT JOIN xt_userinfo xt_userinfo ON xt_operate_business_logs.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE xt_operate_business_logs.xt_operate_b_logs_id=#{xt_operate_b_logs_id}
 	</select>
 
 	<!--添加-->
@@ -52,23 +52,23 @@
 		INSERT INTO
 			xt_operate_business_logs
 			(
-			`xt_operate_business_logs_id`,
-			`xt_operate_business_logsTime`,
-			`xt_userinfo_id`,
-			`xt_operate_business_logsModules`,
-			`xt_operate_business_logsMethod`,
-			`xt_operate_business_logsMethodPar`,
-			`xt_operate_business_logsResult`
+			xt_operate_b_logs_id,
+			xt_operate_b_logsTime,
+			xt_userinfo_id,
+			xt_operate_b_logsModules,
+			xt_operate_b_logsMethod,
+			xt_operate_b_logsMethodPar,
+			xt_operate_b_logsResult
 			)
 			VALUES
 			(
-			#{xt_operate_business_logs_id},
-			#{xt_operate_business_logsTime},
+			#{xt_operate_b_logs_id},
+			#{xt_operate_b_logsTime},
 			#{xt_userinfo_id},
-			#{xt_operate_business_logsModules},
-			#{xt_operate_business_logsMethod},
-			#{xt_operate_business_logsMethodPar},
-			#{xt_operate_business_logsResult}
+			#{xt_operate_b_logsModules},
+			#{xt_operate_b_logsMethod},
+			#{xt_operate_b_logsMethodPar},
+			#{xt_operate_b_logsResult}
 			)
 	</insert>
 
@@ -77,20 +77,20 @@
 		UPDATE
 			xt_operate_business_logs
 		SET
-			`xt_operate_business_logs_id` = #{xt_operate_business_logs_id},
-			`xt_operate_business_logsTime` = #{xt_operate_business_logsTime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_operate_business_logsModules` = #{xt_operate_business_logsModules},
-			`xt_operate_business_logsMethod` = #{xt_operate_business_logsMethod},
-			`xt_operate_business_logsMethodPar` = #{xt_operate_business_logsMethodPar},
-			`xt_operate_business_logsResult` = #{xt_operate_business_logsResult}
-		WHERE xt_operate_business_logs_id=#{xt_operate_business_logs_id}
+			xt_operate_b_logs_id = #{xt_operate_b_logs_id},
+			xt_operate_b_logsTime = #{xt_operate_b_logsTime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_operate_b_logsModules = #{xt_operate_b_logsModules},
+			xt_operate_b_logsMethod = #{xt_operate_b_logsMethod},
+			xt_operate_b_logsMethodPar = #{xt_operate_b_logsMethodPar},
+			xt_operate_b_logsResult = #{xt_operate_b_logsResult}
+		WHERE xt_operate_b_logs_id=#{xt_operate_b_logs_id}
 	</update>
 
 	<!--删除-->
 	<delete id="delXtOperateBusinessLogs" parameterType="map">
-		DELETE FROM xt_operate_business_logs WHERE xt_operate_business_logs_id IN
-		<foreach item="item" index="index" collection="xt_operate_business_logs_id" open="(" separator="," close=")">
+		DELETE FROM xt_operate_business_logs WHERE xt_operate_b_logs_id IN
+		<foreach item="item" index="index" collection="xt_operate_b_logs_id" open="(" separator="," close=")">
 			#{item}
 		</foreach>
 	</delete>

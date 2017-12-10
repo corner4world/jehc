@@ -163,7 +163,7 @@ function initXtGeneratorTab(){
 					allowBlank:true
 				  },
 				  {
-					fieldLabel:'表&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名',
+					fieldLabel:'表名',
 					name:'xt_generator_tbname',
 					width:'50%',
 		            hiddenName:'xt_generator_tbname',
@@ -203,10 +203,10 @@ function initXtGeneratorTab(){
 					}
 				  },
 				  {
-					fieldLabel:'操作主键',
+					fieldLabel:'主键',
 					name:'xt_generator_tb_columnname',
 					id:'xt_generator_tb_columnname',
-					width:'100%',
+					width:'50%',
 		            hiddenName:'xt_generator_tb_columnname',
 		            xtype:"combo",
 		            queryMode:'local', 
@@ -229,6 +229,7 @@ function initXtGeneratorTab(){
 					baseCls:'x-plain',
 					xtype:'panel',
 					border:false,
+					hidden:true,
 					items:[{
 							columnWidth:.3,
 							items:[{
@@ -253,6 +254,7 @@ function initXtGeneratorTab(){
 				  	layout:"column",
 					baseCls:'x-plain',
 					xtype:'panel',
+					hidden:true,
 					items:[{
 							columnWidth:.2,
 							xtype:'checkbox',
@@ -289,6 +291,7 @@ function initXtGeneratorTab(){
 					xtype:'checkbox',
 					fieldLabel:'数据层',
 					checked:true,
+					hidden:true,
 					inputValue:"数据层",
 					name:'xt_generator_modules'
 				  },
@@ -303,6 +306,7 @@ function initXtGeneratorTab(){
 					xtype:'checkbox',
 					fieldLabel:'业务层',
 					checked:true,
+					hidden:true,
 					inputValue:"业务层",
 					name:'xt_generator_modules'
 				  },
@@ -323,6 +327,7 @@ function initXtGeneratorTab(){
 							xtype:'checkboxfield',
 							fieldLabel:'控制层',
 							checked:true,
+							hidden:true,
 							inputValue:"控制层",
 							name:'xt_generator_modules'
 						},

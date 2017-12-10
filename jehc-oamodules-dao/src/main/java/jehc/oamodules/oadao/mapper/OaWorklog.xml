@@ -5,14 +5,14 @@
 	<!--初始化分页-->
 	<select id="getOaWorklogListByCondition" resultType="jehc.oamodules.oamodel.OaWorklog" parameterType="map">
 		SELECT
-			oa_worklog.`oa_worklogID`,
-			oa_worklog.`oa_worklogTitle`,
-			oa_worklog.`oa_worklogContent`,
-			oa_worklog.`oa_worklogCreateTime`,
-			oa_worklog.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			oa_worklog.oa_worklogID,
+			oa_worklog.oa_worklogTitle,
+			oa_worklog.oa_worklogContent,
+			oa_worklog.oa_worklogCreateTime,
+			oa_worklog.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			oa_worklog as oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			oa_worklog oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != oa_worklogTitle">
 			AND instr(oa_worklogTitle,#{oa_worklogTitle})
@@ -33,21 +33,21 @@
  		SELECT 
 			COUNT(0)
 		FROM 
-			oa_worklog as oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			oa_worklog oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 	</select>
 
 	<!--查询对象-->
 	<select id="getOaWorklogById" resultType="jehc.oamodules.oamodel.OaWorklog" parameterType="string">
 		SELECT
-			oa_worklog.`oa_worklogID`,
-			oa_worklog.`oa_worklogTitle`,
-			oa_worklog.`oa_worklogContent`,
-			oa_worklog.`oa_worklogCreateTime`,
-			oa_worklog.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			oa_worklog.oa_worklogID,
+			oa_worklog.oa_worklogTitle,
+			oa_worklog.oa_worklogContent,
+			oa_worklog.oa_worklogCreateTime,
+			oa_worklog.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			oa_worklog as oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			oa_worklog oa_worklog LEFT JOIN xt_userinfo xt_userinfo ON oa_worklog.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE oa_worklogID=#{oa_worklogID}
 	</select>
 
@@ -56,11 +56,11 @@
 		INSERT INTO
 			oa_worklog
 			(
-			`oa_worklogID`,
-			`oa_worklogTitle`,
-			`oa_worklogContent`,
-			`oa_worklogCreateTime`,
-			`xt_userinfo_id`
+			oa_worklogID,
+			oa_worklogTitle,
+			oa_worklogContent,
+			oa_worklogCreateTime,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -77,11 +77,11 @@
 		UPDATE
 			oa_worklog
 		SET
-			`oa_worklogID` = #{oa_worklogID},
-			`oa_worklogTitle` = #{oa_worklogTitle},
-			`oa_worklogContent` = #{oa_worklogContent},
-			`oa_worklogCreateTime` = #{oa_worklogCreateTime},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			oa_worklogID = #{oa_worklogID},
+			oa_worklogTitle = #{oa_worklogTitle},
+			oa_worklogContent = #{oa_worklogContent},
+			oa_worklogCreateTime = #{oa_worklogCreateTime},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE oa_worklogID=#{oa_worklogID}
 	</update>
 

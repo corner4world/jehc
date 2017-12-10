@@ -5,13 +5,13 @@
 	<!--初始化分页-->
 	<select id="getSolrIndexSqlListByCondition" resultType="jehc.solrmodules.solrmodel.SolrIndexSql" parameterType="map">
 		SELECT
-			`solr_index_sql_id`,
-			`solr_index_sql_query`,
-			`solr_index_sql_type`,
-			`solr_entity_id`,
-			DATE_FORMAT(`solr_index_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_ctime`,
-			DATE_FORMAT(`solr_index_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_mtime`,
-			`xt_userinfo_id`
+			solr_index_sql_id,
+			solr_index_sql_query,
+			solr_index_sql_type,
+			solr_entity_id,
+			solr_index_ctime AS solr_index_ctime,
+			solr_index_mtime AS solr_index_mtime,
+			xt_userinfo_id
 		FROM 
 			solr_index_sql
 		WHERE 1=1
@@ -23,13 +23,13 @@
 	<!--查询对象-->
 	<select id="getSolrIndexSqlById" resultType="jehc.solrmodules.solrmodel.SolrIndexSql" parameterType="string">
 		SELECT
-			`solr_index_sql_id`,
-			`solr_index_sql_query`,
-			`solr_index_sql_type`,
-			`solr_entity_id`,
-			DATE_FORMAT(`solr_index_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_ctime`,
-			DATE_FORMAT(`solr_index_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_mtime`,
-			`xt_userinfo_id`
+			solr_index_sql_id,
+			solr_index_sql_query,
+			solr_index_sql_type,
+			solr_entity_id,
+			solr_index_ctime AS solr_index_ctime,
+			solr_index_mtime AS solr_index_mtime,
+			xt_userinfo_id
 		FROM 
 			solr_index_sql
 		WHERE solr_index_sql_id=#{solr_index_sql_id}
@@ -40,13 +40,13 @@
 		INSERT INTO
 			solr_index_sql
 			(
-			`solr_index_sql_id`,
-			`solr_index_sql_query`,
-			`solr_index_sql_type`,
-			`solr_entity_id`,
-			`solr_index_ctime`,
-			`solr_index_mtime`,
-			`xt_userinfo_id`
+			solr_index_sql_id,
+			solr_index_sql_query,
+			solr_index_sql_type,
+			solr_entity_id,
+			solr_index_ctime,
+			solr_index_mtime,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -65,13 +65,13 @@
 		UPDATE
 			solr_index_sql
 		SET
-			`solr_index_sql_id` = #{solr_index_sql_id},
-			`solr_index_sql_query` = #{solr_index_sql_query},
-			`solr_index_sql_type` = #{solr_index_sql_type},
-			`solr_entity_id` = #{solr_entity_id},
-			`solr_index_ctime` = #{solr_index_ctime},
-			`solr_index_mtime` = #{solr_index_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			solr_index_sql_id = #{solr_index_sql_id},
+			solr_index_sql_query = #{solr_index_sql_query},
+			solr_index_sql_type = #{solr_index_sql_type},
+			solr_entity_id = #{solr_entity_id},
+			solr_index_ctime = #{solr_index_ctime},
+			solr_index_mtime = #{solr_index_mtime},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE solr_index_sql_id=#{solr_index_sql_id}
 	</update>
 

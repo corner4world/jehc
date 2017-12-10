@@ -5,17 +5,17 @@
 	<!--初始化分页-->
 	<select id="getSolrIndexListByCondition" resultType="jehc.solrmodules.solrmodel.SolrIndex" parameterType="map">
 		SELECT
-			`solr_index_id`,
-			`solr_index_name`,
-			`solr_index_remark`,
-			`solr_index_type`,
-			`solr_index_indexed`,
-			`xt_userinfo_id`,
-			`solr_index_stored`,
-			`solr_index_multiValued`,
-			`solr_core_id`,
-			DATE_FORMAT(`solr_index_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_ctime`,
-			DATE_FORMAT(`solr_index_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_mtime`
+			solr_index_id,
+			solr_index_name,
+			solr_index_remark,
+			solr_index_type,
+			solr_index_indexed,
+			xt_userinfo_id,
+			solr_index_stored,
+			solr_index_multiValued,
+			solr_core_id,
+			solr_index_ctime AS solr_index_ctime,
+			solr_index_mtime AS solr_index_mtime
 		FROM 
 			solr_index
 		WHERE 1=1
@@ -27,17 +27,17 @@
 	<!--查询对象-->
 	<select id="getSolrIndexById" resultType="jehc.solrmodules.solrmodel.SolrIndex" parameterType="string">
 		SELECT
-			`solr_index_id`,
-			`solr_index_name`,
-			`solr_index_remark`,
-			`solr_index_type`,
-			`solr_index_indexed`,
-			`xt_userinfo_id`,
-			`solr_index_stored`,
-			`solr_index_multiValued`,
-			`solr_core_id`,
-			DATE_FORMAT(`solr_index_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_ctime`,
-			DATE_FORMAT(`solr_index_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_mtime`
+			solr_index_id,
+			solr_index_name,
+			solr_index_remark,
+			solr_index_type,
+			solr_index_indexed,
+			xt_userinfo_id,
+			solr_index_stored,
+			solr_index_multiValued,
+			solr_core_id,
+			solr_index_ctime AS solr_index_ctime,
+			solr_index_mtime AS solr_index_mtime
 		FROM 
 			solr_index
 		WHERE solr_index_id=#{solr_index_id}
@@ -48,17 +48,17 @@
 		INSERT INTO
 			solr_index
 			(
-			`solr_index_id`,
-			`solr_index_name`,
-			`solr_index_remark`,
-			`solr_index_type`,
-			`solr_index_indexed`,
-			`xt_userinfo_id`,
-			`solr_index_stored`,
-			`solr_index_multiValued`,
-			`solr_core_id`,
-			`solr_index_ctime`,
-			`solr_index_mtime`
+			solr_index_id,
+			solr_index_name,
+			solr_index_remark,
+			solr_index_type,
+			solr_index_indexed,
+			xt_userinfo_id,
+			solr_index_stored,
+			solr_index_multiValued,
+			solr_core_id,
+			solr_index_ctime,
+			solr_index_mtime
 			)
 			VALUES
 			(
@@ -81,17 +81,17 @@
 		UPDATE
 			solr_index
 		SET
-			`solr_index_id` = #{solr_index_id},
-			`solr_index_name` = #{solr_index_name},
-			`solr_index_remark` = #{solr_index_remark},
-			`solr_index_type` = #{solr_index_type},
-			`solr_index_indexed` = #{solr_index_indexed},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`solr_index_stored` = #{solr_index_stored},
-			`solr_index_multiValued` = #{solr_index_multiValued},
-			`solr_core_id` = #{solr_core_id},
-			`solr_index_ctime` = #{solr_index_ctime},
-			`solr_index_mtime` = #{solr_index_mtime}
+			solr_index_id = #{solr_index_id},
+			solr_index_name = #{solr_index_name},
+			solr_index_remark = #{solr_index_remark},
+			solr_index_type = #{solr_index_type},
+			solr_index_indexed = #{solr_index_indexed},
+			xt_userinfo_id = #{xt_userinfo_id},
+			solr_index_stored = #{solr_index_stored},
+			solr_index_multiValued = #{solr_index_multiValued},
+			solr_core_id = #{solr_core_id},
+			solr_index_ctime = #{solr_index_ctime},
+			solr_index_mtime = #{solr_index_mtime}
 		WHERE solr_index_id=#{solr_index_id}
 	</update>
 

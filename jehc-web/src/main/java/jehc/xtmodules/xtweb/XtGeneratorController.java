@@ -178,7 +178,7 @@ public class XtGeneratorController extends BaseAction {
 			XtGeneratorForbidtable obj = list.get(i);
 			for(int j = 0; j < xtGeneratorTableList.size(); j++){
 				XtGeneratorTable xt_Generator_Table = xtGeneratorTableList.get(j);
-				if(xt_Generator_Table.getTABLE_NAME().equals(obj.getXt_generator_forbidtable_table())){
+				if(xt_Generator_Table.getTABLE_NAME().equals(obj.getXt_generator_f_table())){
 					xtGeneratorTableList.remove(j);
 					j--;
 					break;
@@ -242,7 +242,7 @@ public class XtGeneratorController extends BaseAction {
 			XtGeneratorForbidtable obj = list.get(i);
 			for(int j = 0; j < xtGeneratorTableList.size(); j++){
 				XtGeneratorTable xt_Generator_Table = xtGeneratorTableList.get(j);
-				if(xt_Generator_Table.getTABLE_NAME().equals(obj.getXt_generator_forbidtable_table())){
+				if(xt_Generator_Table.getTABLE_NAME().equals(obj.getXt_generator_f_table())){
 					xtGeneratorTableList.remove(j);
 					j--;
 					break;

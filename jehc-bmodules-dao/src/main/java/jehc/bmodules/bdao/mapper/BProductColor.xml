@@ -5,21 +5,21 @@
 	<!--初始化分页-->
 	<select id="getBProductColorListByCondition" resultType="jehc.bmodules.bmodel.BProductColor" parameterType="map">
 		SELECT
-			b_product_color.`b_product_color_id`,
-			b_product_color.`b_product_color_name`,
-			DATE_FORMAT(b_product_color.`b_product_color_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_color_ctime`,
-			DATE_FORMAT(b_product_color.`b_product_color_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_color_mtime`,
-			b_product_color.`b_product_color_width`,
-			b_product_color.`b_product_color_height`,
-			b_product_color.`xt_userinfo_id`,
-			b_product_color.`b_product_color_sort`,
-			b_product_color.`b_product_color_status`,
-			b_product_color.`xt_attachment_id`,
-			b_product_color.`b_product_id`,
-			b_product_color.`b_product_color_remark`,
-			b_product_color.`b_seller_id`,
-			xt_userinfo.`xt_userinfo_realName`,
-			b_seller.`b_seller_name`
+			b_product_color.b_product_color_id,
+			b_product_color.b_product_color_name,
+			b_product_color.b_product_color_ctime AS b_product_color_ctime,
+			b_product_color.b_product_color_mtime AS b_product_color_mtime,
+			b_product_color.b_product_color_width,
+			b_product_color.b_product_color_height,
+			b_product_color.xt_userinfo_id,
+			b_product_color.b_product_color_sort,
+			b_product_color.b_product_color_status,
+			b_product_color.xt_attachment_id,
+			b_product_color.b_product_id,
+			b_product_color.b_product_color_remark,
+			b_product_color.b_seller_id,
+			xt_userinfo.xt_userinfo_realName,
+			b_seller.b_seller_name
 		FROM 
 			b_product_color b_product_color LEFT JOIN xt_userinfo xt_userinfo ON b_product_color.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_product_color.b_seller_id
@@ -38,21 +38,21 @@
 	<!--查询对象-->
 	<select id="getBProductColorById" resultType="jehc.bmodules.bmodel.BProductColor" parameterType="string">
 		SELECT
-			b_product_color.`b_product_color_id`,
-			b_product_color.`b_product_color_name`,
-			DATE_FORMAT(b_product_color.`b_product_color_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_color_ctime`,
-			DATE_FORMAT(b_product_color.`b_product_color_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_color_mtime`,
-			b_product_color.`b_product_color_width`,
-			b_product_color.`b_product_color_height`,
-			b_product_color.`xt_userinfo_id`,
-			b_product_color.`b_product_color_sort`,
-			b_product_color.`b_product_color_status`,
-			b_product_color.`xt_attachment_id`,
-			b_product_color.`b_product_id`,
-			b_product_color.`b_product_color_remark`,
-			b_product_color.`b_seller_id`,
-			xt_userinfo.`xt_userinfo_realName`,
-		b_seller.`b_seller_name`
+			b_product_color.b_product_color_id,
+			b_product_color.b_product_color_name,
+			b_product_color.b_product_color_ctime AS b_product_color_ctime,
+			b_product_color.b_product_color_mtime AS b_product_color_mtime,
+			b_product_color.b_product_color_width,
+			b_product_color.b_product_color_height,
+			b_product_color.xt_userinfo_id,
+			b_product_color.b_product_color_sort,
+			b_product_color.b_product_color_status,
+			b_product_color.xt_attachment_id,
+			b_product_color.b_product_id,
+			b_product_color.b_product_color_remark,
+			b_product_color.b_seller_id,
+			xt_userinfo.xt_userinfo_realName,
+		b_seller.b_seller_name
 		FROM 
 			b_product_color b_product_color LEFT JOIN xt_userinfo xt_userinfo ON b_product_color.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_product_color.b_seller_id
@@ -64,19 +64,19 @@
 		INSERT INTO
 			b_product_color
 			(
-			`b_product_color_id`,
-			`b_product_color_name`,
-			`b_product_color_ctime`,
-			`b_product_color_mtime`,
-			`b_product_color_width`,
-			`b_product_color_height`,
-			`xt_userinfo_id`,
-			`b_product_color_sort`,
-			`b_product_color_status`,
-			`xt_attachment_id`,
-			`b_product_id`,
-			`b_product_color_remark`,
-			`b_seller_id`
+			b_product_color_id,
+			b_product_color_name,
+			b_product_color_ctime,
+			b_product_color_mtime,
+			b_product_color_width,
+			b_product_color_height,
+			xt_userinfo_id,
+			b_product_color_sort,
+			b_product_color_status,
+			xt_attachment_id,
+			b_product_id,
+			b_product_color_remark,
+			b_seller_id
 			)
 			VALUES
 			(
@@ -101,18 +101,18 @@
 		UPDATE
 			b_product_color
 		SET
-			`b_product_color_id` = #{b_product_color_id},
-			`b_product_color_name` = #{b_product_color_name},
-			`b_product_color_mtime` = #{b_product_color_mtime},
-			`b_product_color_width` = #{b_product_color_width},
-			`b_product_color_height` = #{b_product_color_height},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`b_product_color_sort` = #{b_product_color_sort},
-			`b_product_color_status` = #{b_product_color_status},
-			`xt_attachment_id` = #{xt_attachment_id},
-			`b_product_id` = #{b_product_id},
-			`b_product_color_remark` = #{b_product_color_remark},
-			`b_seller_id` = #{b_seller_id}
+			b_product_color_id = #{b_product_color_id},
+			b_product_color_name = #{b_product_color_name},
+			b_product_color_mtime = #{b_product_color_mtime},
+			b_product_color_width = #{b_product_color_width},
+			b_product_color_height = #{b_product_color_height},
+			xt_userinfo_id = #{xt_userinfo_id},
+			b_product_color_sort = #{b_product_color_sort},
+			b_product_color_status = #{b_product_color_status},
+			xt_attachment_id = #{xt_attachment_id},
+			b_product_id = #{b_product_id},
+			b_product_color_remark = #{b_product_color_remark},
+			b_seller_id = #{b_seller_id}
 		WHERE b_product_color_id=#{b_product_color_id}
 	</update>
 

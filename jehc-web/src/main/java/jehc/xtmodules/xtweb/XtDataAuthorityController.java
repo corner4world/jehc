@@ -319,7 +319,7 @@ public class XtDataAuthorityController extends BaseAction{
 				Xt_Data_Authority_Default.setXt_menuinfo_id(xt_menuinfo_id);
 				Xt_Data_Authority_Default.setXt_data_authority_default_id(UUID.toUUID());
 				Xt_Data_Authority_Default.setXt_functioninfo_id(xt_functioninfo_idList[j]);
-				Xt_Data_Authority_Default.setXt_data_authority_default_value("1");
+				Xt_Data_Authority_Default.setXt_data_authority_d_value("1");
 				xt_Data_Authority_DefaultList.add(Xt_Data_Authority_Default);
 			}
 		}

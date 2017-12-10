@@ -77,8 +77,8 @@ public class XtGeneratorForbidtableController extends BaseAction{
 	public String addXtGeneratorForbidtable(XtGeneratorForbidtable xt_Generator_Forbidtable,HttpServletRequest request){
 		int i = 0;
 		if(null != xt_Generator_Forbidtable && !"".equals(xt_Generator_Forbidtable)){
-			xt_Generator_Forbidtable.setXt_generator_forbidtable_id(UUID.toUUID());
-			xt_Generator_Forbidtable.setXt_generator_forbidtable_ctime(getSimpleDateFormat());
+			xt_Generator_Forbidtable.setXt_generator_f_id(UUID.toUUID());
+			xt_Generator_Forbidtable.setXt_generator_f_ctime(getSimpleDateFormat());
 			xt_Generator_Forbidtable.setXt_userinfo_id(getXtUid());
 			i=xtGeneratorForbidtableService.addXtGeneratorForbidtable(xt_Generator_Forbidtable);
 		}
@@ -98,7 +98,7 @@ public class XtGeneratorForbidtableController extends BaseAction{
 	public String updateXtGeneratorForbidtable(XtGeneratorForbidtable xt_Generator_Forbidtable,HttpServletRequest request){
 		int i = 0;
 		if(null != xt_Generator_Forbidtable && !"".equals(xt_Generator_Forbidtable)){
-			xt_Generator_Forbidtable.setXt_generator_forbidtable_mtime(getSimpleDateFormat());
+			xt_Generator_Forbidtable.setXt_generator_f_mtime(getSimpleDateFormat());
 			xt_Generator_Forbidtable.setXt_userinfo_id(getXtUid());
 			i=xtGeneratorForbidtableService.updateXtGeneratorForbidtable(xt_Generator_Forbidtable);
 		}
@@ -119,7 +119,7 @@ public class XtGeneratorForbidtableController extends BaseAction{
 		int i = 0;
 		if(null != xt_generator_forbidtable_id && !"".equals(xt_generator_forbidtable_id)){
 			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("xt_generator_forbidtable_id",xt_generator_forbidtable_id.split(","));
+			condition.put("xt_generator_f_id",xt_generator_forbidtable_id.split(","));
 			i=xtGeneratorForbidtableService.delXtGeneratorForbidtable(condition);
 		}
 		if(i>0){
@@ -139,7 +139,7 @@ public class XtGeneratorForbidtableController extends BaseAction{
 		int i = 0;
 		XtGeneratorForbidtable xt_Generator_Forbidtable = xtGeneratorForbidtableService.getXtGeneratorForbidtableById(xt_generator_forbidtable_id);
 		if(null != xt_Generator_Forbidtable && !"".equals(xt_Generator_Forbidtable)){
-			xt_Generator_Forbidtable.setXt_generator_forbidtable_id(UUID.toUUID());
+			xt_Generator_Forbidtable.setXt_generator_f_id(UUID.toUUID());
 			i=xtGeneratorForbidtableService.addXtGeneratorForbidtable(xt_Generator_Forbidtable);
 		}
 		if(i>0){

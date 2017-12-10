@@ -5,15 +5,15 @@
 	<!--初始化分页-->
 	<select id="getBWarehouseLocationListByCondition" resultType="jehc.bmodules.bmodel.BWarehouseLocation" parameterType="map">
 		SELECT
-			b_warehouse_location.`b_warehouse_location_id`,
-			b_warehouse_location.`b_warehouse_location_name`,
-			b_warehouse_location.`b_warehouse_location_space`,
-			b_warehouse_location.`b_warehouse_location_width`,
-			b_warehouse_location.`b_warehouse_location_height`,
-			b_warehouse_location.`b_warehouse_location_length`,
-			b_warehouse_location.`b_warehouse_id`,
-			b_warehouse.`b_warehouse_name`,
-			b_seller.`b_seller_name`
+			b_warehouse_location.b_warehouse_location_id,
+			b_warehouse_location.b_warehouse_location_name,
+			b_warehouse_location.b_warehouse_location_space,
+			b_warehouse_location.b_warehouse_location_width,
+			b_warehouse_location.b_warehouse_location_height,
+			b_warehouse_location.b_warehouse_location_length,
+			b_warehouse_location.b_warehouse_id,
+			b_warehouse.b_warehouse_name,
+			b_seller.b_seller_name
 		FROM 
 			b_warehouse_location b_warehouse_location LEFT JOIN b_warehouse b_warehouse ON b_warehouse.b_warehouse_id=b_warehouse_location.b_warehouse_id
 			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_warehouse.b_seller_id
@@ -29,15 +29,15 @@
 	<!--查询对象-->
 	<select id="getBWarehouseLocationById" resultType="jehc.bmodules.bmodel.BWarehouseLocation" parameterType="string">
 		SELECT
-			b_warehouse_location.`b_warehouse_location_id`,
-			b_warehouse_location.`b_warehouse_location_name`,
-			b_warehouse_location.`b_warehouse_location_space`,
-			b_warehouse_location.`b_warehouse_location_width`,
-			b_warehouse_location.`b_warehouse_location_height`,
-			b_warehouse_location.`b_warehouse_location_length`,
-			b_warehouse_location.`b_warehouse_id`,
-			b_warehouse.`b_warehouse_name`,
-			b_seller.`b_seller_name`
+			b_warehouse_location.b_warehouse_location_id,
+			b_warehouse_location.b_warehouse_location_name,
+			b_warehouse_location.b_warehouse_location_space,
+			b_warehouse_location.b_warehouse_location_width,
+			b_warehouse_location.b_warehouse_location_height,
+			b_warehouse_location.b_warehouse_location_length,
+			b_warehouse_location.b_warehouse_id,
+			b_warehouse.b_warehouse_name,
+			b_seller.b_seller_name
 		FROM 
 			b_warehouse_location b_warehouse_location LEFT JOIN b_warehouse b_warehouse ON b_warehouse.b_warehouse_id=b_warehouse_location.b_warehouse_id
 			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_warehouse.b_seller_id
@@ -49,13 +49,13 @@
 		INSERT INTO
 			b_warehouse_location
 			(
-			`b_warehouse_location_id`,
-			`b_warehouse_location_name`,
-			`b_warehouse_location_space`,
-			`b_warehouse_location_width`,
-			`b_warehouse_location_height`,
-			`b_warehouse_location_length`,
-			`b_warehouse_id`
+			b_warehouse_location_id,
+			b_warehouse_location_name,
+			b_warehouse_location_space,
+			b_warehouse_location_width,
+			b_warehouse_location_height,
+			b_warehouse_location_length,
+			b_warehouse_id
 			)
 			VALUES
 			(
@@ -74,13 +74,13 @@
 		UPDATE
 			b_warehouse_location
 		SET
-			`b_warehouse_location_id` = #{b_warehouse_location_id},
-			`b_warehouse_location_name` = #{b_warehouse_location_name},
-			`b_warehouse_location_space` = #{b_warehouse_location_space},
-			`b_warehouse_location_width` = #{b_warehouse_location_width},
-			`b_warehouse_location_height` = #{b_warehouse_location_height},
-			`b_warehouse_location_length` = #{b_warehouse_location_length},
-			`b_warehouse_id` = #{b_warehouse_id}
+			b_warehouse_location_id = #{b_warehouse_location_id},
+			b_warehouse_location_name = #{b_warehouse_location_name},
+			b_warehouse_location_space = #{b_warehouse_location_space},
+			b_warehouse_location_width = #{b_warehouse_location_width},
+			b_warehouse_location_height = #{b_warehouse_location_height},
+			b_warehouse_location_length = #{b_warehouse_location_length},
+			b_warehouse_id = #{b_warehouse_id}
 		WHERE b_warehouse_location_id=#{b_warehouse_location_id}
 	</update>
 

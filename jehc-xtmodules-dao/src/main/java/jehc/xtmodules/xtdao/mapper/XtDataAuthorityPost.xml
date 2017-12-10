@@ -5,11 +5,11 @@
 	<!--初始化分页-->
 	<select id="getXtDataAuthorityPostListByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityPost" parameterType="map">
 		SELECT
-			`xt_data_authority_post_id`,
-			`xtPID`,
-			`xt_post_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`
+			xt_data_authority_post_id,
+			xtPID,
+			xt_post_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id
 		FROM 
 			xt_data_authority_post
 		WHERE 1=1
@@ -24,11 +24,11 @@
 	<!--查询对象-->
 	<select id="getXtDataAuthorityPostById" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityPost" parameterType="string">
 		SELECT
-			`xt_data_authority_post_id`,
-			`xtPID`,
-			`xt_post_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`
+			xt_data_authority_post_id,
+			xtPID,
+			xt_post_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id
 		FROM 
 			xt_data_authority_post
 		WHERE xt_data_authority_post_id=#{xt_data_authority_post_id}
@@ -39,11 +39,11 @@
 		INSERT INTO
 			xt_data_authority_post
 			(
-			`xt_data_authority_post_id`,
-			`xtPID`,
-			`xt_post_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`
+			xt_data_authority_post_id,
+			xtPID,
+			xt_post_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id
 			)
 			VALUES
 			(
@@ -60,10 +60,10 @@
 		UPDATE
 			xt_data_authority_post
 		SET
-			`xtPID` = #{xtPID},
-			`xt_post_id` = #{xt_post_id},
-			`xt_functioninfo_id` = #{xt_functioninfo_id},
-			`xt_menuinfo_id` = #{xt_menuinfo_id}
+			xtPID = #{xtPID},
+			xt_post_id = #{xt_post_id},
+			xt_functioninfo_id = #{xt_functioninfo_id},
+			xt_menuinfo_id = #{xt_menuinfo_id}
 		WHERE xt_data_authority_post_id=#{xt_data_authority_post_id}
 	</update>
 
@@ -73,16 +73,16 @@
 			xt_data_authority_post
 		<set>
 			<if test="xtPID != null">
-				`xtPID` = #{xtPID},
+				xtPID = #{xtPID},
 			</if>
 			<if test="xt_post_id != null">
-				`xt_post_id` = #{xt_post_id},
+				xt_post_id = #{xt_post_id},
 			</if>
 			<if test="xt_functioninfo_id != null">
-				`xt_functioninfo_id` = #{xt_functioninfo_id},
+				xt_functioninfo_id = #{xt_functioninfo_id},
 			</if>
 			<if test="xt_menuinfo_id != null">
-				`xt_menuinfo_id` = #{xt_menuinfo_id},
+				xt_menuinfo_id = #{xt_menuinfo_id},
 			</if>
 		</set>
 		WHERE xt_data_authority_post_id=#{xt_data_authority_post_id}
@@ -104,7 +104,7 @@
 			AND xt_post_id = #{xt_post_id}
 		</if>
 		<if test="null != xt_menuinfo_id">
-			AND `xt_menuinfo_id` = #{xt_menuinfo_id}
+			AND xt_menuinfo_id = #{xt_menuinfo_id}
 		</if>
 		<if test="null != xt_functioninfo_id">
 			AND xt_functioninfo_id = #{xt_functioninfo_id}
@@ -116,11 +116,11 @@
 		INSERT INTO
 			xt_data_authority_post
 			(
-			`xt_data_authority_post_id`,
-			`xtPID`,
-			`xt_post_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`
+			xt_data_authority_post_id,
+			xtPID,
+			xt_post_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -140,10 +140,10 @@
 			UPDATE
 				xt_data_authority_post
 			SET
-				`xtPID` = #{item.xtPID},
-				`xt_post_id` = #{item.xt_post_id},
-				`xt_functioninfo_id` = #{item.xt_functioninfo_id},
-				`xt_menuinfo_id` = #{item.xt_menuinfo_id}
+				xtPID = #{item.xtPID},
+				xt_post_id = #{item.xt_post_id},
+				xt_functioninfo_id = #{item.xt_functioninfo_id},
+				xt_menuinfo_id = #{item.xt_menuinfo_id}
 			WHERE xt_data_authority_post_id=#{item.xt_data_authority_post_id}
 		</foreach>
 	</update>
@@ -155,16 +155,16 @@
 				xt_data_authority_post
 			<set>
 				<if test="item.xtPID != null">
-					`xtPID` = #{item.xtPID},
+					xtPID = #{item.xtPID},
 				</if>
 				<if test="item.xt_post_id != null">
-					`xt_post_id` = #{item.xt_post_id},
+					xt_post_id = #{item.xt_post_id},
 				</if>
 				<if test="item.xt_functioninfo_id != null">
-					`xt_functioninfo_id` = #{item.xt_functioninfo_id},
+					xt_functioninfo_id = #{item.xt_functioninfo_id},
 				</if>
 				<if test="item.xt_menuinfo_id != null">
-					`xt_menuinfo_id` = #{item.xt_menuinfo_id},
+					xt_menuinfo_id = #{item.xt_menuinfo_id},
 				</if>
 			</set>
 			WHERE xt_data_authority_post_id=#{item.xt_data_authority_post_id}

@@ -77,7 +77,7 @@ public class XtOperateBusinessLogsController extends BaseAction{
 	public String addXtOperateBusinessLogs(XtOperateBusinessLogs xt_Operate_Business_Logs,HttpServletRequest request){
 		int i = 0;
 		if(null != xt_Operate_Business_Logs && !"".equals(xt_Operate_Business_Logs)){
-			xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
+			xt_Operate_Business_Logs.setXt_operate_b_logs_id(UUID.toUUID());
 			i=xtOperateBusinessLogsService.putXtOperateBusinessLogs(xt_Operate_Business_Logs);
 		}
 		if(i>0){
@@ -115,7 +115,7 @@ public class XtOperateBusinessLogsController extends BaseAction{
 		int i = 0;
 		if(null != xt_operate_business_logs_id && !"".equals(xt_operate_business_logs_id)){
 			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("xt_operate_business_logs_id",xt_operate_business_logs_id.split(","));
+			condition.put("xt_operate_b_logs_id",xt_operate_business_logs_id.split(","));
 			i=xtOperateBusinessLogsService.delXtOperateBusinessLogs(condition);
 		}
 		if(i>0){
@@ -135,7 +135,7 @@ public class XtOperateBusinessLogsController extends BaseAction{
 		int i = 0;
 		XtOperateBusinessLogs xt_Operate_Business_Logs = xtOperateBusinessLogsService.getXtOperateBusinessLogsById(xt_operate_business_logs_id);
 		if(null != xt_Operate_Business_Logs && !"".equals(xt_Operate_Business_Logs)){
-			xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
+			xt_Operate_Business_Logs.setXt_operate_b_logs_id(UUID.toUUID());
 			i=xtOperateBusinessLogsService.putXtOperateBusinessLogs(xt_Operate_Business_Logs);
 		}
 		if(i>0){

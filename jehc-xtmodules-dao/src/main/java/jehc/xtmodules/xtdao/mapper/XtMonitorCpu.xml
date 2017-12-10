@@ -5,18 +5,18 @@
 	<!--初始化分页-->
 	<select id="getXtMonitorCpuListByCondition" resultType="jehc.xtmodules.xtmodel.XtMonitorCpu" parameterType="map">
 		SELECT
-			`xt_monitor_cpu_id`,
-			`xt_monitor_cpu_totalMHz`,
-			`xt_monitor_cpu_producer`,
-			`xt_monitor_cpu_cache`,
-			`xt_monitor_cpu_user_use_rate`,
-			`xt_monitor_cpu_sys_use_rate`,
-			`xt_monitor_cpu_wait_use_rate`,
-			`xt_monitor_cpu_error_use_rate`,
-			`xt_monitor_cpu_currently_idle`,
-			`xt_monitor_cpu_use_rate`,
-			`xt_monitorNum`,
-			`xt_monitor_cpuTime`
+			xt_monitor_cpu_id,
+			xt_monitor_cpu_totalMHz,
+			xt_monitor_cpu_producer,
+			xt_monitor_cpu_cache,
+			xt_monitor_cpu_user_use_rate,
+			xt_monitor_cpu_sys_use_rate,
+			xt_monitor_cpu_wait_use_rate,
+			xt_monitor_cpu_error_use_rate,
+			xt_monitor_cpu_currently_idle,
+			xt_monitor_cpu_use_rate,
+			xt_monitorNum,
+			xt_monitor_cpuTime
 		FROM 
 			xt_monitor_cpu 
 		WHERE 1=1
@@ -25,18 +25,18 @@
 	<!--查询对象-->
 	<select id="getXtMonitorCpuById" resultType="jehc.xtmodules.xtmodel.XtMonitorCpu" parameterType="string">
 		SELECT
-			`xt_monitor_cpu_id`,
-			`xt_monitor_cpu_totalMHz`,
-			`xt_monitor_cpu_producer`,
-			`xt_monitor_cpu_cache`,
-			`xt_monitor_cpu_user_use_rate`,
-			`xt_monitor_cpu_sys_use_rate`,
-			`xt_monitor_cpu_wait_use_rate`,
-			`xt_monitor_cpu_error_use_rate`,
-			`xt_monitor_cpu_currently_idle`,
-			`xt_monitor_cpu_use_rate`,
-			`xt_monitorNum`,
-			`xt_monitor_cpuTime`
+			xt_monitor_cpu_id,
+			xt_monitor_cpu_totalMHz,
+			xt_monitor_cpu_producer,
+			xt_monitor_cpu_cache,
+			xt_monitor_cpu_user_use_rate,
+			xt_monitor_cpu_sys_use_rate,
+			xt_monitor_cpu_wait_use_rate,
+			xt_monitor_cpu_error_use_rate,
+			xt_monitor_cpu_currently_idle,
+			xt_monitor_cpu_use_rate,
+			xt_monitorNum,
+			xt_monitor_cpuTime
 		FROM 
 			xt_monitor_cpu
 		WHERE xt_monitor_cpu_id=#{xt_monitor_cpu_id}
@@ -47,18 +47,18 @@
 		INSERT INTO
 			xt_monitor_cpu
 			(
-			`xt_monitor_cpu_id`,
-			`xt_monitor_cpu_totalMHz`,
-			`xt_monitor_cpu_producer`,
-			`xt_monitor_cpu_cache`,
-			`xt_monitor_cpu_user_use_rate`,
-			`xt_monitor_cpu_sys_use_rate`,
-			`xt_monitor_cpu_wait_use_rate`,
-			`xt_monitor_cpu_error_use_rate`,
-			`xt_monitor_cpu_currently_idle`,
-			`xt_monitor_cpu_use_rate`,
-			`xt_monitorNum`,
-			`xt_monitor_cpuTime`
+			xt_monitor_cpu_id,
+			xt_monitor_cpu_totalMHz,
+			xt_monitor_cpu_producer,
+			xt_monitor_cpu_cache,
+			xt_monitor_cpu_user_use_rate,
+			xt_monitor_cpu_sys_use_rate,
+			xt_monitor_cpu_wait_use_rate,
+			xt_monitor_cpu_error_use_rate,
+			xt_monitor_cpu_currently_idle,
+			xt_monitor_cpu_use_rate,
+			xt_monitorNum,
+			xt_monitor_cpuTime
 			)
 			VALUES
 			(
@@ -82,18 +82,18 @@
 		UPDATE
 			xt_monitor_cpu
 		SET
-			`xt_monitor_cpu_id` = #{xt_monitor_cpu_id},
-			`xt_monitor_cpu_totalMHz` = #{xt_monitor_cpu_totalMHz},
-			`xt_monitor_cpu_producer` = #{xt_monitor_cpu_producer},
-			`xt_monitor_cpu_cache` = #{xt_monitor_cpu_cache},
-			`xt_monitor_cpu_user_use_rate` = #{xt_monitor_cpu_user_use_rate},
-			`xt_monitor_cpu_sys_use_rate` = #{xt_monitor_cpu_sys_use_rate},
-			`xt_monitor_cpu_wait_use_rate` = #{xt_monitor_cpu_wait_use_rate},
-			`xt_monitor_cpu_error_use_rate` = #{xt_monitor_cpu_error_use_rate},
-			`xt_monitor_cpu_currently_idle` = #{xt_monitor_cpu_currently_idle},
-			`xt_monitor_cpu_use_rate` = #{xt_monitor_cpu_use_rate},
-			`xt_monitorNum` = #{xt_monitorNum},
-			`xt_monitor_cpuTime` = #{xt_monitor_cpuTime}
+			xt_monitor_cpu_id = #{xt_monitor_cpu_id},
+			xt_monitor_cpu_totalMHz = #{xt_monitor_cpu_totalMHz},
+			xt_monitor_cpu_producer = #{xt_monitor_cpu_producer},
+			xt_monitor_cpu_cache = #{xt_monitor_cpu_cache},
+			xt_monitor_cpu_user_use_rate = #{xt_monitor_cpu_user_use_rate},
+			xt_monitor_cpu_sys_use_rate = #{xt_monitor_cpu_sys_use_rate},
+			xt_monitor_cpu_wait_use_rate = #{xt_monitor_cpu_wait_use_rate},
+			xt_monitor_cpu_error_use_rate = #{xt_monitor_cpu_error_use_rate},
+			xt_monitor_cpu_currently_idle = #{xt_monitor_cpu_currently_idle},
+			xt_monitor_cpu_use_rate = #{xt_monitor_cpu_use_rate},
+			xt_monitorNum = #{xt_monitorNum},
+			xt_monitor_cpuTime = #{xt_monitor_cpuTime}
 		WHERE xt_monitor_cpu_id=#{xt_monitor_cpu_id}
 	</update>
 

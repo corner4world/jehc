@@ -5,18 +5,18 @@
 	<!--初始化分页-->
 	<select id="getLcApplyListByCondition" resultType="jehc.lcmodules.lcmodel.LcApply" parameterType="map">
 		SELECT
-			lc_apply.`lc_apply_id`,
-			lc_apply.`lc_apply_title`,
-			lc_apply.`lc_apply_model_id`,
-			lc_apply.`lc_apply_delete`,
-			lc_apply.`processInstance_id`,
-			lc_apply.`processdefinitions_id`,
-			lc_apply.`lc_url`,
-			lc_apply.`xt_userinfo_id`,
-			DATE_FORMAT(lc_apply.`lc_apply_time`,'%Y-%m-%d %H:%i:%s') AS `lc_apply_time`,
-			lc_apply.`lc_apply_model_biz_id`,
-			xt_constant.`xt_constantRemark`,
-			xt_constant.`xt_constantURL`
+			lc_apply.lc_apply_id,
+			lc_apply.lc_apply_title,
+			lc_apply.lc_apply_model_id,
+			lc_apply.lc_apply_delete,
+			lc_apply.processInstance_id,
+			lc_apply.processdefinitions_id,
+			lc_apply.lc_url,
+			lc_apply.xt_userinfo_id,
+			lc_apply.lc_apply_time AS lc_apply_time,
+			lc_apply.lc_apply_model_biz_id,
+			xt_constant.xt_constantRemark,
+			xt_constant.xt_constantURL
 		FROM 
 			lc_apply lc_apply LEFT JOIN xt_constant xt_constant ON lc_apply.lc_apply_model_id = xt_constant.xt_constant_id
 		WHERE 
@@ -25,10 +25,10 @@
 			AND instr(lc_apply.lc_apply_title,#{lc_apply_title})
 		</if>
 		<if test="null != xt_userinfo_id">
-			AND lc_apply.`xt_userinfo_id` = #{xt_userinfo_id }
+			AND lc_apply.xt_userinfo_id = #{xt_userinfo_id }
 		</if>
 		<if test="null != processInstance_id">
-			AND lc_apply.`processInstance_id` = #{processInstance_id }
+			AND lc_apply.processInstance_id = #{processInstance_id }
 		</if>
 		ORDER BY lc_apply_time DESC
 	</select>
@@ -36,23 +36,23 @@
 	<!--根据实例编号查找集合-->
 	<select id="getLcApplyList" resultType="jehc.lcmodules.lcmodel.LcApply" parameterType="map">
 		SELECT
-			lc_apply.`lc_apply_id`,
-			lc_apply.`lc_apply_title`,
-			lc_apply.`lc_apply_model_id`,
-			lc_apply.`lc_apply_delete`,
-			lc_apply.`processInstance_id`,
-			lc_apply.`processdefinitions_id`,
-			lc_apply.`lc_url`,
-			lc_apply.`xt_userinfo_id`,
-			DATE_FORMAT(lc_apply.`lc_apply_time`,'%Y-%m-%d %H:%i:%s') AS `lc_apply_time`,
-			lc_apply.`lc_apply_model_biz_id`,
-			xt_constant.`xt_constantRemark`,
-			xt_constant.`xt_constantURL`
+			lc_apply.lc_apply_id,
+			lc_apply.lc_apply_title,
+			lc_apply.lc_apply_model_id,
+			lc_apply.lc_apply_delete,
+			lc_apply.processInstance_id,
+			lc_apply.processdefinitions_id,
+			lc_apply.lc_url,
+			lc_apply.xt_userinfo_id,
+			lc_apply.lc_apply_time AS lc_apply_time,
+			lc_apply.lc_apply_model_biz_id,
+			xt_constant.xt_constantRemark,
+			xt_constant.xt_constantURL
 		FROM 
 			lc_apply lc_apply LEFT JOIN xt_constant xt_constant ON lc_apply.lc_apply_model_id = xt_constant.xt_constant_id
 		WHERE 
 			lc_apply.lc_apply_isonlysaverecord = 0
-			AND lc_apply.`processInstance_id` IN
+			AND lc_apply.processInstance_id IN
 		<foreach item="item" index="index" collection="processInstance_id" open="(" separator="," close=")">
 			#{item}
 		</foreach>
@@ -61,18 +61,18 @@
 	<!--查询对象-->
 	<select id="getLcApplyById" resultType="jehc.lcmodules.lcmodel.LcApply" parameterType="string">
 		SELECT
-			lc_apply.`lc_apply_id`,
-			lc_apply.`lc_apply_title`,
-			lc_apply.`lc_apply_model_id`,
-			lc_apply.`lc_apply_delete`,
-			lc_apply.`processInstance_id`,
-			lc_apply.`processdefinitions_id`,
-			lc_apply.`lc_url`,
-			lc_apply.`xt_userinfo_id`,
-			DATE_FORMAT(lc_apply.`lc_apply_time`,'%Y-%m-%d %H:%i:%s') AS `lc_apply_time`,
-			lc_apply.`lc_apply_model_biz_id`,
-			xt_constant.`xt_constantRemark`,
-			xt_constant.`xt_constantURL`
+			lc_apply.lc_apply_id,
+			lc_apply.lc_apply_title,
+			lc_apply.lc_apply_model_id,
+			lc_apply.lc_apply_delete,
+			lc_apply.processInstance_id,
+			lc_apply.processdefinitions_id,
+			lc_apply.lc_url,
+			lc_apply.xt_userinfo_id,
+			lc_apply.lc_apply_time AS lc_apply_time,
+			lc_apply.lc_apply_model_biz_id,
+			xt_constant.xt_constantRemark,
+			xt_constant.xt_constantURL
 		FROM 
 			lc_apply lc_apply LEFT JOIN xt_constant xt_constant ON lc_apply.lc_apply_model_id = xt_constant.xt_constant_id
 		WHERE lc_apply.lc_apply_id=#{lc_apply_id}
@@ -83,16 +83,16 @@
 		INSERT INTO
 			lc_apply
 			(
-			`lc_apply_id`,
-			`lc_apply_title`,
-			`lc_apply_model_id`,
-			`lc_apply_delete`,
-			`processInstance_id`,
-			`processdefinitions_id`,
-			`lc_url`,
-			`xt_userinfo_id`,
-			`lc_apply_time`,
-			`lc_apply_model_biz_id`
+			lc_apply_id,
+			lc_apply_title,
+			lc_apply_model_id,
+			lc_apply_delete,
+			processInstance_id,
+			processdefinitions_id,
+			lc_url,
+			xt_userinfo_id,
+			lc_apply_time,
+			lc_apply_model_biz_id
 			)
 			VALUES
 			(
@@ -114,16 +114,16 @@
 		UPDATE
 			lc_apply
 		SET
-			`lc_apply_id` = #{lc_apply_id},
-			`lc_apply_title` = #{lc_apply_title},
-			`lc_apply_model_id` = #{lc_apply_model_id},
-			`lc_apply_delete` = #{lc_apply_delete},
-			`processInstance_id` = #{processInstance_id},
-			`processdefinitions_id` = #{processdefinitions_id},
-			`lc_url` = #{lc_url},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`lc_apply_time` = #{lc_apply_time},
-			`lc_apply_model_biz_id` = #{lc_apply_model_biz_id}
+			lc_apply_id = #{lc_apply_id},
+			lc_apply_title = #{lc_apply_title},
+			lc_apply_model_id = #{lc_apply_model_id},
+			lc_apply_delete = #{lc_apply_delete},
+			processInstance_id = #{processInstance_id},
+			processdefinitions_id = #{processdefinitions_id},
+			lc_url = #{lc_url},
+			xt_userinfo_id = #{xt_userinfo_id},
+			lc_apply_time = #{lc_apply_time},
+			lc_apply_model_biz_id = #{lc_apply_model_biz_id}
 		WHERE lc_apply_id=#{lc_apply_id}
 	</update>
 
@@ -140,16 +140,16 @@
 		INSERT INTO
 			lc_apply
 			(
-			`lc_apply_id`,
-			`lc_apply_title`,
-			`lc_apply_model_id`,
-			`lc_apply_delete`,
-			`processInstance_id`,
-			`processdefinitions_id`,
-			`lc_url`,
-			`xt_userinfo_id`,
-			`lc_apply_time`,
-			`lc_apply_model_biz_id`
+			lc_apply_id,
+			lc_apply_title,
+			lc_apply_model_id,
+			lc_apply_delete,
+			processInstance_id,
+			processdefinitions_id,
+			lc_url,
+			xt_userinfo_id,
+			lc_apply_time,
+			lc_apply_model_biz_id
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -174,16 +174,16 @@
 			UPDATE
 				lc_apply
 			SET
-				`lc_apply_id` = #{item.lc_apply_id},
-				`lc_apply_title` = #{item.lc_apply_title},
-				`lc_apply_model_id` = #{item.lc_apply_model_id},
-				`lc_apply_delete` = #{item.lc_apply_delete},
-				`processInstance_id` = #{item.processInstance_id},
-				`processdefinitions_id` = #{item.processdefinitions_id},
-				`lc_url` = #{item.lc_url},
-				`xt_userinfo_id` = #{item.xt_userinfo_id},
-				`lc_apply_time` = #{item.lc_apply_time},
-				`lc_apply_model_biz_id` = #{lc_apply_model_biz_id}
+				lc_apply_id = #{item.lc_apply_id},
+				lc_apply_title = #{item.lc_apply_title},
+				lc_apply_model_id = #{item.lc_apply_model_id},
+				lc_apply_delete = #{item.lc_apply_delete},
+				processInstance_id = #{item.processInstance_id},
+				processdefinitions_id = #{item.processdefinitions_id},
+				lc_url = #{item.lc_url},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				lc_apply_time = #{item.lc_apply_time},
+				lc_apply_model_biz_id = #{lc_apply_model_biz_id}
 			WHERE lc_apply_id=#{item.lc_apply_id}
 		</foreach>
 	</update>

@@ -5,21 +5,21 @@
 	<!--初始化分页-->
 	<select id="getBCartDetailListByCondition" resultType="jehc.bmodules.bmodel.BCartDetail" parameterType="map">
 		SELECT
-			b_cart_detail.`b_cart_detail_id`,
-			b_cart_detail.`b_product_id`,
-			b_cart_detail.`b_seller_id`,
-			b_cart_detail.`b_cart_detail_number`,
-			b_cart_detail.`b_cart_detail_price`,
-			b_cart_detail.`b_cart_detail_discount`,
-			DATE_FORMAT(b_cart_detail.`b_cart_detail_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_detail_ctime`,
-			DATE_FORMAT(b_cart_detail.`b_cart_detail_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_detail_mtime`,
-			b_cart_detail.`b_cart_id`,
-			b_product.`b_product_name`,
+			b_cart_detail.b_cart_detail_id,
+			b_cart_detail.b_product_id,
+			b_cart_detail.b_seller_id,
+			b_cart_detail.b_cart_detail_number,
+			b_cart_detail.b_cart_detail_price,
+			b_cart_detail.b_cart_detail_discount,
+			b_cart_detail.b_cart_detail_ctime AS b_cart_detail_ctime,
+			b_cart_detail.b_cart_detail_mtime AS b_cart_detail_mtime,
+			b_cart_detail.b_cart_id,
+			b_product.b_product_name,
 			b_product.b_product_id,
-			b_seller.`b_seller_name`,
-			b_category.`b_category_name`,
-			b_brand.`b_brand_name`,
-			((b_cart_detail.`b_cart_detail_price` * b_cart_detail.`b_cart_detail_number` * b_cart_detail.`b_cart_detail_discount`)/100)AS b_cart_detail_total_price
+			b_seller.b_seller_name,
+			b_category.b_category_name,
+			b_brand.b_brand_name,
+			((b_cart_detail.b_cart_detail_price * b_cart_detail.b_cart_detail_number * b_cart_detail.b_cart_detail_discount)/100)AS b_cart_detail_total_price
 		FROM 
 			b_cart_detail b_cart_detail LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_cart_detail.b_seller_id
 			LEFT JOIN b_product b_product ON b_cart_detail.b_product_id = b_product.b_product_id
@@ -32,15 +32,15 @@
 	<!--查询对象-->
 	<select id="getBCartDetailById" resultType="jehc.bmodules.bmodel.BCartDetail" parameterType="string">
 		SELECT
-			`b_cart_detail_id`,
-			`b_product_id`,
-			`b_seller_id`,
-			`b_cart_detail_number`,
-			`b_cart_detail_price`,
-			`b_cart_detail_discount`,
-			DATE_FORMAT(`b_cart_detail_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_detail_ctime`,
-			DATE_FORMAT(`b_cart_detail_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_detail_mtime`,
-			`b_cart_id`
+			b_cart_detail_id,
+			b_product_id,
+			b_seller_id,
+			b_cart_detail_number,
+			b_cart_detail_price,
+			b_cart_detail_discount,
+			b_cart_detail.b_cart_detail_ctime AS b_cart_detail_ctime,
+			b_cart_detail.b_cart_detail_mtime AS b_cart_detail_mtime,
+			b_cart_id
 		FROM 
 			b_cart_detail
 		WHERE b_cart_detail_id=#{b_cart_detail_id}
@@ -51,15 +51,15 @@
 		INSERT INTO
 			b_cart_detail
 			(
-			`b_cart_detail_id`,
-			`b_product_id`,
-			`b_seller_id`,
-			`b_cart_detail_number`,
-			`b_cart_detail_price`,
-			`b_cart_detail_discount`,
-			`b_cart_detail_ctime`,
-			`b_cart_detail_mtime`,
-			`b_cart_id`
+			b_cart_detail_id,
+			b_product_id,
+			b_seller_id,
+			b_cart_detail_number,
+			b_cart_detail_price,
+			b_cart_detail_discount,
+			b_cart_detail_ctime,
+			b_cart_detail_mtime,
+			b_cart_id
 			)
 			VALUES
 			(
@@ -80,14 +80,14 @@
 		UPDATE
 			b_cart_detail
 		SET
-			`b_cart_detail_id` = #{b_cart_detail_id},
-			`b_product_id` = #{b_product_id},
-			`b_seller_id` = #{b_seller_id},
-			`b_cart_detail_number` = #{b_cart_detail_number},
-			`b_cart_detail_price` = #{b_cart_detail_price},
-			`b_cart_detail_discount` = #{b_cart_detail_discount},
-			`b_cart_detail_mtime` = #{b_cart_detail_mtime},
-			`b_cart_id` = #{b_cart_id}
+			b_cart_detail_id = #{b_cart_detail_id},
+			b_product_id = #{b_product_id},
+			b_seller_id = #{b_seller_id},
+			b_cart_detail_number = #{b_cart_detail_number},
+			b_cart_detail_price = #{b_cart_detail_price},
+			b_cart_detail_discount = #{b_cart_detail_discount},
+			b_cart_detail_mtime = #{b_cart_detail_mtime},
+			b_cart_id = #{b_cart_id}
 		WHERE b_cart_detail_id=#{b_cart_detail_id}
 	</update>
 
@@ -110,7 +110,7 @@
 	<!--根据购物车明细编号获取购物车集合编号并去重-->
 	<select id="getBCartIdByCondition" resultType="string" parameterType="map">
 		SELECT
-			distinct b_cart_detail.`b_cart_id`
+			distinct b_cart_detail.b_cart_id
 		FROM 
 			b_cart_detail b_cart_detail 
 		WHERE b_cart_detail_id IN
@@ -122,21 +122,21 @@
 	<!--根据购物车明细编号查找集合-->
 	<select id="getBCartDetailList" resultType="jehc.bmodules.bmodel.BCartDetail" parameterType="map">
 		SELECT
-			b_cart_detail.`b_cart_detail_id`,
-			b_cart_detail.`b_product_id`,
-			b_cart_detail.`b_seller_id`,
-			b_cart_detail.`b_cart_detail_number`,
-			b_cart_detail.`b_cart_detail_price`,
-			b_cart_detail.`b_cart_detail_discount`,
-			DATE_FORMAT(b_cart_detail.`b_cart_detail_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_detail_ctime`,
-			DATE_FORMAT(b_cart_detail.`b_cart_detail_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_cart_detail_mtime`,
-			b_cart_detail.`b_cart_id`,
-			b_product.`b_product_name`,
+			b_cart_detail.b_cart_detail_id,
+			b_cart_detail.b_product_id,
+			b_cart_detail.b_seller_id,
+			b_cart_detail.b_cart_detail_number,
+			b_cart_detail.b_cart_detail_price,
+			b_cart_detail.b_cart_detail_discount,
+			b_cart_detail.b_cart_detail_ctime AS b_cart_detail_ctime,
+			b_cart_detail.b_cart_detail_mtime AS b_cart_detail_mtime,
+			b_cart_detail.b_cart_id,
+			b_product.b_product_name,
 			b_product.b_product_id,
-			b_seller.`b_seller_name`,
-			b_category.`b_category_name`,
-			b_brand.`b_brand_name`,
-			((b_cart_detail.`b_cart_detail_price` * b_cart_detail.`b_cart_detail_number` * b_cart_detail.`b_cart_detail_discount`)/100)AS b_cart_detail_total_price
+			b_seller.b_seller_name,
+			b_category.b_category_name,
+			b_brand.b_brand_name,
+			((b_cart_detail.b_cart_detail_price * b_cart_detail.b_cart_detail_number * b_cart_detail.b_cart_detail_discount)/100)AS b_cart_detail_total_price
 		FROM 
 			b_cart_detail b_cart_detail LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_cart_detail.b_seller_id
 			LEFT JOIN b_product b_product ON b_cart_detail.b_product_id = b_product.b_product_id

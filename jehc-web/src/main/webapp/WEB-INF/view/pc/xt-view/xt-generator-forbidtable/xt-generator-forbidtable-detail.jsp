@@ -15,31 +15,31 @@
 			<div class="form-group" style="display:none;">
 				<label class="col-lg-3 control-label">主键编号</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="hidden" name="xt_generator_forbidtable_id"  placeholder="请输入主键编号" value="${xtGeneratorForbidtable.xt_generator_forbidtable_id }">
+					<input class="form-control" type="hidden" name="xt_generator_f_id"  placeholder="请输入主键编号" value="${xtGeneratorForbidtable.xt_generator_f_id }">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">表名</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="200"  data-bv-notempty data-bv-notempty-message="请输入表名"  name="xt_generator_forbidtable_table" placeholder="请输入表名" value="${xtGeneratorForbidtable.xt_generator_forbidtable_table }">
+					<input class="form-control" type="text" maxlength="200"  data-bv-notempty data-bv-notempty-message="请输入表名"  name="xt_generator_f_table" placeholder="请输入表名" value="${xtGeneratorForbidtable.xt_generator_f_table }">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">备注</label>
 				<div class="col-lg-6">
-					<textarea class="form-control" maxlength="500"  name="xt_generator_forbidtable_remark" placeholder="请输入备注">${xtGeneratorForbidtable.xt_generator_forbidtable_remark }</textarea>
+					<textarea class="form-control" maxlength="500"  name="xt_generator_f_remark" placeholder="请输入备注">${xtGeneratorForbidtable.xt_generator_f_remark }</textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="xt_generator_forbidtable_ctime"  placeholder="请选择时间" value="${xtGeneratorForbidtable.xt_generator_forbidtable_ctime }">
+					<input class="form_datetime form-control" name="xt_generator_f_ctime"  placeholder="请选择时间" value="${xtGeneratorForbidtable.xt_generator_f_ctime }">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">修改时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="xt_generator_forbidtable_mtime"  placeholder="请选择时间" value="${xtGeneratorForbidtable.xt_generator_forbidtable_mtime }">
+					<input class="form_datetime form-control" name="xt_generator_f_mtime"  placeholder="请选择时间" value="${xtGeneratorForbidtable.xt_generator_f_mtime }">
 				</div>
 			</div>
 			<div class="form-group">

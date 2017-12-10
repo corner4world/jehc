@@ -5,28 +5,28 @@
 	<!--初始化分页-->
 	<select id="getXtDbtableStrategyListByCondition" resultType="jehc.xtmodules.xtmodel.XtDbtableStrategy" parameterType="map">
 		SELECT
-			`xt_dbtable_strategy_id`,
-			`tableName`,
-			DATE_FORMAT(`cTime`,'%Y-%m-%d %H:%i:%s') AS `cTime`,
-			`onlyModulesFlag`
+			xt_dbtable_strategy_id,
+			tableName,
+			cTime,
+			onlyModulesFlag
 		FROM 
 			xt_dbtable_strategy
 		WHERE 1=1
 		<if test="null != onlyModulesFlag">
-			AND instr(onlyModulesFlag,#{onlyModulesFlag})
+			AND onlyModulesFlag LIKE CONCAT(CONCAT('%',#{onlyModulesFlag}),'%')
 		</if>
 		<if test="null != tableName">
-			AND instr(tableName,#{tableName})
+			AND tableName LIKE CONCAT(CONCAT('%',#{tableName}),'%')
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtDbtableStrategyById" resultType="jehc.xtmodules.xtmodel.XtDbtableStrategy" parameterType="string">
 		SELECT
-			`xt_dbtable_strategy_id`,
-			`tableName`,
-			DATE_FORMAT(`cTime`,'%Y-%m-%d %H:%i:%s') AS `cTime`,
-			`onlyModulesFlag`
+			xt_dbtable_strategy_id,
+			tableName,
+			cTime,
+			onlyModulesFlag
 		FROM 
 			xt_dbtable_strategy
 		WHERE xt_dbtable_strategy_id=#{xt_dbtable_strategy_id}
@@ -37,10 +37,10 @@
 		INSERT INTO
 			xt_dbtable_strategy
 			(
-			`xt_dbtable_strategy_id`,
-			`tableName`,
-			`cTime`,
-			`onlyModulesFlag`
+			xt_dbtable_strategy_id,
+			tableName,
+			cTime,
+			onlyModulesFlag
 			)
 			VALUES
 			(
@@ -56,10 +56,10 @@
 		UPDATE
 			xt_dbtable_strategy
 		SET
-			`xt_dbtable_strategy_id` = #{xt_dbtable_strategy_id},
-			`tableName` = #{tableName},
-			`cTime` = #{cTime},
-			`onlyModulesFlag` = #{onlyModulesFlag}
+			xt_dbtable_strategy_id = #{xt_dbtable_strategy_id},
+			tableName = #{tableName},
+			cTime = #{cTime},
+			onlyModulesFlag = #{onlyModulesFlag}
 		WHERE xt_dbtable_strategy_id=#{xt_dbtable_strategy_id}
 	</update>
 

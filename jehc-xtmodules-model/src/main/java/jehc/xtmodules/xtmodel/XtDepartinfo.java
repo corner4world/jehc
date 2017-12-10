@@ -13,7 +13,7 @@ public class XtDepartinfo implements Serializable{
 	private String xt_departinfo_parentId;/**部门父ID**/
 	private String xt_departinfo_name;/**部门名称**/
 	private String xt_departinfo_connectTelNo;/**联系电话**/
-	private String xt_departinfo_connectMobileTelNo;/**移动电话**/
+	private String xt_departinfo_mobileTelNo;/**移动电话**/
 	private String xt_departinfo_faxes;/**传真**/
 	private String xt_departinfo_desc;/**描述部门信息**/
 	private String xt_departinfo_image;/**图片**/
@@ -51,11 +51,11 @@ public class XtDepartinfo implements Serializable{
 	public String getXt_departinfo_connectTelNo(){
 		return xt_departinfo_connectTelNo;
 	}
-	public void setXt_departinfo_connectMobileTelNo(String xt_departinfo_connectMobileTelNo){
-		this.xt_departinfo_connectMobileTelNo=xt_departinfo_connectMobileTelNo;
+	public String getXt_departinfo_mobileTelNo() {
+		return xt_departinfo_mobileTelNo;
 	}
-	public String getXt_departinfo_connectMobileTelNo(){
-		return xt_departinfo_connectMobileTelNo;
+	public void setXt_departinfo_mobileTelNo(String xt_departinfo_mobileTelNo) {
+		this.xt_departinfo_mobileTelNo = xt_departinfo_mobileTelNo;
 	}
 	public void setXt_departinfo_faxes(String xt_departinfo_faxes){
 		this.xt_departinfo_faxes=xt_departinfo_faxes;

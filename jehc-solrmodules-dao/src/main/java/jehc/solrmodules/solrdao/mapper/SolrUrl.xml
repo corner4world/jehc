@@ -5,30 +5,30 @@
 	<!--初始化分页-->
 	<select id="getSolrUrlListByCondition" resultType="jehc.solrmodules.solrmodel.SolrUrl" parameterType="map">
 		SELECT
-			solr_url.`solr_url_id`,
-			solr_url.`solr_url_url`,
-			solr_url.`solr_url_ctime`,
-			solr_url.`solr_url_mtime`,
-			solr_url.`xt_userinfo_id`,
-			solr_url.`solr_url_content`,
-			xt_userinfo.`xt_userinfo_realName`
+			solr_url.solr_url_id,
+			solr_url.solr_url_url,
+			solr_url.solr_url_ctime,
+			solr_url.solr_url_mtime,
+			solr_url.xt_userinfo_id,
+			solr_url.solr_url_content,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			solr_url AS solr_url LEFT JOIN xt_userinfo ON solr_url.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			solr_url solr_url LEFT JOIN xt_userinfo ON solr_url.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 	</select>
 
 	<!--查询对象-->
 	<select id="getSolrUrlById" resultType="jehc.solrmodules.solrmodel.SolrUrl" parameterType="string">
 		SELECT
-			solr_url.`solr_url_id`,
-			solr_url.`solr_url_url`,
-			solr_url.`solr_url_ctime`,
-			solr_url.`solr_url_mtime`,
-			solr_url.`xt_userinfo_id`,
-			solr_url.`solr_url_content`,
-			xt_userinfo.`xt_userinfo_realName`
+			solr_url.solr_url_id,
+			solr_url.solr_url_url,
+			solr_url.solr_url_ctime,
+			solr_url.solr_url_mtime,
+			solr_url.xt_userinfo_id,
+			solr_url.solr_url_content,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			solr_url AS solr_url LEFT JOIN xt_userinfo ON solr_url.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			solr_url solr_url LEFT JOIN xt_userinfo ON solr_url.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE solr_url.solr_url_id=#{solr_url_id}
 	</select>
 
@@ -37,12 +37,12 @@
 		INSERT INTO
 			solr_url
 			(
-			`solr_url_id`,
-			`solr_url_url`,
-			`solr_url_ctime`,
-			`solr_url_mtime`,
-			`xt_userinfo_id`,
-			`solr_url_content`
+			solr_url_id,
+			solr_url_url,
+			solr_url_ctime,
+			solr_url_mtime,
+			xt_userinfo_id,
+			solr_url_content
 			)
 			VALUES
 			(
@@ -60,11 +60,11 @@
 		UPDATE
 			solr_url
 		SET
-			`solr_url_id` = #{solr_url_id},
-			`solr_url_url` = #{solr_url_url},
-			`solr_url_mtime` = #{solr_url_mtime},
-			`solr_url_content` = #{solr_url_content},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			solr_url_id = #{solr_url_id},
+			solr_url_url = #{solr_url_url},
+			solr_url_mtime = #{solr_url_mtime},
+			solr_url_content = #{solr_url_content},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE solr_url_id=#{solr_url_id}
 	</update>
 

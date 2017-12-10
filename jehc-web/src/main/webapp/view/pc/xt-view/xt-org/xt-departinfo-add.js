@@ -98,7 +98,7 @@ function initXtDepartinfoFormAdd(){
 		{
 			fieldLabel:'移动电话',
 			xtype:'textfield',
-			name:'xt_departinfo_connectMobileTelNo',
+			name:'xt_departinfo_mobileTelNo',
 			maxLength:20,
 			anchor:'40%'
 		},

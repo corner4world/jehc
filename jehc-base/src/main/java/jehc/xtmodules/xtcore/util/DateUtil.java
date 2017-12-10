@@ -367,4 +367,18 @@ public class DateUtil
 		 SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
 		 return sdf.format(new Date());
 	}
+	
+	/**
+	 * 时间戳转date
+	 * @param l
+	 * @return
+	 * @throws ParseException
+	 */
+	public static Date getDateByLong(Long l) throws ParseException{
+		//时间戳转化为Sting或Date  
+	    SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");  
+	    String d = format.format(l);  
+	    Date date= format.parse(d); 
+	    return date;
+	}
 }

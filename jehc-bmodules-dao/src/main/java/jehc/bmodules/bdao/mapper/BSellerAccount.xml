@@ -5,8 +5,8 @@
 	<!--初始化分页-->
 	<select id="getBSellerAccountListByCondition" resultType="jehc.bmodules.bmodel.BSellerAccount" parameterType="map">
 		SELECT
-			`b_seller_account_id`,
-			`b_seller_id`
+			b_seller_account_id,
+			b_seller_id
 		FROM 
 			b_seller_account
 		WHERE 1=1
@@ -15,8 +15,8 @@
 	<!--查询对象-->
 	<select id="getBSellerAccountById" resultType="jehc.bmodules.bmodel.BSellerAccount" parameterType="string">
 		SELECT
-			`b_seller_account_id`,
-			`b_seller_id`
+			b_seller_account_id,
+			b_seller_id
 		FROM 
 			b_seller_account
 		WHERE b_seller_account_id=#{b_seller_account_id}
@@ -27,8 +27,8 @@
 		INSERT INTO
 			b_seller_account
 			(
-			`b_seller_account_id`,
-			`b_seller_id`
+			b_seller_account_id,
+			b_seller_id
 			)
 			VALUES
 			(
@@ -42,8 +42,8 @@
 		UPDATE
 			b_seller_account
 		SET
-			`b_seller_account_id` = #{b_seller_account_id},
-			`b_seller_id` = #{b_seller_id}
+			b_seller_account_id = #{b_seller_account_id},
+			b_seller_id = #{b_seller_id}
 		WHERE b_seller_account_id=#{b_seller_account_id}
 	</update>
 

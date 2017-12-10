@@ -51,13 +51,13 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">岗位最大人数</label>
 				<div class="col-lg-6">
-					<input class="form-control" maxlength="10" value="0" style="width:150px;" data-bv-numeric data-bv-numeric-message="岗位最大人数为数字类型"  name="xt_post_maxNum" placeholder="请输入岗位最大人数" value="${xtPost.xt_post_maxNum }">
+					<input class="form-control" maxlength="10" style="width:150px;" data-bv-numeric data-bv-numeric-message="岗位最大人数为数字类型"  name="xt_post_maxNum" placeholder="请输入岗位最大人数" value="${xtPost.xt_post_maxNum }">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">岗位级别</label>
 				<div class="col-lg-6">
-					<input class="form-control" maxlength="10" value="0"  style="width:150px;" data-bv-numeric data-bv-numeric-message="岗位级别为数字类型"  name="xt_post_grade" placeholder="请输入岗位级别" value="${xtPost.xt_post_grade }">
+					<input class="form-control" maxlength="10" style="width:150px;" data-bv-numeric data-bv-numeric-message="岗位级别为数字类型"  name="xt_post_grade" placeholder="请输入岗位级别" value="${xtPost.xt_post_grade }">
 				</div>
 			</div>
 			<div class="form-group">

@@ -5,14 +5,14 @@
 	<!--初始化分页-->
 	<select id="getXtFunctioninfoRightListByCondition" resultType="jehc.xtmodules.xtmodel.XtFunctioninfoRight" parameterType="map">
 		SELECT
-			xt_functioninfo_right.`xt_functioninfo_right_id`,
-			xt_functioninfo_right.`xt_functioninfo_id`,
-			xt_functioninfo_right.`xt_role_id`,
-			xt_functioninfo_right.`xt_menuinfo_id`,
-			xt_functioninfo.`xt_functioninfoURL`,
-			xt_functioninfo.`xt_functioninfoMethod`,
-			xt_functioninfo.`xt_functioninfoType`,
-			xt_functioninfo.`xt_functioninfoIsAuthority`
+			xt_functioninfo_right.xt_functioninfo_right_id,
+			xt_functioninfo_right.xt_functioninfo_id,
+			xt_functioninfo_right.xt_role_id,
+			xt_functioninfo_right.xt_menuinfo_id,
+			xt_functioninfo.xt_functioninfoURL,
+			xt_functioninfo.xt_functioninfoMethod,
+			xt_functioninfo.xt_functioninfoType,
+			xt_functioninfo.xt_functioninfoIsAuthority
 		FROM 
 			xt_functioninfo_right xt_functioninfo_right LEFT JOIN xt_functioninfo xt_functioninfo ON xt_functioninfo.xt_functioninfo_id = xt_functioninfo_right.xt_functioninfo_id
 		WHERE 1=1
@@ -35,10 +35,10 @@
 	<!--初始化分页（for admin all function）-->
 	<select id="getXtFunctioninfoListForAdmin" resultType="jehc.xtmodules.xtmodel.XtFunctioninfoRight" parameterType="map">
 		SELECT
-			xt_functioninfo.`xt_functioninfoURL`,
-			xt_functioninfo.`xt_functioninfoMethod`,
-			xt_functioninfo.`xt_functioninfoType`,
-			xt_functioninfo.`xt_functioninfoIsAuthority`
+			xt_functioninfo.xt_functioninfoURL,
+			xt_functioninfo.xt_functioninfoMethod,
+			xt_functioninfo.xt_functioninfoType,
+			xt_functioninfo.xt_functioninfoIsAuthority
 		FROM 
 			xt_functioninfo xt_functioninfo
 		WHERE 1=1
@@ -49,10 +49,10 @@
 	<!--查询对象-->
 	<select id="getXtFunctioninfoRightById" resultType="jehc.xtmodules.xtmodel.XtFunctioninfoRight" parameterType="string">
 		SELECT
-			`xt_functioninfo_right_id`,
-			`xt_functioninfo_id`,
-			`xt_role_id`,
-			`xt_menuinfo_id`
+			xt_functioninfo_right_id,
+			xt_functioninfo_id,
+			xt_role_id,
+			xt_menuinfo_id
 		FROM 
 			xt_functioninfo_right
 		WHERE xt_functioninfo_right_id=#{xt_functioninfo_right_id}
@@ -63,10 +63,10 @@
 		INSERT INTO
 			xt_functioninfo_right
 			(
-			`xt_functioninfo_right_id`,
-			`xt_functioninfo_id`,
-			`xt_role_id`,
-			`xt_menuinfo_id`
+			xt_functioninfo_right_id,
+			xt_functioninfo_id,
+			xt_role_id,
+			xt_menuinfo_id
 			)
 			VALUES
 			(
@@ -82,10 +82,10 @@
 		UPDATE
 			xt_functioninfo_right
 		SET
-			`xt_functioninfo_right_id` = #{xt_functioninfo_right_id},
-			`xt_functioninfo_id` = #{xt_functioninfo_id},
-			`xt_role_id` = #{xt_role_id},
-			`xt_menuinfo_id` = #{xt_menuinfo_id}
+			xt_functioninfo_right_id = #{xt_functioninfo_right_id},
+			xt_functioninfo_id = #{xt_functioninfo_id},
+			xt_role_id = #{xt_role_id},
+			xt_menuinfo_id = #{xt_menuinfo_id}
 		WHERE xt_functioninfo_right_id=#{xt_functioninfo_right_id}
 	</update>
 
@@ -99,10 +99,10 @@
 		INSERT INTO
 			xt_functioninfo_right
 			(
-			`xt_functioninfo_right_id`,
-			`xt_functioninfo_id`,
-			`xt_role_id`,
-			`xt_menuinfo_id`
+			xt_functioninfo_right_id,
+			xt_functioninfo_id,
+			xt_role_id,
+			xt_menuinfo_id
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -121,10 +121,10 @@
 			UPDATE
 				xt_functioninfo_right
 			SET
-				`xt_functioninfo_right_id` = #{item.xt_functioninfo_right_id},
-				`xt_functioninfo_id` = #{item.xt_functioninfo_id},
-				`xt_role_id` = #{item.xt_role_id},
-				`xt_menuinfo_id` = #{item.xt_menuinfo_id}
+				xt_functioninfo_right_id = #{item.xt_functioninfo_right_id},
+				xt_functioninfo_id = #{item.xt_functioninfo_id},
+				xt_role_id = #{item.xt_role_id},
+				xt_menuinfo_id = #{item.xt_menuinfo_id}
 			WHERE xt_functioninfo_right_id=#{item.xt_functioninfo_right_id}
 		</foreach>
 	</update>

@@ -38,7 +38,7 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">移动电话</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="20"  name="xt_departinfo_connectMobileTelNo" placeholder="请输入移动电话">
+					<input class="form-control" type="text" maxlength="20"  name="xt_departinfo_mobileTelNo" placeholder="请输入移动电话">
 				</div>
 			</div>
 			<div class="form-group">

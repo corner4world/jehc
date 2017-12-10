@@ -5,39 +5,39 @@
 	<!--初始化分页-->
 	<select id="getXtChangePwdListByCondition" resultType="jehc.xtmodules.xtmodel.XtChangePwd" parameterType="map">
 		SELECT
-			`xt_change_pwd_id`,
-			`user_name`,
-			`login_id`,
-			`sex`,
-			`phone`,
-			`mail`,
-			`address`,
-			`xt_attachment_id`,
-			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
-			`status`
+			xt_change_pwd_id,
+			user_name,
+			login_id,
+			sex,
+			phone,
+			mail,
+			address,
+			xt_attachment_id,
+			ctime,
+			status
 		FROM 
 			xt_change_pwd
 		WHERE 1=1
 		<if test="null != user_name">
-			AND instr(user_name,#{user_name})
+			AND user_name LIKE CONCAT(CONCAT('%',#{user_name}),'%')
 		</if>
 		<if test="null != login_id">
-			AND instr(login_id,#{login_id})
+			AND login_id = #{login_id}
 		</if>
 		<if test="null != sex">
 			AND sex = #{sex}
 		</if>
 		<if test="null != phone">
-			AND instr(phone,#{phone})
+			AND phone LIKE CONCAT(CONCAT('%',#{phone}),'%')
 		</if>
 		<if test="null != ctime">
-			AND instr(ctime,#{ctime})
+			AND ctime LIKE CONCAT(CONCAT('%',#{ctime}),'%')
 		</if>
 		<if test="null != address">
-			AND instr(address,#{address})
+			AND address LIKE CONCAT(CONCAT('%',#{address}),'%')
 		</if>
 		<if test="null != mail">
-			AND instr(mail,#{mail})
+			AND mail LIKE CONCAT(CONCAT('%',#{mail}),'%')
 		</if>
 		<if test="null != status">
 			AND status = #{status}
@@ -47,16 +47,16 @@
 	<!--查询对象-->
 	<select id="getXtChangePwdById" resultType="jehc.xtmodules.xtmodel.XtChangePwd" parameterType="string">
 		SELECT
-			`xt_change_pwd_id`,
-			`user_name`,
-			`login_id`,
-			`sex`,
-			`phone`,
-			`mail`,
-			`address`,
-			`xt_attachment_id`,
-			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
-			`status`
+			xt_change_pwd_id,
+			user_name,
+			login_id,
+			sex,
+			phone,
+			mail,
+			address,
+			xt_attachment_id,
+			ctime,
+			status
 		FROM 
 			xt_change_pwd
 		WHERE xt_change_pwd_id=#{xt_change_pwd_id}
@@ -67,16 +67,16 @@
 		INSERT INTO
 			xt_change_pwd
 			(
-			`xt_change_pwd_id`,
-			`user_name`,
-			`login_id`,
-			`sex`,
-			`phone`,
-			`mail`,
-			`address`,
-			`xt_attachment_id`,
-			`ctime`,
-			`status`
+			xt_change_pwd_id,
+			user_name,
+			login_id,
+			sex,
+			phone,
+			mail,
+			address,
+			xt_attachment_id,
+			ctime,
+			status
 			)
 			VALUES
 			(
@@ -98,16 +98,16 @@
 		UPDATE
 			xt_change_pwd
 		SET
-			`xt_change_pwd_id` = #{xt_change_pwd_id},
-			`user_name` = #{user_name},
-			`login_id` = #{login_id},
-			`sex` = #{sex},
-			`phone` = #{phone},
-			`mail` = #{mail},
-			`address` = #{address},
-			`xt_attachment_id` = #{xt_attachment_id},
-			`ctime` = #{ctime},
-			`status` = #{status}
+			xt_change_pwd_id = #{xt_change_pwd_id},
+			user_name = #{user_name},
+			login_id = #{login_id},
+			sex = #{sex},
+			phone = #{phone},
+			mail = #{mail},
+			address = #{address},
+			xt_attachment_id = #{xt_attachment_id},
+			ctime = #{ctime},
+			status = #{status}
 		WHERE xt_change_pwd_id=#{xt_change_pwd_id}
 	</update>
 

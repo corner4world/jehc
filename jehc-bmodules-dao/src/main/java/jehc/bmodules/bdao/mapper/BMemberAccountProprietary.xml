@@ -5,13 +5,13 @@
 	<!--初始化分页-->
 	<select id="getBMemberAccountProprietaryListByCondition" resultType="jehc.bmodules.bmodel.BMemberAccountProprietary" parameterType="map">
 		SELECT
-			`b_member_account_proprietary_id`,
-			`b_member_id`,
-			`b_member_account_id`,
-			`b_member_account_proprietary_status`,
-			DATE_FORMAT(`b_member_account_proprietary_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_account_proprietary_ctime`,
-			`b_member_account_proprietary_money`,
-			`xt_userinfo_id`
+			b_member_account_p_id AS b_member_account_proprietary_id,
+			b_member_id,
+			b_member_account_id,
+			b_member_account_p_status AS b_member_account_proprietary_status,
+			b_member_account_p_ctime AS b_member_account_proprietary_ctime,
+			b_member_account_p_money AS b_member_account_proprietary_money,
+			xt_userinfo_id
 		FROM 
 			b_member_account_proprietary
 		WHERE 1=1
@@ -20,18 +20,18 @@
 	<!--查询对象-->
 	<select id="getBMemberAccountProprietaryById" resultType="jehc.bmodules.bmodel.BMemberAccountProprietary" parameterType="map">
 		SELECT
-			`b_member_account_proprietary_id`,
-			`b_member_id`,
-			`b_member_account_id`,
-			`b_member_account_proprietary_status`,
-			DATE_FORMAT(`b_member_account_proprietary_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_account_proprietary_ctime`,
-			`b_member_account_proprietary_money`,
-			`xt_userinfo_id`
+			b_member_account_p_id AS b_member_account_proprietary_id,
+			b_member_id,
+			b_member_account_id,
+			b_member_account_p_status AS b_member_account_proprietary_status,
+			b_member_account_p_ctime AS b_member_account_proprietary_ctime,
+			b_member_account_p_money AS b_member_account_proprietary_money,
+			xt_userinfo_id
 		FROM 
 			b_member_account_proprietary
 		WHERE 1=1
 		<if test="null != b_member_account_proprietary_id">
-			AND b_member_account_proprietary_id=#{b_member_account_proprietary_id}
+			AND b_member_account_p_id=#{b_member_account_proprietary_id}
 		</if>
 		<if test="null != b_member_id">
 			AND b_member_id=#{b_member_id}
@@ -43,13 +43,13 @@
 		INSERT INTO
 			b_member_account_proprietary
 			(
-			`b_member_account_proprietary_id`,
-			`b_member_id`,
-			`b_member_account_id`,
-			`b_member_account_proprietary_status`,
-			`b_member_account_proprietary_ctime`,
-			`b_member_account_proprietary_money`,
-			`xt_userinfo_id`
+			b_member_account_p_id,
+			b_member_id,
+			b_member_account_id,
+			b_member_account_p_status,
+			b_member_account_p_ctime,
+			b_member_account_p_money,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -68,19 +68,18 @@
 		UPDATE
 			b_member_account_proprietary
 		SET
-			`b_member_account_proprietary_id` = #{b_member_account_proprietary_id},
-			`b_member_id` = #{b_member_id},
-			`b_member_account_id` = #{b_member_account_id},
-			`b_member_account_proprietary_status` = #{b_member_account_proprietary_status},
-			`b_member_account_proprietary_ctime` = #{b_member_account_proprietary_ctime},
-			`b_member_account_proprietary_money` = #{b_member_account_proprietary_money},
-			`xt_userinfo_id` = #{xt_userinfo_id}
-		WHERE b_member_account_proprietary_id=#{b_member_account_proprietary_id}
+			b_member_id = #{b_member_id},
+			b_member_account_id = #{b_member_account_id},
+			b_member_account_p_status = #{b_member_account_proprietary_status},
+			b_member_account_p_ctime = #{b_member_account_proprietary_ctime},
+			b_member_account_p_money = #{b_member_account_proprietary_money},
+			xt_userinfo_id = #{xt_userinfo_id}
+		WHERE b_member_account_p_id=#{b_member_account_proprietary_id}
 	</update>
 
 	<!--删除-->
 	<delete id="delBMemberAccountProprietary" parameterType="map">
-		DELETE FROM b_member_account_proprietary WHERE b_member_account_proprietary_id IN
+		DELETE FROM b_member_account_proprietary WHERE b_member_account_p_id IN
 		<foreach item="item" index="index" collection="b_member_account_proprietary_id" open="(" separator="," close=")">
 			#{item}
 		</foreach>

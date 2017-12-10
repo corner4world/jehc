@@ -5,13 +5,13 @@
 	<!--初始化分页-->
 	<select id="getBCartOrderAddressListByCondition" resultType="jehc.bmodules.bmodel.BCartOrderAddress" parameterType="map">
 		SELECT
-			`b_cart_order_address_id`,
-			`b_cart_order_address_address`,
-			`xt_provinceID`,
-			`xt_cityID`,
-			`xt_districtID`,
-			`b_member_id`,
-			`b_cart_order_address_status`
+			b_cart_order_address_id,
+			b_cart_order_address_address,
+			xt_provinceID,
+			xt_cityID,
+			xt_districtID,
+			b_member_id,
+			b_cart_order_address_status
 		FROM 
 			b_cart_order_address
 		WHERE 1=1
@@ -20,13 +20,13 @@
 	<!--查询对象-->
 	<select id="getBCartOrderAddressById" resultType="jehc.bmodules.bmodel.BCartOrderAddress" parameterType="string">
 		SELECT
-			`b_cart_order_address_id`,
-			`b_cart_order_address_address`,
-			`xt_provinceID`,
-			`xt_cityID`,
-			`xt_districtID`,
-			`b_member_id`,
-			`b_cart_order_address_status`
+			b_cart_order_address_id,
+			b_cart_order_address_address,
+			xt_provinceID,
+			xt_cityID,
+			xt_districtID,
+			b_member_id,
+			b_cart_order_address_status
 		FROM 
 			b_cart_order_address
 		WHERE b_cart_order_address_id=#{b_cart_order_address_id}
@@ -37,13 +37,13 @@
 		INSERT INTO
 			b_cart_order_address
 			(
-			`b_cart_order_address_id`,
-			`b_cart_order_address_address`,
-			`xt_provinceID`,
-			`xt_cityID`,
-			`xt_districtID`,
-			`b_member_id`,
-			`b_cart_order_address_status`
+			b_cart_order_address_id,
+			b_cart_order_address_address,
+			xt_provinceID,
+			xt_cityID,
+			xt_districtID,
+			b_member_id,
+			b_cart_order_address_status
 			)
 			VALUES
 			(
@@ -62,13 +62,13 @@
 		UPDATE
 			b_cart_order_address
 		SET
-			`b_cart_order_address_id` = #{b_cart_order_address_id},
-			`b_cart_order_address_address` = #{b_cart_order_address_address},
-			`xt_provinceID` = #{xt_provinceID},
-			`xt_cityID` = #{xt_cityID},
-			`xt_districtID` = #{xt_districtID},
-			`b_member_id` = #{b_member_id},
-			`b_cart_order_address_status` = #{b_cart_order_address_status}
+			b_cart_order_address_id = #{b_cart_order_address_id},
+			b_cart_order_address_address = #{b_cart_order_address_address},
+			xt_provinceID = #{xt_provinceID},
+			xt_cityID = #{xt_cityID},
+			xt_districtID = #{xt_districtID},
+			b_member_id = #{b_member_id},
+			b_cart_order_address_status = #{b_cart_order_address_status}
 		WHERE b_cart_order_address_id=#{b_cart_order_address_id}
 	</update>
 

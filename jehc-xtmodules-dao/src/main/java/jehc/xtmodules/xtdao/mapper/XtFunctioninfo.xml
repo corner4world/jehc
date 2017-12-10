@@ -5,21 +5,21 @@
 	<!--初始化分页-->
 	<select id="getXtFunctioninfoListByCondition" resultType="jehc.xtmodules.xtmodel.XtFunctioninfo" parameterType="map">
 		SELECT
-			xt_functioninfo.`xt_functioninfo_id`,
-			xt_functioninfo.`xt_functioninfoName`,
-			xt_functioninfo.`xt_functioninfoTitle`,
-			xt_functioninfo.`xt_functioninfoURL`,
-			xt_functioninfo.`xt_menuinfo_id`,
-			xt_functioninfo.`xt_functioninfoMethod`,
-			xt_functioninfo.`xt_functioninfoType`,
-			xt_functioninfo.`xt_functioninfoIsAuthority`,
-			xt_functioninfo.`xt_functioninfoStatus`,
-			xt_menuinfo.`xt_menuinfo_title`
+			xt_functioninfo.xt_functioninfo_id,
+			xt_functioninfo.xt_functioninfoName,
+			xt_functioninfo.xt_functioninfoTitle,
+			xt_functioninfo.xt_functioninfoURL,
+			xt_functioninfo.xt_menuinfo_id,
+			xt_functioninfo.xt_functioninfoMethod,
+			xt_functioninfo.xt_functioninfoType,
+			xt_functioninfo.xt_functioninfoIsAuthority,
+			xt_functioninfo.xt_functioninfoStatus,
+			xt_menuinfo.xt_menuinfo_title
 		FROM 
-			xt_functioninfo AS xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+			xt_functioninfo xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
 		WHERE 1=1
 		<if test="null != xt_functioninfo_id">
-			AND xt_functioninfo.`xt_functioninfo_id` IN 
+			AND xt_functioninfo.xt_functioninfo_id IN 
 			<foreach item="item" index="index" collection="xt_functioninfo_id" open="(" separator="," close=")">
 				#{item}
 			</foreach>
@@ -29,18 +29,18 @@
 	<!--查询对象-->
 	<select id="getXtFunctioninfoById" resultType="jehc.xtmodules.xtmodel.XtFunctioninfo" parameterType="string">
 		SELECT
-			xt_functioninfo.`xt_functioninfo_id`,
-			xt_functioninfo.`xt_functioninfoName`,
-			xt_functioninfo.`xt_functioninfoTitle`,
-			xt_functioninfo.`xt_functioninfoURL`,
-			xt_functioninfo.`xt_menuinfo_id`,
-			xt_functioninfo.`xt_functioninfoMethod`,
-			xt_functioninfo.`xt_functioninfoType`,
-			xt_functioninfo.`xt_functioninfoIsAuthority`,
-			xt_functioninfo.`xt_functioninfoStatus`,
-			xt_menuinfo.`xt_menuinfo_title`
+			xt_functioninfo.xt_functioninfo_id,
+			xt_functioninfo.xt_functioninfoName,
+			xt_functioninfo.xt_functioninfoTitle,
+			xt_functioninfo.xt_functioninfoURL,
+			xt_functioninfo.xt_menuinfo_id,
+			xt_functioninfo.xt_functioninfoMethod,
+			xt_functioninfo.xt_functioninfoType,
+			xt_functioninfo.xt_functioninfoIsAuthority,
+			xt_functioninfo.xt_functioninfoStatus,
+			xt_menuinfo.xt_menuinfo_title
 		FROM 
-			xt_functioninfo AS xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+			xt_functioninfo xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
 		WHERE xt_functioninfo_id=#{xt_functioninfo_id}
 	</select>
 
@@ -49,15 +49,15 @@
 		INSERT INTO
 			xt_functioninfo
 			(
-			`xt_functioninfo_id`,
-			`xt_functioninfoName`,
-			`xt_functioninfoTitle`,
-			`xt_functioninfoURL`,
-			`xt_menuinfo_id`,
-			`xt_functioninfoMethod`,
-			`xt_functioninfoType`,
-			`xt_functioninfoIsAuthority`,
-			`xt_functioninfoStatus`
+			xt_functioninfo_id,
+			xt_functioninfoName,
+			xt_functioninfoTitle,
+			xt_functioninfoURL,
+			xt_menuinfo_id,
+			xt_functioninfoMethod,
+			xt_functioninfoType,
+			xt_functioninfoIsAuthority,
+			xt_functioninfoStatus
 			)
 			VALUES
 			(
@@ -78,15 +78,15 @@
 		UPDATE
 			xt_functioninfo
 		SET
-			`xt_functioninfo_id` = #{xt_functioninfo_id},
-			`xt_functioninfoName` = #{xt_functioninfoName},
-			`xt_functioninfoTitle` = #{xt_functioninfoTitle},
-			`xt_functioninfoURL` = #{xt_functioninfoURL},
-			`xt_menuinfo_id` = #{xt_menuinfo_id},
-			`xt_functioninfoMethod` = #{xt_functioninfoMethod},
-			`xt_functioninfoType` = #{xt_functioninfoType},
-			`xt_functioninfoIsAuthority` = #{xt_functioninfoIsAuthority},
-			`xt_functioninfoStatus` = #{xt_functioninfoStatus}
+			xt_functioninfo_id = #{xt_functioninfo_id},
+			xt_functioninfoName = #{xt_functioninfoName},
+			xt_functioninfoTitle = #{xt_functioninfoTitle},
+			xt_functioninfoURL = #{xt_functioninfoURL},
+			xt_menuinfo_id = #{xt_menuinfo_id},
+			xt_functioninfoMethod = #{xt_functioninfoMethod},
+			xt_functioninfoType = #{xt_functioninfoType},
+			xt_functioninfoIsAuthority = #{xt_functioninfoIsAuthority},
+			xt_functioninfoStatus = #{xt_functioninfoStatus}
 		WHERE xt_functioninfo_id=#{xt_functioninfo_id}
 	</update>
 
@@ -98,20 +98,20 @@
 	<!--读取所有功能-->
 	<select id="getXtFunctioninfoList" resultType="jehc.xtmodules.xtmodel.XtFunctioninfo" parameterType="map">
 		SELECT
-			xt_functioninfo.`xt_functioninfo_id`,
-			xt_functioninfo.`xt_functioninfoName`,
-			xt_functioninfo.`xt_functioninfoTitle`,
-			xt_functioninfo.`xt_functioninfoURL`,
-			xt_functioninfo.`xt_menuinfo_id`,
-			xt_functioninfo.`xt_functioninfoMethod`,
-			xt_functioninfo.`xt_functioninfoType`,
-			xt_functioninfo.`xt_functioninfoIsAuthority`,
-			xt_functioninfo.`xt_functioninfoStatus`,
-			xt_menuinfo.`xt_menuinfo_title`
+			xt_functioninfo.xt_functioninfo_id,
+			xt_functioninfo.xt_functioninfoName,
+			xt_functioninfo.xt_functioninfoTitle,
+			xt_functioninfo.xt_functioninfoURL,
+			xt_functioninfo.xt_menuinfo_id,
+			xt_functioninfo.xt_functioninfoMethod,
+			xt_functioninfo.xt_functioninfoType,
+			xt_functioninfo.xt_functioninfoIsAuthority,
+			xt_functioninfo.xt_functioninfoStatus,
+			xt_menuinfo.xt_menuinfo_title
 		FROM 
-			xt_functioninfo as xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+			xt_functioninfo xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
 		WHERE 1=1
-			AND xt_functioninfo.`xt_functioninfoStatus`='0'
+			AND xt_functioninfo.xt_functioninfoStatus='0'
 			<if test="null != xt_functioninfoType">
 				AND xt_functioninfo.xt_functioninfoType = #{xt_functioninfoType}
 			</if>
@@ -122,23 +122,15 @@
 	<!-- 查询所有功能数据并分组 -->
 	<select id="getXtFunctioninfoListForData" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtFunctioninfo">
 		SELECT
-			xt_functioninfo.`xt_functioninfo_id`,
-			xt_functioninfo.`xt_functioninfoName`,
-			xt_functioninfo.`xt_functioninfoTitle`,
-			xt_functioninfo.`xt_functioninfoURL`,
-			xt_functioninfo.`xt_menuinfo_id`,
-			xt_functioninfo.`xt_functioninfoMethod`,
-			xt_functioninfo.`xt_functioninfoType`,
-			xt_functioninfo.`xt_functioninfoIsAuthority`,
-			xt_menuinfo.`xt_menuinfo_title`,
-			xt_functioninfo.`xt_functioninfoStatus`
+			xt_functioninfo.xt_menuinfo_id,
+			xt_menuinfo.xt_menuinfo_title
 		FROM 
-			xt_functioninfo AS xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+			xt_functioninfo xt_functioninfo LEFT JOIN xt_menuinfo xt_menuinfo ON xt_functioninfo.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
 		WHERE 1=1
-				AND xt_functioninfo.`xt_functioninfoStatus`='0'
+				AND xt_functioninfo.xt_functioninfoStatus='0'
 			<!-- 功能权限调用使用该条件 -->
 			<if test="null != xt_menuinfo_id">
-				AND xt_functioninfo.`xt_menuinfo_id` = #{xt_menuinfo_id}
+				AND xt_functioninfo.xt_menuinfo_id = #{xt_menuinfo_id}
 			</if>
 			<if test="null != xt_functioninfoType">
 				AND xt_functioninfo.xt_functioninfoType = #{xt_functioninfoType}
@@ -152,15 +144,15 @@
 			<if test="null != xt_functioninfoIsAuthority">
 				AND xt_functioninfo.xt_functioninfoIsAuthority = #{xt_functioninfoIsAuthority}
 			</if>
-		 GROUP BY xt_functioninfo.`xt_menuinfo_id`
+		 GROUP BY xt_functioninfo.xt_menuinfo_id,xt_menuinfo.xt_menuinfo_title
 	</select>
 	<select id="getXtFunctioninfoAllForData" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtFunctioninfo">
 		SELECT
-		  `xt_functioninfo_id`,
-		  `xt_functioninfoName`,
-		  `xt_menuinfo_id`
+		  xt_functioninfo_id,
+		  xt_functioninfoName,
+		  xt_menuinfo_id
 		FROM
-		  `xt_functioninfo`
+		  xt_functioninfo
 		WHERE 1=1
 			<if test="null != xt_menuinfo_id">
 				AND xt_menuinfo_id = #{xt_menuinfo_id}

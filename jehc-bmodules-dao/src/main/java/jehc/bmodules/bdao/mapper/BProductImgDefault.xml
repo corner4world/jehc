@@ -5,21 +5,21 @@
 	<!--初始化分页-->
 	<select id="getBProductImgDefaultListByCondition" resultType="jehc.bmodules.bmodel.BProductImgDefault" parameterType="map">
 		SELECT
-			b_product_img_default.`b_product_img_default_id`,
-			b_product_img_default.`b_product_img_name`,
-			DATE_FORMAT(b_product_img_default.`b_product_img_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_ctime`,
-			DATE_FORMAT(b_product_img_default.`b_product_img_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_mtime`,
-			b_product_img_default.`b_product_img_type`,
-			b_product_img_default.`b_product_img_status`,
-			b_product_img_default.`b_product_id`,
-			b_product_img_default.`b_product_img_width`,
-			b_product_img_default.`b_product_img_height`,
-			b_product_img_default.`b_product_img_remark`,
-			xt_userinfo.`xt_userinfo_realName`,
+			b_product_img_default.b_product_img_default_id,
+			b_product_img_default.b_product_img_name,
+			b_product_img_default.b_product_img_ctime AS b_product_img_ctime,
+			b_product_img_default.b_product_img_mtime AS b_product_img_mtime,
+			b_product_img_default.b_product_img_type,
+			b_product_img_default.b_product_img_status,
+			b_product_img_default.b_product_id,
+			b_product_img_default.b_product_img_width,
+			b_product_img_default.b_product_img_height,
+			b_product_img_default.b_product_img_remark,
+			xt_userinfo.xt_userinfo_realName,
 			xt_attachment.*
 		FROM 
 			b_product_img_default b_product_img_default LEFT JOIN xt_userinfo xt_userinfo ON b_product_img_default.xt_userinfo_id = xt_userinfo.xt_userinfo_id
-			LEFT JOIN xt_attachment xt_attachment ON b_product_img_default.`xt_attachment_id` = xt_attachment.xt_attachment_id
+			LEFT JOIN xt_attachment xt_attachment ON b_product_img_default.xt_attachment_id = xt_attachment.xt_attachment_id
 		WHERE 1=1
 		<if test="null != b_product_id">
 			AND b_product_img_default.b_product_id = #{b_product_id}
@@ -38,23 +38,23 @@
 	<!--查询对象-->
 	<select id="getBProductImgDefaultById" resultType="jehc.bmodules.bmodel.BProductImgDefault" parameterType="string">
 		SELECT
-			b_product_img_default.`b_product_img_default_id`,
-			b_product_img_default.`b_product_img_name`,
-			DATE_FORMAT(b_product_img_default.`b_product_img_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_ctime`,
-			DATE_FORMAT(b_product_img_default.`b_product_img_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_mtime`,
-			b_product_img_default.`b_product_img_type`,
-			b_product_img_default.`b_product_img_status`,
-			b_product_img_default.`b_product_id`,
-			b_product_img_default.`xt_attachment_id`,
-			b_product_img_default.`b_product_img_width`,
-			b_product_img_default.`b_product_img_height`,
-			b_product_img_default.`xt_userinfo_id`,
-			b_product_img_default.`b_product_img_remark`,
-			xt_userinfo.`xt_userinfo_realName`,
+			b_product_img_default.b_product_img_default_id,
+			b_product_img_default.b_product_img_name,
+			b_product_img_default.b_product_img_ctime AS b_product_img_ctime,
+			b_product_img_default.b_product_img_mtime AS b_product_img_mtime,
+			b_product_img_default.b_product_img_type,
+			b_product_img_default.b_product_img_status,
+			b_product_img_default.b_product_id,
+			b_product_img_default.xt_attachment_id,
+			b_product_img_default.b_product_img_width,
+			b_product_img_default.b_product_img_height,
+			b_product_img_default.xt_userinfo_id,
+			b_product_img_default.b_product_img_remark,
+			xt_userinfo.xt_userinfo_realName,
 			xt_attachment.*
 		FROM 
 			b_product_img_default b_product_img_default LEFT JOIN xt_userinfo xt_userinfo ON b_product_img_default.xt_userinfo_id = xt_userinfo.xt_userinfo_id
-			LEFT JOIN xt_attachment xt_attachment ON b_product_img_default.`xt_attachment_id` = xt_attachment.xt_attachment_id
+			LEFT JOIN xt_attachment xt_attachment ON b_product_img_default.xt_attachment_id = xt_attachment.xt_attachment_id
 		WHERE b_product_img_default.b_product_img_default_id=#{b_product_img_default_id}
 	</select>
 
@@ -63,18 +63,18 @@
 		INSERT INTO
 			b_product_img_default
 			(
-			`b_product_img_default_id`,
-			`b_product_img_name`,
-			`b_product_img_ctime`,
-			`b_product_img_mtime`,
-			`b_product_img_type`,
-			`b_product_img_status`,
-			`b_product_id`,
-			`xt_attachment_id`,
-			`b_product_img_width`,
-			`b_product_img_height`,
-			`xt_userinfo_id`,
-			`b_product_img_remark`
+			b_product_img_default_id,
+			b_product_img_name,
+			b_product_img_ctime,
+			b_product_img_mtime,
+			b_product_img_type,
+			b_product_img_status,
+			b_product_id,
+			xt_attachment_id,
+			b_product_img_width,
+			b_product_img_height,
+			xt_userinfo_id,
+			b_product_img_remark
 			)
 			VALUES
 			(
@@ -98,17 +98,17 @@
 		UPDATE
 			b_product_img_default
 		SET
-			`b_product_img_default_id` = #{b_product_img_default_id},
-			`b_product_img_name` = #{b_product_img_name},
-			`b_product_img_mtime` = #{b_product_img_mtime},
-			`b_product_img_type` = #{b_product_img_type},
-			`b_product_img_status` = #{b_product_img_status},
-			`b_product_id` = #{b_product_id},
-			`xt_attachment_id` = #{xt_attachment_id},
-			`b_product_img_width` = #{b_product_img_width},
-			`b_product_img_height` = #{b_product_img_height},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`b_product_img_remark` = #{b_product_img_remark}
+			b_product_img_default_id = #{b_product_img_default_id},
+			b_product_img_name = #{b_product_img_name},
+			b_product_img_mtime = #{b_product_img_mtime},
+			b_product_img_type = #{b_product_img_type},
+			b_product_img_status = #{b_product_img_status},
+			b_product_id = #{b_product_id},
+			xt_attachment_id = #{xt_attachment_id},
+			b_product_img_width = #{b_product_img_width},
+			b_product_img_height = #{b_product_img_height},
+			xt_userinfo_id = #{xt_userinfo_id},
+			b_product_img_remark = #{b_product_img_remark}
 		WHERE b_product_img_default_id=#{b_product_img_default_id}
 	</update>
 

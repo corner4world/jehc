@@ -174,10 +174,13 @@ public class XtDataAuthorityPostServiceImpl extends BaseService implements XtDat
 			xtDataAuthorityDao.delXtDataAuthorityByCondition(condition);
 			//3添加新数据
 			if(null != xt_Data_Authority_PostList && xt_Data_Authority_PostList.size() > 0){
-				i = xtDataAuthorityPostDao.addBatchXtDataAuthorityPost(xt_Data_Authority_PostList);
-			}else{
-				i = 1;
+				for(XtDataAuthorityPost xt_Data_Authority_Post:xt_Data_Authority_PostList){
+					xtDataAuthorityPostDao.addXtDataAuthorityPost(xt_Data_Authority_Post);
+				}
+				//兼容oracle与mysql语法 废弃批量插入
+//				i = xtDataAuthorityPostDao.addBatchXtDataAuthorityPost(xt_Data_Authority_PostList);
 			}
+			i = 1;
 			//4统一推送
 			addPushDataAuthority();
 		} catch (Exception e) {

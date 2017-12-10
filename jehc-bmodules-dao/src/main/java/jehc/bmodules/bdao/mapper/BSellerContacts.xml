@@ -5,13 +5,13 @@
 	<!--初始化分页-->
 	<select id="getBSellerContactsListByCondition" resultType="jehc.bmodules.bmodel.BSellerContacts" parameterType="map">
 		SELECT
-			`b_seller_contacts_id`,
-			`b_seller_id`,
-			`b_seller_contacts_uname`,
-			`b_seller_contacts_tel`,
-			`b_seller_contacts_sex`,
-			`b_seller_contacts_type`,
-			`b_seller_contacts_turnover`
+			b_seller_contacts_id,
+			b_seller_id,
+			b_seller_contacts_uname,
+			b_seller_contacts_tel,
+			b_seller_contacts_sex,
+			b_seller_contacts_type,
+			b_seller_contacts_turnover
 		FROM 
 			b_seller_contacts
 		WHERE 1=1
@@ -27,13 +27,13 @@
 	<!--查询对象-->
 	<select id="getBSellerContactsById" resultType="jehc.bmodules.bmodel.BSellerContacts" parameterType="string">
 		SELECT
-			`b_seller_contacts_id`,
-			`b_seller_id`,
-			`b_seller_contacts_uname`,
-			`b_seller_contacts_tel`,
-			`b_seller_contacts_sex`,
-			`b_seller_contacts_type`,
-			`b_seller_contacts_turnover`
+			b_seller_contacts_id,
+			b_seller_id,
+			b_seller_contacts_uname,
+			b_seller_contacts_tel,
+			b_seller_contacts_sex,
+			b_seller_contacts_type,
+			b_seller_contacts_turnover
 		FROM 
 			b_seller_contacts
 		WHERE b_seller_contacts_id=#{b_seller_contacts_id}
@@ -44,13 +44,13 @@
 		INSERT INTO
 			b_seller_contacts
 			(
-			`b_seller_contacts_id`,
-			`b_seller_id`,
-			`b_seller_contacts_uname`,
-			`b_seller_contacts_tel`,
-			`b_seller_contacts_sex`,
-			`b_seller_contacts_type`,
-			`b_seller_contacts_turnover`
+			b_seller_contacts_id,
+			b_seller_id,
+			b_seller_contacts_uname,
+			b_seller_contacts_tel,
+			b_seller_contacts_sex,
+			b_seller_contacts_type,
+			b_seller_contacts_turnover
 			)
 			VALUES
 			(
@@ -69,13 +69,13 @@
 		UPDATE
 			b_seller_contacts
 		SET
-			`b_seller_contacts_id` = #{b_seller_contacts_id},
-			`b_seller_id` = #{b_seller_id},
-			`b_seller_contacts_uname` = #{b_seller_contacts_uname},
-			`b_seller_contacts_tel` = #{b_seller_contacts_tel},
-			`b_seller_contacts_sex` = #{b_seller_contacts_sex},
-			`b_seller_contacts_type` = #{b_seller_contacts_type},
-			`b_seller_contacts_turnover` = #{b_seller_contacts_turnover}
+			b_seller_contacts_id = #{b_seller_contacts_id},
+			b_seller_id = #{b_seller_id},
+			b_seller_contacts_uname = #{b_seller_contacts_uname},
+			b_seller_contacts_tel = #{b_seller_contacts_tel},
+			b_seller_contacts_sex = #{b_seller_contacts_sex},
+			b_seller_contacts_type = #{b_seller_contacts_type},
+			b_seller_contacts_turnover = #{b_seller_contacts_turnover}
 		WHERE b_seller_contacts_id=#{b_seller_contacts_id}
 	</update>
 

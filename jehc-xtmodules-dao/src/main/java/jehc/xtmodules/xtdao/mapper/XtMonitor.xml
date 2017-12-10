@@ -5,42 +5,42 @@
 	<!--初始化分页-->
 	<select id="getXtMonitorListByCondition" resultType="jehc.xtmodules.xtmodel.XtMonitor" parameterType="map">
 		SELECT
-			`xt_monitor_id`,
-			`xt_monitor_userName`,
-			`xt_monitor_accountName`,
-			`xt_monitor_comName`,
-			`xt_monitor_localName`,
-			`xt_monitor_jvm_totalMem`,
-			`xt_monitor_jvm_Mem`,
-			`xt_monitor_operate_sysName`,
-			`xt_monitor_operate_org`,
-			`xt_monitor_jvm_cup_count`,
-			`xt_monitorIP`,
-			`xt_monitor_environment`,
-			`xt_monitorPath`,
-			`xt_monitorTime`
+			xt_monitor_id,
+			xt_monitor_userName,
+			xt_monitor_accountName,
+			xt_monitor_comName,
+			xt_monitor_localName,
+			xt_monitor_jvm_totalMem,
+			xt_monitor_jvm_Mem,
+			xt_monitor_operate_sysName,
+			xt_monitor_operate_org,
+			xt_monitor_jvm_cup_count,
+			xt_monitorIP,
+			xt_monitor_environment,
+			xt_monitorPath,
+			xt_monitorTime
 		FROM 
 			xt_monitor
 		WHERE 1=1
-		ORDER BY `xt_monitorTime` DESC
+		ORDER BY xt_monitorTime DESC
 	</select>
 	<!--查询对象-->
 	<select id="getXtMonitorById" resultType="jehc.xtmodules.xtmodel.XtMonitor" parameterType="string">
 		SELECT
-			`xt_monitor_id`,
-			`xt_monitor_userName`,
-			`xt_monitor_accountName`,
-			`xt_monitor_comName`,
-			`xt_monitor_localName`,
-			`xt_monitor_jvm_totalMem`,
-			`xt_monitor_jvm_Mem`,
-			`xt_monitor_operate_sysName`,
-			`xt_monitor_operate_org`,
-			`xt_monitor_jvm_cup_count`,
-			`xt_monitorIP`,
-			`xt_monitor_environment`,
-			`xt_monitorPath`,
-			`xt_monitorTime`
+			xt_monitor_id,
+			xt_monitor_userName,
+			xt_monitor_accountName,
+			xt_monitor_comName,
+			xt_monitor_localName,
+			xt_monitor_jvm_totalMem,
+			xt_monitor_jvm_Mem,
+			xt_monitor_operate_sysName,
+			xt_monitor_operate_org,
+			xt_monitor_jvm_cup_count,
+			xt_monitorIP,
+			xt_monitor_environment,
+			xt_monitorPath,
+			xt_monitorTime
 		FROM 
 			xt_monitor
 		WHERE xt_monitor_id=#{xt_monitor_id}
@@ -51,20 +51,20 @@
 		INSERT INTO
 			xt_monitor
 			(
-			`xt_monitor_id`,
-			`xt_monitor_userName`,
-			`xt_monitor_accountName`,
-			`xt_monitor_comName`,
-			`xt_monitor_localName`,
-			`xt_monitor_jvm_totalMem`,
-			`xt_monitor_jvm_Mem`,
-			`xt_monitor_operate_sysName`,
-			`xt_monitor_operate_org`,
-			`xt_monitor_jvm_cup_count`,
-			`xt_monitorIP`,
-			`xt_monitor_environment`,
-			`xt_monitorPath`,
-			`xt_monitorTime`
+			xt_monitor_id,
+			xt_monitor_userName,
+			xt_monitor_accountName,
+			xt_monitor_comName,
+			xt_monitor_localName,
+			xt_monitor_jvm_totalMem,
+			xt_monitor_jvm_Mem,
+			xt_monitor_operate_sysName,
+			xt_monitor_operate_org,
+			xt_monitor_jvm_cup_count,
+			xt_monitorIP,
+			xt_monitor_environment,
+			xt_monitorPath,
+			xt_monitorTime
 			)
 			VALUES
 			(
@@ -90,19 +90,19 @@
 		UPDATE
 			xt_monitor
 		SET
-			`xt_monitor_id` = #{xt_monitor_id},
-			`xt_monitor_userName` = #{xt_monitor_userName},
-			`xt_monitor_accountName` = #{xt_monitor_accountName},
-			`xt_monitor_comName` = #{xt_monitor_comName},
-			`xt_monitor_localName` = #{xt_monitor_localName},
-			`xt_monitor_jvm_totalMem` = #{xt_monitor_jvm_totalMem},
-			`xt_monitor_jvm_Mem` = #{xt_monitor_jvm_Mem},
-			`xt_monitor_operate_sysName` = #{xt_monitor_operate_sysName},
-			`xt_monitor_operate_org` = #{xt_monitor_operate_org},
-			`xt_monitor_jvm_cup_count` = #{xt_monitor_jvm_cup_count},
-			`xt_monitorIP` = #{xt_monitorIP},
-			`xt_monitor_environment` = #{xt_monitor_environment},
-			`xt_monitorPath` = #{xt_monitorPath}
+			xt_monitor_id = #{xt_monitor_id},
+			xt_monitor_userName = #{xt_monitor_userName},
+			xt_monitor_accountName = #{xt_monitor_accountName},
+			xt_monitor_comName = #{xt_monitor_comName},
+			xt_monitor_localName = #{xt_monitor_localName},
+			xt_monitor_jvm_totalMem = #{xt_monitor_jvm_totalMem},
+			xt_monitor_jvm_Mem = #{xt_monitor_jvm_Mem},
+			xt_monitor_operate_sysName = #{xt_monitor_operate_sysName},
+			xt_monitor_operate_org = #{xt_monitor_operate_org},
+			xt_monitor_jvm_cup_count = #{xt_monitor_jvm_cup_count},
+			xt_monitorIP = #{xt_monitorIP},
+			xt_monitor_environment = #{xt_monitor_environment},
+			xt_monitorPath = #{xt_monitorPath}
 		WHERE xt_monitor_id=#{xt_monitor_id}
 	</update>
 

@@ -53,12 +53,12 @@
 	
 	<!-- 查询存储过程 -->
 	<select id="getXtDbProcList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbProc">
-		SELECT * FROM mysql.proc WHERE db = #{dbName} AND `type` = 'PROCEDURE'
+		SELECT * FROM mysql.proc WHERE db = #{dbName} AND type = 'PROCEDURE'
 	</select>
 	
 	<!-- 查询函数 -->
 	<select id="getXtDbFunList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtDbFun">
-		SELECT * FROM mysql.proc WHERE db = #{dbName} AND `type` = 'FUNCTION'
+		SELECT * FROM mysql.proc WHERE db = #{dbName} AND type = 'FUNCTION'
 	</select>
 	
 	<!-- 查询视图 -->

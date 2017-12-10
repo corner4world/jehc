@@ -5,17 +5,17 @@
 	<!--初始化分页-->
 	<select id="getXtServiceCenterParameterListByCondition" resultType="jehc.xtmodules.xtmodel.XtServiceCenterParameter" parameterType="map">
 		SELECT
-			`xt_service_center_parameter_id`,
-			`xt_service_center_id`,
-			`xt_service_center_parameter_name`,
-			`xt_service_center_parameter_type`,
-			`xt_service_center_parameter_remark`,
-			`xt_userinfo_id`,
-			`xt_service_center_parameter_status`,
-			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
-			DATE_FORMAT(`mtime`,'%Y-%m-%d %H:%i:%s') AS `mtime`,
-			`attach_filetype`,
-			`attach_fileconfig`
+			xt_service_center_p_id AS xt_service_center_parameter_id,
+			xt_service_center_id,
+			xt_service_center_p_name AS xt_service_center_parameter_name,
+			xt_service_center_p_type AS xt_service_center_parameter_type,
+			xt_service_center_p_remark AS xt_service_center_parameter_remark,
+			xt_userinfo_id,
+			xt_service_center_parameter_status AS xt_service_center_p_status,
+			ctime,
+			mtime,
+			attach_filetype,
+			attach_fileconfig
 		FROM 
 			xt_service_center_parameter
 		WHERE 1=1
@@ -26,7 +26,7 @@
 			AND xt_service_center_type = #{xt_service_center_type}
 		</if>
 		<if test="null != xt_service_center_name">
-			AND instr(xt_service_center_name,#{xt_service_center_name})
+			AND xt_service_center_name LIKE CONCAT(CONCAT('%',#{xt_service_center_name}),'%')
 		</if>
 		<if test = "null != xt_service_center_id">
 			AND xt_service_center_id = #{xt_service_center_id}
@@ -36,20 +36,20 @@
 	<!--查询对象-->
 	<select id="getXtServiceCenterParameterById" resultType="jehc.xtmodules.xtmodel.XtServiceCenterParameter" parameterType="string">
 		SELECT
-			`xt_service_center_parameter_id`,
-			`xt_service_center_id`,
-			`xt_service_center_parameter_name`,
-			`xt_service_center_parameter_type`,
-			`xt_service_center_parameter_remark`,
-			`xt_userinfo_id`,
-			`xt_service_center_parameter_status`,
-			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
-			DATE_FORMAT(`mtime`,'%Y-%m-%d %H:%i:%s') AS `mtime`,
-			`attach_filetype`,
-			`attach_fileconfig`
+			xt_service_center_p_id AS xt_service_center_parameter_id,
+			xt_service_center_id,
+			xt_service_center_p_name AS xt_service_center_parameter_name,
+			xt_service_center_p_type AS xt_service_center_parameter_type,
+			xt_service_center_p_remark AS xt_service_center_parameter_remark,
+			xt_userinfo_id,
+			xt_service_center_parameter_status AS xt_service_center_p_status,
+			ctime,
+			mtime,
+			attach_filetype,
+			attach_fileconfig
 		FROM 
 			xt_service_center_parameter
-		WHERE xt_service_center_parameter_id=#{xt_service_center_parameter_id}
+		WHERE xt_service_center_p_id=#{xt_service_center_parameter_id}
 	</select>
 
 	<!--添加-->
@@ -57,17 +57,16 @@
 		INSERT INTO
 			xt_service_center_parameter
 			(
-			`xt_service_center_parameter_id`,
-			`xt_service_center_id`,
-			`xt_service_center_parameter_name`,
-			`xt_service_center_parameter_type`,
-			`xt_service_center_parameter_remark`,
-			`xt_userinfo_id`,
-			`xt_service_center_parameter_status`,
-			`ctime`,
-			`mtime`,
-			`attach_filetype`,
-			`attach_fileconfig`
+			xt_service_center_p_id,
+			xt_service_center_id,
+			xt_service_center_p_name,
+			xt_service_center_p_type,
+			xt_service_center_p_remark,
+			xt_userinfo_id,
+			xt_service_center_p_status,
+			ctime,
+			attach_filetype,
+			attach_fileconfig
 			)
 			VALUES
 			(
@@ -79,7 +78,6 @@
 			#{xt_userinfo_id},
 			#{xt_service_center_parameter_status},
 			#{ctime},
-			#{mtime},
 			#{attach_filetype},
 			#{attach_fileconfig}
 			)
@@ -90,18 +88,17 @@
 		UPDATE
 			xt_service_center_parameter
 		SET
-			`xt_service_center_parameter_id` = #{xt_service_center_parameter_id},
-			`xt_service_center_id` = #{xt_service_center_id},
-			`xt_service_center_parameter_name` = #{xt_service_center_parameter_name},
-			`xt_service_center_parameter_type` = #{xt_service_center_parameter_type},
-			`xt_service_center_parameter_remark` = #{xt_service_center_parameter_remark},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_service_center_parameter_status` = #{xt_service_center_parameter_status},
-			`ctime` = #{ctime},
-			`mtime` = #{mtime},
-			`attach_filetype` = #{attach_filetype},
-			`attach_fileconfig` = #{attach_fileconfig}
-		WHERE xt_service_center_parameter_id=#{xt_service_center_parameter_id}
+			xt_service_center_p_id = #{xt_service_center_parameter_id},
+			xt_service_center_id = #{xt_service_center_id},
+			xt_service_center_p_name = #{xt_service_center_parameter_name},
+			xt_service_center_p_type = #{xt_service_center_parameter_type},
+			xt_service_center_p_remark = #{xt_service_center_parameter_remark},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_service_center_p_status = #{xt_service_center_parameter_status},
+			mtime = #{mtime},
+			attach_filetype = #{attach_filetype},
+			attach_fileconfig = #{attach_fileconfig}
+		WHERE xt_service_center_p_id=#{xt_service_center_parameter_id}
 	</update>
 	
 	<!-- 修改（根据动态条件） -->
@@ -110,45 +107,42 @@
 			xt_service_center_parameter
 		<set>
 			<if test="xt_service_center_parameter_id != null">
-                `xt_service_center_parameter_id` = #{xt_service_center_parameter_id},
+                xt_service_center_p_id = #{xt_service_center_parameter_id},
             </if>
             <if test="xt_service_center_id !=  null">
-            	`xt_service_center_id` = #{xt_service_center_id},
+            	xt_service_center_id = #{xt_service_center_id},
             </if>
             <if test="xt_service_center_parameter_name !=  null">
-            	`xt_service_center_parameter_name` = #{xt_service_center_parameter_name},
+            	xt_service_center_p_name = #{xt_service_center_parameter_name},
             </if>
-            <if test="xt_service_center_parameter_type !=  null">
-            	`xt_service_center_parameter_type` = #{xt_service_center_parameter_type},
+            <if test="xt_service_center_p_type !=  null">
+            	xt_service_center_parameter_type = #{xt_service_center_parameter_type},
             </if>
-            <if test="xt_service_center_parameter_remark !=  null">
-            	`xt_service_center_parameter_remark` = #{xt_service_center_parameter_remark},
+            <if test="xt_service_center_p_remark !=  null">
+            	xt_service_center_p_remark = #{xt_service_center_parameter_remark},
             </if>
             <if test="xt_userinfo_id !=  null">
-            	`xt_userinfo_id` = #{xt_userinfo_id},
+            	xt_userinfo_id = #{xt_userinfo_id},
             </if>
             <if test="xt_service_center_parameter_status !=  null">
-            	`xt_service_center_parameter_status` = #{xt_service_center_parameter_status},
-            </if>
-            <if test="ctime !=  null">
-            	`ctime` = #{ctime},
+            	xt_service_center_p_status = #{xt_service_center_parameter_status},
             </if>
             <if test="mtime !=  null">
-            	`mtime` = #{mtime},
+            	mtime = #{mtime},
             </if>
             <if test="attach_filetype !=  null">
-            	`attach_filetype` = #{attach_filetype},
+            	attach_filetype = #{attach_filetype},
             </if>
             <if test="attach_fileconfig !=  null">
-            	`attach_fileconfig` = #{attach_fileconfig},
+            	attach_fileconfig = #{attach_fileconfig},
             </if>
 		</set>
-		WHERE xt_service_center_parameter_id=#{xt_service_center_parameter_id}
+		WHERE xt_service_center_p_id=#{xt_service_center_parameter_id}
 	</update>
 	
 	<!--删除-->
 	<delete id="delXtServiceCenterParameter" parameterType="map">
-		DELETE FROM xt_service_center_parameter WHERE xt_service_center_parameter_id IN
+		DELETE FROM xt_service_center_parameter WHERE xt_service_center_p_id IN
 		<foreach item="item" index="index" collection="xt_service_center_parameter_id" open="(" separator="," close=")">
 			#{item}
 		</foreach>
@@ -159,17 +153,16 @@
 		INSERT INTO
 			xt_service_center_parameter
 			(
-			`xt_service_center_parameter_id`,
-			`xt_service_center_id`,
-			`xt_service_center_parameter_name`,
-			`xt_service_center_parameter_type`,
-			`xt_service_center_parameter_remark`,
-			`xt_userinfo_id`,
-			`xt_service_center_parameter_status`,
-			`ctime`,
-			`mtime`,
-			`attach_filetype`,
-			`attach_fileconfig`
+			xt_service_center_p_id,
+			xt_service_center_id,
+			xt_service_center_p_name,
+			xt_service_center_p_type,
+			xt_service_center_p_remark,
+			xt_userinfo_id,
+			xt_service_center_p_status,
+			ctime,
+			attach_filetype,
+			attach_fileconfig
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -182,7 +175,6 @@
 			#{item.xt_userinfo_id},
 			#{item.xt_service_center_parameter_status},
 			#{item.ctime},
-			#{item.mtime},
 			#{item.attach_filetype},
 			#{item.attach_fileconfig}
 			)
@@ -195,18 +187,18 @@
 			UPDATE
 				xt_service_center_parameter
 			SET
-				`xt_service_center_parameter_id` = #{item.xt_service_center_parameter_id},
-				`xt_service_center_id` = #{item.xt_service_center_id},
-				`xt_service_center_parameter_name` = #{item.xt_service_center_parameter_name},
-				`xt_service_center_parameter_type` = #{item.xt_service_center_parameter_type},
-				`xt_service_center_parameter_remark` = #{item.xt_service_center_parameter_remark},
-				`xt_userinfo_id` = #{item.xt_userinfo_id},
-				`xt_service_center_parameter_status` = #{item.xt_service_center_parameter_status},
-				`ctime` = #{item.ctime},
-				`mtime` = #{item.mtime},
-				`attach_filetype` = #{item.attach_filetype},
-				`attach_fileconfig` = #{item.attach_fileconfig}
-			WHERE xt_service_center_parameter_id=#{item.xt_service_center_parameter_id}
+				xt_service_center_p_id = #{item.xt_service_center_parameter_id},
+				xt_service_center_id = #{item.xt_service_center_id},
+				xt_service_center_p_name = #{item.xt_service_center_parameter_name},
+				xt_service_center_p_type = #{item.xt_service_center_parameter_type},
+				xt_service_center_p_remark = #{item.xt_service_center_parameter_remark},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				xt_service_center_p_status = #{item.xt_service_center_parameter_status},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				attach_filetype = #{item.attach_filetype},
+				attach_fileconfig = #{item.attach_fileconfig}
+			WHERE xt_service_center_p_id=#{item.xt_service_center_parameter_id}
 		</foreach>
 	</update>
 	
@@ -217,40 +209,40 @@
 				xt_service_center_parameter
 			<set>
 				<if test="xt_service_center_parameter_id != null">
-	                `xt_service_center_parameter_id` = #{item.xt_service_center_parameter_id},
+	                xt_service_center_p_id = #{item.xt_service_center_parameter_id},
 	            </if>
 	            <if test="xt_service_center_id !=  null">
-	            	`xt_service_center_id` = #{item.xt_service_center_id},
+	            	xt_service_center_id = #{item.xt_service_center_id},
 	            </if>
 	            <if test="xt_service_center_parameter_name !=  null">
-	            	`xt_service_center_parameter_name` = #{item.xt_service_center_parameter_name},
+	            	xt_service_center_p_name = #{item.xt_service_center_parameter_name},
 	            </if>
 	            <if test="xt_service_center_parameter_type !=  null">
-	            	`xt_service_center_parameter_type` = #{item.xt_service_center_parameter_type},
+	            	xt_service_center_p_type = #{item.xt_service_center_parameter_type},
 	            </if>
 	            <if test="xt_service_center_parameter_remark !=  null">
-	            	`xt_service_center_parameter_remark` = #{item.xt_service_center_parameter_remark},
+	            	xt_service_center_p_remark = #{item.xt_service_center_parameter_remark},
 	            </if>
 	            <if test="xt_userinfo_id !=  null">
-	            	`xt_userinfo_id` = #{item.xt_userinfo_id},
+	            	xt_userinfo_id = #{item.xt_userinfo_id},
 	            </if>
 	            <if test="xt_service_center_parameter_status !=  null">
-	            	`xt_service_center_parameter_status` = #{item.xt_service_center_parameter_status},
+	            	xt_service_center_p_status = #{item.xt_service_center_parameter_status},
 	            </if>
 	            <if test="ctime !=  null">
-	            	`ctime` = #{item.ctime},
+	            	ctime = #{item.ctime},
 	            </if>
 	            <if test="mtime !=  null">
-	            	`mtime` = #{item.mtime},
+	            	mtime = #{item.mtime},
 	            </if>
 	            <if test="attach_filetype !=  null">
-	            	`attach_filetype` =#{item.attach_filetype},
+	            	attach_filetype =#{item.attach_filetype},
 	            </if>
 	            <if test="attach_fileconfig !=  null">
-	            	`attach_fileconfig` = #{item.attach_fileconfig},
+	            	attach_fileconfig = #{item.attach_fileconfig},
 	            </if>
 			</set>
-			WHERE xt_service_center_parameter_id=#{item.xt_service_center_parameter_id}
+			WHERE xt_service_center_p_id=#{item.xt_service_center_parameter_id}
 		</foreach>
 	</update>
 

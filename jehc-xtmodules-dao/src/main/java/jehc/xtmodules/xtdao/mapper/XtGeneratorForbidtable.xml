@@ -5,37 +5,37 @@
 	<!--初始化分页-->
 	<select id="getXtGeneratorForbidtableListByCondition" resultType="jehc.xtmodules.xtmodel.XtGeneratorForbidtable" parameterType="map">
 		SELECT
-			xt_generator_forbidtable.`xt_generator_forbidtable_id`,
-			xt_generator_forbidtable.`xt_generator_forbidtable_table`,
-			DATE_FORMAT(xt_generator_forbidtable.`xt_generator_forbidtable_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_generator_forbidtable_ctime`,
-			DATE_FORMAT(xt_generator_forbidtable.`xt_generator_forbidtable_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_generator_forbidtable_mtime`,
-			xt_generator_forbidtable.`xt_userinfo_id`,
-			xt_generator_forbidtable.`xt_generator_forbidtable_remark`,
-			xt_userinfo.`xt_userinfo_realName`
+			  xt_generator_forbidtable.xt_generator_f_id,
+		      xt_generator_forbidtable.xt_generator_f_table,
+		      xt_generator_forbidtable.xt_generator_f_ctime,
+		      xt_generator_forbidtable.xt_generator_f_mtime,
+		      xt_generator_forbidtable.xt_userinfo_id,
+		      xt_generator_forbidtable.xt_generator_f_remark,
+		      xt_userinfo.xt_userinfo_realName
 		FROM 
-			xt_generator_forbidtable xt_generator_forbidtable LEFT JOIN xt_userinfo AS xt_userinfo ON xt_generator_forbidtable.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			xt_generator_forbidtable xt_generator_forbidtable LEFT JOIN xt_userinfo xt_userinfo ON xt_generator_forbidtable.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
-		<if test="null != xt_generator_forbidtable_remark">
-			AND xt_generator_forbidtable.xt_generator_forbidtable_remark like '%${xt_generator_forbidtable_remark}%'
+		<if test="null != xt_generator_f_remark">
+			AND xt_generator_forbidtable.xt_generator_f_remark like '%${xt_generator_f_remark}%'
 		</if>
-		<if test="null != xt_generator_forbidtable_table">
-			AND xt_generator_forbidtable.xt_generator_forbidtable_table like '%${xt_generator_forbidtable_table}%'
+		<if test="null != xt_generator_f_table">
+			AND xt_generator_forbidtable.xt_generator_f_table like '%${xt_generator_f_table}%'
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtGeneratorForbidtableById" resultType="jehc.xtmodules.xtmodel.XtGeneratorForbidtable" parameterType="string">
 		SELECT
-			xt_generator_forbidtable.`xt_generator_forbidtable_id`,
-			xt_generator_forbidtable.`xt_generator_forbidtable_table`,
-			DATE_FORMAT(xt_generator_forbidtable.`xt_generator_forbidtable_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_generator_forbidtable_ctime`,
-			DATE_FORMAT(xt_generator_forbidtable.`xt_generator_forbidtable_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_generator_forbidtable_mtime`,
-			xt_generator_forbidtable.`xt_userinfo_id`,
-			xt_generator_forbidtable.`xt_generator_forbidtable_remark`,
-			xt_userinfo.`xt_userinfo_realName`
+			  xt_generator_forbidtable.xt_generator_f_id,
+		      xt_generator_forbidtable.xt_generator_f_table,
+		      xt_generator_forbidtable.xt_generator_f_ctime,
+		      xt_generator_forbidtable.xt_generator_f_mtime,
+		      xt_generator_forbidtable.xt_userinfo_id,
+		      xt_generator_forbidtable.xt_generator_f_remark,
+		      xt_userinfo.xt_userinfo_realName
 		FROM 
-			xt_generator_forbidtable xt_generator_forbidtable LEFT JOIN xt_userinfo AS xt_userinfo ON xt_generator_forbidtable.xt_userinfo_id = xt_userinfo.xt_userinfo_id
-		WHERE xt_generator_forbidtable.xt_generator_forbidtable_id=#{xt_generator_forbidtable_id}
+			xt_generator_forbidtable xt_generator_forbidtable LEFT JOIN xt_userinfo xt_userinfo ON xt_generator_forbidtable.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE xt_generator_forbidtable.xt_generator_f_id=#{xt_generator_forbidtable_id}
 	</select>
 
 	<!--添加-->
@@ -43,21 +43,19 @@
 		INSERT INTO
 			xt_generator_forbidtable
 			(
-			`xt_generator_forbidtable_id`,
-			`xt_generator_forbidtable_table`,
-			`xt_generator_forbidtable_ctime`,
-			`xt_generator_forbidtable_mtime`,
-			`xt_userinfo_id`,
-			`xt_generator_forbidtable_remark`
+			xt_generator_f_id,
+			xt_generator_f_table,
+			xt_generator_f_ctime,
+			xt_userinfo_id,
+			xt_generator_f_remark
 			)
 			VALUES
 			(
-			#{xt_generator_forbidtable_id},
-			#{xt_generator_forbidtable_table},
-			#{xt_generator_forbidtable_ctime},
-			#{xt_generator_forbidtable_mtime},
+			#{xt_generator_f_id},
+			#{xt_generator_f_table},
+			#{xt_generator_f_ctime},
 			#{xt_userinfo_id},
-			#{xt_generator_forbidtable_remark}
+			#{xt_generator_f_remark}
 			)
 	</insert>
 
@@ -66,17 +64,17 @@
 		UPDATE
 			xt_generator_forbidtable
 		SET
-			`xt_generator_forbidtable_id` = #{xt_generator_forbidtable_id},
-			`xt_generator_forbidtable_table` = #{xt_generator_forbidtable_table},
-			`xt_generator_forbidtable_mtime` = #{xt_generator_forbidtable_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_generator_forbidtable_remark` = #{xt_generator_forbidtable_remark}
-		WHERE xt_generator_forbidtable_id=#{xt_generator_forbidtable_id}
+			xt_generator_f_id = #{xt_generator_f_id},
+			xt_generator_f_table = #{xt_generator_f_table},
+			xt_generator_f_mtime = #{xt_generator_f_mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_generator_f_remark = #{xt_generator_f_remark}
+		WHERE xt_generator_f_id=#{xt_generator_f_id}
 	</update>
 
 	<!--删除-->
 	<delete id="delXtGeneratorForbidtable" parameterType="map">
-		DELETE FROM xt_generator_forbidtable WHERE xt_generator_forbidtable_id IN
+		DELETE FROM xt_generator_forbidtable WHERE xt_generator_f_id IN
 		<foreach item="item" index="index" collection="xt_generator_forbidtable_id" open="(" separator="," close=")">
 			#{item}
 		</foreach>
@@ -87,22 +85,20 @@
 		INSERT INTO
 			xt_generator_forbidtable
 			(
-			`xt_generator_forbidtable_id`,
-			`xt_generator_forbidtable_table`,
-			`xt_generator_forbidtable_ctime`,
-			`xt_generator_forbidtable_mtime`,
-			`xt_userinfo_id`,
-			`xt_generator_forbidtable_remark`
+			xt_generator_f_id,
+			xt_generator_f_table,
+			xt_generator_f_ctime,
+			xt_userinfo_id,
+			xt_generator_f_remark
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
 			(
-			#{item.xt_generator_forbidtable_id},
-			#{item.xt_generator_forbidtable_table},
-			#{item.xt_generator_forbidtable_ctime},
-			#{item.xt_generator_forbidtable_mtime},
+			#{item.xt_generator_f_id},
+			#{item.xt_generator_f_table},
+			#{item.xt_generator_f_ctime},
 			#{item.xt_userinfo_id},
-			#{item.xt_generator_forbidtable_remark}
+			#{item.xt_generator_f_remark}
 			)
 		</foreach>
 	</insert>
@@ -113,12 +109,12 @@
 			UPDATE
 				xt_generator_forbidtable
 			SET
-				`xt_generator_forbidtable_id` = #{item.xt_generator_forbidtable_id},
-				`xt_generator_forbidtable_table` = #{item.xt_generator_forbidtable_table},
-				`xt_generator_forbidtable_mtime` = #{item.xt_generator_forbidtable_mtime},
-				`xt_userinfo_id` = #{item.xt_userinfo_id},
-				`xt_generator_forbidtable_remark` = #{item.xt_generator_forbidtable_remark}
-			WHERE xt_generator_forbidtable_id=#{item.xt_generator_forbidtable_id}
+				xt_generator_f_id = #{item.xt_generator_f_id},
+				xt_generator_f_table = #{item.xt_generator_f_table},
+				xt_generator_f_mtime = #{item.xt_generator_f_mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				xt_generator_f_remark = #{item.xt_generator_f_remark}
+			WHERE xt_generator_f_id=#{item.xt_generator_f_id}
 		</foreach>
 	</update>
 </mapper>

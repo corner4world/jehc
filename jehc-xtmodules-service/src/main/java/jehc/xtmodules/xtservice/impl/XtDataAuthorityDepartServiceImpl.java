@@ -176,7 +176,11 @@ public class XtDataAuthorityDepartServiceImpl extends BaseService implements XtD
 			xtDataAuthorityDao.delXtDataAuthorityByCondition(condition);
 			//3添加新数据
 			if(null != xt_Data_Authority_DepartList && xt_Data_Authority_DepartList.size() > 0){
-				xtDataAuthorityDepartDao.addBatchXtDataAuthorityDepart(xt_Data_Authority_DepartList);
+				for(XtDataAuthorityDepart xt_Data_Authority_Depart:xt_Data_Authority_DepartList){
+					xtDataAuthorityDepartDao.addXtDataAuthorityDepart(xt_Data_Authority_Depart);
+				}
+				//兼容oracle与mysql语法 废弃批量插入
+//				xtDataAuthorityDepartDao.addBatchXtDataAuthorityDepart(xt_Data_Authority_DepartList);
 			}
 			i = 1;
 			//4统一推送

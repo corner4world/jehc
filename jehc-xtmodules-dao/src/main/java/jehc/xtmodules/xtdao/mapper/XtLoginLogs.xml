@@ -5,50 +5,50 @@
 	<!--初始化分页-->
 	<select id="getXtLoginLogsListByCondition" resultType="jehc.xtmodules.xtmodel.XtLoginLogs" parameterType="map">
 		SELECT
-			xt_login_logs.`xt_login_log_id`,
-			xt_login_logs.`xt_userinfo_id`,
-			xt_login_logs.`xt_login_logIP`,
-			xt_login_logs.`xt_login_logtime`,
-			xt_login_logs.`xt_login_logContent`,
-			xt_login_logs.`xt_login_log_browser_type`,
-			xt_login_logs.`xt_login_log_browser_name`,
-			xt_login_logs.`xt_login_log_browser_version`,
-			xt_login_logs.`xt_login_log_system`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_login_logs.xt_login_log_id,
+			xt_login_logs.xt_userinfo_id,
+			xt_login_logs.xt_login_logIP,
+			xt_login_logs.xt_login_logtime,
+			xt_login_logs.xt_login_logContent,
+			xt_login_logs.xt_login_log_browser_type,
+			xt_login_logs.xt_login_log_browser_name,
+			xt_login_logs.xt_login_log_browser_version,
+			xt_login_logs.xt_login_log_system,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
 			xt_login_logs xt_login_logs LEFT JOIN xt_userinfo xt_userinfo ON xt_login_logs.xt_userinfo_id=xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != xt_userinfo_id">
-			AND xt_login_logs.`xt_userinfo_id` = #{xt_userinfo_id}
+			AND xt_login_logs.xt_userinfo_id = #{xt_userinfo_id}
 		</if>
 		<if test="null != xt_login_log_browser_name">
-			AND instr(xt_login_log_browser_name,#{xt_login_log_browser_name})
+			AND xt_login_log_browser_name LIKE CONCAT(CONCAT('%',#{xt_login_log_browser_name}),'%')
 		</if>
 		<if test="null != xt_login_logtime_st and xt_login_logtime_st != ''">
-			AND xt_login_logtime &gt;=STR_TO_DATE(#{xt_login_logtime_st},'%Y-%m-%d')
+			AND xt_login_logtime &gt;= #{xt_login_logtime_st}
 		</if>
 		<if test="null != xt_login_logtime_et and xt_login_logtime_et != ''">
-			AND xt_login_logtime &lt;=STR_TO_DATE(#{xt_login_logtime_et},'%Y-%m-%d')
+			AND xt_login_logtime &lt;= #{xt_login_logtime_et}
 		</if>
 		<if test="null != xt_login_logIP">
-			AND instr(xt_login_logIP,#{xt_login_logIP})
+			AND xt_login_logIP LIKE CONCAT(CONCAT('%',#{xt_login_logIP}),'%')
 		</if>
-		ORDER BY xt_login_logs.`xt_login_logtime` DESC
+		ORDER BY xt_login_logs.xt_login_logtime DESC
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtLoginLogsById" resultType="jehc.xtmodules.xtmodel.XtLoginLogs" parameterType="string">
 		SELECT
-			xt_login_logs.`xt_login_log_id`,
-			xt_login_logs.`xt_userinfo_id`,
-			xt_login_logs.`xt_login_logIP`,
-			xt_login_logs.`xt_login_logtime`,
-			xt_login_logs.`xt_login_logContent`,
-			xt_login_logs.`xt_login_log_browser_type`,
-			xt_login_logs.`xt_login_log_browser_name`,
-			xt_login_logs.`xt_login_log_browser_version`,
-			xt_login_logs.`xt_login_log_system`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_login_logs.xt_login_log_id,
+			xt_login_logs.xt_userinfo_id,
+			xt_login_logs.xt_login_logIP,
+			xt_login_logs.xt_login_logtime,
+			xt_login_logs.xt_login_logContent,
+			xt_login_logs.xt_login_log_browser_type,
+			xt_login_logs.xt_login_log_browser_name,
+			xt_login_logs.xt_login_log_browser_version,
+			xt_login_logs.xt_login_log_system,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
 			xt_login_logs xt_login_logs LEFT JOIN xt_userinfo xt_userinfo ON xt_login_logs.xt_userinfo_id=xt_userinfo.xt_userinfo_id
 		WHERE xt_login_log_id=#{xt_login_log_id}
@@ -59,15 +59,15 @@
 		INSERT INTO
 			xt_login_logs
 			(
-			`xt_login_log_id`,
-			`xt_userinfo_id`,
-			`xt_login_logIP`,
-			`xt_login_logtime`,
-			`xt_login_logContent`,
-			`xt_login_log_browser_type`,
-			`xt_login_log_browser_name`,
-			`xt_login_log_browser_version`,
-			`xt_login_log_system`
+			xt_login_log_id,
+			xt_userinfo_id,
+			xt_login_logIP,
+			xt_login_logtime,
+			xt_login_logContent,
+			xt_login_log_browser_type,
+			xt_login_log_browser_name,
+			xt_login_log_browser_version,
+			xt_login_log_system
 			)
 			VALUES
 			(
@@ -88,15 +88,15 @@
 		UPDATE
 			xt_login_logs
 		SET
-			`xt_login_log_id` = #{xt_login_log_id},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_login_logIP` = #{xt_login_logIP},
-			`xt_login_logtime` = #{xt_login_logtime},
-			`xt_login_logContent` = #{xt_login_logContent},
-			`xt_login_log_browser_type` = #{xt_login_log_browser_type},
-			`xt_login_log_browser_name` = #{xt_login_log_browser_name},
-			`xt_login_log_browser_version` = #{xt_login_log_browser_version},
-			`xt_login_log_system` = #{xt_login_log_system}
+			xt_login_log_id = #{xt_login_log_id},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_login_logIP = #{xt_login_logIP},
+			xt_login_logtime = #{xt_login_logtime},
+			xt_login_logContent = #{xt_login_logContent},
+			xt_login_log_browser_type = #{xt_login_log_browser_type},
+			xt_login_log_browser_name = #{xt_login_log_browser_name},
+			xt_login_log_browser_version = #{xt_login_log_browser_version},
+			xt_login_log_system = #{xt_login_log_system}
 		WHERE xt_login_log_id=#{xt_login_log_id}
 	</update>
 
@@ -111,12 +111,12 @@
 	<!-- 统计出每个人登录的次数 -->
 	<select id="getGroupXtLoginLogsList" resultType="jehc.xtmodules.xtmodel.XtLoginLogs" parameterType="map">
 		SELECT 
-			COUNT(0) AS count,
-			xt_login_logs.xt_userinfo_id ,
-			xt_userinfo.xt_userinfo_realName 
-		FROM xt_login_logs  xt_login_logs LEFT JOIN `xt_userinfo` xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_login_logs.xt_userinfo_id
-		WHERE !ISNULL(xt_login_logs.xt_userinfo_id)
-		GROUP BY xt_login_logs.xt_userinfo_id
-		ORDER BY count DESC
+	      COUNT(0) AS count,
+	      xt_login_logs.xt_userinfo_id ,
+	      xt_userinfo.xt_userinfo_realName AS xt_userinfo_realName
+	    FROM xt_login_logs  xt_login_logs LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_login_logs.xt_userinfo_id
+	    WHERE xt_login_logs.xt_userinfo_id != null
+	    GROUP BY xt_login_logs.xt_userinfo_id,xt_userinfo_realName
+	    ORDER BY count DESC
 	</select>
 </mapper>

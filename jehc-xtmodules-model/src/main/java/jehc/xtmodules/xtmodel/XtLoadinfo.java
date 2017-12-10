@@ -1,6 +1,7 @@
 package jehc.xtmodules.xtmodel;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -34,22 +35,23 @@ public class XtLoadinfo extends BaseEntity implements Serializable{
 	public int getXt_loadinfo_time(){
 		return xt_loadinfo_time;
 	}
-	public void setXt_loadinfo_begtime(String xt_loadinfo_begtime){
-		this.xt_loadinfo_begtime=xt_loadinfo_begtime;
-	}
-	public String getXt_loadinfo_begtime(){
-		return xt_loadinfo_begtime;
-	}
-	public void setXt_loadinfo_endtime(String xt_loadinfo_endtime){
-		this.xt_loadinfo_endtime=xt_loadinfo_endtime;
-	}
-	public String getXt_loadinfo_endtime(){
-		return xt_loadinfo_endtime;
-	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;
 	}
 	public String getXt_userinfo_id(){
 		return xt_userinfo_id;
 	}
+	public String getXt_loadinfo_begtime() {
+		return xt_loadinfo_begtime;
+	}
+	public void setXt_loadinfo_begtime(String xt_loadinfo_begtime) {
+		this.xt_loadinfo_begtime = xt_loadinfo_begtime;
+	}
+	public String getXt_loadinfo_endtime() {
+		return xt_loadinfo_endtime;
+	}
+	public void setXt_loadinfo_endtime(String xt_loadinfo_endtime) {
+		this.xt_loadinfo_endtime = xt_loadinfo_endtime;
+	}
+	
 }

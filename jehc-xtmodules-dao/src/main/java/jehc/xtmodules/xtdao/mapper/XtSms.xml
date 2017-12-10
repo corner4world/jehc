@@ -5,46 +5,46 @@
 	<!--初始化分页-->
 	<select id="getXtSmsListByCondition" resultType="jehc.xtmodules.xtmodel.XtSms" parameterType="map">
 		SELECT
-			`xt_sms_id`,
-			`xt_smsName`,
-			`xt_smsPWD`,
-			`xt_smsURL`,
-			`xt_smsCtime`,
-			`xt_smsCompany`,
-			`xt_smsCompanTel`,
-			`xt_smsValue`,
-			`xt_smsCompanyAddress`,
-			`xt_smsCompanyContacts`,
-			`xt_smsType`,
-			`xt_smsDelete`,
-			`xt_smsState`
+			xt_sms_id,
+			xt_smsName,
+			xt_smsPWD,
+			xt_smsURL,
+			xt_smsCtime,
+			xt_smsCompany,
+			xt_smsCompanTel,
+			xt_smsValue,
+			xt_smsCompanyAddress,
+			xt_smsCompanyContacts,
+			xt_smsType,
+			xt_smsDelete,
+			xt_smsState
 		FROM 
 			xt_sms
 		WHERE 1=1
 		<if test="null != xt_smsName">
-			AND instr(xt_smsName,#{xt_smsName})
+			AND xt_smsName LIKE CONCAT(CONCAT('%',#{xt_smsName}),'%')
 		</if>
 		<if test="null != xt_smsCompany">
-			AND instr(xt_smsCompany,#{xt_smsCompany})
+			AND xt_smsCompany LIKE CONCAT(CONCAT('%',#{xt_smsCompany}),'%')
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtSmsById" resultType="jehc.xtmodules.xtmodel.XtSms" parameterType="string">
 		SELECT
-			`xt_sms_id`,
-			`xt_smsName`,
-			`xt_smsPWD`,
-			`xt_smsURL`,
-			`xt_smsCtime`,
-			`xt_smsCompany`,
-			`xt_smsCompanTel`,
-			`xt_smsValue`,
-			`xt_smsCompanyAddress`,
-			`xt_smsCompanyContacts`,
-			`xt_smsType`,
-			`xt_smsDelete`,
-			`xt_smsState`
+			xt_sms_id,
+			xt_smsName,
+			xt_smsPWD,
+			xt_smsURL,
+			xt_smsCtime,
+			xt_smsCompany,
+			xt_smsCompanTel,
+			xt_smsValue,
+			xt_smsCompanyAddress,
+			xt_smsCompanyContacts,
+			xt_smsType,
+			xt_smsDelete,
+			xt_smsState
 		FROM 
 			xt_sms
 		WHERE xt_sms_id=#{xt_sms_id}
@@ -55,19 +55,19 @@
 		INSERT INTO
 			xt_sms
 			(
-			`xt_sms_id`,
-			`xt_smsName`,
-			`xt_smsPWD`,
-			`xt_smsURL`,
-			`xt_smsCtime`,
-			`xt_smsCompany`,
-			`xt_smsCompanTel`,
-			`xt_smsValue`,
-			`xt_smsCompanyAddress`,
-			`xt_smsCompanyContacts`,
-			`xt_smsType`,
-			`xt_smsDelete`,
-			`xt_smsState`
+			xt_sms_id,
+			xt_smsName,
+			xt_smsPWD,
+			xt_smsURL,
+			xt_smsCtime,
+			xt_smsCompany,
+			xt_smsCompanTel,
+			xt_smsValue,
+			xt_smsCompanyAddress,
+			xt_smsCompanyContacts,
+			xt_smsType,
+			xt_smsDelete,
+			xt_smsState
 			)
 			VALUES
 			(
@@ -92,19 +92,19 @@
 		UPDATE
 			xt_sms
 		SET
-			`xt_sms_id` = #{xt_sms_id},
-			`xt_smsName` = #{xt_smsName},
-			`xt_smsPWD` = #{xt_smsPWD},
-			`xt_smsURL` = #{xt_smsURL},
-			`xt_smsCtime` = #{xt_smsCtime},
-			`xt_smsCompany` = #{xt_smsCompany},
-			`xt_smsCompanTel` = #{xt_smsCompanTel},
-			`xt_smsValue` = #{xt_smsValue},
-			`xt_smsCompanyAddress` = #{xt_smsCompanyAddress},
-			`xt_smsCompanyContacts` = #{xt_smsCompanyContacts},
-			`xt_smsType` = #{xt_smsType},
-			`xt_smsDelete` = #{xt_smsDelete},
-			`xt_smsState` = #{xt_smsState}
+			xt_sms_id = #{xt_sms_id},
+			xt_smsName = #{xt_smsName},
+			xt_smsPWD = #{xt_smsPWD},
+			xt_smsURL = #{xt_smsURL},
+			xt_smsCtime = #{xt_smsCtime},
+			xt_smsCompany = #{xt_smsCompany},
+			xt_smsCompanTel = #{xt_smsCompanTel},
+			xt_smsValue = #{xt_smsValue},
+			xt_smsCompanyAddress = #{xt_smsCompanyAddress},
+			xt_smsCompanyContacts = #{xt_smsCompanyContacts},
+			xt_smsType = #{xt_smsType},
+			xt_smsDelete = #{xt_smsDelete},
+			xt_smsState = #{xt_smsState}
 		WHERE xt_sms_id=#{xt_sms_id}
 	</update>
 

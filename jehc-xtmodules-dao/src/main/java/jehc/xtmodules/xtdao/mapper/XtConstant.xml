@@ -5,12 +5,12 @@
 	<!--初始化分页-->
 	<select id="getXtConstantListByCondition" resultType="jehc.xtmodules.xtmodel.XtConstant" parameterType="map">
 		SELECT
-			`xt_constant_id`,
-			`xt_constantValue`,
-			`xt_constantType`,
-			`xt_constantRemark`,
-			`xt_constantName`,
-			`xt_constantURL`
+			xt_constant_id,
+			xt_constantValue,
+			xt_constantType,
+			xt_constantRemark,
+			xt_constantName,
+			xt_constantURL
 		FROM 
 			xt_constant
 		WHERE 1=1
@@ -18,19 +18,19 @@
 			AND xt_constantType = #{xt_constantType}
 		</if>
 		<if test="null != xt_constantName">
-			AND instr(xt_constantName,#{xt_constantName})
+			AND xt_constantName LIKE CONCAT(CONCAT('%',#{xt_constantName}),'%')
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtConstantById" resultType="jehc.xtmodules.xtmodel.XtConstant" parameterType="string">
 		SELECT
-			`xt_constant_id`,
-			`xt_constantValue`,
-			`xt_constantType`,
-			`xt_constantRemark`,
-			`xt_constantName`,
-			`xt_constantURL`
+			xt_constant_id,
+			xt_constantValue,
+			xt_constantType,
+			xt_constantRemark,
+			xt_constantName,
+			xt_constantURL
 		FROM 
 			xt_constant
 		WHERE xt_constant_id=#{xt_constant_id}
@@ -41,12 +41,12 @@
 		INSERT INTO
 			xt_constant
 			(
-			`xt_constant_id`,
-			`xt_constantValue`,
-			`xt_constantType`,
-			`xt_constantRemark`,
-			`xt_constantName`,
-			`xt_constantURL`
+			xt_constant_id,
+			xt_constantValue,
+			xt_constantType,
+			xt_constantRemark,
+			xt_constantName,
+			xt_constantURL
 			)
 			VALUES
 			(
@@ -64,12 +64,12 @@
 		UPDATE
 			xt_constant
 		SET
-			`xt_constant_id` = #{xt_constant_id},
-			`xt_constantValue` = #{xt_constantValue},
-			`xt_constantType` = #{xt_constantType},
-			`xt_constantRemark` = #{xt_constantRemark},
-			`xt_constantName` = #{xt_constantName},
-			`xt_constantURL` = #{xt_constantURL}
+			xt_constant_id = #{xt_constant_id},
+			xt_constantValue = #{xt_constantValue},
+			xt_constantType = #{xt_constantType},
+			xt_constantRemark = #{xt_constantRemark},
+			xt_constantName = #{xt_constantName},
+			xt_constantURL = #{xt_constantURL}
 		WHERE xt_constant_id=#{xt_constant_id}
 	</update>
 
@@ -84,12 +84,12 @@
 	<!--读取所有常量-->
 	<select id="getXtConstantListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtConstant" parameterType="map">
 		SELECT
-			`xt_constant_id`,
-			`xt_constantValue`,
-			`xt_constantType`,
-			`xt_constantRemark`,
-			`xt_constantName`,
-			`xt_constantURL`
+			xt_constant_id,
+			xt_constantValue,
+			xt_constantType,
+			xt_constantRemark,
+			xt_constantName,
+			xt_constantURL
 		FROM 
 			xt_constant
 		WHERE 1=1

@@ -5,32 +5,32 @@
 	<!--初始化分页-->
 	<select id="getXtIpFrozenListByCondition" resultType="jehc.xtmodules.xtmodel.XtIpFrozen" parameterType="map">
 		SELECT
-			xt_ip_frozen.`xt_ip_frozen_id`,
-			xt_ip_frozen.`xt_ip_frozen_address`,
-			xt_ip_frozen.`xt_ip_frozen_status`,
-			xt_ip_frozen.`xt_ip_frozen_content`,
-			DATE_FORMAT(xt_ip_frozen.`xt_ip_frozen_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_ctime`,
-			DATE_FORMAT(xt_ip_frozen.`xt_ip_frozen_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_mtime`,
-			xt_ip_frozen.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_ip_frozen.xt_ip_frozen_id,
+			xt_ip_frozen.xt_ip_frozen_address,
+			xt_ip_frozen.xt_ip_frozen_status,
+			xt_ip_frozen.xt_ip_frozen_content,
+			xt_ip_frozen_ctime,
+			xt_ip_frozen_mtime,
+			xt_ip_frozen.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			xt_ip_frozen xt_ip_frozen LEFT JOIN xt_userinfo xt_userinfo ON xt_ip_frozen.`xt_userinfo_id` = xt_userinfo.xt_userinfo_id
+			xt_ip_frozen xt_ip_frozen LEFT JOIN xt_userinfo xt_userinfo ON xt_ip_frozen.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != xt_ip_frozen_address">
-			AND instr(xt_ip_frozen.xt_ip_frozen_address,#{xt_ip_frozen_address})
+			AND xt_ip_frozen.xt_ip_frozen_address LIKE CONCAT(CONCAT('%',#{xt_ip_frozen_address}),'%')
 		</if>
 	</select>
 
 	<!-- 获取所有集合 -->
 	<select id="getXtIpFrozenListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtIpFrozen" parameterType="map">
 		SELECT
-			xt_ip_frozen.`xt_ip_frozen_id`,
-			xt_ip_frozen.`xt_ip_frozen_address`,
-			xt_ip_frozen.`xt_ip_frozen_status`,
-			xt_ip_frozen.`xt_ip_frozen_content`,
-			DATE_FORMAT(xt_ip_frozen.`xt_ip_frozen_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_ctime`,
-			DATE_FORMAT(xt_ip_frozen.`xt_ip_frozen_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_mtime`,
-			xt_ip_frozen.`xt_userinfo_id`
+			xt_ip_frozen.xt_ip_frozen_id,
+			xt_ip_frozen.xt_ip_frozen_address,
+			xt_ip_frozen.xt_ip_frozen_status,
+			xt_ip_frozen.xt_ip_frozen_content,
+			xt_ip_frozen_ctime,
+			xt_ip_frozen_mtime,
+			xt_ip_frozen.xt_userinfo_id
 		FROM 
 			xt_ip_frozen xt_ip_frozen 
 		WHERE 1=1
@@ -42,13 +42,13 @@
 	<!--查询对象-->
 	<select id="getXtIpFrozenById" resultType="jehc.xtmodules.xtmodel.XtIpFrozen" parameterType="string">
 		SELECT
-			`xt_ip_frozen_id`,
-			`xt_ip_frozen_address`,
-			`xt_ip_frozen_status`,
-			`xt_ip_frozen_content`,
-			DATE_FORMAT(`xt_ip_frozen_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_ctime`,
-			DATE_FORMAT(`xt_ip_frozen_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_ip_frozen_mtime`,
-			`xt_userinfo_id`
+			xt_ip_frozen_id,
+			xt_ip_frozen_address,
+			xt_ip_frozen_status,
+			xt_ip_frozen_content,
+			xt_ip_frozen_ctime,
+			xt_ip_frozen_mtime,
+			xt_userinfo_id
 		FROM 
 			xt_ip_frozen
 		WHERE xt_ip_frozen_id=#{xt_ip_frozen_id}
@@ -59,12 +59,12 @@
 		INSERT INTO
 			xt_ip_frozen
 			(
-			`xt_ip_frozen_id`,
-			`xt_ip_frozen_address`,
-			`xt_ip_frozen_status`,
-			`xt_ip_frozen_content`,
-			`xt_ip_frozen_ctime`,
-			`xt_userinfo_id`
+			xt_ip_frozen_id,
+			xt_ip_frozen_address,
+			xt_ip_frozen_status,
+			xt_ip_frozen_content,
+			xt_ip_frozen_ctime,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -82,12 +82,12 @@
 		UPDATE
 			xt_ip_frozen
 		SET
-			`xt_ip_frozen_id` = #{xt_ip_frozen_id},
-			`xt_ip_frozen_address` = #{xt_ip_frozen_address},
-			`xt_ip_frozen_status` = #{xt_ip_frozen_status},
-			`xt_ip_frozen_content` = #{xt_ip_frozen_content},
-			`xt_ip_frozen_mtime` = #{xt_ip_frozen_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			xt_ip_frozen_id = #{xt_ip_frozen_id},
+			xt_ip_frozen_address = #{xt_ip_frozen_address},
+			xt_ip_frozen_status = #{xt_ip_frozen_status},
+			xt_ip_frozen_content = #{xt_ip_frozen_content},
+			xt_ip_frozen_mtime = #{xt_ip_frozen_mtime},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE xt_ip_frozen_id=#{xt_ip_frozen_id}
 	</update>
 

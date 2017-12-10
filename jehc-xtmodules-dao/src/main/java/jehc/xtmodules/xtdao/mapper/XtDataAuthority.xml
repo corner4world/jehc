@@ -5,12 +5,12 @@
 	<!--初始化分页-->
 	<select id="getXtDataAuthorityListByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthority" parameterType="map">
 		SELECT
-			`xt_data_authority_id`,
-			`xtUID`,
-			`xt_userinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`,
-			`xt_data_authorityType`
+			xt_data_authority_id,
+			xtUID,
+			xt_userinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id,
+			xt_data_authorityType
 		FROM 
 			xt_data_authority
 		WHERE 1=1
@@ -22,12 +22,12 @@
 	<!--查询对象-->
 	<select id="getXtDataAuthorityById" resultType="jehc.xtmodules.xtmodel.XtDataAuthority" parameterType="string">
 		SELECT
-			`xt_data_authority_id`,
-			`xtUID`,
-			`xt_userinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`,
-			`xt_data_authorityType`
+			xt_data_authority_id,
+			xtUID,
+			xt_userinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id,
+			xt_data_authorityType
 		FROM 
 			xt_data_authority
 		WHERE xt_data_authority_id=#{xt_data_authority_id}
@@ -38,12 +38,12 @@
 		INSERT INTO
 			xt_data_authority
 			(
-			`xt_data_authority_id`,
-			`xtUID`,
-			`xt_userinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`,
-			`xt_data_authorityType`
+			xt_data_authority_id,
+			xtUID,
+			xt_userinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id,
+			xt_data_authorityType
 			)
 			VALUES
 			(
@@ -61,12 +61,12 @@
 		UPDATE
 			xt_data_authority
 		SET
-			`xt_data_authority_id` = #{xt_data_authority_id},
-			`xtUID` = #{xtUID},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_functioninfo_id` = #{xt_functioninfo_id},
-			`xt_menuinfo_id` = #{xt_menuinfo_id},
-			`xt_data_authorityType` = #{xt_data_authorityType}
+			xt_data_authority_id = #{xt_data_authority_id},
+			xtUID = #{xtUID},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_functioninfo_id = #{xt_functioninfo_id},
+			xt_menuinfo_id = #{xt_menuinfo_id},
+			xt_data_authorityType = #{xt_data_authorityType}
 		WHERE xt_data_authority_id=#{xt_data_authority_id}
 	</update>
 
@@ -81,12 +81,12 @@
 	<!--读取所有数据-->
 	<select id="getXtDataAuthorityListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthority" parameterType="map">
 		SELECT
-			`xt_data_authority_id`,
-			`xtUID`,
-			`xt_userinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`,
-			`xt_data_authorityType`
+			xt_data_authority_id,
+			xtUID,
+			xt_userinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id,
+			xt_data_authorityType
 		FROM 
 			xt_data_authority
 		WHERE 1=1
@@ -123,15 +123,15 @@
 	<!-- 获取所有为登录使用 -->
 	<select id="getXtDataAuthorityListForLogin" resultType="jehc.xtmodules.xtmodel.XtDataAuthority" parameterType="map">
 		SELECT
-			xt_data_authority.`xtUID`,				
-			xt_functioninfo.`xt_functioninfoURL`
+			xt_data_authority.xtUID,				
+			xt_functioninfo.xt_functioninfoURL
 		FROM 
 			xt_data_authority xt_data_authority LEFT JOIN xt_functioninfo xt_functioninfo ON xt_functioninfo.xt_functioninfo_id = xt_data_authority.xt_functioninfo_id
 		WHERE 1=1
 		<if test="null != xt_userinfo_id">
 			AND xt_data_authority.xt_userinfo_id = #{xt_userinfo_id}
 		</if>
-		GROUP BY xt_data_authority.`xtUID`,xt_functioninfo.`xt_functioninfoURL`
+		GROUP BY xt_data_authority.xtUID,xt_functioninfo.xt_functioninfoURL
 	</select>
 	
 	<!--批量添加-->
@@ -139,12 +139,12 @@
 		INSERT INTO
 			xt_data_authority
 			(
-			`xt_data_authority_id`,
-			`xtUID`,
-			`xt_userinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`,
-			`xt_data_authorityType`
+			xt_data_authority_id,
+			xtUID,
+			xt_userinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id,
+			xt_data_authorityType
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">

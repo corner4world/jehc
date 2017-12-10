@@ -5,12 +5,12 @@
 	<!--初始化分页-->
 	<select id="getBSellerExpressListByCondition" resultType="jehc.bmodules.bmodel.BSellerExpress" parameterType="map">
 		SELECT
-			`b_seller_express_id`,
-			`b_seller_id`,
-			`b_seller_express_name`,
-			`b_seller_express_status`,
-			DATE_FORMAT(`b_seller_express_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_express_ctime`,
-			DATE_FORMAT(`b_seller_express_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_express_mtime`
+			b_seller_express_id,
+			b_seller_id,
+			b_seller_express_name,
+			b_seller_express_status,
+			b_seller_express_ctime AS b_seller_express_ctime,
+			b_seller_express_mtime AS b_seller_express_mtime
 		FROM 
 			b_seller_express
 		WHERE 1=1
@@ -26,12 +26,12 @@
 	<!--查询对象-->
 	<select id="getBSellerExpressById" resultType="jehc.bmodules.bmodel.BSellerExpress" parameterType="string">
 		SELECT
-			`b_seller_express_id`,
-			`b_seller_id`,
-			`b_seller_express_name`,
-			`b_seller_express_status`,
-			DATE_FORMAT(`b_seller_express_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_express_ctime`,
-			DATE_FORMAT(`b_seller_express_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_express_mtime`
+			b_seller_express_id,
+			b_seller_id,
+			b_seller_express_name,
+			b_seller_express_status,
+			b_seller_express_ctime AS b_seller_express_ctime,
+			b_seller_express_mtime AS b_seller_express_mtime
 		FROM 
 			b_seller_express
 		WHERE b_seller_express_id=#{b_seller_express_id}
@@ -42,12 +42,12 @@
 		INSERT INTO
 			b_seller_express
 			(
-			`b_seller_express_id`,
-			`b_seller_id`,
-			`b_seller_express_name`,
-			`b_seller_express_status`,
-			`b_seller_express_ctime`,
-			`b_seller_express_mtime`
+			b_seller_express_id,
+			b_seller_id,
+			b_seller_express_name,
+			b_seller_express_status,
+			b_seller_express_ctime,
+			b_seller_express_mtime
 			)
 			VALUES
 			(
@@ -65,12 +65,12 @@
 		UPDATE
 			b_seller_express
 		SET
-			`b_seller_express_id` = #{b_seller_express_id},
-			`b_seller_id` = #{b_seller_id},
-			`b_seller_express_name` = #{b_seller_express_name},
-			`b_seller_express_status` = #{b_seller_express_status},
-			`b_seller_express_ctime` = #{b_seller_express_ctime},
-			`b_seller_express_mtime` = #{b_seller_express_mtime}
+			b_seller_express_id = #{b_seller_express_id},
+			b_seller_id = #{b_seller_id},
+			b_seller_express_name = #{b_seller_express_name},
+			b_seller_express_status = #{b_seller_express_status},
+			b_seller_express_ctime = #{b_seller_express_ctime},
+			b_seller_express_mtime = #{b_seller_express_mtime}
 		WHERE b_seller_express_id=#{b_seller_express_id}
 	</update>
 

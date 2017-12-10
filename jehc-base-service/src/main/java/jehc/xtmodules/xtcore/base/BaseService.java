@@ -628,17 +628,17 @@ public class BaseService extends UUID{
 	 */
 	public void aBLogs(String classname,String method,String message){
 		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
-		xt_Operate_Business_Logs.setXt_operate_business_logsTime(getSimpleDateFormat());
-		xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
-		xt_Operate_Business_Logs.setXt_operate_business_logsModules(classname);
-		xt_Operate_Business_Logs.setXt_operate_business_logsMethod(method);
+		xt_Operate_Business_Logs.setXt_operate_b_logsTime(getSimpleDateFormat());
+		xt_Operate_Business_Logs.setXt_operate_b_logs_id(UUID.toUUID());
+		xt_Operate_Business_Logs.setXt_operate_b_logsModules(classname);
+		xt_Operate_Business_Logs.setXt_operate_b_logsMethod(method);
 		xt_Operate_Business_Logs.setXt_userinfo_id(getXtUid());
-		xt_Operate_Business_Logs.setXt_operate_business_logsResult(message);
+		xt_Operate_Business_Logs.setXt_operate_b_logsResult(message);
 		//////////为了性能采用异步
 		/**
         xt_Operate_Business_LogsService.putXtOperateBusinessLogs(xt_Operate_Business_Logs);
         **/
-		new BaseXtOperateBusinessLogsRun(xt_Operate_Business_Logs).run();
+		new BaseXtOperateBusinessLogsRun(xt_Operate_Business_Logs).start();
 	}
 	/**
 	 * 添加平台业务操作日志通用 采用put方法目的不走事务控制
@@ -649,15 +649,15 @@ public class BaseService extends UUID{
 	 */
 	public void aBLogs(String classname,String method,String message,String parm){
 		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
-		xt_Operate_Business_Logs.setXt_operate_business_logsTime(getSimpleDateFormat());
-		xt_Operate_Business_Logs.setXt_operate_business_logs_id(UUID.toUUID());
-		xt_Operate_Business_Logs.setXt_operate_business_logsModules(classname);
-		xt_Operate_Business_Logs.setXt_operate_business_logsMethod(method);
+		xt_Operate_Business_Logs.setXt_operate_b_logsTime(getSimpleDateFormat());
+		xt_Operate_Business_Logs.setXt_operate_b_logs_id(UUID.toUUID());
+		xt_Operate_Business_Logs.setXt_operate_b_logsModules(classname);
+		xt_Operate_Business_Logs.setXt_operate_b_logsMethod(method);
 		xt_Operate_Business_Logs.setXt_userinfo_id(getXtUid());
-		xt_Operate_Business_Logs.setXt_operate_business_logsResult(message);
-		xt_Operate_Business_Logs.setXt_operate_business_logsMethodPar(parm);
+		xt_Operate_Business_Logs.setXt_operate_b_logsResult(message);
+		xt_Operate_Business_Logs.setXt_operate_b_logsMethodPar(parm);
 		//////////为了性能采用异步
-        new BaseXtOperateBusinessLogsRun(xt_Operate_Business_Logs).run();
+        new BaseXtOperateBusinessLogsRun(xt_Operate_Business_Logs).start();
 	}
 	
 	/**
@@ -679,8 +679,16 @@ public class BaseService extends UUID{
 	            String newV = newJson.getString(key);
 	            if(!oldV.equals(newV)){
 	            	XtModifyRecord record = new XtModifyRecord();
-	            	record.setXt_modify_record_aftervalue(""+newV);
-	            	record.setXt_modify_record_beforevalue(""+oldV);
+	            	if(StringUtils.isEmpty(newV)){
+	            		record.setXt_modify_record_aftervalue(null);
+	            	}else{
+	            		record.setXt_modify_record_aftervalue(""+newV);
+	            	}
+	            	if(StringUtils.isEmpty(oldV)){
+	            		record.setXt_modify_record_beforevalue(null);
+	            	}else{
+	            		record.setXt_modify_record_beforevalue(""+oldV);
+	            	}
 	            	record.setXt_modify_record_ctime(getSimpleDateFormat());
 	            	record.setXt_modify_record_field(key);
 	            	record.setXt_modify_record_modules(modules);
@@ -692,7 +700,7 @@ public class BaseService extends UUID{
 				list.get(i).setBusiness_id(business_id);
 				list.get(i).setXt_userinfo_id(getXtUid());
 			}
-			new BaseXtModifyRecordRun(list).run();
+			new BaseXtModifyRecordRun(list).start();
 		} catch (Exception e) {
 		}
 	}
@@ -736,7 +744,7 @@ public class BaseService extends UUID{
 				list.get(i).setBusiness_id(business_id);
 				list.get(i).setXt_userinfo_id(getXtUid());
 			}
-			new BaseXtModifyRecordRun(list).run();
+			new BaseXtModifyRecordRun(list).start();
 		} catch (Exception e) {
 		}
 	}
@@ -831,7 +839,11 @@ public class BaseService extends UUID{
 			xtDataAuthorityDao.delXtDataAuthorityByCondition(condition);
 		}
 		if(null != xt_Data_Authority_List && !xt_Data_Authority_List.isEmpty()){
-			xtDataAuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+			for(XtDataAuthority xtDataAuthority :xt_Data_Authority_List){
+				xtDataAuthorityDao.addXtDataAuthority(xtDataAuthority);
+			}
+			//兼容oracle与mysql语法 废弃批量插入
+//			xtDataAuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
 		}
 		
 		//2推送部门人员
@@ -869,7 +881,11 @@ public class BaseService extends UUID{
 			}
 		}
 		if(null != xt_Data_Authority_List && !xt_Data_Authority_List.isEmpty()){
-			xtDataAuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+			for(XtDataAuthority xt_Data_Authority:xt_Data_Authority_List){
+				xtDataAuthorityDao.addXtDataAuthority(xt_Data_Authority);
+			}
+			//兼容oracle与mysql语法 废弃批量插入
+//			xtDataAuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
 		}
 		
 		//3推送岗位
@@ -908,7 +924,11 @@ public class BaseService extends UUID{
 			}
 		}
 		if(null != xt_Data_Authority_List && !xt_Data_Authority_List.isEmpty()){
-			xtDataAuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
+			for(XtDataAuthority xt_Data_Authority:xt_Data_Authority_List){
+				xtDataAuthorityDao.addXtDataAuthority(xt_Data_Authority);
+			}
+			//兼容oracle与mysql语法 废弃批量插入
+//			xtDataAuthorityDao.addBatchXtDataAuthority(xt_Data_Authority_List);
 		}
 	}
 }

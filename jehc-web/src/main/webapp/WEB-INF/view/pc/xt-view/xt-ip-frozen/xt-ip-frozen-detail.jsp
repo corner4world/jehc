@@ -30,8 +30,8 @@
 					<select class="form-control" name="xt_ip_frozen_status">
 						<option value="">请选择</option>
 						<option value="0" <c:if test="${xtIpFrozen.xt_ip_frozen_status eq 0}">selected</c:if>>正常</option>
-						<option value="1" <c:if test="${xtIpFrozen.xt_ip_frozen_status eq 0}">selected</c:if>>冻结</option>
-						<option value="2" <c:if test="${xtIpFrozen.xt_ip_frozen_status eq 0}">selected</c:if>>黑名单</option>
+						<option value="1" <c:if test="${xtIpFrozen.xt_ip_frozen_status eq 1}">selected</c:if>>冻结</option>
+						<option value="2" <c:if test="${xtIpFrozen.xt_ip_frozen_status eq 2}">selected</c:if>>黑名单</option>
 					</select>
 				</div>
 			</div>

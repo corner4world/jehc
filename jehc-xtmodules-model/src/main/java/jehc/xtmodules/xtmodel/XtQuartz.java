@@ -15,7 +15,7 @@ public class XtQuartz extends BaseEntity implements Serializable{
 	private String jobGroup;/**任务分组**/
 	private String jobStatus;/**任务状态 0禁用 1启用 2删除**/
 	private String cronExpression;/**任务运行时间表达式**/
-	private String desc;/**任务描述**/
+	private String desc_;/**任务描述**/
 	private String targetMethod;/**执行的类方法**/
 	private String targetClass;/**执行的类**/
 	public void setId(String id){
@@ -54,11 +54,11 @@ public class XtQuartz extends BaseEntity implements Serializable{
 	public String getCronExpression(){
 		return cronExpression;
 	}
-	public void setDesc(String desc){
-		this.desc=desc;
+	public String getDesc_() {
+		return desc_;
 	}
-	public String getDesc(){
-		return desc;
+	public void setDesc_(String desc_) {
+		this.desc_ = desc_;
 	}
 	public void setTargetMethod(String targetMethod){
 		this.targetMethod=targetMethod;

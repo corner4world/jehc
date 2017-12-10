@@ -5,23 +5,23 @@
 	<!--初始化分页-->
 	<select id="getSolrFiledCopyListByCondition" resultType="jehc.solrmodules.solrmodel.SolrFiledCopy" parameterType="map">
 		SELECT
-			solr_filed_copy.`solr_filed_copy_id`,
-			solr_filed_copy.`solr_filed_copy_remark`,
-			solr_filed_copy.`solr_filed_copy_source_id`,
-			solr_filed_copy.`solr_filed_copy_dest_id`,
-			solr_filed_copy.`solr_filed_copy_ctime`,
-			solr_filed_copy.`solr_filed_copy_mtime`,
-			solr_filed_copy.`xt_userinfo_id`,
-			solr_filed_copy.`solr_core_id`,
+			solr_filed_copy.solr_filed_copy_id,
+			solr_filed_copy.solr_filed_copy_remark,
+			solr_filed_copy.solr_filed_copy_source_id,
+			solr_filed_copy.solr_filed_copy_dest_id,
+			solr_filed_copy.solr_filed_copy_ctime,
+			solr_filed_copy.solr_filed_copy_mtime,
+			solr_filed_copy.xt_userinfo_id,
+			solr_filed_copy.solr_core_id,
 			solr_filed_copy_source.solr_index_name as solr_filed_copy_source_name,
 			solr_filed_copy_source.solr_index_remark as solr_filed_copy_source_index,
 			solr_filed_copy_dest.solr_index_name as solr_filed_copy_dest_name,
 			solr_filed_copy_dest.solr_index_remark as solr_filed_copy_dest_index,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_userinfo.xt_userinfo_realName
 		FROM 
 			solr_filed_copy solr_filed_copy LEFT JOIN solr_index solr_filed_copy_source ON solr_filed_copy_source.solr_index_id = solr_filed_copy.solr_filed_copy_source_id
 		LEFT JOIN solr_index solr_filed_copy_dest ON solr_filed_copy_dest.solr_index_id = solr_filed_copy.solr_filed_copy_dest_id
-		LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_filed_copy.xt_userinfo_id
+		LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_filed_copy.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != solr_core_id and '' != solr_core_id">
 			AND solr_filed_copy.solr_core_id = #{solr_core_id}
@@ -40,23 +40,23 @@
 	<!--查询对象-->
 	<select id="getSolrFiledCopyById" resultType="jehc.solrmodules.solrmodel.SolrFiledCopy" parameterType="string">
 		SELECT
-			solr_filed_copy.`solr_filed_copy_id`,
-			solr_filed_copy.`solr_filed_copy_remark`,
-			solr_filed_copy.`solr_filed_copy_source_id`,
-			solr_filed_copy.`solr_filed_copy_dest_id`,
-			solr_filed_copy.`solr_filed_copy_ctime`,
-			solr_filed_copy.`solr_filed_copy_mtime`,
-			solr_filed_copy.`xt_userinfo_id`,
-			solr_filed_copy.`solr_core_id`,
+			solr_filed_copy.solr_filed_copy_id,
+			solr_filed_copy.solr_filed_copy_remark,
+			solr_filed_copy.solr_filed_copy_source_id,
+			solr_filed_copy.solr_filed_copy_dest_id,
+			solr_filed_copy.solr_filed_copy_ctime,
+			solr_filed_copy.solr_filed_copy_mtime,
+			solr_filed_copy.xt_userinfo_id,
+			solr_filed_copy.solr_core_id,
 			solr_filed_copy_source.solr_index_name as solr_filed_copy_source_name,
 			solr_filed_copy_source.solr_index_remark as solr_filed_copy_source_index,
 			solr_filed_copy_dest.solr_index_name as solr_filed_copy_dest_name,
 			solr_filed_copy_dest.solr_index_remark as solr_filed_copy_dest_index,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_userinfo.xt_userinfo_realName
 		FROM 
 			solr_filed_copy solr_filed_copy LEFT JOIN solr_index solr_filed_copy_source ON solr_filed_copy_source.solr_index_id = solr_filed_copy.solr_filed_copy_source_id
 		LEFT JOIN solr_index solr_filed_copy_dest ON solr_filed_copy_dest.solr_index_id = solr_filed_copy.solr_filed_copy_dest_id
-		LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_filed_copy.xt_userinfo_id
+		LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_filed_copy.xt_userinfo_id
 		WHERE solr_filed_copy.solr_filed_copy_id=#{solr_filed_copy_id}
 	</select>
 
@@ -65,13 +65,13 @@
 		INSERT INTO
 			solr_filed_copy
 			(
-			`solr_filed_copy_id`,
-			`solr_filed_copy_remark`,
-			`solr_filed_copy_source_id`,
-			`solr_filed_copy_dest_id`,
-			`solr_filed_copy_ctime`,
-			`xt_userinfo_id`,
-			`solr_core_id`
+			solr_filed_copy_id,
+			solr_filed_copy_remark,
+			solr_filed_copy_source_id,
+			solr_filed_copy_dest_id,
+			solr_filed_copy_ctime,
+			xt_userinfo_id,
+			solr_core_id
 			)
 			VALUES
 			(
@@ -90,13 +90,13 @@
 		UPDATE
 			solr_filed_copy
 		SET
-			`solr_filed_copy_id` = #{solr_filed_copy_id},
-			`solr_filed_copy_remark` = #{solr_filed_copy_remark},
-			`solr_filed_copy_source_id` = #{solr_filed_copy_source_id},
-			`solr_filed_copy_dest_id` = #{solr_filed_copy_dest_id},
-			`solr_filed_copy_mtime` = #{solr_filed_copy_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`solr_core_id` = #{solr_core_id}
+			solr_filed_copy_id = #{solr_filed_copy_id},
+			solr_filed_copy_remark = #{solr_filed_copy_remark},
+			solr_filed_copy_source_id = #{solr_filed_copy_source_id},
+			solr_filed_copy_dest_id = #{solr_filed_copy_dest_id},
+			solr_filed_copy_mtime = #{solr_filed_copy_mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			solr_core_id = #{solr_core_id}
 		WHERE solr_filed_copy_id=#{solr_filed_copy_id}
 	</update>
 
@@ -113,14 +113,14 @@
 		INSERT INTO
 			solr_filed_copy
 			(
-			`solr_filed_copy_id`,
-			`solr_filed_copy_remark`,
-			`solr_filed_copy_source_id`,
-			`solr_filed_copy_dest_id`,
-			`solr_filed_copy_ctime`,
-			`solr_filed_copy_mtime`,
-			`xt_userinfo_id`,
-			`solr_core_id`
+			solr_filed_copy_id,
+			solr_filed_copy_remark,
+			solr_filed_copy_source_id,
+			solr_filed_copy_dest_id,
+			solr_filed_copy_ctime,
+			solr_filed_copy_mtime,
+			xt_userinfo_id,
+			solr_core_id
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -143,14 +143,14 @@
 			UPDATE
 				solr_filed_copy
 			SET
-				`solr_filed_copy_id` = #{item.solr_filed_copy_id},
-				`solr_filed_copy_remark` = #{item.solr_filed_copy_remark},
-				`solr_filed_copy_source_id` = #{item.solr_filed_copy_source_id},
-				`solr_filed_copy_dest_id` = #{item.solr_filed_copy_dest_id},
-				`solr_filed_copy_ctime` = #{item.solr_filed_copy_ctime},
-				`solr_filed_copy_mtime` = #{item.solr_filed_copy_mtime},
-				`xt_userinfo_id` = #{item.xt_userinfo_id},
-				`solr_core_id` = #{item.solr_core_id}
+				solr_filed_copy_id = #{item.solr_filed_copy_id},
+				solr_filed_copy_remark = #{item.solr_filed_copy_remark},
+				solr_filed_copy_source_id = #{item.solr_filed_copy_source_id},
+				solr_filed_copy_dest_id = #{item.solr_filed_copy_dest_id},
+				solr_filed_copy_ctime = #{item.solr_filed_copy_ctime},
+				solr_filed_copy_mtime = #{item.solr_filed_copy_mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				solr_core_id = #{item.solr_core_id}
 			WHERE solr_filed_copy_id=#{item.solr_filed_copy_id}
 		</foreach>
 	</update>

@@ -31,5 +31,6 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/mxgraph-core.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sun.misc.BASE64Decoder.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/tk-filters.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/ojdbc14.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

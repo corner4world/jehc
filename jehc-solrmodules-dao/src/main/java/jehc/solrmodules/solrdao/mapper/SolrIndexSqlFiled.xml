@@ -5,14 +5,14 @@
 	<!--初始化分页-->
 	<select id="getSolrIndexSqlFiledListByCondition" resultType="jehc.solrmodules.solrmodel.SolrIndexSqlFiled" parameterType="map">
 		SELECT
-			`solr_index_sql_filed_id`,
-			`solr_index_sql_filed_name`,
-			`solr_index_sql_filed_zh`,
-			`solr_entity_id`,
-			`solr_index_filed_name`,
-			DATE_FORMAT(`solr_index_sql_filed_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_sql_filed_ctime`,
-			DATE_FORMAT(`solr_index_sql_filed_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_sql_filed_mtime`,
-			`xt_userinfo_id`
+			solr_index_sql_filed_id,
+			solr_index_sql_filed_name,
+			solr_index_sql_filed_zh,
+			solr_entity_id,
+			solr_index_filed_name,
+			solr_index_sql_filed_ctime AS solr_index_sql_filed_ctime,
+			solr_index_sql_filed_mtime AS solr_index_sql_filed_mtime,
+			xt_userinfo_id
 		FROM 
 			solr_index_sql_filed
 		WHERE 1=1
@@ -24,14 +24,14 @@
 	<!--查询对象-->
 	<select id="getSolrIndexSqlFiledById" resultType="jehc.solrmodules.solrmodel.SolrIndexSqlFiled" parameterType="string">
 		SELECT
-			`solr_index_sql_filed_id`,
-			`solr_index_sql_filed_name`,
-			`solr_index_sql_filed_zh`,
-			`solr_entity_id`,
-			`solr_index_filed_name`,
-			DATE_FORMAT(`solr_index_sql_filed_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_sql_filed_ctime`,
-			DATE_FORMAT(`solr_index_sql_filed_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_sql_filed_mtime`,
-			`xt_userinfo_id`
+			solr_index_sql_filed_id,
+			solr_index_sql_filed_name,
+			solr_index_sql_filed_zh,
+			solr_entity_id,
+			solr_index_filed_name,
+			solr_index_sql_filed_ctime AS solr_index_sql_filed_ctime,
+			solr_index_sql_filed_mtime AS solr_index_sql_filed_mtime,
+			xt_userinfo_id
 		FROM 
 			solr_index_sql_filed
 		WHERE solr_index_sql_filed_id=#{solr_index_sql_filed_id}
@@ -42,14 +42,14 @@
 		INSERT INTO
 			solr_index_sql_filed
 			(
-			`solr_index_sql_filed_id`,
-			`solr_index_sql_filed_name`,
-			`solr_index_sql_filed_zh`,
-			`solr_entity_id`,
-			`solr_index_sql_filed_ctime`,
-			`solr_index_sql_filed_mtime`,
-			`xt_userinfo_id`,
-			`solr_index_filed_name`
+			solr_index_sql_filed_id,
+			solr_index_sql_filed_name,
+			solr_index_sql_filed_zh,
+			solr_entity_id,
+			solr_index_sql_filed_ctime,
+			solr_index_sql_filed_mtime,
+			xt_userinfo_id,
+			solr_index_filed_name
 			)
 			VALUES
 			(
@@ -69,14 +69,14 @@
 		UPDATE
 			solr_index_sql_filed
 		SET
-			`solr_index_sql_filed_id` = #{solr_index_sql_filed_id},
-			`solr_index_sql_filed_name` = #{solr_index_sql_filed_name},
-			`solr_index_sql_filed_zh` = #{solr_index_sql_filed_zh},
-			`solr_entity_id` = #{solr_entity_id},
-			`solr_index_sql_filed_ctime` = #{solr_index_sql_filed_ctime},
-			`solr_index_sql_filed_mtime` = #{solr_index_sql_filed_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`solr_index_filed_name` = #{solr_index_filed_name}
+			solr_index_sql_filed_id = #{solr_index_sql_filed_id},
+			solr_index_sql_filed_name = #{solr_index_sql_filed_name},
+			solr_index_sql_filed_zh = #{solr_index_sql_filed_zh},
+			solr_entity_id = #{solr_entity_id},
+			solr_index_sql_filed_ctime = #{solr_index_sql_filed_ctime},
+			solr_index_sql_filed_mtime = #{solr_index_sql_filed_mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			solr_index_filed_name = #{solr_index_filed_name}
 		WHERE solr_index_sql_filed_id=#{solr_index_sql_filed_id}
 	</update>
 

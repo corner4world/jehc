@@ -5,21 +5,21 @@
 	<!--初始化分页-->
 	<select id="getBProductImgListByCondition" resultType="jehc.bmodules.bmodel.BProductImg" parameterType="map">
 		SELECT
-			b_product_img.`b_product_img_id`,
-			b_product_img.`b_product_img_name`,
-			DATE_FORMAT(b_product_img.`b_product_img_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_ctime`,
-			DATE_FORMAT(b_product_img.`b_product_img_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_mtime`,
-			b_product_img.`b_product_img_type`,
-			b_product_img.`b_product_img_status`,
-			b_product_img.`b_product_id`,
-			b_product_img.`b_seller_id`,
-			b_product_img.`xt_attachment_id`,
-			b_product_img.`b_product_img_width`,
-			b_product_img.`b_product_img_height`,
-			b_product_img.`xt_userinfo_id`,
-			b_product_img.`b_product_img_remark`,
-			xt_userinfo.`xt_userinfo_realName`,
-			b_seller.`b_seller_name`
+			b_product_img.b_product_img_id,
+			b_product_img.b_product_img_name,
+			b_product_img.b_product_img_ctime AS b_product_img_ctime,
+			b_product_img.b_product_img_mtime AS b_product_img_mtime,
+			b_product_img.b_product_img_type,
+			b_product_img.b_product_img_status,
+			b_product_img.b_product_id,
+			b_product_img.b_seller_id,
+			b_product_img.xt_attachment_id,
+			b_product_img.b_product_img_width,
+			b_product_img.b_product_img_height,
+			b_product_img.xt_userinfo_id,
+			b_product_img.b_product_img_remark,
+			xt_userinfo.xt_userinfo_realName,
+			b_seller.b_seller_name
 		FROM 
 			b_product_img b_product_img LEFT JOIN xt_userinfo xt_userinfo ON b_product_img.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_product_img.b_seller_id
@@ -38,21 +38,21 @@
 	<!--查询对象-->
 	<select id="getBProductImgById" resultType="jehc.bmodules.bmodel.BProductImg" parameterType="string">
 		SELECT
-			b_product_img.`b_product_img_id`,
-			b_product_img.`b_product_img_name`,
-			DATE_FORMAT(b_product_img.`b_product_img_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_ctime`,
-			DATE_FORMAT(b_product_img.`b_product_img_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_product_img_mtime`,
-			b_product_img.`b_product_img_type`,
-			b_product_img.`b_product_img_status`,
-			b_product_img.`b_product_id`,
-			b_product_img.`b_seller_id`,
-			b_product_img.`xt_attachment_id`,
-			b_product_img.`b_product_img_width`,
-			b_product_img.`b_product_img_height`,
-			b_product_img.`xt_userinfo_id`,
-			b_product_img.`b_product_img_remark`,
-			xt_userinfo.`xt_userinfo_realName`,
-			b_seller.`b_seller_name`
+			b_product_img.b_product_img_id,
+			b_product_img.b_product_img_name,
+			b_product_img.b_product_img_ctime AS b_product_img_ctime,
+			b_product_img.b_product_img_mtime AS b_product_img_mtime,
+			b_product_img.b_product_img_type,
+			b_product_img.b_product_img_status,
+			b_product_img.b_product_id,
+			b_product_img.b_seller_id,
+			b_product_img.xt_attachment_id,
+			b_product_img.b_product_img_width,
+			b_product_img.b_product_img_height,
+			b_product_img.xt_userinfo_id,
+			b_product_img.b_product_img_remark,
+			xt_userinfo.xt_userinfo_realName,
+			b_seller.b_seller_name
 		FROM 
 			b_product_img b_product_img LEFT JOIN xt_userinfo xt_userinfo ON b_product_img.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_product_img.b_seller_id
@@ -64,19 +64,19 @@
 		INSERT INTO
 			b_product_img
 			(
-			`b_product_img_id`,
-			`b_product_img_name`,
-			`b_product_img_ctime`,
-			`b_product_img_mtime`,
-			`b_product_img_type`,
-			`b_product_img_status`,
-			`b_product_id`,
-			`b_seller_id`,
-			`xt_attachment_id`,
-			`b_product_img_width`,
-			`b_product_img_height`,
-			`xt_userinfo_id`,
-			`b_product_img_remark`
+			b_product_img_id,
+			b_product_img_name,
+			b_product_img_ctime,
+			b_product_img_mtime,
+			b_product_img_type,
+			b_product_img_status,
+			b_product_id,
+			b_seller_id,
+			xt_attachment_id,
+			b_product_img_width,
+			b_product_img_height,
+			xt_userinfo_id,
+			b_product_img_remark
 			)
 			VALUES
 			(
@@ -101,18 +101,18 @@
 		UPDATE
 			b_product_img
 		SET
-			`b_product_img_id` = #{b_product_img_id},
-			`b_product_img_name` = #{b_product_img_name},
-			`b_product_img_mtime` = #{b_product_img_mtime},
-			`b_product_img_type` = #{b_product_img_type},
-			`b_product_img_status` = #{b_product_img_status},
-			`b_product_id` = #{b_product_id},
-			`b_seller_id` = #{b_seller_id},
-			`xt_attachment_id` = #{xt_attachment_id},
-			`b_product_img_width` = #{b_product_img_width},
-			`b_product_img_height` = #{b_product_img_height},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`b_product_img_remark` = #{b_product_img_remark}
+			b_product_img_id = #{b_product_img_id},
+			b_product_img_name = #{b_product_img_name},
+			b_product_img_mtime = #{b_product_img_mtime},
+			b_product_img_type = #{b_product_img_type},
+			b_product_img_status = #{b_product_img_status},
+			b_product_id = #{b_product_id},
+			b_seller_id = #{b_seller_id},
+			xt_attachment_id = #{xt_attachment_id},
+			b_product_img_width = #{b_product_img_width},
+			b_product_img_height = #{b_product_img_height},
+			xt_userinfo_id = #{xt_userinfo_id},
+			b_product_img_remark = #{b_product_img_remark}
 		WHERE b_product_img_id=#{b_product_img_id}
 	</update>
 

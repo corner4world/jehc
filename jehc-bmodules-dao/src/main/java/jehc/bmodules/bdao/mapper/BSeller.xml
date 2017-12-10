@@ -5,22 +5,22 @@
 	<!--初始化分页-->
 	<select id="getBSellerListByCondition" resultType="jehc.bmodules.bmodel.BSeller" parameterType="map">
 		SELECT
-			b_seller.`b_seller_id`,
-			b_seller.`b_seller_name`,
-			b_seller.`b_seller_status`,
-			b_seller.`b_seller_tel`,
-			b_seller.`b_seller_level`,
-			b_seller.`xt_userinfo_id`,
-			b_seller.`b_seller_login_id`,
-			b_seller.`b_seller_bank`,
-			b_seller.`b_seller_bank_num`,
-			b_seller.`b_seller_official`,
-			b_seller.`b_seller_address`,
-			DATE_FORMAT(b_seller.`b_seller_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_ctime`,
-			DATE_FORMAT(b_seller.`b_seller_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_mtime`,
-			xt_userinfo.`xt_userinfo_realName`
+			b_seller.b_seller_id,
+			b_seller.b_seller_name,
+			b_seller.b_seller_status,
+			b_seller.b_seller_tel,
+			b_seller.b_seller_level,
+			b_seller.xt_userinfo_id,
+			b_seller.b_seller_login_id,
+			b_seller.b_seller_bank,
+			b_seller.b_seller_bank_num,
+			b_seller.b_seller_official,
+			b_seller.b_seller_address,
+			b_seller.b_seller_ctime AS b_seller_ctime,
+			b_seller.b_seller_mtime AS b_seller_mtime,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			b_seller b_seller JOIN xt_userinfo xt_userinfo ON b_seller.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			b_seller b_seller JOIN xt_userinfo xt_userinfo ON b_seller.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != b_seller_tel">
 			AND instr(b_seller.b_seller_tel,#{b_seller_tel})
@@ -36,22 +36,22 @@
 	<!--查询对象-->
 	<select id="getBSellerById" resultType="jehc.bmodules.bmodel.BSeller" parameterType="string">
 		SELECT
-			b_seller.`b_seller_id`,
-			b_seller.`b_seller_name`,
-			b_seller.`b_seller_status`,
-			b_seller.`b_seller_tel`,
-			b_seller.`b_seller_level`,
-			b_seller.`xt_userinfo_id`,
-			b_seller.`b_seller_login_id`,
-			b_seller.`b_seller_bank`,
-			b_seller.`b_seller_bank_num`,
-			b_seller.`b_seller_official`,
-			b_seller.`b_seller_address`,
-			DATE_FORMAT(b_seller.`b_seller_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_ctime`,
-			DATE_FORMAT(b_seller.`b_seller_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_seller_mtime`,
-			xt_userinfo.`xt_userinfo_realName`
+			b_seller.b_seller_id,
+			b_seller.b_seller_name,
+			b_seller.b_seller_status,
+			b_seller.b_seller_tel,
+			b_seller.b_seller_level,
+			b_seller.xt_userinfo_id,
+			b_seller.b_seller_login_id,
+			b_seller.b_seller_bank,
+			b_seller.b_seller_bank_num,
+			b_seller.b_seller_official,
+			b_seller.b_seller_address,
+			b_seller.b_seller_ctime AS b_seller_ctime,
+			b_seller.b_seller_mtime AS b_seller_mtime,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			b_seller b_seller JOIN xt_userinfo xt_userinfo ON b_seller.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			b_seller b_seller JOIN xt_userinfo xt_userinfo ON b_seller.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE b_seller_id=#{b_seller_id}
 	</select>
 
@@ -60,19 +60,19 @@
 		INSERT INTO
 			b_seller
 			(
-			`b_seller_id`,
-			`b_seller_name`,
-			`b_seller_status`,
-			`b_seller_tel`,
-			`b_seller_level`,
-			`xt_userinfo_id`,
-			`b_seller_login_id`,
-			`b_seller_bank`,
-			`b_seller_bank_num`,
-			`b_seller_official`,
-			`b_seller_address`,
-			`b_seller_ctime`,
-			`b_seller_mtime`
+			b_seller_id,
+			b_seller_name,
+			b_seller_status,
+			b_seller_tel,
+			b_seller_level,
+			xt_userinfo_id,
+			b_seller_login_id,
+			b_seller_bank,
+			b_seller_bank_num,
+			b_seller_official,
+			b_seller_address,
+			b_seller_ctime,
+			b_seller_mtime
 			)
 			VALUES
 			(
@@ -97,18 +97,18 @@
 		UPDATE
 			b_seller
 		SET
-			`b_seller_id` = #{b_seller_id},
-			`b_seller_name` = #{b_seller_name},
-			`b_seller_status` = #{b_seller_status},
-			`b_seller_tel` = #{b_seller_tel},
-			`b_seller_level` = #{b_seller_level},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`b_seller_login_id` = #{b_seller_login_id},
-			`b_seller_bank` = #{b_seller_bank},
-			`b_seller_bank_num` = #{b_seller_bank_num},
-			`b_seller_official` = #{b_seller_official},
-			`b_seller_address` = #{b_seller_address},
-			`b_seller_mtime` = #{b_seller_mtime}
+			b_seller_id = #{b_seller_id},
+			b_seller_name = #{b_seller_name},
+			b_seller_status = #{b_seller_status},
+			b_seller_tel = #{b_seller_tel},
+			b_seller_level = #{b_seller_level},
+			xt_userinfo_id = #{xt_userinfo_id},
+			b_seller_login_id = #{b_seller_login_id},
+			b_seller_bank = #{b_seller_bank},
+			b_seller_bank_num = #{b_seller_bank_num},
+			b_seller_official = #{b_seller_official},
+			b_seller_address = #{b_seller_address},
+			b_seller_mtime = #{b_seller_mtime}
 		WHERE b_seller_id=#{b_seller_id}
 	</update>
 

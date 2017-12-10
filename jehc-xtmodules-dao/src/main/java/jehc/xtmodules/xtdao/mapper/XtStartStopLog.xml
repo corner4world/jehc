@@ -5,36 +5,36 @@
 	<!--初始化分页-->
 	<select id="getXtStartStopLogListByCondition" resultType="jehc.xtmodules.xtmodel.XtStartStopLog" parameterType="map">
 		SELECT
-			`xt_start_stop_log_id`,
-			`xt_start_stop_log_starttime`,
-			`xt_start_stop_log_stoptime`,
-			`xt_start_stop_log_iserror`,
-			`xt_start_stop_log_content`
+			xt_start_stop_log_id,
+			xt_start_stop_log_starttime,
+			xt_start_stop_log_stoptime,
+			xt_start_stop_log_iserror,
+			xt_start_stop_log_content
 		FROM 
 			xt_start_stop_log
 		WHERE 1=1
 		<if test="null != xt_start_stop_log_stoptime_st and xt_start_stop_log_stoptime_st != ''">
-			AND xt_start_stop_log_stoptime &gt;=STR_TO_DATE(#{xt_start_stop_log_stoptime_st},'%Y-%m-%d')
+			AND xt_start_stop_log_stoptime &gt;=#{xt_start_stop_log_stoptime_st}
 		</if>
 		<if test="null != xt_start_stop_log_stoptime_et and xt_start_stop_log_stoptime_et != ''">
-			AND xt_start_stop_log_stoptime &lt;=STR_TO_DATE(#{xt_start_stop_log_stoptime_et},'%Y-%m-%d')
+			AND xt_start_stop_log_stoptime &lt;=#{xt_start_stop_log_stoptime_et}
 		</if>
 		<if test="null != xt_start_stop_log_starttime_st and xt_start_stop_log_starttime_st != ''">
-			AND xt_start_stop_log_starttime &gt;=STR_TO_DATE(#{xt_start_stop_log_starttime_st},'%Y-%m-%d')
+			AND xt_start_stop_log_starttime &gt;=#{xt_start_stop_log_starttime_st}
 		</if>
 		<if test="null != xt_start_stop_log_starttime_et and xt_start_stop_log_starttime_et != ''">
-			AND xt_start_stop_log_starttime &lt;=STR_TO_DATE(#{xt_start_stop_log_starttime_et},'%Y-%m-%d')
+			AND xt_start_stop_log_starttime &lt;=#{xt_start_stop_log_starttime_et}
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtStartStopLogById" resultType="jehc.xtmodules.xtmodel.XtStartStopLog" parameterType="string">
 		SELECT
-			`xt_start_stop_log_id`,
-			`xt_start_stop_log_starttime`,
-			`xt_start_stop_log_stoptime`,
-			`xt_start_stop_log_iserror`,
-			`xt_start_stop_log_content`
+			xt_start_stop_log_id,
+			xt_start_stop_log_starttime,
+			xt_start_stop_log_stoptime,
+			xt_start_stop_log_iserror,
+			xt_start_stop_log_content
 		FROM 
 			xt_start_stop_log
 		WHERE xt_start_stop_log_id=#{xt_start_stop_log_id}
@@ -45,11 +45,11 @@
 		INSERT INTO
 			xt_start_stop_log
 			(
-			`xt_start_stop_log_id`,
-			`xt_start_stop_log_starttime`,
-			`xt_start_stop_log_stoptime`,
-			`xt_start_stop_log_iserror`,
-			`xt_start_stop_log_content`
+			xt_start_stop_log_id,
+			xt_start_stop_log_starttime,
+			xt_start_stop_log_stoptime,
+			xt_start_stop_log_iserror,
+			xt_start_stop_log_content
 			)
 			VALUES
 			(
@@ -66,10 +66,10 @@
 		UPDATE
 			xt_start_stop_log
 		SET
-			`xt_start_stop_log_starttime` = #{xt_start_stop_log_starttime},
-			`xt_start_stop_log_stoptime` = #{xt_start_stop_log_stoptime},
-			`xt_start_stop_log_iserror` = #{xt_start_stop_log_iserror},
-			`xt_start_stop_log_content` = #{xt_start_stop_log_content}
+			xt_start_stop_log_starttime = #{xt_start_stop_log_starttime},
+			xt_start_stop_log_stoptime = #{xt_start_stop_log_stoptime},
+			xt_start_stop_log_iserror = #{xt_start_stop_log_iserror},
+			xt_start_stop_log_content = #{xt_start_stop_log_content}
 		WHERE xt_start_stop_log_id=#{xt_start_stop_log_id}
 	</update>
 
@@ -79,16 +79,16 @@
 			xt_start_stop_log
 		<set>
 			<if test="xt_start_stop_log_starttime != null">
-				`xt_start_stop_log_starttime` = #{xt_start_stop_log_starttime},
+				xt_start_stop_log_starttime = #{xt_start_stop_log_starttime},
 			</if>
 			<if test="xt_start_stop_log_stoptime != null">
-				`xt_start_stop_log_stoptime` = #{xt_start_stop_log_stoptime},
+				xt_start_stop_log_stoptime = #{xt_start_stop_log_stoptime},
 			</if>
 			<if test="xt_start_stop_log_iserror != null">
-				`xt_start_stop_log_iserror` = #{xt_start_stop_log_iserror},
+				xt_start_stop_log_iserror = #{xt_start_stop_log_iserror},
 			</if>
 			<if test="xt_start_stop_log_content != null">
-				`xt_start_stop_log_content` = #{xt_start_stop_log_content},
+				xt_start_stop_log_content = #{xt_start_stop_log_content},
 			</if>
 		</set>
 		WHERE xt_start_stop_log_id=#{xt_start_stop_log_id}
@@ -107,11 +107,11 @@
 		INSERT INTO
 			xt_start_stop_log
 			(
-			`xt_start_stop_log_id`,
-			`xt_start_stop_log_starttime`,
-			`xt_start_stop_log_stoptime`,
-			`xt_start_stop_log_iserror`,
-			`xt_start_stop_log_content`
+			xt_start_stop_log_id,
+			xt_start_stop_log_starttime,
+			xt_start_stop_log_stoptime,
+			xt_start_stop_log_iserror,
+			xt_start_stop_log_content
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -131,10 +131,10 @@
 			UPDATE
 				xt_start_stop_log
 			SET
-				`xt_start_stop_log_starttime` = #{item.xt_start_stop_log_starttime},
-				`xt_start_stop_log_stoptime` = #{item.xt_start_stop_log_stoptime},
-				`xt_start_stop_log_iserror` = #{item.xt_start_stop_log_iserror},
-				`xt_start_stop_log_content` = #{item.xt_start_stop_log_content}
+				xt_start_stop_log_starttime = #{item.xt_start_stop_log_starttime},
+				xt_start_stop_log_stoptime = #{item.xt_start_stop_log_stoptime},
+				xt_start_stop_log_iserror = #{item.xt_start_stop_log_iserror},
+				xt_start_stop_log_content = #{item.xt_start_stop_log_content}
 			WHERE xt_start_stop_log_id=#{item.xt_start_stop_log_id}
 		</foreach>
 	</update>
@@ -146,16 +146,16 @@
 				xt_start_stop_log
 			<set>
 				<if test="item.xt_start_stop_log_starttime != null">
-					`xt_start_stop_log_starttime` = #{item.xt_start_stop_log_starttime},
+					xt_start_stop_log_starttime = #{item.xt_start_stop_log_starttime},
 				</if>
 				<if test="item.xt_start_stop_log_stoptime != null">
-					`xt_start_stop_log_stoptime` = #{item.xt_start_stop_log_stoptime},
+					xt_start_stop_log_stoptime = #{item.xt_start_stop_log_stoptime},
 				</if>
 				<if test="item.xt_start_stop_log_iserror != null">
-					`xt_start_stop_log_iserror` = #{item.xt_start_stop_log_iserror},
+					xt_start_stop_log_iserror = #{item.xt_start_stop_log_iserror},
 				</if>
 				<if test="item.xt_start_stop_log_content != null">
-					`xt_start_stop_log_content` = #{item.xt_start_stop_log_content},
+					xt_start_stop_log_content = #{item.xt_start_stop_log_content},
 				</if>
 			</set>
 			WHERE xt_start_stop_log_id=#{item.xt_start_stop_log_id}

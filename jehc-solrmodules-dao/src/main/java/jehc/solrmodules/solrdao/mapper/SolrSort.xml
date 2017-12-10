@@ -5,17 +5,17 @@
 	<!--初始化分页-->
 	<select id="getSolrSortListByCondition" resultType="jehc.solrmodules.solrmodel.SolrSort" parameterType="map">
 		SELECT
-			solr_sort.`solr_sort_id`,
-			solr_sort.`solr_sort_name`,
-			DATE_FORMAT(solr_sort.`solr_sort_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_ctime`,
-			DATE_FORMAT(solr_sort.`solr_sort_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_mtime`,
-			solr_sort.`solr_sort_code`,
-			solr_sort.`solr_sort_useboost`,
-			solr_sort.`solr_index_id`,
-			solr_sort.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			solr_sort.solr_sort_id,
+			solr_sort.solr_sort_name,
+			solr_sort.solr_sort_ctime AS solr_sort_ctime,
+			solr_sort.solr_sort_mtime AS solr_sort_mtime,
+			solr_sort.solr_sort_code,
+			solr_sort.solr_sort_useboost,
+			solr_sort.solr_index_id,
+			solr_sort.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			solr_sort solr_sort LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_sort.xt_userinfo_id
+			solr_sort solr_sort LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_sort.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != solr_index_id">
 			AND solr_sort.solr_index_id=#{solr_index_id}
@@ -28,17 +28,17 @@
 	<!--查询对象-->
 	<select id="getSolrSortById" resultType="jehc.solrmodules.solrmodel.SolrSort" parameterType="string">
 		SELECT
-			solr_sort.`solr_sort_id`,
-			solr_sort.`solr_sort_name`,
-			DATE_FORMAT(solr_sort.`solr_sort_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_ctime`,
-			DATE_FORMAT(solr_sort.`solr_sort_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_mtime`,
-			solr_sort.`solr_sort_code`,
-			solr_sort.`solr_sort_useboost`,
-			solr_sort.`solr_index_id`,
-			solr_sort.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			solr_sort.solr_sort_id,
+			solr_sort.solr_sort_name,
+			solr_sort.solr_sort_ctime AS solr_sort_ctime,
+			solr_sort.solr_sort_mtime AS solr_sort_mtime,
+			solr_sort.solr_sort_code,
+			solr_sort.solr_sort_useboost,
+			solr_sort.solr_index_id,
+			solr_sort.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			solr_sort solr_sort LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_sort.xt_userinfo_id
+			solr_sort solr_sort LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = solr_sort.xt_userinfo_id
 		WHERE solr_sort.solr_sort_id=#{solr_sort_id}
 	</select>
 
@@ -47,14 +47,14 @@
 		INSERT INTO
 			solr_sort
 			(
-			`solr_sort_id`,
-			`solr_sort_name`,
-			`solr_sort_ctime`,
-			`solr_sort_mtime`,
-			`solr_sort_code`,
-			`solr_sort_useboost`,
-			`solr_index_id`,
-			`xt_userinfo_id`
+			solr_sort_id,
+			solr_sort_name,
+			solr_sort_ctime,
+			solr_sort_mtime,
+			solr_sort_code,
+			solr_sort_useboost,
+			solr_index_id,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -74,13 +74,13 @@
 		UPDATE
 			solr_sort
 		SET
-			`solr_sort_id` = #{solr_sort_id},
-			`solr_sort_name` = #{solr_sort_name},
-			`solr_sort_mtime` = #{solr_sort_mtime},
-			`solr_sort_code` = #{solr_sort_code},
-			`solr_sort_useboost` = #{solr_sort_useboost},
-			`solr_index_id` = #{solr_index_id},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			solr_sort_id = #{solr_sort_id},
+			solr_sort_name = #{solr_sort_name},
+			solr_sort_mtime = #{solr_sort_mtime},
+			solr_sort_code = #{solr_sort_code},
+			solr_sort_useboost = #{solr_sort_useboost},
+			solr_index_id = #{solr_index_id},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE solr_sort_id=#{solr_sort_id}
 	</update>
 
@@ -95,17 +95,17 @@
 	<!-- 根据实例编号查找其下面排序字段 -->
 	<select id="getSolrSortList" parameterType="map" resultType="jehc.solrmodules.solrmodel.SolrSort">
 		SELECT 
-			solr_sort.`solr_sort_id`,
-			solr_sort.`solr_sort_name`,
-			DATE_FORMAT(solr_sort.`solr_sort_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_ctime`,
-			DATE_FORMAT(solr_sort.`solr_sort_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_sort_mtime`,
-			solr_sort.`solr_sort_code`,
-			solr_sort.`solr_sort_useboost`,
-			solr_sort.`solr_index_id`,
-			solr_sort.`xt_userinfo_id`,
-			solr_index.`solr_index_name`
+			solr_sort.solr_sort_id,
+			solr_sort.solr_sort_name,
+			solr_sort.solr_sort_ctime AS solr_sort_ctime,
+			solr_sort.solr_sort_mtime AS solr_sort_mtime,
+			solr_sort.solr_sort_code,
+			solr_sort.solr_sort_useboost,
+			solr_sort.solr_index_id,
+			solr_sort.xt_userinfo_id,
+			solr_index.solr_index_name
 		 FROM 
-			solr_sort AS solr_sort LEFT JOIN solr_index AS solr_index ON solr_index.solr_index_id = solr_sort.solr_index_id
+			solr_sort solr_sort LEFT JOIN solr_index solr_index ON solr_index.solr_index_id = solr_sort.solr_index_id
 		 WHERE 1=1
 		 <if test="null != solr_core_id">
 		 	AND solr_index.solr_core_id = #{solr_core_id}

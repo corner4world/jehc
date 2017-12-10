@@ -3,12 +3,15 @@ package jehc.xtmodules.xtcore.base;
 import java.io.Serializable;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import jehc.xtmodules.xtcore.util.DateUtil;
+import jehc.xtmodules.xtcore.util.DateUtils;
+
 
 /**
  * Entity支持类
  * @author邓纯杰
  */
-public class BaseEntity  implements Serializable{
+public class BaseEntity extends jehc.xtmodules.xtcore.allutils.DateUtil implements Serializable{
 	private Object item;
 	private Long version;/**乐观锁使用**/ 
 	private static final long serialVersionUID = 1L;

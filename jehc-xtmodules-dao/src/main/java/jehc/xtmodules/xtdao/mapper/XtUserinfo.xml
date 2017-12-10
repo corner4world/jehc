@@ -5,201 +5,203 @@
 	<!-- 登录 -->
 	<select id="getXtUserinfoByUP" resultType="jehc.xtmodules.xtmodel.XtUserinfo" parameterType="map">
 		SELECT
-			xt_userinfo.`xt_userinfo_id`,
-			xt_userinfo.`xt_company_id`,
-			xt_userinfo.`xt_departinfo_id`,
-			xt_userinfo.`xt_post_id`,
-			xt_userinfo.`xt_userinfo_name`,
-			xt_userinfo.`xt_userinfo_address`,
-			xt_userinfo.`xt_userinfo_state`,
-			xt_userinfo.`xt_userinfo_isDelete`,
-			xt_userinfo.`xt_userinfo_image`,
-			xt_userinfo.`xt_userinfo_status`,
-			xt_userinfo.`xt_userinfo_realName`,
-			xt_userinfo.`xt_userinfo_phone`,
-			xt_userinfo.`xt_userinfo_card`,
-			xt_userinfo.`xt_userinfo_sex`,
-			xt_userinfo.`xt_userinfo_ismarried`,
-			xt_userinfo.`xt_userinfo_isAdmin`,
-			xt_userinfo.`xt_userinfo_nation`,
-			xt_userinfo.`xt_userinfo_origo`,
-			xt_userinfo.`xt_userinfo_pic`,
-			xt_userinfo.`xt_userinfo_mobile`,
-			xt_userinfo.`xt_userinfo_ortherTel`,
-			xt_userinfo.`xt_userinfo_intime`,
-			xt_userinfo.`xt_userinfo_outTime`,
-			xt_userinfo.`xt_userinfo_contractTime`,
-			xt_userinfo.`xt_userinfo_remark`,
-			xt_userinfo.`xt_userinfo_birthday`,
-			xt_userinfo.`xt_userinfo_qq`,
-			xt_userinfo.`xt_userinfo_email`,
-			xt_userinfo.`xt_userinfo_politicalStatus`,
-			xt_userinfo.`xt_userinfo_highestDegree`,
-			xt_userinfo.`xt_userinfo_schoolName`,
-			xt_userinfo.`xt_userinfo_workYear`,
-			xt_departinfo.`xt_departinfo_name`,
-			xt_post.`xt_post_name`
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_company_id,
+			xt_userinfo.xt_departinfo_id,
+			xt_userinfo.xt_post_id,
+			xt_userinfo.xt_userinfo_name,
+			xt_userinfo.xt_userinfo_address,
+			xt_userinfo.xt_userinfo_state,
+			xt_userinfo.xt_userinfo_isDelete,
+			xt_userinfo.xt_userinfo_image,
+			xt_userinfo.xt_userinfo_status,
+			xt_userinfo.xt_userinfo_realName,
+			xt_userinfo.xt_userinfo_phone,
+			xt_userinfo.xt_userinfo_card,
+			xt_userinfo.xt_userinfo_sex,
+			xt_userinfo.xt_userinfo_ismarried,
+			xt_userinfo.xt_userinfo_isAdmin,
+			xt_userinfo.xt_userinfo_nation,
+			xt_userinfo.xt_userinfo_origo,
+			xt_userinfo.xt_userinfo_pic,
+			xt_userinfo.xt_userinfo_mobile,
+			xt_userinfo.xt_userinfo_ortherTel,
+			xt_userinfo.xt_userinfo_intime,
+			xt_userinfo.xt_userinfo_outTime,
+			xt_userinfo.xt_userinfo_contractTime,
+			xt_userinfo.xt_userinfo_remark,
+			xt_userinfo.xt_userinfo_birthday,
+			xt_userinfo.xt_userinfo_qq,
+			xt_userinfo.xt_userinfo_email,
+			xt_userinfo.xt_userinfo_politicalStatus,
+			xt_userinfo.xt_userinfo_highestDegree,
+			xt_userinfo.xt_userinfo_schoolName,
+			xt_userinfo.xt_userinfo_workYear,
+			xt_departinfo.xt_departinfo_name,
+			xt_post.xt_post_name
 			
 		FROM 
 			xt_userinfo xt_userinfo LEFT JOIN xt_post xt_post ON xt_userinfo.xt_post_id = xt_post.xt_post_id
 			LEFT JOIN xt_departinfo xt_departinfo ON xt_userinfo.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE 1=1
-			AND xt_userinfo.`xt_userinfo_isDelete` = 0
+			AND xt_userinfo.xt_userinfo_isDelete = 0
 			AND xt_userinfo.xt_userinfo_name=#{xt_userinfo_name} 
 			AND xt_userinfo.xt_userinfo_passWord=#{xt_userinfo_passWord}
 	</select>
 	<!--初始化分页-->
 	<select id="getXtUserinfoListByCondition" resultType="jehc.xtmodules.xtmodel.XtUserinfo" parameterType="map">
 		SELECT
-			xt_userinfo.`xt_userinfo_id`,
-			xt_userinfo.`xt_company_id`,
-			xt_userinfo.`xt_departinfo_id`,
-			xt_userinfo.`xt_post_id`,
-			xt_userinfo.`xt_userinfo_name`,
-			xt_userinfo.`xt_userinfo_address`,
-			xt_userinfo.`xt_userinfo_state`,
-			xt_userinfo.`xt_userinfo_isDelete`,
-			xt_userinfo.`xt_userinfo_image`,
-			xt_userinfo.`xt_userinfo_status`,
-			xt_userinfo.`xt_userinfo_realName`,
-			xt_userinfo.`xt_userinfo_phone`,
-			xt_userinfo.`xt_userinfo_card`,
-			xt_userinfo.`xt_userinfo_sex`,
-			xt_userinfo.`xt_userinfo_ismarried`,
-			xt_userinfo.`xt_userinfo_isAdmin`,
-			xt_userinfo.`xt_userinfo_nation`,
-			xt_userinfo.`xt_userinfo_origo`,
-			xt_userinfo.`xt_userinfo_pic`,
-			xt_userinfo.`xt_userinfo_mobile`,
-			xt_userinfo.`xt_userinfo_ortherTel`,
-			xt_userinfo.`xt_userinfo_intime`,
-			xt_userinfo.`xt_userinfo_outTime`,
-			xt_userinfo.`xt_userinfo_contractTime`,
-			xt_userinfo.`xt_userinfo_remark`,
-			xt_userinfo.`xt_userinfo_birthday`,
-			xt_userinfo.`xt_userinfo_qq`,
-			xt_userinfo.`xt_userinfo_email`,
-			xt_userinfo.`xt_userinfo_politicalStatus`,
-			xt_userinfo.`xt_userinfo_highestDegree`,
-			xt_userinfo.`xt_userinfo_schoolName`,
-			xt_userinfo.`xt_userinfo_workYear`,
-			xt_departinfo.`xt_departinfo_name`,
-			xt_post.`xt_post_name`
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_company_id,
+			xt_userinfo.xt_departinfo_id,
+			xt_userinfo.xt_post_id,
+			xt_userinfo.xt_userinfo_name,
+			xt_userinfo.xt_userinfo_address,
+			xt_userinfo.xt_userinfo_state,
+			xt_userinfo.xt_userinfo_isDelete,
+			xt_userinfo.xt_userinfo_image,
+			xt_userinfo.xt_userinfo_status,
+			xt_userinfo.xt_userinfo_realName,
+			xt_userinfo.xt_userinfo_phone,
+			xt_userinfo.xt_userinfo_card,
+			xt_userinfo.xt_userinfo_sex,
+			xt_userinfo.xt_userinfo_ismarried,
+			xt_userinfo.xt_userinfo_isAdmin,
+			xt_userinfo.xt_userinfo_nation,
+			xt_userinfo.xt_userinfo_origo,
+			xt_userinfo.xt_userinfo_pic,
+			xt_userinfo.xt_userinfo_mobile,
+			xt_userinfo.xt_userinfo_ortherTel,
+			xt_userinfo.xt_userinfo_intime,
+			xt_userinfo.xt_userinfo_outTime,
+			xt_userinfo.xt_userinfo_contractTime,
+			xt_userinfo.xt_userinfo_remark,
+			xt_userinfo.xt_userinfo_birthday,
+			xt_userinfo.xt_userinfo_qq,
+			xt_userinfo.xt_userinfo_email,
+			xt_userinfo.xt_userinfo_politicalStatus,
+			xt_userinfo.xt_userinfo_highestDegree,
+			xt_userinfo.xt_userinfo_schoolName,
+			xt_userinfo.xt_userinfo_workYear,
+			xt_departinfo.xt_departinfo_name,
+			xt_post.xt_post_name
 			
 		FROM 
 			xt_userinfo xt_userinfo LEFT JOIN xt_post xt_post ON xt_userinfo.xt_post_id = xt_post.xt_post_id
 			LEFT JOIN xt_departinfo xt_departinfo ON xt_userinfo.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE 1=1
-		AND xt_userinfo.`xt_userinfo_isDelete` = 0
-		AND xt_userinfo.`xt_userinfo_isAdmin` = 0
+		AND xt_userinfo.xt_userinfo_isDelete = 0
+		AND xt_userinfo.xt_userinfo_isAdmin = 0
 		<if test="null != xt_departinfo_name and '' != xt_departinfo_name">
-			AND instr(xt_departinfo.`xt_departinfo_name`,#{xt_departinfo_name})
+			AND xt_departinfo.xt_departinfo_name LIKE CONCAT(CONCAT('%',#{xt_departinfo_name}),'%')
+			
 		</if>
 		<if test="null != xt_post_name">
-			AND instr(xt_post.xt_post_name,#{xt_post_name})
+			AND xt_post.xt_post_name LIKE CONCAT(CONCAT('%',#{xt_post_name}),'%')
 		</if>
 		<if test="null != xt_userinfo_realName">
-			AND instr(xt_userinfo.xt_userinfo_realName,#{xt_userinfo_realName})
+			AND xt_userinfo.xt_userinfo_realName LIKE CONCAT(CONCAT('%',#{xt_userinfo_realName}),'%')
 		</if>
 		<if test="null != xt_userinfo_name">
-			AND instr(xt_userinfo.xt_userinfo_name,#{xt_userinfo_name})
+			AND xt_userinfo.xt_userinfo_name LIKE CONCAT(CONCAT('%',#{xt_userinfo_name}),'%')
 		</if>
 	</select>
 	
 	<!--已删除用户初始化分页-->
 	<select id="getXtUserinfoDeletedListByCondition" resultType="jehc.xtmodules.xtmodel.XtUserinfo" parameterType="map">
 		SELECT
-			xt_userinfo.`xt_userinfo_id`,
-			xt_userinfo.`xt_company_id`,
-			xt_userinfo.`xt_departinfo_id`,
-			xt_userinfo.`xt_post_id`,
-			xt_userinfo.`xt_userinfo_name`,
-			xt_userinfo.`xt_userinfo_address`,
-			xt_userinfo.`xt_userinfo_state`,
-			xt_userinfo.`xt_userinfo_isDelete`,
-			xt_userinfo.`xt_userinfo_image`,
-			xt_userinfo.`xt_userinfo_status`,
-			xt_userinfo.`xt_userinfo_realName`,
-			xt_userinfo.`xt_userinfo_phone`,
-			xt_userinfo.`xt_userinfo_card`,
-			xt_userinfo.`xt_userinfo_sex`,
-			xt_userinfo.`xt_userinfo_ismarried`,
-			xt_userinfo.`xt_userinfo_isAdmin`,
-			xt_userinfo.`xt_userinfo_nation`,
-			xt_userinfo.`xt_userinfo_origo`,
-			xt_userinfo.`xt_userinfo_pic`,
-			xt_userinfo.`xt_userinfo_mobile`,
-			xt_userinfo.`xt_userinfo_ortherTel`,
-			xt_userinfo.`xt_userinfo_intime`,
-			xt_userinfo.`xt_userinfo_outTime`,
-			xt_userinfo.`xt_userinfo_contractTime`,
-			xt_userinfo.`xt_userinfo_remark`,
-			xt_userinfo.`xt_userinfo_birthday`,
-			xt_userinfo.`xt_userinfo_qq`,
-			xt_userinfo.`xt_userinfo_email`,
-			xt_userinfo.`xt_userinfo_politicalStatus`,
-			xt_userinfo.`xt_userinfo_highestDegree`,
-			xt_userinfo.`xt_userinfo_schoolName`,
-			xt_userinfo.`xt_userinfo_workYear`,
-			xt_departinfo.`xt_departinfo_name`,
-			xt_post.`xt_post_name`
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_company_id,
+			xt_userinfo.xt_departinfo_id,
+			xt_userinfo.xt_post_id,
+			xt_userinfo.xt_userinfo_name,
+			xt_userinfo.xt_userinfo_address,
+			xt_userinfo.xt_userinfo_state,
+			xt_userinfo.xt_userinfo_isDelete,
+			xt_userinfo.xt_userinfo_image,
+			xt_userinfo.xt_userinfo_status,
+			xt_userinfo.xt_userinfo_realName,
+			xt_userinfo.xt_userinfo_phone,
+			xt_userinfo.xt_userinfo_card,
+			xt_userinfo.xt_userinfo_sex,
+			xt_userinfo.xt_userinfo_ismarried,
+			xt_userinfo.xt_userinfo_isAdmin,
+			xt_userinfo.xt_userinfo_nation,
+			xt_userinfo.xt_userinfo_origo,
+			xt_userinfo.xt_userinfo_pic,
+			xt_userinfo.xt_userinfo_mobile,
+			xt_userinfo.xt_userinfo_ortherTel,
+			xt_userinfo.xt_userinfo_intime,
+			xt_userinfo.xt_userinfo_outTime,
+			xt_userinfo.xt_userinfo_contractTime,
+			xt_userinfo.xt_userinfo_remark,
+			xt_userinfo.xt_userinfo_birthday,
+			xt_userinfo.xt_userinfo_qq,
+			xt_userinfo.xt_userinfo_email,
+			xt_userinfo.xt_userinfo_politicalStatus,
+			xt_userinfo.xt_userinfo_highestDegree,
+			xt_userinfo.xt_userinfo_schoolName,
+			xt_userinfo.xt_userinfo_workYear,
+			xt_departinfo.xt_departinfo_name,
+			xt_post.xt_post_name
 			
 		FROM 
 			xt_userinfo xt_userinfo LEFT JOIN xt_post xt_post ON xt_userinfo.xt_post_id = xt_post.xt_post_id
 			LEFT JOIN xt_departinfo xt_departinfo ON xt_userinfo.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE 1=1
-		AND xt_userinfo.`xt_userinfo_isDelete` = 1
-		AND xt_userinfo.`xt_userinfo_isAdmin` = 0
+		AND xt_userinfo.xt_userinfo_isDelete = 1
+		AND xt_userinfo.xt_userinfo_isAdmin = 0
 		<if test="null != xt_departinfo_name and '' != xt_departinfo_name">
-			AND instr(xt_departinfo.`xt_departinfo_name`,#{xt_departinfo_name})
+			AND xt_departinfo.xt_departinfo_name LIKE CONCAT(CONCAT('%',#{xt_departinfo_name}),'%')
+			
 		</if>
 		<if test="null != xt_post_name">
-			AND instr(xt_post.xt_post_name,#{xt_post_name})
+			AND xt_post.xt_post_name LIKE CONCAT(CONCAT('%',#{xt_post_name}),'%')
 		</if>
 		<if test="null != xt_userinfo_realName">
-			AND instr(xt_userinfo.xt_userinfo_realName,#{xt_userinfo_realName})
+			AND xt_userinfo.xt_userinfo_realName LIKE CONCAT(CONCAT('%',#{xt_userinfo_realName}),'%')
 		</if>
 		<if test="null != xt_userinfo_name">
-			AND instr(xt_userinfo.xt_userinfo_name,#{xt_userinfo_name})
+			AND xt_userinfo.xt_userinfo_name LIKE CONCAT(CONCAT('%',#{xt_userinfo_name}),'%')
 		</if>
 	</select>
 	<!--查询对象-->
 	<select id="getXtUserinfoById" resultType="jehc.xtmodules.xtmodel.XtUserinfo" parameterType="string">
 		SELECT
-			xt_userinfo.`xt_userinfo_id`,
-			xt_userinfo.`xt_company_id`,
-			xt_userinfo.`xt_departinfo_id`,
-			xt_userinfo.`xt_post_id`,
-			xt_userinfo.`xt_userinfo_name`,
-			xt_userinfo.`xt_userinfo_address`,
-			xt_userinfo.`xt_userinfo_state`,
-			xt_userinfo.`xt_userinfo_isDelete`,
-			xt_userinfo.`xt_userinfo_image`,
-			xt_userinfo.`xt_userinfo_status`,
-			xt_userinfo.`xt_userinfo_realName`,
-			xt_userinfo.`xt_userinfo_phone`,
-			xt_userinfo.`xt_userinfo_card`,
-			xt_userinfo.`xt_userinfo_sex`,
-			xt_userinfo.`xt_userinfo_ismarried`,
-			xt_userinfo.`xt_userinfo_isAdmin`,
-			xt_userinfo.`xt_userinfo_nation`,
-			xt_userinfo.`xt_userinfo_origo`,
-			xt_userinfo.`xt_userinfo_pic`,
-			xt_userinfo.`xt_userinfo_mobile`,
-			xt_userinfo.`xt_userinfo_ortherTel`,
-			xt_userinfo.`xt_userinfo_intime`,
-			xt_userinfo.`xt_userinfo_outTime`,
-			xt_userinfo.`xt_userinfo_contractTime`,
-			xt_userinfo.`xt_userinfo_remark`,
-			xt_userinfo.`xt_userinfo_birthday`,
-			xt_userinfo.`xt_userinfo_qq`,
-			xt_userinfo.`xt_userinfo_email`,
-			xt_userinfo.`xt_userinfo_politicalStatus`,
-			xt_userinfo.`xt_userinfo_highestDegree`,
-			xt_userinfo.`xt_userinfo_schoolName`,
-			xt_userinfo.`xt_userinfo_workYear`,
-			xt_departinfo.`xt_departinfo_name`,
-			xt_post.`xt_post_name`
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_company_id,
+			xt_userinfo.xt_departinfo_id,
+			xt_userinfo.xt_post_id,
+			xt_userinfo.xt_userinfo_name,
+			xt_userinfo.xt_userinfo_address,
+			xt_userinfo.xt_userinfo_state,
+			xt_userinfo.xt_userinfo_isDelete,
+			xt_userinfo.xt_userinfo_image,
+			xt_userinfo.xt_userinfo_status,
+			xt_userinfo.xt_userinfo_realName,
+			xt_userinfo.xt_userinfo_phone,
+			xt_userinfo.xt_userinfo_card,
+			xt_userinfo.xt_userinfo_sex,
+			xt_userinfo.xt_userinfo_ismarried,
+			xt_userinfo.xt_userinfo_isAdmin,
+			xt_userinfo.xt_userinfo_nation,
+			xt_userinfo.xt_userinfo_origo,
+			xt_userinfo.xt_userinfo_pic,
+			xt_userinfo.xt_userinfo_mobile,
+			xt_userinfo.xt_userinfo_ortherTel,
+			xt_userinfo.xt_userinfo_intime,
+			xt_userinfo.xt_userinfo_outTime,
+			xt_userinfo.xt_userinfo_contractTime,
+			xt_userinfo.xt_userinfo_remark,
+			xt_userinfo.xt_userinfo_birthday,
+			xt_userinfo.xt_userinfo_qq,
+			xt_userinfo.xt_userinfo_email,
+			xt_userinfo.xt_userinfo_politicalStatus,
+			xt_userinfo.xt_userinfo_highestDegree,
+			xt_userinfo.xt_userinfo_schoolName,
+			xt_userinfo.xt_userinfo_workYear,
+			xt_departinfo.xt_departinfo_name,
+			xt_post.xt_post_name
 			
 		FROM 
 			xt_userinfo xt_userinfo LEFT JOIN xt_post xt_post ON xt_userinfo.xt_post_id = xt_post.xt_post_id
@@ -212,39 +214,39 @@
 		INSERT INTO
 			xt_userinfo
 			(
-			`xt_userinfo_id`,
-			`xt_company_id`,
-			`xt_departinfo_id`,
-			`xt_post_id`,
-			`xt_userinfo_name`,
-			`xt_userinfo_passWord`,
-			`xt_userinfo_address`,
-			`xt_userinfo_state`,
-			`xt_userinfo_isDelete`,
-			`xt_userinfo_image`,
-			`xt_userinfo_status`,
-			`xt_userinfo_realName`,
-			`xt_userinfo_phone`,
-			`xt_userinfo_card`,
-			`xt_userinfo_sex`,
-			`xt_userinfo_ismarried`,
-			`xt_userinfo_isAdmin`,
-			`xt_userinfo_nation`,
-			`xt_userinfo_origo`,
-			`xt_userinfo_pic`,
-			`xt_userinfo_mobile`,
-			`xt_userinfo_ortherTel`,
-			`xt_userinfo_intime`,
-			`xt_userinfo_outTime`,
-			`xt_userinfo_contractTime`,
-			`xt_userinfo_remark`,
-			`xt_userinfo_birthday`,
-			`xt_userinfo_qq`,
-			`xt_userinfo_email`,
-			`xt_userinfo_politicalStatus`,
-			`xt_userinfo_highestDegree`,
-			`xt_userinfo_schoolName`,
-			`xt_userinfo_workYear`
+			xt_userinfo_id,
+			xt_company_id,
+			xt_departinfo_id,
+			xt_post_id,
+			xt_userinfo_name,
+			xt_userinfo_passWord,
+			xt_userinfo_address,
+			xt_userinfo_state,
+			xt_userinfo_isDelete,
+			xt_userinfo_image,
+			xt_userinfo_status,
+			xt_userinfo_realName,
+			xt_userinfo_phone,
+			xt_userinfo_card,
+			xt_userinfo_sex,
+			xt_userinfo_ismarried,
+			xt_userinfo_isAdmin,
+			xt_userinfo_nation,
+			xt_userinfo_origo,
+			xt_userinfo_pic,
+			xt_userinfo_mobile,
+			xt_userinfo_ortherTel,
+			xt_userinfo_intime,
+			xt_userinfo_outTime,
+			xt_userinfo_contractTime,
+			xt_userinfo_remark,
+			xt_userinfo_birthday,
+			xt_userinfo_qq,
+			xt_userinfo_email,
+			xt_userinfo_politicalStatus,
+			xt_userinfo_highestDegree,
+			xt_userinfo_schoolName,
+			xt_userinfo_workYear
 			)
 			VALUES
 			(
@@ -289,37 +291,37 @@
 		UPDATE
 			xt_userinfo
 		SET
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_company_id` = #{xt_company_id},
-			`xt_departinfo_id` = #{xt_departinfo_id},
-			`xt_post_id` = #{xt_post_id},
-			`xt_userinfo_name` = #{xt_userinfo_name},
-			`xt_userinfo_address` = #{xt_userinfo_address},
-			`xt_userinfo_state` = #{xt_userinfo_state},
-			`xt_userinfo_isDelete` = #{xt_userinfo_isDelete},
-			`xt_userinfo_image` = #{xt_userinfo_image},
-			`xt_userinfo_status` = #{xt_userinfo_status},
-			`xt_userinfo_realName` = #{xt_userinfo_realName},
-			`xt_userinfo_phone` = #{xt_userinfo_phone},
-			`xt_userinfo_card` = #{xt_userinfo_card},
-			`xt_userinfo_sex` = #{xt_userinfo_sex},
-			`xt_userinfo_ismarried` = #{xt_userinfo_ismarried},
-			`xt_userinfo_nation` = #{xt_userinfo_nation},
-			`xt_userinfo_origo` = #{xt_userinfo_origo},
-			`xt_userinfo_pic` = #{xt_userinfo_pic},
-			`xt_userinfo_mobile` = #{xt_userinfo_mobile},
-			`xt_userinfo_ortherTel` = #{xt_userinfo_ortherTel},
-			`xt_userinfo_intime` = #{xt_userinfo_intime},
-			`xt_userinfo_outTime` = #{xt_userinfo_outTime},
-			`xt_userinfo_contractTime` = #{xt_userinfo_contractTime},
-			`xt_userinfo_remark` = #{xt_userinfo_remark},
-			`xt_userinfo_birthday` = #{xt_userinfo_birthday},
-			`xt_userinfo_qq` = #{xt_userinfo_qq},
-			`xt_userinfo_email` = #{xt_userinfo_email},
-			`xt_userinfo_politicalStatus` = #{xt_userinfo_politicalStatus},
-			`xt_userinfo_highestDegree` = #{xt_userinfo_highestDegree},
-			`xt_userinfo_schoolName` = #{xt_userinfo_schoolName},
-			`xt_userinfo_workYear` = #{xt_userinfo_workYear}
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_company_id = #{xt_company_id},
+			xt_departinfo_id = #{xt_departinfo_id},
+			xt_post_id = #{xt_post_id},
+			xt_userinfo_name = #{xt_userinfo_name},
+			xt_userinfo_address = #{xt_userinfo_address},
+			xt_userinfo_state = #{xt_userinfo_state},
+			xt_userinfo_isDelete = #{xt_userinfo_isDelete},
+			xt_userinfo_image = #{xt_userinfo_image},
+			xt_userinfo_status = #{xt_userinfo_status},
+			xt_userinfo_realName = #{xt_userinfo_realName},
+			xt_userinfo_phone = #{xt_userinfo_phone},
+			xt_userinfo_card = #{xt_userinfo_card},
+			xt_userinfo_sex = #{xt_userinfo_sex},
+			xt_userinfo_ismarried = #{xt_userinfo_ismarried},
+			xt_userinfo_nation = #{xt_userinfo_nation},
+			xt_userinfo_origo = #{xt_userinfo_origo},
+			xt_userinfo_pic = #{xt_userinfo_pic},
+			xt_userinfo_mobile = #{xt_userinfo_mobile},
+			xt_userinfo_ortherTel = #{xt_userinfo_ortherTel},
+			xt_userinfo_intime = #{xt_userinfo_intime},
+			xt_userinfo_outTime = #{xt_userinfo_outTime},
+			xt_userinfo_contractTime = #{xt_userinfo_contractTime},
+			xt_userinfo_remark = #{xt_userinfo_remark},
+			xt_userinfo_birthday = #{xt_userinfo_birthday},
+			xt_userinfo_qq = #{xt_userinfo_qq},
+			xt_userinfo_email = #{xt_userinfo_email},
+			xt_userinfo_politicalStatus = #{xt_userinfo_politicalStatus},
+			xt_userinfo_highestDegree = #{xt_userinfo_highestDegree},
+			xt_userinfo_schoolName = #{xt_userinfo_schoolName},
+			xt_userinfo_workYear = #{xt_userinfo_workYear}
 		WHERE xt_userinfo_id=#{xt_userinfo_id}
 	</update>
 
@@ -342,47 +344,47 @@
 	<!--读取所有用户根据各种情况非分页-->
 	<select id="getXtUserinfoListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtUserinfo" parameterType="map">
 		SELECT
-			xt_userinfo.`xt_userinfo_id`,
-			xt_userinfo.`xt_company_id`,
-			xt_userinfo.`xt_departinfo_id`,
-			xt_userinfo.`xt_post_id`,
-			xt_userinfo.`xt_userinfo_name`,
-			xt_userinfo.`xt_userinfo_passWord`,
-			xt_userinfo.`xt_userinfo_address`,
-			xt_userinfo.`xt_userinfo_state`,
-			xt_userinfo.`xt_userinfo_isDelete`,
-			xt_userinfo.`xt_userinfo_image`,
-			xt_userinfo.`xt_userinfo_status`,
-			xt_userinfo.`xt_userinfo_realName`,
-			xt_userinfo.`xt_userinfo_phone`,
-			xt_userinfo.`xt_userinfo_card`,
-			xt_userinfo.`xt_userinfo_sex`,
-			xt_userinfo.`xt_userinfo_ismarried`,
-			xt_userinfo.`xt_userinfo_isAdmin`,
-			xt_userinfo.`xt_userinfo_nation`,
-			xt_userinfo.`xt_userinfo_origo`,
-			xt_userinfo.`xt_userinfo_pic`,
-			xt_userinfo.`xt_userinfo_mobile`,
-			xt_userinfo.`xt_userinfo_ortherTel`,
-			xt_userinfo.`xt_userinfo_intime`,
-			xt_userinfo.`xt_userinfo_outTime`,
-			xt_userinfo.`xt_userinfo_contractTime`,
-			xt_userinfo.`xt_userinfo_remark`,
-			xt_userinfo.`xt_userinfo_birthday`,
-			xt_userinfo.`xt_userinfo_qq`,
-			xt_userinfo.`xt_userinfo_email`,
-			xt_userinfo.`xt_userinfo_politicalStatus`,
-			xt_userinfo.`xt_userinfo_highestDegree`,
-			xt_userinfo.`xt_userinfo_schoolName`,
-			xt_userinfo.`xt_userinfo_workYear`,
-			xt_departinfo.`xt_departinfo_name`,
-			xt_post.`xt_post_name`
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_company_id,
+			xt_userinfo.xt_departinfo_id,
+			xt_userinfo.xt_post_id,
+			xt_userinfo.xt_userinfo_name,
+			xt_userinfo.xt_userinfo_passWord,
+			xt_userinfo.xt_userinfo_address,
+			xt_userinfo.xt_userinfo_state,
+			xt_userinfo.xt_userinfo_isDelete,
+			xt_userinfo.xt_userinfo_image,
+			xt_userinfo.xt_userinfo_status,
+			xt_userinfo.xt_userinfo_realName,
+			xt_userinfo.xt_userinfo_phone,
+			xt_userinfo.xt_userinfo_card,
+			xt_userinfo.xt_userinfo_sex,
+			xt_userinfo.xt_userinfo_ismarried,
+			xt_userinfo.xt_userinfo_isAdmin,
+			xt_userinfo.xt_userinfo_nation,
+			xt_userinfo.xt_userinfo_origo,
+			xt_userinfo.xt_userinfo_pic,
+			xt_userinfo.xt_userinfo_mobile,
+			xt_userinfo.xt_userinfo_ortherTel,
+			xt_userinfo.xt_userinfo_intime,
+			xt_userinfo.xt_userinfo_outTime,
+			xt_userinfo.xt_userinfo_contractTime,
+			xt_userinfo.xt_userinfo_remark,
+			xt_userinfo.xt_userinfo_birthday,
+			xt_userinfo.xt_userinfo_qq,
+			xt_userinfo.xt_userinfo_email,
+			xt_userinfo.xt_userinfo_politicalStatus,
+			xt_userinfo.xt_userinfo_highestDegree,
+			xt_userinfo.xt_userinfo_schoolName,
+			xt_userinfo.xt_userinfo_workYear,
+			xt_departinfo.xt_departinfo_name,
+			xt_post.xt_post_name
 			
 		FROM 
 			xt_userinfo xt_userinfo LEFT JOIN xt_post xt_post ON xt_userinfo.xt_post_id = xt_post.xt_post_id
 			LEFT JOIN xt_departinfo xt_departinfo ON xt_userinfo.xt_departinfo_id = xt_departinfo.xt_departinfo_id
 		WHERE 1=1
-		AND xt_userinfo.`xt_userinfo_isAdmin` = 0
+		AND xt_userinfo.xt_userinfo_isAdmin = 0
 		<if test="null != xt_departinfo_id">
 			AND xt_userinfo.xt_departinfo_id = #{xt_departinfo_id}
 		</if>
@@ -396,7 +398,7 @@
 		UPDATE
 			xt_userinfo
 		SET
-			`xt_userinfo_passWord` = #{xt_userinfo_passWord}
+			xt_userinfo_passWord = #{xt_userinfo_passWord}
 		WHERE xt_userinfo_id=#{xt_userinfo_id}
 	</update>
 	
@@ -412,41 +414,41 @@
 	<!-- 根据各种情况查找集合不分页（流程设计器中处理人 发起人 发起人组等使用） -->
 	<select id="getXtUserinfoList" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtUserinfo">
 		SELECT
-			xt_userinfo.`xt_userinfo_id`,
-			xt_userinfo.`xt_company_id`,
-			xt_userinfo.`xt_departinfo_id`,
-			xt_userinfo.`xt_post_id`,
-			xt_userinfo.`xt_userinfo_name`,
-			xt_userinfo.`xt_userinfo_passWord`,
-			xt_userinfo.`xt_userinfo_address`,
-			xt_userinfo.`xt_userinfo_state`,
-			xt_userinfo.`xt_userinfo_isDelete`,
-			xt_userinfo.`xt_userinfo_image`,
-			xt_userinfo.`xt_userinfo_status`,
-			xt_userinfo.`xt_userinfo_realName`,
-			xt_userinfo.`xt_userinfo_phone`,
-			xt_userinfo.`xt_userinfo_card`,
-			xt_userinfo.`xt_userinfo_sex`,
-			xt_userinfo.`xt_userinfo_ismarried`,
-			xt_userinfo.`xt_userinfo_isAdmin`,
-			xt_userinfo.`xt_userinfo_nation`,
-			xt_userinfo.`xt_userinfo_origo`,
-			xt_userinfo.`xt_userinfo_pic`,
-			xt_userinfo.`xt_userinfo_mobile`,
-			xt_userinfo.`xt_userinfo_ortherTel`,
-			xt_userinfo.`xt_userinfo_intime`,
-			xt_userinfo.`xt_userinfo_outTime`,
-			xt_userinfo.`xt_userinfo_contractTime`,
-			xt_userinfo.`xt_userinfo_remark`,
-			xt_userinfo.`xt_userinfo_birthday`,
-			xt_userinfo.`xt_userinfo_qq`,
-			xt_userinfo.`xt_userinfo_email`,
-			xt_userinfo.`xt_userinfo_politicalStatus`,
-			xt_userinfo.`xt_userinfo_highestDegree`,
-			xt_userinfo.`xt_userinfo_schoolName`,
-			xt_userinfo.`xt_userinfo_workYear`,
-			xt_departinfo.`xt_departinfo_name`,
-			xt_post.`xt_post_name`
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_company_id,
+			xt_userinfo.xt_departinfo_id,
+			xt_userinfo.xt_post_id,
+			xt_userinfo.xt_userinfo_name,
+			xt_userinfo.xt_userinfo_passWord,
+			xt_userinfo.xt_userinfo_address,
+			xt_userinfo.xt_userinfo_state,
+			xt_userinfo.xt_userinfo_isDelete,
+			xt_userinfo.xt_userinfo_image,
+			xt_userinfo.xt_userinfo_status,
+			xt_userinfo.xt_userinfo_realName,
+			xt_userinfo.xt_userinfo_phone,
+			xt_userinfo.xt_userinfo_card,
+			xt_userinfo.xt_userinfo_sex,
+			xt_userinfo.xt_userinfo_ismarried,
+			xt_userinfo.xt_userinfo_isAdmin,
+			xt_userinfo.xt_userinfo_nation,
+			xt_userinfo.xt_userinfo_origo,
+			xt_userinfo.xt_userinfo_pic,
+			xt_userinfo.xt_userinfo_mobile,
+			xt_userinfo.xt_userinfo_ortherTel,
+			xt_userinfo.xt_userinfo_intime,
+			xt_userinfo.xt_userinfo_outTime,
+			xt_userinfo.xt_userinfo_contractTime,
+			xt_userinfo.xt_userinfo_remark,
+			xt_userinfo.xt_userinfo_birthday,
+			xt_userinfo.xt_userinfo_qq,
+			xt_userinfo.xt_userinfo_email,
+			xt_userinfo.xt_userinfo_politicalStatus,
+			xt_userinfo.xt_userinfo_highestDegree,
+			xt_userinfo.xt_userinfo_schoolName,
+			xt_userinfo.xt_userinfo_workYear,
+			xt_departinfo.xt_departinfo_name,
+			xt_post.xt_post_name
 			
 		FROM 
 			xt_userinfo xt_userinfo LEFT JOIN xt_post xt_post ON xt_userinfo.xt_post_id = xt_post.xt_post_id

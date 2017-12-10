@@ -34,7 +34,7 @@ $(document).ready(function() {
 				data:'xt_departinfo_connectTelNo'
 			},
 			{
-				data:'xt_departinfo_connectMobileTelNo'
+				data:'xt_departinfo_mobileTelNo'
 			},
 			{
 				data:'xt_departinfo_faxes'

@@ -17,33 +17,33 @@ $(document).ready(function() {
 			{
 				sClass:"text-center",
 				width:"50px",
-				data:"xt_generator_forbidtable_id",
+				data:"xt_generator_f_id",
 				render:function (data, type, full, meta) {
 					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
 				},
 				bSortable:false
 			},
 			{
-				data:"xt_generator_forbidtable_id",
+				data:"xt_generator_f_id",
 				width:"50px"
 			},
 			{
-				data:'xt_generator_forbidtable_table'
+				data:'xt_generator_f_table'
 			},
 			{
-				data:'xt_generator_forbidtable_remark'
+				data:'xt_generator_f_remark'
 			},
 			{
-				data:'xt_generator_forbidtable_ctime'
+				data:'xt_generator_f_ctime'
 			},
 			{
-				data:'xt_generator_forbidtable_mtime'
+				data:'xt_generator_f_mtime'
 			},
 			{
 				data:'xt_userinfo_realName'
 			},
 			{
-				data:"xt_generator_forbidtable_id",
+				data:"xt_generator_f_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
 					return "<a href=\"javascript:toXtGeneratorForbidtableDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";

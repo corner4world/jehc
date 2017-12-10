@@ -17,36 +17,36 @@ $(document).ready(function() {
 			{
 				sClass:"text-center",
 				width:"50px",
-				data:"xt_operate_business_logs_id",
+				data:"xt_operate_b_logs_id",
 				render:function (data, type, full, meta) {
 					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
 				},
 				bSortable:false
 			},
 			{
-				data:"xt_operate_business_logs_id",
+				data:"xt_operate_b_logs_id",
 				width:"50px"
 			},
 			{
-				data:'xt_operate_business_logsModules'
+				data:'xt_operate_b_logsModules'
 			},
 			{
-				data:'xt_operate_business_logsMethod'
+				data:'xt_operate_b_logsMethod'
 			},
 			{
-				data:'xt_operate_business_logsMethodPar'
+				data:'xt_operate_b_logsMethodPar'
 			},
 			{
-				data:'xt_operate_business_logsResult'
+				data:'xt_operate_b_logsResult'
 			},
 			{
-				data:'xt_operate_business_logsTime'
+				data:'xt_operate_b_logsTime'
 			},
 			{
 				data:'xt_userinfo_realName'
 			},
 			{
-				data:"xt_operate_business_logs_id",
+				data:"xt_operate_b_logs_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
 					return "<a href=\"javascript:toXtOperateBusinessLogsDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";

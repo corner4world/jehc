@@ -64,10 +64,19 @@ public class XtMRServiceImpl extends BaseService implements XtMRService{
 				i = xtMRDao.delXtMR(condition);
 				i = xtFunctioninfoRightDao.delXtFunctioninfoRight(condition);
 			}
-			i = xtMRDao.addBatchXtMR(xt_M_RList);
-			if(null != xt_Functioninfo_RightList && !xt_Functioninfo_RightList.isEmpty()){
-				i = xtFunctioninfoRightDao.addBatchXtFunctioninfoRight(xt_Functioninfo_RightList);
+			for(XtMR xt_M_R:xt_M_RList){
+				xtMRDao.addXtMR(xt_M_R);
 			}
+			//兼容oracle与mysql语法 废弃批量插入
+//			i = xtMRDao.addBatchXtMR(xt_M_RList);
+			if(null != xt_Functioninfo_RightList && !xt_Functioninfo_RightList.isEmpty()){
+				for(XtFunctioninfoRight xt_Functioninfo_Right:xt_Functioninfo_RightList){
+					xtFunctioninfoRightDao.addXtFunctioninfoRight(xt_Functioninfo_Right);
+				}
+				//兼容oracle与mysql语法 废弃批量插入
+//				i = xtFunctioninfoRightDao.addBatchXtFunctioninfoRight(xt_Functioninfo_RightList);
+			}
+			i = 1;
 		} catch (Exception e) {
 			i = 0;
 			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/

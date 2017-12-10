@@ -5,11 +5,11 @@
 	<!--初始化分页-->
 	<select id="getBMemberAccountListByCondition" resultType="jehc.bmodules.bmodel.BMemberAccount" parameterType="map">
 		SELECT
-			`b_member_account_id`,
-			`b_member_account_status`,
-			DATE_FORMAT(`b_member_account_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_account_ctime`,
-			`b_member_account_code`,
-			`b_member_id`
+			b_member_account_id,
+			b_member_account_status,
+			b_member_account_ctime AS b_member_account_ctime,
+			b_member_account_code,
+			b_member_id
 		FROM 
 			b_member_account
 		WHERE 1=1
@@ -18,11 +18,11 @@
 	<!--查询对象-->
 	<select id="getBMemberAccountById" resultType="jehc.bmodules.bmodel.BMemberAccount" parameterType="string">
 		SELECT
-			`b_member_account_id`,
-			`b_member_account_status`,
-			DATE_FORMAT(`b_member_account_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_member_account_ctime`,
-			`b_member_account_code`,
-			`b_member_id`
+			b_member_account_id,
+			b_member_account_status,
+			b_member_account_ctime AS b_member_account_ctime,
+			b_member_account_code,
+			b_member_id
 		FROM 
 			b_member_account
 		WHERE b_member_account_id=#{b_member_account_id}
@@ -33,11 +33,11 @@
 		INSERT INTO
 			b_member_account
 			(
-			`b_member_account_id`,
-			`b_member_account_status`,
-			`b_member_account_ctime`,
-			`b_member_account_code`,
-			`b_member_id`
+			b_member_account_id,
+			b_member_account_status,
+			b_member_account_ctime,
+			b_member_account_code,
+			b_member_id
 			)
 			VALUES
 			(
@@ -54,11 +54,11 @@
 		UPDATE
 			b_member_account
 		SET
-			`b_member_account_id` = #{b_member_account_id},
-			`b_member_account_status` = #{b_member_account_status},
-			`b_member_account_ctime` = #{b_member_account_ctime},
-			`b_member_account_code` = #{b_member_account_code},
-			`b_member_id` = #{b_member_id}
+			b_member_account_id = #{b_member_account_id},
+			b_member_account_status = #{b_member_account_status},
+			b_member_account_ctime = #{b_member_account_ctime},
+			b_member_account_code = #{b_member_account_code},
+			b_member_id = #{b_member_id}
 		WHERE b_member_account_id=#{b_member_account_id}
 	</update>
 

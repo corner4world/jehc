@@ -65,19 +65,21 @@
 	<!-- redis整合  -->
 	<import resource="classpath*:config/redis/redis.xml"/>
 	
-	<!-- 连接池整合 -->
+	<!-- 连接池整合 
 	<import resource="classpath*:config/pool/pool.xml"/>
-	 
+	--> 
+	
 	<!-- RabbitMq消息中间键 
 	<import resource="classpath*:config/mq/rabbit.xml"/>
 	-->
 	
-	<!-- netty整合 -->
+	<!-- netty整合
 	<import resource="classpath*:config/netty/netty.xml"/>
+	-->
 	 
-	 
-	<!-- Hession整合-->
+	<!-- Hession整合
 	<import resource="classpath*:config/hessian/hessian.xml"/> 
+	-->
 	<!-- 以上为插件及其他支持【结束】 -->
 	
 	<!-- FTP上传 -->

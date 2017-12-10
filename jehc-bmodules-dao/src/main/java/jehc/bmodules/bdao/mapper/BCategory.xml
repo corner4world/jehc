@@ -5,34 +5,34 @@
 	<!--初始化分页-->
 	<select id="getBCategoryListByCondition" resultType="jehc.bmodules.bmodel.BCategory" parameterType="map">
 		SELECT
-			b_category.`b_category_id`,
-			b_category.`b_category_name`,
-			b_category.`b_category_pid`,
-			b_category.`b_category_path`,
-			DATE_FORMAT(b_category.`b_category_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_category_ctime`,
-			DATE_FORMAT(b_category.`b_category_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_category_mtime`,
-			b_category.`b_category_status`,
-			b_category.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			b_category.b_category_id,
+			b_category.b_category_name,
+			b_category.b_category_pid,
+			b_category.b_category_path,
+			b_category.b_category_ctime AS b_category_ctime,
+			b_category.b_category_mtime AS b_category_mtime,
+			b_category.b_category_status,
+			b_category.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 	</select>
 
 	<!--查询对象-->
 	<select id="getBCategoryById" resultType="jehc.bmodules.bmodel.BCategory" parameterType="string">
 		SELECT
-			b_category.`b_category_id`,
-			b_category.`b_category_name`,
-			b_category.`b_category_pid`,
-			b_category.`b_category_path`,
-			DATE_FORMAT(b_category.`b_category_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_category_ctime`,
-			DATE_FORMAT(b_category.`b_category_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_category_mtime`,
-			b_category.`b_category_status`,
-			b_category.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			b_category.b_category_id,
+			b_category.b_category_name,
+			b_category.b_category_pid,
+			b_category.b_category_path,
+			b_category.b_category_ctime AS b_category_ctime,
+			b_category.b_category_mtime AS b_category_mtime,
+			b_category.b_category_status,
+			b_category.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE b_category.b_category_id=#{b_category_id}
 	</select>
 
@@ -41,14 +41,14 @@
 		INSERT INTO
 			b_category
 			(
-			`b_category_id`,
-			`b_category_name`,
-			`b_category_pid`,
-			`b_category_path`,
-			`b_category_ctime`,
-			`b_category_mtime`,
-			`b_category_status`,
-			`xt_userinfo_id`
+			b_category_id,
+			b_category_name,
+			b_category_pid,
+			b_category_path,
+			b_category_ctime,
+			b_category_mtime,
+			b_category_status,
+			xt_userinfo_id
 			)
 			VALUES
 			(
@@ -68,14 +68,14 @@
 		UPDATE
 			b_category
 		SET
-			`b_category_id` = #{b_category_id},
-			`b_category_name` = #{b_category_name},
-			`b_category_pid` = #{b_category_pid},
-			`b_category_path` = #{b_category_path},
-			`b_category_ctime` = #{b_category_ctime},
-			`b_category_mtime` = #{b_category_mtime},
-			`b_category_status` = #{b_category_status},
-			`xt_userinfo_id` = #{xt_userinfo_id}
+			b_category_id = #{b_category_id},
+			b_category_name = #{b_category_name},
+			b_category_pid = #{b_category_pid},
+			b_category_path = #{b_category_path},
+			b_category_ctime = #{b_category_ctime},
+			b_category_mtime = #{b_category_mtime},
+			b_category_status = #{b_category_status},
+			xt_userinfo_id = #{xt_userinfo_id}
 		WHERE b_category_id=#{b_category_id}
 	</update>
 
@@ -90,17 +90,17 @@
 	<!--读取所有数据根据条件-->
 	<select id="getBCategoryListAllByCondition" resultType="jehc.bmodules.bmodel.BCategory" parameterType="map">
 		SELECT
-			b_category.`b_category_id`,
-			b_category.`b_category_name`,
-			b_category.`b_category_pid`,
-			b_category.`b_category_path`,
-			DATE_FORMAT(b_category.`b_category_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_category_ctime`,
-			DATE_FORMAT(b_category.`b_category_mtime`,'%Y-%m-%d %H:%i:%s') AS `b_category_mtime`,
-			b_category.`b_category_status`,
-			b_category.`xt_userinfo_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			b_category.b_category_id,
+			b_category.b_category_name,
+			b_category.b_category_pid,
+			b_category.b_category_path,
+			b_category.b_category_ctime AS b_category_ctime,
+			b_category.b_category_mtime AS b_category_mtime,
+			b_category.b_category_status,
+			b_category.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.`xt_userinfo_id` = xt_userinfo.`xt_userinfo_id`
+			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 	</select>
 </mapper>

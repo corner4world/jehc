@@ -5,35 +5,35 @@
 	<!--初始化分页-->
 	<select id="getXtQuartzListByCondition" resultType="jehc.xtmodules.xtmodel.XtQuartz" parameterType="map">
 		SELECT
-			`id`,
-			`jobId`,
-			`jobName`,
-			`jobGroup`,
-			`jobStatus`,
-			`cronExpression`,
-			`desc`,
-			`targetMethod`,
-			`targetClass`
+			id,
+			jobId,
+			jobName,
+			jobGroup,
+			jobStatus,
+			cronExpression,
+			desc_ ,
+			targetMethod,
+			targetClass
 		FROM 
 			xt_quartz
 		WHERE 1=1
 		<if test="null != jobName">
-			AND instr(jobName,#{jobName})
+			AND jobName LIKE CONCAT(CONCAT('%',#{jobName}),'%')
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtQuartzById" resultType="jehc.xtmodules.xtmodel.XtQuartz" parameterType="string">
 		SELECT
-			`id`,
-			`jobId`,
-			`jobName`,
-			`jobGroup`,
-			`jobStatus`,
-			`cronExpression`,
-			`desc`,
-			`targetMethod`,
-			`targetClass`
+			id,
+			jobId,
+			jobName,
+			jobGroup,
+			jobStatus,
+			cronExpression,
+			desc_ ,
+			targetMethod,
+			targetClass
 		FROM 
 			xt_quartz
 		WHERE id=#{id}
@@ -44,15 +44,15 @@
 		INSERT INTO
 			xt_quartz
 			(
-			`id`,
-			`jobId`,
-			`jobName`,
-			`jobGroup`,
-			`jobStatus`,
-			`cronExpression`,
-			`desc`,
-			`targetMethod`,
-			`targetClass`
+			id,
+			jobId,
+			jobName,
+			jobGroup,
+			jobStatus,
+			cronExpression,
+			desc_,
+			targetMethod,
+			targetClass
 			)
 			VALUES
 			(
@@ -62,7 +62,7 @@
 			#{jobGroup},
 			#{jobStatus},
 			#{cronExpression},
-			#{desc},
+			#{desc_},
 			#{targetMethod},
 			#{targetClass}
 			)
@@ -73,15 +73,15 @@
 		UPDATE
 			xt_quartz
 		SET
-			`id` = #{id},
-			`jobId` = #{jobId},
-			`jobName` = #{jobName},
-			`jobGroup` = #{jobGroup},
-			`jobStatus` = #{jobStatus},
-			`cronExpression` = #{cronExpression},
-			`desc` = #{desc},
-			`targetMethod` = #{targetMethod},
-			`targetClass` = #{targetClass}
+			id = #{id},
+			jobId = #{jobId},
+			jobName = #{jobName},
+			jobGroup = #{jobGroup},
+			jobStatus = #{jobStatus},
+			cronExpression = #{cronExpression},
+			desc_ = #{desc_},
+			targetMethod = #{targetMethod},
+			targetClass = #{targetClass}
 		WHERE id=#{id}
 	</update>
 
@@ -96,15 +96,15 @@
 	<!--查找集合-->
 	<select id="getXtQuartzListAllByCondition" resultType="jehc.xtmodules.xtmodel.XtQuartz" parameterType="map">
 		SELECT
-			`id`,
-			`jobId`,
-			`jobName`,
-			`jobGroup`,
-			`jobStatus`,
-			`cronExpression`,
-			`desc`,
-			`targetMethod`,
-			`targetClass`
+			id,
+			jobId,
+			jobName,
+			jobGroup,
+			jobStatus,
+			cronExpression,
+			desc_,
+			targetMethod,
+			targetClass
 		FROM 
 			xt_quartz
 		WHERE 1=1

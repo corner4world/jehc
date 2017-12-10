@@ -5,16 +5,16 @@
 	<!--初始化分页-->
 	<select id="getBStockListByCondition" resultType="jehc.bmodules.bmodel.BStock" parameterType="map">
 		SELECT
-			b_stock.`b_stock_id`,
-			b_stock.`b_seller_product_id`,
-			b_stock.`b_stock_countable_sell`,
-			b_stock.`b_stock_locks_number`,
-			b_product.`b_product_name`,
+			b_stock.b_stock_id,
+			b_stock.b_seller_product_id,
+			b_stock.b_stock_countable_sell,
+			b_stock.b_stock_locks_number,
+			b_product.b_product_name,
 			b_product.b_product_id,
-			b_seller.`b_seller_name`,
-			b_seller.`b_seller_id`,
-			b_category.`b_category_name`,
-			b_brand.`b_brand_name`,
+			b_seller.b_seller_name,
+			b_seller.b_seller_id,
+			b_category.b_category_name,
+			b_brand.b_brand_name,
 			b_product_price.*
 		FROM 
 			b_stock b_stock LEFT JOIN b_seller_product b_seller_product ON b_seller_product.b_seller_product_id=b_stock.b_seller_product_id
@@ -22,7 +22,7 @@
 			LEFT JOIN b_product b_product ON b_seller_product.b_product_id = b_product.b_product_id
 			LEFT JOIN b_brand b_brand ON b_product.b_brand_id = b_brand.b_brand_id
 			LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
-			LEFT JOIN b_product_price b_product_price ON b_product_price.b_seller_product_id = b_stock.`b_seller_product_id`
+			LEFT JOIN b_product_price b_product_price ON b_product_price.b_seller_product_id = b_stock.b_seller_product_id
 		WHERE 1=1
 		<if test="null != b_product_name">
 			AND instr(b_product.b_product_name,#{b_product_name})
@@ -35,12 +35,12 @@
 	<!--查询对象-->
 	<select id="getBStockById" resultType="jehc.bmodules.bmodel.BStock" parameterType="string">
 		SELECT
-			b_stock.`b_stock_id`,
-			b_stock.`b_seller_product_id`,
-			b_stock.`b_stock_countable_sell`,
-			b_stock.`b_stock_locks_number`,
-			b_product.`b_product_name`,
-			b_seller.`b_seller_name`
+			b_stock.b_stock_id,
+			b_stock.b_seller_product_id,
+			b_stock.b_stock_countable_sell,
+			b_stock.b_stock_locks_number,
+			b_product.b_product_name,
+			b_seller.b_seller_name
 		FROM 
 			b_stock b_stock LEFT JOIN b_seller_product b_seller_product ON b_seller_product.b_seller_product_id=b_stock.b_seller_product_id
 			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_seller_product.b_seller_id
@@ -53,10 +53,10 @@
 		INSERT INTO
 			b_stock
 			(
-			`b_stock_id`,
-			`b_seller_product_id`,
-			`b_stock_countable_sell`,
-			`b_stock_locks_number`
+			b_stock_id,
+			b_seller_product_id,
+			b_stock_countable_sell,
+			b_stock_locks_number
 			)
 			VALUES
 			(
@@ -72,10 +72,10 @@
 		UPDATE
 			b_stock
 		SET
-			`b_stock_id` = #{b_stock_id},
-			`b_seller_product_id` = #{b_seller_product_id},
-			`b_stock_countable_sell` = #{b_stock_countable_sell},
-			`b_stock_locks_number` = #{b_stock_locks_number}
+			b_stock_id = #{b_stock_id},
+			b_seller_product_id = #{b_seller_product_id},
+			b_stock_countable_sell = #{b_stock_countable_sell},
+			b_stock_locks_number = #{b_stock_locks_number}
 		WHERE b_stock_id=#{b_stock_id}
 	</update>
 

@@ -73,6 +73,7 @@ public class LcStatusController extends BaseAction{
 	* @param lc_status 
 	* @param request 
 	*/
+	@ResponseBody
 	@RequestMapping(value="/addLcStatus",method={RequestMethod.POST,RequestMethod.GET})
 	public String addLcStatus(LcStatus lc_Status,HttpServletRequest request){
 		int i = 0;

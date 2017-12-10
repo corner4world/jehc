@@ -5,11 +5,11 @@
 	<!--初始化分页-->
 	<select id="getXtDataAuthorityDepartListByCondition" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityDepart" parameterType="map">
 		SELECT
-			`xt_data_authority_depart_id`,
-			`xtDID`,
-			`xt_departinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`
+			xt_data_authority_depart_id,
+			xtDID,
+			xt_departinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id
 		FROM 
 			xt_data_authority_depart
 		WHERE 1=1
@@ -24,11 +24,11 @@
 	<!--查询对象-->
 	<select id="getXtDataAuthorityDepartById" resultType="jehc.xtmodules.xtmodel.XtDataAuthorityDepart" parameterType="string">
 		SELECT
-			`xt_data_authority_depart_id`,
-			`xtDID`,
-			`xt_departinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`
+			xt_data_authority_depart_id,
+			xtDID,
+			xt_departinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id
 		FROM 
 			xt_data_authority_depart
 		WHERE xt_data_authority_depart_id=#{xt_data_authority_depart_id}
@@ -39,11 +39,11 @@
 		INSERT INTO
 			xt_data_authority_depart
 			(
-			`xt_data_authority_depart_id`,
-			`xtDID`,
-			`xt_departinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`
+			xt_data_authority_depart_id,
+			xtDID,
+			xt_departinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id
 			)
 			VALUES
 			(
@@ -60,10 +60,10 @@
 		UPDATE
 			xt_data_authority_depart
 		SET
-			`xtDID` = #{xtDID},
-			`xt_departinfo_id` = #{xt_departinfo_id},
-			`xt_functioninfo_id` = #{xt_functioninfo_id},
-			`xt_menuinfo_id` = #{xt_menuinfo_id}
+			xtDID = #{xtDID},
+			xt_departinfo_id = #{xt_departinfo_id},
+			xt_functioninfo_id = #{xt_functioninfo_id},
+			xt_menuinfo_id = #{xt_menuinfo_id}
 		WHERE xt_data_authority_depart_id=#{xt_data_authority_depart_id}
 	</update>
 
@@ -73,16 +73,16 @@
 			xt_data_authority_depart
 		<set>
 			<if test="xtDID != null">
-				`xtDID` = #{xtDID},
+				xtDID = #{xtDID},
 			</if>
 			<if test="xt_departinfo_id != null">
-				`xt_departinfo_id` = #{xt_departinfo_id},
+				xt_departinfo_id = #{xt_departinfo_id},
 			</if>
 			<if test="xt_functioninfo_id != null">
-				`xt_functioninfo_id` = #{xt_functioninfo_id},
+				xt_functioninfo_id = #{xt_functioninfo_id},
 			</if>
 			<if test="xt_menuinfo_id != null">
-				`xt_menuinfo_id` = #{xt_menuinfo_id},
+				xt_menuinfo_id = #{xt_menuinfo_id},
 			</if>
 		</set>
 		WHERE xt_data_authority_depart_id=#{xt_data_authority_depart_id}
@@ -104,7 +104,7 @@
 			AND xt_departinfo_id = #{xt_departinfo_id}
 		</if>
 		<if test="null != xt_menuinfo_id">
-			AND `xt_menuinfo_id` = #{xt_menuinfo_id}
+			AND xt_menuinfo_id = #{xt_menuinfo_id}
 		</if>
 		<if test="null != xt_functioninfo_id">
 			AND xt_functioninfo_id = #{xt_functioninfo_id}
@@ -116,11 +116,11 @@
 		INSERT INTO
 			xt_data_authority_depart
 			(
-			`xt_data_authority_depart_id`,
-			`xtDID`,
-			`xt_departinfo_id`,
-			`xt_functioninfo_id`,
-			`xt_menuinfo_id`
+			xt_data_authority_depart_id,
+			xtDID,
+			xt_departinfo_id,
+			xt_functioninfo_id,
+			xt_menuinfo_id
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -140,10 +140,10 @@
 			UPDATE
 				xt_data_authority_depart
 			SET
-				`xtDID` = #{item.xtDID},
-				`xt_departinfo_id` = #{item.xt_departinfo_id},
-				`xt_functioninfo_id` = #{item.xt_functioninfo_id},
-				`xt_menuinfo_id` = #{item.xt_menuinfo_id}
+				xtDID = #{item.xtDID},
+				xt_departinfo_id = #{item.xt_departinfo_id},
+				xt_functioninfo_id = #{item.xt_functioninfo_id},
+				xt_menuinfo_id = #{item.xt_menuinfo_id}
 			WHERE xt_data_authority_depart_id=#{item.xt_data_authority_depart_id}
 		</foreach>
 	</update>
@@ -155,16 +155,16 @@
 				xt_data_authority_depart
 			<set>
 				<if test="item.xtDID != null">
-					`xtDID` = #{item.xtDID},
+					xtDID = #{item.xtDID},
 				</if>
 				<if test="item.xt_departinfo_id != null">
-					`xt_departinfo_id` = #{item.xt_departinfo_id},
+					xt_departinfo_id = #{item.xt_departinfo_id},
 				</if>
 				<if test="item.xt_functioninfo_id != null">
-					`xt_functioninfo_id` = #{item.xt_functioninfo_id},
+					xt_functioninfo_id = #{item.xt_functioninfo_id},
 				</if>
 				<if test="item.xt_menuinfo_id != null">
-					`xt_menuinfo_id` = #{item.xt_menuinfo_id},
+					xt_menuinfo_id = #{item.xt_menuinfo_id},
 				</if>
 			</set>
 			WHERE xt_data_authority_depart_id=#{item.xt_data_authority_depart_id}

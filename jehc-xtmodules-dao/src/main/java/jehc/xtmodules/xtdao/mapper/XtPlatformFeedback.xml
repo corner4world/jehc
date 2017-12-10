@@ -5,12 +5,12 @@
 	<!--初始化分页-->
 	<select id="getXtPlatformFeedbackListByCondition" resultType="jehc.xtmodules.xtmodel.XtPlatformFeedback" parameterType="map">
 		SELECT
-			`xt_platform_feedback_id`,
-			`xt_platform_id`,
-			DATE_FORMAT(`xt_platform_feedback_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_platform_feedback_ctime`,
-			`xt_userinfo_id`,
-			`xt_platform_feedback_remark`,
-			`xt_platform_feedback_status`
+			xt_platform_feedback_id,
+			xt_platform_id,
+			xt_platform_feedback_ctime AS xt_platform_feedback_ctime,
+			xt_userinfo_id,
+			xt_platform_feedback_remark,
+			xt_platform_feedback_status
 		FROM 
 			xt_platform_feedback
 		WHERE 1=1
@@ -22,12 +22,12 @@
 	<!--查询对象-->
 	<select id="getXtPlatformFeedbackById" resultType="jehc.xtmodules.xtmodel.XtPlatformFeedback" parameterType="string">
 		SELECT
-			`xt_platform_feedback_id`,
-			`xt_platform_id`,
-			DATE_FORMAT(`xt_platform_feedback_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_platform_feedback_ctime`,
-			`xt_userinfo_id`,
-			`xt_platform_feedback_remark`,
-			`xt_platform_feedback_status`
+			xt_platform_feedback_id,
+			xt_platform_id,
+			xt_platform_feedback_ctime AS xt_platform_feedback_ctime,
+			xt_userinfo_id,
+			xt_platform_feedback_remark,
+			xt_platform_feedback_status
 		FROM 
 			xt_platform_feedback
 		WHERE xt_platform_feedback_id=#{xt_platform_feedback_id}
@@ -38,12 +38,12 @@
 		INSERT INTO
 			xt_platform_feedback
 			(
-			`xt_platform_feedback_id`,
-			`xt_platform_id`,
-			`xt_platform_feedback_ctime`,
-			`xt_userinfo_id`,
-			`xt_platform_feedback_remark`,
-			`xt_platform_feedback_status`
+			xt_platform_feedback_id,
+			xt_platform_id,
+			xt_platform_feedback_ctime,
+			xt_userinfo_id,
+			xt_platform_feedback_remark,
+			xt_platform_feedback_status
 			)
 			VALUES
 			(
@@ -61,11 +61,11 @@
 		UPDATE
 			xt_platform_feedback
 		SET
-			`xt_platform_id` = #{xt_platform_id},
-			`xt_platform_feedback_ctime` = #{xt_platform_feedback_ctime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_platform_feedback_remark` = #{xt_platform_feedback_remark},
-			`xt_platform_feedback_status` = #{xt_platform_feedback_status}
+			xt_platform_id = #{xt_platform_id},
+			xt_platform_feedback_ctime = #{xt_platform_feedback_ctime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_platform_feedback_remark = #{xt_platform_feedback_remark},
+			xt_platform_feedback_status = #{xt_platform_feedback_status}
 		WHERE xt_platform_feedback_id=#{xt_platform_feedback_id}
 	</update>
 
@@ -75,19 +75,19 @@
 			xt_platform_feedback
 		<set>
 			<if test="xt_platform_id != null">
-				`xt_platform_id` = #{xt_platform_id},
+				xt_platform_id = #{xt_platform_id},
 			</if>
 			<if test="xt_platform_feedback_ctime != null">
-				`xt_platform_feedback_ctime` = #{xt_platform_feedback_ctime},
+				xt_platform_feedback_ctime = #{xt_platform_feedback_ctime},
 			</if>
 			<if test="xt_userinfo_id != null">
-				`xt_userinfo_id` = #{xt_userinfo_id},
+				xt_userinfo_id = #{xt_userinfo_id},
 			</if>
 			<if test="xt_platform_feedback_remark != null">
-				`xt_platform_feedback_remark` = #{xt_platform_feedback_remark},
+				xt_platform_feedback_remark = #{xt_platform_feedback_remark},
 			</if>
 			<if test="xt_platform_feedback_status != null">
-				`xt_platform_feedback_status` = #{xt_platform_feedback_status},
+				xt_platform_feedback_status = #{xt_platform_feedback_status},
 			</if>
 		</set>
 		WHERE xt_platform_feedback_id=#{xt_platform_feedback_id}
@@ -106,12 +106,12 @@
 		INSERT INTO
 			xt_platform_feedback
 			(
-			`xt_platform_feedback_id`,
-			`xt_platform_id`,
-			`xt_platform_feedback_ctime`,
-			`xt_userinfo_id`,
-			`xt_platform_feedback_remark`,
-			`xt_platform_feedback_status`
+			xt_platform_feedback_id,
+			xt_platform_id,
+			xt_platform_feedback_ctime,
+			xt_userinfo_id,
+			xt_platform_feedback_remark,
+			xt_platform_feedback_status
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -132,11 +132,11 @@
 			UPDATE
 				xt_platform_feedback
 			SET
-				`xt_platform_id` = #{item.xt_platform_id},
-				`xt_platform_feedback_ctime` = #{item.xt_platform_feedback_ctime},
-				`xt_userinfo_id` = #{item.xt_userinfo_id},
-				`xt_platform_feedback_remark` = #{item.xt_platform_feedback_remark},
-				`xt_platform_feedback_status` = #{item.xt_platform_feedback_status}
+				xt_platform_id = #{item.xt_platform_id},
+				xt_platform_feedback_ctime = #{item.xt_platform_feedback_ctime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				xt_platform_feedback_remark = #{item.xt_platform_feedback_remark},
+				xt_platform_feedback_status = #{item.xt_platform_feedback_status}
 			WHERE xt_platform_feedback_id=#{item.xt_platform_feedback_id}
 		</foreach>
 	</update>
@@ -148,19 +148,19 @@
 				xt_platform_feedback
 			<set>
 				<if test="item.xt_platform_id != null">
-					`xt_platform_id` = #{item.xt_platform_id},
+					xt_platform_id = #{item.xt_platform_id},
 				</if>
 				<if test="item.xt_platform_feedback_ctime != null">
-					`xt_platform_feedback_ctime` = #{item.xt_platform_feedback_ctime},
+					xt_platform_feedback_ctime = #{item.xt_platform_feedback_ctime},
 				</if>
 				<if test="item.xt_userinfo_id != null">
-					`xt_userinfo_id` = #{item.xt_userinfo_id},
+					xt_userinfo_id = #{item.xt_userinfo_id},
 				</if>
 				<if test="item.xt_platform_feedback_remark != null">
-					`xt_platform_feedback_remark` = #{item.xt_platform_feedback_remark},
+					xt_platform_feedback_remark = #{item.xt_platform_feedback_remark},
 				</if>
 				<if test="item.xt_platform_feedback_status != null">
-					`xt_platform_feedback_status` = #{item.xt_platform_feedback_status},
+					xt_platform_feedback_status = #{item.xt_platform_feedback_status},
 				</if>
 			</set>
 			WHERE xt_platform_feedback_id=#{item.xt_platform_feedback_id}

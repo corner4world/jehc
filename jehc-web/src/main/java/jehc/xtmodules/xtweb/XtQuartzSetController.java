@@ -283,7 +283,7 @@ public class XtQuartzSetController extends BaseAction{
 			XtQuartz xtQuartz = xtQuartzList.get(i);
 			ScheduleJob job = new ScheduleJob(); 
 			job.setCronExpression(xtQuartz.getCronExpression());
-			job.setDesc(xtQuartz.getDesc());
+			job.setDesc(xtQuartz.getDesc_());
 			job.setJobGroup(xtQuartz.getJobGroup());
 			job.setJobId(xtQuartz.getJobId());
 			job.setJobName(xtQuartz.getJobName());

@@ -130,25 +130,9 @@ public class GeneratorDao extends GeneratorUtil{
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
     		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
-    			if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("datetime")){
-    				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%Y-%m-%d %H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
-    			}else if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("date")){
-    				sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
-    			}else if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("time")){
-    				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
-    			}else{
-    				sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
-    			}
+    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+"\r\n");
     		}else{
-    			if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("datetime")){
-    				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%Y-%m-%d %H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
-    			}else if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("date")){
-    				sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
-    			}else if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("time")){
-    				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
-    			}else{
-    				sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
-    			}
+    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+",\r\n");
     		}
     	}
 		//追加FROM
@@ -188,18 +172,18 @@ public class GeneratorDao extends GeneratorUtil{
         				sb.append("\t\t\t\t</when>\r\n");
         				sb.append("\t\t\t</choose>\r\n");
         				sb.append("\t\t</if>\r\n");
-        			}else if("4".equals(search_type)){//特殊处理日期查询
+        			}else if("4".equals(search_type)){//处理日期查询（废弃相关MYSQL的语法 目的兼容ORACLE）
         				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_st and "+xt_generator_search_name+"_st != ''\">\r\n");
-        				sb.append("\t\t\tAND "+xt_generator_search_name+" &gt;=STR_TO_DATE(#{"+xt_generator_search_name+"_st},'%Y-%m-%d')\r\n");
+        				sb.append("\t\t\tAND "+xt_generator_search_name+" &gt;=#{"+xt_generator_search_name+"_st}\r\n");
             			sb.append("\t\t</if>\r\n");
             			sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_et and "+xt_generator_search_name+"_et != ''\">\r\n");
-        				sb.append("\t\t\tAND "+xt_generator_search_name+" &lt;=STR_TO_DATE(#{"+xt_generator_search_name+"_et},'%Y-%m-%d')\r\n");
+        				sb.append("\t\t\tAND "+xt_generator_search_name+" &lt;=#{"+xt_generator_search_name+"_et}\r\n");
             			sb.append("\t\t</if>\r\n");
         			}else{
         				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"\">\r\n");
             			if("0".equals(xt_generator_search_flag)){
             				//模糊查询
-            				sb.append("\t\t\tAND instr("+xt_generator_search_name+",#{"+xt_generator_search_name+"})\r\n");
+            				sb.append("\t\t\tAND "+xt_generator_search_name+" LIKE CONCAT(CONCAT('%',#{"+xt_generator_search_name+"}),'%')\r\n");
             			}else if("1".equals(xt_generator_search_flag)){
             				//精确查找
             				sb.append("\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
@@ -282,16 +266,16 @@ public class GeneratorDao extends GeneratorUtil{
         				sb.append("\t\t</if>\r\n");
         			}else if("4".equals(search_type)){//特殊处理日期查询
         				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_st and "+xt_generator_search_name+"_st != ''\">\r\n");
-        				sb.append("\t\t\tAND "+xt_generator_search_name+" &gt;=STR_TO_DATE(#{"+xt_generator_search_name+"_st},'%Y-%m-%d')\r\n");
+        				sb.append("\t\t\tAND "+xt_generator_search_name+" &gt;=#{"+xt_generator_search_name+"_st}\r\n");
             			sb.append("\t\t</if>\r\n");
             			sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"_et and "+xt_generator_search_name+"_et != ''\">\r\n");
-        				sb.append("\t\t\tAND "+xt_generator_search_name+" &lt;=STR_TO_DATE(#{"+xt_generator_search_name+"_et},'%Y-%m-%d')\r\n");
+        				sb.append("\t\t\tAND "+xt_generator_search_name+" &lt;=#{"+xt_generator_search_name+"_et}\r\n");
             			sb.append("\t\t</if>\r\n");
         			}else{
         				sb.append("\t\t<if test=\"null != "+xt_generator_search_name+"\">\r\n");
             			if("0".equals(xt_generator_search_flag)){
             				//模糊查询
-            				sb.append("\t\t\tAND instr("+xt_generator_search_name+",#{"+xt_generator_search_name+"})\r\n");
+            				sb.append("\t\t\tAND "+xt_generator_search_name+" LIKE CONCAT(CONCAT('%',#{"+xt_generator_search_name+"}),'%')\r\n");
             			}else if("1".equals(xt_generator_search_flag)){
             				//精确查找
             				sb.append("\t\t\tAND "+xt_generator_search_name+" = #{"+xt_generator_search_name+"}\r\n");
@@ -320,29 +304,13 @@ public class GeneratorDao extends GeneratorUtil{
     	sb.append("\r\n\t<select id=\"get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ById\" resultType=\""+xt_Generator.getXt_generator_model_package()+"."+toUpperCase(xt_Generator.getXt_generator_tbname())+"\" parameterType=\"string\">");
     	//追加SELECT开头
     	sb.append("\r\n\t\tSELECT\r\n");
-    	//追加COLUMN列
+    	//追加COLUMN列（废弃对时间格式处理 代码生成器不再对时间要求）
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
     		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
-    			if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("datetime")){
-    				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%Y-%m-%d %H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
-    			}else if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("date")){
-    				sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
-    			}else if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("time")){
-    				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
-    			}else{
-    				sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
-    			}
+    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+"\r\n");
     		}else{
-    			if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("datetime")){
-    				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%Y-%m-%d %H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
-    			}else if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("date")){
-    				sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
-    			}else if(xt_Generator_Table_Column.getDATA_TYPE().equalsIgnoreCase("time")){
-    				sb.append("\t\t\tDATE_FORMAT(`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,'%H:%i:%s') AS `"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
-    			}else{
-    				sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
-    			}
+    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+",\r\n");
     		}
     	}
 		//追加FROM
@@ -373,9 +341,9 @@ public class GeneratorDao extends GeneratorUtil{
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
     		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
-    			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
+    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+"\r\n");
     		}else{
-    			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
+    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+",\r\n");
     		}
     	}
     	sb.append("\t\t\t)\r\n");
@@ -415,9 +383,9 @@ public class GeneratorDao extends GeneratorUtil{
     		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
 	    		if(i == xt_Generator_Table_ColumnList.size()-1){
-	    			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
+	    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+" = #{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
 	    		}else{
-	    			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
+	    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+" = #{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
 	    		}
     		}
     	}
@@ -448,7 +416,7 @@ public class GeneratorDao extends GeneratorUtil{
     		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
     			sb.append("\t\t\t<if test=\""+xt_Generator_Table_Column.getCOLUMN_NAME()+" != null\">\r\n");
-    			sb.append("\t\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
+    			sb.append("\t\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+" = #{"+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
     			sb.append("\t\t\t</if>\r\n");
     		}
     	}
@@ -500,9 +468,9 @@ public class GeneratorDao extends GeneratorUtil{
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
     		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(i == xt_Generator_Table_ColumnList.size()-1){
-    			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`\r\n");
+    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+"\r\n");
     		}else{
-    			sb.append("\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"`,\r\n");
+    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+",\r\n");
     		}
     	}
     	sb.append("\t\t\t)\r\n");
@@ -545,9 +513,9 @@ public class GeneratorDao extends GeneratorUtil{
     		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
     			if(i == xt_Generator_Table_ColumnList.size()-1){
-        			sb.append("\t\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
+        			sb.append("\t\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+" = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
         		}else{
-        			sb.append("\t\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
+        			sb.append("\t\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+" = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
         		}
     		}
     	}
@@ -581,7 +549,7 @@ public class GeneratorDao extends GeneratorUtil{
     		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
     		if(!getColumnKey(xt_Generator_Table_ColumnList).equals(xt_Generator_Table_Column.getCOLUMN_NAME())){
     			sb.append("\t\t\t\t<if test=\"item."+xt_Generator_Table_Column.getCOLUMN_NAME()+" != null\">\r\n");
-    			sb.append("\t\t\t\t\t`"+xt_Generator_Table_Column.getCOLUMN_NAME()+"` = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
+    			sb.append("\t\t\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+" = #{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
     			sb.append("\t\t\t\t</if>\r\n");
     		}
     	}

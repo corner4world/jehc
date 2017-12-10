@@ -105,8 +105,6 @@ public class InitBean implements ApplicationListener<ContextRefreshedEvent>{
 	public void addOrUpdateXtStartStopLog(XtStartStopLog xtStartStopLog,int status){
 		if(1==status){
 			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("offset", "0");
-			condition.put("pageSize", "1");
 			List<XtStartStopLog> list = xtStartStopLogService.getXtStartStopLogListByCondition(condition);
 			if(!list.isEmpty()){
 				xtStartStopLogService.updateXtStartStopLog(list.get(0));
@@ -128,7 +126,7 @@ public class InitBean implements ApplicationListener<ContextRefreshedEvent>{
         		List<XtQuartz> xtQuartzList = xtQuartzService.getXtQuartzListAllByCondition(condition);
         		for(int i = 0; i < xtQuartzList.size(); i++){
         			XtQuartz xtQuartz = xtQuartzList.get(i);
-        			new QuartzInit(schedulerFactoryBean,xtQuartz.getId(),xtQuartz.getJobName(),xtQuartz.getJobGroup(),xtQuartz.getCronExpression(),xtQuartz.getDesc(),xtQuartz.getTargetMethod(),xtQuartz.getTargetClass()).start();
+        			new QuartzInit(schedulerFactoryBean,xtQuartz.getId(),xtQuartz.getJobName(),xtQuartz.getJobGroup(),xtQuartz.getCronExpression(),xtQuartz.getDesc_(),xtQuartz.getTargetMethod(),xtQuartz.getTargetClass()).start();
         		}
             }
         }, 1 * 10);

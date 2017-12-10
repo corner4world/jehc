@@ -5,18 +5,18 @@
 	<!--初始化分页-->
 	<select id="getXtSourcesListByCondition" resultType="jehc.xtmodules.xtmodel.XtSources" parameterType="map">
 		SELECT
-			xt_sources.`xt_sources_id`,
-			xt_sources.`xt_sources_title`,
-			xt_sources.`xt_sources_remark`,
-			xt_sources.`xt_attachment_id`,
-			xt_sources.`xt_sources_type`,
-			xt_sources.`xt_sources_status`,
-			xt_sources.`xt_userinfo_id`,
-			DATE_FORMAT(xt_sources.`xt_sources_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_sources_ctime`,
-			DATE_FORMAT(xt_sources.`xt_sources_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_sources_mtime`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_sources.xt_sources_id,
+			xt_sources.xt_sources_title,
+			xt_sources.xt_sources_remark,
+			xt_sources.xt_attachment_id,
+			xt_sources.xt_sources_type,
+			xt_sources.xt_sources_status,
+			xt_sources.xt_userinfo_id,
+			xt_sources.xt_sources_ctime,
+			xt_sources.xt_sources_mtime,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			xt_sources xt_sources LEFT JOIN xt_userinfo AS xt_userinfo ON xt_sources.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			xt_sources xt_sources LEFT JOIN xt_userinfo xt_userinfo ON xt_sources.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != xt_sources_status">
 			AND xt_sources.xt_sources_status = #{xt_sources_status}
@@ -32,18 +32,18 @@
 	<!--查询对象-->
 	<select id="getXtSourcesById" resultType="jehc.xtmodules.xtmodel.XtSources" parameterType="string">
 		SELECT
-			xt_sources.`xt_sources_id`,
-			xt_sources.`xt_sources_title`,
-			xt_sources.`xt_sources_remark`,
-			xt_sources.`xt_attachment_id`,
-			xt_sources.`xt_sources_type`,
-			xt_sources.`xt_sources_status`,
-			xt_sources.`xt_userinfo_id`,
-			DATE_FORMAT(xt_sources.`xt_sources_ctime`,'%Y-%m-%d %H:%i:%s') AS `xt_sources_ctime`,
-			DATE_FORMAT(xt_sources.`xt_sources_mtime`,'%Y-%m-%d %H:%i:%s') AS `xt_sources_mtime`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_sources.xt_sources_id,
+			xt_sources.xt_sources_title,
+			xt_sources.xt_sources_remark,
+			xt_sources.xt_attachment_id,
+			xt_sources.xt_sources_type,
+			xt_sources.xt_sources_status,
+			xt_sources.xt_userinfo_id,
+			xt_sources.xt_sources_ctime,
+			xt_sources.xt_sources_mtime,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
-			xt_sources xt_sources LEFT JOIN xt_userinfo AS xt_userinfo ON xt_sources.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			xt_sources xt_sources LEFT JOIN xt_userinfo xt_userinfo ON xt_sources.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE xt_sources.xt_sources_id=#{xt_sources_id}
 	</select>
 
@@ -52,15 +52,15 @@
 		INSERT INTO
 			xt_sources
 			(
-			`xt_sources_id`,
-			`xt_sources_title`,
-			`xt_sources_remark`,
-			`xt_attachment_id`,
-			`xt_sources_type`,
-			`xt_sources_status`,
-			`xt_userinfo_id`,
-			`xt_sources_ctime`,
-			`xt_sources_mtime`
+			xt_sources_id,
+			xt_sources_title,
+			xt_sources_remark,
+			xt_attachment_id,
+			xt_sources_type,
+			xt_sources_status,
+			xt_userinfo_id,
+			xt_sources_ctime,
+			xt_sources_mtime
 			)
 			VALUES
 			(
@@ -81,14 +81,14 @@
 		UPDATE
 			xt_sources
 		SET
-			`xt_sources_id` = #{xt_sources_id},
-			`xt_sources_title` = #{xt_sources_title},
-			`xt_sources_remark` = #{xt_sources_remark},
-			`xt_attachment_id` = #{xt_attachment_id},
-			`xt_sources_type` = #{xt_sources_type},
-			`xt_sources_status` = #{xt_sources_status},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_sources_mtime` = #{xt_sources_mtime}
+			xt_sources_id = #{xt_sources_id},
+			xt_sources_title = #{xt_sources_title},
+			xt_sources_remark = #{xt_sources_remark},
+			xt_attachment_id = #{xt_attachment_id},
+			xt_sources_type = #{xt_sources_type},
+			xt_sources_status = #{xt_sources_status},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_sources_mtime = #{xt_sources_mtime}
 		WHERE xt_sources_id=#{xt_sources_id}
 	</update>
 

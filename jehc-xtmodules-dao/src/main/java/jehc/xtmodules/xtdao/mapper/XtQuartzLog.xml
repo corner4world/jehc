@@ -5,45 +5,45 @@
 	<!--初始化分页-->
 	<select id="getXtQuartzLogListByCondition" resultType="jehc.xtmodules.xtmodel.XtQuartzLog" parameterType="map">
 		SELECT
-			`xt_quartz_log_id`,
-			`xt_quartz_log_name`,
-			`xt_quartz_log_key`,
-			`xt_quartz_log_content`,
-			`xt_quartz_log_ctime`,
-			`xt_quartz_log_etime`,
-			`xt_userinfo_id`,
-			`xt_quartz_log_flag`
+			xt_quartz_log_id,
+			xt_quartz_log_name,
+			xt_quartz_log_key,
+			xt_quartz_log_content,
+			xt_quartz_log_ctime,
+			xt_quartz_log_etime,
+			xt_userinfo_id,
+			xt_quartz_log_flag
 		FROM 
 			xt_quartz_log
 		WHERE 1=1
 		<if test="null != xt_quartz_log_name">
-			AND instr(xt_quartz_log_name,#{xt_quartz_log_name})
+			AND xt_quartz_log_name LIKE CONCAT(CONCAT('%',#{xt_quartz_log_name}),'%')
 		</if>
 		<if test="null != xt_quartz_log_ctime_st and xt_quartz_log_ctime_st != ''">
-			AND xt_quartz_log_ctime &gt;=STR_TO_DATE(#{xt_quartz_log_ctime_st},'%Y-%m-%d')
+			AND xt_quartz_log_ctime &gt;= #{xt_quartz_log_ctime_st}
 		</if>
 		<if test="null != xt_quartz_log_ctime_et and xt_quartz_log_ctime_et != ''">
-			AND xt_quartz_log_ctime &lt;=STR_TO_DATE(#{xt_quartz_log_ctime_et},'%Y-%m-%d')
+			AND xt_quartz_log_ctime &lt;= #{xt_quartz_log_ctime_et}
 		</if>
 		<if test="null != xt_quartz_log_etime_st and xt_quartz_log_etime_st != ''">
-			AND xt_quartz_log_etime &gt;=STR_TO_DATE(#{xt_quartz_log_etime_st},'%Y-%m-%d')
+			AND xt_quartz_log_etime &gt;=#{xt_quartz_log_etime_st}
 		</if>
 		<if test="null != xt_quartz_log_etime_et and xt_quartz_log_etime_et != ''">
-			AND xt_quartz_log_etime &lt;=STR_TO_DATE(#{xt_quartz_log_etime_et},'%Y-%m-%d')
+			AND xt_quartz_log_etime &lt;= #{xt_quartz_log_etime_et}
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtQuartzLogById" resultType="jehc.xtmodules.xtmodel.XtQuartzLog" parameterType="string">
 		SELECT
-			`xt_quartz_log_id`,
-			`xt_quartz_log_name`,
-			`xt_quartz_log_key`,
-			`xt_quartz_log_content`,
-			`xt_quartz_log_ctime`,
-			`xt_quartz_log_etime`,
-			`xt_userinfo_id`,
-			`xt_quartz_log_flag`
+			xt_quartz_log_id,
+			xt_quartz_log_name,
+			xt_quartz_log_key,
+			xt_quartz_log_content,
+			xt_quartz_log_ctime,
+			xt_quartz_log_etime,
+			xt_userinfo_id,
+			xt_quartz_log_flag
 		FROM 
 			xt_quartz_log
 		WHERE xt_quartz_log_id=#{xt_quartz_log_id}
@@ -54,14 +54,14 @@
 		INSERT INTO
 			xt_quartz_log
 			(
-			`xt_quartz_log_id`,
-			`xt_quartz_log_name`,
-			`xt_quartz_log_key`,
-			`xt_quartz_log_content`,
-			`xt_quartz_log_ctime`,
-			`xt_quartz_log_etime`,
-			`xt_userinfo_id`,
-			`xt_quartz_log_flag`
+			xt_quartz_log_id,
+			xt_quartz_log_name,
+			xt_quartz_log_key,
+			xt_quartz_log_content,
+			xt_quartz_log_ctime,
+			xt_quartz_log_etime,
+			xt_userinfo_id,
+			xt_quartz_log_flag
 			)
 			VALUES
 			(
@@ -81,13 +81,13 @@
 		UPDATE
 			xt_quartz_log
 		SET
-			`xt_quartz_log_name` = #{xt_quartz_log_name},
-			`xt_quartz_log_key` = #{xt_quartz_log_key},
-			`xt_quartz_log_content` = #{xt_quartz_log_content},
-			`xt_quartz_log_ctime` = #{xt_quartz_log_ctime},
-			`xt_quartz_log_etime` = #{xt_quartz_log_etime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_quartz_log_flag` = #{xt_quartz_log_flag}
+			xt_quartz_log_name = #{xt_quartz_log_name},
+			xt_quartz_log_key = #{xt_quartz_log_key},
+			xt_quartz_log_content = #{xt_quartz_log_content},
+			xt_quartz_log_ctime = #{xt_quartz_log_ctime},
+			xt_quartz_log_etime = #{xt_quartz_log_etime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_quartz_log_flag = #{xt_quartz_log_flag}
 		WHERE xt_quartz_log_id=#{xt_quartz_log_id}
 	</update>
 
@@ -97,25 +97,22 @@
 			xt_quartz_log
 		<set>
 			<if test="xt_quartz_log_name != null">
-				`xt_quartz_log_name` = #{xt_quartz_log_name},
+				xt_quartz_log_name = #{xt_quartz_log_name},
 			</if>
 			<if test="xt_quartz_log_key != null">
-				`xt_quartz_log_key` = #{xt_quartz_log_key},
+				xt_quartz_log_key = #{xt_quartz_log_key},
 			</if>
 			<if test="xt_quartz_log_content != null">
-				`xt_quartz_log_content` = #{xt_quartz_log_content},
-			</if>
-			<if test="xt_quartz_log_ctime != null">
-				`xt_quartz_log_ctime` = #{xt_quartz_log_ctime},
+				xt_quartz_log_content = #{xt_quartz_log_content},
 			</if>
 			<if test="xt_quartz_log_etime != null">
-				`xt_quartz_log_etime` = #{xt_quartz_log_etime},
+				xt_quartz_log_etime = #{xt_quartz_log_etime},
 			</if>
 			<if test="xt_userinfo_id != null">
-				`xt_userinfo_id` = #{xt_userinfo_id},
+				xt_userinfo_id = #{xt_userinfo_id},
 			</if>
 			<if test="xt_quartz_log_flag != null">
-				`xt_quartz_log_flag` = #{xt_quartz_log_flag},
+				xt_quartz_log_flag = #{xt_quartz_log_flag},
 			</if>
 		</set>
 		WHERE xt_quartz_log_id=#{xt_quartz_log_id}
@@ -134,14 +131,13 @@
 		INSERT INTO
 			xt_quartz_log
 			(
-			`xt_quartz_log_id`,
-			`xt_quartz_log_name`,
-			`xt_quartz_log_key`,
-			`xt_quartz_log_content`,
-			`xt_quartz_log_ctime`,
-			`xt_quartz_log_etime`,
-			`xt_userinfo_id`,
-			`xt_quartz_log_flag`
+			xt_quartz_log_id,
+			xt_quartz_log_name,
+			xt_quartz_log_key,
+			xt_quartz_log_content,
+			xt_quartz_log_ctime,
+			xt_userinfo_id,
+			xt_quartz_log_flag
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -151,7 +147,6 @@
 			#{item.xt_quartz_log_key},
 			#{item.xt_quartz_log_content},
 			#{item.xt_quartz_log_ctime},
-			#{item.xt_quartz_log_etime},
 			#{item.xt_userinfo_id},
 			#{item.xt_quartz_log_flag}
 			)
@@ -164,13 +159,12 @@
 			UPDATE
 				xt_quartz_log
 			SET
-				`xt_quartz_log_name` = #{item.xt_quartz_log_name},
-				`xt_quartz_log_key` = #{item.xt_quartz_log_key},
-				`xt_quartz_log_content` = #{item.xt_quartz_log_content},
-				`xt_quartz_log_ctime` = #{item.xt_quartz_log_ctime},
-				`xt_quartz_log_etime` = #{item.xt_quartz_log_etime},
-				`xt_userinfo_id` = #{item.xt_userinfo_id},
-				`xt_quartz_log_flag` = #{item.xt_quartz_log_flag}
+				xt_quartz_log_name = #{item.xt_quartz_log_name},
+				xt_quartz_log_key = #{item.xt_quartz_log_key},
+				xt_quartz_log_content = #{item.xt_quartz_log_content},
+				xt_quartz_log_etime = #{item.xt_quartz_log_etime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				xt_quartz_log_flag = #{item.xt_quartz_log_flag}
 			WHERE xt_quartz_log_id=#{item.xt_quartz_log_id}
 		</foreach>
 	</update>
@@ -182,25 +176,22 @@
 				xt_quartz_log
 			<set>
 				<if test="item.xt_quartz_log_name != null">
-					`xt_quartz_log_name` = #{item.xt_quartz_log_name},
+					xt_quartz_log_name = #{item.xt_quartz_log_name},
 				</if>
 				<if test="item.xt_quartz_log_key != null">
-					`xt_quartz_log_key` = #{item.xt_quartz_log_key},
+					xt_quartz_log_key = #{item.xt_quartz_log_key},
 				</if>
 				<if test="item.xt_quartz_log_content != null">
-					`xt_quartz_log_content` = #{item.xt_quartz_log_content},
-				</if>
-				<if test="item.xt_quartz_log_ctime != null">
-					`xt_quartz_log_ctime` = #{item.xt_quartz_log_ctime},
+					xt_quartz_log_content = #{item.xt_quartz_log_content},
 				</if>
 				<if test="item.xt_quartz_log_etime != null">
-					`xt_quartz_log_etime` = #{item.xt_quartz_log_etime},
+					xt_quartz_log_etime = #{item.xt_quartz_log_etime},
 				</if>
 				<if test="item.xt_userinfo_id != null">
-					`xt_userinfo_id` = #{item.xt_userinfo_id},
+					xt_userinfo_id = #{item.xt_userinfo_id},
 				</if>
 				<if test="item.xt_quartz_log_flag != null">
-					`xt_quartz_log_flag` = #{item.xt_quartz_log_flag},
+					xt_quartz_log_flag = #{item.xt_quartz_log_flag},
 				</if>
 			</set>
 			WHERE xt_quartz_log_id=#{item.xt_quartz_log_id}

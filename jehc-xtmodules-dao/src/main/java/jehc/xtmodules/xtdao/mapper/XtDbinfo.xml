@@ -5,13 +5,13 @@
 	<!--初始化分页-->
 	<select id="getXtDbinfoListByCondition" resultType="jehc.xtmodules.xtmodel.XtDbinfo" parameterType="map">
 		SELECT
-			`xt_dbinfo_id`,
-			`xt_dbinfoName`,
-			`xt_dbinfoUName`,
-			`xt_dbinfoPwd`,
-			`xt_dbinfoIp`,
-			`xt_dbinfoPort`,
-			`xt_dbinfoType`
+			xt_dbinfo_id,
+			xt_dbinfoName,
+			xt_dbinfoUName,
+			xt_dbinfoPwd,
+			xt_dbinfoIp,
+			xt_dbinfoPort,
+			xt_dbinfoType
 		FROM 
 			xt_dbinfo
 		WHERE 1=1
@@ -23,13 +23,13 @@
 	<!--查询对象-->
 	<select id="getXtDbinfoById" resultType="jehc.xtmodules.xtmodel.XtDbinfo" parameterType="string">
 		SELECT
-			`xt_dbinfo_id`,
-			`xt_dbinfoName`,
-			`xt_dbinfoUName`,
-			`xt_dbinfoPwd`,
-			`xt_dbinfoIp`,
-			`xt_dbinfoPort`,
-			`xt_dbinfoType`
+			xt_dbinfo_id,
+			xt_dbinfoName,
+			xt_dbinfoUName,
+			xt_dbinfoPwd,
+			xt_dbinfoIp,
+			xt_dbinfoPort,
+			xt_dbinfoType
 		FROM 
 			xt_dbinfo
 		WHERE xt_dbinfo_id=#{xt_dbinfo_id}
@@ -40,13 +40,13 @@
 		INSERT INTO
 			xt_dbinfo
 			(
-			`xt_dbinfo_id`,
-			`xt_dbinfoName`,
-			`xt_dbinfoUName`,
-			`xt_dbinfoPwd`,
-			`xt_dbinfoIp`,
-			`xt_dbinfoPort`,
-			`xt_dbinfoType`
+			xt_dbinfo_id,
+			xt_dbinfoName,
+			xt_dbinfoUName,
+			xt_dbinfoPwd,
+			xt_dbinfoIp,
+			xt_dbinfoPort,
+			xt_dbinfoType
 			)
 			VALUES
 			(
@@ -65,13 +65,13 @@
 		UPDATE
 			xt_dbinfo
 		SET
-			`xt_dbinfo_id` = #{xt_dbinfo_id},
-			`xt_dbinfoName` = #{xt_dbinfoName},
-			`xt_dbinfoUName` = #{xt_dbinfoUName},
-			`xt_dbinfoPwd` = #{xt_dbinfoPwd},
-			`xt_dbinfoIp` = #{xt_dbinfoIp},
-			`xt_dbinfoPort` = #{xt_dbinfoPort},
-			`xt_dbinfoType` = #{xt_dbinfoType}
+			xt_dbinfo_id = #{xt_dbinfo_id},
+			xt_dbinfoName = #{xt_dbinfoName},
+			xt_dbinfoUName = #{xt_dbinfoUName},
+			xt_dbinfoPwd = #{xt_dbinfoPwd},
+			xt_dbinfoIp = #{xt_dbinfoIp},
+			xt_dbinfoPort = #{xt_dbinfoPort},
+			xt_dbinfoType = #{xt_dbinfoType}
 		WHERE xt_dbinfo_id=#{xt_dbinfo_id}
 	</update>
 

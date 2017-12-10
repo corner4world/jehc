@@ -5,15 +5,15 @@
 	<!--初始化分页-->
 	<select id="getXtServiceCenterListByCondition" resultType="jehc.xtmodules.xtmodel.XtServiceCenter" parameterType="map">
 		SELECT
-			`xt_service_center_id`,
-			`xt_service_center_location`,
-			`xt_service_center_name`,
-			`xt_service_center_remark`,
-			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
-			DATE_FORMAT(`mtime`,'%Y-%m-%d %H:%i:%s') AS `mtime`,
-			`xt_userinfo_id`,
-			`xt_service_center_type`,
-			`xt_service_center_status`
+			xt_service_center_id,
+			xt_service_center_location,
+			xt_service_center_name,
+			xt_service_center_remark,
+			ctime AS ctime,
+			mtime AS mtime,
+			xt_userinfo_id,
+			xt_service_center_type,
+			xt_service_center_status
 		FROM 
 			xt_service_center
 		WHERE 1=1
@@ -24,22 +24,22 @@
 			AND xt_service_center_type = #{xt_service_center_type}
 		</if>
 		<if test="null != xt_service_center_name">
-			AND instr(xt_service_center_name,#{xt_service_center_name})
+			AND xt_service_center_name LIKE CONCAT(CONCAT('%',#{xt_service_center_name}),'%')
 		</if>
 	</select>
 
 	<!--查询对象-->
 	<select id="getXtServiceCenterById" resultType="jehc.xtmodules.xtmodel.XtServiceCenter" parameterType="string">
 		SELECT
-			`xt_service_center_id`,
-			`xt_service_center_location`,
-			`xt_service_center_name`,
-			`xt_service_center_remark`,
-			DATE_FORMAT(`ctime`,'%Y-%m-%d %H:%i:%s') AS `ctime`,
-			DATE_FORMAT(`mtime`,'%Y-%m-%d %H:%i:%s') AS `mtime`,
-			`xt_userinfo_id`,
-			`xt_service_center_type`,
-			`xt_service_center_status`
+			xt_service_center_id,
+			xt_service_center_location,
+			xt_service_center_name,
+			xt_service_center_remark,
+			ctime AS ctime,
+			mtime AS mtime,
+			xt_userinfo_id,
+			xt_service_center_type,
+			xt_service_center_status
 		FROM 
 			xt_service_center
 		WHERE xt_service_center_id=#{xt_service_center_id}
@@ -50,15 +50,14 @@
 		INSERT INTO
 			xt_service_center
 			(
-			`xt_service_center_id`,
-			`xt_service_center_location`,
-			`xt_service_center_name`,
-			`xt_service_center_remark`,
-			`ctime`,
-			`mtime`,
-			`xt_userinfo_id`,
-			`xt_service_center_type`,
-			`xt_service_center_status`
+			xt_service_center_id,
+			xt_service_center_location,
+			xt_service_center_name,
+			xt_service_center_remark,
+			ctime,
+			xt_userinfo_id,
+			xt_service_center_type,
+			xt_service_center_status
 			)
 			VALUES
 			(
@@ -67,7 +66,6 @@
 			#{xt_service_center_name},
 			#{xt_service_center_remark},
 			#{ctime},
-			#{mtime},
 			#{xt_userinfo_id},
 			#{xt_service_center_type},
 			#{xt_service_center_status}
@@ -79,15 +77,14 @@
 		UPDATE
 			xt_service_center
 		SET
-			`xt_service_center_id` = #{xt_service_center_id},
-			`xt_service_center_location` = #{xt_service_center_location},
-			`xt_service_center_name` = #{xt_service_center_name},
-			`xt_service_center_remark` = #{xt_service_center_remark},
-			`ctime` = #{ctime},
-			`mtime` = #{mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_service_center_type` = #{xt_service_center_type},
-			`xt_service_center_status` = #{xt_service_center_status}
+			xt_service_center_id = #{xt_service_center_id},
+			xt_service_center_location = #{xt_service_center_location},
+			xt_service_center_name = #{xt_service_center_name},
+			xt_service_center_remark = #{xt_service_center_remark},
+			mtime = #{mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_service_center_type = #{xt_service_center_type},
+			xt_service_center_status = #{xt_service_center_status}
 		WHERE xt_service_center_id=#{xt_service_center_id}
 	</update>
 
@@ -104,15 +101,14 @@
 		INSERT INTO
 			xt_service_center
 			(
-			`xt_service_center_id`,
-			`xt_service_center_location`,
-			`xt_service_center_name`,
-			`xt_service_center_remark`,
-			`ctime`,
-			`mtime`,
-			`xt_userinfo_id`,
-			`xt_service_center_type`,
-			`xt_service_center_status`
+			xt_service_center_id,
+			xt_service_center_location,
+			xt_service_center_name,
+			xt_service_center_remark,
+			mtime,
+			xt_userinfo_id,
+			xt_service_center_type,
+			xt_service_center_status
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -121,7 +117,6 @@
 			#{item.xt_service_center_location},
 			#{item.xt_service_center_name},
 			#{item.xt_service_center_remark},
-			#{item.ctime},
 			#{item.mtime},
 			#{item.xt_userinfo_id},
 			#{item.xt_service_center_type},
@@ -136,15 +131,14 @@
 			UPDATE
 				xt_service_center
 			SET
-				`xt_service_center_id` = #{item.xt_service_center_id},
-				`xt_service_center_location` = #{item.xt_service_center_location},
-				`xt_service_center_name` = #{item.xt_service_center_name},
-				`xt_service_center_remark` = #{item.xt_service_center_remark},
-				`ctime` = #{item.ctime},
-				`mtime` = #{item.mtime},
-				`xt_userinfo_id` = #{item.xt_userinfo_id},
-				`xt_service_center_type` = #{item.xt_service_center_type},
-				`xt_service_center_status` = #{item.xt_service_center_status}
+				xt_service_center_id = #{item.xt_service_center_id},
+				xt_service_center_location = #{item.xt_service_center_location},
+				xt_service_center_name = #{item.xt_service_center_name},
+				xt_service_center_remark = #{item.xt_service_center_remark},
+				mtime = #{item.mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				xt_service_center_type = #{item.xt_service_center_type},
+				xt_service_center_status = #{item.xt_service_center_status}
 			WHERE xt_service_center_id=#{item.xt_service_center_id}
 		</foreach>
 	</update>

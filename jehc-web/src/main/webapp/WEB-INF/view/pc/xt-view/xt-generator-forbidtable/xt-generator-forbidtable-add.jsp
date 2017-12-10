@@ -15,13 +15,13 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">表名</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="200"  data-bv-notempty data-bv-notempty-message="请输入表名"  name="xt_generator_forbidtable_table" placeholder="请输入表名">
+					<input class="form-control" type="text" maxlength="200"  data-bv-notempty data-bv-notempty-message="请输入表名"  name="xt_generator_f_table" placeholder="请输入表名">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">备注</label>
 				<div class="col-lg-6">
-					<textarea class="form-control" maxlength="500"  name="xt_generator_forbidtable_remark" placeholder="请输入备注"></textarea>
+					<textarea class="form-control" maxlength="500"  name="xt_generator_f_remark" placeholder="请输入备注"></textarea>
 				</div>
 			</div>
 			<div class="form-group">

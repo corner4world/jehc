@@ -5,13 +5,13 @@
 	<!--初始化分页-->
 	<select id="getLcDeploymentHisListByCondition" resultType="jehc.lcmodules.lcmodel.LcDeploymentHis" parameterType="map">
 		SELECT
-			`id`,
-			`lc_deployment_his_id`,
-			`lc_deployment_his_name`,
-			`lc_deployment_his_time`,
-			`lc_deployment_his_tenantId`,
-			`lc_process_id`,
-			`lc_deployment_his_status`
+			id,
+			lc_deployment_his_id,
+			lc_deployment_his_name,
+			lc_deployment_his_time,
+			lc_deployment_his_tenantId,
+			lc_process_id,
+			lc_deployment_his_status
 		FROM 
 			lc_deployment_his
 		WHERE 1=1
@@ -24,14 +24,14 @@
 	<!--查询对象-->
 	<select id="getLcDeploymentHisById" resultType="jehc.lcmodules.lcmodel.LcDeploymentHis" parameterType="string">
 		SELECT
-			lc_deployment_his.`id`,
-			lc_deployment_his.`lc_deployment_his_id`,
-			lc_deployment_his.`lc_deployment_his_name`,
-			lc_deployment_his.`lc_deployment_his_time`,
-			lc_deployment_his.`lc_deployment_his_tenantId`,
-			lc_deployment_his.`lc_process_id`,
-			lc_process.`xt_constant_id`,
-			`lc_deployment_his_status`
+			lc_deployment_his.id,
+			lc_deployment_his.lc_deployment_his_id,
+			lc_deployment_his.lc_deployment_his_name,
+			lc_deployment_his.lc_deployment_his_time,
+			lc_deployment_his.lc_deployment_his_tenantId,
+			lc_deployment_his.lc_process_id,
+			lc_process.xt_constant_id,
+			lc_deployment_his_status
 		FROM 
 			lc_deployment_his lc_deployment_his LEFT JOIN lc_process lc_process ON lc_deployment_his.lc_process_id = lc_process.lc_process_id
 		WHERE lc_deployment_his.id=#{id}
@@ -42,13 +42,13 @@
 		INSERT INTO
 			lc_deployment_his
 			(
-			`id`,
-			`lc_deployment_his_id`,
-			`lc_deployment_his_name`,
-			`lc_deployment_his_time`,
-			`lc_deployment_his_tenantId`,
-			`lc_process_id`,
-			`lc_deployment_his_status`
+			id,
+			lc_deployment_his_id,
+			lc_deployment_his_name,
+			lc_deployment_his_time,
+			lc_deployment_his_tenantId,
+			lc_process_id,
+			lc_deployment_his_status
 			)
 			VALUES
 			(
@@ -67,13 +67,13 @@
 		UPDATE
 			lc_deployment_his
 		SET
-			`id` = #{id},
-			`lc_deployment_his_id` = #{lc_deployment_his_id},
-			`lc_deployment_his_name` = #{lc_deployment_his_name},
-			`lc_deployment_his_time` = #{lc_deployment_his_time},
-			`lc_deployment_his_tenantId` = #{lc_deployment_his_tenantId},
-			`lc_process_id` = #{lc_process_id},
-			`lc_deployment_his_status` = #{lc_deployment_his_status}
+			id = #{id},
+			lc_deployment_his_id = #{lc_deployment_his_id},
+			lc_deployment_his_name = #{lc_deployment_his_name},
+			lc_deployment_his_time = #{lc_deployment_his_time},
+			lc_deployment_his_tenantId = #{lc_deployment_his_tenantId},
+			lc_process_id = #{lc_process_id},
+			lc_deployment_his_status = #{lc_deployment_his_status}
 		WHERE id=#{id}
 	</update>
 
@@ -90,13 +90,13 @@
 		INSERT INTO
 			lc_deployment_his
 			(
-			`id`,
-			`lc_deployment_his_id`,
-			`lc_deployment_his_name`,
-			`lc_deployment_his_time`,
-			`lc_deployment_his_tenantId`,
-			`lc_process_id`,
-			`lc_deployment_his_status`
+			id,
+			lc_deployment_his_id,
+			lc_deployment_his_name,
+			lc_deployment_his_time,
+			lc_deployment_his_tenantId,
+			lc_process_id,
+			lc_deployment_his_status
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -118,13 +118,13 @@
 			UPDATE
 				lc_deployment_his
 			SET
-				`id` = #{item.id},
-				`lc_deployment_his_id` = #{item.lc_deployment_his_id},
-				`lc_deployment_his_name` = #{item.lc_deployment_his_name},
-				`lc_deployment_his_time` = #{item.lc_deployment_his_time},
-				`lc_deployment_his_tenantId` = #{item.lc_deployment_his_tenantId},
-				`lc_process_id` = #{item.lc_process_id},
-				`lc_deployment_his_status` = #{lc_deployment_his_status}
+				id = #{item.id},
+				lc_deployment_his_id = #{item.lc_deployment_his_id},
+				lc_deployment_his_name = #{item.lc_deployment_his_name},
+				lc_deployment_his_time = #{item.lc_deployment_his_time},
+				lc_deployment_his_tenantId = #{item.lc_deployment_his_tenantId},
+				lc_process_id = #{item.lc_process_id},
+				lc_deployment_his_status = #{lc_deployment_his_status}
 			WHERE id=#{item.id}
 		</foreach>
 	</update>
@@ -132,14 +132,14 @@
 	<!--查询唯一一个对象-->
 	<select id="getLcDeploymentHisUnique" resultType="jehc.lcmodules.lcmodel.LcDeploymentHis" parameterType="map">
 		SELECT
-			lc_deployment_his.`id`,
-			lc_deployment_his.`lc_deployment_his_id`,
-			lc_deployment_his.`lc_deployment_his_name`,
-			lc_deployment_his.`lc_deployment_his_time`,
-			lc_deployment_his.`lc_deployment_his_tenantId`,
-			lc_deployment_his.`lc_process_id`,
-			lc_process.`xt_constant_id`,
-			lc_deployment_his.`lc_deployment_his_status`
+			lc_deployment_his.id,
+			lc_deployment_his.lc_deployment_his_id,
+			lc_deployment_his.lc_deployment_his_name,
+			lc_deployment_his.lc_deployment_his_time,
+			lc_deployment_his.lc_deployment_his_tenantId,
+			lc_deployment_his.lc_process_id,
+			lc_process.xt_constant_id,
+			lc_deployment_his.lc_deployment_his_status
 		FROM 
 			lc_deployment_his lc_deployment_his LEFT JOIN lc_process lc_process ON lc_deployment_his.lc_process_id = lc_process.lc_process_id
 		WHERE 1=1
@@ -150,19 +150,19 @@
 	<!--查询最新唯一一个对象-->
 	<select id="getLcDeploymentHisNewUnique" resultType="jehc.lcmodules.lcmodel.LcDeploymentHis" parameterType="map">
 		SELECT
-			lc_deployment_his.`id`,
-			lc_deployment_his.`lc_deployment_his_id`,
-			lc_deployment_his.`lc_deployment_his_name`,
-			lc_deployment_his.`lc_deployment_his_time`,
-			lc_deployment_his.`lc_deployment_his_tenantId`,
-			lc_deployment_his.`lc_process_id`,
-			lc_process.`xt_constant_id`,
-			lc_deployment_his.`lc_deployment_his_status`
+			lc_deployment_his.id,
+			lc_deployment_his.lc_deployment_his_id,
+			lc_deployment_his.lc_deployment_his_name,
+			lc_deployment_his.lc_deployment_his_time,
+			lc_deployment_his.lc_deployment_his_tenantId,
+			lc_deployment_his.lc_process_id,
+			lc_process.xt_constant_id,
+			lc_deployment_his.lc_deployment_his_status
 		FROM 
 			lc_deployment_his lc_deployment_his LEFT JOIN lc_process lc_process ON lc_deployment_his.lc_process_id = lc_process.lc_process_id
 		WHERE 1=1
 		AND lc_process.xt_constant_id=#{xt_constant_id}
 		AND lc_deployment_his_status = 0
-		ORDER BY lc_deployment_his.`lc_deployment_his_time` DESC
+		ORDER BY lc_deployment_his.lc_deployment_his_time DESC
 	</select>
 </mapper>

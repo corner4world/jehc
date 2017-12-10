@@ -5,32 +5,32 @@
 	<!--初始化分页-->
 	<select id="getXtVersionListByCondition" resultType="jehc.xtmodules.xtmodel.XtVersion" parameterType="map">
 		SELECT
-			xt_version.`xt_version_id`,
-			xt_version.`xt_version_name`,
-			xt_version.`xt_version_ctime`,
-			xt_version.`xt_version_mtime`,
-			xt_version.`xt_version_number`,
-			xt_version.`xt_userinfo_id`,
-			xt_version.`xt_version_remark`,
-			xt_version.`xt_attachment_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_version.xt_version_id,
+			xt_version.xt_version_name,
+			xt_version.xt_version_ctime,
+			xt_version.xt_version_mtime,
+			xt_version.xt_version_number,
+			xt_version.xt_userinfo_id,
+			xt_version.xt_version_remark,
+			xt_version.xt_attachment_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
 			xt_version xt_version LEFT JOIN xt_userinfo xt_userinfo ON xt_version.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != xt_version_name">
-			AND instr(xt_version.xt_version_name,#{xt_version_name})
+			AND xt_version.xt_version_name LIKE CONCAT(CONCAT('%',#{xt_version_name}),'%')
 		</if>
 		<if test="null != xt_version_ctime_st and xt_version_ctime_st != ''">
-			AND xt_version_ctime &gt;=STR_TO_DATE(#{xt_version_ctime_st},'%Y-%m-%d')
+			AND xt_version_ctime &gt;= #{xt_version_ctime_st}
 		</if>
 		<if test="null != xt_version_ctime_et and xt_version_ctime_et != ''">
-			AND xt_version_ctime &lt;=STR_TO_DATE(#{xt_version_ctime_et},'%Y-%m-%d')
+			AND xt_version_ctime &lt;= #{xt_version_ctime_et}
 		</if>
 		<if test="null != xt_version_mtime_st and xt_version_mtime_st != ''">
-			AND xt_version_mtime &gt;=STR_TO_DATE(#{xt_version_mtime_st},'%Y-%m-%d')
+			AND xt_version_mtime &gt;= #{xt_version_mtime_st}
 		</if>
 		<if test="null != xt_version_mtime_et and xt_version_mtime_et != ''">
-			AND xt_version_mtime &lt;=STR_TO_DATE(#{xt_version_mtime_et},'%Y-%m-%d')
+			AND xt_version_mtime &lt;= #{xt_version_mtime_et}
 		</if>
 		<if test="null != xt_version_number_cs and xt_version_number_cs != '' and xt_version_number != null">
 			<choose>
@@ -61,15 +61,15 @@
 	<!--查询对象-->
 	<select id="getXtVersionById" resultType="jehc.xtmodules.xtmodel.XtVersion" parameterType="string">
 		SELECT
-			xt_version.`xt_version_id`,
-			xt_version.`xt_version_name`,
-			xt_version.`xt_version_ctime`,
-			xt_version.`xt_version_mtime`,
-			xt_version.`xt_version_number`,
-			xt_version.`xt_userinfo_id`,
-			xt_version.`xt_version_remark`,
-			xt_version.`xt_attachment_id`,
-			xt_userinfo.`xt_userinfo_realName`
+			xt_version.xt_version_id,
+			xt_version.xt_version_name,
+			xt_version.xt_version_ctime,
+			xt_version.xt_version_mtime,
+			xt_version.xt_version_number,
+			xt_version.xt_userinfo_id,
+			xt_version.xt_version_remark,
+			xt_version.xt_attachment_id,
+			xt_userinfo.xt_userinfo_realName
 		FROM 
 			xt_version xt_version LEFT JOIN xt_userinfo xt_userinfo ON xt_version.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE xt_version.xt_version_id=#{xt_version_id}
@@ -80,14 +80,14 @@
 		INSERT INTO
 			xt_version
 			(
-			`xt_version_id`,
-			`xt_version_name`,
-			`xt_version_ctime`,
-			`xt_version_mtime`,
-			`xt_version_number`,
-			`xt_userinfo_id`,
-			`xt_version_remark`,
-			`xt_attachment_id`
+			xt_version_id,
+			xt_version_name,
+			xt_version_ctime,
+			xt_version_mtime,
+			xt_version_number,
+			xt_userinfo_id,
+			xt_version_remark,
+			xt_attachment_id
 			)
 			VALUES
 			(
@@ -107,12 +107,12 @@
 		UPDATE
 			xt_version
 		SET
-			`xt_version_name` = #{xt_version_name},
-			`xt_version_mtime` = #{xt_version_mtime},
-			`xt_version_number` = #{xt_version_number},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_version_remark` = #{xt_version_remark},
-			`xt_attachment_id` = #{xt_attachment_id}
+			xt_version_name = #{xt_version_name},
+			xt_version_mtime = #{xt_version_mtime},
+			xt_version_number = #{xt_version_number},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_version_remark = #{xt_version_remark},
+			xt_attachment_id = #{xt_attachment_id}
 		WHERE xt_version_id=#{xt_version_id}
 	</update>
 
@@ -122,25 +122,22 @@
 			xt_version
 		<set>
 			<if test="xt_version_name != null">
-				`xt_version_name` = #{xt_version_name},
-			</if>
-			<if test="xt_version_ctime != null">
-				`xt_version_ctime` = #{xt_version_ctime},
+				xt_version_name = #{xt_version_name},
 			</if>
 			<if test="xt_version_mtime != null">
-				`xt_version_mtime` = #{xt_version_mtime},
+				xt_version_mtime = #{xt_version_mtime},
 			</if>
 			<if test="xt_version_number != null">
-				`xt_version_number` = #{xt_version_number},
+				xt_version_number = #{xt_version_number},
 			</if>
 			<if test="xt_userinfo_id != null">
-				`xt_userinfo_id` = #{xt_userinfo_id},
+				xt_userinfo_id = #{xt_userinfo_id},
 			</if>
 			<if test="xt_version_remark != null">
-				`xt_version_remark` = #{xt_version_remark},
+				xt_version_remark = #{xt_version_remark},
 			</if>
 			<if test="xt_attachment_id != null">
-				`xt_attachment_id` = #{xt_attachment_id},
+				xt_attachment_id = #{xt_attachment_id},
 			</if>
 		</set>
 		WHERE xt_version_id=#{xt_version_id}
@@ -159,14 +156,13 @@
 		INSERT INTO
 			xt_version
 			(
-			`xt_version_id`,
-			`xt_version_name`,
-			`xt_version_ctime`,
-			`xt_version_mtime`,
-			`xt_version_number`,
-			`xt_userinfo_id`,
-			`xt_version_remark`,
-			`xt_attachment_id`
+			xt_version_id,
+			xt_version_name,
+			xt_version_ctime,
+			xt_version_number,
+			xt_userinfo_id,
+			xt_version_remark,
+			xt_attachment_id
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -174,7 +170,6 @@
 			#{item.xt_version_id},
 			#{item.xt_version_name},
 			#{item.xt_version_ctime},
-			#{item.xt_version_mtime},
 			#{item.xt_version_number},
 			#{item.xt_userinfo_id},
 			#{item.xt_version_remark},
@@ -189,13 +184,12 @@
 			UPDATE
 				xt_version
 			SET
-				`xt_version_name` = #{item.xt_version_name},
-				`xt_version_ctime` = #{item.xt_version_ctime},
-				`xt_version_mtime` = #{item.xt_version_mtime},
-				`xt_version_number` = #{item.xt_version_number},
-				`xt_userinfo_id` = #{item.xt_userinfo_id},
-				`xt_version_remark` = #{item.xt_version_remark},
-				`xt_attachment_id` = #{item.xt_attachment_id}
+				xt_version_name = #{item.xt_version_name},
+				xt_version_mtime = #{item.xt_version_mtime},
+				xt_version_number = #{item.xt_version_number},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				xt_version_remark = #{item.xt_version_remark},
+				xt_attachment_id = #{item.xt_attachment_id}
 			WHERE xt_version_id=#{item.xt_version_id}
 		</foreach>
 	</update>
@@ -207,25 +201,22 @@
 				xt_version
 			<set>
 				<if test="xt_version_name != null">
-					`xt_version_name` = #{item.xt_version_name},
-				</if>
-				<if test="xt_version_ctime != null">
-					`xt_version_ctime` = #{item.xt_version_ctime},
+					xt_version_name = #{item.xt_version_name},
 				</if>
 				<if test="xt_version_mtime != null">
-					`xt_version_mtime` = #{item.xt_version_mtime},
+					xt_version_mtime = #{item.xt_version_mtime},
 				</if>
 				<if test="xt_version_number != null">
-					`xt_version_number` = #{item.xt_version_number},
+					xt_version_number = #{item.xt_version_number},
 				</if>
 				<if test="xt_userinfo_id != null">
-					`xt_userinfo_id` = #{item.xt_userinfo_id},
+					xt_userinfo_id = #{item.xt_userinfo_id},
 				</if>
 				<if test="xt_version_remark != null">
-					`xt_version_remark` = #{item.xt_version_remark},
+					xt_version_remark = #{item.xt_version_remark},
 				</if>
 				<if test="xt_attachment_id != null">
-					`xt_attachment_id` = #{item.xt_attachment_id},
+					xt_attachment_id = #{item.xt_attachment_id},
 				</if>
 			</set>
 			WHERE xt_version_id=#{item.xt_version_id}

@@ -5,14 +5,14 @@
 	<!--初始化分页-->
 	<select id="getBOrderPayListByCondition" resultType="jehc.bmodules.bmodel.BOrderPay" parameterType="map">
 		SELECT
-			`b_order_pay_id`,
-			`b_order_id`,
-			`b_order_pay_money`,
-			`b_member_id`,
-			DATE_FORMAT(`b_order_pay_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_order_pay_ctime`,
-			`b_order_pay_isall`,
-			`xt_userinfo_id`,
-			`b_seller_id`
+			b_order_pay_id,
+			b_order_id,
+			b_order_pay_money,
+			b_member_id,
+			b_order_pay_ctime AS b_order_pay_ctime,
+			b_order_pay_isall,
+			xt_userinfo_id,
+			b_seller_id
 		FROM 
 			b_order_pay
 		WHERE 1=1
@@ -23,14 +23,14 @@
 	<!--查询对象-->
 	<select id="getBOrderPayById" resultType="jehc.bmodules.bmodel.BOrderPay" parameterType="string">
 		SELECT
-			`b_order_pay_id`,
-			`b_order_id`,
-			`b_order_pay_money`,
-			`b_member_id`,
-			DATE_FORMAT(`b_order_pay_ctime`,'%Y-%m-%d %H:%i:%s') AS `b_order_pay_ctime`,
-			`b_order_pay_isall`,
-			`xt_userinfo_id`,
-			`b_seller_id`
+			b_order_pay_id,
+			b_order_id,
+			b_order_pay_money,
+			b_member_id,
+			b_order_pay_ctime AS b_order_pay_ctime,
+			b_order_pay_isall,
+			xt_userinfo_id,
+			b_seller_id
 		FROM 
 			b_order_pay
 		WHERE b_order_pay_id=#{b_order_pay_id}
@@ -41,14 +41,14 @@
 		INSERT INTO
 			b_order_pay
 			(
-			`b_order_pay_id`,
-			`b_order_id`,
-			`b_order_pay_money`,
-			`b_member_id`,
-			`b_order_pay_ctime`,
-			`b_order_pay_isall`,
-			`xt_userinfo_id`,
-			`b_seller_id`
+			b_order_pay_id,
+			b_order_id,
+			b_order_pay_money,
+			b_member_id,
+			b_order_pay_ctime,
+			b_order_pay_isall,
+			xt_userinfo_id,
+			b_seller_id
 			)
 			VALUES
 			(
@@ -68,14 +68,14 @@
 		UPDATE
 			b_order_pay
 		SET
-			`b_order_pay_id` = #{b_order_pay_id},
-			`b_order_id` = #{b_order_id},
-			`b_order_pay_money` = #{b_order_pay_money},
-			`b_member_id` = #{b_member_id},
-			`b_order_pay_ctime` = #{b_order_pay_ctime},
-			`b_order_pay_isall` = #{b_order_pay_isall},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`b_seller_id` = #{b_seller_id}
+			b_order_pay_id = #{b_order_pay_id},
+			b_order_id = #{b_order_id},
+			b_order_pay_money = #{b_order_pay_money},
+			b_member_id = #{b_member_id},
+			b_order_pay_ctime = #{b_order_pay_ctime},
+			b_order_pay_isall = #{b_order_pay_isall},
+			xt_userinfo_id = #{xt_userinfo_id},
+			b_seller_id = #{b_seller_id}
 		WHERE b_order_pay_id=#{b_order_pay_id}
 	</update>
 
@@ -90,7 +90,7 @@
 	<!-- 计算订单已付总金额 -->
 	<select id="getBOrderPayTotalPrice"  resultType="double" parameterType="map">
 		SELECT
-			COALESCE(SUM(`b_order_pay_money`),0) AS b_order_pay_money
+			COALESCE(SUM(b_order_pay_money),0) AS b_order_pay_money
 		FROM 
 			b_order_pay
 		WHERE 1=1

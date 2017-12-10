@@ -5,16 +5,16 @@
 	<!--初始化分页-->
 	<select id="getSolrIndexAttributeListByCondition" resultType="jehc.solrmodules.solrmodel.SolrIndexAttribute" parameterType="map">
 		SELECT
-			`solr_index_attribute_id`,
-			`solr_index_attribute_facet`,
-			`solr_index_attribute_boost`,
-			`solr_index_attribute_spellcheck`,
-			`solr_index_attribute_status`,
-			`solr_index_attribute_issearch`,
-			`solr_index_id`,
-			DATE_FORMAT(`solr_index_attribute_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_ctime`,
-			DATE_FORMAT(`solr_index_attribute_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_mtime`,
-			`xt_userinfo_id`,
+			solr_index_attribute_id,
+			solr_index_attribute_facet,
+			solr_index_attribute_boost,
+			solr_index_attributeSpellcheck AS solr_index_attribute_spellcheck,
+			solr_index_attribute_status,
+			solr_index_attribute_issearch,
+			solr_index_id,
+			solr_index_attribute_ctime AS solr_index_attribute_ctime,
+			solr_index_attribute_mtime AS solr_index_attribute_mtime,
+			xt_userinfo_id,
 			sor_index_highlight
 		FROM 
 			solr_index_attribute
@@ -24,16 +24,16 @@
 	<!--查询对象-->
 	<select id="getSolrIndexAttributeById" resultType="jehc.solrmodules.solrmodel.SolrIndexAttribute" parameterType="string">
 		SELECT
-			`solr_index_attribute_id`,
-			`solr_index_attribute_facet`,
-			`solr_index_attribute_boost`,
-			`solr_index_attribute_spellcheck`,
-			`solr_index_attribute_status`,
-			`solr_index_attribute_issearch`,
-			`solr_index_id`,
-			DATE_FORMAT(`solr_index_attribute_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_ctime`,
-			DATE_FORMAT(`solr_index_attribute_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_mtime`,
-			`xt_userinfo_id`,
+			solr_index_attribute_id,
+			solr_index_attribute_facet,
+			solr_index_attribute_boost,
+			solr_index_attributeSpellcheck AS solr_index_attribute_spellcheck,
+			solr_index_attribute_status,
+			solr_index_attribute_issearch,
+			solr_index_id,
+			solr_index_attribute_ctime AS solr_index_attribute_ctime,
+			solr_index_attribute_mtime AS solr_index_attribute_mtime,
+			xt_userinfo_id,
 			sor_index_highlight
 		FROM 
 			solr_index_attribute
@@ -45,16 +45,16 @@
 		INSERT INTO
 			solr_index_attribute
 			(
-			`solr_index_attribute_id`,
-			`solr_index_attribute_facet`,
-			`solr_index_attribute_boost`,
-			`solr_index_attribute_spellcheck`,
-			`solr_index_attribute_status`,
-			`solr_index_attribute_issearch`,
-			`solr_index_id`,
-			`solr_index_attribute_ctime`,
-			`solr_index_attribute_mtime`,
-			`xt_userinfo_id`,
+			solr_index_attribute_id,
+			solr_index_attribute_facet,
+			solr_index_attribute_boost,
+			solr_index_attributeSpellcheck,
+			solr_index_attribute_status,
+			solr_index_attribute_issearch,
+			solr_index_id,
+			solr_index_attribute_ctime,
+			solr_index_attribute_mtime,
+			xt_userinfo_id,
 			sor_index_highlight
 			)
 			VALUES
@@ -78,15 +78,15 @@
 		UPDATE
 			solr_index_attribute
 		SET
-			`solr_index_attribute_id` = #{solr_index_attribute_id},
-			`solr_index_attribute_facet` = #{solr_index_attribute_facet},
-			`solr_index_attribute_boost` = #{solr_index_attribute_boost},
-			`solr_index_attribute_spellcheck` = #{solr_index_attribute_spellcheck},
-			`solr_index_attribute_status` = #{solr_index_attribute_status},
-			`solr_index_attribute_issearch` = #{solr_index_attribute_issearch},
-			`solr_index_id` = #{solr_index_id},
-			`solr_index_attribute_mtime` = #{solr_index_attribute_mtime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
+			solr_index_attribute_id = #{solr_index_attribute_id},
+			solr_index_attribute_facet = #{solr_index_attribute_facet},
+			solr_index_attribute_boost = #{solr_index_attribute_boost},
+			solr_index_attributeSpellcheck = #{solr_index_attribute_spellcheck},
+			solr_index_attribute_status = #{solr_index_attribute_status},
+			solr_index_attribute_issearch = #{solr_index_attribute_issearch},
+			solr_index_id = #{solr_index_id},
+			solr_index_attribute_mtime = #{solr_index_attribute_mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
 			sor_index_highlight = #{sor_index_highlight}
 		WHERE solr_index_attribute_id=#{solr_index_attribute_id}
 	</update>
@@ -103,19 +103,19 @@
 	<!--根据实例编号查找其下面属性字段-->
 	<select id="getSolrIndexAttributeList" resultType="jehc.solrmodules.solrmodel.SolrIndexAttribute" parameterType="map">
 		SELECT
-			solr_index_attribute.`solr_index_attribute_id`,
-			solr_index_attribute.`solr_index_attribute_facet`,
-			solr_index_attribute.`solr_index_attribute_boost`,
-			solr_index_attribute.`solr_index_attribute_spellcheck`,
-			solr_index_attribute.`solr_index_attribute_status`,
-			solr_index_attribute.`solr_index_attribute_issearch`,
-			solr_index_attribute.`solr_index_id`,
-			DATE_FORMAT(`solr_index_attribute_ctime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_ctime`,
-			DATE_FORMAT(`solr_index_attribute_mtime`,'%Y-%m-%d %H:%i:%s') AS `solr_index_attribute_mtime`,
-			solr_index.`solr_index_name`,
+			solr_index_attribute.solr_index_attribute_id,
+			solr_index_attribute.solr_index_attribute_facet,
+			solr_index_attribute.solr_index_attribute_boost,
+			solr_index_attribute.solr_index_attributeSpellcheck AS solr_index_attribute_spellcheck,
+			solr_index_attribute.solr_index_attribute_status,
+			solr_index_attribute.solr_index_attribute_issearch,
+			solr_index_attribute.solr_index_id,
+			solr_index_attribute_ctime AS solr_index_attribute_ctime,
+			solr_index_attribute_mtime AS solr_index_attribute_mtime,
+			solr_index.solr_index_name,
 			sor_index_highlight
 		FROM 
-			solr_index_attribute AS solr_index_attribute LEFT JOIN solr_index AS solr_index ON solr_index.solr_index_id = solr_index_attribute.solr_index_id
+			solr_index_attribute solr_index_attribute LEFT JOIN solr_index solr_index ON solr_index.solr_index_id = solr_index_attribute.solr_index_id
 		WHERE 1=1
 			AND solr_index_attribute.solr_index_attribute_status = 0
 		<if test="null != solr_core_id">

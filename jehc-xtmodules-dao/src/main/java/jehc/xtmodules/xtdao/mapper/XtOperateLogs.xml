@@ -5,26 +5,26 @@
 	<!--初始化分页-->
 	<select id="getXtOperateLogsListByCondition" resultType="jehc.xtmodules.xtmodel.XtOperateLogs" parameterType="map">
 		SELECT
-			`xt_operate_log_id`,
-			`xt_operate_logBegTime`,
-			`xt_userinfo_id`,
-			`xt_operate_logClasseName`,
-			`xt_operate_logMethod`,
-			`xt_operate_logMethodPar`,
-			`xt_operate_logResult`,
-			`xt_operate_logTotalTime`,
-			`xt_operate_logEndTime`,
-			`xt_operate_logType`,
-			`xt_operate_logUri`,
-			`xt_operate_logMaxMemory`,
-			`xt_operate_logTotalMemory`,
-			`xt_operate_logFreeMemory`,
-			`xt_operate_logUseMemory`
+			xt_operate_log_id,
+			xt_operate_logBegTime,
+			xt_userinfo_id,
+			xt_operate_logClasseName,
+			xt_operate_logMethod,
+			xt_operate_logMethodPar,
+			xt_operate_logResult,
+			xt_operate_logTotalTime,
+			xt_operate_logEndTime,
+			xt_operate_logType,
+			xt_operate_logUri,
+			xt_operate_logMaxMemory,
+			xt_operate_logTotalMemory,
+			xt_operate_logFreeMemory,
+			xt_operate_logUseMemory
 		FROM 
 			xt_operate_logs
 		WHERE 1=1
 		<if test="null != xt_operate_logClasseName">
-			AND instr(xt_operate_logClasseName,#{xt_operate_logClasseName})
+			AND xt_operate_logClasseName LIKE CONCAT(CONCAT('%',#{xt_operate_logClasseName}),'%')
 		</if>
 		ORDER BY xt_operate_logBegTime DESC
 	</select>
@@ -32,21 +32,21 @@
 	<!--查询对象-->
 	<select id="getXtOperateLogsById" resultType="jehc.xtmodules.xtmodel.XtOperateLogs" parameterType="string">
 		SELECT
-			`xt_operate_log_id`,
-			`xt_operate_logBegTime`,
-			`xt_userinfo_id`,
-			`xt_operate_logClasseName`,
-			`xt_operate_logMethod`,
-			`xt_operate_logMethodPar`,
-			`xt_operate_logResult`,
-			`xt_operate_logTotalTime`,
-			`xt_operate_logEndTime`,
-			`xt_operate_logType`,
-			`xt_operate_logUri`,
-			`xt_operate_logMaxMemory`,
-			`xt_operate_logTotalMemory`,
-			`xt_operate_logFreeMemory`,
-			`xt_operate_logUseMemory`
+			xt_operate_log_id,
+			xt_operate_logBegTime,
+			xt_userinfo_id,
+			xt_operate_logClasseName,
+			xt_operate_logMethod,
+			xt_operate_logMethodPar,
+			xt_operate_logResult,
+			xt_operate_logTotalTime,
+			xt_operate_logEndTime,
+			xt_operate_logType,
+			xt_operate_logUri,
+			xt_operate_logMaxMemory,
+			xt_operate_logTotalMemory,
+			xt_operate_logFreeMemory,
+			xt_operate_logUseMemory
 		FROM 
 			xt_operate_logs
 		WHERE xt_operate_log_id=#{xt_operate_log_id}
@@ -57,21 +57,21 @@
 		INSERT INTO
 			xt_operate_logs
 			(
-			`xt_operate_log_id`,
-			`xt_operate_logBegTime`,
-			`xt_userinfo_id`,
-			`xt_operate_logClasseName`,
-			`xt_operate_logMethod`,
-			`xt_operate_logMethodPar`,
-			`xt_operate_logResult`,
-			`xt_operate_logTotalTime`,
-			`xt_operate_logEndTime`,
-			`xt_operate_logType`,
-			`xt_operate_logUri`,
-			`xt_operate_logMaxMemory`,
-			`xt_operate_logTotalMemory`,
-			`xt_operate_logFreeMemory`,
-			`xt_operate_logUseMemory`
+			xt_operate_log_id,
+			xt_operate_logBegTime,
+			xt_userinfo_id,
+			xt_operate_logClasseName,
+			xt_operate_logMethod,
+			xt_operate_logMethodPar,
+			xt_operate_logResult,
+			xt_operate_logTotalTime,
+			xt_operate_logEndTime,
+			xt_operate_logType,
+			xt_operate_logUri,
+			xt_operate_logMaxMemory,
+			xt_operate_logTotalMemory,
+			xt_operate_logFreeMemory,
+			xt_operate_logUseMemory
 			)
 			VALUES
 			(
@@ -98,21 +98,21 @@
 		UPDATE
 			xt_operate_logs
 		SET
-			`xt_operate_log_id` = #{xt_operate_log_id},
-			`xt_operate_logBegTime` = #{xt_operate_logBegTime},
-			`xt_userinfo_id` = #{xt_userinfo_id},
-			`xt_operate_logClasseName` = #{xt_operate_logClasseName},
-			`xt_operate_logMethod` = #{xt_operate_logMethod},
-			`xt_operate_logMethodPar` = #{xt_operate_logMethodPar},
-			`xt_operate_logResult` = #{xt_operate_logResult},
-			`xt_operate_logTotalTime` = #{xt_operate_logTotalTime},
-			`xt_operate_logEndTime` = #{xt_operate_logEndTime},
-			`xt_operate_logType` = #{xt_operate_logType},
-			`xt_operate_logUri` = #{xt_operate_logUri},
-			`xt_operate_logMaxMemory` = #{xt_operate_logMaxMemory},
-			`xt_operate_logTotalMemory` = #{xt_operate_logTotalMemory},
-			`xt_operate_logFreeMemory` = #{xt_operate_logFreeMemory},
-			`xt_operate_logUseMemory` = #{xt_operate_logUseMemory}
+			xt_operate_log_id = #{xt_operate_log_id},
+			xt_operate_logBegTime = #{xt_operate_logBegTime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			xt_operate_logClasseName = #{xt_operate_logClasseName},
+			xt_operate_logMethod = #{xt_operate_logMethod},
+			xt_operate_logMethodPar = #{xt_operate_logMethodPar},
+			xt_operate_logResult = #{xt_operate_logResult},
+			xt_operate_logTotalTime = #{xt_operate_logTotalTime},
+			xt_operate_logEndTime = #{xt_operate_logEndTime},
+			xt_operate_logType = #{xt_operate_logType},
+			xt_operate_logUri = #{xt_operate_logUri},
+			xt_operate_logMaxMemory = #{xt_operate_logMaxMemory},
+			xt_operate_logTotalMemory = #{xt_operate_logTotalMemory},
+			xt_operate_logFreeMemory = #{xt_operate_logFreeMemory},
+			xt_operate_logUseMemory = #{xt_operate_logUseMemory}
 		WHERE xt_operate_log_id=#{xt_operate_log_id}
 	</update>
 
