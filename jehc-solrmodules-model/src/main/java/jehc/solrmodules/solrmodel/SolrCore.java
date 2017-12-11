@@ -1,5 +1,6 @@
 package jehc.solrmodules.solrmodel;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
@@ -12,8 +13,8 @@ public class SolrCore extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String solr_core_id;/**实例主键**/
 	private String solr_core_name;/**实例名称**/
-	private String solr_core_ctime;/**创建时间**/
-	private String solr_core_uptime;/**修改时间**/
+	private Date solr_core_ctime;/**创建时间**/
+	private Date solr_core_uptime;/**修改时间**/
 	private String xt_userinfo_id;/**操作人**/
 	private String solr_url_id;/**URLID**/
 	private String solr_url_url;/**URL**/
@@ -48,17 +49,17 @@ public class SolrCore extends BaseEntity implements Serializable{
 	public String getSolr_core_name(){
 		return solr_core_name;
 	}
-	public void setSolr_core_ctime(String solr_core_ctime){
-		this.solr_core_ctime=solr_core_ctime;
-	}
-	public String getSolr_core_ctime(){
+	public Date getSolr_core_ctime() {
 		return solr_core_ctime;
 	}
-	public void setSolr_core_uptime(String solr_core_uptime){
-		this.solr_core_uptime=solr_core_uptime;
+	public void setSolr_core_ctime(Date solr_core_ctime) {
+		this.solr_core_ctime = solr_core_ctime;
 	}
-	public String getSolr_core_uptime(){
+	public Date getSolr_core_uptime() {
 		return solr_core_uptime;
+	}
+	public void setSolr_core_uptime(Date solr_core_uptime) {
+		this.solr_core_uptime = solr_core_uptime;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;

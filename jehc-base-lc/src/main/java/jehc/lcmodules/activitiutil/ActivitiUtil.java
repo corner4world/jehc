@@ -981,7 +981,7 @@ public class ActivitiUtil extends BaseService{
 				}
 				lc_Apply.setLc_apply_model_id(xtConstant.getXt_constant_id());
 				lc_Apply.setXt_userinfo_id(getXtUid());
-				lc_Apply.setLc_apply_time(getSimpleDateFormat());
+				lc_Apply.setLc_apply_time(getDate());
 				lc_Apply.setProcessdefinitions_id(processDefinition.getId());
 				lc_Apply.setLc_apply_model_biz_id(businessKey);
 				lc_Apply.setProcessInstance_id(procesInstance.getId());
@@ -1022,7 +1022,7 @@ public class ActivitiUtil extends BaseService{
 				}
 				lc_Apply.setLc_apply_model_id(xtConstant.getXt_constant_id());
 				lc_Apply.setXt_userinfo_id(getXtUid());
-				lc_Apply.setLc_apply_time(getSimpleDateFormat());
+				lc_Apply.setLc_apply_time(getDate());
 				lc_Apply.setProcessdefinitions_id(processDefinition.getId());
 				lc_Apply.setLc_apply_model_biz_id(businessKey);
 				lc_Apply.setProcessInstance_id(procesInstance.getId());

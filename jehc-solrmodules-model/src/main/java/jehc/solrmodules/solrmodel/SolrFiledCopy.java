@@ -1,5 +1,6 @@
 package jehc.solrmodules.solrmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -13,8 +14,8 @@ public class SolrFiledCopy extends BaseEntity implements Serializable{
 	private String solr_filed_copy_remark;/**备注**/
 	private String solr_filed_copy_source_id;/**索引字段源**/
 	private String solr_filed_copy_dest_id;/**目标字段索引编号**/
-	private String solr_filed_copy_ctime;/**创建时间**/
-	private String solr_filed_copy_mtime;/**修改时间**/
+	private Date solr_filed_copy_ctime;/**创建时间**/
+	private Date solr_filed_copy_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**创建人**/
 	private String solr_core_id;/**实例编号**/
 	/////////////扩展字段////////////
@@ -70,17 +71,18 @@ public class SolrFiledCopy extends BaseEntity implements Serializable{
 	public String getSolr_filed_copy_dest_id(){
 		return solr_filed_copy_dest_id;
 	}
-	public void setSolr_filed_copy_ctime(String solr_filed_copy_ctime){
-		this.solr_filed_copy_ctime=solr_filed_copy_ctime;
-	}
-	public String getSolr_filed_copy_ctime(){
+	
+	public Date getSolr_filed_copy_ctime() {
 		return solr_filed_copy_ctime;
 	}
-	public void setSolr_filed_copy_mtime(String solr_filed_copy_mtime){
-		this.solr_filed_copy_mtime=solr_filed_copy_mtime;
+	public void setSolr_filed_copy_ctime(Date solr_filed_copy_ctime) {
+		this.solr_filed_copy_ctime = solr_filed_copy_ctime;
 	}
-	public String getSolr_filed_copy_mtime(){
+	public Date getSolr_filed_copy_mtime() {
 		return solr_filed_copy_mtime;
+	}
+	public void setSolr_filed_copy_mtime(Date solr_filed_copy_mtime) {
+		this.solr_filed_copy_mtime = solr_filed_copy_mtime;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;

@@ -1,5 +1,6 @@
 package jehc.lcmodules.lcmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -11,8 +12,8 @@ public class LcProcess extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String lc_process_id;/**流程编号**/
 	private String lc_process_path;/**打包后的ZIP路径**/
-	private String lc_process_mtime;/**最后修改时间**/
-	private String lc_process_ctime;/**创建时间**/
+	private Date lc_process_mtime;/**最后修改时间**/
+	private Date lc_process_ctime;/**创建时间**/
 	private String xt_userinfo_id;/**创建人**/
 	private String lc_process_uid;/**流程定义中id（uuid）**/
 	private String lc_process_uk;/**流程uk（键）**/
@@ -20,12 +21,12 @@ public class LcProcess extends BaseEntity implements Serializable{
 	private String lc_process_title;/**流程标题**/
 	private String lc_process_bpmn_path;/**bpmn文件路径**/
 	private String lc_process_img_path;/**图片路径**/
-	private String lc_process_status;/**0待发布1发布中2已关闭**/
+	private int lc_process_status;/**0待发布1发布中2已关闭**/
 	private String lc_process_mxgraphxml;/**mxgraphxml字符串**/
-	private String lc_process_mxgraph_style;/**样式风格0直线1曲线**/
-	private String lc_processment_isdelete;/**是否删除0正常1已删除**/
+	private int lc_process_mxgraph_style;/**样式风格0直线1曲线**/
+	private int lc_processment_isdelete;/**是否删除0正常1已删除**/
 	private String xt_constant_id;/**常量编号**/
-	private String lc_process_flag;/**标识:0通过平台设计器设计1通过上传部署**/
+	private int lc_process_flag;/**标识:0通过平台设计器设计1通过上传部署**/
 	private String xt_attachment;/**附件编号**/
 	private String lc_process_remark;/**备注**/
 	private String imgxml;/**imgxml**/
@@ -42,17 +43,18 @@ public class LcProcess extends BaseEntity implements Serializable{
 	public String getLc_process_path(){
 		return lc_process_path;
 	}
-	public void setLc_process_mtime(String lc_process_mtime){
-		this.lc_process_mtime=lc_process_mtime;
-	}
-	public String getLc_process_mtime(){
+	
+	public Date getLc_process_mtime() {
 		return lc_process_mtime;
 	}
-	public void setLc_process_ctime(String lc_process_ctime){
-		this.lc_process_ctime=lc_process_ctime;
+	public void setLc_process_mtime(Date lc_process_mtime) {
+		this.lc_process_mtime = lc_process_mtime;
 	}
-	public String getLc_process_ctime(){
+	public Date getLc_process_ctime() {
 		return lc_process_ctime;
+	}
+	public void setLc_process_ctime(Date lc_process_ctime) {
+		this.lc_process_ctime = lc_process_ctime;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;
@@ -96,42 +98,21 @@ public class LcProcess extends BaseEntity implements Serializable{
 	public String getLc_process_img_path(){
 		return lc_process_img_path;
 	}
-	public void setLc_process_status(String lc_process_status){
-		this.lc_process_status=lc_process_status;
-	}
-	public String getLc_process_status(){
-		return lc_process_status;
-	}
+	
 	public void setLc_process_mxgraphxml(String lc_process_mxgraphxml){
 		this.lc_process_mxgraphxml=lc_process_mxgraphxml;
 	}
 	public String getLc_process_mxgraphxml(){
 		return lc_process_mxgraphxml;
 	}
-	public void setLc_process_mxgraph_style(String lc_process_mxgraph_style){
-		this.lc_process_mxgraph_style=lc_process_mxgraph_style;
-	}
-	public String getLc_process_mxgraph_style(){
-		return lc_process_mxgraph_style;
-	}
-	public void setLc_processment_isdelete(String lc_processment_isdelete){
-		this.lc_processment_isdelete=lc_processment_isdelete;
-	}
-	public String getLc_processment_isdelete(){
-		return lc_processment_isdelete;
-	}
+	
 	public void setXt_constant_id(String xt_constant_id){
 		this.xt_constant_id=xt_constant_id;
 	}
 	public String getXt_constant_id(){
 		return xt_constant_id;
 	}
-	public void setLc_process_flag(String lc_process_flag){
-		this.lc_process_flag=lc_process_flag;
-	}
-	public String getLc_process_flag(){
-		return lc_process_flag;
-	}
+	
 	public void setXt_attachment(String xt_attachment){
 		this.xt_attachment=xt_attachment;
 	}
@@ -155,6 +136,30 @@ public class LcProcess extends BaseEntity implements Serializable{
 	}
 	public void setMxgraphxml(String mxgraphxml) {
 		this.mxgraphxml = mxgraphxml;
+	}
+	public int getLc_process_status() {
+		return lc_process_status;
+	}
+	public void setLc_process_status(int lc_process_status) {
+		this.lc_process_status = lc_process_status;
+	}
+	public int getLc_process_mxgraph_style() {
+		return lc_process_mxgraph_style;
+	}
+	public void setLc_process_mxgraph_style(int lc_process_mxgraph_style) {
+		this.lc_process_mxgraph_style = lc_process_mxgraph_style;
+	}
+	public int getLc_processment_isdelete() {
+		return lc_processment_isdelete;
+	}
+	public void setLc_processment_isdelete(int lc_processment_isdelete) {
+		this.lc_processment_isdelete = lc_processment_isdelete;
+	}
+	public int getLc_process_flag() {
+		return lc_process_flag;
+	}
+	public void setLc_process_flag(int lc_process_flag) {
+		this.lc_process_flag = lc_process_flag;
 	}
 	
 }

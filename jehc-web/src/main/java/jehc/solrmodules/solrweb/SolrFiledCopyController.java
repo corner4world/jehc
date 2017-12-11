@@ -79,7 +79,7 @@ public class SolrFiledCopyController extends BaseAction{
 		if(null != solr_Filed_Copy && !"".equals(solr_Filed_Copy)){
 			solr_Filed_Copy.setSolr_filed_copy_id(UUID.toUUID());
 			solr_Filed_Copy.setXt_userinfo_id(getXtUid());
-			solr_Filed_Copy.setSolr_filed_copy_ctime(getSimpleDateFormat());
+			solr_Filed_Copy.setSolr_filed_copy_ctime(getDate());
 			i=solrFiledCopyService.addSolrFiledCopy(solr_Filed_Copy);
 		}
 		if(i>0){
@@ -99,7 +99,7 @@ public class SolrFiledCopyController extends BaseAction{
 		int i = 0;
 		if(null != solr_Filed_Copy && !"".equals(solr_Filed_Copy)){
 			solr_Filed_Copy.setXt_userinfo_id(getXtUid());
-			solr_Filed_Copy.setSolr_filed_copy_mtime(getSimpleDateFormat());
+			solr_Filed_Copy.setSolr_filed_copy_mtime(getDate());
 			i=solrFiledCopyService.updateSolrFiledCopy(solr_Filed_Copy);
 		}
 		if(i>0){

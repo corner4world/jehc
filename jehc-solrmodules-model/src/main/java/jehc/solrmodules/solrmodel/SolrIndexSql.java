@@ -1,5 +1,6 @@
 package jehc.solrmodules.solrmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -13,8 +14,8 @@ public class SolrIndexSql extends BaseEntity implements Serializable{
 	private String solr_index_sql_query;/**SQL执行语句**/
 	private String solr_index_sql_type;/**类型:query,deltaImportQuery,deltaQuery 数据字典读取**/
 	private String solr_entity_id;/**实体编号**/
-	private String solr_index_ctime;/**创建时间**/
-	private String solr_index_mtime;/**修改时间**/
+	private Date solr_index_ctime;/**创建时间**/
+	private Date solr_index_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**创建人**/
 	public void setSolr_index_sql_id(String solr_index_sql_id){
 		this.solr_index_sql_id=solr_index_sql_id;
@@ -34,17 +35,17 @@ public class SolrIndexSql extends BaseEntity implements Serializable{
 	public String getSolr_index_sql_type(){
 		return solr_index_sql_type;
 	}
-	public void setSolr_index_ctime(String solr_index_ctime){
-		this.solr_index_ctime=solr_index_ctime;
-	}
-	public String getSolr_index_ctime(){
+	public Date getSolr_index_ctime() {
 		return solr_index_ctime;
 	}
-	public void setSolr_index_mtime(String solr_index_mtime){
-		this.solr_index_mtime=solr_index_mtime;
+	public void setSolr_index_ctime(Date solr_index_ctime) {
+		this.solr_index_ctime = solr_index_ctime;
 	}
-	public String getSolr_index_mtime(){
+	public Date getSolr_index_mtime() {
 		return solr_index_mtime;
+	}
+	public void setSolr_index_mtime(Date solr_index_mtime) {
+		this.solr_index_mtime = solr_index_mtime;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;

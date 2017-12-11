@@ -73,17 +73,17 @@ public class SolrEntityController extends BaseAction{
 	public String addSolrEntity(SolrEntity solr_Entity,String solrIndexSqlJSON,String solrIndexSqlFiledJSON,HttpServletRequest request){
 		int i = 0;
 		solr_Entity.setXt_userinfo_id(CommonUtils.getXtUid());
-		solr_Entity.setSolr_entity_ctime(getSimpleDateFormat());
+		solr_Entity.setSolr_entity_ctime(getDate());
 		List<SolrIndexSql> solr_Index_SqlList = commonSolrIndexSqlList(solrIndexSqlJSON);
 		List<SolrIndexSqlFiled> solr_Index_Sql_FiledList = commonSolrIndexSqlFiledJSON(solrIndexSqlFiledJSON);
 		for(int j = 0; j < solr_Index_SqlList.size(); j++){
-			solr_Index_SqlList.get(j).setSolr_index_ctime(getSimpleDateFormat());
+			solr_Index_SqlList.get(j).setSolr_index_ctime(getDate());
 			solr_Index_SqlList.get(j).setSolr_index_sql_id(UUID.toUUID());
 			solr_Index_SqlList.get(j).setXt_userinfo_id(CommonUtils.getXtUid());
 		}
 		for(int j = 0; j < solr_Index_Sql_FiledList.size(); j++){
 			solr_Index_Sql_FiledList.get(j).setSolr_index_sql_filed_id(UUID.toUUID());
-			solr_Index_Sql_FiledList.get(j).setSolr_index_sql_filed_ctime(getSimpleDateFormat());
+			solr_Index_Sql_FiledList.get(j).setSolr_index_sql_filed_ctime(getDate());
 			solr_Index_Sql_FiledList.get(j).setXt_userinfo_id(CommonUtils.getXtUid());
 		}
 		i=solrEntityService.addSolrEntity(solr_Entity,solr_Index_SqlList,solr_Index_Sql_FiledList);
@@ -104,23 +104,23 @@ public class SolrEntityController extends BaseAction{
 	public String updateSolrEntity(SolrEntity solr_Entity,String solrIndexSqlJSON,String solrIndexSqlFiledJSON,HttpServletRequest request){
 		int i = 0;
 		solr_Entity.setXt_userinfo_id(CommonUtils.getXtUid());
-		solr_Entity.setSolr_entity_mtime(getSimpleDateFormat());
+		solr_Entity.setSolr_entity_mtime(getDate());
 		List<SolrIndexSql> solr_Index_SqlList = commonSolrIndexSqlList(solrIndexSqlJSON);
 		List<SolrIndexSqlFiled> solr_Index_Sql_FiledList = commonSolrIndexSqlFiledJSON(solrIndexSqlFiledJSON);
 		for(int j = 0; j < solr_Index_SqlList.size(); j++){
 			if(null == solr_Index_SqlList.get(j).getSolr_index_sql_id() || "".equals(solr_Index_SqlList.get(j).getSolr_index_sql_id())){
-				solr_Index_SqlList.get(j).setSolr_index_ctime(getSimpleDateFormat());
+				solr_Index_SqlList.get(j).setSolr_index_ctime(getDate());
 				
 			}else{
-				solr_Index_SqlList.get(j).setSolr_index_mtime(getSimpleDateFormat());
+				solr_Index_SqlList.get(j).setSolr_index_mtime(getDate());
 			}
 			solr_Index_SqlList.get(j).setXt_userinfo_id(CommonUtils.getXtUid());
 		}
 		for(int j = 0; j < solr_Index_Sql_FiledList.size(); j++){
 			if(null == solr_Index_Sql_FiledList.get(j).getSolr_index_sql_filed_id() || "".equals(solr_Index_Sql_FiledList.get(j).getSolr_index_sql_filed_id())){
-				solr_Index_Sql_FiledList.get(j).setSolr_index_sql_filed_ctime(getSimpleDateFormat());
+				solr_Index_Sql_FiledList.get(j).setSolr_index_sql_filed_ctime(getDate());
 			}else{
-				solr_Index_Sql_FiledList.get(j).setSolr_index_sql_filed_mtime(getSimpleDateFormat());
+				solr_Index_Sql_FiledList.get(j).setSolr_index_sql_filed_mtime(getDate());
 			}
 			solr_Index_Sql_FiledList.get(j).setXt_userinfo_id(CommonUtils.getXtUid());
 		}

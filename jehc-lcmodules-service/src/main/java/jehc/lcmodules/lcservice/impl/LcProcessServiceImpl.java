@@ -157,10 +157,10 @@ public class LcProcessServiceImpl extends BaseService implements LcProcessServic
 			if(null== lc_Process){
 				throw new ExceptionUtil("该流程为空，无法发布");
 			}
-			if(lc_Process.getLc_process_status().equals("1")){
+			if(1==lc_Process.getLc_process_status()){
 				throw new ExceptionUtil("该流程已启动中，无法发布");
 			}
-			if(lc_Process.getLc_process_flag().equals("1")){
+			if(1==lc_Process.getLc_process_flag()){
 				XtAttachment attachment = xtAttachmentService.getXtAttachmentById(lc_Process.getXt_attachment());
 				attachPath = FileUtil.validOrCreateFile(getXtPathCache("ActivitiLc").get(0).getXt_path()+attachment.getXt_attachmentName());
 			}else{
@@ -177,9 +177,9 @@ public class LcProcessServiceImpl extends BaseService implements LcProcessServic
 					lc_Deployment_His.setLc_deployment_his_id(deployment.getId());
 					lc_Deployment_His.setLc_deployment_his_name(lc_Process.getLc_process_title()+"_"+deployment.getId());
 					lc_Deployment_His.setLc_deployment_his_tenantId(deployment.getTenantId());
-					lc_Deployment_His.setLc_deployment_his_time(getSimpleDateFormat());
+					lc_Deployment_His.setLc_deployment_his_time(getDate());
 					lc_Deployment_His.setLc_process_id(lc_process_id);
-					lc_Deployment_His.setLc_deployment_his_status("0");
+					lc_Deployment_His.setLc_deployment_his_status(0);
 					lcDeploymentHisDao.addLcDeploymentHis(lc_Deployment_His);
 				}else{
 					throw new ExceptionUtil("返回流程部署信息为空");

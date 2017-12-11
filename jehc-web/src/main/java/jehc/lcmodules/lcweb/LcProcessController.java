@@ -121,7 +121,7 @@ public class LcProcessController  extends BaseAction{
 		int i = 0;
 		if(null != lc_Process && !"".equals(lc_Process)){
 			lc_Process.setLc_process_id(UUID.toUUID());
-			lc_Process.setLc_process_ctime(getSimpleDateFormat());
+			lc_Process.setLc_process_ctime(getDate());
 			lc_Process.setXt_userinfo_id(getXtUid());
 			i=lcProcessService.addLcProcess(lc_Process);
 		}
@@ -141,7 +141,7 @@ public class LcProcessController  extends BaseAction{
 	public String updateLcProcess(LcProcess lc_Process,HttpServletRequest request){
 		int i = 0;
 		if(null != lc_Process && !"".equals(lc_Process)){
-			lc_Process.setLc_process_mtime(getSimpleDateFormat());
+			lc_Process.setLc_process_mtime(getDate());
 			lc_Process.setXt_userinfo_id(getXtUid());
 			i=lcProcessService.updateLcProcess(lc_Process);
 		}
@@ -234,13 +234,13 @@ public class LcProcessController  extends BaseAction{
 		MxGraphToBPMN MxGraphToBPMN = new MxGraphToBPMN();
 		mxGraphModel = MxGraphToBPMN.createBPMN(mxGraphModel);
 		//////////添加或修改流程信息///////////////
-		lc_Process.setLc_process_flag("0");
+		lc_Process.setLc_process_flag(0);
 		lc_Process.setLc_process_bpmn(mxGraphModel.getBpmn());
 		lc_Process.setLc_process_uid(mxGraphModel.getProcessId());
 		lc_Process.setLc_process_uk(mxGraphModel.getProcessId());
 		lc_Process.setLc_process_remark(mxGraphModel.getRemark());
 		lc_Process.setLc_process_mxgraphxml(mxGraphModel.getMxgraphxml());
-		lc_Process.setLc_process_status("0");
+		lc_Process.setLc_process_status(0);
 		lc_Process.setXt_userinfo_id(getXtUid());
 		lc_Process.setLc_process_title(mxGraphModel.getProcessName());
 		LcProcess lcProcess = generateBpmnAndImg(request.getRequestURL().toString(), imgxml, mxGraphModel.getBpmn(), mxGraphModel.getProcessName(), mxGraphModel.getW(), mxGraphModel.getH(), response, lc_Process);
@@ -250,10 +250,10 @@ public class LcProcessController  extends BaseAction{
 		int i = 0;
 		if(StringUtils.isEmpty(lc_Process.getLc_process_id())){
 			lc_Process.setLc_process_id(UUID.toUUID());
-			lc_Process.setLc_process_ctime(getSimpleDateFormat());
+			lc_Process.setLc_process_ctime(getDate());
 			i = lcProcessService.addLcProcess(lc_Process);
 		}else{
-			lc_Process.setLc_process_mtime(getSimpleDateFormat());
+			lc_Process.setLc_process_mtime(getDate());
 			i = lcProcessService.updateLcProcess(lc_Process);
 		}
 		if(i > 0){

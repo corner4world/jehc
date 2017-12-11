@@ -688,17 +688,15 @@ public class SolrUtil extends BaseService{
         //设置高亮
         for (int i = 0; i < solr_index_attribute_list.size(); i++) {  
         	String solr_index_name = solr_index_attribute_list.get(i).getSolr_index_name();
-        	String sor_index_highlight = solr_index_attribute_list.get(i).getSor_index_highlight();
-        	if(null != sor_index_highlight && !"".equals(sor_index_highlight)){
-        		if("0".equals(sor_index_highlight)) {  
-                    query.setHighlight(true);//开启高亮组件  
-                    query.addHighlightField(solr_index_name);//高亮字段  
-                    query.setHighlightSimplePre("<font color=\"red\">");//标记  
-                    query.setHighlightSimplePost("</font>");  
-                    query.setHighlightSnippets(1);//结果分片数，默认为1  
-                    query.setHighlightFragsize(1000);//每个分片的最大长度，默认为100  
-                }
-        	}
+        	int sor_index_highlight = solr_index_attribute_list.get(i).getSor_index_highlight();
+        	if(0 == sor_index_highlight) {  
+                query.setHighlight(true);//开启高亮组件  
+                query.addHighlightField(solr_index_name);//高亮字段  
+                query.setHighlightSimplePre("<font color=\"red\">");//标记  
+                query.setHighlightSimplePost("</font>");  
+                query.setHighlightSnippets(1);//结果分片数，默认为1  
+                query.setHighlightFragsize(1000);//每个分片的最大长度，默认为100  
+            }
         }  
         try {
         	//连接solr服务器
@@ -752,17 +750,15 @@ public class SolrUtil extends BaseService{
         //设置高亮
         for (int i = 0; i < solr_index_attribute_list.size(); i++) {  
         	String solr_index_name = solr_index_attribute_list.get(i).getSolr_index_name();
-        	String sor_index_highlight = solr_index_attribute_list.get(i).getSor_index_highlight();
-        	if(null != sor_index_highlight && !"".equals(sor_index_highlight)){
-        		if("0".equals(sor_index_highlight)) {  
-                    query.setHighlight(true);//开启高亮组件  
-                    query.addHighlightField(solr_index_name);//高亮字段  
-                    query.setHighlightSimplePre("<font color=\"red\">");//标记  
-                    query.setHighlightSimplePost("</font>");  
-                    query.setHighlightSnippets(1);//结果分片数，默认为1  
-                    query.setHighlightFragsize(1000);//每个分片的最大长度，默认为100  
-                }
-        	}
+        	int sor_index_highlight = solr_index_attribute_list.get(i).getSor_index_highlight();
+        	if(0 == sor_index_highlight) {  
+                query.setHighlight(true);//开启高亮组件  
+                query.addHighlightField(solr_index_name);//高亮字段  
+                query.setHighlightSimplePre("<font color=\"red\">");//标记  
+                query.setHighlightSimplePost("</font>");  
+                query.setHighlightSnippets(1);//结果分片数，默认为1  
+                query.setHighlightFragsize(1000);//每个分片的最大长度，默认为100  
+            }
         }  
         try {
         	//连接solr服务器
@@ -794,7 +790,7 @@ public class SolrUtil extends BaseService{
         ///////////////////////关键代码 执行过滤操作////////////////////
         for(int i = 0; i < solr_index_attribute_list.size(); i++) {  
         	String solr_index_name = solr_index_attribute_list.get(i).getSolr_index_name();
-        	String sor_index_filter = solr_index_attribute_list.get(i).getSor_index_filter();
+        	int sor_index_filter = solr_index_attribute_list.get(i).getSor_index_filter();
         	Object solr_index_value = pageSolr.getConditions().get(solr_index_name);
         	if(null != solr_index_value && !"".equals(solr_index_value) && !"".equals(sor_index_filter) && "0".equals(sor_index_filter)){
         		query.addFilterQuery(solr_index_name + ":" + solr_index_value.toString());  
@@ -815,17 +811,15 @@ public class SolrUtil extends BaseService{
         //设置高亮
         for (int i = 0; i < solr_index_attribute_list.size(); i++) {  
         	String solr_index_name = solr_index_attribute_list.get(i).getSolr_index_name();
-        	String sor_index_highlight = solr_index_attribute_list.get(i).getSor_index_highlight();
-        	if(null != sor_index_highlight && !"".equals(sor_index_highlight)){
-        		if("0".equals(sor_index_highlight)) {  
-                    query.setHighlight(true);//开启高亮组件  
-                    query.addHighlightField(solr_index_name);//高亮字段  
-                    query.setHighlightSimplePre("<font color=\"red\">");//标记  
-                    query.setHighlightSimplePost("</font>");  
-                    query.setHighlightSnippets(1);//结果分片数，默认为1  
-                    query.setHighlightFragsize(1000);//每个分片的最大长度，默认为100  
-                }
-        	}
+        	int sor_index_highlight = solr_index_attribute_list.get(i).getSor_index_highlight();
+        	if(0 == sor_index_highlight) {  
+                query.setHighlight(true);//开启高亮组件  
+                query.addHighlightField(solr_index_name);//高亮字段  
+                query.setHighlightSimplePre("<font color=\"red\">");//标记  
+                query.setHighlightSimplePost("</font>");  
+                query.setHighlightSnippets(1);//结果分片数，默认为1  
+                query.setHighlightFragsize(1000);//每个分片的最大长度，默认为100  
+            }
         }  
         try {
         	//连接solr服务器

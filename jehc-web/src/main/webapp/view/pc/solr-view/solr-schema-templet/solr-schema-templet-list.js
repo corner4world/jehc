@@ -31,10 +31,16 @@ $(document).ready(function() {
 				data:'solr_schema_templet_title'
 			},
 			{
-				data:'solr_schema_templet_ctime'
+				data:'solr_schema_templet_ctime',
+				render:function(data, type, row, meta) {
+					return dateformat(data); 
+				}
 			},
 			{
-				data:'solr_schema_templet_mtime'
+				data:'solr_schema_templet_mtime',
+				render:function(data, type, row, meta) {
+					return dateformat(data); 
+				}
 			},
 			{
 				data:'solr_schema_templet_status',

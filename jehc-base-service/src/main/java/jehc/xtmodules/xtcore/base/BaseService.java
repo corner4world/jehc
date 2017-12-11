@@ -621,6 +621,14 @@ public class BaseService extends UUID{
 	}
 	
 	/**
+	 * 获取 当前日期
+	 * @return
+	 */
+	public static Date getDate(){
+		return new Date();
+	}
+	
+	/**
 	 * 添加平台业务操作日志通用 采用put方法目的不走事务控制
 	 * @param classname
 	 * @param method

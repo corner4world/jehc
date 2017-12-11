@@ -33,13 +33,13 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="solr_data_config_ctime"  placeholder="请选择时间" value="${solrDataConfig.solr_data_config_ctime }">
+					<input class="form_datetime form-control" name="solr_data_config_ctime"  placeholder="请选择时间" value="<fmt:formatDate value="${solrDataConfig.solr_data_config_ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">修改时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="solr_data_config_mtime"  placeholder="请选择时间" value="${solrDataConfig.solr_data_config_mtime }">
+					<input class="form_datetime form-control" name="solr_data_config_mtime"  placeholder="请选择时间" value="<fmt:formatDate value="${solrDataConfig.solr_data_config_mtime }" pattern="yyyy-MM-dd HH:mm:ss"/>">
 				</div>
 			</div>
 			<div class="form-group">

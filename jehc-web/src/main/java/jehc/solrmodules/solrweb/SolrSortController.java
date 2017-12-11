@@ -79,7 +79,7 @@ public class SolrSortController extends BaseAction{
 		int i = 0;
 		if(null != solr_Sort && !"".equals(solr_Sort)){
 			solr_Sort.setSolr_sort_id(UUID.toUUID());
-			solr_Sort.setSolr_sort_ctime(getSimpleDateFormat());
+			solr_Sort.setSolr_sort_ctime(getDate());
 			solr_Sort.setXt_userinfo_id(getXtUid());
 			i=solrSortService.addSolrSort(solr_Sort);
 		}
@@ -99,7 +99,7 @@ public class SolrSortController extends BaseAction{
 	public String updateSolrSort(SolrSort solr_Sort,HttpServletRequest request){
 		int i = 0;
 		if(null != solr_Sort && !"".equals(solr_Sort)){
-			solr_Sort.setSolr_sort_mtime(getSimpleDateFormat());
+			solr_Sort.setSolr_sort_mtime(getDate());
 			solr_Sort.setXt_userinfo_id(getXtUid());
 			i=solrSortService.updateSolrSort(solr_Sort);
 		}

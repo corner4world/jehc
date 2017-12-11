@@ -43,13 +43,13 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="30"  name="solr_schema_templet_ctime" placeholder="请输入创建时间" value="${solrSchemaTemplet.solr_schema_templet_ctime }">
+					<input class="form-control" type="text" maxlength="30"  name="solr_schema_templet_ctime" placeholder="请输入创建时间" value="<fmt:formatDate value="${solrSchemaTemplet.solr_schema_templet_ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">修改时间</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="30"  name="solr_schema_templet_mtime" placeholder="请输入修改时间" value="${solrSchemaTemplet.solr_schema_templet_mtime }">
+					<input class="form-control" type="text" maxlength="30"  name="solr_schema_templet_mtime" placeholder="请输入修改时间" value="<fmt:formatDate value="${solrSchemaTemplet.solr_schema_templet_mtime }" pattern="yyyy-MM-dd HH:mm:ss"/>">
 				</div>
 			</div>
 			<div class="form-group">

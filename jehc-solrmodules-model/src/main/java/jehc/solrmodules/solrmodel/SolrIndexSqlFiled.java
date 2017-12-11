@@ -1,5 +1,6 @@
 package jehc.solrmodules.solrmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -13,8 +14,8 @@ public class SolrIndexSqlFiled extends BaseEntity implements Serializable{
 	private String solr_index_sql_filed_name;/**字段名称**/
 	private String solr_index_sql_filed_zh;/**字段中文说明**/
 	private String solr_entity_id;/**实体编号**/
-	private String solr_index_sql_filed_ctime;/**创建时间**/
-	private String solr_index_sql_filed_mtime;/**修改时间**/
+	private Date solr_index_sql_filed_ctime;/**创建时间**/
+	private Date solr_index_sql_filed_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**创建人**/
 	private String solr_index_filed_name;/**对应索引字段**/
 	public void setSolr_index_sql_filed_id(String solr_index_sql_filed_id){
@@ -35,20 +36,21 @@ public class SolrIndexSqlFiled extends BaseEntity implements Serializable{
 	public String getSolr_index_sql_filed_zh(){
 		return solr_index_sql_filed_zh;
 	}
-	public void setSolr_index_sql_filed_ctime(String solr_index_sql_filed_ctime){
-		this.solr_index_sql_filed_ctime=solr_index_sql_filed_ctime;
-	}
-	public String getSolr_index_sql_filed_ctime(){
+	
+	public Date getSolr_index_sql_filed_ctime() {
 		return solr_index_sql_filed_ctime;
 	}
-	public void setSolr_index_sql_filed_mtime(String solr_index_sql_filed_mtime){
-		this.solr_index_sql_filed_mtime=solr_index_sql_filed_mtime;
+	public void setSolr_index_sql_filed_ctime(Date solr_index_sql_filed_ctime) {
+		this.solr_index_sql_filed_ctime = solr_index_sql_filed_ctime;
 	}
-	public String getSolr_index_sql_filed_mtime(){
+	public Date getSolr_index_sql_filed_mtime() {
 		return solr_index_sql_filed_mtime;
 	}
-	public void setXt_userinfo_id(String xt_userinfo_id){
-		this.xt_userinfo_id=xt_userinfo_id;
+	public void setSolr_index_sql_filed_mtime(Date solr_index_sql_filed_mtime) {
+		this.solr_index_sql_filed_mtime = solr_index_sql_filed_mtime;
+	}
+	public void setXt_userinfo_id(String xt_userinfo_id) {
+		this.xt_userinfo_id = xt_userinfo_id;
 	}
 	public String getXt_userinfo_id(){
 		return xt_userinfo_id;

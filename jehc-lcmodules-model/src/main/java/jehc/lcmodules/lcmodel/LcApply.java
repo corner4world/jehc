@@ -1,5 +1,6 @@
 package jehc.lcmodules.lcmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -12,14 +13,14 @@ public class LcApply extends BaseEntity implements Serializable{
 	private String lc_apply_id;/**流程实例发起编号（即申请编号）**/
 	private String lc_apply_title;/**标题**/
 	private String lc_apply_model_id;/**模块**/
-	private String lc_apply_delete;/**是否删除0正常1删除**/
+	private int lc_apply_delete;/**是否删除0正常1删除**/
 	private String processInstance_id;/**流程实例id（一个任务没有完成其编号是不变也会存在）**/
-	private String processdefinitions_id;/**流程定义id编号**/
+	private String processdefinitions_id;/**流程定义did编号**/
 	private String lc_url;/**URL可缺省(可作为表单查看页面)**/
 	private String xt_userinfo_id;/**提交人编号**/
-	private String lc_apply_time;/**提交时间**/
+	private Date lc_apply_time;/**提交时间**/
 	private String lc_apply_model_biz_id;/**业务编号**/
-	private String lc_apply_isonlysaverecord;/**lc_apply_isonlysaverecord**/
+	private int lc_apply_isonlysaverecord;/**是否只保存该记录0否1是（是否只用于保存业务编号与流程部署、实例绑定）**/
 	private String xt_constantRemark;/**常量备注**/
 	private String xt_constantURL;/**常量URL地址**/
 	public void setLc_apply_id(String lc_apply_id){
@@ -40,12 +41,7 @@ public class LcApply extends BaseEntity implements Serializable{
 	public String getLc_apply_model_id(){
 		return lc_apply_model_id;
 	}
-	public void setLc_apply_delete(String lc_apply_delete){
-		this.lc_apply_delete=lc_apply_delete;
-	}
-	public String getLc_apply_delete(){
-		return lc_apply_delete;
-	}
+	
 	public void setProcessInstance_id(String processInstance_id){
 		this.processInstance_id=processInstance_id;
 	}
@@ -70,23 +66,31 @@ public class LcApply extends BaseEntity implements Serializable{
 	public String getXt_userinfo_id(){
 		return xt_userinfo_id;
 	}
-	public void setLc_apply_time(String lc_apply_time){
-		this.lc_apply_time=lc_apply_time;
-	}
-	public String getLc_apply_time(){
-		return lc_apply_time;
-	}
+	
 	public String getLc_apply_model_biz_id() {
 		return lc_apply_model_biz_id;
 	}
-	public void setLc_apply_model_biz_id(String lc_apply_model_biz_id) {
-		this.lc_apply_model_biz_id = lc_apply_model_biz_id;
+	
+	public int getLc_apply_delete() {
+		return lc_apply_delete;
 	}
-	public String getLc_apply_isonlysaverecord() {
+	public void setLc_apply_delete(int lc_apply_delete) {
+		this.lc_apply_delete = lc_apply_delete;
+	}
+	public Date getLc_apply_time() {
+		return lc_apply_time;
+	}
+	public void setLc_apply_time(Date lc_apply_time) {
+		this.lc_apply_time = lc_apply_time;
+	}
+	public int getLc_apply_isonlysaverecord() {
 		return lc_apply_isonlysaverecord;
 	}
-	public void setLc_apply_isonlysaverecord(String lc_apply_isonlysaverecord) {
+	public void setLc_apply_isonlysaverecord(int lc_apply_isonlysaverecord) {
 		this.lc_apply_isonlysaverecord = lc_apply_isonlysaverecord;
+	}
+	public void setLc_apply_model_biz_id(String lc_apply_model_biz_id) {
+		this.lc_apply_model_biz_id = lc_apply_model_biz_id;
 	}
 	public String getXt_constantRemark() {
 		return xt_constantRemark;

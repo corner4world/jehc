@@ -1,5 +1,6 @@
 package jehc.solrmodules.solrmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -12,8 +13,8 @@ public class SolrEntity extends BaseEntity implements Serializable{
 	private String solr_entity_id;/**编号主键**/
 	private String solr_entity_name;/**实体名称**/
 	private String solr_document_id;/**SOLR文档编号**/
-	private String solr_entity_ctime;/**创建时间**/
-	private String solr_entity_mtime;/**修改时间**/
+	private Date solr_entity_ctime;/**创建时间**/
+	private Date solr_entity_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**创建人**/
 	private String solr_entity_pid;/**实体父级编号**/
 	private String solr_entity_text;/**实体备注**/
@@ -37,17 +38,18 @@ public class SolrEntity extends BaseEntity implements Serializable{
 	public String getSolr_document_id(){
 		return solr_document_id;
 	}
-	public void setSolr_entity_ctime(String solr_entity_ctime){
-		this.solr_entity_ctime=solr_entity_ctime;
-	}
-	public String getSolr_entity_ctime(){
+	
+	public Date getSolr_entity_ctime() {
 		return solr_entity_ctime;
 	}
-	public void setSolr_entity_mtime(String solr_entity_mtime){
-		this.solr_entity_mtime=solr_entity_mtime;
+	public void setSolr_entity_ctime(Date solr_entity_ctime) {
+		this.solr_entity_ctime = solr_entity_ctime;
 	}
-	public String getSolr_entity_mtime(){
+	public Date getSolr_entity_mtime() {
 		return solr_entity_mtime;
+	}
+	public void setSolr_entity_mtime(Date solr_entity_mtime) {
+		this.solr_entity_mtime = solr_entity_mtime;
 	}
 	public String getSolr_entity_pid() {
 		return solr_entity_pid;

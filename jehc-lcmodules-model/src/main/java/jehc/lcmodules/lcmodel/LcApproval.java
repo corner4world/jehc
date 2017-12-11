@@ -1,5 +1,6 @@
 package jehc.lcmodules.lcmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -14,7 +15,7 @@ public class LcApproval extends BaseEntity implements Serializable{
 	private String lc_apply_id;/**申请编号**/
 	private String lc_approval_remark;/**作流工审批内容**/
 	private String taskId;/**activiti任务id**/
-	private String lc_approval_time;/**审批时间**/
+	private Date lc_approval_time;/**审批时间**/
 	private String xt_userinfo_id;/**批审人**/
 	private String lc_status_name;
 	public void setLc_approval_id(String lc_approval_id){
@@ -47,11 +48,12 @@ public class LcApproval extends BaseEntity implements Serializable{
 	public String getTaskId(){
 		return taskId;
 	}
-	public void setLc_approval_time(String lc_approval_time){
-		this.lc_approval_time=lc_approval_time;
-	}
-	public String getLc_approval_time(){
+	
+	public Date getLc_approval_time() {
 		return lc_approval_time;
+	}
+	public void setLc_approval_time(Date lc_approval_time) {
+		this.lc_approval_time = lc_approval_time;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;

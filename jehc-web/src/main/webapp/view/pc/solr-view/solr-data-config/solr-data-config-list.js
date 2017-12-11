@@ -45,10 +45,16 @@ $(document).ready(function() {
 				}
 			},
 			{
-				data:'solr_data_config_ctime'
+				data:'solr_data_config_ctime',
+				render:function(data, type, row, meta) {
+					return dateformat(data); 
+				}
 			},
 			{
-				data:'solr_data_config_mtime'
+				data:'solr_data_config_mtime',
+				render:function(data, type, row, meta) {
+					return dateformat(data); 
+				}
 			},
 			{
 				data:'xt_userinfo_realName'

@@ -1,5 +1,6 @@
 package jehc.solrmodules.solrmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -11,8 +12,8 @@ public class SolrSort extends BaseEntity implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String solr_sort_id;/**主键**/
 	private String solr_sort_name;/**排序名称**/
-	private String solr_sort_ctime;/**创建时间**/
-	private String solr_sort_mtime;/**修改时间**/
+	private Date solr_sort_ctime;/**创建时间**/
+	private Date solr_sort_mtime;/**修改时间**/
 	private String solr_sort_code;/**排序code**/
 	private int solr_sort_useboost;/**选用权重**/
 	private String solr_index_id;/**索引编号**/
@@ -36,17 +37,17 @@ public class SolrSort extends BaseEntity implements Serializable{
 	public String getSolr_sort_name(){
 		return solr_sort_name;
 	}
-	public void setSolr_sort_ctime(String solr_sort_ctime){
-		this.solr_sort_ctime=solr_sort_ctime;
-	}
-	public String getSolr_sort_ctime(){
+	public Date getSolr_sort_ctime() {
 		return solr_sort_ctime;
 	}
-	public void setSolr_sort_mtime(String solr_sort_mtime){
-		this.solr_sort_mtime=solr_sort_mtime;
+	public void setSolr_sort_ctime(Date solr_sort_ctime) {
+		this.solr_sort_ctime = solr_sort_ctime;
 	}
-	public String getSolr_sort_mtime(){
+	public Date getSolr_sort_mtime() {
 		return solr_sort_mtime;
+	}
+	public void setSolr_sort_mtime(Date solr_sort_mtime) {
+		this.solr_sort_mtime = solr_sort_mtime;
 	}
 	public void setSolr_sort_code(String solr_sort_code){
 		this.solr_sort_code=solr_sort_code;

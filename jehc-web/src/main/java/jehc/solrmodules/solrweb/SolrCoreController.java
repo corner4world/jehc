@@ -107,14 +107,14 @@ public class SolrCoreController extends BaseAction{
 		if(null != solr_Core && !"".equals(solr_Core)){
 			solr_Core.setSolr_core_id(UUID.toUUID());
 			solr_Core.setXt_userinfo_id(CommonUtils.getXtUid());
-			solr_Core.setSolr_core_ctime(getSimpleDateFormat());
-			solr_Core.setSolr_core_uptime(getSimpleDateFormat());
+			solr_Core.setSolr_core_ctime(getDate());
+			solr_Core.setSolr_core_uptime(getDate());
 			solr_Document.setSolr_document_id(UUID.toUUID());
-			solr_Document.setSolr_document_ctime(getSimpleDateFormat());
+			solr_Document.setSolr_document_ctime(getDate());
 			solr_Document.setXt_userinfo_id(CommonUtils.getXtUid());
 			List<SolrIndex> solr_IndexList = commonSolrIndexList(solrIndexJSON);
 			for(int j = 0; j < solr_IndexList.size(); j++){
-				solr_IndexList.get(j).setSolr_index_ctime(getSimpleDateFormat());
+				solr_IndexList.get(j).setSolr_index_ctime(getDate());
 				solr_IndexList.get(j).setXt_userinfo_id(CommonUtils.getXtUid());
 				solr_IndexList.get(j).setSolr_index_id(UUID.toUUID());
 			}
@@ -137,12 +137,12 @@ public class SolrCoreController extends BaseAction{
 		int i = 0;
 		if(null != solr_Core && !"".equals(solr_Core)){
 			solr_Core.setXt_userinfo_id(CommonUtils.getXtUid());
-			solr_Core.setSolr_core_uptime(getSimpleDateFormat());
-			solr_Document.setSolr_document_ctime(getSimpleDateFormat());
+			solr_Core.setSolr_core_uptime(getDate());
+			solr_Document.setSolr_document_ctime(getDate());
 			solr_Document.setXt_userinfo_id(CommonUtils.getXtUid());
 			List<SolrIndex> solr_IndexList = commonSolrIndexList(solrIndexJSON);
 			for(int j = 0; j < solr_IndexList.size(); j++){
-				solr_IndexList.get(j).setSolr_index_ctime(getSimpleDateFormat());
+				solr_IndexList.get(j).setSolr_index_ctime(getDate());
 				solr_IndexList.get(j).setXt_userinfo_id(CommonUtils.getXtUid());
 			}
 			i=solrCoreService.updateSolrCore(solr_Core,solr_Document,solr_IndexList);

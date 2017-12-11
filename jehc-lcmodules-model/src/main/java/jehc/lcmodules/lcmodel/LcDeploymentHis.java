@@ -1,5 +1,6 @@
 package jehc.lcmodules.lcmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -12,17 +13,12 @@ public class LcDeploymentHis extends BaseEntity implements Serializable{
 	private String id;/**主键**/
 	private String lc_deployment_his_id;/**流程部署Id**/
 	private String lc_deployment_his_name;/**名称**/
-	private String lc_deployment_his_time;/**部署时间**/
+	private Date lc_deployment_his_time;/**部署时间**/
 	private String lc_deployment_his_tenantId;/**租户编号**/
 	private String lc_process_id;/**流程编号**/
 	private String xt_constant_id;
-	private String lc_deployment_his_status;
-	public String getLc_deployment_his_status() {
-		return lc_deployment_his_status;
-	}
-	public void setLc_deployment_his_status(String lc_deployment_his_status) {
-		this.lc_deployment_his_status = lc_deployment_his_status;
-	}
+	private int lc_deployment_his_status;/**状态0正常1关闭**/
+	
 	public String getXt_constant_id() {
 		return xt_constant_id;
 	}
@@ -47,12 +43,7 @@ public class LcDeploymentHis extends BaseEntity implements Serializable{
 	public String getLc_deployment_his_name(){
 		return lc_deployment_his_name;
 	}
-	public void setLc_deployment_his_time(String lc_deployment_his_time){
-		this.lc_deployment_his_time=lc_deployment_his_time;
-	}
-	public String getLc_deployment_his_time(){
-		return lc_deployment_his_time;
-	}
+	
 	public void setLc_deployment_his_tenantId(String lc_deployment_his_tenantId){
 		this.lc_deployment_his_tenantId=lc_deployment_his_tenantId;
 	}
@@ -65,4 +56,17 @@ public class LcDeploymentHis extends BaseEntity implements Serializable{
 	public void setLc_process_id(String lc_process_id) {
 		this.lc_process_id = lc_process_id;
 	}
+	public Date getLc_deployment_his_time() {
+		return lc_deployment_his_time;
+	}
+	public void setLc_deployment_his_time(Date lc_deployment_his_time) {
+		this.lc_deployment_his_time = lc_deployment_his_time;
+	}
+	public int getLc_deployment_his_status() {
+		return lc_deployment_his_status;
+	}
+	public void setLc_deployment_his_status(int lc_deployment_his_status) {
+		this.lc_deployment_his_status = lc_deployment_his_status;
+	}
+	
 }

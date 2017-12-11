@@ -1,4 +1,5 @@
 package jehc.solrmodules.solrweb;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,7 +79,7 @@ public class SolrDataConfigController extends BaseAction{
 		int i = 0;
 		if(null != solr_Data_Config && !"".equals(solr_Data_Config)){
 			solr_Data_Config.setSolr_data_config_id(UUID.toUUID());
-			solr_Data_Config.setSolr_data_config_ctime(getSimpleDateFormat());
+			solr_Data_Config.setSolr_data_config_ctime(getDate());
 			solr_Data_Config.setXt_userinfo_id(getXtUid());
 			solr_Data_Config.setSolr_data_config_datasource(request.getParameter("solr_data_config_datasource"));
 			solr_Data_Config.setSolr_data_config_content(request.getParameter("solr_data_config_content"));
@@ -99,8 +100,8 @@ public class SolrDataConfigController extends BaseAction{
 	@RequestMapping(value="/updateSolrDataConfig",method={RequestMethod.POST,RequestMethod.GET})
 	public String updateSolrDataConfig(SolrDataConfig solr_Data_Config,HttpServletRequest request){
 		int i = 0;
-		if(null != solr_Data_Config && !"".equals(solr_Data_Config)){
-			solr_Data_Config.setSolr_data_config_mtime(getSimpleDateFormat());
+		if(null != solr_Data_Config){
+			solr_Data_Config.setSolr_data_config_mtime(getDate());
 			solr_Data_Config.setXt_userinfo_id(getXtUid());
 			solr_Data_Config.setSolr_data_config_datasource(request.getParameter("solr_data_config_datasource"));
 			solr_Data_Config.setSolr_data_config_content(request.getParameter("solr_data_config_content"));

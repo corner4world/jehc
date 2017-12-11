@@ -1,5 +1,6 @@
 package jehc.solrmodules.solrmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -12,10 +13,10 @@ public class SolrDataConfig extends BaseEntity implements Serializable{
 	private String solr_data_config_id;/**主键**/
 	private String solr_data_config_title;/**标题**/
 	private String solr_data_config_datasource;/**数据源连接配置**/
-	private String solr_data_config_ctime;/**创建时间**/
-	private String solr_data_config_mtime;/**修改时间**/
+	private Date solr_data_config_ctime;/**创建时间**/
+	private Date solr_data_config_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**操作人**/
-	private String solr_data_config_status;/**状态0正常1删除**/
+	private int solr_data_config_status;/**状态0正常1删除**/
 	private String solr_data_config_content;/**配置内容**/
 	public void setSolr_data_config_id(String solr_data_config_id){
 		this.solr_data_config_id=solr_data_config_id;
@@ -35,34 +36,38 @@ public class SolrDataConfig extends BaseEntity implements Serializable{
 	public String getSolr_data_config_datasource(){
 		return solr_data_config_datasource;
 	}
-	public void setSolr_data_config_ctime(String solr_data_config_ctime){
-		this.solr_data_config_ctime=solr_data_config_ctime;
-	}
-	public String getSolr_data_config_ctime(){
-		return solr_data_config_ctime;
-	}
-	public String getSolr_data_config_mtime() {
-		return solr_data_config_mtime;
-	}
-	public void setSolr_data_config_mtime(String solr_data_config_mtime) {
-		this.solr_data_config_mtime = solr_data_config_mtime;
-	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;
 	}
 	public String getXt_userinfo_id(){
 		return xt_userinfo_id;
 	}
-	public void setSolr_data_config_status(String solr_data_config_status){
-		this.solr_data_config_status=solr_data_config_status;
-	}
-	public String getSolr_data_config_status(){
-		return solr_data_config_status;
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	public void setSolr_data_config_content(String solr_data_config_content){
 		this.solr_data_config_content=solr_data_config_content;
 	}
 	public String getSolr_data_config_content(){
 		return solr_data_config_content;
+	}
+	public Date getSolr_data_config_ctime() {
+		return solr_data_config_ctime;
+	}
+	public void setSolr_data_config_ctime(Date solr_data_config_ctime) {
+		this.solr_data_config_ctime = solr_data_config_ctime;
+	}
+	public Date getSolr_data_config_mtime() {
+		return solr_data_config_mtime;
+	}
+	public void setSolr_data_config_mtime(Date solr_data_config_mtime) {
+		this.solr_data_config_mtime = solr_data_config_mtime;
+	}
+	public int getSolr_data_config_status() {
+		return solr_data_config_status;
+	}
+	public void setSolr_data_config_status(int solr_data_config_status) {
+		this.solr_data_config_status = solr_data_config_status;
 	}
 }

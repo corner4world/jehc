@@ -79,7 +79,7 @@ public class SolrSchemaTempletController extends BaseAction{
 		if(null != solr_Schema_Templet && !"".equals(solr_Schema_Templet)){
 			solr_Schema_Templet.setXt_userinfo_id(getXtUid());
 			solr_Schema_Templet.setSolr_schema_templet_content(request.getParameter("solr_schema_templet_content"));
-			solr_Schema_Templet.setSolr_schema_templet_ctime(getSimpleDateFormat());
+			solr_Schema_Templet.setSolr_schema_templet_ctime(getDate());
 			solr_Schema_Templet.setSolr_schema_templet_id(UUID.toUUID());
 			i=solrSchemaTempletService.addSolrSchemaTemplet(solr_Schema_Templet);
 		}
@@ -101,7 +101,7 @@ public class SolrSchemaTempletController extends BaseAction{
 		if(null != solr_Schema_Templet && !"".equals(solr_Schema_Templet)){
 			solr_Schema_Templet.setXt_userinfo_id(getXtUid());
 			solr_Schema_Templet.setSolr_schema_templet_content(request.getParameter("solr_schema_templet_content"));
-			solr_Schema_Templet.setSolr_schema_templet_mtime(getSimpleDateFormat());
+			solr_Schema_Templet.setSolr_schema_templet_mtime(getDate());
 			i=solrSchemaTempletService.updateSolrSchemaTemplet(solr_Schema_Templet);
 		}
 		if(i>0){
