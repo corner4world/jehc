@@ -69,7 +69,7 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
-					${oaNotice.oa_noticeCreateTime }
+					<fmt:formatDate value="${oaNotice.oa_noticeCreateTime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">

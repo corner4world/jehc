@@ -74,7 +74,7 @@ public class OaNoticeController extends BaseAction{
 		int i = 0;
 		if(null != oaNotice && !"".equals(oaNotice)){
 			oaNotice.setOa_noticeID(UUID.toUUID());
-			oaNotice.setOa_noticeCreateTime(getSimpleDateFormat());
+			oaNotice.setOa_noticeCreateTime(getDate());
 			oaNotice.setXt_userinfo_id(getXtUid());
 			i=oaNoticeService.addOaNotice(oaNotice);
 		}

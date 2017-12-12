@@ -53,6 +53,8 @@ public class XtGenerator implements Serializable{
 	private List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList;/**子表集合**/
 	
 	private String kf_mode;/**开发模式0前端采用Extjs模式 1前端采用bootstrap模式*/
+	
+	private String databaseType;/**数据库类型（如 oracel ，mysql）**/
 	public List<XtGeneratorSearchFiled> getXt_generator_search_filedList() {
 		return xt_generator_search_filedList;
 	}
@@ -284,6 +286,12 @@ public class XtGenerator implements Serializable{
 	}
 	public void setKf_mode(String kf_mode) {
 		this.kf_mode = kf_mode;
+	}
+	public String getDatabaseType() {
+		return databaseType;
+	}
+	public void setDatabaseType(String databaseType) {
+		this.databaseType = databaseType;
 	}
 	
 }

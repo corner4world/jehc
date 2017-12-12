@@ -112,6 +112,7 @@ function addXtGenerator(generatorFlag,type){
         }]                
 	});
 	xtGeneratorWinAdd.show(); 
+	sValue('databaseType',$('#databasetype').val());
 	if(generatorFlag == 0){
 		Ext.getCmp('one_to_many_typeFlag').hide();
 		if(type == 1){
@@ -158,6 +159,14 @@ function initXtGeneratorTab(){
 					fieldLabel:'表名备注',
 					name:'xt_generator_tbcomment',
 					id:'xt_generator_tbcomment',
+					hidden:true,
+					hideLabel:true,
+					allowBlank:true
+				  },
+				  {	
+					fieldLabel:'数据库类型',
+					name:'databaseType',
+					id:'databaseType',
 					hidden:true,
 					hideLabel:true,
 					allowBlank:true

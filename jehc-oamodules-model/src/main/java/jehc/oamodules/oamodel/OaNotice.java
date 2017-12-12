@@ -1,6 +1,7 @@
 package jehc.oamodules.oamodel;
 import jehc.xtmodules.xtcore.base.BaseEntity;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
 * oa_notice 公告 
@@ -12,7 +13,7 @@ public class OaNotice extends BaseEntity implements Serializable{
 	private String xt_userinfo_id;/**创建人ID外键**/
 	private String oa_noticeTitle;/**公告题标**/
 	private String oa_noticeContent;/**告公内容**/
-	private String oa_noticeCreateTime;/**建创时间**/
+	private Date oa_noticeCreateTime;/**建创时间**/
 	private int oa_noticeIsDelete;/**否是删除0正常1删除**/
 	private String oa_noticeType;/**类型1一般2重要3非常重要**/
 	private String oa_notice_status;/**审核状态（执行的每一步）**/
@@ -44,11 +45,11 @@ public class OaNotice extends BaseEntity implements Serializable{
 	public String getOa_noticeContent(){
 		return oa_noticeContent;
 	}
-	public void setOa_noticeCreateTime(String oa_noticeCreateTime){
-		this.oa_noticeCreateTime=oa_noticeCreateTime;
-	}
-	public String getOa_noticeCreateTime(){
+	public Date getOa_noticeCreateTime() {
 		return oa_noticeCreateTime;
+	}
+	public void setOa_noticeCreateTime(Date oa_noticeCreateTime) {
+		this.oa_noticeCreateTime = oa_noticeCreateTime;
 	}
 	public void setOa_noticeIsDelete(int oa_noticeIsDelete){
 		this.oa_noticeIsDelete=oa_noticeIsDelete;

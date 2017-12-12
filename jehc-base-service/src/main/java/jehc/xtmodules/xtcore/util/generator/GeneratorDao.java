@@ -457,37 +457,39 @@ public class GeneratorDao extends GeneratorUtil{
      */
     public String createMyBatisAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
-    	//追加注释
-    	sb.append("\r\n\t<!--批量添加-->");
-    	//追加标签开始
-    	sb.append("\r\n\t<insert id=\"addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"\" parameterType=\"list\">");
-    	//追加INSERT语句
-    	sb.append("\r\n\t\tINSERT INTO\r\n");
-    	sb.append("\t\t\t"+xt_Generator.getXt_generator_tbname()+"\r\n\t\t\t(\r\n");
-    	//追加列
-    	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
-    		if(i == xt_Generator_Table_ColumnList.size()-1){
-    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+"\r\n");
-    		}else{
-    			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+",\r\n");
-    		}
+    	if("mysql".equals(xt_Generator.getDatabaseType())){
+    		//追加注释
+        	sb.append("\r\n\t<!--批量添加-->");
+        	//追加标签开始
+        	sb.append("\r\n\t<insert id=\"addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"\" parameterType=\"list\">");
+        	//追加INSERT语句
+        	sb.append("\r\n\t\tINSERT INTO\r\n");
+        	sb.append("\t\t\t"+xt_Generator.getXt_generator_tbname()+"\r\n\t\t\t(\r\n");
+        	//追加列
+        	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
+        		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+        		if(i == xt_Generator_Table_ColumnList.size()-1){
+        			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+"\r\n");
+        		}else{
+        			sb.append("\t\t\t"+xt_Generator_Table_Column.getCOLUMN_NAME()+",\r\n");
+        		}
+        	}
+        	sb.append("\t\t\t)\r\n");
+        	sb.append("\t\t\tVALUES\r\n");
+        	sb.append("\t\t<foreach collection=\"list\" item=\"item\" index=\"index\" separator=\",\">\r\n");
+        	sb.append("\t\t\t(\r\n");
+        	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
+        		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
+        		if(i == xt_Generator_Table_ColumnList.size()-1){
+        			sb.append("\t\t\t#{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
+        		}else{
+        			sb.append("\t\t\t#{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
+        		}
+        	}
+        	sb.append("\t\t\t)\r\n");
+        	sb.append("\t\t</foreach>\r\n");
+        	sb.append("\t</insert>\r\n");
     	}
-    	sb.append("\t\t\t)\r\n");
-    	sb.append("\t\t\tVALUES\r\n");
-    	sb.append("\t\t<foreach collection=\"list\" item=\"item\" index=\"index\" separator=\",\">\r\n");
-    	sb.append("\t\t\t(\r\n");
-    	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
-    		XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
-    		if(i == xt_Generator_Table_ColumnList.size()-1){
-    			sb.append("\t\t\t#{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"}\r\n");
-    		}else{
-    			sb.append("\t\t\t#{item."+xt_Generator_Table_Column.getCOLUMN_NAME()+"},\r\n");
-    		}
-    	}
-    	sb.append("\t\t\t)\r\n");
-    	sb.append("\t\t</foreach>\r\n");
-    	sb.append("\t</insert>\r\n");
     	return sb.toString();
     }
     
@@ -791,14 +793,16 @@ public class GeneratorDao extends GeneratorUtil{
      */
     public String createDaoAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
-    	//添加注释
-    	sb.append("\t/**\r\n");
-    	sb.append("\t* 批量添加\r\n");
-        sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+"List \r\n");
-        sb.append("\t* @return\r\n");
-        sb.append("\t*/\r\n");
-        //添加方法
-    	sb.append("\tpublic int addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"(List<"+toUpperCase(xt_Generator.getXt_generator_tbname())+"> "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
+    	if("mysql".equals(xt_Generator.getDatabaseType())){
+    		//添加注释
+        	sb.append("\t/**\r\n");
+        	sb.append("\t* 批量添加\r\n");
+            sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+"List \r\n");
+            sb.append("\t* @return\r\n");
+            sb.append("\t*/\r\n");
+            //添加方法
+        	sb.append("\tpublic int addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"(List<"+toUpperCase(xt_Generator.getXt_generator_tbname())+"> "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
+    	}
     	return sb.toString();
     }
     /**
@@ -1095,16 +1099,18 @@ public class GeneratorDao extends GeneratorUtil{
      */
     public String createDaoImplAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
-    	//添加注释
-    	sb.append("\t/**\r\n");
-    	sb.append("\t* 批量添加\r\n");
-        sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+"List \r\n");
-        sb.append("\t* @return\r\n");
-        sb.append("\t*/\r\n");
-        //添加方法
-    	sb.append("\tpublic int addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"(List<"+toUpperCase(xt_Generator.getXt_generator_tbname())+"> "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List){\r\n");
-    	sb.append("\t\treturn this.add(\"addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"\", "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
-    	sb.append("\t}\r\n");
+    	if("mysql".equals(xt_Generator.getDatabaseType())){
+    		//添加注释
+        	sb.append("\t/**\r\n");
+        	sb.append("\t* 批量添加\r\n");
+            sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+"List \r\n");
+            sb.append("\t* @return\r\n");
+            sb.append("\t*/\r\n");
+            //添加方法
+        	sb.append("\tpublic int addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"(List<"+toUpperCase(xt_Generator.getXt_generator_tbname())+"> "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List){\r\n");
+        	sb.append("\t\treturn this.add(\"addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"\", "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
+        	sb.append("\t}\r\n");
+    	}
     	return sb.toString();
     }
     

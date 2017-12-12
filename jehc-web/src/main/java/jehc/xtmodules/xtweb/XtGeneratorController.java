@@ -11,13 +11,11 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,12 +36,14 @@ import jehc.xtmodules.xtmodel.XtGeneratorForbidtable;
 import jehc.xtmodules.xtmodel.XtGeneratorGridColumn;
 import jehc.xtmodules.xtmodel.XtGeneratorSearchFiled;
 import jehc.xtmodules.xtmodel.XtGeneratorTable;
-import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
 import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
-import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
 import jehc.xtmodules.xtmodel.XtGeneratorTableColumnForm;
-import jehc.xtmodules.xtservice.XtGeneratorService;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
+import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
 import jehc.xtmodules.xtservice.XtGeneratorForbidtableService;
+import jehc.xtmodules.xtservice.XtGeneratorService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 /**
  * 代码生成器
  * @author邓纯杰
@@ -70,7 +70,9 @@ public class XtGeneratorController extends BaseAction {
 	 * @return
 	 */
 	@RequestMapping(value="/loadXtGenerator",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadXtGenerator(XtGenerator xt_Generator,HttpServletRequest request) {
+	public ModelAndView loadXtGenerator(XtGenerator xt_Generator,HttpServletRequest request,Model model) {
+		DbInfo dbInfo = DBMSMetaUtil.excuteDB(null);
+		model.addAttribute("dbInfo", dbInfo);
 		return new ModelAndView("pc/xt-view/xt-generator/xt-generator-list");
 	}
 	
@@ -112,14 +114,14 @@ public class XtGeneratorController extends BaseAction {
 			for(int i = 0; i < columns.size(); i++){
 				Map<String, Object> map = columns.get(i);
 				XtGeneratorTableColumn xt_Generator_Table_Column = new XtGeneratorTableColumn();
-				if(primaryKey.equals(map.get("COLUMN_NAME").toString())){
+				if(primaryKey.equals(""+map.get("COLUMN_NAME"))){
 					xt_Generator_Table_Column.setCOLUMN_KEY("PRI");
 				}
-				xt_Generator_Table_Column.setCOLUMN_NAME(map.get("COLUMN_NAME").toString());
-				xt_Generator_Table_Column.setCOLUMN_COMMENT(map.get("REMARKS").toString());
-				xt_Generator_Table_Column.setDATA_TYPE(map.get("TYPE_NAME").toString());
-				xt_Generator_Table_Column.setIS_NULLABLE(map.get("IS_NULLABLE").toString());
-				xt_Generator_Table_Column.setCHARACTER_MAXIMUM_LENGTH(map.get("COLUMN_SIZE").toString());
+				xt_Generator_Table_Column.setCOLUMN_NAME(""+map.get("COLUMN_NAME"));
+				xt_Generator_Table_Column.setCOLUMN_COMMENT(""+map.get("REMARKS"));
+				xt_Generator_Table_Column.setDATA_TYPE(""+map.get("TYPE_NAME"));
+				xt_Generator_Table_Column.setIS_NULLABLE(""+map.get("IS_NULLABLE"));
+				xt_Generator_Table_Column.setCHARACTER_MAXIMUM_LENGTH(""+map.get("COLUMN_SIZE"));
 				xt_Generator_Table_Column.setColumn_label_position("居左");
 				xt_Generator_Table_Column.setColumn_label_anchor("100");
 				xt_Generator_Table_Column.setIsHidden("否");
@@ -165,11 +167,11 @@ public class XtGeneratorController extends BaseAction {
 			Map<String, Object> map = tables.get(i);
 			XtGeneratorTable xt_Generator_Table = new XtGeneratorTable();
 			if(null != map.get("remarks") && !"".equals(map.get("remarks"))){
-				xt_Generator_Table.setTABLE_COMMENT(map.get("remarks").toString());
+				xt_Generator_Table.setTABLE_COMMENT(""+map.get("remarks"));
 			}else{
-				xt_Generator_Table.setTABLE_COMMENT(map.get("table_name").toString());
+				xt_Generator_Table.setTABLE_COMMENT(""+map.get("table_name"));
 			}
-			xt_Generator_Table.setTABLE_NAME(map.get("table_name").toString());
+			xt_Generator_Table.setTABLE_NAME(""+map.get("table_name"));
 			xtGeneratorTableList.add(xt_Generator_Table);
 		}
 		Map<String, Object> condition = new HashMap<String, Object>();
@@ -205,11 +207,11 @@ public class XtGeneratorController extends BaseAction {
 			xtGeneratorTableColumn = new XtGeneratorTableColumn();
 			Map<String, Object> map = columnsPrimary.get(i);
 			if(null != map.get("remarks") && !"".equals(map.get("remarks"))){
-				xtGeneratorTableColumn.setCOLUMN_COMMENT(map.get("remarks").toString());
+				xtGeneratorTableColumn.setCOLUMN_COMMENT(""+map.get("remarks"));
 			}else{
-				xtGeneratorTableColumn.setCOLUMN_COMMENT(map.get("column_name").toString());
+				xtGeneratorTableColumn.setCOLUMN_COMMENT(""+map.get("column_name"));
 			}
-			xtGeneratorTableColumn.setCOLUMN_NAME(map.get("column_name").toString());
+			xtGeneratorTableColumn.setCOLUMN_NAME(""+map.get("column_name"));
 			break;
 		}
 		return outComboDataStr(xtGeneratorTableColumn);
@@ -229,11 +231,11 @@ public class XtGeneratorController extends BaseAction {
 			Map<String, Object> map = tables.get(i);
 			XtGeneratorTable xt_Generator_Table = new XtGeneratorTable();
 			if(null != map.get("remarks") && !"".equals(map.get("remarks"))){
-				xt_Generator_Table.setTABLE_COMMENT(map.get("remarks").toString());
+				xt_Generator_Table.setTABLE_COMMENT(""+map.get("remarks"));
 			}else{
-				xt_Generator_Table.setTABLE_COMMENT(map.get("table_name").toString());
+				xt_Generator_Table.setTABLE_COMMENT(""+map.get("table_name"));
 			}
-			xt_Generator_Table.setTABLE_NAME(map.get("table_name").toString());
+			xt_Generator_Table.setTABLE_NAME(""+map.get("table_name"));
 			xtGeneratorTableList.add(xt_Generator_Table);
 		}
 		Map<String, Object> condition = new HashMap<String, Object>();

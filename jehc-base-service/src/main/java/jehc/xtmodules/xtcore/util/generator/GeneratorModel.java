@@ -50,6 +50,7 @@ public class GeneratorModel extends GeneratorUtil{
         	sb.append("import jehc.xtmodules.xtcore.base.BaseEntity;\r\n");
         }
         sb.append("import java.io.Serializable;\r\n");
+        sb.append("import java.util.Date;\r\n");
         //判断是否为一对多 并且是主表 如果为一对多则导入实体
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
         	List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();

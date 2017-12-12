@@ -77,7 +77,9 @@ public class XtServiceCenterServiceImpl extends BaseService implements XtService
 				}
 			}
 			if(!xt_Service_Center_ParameterList.isEmpty()&&xt_Service_Center_ParameterList.size()>0){
-				xtServiceCenterParameterService.addBatchXtServiceCenterParameter(xt_Service_Center_ParameterList);
+				for(XtServiceCenterParameter xtServiceCenterParameter:xt_Service_Center_ParameterList){
+					xtServiceCenterParameterService.addXtServiceCenterParameter(xtServiceCenterParameter);
+				}
 			}
 		} catch (Exception e) {
 			i = 0;

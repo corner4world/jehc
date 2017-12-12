@@ -529,6 +529,11 @@ public class DBMSMetaUtil {
 		String databasetype = pro.getProperty("databasetype");
 		List<Map<String, Object>> tables = listTables(databasetype, ip, port,dbname, username, password);
 		DbInfo dbInfo = new DbInfo();
+		dbInfo.setIp(ip);
+		dbInfo.setPort(port);
+		dbInfo.setUsername(username);
+		dbInfo.setPassword(password);
+		dbInfo.setDatabasetype(databasetype);
 		dbInfo.setTables(tables);
 		if(null != tableName && !"".equals(tableName)){
 			List<Map<String, Object>> columns = listColumns(databasetype, ip, port,dbname, username, password, tableName);

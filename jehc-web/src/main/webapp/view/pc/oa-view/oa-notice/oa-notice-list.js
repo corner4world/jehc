@@ -65,7 +65,10 @@ $(document).ready(function() {
 				data:'oa_notice_hits'
 			},
 			{
-				data:'oa_noticeCreateTime'
+				data:'oa_noticeCreateTime',
+				render:function(data, type, row, meta) {
+					return dateformat(data); 
+				}
 			},
 			{
 				data:'xt_userinfo_realName'

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtmodel.XtGenerator;
 import jehc.xtmodules.xtmodel.XtGeneratorTableManyToOne;
+import jehc.xtmodules.xtmodel.XtServiceCenterParameter;
 import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
 
 /**
@@ -248,14 +249,16 @@ public class GeneratorService extends GeneratorUtil{
      */
     public String createServiceAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
-    	//添加注释
-    	sb.append("\t/**\r\n");
-    	sb.append("\t* 批量添加\r\n");
-        sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+"List \r\n");
-        sb.append("\t* @return\r\n");
-        sb.append("\t*/\r\n");
-        //添加方法
-    	sb.append("\tpublic int addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"(List<"+toUpperCase(xt_Generator.getXt_generator_tbname())+"> "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
+    	if("mysql".equals(xt_Generator.getDatabaseType())){
+    		//添加注释
+        	sb.append("\t/**\r\n");
+        	sb.append("\t* 批量添加\r\n");
+            sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+"List \r\n");
+            sb.append("\t* @return\r\n");
+            sb.append("\t*/\r\n");
+            //添加方法
+        	sb.append("\tpublic int addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"(List<"+toUpperCase(xt_Generator.getXt_generator_tbname())+"> "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
+    	}
     	return sb.toString();
     }
     /**
@@ -452,7 +455,8 @@ public class GeneratorService extends GeneratorUtil{
     	sb.append("\t\ttry{\r\n");
     	sb.append("\t\t\treturn "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao.get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ListByCondition(condition)"+";\r\n");
     	sb.append("\t\t} catch (Exception e) {\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t}\r\n");
@@ -478,7 +482,8 @@ public class GeneratorService extends GeneratorUtil{
     	sb.append("\t\ttry{\r\n");
     	sb.append("\t\t\treturn "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao.get"+uprepchar(xt_Generator.getXt_generator_tbname())+"ListCountByCondition(condition)"+";\r\n");
     	sb.append("\t\t} catch (Exception e) {\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t}\r\n");
@@ -518,7 +523,8 @@ public class GeneratorService extends GeneratorUtil{
     	}
     	sb.append("\t\t\treturn "+lowfristchar(xt_Generator.getXt_generator_tbname())+";\r\n");
     	sb.append("\t\t} catch (Exception e) {\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t}\r\n");
@@ -565,7 +571,15 @@ public class GeneratorService extends GeneratorUtil{
             		sb.append("\t\t\t\t}\r\n");
             		sb.append("\t\t\t}\r\n");
             		sb.append("\t\t\tif(!"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List.isEmpty()&&"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List.size()>0){\r\n");
-            		sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.addBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List);\r\n");
+            		//oracle不采用批量插入 mysql 依然采用批量插入
+            		if("mysql".equals(xt_Generator.getDatabaseType())){
+            			sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.addBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List);\r\n");
+            		}else{
+            			//oracle 及其他采用循环插入
+            			sb.append("\t\t\t\tfor("+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+" "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+":"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List){\r\n");
+            			sb.append("\t\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.add"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+");\r\n");
+            			sb.append("\t\t\t\t}\r\n");
+            		}
             		sb.append("\t\t\t}\r\n");
             	}
         	}else{
@@ -581,14 +595,23 @@ public class GeneratorService extends GeneratorUtil{
                 	sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List.get(j).set"+initcap(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_fkey())+"("+lowfristchar(xt_Generator.getXt_generator_tbname())+".get"+getColumnKeyUpOneChar(xt_Generator_Table_ColumnList)+"());\r\n");
                 	sb.append("\t\t\t}\r\n");
                 	sb.append("\t\t\tif(!"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"List.isEmpty()&&"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"List.size()>0){\r\n");
-                	sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.addBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List);\r\n");
+                	//oracle不采用批量插入 mysql 依然采用批量插入
+            		if("mysql".equals(xt_Generator.getDatabaseType())){
+            			sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.addBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List);\r\n");
+            		}else{
+            			//oracle 及其他采用循环插入
+            			sb.append("\t\t\t\tfor("+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+" "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+":"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"List){\r\n");
+            			sb.append("\t\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.add"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+");\r\n");
+            			sb.append("\t\t\t\t}\r\n");
+            		}
                 	sb.append("\t\t\t}\r\n");
             	}
         	}
         }
     	sb.append("\t\t} catch (Exception e) {\r\n");
     	sb.append("\t\t\ti = 0;\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t\treturn i;\r\n");
@@ -647,7 +670,15 @@ public class GeneratorService extends GeneratorUtil{
             		sb.append("\t\t\t}\r\n");
             		//操作数据库
             		sb.append("\t\t\tif(!"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList.isEmpty()&&"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList.size()>0){\r\n");
-            		sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.addBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList);\r\n");
+            		//oracle不采用批量插入 mysql 依然采用批量插入
+            		if("mysql".equals(xt_Generator.getDatabaseType())){
+            			sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.addBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList);\r\n");
+            		}else{
+            			//oracle 及其他采用循环插入
+            			sb.append("\t\t\t\tfor("+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+" "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+":"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList){\r\n");
+            			sb.append("\t\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.add"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+");\r\n");
+            			sb.append("\t\t\t\t}\r\n");
+            		}
             		sb.append("\t\t\t}\r\n");
             		sb.append("\t\t\tif(!"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"UpdateList.isEmpty()&&"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"UpdateList.size()>0){\r\n");
             		sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.updateBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"UpdateList);\r\n");
@@ -673,7 +704,15 @@ public class GeneratorService extends GeneratorUtil{
             		sb.append("\t\t\t\t}\r\n");
                 	sb.append("\t\t\t}\r\n");
                 	sb.append("\t\t\tif(!"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"AddList.isEmpty()&&"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"AddList.size()>0){\r\n");
-                	sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.addBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList);\r\n");
+                	//oracle不采用批量插入 mysql 依然采用批量插入
+            		if("mysql".equals(xt_Generator.getDatabaseType())){
+            			sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.addBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList);\r\n");
+            		}else{
+            			//oracle 及其他采用循环插入
+            			sb.append("\t\t\t\tfor("+toUpperCase(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+" "+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+":"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"AddList){\r\n");
+            			sb.append("\t\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.add"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+");\r\n");
+            			sb.append("\t\t\t\t}\r\n");
+            		}
                 	sb.append("\t\t\t}\r\n");
             		sb.append("\t\t\tif(!"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"UpdateList.isEmpty()&&"+xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name()+"UpdateList.size()>0){\r\n");
                 	sb.append("\t\t\t\t"+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"Service.updateBatch"+uprepchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"("+lowfristchar(xt_Generator_TableMany_To_One.getXt_generator_one_to_many_table_name())+"UpdateList);\r\n");
@@ -683,7 +722,8 @@ public class GeneratorService extends GeneratorUtil{
         }
     	sb.append("\t\t} catch (Exception e) {\r\n");
     	sb.append("\t\t\ti = 0;\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t\treturn i;\r\n");
@@ -779,7 +819,8 @@ public class GeneratorService extends GeneratorUtil{
         }
     	sb.append("\t\t} catch (Exception e) {\r\n");
     	sb.append("\t\t\ti = 0;\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t\treturn i;\r\n");
@@ -821,7 +862,8 @@ public class GeneratorService extends GeneratorUtil{
     	}
     	sb.append("\t\t} catch (Exception e) {\r\n");
     	sb.append("\t\t\ti = 0;\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t\treturn i;\r\n");
@@ -836,26 +878,29 @@ public class GeneratorService extends GeneratorUtil{
      */
     public String createServiceImplAddBatch(List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList,XtGenerator xt_Generator){
     	StringBuffer sb = new StringBuffer();
-    	//添加注释
-    	sb.append("\t/**\r\n");
-    	sb.append("\t* 批量添加\r\n");
-        sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+"List \r\n");
-        sb.append("\t* @return\r\n");
-        sb.append("\t*/\r\n");
-        //添加方法
-    	sb.append("\tpublic int addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"(List<"+toUpperCase(xt_Generator.getXt_generator_tbname())+"> "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List){\r\n");
-    	//定义返回值
-    	sb.append("\t\tint i = 0;\r\n");
-    	//定义cry catch模块
-    	sb.append("\t\ttry {\r\n");
-    	sb.append("\t\t\ti = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao.addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"("+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
-    	sb.append("\t\t} catch (Exception e) {\r\n");
-    	sb.append("\t\t\ti = 0;\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
-    	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
-    	sb.append("\t\t}\r\n");
-    	sb.append("\t\treturn i;\r\n");
-    	sb.append("\t}\r\n");
+    	if("mysql".equals(xt_Generator.getDatabaseType())){
+    		//添加注释
+        	sb.append("\t/**\r\n");
+        	sb.append("\t* 批量添加\r\n");
+            sb.append("\t* @param "+xt_Generator.getXt_generator_tbname()+"List \r\n");
+            sb.append("\t* @return\r\n");
+            sb.append("\t*/\r\n");
+            //添加方法
+        	sb.append("\tpublic int addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"(List<"+toUpperCase(xt_Generator.getXt_generator_tbname())+"> "+lowfristchar(xt_Generator.getXt_generator_tbname())+"List){\r\n");
+        	//定义返回值
+        	sb.append("\t\tint i = 0;\r\n");
+        	//定义cry catch模块
+        	sb.append("\t\ttry {\r\n");
+        	sb.append("\t\t\ti = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao.addBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"("+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
+        	sb.append("\t\t} catch (Exception e) {\r\n");
+        	sb.append("\t\t\ti = 0;\r\n");
+//        	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+        	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
+        	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
+        	sb.append("\t\t}\r\n");
+        	sb.append("\t\treturn i;\r\n");
+        	sb.append("\t}\r\n");
+    	}
     	return sb.toString();
     }
     /**
@@ -881,7 +926,8 @@ public class GeneratorService extends GeneratorUtil{
     	sb.append("\t\t\ti = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao.updateBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"("+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
     	sb.append("\t\t} catch (Exception e) {\r\n");
     	sb.append("\t\t\ti = 0;\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t\treturn i;\r\n");
@@ -911,7 +957,8 @@ public class GeneratorService extends GeneratorUtil{
     	sb.append("\t\t\ti = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao.updateBatch"+uprepchar(xt_Generator.getXt_generator_tbname())+"BySelective("+lowfristchar(xt_Generator.getXt_generator_tbname())+"List);\r\n");
     	sb.append("\t\t} catch (Exception e) {\r\n");
     	sb.append("\t\t\ti = 0;\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t\treturn i;\r\n");
@@ -941,7 +988,8 @@ public class GeneratorService extends GeneratorUtil{
     	sb.append("\t\t\ti = "+lowfristchar(xt_Generator.getXt_generator_tbname())+"Dao.del"+uprepchar(xt_Generator.getXt_generator_tbname())+"ByForeignKey("+xt_Generator.getFk()+");\r\n");
     	sb.append("\t\t} catch (Exception e) {\r\n");
     	sb.append("\t\t\ti = 0;\r\n");
-    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+//    	sb.append("\t\t\t/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/\r\n");
+    	sb.append("\t\t\t/**捕捉异常并回滚**/\r\n");
     	sb.append("\t\t\tthrow new ExceptionUtil(e.getMessage(),e.getCause());\r\n");
     	sb.append("\t\t}\r\n");
     	sb.append("\t\treturn i;\r\n");

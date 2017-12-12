@@ -7,8 +7,8 @@ import org.slf4j.LoggerFactory;
 
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtmodel.XtGeneratorTableColumn;
-import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
 import jehc.xtmodules.xtmodel.XtGeneratorTableColumnForm;
+import jehc.xtmodules.xtmodel.XtGeneratorTableColumnManyToOne;
 
 /**
  * 代码生成支持类共用
@@ -216,9 +216,11 @@ public class GeneratorUtil {
                 || sqlType.equalsIgnoreCase("enum")){
             return "String";
         }else if(sqlType.equalsIgnoreCase("datetime")||sqlType.equalsIgnoreCase("date")||sqlType.equalsIgnoreCase("time")){
-            return "String";
+            return "Date";
+        }else if(sqlType.equalsIgnoreCase("timestamp")){
+        	 return "Long";
         }else if(sqlType.equalsIgnoreCase("image")){
-            return "String";
+    	 return "String";
         }else{
         	return "String";
         }

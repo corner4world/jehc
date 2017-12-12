@@ -15,5 +15,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../view/pc/xt-view/xt-generator/xt-generator-one-to-many-add.js"></script>  
 </head>  
 <body>  
+<input type="hidden" id="databasetype" value="${dbInfo.databasetype }">
 </body>  
 </html> 
