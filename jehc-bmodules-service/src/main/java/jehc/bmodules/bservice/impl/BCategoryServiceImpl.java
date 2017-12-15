@@ -106,4 +106,18 @@ public class BCategoryServiceImpl extends BaseService implements BCategoryServic
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
+	
+	/**
+	 * 根据条件查找集合（前端提供）
+	 * @param condition
+	 * @return
+	 */
+	public List<BCategory> getBCategoryListForFrontByCondition(Map<String,Object> condition){
+		try{
+			return bCategoryDao.getBCategoryListForFrontByCondition(condition);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
 }

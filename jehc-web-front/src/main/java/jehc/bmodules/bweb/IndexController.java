@@ -55,64 +55,57 @@ public class IndexController extends BaseAction{
 	 */
 	@RequestMapping(value="/index.html",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView index(Model model,HttpServletRequest request){
-		String jehcimg_base_url = CommonUtils.getXtPathCache("jehcimg_base_url").get(0).getXt_path();
+		String jehcsources_base_url = CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path();
 		//品牌
 		Map<String, Object> condition = new HashMap<String, Object>();
-		condition.put("offset", 0);
-		condition.put("pageSize", 20);
+		commonHPager(condition,request,0,20);
 		List<BBrand> bBrandList = bBrandService.getBBrandListByCondition(condition);
 		//一级分类
 		condition = new HashMap<String, Object>();
 		condition.put("b_category_pid", "0");
-		condition.put("offset", 0);
-		condition.put("pageSize", 50);
-		List<BCategory> bCategoryList = bCategoryService.getBCategoryListAllByCondition(condition);
+		commonHPager(condition,request,0,50);
+		List<BCategory> bCategoryList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 		for(int i = 0; i < bCategoryList.size(); i++){
 			BCategory bCategory = bCategoryList.get(i);
 			condition = new HashMap<String, Object>();
-			condition.put("offset", 0);
-			condition.put("pageSize", 50);
+			commonHPager(condition,request,0,50);
 			condition.put("b_category_pid", bCategory.getB_category_id());
 			//二级分类
-			List<BCategory> bCategoryTwoList = bCategoryService.getBCategoryListAllByCondition(condition);
+			List<BCategory> bCategoryTwoList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 			condition.put("b_category_pid", bCategory.getB_category_id());
 			for(int j = 0; j < bCategoryTwoList.size(); j++){
 				BCategory bCategoryTwo = bCategoryTwoList.get(j);
 				//三级分类
 				condition = new HashMap<String, Object>();
-				condition.put("offset", 0);
-				condition.put("pageSize", 50);
+				commonHPager(condition,request,0,50);
 				condition.put("b_category_pid", bCategoryTwo.getB_category_id());
-				List<BCategory> bCategoryThreeList = bCategoryService.getBCategoryListAllByCondition(condition);
+				List<BCategory> bCategoryThreeList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 				bCategoryTwoList.get(j).setBcategorys(bCategoryThreeList);
 			}
 			bCategoryList.get(i).setBcategorys(bCategoryTwoList);
 		}
 		//滚动图片展示
 		condition = new HashMap<String, Object>();
-		condition.put("offset", 0);
-		condition.put("pageSize", 5);
+		commonHPager(condition,request,0,5);
 		List<BRecommend> bRecommendList = bRecommendService.getBRecommendListByCondition(condition);
 		//商品主信息列表
 		condition = new HashMap<String, Object>();
-		condition.put("offset", 0);
-		condition.put("pageSize", 8);
+		commonHPager(condition,request,0,8);
 		List<BProduct> bProductList = bProductService.getBProductListByCondition(condition);
 		for(int i = 0; i < bProductList.size(); i++){
 			condition = new HashMap<String, Object>();
-			condition.put("offset", 0);
-			condition.put("pageSize", 4);
+			commonHPager(condition,request,0,4);
 			condition.put("b_product_id", bProductList.get(i).getB_product_id());
 			bProductList.get(i).setBproductImgDefaultList(bProductImgDefaultService.getBProductImgDefaultListByCondition(condition));
 		}
 		for(int i = 0; i < bProductList.size(); i++){
-			bProductList.get(i).setJehcimg_base_url(jehcimg_base_url);
+			bProductList.get(i).setJehcimg_base_url(jehcsources_base_url);
 		}
 		model.addAttribute("bProductList", bProductList);
 		model.addAttribute("bCategoryList", bCategoryList);
 		model.addAttribute("bBrandList", bBrandList);
 		model.addAttribute("bRecommendList", bRecommendList);
-		model.addAttribute("jehcimg_base_url", jehcimg_base_url);
+		model.addAttribute("jehcimg_base_url", jehcsources_base_url);
 		return new ModelAndView("pc/index");
 	}
 	
@@ -124,35 +117,31 @@ public class IndexController extends BaseAction{
 	 */
 	@RequestMapping(value="/detail/{b_product_id}",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView detail(@PathVariable("b_product_id")String b_product_id,Model model,HttpServletRequest request){
-		String jehcimg_base_url = CommonUtils.getXtPathCache("jehcimg_base_url").get(0).getXt_path();
+		String jehcsources_base_url = CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path();
 		//品牌
 		Map<String, Object> condition = new HashMap<String, Object>();
-		condition.put("offset", 0);
-		condition.put("pageSize", 20);
+		commonHPager(condition,request,0,20);
 		List<BBrand> bBrandList = bBrandService.getBBrandListByCondition(condition);
 		//一级分类
 		condition = new HashMap<String, Object>();
 		condition.put("b_category_pid", "0");
-		condition.put("offset", 0);
-		condition.put("pageSize", 50);
-		List<BCategory> bCategoryList = bCategoryService.getBCategoryListAllByCondition(condition);
+		commonHPager(condition,request,0,50);
+		List<BCategory> bCategoryList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 		for(int i = 0; i < bCategoryList.size(); i++){
 			BCategory bCategory = bCategoryList.get(i);
 			condition = new HashMap<String, Object>();
-			condition.put("offset", 0);
-			condition.put("pageSize", 50);
+			commonHPager(condition,request,0,50);
 			condition.put("b_category_pid", bCategory.getB_category_id());
 			//二级分类
-			List<BCategory> bCategoryTwoList = bCategoryService.getBCategoryListAllByCondition(condition);
+			List<BCategory> bCategoryTwoList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 			condition.put("b_category_pid", bCategory.getB_category_id());
 			for(int j = 0; j < bCategoryTwoList.size(); j++){
 				BCategory bCategoryTwo = bCategoryTwoList.get(j);
 				//三级分类
 				condition = new HashMap<String, Object>();
-				condition.put("offset", 0);
-				condition.put("pageSize", 50);
+				commonHPager(condition,request,0,50);
 				condition.put("b_category_pid", bCategoryTwo.getB_category_id());
-				List<BCategory> bCategoryThreeList = bCategoryService.getBCategoryListAllByCondition(condition);
+				List<BCategory> bCategoryThreeList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 				bCategoryTwoList.get(j).setBcategorys(bCategoryThreeList);
 			}
 			bCategoryList.get(i).setBcategorys(bCategoryTwoList);
@@ -162,25 +151,22 @@ public class IndexController extends BaseAction{
 		condition = new HashMap<String, Object>();
 		condition.put("b_product_id", b_product_id);
 		BProduct bProduct = bProductService.getBProductById(b_product_id);
-		condition.put("offset", 0);
-		condition.put("pageSize", 4);
+		commonHPager(condition,request,0,4);
 		condition.put("b_product_img_type", "1");
 		//商品默认图片
 		List<BProductImgDefault> bProductImgDefaultList = bProductImgDefaultService.getBProductImgDefaultListByCondition(condition);
 		//商品默认颜色
-		condition.put("offset", 0);
-		condition.put("pageSize", 10);
+		commonHPager(condition,request,0,10);
 		condition.put("b_product_id", b_product_id);
 		List<BProductColorDefault> bProductColorDefaultList = bProductColorDefaultService.getBProductColorDefaultListByCondition(condition);
 		//滚动图片展示
 		condition = new HashMap<String, Object>();
-		condition.put("offset", 0);
-		condition.put("pageSize", 5);
+		commonHPager(condition,request,0,5);
 		List<BRecommend> bRecommendList = bRecommendService.getBRecommendListByCondition(condition);
 		model.addAttribute("bProduct", bProduct);
 		model.addAttribute("bCategoryList", bCategoryList);
 		model.addAttribute("bBrandList", bBrandList);
-		model.addAttribute("jehcimg_base_url", jehcimg_base_url);
+		model.addAttribute("jehcimg_base_url", jehcsources_base_url);
 		model.addAttribute("bProductColorDefaultList", bProductColorDefaultList);
 		model.addAttribute("bProductImgDefaultList", bProductImgDefaultList);
 		model.addAttribute("bRecommendList", bRecommendList);
@@ -195,35 +181,31 @@ public class IndexController extends BaseAction{
 	 */
 	@RequestMapping(value="/list.html",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView list(Model model,HttpServletRequest request){
-		String jehcimg_base_url = CommonUtils.getXtPathCache("jehcimg_base_url").get(0).getXt_path();
+		String jehcsources_base_url = CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path();
 		//品牌
 		Map<String, Object> condition = new HashMap<String, Object>();
-		condition.put("offset", 0);
-		condition.put("pageSize", 20);
+		commonHPager(condition,request,0,20);
 		List<BBrand> bBrandList = bBrandService.getBBrandListByCondition(condition);
 		//一级分类
 		condition = new HashMap<String, Object>();
 		condition.put("b_category_pid", "0");
-		condition.put("offset", 0);
-		condition.put("pageSize", 50);
-		List<BCategory> bCategoryList = bCategoryService.getBCategoryListAllByCondition(condition);
+		commonHPager(condition,request,0,50);
+		List<BCategory> bCategoryList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 		for(int i = 0; i < bCategoryList.size(); i++){
 			BCategory bCategory = bCategoryList.get(i);
 			condition = new HashMap<String, Object>();
-			condition.put("offset", 0);
-			condition.put("pageSize", 50);
+			commonHPager(condition,request,0,50);
 			condition.put("b_category_pid", bCategory.getB_category_id());
 			//二级分类
-			List<BCategory> bCategoryTwoList = bCategoryService.getBCategoryListAllByCondition(condition);
+			List<BCategory> bCategoryTwoList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 			condition.put("b_category_pid", bCategory.getB_category_id());
 			for(int j = 0; j < bCategoryTwoList.size(); j++){
 				BCategory bCategoryTwo = bCategoryTwoList.get(j);
 				//三级分类
 				condition = new HashMap<String, Object>();
-				condition.put("offset", 0);
-				condition.put("pageSize", 50);
+				commonHPager(condition,request,0,50);
 				condition.put("b_category_pid", bCategoryTwo.getB_category_id());
-				List<BCategory> bCategoryThreeList = bCategoryService.getBCategoryListAllByCondition(condition);
+				List<BCategory> bCategoryThreeList = bCategoryService.getBCategoryListForFrontByCondition(condition);
 				bCategoryTwoList.get(j).setBcategorys(bCategoryThreeList);
 			}
 			bCategoryList.get(i).setBcategorys(bCategoryTwoList);
@@ -231,22 +213,20 @@ public class IndexController extends BaseAction{
 		//省市
 		//滚动图片展示
 		condition = new HashMap<String, Object>();
-		condition.put("offset", 0);
-		condition.put("pageSize", 5);
+		commonHPager(condition,request,0,5);
 		List<BRecommend> bRecommendList = bRecommendService.getBRecommendListByCondition(condition);
 		//商品主信息列表
 		condition = new HashMap<String, Object>();
-		condition.put("offset", 0);
-		condition.put("pageSize", 8);
+		commonHPager(condition,request,0,8);
 		List<BProduct> bProductList = bProductService.getBProductListByCondition(condition);
 		for(int i = 0; i < bProductList.size(); i++){
-			bProductList.get(i).setJehcimg_base_url(jehcimg_base_url);
+			bProductList.get(i).setJehcimg_base_url(jehcsources_base_url);
 		}
 		model.addAttribute("bProductList", bProductList);
 		model.addAttribute("bCategoryList", bCategoryList);
 		model.addAttribute("bBrandList", bBrandList);
 		model.addAttribute("bRecommendList", bRecommendList);
-		model.addAttribute("jehcimg_base_url", jehcimg_base_url);
+		model.addAttribute("jehcimg_base_url", jehcsources_base_url);
 		return new ModelAndView("pc/list");
 	}
 }

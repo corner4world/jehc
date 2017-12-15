@@ -527,6 +527,12 @@ public class BaseAction extends CommonUtils{
 		PageHelper.offsetPage(start, limit);
 	}
 	/**
+	 * 封装共同分页参数
+	 */
+	protected void commonHPager(Map<String, Object> condition,HttpServletRequest request,Integer offset,Integer limit){
+		PageHelper.offsetPage(offset, limit);
+	}
+	/**
 	 * 初始化数据绑定
 	 * 1. 将所有传递进来的String进行HTML编码
 	 * 2. 将字段中Date类型转换为String类型

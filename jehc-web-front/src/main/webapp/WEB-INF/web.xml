@@ -68,6 +68,8 @@
 				classpath*:config/spring/springmvc.xml
 			</param-value>
 		</init-param>
+		<!-- 解决控制层启动并加载 -->
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>

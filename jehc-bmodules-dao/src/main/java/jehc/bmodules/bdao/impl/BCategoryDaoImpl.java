@@ -64,4 +64,14 @@ public class BCategoryDaoImpl  extends BaseDaoImpl implements BCategoryDao{
 	public List<BCategory> getBCategoryListAllByCondition(Map<String,Object> condition){
 		return (List<BCategory>)this.getList("getBCategoryListAllByCondition",condition);
 	}
+	
+	/**
+	 * 根据条件查找集合（前端提供）
+	 * @param condition
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<BCategory> getBCategoryListForFrontByCondition(Map<String,Object> condition){
+		return (List<BCategory>)this.getList("getBCategoryListForFrontByCondition",condition);
+	}
 }

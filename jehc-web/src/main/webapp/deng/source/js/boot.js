@@ -313,7 +313,7 @@ function datatablesCallBack(data, callback, settings,url,opt){
 		  success:function (result){
 			  try {
 				  //setTimeout仅为测试延迟效果
-				  setTimeout(function(){
+//				  setTimeout(function(){
 					  result = eval("(" + result + ")");
 					  //封装返回数据
 					  var returnData = {};
@@ -324,7 +324,7 @@ function datatablesCallBack(data, callback, settings,url,opt){
 					  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
 					  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
 					  callback(returnData);
-				   },200);
+//				   },200);
 			 } catch (e) {
 				 
 			 }
@@ -424,7 +424,7 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 		  success:function (result){
 			  try {
 				  //setTimeout仅为测试延迟效果
-				  setTimeout(function(){
+//				  setTimeout(function(){
 					  result = eval("(" + result + ")");
 					  //封装返回数据
 					  var returnData = {};
@@ -432,7 +432,7 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 					  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
 					  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
 					  callback(returnData);
-				   },200);
+//				   },200);
 			 } catch (e) {
 				 
 			 }

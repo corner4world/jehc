@@ -45,4 +45,11 @@ public interface BCategoryService{
 	 * @return
 	 */
 	public List<BCategory> getBCategoryListAllByCondition(Map<String,Object> condition);
+	
+	/**
+	 * 根据条件查找集合（前端提供）
+	 * @param condition
+	 * @return
+	 */
+	public List<BCategory> getBCategoryListForFrontByCondition(Map<String,Object> condition);
 }

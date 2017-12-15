@@ -15,8 +15,8 @@
 		    xt_userinfo.xt_userinfo_realName as fromName,
             xtuserinfo.xt_userinfo_realName as toName
 		FROM 
-			xt_message AS xt_message LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_message.from_id
-		LEFT JOIN xt_userinfo AS xtuserinfo ON xtuserinfo.xt_userinfo_id = xt_message.to_id
+			xt_message xt_message LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_message.from_id
+		LEFT JOIN xt_userinfo xtuserinfo ON xtuserinfo.xt_userinfo_id = xt_message.to_id
 		WHERE 1=1
 		<if test="null != isread">
 			AND isread = #{isread}
@@ -63,8 +63,8 @@
 		    xt_userinfo.xt_userinfo_realName as fromName,
             xtuserinfo.xt_userinfo_realName as toName
 		FROM 
-			xt_message AS xt_message LEFT JOIN xt_userinfo AS xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_message.from_id
-		LEFT JOIN xt_userinfo AS xtuserinfo ON xtuserinfo.xt_userinfo_id = xt_message.to_id
+			xt_message xt_message LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = xt_message.from_id
+		LEFT JOIN xt_userinfo xtuserinfo ON xtuserinfo.xt_userinfo_id = xt_message.to_id
 		WHERE xt_message_id=#{xt_message_id}
 	</select>
 

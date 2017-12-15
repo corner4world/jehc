@@ -1,5 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -12,8 +13,8 @@ public class BBrand extends BaseEntity implements Serializable{
 	private String b_brand_id;/**品牌编号**/
 	private String b_brand_name;/**品牌名称**/
 	private String b_brand_status;/**状态0可用1禁用**/
-	private String b_brand_ctime;/**创建时间**/
-	private String b_brand_mtime;/**修改时间**/
+	private Date b_brand_ctime;/**创建时间**/
+	private Date b_brand_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**创建人**/
 	private String b_brand_type;/**类型0国内1国外**/
 	private int b_brand_soft;/**排序**/
@@ -35,17 +36,17 @@ public class BBrand extends BaseEntity implements Serializable{
 	public String getB_brand_status(){
 		return b_brand_status;
 	}
-	public void setB_brand_ctime(String b_brand_ctime){
-		this.b_brand_ctime=b_brand_ctime;
-	}
-	public String getB_brand_ctime(){
+	public Date getB_brand_ctime() {
 		return b_brand_ctime;
 	}
-	public void setB_brand_mtime(String b_brand_mtime){
-		this.b_brand_mtime=b_brand_mtime;
+	public void setB_brand_ctime(Date b_brand_ctime) {
+		this.b_brand_ctime = b_brand_ctime;
 	}
-	public String getB_brand_mtime(){
+	public Date getB_brand_mtime() {
 		return b_brand_mtime;
+	}
+	public void setB_brand_mtime(Date b_brand_mtime) {
+		this.b_brand_mtime = b_brand_mtime;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;

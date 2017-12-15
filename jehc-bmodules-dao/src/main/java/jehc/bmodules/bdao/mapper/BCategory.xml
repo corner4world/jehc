@@ -94,13 +94,36 @@
 			b_category.b_category_name,
 			b_category.b_category_pid,
 			b_category.b_category_path,
-			b_category.b_category_ctime AS b_category_ctime,
-			b_category.b_category_mtime AS b_category_mtime,
+			b_category_ctime,
+			b_category_mtime,
 			b_category.b_category_status,
 			b_category.xt_userinfo_id,
 			xt_userinfo.xt_userinfo_realName
 		FROM 
 			b_category b_category LEFT JOIN xt_userinfo xt_userinfo ON b_category.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		WHERE 1=1
+	</select>
+	
+	
+	<!-- 根据条件查找集合（前端提供） -->
+	<select id="getBCategoryListForFrontByCondition" resultType="jehc.bmodules.bmodel.BCategory" parameterType="map">
+		SELECT
+			b_category_id,
+			b_category_name,
+			b_category_pid,
+			b_category_path,
+			b_category_ctime,
+			b_category_mtime,
+			b_category_status,
+			xt_userinfo_id
+		FROM 
+			b_category
+		WHERE 1=1
+		<if test="null != b_category_pid">
+			AND b_category_pid = #{b_category_pid}
+		</if>
+		<if test="null != b_category_path">
+			AND b_category_path = #{b_category_path}
+		</if>
 	</select>
 </mapper>

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,7 +57,7 @@ public class BBrandController extends BaseAction{
 		commonHPager(condition,request);
 		List<BBrand> b_BrandList = bBrandService.getBBrandListByCondition(condition);
 		PageInfo<BBrand> page = new PageInfo<BBrand>(b_BrandList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -81,8 +82,7 @@ public class BBrandController extends BaseAction{
 		int i = 0;
 		if(null != b_Brand && !"".equals(b_Brand)){
 			b_Brand.setB_brand_id(UUID.toUUID());
-			b_Brand.setB_brand_ctime(sdf.format(new Date()));
-			b_Brand.setB_brand_mtime(sdf.format(new Date()));
+			b_Brand.setB_brand_ctime(getDate());
 			b_Brand.setXt_userinfo_id(CommonUtils.getXtUid());
 			i=bBrandService.addBBrand(b_Brand);
 		}
@@ -103,7 +103,7 @@ public class BBrandController extends BaseAction{
 		int i = 0;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if(null != b_Brand && !"".equals(b_Brand)){
-			b_Brand.setB_brand_mtime(sdf.format(new Date()));
+			b_Brand.setB_brand_mtime(getDate());
 			b_Brand.setXt_userinfo_id(CommonUtils.getXtUid());
 			i=bBrandService.updateBBrand(b_Brand);
 		}
@@ -165,5 +165,34 @@ public class BBrandController extends BaseAction{
 	public void exportBBrand(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBBrandAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBBrandAdd(BBrand bBrand,HttpServletRequest request){
+		return new ModelAndView("pc/b-view/b-brand/b-brand-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBBrandUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBBrandUpdate(String b_brand_id,HttpServletRequest request, Model model){
+		BBrand bBrand = bBrandService.getBBrandById(b_brand_id);
+		model.addAttribute("bBrand", bBrand);
+		return new ModelAndView("pc/b-view/b-brand/b-brand-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBBrandDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBBrandDetail(String b_brand_id,HttpServletRequest request, Model model){
+		BBrand bBrand = bBrandService.getBBrandById(b_brand_id);
+		model.addAttribute("bBrand", bBrand);
+		return new ModelAndView("pc/b-view/b-brand/b-brand-detail");
 	}
 }

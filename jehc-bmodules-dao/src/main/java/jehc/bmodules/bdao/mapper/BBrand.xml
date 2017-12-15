@@ -8,24 +8,18 @@
 			b_brand.b_brand_id,
 			b_brand.b_brand_name,
 			b_brand.b_brand_status,
-			b_brand.b_brand_ctime AS b_brand_ctime,
-			b_brand.b_brand_mtime AS b_brand_mtime,
+			b_brand.b_brand_ctime,
+			b_brand.b_brand_mtime,
 			b_brand.xt_userinfo_id,
 			b_brand.b_brand_type,
+			b_brand.b_brand_soft,
 			xt_userinfo.xt_userinfo_realName
 		FROM 
-			b_brand b_brand LEFT JOIN xt_userinfo xt_userinfo ON b_brand.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			b_brand b_brand LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = b_brand.xt_userinfo_id
 		WHERE 1=1
 		<if test="null != b_brand_name">
-			AND instr(b_brand.b_brand_name,#{b_brand_name})
+			AND b_brand_name LIKE CONCAT(CONCAT('%',#{b_brand_name}),'%')
 		</if>
-		<if test="null != b_brand_status">
-			AND b_brand.b_brand_status = #{b_brand_status}
-		</if>
-		<if test="null != b_brand_type">
-			AND b_brand.b_brand_type = #{b_brand_type}
-		</if>
-		ORDER BY b_brand_soft ASC
 	</select>
 
 	<!--查询对象-->
@@ -34,15 +28,15 @@
 			b_brand.b_brand_id,
 			b_brand.b_brand_name,
 			b_brand.b_brand_status,
-			b_brand.b_brand_ctime AS b_brand_ctime,
-			b_brand.b_brand_mtime AS b_brand_mtime,
+			b_brand.b_brand_ctime,
+			b_brand.b_brand_mtime,
 			b_brand.xt_userinfo_id,
 			b_brand.b_brand_type,
 			b_brand.b_brand_soft,
 			xt_userinfo.xt_userinfo_realName
 		FROM 
-			b_brand b_brand LEFT JOIN xt_userinfo xt_userinfo ON b_brand.xt_userinfo_id = xt_userinfo.xt_userinfo_id
-		WHERE b_brand.b_brand_id=#{b_brand_id}
+			b_brand b_brand LEFT JOIN xt_userinfo xt_userinfo ON xt_userinfo.xt_userinfo_id = b_brand.xt_userinfo_id
+		WHERE b_brand_id=#{b_brand_id}
 	</select>
 
 	<!--添加-->
@@ -77,7 +71,6 @@
 		UPDATE
 			b_brand
 		SET
-			b_brand_id = #{b_brand_id},
 			b_brand_name = #{b_brand_name},
 			b_brand_status = #{b_brand_status},
 			b_brand_ctime = #{b_brand_ctime},
@@ -88,6 +81,36 @@
 		WHERE b_brand_id=#{b_brand_id}
 	</update>
 
+	<!--修改（根据动态条件）-->
+	<update id="updateBBrandBySelective" parameterType="jehc.bmodules.bmodel.BBrand">
+		UPDATE
+			b_brand
+		<set>
+			<if test="b_brand_name != null">
+				b_brand_name = #{b_brand_name},
+			</if>
+			<if test="b_brand_status != null">
+				b_brand_status = #{b_brand_status},
+			</if>
+			<if test="b_brand_ctime != null">
+				b_brand_ctime = #{b_brand_ctime},
+			</if>
+			<if test="b_brand_mtime != null">
+				b_brand_mtime = #{b_brand_mtime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="b_brand_type != null">
+				b_brand_type = #{b_brand_type},
+			</if>
+			<if test="b_brand_soft != null">
+				b_brand_soft = #{b_brand_soft},
+			</if>
+		</set>
+		WHERE b_brand_id=#{b_brand_id}
+	</update>
+
 	<!--删除-->
 	<delete id="delBBrand" parameterType="map">
 		DELETE FROM b_brand WHERE b_brand_id IN
@@ -95,4 +118,82 @@
 			#{item}
 		</foreach>
 	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchBBrand" parameterType="list">
+		INSERT INTO
+			b_brand
+			(
+			b_brand_id,
+			b_brand_name,
+			b_brand_status,
+			b_brand_ctime,
+			b_brand_mtime,
+			xt_userinfo_id,
+			b_brand_type,
+			b_brand_soft
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.b_brand_id},
+			#{item.b_brand_name},
+			#{item.b_brand_status},
+			#{item.b_brand_ctime},
+			#{item.b_brand_mtime},
+			#{item.xt_userinfo_id},
+			#{item.b_brand_type},
+			#{item.b_brand_soft}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchBBrand" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				b_brand
+			SET
+				b_brand_name = #{item.b_brand_name},
+				b_brand_status = #{item.b_brand_status},
+				b_brand_ctime = #{item.b_brand_ctime},
+				b_brand_mtime = #{item.b_brand_mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				b_brand_type = #{item.b_brand_type},
+				b_brand_soft = #{item.b_brand_soft}
+			WHERE b_brand_id=#{item.b_brand_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchBBrandBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				b_brand
+			<set>
+				<if test="item.b_brand_name != null">
+					b_brand_name = #{item.b_brand_name},
+				</if>
+				<if test="item.b_brand_status != null">
+					b_brand_status = #{item.b_brand_status},
+				</if>
+				<if test="item.b_brand_ctime != null">
+					b_brand_ctime = #{item.b_brand_ctime},
+				</if>
+				<if test="item.b_brand_mtime != null">
+					b_brand_mtime = #{item.b_brand_mtime},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.b_brand_type != null">
+					b_brand_type = #{item.b_brand_type},
+				</if>
+				<if test="item.b_brand_soft != null">
+					b_brand_soft = #{item.b_brand_soft},
+				</if>
+			</set>
+			WHERE b_brand_id=#{item.b_brand_id}
+		</foreach>
+	</update>
 </mapper>
