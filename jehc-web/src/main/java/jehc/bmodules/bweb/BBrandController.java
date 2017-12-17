@@ -1,6 +1,5 @@
 package jehc.bmodules.bweb;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +58,20 @@ public class BBrandController extends BaseAction{
 		PageInfo<BBrand> page = new PageInfo<BBrand>(b_BrandList);
 		return outPageBootStr(page,request);
 	}
+	
+	/**
+	* 读取所有品牌集合
+	* @param b_brand 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getBBrandList",method={RequestMethod.POST,RequestMethod.GET})
+	public List<BBrand> getBBrandList(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
+		List<BBrand> b_BrandList = bBrandService.getBBrandListByCondition(condition);
+		return b_BrandList;
+	}
+	
 	/**
 	* 获取对象
 	* @param b_brand_id 

@@ -1,5 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -15,10 +16,10 @@ public class BWarehouse extends BaseEntity implements Serializable{
 	private String xt_provinceID;/**所在省份区域**/
 	private String xt_cityID;/**所在城市区域**/
 	private String xt_districtID;/**所在区县区域**/
-	private String b_warehouse_ctime;/**创建时间**/
-	private String b_warehouse_mtime;/**修改时间**/
+	private Date b_warehouse_ctime;/**创建时间**/
+	private Date b_warehouse_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**操作者**/
-	private String b_warehouse_type;/**仓库类型:0赠品1疵品2正品**/
+	private int b_warehouse_type;/**仓库类型:0赠品1疵品2正品**/
 	private String b_seller_id;/**商户编号**/
 	private String xt_provinceName;/**省份**/
 	private String xt_cityName;/**城市*/
@@ -60,29 +61,30 @@ public class BWarehouse extends BaseEntity implements Serializable{
 	public String getXt_districtID(){
 		return xt_districtID;
 	}
-	public void setB_warehouse_ctime(String b_warehouse_ctime){
-		this.b_warehouse_ctime=b_warehouse_ctime;
-	}
-	public String getB_warehouse_ctime(){
-		return b_warehouse_ctime;
-	}
-	public void setB_warehouse_mtime(String b_warehouse_mtime){
-		this.b_warehouse_mtime=b_warehouse_mtime;
-	}
-	public String getB_warehouse_mtime(){
-		return b_warehouse_mtime;
-	}
+	
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;
 	}
 	public String getXt_userinfo_id(){
 		return xt_userinfo_id;
 	}
-	public void setB_warehouse_type(String b_warehouse_type){
-		this.b_warehouse_type=b_warehouse_type;
+	public Date getB_warehouse_ctime() {
+		return b_warehouse_ctime;
 	}
-	public String getB_warehouse_type(){
+	public void setB_warehouse_ctime(Date b_warehouse_ctime) {
+		this.b_warehouse_ctime = b_warehouse_ctime;
+	}
+	public Date getB_warehouse_mtime() {
+		return b_warehouse_mtime;
+	}
+	public void setB_warehouse_mtime(Date b_warehouse_mtime) {
+		this.b_warehouse_mtime = b_warehouse_mtime;
+	}
+	public int getB_warehouse_type() {
 		return b_warehouse_type;
+	}
+	public void setB_warehouse_type(int b_warehouse_type) {
+		this.b_warehouse_type = b_warehouse_type;
 	}
 	public String getXt_provinceName() {
 		return xt_provinceName;

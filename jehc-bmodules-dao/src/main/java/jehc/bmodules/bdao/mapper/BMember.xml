@@ -20,8 +20,8 @@
 			b_member.b_member_qq,
 			b_member.b_member_wb,
 			b_member.b_member_type,
-			b_member.b_member_ctime AS b_member_ctime,
-			b_member.b_member_mtime AS b_member_mtime,
+			b_member.b_member_ctime,
+			b_member.b_member_mtime,
 			xt_province.NAME AS xt_provinceName,
 			xt_city.NAME AS xt_cityName,
 			xt_district.NAME AS xt_districtName
@@ -31,13 +31,13 @@
 			LEFT JOIN xt_area_region xt_district ON xt_district.ID = b_member.xt_districtID
 		WHERE 1=1
 		<if test="null != b_member_name">
-			AND instr(b_member.b_member_name,#{b_member_name})
+			AND b_member.b_member_name LIKE CONCAT(CONCAT('%',#{b_member_name}),'%')
+		</if>
+		<if test="null != b_member_tel">
+			AND b_member.b_member_tel LIKE CONCAT(CONCAT('%',#{b_member_tel}),'%')
 		</if>
 		<if test="null != b_member_type">
 			AND b_member.b_member_type = #{b_member_type}
-		</if>
-		<if test="null != b_member_tel">
-			AND instr(b_member.b_member_tel,#{b_member_tel})
 		</if>
 	</select>
 
@@ -59,8 +59,8 @@
 			b_member_qq,
 			b_member_wb,
 			b_member_type,
-			b_member.b_member_ctime AS b_member_ctime,
-			b_member.b_member_mtime AS b_member_mtime
+			b_member.b_member_ctime,
+			b_member.b_member_mtime
 		FROM 
 			b_member
 		WHERE b_member_id=#{b_member_id}
@@ -86,8 +86,7 @@
 			b_member_qq,
 			b_member_wb,
 			b_member_type,
-			b_member_ctime,
-			b_member_mtime
+			b_member_ctime
 			)
 			VALUES
 			(
@@ -106,8 +105,7 @@
 			#{b_member_qq},
 			#{b_member_wb},
 			#{b_member_type},
-			#{b_member_ctime},
-			#{b_member_mtime}
+			#{b_member_ctime}
 			)
 	</insert>
 

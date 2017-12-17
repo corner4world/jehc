@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,6 @@ import jehc.bmodules.bmodel.BFriendshipLink;
 import jehc.bmodules.bservice.BFriendshipLinkService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
-import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
@@ -54,7 +54,7 @@ public class BFriendshipLinkController extends BaseAction{
 		commonHPager(condition,request);
 		List<BFriendshipLink> b_Friendship_LinkList = bFriendshipLinkService.getBFriendshipLinkListByCondition(condition);
 		PageInfo<BFriendshipLink> page = new PageInfo<BFriendshipLink>(b_Friendship_LinkList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -78,8 +78,8 @@ public class BFriendshipLinkController extends BaseAction{
 		int i = 0;
 		if(null != b_Friendship_Link && !"".equals(b_Friendship_Link)){
 			b_Friendship_Link.setB_friendship_link_id(UUID.toUUID());
-			b_Friendship_Link.setB_friendship_link_ctime(CommonUtils.getSimpleDateFormat());
-			b_Friendship_Link.setXt_userinfo_id(CommonUtils.getXtUid());
+			b_Friendship_Link.setB_friendship_link_ctime(getDate());
+			b_Friendship_Link.setXt_userinfo_id(getXtUid());
 			i=bFriendshipLinkService.addBFriendshipLink(b_Friendship_Link);
 		}
 		if(i>0){
@@ -98,8 +98,8 @@ public class BFriendshipLinkController extends BaseAction{
 	public String updateBFriendshipLink(BFriendshipLink b_Friendship_Link,HttpServletRequest request){
 		int i = 0;
 		if(null != b_Friendship_Link && !"".equals(b_Friendship_Link)){
-			b_Friendship_Link.setXt_userinfo_id(CommonUtils.getXtUid());
-			b_Friendship_Link.setB_friendship_link_mtime(CommonUtils.getSimpleDateFormat());
+			b_Friendship_Link.setXt_userinfo_id(getXtUid());
+			b_Friendship_Link.setB_friendship_link_mtime(getDate());
 			i=bFriendshipLinkService.updateBFriendshipLink(b_Friendship_Link);
 		}
 		if(i>0){
@@ -160,5 +160,34 @@ public class BFriendshipLinkController extends BaseAction{
 	public void exportBFriendshipLink(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBFriendshipLinkAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBFriendshipLinkAdd(BFriendshipLink bFriendshipLink,HttpServletRequest request){
+		return new ModelAndView("pc/b-view/b-friendship-link/b-friendship-link-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBFriendshipLinkUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBFriendshipLinkUpdate(String b_friendship_link_id,HttpServletRequest request, Model model){
+		BFriendshipLink bFriendshipLink = bFriendshipLinkService.getBFriendshipLinkById(b_friendship_link_id);
+		model.addAttribute("bFriendshipLink", bFriendshipLink);
+		return new ModelAndView("pc/b-view/b-friendship-link/b-friendship-link-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBFriendshipLinkDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBFriendshipLinkDetail(String b_friendship_link_id,HttpServletRequest request, Model model){
+		BFriendshipLink bFriendshipLink = bFriendshipLinkService.getBFriendshipLinkById(b_friendship_link_id);
+		model.addAttribute("bFriendshipLink", bFriendshipLink);
+		return new ModelAndView("pc/b-view/b-friendship-link/b-friendship-link-detail");
 	}
 }

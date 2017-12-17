@@ -1,5 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -12,8 +13,8 @@ public class BFriendshipLink extends BaseEntity implements Serializable{
 	private String b_friendship_link_id;/**编号**/
 	private String b_friendship_link_name;/**名称**/
 	private String b_friendship_link_url;/**链接地址**/
-	private String b_friendship_link_ctime;/**创建时间**/
-	private String b_friendship_link_mtime;/**修改时间**/
+	private Date b_friendship_link_ctime;/**创建时间**/
+	private Date b_friendship_link_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**创建人**/
 	private String b_friendship_link_status;/**状态0正常1禁用**/
 	private int b_friendship_link_sort;/**排序**/
@@ -35,17 +36,17 @@ public class BFriendshipLink extends BaseEntity implements Serializable{
 	public String getB_friendship_link_url(){
 		return b_friendship_link_url;
 	}
-	public void setB_friendship_link_ctime(String b_friendship_link_ctime){
-		this.b_friendship_link_ctime=b_friendship_link_ctime;
-	}
-	public String getB_friendship_link_ctime(){
+	public Date getB_friendship_link_ctime() {
 		return b_friendship_link_ctime;
 	}
-	public void setB_friendship_link_mtime(String b_friendship_link_mtime){
-		this.b_friendship_link_mtime=b_friendship_link_mtime;
+	public void setB_friendship_link_ctime(Date b_friendship_link_ctime) {
+		this.b_friendship_link_ctime = b_friendship_link_ctime;
 	}
-	public String getB_friendship_link_mtime(){
+	public Date getB_friendship_link_mtime() {
 		return b_friendship_link_mtime;
+	}
+	public void setB_friendship_link_mtime(Date b_friendship_link_mtime) {
+		this.b_friendship_link_mtime = b_friendship_link_mtime;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;

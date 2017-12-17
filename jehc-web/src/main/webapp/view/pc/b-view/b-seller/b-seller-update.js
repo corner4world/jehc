@@ -1,146 +1,16 @@
-var bSellerWinEdit;
-var bSellerFormEdit;
+//返回r
+function goback(){
+	tlocation("../bSellerController/loadBSeller");
+}
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
 function updateBSeller(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length == 0){
-		msgTishi('请选择要修改的一项！');
-		return;
-	}
-	initBSellerFormEdit();
-	bSellerWinEdit = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-//		maximized:true,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		headerPosition:'left',
-		title:'编辑信息',
-		listeners:{
-			minimize:function(win,opts){
-				win.collapse();
-			}
-		},
-		items:bSellerFormEdit,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(bSellerFormEdit,'../bSellerController/updateBSeller',grid,bSellerWinEdit,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	bSellerWinEdit.show();
-	loadFormData(bSellerFormEdit,'../bSellerController/getBSellerById?b_seller_id='+ record.items[0].data.b_seller_id);
+	submitBForm('defaultForm','../bSellerController/updateBSeller','../bSellerController/loadBSeller');
 }
-function initBSellerFormEdit(){
-	bSellerFormEdit = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
-		},
-		items:[
-		{
-			fieldLabel:'基础卖家编号',
-			xtype:'textfield',
-			hidden:true,
-			name:'b_seller_id',
-			allowBlank:false,
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'卖家名称',
-			xtype:'textfield',
-			name:'b_seller_name',
-			maxLength:100,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
-			name:'b_seller_status',
-			xtype:"combo",
-			store:[["0","可用"],["1","禁用"]],
-            emptyText:"请选择",
-            mode:"local",
-            value:'0',
-            triggerAction:"all",
-            editable:false,
-		},
-		{
-			fieldLabel:'卖家电话',
-			xtype:'textfield',
-			name:'b_seller_tel',
-			maxLength:20,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'卖家等级',
-			xtype:'numberfield',
-			value:'0',
-			name:'b_seller_level',
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'登陆账户编号',
-			xtype:'textfield',
-			name:'b_seller_login_id',
-			maxLength:32,
-			hidden:true,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'银行名称',
-			xtype:'textfield',
-			name:'b_seller_bank',
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'银行卡号',
-			xtype:'textfield',
-			name:'b_seller_bank_num',
-			maxLength:25,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'是否官方',
-			xtype:"combo",
-			store:[["0","是"],["1","否"]],
-            emptyText:"请选择",
-            mode:"local",
-            value:'0',
-            triggerAction:"all",
-            editable:false,
-			name:'b_seller_official'
-		},
-		{
-			fieldLabel:'地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址',
-			xtype:'textfield',
-			name:'b_seller_address',
-			maxLength:200,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'操&nbsp;&nbsp;作&nbsp;者',
-			xtype:'textfield',
-			name:'xt_userinfo_realName',
-			maxLength:32
-		}
-		]
-	});
-}
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+});
+

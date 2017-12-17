@@ -1,5 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -18,10 +19,10 @@ public class BSeller extends BaseEntity implements Serializable{
 	private String b_seller_login_id;/**卖家登陆账户编号**/
 	private String b_seller_bank;/**银行名称**/
 	private String b_seller_bank_num;/**银行卡号**/
-	private String b_seller_official;/**是否官方商店**/
+	private int b_seller_official;/**是否官方商店**/
 	private String b_seller_address;/**地址**/
-	private String b_seller_ctime;/**创建时间**/
-	private String b_seller_mtime;/**修改时间**/
+	private Date b_seller_ctime;/**创建时间**/
+	private Date b_seller_mtime;/**修改时间**/
 	public void setB_seller_id(String b_seller_id){
 		this.b_seller_id=b_seller_id;
 	}
@@ -76,28 +77,29 @@ public class BSeller extends BaseEntity implements Serializable{
 	public String getB_seller_bank_num(){
 		return b_seller_bank_num;
 	}
-	public void setB_seller_official(String b_seller_official){
-		this.b_seller_official=b_seller_official;
-	}
-	public String getB_seller_official(){
+	public int getB_seller_official() {
 		return b_seller_official;
 	}
-	public void setB_seller_address(String b_seller_address){
-		this.b_seller_address=b_seller_address;
+	public void setB_seller_official(int b_seller_official) {
+		this.b_seller_official = b_seller_official;
 	}
-	public String getB_seller_address(){
+	public String getB_seller_address() {
 		return b_seller_address;
 	}
-	public void setB_seller_ctime(String b_seller_ctime){
-		this.b_seller_ctime=b_seller_ctime;
+	public void setB_seller_address(String b_seller_address) {
+		this.b_seller_address = b_seller_address;
 	}
-	public String getB_seller_ctime(){
+	public Date getB_seller_ctime() {
 		return b_seller_ctime;
 	}
-	public void setB_seller_mtime(String b_seller_mtime){
-		this.b_seller_mtime=b_seller_mtime;
+	public void setB_seller_ctime(Date b_seller_ctime) {
+		this.b_seller_ctime = b_seller_ctime;
 	}
-	public String getB_seller_mtime(){
+	public Date getB_seller_mtime() {
 		return b_seller_mtime;
 	}
+	public void setB_seller_mtime(Date b_seller_mtime) {
+		this.b_seller_mtime = b_seller_mtime;
+	}
+	
 }

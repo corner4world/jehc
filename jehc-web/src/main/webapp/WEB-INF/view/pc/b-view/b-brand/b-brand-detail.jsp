@@ -53,19 +53,25 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
+					<label class="control-label">
 					<fmt:formatDate value="${bBrand.b_brand_ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>
+					</label>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">修改时间</label>
 				<div class="col-lg-6">
+					<label class="control-label">
 					<fmt:formatDate value="${bBrand.b_brand_mtime }" pattern="yyyy-MM-dd HH:mm:ss"/>
+					</label>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创&nbsp;建&nbsp;&nbsp;人</label>
 				<div class="col-lg-6">
+					<label class="control-label">
 					${bBrand.xt_userinfo_realName }
+					</label>
 				</div>
 			</div>
 			<div class="form-group">

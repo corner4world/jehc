@@ -20,6 +20,7 @@ import jehc.bmodules.bmodel.BCategory;
 import jehc.bmodules.bservice.BCategoryService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
+import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
@@ -187,5 +188,42 @@ public class BCategoryController extends BaseAction{
 	public void exportBCategory(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 读取所有
+	* @param b_category 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getBCategoryList",method={RequestMethod.POST,RequestMethod.GET})
+	public String getBCategoryList(HttpServletRequest request){
+		Map<String, Object> condition = new HashMap<String, Object>();
+		String expanded = request.getParameter("expanded");
+		String singleClickExpand = request.getParameter("singleClickExpand");
+		List<BaseZTreeEntity> list = new ArrayList<BaseZTreeEntity>();
+		List<BCategory> b_CategoryList = bCategoryService.getBCategoryListAllByCondition(condition);
+		for(int j = 0; j < b_CategoryList.size(); j++){
+			BCategory b_Category = b_CategoryList.get(j);
+			BaseZTreeEntity baseZTreeEntity = new BaseZTreeEntity();
+			baseZTreeEntity.setId(b_Category.getB_category_id());
+			baseZTreeEntity.setPid(b_Category.getB_category_pid());
+			baseZTreeEntity.setText(b_Category.getB_category_name());
+			baseZTreeEntity.setContent("创建时间:"+b_Category.getB_category_ctime()+",修改时间:"+b_Category.getB_category_mtime());
+			baseZTreeEntity.setTempObject(b_Category.getB_category_status());
+			baseZTreeEntity.setIntegerappend(b_Category.getXt_userinfo_realName());
+			if(("true").equals(expanded)){
+				baseZTreeEntity.setExpanded(true);
+			}else{
+				baseZTreeEntity.setExpanded(false);
+			}
+			if("true".equals(singleClickExpand)){
+				baseZTreeEntity.setSingleClickExpand(true);
+			}else{
+				baseZTreeEntity.setSingleClickExpand(false);
+			}
+			list.add(baseZTreeEntity);
+		}
+		return outStr(BaseZTreeEntity.buildTree(list,false));
 	}
 }

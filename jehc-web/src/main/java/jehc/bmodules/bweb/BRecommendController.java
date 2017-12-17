@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -58,13 +59,9 @@ public class BRecommendController extends BaseAction{
 	public String getBRecommendListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		String jehcimg_base_url = CommonUtils.getXtPathCache("jehcimg_base_url").get(0).getXt_path();
 		List<BRecommend> b_RecommendList = bRecommendService.getBRecommendListByCondition(condition);
-		for(int i = 0; i < b_RecommendList.size(); i++){
-			b_RecommendList.get(i).setJehcimg_base_url(jehcimg_base_url);
-		}
 		PageInfo<BRecommend> page = new PageInfo<BRecommend>(b_RecommendList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -87,8 +84,8 @@ public class BRecommendController extends BaseAction{
 	public String addBRecommend(BRecommend b_Recommend,HttpServletRequest request){
 		int i = 0;
 		if(null != b_Recommend && !"".equals(b_Recommend)){
-			b_Recommend.setB_recommend_ctime(CommonUtils.getSimpleDateFormat());
-			b_Recommend.setXt_userinfo_id(CommonUtils.getXtUid());
+			b_Recommend.setB_recommend_ctime(getDate());
+			b_Recommend.setXt_userinfo_id(getXtUid());
 			b_Recommend.setB_recommend_id(UUID.toUUID());
 			i=bRecommendService.addBRecommend(b_Recommend);
 		}
@@ -108,8 +105,8 @@ public class BRecommendController extends BaseAction{
 	public String updateBRecommend(BRecommend b_Recommend,HttpServletRequest request){
 		int i = 0;
 		if(null != b_Recommend && !"".equals(b_Recommend)){
-			b_Recommend.setXt_userinfo_id(CommonUtils.getXtUid());
-			b_Recommend.setB_recommend_mtime(CommonUtils.getSimpleDateFormat());
+			b_Recommend.setXt_userinfo_id(getXtUid());
+			b_Recommend.setB_recommend_mtime(getDate());
 			i=bRecommendService.updateBRecommend(b_Recommend);
 		}
 		if(i>0){
@@ -200,5 +197,34 @@ public class BRecommendController extends BaseAction{
         	baseJson.setMsg("上传失败");
         	return outDataStr(baseJson);
         }
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBRecommendAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBRecommendAdd(BRecommend bRecommend,HttpServletRequest request){
+		return new ModelAndView("pc/b-view/b-recommend/b-recommend-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBRecommendUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBRecommendUpdate(String b_recommend_id,HttpServletRequest request, Model model){
+		BRecommend bRecommend = bRecommendService.getBRecommendById(b_recommend_id);
+		model.addAttribute("bRecommend", bRecommend);
+		return new ModelAndView("pc/b-view/b-recommend/b-recommend-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBRecommendDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBRecommendDetail(String b_recommend_id,HttpServletRequest request, Model model){
+		BRecommend bRecommend = bRecommendService.getBRecommendById(b_recommend_id);
+		model.addAttribute("bRecommend", bRecommend);
+		return new ModelAndView("pc/b-view/b-recommend/b-recommend-detail");
 	}
 }

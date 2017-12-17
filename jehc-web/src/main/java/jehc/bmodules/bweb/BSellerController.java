@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,6 @@ import jehc.bmodules.bmodel.BSeller;
 import jehc.bmodules.bservice.BSellerService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
-import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
@@ -54,7 +54,7 @@ public class BSellerController extends BaseAction{
 		commonHPager(condition,request);
 		List<BSeller> b_SellerList = bSellerService.getBSellerListByCondition(condition);
 		PageInfo<BSeller> page = new PageInfo<BSeller>(b_SellerList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -78,8 +78,8 @@ public class BSellerController extends BaseAction{
 		int i = 0;
 		if(null != b_Seller && !"".equals(b_Seller)){
 			b_Seller.setB_seller_id(UUID.toUUID());
-			b_Seller.setXt_userinfo_id(CommonUtils.getXtUid());
-			b_Seller.setB_seller_ctime(CommonUtils.getSimpleDateFormat());
+			b_Seller.setXt_userinfo_id(getXtUid());
+			b_Seller.setB_seller_ctime(getDate());
 			i=bSellerService.addBSeller(b_Seller);
 		}
 		if(i>0){
@@ -98,8 +98,8 @@ public class BSellerController extends BaseAction{
 	public String updateBSeller(BSeller b_Seller,HttpServletRequest request){
 		int i = 0;
 		if(null != b_Seller && !"".equals(b_Seller)){
-			b_Seller.setB_seller_mtime(CommonUtils.getSimpleDateFormat());
-			b_Seller.setXt_userinfo_id(CommonUtils.getXtUid());
+			b_Seller.setB_seller_mtime(getDate());
+			b_Seller.setXt_userinfo_id(getXtUid());
 			i=bSellerService.updateBSeller(b_Seller);
 		}
 		if(i>0){
@@ -160,5 +160,34 @@ public class BSellerController extends BaseAction{
 	public void exportBSeller(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBSellerAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBSellerAdd(BSeller bSeller,HttpServletRequest request){
+		return new ModelAndView("pc/b-view/b-seller/b-seller-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBSellerUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBSellerUpdate(String b_seller_id,HttpServletRequest request, Model model){
+		BSeller bSeller = bSellerService.getBSellerById(b_seller_id);
+		model.addAttribute("bSeller", bSeller);
+		return new ModelAndView("pc/b-view/b-seller/b-seller-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBSellerDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBSellerDetail(String b_seller_id,HttpServletRequest request, Model model){
+		BSeller bSeller = bSellerService.getBSellerById(b_seller_id);
+		model.addAttribute("bSeller", bSeller);
+		return new ModelAndView("pc/b-view/b-seller/b-seller-detail");
 	}
 }

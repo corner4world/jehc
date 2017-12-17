@@ -1,6 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
@@ -18,9 +18,9 @@ public class BProduct extends BaseEntity implements Serializable{
 	private String b_product_barcode;/**条形码**/
 	private String b_product_code;/**商品货号**/
 	private String b_product_qr_code;/**商品二维码**/
-	private String b_product_status;/**0可用1禁用**/
-	private String b_product_ctime;/**创建时间**/
-	private String b_product_mtime;/**修改时间**/
+	private int b_product_status;/**0可用1禁用**/
+	private Date b_product_ctime;/**创建时间**/
+	private Date b_product_mtime;/**修改时间**/
 	private String xt_userinfo_id;/**创建人**/
 	private String b_product_model;/**商品型号**/
 	private String b_product_model_name;/**商品型号名称**/
@@ -36,8 +36,7 @@ public class BProduct extends BaseEntity implements Serializable{
 	
 	private String b_category_name;/**分类名称**/
 	private String b_brand_name;/**品牌名称**/
-	
-	private List<BProductImgDefault> bproductImgDefaultList = new ArrayList<BProductImgDefault>();/**商品默认图片集合**/
+	private List<BProductImgDefault> bproductImgDefaultList;
 	public void setB_product_id(String b_product_id){
 		this.b_product_id=b_product_id;
 	}
@@ -80,23 +79,24 @@ public class BProduct extends BaseEntity implements Serializable{
 	public String getB_product_qr_code(){
 		return b_product_qr_code;
 	}
-	public void setB_product_status(String b_product_status){
-		this.b_product_status=b_product_status;
-	}
-	public String getB_product_status(){
+	
+	public int getB_product_status() {
 		return b_product_status;
 	}
-	public void setB_product_ctime(String b_product_ctime){
-		this.b_product_ctime=b_product_ctime;
+	public void setB_product_status(int b_product_status) {
+		this.b_product_status = b_product_status;
 	}
-	public String getB_product_ctime(){
+	public Date getB_product_ctime() {
 		return b_product_ctime;
 	}
-	public void setB_product_mtime(String b_product_mtime){
-		this.b_product_mtime=b_product_mtime;
+	public void setB_product_ctime(Date b_product_ctime) {
+		this.b_product_ctime = b_product_ctime;
 	}
-	public String getB_product_mtime(){
+	public Date getB_product_mtime() {
 		return b_product_mtime;
+	}
+	public void setB_product_mtime(Date b_product_mtime) {
+		this.b_product_mtime = b_product_mtime;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;

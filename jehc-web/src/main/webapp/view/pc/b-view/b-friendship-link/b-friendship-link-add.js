@@ -1,89 +1,16 @@
-var bFriendshipLinkWinAdd;
-var bFriendshipLinkFormAdd;
+//返回r
+function goback(){
+	tlocation("../bFriendshipLinkController/loadBFriendshipLink");
+}
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
 function addBFriendshipLink(){
-	initBFriendshipLinkFormAdd();
-	bFriendshipLinkWinAdd = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-//		maximized:true,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'添加信息',
-		listeners:{
-			minimize:function(win,opts){
-				win.collapse();
-			}
-		},
-		items:bFriendshipLinkFormAdd,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(bFriendshipLinkFormAdd,'../bFriendshipLinkController/addBFriendshipLink',grid,bFriendshipLinkWinAdd,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	bFriendshipLinkWinAdd.show();
+	submitBForm('defaultForm','../bFriendshipLinkController/addBFriendshipLink','../bFriendshipLinkController/loadBFriendshipLink');
 }
-function initBFriendshipLinkFormAdd(){
-	bFriendshipLinkFormAdd = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
-		},
-		items:[
-		{
-			fieldLabel:'名&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称',
-			xtype:'textfield',
-			name:'b_friendship_link_name',
-			allowBlank:false,
-			maxLength:50,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'链接地址',
-			xtype:'textfield',
-			name:'b_friendship_link_url',
-			maxLength:500,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
-			name:'b_friendship_link_status',
-			xtype:"combo",
-            store:[["0","正常"],["1","禁用"]],
-            emptyText:"请选择",
-            mode:"local",
-            value:'0',
-            triggerAction:"all",
-            editable:false,
-			hiddenName:'b_friendship_link_status',
-			allowBlank:false,
-			maxLength:2,
-			anchor:'25%'
-		},
-		{
-			fieldLabel:'排&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;序',
-			xtype:'numberfield',
-			value:'0',
-			name:'b_friendship_link_sort',
-			anchor:'25%'
-		}
-		]
-	});
-}
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+});
+

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,6 @@ import jehc.bmodules.bmodel.BMember;
 import jehc.bmodules.bservice.BMemberService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
-import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
@@ -54,7 +54,7 @@ public class BMemberController extends BaseAction{
 		commonHPager(condition,request);
 		List<BMember> b_MemberList = bMemberService.getBMemberListByCondition(condition);
 		PageInfo<BMember> page = new PageInfo<BMember>(b_MemberList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -78,7 +78,7 @@ public class BMemberController extends BaseAction{
 		int i = 0;
 		if(null != b_Member && !"".equals(b_Member)){
 			b_Member.setB_member_id(UUID.toUUID());
-			b_Member.setB_member_ctime(CommonUtils.getSimpleDateFormat());
+			b_Member.setB_member_ctime(getDate());
 			i=bMemberService.addBMember(b_Member);
 		}
 		if(i>0){
@@ -97,7 +97,7 @@ public class BMemberController extends BaseAction{
 	public String updateBMember(BMember b_Member,HttpServletRequest request){
 		int i = 0;
 		if(null != b_Member && !"".equals(b_Member)){
-			b_Member.setB_member_mtime(CommonUtils.getSimpleDateFormat());
+			b_Member.setB_member_mtime(getDate());
 			i=bMemberService.updateBMember(b_Member);
 		}
 		if(i>0){
@@ -158,5 +158,34 @@ public class BMemberController extends BaseAction{
 	public void exportBMember(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBMemberAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBMemberAdd(BMember bMember,HttpServletRequest request){
+		return new ModelAndView("pc/b-view/b-member/b-member-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBMemberUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBMemberUpdate(String b_member_id,HttpServletRequest request, Model model){
+		BMember bMember = bMemberService.getBMemberById(b_member_id);
+		model.addAttribute("bMember", bMember);
+		return new ModelAndView("pc/b-view/b-member/b-member-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBMemberDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBMemberDetail(String b_member_id,HttpServletRequest request, Model model){
+		BMember bMember = bMemberService.getBMemberById(b_member_id);
+		model.addAttribute("bMember", bMember);
+		return new ModelAndView("pc/b-view/b-member/b-member-detail");
 	}
 }

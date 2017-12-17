@@ -9,10 +9,5 @@
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.core.js"></script>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.excheck.js"></script>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.exedit.js"></script>
-		<!-- bootstrap-treegrid支撑 -->
-		<link rel="stylesheet" href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-treegrid/css/jquery.treegrid.css">
-  		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-treegrid/js/jquery.treegrid.min.js"></script>
-    	<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-treegrid/js/jquery.treegrid.bootstrap3.js"></script>
-  		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-treegrid/js/jquery.treegrid.extension.js" type="text/javascript"></script>
 	</head>
 </html>

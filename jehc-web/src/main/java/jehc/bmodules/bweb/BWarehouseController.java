@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,6 @@ import jehc.bmodules.bmodel.BWarehouse;
 import jehc.bmodules.bservice.BWarehouseService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
-import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
@@ -54,7 +54,7 @@ public class BWarehouseController extends BaseAction{
 		commonHPager(condition,request);
 		List<BWarehouse> b_WarehouseList = bWarehouseService.getBWarehouseListByCondition(condition);
 		PageInfo<BWarehouse> page = new PageInfo<BWarehouse>(b_WarehouseList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -78,8 +78,8 @@ public class BWarehouseController extends BaseAction{
 		int i = 0;
 		if(null != b_Warehouse && !"".equals(b_Warehouse)){
 			b_Warehouse.setB_warehouse_id(UUID.toUUID());
-			b_Warehouse.setXt_userinfo_id(CommonUtils.getXtUid());
-			b_Warehouse.setB_warehouse_ctime(CommonUtils.getSimpleDateFormat());
+			b_Warehouse.setXt_userinfo_id(getXtUid());
+			b_Warehouse.setB_warehouse_ctime(getDate());
 			i=bWarehouseService.addBWarehouse(b_Warehouse);
 		}
 		if(i>0){
@@ -98,8 +98,8 @@ public class BWarehouseController extends BaseAction{
 	public String updateBWarehouse(BWarehouse b_Warehouse,HttpServletRequest request){
 		int i = 0;
 		if(null != b_Warehouse && !"".equals(b_Warehouse)){
-			b_Warehouse.setXt_userinfo_id(CommonUtils.getXtUid());
-			b_Warehouse.setB_warehouse_mtime(CommonUtils.getSimpleDateFormat());
+			b_Warehouse.setXt_userinfo_id(getXtUid());
+			b_Warehouse.setB_warehouse_mtime(getDate());
 			i=bWarehouseService.updateBWarehouse(b_Warehouse);
 		}
 		if(i>0){
@@ -160,5 +160,33 @@ public class BWarehouseController extends BaseAction{
 	public void exportBWarehouse(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBWarehouseAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBWarehouseAdd(BWarehouse bWarehouse,HttpServletRequest request){
+		return new ModelAndView("pc/b-view/b-warehouse/b-warehouse-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBWarehouseUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBWarehouseUpdate(String b_warehouse_id,HttpServletRequest request, Model model){
+		BWarehouse bWarehouse = bWarehouseService.getBWarehouseById(b_warehouse_id);
+		model.addAttribute("bWarehouse", bWarehouse);
+		return new ModelAndView("pc/b-view/b-warehouse/b-warehouse-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBWarehouseDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBWarehouseDetail(String b_warehouse_id,HttpServletRequest request, Model model){
+		BWarehouse bWarehouse = bWarehouseService.getBWarehouseById(b_warehouse_id);
+		model.addAttribute("bWarehouse", bWarehouse);
+		return new ModelAndView("pc/b-view/b-warehouse/b-warehouse-detail");
 	}
 }

@@ -1,5 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -12,23 +13,23 @@ public class BMember extends BaseEntity implements Serializable{
 	private String b_member_id;/**会员编号**/
 	private String b_member_name;/**会员名称**/
 	private String b_member_tel;/**会员电话**/
-	private String b_member_status;/**状态0正常1禁用**/
+	private int b_member_status;/**状态0正常1禁用**/
 	private int b_member_level;/**等级**/
 	private String b_member_address;/**会员详细地址**/
 	private String xt_provinceID;/**省份**/
 	private String xt_cityID;/**城市**/
 	private String xt_districtID;/**区县**/
-	private String b_member_sex;/**性别0男1女**/
+	private int b_member_sex;/**性别0男1女**/
 	private String b_member_pwd;/**密码**/
 	private String b_member_email;/**邮箱**/
 	private String b_member_qq;/**qq账号**/
 	private String b_member_wb;/**微博账号**/
-	private String b_member_type;/**类型0普通会员1VIP会员**/
+	private int b_member_type;/**类型0普通会员1VIP会员**/
 	private String xt_provinceName;/**省份**/
 	private String xt_cityName;/**城市*/
 	private String xt_districtName;/**区县**/
-	private String b_member_ctime;/**注册时间**/
-	private String b_member_mtime;/**修改时间**/
+	private Date b_member_ctime;/**注册时间**/
+	private Date b_member_mtime;/**修改时间**/
 	public void setB_member_id(String b_member_id){
 		this.b_member_id=b_member_id;
 	}
@@ -46,12 +47,6 @@ public class BMember extends BaseEntity implements Serializable{
 	}
 	public String getB_member_tel(){
 		return b_member_tel;
-	}
-	public void setB_member_status(String b_member_status){
-		this.b_member_status=b_member_status;
-	}
-	public String getB_member_status(){
-		return b_member_status;
 	}
 	public void setB_member_level(int b_member_level){
 		this.b_member_level=b_member_level;
@@ -83,10 +78,8 @@ public class BMember extends BaseEntity implements Serializable{
 	public String getXt_districtID(){
 		return xt_districtID;
 	}
-	public void setB_member_sex(String b_member_sex){
-		this.b_member_sex=b_member_sex;
-	}
-	public String getB_member_sex(){
+	
+	public int getB_member_sex() {
 		return b_member_sex;
 	}
 	public void setB_member_pwd(String b_member_pwd){
@@ -113,12 +106,6 @@ public class BMember extends BaseEntity implements Serializable{
 	public String getB_member_wb(){
 		return b_member_wb;
 	}
-	public void setB_member_type(String b_member_type){
-		this.b_member_type=b_member_type;
-	}
-	public String getB_member_type(){
-		return b_member_type;
-	}
 	public String getXt_provinceName() {
 		return xt_provinceName;
 	}
@@ -137,16 +124,32 @@ public class BMember extends BaseEntity implements Serializable{
 	public void setXt_districtName(String xt_districtName) {
 		this.xt_districtName = xt_districtName;
 	}
-	public String getB_member_ctime() {
+	public int getB_member_status() {
+		return b_member_status;
+	}
+	public void setB_member_status(int b_member_status) {
+		this.b_member_status = b_member_status;
+	}
+	public int getB_member_type() {
+		return b_member_type;
+	}
+	public void setB_member_type(int b_member_type) {
+		this.b_member_type = b_member_type;
+	}
+	public Date getB_member_ctime() {
 		return b_member_ctime;
 	}
-	public void setB_member_ctime(String b_member_ctime) {
+	public void setB_member_ctime(Date b_member_ctime) {
 		this.b_member_ctime = b_member_ctime;
 	}
-	public String getB_member_mtime() {
+	public Date getB_member_mtime() {
 		return b_member_mtime;
 	}
-	public void setB_member_mtime(String b_member_mtime) {
+	public void setB_member_mtime(Date b_member_mtime) {
 		this.b_member_mtime = b_member_mtime;
 	}
+	public void setB_member_sex(int b_member_sex) {
+		this.b_member_sex = b_member_sex;
+	}
+	
 }

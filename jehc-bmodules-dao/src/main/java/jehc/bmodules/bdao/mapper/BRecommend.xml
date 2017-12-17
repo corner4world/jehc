@@ -12,8 +12,8 @@
 			b_recommend.b_recommend_remark,
 			b_recommend.b_recommend_width,
 			b_recommend.b_recommend_height,
-			b_recommend.b_recommend_ctime AS b_recommend_ctime,
-			b_recommend.b_recommend_mtime AS b_recommend_mtime,
+			b_recommend_ctime,
+			b_recommend_mtime,
 			b_recommend.b_recommend_status,
 			xt_userinfo.xt_userinfo_realName,
 			xt_attachment.*
@@ -21,11 +21,11 @@
 			b_recommend b_recommend LEFT JOIN xt_userinfo xt_userinfo ON b_recommend.xt_userinfo_id = xt_userinfo.xt_userinfo_id
 		LEFT JOIN xt_attachment xt_attachment ON b_recommend.xt_attachment_id = xt_attachment.xt_attachment_id
 		WHERE 1=1
-		<if test="null != b_recommend_title">
-			AND instr(b_recommend.b_recommend_title,#{b_recommend_title})
-		</if>
 		<if test="null != b_recommend_url">
-			AND instr(b_recommend.b_recommend_url,#{b_recommend_url})
+			AND b_recommend_url LIKE CONCAT(CONCAT('%',#{b_recommend_url}),'%')
+		</if>
+		<if test="null != b_recommend_title">
+			AND b_recommend_title LIKE CONCAT(CONCAT('%',#{b_recommend_title}),'%')
 		</if>
 	</select>
 
@@ -40,8 +40,8 @@
 			b_recommend.xt_userinfo_id,
 			b_recommend.b_recommend_width,
 			b_recommend.b_recommend_height,
-			b_recommend.b_recommend_ctime AS b_recommend_ctime,
-			b_recommend.b_recommend_mtime AS b_recommend_mtime,
+			b_recommend_ctime,
+			b_recommend_mtime,
 			b_recommend.b_recommend_status,
 			b_recommend.xt_attachment_id,
 			xt_userinfo.xt_userinfo_realName
@@ -65,7 +65,6 @@
 			b_recommend_width,
 			b_recommend_height,
 			b_recommend_ctime,
-			b_recommend_mtime,
 			b_recommend_status,
 			xt_attachment_id
 			)
@@ -80,7 +79,6 @@
 			#{b_recommend_width},
 			#{b_recommend_height},
 			#{b_recommend_ctime},
-			#{b_recommend_mtime},
 			#{b_recommend_status},
 			#{xt_attachment_id}
 			)

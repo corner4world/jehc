@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -19,7 +20,6 @@ import jehc.bmodules.bmodel.BProduct;
 import jehc.bmodules.bservice.BProductService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
-import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
@@ -54,7 +54,7 @@ public class BProductController extends BaseAction{
 		commonHPager(condition,request);
 		List<BProduct> b_ProductList = bProductService.getBProductListByCondition(condition);
 		PageInfo<BProduct> page = new PageInfo<BProduct>(b_ProductList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -79,8 +79,8 @@ public class BProductController extends BaseAction{
 		String b_product_features = request.getParameter("b_product_features");
 		if(null != b_Product && !"".equals(b_Product)){
 			b_Product.setB_product_id(UUID.toUUID());
-			b_Product.setXt_userinfo_id(CommonUtils.getXtUid());
-			b_Product.setB_product_ctime(CommonUtils.getSimpleDateFormat());
+			b_Product.setXt_userinfo_id(getXtUid());
+			b_Product.setB_product_ctime(getDate());
 			b_Product.setB_product_features(b_product_features);
 			i=bProductService.addBProduct(b_Product);
 		}
@@ -101,8 +101,8 @@ public class BProductController extends BaseAction{
 		int i = 0;
 		String b_product_features = request.getParameter("b_product_features");
 		if(null != b_Product && !"".equals(b_Product)){
-			b_Product.setXt_userinfo_id(CommonUtils.getXtUid());
-			b_Product.setB_product_mtime(CommonUtils.getSimpleDateFormat());
+			b_Product.setXt_userinfo_id(getXtUid());
+			b_Product.setB_product_mtime(getDate());
 			b_Product.setB_product_features(b_product_features);
 			i=bProductService.updateBProduct(b_Product);
 		}
@@ -164,5 +164,34 @@ public class BProductController extends BaseAction{
 	public void exportBProduct(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductAdd(BProduct bProduct,HttpServletRequest request){
+		return new ModelAndView("pc/b-view/b-product/b-product-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductUpdate(String b_product_id,HttpServletRequest request, Model model){
+		BProduct bProduct = bProductService.getBProductById(b_product_id);
+		model.addAttribute("bProduct", bProduct);
+		return new ModelAndView("pc/b-view/b-product/b-product-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductDetail(String b_product_id,HttpServletRequest request, Model model){
+		BProduct bProduct = bProductService.getBProductById(b_product_id);
+		model.addAttribute("bProduct", bProduct);
+		return new ModelAndView("pc/b-view/b-product/b-product-detail");
 	}
 }

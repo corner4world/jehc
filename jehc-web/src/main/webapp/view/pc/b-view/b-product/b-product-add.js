@@ -1,238 +1,91 @@
-var bProductWinAdd;
-var bProductFormAdd;
-function addBProduct(){
-	initBProductFormAdd();
-	bProductWinAdd = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-		maximized:true,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'添加商品主数据',
-		listeners:{
-			minimize:function(win,opts){
-				win.collapse();
-			}
-		},
-		items:bProductFormAdd,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(bProductFormAdd,'../bProductController/addBProduct',grid,bProductWinAdd,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	bProductWinAdd.show();
+//返回r
+function goback(){
+	tlocation("../bProductController/loadBProduct");
 }
-/**初始化添加**/
-function initBProductFormAdd(){
-	var addTab = Ext.create('Ext.TabPanel',{
-		activeTab:0,
-		region:'center',
-		tabPosition:'left',
-		items:[
-			{
-			title:'基础信息',
-			autoScroll:true,
-			items:[{
-						fieldLabel:'产品名称',
-						xtype:'textfield',
-						name:'b_product_name',
-						allowBlank:false,
-						maxLength:200,
-						width:350
-					},
-					{
-						fieldLabel:'商品分类',
-						xtype:'treepicker',
-						displayField:'text',
-						width:350,
-						hiddenName:'b_category_id',
-						name:'b_category_id',
-						minPickerHeight:200,
-						maxHeight:200,
-						editable:false,
-						rootVisible:false,
-						allowBlank:false,
-						emptyText:'请选择', 
-						store:Ext.create('Ext.data.TreeStore',{
-							fields:['id','text'],
-							root:{
-								text:'商品分类',
-								id:'0',
-								expanded:true
-							},
-							proxy:{
-								type:'ajax',
-								url:'../bCategoryController/getBCategoryListByCondition',
-								reader:{
-									type:'json'
-								}
-							}
-						})
-					},
-					{
-						fieldLabel:'商品品牌',
-						xtype:"combo",
-						store:b_brandList, 
-						pageSize:10, 
-			            emptyText:'请选择',  
-			            mode:'local',  
-			            triggerAction:'all',  
-			            valueField:'b_brand_id',  
-			            name:'b_brand_id',
-			            displayField:'b_brand_name',  
-			            editable:false, 
-						allowBlank:false,
-						maxLength:32,
-						width:550
-					},
-					{
-						fieldLabel:'条&nbsp;&nbsp;形&nbsp;码',
-						xtype:'textfield',
-						name:'b_product_barcode',
-						maxLength:200,
-						width:200
-					},
-					{
-						fieldLabel:'商品货号',
-						xtype:'textfield',
-						name:'b_product_code',
-						maxLength:32,
-						width:200
-					},
-					{
-						fieldLabel:'二&nbsp;&nbsp;维&nbsp;码',
-						xtype:'textfield',
-						name:'b_product_qr_code',
-						maxLength:200,
-						width:200
-					},
-					{
-						fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
-						xtype:"combo",
-			            store:[["0","可用"],["1","禁用"]],
-			            emptyText:"请选择",
-			            mode:"local",
-			            value:'0',
-			            triggerAction:"all",
-			            editable:false,
-			            name:'b_product_status',
-						hiddenName:'b_product_status',
-						allowBlank:false,
-						maxLength:2,
-						width:200
-					},
-					{
-						fieldLabel:'型&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号',
-						xtype:'textfield',
-						name:'b_product_model',
-						maxLength:200,
-						width:200
-					},
-					{
-						fieldLabel:'型号名称',
-						xtype:'textfield',
-						name:'b_product_model_name',
-						maxLength:200,
-						width:200
-					},
-					{
-						fieldLabel:'商品颜色',
-						xtype:'textfield',
-						name:'b_product_color',
-						maxLength:30,
-						width:200
-					},
-					{
-						fieldLabel:'产&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地',
-						xtype:'textareafield',
-						name:'b_product_origin',
-						maxLength:200,
-						width:550
-					},
-					{
-						fieldLabel:'质量等级',
-						xtype:'textfield',
-						name:'b_product_qualitylevel',
-						maxLength:12,
-						width:200
-					},
-					{
-						fieldLabel:'商品毛重',
-						xtype:'textfield',
-						name:'b_product_gross_weight',
-						width:200
-					},
-					{
-						fieldLabel:'商品净重',
-						xtype:'textfield',
-						name:'b_product_net_weight',
-						width:200
-					},
-					{
-						fieldLabel:'尺寸长度',
-						xtype:'numberfield',
-						value:'0',
-						name:'b_product_size_length',
-						width:200
-					},
-					{
-						fieldLabel:'尺寸宽度',
-						xtype:'numberfield',
-						value:'0',
-						name:'b_product_size_width',
-						width:200
-					},
-					{
-						fieldLabel:'尺寸高度',
-						xtype:'numberfield',
-						value:'0',
-						name:'b_product_size_height',
-						width:200
-					}
-				  ]
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
+function addBProduct(){
+	submitBForm('defaultForm','../bProductController/addBProduct','../bProductController/loadBProduct');
+}
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+	initBbrandList();
+});
+
+
+/////////////////////品类选择器开始///////////////////
+function bCategorySelect(){
+	$('#bcategoryBody').height(300);
+	var $modal_dialog = $("#bcategorySelectDialog");  
+	$modal_dialog.css({'width':'500px'});  
+	$('#bcategorySelectModal').modal({"backdrop":"static"});
+	var setting = {
+		view:{
+			selectedMulti:false
 		},
-		{
-			title:'商品介绍',
-			layout:"fit",
-		    items:[{
-					name:'b_product_features',
-					maxLength:65535,
-					xtype:'htmleditor',
-		            border:true,
-		            id:'b_product_features',
-		            defaultValue:'',
-		            plugins:[
-		                Ext.create('Ext.deng.form.HtmlEditorImage')
-		            ],
-		            anchor:'100%'
-				}]
-		}
-		]
-	});
-	bProductFormAdd = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		layout:"fit",
-		fieldDefaults:{
-			labelWidth:70,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
+		check:{
+			enable:false
 		},
-		items:[addTab]
+		async:{
+			enable:true,//设置 zTree是否开启异步加载模式  加载全部信息
+			url:"../bCategoryController/getBCategoryList",//Ajax获取数据的 URL地址  
+			otherParam:{ 
+				'expanded':function(){return 'true'} 
+			} //异步参数
+		},
+		data:{
+			//必须使用data  
+			simpleData:{
+				enable:true,
+				idKey:"id",//id编号命名 默认  
+				pIdKey:"pId",//父id编号命名 默认   
+				rootPId:0 //用于修正根节点父节点数据，即 pIdKey 指定的属性值  
+			}
+		},
+		edit:{
+			enable:false
+		},  
+		callback:{  
+			onClick:onClick//单击事件
+		}  
+	};
+	$.fn.zTree.init($("#menu"), setting);
+}
+
+//单击事件
+function onClick(event, treeId, treeNode, msg){  
+
+}  
+
+function doBcategorySelect(){
+	var zTree = $.fn.zTree.getZTreeObj("menu"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"请选择一条品类");
+		return;
+	}
+	msgTishCallFnBoot("确定要选择【<font color=red>"+nodes[0].name+"</font>】？",function(){
+		$("#b_category_id").val(nodes[0].id);
+		$("#b_category_name").val(nodes[0].name);
+		$('#bcategorySelectModal').modal('hide');
+	})
+}
+/////////////////////品类选择器结束///////////////////
+
+function initBbrandList(){
+	var str = "<option value=''>请选择</option>";
+	$.ajax({
+	   type:"GET",
+	   url:"../bBrandController/getBBrandList",
+	   success: function(result){
+		   //从服务器获取数据进行绑定
+           $.each(result, function(i, item){
+           	 str += "<option value=" + item.b_brand_id + ">" + item.b_brand_name + "</option>";
+           })
+           $("#b_brand_id").append(str);
+	   }
 	});
 }

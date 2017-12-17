@@ -11,8 +11,8 @@
 			b_warehouse.xt_provinceID,
 			b_warehouse.xt_cityID,
 			b_warehouse.xt_districtID,
-			b_warehouse.b_warehouse_ctime AS b_warehouse_ctime,
-			b_warehouse.b_warehouse_mtime AS b_warehouse_mtime,
+			b_warehouse_ctime,
+			b_warehouse_mtime,
 			b_warehouse.xt_userinfo_id,
 			b_warehouse.b_warehouse_type,
 			xt_province.NAME AS xt_provinceName,
@@ -27,13 +27,13 @@
 			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_warehouse.b_seller_id
 		WHERE 1=1
 		<if test="null != b_warehouse_name">
-			AND instr(b_warehouse.b_warehouse_name,#{b_warehouse_name})
+			AND b_warehouse.b_warehouse_name LIKE CONCAT(CONCAT('%',#{b_warehouse_name}),'%')
+		</if>
+		<if test="null != b_seller_name">
+			AND b_seller.b_seller_name LIKE CONCAT(CONCAT('%',#{b_seller_name}),'%')
 		</if>
 		<if test="null != b_warehouse_type">
 			AND b_warehouse.b_warehouse_type = #{b_warehouse_type}
-		</if>
-		<if test="null != b_seller_name">
-			AND instr(b_seller.b_seller_name,#{b_seller_name})
 		</if>
 	</select>
 
@@ -46,8 +46,8 @@
 			b_warehouse.xt_provinceID,
 			b_warehouse.xt_cityID,
 			b_warehouse.xt_districtID,
-			b_warehouse.b_warehouse_ctime AS b_warehouse_ctime,
-			b_warehouse.b_warehouse_mtime AS b_warehouse_mtime,
+			b_warehouse_ctime,
+			b_warehouse_mtime,
 			b_warehouse.xt_userinfo_id,
 			b_warehouse.b_warehouse_type,
 			b_warehouse.b_seller_id,

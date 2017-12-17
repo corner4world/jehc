@@ -13,8 +13,8 @@
 			b_product.b_product_code,
 			b_product.b_product_qr_code,
 			b_product.b_product_status,
-			b_product.b_product_ctime AS b_product_ctime,
-			b_product.b_product_mtime AS b_product_mtime,
+			b_product_ctime,
+			b_product_mtime,
 			b_product.xt_userinfo_id,
 			b_product.b_product_model,
 			b_product.b_product_model_name,
@@ -36,7 +36,7 @@
 		LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
 		WHERE 1=1
 		<if test="null != b_product_name">
-			AND instr(b_product.b_product_name,#{b_product_name})
+			AND b_product.b_product_name LIKE CONCAT(CONCAT('%',#{b_product_name}),'%')
 		</if>
 		<if test="null != b_product_status">
 			AND b_product.b_product_status = #{b_product_status}
@@ -55,8 +55,8 @@
 			b_product.b_product_code,
 			b_product.b_product_qr_code,
 			b_product.b_product_status,
-			b_product.b_product_ctime AS b_product_ctime,
-			b_product.b_product_mtime AS b_product_mtime,
+			b_product_ctime,
+			b_product_mtime,
 			b_product.xt_userinfo_id,
 			b_product.b_product_model,
 			b_product.b_product_model_name,
@@ -93,7 +93,6 @@
 			b_product_qr_code,
 			b_product_status,
 			b_product_ctime,
-			b_product_mtime,
 			xt_userinfo_id,
 			b_product_model,
 			b_product_model_name,
@@ -116,9 +115,8 @@
 			#{b_product_barcode},
 			#{b_product_code},
 			#{b_product_qr_code},
-			#{b_product_status},
+			0,
 			#{b_product_ctime},
-			#{b_product_mtime},
 			#{xt_userinfo_id},
 			#{b_product_model},
 			#{b_product_model_name},
