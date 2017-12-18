@@ -65,7 +65,7 @@ public class BCategoryController extends BaseAction{
 			BaseTreeGridEntity.setText(b_Category.getB_category_name());
 			BaseTreeGridEntity.setContent("创建时间:"+b_Category.getB_category_ctime()+",修改时间:"+b_Category.getB_category_mtime());
 			BaseTreeGridEntity.setIcon("../deng/images/icons/target.png");
-			BaseTreeGridEntity.setTempObject(b_Category.getB_category_status());
+			BaseTreeGridEntity.setTempObject(""+b_Category.getB_category_status());
 			BaseTreeGridEntity.setIntegerappend(b_Category.getXt_userinfo_realName());
 			if(("true").equals(expanded)){
 				BaseTreeGridEntity.setExpanded(true);
@@ -104,8 +104,8 @@ public class BCategoryController extends BaseAction{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if(null != b_Category && !"".equals(b_Category)){
 			b_Category.setB_category_id(UUID.toUUID());
-			b_Category.setB_category_ctime(sdf.format(new Date()));
-			b_Category.setB_category_mtime(sdf.format(new Date()));
+			b_Category.setB_category_ctime(getDate());
+			b_Category.setB_category_mtime(getDate());
 			b_Category.setXt_userinfo_id(CommonUtils.getXtUid());
 			i=bCategoryService.addBCategory(b_Category);
 		}
@@ -126,7 +126,7 @@ public class BCategoryController extends BaseAction{
 		int i = 0;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		if(null != b_Category && !"".equals(b_Category)){
-			b_Category.setB_category_mtime(sdf.format(new Date()));
+			b_Category.setB_category_mtime(getDate());
 			b_Category.setXt_userinfo_id(CommonUtils.getXtUid());
 			i=bCategoryService.updateBCategory(b_Category);
 		}
@@ -210,7 +210,7 @@ public class BCategoryController extends BaseAction{
 			baseZTreeEntity.setPid(b_Category.getB_category_pid());
 			baseZTreeEntity.setText(b_Category.getB_category_name());
 			baseZTreeEntity.setContent("创建时间:"+b_Category.getB_category_ctime()+",修改时间:"+b_Category.getB_category_mtime());
-			baseZTreeEntity.setTempObject(b_Category.getB_category_status());
+			baseZTreeEntity.setTempObject(""+b_Category.getB_category_status());
 			baseZTreeEntity.setIntegerappend(b_Category.getXt_userinfo_realName());
 			if(("true").equals(expanded)){
 				baseZTreeEntity.setExpanded(true);

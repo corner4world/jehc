@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
 import org.apache.commons.net.ftp.FTPReply;
@@ -38,6 +39,8 @@ public class FtpUtil extends FtpConfig{
 				return success;
 			}
 			ftp.changeWorkingDirectory(path);
+			//设置上传文件的类型为二进制类型  
+            ftp.setFileType(FTP.BINARY_FILE_TYPE);  
 			ftp.storeFile(fname, input);
 			input.close();
 			ftp.logout();

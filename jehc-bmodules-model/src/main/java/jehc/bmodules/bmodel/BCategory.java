@@ -1,6 +1,7 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
@@ -15,9 +16,9 @@ public class BCategory extends BaseEntity implements Serializable{
 	private String b_category_name;/**分类名称**/
 	private String b_category_pid;/**分类父级编号**/
 	private String b_category_path;/**分类深度**/
-	private String b_category_ctime;/**创建时间**/
-	private String b_category_mtime;/**修改时间**/
-	private String b_category_status;/**0可用1禁用**/
+	private Date b_category_ctime;/**创建时间**/
+	private Date b_category_mtime;/**修改时间**/
+	private int b_category_status;/**0可用1禁用**/
 	private String xt_userinfo_id;/**创建人**/
 	private List<BCategory> bcategorys = new ArrayList<BCategory>();
 	
@@ -51,23 +52,23 @@ public class BCategory extends BaseEntity implements Serializable{
 	public String getB_category_path(){
 		return b_category_path;
 	}
-	public void setB_category_ctime(String b_category_ctime){
-		this.b_category_ctime=b_category_ctime;
-	}
-	public String getB_category_ctime(){
+	public Date getB_category_ctime() {
 		return b_category_ctime;
 	}
-	public void setB_category_mtime(String b_category_mtime){
-		this.b_category_mtime=b_category_mtime;
+	public void setB_category_ctime(Date b_category_ctime) {
+		this.b_category_ctime = b_category_ctime;
 	}
-	public String getB_category_mtime(){
+	public Date getB_category_mtime() {
 		return b_category_mtime;
 	}
-	public void setB_category_status(String b_category_status){
-		this.b_category_status=b_category_status;
+	public void setB_category_mtime(Date b_category_mtime) {
+		this.b_category_mtime = b_category_mtime;
 	}
-	public String getB_category_status(){
+	public int getB_category_status() {
 		return b_category_status;
+	}
+	public void setB_category_status(int b_category_status) {
+		this.b_category_status = b_category_status;
 	}
 	public void setXt_userinfo_id(String xt_userinfo_id){
 		this.xt_userinfo_id=xt_userinfo_id;
