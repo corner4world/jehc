@@ -7,8 +7,8 @@
 		SELECT
 			b_product_img_default.b_product_img_default_id,
 			b_product_img_default.b_product_img_name,
-			b_product_img_default.b_product_img_ctime AS b_product_img_ctime,
-			b_product_img_default.b_product_img_mtime AS b_product_img_mtime,
+			b_product_img_default.b_product_img_ctime,
+			b_product_img_default.b_product_img_mtime,
 			b_product_img_default.b_product_img_type,
 			b_product_img_default.b_product_img_status,
 			b_product_img_default.b_product_id,
@@ -25,13 +25,7 @@
 			AND b_product_img_default.b_product_id = #{b_product_id}
 		</if>
 		<if test="null != b_product_img_name">
-			AND instr(b_product_img_default.b_product_img_name,#{b_product_img_name})
-		</if>
-		<if test="null != b_product_img_status">
-			AND b_product_img_default.b_product_img_status = #{b_product_img_status}
-		</if>
-		<if test="null != b_product_img_type">
-			AND b_product_img_default.b_product_img_type = #{b_product_img_type}
+			AND b_product_img_name LIKE CONCAT(CONCAT('%',#{b_product_img_name}),'%')
 		</if>
 	</select>
 
@@ -40,8 +34,8 @@
 		SELECT
 			b_product_img_default.b_product_img_default_id,
 			b_product_img_default.b_product_img_name,
-			b_product_img_default.b_product_img_ctime AS b_product_img_ctime,
-			b_product_img_default.b_product_img_mtime AS b_product_img_mtime,
+			b_product_img_default.b_product_img_ctime,
+			b_product_img_default.b_product_img_mtime,
 			b_product_img_default.b_product_img_type,
 			b_product_img_default.b_product_img_status,
 			b_product_img_default.b_product_id,
@@ -66,7 +60,6 @@
 			b_product_img_default_id,
 			b_product_img_name,
 			b_product_img_ctime,
-			b_product_img_mtime,
 			b_product_img_type,
 			b_product_img_status,
 			b_product_id,
@@ -81,7 +74,6 @@
 			#{b_product_img_default_id},
 			#{b_product_img_name},
 			#{b_product_img_ctime},
-			#{b_product_img_mtime},
 			#{b_product_img_type},
 			#{b_product_img_status},
 			#{b_product_id},

@@ -1,5 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
 * b_product_img 基础商品图片 
@@ -9,10 +10,10 @@ public class BProductImg extends BSeller implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String b_product_img_id;/**商品图片编号**/
 	private String b_product_img_name;/**商品图片名称**/
-	private String b_product_img_ctime;/**创建时间**/
-	private String b_product_img_mtime;/**修改时间**/
-	private String b_product_img_type;/**图片类型:0大图片1小图片**/
-	private String b_product_img_status;/**状态:0可用1禁用**/
+	private Date b_product_img_ctime;/**创建时间**/
+	private Date b_product_img_mtime;/**修改时间**/
+	private int b_product_img_type;/**图片类型:0大图片1小图片**/
+	private int b_product_img_status;/**状态:0可用1禁用**/
 	private String b_product_id;/**商品编号**/
 	private String b_seller_id;/**商家编号**/
 	private String xt_attachment_id;/**附件编号**/
@@ -32,29 +33,29 @@ public class BProductImg extends BSeller implements Serializable{
 	public String getB_product_img_name(){
 		return b_product_img_name;
 	}
-	public void setB_product_img_ctime(String b_product_img_ctime){
-		this.b_product_img_ctime=b_product_img_ctime;
-	}
-	public String getB_product_img_ctime(){
+	public Date getB_product_img_ctime() {
 		return b_product_img_ctime;
 	}
-	public void setB_product_img_mtime(String b_product_img_mtime){
-		this.b_product_img_mtime=b_product_img_mtime;
+	public void setB_product_img_ctime(Date b_product_img_ctime) {
+		this.b_product_img_ctime = b_product_img_ctime;
 	}
-	public String getB_product_img_mtime(){
+	public Date getB_product_img_mtime() {
 		return b_product_img_mtime;
 	}
-	public void setB_product_img_type(String b_product_img_type){
-		this.b_product_img_type=b_product_img_type;
+	public void setB_product_img_mtime(Date b_product_img_mtime) {
+		this.b_product_img_mtime = b_product_img_mtime;
 	}
-	public String getB_product_img_type(){
+	public int getB_product_img_type() {
 		return b_product_img_type;
 	}
-	public void setB_product_img_status(String b_product_img_status){
-		this.b_product_img_status=b_product_img_status;
+	public void setB_product_img_type(int b_product_img_type) {
+		this.b_product_img_type = b_product_img_type;
 	}
-	public String getB_product_img_status(){
+	public int getB_product_img_status() {
 		return b_product_img_status;
+	}
+	public void setB_product_img_status(int b_product_img_status) {
+		this.b_product_img_status = b_product_img_status;
 	}
 	public void setB_product_id(String b_product_id){
 		this.b_product_id=b_product_id;

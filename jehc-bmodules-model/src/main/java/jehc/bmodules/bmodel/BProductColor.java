@@ -1,5 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
 * b_product_color 基础商品商户所选颜色 
@@ -9,13 +10,13 @@ public class BProductColor extends BSeller implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String b_product_color_id;/**编号**/
 	private String b_product_color_name;/**名称**/
-	private String b_product_color_ctime;/**创建时间**/
-	private String b_product_color_mtime;/**修改时间**/
+	private Date b_product_color_ctime;/**创建时间**/
+	private Date b_product_color_mtime;/**修改时间**/
 	private int b_product_color_width;/**图片宽度**/
 	private int b_product_color_height;/**图片高度**/
 	private String xt_userinfo_id;/**创建人**/
 	private int b_product_color_sort;/**排序编号**/
-	private String b_product_color_status;/**状态0正常1禁用**/
+	private int b_product_color_status;/**状态0正常1禁用**/
 	private String xt_attachment_id;/**附件编号**/
 	private String b_product_id;/**商品编号**/
 	private String b_product_color_remark;/**备注**/
@@ -31,18 +32,6 @@ public class BProductColor extends BSeller implements Serializable{
 	}
 	public String getB_product_color_name(){
 		return b_product_color_name;
-	}
-	public void setB_product_color_ctime(String b_product_color_ctime){
-		this.b_product_color_ctime=b_product_color_ctime;
-	}
-	public String getB_product_color_ctime(){
-		return b_product_color_ctime;
-	}
-	public void setB_product_color_mtime(String b_product_color_mtime){
-		this.b_product_color_mtime=b_product_color_mtime;
-	}
-	public String getB_product_color_mtime(){
-		return b_product_color_mtime;
 	}
 	public void setB_product_color_width(int b_product_color_width){
 		this.b_product_color_width=b_product_color_width;
@@ -68,11 +57,23 @@ public class BProductColor extends BSeller implements Serializable{
 	public int getB_product_color_sort(){
 		return b_product_color_sort;
 	}
-	public void setB_product_color_status(String b_product_color_status){
-		this.b_product_color_status=b_product_color_status;
+	public Date getB_product_color_ctime() {
+		return b_product_color_ctime;
 	}
-	public String getB_product_color_status(){
+	public void setB_product_color_ctime(Date b_product_color_ctime) {
+		this.b_product_color_ctime = b_product_color_ctime;
+	}
+	public Date getB_product_color_mtime() {
+		return b_product_color_mtime;
+	}
+	public void setB_product_color_mtime(Date b_product_color_mtime) {
+		this.b_product_color_mtime = b_product_color_mtime;
+	}
+	public int getB_product_color_status() {
 		return b_product_color_status;
+	}
+	public void setB_product_color_status(int b_product_color_status) {
+		this.b_product_color_status = b_product_color_status;
 	}
 	public void setXt_attachment_id(String xt_attachment_id){
 		this.xt_attachment_id=xt_attachment_id;

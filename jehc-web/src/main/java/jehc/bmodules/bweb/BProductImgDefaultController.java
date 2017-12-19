@@ -18,15 +18,11 @@ import com.github.pagehelper.PageInfo;
 
 import jehc.bmodules.bmodel.BProductImgDefault;
 import jehc.bmodules.bservice.BProductImgDefaultService;
-import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
-import jehc.xtmodules.xtcore.base.BaseJson;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
-import jehc.xtmodules.xtmodel.XtAttachment;
-import jehc.xtmodules.xtservice.XtAttachmentService;
 
 /**
 * 基础商品默认图片 
@@ -37,8 +33,6 @@ import jehc.xtmodules.xtservice.XtAttachmentService;
 public class BProductImgDefaultController extends BaseAction{
 	@Autowired
 	private BProductImgDefaultService bProductImgDefaultService;
-	@Autowired
-	private XtAttachmentService xtAttachmentService;
 	/**
 	* 载入初始化页面
 	* @param b_product_img_default 
@@ -79,7 +73,7 @@ public class BProductImgDefaultController extends BaseAction{
 			b_Product_Img_DefaultList.get(i).setJehcimg_base_path_url(jehcimg_base_url+b_Product_Img_DefaultList.get(i).getXt_attachmentPath());
 		}
 		PageInfo<BProductImgDefault> page = new PageInfo<BProductImgDefault>(b_Product_Img_DefaultList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	
 	/**
@@ -104,8 +98,8 @@ public class BProductImgDefaultController extends BaseAction{
 		int i = 0;
 		if(null != b_Product_Img_Default && !"".equals(b_Product_Img_Default)){
 			b_Product_Img_Default.setB_product_img_default_id(UUID.toUUID());
-			b_Product_Img_Default.setB_product_img_ctime(CommonUtils.getSimpleDateFormat());
-			b_Product_Img_Default.setXt_userinfo_id(CommonUtils.getXtUid());
+			b_Product_Img_Default.setB_product_img_ctime(getDate());
+			b_Product_Img_Default.setXt_userinfo_id(getXtUid());
 			i=bProductImgDefaultService.addBProductImgDefault(b_Product_Img_Default);
 		}
 		if(i>0){
@@ -124,8 +118,8 @@ public class BProductImgDefaultController extends BaseAction{
 	public String updateBProductImgDefault(BProductImgDefault b_Product_Img_Default,HttpServletRequest request){
 		int i = 0;
 		if(null != b_Product_Img_Default && !"".equals(b_Product_Img_Default)){
-			b_Product_Img_Default.setB_product_img_mtime(CommonUtils.getSimpleDateFormat());
-			b_Product_Img_Default.setXt_userinfo_id(CommonUtils.getXtUid());
+			b_Product_Img_Default.setB_product_img_mtime(getDate());
+			b_Product_Img_Default.setXt_userinfo_id(getXtUid());
 			i=bProductImgDefaultService.updateBProductImgDefault(b_Product_Img_Default);
 		}
 		if(i>0){
@@ -188,32 +182,32 @@ public class BProductImgDefaultController extends BaseAction{
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
 	}
 	/**
-	 * 上传图片
-	 * @param file
-	 * @param request
-	 * @param response
-	 */
-	@ResponseBody
-	@RequestMapping(value="/uploadProductImgDefaultImages",method={RequestMethod.POST,RequestMethod.GET})
-	public String uploadProductImgDefaultImages(HttpServletRequest request,HttpServletResponse response){
-		BaseJson baseJson = new BaseJson();
-		try {
-			String path = CommonUtils.getXtPathCache("b_product_img_default_path").get(0).getXt_path();
-			String relative_path = CommonUtils.getXtPathCache("b_product_img_default_relative_path").get(0).getXt_path();
-			FileUtil.initPath(request, path);
-			List<XtAttachment> xtAttachmentList = CommonUtils.upLoad(request, path,relative_path,null,null,null,null,null);
-			int i = xtAttachmentService.addXtAttachment(xtAttachmentList.get(0));
-			if(i > 0){
-				baseJson.setJsonID(xtAttachmentList.get(0).getXt_attachment_id());
-				baseJson.setMsg("上传成功");
-				baseJson.setJsonValue(CommonUtils.getXtPathCache("jehcimg_base_url").get(0).getXt_path()+ xtAttachmentList.get(0).getXt_attachmentPath());
-			}else{
-				baseJson.setMsg("上传失败");
-			}
-			return outDataStr(baseJson);
-        } catch (Exception e) {
-        	baseJson.setMsg("上传失败");
-        	return outDataStr(baseJson); 
-        }
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductImgDefaultAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductImgDefaultAdd(BProductImgDefault bProductImgDefault,HttpServletRequest request, Model model){
+		model.addAttribute("b_product_id", bProductImgDefault.getB_product_id());
+		return new ModelAndView("pc/b-view/b-product-img-default/b-product-img-default-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductImgDefaultUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductImgDefaultUpdate(String b_product_img_default_id,HttpServletRequest request, Model model){
+		BProductImgDefault bProductImgDefault = bProductImgDefaultService.getBProductImgDefaultById(b_product_img_default_id);
+		model.addAttribute("bProductImgDefault", bProductImgDefault);
+		return new ModelAndView("pc/b-view/b-product-img-default/b-product-img-default-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductImgDefaultDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductImgDefaultDetail(String b_product_img_default_id,HttpServletRequest request, Model model){
+		BProductImgDefault bProductImgDefault = bProductImgDefaultService.getBProductImgDefaultById(b_product_img_default_id);
+		model.addAttribute("bProductImgDefault", bProductImgDefault);
+		return new ModelAndView("pc/b-view/b-product-img-default/b-product-img-default-detail");
 	}
 }

@@ -1,5 +1,6 @@
 package jehc.bmodules.bmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtmodel.XtAttachment;
 
@@ -11,13 +12,13 @@ public class BProductColorDefault  extends XtAttachment implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String b_product_color_default_id;/**编号**/
 	private String b_product_color_default_name;/**名称**/
-	private String b_product_color_default_ctime;/**创建时间**/
-	private String b_product_color_default_mtime;/**修改时间**/
+	private Date b_product_color_default_ctime;/**创建时间**/
+	private Date b_product_color_default_mtime;/**修改时间**/
 	private int b_product_color_default_width;/**图片宽度**/
 	private int b_product_color_default_height;/**图片高度**/
 	private String xt_userinfo_id;/**创建人**/
 	private int b_product_color_default_sort;/**排序编号**/
-	private String b_product_color_default_status;/**状态0正常1禁用**/
+	private int b_product_color_default_status;/**状态0正常1禁用**/
 	private String xt_attachment_id;/**附件编号**/
 	private String b_product_id;/**商品编号**/
 	private String b_product_color_default_remark;/**备注**/
@@ -32,18 +33,6 @@ public class BProductColorDefault  extends XtAttachment implements Serializable{
 	}
 	public String getB_product_color_default_name(){
 		return b_product_color_default_name;
-	}
-	public void setB_product_color_default_ctime(String b_product_color_default_ctime){
-		this.b_product_color_default_ctime=b_product_color_default_ctime;
-	}
-	public String getB_product_color_default_ctime(){
-		return b_product_color_default_ctime;
-	}
-	public void setB_product_color_default_mtime(String b_product_color_default_mtime){
-		this.b_product_color_default_mtime=b_product_color_default_mtime;
-	}
-	public String getB_product_color_default_mtime(){
-		return b_product_color_default_mtime;
 	}
 	public void setB_product_color_default_width(int b_product_color_default_width){
 		this.b_product_color_default_width=b_product_color_default_width;
@@ -69,11 +58,24 @@ public class BProductColorDefault  extends XtAttachment implements Serializable{
 	public int getB_product_color_default_sort(){
 		return b_product_color_default_sort;
 	}
-	public void setB_product_color_default_status(String b_product_color_default_status){
-		this.b_product_color_default_status=b_product_color_default_status;
+	
+	public Date getB_product_color_default_ctime() {
+		return b_product_color_default_ctime;
 	}
-	public String getB_product_color_default_status(){
+	public void setB_product_color_default_ctime(Date b_product_color_default_ctime) {
+		this.b_product_color_default_ctime = b_product_color_default_ctime;
+	}
+	public Date getB_product_color_default_mtime() {
+		return b_product_color_default_mtime;
+	}
+	public void setB_product_color_default_mtime(Date b_product_color_default_mtime) {
+		this.b_product_color_default_mtime = b_product_color_default_mtime;
+	}
+	public int getB_product_color_default_status() {
 		return b_product_color_default_status;
+	}
+	public void setB_product_color_default_status(int b_product_color_default_status) {
+		this.b_product_color_default_status = b_product_color_default_status;
 	}
 	public void setXt_attachment_id(String xt_attachment_id){
 		this.xt_attachment_id=xt_attachment_id;

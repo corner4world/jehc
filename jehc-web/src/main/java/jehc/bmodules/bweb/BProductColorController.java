@@ -55,7 +55,7 @@ public class BProductColorController extends BaseAction{
 		commonHPager(condition,request);
 		List<BProductColor> b_Product_ColorList = bProductColorService.getBProductColorListByCondition(condition);
 		PageInfo<BProductColor> page = new PageInfo<BProductColor>(b_Product_ColorList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -80,7 +80,7 @@ public class BProductColorController extends BaseAction{
 		if(null != b_Product_Color && !"".equals(b_Product_Color)){
 			b_Product_Color.setB_product_color_id(UUID.toUUID());
 			b_Product_Color.setXt_userinfo_id(getXtUid());
-			b_Product_Color.setB_product_color_ctime(getSimpleDateFormat());
+			b_Product_Color.setB_product_color_ctime(getDate());
 			i=bProductColorService.addBProductColor(b_Product_Color);
 		}
 		if(i>0){
@@ -100,7 +100,7 @@ public class BProductColorController extends BaseAction{
 		int i = 0;
 		if(null != b_Product_Color && !"".equals(b_Product_Color)){
 			b_Product_Color.setXt_userinfo_id(getXtUid());
-			b_Product_Color.setB_product_color_mtime(getSimpleDateFormat());
+			b_Product_Color.setB_product_color_mtime(getDate());
 			i=bProductColorService.updateBProductColor(b_Product_Color);
 		}
 		if(i>0){
@@ -161,5 +161,34 @@ public class BProductColorController extends BaseAction{
 	public void exportBProductColor(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductColorAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductColorAdd(BProductColor bProductColor,HttpServletRequest request, Model model){
+		model.addAttribute("b_product_id", bProductColor.getB_product_id());
+		return new ModelAndView("pc/b-view/b-product-color/b-product-color-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductColorUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductColorUpdate(String b_product_color_id,HttpServletRequest request, Model model){
+		BProductColor bProductColor = bProductColorService.getBProductColorById(b_product_color_id);
+		model.addAttribute("bProductColor", bProductColor);
+		return new ModelAndView("pc/b-view/b-product-color/b-product-color-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductColorDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductColorDetail(String b_product_color_id,HttpServletRequest request, Model model){
+		BProductColor bProductColor = bProductColorService.getBProductColorById(b_product_color_id);
+		model.addAttribute("bProductColor", bProductColor);
+		return new ModelAndView("pc/b-view/b-product-color/b-product-color-detail");
 	}
 }

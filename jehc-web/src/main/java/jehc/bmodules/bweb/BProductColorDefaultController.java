@@ -18,15 +18,11 @@ import com.github.pagehelper.PageInfo;
 
 import jehc.bmodules.bmodel.BProductColorDefault;
 import jehc.bmodules.bservice.BProductColorDefaultService;
-import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
-import jehc.xtmodules.xtcore.base.BaseJson;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
-import jehc.xtmodules.xtmodel.XtAttachment;
-import jehc.xtmodules.xtservice.XtAttachmentService;
 
 /**
 * 基础商品默认颜色 
@@ -37,8 +33,6 @@ import jehc.xtmodules.xtservice.XtAttachmentService;
 public class BProductColorDefaultController extends BaseAction{
 	@Autowired
 	private BProductColorDefaultService bProductColorDefaultService;
-	@Autowired
-	private XtAttachmentService xtAttachmentService;
 	/**
 	* 载入初始化页面
 	* @param b_product_color_default 
@@ -66,7 +60,7 @@ public class BProductColorDefaultController extends BaseAction{
 			b_Product_Color_DefaultList.get(i).setJehcimg_base_url(jehcimg_base_url);
 		}
 		PageInfo<BProductColorDefault> page = new PageInfo<BProductColorDefault>(b_Product_Color_DefaultList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -90,7 +84,7 @@ public class BProductColorDefaultController extends BaseAction{
 		int i = 0;
 		if(null != b_Product_Color_Default && !"".equals(b_Product_Color_Default)){
 			b_Product_Color_Default.setB_product_color_default_id(UUID.toUUID());
-			b_Product_Color_Default.setB_product_color_default_ctime(CommonUtils.getSimpleDateFormat());
+			b_Product_Color_Default.setB_product_color_default_ctime(getDate());
 			b_Product_Color_Default.setXt_userinfo_id(CommonUtils.getXtUid());
 			i=bProductColorDefaultService.addBProductColorDefault(b_Product_Color_Default);
 		}
@@ -110,7 +104,7 @@ public class BProductColorDefaultController extends BaseAction{
 	public String updateBProductColorDefault(BProductColorDefault b_Product_Color_Default,HttpServletRequest request){
 		int i = 0;
 		if(null != b_Product_Color_Default && !"".equals(b_Product_Color_Default)){
-			b_Product_Color_Default.setB_product_color_default_mtime(CommonUtils.getSimpleDateFormat());
+			b_Product_Color_Default.setB_product_color_default_mtime(getDate());
 			i=bProductColorDefaultService.updateBProductColorDefault(b_Product_Color_Default);
 		}
 		if(i>0){
@@ -151,7 +145,7 @@ public class BProductColorDefaultController extends BaseAction{
 		BProductColorDefault b_Product_Color_Default = bProductColorDefaultService.getBProductColorDefaultById(b_product_color_default_id);
 		if(null != b_Product_Color_Default && !"".equals(b_Product_Color_Default)){
 			b_Product_Color_Default.setB_product_color_default_id(UUID.toUUID());
-			b_Product_Color_Default.setB_product_color_default_ctime(CommonUtils.getSimpleDateFormat());
+			b_Product_Color_Default.setB_product_color_default_ctime(getDate());
 			i=bProductColorDefaultService.addBProductColorDefault(b_Product_Color_Default);
 		}
 		if(i>0){
@@ -175,32 +169,32 @@ public class BProductColorDefaultController extends BaseAction{
 	}
 	
 	/**
-	 * 上传图片
-	 * @param file
-	 * @param request
-	 * @param response
-	 */
-	@ResponseBody
-	@RequestMapping(value="/uploadProductColorDefaultImages",method={RequestMethod.POST,RequestMethod.GET})
-	public String uploadProductColorDefaultImages(HttpServletRequest request,HttpServletResponse response){
-		BaseJson baseJson = new BaseJson();
-		try {
-			String path = CommonUtils.getXtPathCache("b_product_color_default_path").get(0).getXt_path();
-			String relative_path = CommonUtils.getXtPathCache("b_product_color_default_relative_path").get(0).getXt_path();
-			FileUtil.initPath(request, path);
-			List<XtAttachment> xtAttachmentList = CommonUtils.upLoad(request, path,relative_path,null,null,null,null,null);
-			int i = xtAttachmentService.addXtAttachment(xtAttachmentList.get(0));
-			if(i > 0){
-				baseJson.setJsonID(xtAttachmentList.get(0).getXt_attachment_id());
-				baseJson.setMsg("上传成功");
-				baseJson.setJsonValue(CommonUtils.getXtPathCache("jehcimg_base_url").get(0).getXt_path()+ xtAttachmentList.get(0).getXt_attachmentPath());
-			}else{
-				baseJson.setMsg("上传失败");
-			}
-			return outDataStr(baseJson);
-        } catch (Exception e) {
-        	baseJson.setMsg("上传失败");
-        	return outDataStr(baseJson);
-        }
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductColorDefaultAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductColorDefaultAdd(BProductColorDefault bProductColorDefault,HttpServletRequest request, Model model){
+		model.addAttribute("b_product_id", bProductColorDefault.getB_product_id());
+		return new ModelAndView("pc/b-view/b-product-color-default/b-product-color-default-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductColorDefaultUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductColorDefaultUpdate(String b_product_color_default_id,HttpServletRequest request, Model model){
+		BProductColorDefault bProductColorDefault = bProductColorDefaultService.getBProductColorDefaultById(b_product_color_default_id);
+		model.addAttribute("bProductColorDefault", bProductColorDefault);
+		return new ModelAndView("pc/b-view/b-product-color-default/b-product-color-default-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductColorDefaultDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductColorDefaultDetail(String b_product_color_default_id,HttpServletRequest request, Model model){
+		BProductColorDefault bProductColorDefault = bProductColorDefaultService.getBProductColorDefaultById(b_product_color_default_id);
+		model.addAttribute("bProductColorDefault", bProductColorDefault);
+		return new ModelAndView("pc/b-view/b-product-color-default/b-product-color-default-detail");
 	}
 }

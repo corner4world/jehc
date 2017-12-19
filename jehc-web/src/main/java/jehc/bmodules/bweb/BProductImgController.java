@@ -55,7 +55,7 @@ public class BProductImgController extends BaseAction{
 		commonHPager(condition,request);
 		List<BProductImg> b_Product_ImgList = bProductImgService.getBProductImgListByCondition(condition);
 		PageInfo<BProductImg> page = new PageInfo<BProductImg>(b_Product_ImgList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -80,7 +80,7 @@ public class BProductImgController extends BaseAction{
 		if(null != b_Product_Img && !"".equals(b_Product_Img)){
 			b_Product_Img.setB_product_img_id(UUID.toUUID());
 			b_Product_Img.setXt_userinfo_id(getXtUid());
-			b_Product_Img.setB_product_img_ctime(getSimpleDateFormat());
+			b_Product_Img.setB_product_img_ctime(getDate());
 			i=bProductImgService.addBProductImg(b_Product_Img);
 		}
 		if(i>0){
@@ -100,7 +100,7 @@ public class BProductImgController extends BaseAction{
 		int i = 0;
 		if(null != b_Product_Img && !"".equals(b_Product_Img)){
 			b_Product_Img.setXt_userinfo_id(getXtUid());
-			b_Product_Img.setB_product_img_mtime(getSimpleDateFormat());
+			b_Product_Img.setB_product_img_mtime(getDate());
 			i=bProductImgService.updateBProductImg(b_Product_Img);
 		}
 		if(i>0){
@@ -161,5 +161,34 @@ public class BProductImgController extends BaseAction{
 	public void exportBProductImg(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductImgAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductImgAdd(BProductImg bProductImg,HttpServletRequest request, Model model){
+		model.addAttribute("b_product_id", bProductImg.getB_product_id());
+		return new ModelAndView("pc/b-view/b-product-img/b-product-img-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductImgUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductImgUpdate(String b_product_img_id,HttpServletRequest request, Model model){
+		BProductImg bProductImg = bProductImgService.getBProductImgById(b_product_img_id);
+		model.addAttribute("bProductImg", bProductImg);
+		return new ModelAndView("pc/b-view/b-product-img/b-product-img-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBProductImgDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBProductImgDetail(String b_product_img_id,HttpServletRequest request, Model model){
+		BProductImg bProductImg = bProductImgService.getBProductImgById(b_product_img_id);
+		model.addAttribute("bProductImg", bProductImg);
+		return new ModelAndView("pc/b-view/b-product-img/b-product-img-detail");
 	}
 }

@@ -1,190 +1,115 @@
-var bProductImgWinAdd;
-var bProductImgFormAdd;
-function addBProductImg(){
-	initBProductImgFormAdd();
-	bProductImgWinAdd = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:800,
-		height:400,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'添加信息',
-		listeners:{
-			minimize:function(win,opts){
-				win.collapse();
-			}
-		},
-		items:bProductImgFormAdd,
-		buttons:[{
-			text:'保存',
-			itemId:'save',
-			handler:function(button){
-				submitForm(bProductImgFormAdd,'../bProductImgController/addBProductImg',grid,bProductImgWinAdd,false,true);
-			}
-		},{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	bProductImgWinAdd.show();
-	bProductImgWinAdd.maximize();
-	Ext.getCmp('b_product_id').setValue($('#b_product_id_').val());
-	/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/
-	initFileRight('xt_attachment_id','xt_attachment_id_pic',1,1);
-	/**初始化附件右键菜单结束**/
-
+//返回r
+function goback(){
+	tlocation("../bProductImgDefaultController/loadBProductImgDefault?b_product_id="+$('#b_product_id').val());
 }
-function initBProductImgFormAdd(){
-	bProductImgFormAdd = Ext.create('Ext.FormPanel',{
-		xtype:'form',
-		waitMsgTarget:true,
-		defaultType:'textfield',
-		autoScroll:true,
-		fieldDefaults:{
-			labelWidth:77,
-			labelAlign:'left',
-			flex:1,
-			margin:'2 5 4 5'
+$('#defaultForm').bootstrapValidator({
+	message:'此值不是有效的'
+});
+//保存
+function addBProductImg(){
+	submitBForm('defaultForm','../bProductImgController/addBProductImg',"../bProductImgDefaultController/loadBProductImgDefault?b_product_id="+$('#b_product_id').val());
+}
+//初始化日期选择器
+$(document).ready(function(){
+	datetimeInit();
+});
+/**初始化附件右键菜单开始 参数4为1表示拥有上传和删除功能 即新增和编辑页面使用**/
+initBFileRight('xt_attachment_id','xt_attachment_id_pic',1);
+/**初始化附件右键菜单结束**/
+
+
+//商户选择器
+function initBSellerList(){
+	$('#bSellerSelectModal').modal();
+	$('#searchBSellerForm')[0].reset();
+	var opt = {
+			searchformId:'searchBSellerForm'
+		};
+	var options = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../bSellerController/getBSellerListByCondition',opt);},//渲染数据
+			//在第一位置追加序列号
+			fnRowCallback:function(nRow, aData, iDisplayIndex){
+				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+				return nRow;
 		},
-		/**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        /**新方法使用结束**/ 
-		items:[
-		{
-			fieldLabel:'图片名称',
-			xtype:'textfield',
-			name:'b_product_img_name',
-			maxLength:100,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'图片类型',
-			xtype:'combo',
-			emptyText:'请选择',
-			store:B_PRODUCT_IMG_TYPE_COMBO_STORE,
-			mode:'local',
-			triggerAction:'all',
-			editable:false,
-			hiddenName:'b_product_img_type',
-			valueField:'value',
-			displayField:'text',
-			name:'b_product_img_type',
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态',
-			xtype:'combo',
-			emptyText:'请选择',
-			store:B_PRODUCT_IMG_STATUS_COMBO_STORE,
-			mode:'local',
-			triggerAction:'all',
-			editable:false,
-			hiddenName:'b_product_img_status',
-			valueField:'value',
-			displayField:'text',
-			name:'b_product_img_status',
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'商品编号',
-			xtype:'textfield',
-			name:'b_product_id',
-			id:'b_product_id',
-			maxLength:32,
-			hidden:true,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'商户、卖家编号',
-			xtype:'textfield',
-			hidden:true,
-			id:'b_seller_id',
-			name:'b_seller_id',
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			xtype:"fieldcontainer",
-			fieldLabel:'&nbsp;&nbsp;商户卖家',
-			anchor:'40%',
-			layout:'hbox',
-			margin:'0 0 0 0',
-			items:[{
-					xtype:'textfield',
-					name:'b_seller_name',
-					id:'b_seller_name',
-					maxLength:255,
-					readOnly:true,
-					allowBlank:false,
-					anchor:'40%'
+		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		//列表表头字段
+		colums:[
+				{
+					sClass:"text-center",
+					width:"50px",
+					data:"b_seller_id",
+					render:function (data, type, full, meta) {
+						return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildBSeller " value="' + data + '" /><span></span></label>';
+					},
+					bSortable:false
 				},
-		        {
-		            xtype:'button',
-					text:'选择商户、卖家',
-					height:30,
-					margin:'3 0 0 0',
-					handler:function(button){
-						initBsellerGrid();
-					}
-		        }
-		    ]
-		},
-		{
-			fieldLabel:'附件编号',
-			xtype:'textfield',
-			hidden:true,
-			id:'xt_attachment_id',
-			name:'xt_attachment_id',
-			maxLength:32,
-			anchor:'100%'
-		},
-		{
-			title:'附件编号',
-			xtype:'fieldset',
-			items:{
-				xtype:'box', 
-				id:'xt_attachment_id_pic', 
-				margin:'2 5 4 70', 
-				autoEl:{
-					tag:'img',
-					/** 不采用右键时候直接用点击事件触发
-					onclick:"optupload('xt_attachment_id','xt_attachment_id_pic',1)",
-					**/
-					src:bsdefimg
+				{
+					data:"b_seller_id",
+					width:"50px"
+				},
+				{
+					data:'b_seller_name'
+				},
+				{
+					data:'b_seller_tel'
+				},
+				{
+					data:'b_seller_level'
+				},
+				{
+					data:'b_seller_official',
+	                render:function(data, type, row, meta) {
+	                	if(data == 0){
+	                        return '是';
+	                    }else if(data == 1){
+	                        return "否";
+	                    }else{
+	                    	return "缺省";
+	                    }
+	                }
+				},
+				{
+					data:'b_seller_status',
+	                render:function(data, type, row, meta) {
+	                	if(data == 0){
+	                        return '可用';
+	                    }else if(data == 1){
+	                        return "禁用";
+	                    }else{
+	                    	return "缺省";
+	                    }
+	                }
+				},
+				{
+					data:'b_seller_address'
 				}
-			}
-		},
-		{
-			fieldLabel:'图片宽度',
-			xtype:'numberfield',
-			value:'0',
-			name:'b_product_img_width',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'图片高度',
-			xtype:'numberfield',
-			value:'0',
-			name:'b_product_img_height',
-			maxLength:10,
-			anchor:'100%'
-		},
-		{
-			fieldLabel:'使用说明',
-			xtype:'textareafield',
-			name:'b_product_img_remark',
-			maxLength:200,
-			anchor:'100%'
-		}
-		]
+			]
 	});
+	grid=$('#bSellersDatatables').dataTable(options);
+	//实现全选反选
+	docheckboxall('checkallBSeller','checkchildBSeller');
+	//实现单击行选中
+	clickrowselected('bSellersDatatables');
+}
+
+function doBSellerSelect(){
+	if(returncheckedLength('checkchildBSeller') != 1){
+		toastrBoot(4,"请选择一个商户");
+		return;
+	}
+	msgTishCallFnBoot("确定选择的该商户？",function(){
+		var id = returncheckIds('checkId').join(",");
+		var table = $('#bSellersDatatables').dataTable();
+		var List = getTableContent(table);
+		for(var i = 0; i < List.length; i++){
+			var obj = List[i];
+			if(obj.b_seller_id == id){
+				$('#b_seller_name').val(obj.b_seller_name);
+				$('#b_seller_id').val(obj.b_seller_id);
+				$('#bSellerSelectModal').modal('hide');
+				return;
+			}
+		}
+	})
 }

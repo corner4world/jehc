@@ -7,8 +7,8 @@
 		SELECT
 			b_product_color.b_product_color_id,
 			b_product_color.b_product_color_name,
-			b_product_color.b_product_color_ctime AS b_product_color_ctime,
-			b_product_color.b_product_color_mtime AS b_product_color_mtime,
+			b_product_color.b_product_color_ctime,
+			b_product_color.b_product_color_mtime,
 			b_product_color.b_product_color_width,
 			b_product_color.b_product_color_height,
 			b_product_color.xt_userinfo_id,
@@ -28,7 +28,7 @@
 			AND b_product_color.b_product_id=#{b_product_id}
 		</if>
 		<if test="null != b_product_color_name">
-			AND instr(b_product_color.b_product_color_name,#{b_product_color_name})
+			AND b_product_color.b_product_color_name LIKE CONCAT(CONCAT('%',#{b_product_color_name}),'%')
 		</if>
 		<if test="null != b_product_color_status">
 			AND b_product_color.b_product_color_status = #{b_product_color_status}
@@ -40,8 +40,8 @@
 		SELECT
 			b_product_color.b_product_color_id,
 			b_product_color.b_product_color_name,
-			b_product_color.b_product_color_ctime AS b_product_color_ctime,
-			b_product_color.b_product_color_mtime AS b_product_color_mtime,
+			b_product_color.b_product_color_ctime,
+			b_product_color.b_product_color_mtime,
 			b_product_color.b_product_color_width,
 			b_product_color.b_product_color_height,
 			b_product_color.xt_userinfo_id,
@@ -67,7 +67,6 @@
 			b_product_color_id,
 			b_product_color_name,
 			b_product_color_ctime,
-			b_product_color_mtime,
 			b_product_color_width,
 			b_product_color_height,
 			xt_userinfo_id,
@@ -83,7 +82,6 @@
 			#{b_product_color_id},
 			#{b_product_color_name},
 			#{b_product_color_ctime},
-			#{b_product_color_mtime},
 			#{b_product_color_width},
 			#{b_product_color_height},
 			#{xt_userinfo_id},

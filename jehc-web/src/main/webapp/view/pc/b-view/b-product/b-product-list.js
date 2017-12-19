@@ -68,9 +68,18 @@ $(document).ready(function() {
 			},
 			{
 				data:"b_product_id",
-				width:"50px",
+				width:"250px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toBProductDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					var b_product_id = row.b_product_id;
+					var b_product_name = row.b_product_name;
+					var b_product_btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toBProductImgDefault("'+b_product_id+'")><i class="glyphicon glyphicon-picture"></i>默认图片</button>';
+					var b_product_imgbtn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toBProductImg("'+b_product_id+'")><i class="glyphicon glyphicon-picture"></i>商户商品图片</button>';
+					
+					var b_product_colorbtn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toBProductColor("'+b_product_id+'")><i class="glyphicon glyphicon-picture">商户商品颜色</i></button>';
+					var b_product_colordefaultbtn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toBProductColorDefault("'+b_product_id+'")><i class="glyphicon glyphicon-picture"></i>默认颜色</button>';
+					
+					var b_product_detail_btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toBProductDetail("'+b_product_id+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+					return b_product_imgbtn+b_product_btn+b_product_colorbtn+b_product_colordefaultbtn+b_product_detail_btn;
 				}
 			}
 		]
@@ -98,6 +107,22 @@ function toBProductUpdate(){
 function toBProductDetail(id){
 	tlocation("../bProductController/toBProductDetail?b_product_id="+id);
 }
+
+function toBProductImgDefault(id){
+	tlocation("../bProductImgDefaultController/loadBProductImgDefault?b_product_id="+id);
+}
+
+function toBProductImg(id){
+	tlocation("../bProductImgController/loadBProductImg?b_product_id="+id);
+}
+
+function toBProductColorDefault(id){
+	tlocation("../bProductColorDefaultController/loadBProductColorDefault?b_product_id="+id);
+}
+
+function toBProductColor(id){
+	tlocation("../bProductColorController/loadBProductColor?b_product_id="+id);
+} 
 //删除
 function delBProduct(){
 	if(returncheckedLength('checkchild') <= 0){

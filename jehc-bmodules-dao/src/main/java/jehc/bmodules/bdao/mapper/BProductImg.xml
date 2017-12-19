@@ -7,8 +7,8 @@
 		SELECT
 			b_product_img.b_product_img_id,
 			b_product_img.b_product_img_name,
-			b_product_img.b_product_img_ctime AS b_product_img_ctime,
-			b_product_img.b_product_img_mtime AS b_product_img_mtime,
+			b_product_img.b_product_img_ctime,
+			b_product_img.b_product_img_mtime,
 			b_product_img.b_product_img_type,
 			b_product_img.b_product_img_status,
 			b_product_img.b_product_id,
@@ -25,13 +25,16 @@
 		LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_product_img.b_seller_id
 		WHERE 1=1
 		<if test="null != b_product_img_name">
-			AND instr(b_product_img.b_product_img_name,#{b_product_img_name})
+			AND b_product_img.b_product_img_name LIKE CONCAT(CONCAT('%',#{b_product_img_name}),'%')
 		</if>
-		<if test="null != b_product_img_status">
-			AND b_product_img.b_product_img_status = #{b_product_img_status}
+		<if test="null != b_seller_name">
+			AND b_seller.b_seller_name LIKE CONCAT(CONCAT('%',#{b_seller_name}),'%')
 		</if>
 		<if test="null != b_product_img_type">
-			AND b_product_img_type = #{b_product_img_type}
+			AND b_product_img.b_product_img_type = #{b_product_img_type}
+		</if>
+		<if test="null != b_product_id">
+			AND b_product_img.b_product_id = #{b_product_id}
 		</if>
 	</select>
 
@@ -40,8 +43,8 @@
 		SELECT
 			b_product_img.b_product_img_id,
 			b_product_img.b_product_img_name,
-			b_product_img.b_product_img_ctime AS b_product_img_ctime,
-			b_product_img.b_product_img_mtime AS b_product_img_mtime,
+			b_product_img.b_product_img_ctime,
+			b_product_img.b_product_img_mtime,
 			b_product_img.b_product_img_type,
 			b_product_img.b_product_img_status,
 			b_product_img.b_product_id,
@@ -67,7 +70,6 @@
 			b_product_img_id,
 			b_product_img_name,
 			b_product_img_ctime,
-			b_product_img_mtime,
 			b_product_img_type,
 			b_product_img_status,
 			b_product_id,
@@ -83,7 +85,6 @@
 			#{b_product_img_id},
 			#{b_product_img_name},
 			#{b_product_img_ctime},
-			#{b_product_img_mtime},
 			#{b_product_img_type},
 			#{b_product_img_status},
 			#{b_product_id},
