@@ -672,13 +672,6 @@ public class MxUtils {
 		mxCellList = root.elements();
 		String id = mxCell.attributeValue("id");
 		String nodeID = mxCell.attributeValue("nodeID");
-		String skipexpression = mxCell.attributeValue("skipexpression");
-		if(null != skipexpression && !"".equals(skipexpression)){
-			skipexpression = " skipExpression='"+skipexpression+"'";
-		}else{
-			skipexpression = "";
-		}
-		
 		String sequenceFlow="";//连线指向
 		//再次进行循环 目的获取连接线
 		for(int j = 0; j < mxCellList.size(); j++ ){
@@ -693,6 +686,12 @@ public class MxUtils {
             		List<Element> target_target_list = root.selectNodes("/root/mxCell[@id='"+mxCell_agin.attributeValue("target")+"']");
         			if(!target_target_list.isEmpty()){
         				Element mxCell_target = (Element)target_target_list.get(0);
+        				String skipexpression = mxCell_agin.attributeValue("skipexpression");
+        				if(null != skipexpression && !"".equals(skipexpression)){
+        					skipexpression = " skipExpression='"+skipexpression+"'";
+        				}else{
+        					skipexpression = "";
+        				}
         				if(sequenceFlowIsInMessageFlow(mxCellList, mxCell_agin)){
         					sequenceFlow += "<sequenceFlow id='"+mxCell_agin.attributeValue("nodeID")+"' name='"+mxCell_agin.attributeValue("value")+"' sourceRef='"+nodeID+"' targetRef='"+mxCell_target.attributeValue("nodeID")+"' "+skipexpression+"></sequenceFlow>";
         				}

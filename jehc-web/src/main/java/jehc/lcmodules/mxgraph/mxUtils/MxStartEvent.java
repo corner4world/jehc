@@ -211,12 +211,18 @@ public class MxStartEvent {
             		List target_target_list = root.selectNodes("/root/mxCell[@id='"+mxCell_agin.attributeValue("target")+"']");
         			if(!target_target_list.isEmpty()){
         				Element mxCell_target = (Element)target_target_list.get(0);
+        				String skipexpression = mxCell_agin.attributeValue("skipexpression");
+        				if(null != skipexpression && !"".equals(skipexpression)){
+        					skipexpression = " skipExpression='"+skipexpression+"'";
+        				}else{
+        					skipexpression = "";
+        				}
         				if("endEvent".equals(mxCell_target.attributeValue("node_type"))){
         					//提示
         					System.out.println("开始节点不能直接连接结束节点");
         					//该地方需要终止
         				}else{
-        					start_sequenceFlow += "<sequenceFlow id='"+mxCell_agin.attributeValue("nodeID")+"' name='"+mxCell_agin.attributeValue("value")+"' sourceRef='"+nodeID+"' targetRef='"+mxCell_target.attributeValue("nodeID")+"'></sequenceFlow>";
+        					start_sequenceFlow += "<sequenceFlow id='"+mxCell_agin.attributeValue("nodeID")+"' name='"+mxCell_agin.attributeValue("value")+"' sourceRef='"+nodeID+"' targetRef='"+mxCell_target.attributeValue("nodeID")+"' "+skipexpression+"></sequenceFlow>";
         					/**
         					 * 
         					//连线备注显示

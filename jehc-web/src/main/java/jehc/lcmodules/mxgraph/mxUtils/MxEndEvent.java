@@ -96,7 +96,13 @@ public class MxEndEvent {
             		List target_target_list = root.selectNodes("/root/mxCell[@id='"+mxCell_agin.attributeValue("target")+"']");
         			if(!target_target_list.isEmpty()){
         				Element mxCell_target = (Element)target_target_list.get(0);
-        				end_sequenceFlow += "<sequenceFlow id='"+mxCell_agin.attributeValue("value")+"' name='"+mxCell_agin.attributeValue("value")+"' sourceRef='"+nodeID+"' targetRef='"+mxCell_target.attributeValue("nodeID")+"'></sequenceFlow>";
+        				String skipexpression = mxCell_agin.attributeValue("skipexpression");
+        				if(null != skipexpression && !"".equals(skipexpression)){
+        					skipexpression = " skipExpression='"+skipexpression+"'";
+        				}else{
+        					skipexpression = "";
+        				}
+        				end_sequenceFlow += "<sequenceFlow id='"+mxCell_agin.attributeValue("value")+"' name='"+mxCell_agin.attributeValue("value")+"' sourceRef='"+nodeID+"' targetRef='"+mxCell_target.attributeValue("nodeID")+"' "+skipexpression+"></sequenceFlow>";
         				/**
         				if("endEvent".equals(mxCell_target.attributeValue("node_type"))){
         					//提示
