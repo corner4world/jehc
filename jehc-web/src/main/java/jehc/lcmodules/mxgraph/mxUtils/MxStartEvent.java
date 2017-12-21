@@ -3,6 +3,7 @@ package jehc.lcmodules.mxgraph.mxUtils;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Element;
 
 import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
@@ -212,17 +213,25 @@ public class MxStartEvent {
         			if(!target_target_list.isEmpty()){
         				Element mxCell_target = (Element)target_target_list.get(0);
         				String skipexpression = mxCell_agin.attributeValue("skipexpression");
+        				String condition =  mxCell_agin.attributeValue("condition");
         				if(null != skipexpression && !"".equals(skipexpression)){
         					skipexpression = " skipExpression='"+skipexpression+"'";
         				}else{
         					skipexpression = "";
+        				}
+        				if(!StringUtils.isEmpty(condition)){
+        					condition = " <conditionExpression xsi:type='tFormalExpression'><![CDATA["+condition+"]]></conditionExpression> ";	
+        				}else{
+        					condition = "";
         				}
         				if("endEvent".equals(mxCell_target.attributeValue("node_type"))){
         					//提示
         					System.out.println("开始节点不能直接连接结束节点");
         					//该地方需要终止
         				}else{
-        					start_sequenceFlow += "<sequenceFlow id='"+mxCell_agin.attributeValue("nodeID")+"' name='"+mxCell_agin.attributeValue("value")+"' sourceRef='"+nodeID+"' targetRef='"+mxCell_target.attributeValue("nodeID")+"' "+skipexpression+"></sequenceFlow>";
+        					start_sequenceFlow += "<sequenceFlow id='"+mxCell_agin.attributeValue("nodeID")+"' name='"+mxCell_agin.attributeValue("value")+"' sourceRef='"+nodeID+"' targetRef='"+mxCell_target.attributeValue("nodeID")+"' "+skipexpression+">"
+        							+ condition
+        							+"</sequenceFlow>";
         					/**
         					 * 
         					//连线备注显示
