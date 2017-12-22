@@ -114,7 +114,7 @@
 							<div class="form-group">
 								<label>是否官方商店</label>
 								<select class="form-control" name="b_seller_official" placeholder="请选择">
-									<option>请选择</option>
+									<option value="">请选择</option>
 									<option value="0">是</option>
 									<option value="1">否</option>
 								</select>
