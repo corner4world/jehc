@@ -19,10 +19,13 @@
 			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_warehouse.b_seller_id
 		WHERE 1=1
 		<if test="null != b_seller_name">
-			AND instr(b_seller.b_seller_name,#{b_seller_name})
+			AND b_seller.b_seller_name LIKE CONCAT(CONCAT('%',#{b_seller_name}),'%')
 		</if>
-		<if test="null != b_seller_name">
-			AND b_seller.b_seller_name = #{b_warehouse_type}
+		<if test="null != b_warehouse_id">
+			AND b_warehouse_location.b_warehouse_id = #{b_warehouse_id}
+		</if>
+		<if test="null != b_warehouse_location_name">
+			AND b_warehouse_location.b_warehouse_location_name LIKE CONCAT(CONCAT('%',#{b_warehouse_location_name}),'%')
 		</if>
 	</select>
 

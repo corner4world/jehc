@@ -25,10 +25,10 @@
 			LEFT JOIN b_product_price b_product_price ON b_product_price.b_seller_product_id = b_stock.b_seller_product_id
 		WHERE 1=1
 		<if test="null != b_product_name">
-			AND instr(b_product.b_product_name,#{b_product_name})
+			AND b_product.b_product_name LIKE CONCAT(CONCAT('%',#{b_product_name}),'%')
 		</if>
 		<if test="null != b_seller_name">
-			AND instr(b_seller.b_seller_name,#{b_seller_name})
+			AND b_seller.b_seller_name LIKE CONCAT(CONCAT('%',#{b_seller_name}),'%')
 		</if>
 	</select>
 
@@ -40,11 +40,19 @@
 			b_stock.b_stock_countable_sell,
 			b_stock.b_stock_locks_number,
 			b_product.b_product_name,
-			b_seller.b_seller_name
+			b_product.b_product_id,
+			b_seller.b_seller_name,
+			b_seller.b_seller_id,
+			b_category.b_category_name,
+			b_brand.b_brand_name,
+			b_product_price.*
 		FROM 
 			b_stock b_stock LEFT JOIN b_seller_product b_seller_product ON b_seller_product.b_seller_product_id=b_stock.b_seller_product_id
 			LEFT JOIN b_seller b_seller ON b_seller.b_seller_id = b_seller_product.b_seller_id
 			LEFT JOIN b_product b_product ON b_seller_product.b_product_id = b_product.b_product_id
+			LEFT JOIN b_brand b_brand ON b_product.b_brand_id = b_brand.b_brand_id
+			LEFT JOIN b_category b_category ON b_category.b_category_id = b_product.b_category_id 
+			LEFT JOIN b_product_price b_product_price ON b_product_price.b_seller_product_id = b_stock.b_seller_product_id
 		WHERE b_stock.b_stock_id=#{b_stock_id}
 	</select>
 
@@ -72,7 +80,6 @@
 		UPDATE
 			b_stock
 		SET
-			b_stock_id = #{b_stock_id},
 			b_seller_product_id = #{b_seller_product_id},
 			b_stock_countable_sell = #{b_stock_countable_sell},
 			b_stock_locks_number = #{b_stock_locks_number}
@@ -86,4 +93,24 @@
 			#{item}
 		</foreach>
 	</delete>
+	
+	<!-- 锁定库存  b_stock_countable_sell 库存数量，b_stock_locks_number 可卖数-->
+	<update id="lockBStock" parameterType="jehc.bmodules.bmodel.BStock">
+		UPDATE
+			b_stock
+		SET
+			b_stock_countable_sell = #{b_stock_countable_sell}-#{buy_number},
+			b_stock_locks_number = #{b_stock_locks_number}-#{buy_number}
+		WHERE b_stock_id=#{b_stock_id} AND #{b_stock_locks_number}-#{buy_number} > 0
+	</update>
+	
+	<!-- 释放库存  b_stock_countable_sell 库存数量，b_stock_locks_number 可卖数 -->
+	<update id="releaseBStock" parameterType="jehc.bmodules.bmodel.BStock">
+		UPDATE
+			b_stock
+		SET
+			b_stock_countable_sell = #{b_stock_countable_sell}+#{buy_number},
+			b_stock_locks_number = #{b_stock_locks_number}+#{buy_number}
+		WHERE b_stock_id=#{b_stock_id}
+	</update>
 </mapper>

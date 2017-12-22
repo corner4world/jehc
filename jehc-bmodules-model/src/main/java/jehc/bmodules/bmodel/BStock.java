@@ -10,8 +10,8 @@ public class BStock extends BProductPrice implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private String b_stock_id;/**库存编号**/
 	private String b_seller_product_id;/**卖家产品编号**/
-	private int b_stock_countable_sell;/**可卖数即商家所设置的数量**/
-	private int b_stock_locks_number;/**锁定数即已卖数**/
+	private int b_stock_countable_sell;/**库存数量**/
+	private int b_stock_locks_number;/**可卖数**/
 	private String b_product_name;/**商品名称**/
 	private String b_seller_name;/**商品卖家**/
 	
@@ -19,6 +19,8 @@ public class BStock extends BProductPrice implements Serializable{
 	private String b_brand_name;/**品牌名称**/
 	private String b_product_id;/**商品编号**/
 	private String b_seller_id;/**卖家编号**/
+	
+	private int buy_numbers;/**购买数**/
 	public void setB_stock_id(String b_stock_id){
 		this.b_stock_id=b_stock_id;
 	}
@@ -78,5 +80,11 @@ public class BStock extends BProductPrice implements Serializable{
 	}
 	public void setB_seller_id(String b_seller_id) {
 		this.b_seller_id = b_seller_id;
+	}
+	public int getBuy_numbers() {
+		return buy_numbers;
+	}
+	public void setBuy_numbers(int buy_numbers) {
+		this.buy_numbers = buy_numbers;
 	}
 }

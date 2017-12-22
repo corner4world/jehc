@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -53,7 +54,7 @@ public class BStockController extends BaseAction{
 		commonHPager(condition,request);
 		List<BStock> b_StockList = bStockService.getBStockListByCondition(condition);
 		PageInfo<BStock> page = new PageInfo<BStock>(b_StockList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -155,5 +156,34 @@ public class BStockController extends BaseAction{
 	public void exportBStock(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBStockAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBStockAdd(BStock bStock,HttpServletRequest request){
+		return new ModelAndView("pc/b-view/b-stock/b-stock-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBStockUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBStockUpdate(String b_stock_id,HttpServletRequest request, Model model){
+		BStock bStock = bStockService.getBStockById(b_stock_id);
+		model.addAttribute("bStock", bStock);
+		return new ModelAndView("pc/b-view/b-stock/b-stock-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBStockDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBStockDetail(String b_stock_id,HttpServletRequest request, Model model){
+		BStock bStock = bStockService.getBStockById(b_stock_id);
+		model.addAttribute("bStock", bStock);
+		return new ModelAndView("pc/b-view/b-stock/b-stock-detail");
 	}
 }

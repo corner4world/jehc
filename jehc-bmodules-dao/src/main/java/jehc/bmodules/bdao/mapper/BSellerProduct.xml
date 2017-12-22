@@ -100,7 +100,6 @@
 		LEFT JOIN b_seller_product b_seller_product ON b_seller_product.b_product_id = b_product.b_product_id
 		INNER JOIN b_seller b_seller ON b_seller.b_seller_id = b_seller_product.b_seller_id
 		WHERE 1=1
-		LIMIT #{offset},#{pageSize}
 	</select>
 
 	<!--查询库存使用商户商品并分页统计-->

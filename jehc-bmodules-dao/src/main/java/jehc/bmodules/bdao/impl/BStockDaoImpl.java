@@ -55,4 +55,23 @@ public class BStockDaoImpl  extends BaseDaoImpl implements BStockDao{
 	public int delBStock(Map<String,Object> condition){
 		return this.del("delBStock", condition);
 	}
+	
+
+	/**
+	 * 锁定库存  b_stock_countable_sell 库存数量，b_stock_locks_number 可卖数
+	 * @param b_Stock
+	 * @return
+	 */
+	public int lockBStock(BStock b_Stock){
+		return this.update("lockBStock", b_Stock);
+	}
+	
+	/**
+	 * 释放库存  b_stock_countable_sell 库存数量，b_stock_locks_number 可卖数 
+	 * @param b_Stock
+	 * @return
+	 */
+	public int releaseBStock(BStock b_Stock){
+		return this.update("releaseBStock", b_Stock);
+	}
 }

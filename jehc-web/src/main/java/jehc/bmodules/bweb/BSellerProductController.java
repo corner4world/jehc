@@ -58,7 +58,7 @@ public class BSellerProductController extends BaseAction{
 		commonHPager(condition,request);
 		List<BSellerProduct> b_Seller_ProductList = bSellerProductService.getBSellerProductListByCondition(condition);
 		PageInfo<BSellerProduct> page = new PageInfo<BSellerProduct>(b_Seller_ProductList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -171,11 +171,11 @@ public class BSellerProductController extends BaseAction{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getBSellerProductStockListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getBSellerProductStockListByCondition(HttpServletRequest request){
-		Map<String, Object> condition = new HashMap<String, Object>();
-		commonPager(condition,request);
+	public String getBSellerProductStockListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+		Map<String, Object> condition = baseSearch.convert();
+		commonHPager(condition,request);
 		List<BSellerProduct> b_Seller_ProductList = bSellerProductService.getBSellerProductStockListByCondition(condition);
-		int total = bSellerProductService.getBSellerProductStockListCountByCondition(condition);
-		return outPageStr(b_Seller_ProductList,total,request);
+		PageInfo<BSellerProduct> page = new PageInfo<BSellerProduct>(b_Seller_ProductList);
+		return outPageBootStr(page, request);
 	}
 }

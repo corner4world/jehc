@@ -184,6 +184,7 @@
 				FROM
 				  xt_menuinfo
 				WHERE 1=1
+				AND xt_menuinfo_status = '0'
 				<if test="null != xt_menuinfo_sys">
 					AND xt_menuinfo.xt_menuinfo_sys = '0'
 				</if>

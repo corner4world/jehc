@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,8 +16,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
+import jehc.bmodules.bmodel.BWarehouse;
 import jehc.bmodules.bmodel.BWarehouseLocation;
 import jehc.bmodules.bservice.BWarehouseLocationService;
+import jehc.bmodules.bservice.BWarehouseService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.UUID;
@@ -31,6 +34,8 @@ import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 public class BWarehouseLocationController extends BaseAction{
 	@Autowired
 	private BWarehouseLocationService bWarehouseLocationService;
+	@Autowired
+	private BWarehouseService bWarehouseService;
 	/**
 	* 载入初始化页面
 	* @param b_warehouse_location 
@@ -38,7 +43,8 @@ public class BWarehouseLocationController extends BaseAction{
 	* @return
 	*/
 	@RequestMapping(value="/loadBWarehouseLocation",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadBWarehouseLocation(BWarehouseLocation b_Warehouse_Location,HttpServletRequest request){
+	public ModelAndView loadBWarehouseLocation(BWarehouse bWarehouse,HttpServletRequest request, Model model){
+		model.addAttribute("bWarehouse", bWarehouse=bWarehouseService.getBWarehouseById(bWarehouse.getB_warehouse_id()));
 		return new ModelAndView("pc/b-view/b-warehouse-location/b-warehouse-location-list");
 	}
 	/**
@@ -53,7 +59,7 @@ public class BWarehouseLocationController extends BaseAction{
 		commonHPager(condition,request);
 		List<BWarehouseLocation> b_Warehouse_LocationList = bWarehouseLocationService.getBWarehouseLocationListByCondition(condition);
 		PageInfo<BWarehouseLocation> page = new PageInfo<BWarehouseLocation>(b_Warehouse_LocationList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -155,5 +161,35 @@ public class BWarehouseLocationController extends BaseAction{
 	public void exportBWarehouseLocation(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBWarehouseLocationAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBWarehouseLocationAdd(BWarehouse bWarehouse,HttpServletRequest request, Model model){
+		model.addAttribute("bWarehouse", bWarehouse=bWarehouseService.getBWarehouseById(bWarehouse.getB_warehouse_id()));
+		return new ModelAndView("pc/b-view/b-warehouse-location/b-warehouse-location-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBWarehouseLocationUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBWarehouseLocationUpdate(String b_warehouse_location_id,HttpServletRequest request, Model model){
+		BWarehouseLocation bWarehouseLocation = bWarehouseLocationService.getBWarehouseLocationById(b_warehouse_location_id);
+		model.addAttribute("bWarehouseLocation", bWarehouseLocation);
+		return new ModelAndView("pc/b-view/b-warehouse-location/b-warehouse-location-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toBWarehouseLocationDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toBWarehouseLocationDetail(String b_warehouse_location_id,HttpServletRequest request, Model model){
+		BWarehouseLocation bWarehouseLocation = bWarehouseLocationService.getBWarehouseLocationById(b_warehouse_location_id);
+		model.addAttribute("bWarehouseLocation", bWarehouseLocation);
+		return new ModelAndView("pc/b-view/b-warehouse-location/b-warehouse-location-detail");
 	}
 }

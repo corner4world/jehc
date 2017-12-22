@@ -78,7 +78,10 @@ $(document).ready(function() {
 				data:"b_warehouse_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toBWarehouseDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					var b_warehouse_name = row.b_warehouse_name;
+					var b_warehouse_localtionbtn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toBWarehouseLocation("'+data+'","'+b_warehouse_name+'")><i class="glyphicon glyphicon-tower"></i>库位</button>';
+					var b_warehouse_detailbtn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toBWarehouseDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+					return b_warehouse_localtionbtn+b_warehouse_detailbtn;
 				}
 			}
 		]
@@ -117,4 +120,9 @@ function delBWarehouse(){
 		var params = {b_warehouse_id:id};
 		ajaxBReq('../bWarehouseController/delBWarehouse',params,['datatables']);
 	})
+}
+
+//发送至库位列表页面
+function toBWarehouseLocation(b_warehouse_id,b_warehouse_name){
+	tlocation("../bWarehouseLocationController/loadBWarehouseLocation?b_warehouse_id="+b_warehouse_id+"&b_warehouse_name="+b_warehouse_name);
 }

@@ -39,4 +39,18 @@ public interface BStockDao{
 	* @return
 	*/
 	public int delBStock(Map<String,Object> condition);
+	
+	/**
+	 * 锁定库存  b_stock_countable_sell 库存数量，b_stock_locks_number 可卖数
+	 * @param b_Stock
+	 * @return
+	 */
+	public int lockBStock(BStock b_Stock);
+	
+	/**
+	 * 释放库存  b_stock_countable_sell 库存数量，b_stock_locks_number 可卖数 
+	 * @param b_Stock
+	 * @return
+	 */
+	public int releaseBStock(BStock b_Stock);
 }
