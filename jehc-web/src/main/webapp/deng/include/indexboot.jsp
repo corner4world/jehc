@@ -50,7 +50,7 @@
         <link href="${syspath}/deng/source/plugins/admin/index/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
         <!--[if lt IE 9]>
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/respond.min.js"></script>

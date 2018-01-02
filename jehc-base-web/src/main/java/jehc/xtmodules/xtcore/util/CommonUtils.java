@@ -31,6 +31,7 @@ import jehc.xtmodules.xtcore.base.BaseXtModifyRecordRun;
 import jehc.xtmodules.xtcore.base.BaseXtOperateBusinessLogsRun;
 import jehc.xtmodules.xtcore.util.constant.CacheConstant;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
+import jehc.xtmodules.xtcore.util.constant.StatusConstant;
 import jehc.xtmodules.xtmodel.XtAreaRegion;
 import jehc.xtmodules.xtmodel.XtAttachment;
 import jehc.xtmodules.xtmodel.XtConstant;
@@ -773,4 +774,18 @@ public class CommonUtils extends UUID{
 //	    }
 //	    return sb.toString();
 //	}
+	
+	/**
+	 * 判断当前请求是否异步
+	 * @param request
+	 * @return
+	 */
+	public static boolean isAjaxReq(HttpServletRequest request){
+		String head = request.getHeader("x-requested-with");
+		//XMLHttpRequest为异步 Ext.basex为同步 则Ajax拦截
+		if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head)))) { 
+			return true;
+		}
+		return false;
+	}
 }

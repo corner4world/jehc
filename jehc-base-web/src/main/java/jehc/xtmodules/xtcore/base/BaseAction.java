@@ -1,4 +1,5 @@
 package jehc.xtmodules.xtcore.base;
+import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -6,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -544,5 +546,15 @@ public class BaseAction extends CommonUtils{
         binder.registerCustomEditor(long.class, new LongEditor());  
         binder.registerCustomEditor(double.class, new DoubleEditor());  
         binder.registerCustomEditor(float.class, new FloatEditor()); 
+        // String类型转换，将所有传递进来的String进行HTML编码，防止XSS攻击
+//        binder.registerCustomEditor(String.class, new PropertyEditorSupport() {
+//            public void setAsText(String text) {
+//                setValue(text == null ? null : StringEscapeUtils.escapeHtml4(text.trim()));
+//            }
+//            public String getAsText() {
+//                Object value = getValue();
+//                return value != null ? value.toString() : "";
+//            }
+//        });
 	}
 }

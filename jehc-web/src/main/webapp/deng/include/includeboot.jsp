@@ -139,6 +139,9 @@
 			  margin-top: 4px;  
 			  margin-bottom: 4px;  
 			} 
+			legend {
+			    padding: 10px 0px 10px;
+			}
 		</style>
 	</head>
 	<!-- upload模态框（Modal）开始 -->

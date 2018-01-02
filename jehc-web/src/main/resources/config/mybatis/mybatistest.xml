@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+	<!-- 设置MyBatis全局变量 -->  
+    <properties>  
+        <property name="databasetype" value="oracle"/><!-- 数据库类型选择器 用于mysql，oracle语法兼容 -->  
+    </properties>
 	<!-- 全局参数 -->
 	<settings>
 		<!-- 使全局的映射器启用或禁用缓存。 -->
@@ -24,6 +28,8 @@
         <!-- 全局启用或禁用延迟加载。当禁用时，所有关联对象都会即时加载。 -->  
     	<setting name="lazyLoadingEnabled" value="false" />  
     	<setting name="aggressiveLazyLoading" value="true" />  
+    	 <!-- 设置但JDBC类型为空时,某些驱动程序 要指定值,default:OTHER，插入空值时不需要指定类型 -->
+        <setting name="jdbcTypeForNull" value="NULL"/>
     
         <!-- 配置日志 -->
         <setting name="logImpl" value="LOG4J"/>  
