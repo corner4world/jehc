@@ -652,7 +652,7 @@ $(function(){
 	            	}
 	    		}	
     	 	}catch(e){
-    	 		window.parent.toastrBoot(4,'json转换出现异常');
+    	 		//window.parent.toastrBoot(4,'json转换出现异常');
     	 	}
         },
         error:function(jqXHR, textStatus, errorThrown){  
@@ -672,7 +672,7 @@ $(function(){
 	     		window.parent.toastrBoot(2,"访问超时,可能存在网络异常,检查后请重试!");
 		    }else if(status == 0){
 		    	//4.其他异常
-		    	window.parent.toastrBoot(2,"无法连接网络!");
+		    	//window.parent.toastrBoot(2,"无法连接网络!");
 		    }else{
 		    	//5.其他异常
 		    	window.parent.toastrBoot(2,"其他异常!错误状态信息:"+status);

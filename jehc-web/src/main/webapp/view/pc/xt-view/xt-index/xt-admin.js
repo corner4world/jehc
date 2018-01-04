@@ -18,10 +18,10 @@ $(function () {
 
 function clickAddTab(url,title,id,rootId,idList,close){
 	var tabNumbs = Addtabs.tabList();
-	if(tabNumbs > 5){
-		toastrBoot(4,"打开选项卡超过6个，请关闭操作!");
-		return;
-	}
+//	if(tabNumbs > 5){
+//		toastrBoot(4,"打开选项卡超过6个，请关闭操作!");
+//		return;
+//	}
 	if(null == url || url == ''){
 		return;
 	}

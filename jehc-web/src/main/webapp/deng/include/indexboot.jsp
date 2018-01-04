@@ -98,6 +98,17 @@
 		.page-boxed .page-footer .page-footer-inner, .page-footer-fixed .page-footer .page-footer-inner {
 		    color: #ffffff;
 		}
+		.page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
+		    font-size: 14px;
+		    font-weight: 400;
+		    text-align: center;
+		}
+		.page-sidebar .page-sidebar-menu>li.open>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.open>a {
+		    font-size: 14px;
+		}
+		.page-sidebar .page-sidebar-menu .sub-menu li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>a {
+		    font-size: 14px;
+		}
 		.page-footer-fixed .page-boxed .page-footer, .page-footer-fixed .page-footer {
 		    background-color: #388E8E;
 		}

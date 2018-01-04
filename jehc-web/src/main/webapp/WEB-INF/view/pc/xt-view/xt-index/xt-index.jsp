@@ -272,6 +272,7 @@
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
+                    <!-- 
                     <div class="theme-panel">
                         <div class="toggler tooltips" data-container="body" data-placement="left" data-html="true" data-original-title="切换主题">
                             <i class="icon-settings"></i>
@@ -290,7 +291,6 @@
                                     <li class="color-light tooltips" data-style="light" data-container="body" data-original-title="亮黑色"> </li>
                                 </ul>
                             </div>
-                            <!-- 
                             <div class="theme-option">
                                 <span> 侧边样式</span>
                                 <select class="sidebar-style-option form-control input-small">
@@ -334,9 +334,9 @@
                                     <option value="default" selected="selected">默认</option>
                                 </select>
                             </div>
-                            -->
                         </div>
                     </div>
+                    -->
                     <!-- END THEME PANEL -->
 		            <div class="main">
 		                <div id="tabs" class="row">
