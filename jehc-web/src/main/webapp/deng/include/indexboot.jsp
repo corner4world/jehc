@@ -50,7 +50,11 @@
         <link href="${syspath}/deng/source/plugins/admin/index/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" />
+        <%-- 
+        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout3/css/themes/red-sunglo.min.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" /> 
+        --%>
+        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout3/css/themes/yellow-orange.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
         <!--[if lt IE 9]>
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/respond.min.js"></script>
@@ -100,7 +104,7 @@
 		}
 		.page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
 		    font-size: 14px;
-		    font-weight: 400;
+		    font-weight: 500;
 		    text-align: center;
 		}
 		.page-sidebar .page-sidebar-menu>li.open>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.open>a {
@@ -111,6 +115,12 @@
 		}
 		.page-footer-fixed .page-boxed .page-footer, .page-footer-fixed .page-footer {
 		    background-color: #388E8E;
+		}
+		.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu {
+		    background: #23262E;
+		}
+		.page-header.navbar .page-top {
+		    background: #23262E;
 		}
 		.modal.in .modal-dialog{-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);-o-transform:translate(0,-50%);transform:translate(0,-50%)}
 		.modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;top:50%;}
