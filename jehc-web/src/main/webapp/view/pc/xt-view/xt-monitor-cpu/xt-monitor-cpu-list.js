@@ -62,7 +62,10 @@ Ext.onReady(function(){
 			{
 				header:'取读时间',
 				flex:1,
-				dataIndex:'xt_monitor_cpuTime'
+				dataIndex:'xt_monitor_cpuTime',
+				renderer:function(value){
+					return dateformat(value); 
+				}
 			}
 		],
 		tbar:[

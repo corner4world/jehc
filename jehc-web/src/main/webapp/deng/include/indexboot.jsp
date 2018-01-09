@@ -122,6 +122,9 @@
 		.page-header.navbar .page-top {
 		    background: #23262E;
 		}
+		.page-sidebar .page-sidebar-menu {
+		    /* background: #23262E; */
+		}
 		.modal.in .modal-dialog{-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);-o-transform:translate(0,-50%);transform:translate(0,-50%)}
 		.modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;top:50%;}
 		@media (min-width:768px){.modal-dialog{width:768px}

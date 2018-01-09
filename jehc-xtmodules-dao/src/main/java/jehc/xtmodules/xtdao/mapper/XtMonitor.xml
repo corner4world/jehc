@@ -90,7 +90,6 @@
 		UPDATE
 			xt_monitor
 		SET
-			xt_monitor_id = #{xt_monitor_id},
 			xt_monitor_userName = #{xt_monitor_userName},
 			xt_monitor_accountName = #{xt_monitor_accountName},
 			xt_monitor_comName = #{xt_monitor_comName},

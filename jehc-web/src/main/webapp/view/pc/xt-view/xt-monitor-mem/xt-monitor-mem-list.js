@@ -57,7 +57,10 @@ Ext.onReady(function(){
 			{
 				header:'取读时间',
 				flex:1,
-				dataIndex:'xt_monitor_memTime'
+				dataIndex:'xt_monitor_memTime',
+				renderer:function(value){
+					return dateformat(value); 
+				}
 			}
 		],
 		tbar:[

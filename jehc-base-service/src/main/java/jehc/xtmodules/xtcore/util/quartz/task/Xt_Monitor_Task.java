@@ -79,7 +79,7 @@ public class Xt_Monitor_Task extends Thread{
 			xtMonitor.setXt_monitor_environment(props.getProperty("java.version"));
 			xtMonitor.setXt_monitorPath(props.getProperty("java.home"));
 			xtMonitor.setXt_monitor_id(UUID.toUUID());
-			xtMonitor.setXt_monitorTime(BaseService.getSimpleDateFormat());
+			xtMonitor.setXt_monitorTime(BaseService.getDate());
 			int i = xt_MonitorDao.addXtMonitor(xtMonitor);
 			if(i > 0){
 				logger.info(BaseService.getSimpleDateFormat()+"--->主服务器信息获取成功");
@@ -108,7 +108,7 @@ public class Xt_Monitor_Task extends Thread{
 			xt_Monitor_Mem.setXt_monitor_memJhTotal(""+swap.getTotal() / 1024L);
 			xt_Monitor_Mem.setXt_monitor_memJhCurrUse(""+swap.getUsed() / 1024L);
 			xt_Monitor_Mem.setXt_monitor_memJhSy(""+swap.getFree() / 1024L);
-			xt_Monitor_Mem.setXt_monitor_memTime(BaseService.getSimpleDateFormat());
+			xt_Monitor_Mem.setXt_monitor_memTime(BaseService.getDate());
 			xt_Monitor_Mem.setXt_monitor_mem_id(UUID.toUUID());
 			int i = xt_Monitor_MemDao.addXtMonitorMem(xt_Monitor_Mem);
 			if(i > 0){
@@ -149,7 +149,7 @@ public class Xt_Monitor_Task extends Thread{
 	            xt_Monitor_Cpu.setXt_monitor_cpu_use_rate(CpuPerc.format(cpu.getCombined()));
 	            xt_Monitor_Cpu.setXt_monitorNum(i+1);
 	            xt_Monitor_Cpu.setXt_monitor_cpu_id(UUID.toUUID());
-	            xt_Monitor_Cpu.setXt_monitor_cpuTime(BaseService.getSimpleDateFormat());
+	            xt_Monitor_Cpu.setXt_monitor_cpuTime(BaseService.getDate());
 	            int j = xt_Monitor_CpuDao.addXtMonitorCpu(xt_Monitor_Cpu);
 	            if(j > 0){
 //	            	logger.info(CommonUtils.getSimpleDateFormat()+"--->内存监控成功");

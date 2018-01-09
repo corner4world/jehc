@@ -57,7 +57,10 @@ Ext.onReady(function(){
 			{
 				header:'监控时间',
 				flex:1,
-				dataIndex:'xt_monitorTime'
+				dataIndex:'xt_monitorTime',
+				renderer:function(value){
+					return dateformat(value); 
+				}
 			}
 		],
 		tbar:[

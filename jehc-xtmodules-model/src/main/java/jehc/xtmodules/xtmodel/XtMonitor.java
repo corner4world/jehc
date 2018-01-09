@@ -1,5 +1,6 @@
 package jehc.xtmodules.xtmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import jehc.xtmodules.xtcore.base.BaseEntity;
 
@@ -22,7 +23,7 @@ public class XtMonitor extends BaseEntity implements Serializable{
 	private String xt_monitorIP;/**本地IP地址**/
 	private String xt_monitor_environment;/**Java的运行环境版本**/
 	private String xt_monitorPath;/**Java的安装路径**/
-	private String xt_monitorTime;/**监控时间**/
+	private Date xt_monitorTime;/**监控时间**/
 	public void setXt_monitor_id(String xt_monitor_id){
 		this.xt_monitor_id=xt_monitor_id;
 	}
@@ -101,10 +102,10 @@ public class XtMonitor extends BaseEntity implements Serializable{
 	public String getXt_monitorPath(){
 		return xt_monitorPath;
 	}
-	public String getXt_monitorTime() {
+	public Date getXt_monitorTime() {
 		return xt_monitorTime;
 	}
-	public void setXt_monitorTime(String xt_monitorTime) {
+	public void setXt_monitorTime(Date xt_monitorTime) {
 		this.xt_monitorTime = xt_monitorTime;
 	}
 }

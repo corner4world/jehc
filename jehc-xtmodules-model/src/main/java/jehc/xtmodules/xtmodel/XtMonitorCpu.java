@@ -1,6 +1,7 @@
 package jehc.xtmodules.xtmodel;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
 * xt_monitor_cpu 服务器CPU运行 
@@ -19,7 +20,7 @@ public class XtMonitorCpu implements Serializable{
 	private String xt_monitor_cpu_currently_idle;/**CPU当前空闲率**/
 	private String xt_monitor_cpu_use_rate;/**CPU总的使用率**/
 	private int xt_monitorNum;/**第几模块CPU信息**/
-	private String xt_monitor_cpuTime;/**取读时间**/
+	private Date xt_monitor_cpuTime;/**取读时间**/
 	public void setXt_monitor_cpu_id(String xt_monitor_cpu_id){
 		this.xt_monitor_cpu_id=xt_monitor_cpu_id;
 	}
@@ -86,10 +87,11 @@ public class XtMonitorCpu implements Serializable{
 	public int getXt_monitorNum(){
 		return xt_monitorNum;
 	}
-	public void setXt_monitor_cpuTime(String xt_monitor_cpuTime){
-		this.xt_monitor_cpuTime=xt_monitor_cpuTime;
-	}
-	public String getXt_monitor_cpuTime(){
+	public Date getXt_monitor_cpuTime() {
 		return xt_monitor_cpuTime;
 	}
+	public void setXt_monitor_cpuTime(Date xt_monitor_cpuTime) {
+		this.xt_monitor_cpuTime = xt_monitor_cpuTime;
+	}
+	
 }
