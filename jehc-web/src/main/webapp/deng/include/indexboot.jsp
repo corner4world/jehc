@@ -54,7 +54,7 @@
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout3/css/themes/red-sunglo.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" /> 
         --%>
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout3/css/themes/yellow-orange.min.css" rel="stylesheet" type="text/css" id="style_color" />
+        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
         <!--[if lt IE 9]>
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/respond.min.js"></script>
@@ -113,6 +113,7 @@
 		.page-sidebar .page-sidebar-menu .sub-menu li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>a {
 		    font-size: 14px;
 		}
+		/* 
 		.page-footer-fixed .page-boxed .page-footer, .page-footer-fixed .page-footer {
 		    background-color: #388E8E;
 		}
@@ -123,7 +124,40 @@
 		    background: #23262E;
 		}
 		.page-sidebar .page-sidebar-menu {
-		    /* background: #23262E; */
+		    background: #23262E; 
+		}
+		.page-header.navbar .search-form {
+		    background: #23262E;
+		}
+		.page-header.navbar .page-logo {
+		    background: #E26A6A!important;
+		}
+		*/
+		/* 
+		.page-header.navbar .page-logo {
+		    background: #26344B!important
+		}
+		.page-header.navbar .page-top {
+		    background: #23262E;
+		}
+		.page-header.navbar .search-form {
+		    background: #23262E;
+		} 
+		 */
+		
+		
+		.page-container-bg-solid .page-content {
+		    background: #eef1f5;
+		}
+		.page-sidebar .page-sidebar-menu.page-sidebar-menu-compact>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact>li>a {
+		    min-height: 50px;
+		    padding: 18px;
+		} 
+		.page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
+		    /* border-top: 1px solid #23262E; */ 
+		}
+		.page-sidebar-fixed .page-sidebar-menu .sub-menu {
+		    /**background: #4E5465;**/
 		}
 		.modal.in .modal-dialog{-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);-o-transform:translate(0,-50%);transform:translate(0,-50%)}
 		.modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;top:50%;}
