@@ -18,7 +18,6 @@ public class IndexTree {
 			if ("0".equals(node.getXt_menuinfo_parentId())) {
 				html.append("<li class=\"nav-item\" id=\"menu"+node.getXt_menuinfo_id()+"\">");
 				//根目录开始
-//				html.append("\r\n<a href=\"javascript:clickAddTab('"+node.getXt_menuinfo_url()+"','"+node.getXt_menuinfo_title()+"','"+node.getXt_menuinfo_id()+"');\" class=\"nav-link nav-toggle\">");
 				if(node.getXt_menuinfo_leaf().equals("0")){
 					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
 				}else{
@@ -29,6 +28,7 @@ public class IndexTree {
 				if(node.getXt_menuinfo_leaf().equals("0")){
 					html.append("\r\n<span class=\"arrow \"></span>");
 				}
+				html.append("\r\n <span class=\"selected\"></span>");
 				html.append("\r\n</a>");
 				//根目录结束
 				//递归子目录开始
@@ -58,18 +58,13 @@ public class IndexTree {
 				if(child.getXt_menuinfo_leaf().equals("0")){
 					//存在下级菜单
 					html.append("\r\n<span class=\"arrow\"></span>");
+					html.append("\r\n <span class=\"selected\"></span>");
 				}
 				html.append("\r\n</a>");
 				//继续递归
 				String buildSbf = build(child,rootId);
 				html.append(buildSbf);
 				html.append("\r\n</li>");
-//				if(child.getXt_menuinfo_leaf().equals("0")){
-//					html.append("\r\n<li class=\"nav-item\" style=\"display: none;\">");
-//					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\" >");
-//					html.append("\r\n</a>");
-//					html.append("\r\n</li>");
-//				}
 			}
 			html.append("\r\n</ul>");
 		}

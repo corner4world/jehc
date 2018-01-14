@@ -132,18 +132,17 @@
 		.page-header.navbar .page-logo {
 		    background: #E26A6A!important;
 		}
-		*/
-		/* 
+		
 		.page-header.navbar .page-logo {
-		    background: #26344B!important
+		    background: #23262E!important
 		}
+		*/
 		.page-header.navbar .page-top {
 		    background: #23262E;
 		}
 		.page-header.navbar .search-form {
 		    background: #23262E;
 		} 
-		 */
 		
 		
 		.page-container-bg-solid .page-content {
@@ -151,7 +150,7 @@
 		}
 		.page-sidebar .page-sidebar-menu.page-sidebar-menu-compact>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact>li>a {
 		    min-height: 50px;
-		    padding: 18px;
+		    padding: 15px;
 		} 
 		.page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
 		    /* border-top: 1px solid #23262E; */ 

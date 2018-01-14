@@ -54,7 +54,7 @@ function doActive(id,idList,tabIdList){
     		if(null != tabIdTemp && '' != tabIdTemp){
     			var tabIdArray = tabIdTemp.split(',');
     			for(var j = 0; j < tabIdArray.length; j++){
-    				$('#menu'+tabIdArray[j]).removeClass('active open');
+    				$('#menu'+tabIdArray[j]).removeClass('start active open');
     			}
     		}
     	}
@@ -62,11 +62,12 @@ function doActive(id,idList,tabIdList){
         if(null != idList && '' != idList){
         	var idArray = idList.split(',');
         	for(var i = 0; i < idArray.length; i++){
-        		$('#menu'+idArray[i]).addClass('active open');
+        		$('#menu'+idArray[i]).addClass('start active open');
             }
         }
+        //<span class="selected"></span>
         if(null != id && '' != id){
-        	$('#menu'+id).addClass('active open');
+        	$('#menu'+id).addClass('start active open');
         }
     	//选中菜单样式结束
     }catch (e) {
@@ -243,7 +244,7 @@ function closeAllTab(){
 		if(null != tabIdTemp && '' != tabIdTemp){
 			var tabIdArray = tabIdTemp.split(',');
 			for(var j = 0; j < tabIdArray.length; j++){
-				$('#menu'+tabIdArray[j]).removeClass('active open');
+				$('#menu'+tabIdArray[j]).removeClass('start active open');
 			}
 		}
 	}
