@@ -158,6 +158,10 @@
 		.page-sidebar-fixed .page-sidebar-menu .sub-menu {
 		    /**background: #4E5465;**/
 		}
+		.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+		    background-color: #32404e;
+		    border: 0px solid #32404e;
+		}
 		.modal.in .modal-dialog{-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);-o-transform:translate(0,-50%);transform:translate(0,-50%)}
 		.modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;top:50%;}
 		@media (min-width:768px){.modal-dialog{width:768px}

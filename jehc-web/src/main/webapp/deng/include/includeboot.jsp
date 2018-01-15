@@ -165,11 +165,6 @@
 			legend {
 			    background: #f5f5f5;
 			}
-			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-			    color: #FFFFFF;
-			    background-color: #32404e;
-			    border: 0px solid #32404e;
-			}
 		</style>
 	</head>
 	<!-- upload模态框（Modal）开始 -->
