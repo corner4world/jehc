@@ -133,10 +133,10 @@
 		    background: #E26A6A!important;
 		}
 		
+		*/
 		.page-header.navbar .page-logo {
 		    background: #23262E!important
 		}
-		*/
 		.page-header.navbar .page-top {
 		    background: #23262E;
 		}
@@ -159,6 +159,10 @@
 		    /**background: #4E5465;**/
 		}
 		.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+		    background-color: #32404e;
+		    border: 0px solid #32404e;
+		}
+		.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
 		    background-color: #32404e;
 		    border: 0px solid #32404e;
 		}
