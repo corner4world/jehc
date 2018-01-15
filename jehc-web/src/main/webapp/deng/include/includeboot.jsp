@@ -142,6 +142,34 @@
 			legend {
 			    padding: 10px 0px 10px;
 			}
+			
+			
+			/* dataTables列内容居中 */  
+			.table>tbody>tr>td{  
+			        text-align:center;  
+			}  
+			  
+			/* dataTables表头居中 */  
+			.table>thead:first-child>tr:first-child>th{  
+			        text-align:center;  
+			        background-color: #f5f5f5;
+			} 
+			.table>thead:first-child>tr:first-child>th p{  
+			        text-align:center;  
+			        font-weight:normal;
+			}  
+			table.dataTable thead th, table.dataTable tfoot th {
+			    font-weight: normal;
+			    font-size: 14px;
+			}
+			legend {
+			    background: #f5f5f5;
+			}
+			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+			    color: #FFFFFF;
+			    background-color: #32404e;
+			    border: 0px solid #32404e;
+			}
 		</style>
 	</head>
 	<!-- upload模态框（Modal）开始 -->
