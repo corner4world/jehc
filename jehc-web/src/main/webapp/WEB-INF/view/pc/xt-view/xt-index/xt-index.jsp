@@ -534,15 +534,15 @@
 			}
 			.nav-tabs li a{
 				font-size:14px;
-				color:#1e232f; 
-				background:#fff;
-				margin:0;
+				/* color:#1e232f;  */
+				/* background:#fff; */
+				/* margin:0; */
 				/* 
 				padding:10px 5px; 
 				*/
 				border-radius:0;
 				border:none;
-				border-right:1px solid #f5f5f5;
+				/* border-right:1px solid #f5f5f5; */
 				text-transform:capitalize;/**capitalize(不改变英文大小写) lowercase(改变为小写) uppercase（改变为小写）**/
 				position:relative;
 			}
@@ -558,27 +558,34 @@
 				/* 
 				background: #17C4BB; 
 				*/
-				border-right: 1px solid #ddd;
+				border-right: 0px solid #ddd;
 			}
 			.nav-tabs li.active a:before{
-				width: 58%;
-				height: 4px;
-				background: #fff;
-				position: absolute;
+				/* width: 58%;
+				height: 4px; */
+				/* background: #fff; */
+				/* position: absolute;
 				top: 0;
 				left: 0;
 				right: 0;
-				margin: 0 auto;
+				margin: 0 auto; */
 			}
 			.nav-tabs li.active a:after{
-				border-top: 10px solid #17C4BB; 
+				/* border-top: 10px solid #17C4BB; 
 				border-left: 10px solid transparent;
 				border-right: 10px solid transparent;
 				position: absolute;
 				bottom: -10px;
-				left: 43%;
+				left: 43%; */
 			}
 			
+			.page-container-bg-solid .page-content {
+			    /* background: #23262E; */
+			    background: #f5f5f5;
+			}
+			.page-sidebar-fixed:not(.page-footer-fixed) .page-footer {
+			    background-color: #f5f5f5;
+			}
 			@media only screen and (max-width: 480px){
 				.nav-tabs li{
 					width: 100%;

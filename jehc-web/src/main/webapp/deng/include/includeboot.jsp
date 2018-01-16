@@ -140,10 +140,9 @@
 			  margin-bottom: 4px;  
 			} 
 			legend {
+				font-size:16px;
 			    padding: 10px 0px 10px;
 			}
-			
-			
 			/* dataTables列内容居中 */  
 			.table>tbody>tr>td{  
 			        text-align:center;  
