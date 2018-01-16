@@ -104,7 +104,7 @@
 		}
 		.page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
 		    font-size: 14px;
-		    font-weight: 500;
+		    font-weight: 300;
 		    text-align: center;
 		}
 		.page-sidebar .page-sidebar-menu>li.open>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.open>a {
