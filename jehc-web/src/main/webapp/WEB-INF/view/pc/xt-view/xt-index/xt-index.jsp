@@ -245,6 +245,7 @@
             <div class="page-sidebar-wrapper">
                 <!-- END SIDEBAR -->
                 <div class="page-sidebar navbar-collapse collapse">
+                   <%--
                    <!-- BEGIN SIDEBAR MENU -->
                    <!-- 手风琴样式 
                    <ul class="page-sidebar-menu page-sidebar-menu-light page-header-fixed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 0px">
@@ -256,6 +257,7 @@
                         ${MenuList }
                    </ul>
                    -->
+                   --%>
                    <!-- 手风琴+侧边样式 -->
                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                    		${MenuList }
@@ -272,6 +274,7 @@
                 <div class="page-content">
                     <!-- BEGIN PAGE HEADER-->
                     <!-- BEGIN THEME PANEL -->
+                    <%--
                     <!-- 
                     <div class="theme-panel">
                         <div class="toggler tooltips" data-container="body" data-placement="left" data-html="true" data-original-title="切换主题">
@@ -337,13 +340,14 @@
                         </div>
                     </div>
                     -->
+                    --%>
                     <!-- END THEME PANEL -->
 		            <div class="main">
 		                <div id="tabs" class="row">
 		                    <!-- Nav tabs -->
 		                    <ul class="nav nav-tabs" role="tablist" id="tabList">
 		                        <li role="presentation" class="active">
-		                            <a href="#home" aria-controls="home" role="tab" data-toggle="tab">平台首页</a>
+		                            <a href="#home" aria-controls="home" style="width:120px;" class="glyphicon glyphicon-home" role="tab" data-toggle="tab">平台首页</a>
 		                        </li>
 		                    </ul>
 		                    <!-- Tab panes -->
@@ -520,93 +524,6 @@
                 <i class="icon-arrow-up"></i>
             </div>
         </div>
-       
-   		<style type="text/css">
-			a:hover,a:focus{
-				outline: none;
-				text-decoration: none;
-			}
-			.nav-tabs{
-				border: 0px solid #32404e;
-			}
-			.nav-tabs li{
-				margin: 0;
-			}
-			.nav-tabs li a{
-				font-size:14px;
-				/* color:#1e232f;  */
-				/* background:#fff; */
-				/* margin:0; */
-				/* 
-				padding:10px 5px; 
-				*/
-				border-radius:0;
-				border:none;
-				/* border-right:1px solid #f5f5f5; */
-				text-transform:capitalize;/**capitalize(不改变英文大小写) lowercase(改变为小写) uppercase（改变为小写）**/
-				position:relative;
-			}
-			.nav-tabs li a:hover{
-				border-top: none;
-				border-bottom: none;
-				border-right-color: #ddd;
-			}
-			.nav-tabs li.active a,
-			.nav-tabs li.active a:hover{
-				color: #fff;
-				border: none;
-				/* 
-				background: #17C4BB; 
-				*/
-				border-right: 0px solid #ddd;
-			}
-			.nav-tabs li.active a:before{
-				/* width: 58%;
-				height: 4px; */
-				/* background: #fff; */
-				/* position: absolute;
-				top: 0;
-				left: 0;
-				right: 0;
-				margin: 0 auto; */
-			}
-			.nav-tabs li.active a:after{
-				/* border-top: 10px solid #17C4BB; 
-				border-left: 10px solid transparent;
-				border-right: 10px solid transparent;
-				position: absolute;
-				bottom: -10px;
-				left: 43%; */
-			}
-			
-			.page-container-bg-solid .page-content {
-			    /* background: #23262E; */
-			    background: #f5f5f5;
-			}
-			.page-sidebar-fixed:not(.page-footer-fixed) .page-footer {
-			    background-color: #f5f5f5;
-			}
-			@media only screen and (max-width: 480px){
-				.nav-tabs li{
-					width: 100%;
-					text-align: center;
-				}
-				.nav-tabs li.active a,
-				.nav-tabs li.active a:after,
-				.nav-tabs li.active a:hover{
-					border: none;
-				}
-			}
-			.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
-			    color: #FFFFFF;
-			    /**
-			    background-color: #17C4BB;
-			    border: 0px solid #17C4BB;
-			    **/
-			    border-bottom-color: transparent;
-			    cursor: default;
-			}
-		</style>
 		<!-- 修改密码模态框（Modal）开始 -->
 		<div class="modal fade" id="updatePwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
