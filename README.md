@@ -30,6 +30,13 @@ jEhc能做什么
 ![输入图片说明](https://gitee.com/uploads/images/2018/0120/160344_f5233e1e_1341290.png "部门管理.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0120/160750_e48fe212_1341290.png "公司信息.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0120/161053_5dbb5d28_1341290.png "全文检索.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/161156_eceea59c_1341290.png "创建调度器.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/161237_87886e01_1341290.png "执行调度任务.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/161333_7a890de9_1341290.png "页面时间监控.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/161408_134b6fe0_1341290.png "操作日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/161458_f26a08e9_1341290.png "异常日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/161531_cb7ab7d8_1341290.png "平台业务操作日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/161613_82d2616c_1341290.png "平台知识库.png")
 电商后端及前端
 ![输入图片说明](https://gitee.com/uploads/images/2018/0120/160635_89d6de89_1341290.png "添加购物车.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0120/160713_6fa82509_1341290.png "创建订单.png")
