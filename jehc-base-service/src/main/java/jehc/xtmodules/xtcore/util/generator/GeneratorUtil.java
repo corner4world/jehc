@@ -26,6 +26,7 @@ public class GeneratorUtil {
      * @return
      */
     public String initcap(String str) {
+    	str = str.toLowerCase();
         char[] ch = str.toCharArray();
         if(ch[0] >= 'a' && ch[0] <= 'z'){
             ch[0] = (char)(ch[0] - 32);
@@ -39,6 +40,7 @@ public class GeneratorUtil {
      * @return
      */
     public static String toUpperCase(String str){
+    	str = str.toLowerCase();
     	StringBuffer sb = new StringBuffer();
     	String[] strList = str.split("_");
     	if(null != strList){
@@ -79,6 +81,7 @@ public class GeneratorUtil {
      */
     public String uprepchar(String str){
     	StringBuffer sb = new StringBuffer();
+    	str = str.toLowerCase();
     	String[] strList = str.split("_");
     	if(null != strList){
     		for(int i =  0; i < strList.length; i++){
@@ -119,6 +122,7 @@ public class GeneratorUtil {
      * @return
      */
     public static String lowfristchar(String str){
+    	str = str.toLowerCase();
     	str = toUpperCase(str);
     	StringBuffer sb = new StringBuffer();
     	if(null != str && !"".equals(str)){
@@ -134,9 +138,10 @@ public class GeneratorUtil {
      * @return
      */
     public String lowOneCharAll_(String str){
-    	str = uprepchar(str);
+    	str = str.toLowerCase();
     	StringBuffer sb = new StringBuffer();
     	if(null != str && !"".equals(str)){
+    		str = str.toLowerCase();
     		sb.append(str.substring(0,1).toLowerCase());
     		sb.append(str.substring(1,str.length()));
     	}
@@ -149,6 +154,7 @@ public class GeneratorUtil {
      * @return
      */
     public String lowAllChar_(String str){
+    	str = str.toLowerCase();
     	StringBuffer sb = new StringBuffer();
     	if(null != str && !"".equals(str)){
     		str = str.replaceAll("_", "-");
@@ -201,26 +207,28 @@ public class GeneratorUtil {
             return "long";
         }else if(sqlType.equalsIgnoreCase("float")){
             return "float";
-        }else if(sqlType.equalsIgnoreCase("decimal") || sqlType.equalsIgnoreCase("numeric") 
+        }else if(sqlType.equalsIgnoreCase("decimal")){
+        	return "BigDecimal";
+    	}else if(sqlType.equalsIgnoreCase("numeric") 
                 || sqlType.equalsIgnoreCase("real") || sqlType.equalsIgnoreCase("money") 
                 || sqlType.equalsIgnoreCase("smallmoney") ||sqlType.equalsIgnoreCase("double")){
             return "double";
         }else if(sqlType.equalsIgnoreCase("varchar") || sqlType.equalsIgnoreCase("char") 
                 || sqlType.equalsIgnoreCase("nvarchar") || sqlType.equalsIgnoreCase("nchar") 
-                || sqlType.equalsIgnoreCase("text") || sqlType.equalsIgnoreCase("longtext")
+                || sqlType.equalsIgnoreCase("text") || sqlType.equalsIgnoreCase("longtext")|| sqlType.equalsIgnoreCase("tinytext")
                 || sqlType.equalsIgnoreCase("mediumtext") || sqlType.equalsIgnoreCase("longblob")
-                || sqlType.equalsIgnoreCase("tinytext") || sqlType.equalsIgnoreCase("blob")
+                || sqlType.equalsIgnoreCase("tinytext") || sqlType.equalsIgnoreCase("blob")|| sqlType.equalsIgnoreCase("tinyblob")
                 || sqlType.equalsIgnoreCase("mediumblob") || sqlType.equalsIgnoreCase("set")
                 || sqlType.equalsIgnoreCase("binary") || sqlType.equalsIgnoreCase("varbinary")
                 //枚举
                 || sqlType.equalsIgnoreCase("enum")){
             return "String";
-        }else if(sqlType.equalsIgnoreCase("datetime")||sqlType.equalsIgnoreCase("date")||sqlType.equalsIgnoreCase("time")){
+        }else if(sqlType.equalsIgnoreCase("datetime")||sqlType.equalsIgnoreCase("date")||sqlType.equalsIgnoreCase("time")||sqlType.equalsIgnoreCase("year")){
             return "Date";
         }else if(sqlType.equalsIgnoreCase("timestamp")){
         	 return "Long";
         }else if(sqlType.equalsIgnoreCase("image")){
-    	 return "String";
+        	return "String";
         }else{
         	return "String";
         }
@@ -327,26 +335,30 @@ public class GeneratorUtil {
             return "int";
         }else if(sqlType.equalsIgnoreCase("float")){
             return "int";
-        }else if(sqlType.equalsIgnoreCase("decimal") || sqlType.equalsIgnoreCase("numeric") 
+        }else if(sqlType.equalsIgnoreCase("decimal")){
+        	return "BigDecimal";
+        }else if(sqlType.equalsIgnoreCase("numeric") 
                 || sqlType.equalsIgnoreCase("real") || sqlType.equalsIgnoreCase("money") 
                 || sqlType.equalsIgnoreCase("smallmoney")){
             return "int";
         }else if(sqlType.equalsIgnoreCase("varchar") || sqlType.equalsIgnoreCase("char") 
                 || sqlType.equalsIgnoreCase("nvarchar") || sqlType.equalsIgnoreCase("nchar") 
-                || sqlType.equalsIgnoreCase("text") || sqlType.equalsIgnoreCase("longtext")
+                || sqlType.equalsIgnoreCase("text") || sqlType.equalsIgnoreCase("longtext")|| sqlType.equalsIgnoreCase("tinytext")
                 || sqlType.equalsIgnoreCase("mediumtext") || sqlType.equalsIgnoreCase("longblob")
-                || sqlType.equalsIgnoreCase("tinytext") || sqlType.equalsIgnoreCase("blob")
+                || sqlType.equalsIgnoreCase("tinytext") || sqlType.equalsIgnoreCase("blob")|| sqlType.equalsIgnoreCase("tinyblob")
                 || sqlType.equalsIgnoreCase("mediumblob") || sqlType.equalsIgnoreCase("set")
                 || sqlType.equalsIgnoreCase("binary") || sqlType.equalsIgnoreCase("varbinary")
                 //枚举
                 || sqlType.equalsIgnoreCase("enum")){
             return "String";
-        }else if(sqlType.equalsIgnoreCase("date")){
+        }else if(sqlType.equalsIgnoreCase("date")||sqlType.equalsIgnoreCase("year")){
             return "Date";
         }else if(sqlType.equalsIgnoreCase("datetime")){
             return "datetime";
         }else if(sqlType.equalsIgnoreCase("time")){
             return "time";
+        }else if(sqlType.equalsIgnoreCase("timestamp")){
+        	return "Long";
         }else if(sqlType.equalsIgnoreCase("image")){
             return "String";
         }

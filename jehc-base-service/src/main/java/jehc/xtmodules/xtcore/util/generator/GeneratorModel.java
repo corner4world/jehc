@@ -51,6 +51,7 @@ public class GeneratorModel extends GeneratorUtil{
         }
         sb.append("import java.io.Serializable;\r\n");
         sb.append("import java.util.Date;\r\n");
+        sb.append("import java.math.BigDecimal\r\n");
         //判断是否为一对多 并且是主表 如果为一对多则导入实体
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
         	List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
@@ -65,7 +66,7 @@ public class GeneratorModel extends GeneratorUtil{
         //注释部分
         sb.append("/**\r\n");
         sb.append("* "+xt_Generator.getXt_generator_tbname()+" "+xt_Generator.getXt_generator_tbcomment()+" \r\n");
-        sb.append("* "+sdf.format(new Date())+"  邓纯杰\r\n");
+        sb.append("* "+sdf.format(new Date())+"  "+xt_Generator.getXt_userinfo_realName()+"\r\n");
         sb.append("*/");
         //sb.append("*/ \r\n");
         //实体部分
