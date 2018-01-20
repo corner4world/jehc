@@ -89,6 +89,9 @@
     font-size: 14px;
     margin-right: 8px;
 }
+.page-sidebar .page-sidebar-menu>li:last-child>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li:last-child>a {
+    border-bottom: 1px solid #2b3b55!important;
+}
 .page-header-fixed .page-container {
     margin-top: 43px;
 }
