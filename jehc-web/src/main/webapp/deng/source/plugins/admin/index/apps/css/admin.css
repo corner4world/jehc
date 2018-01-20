@@ -92,8 +92,19 @@
 .page-header-fixed .page-container {
     margin-top: 43px;
 }
+.btn.btn-outline.red {
+    border-color: #23262E;
+    color:rgba(255,255,255,.7);
+}
+.btn-circle {
+    border-radius: 0px!important;
+}
 .nav-pills, .nav-tabs {
     margin-bottom: 0px; 
+}
+.page-header.navbar .menu-toggler.sidebar-toggler {
+    float: right;
+    margin: 23px -8px 0;
 }
 .row {
     margin-left: -20px;
