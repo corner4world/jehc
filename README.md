@@ -21,6 +21,10 @@ jEhc能做什么
 ![输入图片说明](https://gitee.com/uploads/images/2018/0120/155641_cf6bf26c_1341290.png "首页.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0120/155650_1d1c0fa1_1341290.png "在线设计.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0120/155658_5d412677_1341290.png "流程部署.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/155838_5a94457d_1341290.png "代码生成器.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/155927_13b4e4ae_1341290.png "菜单配置.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/160017_51a55007_1341290.png "数据字典.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0120/160101_1fa37474_1341290.png "角色权限.png")
 电商后端及前端
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
