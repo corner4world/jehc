@@ -34,17 +34,17 @@
 	</div>
 	<div class="panel-body">
 		<div class="btn-group pull-right" style="margin-right: 20px;">
-			<button class="btn btn-primary" onclick="toOaWorklogAdd()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+			<button class="btn btn-primary" onclick="toOaWorklogAdd()" title="新增">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
 			</button>
-			<button class="btn btn-warning" onclick="toOaWorklogUpdate()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+			<button class="btn btn-warning" onclick="toOaWorklogUpdate()" title="修改">
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 			</button>
 			<button class="btn btn-danger " onclick="delOaWorklog()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+				<span class="glyphicon glyphicon-remove" aria-hidden="true" title="删除"></span>
 			</button>
 			<button class="btn btn-success" onclick="search('datatables')">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+				<span class="glyphicon glyphicon-refresh" aria-hidden="true" title="刷新"></span>
 			</button>
 		</div>
 		<table id="datatables" class="table table-striped table-bordered table-hover table-checkable order-column">
