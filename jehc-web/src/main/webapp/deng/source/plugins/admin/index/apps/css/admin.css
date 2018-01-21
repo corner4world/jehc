@@ -117,9 +117,6 @@ a:hover,a:focus{
 	outline: none;
 	text-decoration: none;
 }
-.nav-tabs{
-	border: 0px solid #32404e;
-}
 .nav-tabs li{
 	margin: 0;
 }
@@ -246,6 +243,9 @@ a:hover,a:focus{
 }
 .page-sidebar .page-sidebar-menu .sub-menu, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu {
     background: #212d41;
+}
+.nav-tabs {
+    border: 0px solid #32404e;
 }
 .page-content-wrapper .page-content {
     margin-left: 225px;

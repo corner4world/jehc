@@ -30,13 +30,6 @@
 					<textarea class="form-control" rows="3" name="oa_worklogContent" placeholder="请输入工作内容"></textarea>
 				</div>
 			</div>
-			
-			<div class="form-group">
-				<label class="col-lg-3 control-label">测试内容</label>
-				<div class="col-lg-6">
-					<input type="text" class="form-control" placeholder="用户名"  id="username" name="username" data-bv-notempty data-bv-notempty-message="请输入用户名" data-bv-regexp="true" data-bv-regexp-regexp="[0-9]{6}" data-bv-regexp-message="验证码格式不正确"/>
-				</div>
-			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label"></label>
 				<div class="col-lg-6">

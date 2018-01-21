@@ -18,10 +18,10 @@
 			AND instr(oa_worklogTitle,#{oa_worklogTitle})
 		</if>
 		<if test="null != oa_worklogCreateTime_st and oa_worklogCreateTime_st != ''">
-			AND oa_worklogCreateTime &gt;=STR_TO_DATE(#{oa_worklogCreateTime_st},'%Y-%m-%d')
+			AND oa_worklogCreateTime &gt;=#{oa_worklogCreateTime_st}
 		</if>
 		<if test="null != oa_worklogCreateTime_et and oa_worklogCreateTime_et != ''">
-			AND oa_worklogCreateTime &lt;=STR_TO_DATE(#{oa_worklogCreateTime_et},'%Y-%m-%d')
+			AND oa_worklogCreateTime &lt;=#{oa_worklogCreateTime_et}
 		</if>
 		<!-- 
 		LIMIT #{offset},#{pageSize}

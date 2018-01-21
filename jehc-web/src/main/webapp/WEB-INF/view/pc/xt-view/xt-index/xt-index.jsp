@@ -346,9 +346,17 @@
 		                <div id="tabs" class="row">
 		                    <!-- Nav tabs -->
 		                    <ul class="nav nav-tabs" role="tablist" id="tabList">
+		                    	<!-- 
+		                    	<li>
+		                    		<button type="button" class="btn green" style="padding: 10px 20px;"><i class="fa fa-backward"></i></button>
+		                    	</li> -->
 		                        <li role="presentation" class="active">
 		                            <a href="#home" aria-controls="home" style="width:120px;" class="glyphicon glyphicon-home" role="tab" data-toggle="tab">平台首页</a>
 		                        </li>
+		                        <!-- 
+		                        <li style="right:0px;position: absolute">
+		                        	<button type="button" class="btn green" style="padding: 10px 20px;"><i class="fa fa-forward"></i></button>
+		                        </li> -->
 		                    </ul>
 		                    <!-- Tab panes -->
 		                    <div class="tab-content">
