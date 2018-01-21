@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"b_product_color_default_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'b_product_color_default_name'

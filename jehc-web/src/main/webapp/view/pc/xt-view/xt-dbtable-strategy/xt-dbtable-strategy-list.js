@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"xt_dbtable_strategy_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'tableName'

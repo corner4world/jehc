@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"solr_data_config_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'solr_data_config_title'

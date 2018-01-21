@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"oa_noticeID",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'oa_noticeTitle'

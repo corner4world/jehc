@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"xt_concordat_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'xt_concordatName'

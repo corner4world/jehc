@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"b_warehouse_location_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'b_warehouse_location_name'

@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"xt_change_pwd_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'user_name'

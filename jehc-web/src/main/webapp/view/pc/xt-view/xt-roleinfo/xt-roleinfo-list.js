@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"xt_role_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'xt_role_name'

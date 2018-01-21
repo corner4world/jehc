@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"lc_status_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'lc_status_name'

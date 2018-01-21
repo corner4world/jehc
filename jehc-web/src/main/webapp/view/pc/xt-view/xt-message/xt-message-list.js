@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"xt_message_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'fromName'

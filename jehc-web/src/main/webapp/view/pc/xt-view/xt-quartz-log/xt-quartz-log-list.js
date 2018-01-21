@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"xt_quartz_log_id",
-				width:"150px"
+				width:"50px"
 			},
 			{
 				data:'xt_quartz_log_name'
