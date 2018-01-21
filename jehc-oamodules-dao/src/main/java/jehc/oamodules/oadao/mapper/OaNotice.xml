@@ -30,10 +30,10 @@
 			AND oa_notice.status = #{status}
 		</if>
 		<if test="null != oa_noticeCreateTime_st and oa_noticeCreateTime_st != ''">
-			AND oa_notice.oa_noticeCreateTime &gt;=STR_TO_DATE(#{oa_noticeCreateTime_st},'%Y-%m-%d')
+			AND oa_notice.oa_noticeCreateTime &gt;=#{oa_noticeCreateTime_st}
 		</if>
 		<if test="null != oa_noticeCreateTime_et and oa_noticeCreateTime_et != ''">
-			AND oa_notice.oa_noticeCreateTime &lt;=STR_TO_DATE(#{oa_noticeCreateTime_et},'%Y-%m-%d')
+			AND oa_notice.oa_noticeCreateTime &lt;=#{oa_noticeCreateTime_et}
 		</if>
 	</select>
 
