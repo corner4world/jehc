@@ -9,7 +9,7 @@
 <body>
 	<div class="panel-body">
 		<div class="page-header">
-			<h4>编辑用户角色表</h4>
+			<h4>编辑角色</h4>
 		</div>
 		<form class="form-horizontal" id="defaultForm" method="post">
 			<div class="form-group" style="display:none;">

@@ -14,7 +14,7 @@
 <body>
 	<div class="panel-body">
 		<div class="page-header">
-			<h4>创建员工信息</h4>
+			<h4>创建员工</h4>
 		</div>
 		<form class="form-horizontal" id="defaultForm" method="post">
 			<fieldset>

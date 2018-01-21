@@ -13,7 +13,7 @@
 <body>
 	<div class="panel-body">
 		<div class="page-header">
-			<h4>编辑部门信息</h4>
+			<h4>编辑部门</h4>
 		</div>
 		<form class="form-horizontal" id="defaultForm" method="post">
 			<div class="form-group" style="display:none;">
@@ -48,13 +48,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-3 control-label">传&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;真</label>
+				<label class="col-lg-3 control-label">传&nbsp;&nbsp;&nbsp;&nbsp;真</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="50"  name="xt_departinfo_faxes" placeholder="请输入传真" value="${xtDepartinfo.xt_departinfo_faxes }">
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-3 control-label">描&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;述</label>
+				<label class="col-lg-3 control-label">描&nbsp;&nbsp;&nbsp;&nbsp;述</label>
 				<div class="col-lg-6">
 					<textarea class="form-control" maxlength="200"  name="xt_departinfo_desc" placeholder="请输入描述">${xtDepartinfo.xt_departinfo_desc }</textarea>
 				</div>

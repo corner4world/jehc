@@ -164,6 +164,11 @@
 			legend {
 			    background: #f5f5f5;
 			}
+			.page-header {
+			    padding-bottom: 9px;
+			    margin: 0px 0 20px;
+			    border-bottom: 1px solid #eee;
+			}
 		</style>
 	</head>
 	<!-- upload模态框（Modal）开始 -->

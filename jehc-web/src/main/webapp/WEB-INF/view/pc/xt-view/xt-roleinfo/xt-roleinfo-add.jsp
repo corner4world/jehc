@@ -9,7 +9,7 @@
 <body>
 	<div class="panel-body">
 		<div class="page-header">
-			<h4>创建用户角色表</h4>
+			<h4>创建角色</h4>
 		</div>
 		<form class="form-horizontal" id="defaultForm" method="post">
 			<div class="form-group">

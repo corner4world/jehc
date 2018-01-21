@@ -10,7 +10,7 @@
 <body>
 	<div class="panel-body">
 		<div class="page-header">
-			<h4>员工信息表详情</h4>
+			<h4>员工详情</h4>
 		</div>
 		<form class="form-horizontal" id="defaultForm" method="post">
 			<fieldset>
