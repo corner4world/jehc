@@ -197,6 +197,9 @@ a:hover,a:focus{
     border-bottom-color: transparent;
     cursor: default;
 }
+.nav-tabs li.active a, .nav-tabs li.active a:hover {
+    color: #999;
+}
 .page-sidebar .page-sidebar-menu.page-sidebar-menu-compact>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact>li>a {
     min-height: 50px;
     padding: 21px;
@@ -241,8 +244,8 @@ a:hover,a:focus{
 .page-sidebar .page-sidebar-menu.page-sidebar-menu-compact li>a>.arrow.open:before, .page-sidebar .page-sidebar-menu.page-sidebar-menu-compact li>a>.arrow:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact li>a>.arrow.open:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact li>a>.arrow:before {
     margin-top: 3px;
 }
-.nav-tabs li.active a, .nav-tabs li.active a:hover {
-    color: #000;
+.page-sidebar .page-sidebar-menu .sub-menu, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu {
+    background: #212d41;
 }
 .page-content-wrapper .page-content {
     margin-left: 225px;
