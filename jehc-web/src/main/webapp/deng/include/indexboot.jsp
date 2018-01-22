@@ -90,17 +90,18 @@
         <%--
         <!-- 
         <script src="${syspath}/deng/source/plugins/admin/index/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-        --%>
+        
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/css/bootstrap.addtabs.css" rel="stylesheet" type="text/css" />
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/js/bootstrap.addtabs.js" type="text/javascript"></script>
+        --%>
         <!-- bootstrap验证框架开始 -->
 		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.css" />
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
-		
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 		<!-- bootstrap验证框架结束 -->
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.js"></script>
+		<link href="${syspath}/deng/source/plugins/admin/index/tab/css/style.min.css" rel="stylesheet">
+		<script type="text/javascript" src="${syspath}/deng/source/plugins/admin/index/tab/js/contabs.min.js"></script>
 		<link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.css" rel="stylesheet" type="text/css" />
 	</head>
 </html>

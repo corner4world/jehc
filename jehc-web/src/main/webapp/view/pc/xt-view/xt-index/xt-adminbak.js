@@ -1,30 +1,23 @@
 $(function () {
-    /*
-     * $('#tabs').addtabs();
-     */
+    $('#tabs').addtabs();
     initLockSystem();
-    $("#content-main").css("height", tableHeight()-153);
 })
 
 function indexHome(){
-	 /*
 	 $('#tab_home').addClass('active');
      $('#home').addClass('active');
      Addtabs.drop();
-     */
 }
 $(function () {  
-	  /*
 	  $('#myTab a:last').tab('show');//初始化显示哪个tab  
 	  $('#myTab a').click(function (e) {  
 	    e.preventDefault();//阻止a链接的跳转行为  
 	    $(this).tab('show');//显示当前选中的链接及关联的content  
-	  })
-	  */ 
-}) 
+	  })  
+	}) 
 
 function clickAddTab(url,title,id,rootId,idList,close){
-	//var tabNumbs = Addtabs.tabList();
+	var tabNumbs = Addtabs.tabList();
 //	if(tabNumbs > 5){
 //		toastrBoot(4,"打开选项卡超过6个，请关闭操作!");
 //		return;
@@ -32,7 +25,6 @@ function clickAddTab(url,title,id,rootId,idList,close){
 	if(null == url || url == ''){
 		return;
 	}
-	/*
 	var closeable = close;
 	if(closeable == false){
 		closeable=false;
@@ -49,8 +41,8 @@ function clickAddTab(url,title,id,rootId,idList,close){
     })
     doActive(id,idList);
     loadXtIframeComplete(id,dt1,title);
-    */
 }
+
 function doActive(id,idList,tabIdList){
 	try{
     	//清空之前选中样式
@@ -241,7 +233,7 @@ function search(){
 function updateUserPic(){
 	toastrBoot(1,'该功能暂未开放');
 }
-/*
+
 //关闭所有选项卡
 function closeAllTab(){
 	//清空之前选中样式
@@ -295,7 +287,7 @@ function closeRightTab(){
 	    $('#popMenu').fadeOut();
 	}
 }
-*/
+
 ///**
 // * 增加标签页
 // */
@@ -355,7 +347,7 @@ function closeRightTab(){
 var xtIframe;
 function loadXtIframeComplete(id,dt1,text){
 	/**开启多个Tab目的**/
-	xtIframe = document.getElementById("iframe"+id);
+	xtIframe = document.getElementById("iframe_id_"+id);
 	if(xtIframe == null){
 		var dt2 = nowTimestamp();
 		//执行监控页面信息操作

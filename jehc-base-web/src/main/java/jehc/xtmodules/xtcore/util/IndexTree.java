@@ -49,12 +49,14 @@ public class IndexTree {
 				html.append("\r\n<li class=\"nav-item\" id=\"menu"+child.getXt_menuinfo_id()+"\">");
 				if(!child.getXt_menuinfo_leaf().equals("0")){
 					//不存在下级菜单
-					html.append("\r\n<a href=\"javascript:clickAddTab('"+child.getXt_menuinfo_url()+"','"+child.getXt_menuinfo_title()+"','"+child.getXt_menuinfo_id()+"','"+rootId+"','"+idBu(child.getXt_menuinfo_parentId())+"');\" class=\"nav-link\">");
+//					html.append("\r\n<a href=\"javascript:clickAddTab('"+child.getXt_menuinfo_url()+"','"+child.getXt_menuinfo_title()+"','"+child.getXt_menuinfo_id()+"','"+rootId+"','"+idBu(child.getXt_menuinfo_parentId())+"');\" class=\"nav-link\">");
+					 html.append("\r\n<a  href='../"+child.getXt_menuinfo_url()+"' class=\"nav-link J_menuItem\" data-index='"+child.getXt_menuinfo_id()+"' rootId='"+rootId+"' idBu='"+idBu(child.getXt_menuinfo_parentId())+"'>");
 				}else{
 					//存在下级菜单
 					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
 				}
-				html.append("\r\n<i class=\""+child.getXt_menuinfo_iconCls()+"\"></i> "+child.getXt_menuinfo_title()+"");
+				html.append("\r\n"+child.getXt_menuinfo_title()+"");
+//				html.append("\r\n<i class=\""+child.getXt_menuinfo_iconCls()+"\"></i> "+child.getXt_menuinfo_title()+"");//二级图标不再显示
 				if(child.getXt_menuinfo_leaf().equals("0")){
 					//存在下级菜单
 					html.append("\r\n<span class=\"arrow\"></span>");
