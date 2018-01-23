@@ -107,14 +107,14 @@ function initXtMenuinfoFormAdd(){
 	            mode:"local",
 	            triggerAction:"all",
 	            editable:false
-	          },{
+	          },/*{
 				fieldLabel:'菜单图标',
 			   	xtype:'textfield',
 			   	hidden:true,
 			   	id:'xt_menuinfo_images',
 			   	name:'xt_menuinfo_images',
 			   	itemId:'xt_menuinfo_images',
-			   	allowBlank:false
+			   	allowBlank:true
 			  },{
 				layout:"table",
 				border:false,
@@ -134,8 +134,8 @@ function initXtMenuinfoFormAdd(){
 							img_select(); 
 			            } 
 				}]
-		     },{
-		   		fieldLabel:'图像样式',
+		     },*/{
+		   		fieldLabel:'字体图标',
 			   	anchor:'60%',
 			   	name:'xt_menuinfo_iconCls'
 		     },{  
