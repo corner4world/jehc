@@ -240,7 +240,8 @@ nav.page-tabs .page-tabs-content {
 	display: block;
 	float: left;
 	border-right: solid 1px #eee;
-	padding: 0 15px
+	padding: 0 15px;
+	text-decoration: none;
 }
 
 .page-tabs a i:hover {
