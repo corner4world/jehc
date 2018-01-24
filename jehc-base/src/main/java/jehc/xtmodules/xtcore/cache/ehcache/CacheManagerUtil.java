@@ -1,13 +1,15 @@
-package jehc.xtmodules.xtcore.util;
+package jehc.xtmodules.xtcore.cache.ehcache;
 
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.constant.PathConstant;
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.Ehcache;
 import net.sf.ehcache.Element;
 import net.sf.json.JSONArray;
 
@@ -163,5 +165,38 @@ public class CacheManagerUtil {
 			jsonArray.add(model);
 		}
 		return jsonArray;
+	}
+	
+
+	/**
+	 * Eh锁
+	 * @param cache 缓存对象
+	 * @param key键
+	 * @param 当前存放值
+	 * @return
+	 */
+	public boolean acquireLock(Ehcache cache,Object key,Object value){
+		try {  
+			if(null == cache){
+				throw new ExceptionUtil("未能获取到当前缓存对象");
+			}
+			if(null == key){
+				throw new ExceptionUtil("未能获取到当前锁key");
+			}
+			if(null == value){
+				throw new ExceptionUtil("未能获取到当前值value");
+			}
+			cache.acquireWriteLockOnKey(key);  
+			Element element = cache.get(key);
+			if(null != element && !value.equals(element.getObjectKey())){
+				return false;
+			}
+			cache.put(new Element(key, value));  
+		}catch(Exception e){
+			throw new ExceptionUtil("Ehcache执行锁操作出现异常，key:"+key+",value:"+value);
+		} finally {  
+			cache.releaseWriteLockOnKey(key);  
+		}  
+		return true;
 	}
 }

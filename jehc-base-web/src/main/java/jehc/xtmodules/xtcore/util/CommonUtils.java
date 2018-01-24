@@ -29,6 +29,7 @@ import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.base.BaseXtModifyRecordRun;
 import jehc.xtmodules.xtcore.base.BaseXtOperateBusinessLogsRun;
+import jehc.xtmodules.xtcore.cache.ehcache.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.constant.CacheConstant;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtcore.util.constant.StatusConstant;

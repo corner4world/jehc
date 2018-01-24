@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
-import jehc.xtmodules.xtcore.util.CacheManagerUtil;
+import jehc.xtmodules.xtcore.cache.ehcache.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 
 /**

@@ -19,7 +19,7 @@ import jehc.solrmodules.solrmodel.SolrCore;
 import jehc.solrmodules.solrservice.SolrCoreService;
 import jehc.solrmodules.solrservice.SolrIndexAttributeService;
 import jehc.solrmodules.solrservice.SolrSortService;
-import jehc.xtmodules.xtcore.util.CacheManagerUtil;
+import jehc.xtmodules.xtcore.cache.ehcache.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.constant.CacheConstant;
 import jehc.xtmodules.xtcore.util.quartz.QuartzInit;

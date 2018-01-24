@@ -28,7 +28,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
-import jehc.xtmodules.xtcore.util.CacheManagerUtil;
+import jehc.xtmodules.xtcore.cache.ehcache.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.JsonUtil;
 import jehc.xtmodules.xtcore.util.UUID;

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import jehc.solrmodules.solrdao.SolrCoreDao;
 import jehc.solrmodules.solrmodel.SolrCore;
-import jehc.xtmodules.xtcore.util.CacheManagerUtil;
+import jehc.xtmodules.xtcore.cache.ehcache.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
 import jehc.xtmodules.xtdao.XtConstantDao;
 import jehc.xtmodules.xtdao.XtDataDictionaryDao;
