@@ -37,7 +37,7 @@
 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>禁用
 			</button>
 			<button class="btn btn-default" onclick="initListDeleted()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>已禁用角色
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>已禁用角色
 			</button>
 			<button class="btn btn-default" onclick="search('datatables')">
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新

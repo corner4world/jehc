@@ -48,7 +48,7 @@
 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 			</button>
 			<button class="btn btn-default" onclick="initListDeleted()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>已废除
+				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>已废除
 			</button>
 			<button class="btn btn-default" onclick="search('datatables')">
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
