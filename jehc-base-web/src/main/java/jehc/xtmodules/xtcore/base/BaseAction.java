@@ -1,5 +1,4 @@
 package jehc.xtmodules.xtcore.base;
-import java.beans.PropertyEditorSupport;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -7,9 +6,9 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -30,6 +29,7 @@ import net.sf.json.JSONArray;
  * @author邓纯杰
  *
  */
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class BaseAction extends CommonUtils{
 	/**
 	 * 封装共同的数据权限获取参数

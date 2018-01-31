@@ -11,7 +11,11 @@
      http://www.springframework.org/schema/tx/spring-tx-3.0.xsd  
      http://www.springframework.org/schema/aop   
      http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
-        
+   
+   <!-- 初始化平台数据Bean -->
    <bean id="InitBean" class="jehc.xtmodules.xtcore.init.InitBean"/>
+   
+   <!-- 初始化SOLR数据Bean -->
+   <bean id="InitSolrBean" class="jehc.xtmodules.xtcore.init.InitSolrBean"/>
 
 </beans>

@@ -310,6 +310,7 @@ function datatablesCallBack(data, callback, settings,url,opt){
 		  cache:false,//禁用缓存
 		  data:param,//传入组装的参数
 		  dataType:"json",
+		  xhrFields:{withCredentials:true},
 		  success:function (result){
 			  try {
 				  //setTimeout仅为测试延迟效果
@@ -421,6 +422,7 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 		  cache:false,//禁用缓存
 		  data:param,//传入组装的参数
 		  dataType:"json",
+		  xhrFields:{withCredentials:true},
 		  success:function (result){
 			  try {
 				  //setTimeout仅为测试延迟效果
@@ -712,6 +714,7 @@ function submitBForm(formid,url,callUrl){
 		msgTishCallFnBoot("确定要提交该表单信息？",function(){
 			$.ajax({
 	            url:url,
+	            xhrFields:{withCredentials:true},
 //	            async:false,//同步，会阻塞操作
 	            type:'POST',//PUT DELETE POST
 	            data:bootform.serialize(),
@@ -763,6 +766,7 @@ function submitBFormCallFn(formid,url,fn){
 		msgTishCallFnBoot("确定要提交该表单信息？",function(){
 			$.ajax({
 	            url:url,
+	            xhrFields:{withCredentials:true},
 //	            async:false,//同步，会阻塞操作
 	            type:'POST',//PUT DELETE POST
 	            data:bootform.serialize(),
@@ -782,6 +786,7 @@ function submitBFormCallFn(formid,url,fn){
 function ajaxBReq(url,params,datatablesid){
 	$.ajax({
         url:url,
+        xhrFields:{withCredentials:true},
 //      async:false,//同步，会阻塞操作
         type:'POST',//PUT DELETE POST
         data:params,
@@ -816,6 +821,7 @@ function ajaxBReq(url,params,datatablesid){
 function ajaxBRequestCallUrl(url,callUrl,params){
 	$.ajax({
         url:url,
+        xhrFields:{withCredentials:true},
 //      async:false,//同步，会阻塞操作
         type:'POST',//PUT DELETE POST
         data:params,
@@ -847,6 +853,7 @@ function ajaxBRequestCallUrl(url,callUrl,params){
 function ajaxBRequestCallFn(url,params,fn){
 	$.ajax({
         url:url,
+        xhrFields:{withCredentials:true},
 //      async:false,//同步，会阻塞操作
         type:'POST',//PUT DELETE POST
         data:params,
@@ -885,6 +892,7 @@ function getProvice(num){
         url:"../xtAreaRegionController/getPList",
         dataType:"JSON",
         async:false,
+        xhrFields:{withCredentials:true},
         success:function(data){
         	data = eval("(" + data + ")");  
         	data = data.items;
@@ -915,6 +923,7 @@ function getCity(num){
         type:"POST",
         url:"../xtAreaRegionController/getCList",
         data:{"parentId":provinceId},
+        xhrFields:{withCredentials:true},
         dataType:"JSON",
         async:false,
         success:function (data) {
@@ -946,6 +955,7 @@ function getCounties(num){
         type:"POST",
         url:"../xtAreaRegionController/getDList",
         data:{"parentId":cityId},
+        xhrFields:{withCredentials:true},
         dataType:"JSON",
         async:false,
         success:function(data){
@@ -973,6 +983,7 @@ function bUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,
 			url:basePath+'/xtCommonController/upload',
             type:'POST',//PUT DELETE POST
             data:jehcUploadForm.serialize(),
+            xhrFields:{withCredentials:true},
             success:function(result){
             	var obj = eval("(" + result + ")");
             	console.info(obj);
@@ -1008,6 +1019,7 @@ function ajaxBFilePathBackRequest(url,params){
         url:url,
         type:'POST',//PUT DELETE POST
         data:params == null || '' == params ? {}:params, 
+        xhrFields:{withCredentials:true},
         success:function(result){
         	try {
         		var obj = eval("(" + result + ")");  
@@ -1196,6 +1208,7 @@ function downOrExportB(url){
     $.ajax({
  	   type:"GET",
  	   url:url,
+ 	   xhrFields:{withCredentials:true},
  	   form:frm,
  	   data:"exportOrDownloadSysFlag=exportOrDownloadSysFlag",
  	   success: function(result){
@@ -1254,6 +1267,7 @@ function InitBDataCallFn(xt_data_dictionary_id,fn){
 //	var xt_data_dictionary_name="∨";
 	$.ajax({
 	   type:"GET",
+	   xhrFields:{withCredentials:true},
 	   url:"../xtDataDictionaryController/getXtDataDictionaryById",
 	   data:"xt_data_dictionary_id="+xt_data_dictionary_id,
 	   success: function(result){
@@ -1274,6 +1288,7 @@ function InitBDataCallFn(xt_data_dictionary_id,fn){
 function InitBDataComboCallFn(ckey,fn){
 	$.ajax({
 	   type:"GET",
+	   xhrFields:{withCredentials:true},
 	   url:"../xtCommonController/getXtDataDictionaryList",
 	   data:"ckey="+ckey,
 	   success: function(result){
@@ -1294,6 +1309,7 @@ function InitBDataCombo(ckey,id){
 	   type:"GET",
 	   url:"../xtCommonController/getXtDataDictionaryList",
 	   data:"ckey="+ckey,
+	   xhrFields:{withCredentials:true},
 	   success: function(data){
 //		   result = eval("(" + result + ")");  
 //		   result = result.data;
@@ -1320,6 +1336,7 @@ function InitBDataComboSetV(ckey,id,value_id){
 	   type:"GET",
 	   url:"../xtCommonController/getXtDataDictionaryList",
 	   data:"ckey="+ckey,
+	   xhrFields:{withCredentials:true},
 	   success: function(data){
 //		   result = eval("(" + result + ")");  
 //		   result = result.data;
@@ -1349,6 +1366,7 @@ function InitconstantList(ckey,id){
 	var str = "<option value=''>请选择</option>";
 	$.ajax({
 	   type:"GET",
+	   xhrFields:{withCredentials:true},
 	   url:"../xtConstantController/getXtConstantList",
 	   data:"xt_constantType="+ckey,
 	   success: function(result){
@@ -1367,6 +1385,7 @@ function InitconstantListSetV(ckey,id,value_id){
 	var str = "<option value=''>请选择</option>";
 	$.ajax({
 	   type:"GET",
+	   xhrFields:{withCredentials:true},
 	   url:"../xtConstantController/getXtConstantList",
 	   data:"xt_constantType="+ckey,
 	   success: function(result){
