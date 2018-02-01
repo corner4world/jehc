@@ -27,8 +27,12 @@
 	<context:component-scan base-package="jehc.*modules.*web,jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"> 
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
 	</context:component-scan>
-	-->
+	3.
 	<context:component-scan base-package="jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"/> 
+	-->
+	
+	<context:component-scan base-package="jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util">
+	</context:component-scan> 
     
     <!-- properties 文件位置 -->
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
