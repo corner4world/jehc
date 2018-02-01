@@ -51,7 +51,7 @@ public class LcApplyController extends BaseAction{
 		condition.put("xt_userinfo_id",getXtUid());
 		List<LcApply> lc_ApplyList = lcApplyService.getLcApplyListByCondition(condition);
 		PageInfo<LcApply> page = new PageInfo<LcApply>(lc_ApplyList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象

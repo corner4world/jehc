@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>流程详细信息即流程部署内容,BPMN文件,ZIP路径,IMG路径,MXGraph内容等等（流程表）</title>
+<title>待办事项</title>
 </head>
 <body>
 	<div class="panel panel-default">
