@@ -64,16 +64,16 @@ $(document).ready(function() {
 					var lc_process_flag = row.lc_process_flag;
 					var lc_process_title = row.lc_process_title;
 					var xt_attachment = row.xt_attachment;
-					var btn = '<button title ="流程详情" class="btn btn-warning" onclick=toLcProcessDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i></button>';
+					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toLcProcessDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
 					if(lc_process_flag == 0){
-			        	btn = btn +'<button title ="设计流程" class="btn btn-primary" onclick=addLcDesign("'+data+'","'+lc_process_title+'")><i class="glyphicon glyphicon-cog"></i></button>';
-			        	btn = btn +'<button title ="下载bpmn文件" class="btn btn-warning" onclick=downFileBpmn("'+data+'")><i class="glyphicon glyphicon-save"></i></button>';
-			        	btn = btn +'<button title="下载img文件" class="btn btn-danger" onclick=downFileImg("'+data+'")><i class="glyphicon glyphicon-save"></i></button>';
+			        	btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=addLcDesign("'+data+'","'+lc_process_title+'")><i class="glyphicon glyphicon-cog"></i>设计流程</button>';
+			        	btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=downFileBpmn("'+data+'")><i class="glyphicon glyphicon-save"></i>下载bpmn文件</button>';
+			        	btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=downFileImg("'+data+'")><i class="glyphicon glyphicon-save"></i>下载img文件</button>';
 					}else{
-						btn = btn +'<button class="btn btn-info" onclick=downFile("'+xt_attachment+'")><i class="glyphicon glyphicon-save"></i></button>';
+						btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=downFile("'+xt_attachment+'")><i class="glyphicon glyphicon-save"></i>下载附件</button>';
 					}
-					btn = btn +'<button title ="发布流程" class="btn btn-success active" onclick=createDeployment("'+data+'")><i class="glyphicon glyphicon-pencil"></i></button>';
-					btn = btn +'<button title ="发布历史记录" class="btn btn-success" onclick=showLcDeploymentHis("'+data+'","'+lc_process_title+'")><i class="glyphicon glyphicon-wrench"></i></button>';
+					btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=createDeployment("'+data+'")><i class="glyphicon glyphicon-pencil"></i>发布流程</button>';
+					btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=showLcDeploymentHis("'+data+'","'+lc_process_title+'")><i class="glyphicon glyphicon-wrench"></i>发布历史记录</button>';
 					return btn;
 				}
 			}
@@ -129,7 +129,7 @@ function delLcProcess(){
 
 
 function addLcDesign(lc_process_id,lc_process_title){
-	$('#lcDesignPanelBody').height(reGetBodyHeight()*0.7);
+	$('#lcDesignPanelBody').height(reGetBodyHeight()*0.9);
 	$('#lcDesignModalLabel').html("在线设计---<font color=red>"+lc_process_title+"</font>");
 	$('#lcDesignModal').modal({backdrop:'static',keyboard:false});
 	$("#lcDesignIframe",document.body).attr("src",'../lcProcessController/loadLcDesign?lc_process_id='+lc_process_id) 
@@ -156,7 +156,7 @@ function closeLcProcessWin(){
 	search('datatables');
 }
 function showLcDeploymentHis(lc_process_id,lc_process_title){
-	$('#lcDeploymentHisPanelBody').height(reGetBodyHeight()*0.7);
+	$('#lcDeploymentHisPanelBody').height(reGetBodyHeight()*0.9);
 	$('#lcDeploymentHisModalLabel').html("流程发布历史记录---<font color=red>"+lc_process_title+"</font>");
 	$('#lcDeploymentHisModal').modal({backdrop:'static',keyboard:false});
 	$("#lcDeploymentHisIframe",document.body).attr("src",'../lcDeploymentHisController/loadLcDeploymentHis?lc_process_id='+lc_process_id) 

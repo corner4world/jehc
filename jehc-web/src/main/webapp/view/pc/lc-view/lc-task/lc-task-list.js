@@ -1,585 +1,345 @@
-var store;
 var grid;
-Ext.onReady(function(){
-	store = getGridJsonStore('../lcTaskController/getTaskListByCondition',[]);
-	grid = Ext.create('Ext.grid.Panel',{
-		region:'center',
-		xtype:'panel',
-		store:store,
-		title:'查询结果',
-		columnLines:true,
-		selType:'cellmodel',
-		multiSelect:true,
-		selType:'checkboxmodel',
-		viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
+$(document).ready(function() {
+	/////////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用） 如弹窗分页查找根据条件 可能此时的form发生变化 此时 可以解决该类问题
+	var opt = {
+		searchformId:'searchForm'
+	};
+	var options = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../lcTaskController/getTaskListByCondition',opt);},//渲染数据
+			//在第一位置追加序列号
+			fnRowCallback:function(nRow, aData, iDisplayIndex){
+				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+				return nRow;
 		},
-		loadMask:{
-			msg:'正在加载...'
-		},
-		columns:[
+		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		//列表表头字段
+		colums:[
 			{
-				header:'序号',
-				width:77,
-				xtype:'rownumberer'
-			},
-			{
-				header:'任务名称',
-				locked:true,
-				dataIndex:'name'
-			},
-			{
-				header:'所属人',
-				locked:true,
-				dataIndex:'owner'
-			},
-			{
-				header:'执行人',
-				locked:true,
-				dataIndex:'assignee'
-			},
-			{
-				header:'描述',
-				dataIndex:'description'
-			},
-			{
-				header:'实例编号',
-				dataIndex:'processInstanceId'
-			},
-			{
-				header:'流程定义编号',
-				dataIndex:'processDefinitionId'
-			},
-			{
-				header:'租户',
-				dataIndex:'tenantId'
-			},
-			{
-				header:'提交时间',
-				dataIndex:'createTime',
-				renderer:function(value){
-					return Ext.util.Format.date(value, "Y-m-d H:i:s")
-				}
-			},
-			{
-				header:'操作',
-				columns:[
-				{
-					header:'查看流程实例图',
-					align:'center',
-					xtype:'widgetcolumn',
-					widget:{
-		                xtype:'button',
-		                text:'查看流程实例图',
-		                handler:function(rec){	
-		  					var id = rec.getWidgetRecord().data.processInstanceId;
-		  					showLcProcessInstance(id);
-					    }
-		            }
+				sClass:"text-center",
+				width:"50px",
+				data:"taskId",
+				render:function (data, type, full, meta) {
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
 				},
-				{
-					header:'查看流程实例审批记录',
-					align:'center',
-					xtype:'widgetcolumn',
-					widget:{
-		                xtype:'button',
-		                text:'查看流程实例审批记录',
-		                handler:function(rec){	
-		  					var id = rec.getWidgetRecord().data.processInstanceId;
-		  					initLcApprovalWin(id);
-					    }
-		            }
+				bSortable:false
+			},
+			{
+				data:"taskId",
+				width:"50px"
+			},
+			{
+				data:'name'
+			},
+			{
+				data:'owner'
+			},
+			{
+				data:'assignee'
+			},
+			{
+				data:'description'
+			},
+			{
+				data:'processInstanceId'
+			},
+			{
+				data:'processDefinitionId'
+			},
+			{
+				data:'tenantId'
+			},
+			{
+				data:'createTime',
+				render:function(data, type, row, meta) {
+					return dateformat(data); 
 				}
-				]
+			},
+			{
+				data:"taskId",
+				render:function(data, type, row, meta) {
+					var processInstanceId = row.processInstanceId;
+					var lc_process_title = row.lc_process_title;
+					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" title="查看流程实例图" onclick=showLcProcessInstance('+processInstanceId+')><i class="glyphicon glyphicon-transfer"></i></button>';
+					btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" title="查看流程实例审批记录" onclick=initLcApprovalWin('+processInstanceId+')><i class="glyphicon glyphicon-log-out"></i></button>';
+					return btn;
+				}
 			}
-		],
-		tbar:[
-			 {
-			 	text:'设置经办人',
-				tooltip:'设置经办人',
-				cls:'addBtn',
-				icon:addIcon,
-				minWidth:tbarBtnMinWidth,
-				handler:function(){
-					setAssignee();
-				}
-			 },
-			 {
-			 	text:'设置归属人',
-				tooltip:'设置归属人',
-				cls:'updateBtn',
-				icon:editIcon,
-				minWidth:tbarBtnMinWidth,
-				handler:function(){
-					setOwner();
-				}
-			 },
-			 {
-			 	text:'添加组任务中成员',
-				tooltip:'添加组任务中成员',
-				cls:'setBtn',
-				icon:addIcon,
-				minWidth:tbarBtnMinWidth,
-				handler:function(){
-					addGroupUser();
-				}
-			 },
-			 {
-			 	text:'删除组任务中成员',
-				tooltip:'向组任务中删除成员',
-				cls:'delBtn',
-				icon:delIcon,
-				minWidth:tbarBtnMinWidth,
-				handler:function(){
-					deleteGroupUser();
-				}
-			 },
-			 {
-			 	text:'完成任务',
-				tooltip:'完成任务',
-				icon:taskIcon,
-				cls:'completeBtn',
-				minWidth:tbarBtnMinWidth,
-				handler:function(){
-					completeTask();
-				}
-			 },
-//			 {
-//				text:'检索',
-//				minWidth:tbarBtnMinWidth,
-//				cls:'searchBtn',
-//				icon:searchIcon,
-//				handler:function(){
-//					search();
-//				}
-//			 },
-			 grid_toolbar_moretext_gaps,
-			 {
-				 text:moretext,
-				 tooltip:moretexttooltip,
-				 icon:listIcon,
-				 iconAlign:'left',
-				 menu:[
-				 {
-					text:'明 细',
-					tooltip:'明 细',
-					glyph:0xf03b,
-					handler:function(){
-						detailLcDeploymentHis();
-					}
-				 },
-				 '-',
-				 {
-					text:'打 印',
-					tooltip:'打 印',
-					glyph:0xf02f,
-					handler:function(){
-						printerGrid(grid);
-					}
-				 },
-				 '-',
-				 {
-					text:'全 选',
-					tooltip:'全 选',
-					glyph:0xf046,
-					handler:function(){selectAll(grid);}
-				 },
-				 {
-					text:'反 选',
-					tooltip:'反 选',
-					glyph:0xf096,
-					handler:function(){unSelectAll(grid);}
-				 },
-				 '-',
-				 {
-					text:'刷 新',
-					tooltip:'刷 新',
-					glyph:0xf021,
-					handler:function(){
-						grid.getStore().reload();
-					}
-				 }
-				 ]
-			 }
-		],
-		bbar:getGridBBar(store),
-		listeners:{
-			'rowdblclick':function(grid, rowIndex, e){
-			}
-		}
+		]
 	});
-	Ext.create('Ext.Viewport',{
-		layout:'border',
-		xtype:'viewport',
-		items:[grid]
-	});
+	grid=$('#datatables').dataTable(options);
+	//实现全选反选
+	docheckboxall('checkall','checkchild');
+	//实现单击行选中
+	clickrowselected('datatables');
 });
 
 
+
 function setAssignee(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length != 1){
-		msgTishi('请选择要设置的一项！');
+	if($(".checkchild:checked").length != 1){
+		toastrBoot(4,"请选择要设置的一项！");
 		return;
 	}
-	var taskId = record.items[0].data.taskId;
+	var taskId =$(".checkchild:checked").val();
 	initassignee(taskId,0);
 }
 
 function setOwner(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length != 1){
-		msgTishi('请选择要设置的一项！');
+	if($(".checkchild:checked").length != 1){
+		toastrBoot(4,"请选择要设置的一项！");
 		return;
 	}
-	var taskId = record.items[0].data.taskId;
+	var taskId =$(".checkchild:checked").val();
 	initassignee(taskId,1);
 }
 
 function addGroupUser(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length != 1){
-		msgTishi('请选择要添加的一项！');
+	if($(".checkchild:checked").length != 1){
+		toastrBoot(4,"请选择一项！");
 		return;
 	}
-	var taskId = record.items[0].data.taskId;
+	var taskId =$(".checkchild:checked").val();
 	initassignee(taskId,2);
 }
 
 function deleteGroupUser(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length != 1){
-		msgTishi('请选择要删除的一项！');
+	if($(".checkchild:checked").length != 1){
+		toastrBoot(4,"请选择要删除的一项！");
 		return;
 	}
-	var taskId = record.items[0].data.taskId;
+	var taskId =$(".checkchild:checked").val();
 	initassignee(taskId,3);
 }
 
-//读取性别下拉框数据
-var xtUserinfoSexList = new Ext.data.Store({
-	singleton:true, 
-	proxy:new Ext.data.HttpProxy( { 
-		url:'../xtUserinfoController/getXtUserinfoSexList',
-		reader:new Ext.data.JsonReader({
-			root:'items',
-			type:'json'
-		})
-	}),
-	fields:['xt_data_dictionary_id', 'xt_data_dictionary_name'],
-	autoLoad:true 
-});
-//读取名族下拉框数据
-var xtUserinfoNationList = new Ext.data.Store({
-	singleton:true, 
-	proxy:new Ext.data.HttpProxy( { 
-		url:'../xtUserinfoController/getXtUserinfoNationList',
-		reader:new Ext.data.JsonReader({
-			root:'items',
-			type:'json'
-		})
-	}),
-	fields:['xt_data_dictionary_id', 'xt_data_dictionary_name'],
-	autoLoad:true 
-});
-//读取是否已婚下拉框数据
-var xtUserinfoIsmarriedList = new Ext.data.Store({
-	singleton:true, 
-	proxy:new Ext.data.HttpProxy( { 
-		url:'../xtUserinfoController/getXtUserinfoIsmarriedList',
-		reader:new Ext.data.JsonReader({
-			root:'items',
-			type:'json'
-		})
-	}),
-	fields:['xt_data_dictionary_id', 'xt_data_dictionary_name'],
-	autoLoad:true 
-});
 function initassignee(taskId,type){
-	var userStore = getGridJsonStore('../xtUserinfoController/getXtUserinfoListByCondition',[{}]);
-	var userGrid = Ext.create('Ext.grid.Panel',{
-		region:'center',
-		xtype:'panel',
-		store:userStore,
-		columnLines:true,
-		selType:'cellmodel',
-		multiSelect:true,
-		selType:'checkboxmodel',
-		viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
+	var text = "";
+	$('#lcTaskType').val(type);
+	$('#taskId').val(taskId);
+	if(type == 0){
+		text="设置经办人";
+	}
+	if(type == 1){
+		text="设置归属人";
+	}
+	if(type == 2){
+		text="添加组成员";
+	}
+	if(type == 3){
+		text="移除组成员";
+	}
+	$('#lcAssigneePanelBody').height(reGetBodyHeight()*0.9);
+	$('#lcAssigneeModalLabel').html(text);
+	$('#lcAssigneeModal').modal({backdrop:'static',keyboard:false});
+	$('#lcAssigneeModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
+        // 是弹出框居中。。。  
+        var $modal_dialog = $("#lcAssigneeModalDialog");  
+        /**
+        //获取可视窗口的高度  
+        var clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;  
+        //得到dialog的高度  
+        var dialogHeight = $modal_dialog.height();  
+        //计算出距离顶部的高度  
+        var m_top = (clientHeight - dialogHeight)/2;  
+        console.log("clientHeight : " + clientHeight);  
+        console.log("dialogHeight : " + dialogHeight);  
+        console.log("m_top : " + m_top);  
+        $modal_dialog.css({'margin': m_top + 'px auto'});  
+        **/
+        $modal_dialog.css({'width':reGetBodyWidth()*0.9+'px'});  
+    });
+	$('#searchFormUserinfo')[0].reset();
+	var opt = {
+			searchformId:'searchFormUserinfo'
+		};
+	var options = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtUserinfoListByCondition',opt);},//渲染数据
+			//在第一位置追加序列号
+			fnRowCallback:function(nRow, aData, iDisplayIndex){
+				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+				return nRow;
 		},
-		loadMask:{
-			msg:'正在加载...'
-		},
-		columns:[
+		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		//列表表头字段
+		colums:[
 			{
-				header:'序号',
-				width:77,
-				xtype:'rownumberer'
+				sClass:"text-center",
+				width:"50px",
+				data:"xt_userinfo_id",
+				render:function (data, type, full, meta) {
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildUserinfo" value="' + data + '" /><span></span></label>';
+				},
+				bSortable:false
 			},
 			{
-				header:'用户名',
-				dataIndex:'xt_userinfo_name'
+				data:"xt_userinfo_id",
+				width:"50px"
 			},
 			{
-				header:'真实姓名',
-				dataIndex:'xt_userinfo_realName'
+				data:'xt_userinfo_name'
 			},
 			{
-				header:'性别',
-				width:50,
-				dataIndex:'xt_userinfo_sex',
-				renderer:function(value){
-					return initData(xtUserinfoSexList,value);
-				}
+				data:'xt_userinfo_realName'
 			},
 			{
-				header:'是否已婚',
-				width:80,
-				dataIndex:'xt_userinfo_ismarried',
-				renderer:function(value){
-					return initData(xtUserinfoIsmarriedList,value);
-				}
+				data:'xt_userinfo_phone'
 			},
 			{
-				header:'籍贯',
-				dataIndex:'xt_userinfo_origo',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
+				data:'xt_userinfo_origo'
 			},
 			{
-				header:'入职时间',
-				dataIndex:'xt_userinfo_intime',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
+				data:'xt_userinfo_birthday'
 			},
 			{
-				header:'到期时间',
-				dataIndex:'xt_userinfo_contractTime',
-				renderer:function(value){
-					if(value == ''){
-						return '∨'
-					}else{
-						return value;
-					}
-				}
-			},
-			{
-				header:'岗位',
-				dataIndex:'xt_post_name'
-			},
-			{
-				header:'部门',
-				flex:1,
-				dataIndex:'xt_departinfo_name'
-			},
-			{
-				header:'状态',
-				dataIndex:'xt_userinfo_isDelete',
-				renderer:function(value){
-					if(value == 0){
-						return '在职'
-					}else{
-						return '离职'
-					}
-				}
+				data:'xt_userinfo_email'
 			}
-		],
-		listeners:{
-			'rowdblclick':function(grid, rowIndex, e){
-				var xt_userinfo_realName = userGrid.getSelectionModel().selected.items[0].data.xt_userinfo_realName;
-				var xt_userinfo_id = userGrid.getSelectionModel().selected.items[0].data.xt_userinfo_id; 
-				var xt_departinfo_name = userGrid.getSelectionModel().selected.items[0].data.xt_departinfo_name;
-				var xt_post_name = userGrid.getSelectionModel().selected.items[0].data.xt_post_name;
-				var str = "[<font color=red><br>用户姓名:"+xt_userinfo_realName+"<br>所属部门:"+xt_departinfo_name+"<br>所属岗位:"+xt_post_name+"<br></font>]";
-				Ext.Msg.confirm('提示','确定要选择:<br>'+str+'？',function(btn){
-					if(btn == 'yes'){
-						var params = {taskId:taskId,userId:xt_userinfo_id};
-						if(type == 0){
-							ajaxRequest('../lcTaskController/setAssignee',grid,params,'设置经办人中！请稍后...');
-						}
-						if(type == 1){
-							ajaxRequest('../lcTaskController/setOwner',grid,params,'设置归属人中！请稍后...');
-						}
-						if(type == 2){
-							ajaxRequest('../lcTaskController/addGroupUser',grid,params,'向组任务中添加成员中！请稍后...');
-						}
-						if(type == 3){
-							ajaxRequest('../lcTaskController/deleteGroupUser',grid,params,'向组任务中删除成员中！请稍后...');
-						}
-						userWin.close();
-					}
-				});
-			}
-		},
-		bbar:getGridBBar(userStore)
+		]
 	});
-	reGetWidthAndHeight();
-	userWin = Ext.create('Ext.Window',{
-		layout:'fit',
-		title:'用户列表',
-		width:clientWidth,                    
-		height:clientHeight, 
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		items:userGrid,
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		},
-		buttons:[{
-			text:'关闭',
-			itemId:'close',
-			handler:function(button){
-				button.up('window').close();
-			}
-		}]
-	});
-	userWin.show();
+	grid=$('#userinfoDatatables').dataTable(options);
+	//实现全选反选
+	docheckboxall('checkallUserinfo','checkchildUserinfo');
+	//实现单击行选中
+	clickrowselected('UserinfoDatatables');
+	//实现单击操作开始
+	var table = $('#userinfoDatatables').DataTable();
+    $('#userinfoDatatables tbody').on('click', 'tr', function () {
+        var data = table.row( this ).data();
+        console.info(data.xt_userinfo_realName);
+    });
+    //实现单击操作结束
 }
 
-//完成任务
-function completeTask(){
-	var record = grid.getSelectionModel().selected;
-	if(record.length != 1){
-		msgTishi('请选择要添加的一项！');
+function doUser(){
+	if($(".checkchildUserinfo:checked").length != 1){
+		toastrBoot(4,"请选择要处理的人！");
 		return;
 	}
-	Ext.Msg.confirm('提示','确定要完成该任务？',function(btn){
-		if(btn == 'yes'){
-			var taskId = record.items[0].data.taskId;
-			var params = {taskId:taskId};
-			ajaxRequest('../lcTaskController/completeTask',grid,params,'向组任务中删除成员中！请稍后...');
+	msgTishCallFnBoot("确定要操作该项？",function(){
+		var xt_userinfo_id =$(".checkchildUserinfo:checked").val();
+		var taskId = $('#taskId').val();
+		var lcTaskType = $('#lcTaskType').val(); 
+		var params = {taskId:taskId,userId:xt_userinfo_id};
+		if(lcTaskType == 0){
+			ajaxBReq('../lcTaskController/setAssignee',params,['datatables']);
 		}
-	});
+		if(lcTaskType == 1){
+			ajaxBReq('../lcTaskController/setOwner',params,['datatables']);
+		}
+		if(lcTaskType == 2){
+			ajaxBReq('../lcTaskController/addGroupUser',params,['datatables']);
+		}
+		if(lcTaskType == 3){
+			ajaxBReq('../lcTaskController/deleteGroupUser',params,['datatables']);
+		}
+		$('#lcAssigneeModal').modal('hide');
+		search('datatables');
+	})
+}
+//完成任务
+function completeTask(){
+	if($(".checkchild:checked").length != 1){
+		toastrBoot(4,"请选择要完成的一项！");
+		return;
+	}
+	msgTishCallFnBoot("确定要完成该任务？",function(){
+		var taskId =$(".checkchild:checked").val();
+		var params = {taskId:taskId};
+		ajaxBReq('../lcTaskController/completeTask',params,['datatables']);
+	})
 }
 
-var lcProcessInstanceWin;
 function showLcProcessInstance(id){
-	reGetWidthAndHeight();
-	lcProcessInstanceWin = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:clientWidth*0.8,                    
-		height:clientHeight*0.8,
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		headerPosition:'right',
-		title:'实例监控图',
-		html:'<iframe scrolling="auto" frameborder="0" width="100%" height="100%" src="../lcProcessController/loadLcProcessInstanceImg?processInstanceId='+id+'"></iframe>',
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		}
-	});
-	lcProcessInstanceWin.show();
+	$('#lcImagePanelBody').height(reGetBodyHeight()*0.9);
+	$('#lcImageModalLabel').html("实例监控图");
+	$('#lcImageModal').modal({backdrop:'static',keyboard:false});
+	$("#lcImageIframe",document.body).attr("src",'../lcProcessController/loadLcProcessInstanceImg?processInstanceId='+id) 
+	$('#lcImageModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
+        // 是弹出框居中。。。  
+        var $modal_dialog = $("#lcImageModalDialog");  
+        /**
+        //获取可视窗口的高度  
+        var clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;  
+        //得到dialog的高度  
+        var dialogHeight = $modal_dialog.height();  
+        //计算出距离顶部的高度  
+        var m_top = (clientHeight - dialogHeight)/2;  
+        console.log("clientHeight : " + clientHeight);  
+        console.log("dialogHeight : " + dialogHeight);  
+        console.log("m_top : " + m_top);  
+        $modal_dialog.css({'margin': m_top + 'px auto'});  
+        **/
+        $modal_dialog.css({'width':reGetBodyWidth()*0.9+'px'});  
+    });  
 }
 
-var lcApprovalWin;
+function closeLcImageWin(){
+	search('datatables');
+}
+
 function initLcApprovalWin(id){
-	initLcApprovalGrid(id);
-	reGetWidthAndHeight();
-	lcApprovalWin = Ext.create('Ext.Window',{
-		layout:'fit',
-		width:clientWidth*0.8,                    
-		height:clientHeight*0.8,
-		headerPosition:'right',
-		maximizable:true,
-		minimizable:true,
-		animateTarget:document.body,
-		plain:true,
-		modal:true,
-		title:'审批记录',
-		items:lcApprovalGrid,
-		listeners:{
-			minimize:function(win,opts){
-				if(!win.collapse()){
-					win.collapse();
-				}else{
-					win.expand();
-				}
-			}
-		}
-	});
-	lcApprovalWin.show();
-}
-
-function initLcApprovalGrid(id){
-	lcApprovalStore = getGridJsonStore('../lcApprovalController/getLcApprovalListByCondition?instanceId='+id,[]);
-	lcApprovalGrid = Ext.create('Ext.grid.Panel',{
-		region:'center',
-		xtype:'panel',
-		store:lcApprovalStore,
-		columnLines:true,
-		selType:'cellmodel',
-		multiSelect:true,
-		selType:'checkboxmodel',
-		viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
+	$('#lcHisLogPanelBody').height(reGetBodyHeight()*0.9);
+	$('#lcHisLogModal').modal({backdrop:'static',keyboard:false});
+	$('#lcHisLogModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
+        // 是弹出框居中。。。  
+        var $modal_dialog = $("#lcHisLogModalDialog");  
+        /**
+        //获取可视窗口的高度  
+        var clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight: document.documentElement.clientHeight;  
+        //得到dialog的高度  
+        var dialogHeight = $modal_dialog.height();  
+        //计算出距离顶部的高度  
+        var m_top = (clientHeight - dialogHeight)/2;  
+        console.log("clientHeight : " + clientHeight);  
+        console.log("dialogHeight : " + dialogHeight);  
+        console.log("m_top : " + m_top);  
+        $modal_dialog.css({'margin': m_top + 'px auto'});  
+        **/
+        $modal_dialog.css({'width':reGetBodyWidth()*0.9+'px'});  
+    });
+	$('#searchFormApproval')[0].reset();
+	$('#instanceId').val(id);
+	var opt = {
+			searchformId:'searchFormApproval'
+		};
+	var options = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../lcApprovalController/getLcApprovalListByCondition',opt);},//渲染数据
+			//在第一位置追加序列号
+			fnRowCallback:function(nRow, aData, iDisplayIndex){
+				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+				return nRow;
 		},
-		loadMask:{
-			msg:'正在加载...'
-		},
-		title:'审批列表',
-		columns:[
+		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		//列表表头字段
+		colums:[
 			{
-				header:'序号',
-				width:77,
-				xtype:'rownumberer'
+				sClass:"text-center",
+				width:"50px",
+				data:"lc_approval_id",
+				render:function (data, type, full, meta) {
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildApproval" value="' + data + '" /><span></span></label>';
+				},
+				bSortable:false
 			},
 			{
-				header:'批审状态',
-				flex:1,
-				dataIndex:'lc_status_name'
+				data:"lc_approval_id",
+				width:"50px"
 			},
 			{
-				header:'审批内容',
-				flex:1,
-				dataIndex:'lc_approval_remark'
+				data:'lc_status_name'
 			},
 			{
-				header:'审批时间',
-				flex:1,
-				dataIndex:'lc_approval_time'
+				data:'lc_approval_remark'
 			},
 			{
-				header:'批审人',
-				flex:1,
-				dataIndex:'xt_userinfo_realName'
+				data:'lc_approval_time'
+			},
+			{
+				data:'xt_userinfo_realName'
 			}
-		],
-		bbar:getGridBBar(lcApprovalStore)
+		]
 	});
-}
-
-/**查询操作**/
-function search(){
+	grid=$('#approvalDatatables').dataTable(options);
+	//实现全选反选
+	docheckboxall('checkallApproval','checkchildApproval');
+	//实现单击行选中
+	clickrowselected('approvalDatatables');
 }

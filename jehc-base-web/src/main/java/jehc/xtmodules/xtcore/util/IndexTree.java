@@ -21,7 +21,9 @@ public class IndexTree {
 				if(node.getXt_menuinfo_leaf().equals("0")){
 					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link nav-toggle\">");
 				}else{
-					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link\">");
+//					html.append("\r\n<a href=\"javascript:;\" class=\"nav-link\">");
+					//一级菜单如果没有子级则可以连接
+					html.append("\r\n<a href='../"+node.getXt_menuinfo_url()+"' class=\"nav-link J_menuItem\" data-index='"+node.getXt_menuinfo_id()+"' rootId='"+node.getXt_menuinfo_id()+"'>");
 				}
 				html.append("\r\n<i class=\""+node.getXt_menuinfo_iconCls()+"\"></i>");
 				html.append("\r\n<span class=\"title\">"+node.getXt_menuinfo_title()+"</span>");

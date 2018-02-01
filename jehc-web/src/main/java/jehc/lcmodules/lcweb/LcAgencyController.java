@@ -43,7 +43,6 @@ public class LcAgencyController extends BaseAction{
 	* 查找个人任务
 	* @param request 
 	*/
-	@SuppressWarnings({ "unchecked", "deprecation" })
 	@ResponseBody
 	@RequestMapping(value="/getAssigneeTaskPageList",method={RequestMethod.POST,RequestMethod.GET})
 	public String getLcApprovalListByCondition(HttpServletRequest request){
@@ -71,13 +70,13 @@ public class LcAgencyController extends BaseAction{
 			model.put("processInstanceId", task.getProcessInstanceId());
 			model.put("taskDefinitionKey", task.getTaskDefinitionKey());
 			model.put("tenantId", task.getTenantId());
-			model.put("createTime", task.getCreateTime().toGMTString());
+			model.put("createTime", task.getCreateTime());
 			model.put("delegationState", task.getDelegationState());
 			model.put("dueDate", task.getDueDate());
 			model.put("processVariables", task.getProcessVariables());
             jsonArray.add(model);
 		}
-		return outPageStr(jsonArray,total, request);
+		return outPageBootStr(jsonArray,total, request);
 	}
 	
 	/**

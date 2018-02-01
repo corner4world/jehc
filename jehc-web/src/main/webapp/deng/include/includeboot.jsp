@@ -19,7 +19,9 @@
 	   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<link rel="icon" type="image/ico" href="${syspath }/deng/images/icons/system.png" />
 		<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
+		<%-- 
 		<input type="hidden" value="${xt_functioninfoMethod }" id="xtFunctionInfoBtnStr">
+		 --%>
 	   	<script type="text/javascript">
 	    	var basePath = "${syspath}";
 	    	var sys_pt_login = "${sys_pt_login}";
@@ -163,11 +165,6 @@
 			}
 			legend {
 			    background: #f5f5f5;
-			}
-			.page-header {
-			    padding-bottom: 9px;
-			    margin: 0px 0 20px;
-			    border-bottom: 1px solid #eee;
 			}
 		</style>
 	</head>

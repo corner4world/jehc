@@ -47,7 +47,6 @@ public class LcTaskController extends BaseAction{
 	* 读取所有任务
 	* @param request 
 	*/
-	@SuppressWarnings({ "unchecked", "deprecation" })
 	@ResponseBody
 	@RequestMapping(value="/getTaskListByCondition",method={RequestMethod.POST,RequestMethod.GET})
 	public String getLcApprovalListByCondition(String instanceId,HttpServletRequest request){
@@ -88,7 +87,7 @@ public class LcTaskController extends BaseAction{
 			model.put("processInstanceId", task.getProcessInstanceId());
 			model.put("taskDefinitionKey", task.getTaskDefinitionKey());
 			model.put("tenantId", task.getTenantId());
-			model.put("createTime", task.getCreateTime().toLocaleString());
+			model.put("createTime", task.getCreateTime());
 			model.put("delegationState", task.getDelegationState());
 			model.put("dueDate", task.getDueDate());
 			model.put("processVariables", task.getProcessVariables());
@@ -96,7 +95,7 @@ public class LcTaskController extends BaseAction{
 			model.put("processInstanceId", task.getProcessInstanceId());
             jsonArray.add(model);
 		}
-		return outPageStr(jsonArray,total, request);
+		return outPageBootStr(jsonArray,total, request);
 	}
 	
 	

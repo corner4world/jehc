@@ -65,7 +65,7 @@ public class LcApprovalController extends BaseAction{
 		condition.put("lc_apply_id", lc_Approval.getLc_apply_id());
 		List<LcApproval> lc_ApprovalList = lcApprovalService.getLcApprovalListByCondition(condition);
 		PageInfo<LcApproval> page = new PageInfo<LcApproval>(lc_ApprovalList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象

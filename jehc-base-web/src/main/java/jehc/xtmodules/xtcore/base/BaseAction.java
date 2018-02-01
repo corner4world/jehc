@@ -253,6 +253,38 @@ public class BaseAction extends CommonUtils{
         }
 	}
 	/**
+	 * 分页方式二（bootstrap风格）
+	 * 输出带分页的JSON格式字符串
+	 * @param jsonArray
+	 */
+	protected String outPageBootStr(JSONArray jsonArray,int total,HttpServletRequest request){
+		Integer start = 0;
+		Integer limit = 30;
+        try{
+    		String offset = request.getParameter("start");
+    		String pageSize = request.getParameter("limit");
+    		if(null != pageSize){
+    			limit = new Integer(pageSize);
+    		}
+    		if(null != offset){
+    			start = new Integer(offset);
+    			/**Extjs分页无需对start处理
+    			start = new Integer(offset);
+    			if(start > 0){
+    				start = (start-1)*limit;
+    			}else{
+    				start = 0;
+    			}
+    			**/
+    		}
+    		String jsonStr = jsonArray.toString();
+    		String jsonString = "{page:"+start+",limit:"+limit+",total:"+total+",data:"+jsonStr+"}";
+            return jsonString;
+        }catch(Exception e){      
+        	throw new ExceptionUtil("加载分页列表出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
+        }
+	}
+	/**
 	 * 分页方式三
 	 * DataGrid
 	 * 输出带分页的JSON格式字符串
