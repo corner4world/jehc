@@ -3,11 +3,8 @@ package jehc.junitmodules.junit.rabbitjunit;
 import org.junit.Test;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import jehc.xtmodules.xtcore.base.BaseJunit;
-import jehc.xtmodules.xtcore.util.springutil.SpringUtil;
+import jehc.junitmodules.junit.base.BaseJunit;
 public class MqJunit extends BaseJunit{
 	@Autowired
 	AmqpTemplate rabbitTemplate;

@@ -1,4 +1,4 @@
-package jehc.xtmodules.xtcore.base;
+package jehc.junitmodules.junit.base;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

@@ -7,8 +7,8 @@ import java.io.InputStream;
 
 import org.junit.Test;
 
+import jehc.junitmodules.junit.base.BaseJunit;
 import jehc.xtmodules.xtcore.allutils.file.ftp.FtpUtil;
-import jehc.xtmodules.xtcore.base.BaseJunit;
 
 public class FtpJunit extends BaseJunit{
 	@Test

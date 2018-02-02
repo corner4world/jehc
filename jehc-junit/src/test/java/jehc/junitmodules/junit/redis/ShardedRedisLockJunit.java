@@ -9,7 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import jehc.xtmodules.xtcore.base.BaseJunit;
+import jehc.junitmodules.junit.base.BaseJunit;
 import jehc.xtmodules.xtcore.cache.redis.RedisUtil;
 import jehc.xtmodules.xtcore.cache.sharedjedis.SharedRedisLockUtils;
 

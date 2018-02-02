@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.caucho.hessian.client.HessianProxyFactory;
 
-import jehc.xtmodules.xtcore.base.BaseJunit;
+import jehc.junitmodules.junit.base.BaseJunit;
 import jehc.xtmodules.xtcore.hession.SpaceService;
 
 public class SpaceClient extends BaseJunit{

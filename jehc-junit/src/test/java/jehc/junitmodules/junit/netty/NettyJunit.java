@@ -2,7 +2,7 @@ package jehc.junitmodules.junit.netty;
 
 import org.junit.Test;
 
-import jehc.xtmodules.xtcore.base.BaseJunit;
+import jehc.junitmodules.junit.base.BaseJunit;
 import jehc.xtmodules.xtcore.netty.server.TcpServer;
 
 public class NettyJunit extends BaseJunit{

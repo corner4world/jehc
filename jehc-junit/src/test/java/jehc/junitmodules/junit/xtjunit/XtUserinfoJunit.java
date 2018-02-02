@@ -6,7 +6,7 @@ import java.util.Map;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import jehc.xtmodules.xtcore.base.BaseJunit;
+import jehc.junitmodules.junit.base.BaseJunit;
 import jehc.xtmodules.xtmodel.XtCompany;
 import jehc.xtmodules.xtservice.XtCompanyService;
 import jehc.xtmodules.xtservice.XtUserinfoService;
