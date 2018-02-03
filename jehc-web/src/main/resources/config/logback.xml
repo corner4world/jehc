@@ -103,12 +103,16 @@ debug：当此属性设置为true时，将打印出logback内部日志信息，�
 	</logger>
     <root level="debug">
     	<appender-ref ref="console" />  
-        <appender-ref ref="com.framework" />  
+    	<!-- 
+        <appender-ref ref="com.framework" /> 
+        --> 
         <appender-ref ref="com.ibatis" />  
         <appender-ref ref="rollingFile" />  
         <appender-ref ref="stdout" />
         <appender-ref ref="appLogAppender" />
+        <!-- 
         <appender-ref ref="org.springframework.session.web.http.SessionRepositoryFilter" />  
+        -->
     </root>
      
 </configuration> 
