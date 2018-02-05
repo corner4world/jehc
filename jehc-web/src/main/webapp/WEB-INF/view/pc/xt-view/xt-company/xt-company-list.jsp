@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 			<div class="row">
 				<div class="col-md-1">
-					<label class="control-label">联&nbsp;系&nbsp;&nbsp;人</label>
+					<label class="control-label">联&nbsp;系&nbsp;人</label>
 				</div>
 				<div class="col-md-3">
 					<input class="form-control" type="text" maxlength="20"  name="xt_company_userName" placeholder="请输入联系人" value="${xt_Company.xt_company_userName }">

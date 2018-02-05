@@ -479,6 +479,9 @@ public class CommonUtils extends UUID{
 	public static String getXtFunctioninfoCommonCache(){
 		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTFUNCTIONINFOCOMMONCACHE);
 		Element XtFunctioninfoCommonCacheEle = ehCache.get(CacheConstant.XTFUNCTIONINFOCOMMONCACHE);
+		if(null == XtFunctioninfoCommonCacheEle || null == XtFunctioninfoCommonCacheEle.getObjectValue()){
+			return null;
+		}
 		return ""+XtFunctioninfoCommonCacheEle.getObjectValue();
 	}
 	

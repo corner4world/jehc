@@ -85,7 +85,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
         	//////////////////对功能进行拦截开始///////////////////
         	//过滤公共功能
     		String XtFunctioninfoCommon = CommonUtils.getXtFunctioninfoCommonCache();
-    		if(XtFunctioninfoCommon.indexOf(","+requestUrl+",") >= 0){
+			if(!StringUtils.isEmpty(XtFunctioninfoCommon) && XtFunctioninfoCommon.indexOf(","+requestUrl+",") >= 0){
     			return dataAuth(request, response, requestUrl);
     		}
     		//如果超级管理员则放过所有功能
