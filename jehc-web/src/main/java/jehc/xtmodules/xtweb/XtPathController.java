@@ -79,7 +79,7 @@ public class XtPathController extends BaseAction{
 		int i = 0;
 		if(null != xt_Path && !"".equals(xt_Path)){
 			xt_Path.setXt_path_id(UUID.toUUID());
-			xt_Path.setXt_time(CommonUtils.getSimpleDateFormat());
+			xt_Path.setXt_time(CommonUtils.getDate());
 			i=xtPathService.addXtPath(xt_Path);
 		}
 		if(i>0){
@@ -136,7 +136,7 @@ public class XtPathController extends BaseAction{
 	public String copyXtPath(String xt_path_id,HttpServletRequest request){
 		int i = 0;
 		XtPath xt_Path = xtPathService.getXtPathById(xt_path_id);
-		xt_Path.setXt_time(CommonUtils.getSimpleDateFormat());
+		xt_Path.setXt_time(CommonUtils.getDate());
 		if(null != xt_Path && !"".equals(xt_Path)){
 			xt_Path.setXt_path_id(UUID.toUUID());
 			i=xtPathService.addXtPath(xt_Path);

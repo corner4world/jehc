@@ -266,6 +266,7 @@
                             <a href='../xtUserinfoController/loadMyXtUserinfo' class="nav-link J_menuItem" data-index='myUserInfo' rootId='myUserInfo' idBu='myUserInfo' class="nav-link nav-toggle">
                                 <!-- <i class="icon-user"></i> -->
                                 <span class="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;个人中心</span>
+                                <span class="badge badge-danger">新</span>
                             </a>
                         </li>
                    		${MenuList }

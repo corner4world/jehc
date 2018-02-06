@@ -534,6 +534,7 @@ public class DBMSMetaUtil {
 		dbInfo.setUsername(username);
 		dbInfo.setPassword(password);
 		dbInfo.setDatabasetype(databasetype);
+		dbInfo.setDbname(dbname);
 		dbInfo.setTables(tables);
 		if(null != tableName && !"".equals(tableName)){
 			List<Map<String, Object>> columns = listColumns(databasetype, ip, port,dbname, username, password, tableName);

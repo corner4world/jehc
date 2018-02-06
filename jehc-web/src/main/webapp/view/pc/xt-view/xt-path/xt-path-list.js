@@ -46,7 +46,10 @@ $(document).ready(function() {
 				}
 			},
 			{
-				data:'xt_time'
+				data:'xt_time',
+				render:function(data, type, row, meta) {
+					return dateformat(data); 
+				}
 			},
 			{
 				data:"xt_path_id",
