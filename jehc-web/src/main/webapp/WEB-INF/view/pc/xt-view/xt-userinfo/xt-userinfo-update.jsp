@@ -174,7 +174,7 @@
 			        </div>
 			        <div class="col-md-11">
 			        	<div class="form-group">
-			        		<textarea class="form-control" cols="100" maxlength="200"  name="xt_userinfo_remark" placeholder="请输入备注">${xtUserinfo.xt_userinfo_ortherTel }</textarea>
+			        		<textarea class="form-control" cols="100" maxlength="200"  name="xt_userinfo_remark" placeholder="请输入备注">${xtUserinfo.xt_userinfo_remark }</textarea>
 			        	</div>
 			        </div>
 			    </div>

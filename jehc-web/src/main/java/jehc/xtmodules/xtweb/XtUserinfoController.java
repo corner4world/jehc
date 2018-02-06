@@ -19,11 +19,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
+import jehc.xtmodules.xtcore.annotation.AuthNeedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
 import jehc.xtmodules.xtcore.md5.MD5;
 import jehc.xtmodules.xtcore.util.CommonUtils;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtmodel.XtDataDictionary;
@@ -445,5 +447,49 @@ public class XtUserinfoController extends BaseAction{
 		XtUserinfo xtUserinfo = xtUserinfoService.getXtUserinfoById(xt_userinfo_id);
 		model.addAttribute("xtUserinfo", xtUserinfo);
 		return new ModelAndView("pc/xt-view/xt-userinfo/xt-userinfo-detail");
+	}
+	
+	/**
+	 * 载入个人中心页面
+	 * @param model
+	 * @return
+	 */
+	@AuthNeedLogin
+	@RequestMapping(value="/loadMyXtUserinfo",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView loadMyXtUserinfo(Model model){
+		return new ModelAndView("pc/xt-view/xt-userinfo/my-xt-userinfo");
+	}
+	
+	/**
+	* 修改（个人中心）
+	* @param xt_userinfo 
+	* @param request 
+	*/
+	@ResponseBody
+	@AuthNeedLogin
+	@RequestMapping(value="/updateMyXtUserinfo",method={RequestMethod.POST,RequestMethod.GET})
+	public String updateMyXtUserinfo(XtUserinfo xt_Userinfo,HttpServletRequest request){
+		int i = 0;
+		XtUserinfo xtUserinfo = getXtU();
+		if(null == xtUserinfo){
+			throw new ExceptionUtil("未能获取到当前用户！");
+		}
+		if(null != xt_Userinfo && !"".equals(xt_Userinfo)){
+			xtUserinfo.setXt_userinfo_phone(xt_Userinfo.getXt_userinfo_phone());
+			xtUserinfo.setXt_userinfo_mobile(xt_Userinfo.getXt_userinfo_mobile());
+			xtUserinfo.setXt_userinfo_ortherTel(xt_Userinfo.getXt_userinfo_ortherTel());
+			xtUserinfo.setXt_userinfo_qq(xt_Userinfo.getXt_userinfo_qq());
+			xtUserinfo.setXt_userinfo_email(xt_Userinfo.getXt_userinfo_email());
+			xtUserinfo.setXt_userinfo_remark(xt_Userinfo.getXt_userinfo_remark());
+			xtUserinfo.setXt_userinfo_address(xt_Userinfo.getXt_userinfo_address());
+			i=xtUserinfoService.updateXtUserinfo(xtUserinfo);
+		}
+		if(i>0){
+			aBLogs("用户控制层", "修改", "修改用户成功");
+			return outAudStr(true);
+		}else{
+			aBLogs("用户控制层", "修改", "修改用户失败");
+			return outAudStr(false);
+		}
 	}
 }
