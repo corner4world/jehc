@@ -155,3 +155,10 @@
 .modal.in .modal-dialog{-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);-o-transform:translate(0,-50%);transform:translate(0,-50%)}
 .modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;top:50%;}
 @media (min-width:768px){.modal-dialog{width:768px}
+
+.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .form-control-feedback, .has-success .help-block, .has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label, .has-success.radio label, .has-success.radio-inline label {
+    color: #333333;
+}
+.has-success .form-control {
+    border-color: #c2cad8;
+}

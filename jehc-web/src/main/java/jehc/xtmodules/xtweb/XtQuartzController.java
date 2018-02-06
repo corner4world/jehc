@@ -1,12 +1,14 @@
 package jehc.xtmodules.xtweb;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -50,9 +52,9 @@ public class XtQuartzController extends BaseAction{
 	public String getXtQuartzListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		List<XtQuartz> xt_QuartzList = xtQuartzService.getXtQuartzListByCondition(condition);
-		PageInfo<XtQuartz> page = new PageInfo<XtQuartz>(xt_QuartzList);
-		return outPageStr(page,request);
+		List<XtQuartz> xtQuartzList = xtQuartzService.getXtQuartzListByCondition(condition);
+		PageInfo<XtQuartz> page = new PageInfo<XtQuartz>(xtQuartzList);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
@@ -154,5 +156,34 @@ public class XtQuartzController extends BaseAction{
 	public void exportXtQuartz(String excleData,String excleHeader,String excleText,HttpServletRequest request,HttpServletResponse response){
 		ExportExcel exportExcel = new ExportExcel();
 		exportExcel.exportExcel(excleData, excleHeader,excleText,response);
+	}
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtQuartzAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtQuartzAdd(XtQuartz xtQuartz,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-quartz/xt-quartz-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtQuartzUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtQuartzUpdate(String id,HttpServletRequest request, Model model){
+		XtQuartz xtQuartz = xtQuartzService.getXtQuartzById(id);
+		model.addAttribute("xtQuartz", xtQuartz);
+		return new ModelAndView("pc/xt-view/xt-quartz/xt-quartz-update");
+	}
+	/**
+	* 发送至明细页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtQuartzDetail",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtQuartzDetail(String id,HttpServletRequest request, Model model){
+		XtQuartz xtQuartz = xtQuartzService.getXtQuartzById(id);
+		model.addAttribute("xtQuartz", xtQuartz);
+		return new ModelAndView("pc/xt-view/xt-quartz/xt-quartz-detail");
 	}
 }

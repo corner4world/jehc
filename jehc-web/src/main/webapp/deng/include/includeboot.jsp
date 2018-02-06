@@ -166,6 +166,12 @@
 			legend {
 			    background: #f5f5f5;
 			}
+			.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .form-control-feedback, .has-success .help-block, .has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label, .has-success.radio label, .has-success.radio-inline label {
+			    color: #333333;
+			}
+			.has-success .form-control {
+			    border-color: #c2cad8;
+			}
 		</style>
 	</head>
 	<!-- upload模态框（Modal）开始 -->

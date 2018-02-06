@@ -2,6 +2,7 @@ package jehc.xtmodules.xtcore.util.generator;
 
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -112,7 +113,7 @@ public class GeneratorUtil {
     	if(null != sb.toString() && !"".equals(sb.toString())){
     		return sb.toString().replaceAll("_", "");
     	}else{
-    		return null;
+    		return "";
     	}
     } 
     
@@ -125,7 +126,7 @@ public class GeneratorUtil {
     	str = str.toLowerCase();
     	str = toUpperCase(str);
     	StringBuffer sb = new StringBuffer();
-    	if(null != str && !"".equals(str)){
+    	if(!StringUtils.isEmpty(str)){
     		sb.append(str.substring(0,1).toLowerCase());
     		sb.append(str.substring(1,str.length()));
     	}
@@ -138,14 +139,15 @@ public class GeneratorUtil {
      * @return
      */
     public String lowOneCharAll_(String str){
-    	str = str.toLowerCase();
-    	StringBuffer sb = new StringBuffer();
-    	if(null != str && !"".equals(str)){
+    	if(!StringUtils.isEmpty(str)){
     		str = str.toLowerCase();
+        	str = uprepchar(str);
+        	StringBuffer sb = new StringBuffer();
     		sb.append(str.substring(0,1).toLowerCase());
     		sb.append(str.substring(1,str.length()));
+    		return sb.toString();
     	}
-    	return sb.toString();
+    	return "";
     }
     
     /**
@@ -156,7 +158,7 @@ public class GeneratorUtil {
     public String lowAllChar_(String str){
     	str = str.toLowerCase();
     	StringBuffer sb = new StringBuffer();
-    	if(null != str && !"".equals(str)){
+    	if(!StringUtils.isEmpty(str)){
     		str = str.replaceAll("_", "-");
     		str = str.toLowerCase();
     	}
