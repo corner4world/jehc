@@ -264,8 +264,8 @@
                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                    		<li class="nav-item start active open">
                             <a href='../xtUserinfoController/loadMyXtUserinfo' class="nav-link J_menuItem" data-index='myUserInfo' rootId='myUserInfo' idBu='myUserInfo' class="nav-link nav-toggle">
-                                <i class="icon-user"></i>
-                                <span class="title">个人中心</span>
+                                <!-- <i class="icon-user"></i> -->
+                                <span class="title">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;个人中心</span>
                             </a>
                         </li>
                    		${MenuList }
