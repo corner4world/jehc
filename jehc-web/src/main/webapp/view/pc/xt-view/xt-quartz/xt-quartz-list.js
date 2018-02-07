@@ -67,7 +67,10 @@ $(document).ready(function() {
 					return "<a href=\"javascript:toXtQuartzDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
 				}
 			}
-		]
+		],
+		fixedColumns:{
+            leftColumns:7
+        }
 	});
 	grid=$('#datatables').dataTable(options);
 	//实现全选反选

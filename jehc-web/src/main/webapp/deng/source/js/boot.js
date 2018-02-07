@@ -615,9 +615,19 @@ function docheckboxall(classPchekall,classCh){
 
 //实现单击行选中
 function clickrowselected(datatablesid){
-	$('#'+datatablesid+' tbody').on('click', 'tr', function() {
-        $(this).toggleClass('row_selected');
-	});
+	var table = $('#'+datatablesid).DataTable();
+	$('#'+datatablesid+' tbody').on( 'click', 'tr', function () {
+        if($(this).hasClass('selected')){
+            $(this).removeClass('selected');
+        }else{
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    });
+	/*删除选中行
+	$('#button').click( function () {
+        table.row('.selected').remove().draw( false );
+    });*/
 }
 
 ////////////////////////全局Ajax处理开始////////////////////////////
