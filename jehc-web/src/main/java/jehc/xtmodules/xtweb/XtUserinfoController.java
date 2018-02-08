@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.annotation.AuthNeedLogin;
+import jehc.xtmodules.xtcore.annotation.NeedLoginUnAuth;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
@@ -454,7 +455,7 @@ public class XtUserinfoController extends BaseAction{
 	 * @param model
 	 * @return
 	 */
-	@AuthNeedLogin
+	@NeedLoginUnAuth
 	@RequestMapping(value="/loadMyXtUserinfo",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView loadMyXtUserinfo(Model model){
 		return new ModelAndView("pc/xt-view/xt-userinfo/my-xt-userinfo");
@@ -466,7 +467,7 @@ public class XtUserinfoController extends BaseAction{
 	* @param request 
 	*/
 	@ResponseBody
-	@AuthNeedLogin
+	@NeedLoginUnAuth
 	@RequestMapping(value="/updateMyXtUserinfo",method={RequestMethod.POST,RequestMethod.GET})
 	public String updateMyXtUserinfo(XtUserinfo xt_Userinfo,HttpServletRequest request){
 		int i = 0;

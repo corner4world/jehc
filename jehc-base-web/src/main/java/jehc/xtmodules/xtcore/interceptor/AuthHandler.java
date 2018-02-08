@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
+import jehc.xtmodules.xtcore.annotation.NeedLoginUnAuth;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.Logback4jUtil;
 import jehc.xtmodules.xtcore.util.constant.PathConstant;
@@ -73,13 +74,21 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		if(null != authUneedLogin){
 			return true;
 		}
-		
 		//过滤druid
-		 if(((request.getRequestURI().indexOf(("druid"))> 0 ) && null == CommonUtils.getXtU())){
+		if(((request.getRequestURI().indexOf(("druid"))> 0 ) && null == CommonUtils.getXtU())){
 			 request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
 			 return false;
-		 }
-		
+		}
+		//需要登录但无需拦截验证URL
+		NeedLoginUnAuth needLoginUnAuth = methodHandler.getMethodAnnotation(NeedLoginUnAuth.class);
+		if(null != needLoginUnAuth){
+			//如果注解为需要用户登录 则判断该用户是否登录 如果登录了 则放开其操作该方法的权限 否则不通过
+			 if(null == CommonUtils.getXtU()){
+				 return false;
+			 }else{
+				 return true;
+			 }
+		}
 		//验证当前用户是否登录（优先级第三）
         if(null != CommonUtils.getXtU()){
         	//////////////////对功能进行拦截开始///////////////////

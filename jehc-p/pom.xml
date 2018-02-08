@@ -379,11 +379,13 @@
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
         </dependency>
+        <!-- 
 		<dependency>
 		    <groupId>taglibs</groupId>
 		    <artifactId>standard</artifactId>
 		    <version>${standar.version}</version>
 		</dependency>
+		 -->
 		<!-- JSP标准标签库结束 -->
 		
 		
@@ -561,6 +563,68 @@
 	        	<exclusion>
 	        		<groupId>org.apache.hadoop</groupId>
       				<artifactId>hadoop-hdfs</artifactId>
+	        	</exclusion>
+	        	
+	        	<!-- 去除lucene相关 -->
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-analyzers-common</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-analyzers-kuromoji</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-analyzers-phonetic</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-codecs</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-core</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-expressions</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-grouping</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-highlighter</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-join</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-memory</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-misc</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-queries</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-queryparser</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-spatial</artifactId>
+	        	</exclusion>
+	        	<exclusion>
+	        		<groupId>org.apache.lucene</groupId>
+      				<artifactId>lucene-suggest</artifactId>
 	        	</exclusion>
 	        </exclusions>
 		</dependency>
