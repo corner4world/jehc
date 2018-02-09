@@ -101,9 +101,9 @@
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
 		<!-- bootstrap验证框架结束 -->
 		<!-- 公共模块包含上传控件，共同JS封装 -->
-		<script type="text/javascript" src="${syspath}/deng/source/js/boot.js"></script>
+		<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
 		<link href="${syspath}/deng/source/plugins/admin/index/tab/css/style.min.css" rel="stylesheet">
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/admin/index/tab/js/contabs.min.js"></script>
-		<link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.css" rel="stylesheet" type="text/css" />
+		<link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
 	</head>
 </html>

@@ -61,7 +61,7 @@
 		</style>
         <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ux/ProgressBarPager.js"></script>
 		<!-- 公共模块包含上传控件，共同JS封装 -->
-		<script type="text/javascript" src="${syspath}/deng/source/js/common.js"></script>
+		<script type="text/javascript" src="${syspath}/deng/source/js/common.min.js"></script>
 		<!-- 数据	权限按钮操作 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/xtFunctionInfoStr.js"></script>
 		<!-- 主题切换

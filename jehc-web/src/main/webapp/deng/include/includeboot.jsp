@@ -52,14 +52,14 @@
         <link href="${syspath}/deng/source/plugins/admin/index/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
         <!-- 自定义主题样式结束 -->
-        <!--[if lt IE 9]>
+        <%-- [if lt IE 9]>
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/respond.min.js"></script>
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/excanvas.min.js"></script> 
-		<![endif]-->
+		<![endif] --%>
         <!-- 基础插件开始 -->
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+        <%-- <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/js.cookie.min.js" type="text/javascript"></script> --%>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
@@ -68,9 +68,9 @@
         <!-- DataTables插件开始 -->
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/dataTables.fixedColumns.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/datatable.js" type="text/javascript"></script>
+        <%-- <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/datatable.js" type="text/javascript"></script> --%>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
+        <%-- <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script> --%>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/dataTables.fixedColumns.min.js" type="text/javascript"></script>
         <!-- DataTables插件结束 -->
         <!-- 日期选择器控件开始 -->
@@ -78,13 +78,13 @@
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" />
+        <%-- <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/clockface/css/clockface.css" rel="stylesheet" type="text/css" /> --%>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/moment.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-timepicker/js/bootstrap-timepicker.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/clockface/js/clockface.js" type="text/javascript"></script>
+        <%-- <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/clockface/js/clockface.js" type="text/javascript"></script> --%>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>
         <!-- 日期选择器控件结束 -->
         <!-- 其他插件开始 -->
@@ -109,14 +109,14 @@
 		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.css" />
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
 		<!-- bootstrap验证框架结束 -->
-		<!-- jquery验证框架开始
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+		<!-- jquery验证框架开始-->
+		<%-- <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-validation/js/localization/messages_zh.min.js" type="text/javascript" />
-		 -->
+		--%>
 		<!-- jquery验证框架结束 -->
 		<!-- 公共模块包含上传控件，共同JS封装 -->
-		<script type="text/javascript" src="${syspath}/deng/source/js/boot.js"></script>
+		<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
 		<!-- 文件上传通用模块 -->
 		<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
