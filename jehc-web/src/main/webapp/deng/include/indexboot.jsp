@@ -56,7 +56,6 @@
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout3/css/themes/red-sunglo.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" /> 
         --%>
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
         <!--[if lt IE 9]>
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/respond.min.js"></script>
@@ -104,6 +103,47 @@
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
 		<link href="${syspath}/deng/source/plugins/admin/index/tab/css/style.min.css" rel="stylesheet">
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/admin/index/tab/js/contabs.min.js"></script>
-		<link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
+		<%
+        Cookie cookies[]=request.getCookies(); 
+		Cookie cookieC=null; 
+		if(null != cookies){
+			for(int i=0;i < cookies.length;i++){
+			    if(("css").equals(cookies[i].getName())){ 
+		      		cookieC=cookies[i]; 
+		      		break; 
+		      	}
+		    }
+		}
+	    if(null != cookieC){
+		    if(cookieC.getValue().indexOf("whiteClass")>=0){
+				%>
+		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-white.min.css" rel="stylesheet" type="text/css" />
+		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
+				<%
+			}else  if(cookieC.getValue().indexOf("whiteBlackClass")>=0){
+				%>
+		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-white-black.min.css" rel="stylesheet" type="text/css" />
+		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
+				<%
+			}else  if(cookieC.getValue().indexOf("groupClass")>=0){
+				%>
+		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-group.min.css" rel="stylesheet" type="text/css" />
+		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
+				<%
+			}else{
+				%>
+		 <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
+		 <style>.content-tabs {border-bottom: solid 2px #2f4050;}</style>
+				<%
+			}
+	    }else{
+	    	%>
+	    <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
+	    <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
+	    <style>.content-tabs {border-bottom: solid 2px #2f4050;}</style>
+	    	<%
+	    }
+        %>
 	</head>
 </html>

@@ -403,3 +403,22 @@ function loadinfo(text,dt1,dt2){
         }
     })
 }
+//切换肤色
+function displayTheme(){
+	var themecss = getCookie("css");
+	if(null != themecss && "" != themecss){
+		$('#chatheme').val(themecss);
+	}
+	$('#themeModal').modal({backdrop:'static',keyboard:false});
+}
+//保存肤色
+function changeTheme(){
+	var chatheme = $('#chatheme').val();
+	msgTishCallFnBoot("切换肤色之后平台将重新刷新整个页面,确定要切换肤色吗？",function(){
+		 var date=new Date();
+      	 date.setTime(date.getTime() + 365*24*3066*1000);
+		 window.document.cookie="css=" + chatheme + ";expires=" + date.toGMTString();
+      	 window.document.cookie="css=" + chatheme + ";expires=" + date.toGMTString()+";path=/";
+		 window.location.href=basePath+"/index/index.html";
+	})
+}

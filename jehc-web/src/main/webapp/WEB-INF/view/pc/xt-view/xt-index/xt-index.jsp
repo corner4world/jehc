@@ -208,10 +208,11 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
                                     <li>
-                                        <a href="javascript:updateUserPic()">
-                                            <i class="icon-user"></i>修改头像
+                                        <a href="javascript:displayTheme()">
+                                            <i class="icon-wrench"></i>切换主题
                                         </a>
                                     </li>
+                                    <li class="divider"> </li>
                                     <li>
                                         <a href="javascript:updatePwd()">
                                             <i class="icon-calendar"></i>修改密码 
@@ -474,6 +475,36 @@
 			</div><!-- /.modal -->
 		</div>
 		<!-- 锁屏模态框（Modal）结束 -->
+		
+		<!-- 肤色模态框（Modal）开始 -->
+		<div class="modal fade" id="themeModal" tabindex="-1" role="dialog" aria-labelledby="themeModalLabel" data-backdrop=”static”  aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title" id="themeModalLabel">
+							切换肤色
+						</h4>
+					</div>
+					<div class="modal-body">
+						<form id="themeForm" method="post">
+			               <div class="form-group">
+                           	<select class="bs-select form-control" id="chatheme">
+                               <option value="defaultClass">默认经典</option>
+                               <option value="whiteClass">清爽肤色</option>
+                               <option value="whiteBlackClass">黑白肤色</option>
+                               <option value="groupClass">多色组合</option>
+                            </select>
+                           </div>
+		                </form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+		                <button type="button" class="btn btn-primary" onclick="changeTheme()">保存</button>
+		            </div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal -->
+		</div>
+		<!-- 肤色模态框（Modal）结束 -->
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
 </html>
