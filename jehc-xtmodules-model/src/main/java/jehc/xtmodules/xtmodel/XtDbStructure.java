@@ -18,6 +18,7 @@ public class XtDbStructure  implements Serializable{
 	private String extra;
 	private String privileges;
 	private String comment;
+	private String Null;
 	//////end///////////////
 	private String table;
 	private String createTable;
@@ -87,4 +88,11 @@ public class XtDbStructure  implements Serializable{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	public String getNull() {
+		return Null;
+	}
+	public void setNull(String null1) {
+		Null = null1;
+	}
+	
 }

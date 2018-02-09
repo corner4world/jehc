@@ -49,17 +49,15 @@ Ext.onReady(function(){
 			},
 			{
 				header:'表名',
-				locked:true,
+				width:150,
 				dataIndex:'name'
 			},
 			{
 				header:'引擎',
-				locked:true,
 				dataIndex:'engine'
 			},
 			{
 				header:'版本',
-				locked:true,
 				dataIndex:'version'
 			},
 			{
@@ -90,60 +88,54 @@ Ext.onReady(function(){
 			{header:'checksum',dataIndex:'checksum',sortable:true,hideable:false,hidden:true},
 			{header:'create_options',dataIndex:'create_options',sortable:true,hideable:false,hidden:true},
 			{
-				header:'操作',
-				flex:2,
-				columns:[{
-					header:'更多属性',
-					align:'center',
-					xtype:'widgetcolumn',
-					width:100,
-					widget:{
-		                xtype:'button',
-		                text:'更多属性',
-		                handler:function(rec){
-		                	getXtDbTableAttribute(rec.getWidgetRecord())
-		                }
-		            }
-				},{
-					header:'字段结构',
-					align:'center',
-					xtype:'widgetcolumn',
-					width:100,
-					widget:{
-		                xtype:'button',
-		                text:'字段结构',
-		                handler:function(rec){
-		                	var name = rec.getWidgetRecord().data.name;
-		                	getXtDbStructureByCondition(name);
-		                }
-		            }
-				},{
-					header:'索引',
-					align:'center',
-					xtype:'widgetcolumn',
-					width:100,
-					widget:{
-		                xtype:'button',
-		                text:'索引',
-		                handler:function(rec){
-		                	var name = rec.getWidgetRecord().data.name;
-		                	getXtDbTableIndex(name);
-		                }
-		            }
-				},{
-					header:'表大小',
-					align:'center',
-					xtype:'widgetcolumn',
-					width:100,
-					widget:{
-		                xtype:'button',
-		                text:'表大小',
-		                handler:function(rec){
-		                	var name = rec.getWidgetRecord().data.name;
-		                	getXtDbTableSize(name);
-		                }
-		            }
-				}]
+				align:'center',
+				header:'更多属性',
+				xtype:'widgetcolumn',
+				widget:{
+	                xtype:'button',
+	                glyph:0xf044,
+	                handler:function(rec){
+	                	getXtDbTableAttribute(rec.getWidgetRecord())
+	                }
+	            }
+			},
+			{
+				header:'字段结构',
+				align:'center',
+				xtype:'widgetcolumn',
+				widget:{
+	                xtype:'button',
+	                glyph:0xf044,
+	                handler:function(rec){
+	                	var name = rec.getWidgetRecord().data.name;
+	                	getXtDbStructureByCondition(name);
+	                }
+	            }
+			},
+			{
+				header:'索引',
+				align:'center',
+				xtype:'widgetcolumn',
+				widget:{
+	                xtype:'button',
+	                glyph:0xf044,
+	                handler:function(rec){
+	                	var name = rec.getWidgetRecord().data.name;
+	                	getXtDbTableIndex(name);
+	                }
+	            }
+			},{
+				header:'表大小',
+				align:'center',
+				xtype:'widgetcolumn',
+				widget:{
+	                xtype:'button',
+	                glyph:0xf044,
+	                handler:function(rec){
+	                	var name = rec.getWidgetRecord().data.name;
+	                	getXtDbTableSize(name);
+	                }
+	            }
 			}
 		],
 		tbar:[

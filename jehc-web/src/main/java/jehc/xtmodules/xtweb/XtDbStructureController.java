@@ -201,7 +201,7 @@ public class XtDbStructureController extends BaseAction{
 	
 	
 	
-	private String[] xtDataBaseDictionaryTitle = {"编号","字段名称","类型","备注"};
+	private String[] xtDataBaseDictionaryTitle = {"编号","字段名称","类型","是否必填","备注"};
 	/**
 	 * 导出数据字典
 	 * @return
@@ -235,7 +235,7 @@ public class XtDbStructureController extends BaseAction{
 		Document document = new Document(PageSize.A4,40f,40f,40f,40f);
 		String filePath = "";
 		try {
-			filePath = FileUtil.validOrCreateFile(CommonUtils.getXtPathCache(CacheConstant.XTPATHCACHE_XTDbSTRUCTURE_FILE_PATH).get(0).getXt_path());
+			 filePath = FileUtil.validOrCreateFile(CommonUtils.getXtPathCache(CacheConstant.XTPATHCACHE_XTDbSTRUCTURE_FILE_PATH).get(0).getXt_path());
 			 RtfWriter2.getInstance(document, new FileOutputStream(filePath+file_name));
 			 document.open();
 			 document = createXtDataBaseDictionary(document,tableAndFileListModel,file_name);
@@ -275,10 +275,10 @@ public class XtDbStructureController extends BaseAction{
 	    Iterator<String> it = key.iterator();  
 	    while(it.hasNext()){
 	    	String keystr = (String) it.next();
-	    	List<XtDbStructure> saDataBaseStructureList = tableAndFileListModel.get(keystr);
+	    	List<XtDbStructure> xtDataBaseStructureList = tableAndFileListModel.get(keystr);
 	    	document.add(WordCss.getParagraph(keystr,t_font,Element.ALIGN_LEFT));
-			Table table = new Table(4,2);
-			int[] widths = {10,50,20,20};
+			Table table = new Table(5,2);
+			int[] widths = {10,50,20,5,15};
 			table.setWidths(widths);
 			table.setWidth(100);
 			table.setAutoFillEmptyCells(true);
@@ -295,8 +295,8 @@ public class XtDbStructureController extends BaseAction{
 				table.addCell(title);
 			}
 			//2.读取表内容
-			for(int j = 0; j < saDataBaseStructureList.size(); j++){
-				XtDbStructure saDataBaseStructure = saDataBaseStructureList.get(j);
+			for(int j = 0; j < xtDataBaseStructureList.size(); j++){
+				XtDbStructure xtDbStructure = xtDataBaseStructureList.get(j);
 				//(1)编号
 				Cell sizaID = new Cell(WordCss.getParagraph(String.valueOf((j+1)), t_font, Element.ALIGN_CENTER));
 				sizaID.setRowspan(1);
@@ -304,18 +304,25 @@ public class XtDbStructureController extends BaseAction{
 				table.addCell(sizaID);
 				
 				//(2)字段名
-				Cell filedModel = new Cell(WordCss.getParagraph(String.valueOf(saDataBaseStructure.getField()), t_font, Element.ALIGN_CENTER));
+				Cell filedModel = new Cell(WordCss.getParagraph(String.valueOf(xtDbStructure.getField()), t_font, Element.ALIGN_CENTER));
 				filedModel.setRowspan(1);
 				filedModel.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				table.addCell(filedModel);
 				
 				//(3)类型
-				Cell typeModel = new Cell(WordCss.getParagraph(String.valueOf(saDataBaseStructure.getType()), t_font, Element.ALIGN_CENTER));
+				Cell typeModel = new Cell(WordCss.getParagraph(String.valueOf(xtDbStructure.getType()), t_font, Element.ALIGN_CENTER));
 				typeModel.setRowspan(1);
 				typeModel.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				table.addCell(typeModel);
-				//(4)备注
-				Cell commentModel = new Cell(WordCss.getParagraph(saDataBaseStructure.getComment(), t_font, Element.ALIGN_CENTER));//单位
+				
+				//(4)是否必填
+				Cell isNullModel = new Cell(WordCss.getParagraph(String.valueOf(xtDbStructure.getNull()), t_font, Element.ALIGN_CENTER));
+				typeModel.setRowspan(1);
+				typeModel.setVerticalAlignment(Element.ALIGN_MIDDLE);
+				table.addCell(isNullModel);
+				
+				//(5)备注
+				Cell commentModel = new Cell(WordCss.getParagraph(xtDbStructure.getComment(), t_font, Element.ALIGN_CENTER));
 				commentModel.setRowspan(1);
 				commentModel.setVerticalAlignment(Element.ALIGN_MIDDLE);
 				table.addCell(commentModel);
