@@ -94,4 +94,17 @@ public class XtNoticeServiceImpl extends BaseService implements XtNoticeService{
 		}
 		return i;
 	}
+	/**
+	 * 统计
+	 * @param condition
+	 * @return
+	 */
+	public int getXtNoticeCountByCondition(Map<String,Object> condition){
+		try{
+			return xtNoticeDao.getXtNoticeCountByCondition(condition);
+		} catch (Exception e) {
+			/**方案一加上这句话这样程序异常时才能被aop捕获进而回滚**/
+			throw new ExceptionUtil(e.getMessage(),e.getCause());
+		}
+	}
 }

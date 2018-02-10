@@ -90,4 +90,11 @@
 			#{item}
 		</foreach>
 	</delete>
+	<!-- 统计知识点 -->
+	<select id="getXtKnowledgeCount" resultType="java.lang.Integer" parameterType="map">
+		SELECT 
+	      COUNT(0) AS count
+	    FROM xt_knowledge  
+	    WHERE 1=1
+	</select>
 </mapper>

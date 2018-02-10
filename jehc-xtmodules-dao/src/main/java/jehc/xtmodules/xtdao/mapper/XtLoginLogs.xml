@@ -119,4 +119,12 @@
 	    GROUP BY xt_login_logs.xt_userinfo_id,xt_userinfo_realName
 	    ORDER BY count DESC
 	</select>
+	
+	<!-- 个人登录次数 -->
+	<select id="getXtLoginLogsCount" resultType="java.lang.Integer" parameterType="map">
+		SELECT 
+	      COUNT(0) AS count
+	    FROM xt_login_logs  
+	    WHERE xt_userinfo_id = #{xt_userinfo_id}
+	</select>
 </mapper>

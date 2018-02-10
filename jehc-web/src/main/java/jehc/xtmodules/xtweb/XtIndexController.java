@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
@@ -23,9 +25,14 @@ import jehc.xtmodules.xtcore.md5.MD5;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.IndexTree;
 import jehc.xtmodules.xtcore.util.SortList;
+import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtmodel.XtMenuinfo;
 import jehc.xtmodules.xtmodel.XtUserinfo;
+import jehc.xtmodules.xtservice.XtKnowledgeService;
+import jehc.xtmodules.xtservice.XtKwordsService;
+import jehc.xtmodules.xtservice.XtLoginLogsService;
 import jehc.xtmodules.xtservice.XtMenuinfoService;
+import jehc.xtmodules.xtservice.XtNoticeService;
 import jehc.xtmodules.xtservice.XtUserinfoService;
 
 /**
@@ -157,13 +164,35 @@ public class XtIndexController extends BaseAction{
 			condition.put("xt_role_id", xt_role_id.split(","));
 		}
 	}
+	
+	@Autowired
+	private XtNoticeService xtNoticeService;
+	@Autowired
+	private XtLoginLogsService xtLoginLogsService;
+	@Autowired
+	private XtKnowledgeService xtKnowledgeService;
 	/**
 	 * 载入桌面
 	 * @param request
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/desk.html",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadDesk(HttpServletRequest request) {
+	public ModelAndView loadDesk(HttpServletRequest request,Model model) {
+		Map<String,Object> condition = new HashMap<String,Object>();
+		//在线用户
+		HttpSession se = request.getSession(); 
+		ServletContext application = se.getServletContext();  
+		List<XtUserinfo> xtUserInfoList =((List<XtUserinfo>)application.getAttribute(SessionConstant.XT_ONLINE_USERLIST));
+		model.addAttribute("xtOnlineUserCount", xtUserInfoList.size());
+		//公告数
+		model.addAttribute("xtNoticeCount", xtNoticeService.getXtNoticeCountByCondition(condition));
+		model.addAttribute("xtNoticeList", xtNoticeService.getXtNoticeListByCondition(condition));
+		//个人登录次数
+		condition.put("xt_userinfo_id", getXtUid());
+		model.addAttribute("xtLoginLogsCount", xtLoginLogsService.getXtLoginLogsCount(condition));
+		//平台知识库数
+		model.addAttribute("xtKnowledgeCount", xtKnowledgeService.getXtKnowledgeCount(condition));
 		return new ModelAndView("pc/xt-view/xt-desk/xt-desk");
 	}
 	

@@ -39,4 +39,10 @@ public interface XtKnowledgeService{
 	* @return
 	*/
 	public int delXtKnowledge(Map<String,Object> condition);
+	/**
+	 * 统计知识点数
+	 * @param condition
+	 * @return
+	 */
+	public int getXtKnowledgeCount(Map<String,Object> condition);
 }

@@ -53,7 +53,7 @@ body {
 				</div>
 				<div class="details">
 					<div class="number">
-						<span data-counter="counterup" data-value="1349">1349</span>
+						<span data-counter="counterup" data-value="${xtLoginLogsCount }">${xtLoginLogsCount }</span>
 					</div>
 					<div class="desc">登录次数</div>
 				</div>
@@ -66,9 +66,9 @@ body {
 				</div>
 				<div class="details">
 					<div class="number">
-						<span data-counter="counterup" data-value="12,5">12,5</span>M$
+						<span data-counter="counterup" data-value="${xtNoticeCount }">${xtNoticeCount }</span>条
 					</div>
-					<div class="desc">平台通知次数</div>
+					<div class="desc">平台公告数</div>
 				</div>
 			</a>
 		</div>
@@ -79,7 +79,7 @@ body {
 				</div>
 				<div class="details">
 					<div class="number">
-						<span data-counter="counterup" data-value="549">549</span>
+						<span data-counter="counterup" data-value="${xtKnowledgeCount }">${xtKnowledgeCount }</span>条
 					</div>
 					<div class="desc">平台知识库数量</div>
 				</div>
@@ -92,7 +92,7 @@ body {
 				</div>
 				<div class="details">
 					<div class="number">
-						+ <span data-counter="counterup" data-value="89">89</span>%
+						<span data-counter="counterup" data-value="${xtOnlineUserCount }">${xtOnlineUserCount }</span>个
 					</div>
 					<div class="desc">当前在线人数</div>
 				</div>
@@ -105,30 +105,43 @@ body {
 			<div class="portlet light ">
 				<div class="portlet-title">
 					<div class="caption">
-						<i class="icon-share font-dark hide"></i><span class="caption-subject font-dark bold uppercase">个人通知</span>
+						<i class="icon-share font-dark hide"></i><span class="caption-subject font-dark bold uppercase">平台公告</span>
 					</div>
 				</div>
 				<div class="portlet-body">
                     <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
                         <ul class="feeds">
-                            <li>
-                                <div class="col1">
-                                    <div class="cont">
-                                        <div class="cont-col1">
-                                            <div class="label label-sm label-warning">
-                                                <i class="fa fa-bell-o"></i>
-                                            </div>
-                                        </div>
-                                        <div class="cont-col2">
-                                            <div class="desc">Ehc平台V1.0上线了... <span class="label label-sm label-default "> 完成 </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col2">
-                                    <div class="date">14:18 </div>
-                                </div>
-                            </li>
+                        	<c:forEach var="xtNotice" items="${xtNoticeList }">
+                        		<li>
+	                                <div class="col1">
+	                                    <div class="cont">
+	                                        <div class="cont-col1">
+	                                            <div class="label label-sm label-warning">
+	                                                <i class="fa fa-bell-o"></i>
+	                                            </div>
+	                                        </div>
+	                                        <div class="cont-col2">
+	                                            <c:choose>
+	                                            <c:when test="${fn:length(xtNotice.xt_title)>20 }">
+		                                            <div class="desc" title="${xtNotice.xt_title }">${fn:substring( xtNotice.xt_title ,0,20)}...<span class="label label-sm label-default "> 完成 </span></div>
+	                                            </c:when>
+	                                            <c:otherwise>
+	                                            <div class="desc" title="${xtNotice.xt_title }">${xtNotice.xt_title }<span class="label label-sm label-default "> 完成 </span></div>
+	                                            </c:otherwise>
+	                                            </c:choose>
+	                                        </div>
+	                                    </div>
+	                                </div>
+	                                <div class="col2">
+	                                    <div class="date">
+	                                    <c:choose>
+                                        	<c:when test="${fn:length(xtNotice.xt_createTime)>16 }">${fn:substring(xtNotice.xt_createTime ,8,16)}</c:when>
+                                        	<c:otherwise>-</c:otherwise>
+                                        </c:choose>
+	                                    </div>
+	                                </div>
+	                            </li>
+                        	</c:forEach>
                         </ul>
                     </div>
 					<div class="scroller-footer">

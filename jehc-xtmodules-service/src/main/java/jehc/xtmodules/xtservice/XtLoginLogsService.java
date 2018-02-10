@@ -46,4 +46,10 @@ public interface XtLoginLogsService{
 	 * @return
 	 */
 	public List<XtLoginLogs> getGroupXtLoginLogsList(Map<String,Object> condition);
+	/**
+	 * 个人登录次数
+	 * @param condition
+	 * @return
+	 */
+	public int getXtLoginLogsCount(Map<String,Object> condition);
 }

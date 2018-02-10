@@ -39,4 +39,10 @@ public interface XtNoticeService{
 	* @return
 	*/
 	public int delXtNotice(Map<String,Object> condition);
+	/**
+	 * 统计
+	 * @param condition
+	 * @return
+	 */
+	public int getXtNoticeCountByCondition(Map<String,Object> condition);
 }

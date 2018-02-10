@@ -64,4 +64,12 @@ public class XtLoginLogsDaoImpl  extends BaseDaoImpl implements XtLoginLogsDao{
 	public List<XtLoginLogs> getGroupXtLoginLogsList(Map<String,Object> condition){
 		return (List<XtLoginLogs>)this.getList("getGroupXtLoginLogsList",condition); 
 	}
+	/**
+	 * 个人登录次数
+	 * @param condition
+	 * @return
+	 */
+	public int getXtLoginLogsCount(Map<String,Object> condition){
+		return new Integer(this.get("getXtLoginLogsCount", condition).toString());
+	}
 }

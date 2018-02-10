@@ -54,4 +54,12 @@ public class XtKnowledgeDaoImpl  extends BaseDaoImpl implements XtKnowledgeDao{
 	public int delXtKnowledge(Map<String,Object> condition){
 		return this.del("delXtKnowledge", condition);
 	}
+	/**
+	 * 统计知识点数
+	 * @param condition
+	 * @return
+	 */
+	public int getXtKnowledgeCount(Map<String,Object> condition){
+		return new Integer(this.get("getXtKnowledgeCount", condition).toString()); 
+	}
 }

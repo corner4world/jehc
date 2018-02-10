@@ -108,4 +108,12 @@ public class XtLoginLogsServiceImpl extends BaseService implements XtLoginLogsSe
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
 	}
+	/**
+	 * 个人登录次数
+	 * @param condition
+	 * @return
+	 */
+	public int getXtLoginLogsCount(Map<String,Object> condition){
+		return xtLoginLogsDao.getXtLoginLogsCount(condition);
+	}
 }

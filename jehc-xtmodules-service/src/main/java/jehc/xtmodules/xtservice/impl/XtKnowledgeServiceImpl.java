@@ -95,4 +95,12 @@ public class XtKnowledgeServiceImpl extends BaseService implements XtKnowledgeSe
 		}
 		return i;
 	}
+	/**
+	 * 统计知识点数
+	 * @param condition
+	 * @return
+	 */
+	public int getXtKnowledgeCount(Map<String,Object> condition){
+		return xtKnowledgeDao.getXtKnowledgeCount(condition);
+	}
 }

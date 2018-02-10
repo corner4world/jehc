@@ -54,4 +54,12 @@ public class XtNoticeDaoImpl  extends BaseDaoImpl implements XtNoticeDao{
 	public int delXtNotice(Map<String,Object> condition){
 		return this.del("delXtNotice", condition);
 	}
+	/**
+	 * 统计
+	 * @param condition
+	 * @return
+	 */
+	public int getXtNoticeCountByCondition(Map<String,Object> condition){
+		return new Integer(this.get("getXtNoticeCountByCondition", condition).toString());
+	}
 }
