@@ -68,9 +68,9 @@
         <!-- DataTables插件开始 -->
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/dataTables.fixedColumns.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-        <%-- <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/datatable.js" type="text/javascript"></script> --%>
+        <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/datatable.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-        <%-- <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script> --%>
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/dataTables.fixedColumns.min.js" type="text/javascript"></script>
         <!-- DataTables插件结束 -->
         <!-- 日期选择器控件开始 -->
@@ -123,6 +123,9 @@
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/js/fileinput_locale_zh.js" type="text/javascript"></script>
 		<!-- 右键插件 -->
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-contextmenu/BootstrapMenu.min.js" type="text/javascript"></script>
+		<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/select2/js/select2.min.js" type="text/javascript"></script>
 		<style type="text/css">
 			table.dataTable.no-footer {
 			    border-bottom: 1px solid #ffffff;
@@ -173,6 +176,9 @@
 			}
 			.has-success .form-control {
 			    border-color: #c2cad8;
+			}
+			.page-header {
+			    margin: 5px 0 20px;
 			}
 		</style>
 	</head>

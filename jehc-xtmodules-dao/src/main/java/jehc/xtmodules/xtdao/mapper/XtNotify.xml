@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtNotify">
+	<!--初始化分页-->
+	<select id="getXtNotifyListByCondition" resultType="jehc.xtmodules.xtmodel.XtNotify" parameterType="map">
+		SELECT
+			xt_notify_id,
+		    xt_notify_title,
+		    xt_notify_content,
+		    xt_notify_ctime,
+		    xt_userinfo_id,
+		    xt_userinfo_realName,
+		    xt_notify_type
+		FROM 
+			xt_notify 
+		WHERE 1=1
+			AND isDelete = 0
+			AND xt_userinfo_id = #{xt_userinfo_id}
+		<if test="null != xt_notify_title">
+			AND xt_notify_title LIKE CONCAT(CONCAT('%',#{xt_notify_title}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtNotifyById" resultType="jehc.xtmodules.xtmodel.XtNotify" parameterType="string">
+		SELECT
+			xt_notify_id,
+		    xt_notify_title,
+		    xt_notify_content,
+		    xt_notify_ctime,
+		    xt_userinfo_id,
+		    xt_userinfo_realName,
+		    xt_notify_type
+		FROM 
+			xt_notify 
+		WHERE xt_notify_id=#{xt_notify_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtNotify" parameterType="jehc.xtmodules.xtmodel.XtNotify">
+		INSERT INTO
+			xt_notify
+			(
+			xt_notify_id,
+		    xt_notify_title,
+		    xt_notify_content,
+		    xt_notify_ctime,
+		    xt_userinfo_id,
+		    xt_userinfo_realName,
+		    xt_notify_type,
+		    isDelete
+			)
+			VALUES
+			(
+			#{xt_notify_id},
+		    #{xt_notify_title},
+		    #{xt_notify_content},
+		    #{xt_notify_ctime},
+		    #{xt_userinfo_id},
+		    #{xt_userinfo_realName},
+		    #{xt_notify_type},
+		    0
+			)
+	</insert>
+
+	<!--删除-->
+	<update id="delXtNotify" parameterType="map">
+		UPDATE  xt_notify SET isDelete = 1  WHERE xt_notify_id IN
+		<foreach item="item" index="index" collection="xt_notify_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+</mapper>

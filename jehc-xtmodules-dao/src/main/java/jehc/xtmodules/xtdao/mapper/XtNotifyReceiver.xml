@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtNotifyReceiver">
+	<!--初始化分页-->
+	<select id="getXtNotifyReceiverListByCondition" resultType="jehc.xtmodules.xtmodel.XtNotifyReceiver" parameterType="map">
+		SELECT
+			xt_notify_receiver_id,
+		    receive_time,
+		    xt_notify_receiver.xt_userinfo_id,
+		    xt_notify_receiver.xt_userinfo_realName,
+		    xt_notify_receiver.xt_notify_id,
+		    read_time,
+		    receive_status,
+		    xt_notify.xt_notify_title,
+		    xt_notify.xt_userinfo_realName as sendUserRealName
+		FROM 
+			xt_notify_receiver xt_notify_receiver LEFT JOIN xt_notify xt_notify ON xt_notify.xt_notify_id = xt_notify_receiver.xt_notify_id
+		WHERE 1=1
+			AND xt_notify_receiver.isDelete = 0
+			AND xt_notify_receiver.xt_userinfo_id = #{xt_userinfo_id}
+		<if test="null != xt_notify_title">
+			AND xt_notify.xt_notify_title LIKE CONCAT(CONCAT('%',#{xt_notify_title}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtNotifyReceiverById" resultType="jehc.xtmodules.xtmodel.XtNotifyReceiver" parameterType="string">
+		SELECT
+			xt_notify_receiver_id,
+		    receive_time,
+		    xt_notify_receiver.xt_userinfo_id,
+		    xt_notify_receiver.xt_userinfo_realName,
+		    xt_notify_receiver.xt_notify_id,
+		    read_time,
+		    receive_status,
+		    xt_notify.xt_notify_title,
+		    xt_notify.xt_notify_content,
+		    xt_notify.xt_userinfo_realName as sendUserRealName
+		FROM 
+			xt_notify_receiver xt_notify_receiver LEFT JOIN xt_notify xt_notify ON xt_notify.xt_notify_id = xt_notify_receiver.xt_notify_id
+		WHERE xt_notify_receiver_id=#{xt_notify_receiver_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtNotifyReceiver" parameterType="jehc.xtmodules.xtmodel.XtNotifyReceiver">
+		INSERT INTO
+			xt_notify_receiver
+			(
+			xt_notify_receiver_id,
+		    receive_time,
+		    xt_userinfo_id,
+		    xt_userinfo_realName,
+		    xt_notify_id,
+		    receive_status,
+		    isDelete
+			)
+			VALUES
+			(
+			#{xt_notify_receiver_id},
+		    #{receive_time},
+		    #{xt_userinfo_id},
+		    #{xt_userinfo_realName},
+		    #{xt_notify_id},
+		    0,
+		    0
+			)
+	</insert>
+
+	<!--删除-->
+	<update id="delXtNotifyReceiver" parameterType="map">
+		UPDATE  xt_notify_receiver SET isDelete = 1  WHERE xt_notify_receiver_id IN
+		<foreach item="item" index="index" collection="xt_notify_receiver_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!--更新已读-->
+	<update id="updateXtNotifyReceiver" parameterType="map">
+		UPDATE  xt_notify_receiver SET receive_status = 1 ,read_time=#{read_time} WHERE xt_notify_receiver_id = #{xt_notify_receiver_id}
+	</update>
+	
+	<!--根据通知编号查找集合-->
+	<select id="getXtNotifyReceiverListById" resultType="jehc.xtmodules.xtmodel.XtNotifyReceiver" parameterType="string">
+		SELECT
+			xt_notify_receiver_id,
+		    receive_time,
+		    xt_userinfo_id,
+		    xt_userinfo_realName,
+		    xt_notify_id,
+		    read_time,
+		    receive_status
+		FROM 
+			xt_notify_receiver 
+		WHERE 
+			xt_notify_id = #{xt_notify_id}
+	</select>
+</mapper>
