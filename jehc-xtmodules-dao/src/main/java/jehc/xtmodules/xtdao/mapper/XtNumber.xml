@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtNumber">
+	<!--初始化分页-->
+	<select id="getXtNumberListByCondition" resultType="jehc.xtmodules.xtmodel.XtNumber" parameterType="map">
+		SELECT
+			xt_number_id,
+			lastvalue,
+			version,
+			createTime,
+			lastUpdateTime,
+			modulesType
+		FROM 
+			xt_number
+		WHERE 1=1
+	</select>
+
+	<!--读取唯一一条记录根据类型-->
+	<select id="getXtNumberSingleByType" resultType="jehc.xtmodules.xtmodel.XtNumber" parameterType="string">
+		SELECT
+			xt_number_id,
+			lastvalue,
+			version,
+			createTime,
+			lastUpdateTime,
+			modulesType
+		FROM 
+			xt_number
+		WHERE modulesType = #{modulesType}
+	</select>
+	
+	<!--添加-->
+	<insert id="addXtNumber" parameterType="jehc.xtmodules.xtmodel.XtNumber">
+		INSERT INTO
+			xt_number
+			(
+			xt_number_id,
+			lastvalue,
+			version,
+			createTime,
+			lastUpdateTime,
+			modulesType
+			)
+			VALUES
+			(
+			#{xt_number_id},
+			#{lastvalue},
+			#{version},
+			#{createTime},
+			#{lastUpdateTime},
+			#{modulesType}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtNumber" parameterType="jehc.xtmodules.xtmodel.XtNumber">
+		UPDATE
+			xt_number
+		SET
+			lastvalue = #{lastvalue},
+			version = version+1,
+			lastUpdateTime = #{lastUpdateTime}
+		WHERE modulesType=#{modulesType} AND version = #{version}
+	</update>
+
+</mapper>

@@ -60,7 +60,7 @@
     <import resource="classpath*:config/datasources/basedatasources.xml"/>
 	<!-- 以下为插件及其他支持【开始】 -->
 	<!-- spring上下文应用环境 -->
-    <bean id="SpringContextUtil" class="jehc.xtmodules.xtcore.util.springutil.SpringContextUtil"/>
+    <bean id="applicationContext" class="jehc.xtmodules.xtcore.util.springutil.SpringContextUtil" lazy-init="false"/>
 	<!-- 异常统一处理类 -->
 	<bean id="exceptionResolver" class="jehc.xtmodules.xtcore.interceptor.ExceptionHandler"/>
 	
