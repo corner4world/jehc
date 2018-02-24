@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageInfo;
 
+import jehc.xtmodules.xtcore.annotation.NeedLoginUnAuth;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtmodel.XtNumber;
@@ -36,6 +37,7 @@ public class XtNumberController extends BaseAction {
 	* @param request 
 	* @return
 	*/
+	@NeedLoginUnAuth
 	@RequestMapping(value="/loadXtNumber",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView loadXtNumber(HttpServletRequest request){
 		return new ModelAndView("pc/xt-view/xt-number/xt-number-list");
@@ -45,6 +47,7 @@ public class XtNumberController extends BaseAction {
 	* 加载初始化列表数据并分页
 	* @param request 
 	*/
+	@NeedLoginUnAuth
 	@ResponseBody
 	@RequestMapping(value="/getXtNumberListByCondition",method={RequestMethod.POST,RequestMethod.GET})
 	public String getXtNumberListByCondition(BaseSearch baseSearch,HttpServletRequest request){
