@@ -1,4 +1,4 @@
-
+ **本工程为Maven多工程依赖版本** 
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
 
@@ -14,6 +14,10 @@ eclipse-jee-mars-1
  **非maven版本地址：** 
 
 https://gitee.com/jehc/jehc-none-maven
+
+ **
+单工程版本如下：** 
+https://gitee.com/jehc/jehc-admin
 
 效果图片如下：
 
@@ -50,3 +54,7 @@ eclipse-jee-mars-1
  **非maven版本地址：** 
 
 https://gitee.com/jehc/jehc-none-maven
+
+ **
+单工程版本如下：** 
+https://gitee.com/jehc/jehc-admin
