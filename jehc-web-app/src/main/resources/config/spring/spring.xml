@@ -27,8 +27,14 @@
 	<context:component-scan base-package="jehc.*modules.*web,jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"> 
 		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
 	</context:component-scan>
-	-->
+	3.
 	<context:component-scan base-package="jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"/> 
+	-->
+	
+	<context:component-scan base-package="jehc">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan> 
+    
     <!-- properties 文件位置 -->
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="order" value="1" />
@@ -54,7 +60,7 @@
     <import resource="classpath*:config/datasources/basedatasources.xml"/>
 	<!-- 以下为插件及其他支持【开始】 -->
 	<!-- spring上下文应用环境 -->
-    <bean id="SpringContextUtil" class="jehc.xtmodules.xtcore.util.springutil.SpringContextUtil"/>
+    <bean id="applicationContext" class="jehc.xtmodules.xtcore.util.springutil.SpringContextUtil" lazy-init="false"/>
 	<!-- 异常统一处理类 -->
 	<bean id="exceptionResolver" class="jehc.xtmodules.xtcore.interceptor.ExceptionHandler"/>
 	
@@ -64,19 +70,21 @@
 	<!-- redis整合  -->
 	<import resource="classpath*:config/redis/redis.xml"/>
 	
-	<!-- 连接池整合 -->
+	<!-- 连接池整合 
 	<import resource="classpath*:config/pool/pool.xml"/>
-	 
+	--> 
+	
 	<!-- RabbitMq消息中间键 
 	<import resource="classpath*:config/mq/rabbit.xml"/>
 	-->
 	
-	<!-- netty整合 -->
+	<!-- netty整合
 	<import resource="classpath*:config/netty/netty.xml"/>
+	-->
 	 
-	 
-	<!-- Hession整合-->
+	<!-- Hession整合
 	<import resource="classpath*:config/hessian/hessian.xml"/> 
+	-->
 	<!-- 以上为插件及其他支持【结束】 -->
 	
 	<!-- FTP上传 -->
