@@ -32,6 +32,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.zip.GZIPInputStream;
@@ -67,13 +68,14 @@ public class FileUtil {
 			FileUtil.FILEDIR = path;
 		}
 	}
+
 	/**
 	 * 判断文件类型是否是合法的,就是判断allowTypes中是否包含contentType
 	 * 
 	 * @param contentType
-	 *          文件类型
+	 *            文件类型
 	 * @param allowTypes
-	 *          文件类型列表
+	 *            文件类型列表
 	 * @return 是否合法
 	 */
 	public static boolean isValid(String contentType, String[] allowTypes) {
@@ -87,30 +89,29 @@ public class FileUtil {
 		}
 		return false;
 	}
-	
-	
+
 	/**
 	 * 验证并创建文件
+	 * 
 	 * @param filePath
 	 */
-	public static String validOrCreateFile(String filePath){
+	public static String validOrCreateFile(String filePath) {
 		File f = new File(filePath);
-		if(!f.exists()){
+		if (!f.exists()) {
 			(new File(filePath)).mkdirs();
 		}
 		return filePath;
 	}
-	
-	
+
 	/**
 	 * 上传文件
 	 * 
 	 * @param uploadFileName
-	 *          被上传的文件名称
+	 *            被上传的文件名称
 	 * @param savePath
-	 *          文件的保存路径
+	 *            文件的保存路径
 	 * @param uploadFile
-	 *          被上传的文件
+	 *            被上传的文件
 	 * @return newFileName
 	 */
 	public static String upload(String uploadFileName, String savePath, File uploadFile) {
@@ -154,9 +155,9 @@ public class FileUtil {
 	 * 将对象数组的每一个元素分别添加到指定集合中,调用Apache commons collections 中的方法
 	 * 
 	 * @param collection
-	 *          目标集合对象
+	 *            目标集合对象
 	 * @param arr
-	 *          对象数组
+	 *            对象数组
 	 */
 	@SuppressWarnings("unchecked")
 	public static void addToCollection(Collection collection, Object[] arr) {
@@ -175,9 +176,9 @@ public class FileUtil {
 	 * </pre>
 	 * 
 	 * @param str
-	 *          目标字符串
+	 *            目标字符串
 	 * @param separatorChars
-	 *          分隔符字符串
+	 *            分隔符字符串
 	 * @return 字符串数组
 	 */
 	public static String[] split(String str, String separatorChars) {
@@ -194,11 +195,11 @@ public class FileUtil {
 	 * </pre>
 	 * 
 	 * @param fieldName
-	 *          字段(属性)名称
+	 *            字段(属性)名称
 	 * @param invokeObj
-	 *          被调用方法的对象
+	 *            被调用方法的对象
 	 * @param args
-	 *          被调用方法的参数数组
+	 *            被调用方法的参数数组
 	 * @return 成功与否
 	 */
 	public static boolean invokeSetMethod(String fieldName, Object invokeObj, Object[] args) {
@@ -277,9 +278,9 @@ public class FileUtil {
 	 * 创建缩略图
 	 * 
 	 * @param file
-	 *          上传的文件流
+	 *            上传的文件流
 	 * @param height
-	 *          最小的尺寸
+	 *            最小的尺寸
 	 * @throws IOException
 	 */
 	public static void createMiniPic(File file, float width, float height) throws IOException {
@@ -331,16 +332,13 @@ public class FileUtil {
 	 *            //文件名
 	 * @return 文件名
 	 */
-	public static String fileUp(MultipartFile file, String filePath,
-			String fileName) {
+	public static String fileUp(MultipartFile file, String filePath, String fileName) {
 		String extName = ""; // 扩展名格式：
 		try {
 			if (file.getOriginalFilename().lastIndexOf(".") >= 0) {
-				extName = file.getOriginalFilename().substring(
-						file.getOriginalFilename().lastIndexOf("."));
+				extName = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 			}
-			copyFile(file.getInputStream(), filePath, fileName + extName)
-					.replaceAll("-", "");
+			copyFile(file.getInputStream(), filePath, fileName + extName).replaceAll("-", "");
 		} catch (IOException e) {
 			System.out.println(e);
 		}
@@ -354,8 +352,7 @@ public class FileUtil {
 	 * @param fileName
 	 * @throws IOException
 	 */
-	private static String copyFile(InputStream in, String dir, String realName)
-			throws IOException {
+	private static String copyFile(InputStream in, String dir, String realName) throws IOException {
 		File file = new File(dir, realName);
 		if (!file.exists()) {
 			if (!file.getParentFile().exists()) {
@@ -380,14 +377,12 @@ public class FileUtil {
 		if (!file.exists()) {
 			file.mkdir();
 		}
-		Iterator<Map.Entry<String, MultipartFile>> it = fileMap.entrySet()
-				.iterator();
+		Iterator<Map.Entry<String, MultipartFile>> it = fileMap.entrySet().iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, MultipartFile> entry = it.next();
 			MultipartFile mFile = entry.getValue();
 			if (mFile.getSize() != 0 && !"".equals(mFile.getName())) {
-				write(mFile.getInputStream(), new FileOutputStream(
-						initFilePath(mFile.getOriginalFilename())));
+				write(mFile.getInputStream(), new FileOutputStream(initFilePath(mFile.getOriginalFilename())));
 			}
 		}
 	}
@@ -406,8 +401,7 @@ public class FileUtil {
 		}
 		Long num = new Date().getTime();
 		Double d = Math.random() * num;
-		return (file.getPath() + "/" + num + d.longValue() + "_" + name)
-				.replaceAll(" ", "-");
+		return (file.getPath() + "/" + num + d.longValue() + "_" + name).replaceAll(" ", "-");
 	}
 
 	private static int getFileDir(String name) {
@@ -416,37 +410,43 @@ public class FileUtil {
 
 	/**
 	 * 普通下载
-	 * @param response 
-	 * @param filePath		//文件完整路径(包括文件名和扩展名)
-	 * @param fileName		//下载后看到的文件名
-	 * @return  文件名
+	 * 
+	 * @param response
+	 * @param filePath
+	 *            //文件完整路径(包括文件名和扩展名)
+	 * @param fileName
+	 *            //下载后看到的文件名
+	 * @return 文件名
 	 */
-	public static void fileDownload(final HttpServletResponse response, String filePath, String fileName) throws Exception{  
-	    byte[] data = FileUtil.toByteArray2(filePath);  
-	    fileName = URLEncoder.encode(fileName, "UTF-8");  
-	    response.reset();  
-	    response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");  
-	    response.addHeader("Content-Length", "" + data.length);  
-	    response.setContentType("application/octet-stream;charset=UTF-8");  
-	    OutputStream outputStream = new BufferedOutputStream(response.getOutputStream());  
-	    outputStream.write(data);  
-	    outputStream.flush();  
-	    outputStream.close();
-	    response.flushBuffer();
-	} 
-	
+	public static void fileDownload(final HttpServletResponse response, String filePath, String fileName)
+			throws Exception {
+		byte[] data = FileUtil.toByteArray2(filePath);
+		fileName = URLEncoder.encode(fileName, "UTF-8");
+		response.reset();
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "\"");
+		response.addHeader("Content-Length", "" + data.length);
+		response.setContentType("application/octet-stream;charset=UTF-8");
+		OutputStream outputStream = new BufferedOutputStream(response.getOutputStream());
+		outputStream.write(data);
+		outputStream.flush();
+		outputStream.close();
+		response.flushBuffer();
+	}
+
 	/**
 	 * 下载文件
+	 * 
 	 * @param downloadfFileName
 	 * @param out
 	 */
-	public static void download(String downloadfFileName,ServletOutputStream out) {
+	public static void download(String downloadfFileName, ServletOutputStream out) {
 		try {
 			FileInputStream in = new FileInputStream(new File(FILEDIR + "/" + downloadfFileName));
 			write(in, out);
 		} catch (FileNotFoundException e) {
 			try {
-				FileInputStream in = new FileInputStream(new File(FILEDIR+ "/"+ new String(downloadfFileName.getBytes("iso-8859-1"),"utf-8")));
+				FileInputStream in = new FileInputStream(
+						new File(FILEDIR + "/" + new String(downloadfFileName.getBytes("iso-8859-1"), "utf-8")));
 				write(in, out);
 			} catch (IOException e1) {
 				e1.printStackTrace();
@@ -458,17 +458,18 @@ public class FileUtil {
 
 	/**
 	 * HTTP 网格下载
+	 * 
 	 * @param id
 	 * @param request
 	 * @return
 	 */
-	public void download(String URL, String fileName,HttpServletResponse response) {
+	public void download(String URL, String fileName, HttpServletResponse response) {
 		response.setContentType("text/html;charset=utf-8");
 		try {
 			URL url = new URL(URL);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			// 防止屏蔽程序抓取而返回403错误
-			conn.setRequestProperty("User-Agent","Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+			conn.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
 			// 得到输入流
 			InputStream inputStream = conn.getInputStream();
 			int len = 0;
@@ -476,7 +477,8 @@ public class FileUtil {
 			OutputStream ut = null;
 			response.reset();
 			response.setContentType("application/x-msdownload");
-			response.setHeader("Content-Disposition", "attachment; filename="+ java.net.URLEncoder.encode(fileName, "UTF-8"));
+			response.setHeader("Content-Disposition",
+					"attachment; filename=" + java.net.URLEncoder.encode(fileName, "UTF-8"));
 			ut = response.getOutputStream();
 			while ((len = inputStream.read(buffers)) != -1) {
 				ut.write(buffers, 0, len);
@@ -491,11 +493,12 @@ public class FileUtil {
 
 	/**
 	 * 写入数据
+	 * 
 	 * @param in
 	 * @param out
 	 * @throws IOException
 	 */
-	public static void write(InputStream in, OutputStream out)throws IOException {
+	public static void write(InputStream in, OutputStream out) throws IOException {
 		try {
 			byte[] buffer = new byte[1024];
 			int bytesRead = -1;
@@ -576,14 +579,12 @@ public class FileUtil {
 		byte[] buffer = new byte[(int) fileSize];
 		int offset = 0;
 		int numRead = 0;
-		while (offset < buffer.length
-				&& (numRead = fi.read(buffer, offset, buffer.length - offset)) >= 0) {
+		while (offset < buffer.length && (numRead = fi.read(buffer, offset, buffer.length - offset)) >= 0) {
 			offset += numRead;
 		}
 		// 确保所有数据均被读取
 		if (offset != buffer.length) {
-			throw new IOException("Could not completely read file "
-					+ file.getName());
+			throw new IOException("Could not completely read file " + file.getName());
 		}
 		fi.close();
 		return buffer;
@@ -681,7 +682,7 @@ public class FileUtil {
 		try {
 			rf = new RandomAccessFile(filePath, "r");
 			fc = rf.getChannel();
-			MappedByteBuffer byteBuffer = fc.map(MapMode.READ_ONLY, 0,fc.size()).load();
+			MappedByteBuffer byteBuffer = fc.map(MapMode.READ_ONLY, 0, fc.size()).load();
 			byte[] result = new byte[(int) fc.size()];
 			if (byteBuffer.remaining() > 0) {
 				byteBuffer.get(result, 0, byteBuffer.remaining());
@@ -725,29 +726,30 @@ public class FileUtil {
 		}
 		// 确保所有数据均被读取
 		if (offset < bytes.length) {
-			throw new IOException("Could not completely read file "+ file.getName());
+			throw new IOException("Could not completely read file " + file.getName());
 		}
 		is.close();
 		return bytes;
 	}
 
 	/**
-	 * @param inputFileName 你要压缩的文件夹(整个完整路径)
-	 * @param zipFileName 压缩后的文件(整个完整路径)
+	 * @param inputFileName
+	 *            你要压缩的文件夹(整个完整路径)
+	 * @param zipFileName
+	 *            压缩后的文件(整个完整路径)
 	 */
-	public static void zip(String inputFileName, String zipFileName)
-			throws Exception {
+	public static void zip(String inputFileName, String zipFileName) throws Exception {
 		zip(zipFileName, new File(inputFileName));
 	}
 
-	private static void zip(String zipFileName, File inputFile)throws Exception {
+	private static void zip(String zipFileName, File inputFile) throws Exception {
 		ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipFileName));
 		zip(out, inputFile, "");
 		out.flush();
 		out.close();
 	}
 
-	private static void zip(ZipOutputStream out, File f, String base)throws Exception {
+	private static void zip(ZipOutputStream out, File f, String base) throws Exception {
 		if (f.isDirectory()) {
 			File[] fl = f.listFiles();
 			out.putNextEntry(new ZipEntry(base + "/"));
@@ -768,6 +770,7 @@ public class FileUtil {
 
 	Key key;
 	private String strKey = "gzsdxDesc";
+
 	public FileUtil() {
 		getKey();// 生成密匙
 	}
@@ -790,10 +793,13 @@ public class FileUtil {
 
 	/**
 	 * 文件file进行加密并保存目标文件destFile中
-	 * @param file 要加密的文件 如c:/test/srcFile.txt
-	 * @param destFile 加密后存放的文件名 如c:/加密后文件.txt
+	 * 
+	 * @param file
+	 *            要加密的文件 如c:/test/srcFile.txt
+	 * @param destFile
+	 *            加密后存放的文件名 如c:/加密后文件.txt
 	 */
-	public void encrypt(String file, String destFile, String filename)throws Exception {
+	public void encrypt(String file, String destFile, String filename) throws Exception {
 		String jm = destFile;
 		File dest = new File(jm);
 		if (!dest.exists()) {
@@ -821,10 +827,13 @@ public class FileUtil {
 
 	/**
 	 * 文件采用DES算法解密文件
-	 * @param file  已加密的文件 如c:/加密后文件.txt *
-	 * @param destFile 解密后存放的文件名 如c:/ test/解密后文件.txt
+	 * 
+	 * @param file
+	 *            已加密的文件 如c:/加密后文件.txt *
+	 * @param destFile
+	 *            解密后存放的文件名 如c:/ test/解密后文件.txt
 	 */
-	public void decrypt(String file, String dest, String filename)throws Exception {
+	public void decrypt(String file, String dest, String filename) throws Exception {
 		String jm = dest;
 		File decdest = new File(jm);
 		if (!decdest.exists()) {
@@ -850,26 +859,30 @@ public class FileUtil {
 		// //删除加密的文件
 		// FileOperation.deleteFile(jm);
 	}
-	
-	
-	
-	/**java删除所有文件和文件夹
-	 * @param folderPath 文件路径 (只删除此路径的最末路径下所有文件和文件夹)
+
+	/**
+	 * java删除所有文件和文件夹
+	 * 
+	 * @param folderPath
+	 *            文件路径 (只删除此路径的最末路径下所有文件和文件夹)
 	 */
 	public static void delFolder(String folderPath) {
 		try {
-			delAllFile(folderPath); 	// 删除完里面所有内容
+			delAllFile(folderPath); // 删除完里面所有内容
 			String filePath = folderPath;
 			filePath = filePath.toString();
 			java.io.File myFilePath = new java.io.File(filePath);
-			myFilePath.delete(); 		// 删除空文件夹
+			myFilePath.delete(); // 删除空文件夹
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	/**
 	 * 删除指定文件夹下所有文件
-	 * @param path 文件夹完整绝对路径
+	 * 
+	 * @param path
+	 *            文件夹完整绝对路径
 	 */
 	public static boolean delAllFile(String path) {
 		boolean flag = false;
@@ -892,8 +905,8 @@ public class FileUtil {
 				temp.delete();
 			}
 			if (temp.isDirectory()) {
-				delAllFile(path + "/" + tempList[i]);	// 先删除文件夹里面的文件
-				delFolder(path + "/" + tempList[i]);	// 再删除空文件夹
+				delAllFile(path + "/" + tempList[i]); // 先删除文件夹里面的文件
+				delFolder(path + "/" + tempList[i]); // 再删除空文件夹
 				flag = true;
 			}
 		}
@@ -904,148 +917,240 @@ public class FileUtil {
 		try {
 			zip("E:\\ftl", "E:\\test.zip");// 你要压缩的文件夹 和 压缩后的文件
 			FileUtil td = new FileUtil();
-			td
-					.decrypt("D:\\OA加密doc\\OA加密doc\\5473100", "D:/jiami/",
-							"0001.doc"); // 解密
+			td.decrypt("D:\\OA加密doc\\OA加密doc\\5473100", "D:/jiami/", "0001.doc"); // 解密
 			System.out.println(File.separator);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
+
+	/**
+	 * 功能:压缩多个文件成一个zip文件
+	 * 
+	 * @param srcfile：源文件列表
+	 * @param zipfile：压缩后的文件
+	 */
+	public static void zipFiles(File[] srcfile, File zipfile) {
+		byte[] buf = new byte[1024];
+		try {
+			// ZipOutputStream类：完成文件或文件夹的压缩
+			ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipfile));
+			for (int i = 0; i < srcfile.length; i++) {
+				FileInputStream in = new FileInputStream(srcfile[i]);
+				out.putNextEntry(new ZipEntry(srcfile[i].getName()));
+				int len;
+				while ((len = in.read(buf)) > 0) {
+					out.write(buf, 0, len);
+				}
+				out.closeEntry();
+				in.close();
+			}
+			out.close();
+			System.out.println("压缩完成.");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 功能:解压缩
+	 * 
+	 * @param zipfile：需要解压缩的文件
+	 * @param descDir：解压后的目标目录
+	 */
+	@SuppressWarnings("unchecked")
+	public static void unZipFiles(File zipfile, String descDir) {
+		try {
+			ZipFile zf = new ZipFile(zipfile);
+			for (Enumeration entries = zf.entries(); entries.hasMoreElements();) {
+				ZipEntry entry = (ZipEntry) entries.nextElement();
+				String zipEntryName = entry.getName();
+				InputStream in = zf.getInputStream(entry);
+				OutputStream out = new FileOutputStream(descDir + zipEntryName);
+				byte[] buf1 = new byte[1024];
+				int len;
+				while ((len = in.read(buf1)) > 0) {
+					out.write(buf1, 0, len);
+				}
+				in.close();
+				out.close();
+				System.out.println("解压缩完成.");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 获取文件后缀
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	public static String getFilePreFix(String fileName) {
+		String prefix = fileName.substring(fileName.lastIndexOf(".") + 1);
+		return prefix;
+	}
+
+	/**
+	 * 将文本文件中的内容读入到buffer中
+	 * 
+	 * @param buffer
+	 *            buffer
+	 * @param filePath
+	 *            文件路径
+	 * @throws IOException
+	 *             异常
+	 */
+	public static void readToBuffer(StringBuffer buffer, String filePath) throws IOException {
+		InputStream is = new FileInputStream(filePath);
+		String line; // 用来保存每行读取的内容
+		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		line = reader.readLine(); // 读取第一行
+		while (line != null) { // 如果 line 为空说明读完了
+			buffer.append(line); // 将读到的内容添加到 buffer 中
+			buffer.append("\n"); // 添加换行符
+			line = reader.readLine(); // 读取下一行
+		}
+		reader.close();
+		is.close();
+	}
+
+	/**
+	 * 读取文本文件内容
+	 * 
+	 * @param filePath
+	 *            文件所在路径
+	 * @return 文本内容
+	 * @throws IOException
+	 *             异常
+	 */
+	public static String readFile(String filePath) throws IOException {
+		StringBuffer sb = new StringBuffer();
+		FileUtil.readToBuffer(sb, filePath);
+		return sb.toString();
+	}
+
+	/**
+	 * 压缩字符串
+	 * 
+	 * @param str
+	 * @return
+	 * @throws IOException
+	 */
+	public static String compress(String str) throws IOException {
+		if (str == null || str.length() == 0) {
+			return str;
+		}
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		GZIPOutputStream gzip = new GZIPOutputStream(out);
+		gzip.write(str.getBytes());
+		gzip.close();
+		return out.toString("ISO-8859-1");
+	}
+
+	/**
+	 * 解压缩
+	 * 
+	 * @param str
+	 * @return
+	 * @throws IOException
+	 */
+	public static String uncompress(String str) throws IOException {
+		if (str == null || str.length() == 0) {
+			return str;
+		}
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes("ISO-8859-1"));
+		GZIPInputStream gunzip = new GZIPInputStream(in);
+		byte[] buffer = new byte[256];
+		int n;
+		while ((n = gunzip.read(buffer)) >= 0) {
+			out.write(buffer, 0, n);
+		}
+		return out.toString();
+	}
+
+	
 	
 	
 	/**
-     * 功能:压缩多个文件成一个zip文件
-     * @param srcfile：源文件列表
-     * @param zipfile：压缩后的文件
-     */
-    public static void zipFiles(File[] srcfile,File zipfile){
-        byte[] buf=new byte[1024];
-        try {
-            //ZipOutputStream类：完成文件或文件夹的压缩
-            ZipOutputStream out=new ZipOutputStream(new FileOutputStream(zipfile));
-            for(int i=0;i<srcfile.length;i++){
-                FileInputStream in=new FileInputStream(srcfile[i]);
-                out.putNextEntry(new ZipEntry(srcfile[i].getName()));
-                int len;
-                while((len=in.read(buf))>0){
-                    out.write(buf,0,len);
-                }
-                out.closeEntry();
-                in.close();
-            }
-            out.close();
-            System.out.println("压缩完成.");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    /**
-     * 功能:解压缩
-     * @param zipfile：需要解压缩的文件
-     * @param descDir：解压后的目标目录
-     */
-    @SuppressWarnings("unchecked")
-	public static void unZipFiles(File zipfile,String descDir){
-        try {
-            ZipFile zf=new ZipFile(zipfile);
-            for(Enumeration entries=zf.entries();entries.hasMoreElements();){
-                ZipEntry entry=(ZipEntry) entries.nextElement();
-                String zipEntryName=entry.getName();
-                InputStream in=zf.getInputStream(entry);
-                OutputStream out=new FileOutputStream(descDir+zipEntryName);
-                byte[] buf1=new byte[1024];
-                int len;
-                while((len=in.read(buf1))>0){
-                    out.write(buf1,0,len);
-                }
-                in.close();
-                out.close();
-                System.out.println("解压缩完成.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    
-    /**
-     * 获取文件后缀
-     * @param fileName
-     * @return
-     */
-    public static String getFilePreFix(String fileName){
-    	String prefix=fileName.substring(fileName.lastIndexOf(".")+1);
-    	return prefix;
-    }
-    
-    /**
-     * 将文本文件中的内容读入到buffer中
-     * @param buffer buffer
-     * @param filePath 文件路径
-     * @throws IOException 异常
-     */
-    public static void readToBuffer(StringBuffer buffer, String filePath) throws IOException {
-        InputStream is = new FileInputStream(filePath);
-        String line; // 用来保存每行读取的内容
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        line = reader.readLine(); // 读取第一行
-        while (line != null) { // 如果 line 为空说明读完了
-            buffer.append(line); // 将读到的内容添加到 buffer 中
-            buffer.append("\n"); // 添加换行符
-            line = reader.readLine(); // 读取下一行
-        }
-        reader.close();
-        is.close();
-    }
-    
-    /**
-     * 读取文本文件内容
-     * @param filePath 文件所在路径
-     * @return 文本内容
-     * @throws IOException 异常
-     */
-    public static String readFile(String filePath) throws IOException {
-        StringBuffer sb = new StringBuffer();
-        FileUtil.readToBuffer(sb, filePath);
-        return sb.toString();
-    }
-    
-    /**
-     * 压缩字符串  
-     * @param str
-     * @return
-     * @throws IOException
-     */
-    public static String compress(String str) throws IOException {   
-       if (str == null || str.length() == 0) {   
-    	   return str;   
-       }   
-       ByteArrayOutputStream out = new ByteArrayOutputStream();   
-       GZIPOutputStream gzip = new GZIPOutputStream(out);   
-       gzip.write(str.getBytes());   
-       gzip.close();   
-       return out.toString("ISO-8859-1");   
-     }
-    
-    /**
-     * 解压缩   
-     * @param str
-     * @return
-     * @throws IOException
-     */
-    public static String uncompress(String str) throws IOException {   
-        if (str == null || str.length() == 0) {   
-        	return str;   
-        }   
-        ByteArrayOutputStream out = new ByteArrayOutputStream();   
-        ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes("ISO-8859-1"));   
-        GZIPInputStream gunzip = new GZIPInputStream(in);   
-        byte[] buffer = new byte[256];   
-        int n;   
-        while ((n = gunzip.read(buffer))>= 0) {   
-        	out.write(buffer, 0, n);   
-        }   
-        return out.toString();   
-      }   
+	 * 封装压缩文件的方法
+	 * @param inputFile
+	 * @param zipoutputStream
+	 * @throws IOException 
+	 */
+	public void zipFile(File inputFile, ZipOutputStream zipoutputStream) throws IOException {
+		if(inputFile.exists()) {//判断文件是否存在
+			if (inputFile.isFile()) {//判断是否属于文件，还是文件夹
+				//创建输入流读取文件
+				FileInputStream fis = new FileInputStream(inputFile);
+				BufferedInputStream bis = new BufferedInputStream(fis);
+				//将文件写入zip内，即将文件进行打包
+				ZipEntry ze = new ZipEntry(inputFile.getName()); // 获取文件名
+				zipoutputStream.putNextEntry(ze);
+				// 写入文件的方法，同上
+				byte[] b = new byte[1024];
+				long l = 0;
+				while (l < inputFile.length()) {
+					int j = bis.read(b, 0, 1024);
+					l += j;
+					zipoutputStream.write(b, 0, j);
+				}
+				// 关闭输入输出流
+				bis.close();
+				fis.close();
+			} else { //如果是文件夹，则使用穷举的方法获取文件，写入zip
+				File[] files = inputFile.listFiles();
+				for(int i = 0; i < files.length; i++) {
+					zipFile(files[i], zipoutputStream);
+				}
+			}
+		}
+	}
+	
+	
+	/**
+	 * 下载调用
+	 * @param basePath
+	 * @param fileName
+	 * @throws IOException
+	 */
+	public void downZipFile(FileEntity fileEntity) throws IOException{  
+		List<String> filePath = fileEntity.getFilePathList();
+		String targetFileName= fileEntity.getTargetFileName();
+		fileEntity.getRes().setContentType("text/html; charset=UTF-8"); //设置编码字符  
+		fileEntity.getRes().setContentType("application/x-msdownload"); //设置内容类型为下载类型  
+		fileEntity.getRes().setHeader("Content-disposition", "attachment;filename="+targetFileName);//设置下载的文件名称  
+	    OutputStream out = fileEntity.getRes().getOutputStream();   //创建页面返回方式为输出流，会自动弹出下载框   
+	    //创建压缩文件需要的空的zip包  
+	    String zipFile = fileEntity.getZipFilePath()+"/"+fileEntity.getZipFileName();  
+	    //根据临时的zip压缩包路径，创建zip文件  
+	    File zip = new File(zipFile);  
+	    if(!zip.exists()){     
+	        zip.createNewFile();     
+	    }  
+	    //创建zip文件输出流  
+	    FileOutputStream fos = new FileOutputStream(zip);  
+	    ZipOutputStream zos = new ZipOutputStream(fos);  
+	    
+	    //循环读取文件路径集合，获取每一个文件的路径  
+	    for(String fp : filePath){  
+	        File f = new File(fp);  //根据文件路径创建文件  
+	        zipFile(f, zos);  //将每一个文件写入zip文件包内，即进行打包  
+	    }  
+	    fos.close();  
+	    zos.close();  
+	    //将打包后的文件写到客户端，输出的方法同上，使用缓冲流输出  
+	    InputStream fis = new BufferedInputStream(new FileInputStream(zipFile));  
+	    byte[] buff = new byte[4096];  
+	    int size = 0;  
+	    while((size=fis.read(buff)) != -1){  
+	        out.write(buff, 0, size);  
+	    }  
+	    //释放和关闭输入输出流  
+	    out.flush();  
+	    out.close();  
+	    fis.close();  
+	}  
 }

@@ -4,12 +4,18 @@ import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URL;
 import java.net.URLDecoder;
+import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jehc.xtmodules.xtcore.allutils.file.FileEntity;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
@@ -302,7 +309,7 @@ public class XtCommonController extends BaseAction{
 	@RequestMapping(value="/downFile",method={RequestMethod.POST,RequestMethod.GET})
 	public void downFile(HttpServletRequest request,HttpServletResponse response) throws IOException{
 		String xt_attachment_id = request.getParameter("xt_attachment_id");
-		if(null != xt_attachment_id && !"".equals(xt_attachment_id)){
+		if(!StringUtils.isEmpty(xt_attachment_id)){
 			XtAttachment xtAttachment = xtAttachmentService.getXtAttachmentById(xt_attachment_id);
 			String path = CommonUtils.getXtPathCache("xt_sources_default_path").get(0).getXt_path();
 			//判断该附件是否使用自定义xt_path_absolutek（自定义绝对路径K）
@@ -313,7 +320,7 @@ public class XtCommonController extends BaseAction{
 			File file = new File(path+xtAttachment.getXt_attachmentName()); 
 			String xt_attachment_name=xtAttachment.getXt_attachmentTitle();
 			if(!file.exists()){
-				response.getWriter().println("<script>top.Ext.Msg.alert('提示','<font color=red>您访问的文件已经不存在，请联系管理员！</font>');</script>");
+				response.getWriter().println("<script type='text/javascript'>top.window.parent.toastrBoot(4,'<font color=red>您访问的文件已经不存在，请联系管理员！</font>');</script>");
 			}else{
 				int len=0;
 				byte []buffers = new byte[1024];
@@ -332,7 +339,68 @@ public class XtCommonController extends BaseAction{
 		        br.close();
 			}
 		}else{
-			response.getWriter().println("<script>top.Ext.Msg.alert('提示','<font color=red>您访问的文件已经不存在，请联系管理员！</font>');</script>");
+			response.getWriter().println("<script type='text/javascript'>top.window.parent.toastrBoot(4,'<font color=red>您访问的文件已经不存在，请联系管理员！</font>');</script>");
+		}
+	}
+	
+/*	
+	*//**
+	 * 下载文件（网络批量）
+	 * @return
+	 * @throws IOException 
+	 *//*
+	@AuthUneedLogin
+	@RequestMapping(value="/downBatchFileByUrl",method={RequestMethod.POST,RequestMethod.GET})
+	public void downBatchFileByUrl(String[] pathList,HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String downloadFilename = "jEHC开源平台压缩文件.zip";//文件的名称
+		downloadFilename = URLEncoder.encode(downloadFilename, "UTF-8");//转换中文否则可能会产生乱码
+		response.setContentType("application/octet-stream");// 指明response的返回对象是文件流
+        response.setHeader("Content-Disposition", "attachment;filename=" + downloadFilename);// 设置在下载框默认显示的文件名
+        ZipOutputStream zos = new ZipOutputStream(response.getOutputStream());
+        for (int i=0;i<pathList.length;i++) {
+           URL url = new URL(pathList[i]);
+           zos.putNextEntry(new ZipEntry(pathList[i]));
+           InputStream fis = url.openConnection().getInputStream();  
+           byte[] buffer = new byte[1024];    
+           int r = 0;    
+           while ((r = fis.read(buffer)) != -1) {    
+               zos.write(buffer, 0, r);    
+           }    
+           fis.close();  
+          } 
+        zos.flush();    
+        zos.close();
+	}
+	*/
+	
+	/**
+	 * 下载文件（非网络批量）
+	 * @return
+	 * @throws IOException 
+	 */
+	@AuthUneedLogin
+	@RequestMapping(value="/downBatchFile",method={RequestMethod.POST,RequestMethod.GET})
+	public void downBatchFile(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String xt_attachment_id = request.getParameter("xt_attachment_id");
+		if(!StringUtils.isEmpty(xt_attachment_id)){
+			String[] xt_attachment_ids = xt_attachment_id.split(",");
+			List<String> paths = new ArrayList<String>();
+			String path = CommonUtils.getXtPathCache("xt_sources_default_path").get(0).getXt_path();
+			for(String xt_attachment_id_:xt_attachment_ids){
+				XtAttachment xtAttachment = xtAttachmentService.getXtAttachmentById(xt_attachment_id_);
+				//判断该附件是否使用自定义xt_path_absolutek（自定义绝对路径K）
+				if(null != xtAttachment && !StringUtils.isEmpty(xtAttachment.getXt_path_absolutek())){
+					 path = CommonUtils.getXtPathCache(xtAttachment.getXt_path_absolutek()).get(0).getXt_path()+"/"+xtAttachment.getXt_attachmentName();
+				}else{
+					path = path+"/"+xtAttachment.getXt_attachmentName();
+				}
+				 paths.add(path);
+			}
+			FileUtil fileUtil = new FileUtil();
+			FileEntity fileEntity = new FileEntity("jEhc开源.zip",null,paths,"D://","jEhc开源.zip",response,request);
+			fileUtil.downZipFile(fileEntity);
+		}else{
+			response.getWriter().println("<script type='text/javascript'>top.window.parent.toastrBoot(4,'<font color=red>您访问的文件已经不存在，请联系管理员！</font>');</script>");
 		}
 	}
 	

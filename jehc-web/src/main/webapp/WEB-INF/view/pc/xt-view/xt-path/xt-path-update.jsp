@@ -46,7 +46,6 @@
 					</select>
 				</div>
 			</div>
-			<input class="form_datetime form-control" name="xt_time"  type="hidden" placeholder="请选择时间" value="${xtPath.xt_time }">
 			<div class="form-group">
 				<label class="col-lg-3 control-label"></label>
 				<div class="col-lg-6">
