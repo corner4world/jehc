@@ -28,6 +28,7 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
 import java.security.Key;
 import java.security.SecureRandom;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Enumeration;
@@ -52,6 +53,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -61,7 +64,7 @@ import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
 public class FileUtil {
 	public static String FILEDIR = null;
-
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@SuppressWarnings("unused")
 	public static void initPath(HttpServletRequest request, String path) {
 		if (FileUtil.FILEDIR == null) {
@@ -951,6 +954,41 @@ public class FileUtil {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	/**
+	 * 批量压缩文件 自定义文件名称
+	 * @param srcfile源文件集合
+	 * @param srcFileCustomName源文件集合名称
+	 * @param zipfile压缩文件总名称
+	 */
+	public static void zipFiles(List<File> srcfile,List<String> srcFileCustomName, File zipfile) {
+		byte[] buf = new byte[1024];
+		try {
+			boolean usecustomName = true;
+			if(srcfile.size() != srcFileCustomName.size()){
+				usecustomName = false;
+			}
+			ZipOutputStream out = new ZipOutputStream(new FileOutputStream(zipfile));
+			for (int i = 0; i < srcfile.size(); i++) {
+				FileInputStream in = new FileInputStream(srcfile.get(i));
+				if(usecustomName){
+					out.putNextEntry(new ZipEntry(srcFileCustomName.get(i)));
+				}else{
+					out.putNextEntry(new ZipEntry(srcfile.get(i).getName()));
+				}
+				int len;
+				while ((len = in.read(buf)) > 0) {
+					out.write(buf, 0, len);
+				}
+				out.closeEntry();
+				in.close();
+			}
+			out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * 功能:解压缩
@@ -1074,83 +1112,83 @@ public class FileUtil {
 	
 	
 	
+//	/**
+//	 * 封装压缩文件的方法
+//	 * @param inputFile
+//	 * @param zipoutputStream
+//	 * @throws IOException 
+//	 */
+//	public void zipFile(File inputFile, ZipOutputStream zipoutputStream){
+//		try {
+//			if(inputFile.exists()) {//判断文件是否存在
+//				if (inputFile.isFile()) {//判断是否属于文件，还是文件夹
+//					//创建输入流读取文件
+//					FileInputStream fis = new FileInputStream(inputFile);
+//					BufferedInputStream bis = new BufferedInputStream(fis);
+//					//将文件写入zip内，即将文件进行打包
+//					ZipEntry ze = new ZipEntry(inputFile.getName()); // 获取文件名
+//					zipoutputStream.putNextEntry(ze);
+//					// 写入文件的方法，同上
+//					byte[] b = new byte[1024];
+//					long l = 0;
+//					while (l < inputFile.length()) {
+//						int j = bis.read(b, 0, 1024);
+//						l += j;
+//						zipoutputStream.write(b, 0, j);
+//					}
+//					zipoutputStream.closeEntry();
+//					// 关闭输入输出流
+//					bis.close();
+//					fis.close();
+////					zipoutputStream.close();
+//				} else { //如果是文件夹，则使用穷举的方法获取文件，写入zip
+//					File[] files = inputFile.listFiles();
+//					for(int i = 0; i < files.length; i++) {
+//						zipFile(files[i], zipoutputStream);
+//					}
+//				}
+//			}
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
+	
+	
 	/**
-	 * 封装压缩文件的方法
-	 * @param inputFile
-	 * @param zipoutputStream
-	 * @throws IOException 
+	 * 压缩并返回当前压缩文件路径
+	 * @param fileEntity
+	 * @return
 	 */
-	public void zipFile(File inputFile, ZipOutputStream zipoutputStream) throws IOException {
-		if(inputFile.exists()) {//判断文件是否存在
-			if (inputFile.isFile()) {//判断是否属于文件，还是文件夹
-				//创建输入流读取文件
-				FileInputStream fis = new FileInputStream(inputFile);
-				BufferedInputStream bis = new BufferedInputStream(fis);
-				//将文件写入zip内，即将文件进行打包
-				ZipEntry ze = new ZipEntry(inputFile.getName()); // 获取文件名
-				zipoutputStream.putNextEntry(ze);
-				// 写入文件的方法，同上
-				byte[] b = new byte[1024];
-				long l = 0;
-				while (l < inputFile.length()) {
-					int j = bis.read(b, 0, 1024);
-					l += j;
-					zipoutputStream.write(b, 0, j);
-				}
-				// 关闭输入输出流
-				bis.close();
-				fis.close();
-			} else { //如果是文件夹，则使用穷举的方法获取文件，写入zip
-				File[] files = inputFile.listFiles();
-				for(int i = 0; i < files.length; i++) {
-					zipFile(files[i], zipoutputStream);
-				}
+	public String callZipFilePath(FileEntity fileEntity) {  
+		File zip = null;
+		try {
+			List<String> filePath = fileEntity.getFilePathList();
+			//创建压缩文件需要的空的zip包  
+		    String zipFile = fileEntity.getZipFilePath()+fileEntity.getZipFileName();  
+		    //根据临时的zip压缩包路径，创建zip文件  
+		    zip = new File(zipFile);  
+		    if(!zip.exists()){     
+		        zip.createNewFile();     
+		    }  
+		    //创建zip文件输出流  
+		  	List<File> srcfile = new ArrayList<File>();
+		    //循环读取文件路径集合，获取每一个文件的路径  
+		    for(int i = 0; i < filePath.size(); i++){
+		    	 File f = new File(filePath.get(i));  //根据文件路径创建文件  
+		    	 if(f.exists()){
+		    		 srcfile.add(f);
+		    	 }
+		    }
+		    zipFiles(srcfile,fileEntity.getSrcFileCustomName(), zip);
+		    return zipFile;
+		} catch (IOException e) {
+			//压缩失败则删除无用文件
+			if(zip.exists()){
+				zip.delete();
 			}
-		}
-	}
-	
-	
-	/**
-	 * 下载调用
-	 * @param basePath
-	 * @param fileName
-	 * @throws IOException
-	 */
-	public void downZipFile(FileEntity fileEntity) throws IOException{  
-		List<String> filePath = fileEntity.getFilePathList();
-		String targetFileName= fileEntity.getTargetFileName();
-		fileEntity.getRes().setContentType("text/html; charset=UTF-8"); //设置编码字符  
-		fileEntity.getRes().setContentType("application/x-msdownload"); //设置内容类型为下载类型  
-		fileEntity.getRes().setHeader("Content-disposition", "attachment;filename="+targetFileName);//设置下载的文件名称  
-	    OutputStream out = fileEntity.getRes().getOutputStream();   //创建页面返回方式为输出流，会自动弹出下载框   
-	    //创建压缩文件需要的空的zip包  
-	    String zipFile = fileEntity.getZipFilePath()+"/"+fileEntity.getZipFileName();  
-	    //根据临时的zip压缩包路径，创建zip文件  
-	    File zip = new File(zipFile);  
-	    if(!zip.exists()){     
-	        zip.createNewFile();     
-	    }  
-	    //创建zip文件输出流  
-	    FileOutputStream fos = new FileOutputStream(zip);  
-	    ZipOutputStream zos = new ZipOutputStream(fos);  
-	    
-	    //循环读取文件路径集合，获取每一个文件的路径  
-	    for(String fp : filePath){  
-	        File f = new File(fp);  //根据文件路径创建文件  
-	        zipFile(f, zos);  //将每一个文件写入zip文件包内，即进行打包  
-	    }  
-	    fos.close();  
-	    zos.close();  
-	    //将打包后的文件写到客户端，输出的方法同上，使用缓冲流输出  
-	    InputStream fis = new BufferedInputStream(new FileInputStream(zipFile));  
-	    byte[] buff = new byte[4096];  
-	    int size = 0;  
-	    while((size=fis.read(buff)) != -1){  
-	        out.write(buff, 0, size);  
-	    }  
-	    //释放和关闭输入输出流  
-	    out.flush();  
-	    out.close();  
-	    fis.close();  
+			logger.error("调用压缩文件并返回压缩文件路径失败："+e.getMessage());
+		} 
+		return null;
 	}  
 }

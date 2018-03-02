@@ -385,20 +385,26 @@ public class XtCommonController extends BaseAction{
 		if(!StringUtils.isEmpty(xt_attachment_id)){
 			String[] xt_attachment_ids = xt_attachment_id.split(",");
 			List<String> paths = new ArrayList<String>();
-			String path = CommonUtils.getXtPathCache("xt_sources_default_path").get(0).getXt_path();
+			List<String> oldNames = new ArrayList<String>();
 			for(String xt_attachment_id_:xt_attachment_ids){
+				String path = CommonUtils.getXtPathCache("xt_sources_default_path").get(0).getXt_path();
 				XtAttachment xtAttachment = xtAttachmentService.getXtAttachmentById(xt_attachment_id_);
 				//判断该附件是否使用自定义xt_path_absolutek（自定义绝对路径K）
 				if(null != xtAttachment && !StringUtils.isEmpty(xtAttachment.getXt_path_absolutek())){
-					 path = CommonUtils.getXtPathCache(xtAttachment.getXt_path_absolutek()).get(0).getXt_path()+"/"+xtAttachment.getXt_attachmentName();
-				}else{
+					path = CommonUtils.getXtPathCache(xtAttachment.getXt_path_absolutek()).get(0).getXt_path();
+					
+				}
+				if(path.substring(path.length()-2, path.length()-1).equals("/")){
+					path = path+xtAttachment.getXt_attachmentName();
+				}else {
 					path = path+"/"+xtAttachment.getXt_attachmentName();
 				}
-				 paths.add(path);
+				oldNames.add(xtAttachment.getXt_attachmentTitle());
+				paths.add(path);
 			}
 			FileUtil fileUtil = new FileUtil();
-			FileEntity fileEntity = new FileEntity("jEhc开源.zip",null,paths,"D://","jEhc开源.zip",response,request);
-			fileUtil.downZipFile(fileEntity);
+			FileEntity fileEntity = new FileEntity(paths,oldNames,"D://","jEhc开源.zip");
+			fileUtil.callZipFilePath(fileEntity);
 		}else{
 			response.getWriter().println("<script type='text/javascript'>top.window.parent.toastrBoot(4,'<font color=red>您访问的文件已经不存在，请联系管理员！</font>');</script>");
 		}

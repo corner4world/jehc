@@ -13,6 +13,7 @@ public class FileEntity {
 	private String zipFileName;//附件压缩文件名称
 	private HttpServletResponse res;
 	private HttpServletRequest req;
+	private List<String> srcFileCustomName;//附件集合自定义名称输出
 	
 	/**
 	 * 默认构造函数
@@ -21,14 +22,16 @@ public class FileEntity {
 	
 	/**
 	 * 有参构造函数
-	 * @param targetFileName
-	 * @param basePath
-	 * @param filePathList
-	 * @param zipFilePath
-	 * @param res
+	 * @param targetFileName 目标文件名称（即供最终下载文件设置名称使用）
+	 * @param basePath基础路径
+	 * @param filePathList 附件路径列表（包含名称）
+	 * @param srcFileCustomName压缩文件名称
+	 * @param zipFilePath压缩文件路径（包含名称）
+	 * @param zipFileName压缩文件名称
 	 * @param req
+	 * @param res
 	 */
-	public FileEntity(String targetFileName,String basePath,List<String> filePathList,String zipFilePath,String zipFileName,HttpServletResponse res,HttpServletRequest req){
+	public FileEntity(String targetFileName,String basePath,List<String> filePathList,List<String> srcFileCustomName,String zipFilePath,String zipFileName,HttpServletResponse res,HttpServletRequest req){
 		this.targetFileName = targetFileName;
 		this.basePath = basePath;
 		this.filePathList = filePathList;
@@ -36,7 +39,78 @@ public class FileEntity {
 		this.zipFileName =zipFileName;
 		this.req = req;
 		this.res = res;
+		this.srcFileCustomName = srcFileCustomName;
 	}
+	
+	/**
+	 * 有参构造函数
+	 * @param targetFileName 目标文件名称（即供最终下载文件设置名称使用）
+	 * @param basePath基础路径
+	 * @param filePathList 附件路径列表（包含名称）
+	 * @param srcFileCustomName压缩文件名称
+	 * @param zipFilePath压缩文件路径（包含名称）
+	 */
+	public FileEntity(String targetFileName,String basePath,List<String> filePathList,List<String> srcFileCustomName,String zipFilePath,String zipFileName){
+		this.targetFileName = targetFileName;
+		this.basePath = basePath;
+		this.filePathList = filePathList;
+		this.zipFilePath = zipFilePath;
+		this.zipFileName =zipFileName;
+		this.srcFileCustomName = srcFileCustomName;
+	}
+	
+	/**
+	 * 有参构造函数
+	 * @param targetFileName 目标文件名称（即供最终下载文件设置名称使用）
+	 * @param filePathList 附件路径列表（包含名称）
+	 * @param srcFileCustomName压缩文件自定义名称
+	 * @param zipFilePath压缩文件路径（包含名称）
+	 * @param zipFileName压缩文件名称
+	 */
+	public FileEntity(String targetFileName,List<String> filePathList,List<String> srcFileCustomName,String zipFilePath,String zipFileName){
+		this.targetFileName = targetFileName;
+		this.filePathList = filePathList;
+		this.zipFilePath = zipFilePath;
+		this.zipFileName =zipFileName;
+		this.srcFileCustomName = srcFileCustomName;
+	}
+	
+	/**
+	 * 有参构造函数
+	 * @param filePathList 附件路径列表（包含名称）
+	 * @param srcFileCustomName压缩文件自定义名称
+	 * @param zipFilePath压缩文件路径（包含名称）
+	 * @param zipFileName压缩文件名称
+	 */
+	public FileEntity(List<String> filePathList,List<String> srcFileCustomName,String zipFilePath,String zipFileName){
+		this.filePathList = filePathList;
+		this.srcFileCustomName = srcFileCustomName;
+		this.zipFilePath = zipFilePath;
+		this.zipFileName =zipFileName;
+	}
+	
+	/**
+	 * 有参构造函数
+	 * @param filePathList 附件路径列表（包含名称）
+	 * @param srcFileCustomName压缩文件自定义名称
+	 * @param zipFilePath压缩文件路径（包含名称）
+	 */
+	public FileEntity(List<String> filePathList,List<String> srcFileCustomName,String zipFilePath){
+		this.filePathList = filePathList;
+		this.srcFileCustomName = srcFileCustomName;
+		this.zipFilePath = zipFilePath;
+	}
+	
+	/**
+	 * 有参构造函数
+	 * @param filePathList 附件路径列表（包含名称）
+	 * @param srcFileCustomName压缩文件名称
+	 */
+	public FileEntity(List<String> filePathList,List<String> srcFileCustomName){
+		this.filePathList = filePathList;
+		this.srcFileCustomName = srcFileCustomName;
+	}
+	
 	public String getTargetFileName() {
 		return targetFileName;
 	}
@@ -81,4 +155,13 @@ public class FileEntity {
 	public void setZipFileName(String zipFileName) {
 		this.zipFileName = zipFileName;
 	}
+
+	public List<String> getSrcFileCustomName() {
+		return srcFileCustomName;
+	}
+
+	public void setSrcFileCustomName(List<String> srcFileCustomName) {
+		this.srcFileCustomName = srcFileCustomName;
+	}
+	
 }
