@@ -10,22 +10,44 @@
 			classpath*:config/spring/spring.xml
 		</param-value>
 	</context-param>
+	
+	<!-- springmvc视图转发器配置 -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+				classpath*:config/spring/springmvc.xml
+			</param-value>
+		</init-param>
+		<!-- 解决控制层启动并加载 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
 	<!-- spring监听器配置 -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
+	
 	<!-- Spring 刷新Introspector防止内存泄露 -->
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
+	
 	<!-- 支持session scope的Spring bean -->
 	<listener>
 		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
 	</listener>
-	<!-- 监听Request会话清空ThreadLocal变量
+	
+	<!-- 监听Request会话清空ThreadLocal变量 -->
 	<listener>
 		<listener-class>jehc.xtmodules.xtcore.threadlocalutil.ServletRequestListener</listener-class>
-	</listener> -->
+	</listener> 
 	<!-- 监听在线人数 -->
 	<listener>
 		<listener-class>jehc.xtmodules.xtcore.session.OnLinesessionlistener</listener-class>
@@ -165,23 +187,7 @@
 	    <param-name>spring.liveBeansView.mbeanDomain</param-name>  
 	    <param-value>dev</param-value>  
 	</context-param> 
-	<!-- springmvc视图转发器配置 -->
-	<servlet>
-		<servlet-name>springmvc</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<init-param>
-			<param-name>contextConfigLocation</param-name>
-			<param-value>
-				classpath*:config/spring/springmvc.xml
-			</param-value>
-		</init-param>
-		<!-- 解决控制层启动并加载 -->
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>springmvc</servlet-name>
-		<url-pattern>/</url-pattern>
-	</servlet-mapping>
+	
 	<!-- 编码过滤器配置 -->
 	<filter>
 		<filter-name>CharacterEncodingFilter</filter-name>

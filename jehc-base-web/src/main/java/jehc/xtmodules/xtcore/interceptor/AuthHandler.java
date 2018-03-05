@@ -65,6 +65,9 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		///////////////////拦截IP黑户结束///////////////////////
 		
         String requestUrl = request.getRequestURI().replace(request.getContextPath(), "").replaceFirst("/", "");  
+        /*if (!(handler instanceof HandlerMethod)) {
+            return false;
+        } */
 		HandlerMethod methodHandler=(HandlerMethod) handler;
 		//不需要登陆验证的URL
 		AuthUneedLogin authUneedLogin=methodHandler.getMethodAnnotation(AuthUneedLogin.class);
@@ -74,11 +77,11 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		if(null != authUneedLogin){
 			return true;
 		}
-		//过滤druid
-		if(((request.getRequestURI().indexOf(("druid"))> 0 ) && null == CommonUtils.getXtU())){
-			 request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
-			 return false;
-		}
+//		//过滤druid
+//		if(((request.getRequestURI().indexOf(("druid"))> 0 ) && null == CommonUtils.getXtU())){
+//			 request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
+//			 return false;
+//		}
 		//需要登录但无需拦截验证URL
 		NeedLoginUnAuth needLoginUnAuth = methodHandler.getMethodAnnotation(NeedLoginUnAuth.class);
 		if(null != needLoginUnAuth){

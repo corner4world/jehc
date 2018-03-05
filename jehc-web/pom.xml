@@ -3,14 +3,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<!-- 继承父级 -->
 	<parent>
-		<groupId>jehc-p</groupId>
+		<groupId>jehc.p</groupId>
 		<artifactId>jehc-p</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../jehc-p/pom.xml</relativePath>
 	</parent>
 
 
-	<groupId>jehc-web</groupId>
+	<groupId>jehc.web</groupId>
 	<artifactId>jehc-web</artifactId>
 	<version>${jehc.version}</version>
 	<packaging>war</packaging>
@@ -20,105 +20,105 @@
 	<dependencies>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的Model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-xtmodules-model</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的Dao层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-xtmodules-dao</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 需要引用父级中定义的jehc-base层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-base-dao层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base-dao</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的Service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-xtmodules-service</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-base-web层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base-web</artifactId>
 		</dependency>
 
 		<!-- 工作流 -->
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-base-lc层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base-lc</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-lcmodules-service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-lcmodules-service</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-lcmodules-dao层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-lcmodules-dao</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-lcmodules-model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-lcmodules-model</artifactId>
 		</dependency>
 
 		<!-- 全文检索模块 -->
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-solrmodules-service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-solrmodules-service</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-solrmodules-dao层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-solrmodules-dao</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-solrmodules-model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-solrmodules-model</artifactId>
 		</dependency>
 		
 		<!-- 电商模块 -->
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-bmodules-service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-bmodules-service</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-bmodules-dao层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-bmodules-dao</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-bmodules-model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-bmodules-model</artifactId>
 		</dependency>
 		
 		<!-- OA模块 -->
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-oamodules-service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-oamodules-service</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-oamodules-dao层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-oamodules-dao</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 控制层web需要引用父级中定义的jehc-oamodules-model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-oamodules-model</artifactId>
 		</dependency>
 	</dependencies>

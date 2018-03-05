@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<!-- 继承父级 -->
 	<parent>
-		<groupId>jehc-p</groupId>
+		<groupId>jehc.p</groupId>
 		<artifactId>jehc-p</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../jehc-p/pom.xml</relativePath>
@@ -18,33 +18,33 @@
 	<dependencies>
 		<dependency>
 			<!-- 业务层Service需要引用父级中定义的xtmodules-service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-xtmodules-service</artifactId>
 		</dependency>
 		
 		<dependency>
 			<!-- 业务层Service需要引用父级中定义的Model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-lcmodules-model</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 业务层Service需要引用父级中定义的Dao层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-lcmodules-dao</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 需要引用父级中定义的jehc-base层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 业务层Service需要引用父级中定义的base-service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base-service</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 业务层Service需要引用父级中定义的base-lc层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base-lc</artifactId>
 		</dependency>
 	</dependencies>

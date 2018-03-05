@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<!-- 继承父级 -->
 	<parent>
-		<groupId>jehc-p</groupId>
+		<groupId>jehc.p</groupId>
 		<artifactId>jehc-p</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../jehc-p/pom.xml</relativePath>
@@ -18,12 +18,12 @@
 	<dependencies>
 		<dependency>
 			<!-- 数据访问层Dao需要引用父级中定义的Model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-lcmodules-model</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 数据访问层Dao需要引用父级中定义的base-dao层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base-dao</artifactId>
 		</dependency>
 	</dependencies>

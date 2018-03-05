@@ -44,7 +44,8 @@ $(document).ready(function() {
 						result = eval("(" + result + ")");  
 					    result = result.data;
 					    xt_data_dictionary_name = result.xt_data_dictionary_name;
-					    jQuery('td:eq('+meta.col+')', meta.row).html(xt_data_dictionary_name);   //通过异步渲染数据
+					    $("#datatables tbody > tr:eq("+meta.row+ ") > td:eq("+meta.col+")").html(xt_data_dictionary_name);
+//					    jQuery('td:eq('+meta.col+')', meta.row).html(xt_data_dictionary_name);   //通过异步渲染数据
 					});
 					return xt_data_dictionary_name;
 				}
@@ -57,7 +58,8 @@ $(document).ready(function() {
 						result = eval("(" + result + ")");  
 					    result = result.data;
 					    xt_data_dictionary_name = result.xt_data_dictionary_name;
-					    jQuery('td:eq('+meta.col+')', meta.row).html(xt_data_dictionary_name); //通过异步渲染数据
+					    $("#datatables tbody > tr:eq("+meta.row+ ") > td:eq("+meta.col+")").html(xt_data_dictionary_name);
+//					    jQuery('td:eq('+meta.col+')', meta.row).html(xt_data_dictionary_name); //通过异步渲染数据
 					});
 					return xt_data_dictionary_name;
 				}

@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<!-- 继承父级 -->
 	<parent>
-		<groupId>jehc-p</groupId>
+		<groupId>jehc.p</groupId>
 		<artifactId>jehc-p</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../jehc-p/pom.xml</relativePath>
@@ -18,36 +18,36 @@
 	<dependencies>
 		<dependency>
 			<!-- 需要引用父级中定义的Model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-xtmodules-model</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 需要引用父级中定义的service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-xtmodules-service</artifactId>
 		</dependency>
 		
 		<dependency>
 			<!-- 需要引用父级中定义的Model层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-solrmodules-model</artifactId>
 		</dependency>
 		<dependency>
 			<!-- 需要引用父级中定义的service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-solrmodules-service</artifactId>
 		</dependency>
 		
 		<dependency>
 			<!-- 需要引用父级中定义的base-service层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base-service</artifactId>
 		</dependency>
 		
 		
 		<dependency>
 			<!-- 需要引用父级中定义的jehc-base层 -->
-			<groupId>jehc-p</groupId>
+			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base</artifactId>
 		</dependency>
 	</dependencies>
