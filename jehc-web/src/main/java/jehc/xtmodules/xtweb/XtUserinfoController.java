@@ -85,6 +85,23 @@ public class XtUserinfoController extends BaseAction{
 	}
 	
 	/**
+	* 加载初始化列表数据并分页
+	* @param xt_userinfo 
+	* @param request 
+	 * @throws UnsupportedEncodingException 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/getXtUserinfoListForLcByCondition",method={RequestMethod.POST,RequestMethod.GET})
+	@NeedLoginUnAuth
+	public String getXtUserinfoListForLcByCondition(BaseSearch baseSearch,HttpServletRequest request) throws UnsupportedEncodingException{
+		Map<String, Object> condition = baseSearch.convert();
+		commonHPager(condition,request);
+		List<XtUserinfo>XtUserinfoList = xtUserinfoService.getXtUserinfoListByCondition(condition);
+		PageInfo<XtUserinfo> page = new PageInfo<XtUserinfo>(XtUserinfoList);
+		return outPageStr(page,request);
+	}
+	
+	/**
 	 * 已删除用户
 	 * @param xt_Userinfo
 	 * @param request

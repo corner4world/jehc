@@ -330,7 +330,7 @@ var xtUserinfoIsmarriedList = new Ext.data.Store({
 
 //用户选择器--------flag标识是1单个用户选择2支持多选----------type类型1在UserTask中使用2在“流程基本信息使用”3在泳道中使用
 function initassignee(flag,type){
-	userStore = getGridJsonStore('../xtUserinfoController/getXtUserinfoListByCondition',[{}]);
+	userStore = getGridJsonStore('../xtUserinfoController/getXtUserinfoListForLcByCondition',[{}]);
 	/**查询区域可扩展**/
 	var formItems = Ext.create('Ext.FormPanel',{
 		maxHeight:220,
@@ -1082,5 +1082,5 @@ function initACC(assignee,candidateUsers,candidateGroups,type){
 }
 
 function searchUser(){
-	initSearch(userStore,'../xtUserinfoController/getXtUserinfoListByCondition',formSearc); 
+	initSearch(userStore,'../xtUserinfoController/getXtUserinfoListForLcByCondition',formSearc); 
 }

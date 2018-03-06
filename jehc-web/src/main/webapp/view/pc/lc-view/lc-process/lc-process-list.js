@@ -64,16 +64,16 @@ $(document).ready(function() {
 					var lc_process_flag = row.lc_process_flag;
 					var lc_process_title = row.lc_process_title;
 					var xt_attachment = row.xt_attachment;
-					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toLcProcessDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+					var btn = '<button class="btn btn-default" onclick=toLcProcessDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
 					if(lc_process_flag == 0){
-			        	btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=addLcDesign("'+data+'","'+lc_process_title+'")><i class="glyphicon glyphicon-cog"></i>设计流程</button>';
-			        	btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=downFileBpmn("'+data+'")><i class="glyphicon glyphicon-save"></i>下载bpmn文件</button>';
-			        	btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=downFileImg("'+data+'")><i class="glyphicon glyphicon-save"></i>下载img文件</button>';
+			        	btn = btn +'<button class="btn btn-primary" onclick=addLcDesign("'+data+'","'+lc_process_title+'")><i class="glyphicon glyphicon-cog"></i>设计流程</button>';
+			        	btn = btn +'<button class="btn btn-success" onclick=downFileBpmn("'+data+'")><i class="glyphicon glyphicon-save"></i>下载bpmn文件</button>';
+			        	btn = btn +'<button class="btn btn-info" onclick=downFileImg("'+data+'")><i class="glyphicon glyphicon-save"></i>下载img文件</button>';
 					}else{
-						btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=downFile("'+xt_attachment+'")><i class="glyphicon glyphicon-save"></i>下载附件</button>';
+						btn = btn +'<button class="btn btn-info" onclick=downFile("'+xt_attachment+'")><i class="glyphicon glyphicon-save"></i>下载附件</button>';
 					}
-					btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=createDeployment("'+data+'")><i class="glyphicon glyphicon-pencil"></i>发布流程</button>';
-					btn = btn +'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=showLcDeploymentHis("'+data+'","'+lc_process_title+'")><i class="glyphicon glyphicon-wrench"></i>发布历史记录</button>';
+					btn = btn +'<button class="btn btn-danger" onclick=createDeployment("'+data+'")><i class="glyphicon glyphicon-pencil"></i>发布流程</button>';
+					btn = btn +'<button class="btn btn-warnin" onclick=showLcDeploymentHis("'+data+'","'+lc_process_title+'")><i class="glyphicon glyphicon-wrench"></i>发布历史记录</button>';
 					return btn;
 				}
 			}
