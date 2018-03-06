@@ -148,7 +148,9 @@
 			} 
 			legend {
 				font-size:16px;
-			    padding: 10px 0px 10px;
+			    padding: 0px 0px 0px;
+			    margin-bottom: 0px;
+			    background: #f5f5f5;
 			}
 			/* dataTables列内容居中 */  
 			.table>tbody>tr>td{  
@@ -168,8 +170,8 @@
 			    font-weight: normal;
 			    font-size: 14px;
 			}
-			legend {
-			    background: #f5f5f5;
+			.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+			    vertical-align: middle;
 			}
 			.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .form-control-feedback, .has-success .help-block, .has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label, .has-success.radio label, .has-success.radio-inline label {
 			    color: #333333;
@@ -177,9 +179,8 @@
 			.has-success .form-control {
 			    border-color: #c2cad8;
 			}
-			.page-header {
-			    margin: 5px 0 20px;
-			}
+			.page-header { margin: 5px 0 2px;}
+			.panel { margin-bottom: 0px;}
 		</style>
 	</head>
 	<!-- upload模态框（Modal）开始 -->
