@@ -60,7 +60,7 @@
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 			</button>
 		</div>
-		<table id="datatables" class="table table-bordered table-striped table-hover">
+		<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; ">
 			<thead>
 				<tr>
 					<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
