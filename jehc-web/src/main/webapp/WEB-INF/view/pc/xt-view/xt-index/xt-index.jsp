@@ -250,6 +250,11 @@
 	                                <span class="badge badge-danger">新</span>
 	                            </a>
 	                        </li>
+	                        <li class="nav-item">
+	                            <a href='' onclick="updatePwd()" class="nav-link J_menuItem" data-index='updatePwd' rootId='updatePwd' idBu='updatePwd' class="nav-link nav-toggle">
+	                                <span class="title">修改密码</span>
+	                            </a>
+	                        </li>
 	                        </ul>
 						</li>
                    		${MenuList }

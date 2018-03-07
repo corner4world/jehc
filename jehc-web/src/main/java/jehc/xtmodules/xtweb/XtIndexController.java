@@ -184,7 +184,9 @@ public class XtIndexController extends BaseAction{
 		HttpSession se = request.getSession(); 
 		ServletContext application = se.getServletContext();  
 		List<XtUserinfo> xtUserInfoList =((List<XtUserinfo>)application.getAttribute(SessionConstant.XT_ONLINE_USERLIST));
-		model.addAttribute("xtOnlineUserCount", xtUserInfoList.size());
+		if(null != xtUserInfoList && !xtUserInfoList.isEmpty() && xtUserInfoList.size() > 0){
+			model.addAttribute("xtOnlineUserCount", xtUserInfoList.size());
+		}
 		//公告数
 		model.addAttribute("xtNoticeCount", xtNoticeService.getXtNoticeCountByCondition(condition));
 		model.addAttribute("xtNoticeList", xtNoticeService.getXtNoticeListByCondition(condition));
