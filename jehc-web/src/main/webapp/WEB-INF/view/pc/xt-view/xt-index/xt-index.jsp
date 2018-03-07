@@ -13,7 +13,7 @@
 	</head>
     <!-- END HEAD -->
     <!-- <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid"> 非采用滚动条-->
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-fixed"><!-- 采用滚动条menu -->
+    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-fixed page-sidebar-closed"><!-- 采用滚动条menu -->
         <!-- BEGIN HEADER -->
         <div class="page-header navbar navbar-fixed-top">
             <!-- BEGIN HEADER INNER -->
@@ -172,33 +172,6 @@
                                     </li>
                                 </ul>
                             </li>
-                            <!-- BEGIN QUICK SIDEBAR TOGGLER -->
-                            <!-- 
-                            <li class="dropdown dropdown-user">
-                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                   <span class="username username-hide-on-mobile"> 选项卡操作</span>
-                                   <i class="fa fa-angle-down"></i>
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-default">
-                                    <li>
-                                        <a href="javascript:closeAllTab()">
-                                            <i class="icon-trash"></i>关闭全部标签
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:closeCruTab()">
-                                            <i class="icon-close"></i>关闭当前项
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="javascript:refreshCruTab()">
-                                            <i class="icon-reload"></i>刷新当前选项卡标签
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li> 
-                            -->
-                            <!-- END QUICK SIDEBAR TOGGLER -->
                             <!-- BEGIN USER LOGIN DROPDOWN -->
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -262,7 +235,7 @@
                    -->
                    --%>
                    <!-- 手风琴+侧边样式 -->
-                   <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                   <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         <li class="nav-item start active open" id="menuMyCenterP">
 							<a href="javascript:;" class="nav-link nav-toggle">
 							<i class="icon-user"></i>

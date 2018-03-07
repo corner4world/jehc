@@ -56,9 +56,9 @@ $(document).ready(function() {
 				render:function(data, type, row, meta) {
 					var xt_role_id = row.xt_role_id;
   					var xt_role_name = row.xt_role_name;
-					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toXtRoleinfoDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=addXtMenuinfo("'+xt_role_id+'","'+xt_role_name+'")><i class="glyphicon glyphicon-edit"></i>导入资源</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=addXtUserinfo("'+xt_role_id+'","'+xt_role_name+'")><i class="glyphicon glyphicon-edit"></i>导入用户</button>';
+					var btn = '<button class="btn btn-primary" onclick=toXtRoleinfoDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+					btn = btn+'<button class="btn btn-primary" onclick=addXtMenuinfo("'+xt_role_id+'","'+xt_role_name+'")><i class="glyphicon glyphicon-edit"></i>分配菜单</button>';
+					btn = btn+'<button class="btn btn-primary" onclick=addXtUserinfo("'+xt_role_id+'","'+xt_role_name+'")><i class="glyphicon glyphicon-edit"></i>分配用户</button>';
 					return btn;
 				}
 			}

@@ -20,7 +20,7 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 		width:clientWidth,                    
 		height:clientHeight, 
 		headerPosition:'left',
-		title:'导入用户',
+		title:'分配用户',
 		listeners:{
 			minimize:function(win,opts){
 				if(!win.collapse()){

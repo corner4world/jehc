@@ -12,7 +12,7 @@ function addXtMenuinfo(xt_role_id,xt_role_name){
 		minimizable:true,
 		plain:true,
 		modal:true,
-		title:'导入资源',
+		title:'分配菜单',
 		headerPosition:'left',
 		listeners:{
 			minimize:function(win,opts){

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>用户岗位表(xt_post)</title>
+<title>用户岗位</title>
 </head>
 <body>
 	<div class="panel panel-default">
@@ -16,16 +16,10 @@
 					<input type="text" class="form-control" name="xt_post_name" placeholder="请输入岗位名称">
 				</div>
 			</form>
-			<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-				<button class="btn btn-primary" onclick="search('datatables')">
-					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-				</button>
-				<button class="btn btn-default" onclick="resetAll();">重置</button>
-			</div>
 		</fieldset>
 	</div>
 	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 20px;">
+		<div class="btn-group pull-right" style="margin-right: 0px;">
 			<button class="btn btn-default" onclick="toXtPostAdd()">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 			</button>
@@ -38,6 +32,12 @@
 			<button class="btn btn-default" onclick="search('datatables')">
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 			</button>
+			<div class="btn-group pull-right" style="margin-right: 20px;">
+				<button class="btn btn-primary" onclick="search('datatables')">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+				</button>
+				<button class="btn btn-default" onclick="resetAll();">重置</button>
+			</div>
 		</div>
 		<table id="datatables" class="table table-bordered table-striped table-hover">
 			<thead>
