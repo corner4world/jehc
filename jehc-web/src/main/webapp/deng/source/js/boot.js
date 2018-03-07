@@ -218,7 +218,7 @@ function callLang(){
 			"sLoadingRecords":"载入中...",
 			"sSearch":"搜索",
 			"bAutoWidth":true,
-		    "sLengthMenu":"每页显示 _MENU_ 条记录",
+		    "sLengthMenu":"，每页显示 _MENU_ 条记录",
 		    "sInfoEmpty":"显示0条记录",
 		    "sInfoFiltered":"(全部记录数 _MAX_ 条)",
 		    "sInfoPostFix":"",
@@ -250,6 +250,7 @@ var DataTablesPaging = {
     			"sScrollXInner":"100%",//表格的内容宽度
     			"bScrollCollapse":false,//当显示的数据不足以支撑表格的默认的高度时，依然显示纵向的滚动条。(默认是false) 
     			"bScrollCollapse":true,
+    			dom:'<"top">rt<"bottom"iflp><"clear">',
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
     			"bInfo":true,//显示表格信息

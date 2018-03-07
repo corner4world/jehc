@@ -168,13 +168,17 @@
 			}  
 			table.dataTable thead th, table.dataTable tfoot th {
 			    font-weight: normal;
-			    font-size: 12px;
 			}
+			/* 
 			.table td, .table th {
 			    font-size: 12px;
-			}
+			} */
 			.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
 			    vertical-align: middle;
+			}
+			.dataTables_wrapper .dataTables_length {
+			    float: left;
+			    padding-top: 3px;
 			}
 			.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .form-control-feedback, .has-success .help-block, .has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label, .has-success.radio label, .has-success.radio-inline label {
 			    color: #333333;
