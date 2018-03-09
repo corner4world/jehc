@@ -15,6 +15,7 @@
 		FROM 
 			xt_data_dictionary
 		WHERE 1=1
+		<!-- 
 		<choose>
 			<when test="null != xt_data_dictionary_pid and '' != xt_data_dictionary_pid">
 				AND xt_data_dictionary_pid = #{xt_data_dictionary_pid}
@@ -22,7 +23,8 @@
 			<otherwise>
 				AND (xt_data_dictionary_pid = '' OR xt_data_dictionary_pid is null)
 			</otherwise>
-		</choose>
+		</choose> 
+		-->
 		ORDER BY xt_data_dictionary_soft DESC
 	</select>
 	
@@ -40,6 +42,9 @@
 			xt_data_dictionary
 		WHERE 1=1
 		AND xt_data_dictionary_state = '0'
+		<if test="null != xt_data_dictionary_pid and '' != xt_data_dictionary_pid">
+		AND xt_data_dictionary_pid = #{xt_data_dictionary_pid}
+		</if>
 		ORDER BY xt_data_dictionary_soft DESC
 	</select>
 	

@@ -1,10 +1,12 @@
 package jehc.xtmodules.xtweb;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.github.pagehelper.PageInfo;
-
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseBTreeGridEntity;
+import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtmodel.XtDataDictionary;
 import jehc.xtmodules.xtservice.XtDataDictionaryService;
@@ -59,14 +61,38 @@ public class XtDataDictionaryController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getXtDataDictionaryListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtDataDictionaryListByCondition(XtDataDictionary xt_Data_Dictionary,HttpServletRequest request){
-		String xt_data_dictionary_pid = request.getParameter("xt_data_dictionary_pid");
+	public String getXtDataDictionaryListByCondition(HttpServletRequest request){
+//		String xt_data_dictionary_pid = request.getParameter("xt_data_dictionary_pid");
+//		Map<String, Object> condition = new HashMap<String, Object>();
+//		commonHPager(condition,request);
+//		condition.put("xt_data_dictionary_pid", xt_data_dictionary_pid);
+//		List<XtDataDictionary>XtDataDictionaryList = xtDataDictionaryService.getXtDataDictionaryListByCondition(condition);
+//		PageInfo<XtDataDictionary> page = new PageInfo<XtDataDictionary>(XtDataDictionaryList);
+//		return outPageStr(page,request);
+		List<BaseBTreeGridEntity> list = new ArrayList<BaseBTreeGridEntity>();
 		Map<String, Object> condition = new HashMap<String, Object>();
-		commonHPager(condition,request);
-		condition.put("xt_data_dictionary_pid", xt_data_dictionary_pid);
-		List<XtDataDictionary>XtDataDictionaryList = xtDataDictionaryService.getXtDataDictionaryListByCondition(condition);
-		PageInfo<XtDataDictionary> page = new PageInfo<XtDataDictionary>(XtDataDictionaryList);
-		return outPageStr(page,request);
+		List<XtDataDictionary> XtDataDictionaryList = xtDataDictionaryService.getXtDataDictionaryListByCondition(condition);
+		for(int i = 0; i < XtDataDictionaryList.size(); i++){
+			XtDataDictionary XtDataDictionary = XtDataDictionaryList.get(i);
+			BaseBTreeGridEntity BaseBTreeGridEntity = new BaseBTreeGridEntity();
+			BaseBTreeGridEntity.setId(XtDataDictionary.getXt_data_dictionary_id());
+			BaseBTreeGridEntity.setPid(XtDataDictionary.getXt_data_dictionary_pid());
+			BaseBTreeGridEntity.setText(XtDataDictionary.getXt_data_dictionary_name());
+			BaseBTreeGridEntity.setContent(XtDataDictionary.getXt_data_dictionary_remark());
+//			BaseZTreeEntity.setIcon("../deng/images/icons/target.png");
+			if(0==XtDataDictionary.getXt_data_dictionary_state()){
+				BaseBTreeGridEntity.setTempObject("启用");
+			}else{
+				BaseBTreeGridEntity.setTempObject("禁用");
+			}
+			if(StringUtils.isEmpty(XtDataDictionary.getXt_data_dictionary_pid()) || "0".equals(XtDataDictionary.getXt_data_dictionary_pid())){
+				BaseBTreeGridEntity.setIntegerappend("0");
+			}else{
+				BaseBTreeGridEntity.setIntegerappend("1");
+			}
+			list.add(BaseBTreeGridEntity);
+		}
+		return outStr(BaseBTreeGridEntity.buildTree(list));
 	}
 	/**
 	* 获取对象
