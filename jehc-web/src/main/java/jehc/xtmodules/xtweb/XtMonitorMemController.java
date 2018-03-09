@@ -57,7 +57,7 @@ public class XtMonitorMemController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtMonitorMem> xt_Monitor_MemList = xtMonitorMemService.getXtMonitorMemListByCondition(condition);
 		PageInfo<XtMonitorMem> page = new PageInfo<XtMonitorMem>(xt_Monitor_MemList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象

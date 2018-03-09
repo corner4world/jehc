@@ -61,7 +61,7 @@ public class XtMonitorCpuController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtMonitorCpu>XtMonitorCpuList = xtMonitorCpuService.getXtMonitorCpuListByCondition(condition);
 		PageInfo<XtMonitorCpu> page = new PageInfo<XtMonitorCpu>(XtMonitorCpuList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象

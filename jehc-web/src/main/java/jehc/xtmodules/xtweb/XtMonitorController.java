@@ -57,7 +57,7 @@ public class XtMonitorController extends BaseAction{
 		commonHPager(condition,request);
 		List<XtMonitor> xt_MonitorList = xtMonitorService.getXtMonitorListByCondition(condition);
 		PageInfo<XtMonitor> page = new PageInfo<XtMonitor>(xt_MonitorList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	/**
 	* 获取对象
