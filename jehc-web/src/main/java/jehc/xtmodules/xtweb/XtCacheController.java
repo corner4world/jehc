@@ -61,7 +61,7 @@ public class XtCacheController  extends BaseAction{
 			model.put("MemoryStoreSize", CacheManagerUtil.getMemoryStoreSize(cache));
 			jsonArray.add(model);
 		}
-		return outItemsStr(jsonArray);
+		return jsonArray.toString();
 	}
 	/**
 	* 读取缓存数据
@@ -72,7 +72,7 @@ public class XtCacheController  extends BaseAction{
 	public String getXtCacheDataListByCondition(String cacheName,HttpServletRequest request){
 		CacheManagerUtil CacheManagerUtil = new CacheManagerUtil();
 		JSONArray jsonArray = CacheManagerUtil.getCacheDataList(cacheName);
-		return outItemsStr(jsonArray);
+		return jsonArray.toString();
 	}
 	
 	/**

@@ -1,268 +1,139 @@
-var store;
-var grid;
-var expander;
-Ext.onReady(function(){
-	store = getGridJsonStore('../xtCacheController/getXtCacheListByCondition',[]);
-	expander = new Ext.ux.RowExpander({
-		rowBodyTpl:new Ext.XTemplate(
-	    	'<div width="100%" style="margin:0 auto;border:0px solid #5fa2dd;width:602px" id="cache_data{CacheType}{CacheName}"></div>'
-	    )
-		/**,
-       	toggleRow:function(row){  
-       		if(typeof row == 'number'){  
-               row = this.grid.view.getRow(row);  
-           }  
-           var record = grid.store.getAt(row.rowIndex); 
-        } **/ 
+$(function (){
+	initTreeTable();
+}) 
+function initTreeTable(){
+	$.ajax({
+        url:"../xtCacheController/getXtCacheListByCondition",
+        type:"post",
+        dataType:"json",
+        success:function(data) {
+        	var $table = $("#table");
+        	data = eval("(" + data + ")");
+    	    $('#table').bootstrapTable('destroy').bootstrapTable({
+    	        columns:[{
+    	            checkbox:true
+    	        },
+    	        {
+    	            title:'名称',
+    	            field:'CacheName',
+    	            align:'left',
+    	        },
+    	        {
+    	            title:'数量',
+    	            field:'CacheSize',
+    	            align:'left'
+    	        },
+    	        {
+    	            title:'读取命中次数',
+    	            field:'Hits',
+    	            align:'left'
+    	        },
+    	        {
+    	            title:'读取错失次数',
+    	            field:'Misses',
+    	            align:'left',
+    	            formatter:function(value, row, index) {
+    	            	return '<span class="label label-default">'+value+'</span>';
+    	            }
+    	        },
+    	        {
+    	            title:'硬盘存储大小',
+    	            field:'DiskStoreSize',
+    	            align:'left'
+    	        },
+    	        {
+    	        	title:'类型',
+    	            field:'CacheType',
+    	            align:'left'
+    			},
+    	        {
+    	            title:'占用内存大小',
+    	            field:'MemoryStoreSize',
+    	            align:'left'
+    	        },
+    	        {
+    	            title:'操作',
+    	            field:'CacheName',
+    	            formatter:function(value, row, index) {
+    	            	return '<a href=javascript:delCache("'+value+'") class="btn btn-danger btn-sm" title="清空缓存"><i class="fa fa-trash-o"></i></a>';
+    	            }
+    	        }],
+    	        data:data,
+    	        method:'post',//请求方式(*)
+    	        striped:true,//是否显示行间隔色
+    	        cache:false,//是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性(*)
+    	        pagination:false,//是否显示分页(*)
+    	        sortable:true,//是否启用排序
+    	        sortOrder:"desc",//排序方式
+    	        sidePagination:"server",//分页方式：client客户端分页，server服务端分页(*)
+    	        showColumns:false,//是否显示所有的列
+    	        showRefresh:false,//是否显示刷新按钮
+    	        minimumCountColumns:2,//最少允许的列数
+    	        clickToSelect:true,//是否启用点击选中行
+    	        detailView:true,//是否显示父子表    *关键位置*
+    	        contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+    	        checkboxHeader:true,
+    	        search:false,
+    	        singleSelect:true,
+    	        striped:true,
+    	        showColumns:true,//开启自定义列显示功能
+    	        //注册加载子表的事件。你可以理解为点击父表中+号时触发的事件
+    	        onExpandRow:function(index, row, $detail) {
+    	            var cur_table = $detail.html('<table></table>').find('table');
+    	            var html = "";
+    	            html += "<table class='table'>";
+    	            html += "<thead>";
+    	            html += "<tr style='height:40px;'>";
+    	            html += "<th>键</th>";
+    	            html += "<th>值</th>";
+    	            html += "</tr>";
+    	            html += "</thead>";
+    	            $.ajax({
+    	                type:"post",
+    	                url:"../xtCacheController/getXtCacheDataListByCondition",
+    	                data:{cacheName:row.CacheName},
+    	                async:false,//同步请求
+    	                success:function(data){
+    	                	var dat = eval("(" + data + ")");
+    	                    html += '<ul class="list-group" >';
+    	                    $.each(dat,
+    	                    function(n, value) {
+    	                        html += "<tr align='center'>" 
+    	                            + "<td>" + value.key + "</td>" 
+    	                            + "<td>" + value.value + "</td>" 
+    	                            + "</tr>";
+    	                    });
+    	                    html += '</table>';
+    	                    $detail.html(html);
+    	                }
+    	            });
+    	        }
+    	    });
+        }
 	});
-	grid = Ext.create('Ext.grid.Panel',{
-		region:'center',
-		xtype:'panel',
-		store:store,
-		title:'查询结果',
-		columnLines:true,
-		selType:'cellmodel',
-		multiSelect:true,
-		collapsible:false,
-		/**新方法使用开始**/  
-        scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',
-        /**新方法使用结束**/ 
-		selType:'checkboxmodel',
-		plugins:expander,
-		viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true,
-			enableTextSelection:true//可以复制单元格文字
-		},
-		loadMask:{
-			msg:'正在加载...'
-		},
-		columns:[
-			{
-				header:'序号',
-				width:77,
-				xtype:'rownumberer'
-			},
-			{
-				header:'缓存名称',
-				sortable:false,
-				menuDisabled:true,
-				dataIndex:'CacheName'
-			},
-			{
-				header:'数量',
-				sortable:false,
-				menuDisabled:true,
-				dataIndex:'CacheSize'
-			},
-			{
-				header:'占用内存大小',
-				sortable:false,
-				menuDisabled:true,
-				dataIndex:'MemoryStoreSize'
-			},
-			{
-				header:'读取命中次数',
-				sortable:false,
-				menuDisabled:true,
-				dataIndex:'Hits'
-			},
-			{
-				header:'读取错失次数',
-				sortable:false,
-				menuDisabled:true,
-				dataIndex:'Misses'
-			},
-			{
-				header:'硬盘存储大小',
-				sortable:false,
-				menuDisabled:true,
-				dataIndex:'DiskStoreSize'
-			},
-			{
-				header:'类型',
-				sortable:false,
-				menuDisabled:true,
-				flex:true,
-				dataIndex:'CacheType'
-			},
-			{
-				header:'操作',
-				sortable:false,
-				menuDisabled:true,
-				columns:[
-				{
-					header:'清空所有数据',
-					align:'center',
-					sortable:false,
-					menuDisabled:true,
-					xtype:'widgetcolumn',
-					widget:{
-		                xtype:'button',
-		                text:'清空所有数据',
-		                handler:function(rec){	
-		                	 Ext.MessageBox.confirm('提示', '确定清空该缓存下所有数据吗？', function(btn) {  
-						       if(btn == 'yes'){ 
-								var CacheName = rec.getWidgetRecord().data.CacheName;
-						    	var params = {cacheName:CacheName};
-								ajaxRequest('../xtCacheController/delCache',grid,params,'正在执行清空操作中！请稍后...');
-						       }  
-						    }) 
-					    }
-		            }
-				}]
+}
+
+function delCache(value){
+	if(value == null){
+		toastrBoot(4,"未能获取该缓存名称");
+		return;
+	}
+	msgTishCallFnBoot("确定清空该缓存？",function(){
+		var params = {cacheName:value};
+		ajaxBRequestCallFn('../xtCacheController/delCache',params,function(result){
+			try {
+	    		result = eval("(" + result + ")");  
+	    		if(typeof(result.success) != "undefined"){
+	    			if(result.success){
+	            		window.parent.toastrBoot(3,result.msg);
+	            		initTreeTable();
+	        		}else{
+	        			window.parent.toastrBoot(4,result.msg);
+	        		}
+	    		}
+			} catch (e) {
+				
 			}
-		],
-		tbar:[
-			 grid_toolbar_moretext_gaps,
-			 {
-				 text:moretext,
-				 tooltip:moretexttooltip,
-				 icon:listIcon,
-				 iconAlign:'left',
-				 menu:[
-				 {
-					text:'导 出',
-					tooltip:'导 出',
-					glyph:0xf1c3,
-					handler:function(){
-						exportCache(grid,'../xtCacheController/exportCache');
-					}
-				 },
-				 '-',
-				 {
-					text:'全 选',
-					tooltip:'全 选',
-					glyph:0xf046,
-					handler:function(){selectAll(grid);}
-				 },
-				 {
-					text:'反 选',
-					tooltip:'反 选',
-					glyph:0xf096,
-					handler:function(){unSelectAll(grid);}
-				 },
-				 '-',
-				 {
-					text:'刷 新',
-					tooltip:'刷 新',
-					glyph:0xf021,
-					handler:function(){
-						refreshGrid(grid);
-					}
-				 }
-				 ]
-			 }
-		],
-		listeners:{
-			'afterrender':function(grid){
-				grid.view.on('expandBody', function (rowNode, record, expandRow, eOpts){
-					initCacheData(record.data.CacheType,record.data.CacheName); 
-                });
-                grid.view.on('collapsebody', function (rowNode, record, expandRow, eOpts){
-                	$("#cache_data"+record.data.CacheType+record.data.CacheName).empty();
-                });
-            },
-			'rowdblclick':function(grid, rowIndex, e){}
-		}
-	});
-	Ext.create('Ext.Viewport',{
-		layout:'border',
-		xtype:'viewport',
-		items:[grid]
-	});
-	/**
-	grid.on("headerclick", function(ct,column,e,t,opts) {
-         expendRows();
-    });
-    **/
-	/**调用右键**/
-	initRight();
-});
-/**导出**/
-function exportCache(grid,url){
-	exportExcel(grid,url);
-}
-/**初始化右键**/
-function initRight(){
-	var contextmenu = new Ext.menu.Menu({
-		id:'theContextMenu',
-		items:[
-		{
-			text:'导 出',
-			glyph:0xf1c3,
-			handler:function(){
-				exportCache(grid,'..//');
-			}
-		},'-',{
-			text:'全 选',
-			glyph:0xf046,
-			handler:function(){selectAll(grid);}
-		},{
-			text:'反 选',
-			glyph:0xf096,
-			handler:function(){unSelectAll(grid);}
-		},'-',{
-			text:'刷 新',
-			glyph:0xf021,
-			handler:function(){refreshGrid(grid);}
-		}]
-	});
-	initrightgridcontextmenu(grid,contextmenu,[]);
-	/**
-	store.on('load',function(thiz, options){
-		expendRows();
-    });
-    **/
-}
-/**
-//展开符合某个条件的行 
-function expendRows(){ 
-	for(var i=0;i<store.data.length;i++){ 
-		var record = store.getAt(i);//循环遍历每一行 
-		initCacheData(record.data.CacheType,record.data.CacheName);
-		expander.toggleRow(i,record);
-	} 
-}
-**/
-var cache_data_store;
-var cache_data_grid;
-function initCacheData(CacheType,CacheName){
-	cache_data_store = getGridJsonStore('../xtCacheController/getXtCacheDataListByCondition?cacheName='+CacheName,[]);
-	cache_data_grid = Ext.create('Ext.grid.Panel', {
-		renderTo:'cache_data'+CacheType+CacheName,
-        collapsible:false,
-        store:cache_data_store,
-        autoSctroll:true,
-        animate:false,
-        columnLines:true,
-        frame:true,
-        width:600,
-        height:150,
-        plugins:{
-			ptype:'cellediting',
-        	clicksToEdit:1
-		},
-        title:'数据列表',
-        headerPosition:'left',
-        viewConfig:{
-			emptyText:'暂无数据',
-			stripeRows:true
-		},
-        columns:[{
-            text:'键',
-            dataIndex:'key'
-        },
-        {
-            text:'值',
-            flex:1,
-            dataIndex:'value',
-			editor:{
-                xtype:'textareafield',
-                height:125
-            }
-        }]
-    });
+		});
+	})
 }
