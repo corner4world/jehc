@@ -248,7 +248,6 @@ var DataTablesPaging = {
         var options = {
 //        		"sScrollX":"100%",//表格的宽度
     			"sScrollXInner":"100%",//表格的内容宽度
-    			"bScrollCollapse":false,//当显示的数据不足以支撑表格的默认的高度时，依然显示纵向的滚动条。(默认是false) 
     			"bScrollCollapse":true,
     			dom:'<"top">rt<"bottom"iflp><"clear">',
     			"bFilter":false,//搜索栏
@@ -315,7 +314,7 @@ function datatablesCallBack(data, callback, settings,url,opt){
 		  success:function (result){
 			  try {
 				  //setTimeout仅为测试延迟效果
-//				  setTimeout(function(){
+				  setTimeout(function(){
 					  result = eval("(" + result + ")");
 					  //封装返回数据
 					  var returnData = {};
@@ -326,7 +325,7 @@ function datatablesCallBack(data, callback, settings,url,opt){
 					  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
 					  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
 					  callback(returnData);
-//				   },200);
+				   },200);
 			 } catch (e) {
 				 
 			 }
@@ -427,7 +426,7 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 		  success:function (result){
 			  try {
 				  //setTimeout仅为测试延迟效果
-//				  setTimeout(function(){
+				  setTimeout(function(){
 					  result = eval("(" + result + ")");
 					  //封装返回数据
 					  var returnData = {};
@@ -435,7 +434,7 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 					  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
 					  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
 					  callback(returnData);
-//				   },200);
+				   },200);
 			 } catch (e) {
 				 
 			 }

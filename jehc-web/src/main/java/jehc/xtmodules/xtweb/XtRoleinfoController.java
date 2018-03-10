@@ -225,11 +225,9 @@ public class XtRoleinfoController extends BaseAction{
 	 */
 	@ResponseBody
 	@RequestMapping(value="/getUserinfoListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getUserinfoListByCondition(String flag,String xt_role_id,String type,String id,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
-		Map<String, Object> condition = new HashMap<String, Object>();
+	public String getUserinfoListByCondition(BaseSearch baseSearch,String type,String id,HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException{
+		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
-		condition.put("flag", flag);
-		condition.put("xt_roleinfo_id", xt_role_id);
 		if(null != type && !"".equals(type)){
 			type = URLDecoder.decode(type, "UTF-8");
 			condition.put("id", id);
@@ -237,7 +235,7 @@ public class XtRoleinfoController extends BaseAction{
 		}
 		List<XtUserinfo> xtUserinfoList = xtURService.getXtURListByCondition(condition);
 		PageInfo<XtUserinfo> page = new PageInfo<XtUserinfo>(xtUserinfoList);
-		return outPageStr(page,request);
+		return outPageBootStr(page,request);
 	}
 	
 	/**
