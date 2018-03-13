@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ include file="/deng/include/include.jsp"%>
 <%@ include file="/deng/include/includeboot.jsp"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -212,8 +211,36 @@
 		</div><!-- /.modal -->
 	</div>
 	<!-- 分配用户模态框（Modal）结束 -->
+	
+	
+	
+	<!-- 分配菜单模态框（Modal）开始 -->
+	<div class="modal fade" id="XtMenuinfoModal" tabindex="-1" role="dialog" aria-labelledby="XtMenuinfoModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="XtMenuinfoModalLabel">
+						分配菜单
+					</h4>
+				</div>
+				<div class="modal-body" id="XtMenuinfoBody" style="overflow:auto;">
+					<ul id="tree" class="ztree"></ul>
+				</div>
+				<div class="modal-footer">
+					<input type="hidden" id="roleIdForMenu">
+	                <button type="button" class="btn btn-default" onclick="closeXtMenuinfoWin();">关闭</button>
+	                <button type="button" class="btn btn-primary" onclick="addXtMR();">保存</button>
+	            </div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<!-- 分配菜单模态框（Modal）结束 -->
 </body>
 <script type="text/javascript" src="../view/pc/xt-view/xt-roleinfo/xt-roleinfo-list.js"></script> 
-<script type="text/javascript" src="../view/pc/xt-view/xt-roleinfo/xt-menuinfo-treelist.js"></script> 
 <script type="text/javascript" src="../view/pc/xt-view/xt-roleinfo/xt-userinfo-list.js"></script> 
+<link rel="stylesheet" href="${syspath}/deng/source/plugins/other/bztree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.exedit.js"></script>
+<script type="text/javascript" src="../view/pc/xt-view/xt-roleinfo/xt-menuinfo-treelist.js"></script>
 </html>
