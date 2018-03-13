@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.github.pagehelper.PageInfo;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseBTreeGridEntity;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.base.BaseTreeEntity;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
@@ -77,69 +79,99 @@ public class XtMenuinfoController extends BaseAction {
 	@ResponseBody
 	@RequestMapping(value="/getXtMenuinfoList",method={RequestMethod.POST,RequestMethod.GET})
 	public String getXtMenuinfoList(HttpServletRequest request, HttpServletResponse response){
+		//废弃Extjs操作模式
 		//1获取所有菜单
+//		Map<String, Object> condition = new HashMap<String, Object>();
+//		String expanded = request.getParameter("expanded");
+//		String singleClickExpand = request.getParameter("singleClickExpand");
+//		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
+//		List<XtFunctioninfo> xtFunctioninfoList = xtFunctioninfoService.getXtFunctioninfoList(condition);
+//		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinfoListAll(condition);
+//		for(int j = 0; j < xtMenuinfoList.size(); j++){
+//			XtMenuinfo xtMenuinfo = xtMenuinfoList.get(j);
+//			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
+//			BaseTreeGridEntity.setId(xtMenuinfo.getXt_menuinfo_id());
+//			BaseTreeGridEntity.setPid(xtMenuinfo.getXt_menuinfo_parentId());
+//			BaseTreeGridEntity.setText(xtMenuinfo.getXt_menuinfo_title());
+//			BaseTreeGridEntity.setContent("");
+//			if("0".equals(xtMenuinfo.getXt_menuinfo_leaf())){
+//				BaseTreeGridEntity.setLeaf(false);
+//			}else{
+//				BaseTreeGridEntity.setLeaf(true);
+//				//当菜单为末级时判断是否存在功能
+//				if(hasLeaf(xtFunctioninfoList, xtMenuinfo.getXt_menuinfo_id())){
+//					BaseTreeGridEntity.setLeaf(false);
+//				}else{
+//					BaseTreeGridEntity.setLeaf(true);
+//				}
+//			}
+//			BaseTreeGridEntity.setIcon("../deng/images/icons/target.png");
+//			BaseTreeGridEntity.setTempObject("菜单");
+//			if(("true").equals(expanded)){
+//				BaseTreeGridEntity.setExpanded(true);
+//			}else{
+//				BaseTreeGridEntity.setExpanded(false);
+//			}
+//			if("true".equals(singleClickExpand)){
+//				BaseTreeGridEntity.setSingleClickExpand(true);
+//			}else{
+//				BaseTreeGridEntity.setSingleClickExpand(false);
+//			}
+//			list.add(BaseTreeGridEntity);
+//		}
+//		for(int i = 0; i < xtFunctioninfoList.size(); i++){
+//			XtFunctioninfo xtFunctioninfo = xtFunctioninfoList.get(i);
+//			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
+//			BaseTreeGridEntity.setId(xtFunctioninfo.getXt_functioninfo_id());
+//			BaseTreeGridEntity.setPid(xtFunctioninfo.getXt_menuinfo_id());
+//			BaseTreeGridEntity.setText(xtFunctioninfo.getXt_functioninfoTitle());
+//			BaseTreeGridEntity.setIcon("../deng/images/icons/target_point.png");
+//			BaseTreeGridEntity.setTempObject("功能");
+//			BaseTreeGridEntity.setContent(""+xtFunctioninfo.getXt_functioninfoTitle());
+//			BaseTreeGridEntity.setIntegerappend(xtFunctioninfo.getXt_functioninfoIsAuthority()+","+xtFunctioninfo.getXt_functioninfoType());
+//			if(("true").equals(expanded)){
+//				BaseTreeGridEntity.setExpanded(true);
+//			}else{
+//				BaseTreeGridEntity.setExpanded(false);
+//			}
+//			if("true".equals(singleClickExpand)){
+//				BaseTreeGridEntity.setSingleClickExpand(true);
+//			}else{
+//				BaseTreeGridEntity.setSingleClickExpand(false);
+//			}
+//			BaseTreeGridEntity.setLeaf(true);
+//			list.add(BaseTreeGridEntity);
+//		}
+//		return outStr(BaseTreeGridEntity.buildTree(list,false));
+		
+		
+		//采用BTree操作模式
 		Map<String, Object> condition = new HashMap<String, Object>();
-		String expanded = request.getParameter("expanded");
-		String singleClickExpand = request.getParameter("singleClickExpand");
-		List<BaseTreeGridEntity> list = new ArrayList<BaseTreeGridEntity>();
+		List<BaseBTreeGridEntity> list = new ArrayList<BaseBTreeGridEntity>();
 		List<XtFunctioninfo> xtFunctioninfoList = xtFunctioninfoService.getXtFunctioninfoList(condition);
 		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinfoListAll(condition);
 		for(int j = 0; j < xtMenuinfoList.size(); j++){
 			XtMenuinfo xtMenuinfo = xtMenuinfoList.get(j);
-			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
-			BaseTreeGridEntity.setId(xtMenuinfo.getXt_menuinfo_id());
-			BaseTreeGridEntity.setPid(xtMenuinfo.getXt_menuinfo_parentId());
-			BaseTreeGridEntity.setText(xtMenuinfo.getXt_menuinfo_title());
-			BaseTreeGridEntity.setContent("");
-			if("0".equals(xtMenuinfo.getXt_menuinfo_leaf())){
-				BaseTreeGridEntity.setLeaf(false);
-			}else{
-				BaseTreeGridEntity.setLeaf(true);
-				//当菜单为末级时判断是否存在功能
-				if(hasLeaf(xtFunctioninfoList, xtMenuinfo.getXt_menuinfo_id())){
-					BaseTreeGridEntity.setLeaf(false);
-				}else{
-					BaseTreeGridEntity.setLeaf(true);
-				}
-			}
-			BaseTreeGridEntity.setIcon("../deng/images/icons/target.png");
-			BaseTreeGridEntity.setTempObject("菜单");
-			if(("true").equals(expanded)){
-				BaseTreeGridEntity.setExpanded(true);
-			}else{
-				BaseTreeGridEntity.setExpanded(false);
-			}
-			if("true".equals(singleClickExpand)){
-				BaseTreeGridEntity.setSingleClickExpand(true);
-			}else{
-				BaseTreeGridEntity.setSingleClickExpand(false);
-			}
-			list.add(BaseTreeGridEntity);
+			BaseBTreeGridEntity BaseBTreeGridEntity = new BaseBTreeGridEntity();
+			BaseBTreeGridEntity.setId(xtMenuinfo.getXt_menuinfo_id());
+			BaseBTreeGridEntity.setPid(xtMenuinfo.getXt_menuinfo_parentId());
+			BaseBTreeGridEntity.setText(xtMenuinfo.getXt_menuinfo_title());
+			BaseBTreeGridEntity.setTempObject("菜单");
+			list.add(BaseBTreeGridEntity);
 		}
 		for(int i = 0; i < xtFunctioninfoList.size(); i++){
 			XtFunctioninfo xtFunctioninfo = xtFunctioninfoList.get(i);
-			BaseTreeGridEntity BaseTreeGridEntity = new BaseTreeGridEntity();
-			BaseTreeGridEntity.setId(xtFunctioninfo.getXt_functioninfo_id());
-			BaseTreeGridEntity.setPid(xtFunctioninfo.getXt_menuinfo_id());
-			BaseTreeGridEntity.setText(xtFunctioninfo.getXt_functioninfoTitle());
-			BaseTreeGridEntity.setIcon("../deng/images/icons/target_point.png");
-			BaseTreeGridEntity.setTempObject("功能");
-			BaseTreeGridEntity.setContent(""+xtFunctioninfo.getXt_functioninfoTitle());
-			BaseTreeGridEntity.setIntegerappend(xtFunctioninfo.getXt_functioninfoIsAuthority()+","+xtFunctioninfo.getXt_functioninfoType());
-			if(("true").equals(expanded)){
-				BaseTreeGridEntity.setExpanded(true);
-			}else{
-				BaseTreeGridEntity.setExpanded(false);
-			}
-			if("true".equals(singleClickExpand)){
-				BaseTreeGridEntity.setSingleClickExpand(true);
-			}else{
-				BaseTreeGridEntity.setSingleClickExpand(false);
-			}
-			BaseTreeGridEntity.setLeaf(true);
-			list.add(BaseTreeGridEntity);
+			BaseBTreeGridEntity BaseBTreeGridEntity = new BaseBTreeGridEntity();
+			BaseBTreeGridEntity.setId(xtFunctioninfo.getXt_functioninfo_id());
+			BaseBTreeGridEntity.setPid(xtFunctioninfo.getXt_menuinfo_id());
+			BaseBTreeGridEntity.setText(xtFunctioninfo.getXt_functioninfoTitle());
+			BaseBTreeGridEntity.setIcon("../deng/images/icons/target_point.png");
+			BaseBTreeGridEntity.setTempObject("功能");
+			BaseBTreeGridEntity.setContent(""+xtFunctioninfo.getXt_functioninfoTitle());
+			BaseBTreeGridEntity.setIntegerappend(xtFunctioninfo.getXt_functioninfoIsAuthority()+","+xtFunctioninfo.getXt_functioninfoType());
+			list.add(BaseBTreeGridEntity);
 		}
-		return outStr(BaseTreeGridEntity.buildTree(list,false));
+		return outStr(BaseBTreeGridEntity.buildTreeF(list));
 	}
 	
 	/**

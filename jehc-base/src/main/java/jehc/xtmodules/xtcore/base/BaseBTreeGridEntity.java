@@ -23,8 +23,8 @@ public class BaseBTreeGridEntity implements Serializable{
 	private String integerappend;/**int类型拼接使用可以使用@或逗号隔开**/
 	private String buessid;/**业务id**/
 	private ArrayList<BaseBTreeGridEntity> children = new ArrayList<BaseBTreeGridEntity>();/**子节点集合**/
-	private int idConvertInteger;/**将id为非整数类型动态转换为整型字段**/
-	private int pidConvertInteger;/**将pid为非整数类型动态转换为整型字段**/
+	private Long idConvertInteger;/**将id为非整数类型动态转换为整型字段**/
+	private Long pidConvertInteger;/**将pid为非整数类型动态转换为整型字段**/
 	public String getId() {
 		return id;
 	}
@@ -86,25 +86,26 @@ public class BaseBTreeGridEntity implements Serializable{
 	public void setIntegerappend(String integerappend) {
 		this.integerappend = integerappend;
 	}
-	public int getIdConvertInteger() {
-		return idConvertInteger;
-	}
-	public void setIdConvertInteger(int idConvertInteger) {
-		this.idConvertInteger = idConvertInteger;
-	}
+	
 	public String getBuessid() {
 		return buessid;
 	}
 	public void setBuessid(String buessid) {
 		this.buessid = buessid;
 	}
-	public int getPidConvertInteger() {
+	
+	public Long getIdConvertInteger() {
+		return idConvertInteger;
+	}
+	public void setIdConvertInteger(Long idConvertInteger) {
+		this.idConvertInteger = idConvertInteger;
+	}
+	public Long getPidConvertInteger() {
 		return pidConvertInteger;
 	}
-	public void setPidConvertInteger(int pidConvertInteger) {
+	public void setPidConvertInteger(Long pidConvertInteger) {
 		this.pidConvertInteger = pidConvertInteger;
 	}
-	
 	/**
 	 * 返回JSON字符串
 	 * @param list
@@ -114,11 +115,11 @@ public class BaseBTreeGridEntity implements Serializable{
 		List<BaseBTreeGridEntity> BaseBTreeGridEntityList = new ArrayList<BaseBTreeGridEntity>();
         for(int i = 0; i < list.size(); i++) { 
         	BaseBTreeGridEntity node = list.get(i);
-        	node.setIdConvertInteger(i+1);//设置id转换器
-        	node.setBuessid(node.getId());
             if ("0".equals(node.getPid()) || StringUtils.isEmpty(node.getPid())) {  
+            	node.setIdConvertInteger(new Long(i+1));//设置id转换器
+            	node.setBuessid(node.getId());
             	node.setPid("0");
-            	node.setPidConvertInteger(0);//设置pid转换器
+            	node.setPidConvertInteger(new Long(0));//设置pid转换器
             	BaseBTreeGridEntityList.addAll(build(list,node));
             	BaseBTreeGridEntityList.add(node);
             }
@@ -137,7 +138,40 @@ public class BaseBTreeGridEntity implements Serializable{
         	map.put("integerappend", StringUtils.isEmpty(BaseBTreeGridEntity.getIntegerappend())?"":BaseBTreeGridEntity.getIntegerappend());
         	jsonArray.add(map);
         }
-//      return  "{\"rows\":" + jsonArray.toString() + "}";
+        return  jsonArray.toString();
+    } 
+	/**
+	 * 返回JSON字符串
+	 * @param list
+	 * @return
+	 */
+	public static String buildTreeF(List<BaseBTreeGridEntity> list){  
+		List<BaseBTreeGridEntity> BaseBTreeGridEntityList = new ArrayList<BaseBTreeGridEntity>();
+        for(int i = 0; i < list.size(); i++) { 
+        	BaseBTreeGridEntity node = list.get(i);
+            if ("0".equals(node.getPid()) || StringUtils.isEmpty(node.getPid())) {  
+            	node.setIdConvertInteger(new Long(i+1));//设置id转换器
+            	node.setBuessid(node.getId());
+            	node.setPid("0");
+            	node.setPidConvertInteger(new Long(0));//设置pid转换器
+            	BaseBTreeGridEntityList.addAll(build(list,node));
+            	BaseBTreeGridEntityList.add(node);
+            }
+        }  
+        
+        //统一转换
+        JSONArray jsonArray = new JSONArray();
+        for(BaseBTreeGridEntity BaseBTreeGridEntity:BaseBTreeGridEntityList){
+        	Map<String, Object> map = new HashMap<String,Object>();
+        	map.put("id", BaseBTreeGridEntity.getIdConvertInteger());
+        	map.put("parentId", BaseBTreeGridEntity.getPidConvertInteger() == 0?null:BaseBTreeGridEntity.getPidConvertInteger());
+        	map.put("name", BaseBTreeGridEntity.getText());
+        	map.put("tempObject", BaseBTreeGridEntity.getTempObject());
+        	map.put("buessid", BaseBTreeGridEntity.getBuessid());
+        	map.put("content", StringUtils.isEmpty(BaseBTreeGridEntity.getContent())?"":BaseBTreeGridEntity.getContent());
+        	map.put("integerappend", StringUtils.isEmpty(BaseBTreeGridEntity.getIntegerappend())?"":BaseBTreeGridEntity.getIntegerappend());
+        	jsonArray.add(map);
+        }
         return  jsonArray.toString();
     } 
     /**
@@ -145,38 +179,19 @@ public class BaseBTreeGridEntity implements Serializable{
      * @param childList
      * @param node
      */
-    private static List<BaseBTreeGridEntity> build(List<BaseBTreeGridEntity> list,BaseBTreeGridEntity node){  
-    	List<BaseBTreeGridEntity> children = getChildren(list,node);  
-        if (!children.isEmpty() && children.size()>0) {
-        	for(int i = 0; i < children.size(); i++){
-        		BaseBTreeGridEntity child = children.get(i);
-        		child.setIdConvertInteger(new Integer(node.getIdConvertInteger()+""+(i+1)));//设置id转换器
-        		child.setPidConvertInteger(node.getIdConvertInteger());//设置pid转换器
-        		child.setBuessid(node.getId());
-        		children.addAll(build(list,child)); 
-            }  
-        }  
-        return children;
-    }  
-    
-    /**
-     * 获取子节点
-     * @param nodes
-     * @param node
-     * @return
-     */
-    private static List<BaseBTreeGridEntity> getChildren(List<BaseBTreeGridEntity> list,BaseBTreeGridEntity node){  
-        List<BaseBTreeGridEntity> children = new ArrayList<BaseBTreeGridEntity>(); 
-        int size = list.size();
-        for(int i = 0; i < size; i++){
-        	BaseBTreeGridEntity child = list.get(i);
-        	if (node.getId().equals(child.getPid())) {  
-        		child.setBuessid(node.getId());
-        		child.setIdConvertInteger(new Integer(node.getIdConvertInteger()+""+(i+1)));//设置id转换器
-        		child.setPidConvertInteger(node.getIdConvertInteger());//设置pid转换器
+    private static List<BaseBTreeGridEntity> build(List<BaseBTreeGridEntity> list,BaseBTreeGridEntity node){
+    	 List<BaseBTreeGridEntity> children = new ArrayList<BaseBTreeGridEntity>(); 
+         int size = list.size();
+         for(int i = 0; i < size; i++){
+         	BaseBTreeGridEntity child = list.get(i);
+         	if (node.getId().equals(child.getPid())) {  
+         		child.setBuessid(child.getId());
+         		child.setPidConvertInteger(node.getIdConvertInteger());//设置pid转换器
+         		child.setIdConvertInteger(new Long(node.getIdConvertInteger()+""+(i+1)));//设置id转换器
                 children.add(child);  
-            }
-        }
-        return children;  
-    }
+                children.addAll(build(list, child));
+             }
+         }
+         return children;  
+    }  
 }

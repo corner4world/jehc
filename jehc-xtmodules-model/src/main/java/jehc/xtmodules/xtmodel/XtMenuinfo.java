@@ -22,6 +22,8 @@ public class XtMenuinfo extends BaseEntity  implements Serializable{
 	private int xt_menuinfo_sort;//排序
 	private int xt_menuinfo_sys;//是否是平台菜单0否1是
 	private String xt_menuinfo_status;//状态0可用1禁用
+	
+	private String xt_menuinfo_parentTitle;//父级标题
 
 	public String getXt_menuinfo_status() {
 		return xt_menuinfo_status;
@@ -102,4 +104,13 @@ public class XtMenuinfo extends BaseEntity  implements Serializable{
 	public void setXt_menuinfo_sys(int xt_menuinfo_sys) {
 		this.xt_menuinfo_sys = xt_menuinfo_sys;
 	}
+
+	public String getXt_menuinfo_parentTitle() {
+		return xt_menuinfo_parentTitle;
+	}
+
+	public void setXt_menuinfo_parentTitle(String xt_menuinfo_parentTitle) {
+		this.xt_menuinfo_parentTitle = xt_menuinfo_parentTitle;
+	}
+	
 }
