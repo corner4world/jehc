@@ -2,8 +2,6 @@
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
 
- **QQ讨论群:330370132** 
-
  **开发工具：** 
 eclipse-jee-mars-1
 或eclipse-jee-mars-2
@@ -41,8 +39,6 @@ jEhc能做什么
 
 统一开发 统一开放 统一规范 统一开源
 http://git.oschina.net/jehc/jehc
-
- **QQ讨论群:330370132** 
 
  **开发工具：** 
 eclipse-jee-mars-1
