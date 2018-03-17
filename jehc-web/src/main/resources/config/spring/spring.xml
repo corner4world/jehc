@@ -67,9 +67,9 @@
 	<!-- Activiti核心工作流引擎 -->
 	<import resource="classpath:/config/activiti/activiti.xml"/>
 	
-	<!-- redis整合  -->
+	<!-- redis整合 -->
 	<import resource="classpath*:config/redis/redis.xml"/>
-	
+	  
 	<!-- 连接池整合 
 	<import resource="classpath*:config/pool/pool.xml"/>
 	--> 
@@ -100,4 +100,8 @@
 	<!-- ehcache整合  暂废弃
 	<import resource="classpath*:config/ehcache/ehcache-spring.xml"/>
 	 -->
+	 
+	 <!-- HttpSession共享整合  -->
+	<import resource="classpath*:config/session-share/session-share.xml"/>
+	
 </beans>

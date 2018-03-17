@@ -10,48 +10,46 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<!-- 文件拷贝时的编码 -->  
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>  
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>  
-        <!-- 编译时的编码 -->  
-        <maven.compiler.encoding>UTF-8</maven.compiler.encoding>  
-        
-        <!-- jehc版本 -->
-        <jehc.version>0.0.1-SNAPSHOT</jehc.version>
-        
-        <!-- jdk编译版本 -->
-        <jdk.version>1.7</jdk.version>
-        
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-        
+		<!-- 文件拷贝时的编码 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<!-- 编译时的编码 -->
+		<maven.compiler.encoding>UTF-8</maven.compiler.encoding>
+
+		<!-- jehc版本 -->
+		<jehc.version>0.0.1-SNAPSHOT</jehc.version>
+
+		<!-- jdk编译版本 -->
+		<jdk.version>1.7</jdk.version>
+
+		<failOnMissingWebXml>false</failOnMissingWebXml>
+
 		<!-- Spring版本号 -->
-        <spring.version>4.2.8.RELEASE</spring.version>
-        <aspectjrt.version>1.8.0</aspectjrt.version>
-        <!-- Activiti版本号 -->
-        <activiti.version>5.22.0</activiti.version>
-        <!-- solr全文检索版本号 -->
-        <solr.version>4.10.1</solr.version>
-        <!-- logback日志版本 -->
-        <logback-classic.version>1.1.2</logback-classic.version>
+		<spring.version>4.2.8.RELEASE</spring.version>
+		<aspectjrt.version>1.8.0</aspectjrt.version>
+		<!-- Activiti版本号 -->
+		<activiti.version>5.22.0</activiti.version>
+		<!-- solr全文检索版本号 -->
+		<solr.version>4.10.1</solr.version>
+		<!-- logback日志版本 -->
+		<logback-classic.version>1.1.2</logback-classic.version>
 		<logback-core.version>1.1.2</logback-core.version>
 		<logback-ext-spring.version>0.1.2</logback-ext-spring.version>
-        <!-- rabbitMq日志版本 -->
-        <rabbitMq.version>4.1.0</rabbitMq.version>
-        <!-- hibernate.validator验证框架 -->
-        <hibernate.validator>4.3.1.Final</hibernate.validator>
-        <!-- 调度器org.quartz-scheduler版本 -->
-        <quartz.validator>2.2.1</quartz.validator>
-        <!-- redis版本 -->
-        <redis.version>2.9.0</redis.version>
-        <servlet-api.version>3.1.0</servlet-api.version>
+		<!-- rabbitMq日志版本 -->
+		<rabbitMq.version>4.1.0</rabbitMq.version>
+		<!-- hibernate.validator验证框架 -->
+		<hibernate.validator>4.3.1.Final</hibernate.validator>
+		<!-- 调度器org.quartz-scheduler版本 -->
+		<quartz.validator>2.2.1</quartz.validator>
+		<!-- redis版本 -->
+		<redis.version>2.9.0</redis.version>
+		<spring.session.version>1.2.2.RELEASE</spring.session.version>
+		<servlet-api.version>3.1.0</servlet-api.version>
 		<jsp-api.version>2.1.3-b06</jsp-api.version>
 		<jsp-tag-api.version>1.2.1</jsp-tag-api.version>
-		<!-- 
-		<commons-lang.version>2.5</commons-lang.version>
-		 -->
+		<!-- <commons-lang.version>2.5</commons-lang.version> -->
 		<mysql.version>5.1.34</mysql.version>
 		<oracle.version>11.2.0</oracle.version>
-		<jedis.version>2.8.0</jedis.version>
 		<fastjson.version>1.2.9</fastjson.version>
 		<commons-collections.version>3.2.1</commons-collections.version>
 		<commons-fileupload.version>1.3.1</commons-fileupload.version>
@@ -68,7 +66,7 @@
 		<mybatis.version>3.2.8</mybatis.version>
 		<mybatis-spring.version>1.2.2</mybatis-spring.version>
 		<jstl.version>1.2</jstl.version>
- 		<standar.version>1.1.2</standar.version>
+		<standar.version>1.1.2</standar.version>
 		<httpclient.version>4.4.1</httpclient.version>
 		<httpcore.version>4.4.8</httpcore.version>
 		<commons-httpclient.version>3.1</commons-httpclient.version>
@@ -87,45 +85,36 @@
 		<jackson-annotations.version>2.6.2</jackson-annotations.version>
 		<jackson-databind.version>2.6.2</jackson-databind.version>
 		<jackson-core.version>2.6.2</jackson-core.version>
-		<!-- 
-		<spring-data-elasticsearch.version>2.0.0.RELEASE</spring-data-elasticsearch.version>
-		 -->
+		<!-- <spring-data-elasticsearch.version>2.0.0.RELEASE</spring-data-elasticsearch.version> -->
 		<jasperreports.version>5.1.0</jasperreports.version>
 		<itext.version>2.0.8</itext.version>
-		<!-- 
-		<iTextAsian.version>1.0</iTextAsian.version>
-		 -->
+		<!-- <iTextAsian.version>1.0</iTextAsian.version> -->
 		<itextpdf.version>5.1.2</itextpdf.version>
 		<groovy-all.version>2.4.5</groovy-all.version>
 		<mybatis-pagehelper.version>4.2.1</mybatis-pagehelper.version>
 		<dom4j.version>1.6.1</dom4j.version>
 		<jaxen.version>1.1.1</jaxen.version>
-		<!-- 
-		<dbcp.version>1.2.2</dbcp.version>
-		 -->
+		<!-- <dbcp.version>1.2.2</dbcp.version> -->
 		<jsoup.version>1.8.1</jsoup.version>
-		<jedis.version>2.9.0</jedis.version>  
-        <spring.data.redis.version>1.7.1.RELEASE</spring.data.redis.version>  
-        <jdom.version>1.1.3</jdom.version>
-        <pdfbox.version>1.8.2</pdfbox.version>
-        <amqp.version>1.3.5.RELEASE</amqp.version>
-        <netty.version>4.1.14.Final</netty.version>
-        <cglib.nodep.version>3.2.6</cglib.nodep.version>
-        <jackson.core.asl>1.8.4</jackson.core.asl>
-        <jackson.mapper.asl>1.8.4</jackson.mapper.asl>
-        <ehcache.core.version>2.6.8</ehcache.core.version>
-        <hsqldb.version>2.2.9</hsqldb.version>
-        <sigar.version>1.6.4</sigar.version>
-        <jodd.version>3.3.2</jodd.version>
-        <UserAgentUtils.version>1.2.4</UserAgentUtils.version>
-        <commons-codec.version>1.7</commons-codec.version>
-        <!-- 
-        <log4j.version>1.2.16</log4j.version>
-		<slf4j.api.version>1.7.21</slf4j.api.version>
-		<c3p0.version>0.9.1.2</c3p0.version>
-		 -->
-	    <bonecp.version>0.8.0.RELEASE</bonecp.version>
-	    <jaxen.version>1.1.6</jaxen.version>
+		<jedis.version>2.9.0</jedis.version>
+		<spring.data.redis.version>1.7.11.RELEASE</spring.data.redis.version>
+		<jdom.version>1.1.3</jdom.version>
+		<pdfbox.version>1.8.2</pdfbox.version>
+		<amqp.version>1.3.5.RELEASE</amqp.version>
+		<netty.version>4.1.14.Final</netty.version>
+		<cglib.nodep.version>3.2.6</cglib.nodep.version>
+		<jackson.core.asl>1.8.4</jackson.core.asl>
+		<jackson.mapper.asl>1.8.4</jackson.mapper.asl>
+		<ehcache.core.version>2.6.8</ehcache.core.version>
+		<hsqldb.version>2.2.9</hsqldb.version>
+		<sigar.version>1.6.4</sigar.version>
+		<jodd.version>3.3.2</jodd.version>
+		<UserAgentUtils.version>1.2.4</UserAgentUtils.version>
+		<commons-codec.version>1.7</commons-codec.version>
+		<!-- <log4j.version>1.2.16</log4j.version> <slf4j.api.version>1.7.21</slf4j.api.version> 
+			<c3p0.version>0.9.1.2</c3p0.version> -->
+		<bonecp.version>0.8.0.RELEASE</bonecp.version>
+		<jaxen.version>1.1.6</jaxen.version>
 		<swagger2.version>2.7.0</swagger2.version>
 		<guava.version>19.0</guava.version>
 	</properties>
@@ -136,7 +125,7 @@
 		<module>jehc-base-service</module>
 		<module>jehc-base-web</module>
 		<module>jehc-base-lc</module>
-		
+
 		<!-- 平台模块 -->
 		<module>jehc-xtmodules-model</module>
 		<module>jehc-xtmodules-dao</module>
@@ -151,19 +140,19 @@
 		<module>jehc-solrmodules-model</module>
 		<module>jehc-solrmodules-dao</module>
 		<module>jehc-solrmodules-service</module>
-		
+
 
 		<!-- 电商模块 -->
 		<module>jehc-bmodules-model</module>
 		<module>jehc-bmodules-dao</module>
 		<module>jehc-bmodules-service</module>
-		
-		
+
+
 		<!-- OA模块 -->
 		<module>jehc-oamodules-model</module>
 		<module>jehc-oamodules-dao</module>
 		<module>jehc-oamodules-service</module>
-		
+
 		<!-- web模块 -->
 		<module>jehc-web</module>
 	</modules>
@@ -259,7 +248,7 @@
 				<artifactId>jehc-bmodules-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-			
+
 			<!-- OA模块 -->
 			<dependency>
 				<groupId>jehc.p</groupId>
@@ -278,117 +267,107 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	 <!-- 其他插件 -->
-    <dependencies>
-        <!-- Spring相关包开始 -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-aop</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-jdbc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-test</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-		<!-- Spring相关包结束 -->
-		
-        <!-- AOP相关包开始 -->
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjrt</artifactId>
-            <version>${aspectjrt.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.aspectj</groupId>
-            <artifactId>aspectjweaver</artifactId>
-            <version>${aspectjrt.version}</version>
-        </dependency>
-        <!-- AOP相关包结束 -->
-
-        <!-- MyBatis相关包 开始-->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>${mybatis.version}</version>
-        </dependency>
-        <!-- MyBatis相关包 结束-->
-        
-        <!-- MySQL相关包开始 -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
-        </dependency>
-        <!-- MySQL相关包结束 -->
-        
-        <!-- Oracle相关包开始 -->
-        <!-- 
-        <dependency>
-		    <groupId>com.oracle</groupId>
-		    <artifactId>ojdbc6</artifactId>
-		    <version>${oracle.version}</version>
-		</dependency>
-		 -->
-		<!-- Oracle相关包结束 -->
-		
-        <!-- 数据库连接池开始 -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid</artifactId>
-            <version>${druid.version}</version>
-        </dependency>
-		<!-- 数据库连接池结束 -->
-		
-        <!-- Spring集成MyBatis开始 -->
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis-spring</artifactId>
-            <version>${mybatis-spring.version}</version>
-        </dependency>
- 		<!-- Spring集成MyBatis结束 -->
- 		
-        <!-- JSP标准标签库开始 -->
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>jstl</artifactId>
-            <version>${jstl.version}</version>
-        </dependency>
-        <!-- 
+	<!-- 其他插件 -->
+	<dependencies>
+		<!-- Spring相关包开始 -->
 		<dependency>
-		    <groupId>taglibs</groupId>
-		    <artifactId>standard</artifactId>
-		    <version>${standar.version}</version>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
 		</dependency>
-		 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		<!-- Spring相关包结束 -->
+
+		<!-- AOP相关包开始 -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectjrt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${aspectjrt.version}</version>
+		</dependency>
+		<!-- AOP相关包结束 -->
+
+		<!-- MyBatis相关包 开始 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>${mybatis.version}</version>
+		</dependency>
+		<!-- MyBatis相关包 结束 -->
+
+		<!-- MySQL相关包开始 -->
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.version}</version>
+		</dependency>
+		<!-- MySQL相关包结束 -->
+
+		<!-- Oracle相关包开始 -->
+		<!-- <dependency> <groupId>com.oracle</groupId> <artifactId>ojdbc6</artifactId> 
+			<version>${oracle.version}</version> </dependency> -->
+		<!-- Oracle相关包结束 -->
+
+		<!-- 数据库连接池开始 -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>${druid.version}</version>
+		</dependency>
+		<!-- 数据库连接池结束 -->
+
+		<!-- Spring集成MyBatis开始 -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>${mybatis-spring.version}</version>
+		</dependency>
+		<!-- Spring集成MyBatis结束 -->
+
+		<!-- JSP标准标签库开始 -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		<!-- <dependency> <groupId>taglibs</groupId> <artifactId>standard</artifactId> 
+			<version>${standar.version}</version> </dependency> -->
 		<!-- JSP标准标签库结束 -->
-		
-		
+
+
 		<!-- logback日志相关包开始 -->
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
@@ -409,248 +388,243 @@
 
 		<!-- hibernate-验证框架开始 -->
 		<dependency>
-		    <groupId>org.hibernate</groupId>
-		    <artifactId>hibernate-validator</artifactId>
-		    <version>${hibernate.validator}</version> 
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${hibernate.validator}</version>
 		</dependency>
 		<!-- hibernate-验证框架结束 -->
-		
+
 		<!-- 调度器开始 -->
 		<dependency>
-            <groupId>org.quartz-scheduler</groupId>
-            <artifactId>quartz</artifactId>
-            <version>${quartz.validator}</version>
-        </dependency>
-        <!-- 调度器结束 -->
-        
-       
-        <!-- 单元测试相关包开始 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <!-- 单元测试相关包结束-->
-        
-        <!-- pdfbox开始 -->
-        <dependency>
-		    <groupId>org.apache.pdfbox</groupId>
-		    <artifactId>pdfbox</artifactId>
-		    <version>${pdfbox.version}</version>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>${quartz.validator}</version>
+		</dependency>
+		<!-- 调度器结束 -->
+
+
+		<!-- 单元测试相关包开始 -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- 单元测试相关包结束 -->
+
+		<!-- pdfbox开始 -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+			<version>${pdfbox.version}</version>
 		</dependency>
 		<!-- pdfbox结束 -->
-		
+
 		<!-- dom4j开始 -->
-        <dependency>   
-	      <groupId>dom4j</groupId>    
-	      <artifactId>dom4j</artifactId>    
-	      <version>${dom4j.version}</version>  
-	      <exclusions>
-	      	<exclusion>
-	      		<groupId>xml-apis</groupId>    
-	      		<artifactId>xml-apis</artifactId>  
-	      	</exclusion>
-	      </exclusions> 
-	    </dependency>   
-        <!-- dom4j结束 -->
-        
-        <!-- activiti5.22工作流 开始-->
-        <dependency>  
-	      <groupId>org.activiti</groupId>  
-	      <artifactId>activiti-engine</artifactId>  
-	      <version>${activiti.version}</version>  
-	    </dependency>  
-	    <dependency>  
-	        <groupId>org.activiti</groupId>  
-	        <artifactId>activiti-bpmn-converter</artifactId>  
-	        <version>${activiti.version}</version>  
-	    </dependency> 
-	    <dependency>  
-	        <groupId>org.activiti</groupId>  
-	        <artifactId>activiti-bpmn-model</artifactId>  
-	        <version>${activiti.version}</version>  
-	    </dependency>
-	    <dependency>  
-	        <groupId>org.activiti</groupId>  
-	        <artifactId>activiti-bpmn-layout</artifactId>  
-	        <version>${activiti.version}</version>  
-	        <exclusions>
-	        	<exclusion>
-	        		<!-- 不采用该jar 采用mxGraph包代替它 -->
-	        		<groupId>org.tinyjee.jgraphx</groupId>
-    				<artifactId>jgraphx</artifactId>
-	        	</exclusion>
-	        </exclusions>
-	    </dependency>
-	    <dependency>  
-		    <groupId>org.activiti</groupId>  
-		    <artifactId>activiti-spring</artifactId>  
-		    <version>${activiti.version}</version>  
+		<dependency>
+			<groupId>dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>${dom4j.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
-	    <!-- activiti5.22工作流 结束-->
-	    
-	    <!-- solr全文检索开始 -->
-	    <!-- dataimporthandler放在该位置 -->
-	    <dependency>
-		    <groupId>org.apache.solr</groupId>
-		    <artifactId>solr-dataimporthandler</artifactId>
-		    <version>${solr.version}</version>
-		    <exclusions>
-		    	<!-- 去除jetty相关 -->
-	        	<exclusion>
-				    <groupId>org.eclipse.jetty.orbit</groupId>
-				    <artifactId>javax.servlet</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-deploy</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-continuation</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		 <groupId>org.eclipse.jetty</groupId>
-				     <artifactId>jetty-http</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-io</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-jmx</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-security</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-server</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-servlet</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-util</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-webapp</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.eclipse.jetty</groupId>
-				    <artifactId>jetty-xml</artifactId>
-	        	</exclusion>
-	        	
-	        	<!-- 去除hadoop -->
-	        	<exclusion>
-	        		<groupId>org.apache.hadoop</groupId>
-      				<artifactId>hadoop-annotations</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.hadoop</groupId>
-      				<artifactId>hadoop-auth</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.hadoop</groupId>
-      				<artifactId>hadoop-common</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.hadoop</groupId>
-      				<artifactId>hadoop-hdfs</artifactId>
-	        	</exclusion>
-	        	
-	        	<!-- 去除lucene相关 -->
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-analyzers-common</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-analyzers-kuromoji</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-analyzers-phonetic</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-codecs</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-core</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-expressions</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-grouping</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-highlighter</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-join</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-memory</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-misc</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-queries</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-queryparser</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-spatial</artifactId>
-	        	</exclusion>
-	        	<exclusion>
-	        		<groupId>org.apache.lucene</groupId>
-      				<artifactId>lucene-suggest</artifactId>
-	        	</exclusion>
-	        </exclusions>
+		<!-- dom4j结束 -->
+
+		<!-- activiti5.22工作流 开始 -->
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-engine</artifactId>
+			<version>${activiti.version}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.solr</groupId>
-		    <artifactId>solr-core</artifactId>
-		    <version>${solr.version}</version>
-		    <exclusions>
-		    	<!-- 采用通配符去除依赖 -->
-		    	<exclusion>
-				    <groupId>*</groupId>
-				    <artifactId>*</artifactId>
-	        	</exclusion>
-	        </exclusions>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-converter</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-model</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-bpmn-layout</artifactId>
+			<version>${activiti.version}</version>
+			<exclusions>
+				<exclusion>
+					<!-- 不采用该jar 采用mxGraph包代替它 -->
+					<groupId>org.tinyjee.jgraphx</groupId>
+					<artifactId>jgraphx</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.activiti</groupId>
+			<artifactId>activiti-spring</artifactId>
+			<version>${activiti.version}</version>
+		</dependency>
+		<!-- activiti5.22工作流 结束 -->
+
+		<!-- solr全文检索开始 -->
+		<!-- dataimporthandler放在该位置 -->
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-dataimporthandler</artifactId>
+			<version>${solr.version}</version>
+			<exclusions>
+				<!-- 去除jetty相关 -->
+				<exclusion>
+					<groupId>org.eclipse.jetty.orbit</groupId>
+					<artifactId>javax.servlet</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-deploy</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-continuation</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-http</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-io</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-jmx</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-security</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-server</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-servlet</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-util</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-webapp</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.eclipse.jetty</groupId>
+					<artifactId>jetty-xml</artifactId>
+				</exclusion>
+
+				<!-- 去除hadoop -->
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-annotations</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-auth</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.hadoop</groupId>
+					<artifactId>hadoop-hdfs</artifactId>
+				</exclusion>
+
+				<!-- 去除lucene相关 -->
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-analyzers-common</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-analyzers-kuromoji</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-analyzers-phonetic</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-codecs</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-core</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-expressions</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-grouping</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-highlighter</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-join</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-memory</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-misc</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-queries</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-queryparser</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-spatial</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.apache.lucene</groupId>
+					<artifactId>lucene-suggest</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.solr</groupId>
+			<artifactId>solr-core</artifactId>
+			<version>${solr.version}</version>
+			<exclusions>
+				<!-- 采用通配符去除依赖 -->
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<!-- solr全文检索结束 -->
-		
-		<!-- dbcp开始 
-		<dependency>
-		    <groupId>commons-dbcp</groupId>
-		    <artifactId>commons-dbcp</artifactId>
-		    <version>${dbcp.version}</version>
-		</dependency>
-		-->
+
+		<!-- dbcp开始 <dependency> <groupId>commons-dbcp</groupId> <artifactId>commons-dbcp</artifactId> 
+			<version>${dbcp.version}</version> </dependency> -->
 		<!-- dbcp开始 -->
-		
+
 		<!-- hessian开始 -->
 		<dependency>
 			<groupId>com.caucho</groupId>
@@ -658,7 +632,7 @@
 			<version>${hessian.version}</version>
 		</dependency>
 		<!-- hessian结束 -->
-			
+
 		<!-- jackson-databind开始 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -666,7 +640,7 @@
 			<version>${jackson-databind.version}</version>
 		</dependency>
 		<!-- jackson-databind结束 -->
-		
+
 		<!-- fastjson开始 -->
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -674,7 +648,7 @@
 			<version>${fastjson.version}</version>
 		</dependency>
 		<!-- fastjson结束 -->
-		
+
 		<!-- commons-collections开始 -->
 		<dependency>
 			<groupId>commons-collections</groupId>
@@ -682,7 +656,7 @@
 			<version>${commons-collections.version}</version>
 		</dependency>
 		<!-- commons-collections结束 -->
-		
+
 		<!-- 上传组件开始 -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
@@ -690,8 +664,8 @@
 			<version>${commons-fileupload.version}</version>
 		</dependency>
 		<!-- 上传组件结束 -->
-		
-		
+
+
 		<!-- httpcomponents开始 -->
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -704,7 +678,7 @@
 			<version>${httpcore.version}</version>
 		</dependency>
 		<!-- httpcomponents结束 -->
-		
+
 		<!-- httpclient开始 -->
 		<dependency>
 			<groupId>commons-httpclient</groupId>
@@ -712,9 +686,9 @@
 			<version>${commons-httpclient.version}</version>
 		</dependency>
 		<!-- httpclient结束 -->
-		
-		
-		
+
+
+
 		<!-- servlet api开始 -->
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
@@ -729,16 +703,16 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- servlet api结束 -->
-		
+
 		<!-- jodd开始 -->
 		<dependency>
-		    <groupId>org.jodd</groupId>
-		    <artifactId>jodd</artifactId>
-		    <version>${jodd.version}</version>
+			<groupId>org.jodd</groupId>
+			<artifactId>jodd</artifactId>
+			<version>${jodd.version}</version>
 		</dependency>
 		<!-- jodd结束 -->
-		
-		<!-- poi开始 -->		
+
+		<!-- poi开始 -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi</artifactId>
@@ -760,15 +734,15 @@
 			<version>${poi.version}</version>
 		</dependency>
 		<!-- poi结束 -->
-		
-		<!-- jsonp 开始-->	
+
+		<!-- jsonp 开始 -->
 		<dependency>
-		    <groupId>org.jsoup</groupId>
-		    <artifactId>jsoup</artifactId>
-		    <version>${jsoup.version}</version>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>${jsoup.version}</version>
 		</dependency>
-		<!-- jsonp 结束-->	
-		
+		<!-- jsonp 结束 -->
+
 		<!-- ftp开始 -->
 		<dependency>
 			<groupId>commons-net</groupId>
@@ -777,7 +751,7 @@
 			<classifier>ftp</classifier>
 		</dependency>
 		<!-- ftp结束 -->
-		
+
 		<!-- json开始 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
@@ -790,176 +764,169 @@
 			<version>${jackson-core.version}</version>
 		</dependency>
 		<dependency>
-            <groupId>net.sf.ezmorph</groupId>
-            <artifactId>ezmorph</artifactId>
-            <version>1.0.3</version>
-        </dependency>
- 		<dependency>
-            <groupId>net.sf.json-lib</groupId>
-            <artifactId>json-lib</artifactId>
-            <version>2.4</version>
-            <classifier>jdk15</classifier>
-        </dependency>
-        <!-- json结束 -->
-		
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.3</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.json-lib</groupId>
+			<artifactId>json-lib</artifactId>
+			<version>2.4</version>
+			<classifier>jdk15</classifier>
+		</dependency>
+		<!-- json结束 -->
+
 		<!-- itext开始 -->
 		<dependency>
 			<groupId>com.lowagie</groupId>
 			<artifactId>itext</artifactId>
 			<version>${itext.version}</version>
 		</dependency>
-		
+
 		<dependency>
-		    <groupId>com.itextpdf</groupId>
-		    <artifactId>itextpdf</artifactId>
-		    <version>${itextpdf.version}</version>
-		</dependency>					
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+			<version>${itextpdf.version}</version>
+		</dependency>
 		<!-- itext结束 -->
-		
+
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
 			<version>${groovy-all.version}</version>
 		</dependency>
-		
+
 		<!-- pagehelper开始 -->
 		<dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper</artifactId>
-            <version>${mybatis-pagehelper.version}</version>
-        </dependency>
-        <!-- pagehelper结束 -->
-        
-        <!--ehcache 相关包开始 -->
-	    <dependency>
-	       <groupId>com.googlecode.ehcache-spring-annotations</groupId>
-	       <artifactId>ehcache-spring-annotations</artifactId>
-	       <version>1.2.0</version>
-	    </dependency>
-	    <dependency>
-		   <groupId>net.sf.ehcache</groupId>
-		   <artifactId>ehcache-core</artifactId>
-		   <version>${ehcache.core.version}</version>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper</artifactId>
+			<version>${mybatis-pagehelper.version}</version>
 		</dependency>
-	    <!--ehcache 相关包结束 -->
-	   
-	    <!-- hsqldb开始 -->
-	    <dependency>  
-	        <groupId>org.hsqldb</groupId>  
-	        <artifactId>hsqldb</artifactId>  
-	        <version>${hsqldb.version}</version>  
-	    </dependency>
-    		<!-- hsqldb结束 -->
-    		
-	    <!-- commons-io开始 -->
-	    <dependency>
-		    <groupId>commons-io</groupId>
-		    <artifactId>commons-io</artifactId>
-		    <version>${commons.io.version}</version>
+		<!-- pagehelper结束 -->
+
+		<!--ehcache 相关包开始 -->
+		<dependency>
+			<groupId>com.googlecode.ehcache-spring-annotations</groupId>
+			<artifactId>ehcache-spring-annotations</artifactId>
+			<version>1.2.0</version>
 		</dependency>
-		<!-- commons-io结束 -->	
-		
+		<dependency>
+			<groupId>net.sf.ehcache</groupId>
+			<artifactId>ehcache-core</artifactId>
+			<version>${ehcache.core.version}</version>
+		</dependency>
+		<!--ehcache 相关包结束 -->
+
+		<!-- hsqldb开始 -->
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>${hsqldb.version}</version>
+		</dependency>
+		<!-- hsqldb结束 -->
+
+		<!-- commons-io开始 -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>${commons.io.version}</version>
+		</dependency>
+		<!-- commons-io结束 -->
+
 		<!-- 监控sigar开始 -->
 		<dependency>
-		    <groupId>org.fusesource</groupId>
-		    <artifactId>sigar</artifactId>
-		    <version>${sigar.version}</version>
+			<groupId>org.fusesource</groupId>
+			<artifactId>sigar</artifactId>
+			<version>${sigar.version}</version>
 		</dependency>
 		<!-- 监控sigar结束 -->
-		
-		<!-- redis开始 -->  
-        <dependency>  
-            <groupId>redis.clients</groupId>  
-            <artifactId>jedis</artifactId>  
-            <version>${jedis.version}</version>  
-         </dependency>  
-         <dependency>  
-            <groupId>org.springframework.data</groupId>  
-            <artifactId>spring-data-redis</artifactId>  
-            <version>${spring.data.redis.version}</version>  
-         </dependency>  
-         <!-- redis结束 -->
-         
-         <!-- jdom开始 -->  
-         <dependency>
-		    <groupId>org.jdom</groupId>
-		    <artifactId>jdom</artifactId>
-		    <version>${jdom.version}</version>
+
+		<!-- redis开始 -->
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>${jedis.version}</version>
 		</dependency>
-		<!-- jdom结束 -->  
-		
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session</artifactId>
+			<version>${spring.session.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.session</groupId>
+			<artifactId>spring-session-data-redis</artifactId>
+			<version>${spring.session.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>${spring.data.redis.version}</version>
+		</dependency>
+		<!-- redis结束 -->
+
+		<!-- jdom开始 -->
+		<dependency>
+			<groupId>org.jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>${jdom.version}</version>
+		</dependency>
+		<!-- jdom结束 -->
+
 		<!-- spring-amqp开始 -->
 		<dependency>
-		    <groupId>org.springframework.amqp</groupId>
-		    <artifactId>spring-amqp</artifactId>
-		    <version>${amqp.version}</version>
+			<groupId>org.springframework.amqp</groupId>
+			<artifactId>spring-amqp</artifactId>
+			<version>${amqp.version}</version>
 		</dependency>
 		<!-- spring-amqp结束 -->
-		
+
 		<!-- netty开始 -->
 		<dependency>
-		    <groupId>io.netty</groupId>
-		    <artifactId>netty-all</artifactId>
-		    <version>${netty.version}</version>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>${netty.version}</version>
 		</dependency>
 		<!-- netty结束 -->
-		
+
 		<!-- cglib-nodep开始 -->
 		<dependency>
-		    <groupId>cglib</groupId>
-		    <artifactId>cglib-nodep</artifactId>
-		    <version>${cglib.nodep.version}</version>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>${cglib.nodep.version}</version>
 		</dependency>
-		<!-- cglib-nodep结束 -->	
-		
+		<!-- cglib-nodep结束 -->
+
 		<!-- jackson-core-asl开始 -->
 		<dependency>
-		   <groupId>org.codehaus.jackson</groupId>
-		   <artifactId>jackson-core-asl</artifactId>
-		   <version>${jackson.core.asl}</version>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>${jackson.core.asl}</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.codehaus.jackson</groupId>
-		    <artifactId>jackson-mapper-asl</artifactId>
-		    <version>${jackson.mapper.asl}</version>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>${jackson.mapper.asl}</version>
 		</dependency>
 		<!-- jackson-core-asl结束 -->
-		
+
 		<!-- UserAgentUtils浏览器判断开始 -->
 		<dependency>
-		    <groupId>nl.bitwalker</groupId>
-		    <artifactId>UserAgentUtils</artifactId>
-		    <version>${UserAgentUtils.version}</version>
+			<groupId>nl.bitwalker</groupId>
+			<artifactId>UserAgentUtils</artifactId>
+			<version>${UserAgentUtils.version}</version>
 		</dependency>
 		<!-- UserAgentUtils浏览器判断结束 -->
-		
-		<!-- 解决编译时候tools rt jce等 开始  
-		<dependency>
-		    <groupId>jdk.tools</groupId>
-		    <artifactId>jdk.tools</artifactId>
-		    <version>${jdk.version}</version>
-		    <scope>system</scope>
-		    <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath>
-		</dependency>
-		-->
-		<!-- 
-		<dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>rt</artifactId>
-            <version>${jdk.version}</version>
-            <scope>system</scope>
-            <systemPath>${JAVA_HOME}/jre/lib/rt.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>jce</artifactId>
-            <version>${jdk.version}</version>
-            <scope>system</scope>
-            <systemPath>${JAVA_HOME}/jre/lib/jce.jar</systemPath>
-        </dependency>
-         -->
-        <!-- 解决编译时候tools rt等 结束 -->
-        
+
+		<!-- 解决编译时候tools rt jce等 开始 <dependency> <groupId>jdk.tools</groupId> <artifactId>jdk.tools</artifactId> 
+			<version>${jdk.version}</version> <scope>system</scope> <systemPath>${JAVA_HOME}/lib/tools.jar</systemPath> 
+			</dependency> -->
+		<!-- <dependency> <groupId>com.sun</groupId> <artifactId>rt</artifactId> 
+			<version>${jdk.version}</version> <scope>system</scope> <systemPath>${JAVA_HOME}/jre/lib/rt.jar</systemPath> 
+			</dependency> <dependency> <groupId>com.sun</groupId> <artifactId>jce</artifactId> 
+			<version>${jdk.version}</version> <scope>system</scope> <systemPath>${JAVA_HOME}/jre/lib/jce.jar</systemPath> 
+			</dependency> -->
+		<!-- 解决编译时候tools rt等 结束 -->
+
 		<!-- 解决BASE64Decoder开始 -->
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -967,67 +934,57 @@
 			<version>${commons-codec.version}</version>
 		</dependency>
 		<!-- 解决BASE64Decoder结束 -->
-		
-		<!-- c3p0配置开始 
-		<dependency>  
-	        <groupId>c3p0</groupId>  
-	        <artifactId>c3p0</artifactId>  
-	        <version>${c3p0.version}</version>  
-	    </dependency>  
-	    -->
-	 	<!-- c3p0配置结束 -->
-	  	
-	  	<!-- bonecp配置开始 
-	    <dependency>  
-	        <groupId>com.jolbox</groupId>  
-	        <artifactId>bonecp</artifactId>  
-	        <version>${bonecp.version}</version>  
-	    </dependency>  
-	    -->
-	    <!-- bonecp配置结束 -->
 
-	    <!-- jaxen开始 -->
-	    <dependency>
-		    <groupId>jaxen</groupId>
-		    <artifactId>jaxen</artifactId>
-		    <version>${jaxen.version}</version>
+		<!-- c3p0配置开始 <dependency> <groupId>c3p0</groupId> <artifactId>c3p0</artifactId> 
+			<version>${c3p0.version}</version> </dependency> -->
+		<!-- c3p0配置结束 -->
+
+		<!-- bonecp配置开始 <dependency> <groupId>com.jolbox</groupId> <artifactId>bonecp</artifactId> 
+			<version>${bonecp.version}</version> </dependency> -->
+		<!-- bonecp配置结束 -->
+
+		<!-- jaxen开始 -->
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>${jaxen.version}</version>
 		</dependency>
-		<!-- jaxen结束 -->	
-		
+		<!-- jaxen结束 -->
+
 		<!-- swagger2开始 -->
-		<dependency>  
-            <groupId>io.springfox</groupId>  
-            <artifactId>springfox-swagger2</artifactId>  
-            <version>${swagger2.version}</version>  
-        </dependency>  
-        <dependency>  
-            <groupId>io.springfox</groupId>  
-            <artifactId>springfox-swagger-ui</artifactId>  
-            <version>${swagger2.version}</version>  
-        </dependency>  
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger2.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger2.version}</version>
+		</dependency>
 		<!-- swagger2结束 -->
-		
+
 		<!-- guava开始 -->
 		<dependency>
-		    <groupId>com.google.guava</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>${guava.version}</version>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
 		</dependency>
 		<!-- guava結束 -->
-		
-     </dependencies>
-	 <build>
+
+	</dependencies>
+	<build>
 		<plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>  
-			    <artifactId>maven-compiler-plugin</artifactId>  
-			    <version>2.3.2</version>  
-                <configuration>
-                    <source>${jdk.version}</source>
-                    <target>${jdk.version}</target>
-                    
-                </configuration>
-            </plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+
+				</configuration>
+			</plugin>
 			<plugin>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>2.1</version>

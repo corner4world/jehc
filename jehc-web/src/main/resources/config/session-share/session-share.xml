@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:cache='http://www.springframework.org/schema/cache'
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd  
+	        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd  
+	        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+	<bean class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration" />
+	<!--引入配置文件 -->
+	<bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath*:config/session-share/session-share.properties
+				</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!--redis哨兵 -->
+    <bean id="redisSentinelConfiguration"
+          class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+        <property name="master">
+            <bean class="org.springframework.data.redis.connection.RedisNode">
+                <property name="name" value="${redis.master.name}"/>
+            </bean>
+        </property>
+        <property name="sentinels">
+            <set>
+                <bean class="org.springframework.data.redis.connection.RedisNode">
+                    <constructor-arg name="host" value="${redis.sentinel.host1}"/>
+                    <constructor-arg name="port" value="${redis.sentinel.port1}"/>
+                </bean>  
+            </set>
+        </property>
+    </bean>
+
+    <bean id="jedisConnFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <constructor-arg name="sentinelConfig" ref="redisSentinelConfiguration"/>
+    </bean>
+
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnFactory"/>
+    </bean>
+</beans>
