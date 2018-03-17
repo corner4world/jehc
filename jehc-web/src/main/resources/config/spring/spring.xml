@@ -101,7 +101,7 @@
 	<import resource="classpath*:config/ehcache/ehcache-spring.xml"/>
 	 -->
 	 
-	 <!-- HttpSession共享整合  -->
+	<!-- HttpSession共享整合 
 	<import resource="classpath*:config/session-share/session-share.xml"/>
-	
+	 -->
 </beans>
