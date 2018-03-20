@@ -145,22 +145,25 @@
 			} 
 			legend {
 				font-size:16px;
-			    padding: 0px 0px 0px;
-			    margin-bottom: 0px;
+			    /* padding: 0px 0px 0px;
+			    margin-bottom: 0px; */
 			    background: #f5f5f5;
 			}
+			fieldset, legend {
+			    padding: 0px 0px 16px 0px;
+			}
 			/* dataTables列内容居中 */  
-			.table>tbody>tr>td{  
+			/* .table>tbody>tr>td{  
 			        text-align:left;  
-			}  
+			}   */
 			  
 			/* dataTables表头居中 */  
 			.table>thead:first-child>tr:first-child>th{  
-			        text-align:left;  
+			        /* text-align:left;   */
 			        background-color: #f5f5f5;
 			} 
 			.table>thead:first-child>tr:first-child>th p{  
-			        text-align:left;  
+			        /* text-align:left;   */
 			        font-weight:normal;
 			}  
 			table.dataTable thead th, table.dataTable tfoot th {
@@ -185,6 +188,9 @@
 			}
 			.page-header { margin: 5px 0 2px;}
 			.panel { margin-bottom: 0px;}
+			.panel-body {
+			    padding: 5px 0px 5px 0px;
+			}
 			.table-striped>tbody>tr:nth-of-type(odd) {
 			    background-color: rgb(255, 255, 255);
 			}
