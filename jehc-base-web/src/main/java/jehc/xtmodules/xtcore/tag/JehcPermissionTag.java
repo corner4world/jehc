@@ -14,6 +14,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import jehc.xtmodules.xtcore.allutils.StringUtil;
+import jehc.xtmodules.xtcore.base.BaseHttpSessionEntity;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 
@@ -68,16 +69,17 @@ public class JehcPermissionTag extends BodyTagSupport {
 				// 允许访问标签body（allow access to tag body）
 				return BodyTagSupport.EVAL_BODY_INCLUDE;// 返回此则执行标签body中内容，SKIP_BODY则不执行（If you return this, execute the content in the tag body, and SKIP_BODY does not） 
 			}
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
 			if(!StringUtils.isEmpty(this.getSystemUID())){
 				//如果数据权限标识不为空 则开始进行数据权限验证
-				List<String> systemUandM = (List<String>)request.getSession(false).getAttribute(SessionConstant.SYSTEMUANDM);
+				List<String> systemUandM =baseHttpSessionEntity.getSYSTEMUANDM();
 				if(!dataAuth(systemUandM, systemUID, modules)){
 					//不满足条件 
 					return BodyTagSupport.SKIP_BODY;
 				}
 			}else{
 				//普通按钮权限验证
-				String btnList = (String)request.getSession(false).getAttribute(SessionConstant.XT_FUNCTIONINFOMETHOD);
+				String btnList = baseHttpSessionEntity.getXT_FUNCTIONINFOMETHOD();
 				btnList = ","+btnList+",";
 				if(btnList.indexOf(","+this.getModules()+",")<0){
 					//不满足条件 

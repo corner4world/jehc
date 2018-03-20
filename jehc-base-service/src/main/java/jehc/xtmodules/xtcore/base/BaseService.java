@@ -79,9 +79,12 @@ public class BaseService extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-			if (null != xtUserinfo) {
-				return xtUserinfo.getXt_userinfo_realName();
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				XtUserinfo xtUserinfo = baseHttpSessionEntity.getXTUSERINFO();
+				if (null != xtUserinfo) {
+					return xtUserinfo.getXt_userinfo_realName();
+				}
 			}
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
@@ -102,9 +105,12 @@ public class BaseService extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-			if (null != xtUserinfo) {
-				return xtUserinfo.getXt_userinfo_name();
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				XtUserinfo xtUserinfo = baseHttpSessionEntity.getXTUSERINFO();
+				if (null != xtUserinfo) {
+					return xtUserinfo.getXt_userinfo_name();
+				}
 			}
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
@@ -125,9 +131,12 @@ public class BaseService extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-			if (null != xtUserinfo) {
-				return xtUserinfo.getXt_userinfo_id();
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				XtUserinfo xtUserinfo = baseHttpSessionEntity.getXTUSERINFO();
+				if (null != xtUserinfo) {
+					return xtUserinfo.getXt_userinfo_id();
+				}
 			}
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
@@ -184,11 +193,15 @@ public class BaseService extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-			return xtUserinfo;
+			
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				return baseHttpSessionEntity.getXTUSERINFO();
+			}
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
+		return null;
 	}
 
 	/**
@@ -285,7 +298,7 @@ public class BaseService extends UUID{
 	 * 获取数据权限
 	 * @return
 	 */
-	public static String systemUandM(){
+	public static List<String> systemUandM(){
 		try {
 			RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 			HttpServletRequest request = ((ServletRequestAttributes) ra).getRequest();
@@ -293,10 +306,14 @@ public class BaseService extends UUID{
 			if(null == session){
 				return null;
 			}
-			return (String) session.getAttribute(SessionConstant.SYSTEMUANDM);
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				return baseHttpSessionEntity.getSYSTEMUANDM();
+			}
 		} catch (Exception e) {
 			throw new ExceptionUtil("获取systemUandM出现异常："+e.getMessage());
 		}
+		return null;
 	}
 
 	/**
@@ -311,12 +328,16 @@ public class BaseService extends UUID{
 		if(null == session){
 			return false;
 		}
-		XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-		if (xtUserinfo.getXt_userinfo_isAdmin() == 1) {
-			return true;
-		} else {
-			return false;
+		BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+		if(null != baseHttpSessionEntity){
+			XtUserinfo xtUserinfo = baseHttpSessionEntity.getXTUSERINFO();
+			if (xtUserinfo.getXt_userinfo_isAdmin() == 1) {
+				return true;
+			} else {
+				return false;
+			}
 		}
+		return false;
 	}
 
 	/**

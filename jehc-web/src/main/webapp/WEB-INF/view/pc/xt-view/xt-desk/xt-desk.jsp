@@ -92,9 +92,9 @@ body {
 				</div>
 				<div class="details">
 					<div class="number">
-						<span data-counter="counterup" data-value="${xtOnlineUserCount }">${xtOnlineUserCount }</span>个
+						<span data-counter="counterup" data-value="${xtNotifyCount }">${xtNotifyCount }</span>个
 					</div>
-					<div class="desc">当前在线人数</div>
+					<div class="desc">通知</div>
 				</div>
 			</a>
 		</div>

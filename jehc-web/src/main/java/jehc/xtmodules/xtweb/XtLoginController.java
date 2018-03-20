@@ -20,8 +20,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseHttpSessionEntity;
 import jehc.xtmodules.xtcore.md5.MD5;
-import jehc.xtmodules.xtcore.session.OnLinesessionthread;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
@@ -98,10 +98,9 @@ public class XtLoginController extends BaseAction{
 		if(flag != 1){
 			XtUserinfo xtUserinfo = xtUserinfoService.getXtUserinfoByUP(condition);
 			if(null != xtUserinfo){
-				request.getSession(false).setAttribute(SessionConstant.XTUSERINFO, xtUserinfo);
 				List<XtFunctioninfoRight> xt_Functioninfo_RightList = new ArrayList<XtFunctioninfoRight>();
 				StringBuffer xt_role_id = new StringBuffer();
-				if(isAdmin()){
+				if(isAdmin(xtUserinfo)){
 					//如果是超级管理员 取出所有功能
 					xt_Functioninfo_RightList = xtFunctioninfoRightService.getXtFunctioninfoListForAdmin(condition);
 				}else{
@@ -137,11 +136,11 @@ public class XtLoginController extends BaseAction{
 						sbfMethod.append(","+xt_Functioninfo_Right.getXt_functioninfoMethod()+",");
 					}
 				}
-				request.getSession(false).setAttribute(SessionConstant.XT_ROLE_ID, xt_role_id.toString());
-				request.getSession(false).setAttribute(SessionConstant.XT_FUNCTIONINFOURL, sbfURL.toString());
-				request.getSession(false).setAttribute(SessionConstant.XT_FUNCTIONINFOMETHOD, sbfMethod.toString());
-				new OnLinesessionthread(xtUserinfo, session).start();//监控在线用户
-				dataAuthority(request);
+				BaseHttpSessionEntity baseHttpSessionEntity = new BaseHttpSessionEntity(xtUserinfo,xt_role_id.toString(),sbfURL.toString(),sbfMethod.toString(),dataAuthority(request,xtUserinfo),session.getId());
+				request.getSession(false).setAttribute(SessionConstant.BASE_HTTP_SESSION, baseHttpSessionEntity);
+				/**
+				new OnLinesessionthread(baseHttpSessionEntity, session).start();//监控在线用户
+				**/
 			}else{
 				flag = 2;
 			}
@@ -204,13 +203,13 @@ public class XtLoginController extends BaseAction{
 	 * 数据权限
 	 * @param request
 	 */
-	public void dataAuthority(HttpServletRequest request){
+	public List<String> dataAuthority(HttpServletRequest request,XtUserinfo u){
 		/////////////////////////////////
 		/////////////////////////操作数据及数据功能权限 开始
 		/////////////////////////////////
 		Map<String,Object> condition = new HashMap<String, Object>();
-		if(!isAdmin()){
-			condition.put("xt_userinfo_id", getXtUid());
+		if(!isAdmin(u)){
+			condition.put("xt_userinfo_id", u.getXt_userinfo_id());
 		}
 		List<String> systemUandM = new ArrayList<String>();//用户及功能URL
 		List<XtDataAuthority> xt_Data_AuthorityList = xtDataAuthorityService.getXtDataAuthorityListForLogin(condition);
@@ -218,9 +217,9 @@ public class XtLoginController extends BaseAction{
 			systemUandM.add(xtDataAuthority.getXtUID()+"#"+xtDataAuthority.getXt_functioninfoURL());
 		}
 		//将数据及数据功能权限等信息放入到里面
-		request.getSession(false).setAttribute(SessionConstant.SYSTEMUANDM, systemUandM);//用户及功能URL
 		/////////////////////////////////
 		/////////////////////////操作数据及数据功能权限 结束
 		/////////////////////////////////	
+		return systemUandM;
 	}
 }

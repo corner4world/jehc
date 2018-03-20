@@ -1,5 +1,6 @@
 package jehc.xtmodules.xtweb;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
+import jehc.xtmodules.xtcore.base.BaseHttpSessionEntity;
 import jehc.xtmodules.xtcore.session.OnLinesessionlistener;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtmodel.XtUserinfo;
@@ -47,8 +49,12 @@ public class XtOnLineUserController extends BaseAction{
 	public String getXtOnLineUserList(HttpServletRequest request){
 		HttpSession se = request.getSession(); 
 		ServletContext application = se.getServletContext();  
-		List<XtUserinfo> saUserInfoList =((List<XtUserinfo>)application.getAttribute(SessionConstant.XT_ONLINE_USERLIST));
-		return outItemsStr(saUserInfoList);
+		List<XtUserinfo> xtUserInfoList = new ArrayList<XtUserinfo>();
+		List<BaseHttpSessionEntity> baseHttpSessionEntityList = (List<BaseHttpSessionEntity>) application.getAttribute(SessionConstant.XT_ONLINE_USERLIST);  
+		for(BaseHttpSessionEntity baseHttpSessionEntity:baseHttpSessionEntityList){
+			xtUserInfoList.add(baseHttpSessionEntity.getXTUSERINFO());
+		}
+		return outItemsStr(xtUserInfoList);
 	}
 	
 	
@@ -56,26 +62,24 @@ public class XtOnLineUserController extends BaseAction{
 	 * 移除所有人员
 	 * @return
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@ResponseBody
 	@RequestMapping(value="/removeAllXtOnLineUser",method={RequestMethod.POST,RequestMethod.GET})
 	public String removeAllXtOnLineUser(HttpServletRequest request){
 		try {
 			 HttpSession session = request.getSession(); 
 		     ServletContext application = session.getServletContext(); 
-		     List<XtUserinfo> onLineUserList = (List<XtUserinfo>) application.getAttribute(SessionConstant.XT_ONLINE_USERLIST);  
-		     onLineUserList.clear();
+		     if(null != application){
+		    	application.removeAttribute(SessionConstant.XT_ONLINE_USERLIST); 
+		     }
+		} catch (Exception e) {
+		}
+		try {
 		     Iterator iterator = OnLinesessionlistener.getSet(); 
 		     while (iterator.hasNext()) { 
 		    	 HttpSession se = (HttpSession) iterator.next();
-		    	 try {
-		    		 if(null != se && null != se.getAttribute(SessionConstant.XTUSERINFO)){
-			    		 se.removeAttribute(SessionConstant.XTUSERINFO);
-			    	 }
-				} catch (Exception e) {
-					//用异常处理类就是为了让while循环继续
-					//e.printStackTrace();
-				}
+		    	 if(null != se){
+	    			 se.invalidate();
+		    	 }
 		     }
 		     return outAudStr(true, "剔除成功");
 		} catch (Exception e) {
@@ -91,32 +95,23 @@ public class XtOnLineUserController extends BaseAction{
 	@RequestMapping(value="/removeXtOnLineUser",method={RequestMethod.POST,RequestMethod.GET})
 	public String removeXtOnLineUser(HttpServletRequest request,String sessionId){
 		String[] sessionIdList = sessionId.split(",");
+		HttpSession session = request.getSession(); 
+	    ServletContext application = session.getServletContext();
+	    List<BaseHttpSessionEntity> baseHttpSessionEntityList = (List<BaseHttpSessionEntity>) application.getAttribute(SessionConstant.XT_ONLINE_USERLIST);  
 		for(String sessionIds:sessionIdList){
-			HttpSession session = request.getSession(); 
-		     ServletContext application = session.getServletContext(); 
-		     List<XtUserinfo> onLineUserList = (List<XtUserinfo>) application.getAttribute(SessionConstant.XT_ONLINE_USERLIST);  
-		     int number = 1;
-		     for(int i = 0; i < onLineUserList.size(); i++){
-		    	 if(onLineUserList.get(i).getSessionId().equals(sessionIds)){
-		    		 onLineUserList.remove(i);
+		     for(int i = 0; i < baseHttpSessionEntityList.size(); i++){
+		    	 if(baseHttpSessionEntityList.get(i).getSESSION_ID().equals(sessionIds)){
 		    		 Iterator<HttpSession> iterator = OnLinesessionlistener.getSet(); 
 				     while (iterator.hasNext()) { 
 				    	 HttpSession se = (HttpSession) iterator.next();
-				    	 XtUserinfo onlineUser = (XtUserinfo)se.getAttribute(SessionConstant.XTUSERINFO);
-				    	 if(null != onlineUser){
-				    		 if(onlineUser.getSessionId().equals(sessionIds)) {
-				    			 se.removeAttribute(SessionConstant.XTUSERINFO);
-				    			 break;
-				    		 }
+				    	 if(se.getId().equals(sessionIds)){
+				    		 se.invalidate();
+				    		 break;
 				    	 }
 				     }
-				     i--;
-		    	 }else{
-		    		 number++;
+				     baseHttpSessionEntityList.remove(i);
+		    		 i--;
 		    	 }
-		     }
-		     if(number == onLineUserList.size()){
-		    	 return outAudStr(false, "剔除失败,该用户可能已经退出系统");
 		     }
 		}
 		return outAudStr(true, "剔除成功");

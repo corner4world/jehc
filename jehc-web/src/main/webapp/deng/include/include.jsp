@@ -13,7 +13,7 @@
 	   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<link rel="icon" type="image/ico" href="${syspath }/deng/images/icons/system.png" />
 		<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
-		<input type="hidden" value="${xt_functioninfoMethod }" id="xtFunctionInfoBtnStr">
+		<input type="hidden" value="${BASE_HTTP_SESSION.XT_FUNCTIONINFOMETHOD }" id="xtFunctionInfoBtnStr">
 	   	<!-- 主题技术Extjs支持 -->
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
@@ -35,7 +35,7 @@
 	    	var sys_pt_index_foot = "${sys_pt_index_foot}";
 	    	var sys_pt_index_top = "${sys_pt_index_top}";
 	    	var sys_pt_session = "${sys_pt_session}";
-	    	var sys_pt_user_name = "${xtUserinfo.xt_userinfo_realName}";
+	    	var sys_pt_user_name = "${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_realName}";
 	    	var moretext = "${moretext}";
 	    	var moretexttooltip = "${moretexttooltip}";
 	    	var grid_toolbar_gaps = "${grid_toolbar_gaps}";
@@ -49,7 +49,7 @@
 		</script>
 		<c:if test="${not empty xtUserinfo.xt_userinfo_id}">
 			<script>
-			xt_userinfo_id = '${xtUserinfo.xt_userinfo_id}';
+			xt_userinfo_id = '${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_id}';
 			</script>
 		</c:if>
 		<style type="text/css">

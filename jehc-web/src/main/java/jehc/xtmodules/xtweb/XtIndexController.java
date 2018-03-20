@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageInfo;
+
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseTreeEntity;
@@ -27,12 +29,16 @@ import jehc.xtmodules.xtcore.util.IndexTree;
 import jehc.xtmodules.xtcore.util.SortList;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtmodel.XtMenuinfo;
+import jehc.xtmodules.xtmodel.XtNotify;
+import jehc.xtmodules.xtmodel.XtNotifyReceiver;
 import jehc.xtmodules.xtmodel.XtUserinfo;
 import jehc.xtmodules.xtservice.XtKnowledgeService;
 import jehc.xtmodules.xtservice.XtKwordsService;
 import jehc.xtmodules.xtservice.XtLoginLogsService;
 import jehc.xtmodules.xtservice.XtMenuinfoService;
 import jehc.xtmodules.xtservice.XtNoticeService;
+import jehc.xtmodules.xtservice.XtNotifyReceiverService;
+import jehc.xtmodules.xtservice.XtNotifyService;
 import jehc.xtmodules.xtservice.XtUserinfoService;
 
 /**
@@ -171,22 +177,21 @@ public class XtIndexController extends BaseAction{
 	private XtLoginLogsService xtLoginLogsService;
 	@Autowired
 	private XtKnowledgeService xtKnowledgeService;
+	@Autowired
+	private XtNotifyReceiverService xtNotifyReceiverService;
 	/**
 	 * 载入桌面
 	 * @param request
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/desk.html",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView loadDesk(HttpServletRequest request,Model model) {
 		Map<String,Object> condition = new HashMap<String,Object>();
-		//在线用户
-		HttpSession se = request.getSession(); 
-		ServletContext application = se.getServletContext();  
-		List<XtUserinfo> xtUserInfoList =((List<XtUserinfo>)application.getAttribute(SessionConstant.XT_ONLINE_USERLIST));
-		if(null != xtUserInfoList && !xtUserInfoList.isEmpty() && xtUserInfoList.size() > 0){
-			model.addAttribute("xtOnlineUserCount", xtUserInfoList.size());
-		}
+		commonHPager(condition,request);
+		List<XtNotifyReceiver> xtNotifyReceiverList = xtNotifyReceiverService.getXtNotifyReceiverListByCondition(condition);
+		PageInfo<XtNotifyReceiver> page = new PageInfo<XtNotifyReceiver>(xtNotifyReceiverList);
+		model.addAttribute("xtNotifyCount",page.getTotal());
+		
 		//公告数
 		model.addAttribute("xtNoticeCount", xtNoticeService.getXtNoticeCountByCondition(condition));
 		model.addAttribute("xtNoticeList", xtNoticeService.getXtNoticeListByCondition(condition));

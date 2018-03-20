@@ -17,11 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.annotation.NeedLoginUnAuth;
+import jehc.xtmodules.xtcore.base.BaseHttpSessionEntity;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.Logback4jUtil;
 import jehc.xtmodules.xtcore.util.constant.PathConstant;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtcore.util.constant.StatusConstant;
+import jehc.xtmodules.xtmodel.XtUserinfo;
 
 /**
  * 采用自定义注解做权限
@@ -65,9 +67,6 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		///////////////////拦截IP黑户结束///////////////////////
 		
         String requestUrl = request.getRequestURI().replace(request.getContextPath(), "").replaceFirst("/", "");  
-        /*if (!(handler instanceof HandlerMethod)) {
-            return false;
-        } */
 		HandlerMethod methodHandler=(HandlerMethod) handler;
 		//不需要登陆验证的URL
 		AuthUneedLogin authUneedLogin=methodHandler.getMethodAnnotation(AuthUneedLogin.class);
@@ -77,11 +76,11 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		if(null != authUneedLogin){
 			return true;
 		}
-//		//过滤druid
-//		if(((request.getRequestURI().indexOf(("druid"))> 0 ) && null == CommonUtils.getXtU())){
-//			 request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
-//			 return false;
-//		}
+		//过滤druid
+		if(((request.getRequestURI().indexOf(("druid"))> 0 ) && null == CommonUtils.getXtU())){
+			 request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
+			 return false;
+		}
 		//需要登录但无需拦截验证URL
 		NeedLoginUnAuth needLoginUnAuth = methodHandler.getMethodAnnotation(NeedLoginUnAuth.class);
 		if(null != needLoginUnAuth){
@@ -95,17 +94,18 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 		//验证当前用户是否登录（优先级第三）
         if(null != CommonUtils.getXtU()){
         	//////////////////对功能进行拦截开始///////////////////
+        	BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) request.getSession(false).getAttribute(SessionConstant.BASE_HTTP_SESSION);
         	//过滤公共功能
     		String XtFunctioninfoCommon = CommonUtils.getXtFunctioninfoCommonCache();
 			if(!StringUtils.isEmpty(XtFunctioninfoCommon) && XtFunctioninfoCommon.indexOf(","+requestUrl+",") >= 0){
-    			return dataAuth(request, response, requestUrl);
+    			return dataAuth(request, response, requestUrl,baseHttpSessionEntity);
     		}
     		//如果超级管理员则放过所有功能
     		if(isAdmin()){
     			return true;
     		}
     		//非超级管理员则进行功能权限验证
-    		String xt_functioninfoURL = (String)request.getSession(false).getAttribute(SessionConstant.XT_FUNCTIONINFOURL);
+    		String xt_functioninfoURL = baseHttpSessionEntity.getXT_FUNCTIONINFOURL();
     		if(xt_functioninfoURL.indexOf(","+requestUrl+",")<0){
     			if(!bDownLoad(request, response)){
     				return false;
@@ -122,7 +122,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
     			}
     			return false;  
     		}else{
-				return dataAuth(request, response, requestUrl);
+				return dataAuth(request, response, requestUrl,baseHttpSessionEntity);
     		}
     		//////////////////对功能进行拦截结束///////////////////
         }else{
@@ -223,9 +223,9 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("unchecked")
-	public boolean dataAuth(HttpServletRequest request,HttpServletResponse response,String requestUrl) throws IOException{
+	public boolean dataAuth(HttpServletRequest request,HttpServletResponse response,String requestUrl,BaseHttpSessionEntity baseHttpSessionEntity) throws IOException{
 		String[] paramNames = (String[])request.getParameterValues("systemUID");//唯一标志systemUID
-		List<String> systemUandM = (List<String>)request.getSession(false).getAttribute(SessionConstant.SYSTEMUANDM);
+		List<String> systemUandM = baseHttpSessionEntity.getSYSTEMUANDM();
 		List<String> sysUID = new ArrayList<String>();
 		//如果系统唯一标志不为空 说明系统采用了数据权限
 		if(null != paramNames){

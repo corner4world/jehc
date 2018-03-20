@@ -19,9 +19,6 @@
 	   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 		<link rel="icon" type="image/ico" href="${syspath }/deng/images/icons/system.png" />
 		<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
-		<%-- 
-		<input type="hidden" value="${xt_functioninfoMethod }" id="xtFunctionInfoBtnStr">
-		 --%>
 	   	<script type="text/javascript">
 	    	var basePath = "${syspath}";
 	    	var sys_pt_login = "${sys_pt_login}";
@@ -29,7 +26,7 @@
 	    	var sys_pt_index_foot = "${sys_pt_index_foot}";
 	    	var sys_pt_index_top = "${sys_pt_index_top}";
 	    	var sys_pt_session = "${sys_pt_session}";
-	    	var sys_pt_user_name = "${xtUserinfo.xt_userinfo_realName}";
+	    	var sys_pt_user_name = "${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_realName}";
 	    	var moretext = "${moretext}";
 	    	var moretexttooltip = "${moretexttooltip}";
 	    	var grid_toolbar_gaps = "${grid_toolbar_gaps}";
@@ -39,7 +36,7 @@
 	    	var tbarBtnMinWidth=0;
 	    	var hideCollapseToolFlag=true;
 	    	var lc_design_displaywin_for_edit = ${lc_design_displaywin_for_edit};
-	    	var xt_userinfo_id='${xtUserinfo.xt_userinfo_id}'; 
+	    	var xt_userinfo_id='${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_id}'; 
 		</script>
 		<!-- 基础插件样式开始 -->
 		<%-- <script type="text/javascript" src="${syspath}/deng/source/plugins/other/jquery/jquery-1.7.2.min.js"></script> --%>

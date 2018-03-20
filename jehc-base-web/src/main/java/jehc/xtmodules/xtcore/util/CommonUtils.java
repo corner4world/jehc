@@ -27,12 +27,12 @@ import jehc.solrmodules.solrmodel.SolrCore;
 import jehc.xtmodules.xtcore.allutils.AllUtils;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.allutils.file.FileUtil;
+import jehc.xtmodules.xtcore.base.BaseHttpSessionEntity;
 import jehc.xtmodules.xtcore.base.BaseXtModifyRecordRun;
 import jehc.xtmodules.xtcore.base.BaseXtOperateBusinessLogsRun;
 import jehc.xtmodules.xtcore.cache.ehcache.CacheManagerUtil;
 import jehc.xtmodules.xtcore.util.constant.CacheConstant;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
-import jehc.xtmodules.xtcore.util.constant.StatusConstant;
 import jehc.xtmodules.xtmodel.XtAreaRegion;
 import jehc.xtmodules.xtmodel.XtAttachment;
 import jehc.xtmodules.xtmodel.XtConstant;
@@ -68,9 +68,12 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-			if (null != xtUserinfo) {
-				return xtUserinfo.getXt_userinfo_realName();
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				XtUserinfo xtUserinfo = baseHttpSessionEntity.getXTUSERINFO();
+				if (null != xtUserinfo) {
+					return xtUserinfo.getXt_userinfo_realName();
+				}
 			}
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
@@ -91,9 +94,12 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-			if (null != xtUserinfo) {
-				return xtUserinfo.getXt_userinfo_name();
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				XtUserinfo xtUserinfo = baseHttpSessionEntity.getXTUSERINFO();
+				if (null != xtUserinfo) {
+					return xtUserinfo.getXt_userinfo_name();
+				}
 			}
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
@@ -114,9 +120,12 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-			if (null != xtUserinfo) {
-				return xtUserinfo.getXt_userinfo_id();
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if (null != baseHttpSessionEntity) {
+				XtUserinfo xtUserinfo = baseHttpSessionEntity.getXTUSERINFO();
+				if(null != xtUserinfo){
+					return xtUserinfo.getXt_userinfo_id();
+				}
 			}
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
@@ -173,11 +182,15 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-			return xtUserinfo;
+			
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				return baseHttpSessionEntity.getXTUSERINFO();
+			}
 		} catch (Exception e) {
 			throw new ExceptionUtil(e.getMessage(),e.getCause());
 		}
+		return null;
 	}
 
 	/**
@@ -274,7 +287,7 @@ public class CommonUtils extends UUID{
 	 * 获取数据权限
 	 * @return
 	 */
-	public static String systemUandM(){
+	public static List<String> systemUandM(){
 		try {
 			RequestAttributes ra = RequestContextHolder.getRequestAttributes();
 			HttpServletRequest request = ((ServletRequestAttributes) ra).getRequest();
@@ -282,10 +295,14 @@ public class CommonUtils extends UUID{
 			if(null == session){
 				return null;
 			}
-			return (String) session.getAttribute(SessionConstant.SYSTEMUANDM);
+			BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+			if(null != baseHttpSessionEntity){
+				return baseHttpSessionEntity.getSYSTEMUANDM();
+			}
 		} catch (Exception e) {
 			throw new ExceptionUtil("获取systemUandM出现异常："+e.getMessage());
 		}
+		return null;
 	}
 
 	/**
@@ -300,12 +317,32 @@ public class CommonUtils extends UUID{
 		if(null == session){
 			return false;
 		}
-		XtUserinfo xtUserinfo = (XtUserinfo) session.getAttribute(SessionConstant.XTUSERINFO);
-		if (xtUserinfo.getXt_userinfo_isAdmin() == 1) {
-			return true;
-		} else {
-			return false;
+		BaseHttpSessionEntity baseHttpSessionEntity = (BaseHttpSessionEntity) session.getAttribute(SessionConstant.BASE_HTTP_SESSION);
+		if(null != baseHttpSessionEntity){
+			XtUserinfo xtUserinfo = baseHttpSessionEntity.getXTUSERINFO();
+			if (xtUserinfo.getXt_userinfo_isAdmin() == 1) {
+				return true;
+			} else {
+				return false;
+			}
 		}
+		return false;
+	}
+	
+	/**
+	 * 判断当前用户是否为超级管理员
+	 * 
+	 * @return
+	 */
+	public static boolean isAdmin(XtUserinfo xtUserinfo) {
+		if(null != xtUserinfo){
+			if (xtUserinfo.getXt_userinfo_isAdmin() == 1) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -479,7 +516,7 @@ public class CommonUtils extends UUID{
 	public static String getXtFunctioninfoCommonCache(){
 		Cache ehCache = CacheManagerUtil.getCache(CacheConstant.XTFUNCTIONINFOCOMMONCACHE);
 		Element XtFunctioninfoCommonCacheEle = ehCache.get(CacheConstant.XTFUNCTIONINFOCOMMONCACHE);
-		if(null == XtFunctioninfoCommonCacheEle || null == XtFunctioninfoCommonCacheEle.getObjectValue()){
+		if(null == XtFunctioninfoCommonCacheEle){
 			return null;
 		}
 		return ""+XtFunctioninfoCommonCacheEle.getObjectValue();
@@ -546,11 +583,10 @@ public class CommonUtils extends UUID{
 						FileUtils.copyInputStreamToFile(file.getInputStream(), new File(path,newName));//采用文件拷贝模式上传
 //						FtpUtil.uploadFile(path, newName, file.getInputStream());//此处可以修改成Ftp操作如下:
 						XtAttachment xt_Attachment = new XtAttachment();
-						xt_Attachment.setXt_attachment_id(UUID.toUUID());
+						xt_Attachment.setXt_attachment_id(toUUID());
 						xt_Attachment.setXt_attachmentCtime(getSimpleDateFormat());
 						xt_Attachment.setXt_attachmentName(newName);
 						xt_Attachment.setXt_attachmentPath(relative_path+newName);
-						xt_Attachment.setXt_userinfo_id(CommonUtils.getXtUid());
 						xt_Attachment.setXt_attachmentSize(""+file.getSize());
 						xt_Attachment.setXt_attachmentType(file.getContentType());
 						xt_Attachment.setXt_attachmentTitle(fileName);
@@ -633,11 +669,11 @@ public class CommonUtils extends UUID{
 	 */
 	public void aBLogs(String classname,String method,String message){
 		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
-		xt_Operate_Business_Logs.setXt_operate_b_logsTime(CommonUtils.getSimpleDateFormat());
-		xt_Operate_Business_Logs.setXt_operate_b_logs_id(UUID.toUUID());
+		xt_Operate_Business_Logs.setXt_operate_b_logsTime(getSimpleDateFormat());
+		xt_Operate_Business_Logs.setXt_operate_b_logs_id(toUUID());
 		xt_Operate_Business_Logs.setXt_operate_b_logsModules(classname);
 		xt_Operate_Business_Logs.setXt_operate_b_logsMethod(method);
-		xt_Operate_Business_Logs.setXt_userinfo_id(CommonUtils.getXtUid());
+		xt_Operate_Business_Logs.setXt_userinfo_id(getXtUid());
 		xt_Operate_Business_Logs.setXt_operate_b_logsResult(message);
 		//////////为了性能采用异步
 		/**
@@ -654,11 +690,11 @@ public class CommonUtils extends UUID{
 	 */
 	public void aBLogs(String classname,String method,String message,String parm){
 		XtOperateBusinessLogs xt_Operate_Business_Logs = new XtOperateBusinessLogs();
-		xt_Operate_Business_Logs.setXt_operate_b_logsTime(CommonUtils.getSimpleDateFormat());
-		xt_Operate_Business_Logs.setXt_operate_b_logs_id(UUID.toUUID());
+		xt_Operate_Business_Logs.setXt_operate_b_logsTime(getSimpleDateFormat());
+		xt_Operate_Business_Logs.setXt_operate_b_logs_id(toUUID());
 		xt_Operate_Business_Logs.setXt_operate_b_logsModules(classname);
 		xt_Operate_Business_Logs.setXt_operate_b_logsMethod(method);
-		xt_Operate_Business_Logs.setXt_userinfo_id(CommonUtils.getXtUid());
+		xt_Operate_Business_Logs.setXt_userinfo_id(getXtUid());
 		xt_Operate_Business_Logs.setXt_operate_b_logsResult(message);
 		xt_Operate_Business_Logs.setXt_operate_b_logsMethodPar(parm);
 		//////////为了性能采用异步
@@ -690,16 +726,16 @@ public class CommonUtils extends UUID{
 	            	XtModifyRecord record = new XtModifyRecord();
 	            	record.setXt_modify_record_aftervalue(""+newV);
 	            	record.setXt_modify_record_beforevalue(""+oldV);
-	            	record.setXt_modify_record_ctime(CommonUtils.getSimpleDateFormat());
+	            	record.setXt_modify_record_ctime(getSimpleDateFormat());
 	            	record.setXt_modify_record_field(key);
 	            	record.setXt_modify_record_modules(modules);
 	            	list.add(record);
 	            }
 			}
 			for(int i = 0; i < list.size(); i++){
-				list.get(i).setXt_modify_record_id(UUID.toUUID());
+				list.get(i).setXt_modify_record_id(toUUID());
 				list.get(i).setBusiness_id(business_id);
-				list.get(i).setXt_userinfo_id(CommonUtils.getXtUid());
+				list.get(i).setXt_userinfo_id(getXtUid());
 			}
 			new BaseXtModifyRecordRun(list).start();
 		} catch (Exception e) {
@@ -731,7 +767,7 @@ public class CommonUtils extends UUID{
 	        	            	XtModifyRecord record = new XtModifyRecord();
 	        	            	record.setXt_modify_record_aftervalue(""+newV);
 	        	            	record.setXt_modify_record_beforevalue(""+oldV);
-	        	            	record.setXt_modify_record_ctime(CommonUtils.getSimpleDateFormat());
+	        	            	record.setXt_modify_record_ctime(getSimpleDateFormat());
 	        	            	record.setXt_modify_record_field(key);
 	        	            	record.setXt_modify_record_modules(modules);
 	        	            	list.add(record);
@@ -741,9 +777,9 @@ public class CommonUtils extends UUID{
 	            }
 			}
 			for(int i = 0; i < list.size(); i++){
-				list.get(i).setXt_modify_record_id(UUID.toUUID());
+				list.get(i).setXt_modify_record_id(toUUID());
 				list.get(i).setBusiness_id(business_id);
-				list.get(i).setXt_userinfo_id(CommonUtils.getXtUid());
+				list.get(i).setXt_userinfo_id(getXtUid());
 			}
 			new BaseXtModifyRecordRun(list).start();
 		} catch (Exception e) {
