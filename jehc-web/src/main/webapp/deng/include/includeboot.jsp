@@ -188,9 +188,6 @@
 			}
 			.page-header { margin: 5px 0 2px;}
 			.panel { margin-bottom: 0px;}
-			.panel-body {
-			    padding: 5px 0px 5px 0px;
-			}
 			.table-striped>tbody>tr:nth-of-type(odd) {
 			    background-color: rgb(255, 255, 255);
 			}

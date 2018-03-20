@@ -7,10 +7,15 @@
 <title>员工信息表</title>
 </head>
 <body>
-	<div class="panel panel-default">
-		<fieldset>
-			<legend>查询区域</legend>
-			<form method="POST" id="searchForm" class="form-inline">
+	<div class="portlet box red ">
+        <div class="portlet-title">
+            <div class="caption"><i class="glyphicon glyphicon-search"></i>查询区域</div>
+            <div class="tools">
+                <a title="" class="collapse" href="javascript:;" data-original-title=""></a>
+            </div>
+        </div>
+        <div class="portlet-body form">
+        	<form method="POST" id="searchForm" class="form-inline">
 				<div class="form-group">
 					<label>隶属部门</label>
 					<input type="text" class="form-control" name="xt_departinfo_name" placeholder="请输入部门名称">
@@ -28,50 +33,48 @@
 					<input type="text" class="form-control" name="xt_userinfo_name" placeholder="请输入用户名">
 				</div>
 			</form>
-		</fieldset>
+        </div>
+    </div>
+	<div class="btn-group pull-right" style="margin-right: 0px;">
+		<button class="btn btn-default" onclick="toXtUserinfoAdd()">
+			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+		</button>
+		<button class="btn btn-default" onclick="toXtUserinfoUpdate()">
+			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+		</button>
+		<button class="btn btn-default" onclick="delXtUserinfo()">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+		</button>
+		<button class="btn btn-default" onclick="initListDeleted()">
+			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>已废除
+		</button>
+		<button class="btn btn-default" onclick="search('datatables')">
+			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+		</button>
 	</div>
-	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 0px;">
-			<button class="btn btn-default" onclick="toXtUserinfoAdd()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-			</button>
-			<button class="btn btn-default" onclick="toXtUserinfoUpdate()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-			</button>
-			<button class="btn btn-default" onclick="delXtUserinfo()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
-			<button class="btn btn-default" onclick="initListDeleted()">
-				<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>已废除
-			</button>
-			<button class="btn btn-default" onclick="search('datatables')">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
-		</div>
-		<div class="btn-group pull-right" style="margin-right:20px;">
-			<button class="btn btn-primary" onclick="search('datatables')">
-				<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-			</button>
-			<button class="btn btn-default" onclick="resetAll();">重置</button>
-		</div>
-		<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; ">
-			<thead>
-				<tr>
-					<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
-					<th>序号</th>
-					<th>用户名</th>
-					<th>真实姓名</th>
-					<th>联系电话</th>
-					<th>状态</th>
-					<th>性别</th>
-					<th>籍贯</th>
-					<th>生日</th>
-					<th>电子邮件</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-		</table>
+	<div class="btn-group pull-right" style="margin-right:20px;">
+		<div class="form-actions">
+            <button class="btn default" type="button" onclick="search('datatables')"><i class="glyphicon glyphicon-search"></i>&nbsp;检索</button>
+            <button class="btn red" onclick="resetAll();" type="button">重置</button>
+        </div>
 	</div>
+	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; ">
+		<thead>
+			<tr>
+				<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
+				<th>序号</th>
+				<th>用户名</th>
+				<th>真实姓名</th>
+				<th>联系电话</th>
+				<th>状态</th>
+				<th>性别</th>
+				<th>籍贯</th>
+				<th>生日</th>
+				<th>电子邮件</th>
+				<th>操作</th>
+			</tr>
+		</thead>
+	</table>
 </body>
 <!-- 已废除用户模态框（Modal）开始 -->
 <div class="modal fade" id="deletedUserinfoSelectModal" tabindex="-1" role="dialog" aria-labelledby="deletedUserinfoModalLabel" aria-hidden="true">
