@@ -185,6 +185,15 @@
 			}
 			.page-header { margin: 5px 0 2px;}
 			.panel { margin-bottom: 0px;}
+			.table-striped>tbody>tr:nth-of-type(odd) {
+			    background-color: rgb(255, 255, 255);
+			}
+			table.dataTable tbody tr {
+			    background-color: #f5f5f5;
+			}
+			body {
+			    color: #666;
+			}
 		</style>
 	</head>
 	<!-- upload模态框（Modal）开始 -->
