@@ -151,16 +151,16 @@
 			}
 			/* dataTables列内容居中 */  
 			.table>tbody>tr>td{  
-			        text-align:center;  
+			        text-align:left;  
 			}  
 			  
 			/* dataTables表头居中 */  
 			.table>thead:first-child>tr:first-child>th{  
-			        text-align:center;  
+			        text-align:left;  
 			        background-color: #f5f5f5;
 			} 
 			.table>thead:first-child>tr:first-child>th p{  
-			        text-align:center;  
+			        text-align:left;  
 			        font-weight:normal;
 			}  
 			table.dataTable thead th, table.dataTable tfoot th {
