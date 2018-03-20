@@ -48,7 +48,7 @@
 }
 .page-sidebar .page-sidebar-menu.page-sidebar-menu-compact>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact>li>a {
     min-height: 50px;
-    padding: 25px 15px 25px 5px;
+    padding: 15px 15px 15px 5px;
 } 
 .page-sidebar .page-sidebar-menu .sub-menu>li.active>a, .page-sidebar .page-sidebar-menu .sub-menu>li.open>a, .page-sidebar .page-sidebar-menu .sub-menu>li:hover>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li.active>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li.open>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu>li:hover>a {
     background: #009688!important;
@@ -162,3 +162,4 @@
 .has-success .form-control {
     border-color: #c2cad8;
 }
+.page-sidebar .page-sidebar-menu .sub-menu li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>a {padding: 4px 15px;font-weight: 100;}
