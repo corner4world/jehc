@@ -22,6 +22,10 @@
 		<if test="null != xt_notify_title">
 			AND xt_notify.xt_notify_title LIKE CONCAT(CONCAT('%',#{xt_notify_title}),'%')
 		</if>
+		<if test="null != receive_status">
+			AND xt_notify_receiver.receive_status =#{receive_status}
+		</if>
+			order by receive_time desc
 	</select>
 
 	<!--查询对象-->

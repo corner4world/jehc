@@ -7,7 +7,7 @@
 <title>员工信息表</title>
 </head>
 <body>
-	<div class="portlet box green" style="margin-bottom: 5px">
+	<div class="portlet box green" style="margin-bottom: 5px;">
 		<div class="portlet-title">
             <div class="caption">
                 	查询区域
@@ -42,7 +42,7 @@
 			</form>
         </div>
     </div>
-	<div class="pull-right form-actions" style="margin-right:0px;margin-bottom: 5px">
+	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
         <button class="btn btn-default" onclick="toXtUserinfoAdd()">
 		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		</button>
@@ -59,7 +59,7 @@
 			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 		</button>
     </div>
-	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; ">
+	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
 		<thead>
 			<tr>
 				<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>

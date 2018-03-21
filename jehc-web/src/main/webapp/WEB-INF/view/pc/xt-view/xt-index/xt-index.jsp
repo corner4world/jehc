@@ -85,17 +85,17 @@
                         	<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <i class="icon-bell"></i>
-                                    <span class="badge badge-default"> 1 </span>
+                                    <span id="notifyNumright" class="badge badge-default"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="external">
                                         <h3>
-                                            <span class="bold">1 个</span> 通知</h3>
-                                        <a href="#">全部</a>
+                                            <span id="notifyNum" class="bold"></span> 通知</h3>
+                                        <a href="../xtNotifyController/loadXtNotify" target="_blank">全部</a>
                                     </li>
                                     <li>
-                                        <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                                            <li>
+                                        <ul id="notify" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+<!--                                             <li>
                                                 <a href="javascript:;">
                                                     <span class="time">刚才</span>
                                                     <span class="details">
@@ -103,7 +103,7 @@
                                                             <i class="fa fa-plus"></i>
                                                         </span> 新用户注册. </span>
                                                 </a>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </li>
                                 </ul>

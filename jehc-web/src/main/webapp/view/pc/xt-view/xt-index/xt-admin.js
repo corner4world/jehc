@@ -422,3 +422,63 @@ function changeTheme(){
 		 window.location.href=basePath+"/index/index.html";
 	})
 }
+//获取通知信息
+function geNotify(){
+	ajaxBRequestCallFn('../xtNotifyReceiverController/getXtNotifyReceiverListByCondition?receive_status=0',null,function(result){
+		result = eval("(" + result + ")");
+		var data=result.data;
+		$('#notifyNum').html(data.length);
+		$('#notifyNumright').html(data.length);
+		$("#notify").empty();
+		if(data.length>15){
+			for(var i=0;i<15;i++){
+				var xt_notify = data[i];
+				console.info(xt_notify);
+				var xt_notify_receiver_id=xt_notify.xt_notify_receiver_id;
+				var xt_notify_title=xt_notify.xt_notify_title;
+				var sub_xt_notify_title;
+				if(xt_notify_title.length>10){
+					sub_xt_notify_title=xt_notify_title.substr(0,10)+"...";
+				}else{
+					sub_xt_notify_title=xt_notify_title;
+				};
+				var receive_time=xt_notify.receive_time;
+				var date=receive_time.time
+				var localtime=date.toLocaleString()
+				var date1=new Date();
+				date1.setTime(date);
+				$("#notify").append("<li><a target='_blank' onclick=\"toXtReceiverDetail('"+xt_notify_receiver_id+"')\"><span class='time'>"+date1.toLocaleStringMDHM()+"</span><span class='details' title='"+xt_notify_title+"'><span class='label label-sm label-icon label-success'><i class='fa fa-plus'></i></span>"+sub_xt_notify_title+"</span></a></li>")
+			}
+			$("#notify").append("<li class='text-center'><a href='../xtNotifyController/loadXtNotify' target='_blank'>查看更多</a></li>")
+		}else{
+			for(var i=0;i<data.length;i++){
+				var xt_notify = data[i];
+				console.info(xt_notify);
+				var xt_notify_receiver_id=xt_notify.xt_notify_receiver_id;
+				var xt_notify_title=xt_notify.xt_notify_title;
+				var sub_xt_notify_title;
+				if(xt_notify_title.length>10){
+					sub_xt_notify_title=xt_notify_title.substr(0,10)+"...";
+				}else{
+					sub_xt_notify_title=xt_notify_title;
+				};
+				var receive_time=xt_notify.receive_time;
+				var date=receive_time.time
+				var localtime=date.toLocaleString()
+				var date1=new Date();
+				date1.setTime(date);
+				
+				$("#notify").append("<li><a target='_blank' onclick=\"toXtReceiverDetail('"+xt_notify_receiver_id+"')\"><span class='time'>"+date1.toLocaleStringMDHM()+"</span><span class='details' title='"+xt_notify_title+"'><span class='label label-sm label-icon label-success'><i class='fa fa-plus'></i></span>"+sub_xt_notify_title+"</span></a></li>")
+			}
+		}
+	});
+}
+geNotify();
+setInterval(geNotify,5000);
+function toXtReceiverDetail(xt_notify_receiver_id){
+	window.open('../xtNotifyReceiverController/toXtReceiverDetail?xt_notify_receiver_id='+xt_notify_receiver_id,"_blank"); 
+	setTimeout(geNotify,500)
+}
+Date.prototype.toLocaleStringMDHM = function() {
+    return (this.getMonth() + 1) + "-" + this.getDate() + " " + this.getHours() + ":" + this.getMinutes();
+};

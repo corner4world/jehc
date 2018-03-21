@@ -40,14 +40,16 @@ public class XtNotifyReceiverController extends BaseAction {
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getXtNotifyReceiverListByCondition",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtNotifyReceiverListByCondition(BaseSearch baseSearch,HttpServletRequest request){
+	public String getXtNotifyReceiverListByCondition(BaseSearch baseSearch,HttpServletRequest request,String receive_status){
 		Map<String, Object> condition = baseSearch.convert();
 		condition.put("xt_userinfo_id", getXtUid());
+		condition.put("receive_status",receive_status);
 		commonHPager(condition,request);
 		List<XtNotifyReceiver> xtNotifyReceiverList = xtNotifyReceiverService.getXtNotifyReceiverListByCondition(condition);
 		PageInfo<XtNotifyReceiver> page = new PageInfo<XtNotifyReceiver>(xtNotifyReceiverList);
 		return outPageBootStr(page,request);
 	}
+
 	
 	/**
 	* 删除
@@ -78,13 +80,16 @@ public class XtNotifyReceiverController extends BaseAction {
 	@RequestMapping(value="/toXtReceiverDetail",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView toXtReceiverDetail(String xt_notify_receiver_id,HttpServletRequest request,Model model){
 		XtNotifyReceiver xtNotifyReceiver =xtNotifyReceiverService.getXtNotifyReceiverById(xt_notify_receiver_id);
-		if(null == xtNotifyReceiver.getReceive_time()){
-			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("read_time", getDate());
-			condition.put("xt_notify_receiver_id", xt_notify_receiver_id);
-			xtNotifyReceiverService.updateXtNotifyReceiver(condition);
+		if(null != xtNotifyReceiver){
+			Boolean flag=0==xtNotifyReceiver.getReceive_status();
+			if(flag){
+				Map<String, Object> condition = new HashMap<String, Object>();
+				condition.put("read_time", getDate());
+				condition.put("xt_notify_receiver_id", xt_notify_receiver_id);
+				xtNotifyReceiverService.updateXtNotifyReceiver(condition);
+			}
+			model.addAttribute("xtNotifyReceiver",xtNotifyReceiver);
 		}
-		model.addAttribute("xtNotifyReceiver",xtNotifyReceiver);
 		return new ModelAndView("pc/xt-view/xt-notify/xt-notify-receiver-detail"); 
 	}
 }

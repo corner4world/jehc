@@ -150,7 +150,7 @@
 			    background: #f5f5f5;
 			}
 			fieldset, legend {
-			    padding: 0px 0px 16px 0px;
+			    padding: 5px 0px 5px 0px;
 			}
 			/* dataTables列内容居中 */  
 			/* .table>tbody>tr>td{  
@@ -196,6 +196,9 @@
 			}
 			body {
 			    color: #666;
+			}
+			table.dataTable tbody tr.selected {
+			    background-color: #f5f5ff5;
 			}
 		</style>
 	</head>
