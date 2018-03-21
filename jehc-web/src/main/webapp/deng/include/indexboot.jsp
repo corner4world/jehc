@@ -98,7 +98,7 @@
 		<!-- bootstrap验证框架结束 -->
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
-		<link href="${syspath}/deng/source/plugins/admin/index/tab/css/style.min.css" rel="stylesheet" />
+		<link href="${syspath}/deng/source/plugins/admin/index/tab/css/style.min.css" rel="stylesheet">
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/admin/index/tab/js/contabs.min.js"></script>
 		<%
         Cookie cookies[]=request.getCookies(); 
@@ -115,30 +115,30 @@
 		    if(cookieC.getValue().indexOf("whiteClass")>=0){
 				%>
 		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-white.min.css" rel="stylesheet" type="text/css" />
-		 <style type="text/css">.content-tabs {border-bottom: solid 2px #ffffff;}</style>
+		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
 				<%
 			}else  if(cookieC.getValue().indexOf("whiteBlackClass")>=0){
 				%>
 		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-white-black.min.css" rel="stylesheet" type="text/css" />
-		 <style type="text/css">.content-tabs {border-bottom: solid 2px #ffffff;}</style>
+		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
 				<%
 			}else  if(cookieC.getValue().indexOf("groupClass")>=0){
 				%>
 		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-group.min.css" rel="stylesheet" type="text/css" />
-		 <style type="text/css">.content-tabs {border-bottom: solid 2px #ffffff;}</style>
+		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
 				<%
 			}else{
 				%>
 		 <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
 		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
-		 <style type="text/css">.content-tabs {border-bottom: solid 2px #2f4050;}</style>
+		 <style>.content-tabs {border-bottom: solid 2px #2f4050;}</style>
 				<%
 			}
 	    }else{
 	    	%>
 	    <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
 	    <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
-	    <style type="text/css">.content-tabs {border-bottom: solid 2px #2f4050;}</style>
+	    <style>.content-tabs {border-bottom: solid 2px #2f4050;}</style>
 	    	<%
 	    }
         %>

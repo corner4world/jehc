@@ -7,15 +7,22 @@
 <title>员工信息表</title>
 </head>
 <body>
-	<div class="portlet box red ">
-        <div class="portlet-title">
-            <div class="caption"><i class="glyphicon glyphicon-search"></i>查询区域</div>
-            <div class="tools">
-                <a title="" class="collapse" href="javascript:;" data-original-title=""></a>
+	<div class="portlet box green" style="margin-bottom: 5px">
+		<div class="portlet-title">
+            <div class="caption">
+                	查询区域
+            </div>
+            <div class="actions">
+                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
+                     <i class="glyphicon glyphicon-search"></i>
+                 </a>
+                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
+                     <i class="icon-trash"></i>
+                 </a>
             </div>
         </div>
         <div class="portlet-body form">
-        	<form method="POST" id="searchForm" class="form-inline">
+        	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
 				<div class="form-group">
 					<label>隶属部门</label>
 					<input type="text" class="form-control" name="xt_departinfo_name" placeholder="请输入部门名称">
@@ -35,9 +42,9 @@
 			</form>
         </div>
     </div>
-	<div class="btn-group pull-right" style="margin-right: 0px;">
-		<button class="btn btn-default" onclick="toXtUserinfoAdd()">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+	<div class="pull-right form-actions" style="margin-right:0px;margin-bottom: 5px">
+        <button class="btn btn-default" onclick="toXtUserinfoAdd()">
+		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		</button>
 		<button class="btn btn-default" onclick="toXtUserinfoUpdate()">
 			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
@@ -51,13 +58,7 @@
 		<button class="btn btn-default" onclick="search('datatables')">
 			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 		</button>
-	</div>
-	<div class="btn-group pull-right" style="margin-right:20px;">
-		<div class="form-actions">
-            <button class="btn default" type="button" onclick="search('datatables')"><i class="glyphicon glyphicon-search"></i>&nbsp;检索</button>
-            <button class="btn red" onclick="resetAll();" type="button">重置</button>
-        </div>
-	</div>
+    </div>
 	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; ">
 		<thead>
 			<tr>

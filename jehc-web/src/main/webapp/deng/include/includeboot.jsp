@@ -178,7 +178,7 @@
 			}
 			.dataTables_wrapper .dataTables_length {
 			    float: left;
-			    padding-top: 3px;
+			    padding-top: 0.3em;
 			}
 			.has-success .checkbox, .has-success .checkbox-inline, .has-success .control-label, .has-success .form-control-feedback, .has-success .help-block, .has-success .radio, .has-success .radio-inline, .has-success.checkbox label, .has-success.checkbox-inline label, .has-success.radio label, .has-success.radio-inline label {
 			    color: #333333;
