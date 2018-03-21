@@ -35,14 +35,14 @@ $(document).ready(function() {
 				render:function(data, type, row, meta) {
 					var xt_menuinfo_id = row.xt_menuinfo_id;
   					var xt_menuinfo_title = row.xt_menuinfo_title;
-					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=delXtDataAuthorityDefaultAll("'+xt_menuinfo_id+'")><i class="glyphicon glyphicon-trash"></i>清空初始化</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=delXtDataAuthorityAll("'+xt_menuinfo_id+'")><i class="glyphicon glyphicon-remove"></i>清空按人员</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=delXtDataAuthorityDepartAll("'+xt_menuinfo_id+'")><i class="glyphicon glyphicon-remove"></i>清空按部门</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=delXtDataAuthorityPostAll("'+xt_menuinfo_id+'")><i class="glyphicon glyphicon-remove"></i>清空按岗位</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=showDataAuthorityDefaultAllWin("'+xt_menuinfo_id+'","'+xt_menuinfo_title+'")><i class="glyphiconglyphicon-wrench"></i>启动初始化设置权限</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=showUserWin("'+xt_menuinfo_id+'","'+xt_menuinfo_title+'")><i class="glyphicon glyphicon-transfer"></i>按人员设置</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=showDepartWin("'+xt_menuinfo_id+'","'+xt_menuinfo_title+'")><i class="glyphicon glyphicon-cog"></i>按部门设置</button>';
-					btn = btn+'<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=showPostWin("'+xt_menuinfo_id+'","'+xt_menuinfo_title+'")><i class="glyphicon glyphicon-edit"></i>按岗位设置</button>';
+					var btn = '<button class="btn btn-default" onclick=delXtDataAuthorityDefaultAll("'+xt_menuinfo_id+'")><i class="glyphicon glyphicon-trash"></i>清空初始化</button>';
+					btn = btn+'<button class="btn btn-default" onclick=delXtDataAuthorityAll("'+xt_menuinfo_id+'")><i class="glyphicon glyphicon-remove"></i>清空按人员</button>';
+					btn = btn+'<button class="btn btn-default" onclick=delXtDataAuthorityDepartAll("'+xt_menuinfo_id+'")><i class="glyphicon glyphicon-remove"></i>清空按部门</button>';
+					btn = btn+'<button class="btn btn-default" onclick=delXtDataAuthorityPostAll("'+xt_menuinfo_id+'")><i class="glyphicon glyphicon-remove"></i>清空按岗位</button>';
+					btn = btn+'<button class="btn btn-default" onclick=showDataAuthorityDefaultAllWin("'+xt_menuinfo_id+'","'+xt_menuinfo_title+'")><i class="glyphiconglyphicon-wrench"></i>启动初始化设置权限</button>';
+					btn = btn+'<button class="btn btn-default" onclick=showUserWin("'+xt_menuinfo_id+'","'+xt_menuinfo_title+'")><i class="glyphicon glyphicon-transfer"></i>按人员设置</button>';
+					btn = btn+'<button class="btn btn-default" onclick=showDepartWin("'+xt_menuinfo_id+'","'+xt_menuinfo_title+'")><i class="glyphicon glyphicon-cog"></i>按部门设置</button>';
+					btn = btn+'<button class="btn btn-default" onclick=showPostWin("'+xt_menuinfo_id+'","'+xt_menuinfo_title+'")><i class="glyphicon glyphicon-edit"></i>按岗位设置</button>';
 					return btn;
 				}
 			},
