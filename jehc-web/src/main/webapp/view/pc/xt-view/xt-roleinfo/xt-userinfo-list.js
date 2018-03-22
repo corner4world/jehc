@@ -1,5 +1,5 @@
 function addXtUserinfo(xt_role_id,xt_role_name){
-	$('#UserinfoBody').height(reGetBodyHeight()*1.25);
+	$('#UserinfoBody').height(reGetBodyHeight());
 	$('#UserinfoModal').modal({backdrop:'static',keyboard:false});
 	$('#UserinfoModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
         // 是弹出框居中。。。  

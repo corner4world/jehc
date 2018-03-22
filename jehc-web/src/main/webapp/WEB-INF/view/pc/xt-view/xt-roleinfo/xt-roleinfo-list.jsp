@@ -107,10 +107,21 @@
 				</div>
 				<div class="modal-body" id="UserinfoBody" style="overflow:auto;">
 					<!-- 待分配用户开始 -->
-					<div class="panel panel-default">
-						<fieldset>
-							<legend>待分配用户</legend>
-							<form method="POST" id="searchFormUnImportU">
+					<div class="portlet box green" style="margin-bottom: 5px;">
+						<div class="portlet-title">
+				            <div class="caption">
+				                	待分配用户
+				            </div>
+				            <div class="actions">
+				                <button class="btn btn-primary" onclick="search('UnImportUDatatables')">
+									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+								</button>
+								<button class="btn btn-primary" onclick="resetAll('searchFormUnImportU');">重置</button>
+								<button class="btn btn-primary" onclick="addXtUr();">导入用户</button>
+				            </div>
+				        </div>
+				        <div class="portlet-body form">
+				        	<form method="POST" id="searchFormUnImportU" style="padding: 5px 0px 5px 0px;">
 								<input type="hidden" id="flag2" name="flag" value="2">
 								<input type="hidden" name="xt_roleinfo_id" id="xt_role_id1">
 								<div class="row">
@@ -132,37 +143,39 @@
 									</div>
 								</div>
 							</form>
-							<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-								<button class="btn btn-primary" onclick="search('UnImportUDatatables')">
-									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-								</button>
-								<button class="btn btn-default" onclick="resetAll('searchFormUnImportU');">重置</button>
-								<button class="btn btn-default" onclick="addXtUr();">导入用户</button>
-							</div>
-						</fieldset>
-					</div>
-					<div class="panel-body">
-						<table id="UnImportUDatatables" class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallUnImportU" /><span></span></label></th>
-									<th>序号</th>
-									<th>用户名</th>
-									<th>真实姓名</th>
-									<th>联系电话</th>
-									<th>籍贯</th>
-									<th>生日</th>
-									<th>电子邮件</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
+							<table id="UnImportUDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+								<thead>
+									<tr>
+										<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallUnImportU" /><span></span></label></th>
+										<th>序号</th>
+										<th>用户名</th>
+										<th>真实姓名</th>
+										<th>联系电话</th>
+										<th>籍贯</th>
+										<th>生日</th>
+										<th>电子邮件</th>
+									</tr>
+								</thead>
+							</table>
+				        </div>
+				    </div>
 					<!-- 待分配用户结束 -->
 					<!-- 已分配用户开始 -->
-					<div class="panel panel-default">
-						<fieldset>
-							<legend>已分配用户</legend>
-							<form method="POST" id="searchFormImportU">
+					<div class="portlet box green" style="margin-bottom: 5px;">
+						<div class="portlet-title">
+				            <div class="caption">
+				                	已分配用户
+				            </div>
+				            <div class="actions">
+				                <button class="btn btn-primary" onclick="search('ImportUDatatables')">
+									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+								</button>
+								<button class="btn btn-primary" onclick="resetAll('searchFormUnImportU');">重置</button>
+								<button class="btn btn-primary" onclick="delXtUR();">移除用户</button>
+				            </div>
+				        </div>
+				        <div class="portlet-body form">
+				        	<form method="POST" id="searchFormImportU" style="padding: 5px 0px 5px 0px;">
 								<input type="hidden" name="flag" value="1">
 								<input type="hidden" name="xt_roleinfo_id" id="xt_role_id2">
 								<div class="row">
@@ -184,31 +197,22 @@
 									</div>
 								</div>
 							</form>
-							<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-								<button class="btn btn-primary" onclick="search('ImportUDatatables')">
-									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-								</button>
-								<button class="btn btn-default" onclick="resetAll('searchFormUnImportU');">重置</button>
-								<button class="btn btn-default" onclick="delXtUR();">移除用户</button>
-							</div>
-						</fieldset>
-					</div>
-					<div class="panel-body">
-						<table id="ImportUDatatables" class="table table-bordered table-striped table-hover">
-							<thead>
-								<tr>
-									<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallImportU" /><span></span></label></th>
-									<th>序号</th>
-									<th>用户名</th>
-									<th>真实姓名</th>
-									<th>联系电话</th>
-									<th>籍贯</th>
-									<th>生日</th>
-									<th>电子邮件</th>
-								</tr>
-							</thead>
-						</table>
-					</div>
+							<table id="ImportUDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+								<thead>
+									<tr>
+										<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallImportU" /><span></span></label></th>
+										<th>序号</th>
+										<th>用户名</th>
+										<th>真实姓名</th>
+										<th>联系电话</th>
+										<th>籍贯</th>
+										<th>生日</th>
+										<th>电子邮件</th>
+									</tr>
+								</thead>
+							</table>
+				        </div>
+				    </div>
 				</div>
 			</div><!-- /.modal-content -->
 			<!-- 已分配用户开结束-->
