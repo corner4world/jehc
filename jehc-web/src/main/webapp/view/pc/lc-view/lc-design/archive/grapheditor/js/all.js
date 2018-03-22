@@ -168,12 +168,18 @@ function initProcessGrid(graph,history){
 			{
 				header:'创建时间',
 				flex:1,
-				dataIndex:'lc_process_ctime'
+				dataIndex:'lc_process_ctime',
+				renderer:function(value){
+					return dateformat(value); 
+				}
 			},
 			{
 				header:'最后修改时间',
 				flex:1,
-				dataIndex:'lc_process_mtime'
+				dataIndex:'lc_process_mtime',
+				renderer:function(value){
+					return dateformat(value); 
+				}
 			},
 			{
 				header:'创建人',
