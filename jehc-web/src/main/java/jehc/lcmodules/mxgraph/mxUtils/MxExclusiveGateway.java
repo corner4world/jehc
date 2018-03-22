@@ -39,7 +39,7 @@ public class MxExclusiveGateway {
         	x = "0";
         }
 		//开区间
-        task_node+="<parallelGateway id='"+nodeID+"' name='"+name+"' "+MxUtils.normal(mxCell)+">";
+        task_node+="<exclusiveGateway id='"+nodeID+"' name='"+name+"' "+MxUtils.normal(mxCell)+">";
 
         //****开始区间与闭区间属性 开始****//
         //2备注配置开始
@@ -55,7 +55,7 @@ public class MxExclusiveGateway {
         //****开始区间与闭区间属性 结束****//
         
 		//闭区间
-		task_node += "</parallelGateway>";
+		task_node += "</exclusiveGateway>";
 		
 		//3连线配置开始
         task_node+=MxUtils.sequenceFlow(root, mxCellList, mxCell);
