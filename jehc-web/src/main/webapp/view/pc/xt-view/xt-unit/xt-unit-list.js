@@ -34,7 +34,7 @@ $(document).ready(function() {
 				data:"xt_unit_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtUnitDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtUnitDetail('"+ data +"')\" class='btn btn-default'><span class='glyphicon glyphicon-eye-open'></span></a>";
 				}
 			}
 		]

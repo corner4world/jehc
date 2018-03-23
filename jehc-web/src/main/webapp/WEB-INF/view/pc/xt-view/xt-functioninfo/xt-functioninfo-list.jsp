@@ -13,38 +13,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>功能配置</title>   
 </head>  
 <body>  
-	<div class="panel panel-default">
-		<fieldset>
-			<legend>查询区域</legend>
-			<div class="form-group">
-				<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
-			</div>
-			<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-				<button class="btn btn-primary" onclick="filter('tree','keyword')">
-					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-				</button>
-				<button class="btn btn-default" onclick="$('#keyword').val('')">重置</button>
-			</div>
-		</fieldset>
-	</div>
+	<div class="portlet box green" style="margin-bottom: 5px">
+		<div class="portlet-title">
+            <div class="caption">
+                	查询区域
+            </div>
+            <div class="actions">
+                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:filter('tree','keyword')">
+                     <i class="glyphicon glyphicon-search"></i>
+                 </a>
+                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:$('#keyword').val('')">
+                     <i class="icon-trash"></i>
+                 </a>
+            </div>
+        </div>
+        <div class="portlet-body form">
+        	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
+	        	<div class="form-group">
+					<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
+					<button class="btn btn-default" onclick="addXtFunctioninfo()">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+					</button>
+					<button class="btn btn-default" onclick="updateXtFunctioninfo()">
+						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+					</button>
+					<button class="btn btn-default" onclick="getXtFunctioninfoById()">
+						<span class="glyphicon glyphicon-share" aria-hidden="true"></span>详情
+					</button>
+					<button class="btn btn-default" onclick="delXtFunctioninfo()">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+					</button>
+					<button class="btn btn-default" onclick="refreshAll()">
+						<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+					</button>
+				</div>
+			</form>
+        </div>
+    </div>
 	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 20px;">
-			<button class="btn btn-default" onclick="addXtFunctioninfo()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-			</button>
-			<button class="btn btn-default" onclick="updateXtFunctioninfo()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-			</button>
-			<button class="btn btn-default" onclick="getXtFunctioninfoById()">
-				<span class="glyphicon glyphicon-share" aria-hidden="true"></span>详情
-			</button>
-			<button class="btn btn-default" onclick="delXtFunctioninfo()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
-			<button class="btn btn-default" onclick="refreshAll()">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
-		</div>
 		<ul id="tree" class="ztree"></ul>
 	</div>
 	

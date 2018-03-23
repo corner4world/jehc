@@ -55,10 +55,10 @@ function setNodeAttribute(cell,graph_refresh){
 			//调用子流程
 			showCallActivityNodeAttributeWin(cell,graph_refresh);
 		}else if(node_type == 'parallelGateway'){
-			//分支节点
+			//并行网关
 			showParallelGatewayNodeAttributeWin(cell,graph_refresh);
 		}else if(node_type == 'exclusiveGateway'){
-			//同步节点
+			//排他网关
 			showExclusiveGatewayNodeAttributeWin(cell,graph_refresh);
 		}else if(node_type == 'inclusiveGateway'){
 			//包括网关

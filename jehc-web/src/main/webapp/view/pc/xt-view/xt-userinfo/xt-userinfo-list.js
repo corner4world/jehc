@@ -78,9 +78,9 @@ $(document).ready(function() {
 				render:function(data, type, row, meta) {
 					var xt_userinfo_name = row.xt_userinfo_name;
 					var xt_userinfo_realName = row.xt_userinfo_realName;
-					var btn = '<button class="btn btn-primary" onclick=toXtUserinfoDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
-						btn = btn +'<button class="btn btn-primary" onclick=initRoleinfo("'+data+'")><i class="glyphicon glyphicon-check"></i>角色权限</button>';
-						btn = btn +'<button class="btn btn-primary" onclick=resetXtUserinfoPwd("'+data+'","'+xt_userinfo_realName+'","'+xt_userinfo_name+'")><i class="glyphicon glyphicon-edit"></i>重置密码</button>';
+					var btn = '<button class="btn btn-primary btn-sm" onclick=toXtUserinfoDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+						btn = btn +'<button class="btn btn-primary btn-sm" onclick=initRoleinfo("'+data+'")><i class="glyphicon glyphicon-check"></i>角色权限</button>';
+						btn = btn +'<button class="btn btn-primary btn-sm" onclick=resetXtUserinfoPwd("'+data+'","'+xt_userinfo_realName+'","'+xt_userinfo_name+'")><i class="glyphicon glyphicon-edit"></i>重置密码</button>';
 					return btn;
 				}
 			}

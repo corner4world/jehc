@@ -1,4 +1,4 @@
-//同步节点
+//排他网关
 var exclusiveGatewayNodeAttributeWin;
 var exclusiveGatewayNodeAttributeTabPanel;
 var exclusiveGatewayNodeAttributeForm;

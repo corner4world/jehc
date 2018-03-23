@@ -55,7 +55,7 @@ $(document).ready(function() {
 				data:"xt_path_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtPathDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtPathDetail('"+ data +"')\" class='btn btn-default'><span class='glyphicon glyphicon-eye-open'></span></a>";
 				}
 			}
 		]

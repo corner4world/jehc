@@ -29,6 +29,12 @@ $(document).ready(function() {
 			},
 			{
 				data:'xt_attachmentTitle',
+				render:function(data, type, row, meta) {
+					if(data.length > 20){
+						return data.substring(0,20)+"...";
+					}
+					return data;
+				},
 				width:"50px"
 			},
 			{
@@ -60,9 +66,8 @@ $(document).ready(function() {
 			},
 			{
 				data:"xt_attachment_id",
-				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtAttachmentDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtAttachmentDetail('"+ data +"')\"  class='btn btn-default'><span class='glyphicon glyphicon-eye-open'></span></a>";
 				}
 			}
 		]

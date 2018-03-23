@@ -31,12 +31,6 @@ $(document).ready(function() {
 				data:'jobId'
 			},
 			{
-				data:'jobName'
-			},
-			{
-				data:'jobGroup'
-			},
-			{
 				data:'jobStatus',
 				render:function(value, type, row, meta) {
 					if(value == 'NORMAL'){
@@ -49,22 +43,9 @@ $(document).ready(function() {
 				}
 			},
 			{
-				data:'cronExpression'
-			},
-			{
-				data:'desc_'
-			},
-			{
-				data:'targetMethod'
-			},
-			{
-				data:'targetClass'
-			},
-			{
 				data:"id",
-				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtQuartzDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtQuartzDetail('"+ data +"')\" class=\"btn btn-default\"><span class='glyphicon glyphicon-eye-open'>详情</span></a>";
 				}
 			}
 		],
