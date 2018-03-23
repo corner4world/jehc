@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,19 +24,23 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseHttpSessionEntity;
+import jehc.xtmodules.xtcore.base.BaseTreeEntity;
 import jehc.xtmodules.xtcore.md5.MD5;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.IndexTree;
 import jehc.xtmodules.xtcore.util.SortList;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtmodel.XtMenuinfo;
+import jehc.xtmodules.xtmodel.XtNotify;
 import jehc.xtmodules.xtmodel.XtNotifyReceiver;
 import jehc.xtmodules.xtmodel.XtUserinfo;
 import jehc.xtmodules.xtservice.XtKnowledgeService;
+import jehc.xtmodules.xtservice.XtKwordsService;
 import jehc.xtmodules.xtservice.XtLoginLogsService;
 import jehc.xtmodules.xtservice.XtMenuinfoService;
 import jehc.xtmodules.xtservice.XtNoticeService;
 import jehc.xtmodules.xtservice.XtNotifyReceiverService;
+import jehc.xtmodules.xtservice.XtNotifyService;
 import jehc.xtmodules.xtservice.XtUserinfoService;
 
 /**
@@ -169,9 +174,11 @@ public class XtIndexController extends BaseAction{
 				String xt_role_id = baseHttpSessionEntity.getXT_ROLE_ID();
 				if(!StringUtils.isEmpty(xt_role_id)){
 					condition.put("xt_role_id", xt_role_id.split(","));
+				}else{
+					condition.put("xt_role_id", "-1".split(","));
 				}
 			}else{
-				condition.put("xt_role_id", -1);
+				condition.put("xt_role_id", "-1".split(","));
 			}
 		}
 	}
