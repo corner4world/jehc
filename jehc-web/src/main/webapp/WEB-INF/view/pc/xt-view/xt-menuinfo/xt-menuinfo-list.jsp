@@ -37,13 +37,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</style>
 </head>  
 <body>  
-	<div class="panel panel-default">
-		<fieldset>
-			<legend>菜单列表</legend>
-		</fieldset>
-	</div>
-	<div class="btn-group pull-left" style="margin-right: 20px;">
-		<button class="btn btn-default" onclick="addXtMenuinfo()">
+	<div class="portlet box green" style="margin-bottom: 5px">
+		<div class="portlet-title">
+            <div class="caption">
+                	菜单列表
+            </div>
+        </div>
+    </div>
+	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
+        <button class="btn btn-default" onclick="addXtMenuinfo()">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 		</button>
 		<button class="btn btn-default" onclick="initTreeTable()">
@@ -55,7 +57,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<button class="btn btn-default" onclick="collapseTree()">
 			<span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>折叠所有
 		</button>
-	</div>
+    </div>
 	<table id="table"></table>
 	
 	<!-- 菜单新增页面模态框（Modal）开始 -->
@@ -191,11 +193,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                		<label class="control-label">上级菜单</label>
 		                	</div>
 		                	<div class="col-md-4">
-		                		<div class="form-group">
-		                		<input class="form-control placeholder-no-fix" type="hidden" name="xt_menuinfo_parentId" id="xt_menuinfo_parentId_"/> 
-		                		<input class="form-control placeholder-no-fix" type="hidden" name="xt_menuinfo_id" id="xt_menuinfo_id"/> 
-		                    	<input class="form-control placeholder-no-fix" type="text" id="xt_menuinfo_parentTitle_" disabled="disabled"/> 
-		                    	</div>
+		                		<div class="form-group input-group">
+					        		<input class="form-control placeholder-no-fix" type="hidden" name="xt_menuinfo_parentId" id="xt_menuinfo_parentId_"/> 
+			                		<input class="form-control placeholder-no-fix" type="hidden" name="xt_menuinfo_id" id="xt_menuinfo_id"/> 
+			                    	<input class="form-control placeholder-no-fix" type="text" id="xt_menuinfo_parentTitle_" disabled="disabled"/> 
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button" onclick="changeMenuinfoSelect()">
+											选择
+										</button>
+									</span>
+								</div>
 		                	</div>
 		                	<div class="col-md-2">
 		                		<label class="control-label">是否存在下级</label>
@@ -271,5 +278,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div><!-- /.modal -->
 	</div>
 	<!-- 菜单编辑页面模态框（Modal）结束 -->
+	
+	
+	<!-- 菜单上级变更页面模态框（Modal）开始 -->
+	<div class="modal fade" id="changeXtMenuinfoModal" tabindex="-1" role="dialog" aria-labelledby="changeXtMenuinfoModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="changeXtMenuinfoModalLabel">
+						上级菜单
+					</h4>
+				</div>
+				<div class="modal-body" id="changeXtMenuinfoBody" style="overflow:auto;">
+		               <ul id="tree" class="ztree"></ul>
+				</div>
+				<div class="modal-footer">
+	                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+	                <button type="button" class="btn btn-primary" onclick="doXtMenuinfoSel()">确认</button>
+	            </div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
+	<!-- 菜单上级变更页面模态框（Modal）结束 -->
 </body>  
+<link rel="stylesheet" href="${syspath}/deng/source/plugins/other/bztree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.core.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.excheck.js"></script>
+<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.exedit.js"></script>
 </html> 

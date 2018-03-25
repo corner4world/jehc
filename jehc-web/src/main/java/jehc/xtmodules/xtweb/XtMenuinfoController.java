@@ -308,7 +308,7 @@ public class XtMenuinfoController extends BaseAction {
 			BaseZTreeEntity.setId(xtMenuinfo.getXt_menuinfo_id());
 			BaseZTreeEntity.setPid(xtMenuinfo.getXt_menuinfo_parentId());
 			BaseZTreeEntity.setText(xtMenuinfo.getXt_menuinfo_title());
-			BaseZTreeEntity.setIcon("../deng/images/icons/"+xtMenuinfo.getXt_menuinfo_images());
+			BaseZTreeEntity.setIcon("../deng/images/icons/target_point.png");
 			if("0".equals(xtMenuinfo.getXt_menuinfo_leaf())){
 				BaseZTreeEntity.setLeaf(false);
 			}else{
