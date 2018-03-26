@@ -1056,8 +1056,9 @@ function ajaxBFilePathBackRequest(url,params){
  * xt_path_relativek:平台路径配置中心键（自定义上传相对路径）
  * llowedFileExtensions:['jpg','gif','png']
 **/
-
+var fileUploadResultArray = [];
 function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk){
+	fileUploadResultArray.push('0');
 	var allowedFileExtensions_ = ['jpg','gif','png','xls','xlsx','bmp','zip','docx','pptx','pdf','csv','txt','apk'];
 	var maxFileSize_ = 0;
 	if(null !=validateSize){
@@ -1071,12 +1072,13 @@ function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolu
 		showUpload:true, //是否显示上传按钮
 		showCaption:false,
 		showPreview:true,
+		overwriteInitial:true,//覆盖已存在的文件
 		uploadUrl:basePath+'/xtCommonController/upload',
 		enctype:'multipart/form-data',
 		language:'zh',
         allowedFileExtensions:allowedFileExtensions_,//接收的文件后缀
         minFileCount:1,
-        uploadAsync:false,/**默认异步上传**/
+        uploadAsync:true,/**默认异步上传**/
         showCaption:true,/**是否显示标题**/
         maxFileSize:maxFileSize_,/**单位为kb，如果为0表示不限制文件大小**/
         maxFileCount:1,/**表示允许同时上传的最大文件个数**/
@@ -1094,19 +1096,26 @@ function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolu
             return data;
        }
      }).on('filebatchuploadsuccess', function(event, data, previewId, index) {
- 		 var obj = eval("(" + data.response + ")");
-     	 if(obj.data.jsonID != 0){
-     		//赋值
-          	$("#"+picid).attr('src',obj.data.jsonValue); 
-          	$("#"+fieldid).val(obj.data.jsonID);
-      		//关闭上传窗口
-          	$('#jehcUploadModal').modal('hide');
-          	//并清空上传控件内容
-          	$('#jehcFile').val('');
-          	 window.parent.toastrBoot(3,obj.data.msg);
-         }else{
-        	 window.parent.toastrBoot(4,obj.data.msg);
-         }
+    	 for(var i = 0; i < fileUploadResultArray.length; i++){
+    		 if(i == 0){
+    			 var obj = eval("(" + data.response + ")");
+    	     	 if(obj.data.jsonID != 0){
+    	     		//赋值
+    	          	$("#"+picid).attr('src',obj.data.jsonValue); 
+    	          	$("#"+fieldid).val(obj.data.jsonID);
+    	      		//关闭上传窗口
+    	          	$('#jehcUploadModal').modal('hide');
+    	          	//并清空上传控件内容
+    	          	$('#jehcFile').val('');
+    	          	$("#jehcFile").fileinput('reset'); //重置上传控件（清空已文件） 
+    	          	 window.parent.toastrBoot(3,obj.data.msg);
+    	         }else{
+    	        	 window.parent.toastrBoot(4,obj.data.msg);
+    	         }
+    	     	 fileUploadResultArray.splice(0,fileUploadResultArray.length);
+    	     	 break;
+    	     }
+    	 }
      });
 }
 
@@ -1200,7 +1209,11 @@ function initBFileRight(fieldid,picid,isUpAndDelete,validateparameter,validateSi
 	});
 	**/
 }
-
+function closeUploadWin(){
+	$("#jehcFile").fileinput('reset'); //重置上传控件（清空已文件） 
+	//关闭上传窗口
+  	$('#jehcUploadModal').modal('hide');
+}
 /**
  * 通过iFrame实现类ajax文件下载
  */
