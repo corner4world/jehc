@@ -115,30 +115,25 @@
 		    if(cookieC.getValue().indexOf("whiteClass")>=0){
 				%>
 		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-white.min.css" rel="stylesheet" type="text/css" />
-		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
 				<%
 			}else  if(cookieC.getValue().indexOf("whiteBlackClass")>=0){
 				%>
 		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-white-black.min.css" rel="stylesheet" type="text/css" />
-		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
 				<%
 			}else  if(cookieC.getValue().indexOf("groupClass")>=0){
 				%>
 		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-group.min.css" rel="stylesheet" type="text/css" />
-		 <style>.content-tabs {border-bottom: solid 2px #ffffff;}</style>
 				<%
 			}else{
 				%>
 		 <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
 		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
-		 <style>.content-tabs {border-bottom: solid 2px #2f4050;}</style>
 				<%
 			}
 	    }else{
 	    	%>
 	    <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
 	    <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
-	    <style>.content-tabs {border-bottom: solid 2px #2f4050;}</style>
 	    	<%
 	    }
         %>
