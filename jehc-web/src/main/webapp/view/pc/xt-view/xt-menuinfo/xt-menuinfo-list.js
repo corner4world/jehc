@@ -85,10 +85,30 @@ function btnFormatter(value, row, index){
 	var tempObject = row.tempObject;
 	var name = row.name;
 	if(tempObject == '菜单'){
-		return '<a href=javascript:addXtMenuinfo("'+value+'","'+name+'") class="btn btn-default" title="添加子菜单"><i class="glyphicon glyphicon-plus">添加子菜单</i></a><a href=javascript:updateXtMenuinfo("'+value+'") title="编辑" class="btn btn-default"><i class="fa fa-edit">编辑</i></a><a href=javascript:delXtMenuinfo("'+value+'") class="btn btn-default" title="删除"><i class="fa fa-trash-o">删除</i></a>';
+		return '<a href=javascript:addXtMenuinfo("'+value+'","'+name+'") class="btn btn-default" title="添加子菜单"><i class="glyphicon glyphicon-plus">添加子菜单</i></a><a href=javascript:chXtMenuinfo("'+value+'","'+name+'") class="btn btn-default" title="设为一级菜单"><i class="glyphicon glyphicon-pencil">设为一级菜单</i></a><a href=javascript:updateXtMenuinfo("'+value+'") title="编辑" class="btn btn-default"><i class="fa fa-edit">编辑</i></a><a href=javascript:delXtMenuinfo("'+value+'") class="btn btn-default" title="删除"><i class="fa fa-trash-o">删除</i></a>';
 	}
 }
 
+function chXtMenuinfo(value,valueText){
+	msgTishCallFnBoot("确定将菜单<font color=red>【"+valueText+"】</font>设为一级菜单？",function(){
+		var params = {xt_menuinfo_id:value};
+		ajaxBRequestCallFn('../xtMenuinfoController/chXtMenuinfo',params,function(result){
+			try {
+	    		result = eval("(" + result + ")");  
+	    		if(typeof(result.success) != "undefined"){
+	    			if(result.success){
+	            		window.parent.toastrBoot(3,result.msg);
+	            		initTreeTable();
+	        		}else{
+	        			window.parent.toastrBoot(4,result.msg);
+	        		}
+	    		}
+			} catch (e) {
+				
+			}
+		});
+	})
+}
 function delXtMenuinfo(value){
 	if(value == null){
 		toastrBoot(4,"未能获取该数据编号");

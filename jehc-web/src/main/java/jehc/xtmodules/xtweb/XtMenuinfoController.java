@@ -384,4 +384,27 @@ public class XtMenuinfoController extends BaseAction {
         request.setAttribute("xt_menuinfo_images", xt_menuinfo_images);
         return new ModelAndView("pc/xt-view/xt-menuinfo/xt-menuinfo-img-select");
 	}
+	
+	/**
+	 * 设置为一级菜单
+	 * @param xt_menuinfo_id
+	 * @param request
+	 * @param response
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value="/chXtMenuinfo",method={RequestMethod.POST,RequestMethod.GET})
+	public String chXtMenuinfo(String xt_menuinfo_id,HttpServletRequest request, HttpServletResponse response){
+		int i = 0;
+		XtMenuinfo xt_Menuinfo = xtMenuinfoService.getXtMenuinfo(xt_menuinfo_id);
+		if(null != xt_Menuinfo){
+			xt_Menuinfo.setXt_menuinfo_parentId("0");
+			i = xtMenuinfoService.updateXtMenuinfo(xt_Menuinfo);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
 }
