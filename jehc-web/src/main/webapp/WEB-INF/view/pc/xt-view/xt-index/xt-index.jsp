@@ -176,7 +176,7 @@
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <img alt="" class="img-circle" src="${syspath}/deng/images/default/user.png" />
-                                    <span class="username username-hide-on-mobile"> ${xtUserinfo.xt_userinfo_realName }</span>
+                                    <span class="username username-hide-on-mobile"> ${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_realName }</span>
                                     <i class="fa fa-angle-down"></i>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-default">
@@ -184,6 +184,12 @@
                                         <a href="javascript:displayTheme()">
                                             <i class="icon-wrench"></i>切换主题
                                         </a>
+                                    </li>
+                                    <li class="divider"> </li>
+                                    <li>
+                                    	<a href='../xtUserinfoController/loadMyXtUserinfo' class="nav-link J_menuItem" data-index='myUserInfo' rootId='myUserInfo' idBu='myUserInfo'>
+			                                <i class="icon-user"></i>个人资料</span>
+			                            </a>
                                     </li>
                                     <li class="divider"> </li>
                                     <li>
@@ -236,26 +242,6 @@
                    --%>
                    <!-- 手风琴+侧边样式 -->
                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-                        <li class="nav-item start active open" id="menuMyCenterP">
-							<a href="javascript:;" class="nav-link nav-toggle">
-							<i class="glyphicon glyphicon-user"></i>
-							<span class="title">个人中心</span>
-							<span class="arrow  open"></span>
-							</a>
-							<ul class="sub-menu">
-							<li class="nav-item">
-	                            <a href='' onclick="updatePwd()" class="nav-link J_menuItem" data-index='updatePwd' rootId='updatePwd' idBu='updatePwd' class="nav-link nav-toggle">
-	                                <span class="title">修改密码</span>
-	                            </a>
-	                        </li>
-							<li class="nav-item">
-	                            <a href='../xtUserinfoController/loadMyXtUserinfo' class="nav-link J_menuItem" data-index='myUserInfo' rootId='myUserInfo' idBu='myUserInfo' class="nav-link nav-toggle">
-	                                <span class="title">个人资料</span>
-	                                <!--  <span class="badge badge-danger">新</span> -->
-	                            </a>
-	                        </li>
-	                        </ul>
-						</li>
                    		${MenuList }
                    </ul>
                   

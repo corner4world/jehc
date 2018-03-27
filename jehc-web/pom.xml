@@ -133,17 +133,19 @@
 				<filtering>true</filtering>
 				<includes>
 					<include>**/*.xml</include>
+					<include>**.*</include>
 					<include>**/*.properties</include>
 				</includes>
 			</resource>
-			<!-- 
 			<resource>
-				<directory>src/main/java</directory>
-				<includes>
-					<include>**/*.xml</include>
-				</includes>
-			</resource>
-			 -->
+				<targetPath>${project.build.directory}/classes</targetPath>
+		        <directory>src/main/java</directory>
+		        <includes>
+		            <include>**/*.xml</include>
+					<include>**.*</include>
+					<include>**/*.properties</include>
+		        </includes>
+		    </resource>
 		</resources>
 	</build>
 </project>
