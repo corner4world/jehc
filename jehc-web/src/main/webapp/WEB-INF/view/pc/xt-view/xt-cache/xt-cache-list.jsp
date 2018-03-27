@@ -36,17 +36,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 	</style>
 </head>  
-<body>  
-	<div class="panel panel-default">
-		<fieldset>
-			<legend>缓存列表</legend>
-		</fieldset>
-	</div>
-	<div class="btn-group pull-left" style="margin-right: 20px;">
-		<button class="btn btn-default" onclick="initTreeTable()">
-			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-		</button>
-	</div>
+<body> 
+	<div class="portlet box green" style="margin-bottom: 5px">
+		<div class="portlet-title">
+            <div class="caption">
+                	缓存列表
+            </div>
+            <div class="actions">
+                 <button class="btn btn-default" onclick="initTreeTable()">
+					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+				</button>
+            </div>
+        </div>
+    </div>
 	<table id="table"></table>
 </body>  
 </html> 

@@ -32,11 +32,11 @@
     </div>
 	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
         <button class="btn btn-default" onclick="delXtAttachment()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
-			<button class="btn btn-default" onclick="search('datatables')">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+		</button>
+		<button class="btn btn-default" onclick="search('datatables')">
+			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+		</button>
     </div>
 	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
 		<thead>

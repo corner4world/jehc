@@ -13,35 +13,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../view/pc/xt-view/xt-monitor-mem/xt-monitor-mem-list.js"></script>  
 </head>  
 <body>  
-	<div class="panel panel-default">
-		<fieldset>
-			<legend>服务器内存监测列表</legend>
-		</fieldset>
-	</div>
-	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 20px;">
-			<button class="btn btn-default" onclick="delXtMonitorMem()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
-			<button class="btn btn-default" onclick="search('datatables')">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
-		</div>
-		<table id="datatables" class="table table-bordered table-striped table-hover">
-			<thead>
-				<tr>
-					<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
-					<th>序号</th>
-					<th>总内存</th>
-					<th>当前内存使用量</th>
-					<th>当前内存剩余量</th>
-					<th>交换区总量</th>
-					<th>当前交换区使用量</th>
-					<th>当前交换区剩余量</th>
-					<th>取读时间</th>
-				</tr>
-			</thead>
-		</table>
-	</div>
+	<div class="portlet box green" style="margin-bottom: 5px">
+		<div class="portlet-title">
+            <div class="caption">
+                	服务器内存监测列表
+            </div>
+            <div class="actions">
+                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
+                     <i class="glyphicon glyphicon-search"></i>
+                 </a>
+                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
+                     <i class="icon-trash"></i>
+                 </a>
+            </div>
+        </div>
+    </div>
+	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
+        <button class="btn btn-default" onclick="delXtMonitorMem()">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+		</button>
+		<button class="btn btn-default" onclick="search('datatables')">
+			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+		</button>
+    </div>
+	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+		<thead>
+			<tr>
+				<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
+				<th>序号</th>
+				<th>总内存</th>
+				<th>当前内存使用量</th>
+				<th>当前内存剩余量</th>
+				<th>交换区总量</th>
+				<th>当前交换区使用量</th>
+				<th>当前交换区剩余量</th>
+				<th>取读时间</th>
+			</tr>
+		</thead>
+	</table>
 </body>  
 </html> 

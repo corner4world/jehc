@@ -16,44 +16,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>行政区划</title>   
 </head>  
 <body>  
-	<div class="panel panel-default">
-		<fieldset>
-			<legend>查询区域</legend>
-			<div class="form-group">
-				<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
-			</div>
-			<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-				<button class="btn btn-primary" onclick="filter('tree','keyword')">
+	<div class="portlet box green" style="margin-bottom: 5px">
+		<div class="portlet-title">
+            <div class="caption">
+                	查询区域
+            </div>
+            <div class="actions">
+                <button class="btn btn-primary" onclick="filter('tree','keyword')">
 					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
 				</button>
 				<button class="btn btn-default" onclick="$('#keyword').val('')">重置</button>
+            </div>
+        </div>
+        <div class="portlet-body form">
+        	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
+				<div class="form-group">
+					<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
+				</div>
+			</form>
+			<div class="btn-group pull-right" style="margin-right:0px;margin-bottom: 5px">
+				<button class="btn btn-default" onclick="addXtAreaRegion(0)">
+					<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> 新增一级（国家）
+				</button>
+				<button class="btn btn-default" onclick="addXtAreaRegion(1)">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增下级
+				</button>
+				<button class="btn btn-default" onclick="updateXtAreaRegion()">
+					<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+				</button>
+				<button class="btn btn-default" onclick="detailXtAreaRegion()">
+					<span class="glyphicon glyphicon-share" aria-hidden="true"></span>详情
+				</button>
+				<button class="btn btn-default" onclick="delXtAreaRegion()">
+					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+				</button>
+				<button class="btn btn-default" onclick="refreshAll()">
+					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+				</button>
 			</div>
-		</fieldset>
+        </div>
+    </div>
+    <div class="panel-body">
+	<ul id="tree" class="ztree"></ul>
 	</div>
-	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 20px;">
-			<button class="btn btn-default" onclick="addXtAreaRegion(0)">
-				<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> 新增一级（国家）
-			</button>
-			<button class="btn btn-default" onclick="addXtAreaRegion(1)">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增下级
-			</button>
-			<button class="btn btn-default" onclick="updateXtAreaRegion()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-			</button>
-			<button class="btn btn-default" onclick="detailXtAreaRegion()">
-				<span class="glyphicon glyphicon-share" aria-hidden="true"></span>详情
-			</button>
-			<button class="btn btn-default" onclick="delXtAreaRegion()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
-			<button class="btn btn-default" onclick="refreshAll()">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
-		</div>
-		<ul id="tree" class="ztree"></ul>
-	</div>
-	
 	<!-- 新增行政区域模态框（Modal）开始 -->
 	<div class="modal fade" id="addXtAreaRegionModal" tabindex="-1" role="dialog" aria-labelledby="addXtAreaRegionModalLabel" aria-hidden="true">
 		<div class="modal-dialog">

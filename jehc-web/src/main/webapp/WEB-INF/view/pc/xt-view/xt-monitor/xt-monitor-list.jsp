@@ -13,35 +13,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../view/pc/xt-view/xt-monitor/xt-monitor-list.js"></script>  
 </head>  
 <body>  
-	<div class="panel panel-default">
-		<fieldset>
-			<legend>虚拟机监测列表</legend>
-		</fieldset>
-	</div>
-	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 20px;">
-			<button class="btn btn-default" onclick="delXtMonitor()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
-			<button class="btn btn-default" onclick="search('datatables')">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
-		</div>
-		<table id="datatables" class="table table-bordered table-striped table-hover">
-			<thead>
-				<tr>
-					<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
-					<th>序号</th>
-					<th>用户名</th>
-					<th>账户名称</th>
-					<th>本地主机名</th>
-					<th>JVM可使用总内存</th>
-					<th>JVM可使用剩余内存</th>
-					<th>JVM可使用处理器个数</th>
-					<th>取读时间</th>
-				</tr>
-			</thead>
-		</table>
-	</div>
+	<div class="portlet box green" style="margin-bottom: 5px">
+		<div class="portlet-title">
+            <div class="caption">
+                	虚拟机监测列表
+            </div>
+            <div class="actions">
+                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
+                     <i class="glyphicon glyphicon-search"></i>
+                 </a>
+                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
+                     <i class="icon-trash"></i>
+                 </a>
+            </div>
+        </div>
+    </div>
+	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
+        <button class="btn btn-default" onclick="delXtMonitor()">
+			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+		</button>
+		<button class="btn btn-default" onclick="search('datatables')">
+			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+		</button>
+    </div>
+	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+		<thead>
+			<tr>
+				<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
+				<th>序号</th>
+				<th>用户名</th>
+				<th>账户名称</th>
+				<th>本地主机名</th>
+				<th>JVM可使用总内存</th>
+				<th>JVM可使用剩余内存</th>
+				<th>JVM可使用处理器个数</th>
+				<th>取读时间</th>
+			</tr>
+		</thead>
+	</table>
 </body>  
 </html> 

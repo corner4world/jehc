@@ -238,7 +238,7 @@
                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                         <li class="nav-item start active open" id="menuMyCenterP">
 							<a href="javascript:;" class="nav-link nav-toggle">
-							<i class="icon-user"></i>
+							<i class="glyphicon glyphicon-user"></i>
 							<span class="title">个人中心</span>
 							<span class="arrow  open"></span>
 							</a>
@@ -250,9 +250,8 @@
 	                        </li>
 							<li class="nav-item">
 	                            <a href='../xtUserinfoController/loadMyXtUserinfo' class="nav-link J_menuItem" data-index='myUserInfo' rootId='myUserInfo' idBu='myUserInfo' class="nav-link nav-toggle">
-	                                <!--  -->
 	                                <span class="title">个人资料</span>
-	                                <span class="badge badge-danger">新</span>
+	                                <!--  <span class="badge badge-danger">新</span> -->
 	                            </a>
 	                        </li>
 	                        </ul>
