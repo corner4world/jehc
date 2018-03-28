@@ -137,5 +137,6 @@
 	    	<%
 	    }
         %>
+        <link href="${syspath}/deng/source/css/bootcommon.css" rel="stylesheet" type="text/css" />
 	</head>
 </html>

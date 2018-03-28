@@ -98,22 +98,6 @@
 .page-sidebar .page-sidebar-menu>li.active>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li.active>a {
     font-size: 14px;
 }
-.page-sidebar .page-sidebar-menu li>a>.arrow:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li>a>.arrow:before {
-    border-left: 5px solid #A0A0A0;
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-    content: "";
-    margin-right: -10px;
-    margin-left: -10px;
-}
-.page-sidebar .page-sidebar-menu li>a>.arrow.open:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li>a>.arrow.open:before {
-    border-top: 5px solid #A0A0A0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    content: "";
-    margin-right: -10px;
-    margin-left: -10px;
-}
 .page-sidebar .page-sidebar-menu.page-sidebar-menu-compact li>a>.arrow.open:before, .page-sidebar .page-sidebar-menu.page-sidebar-menu-compact li>a>.arrow:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact li>a>.arrow.open:before, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact li>a>.arrow:before {
     margin-top: 18px;
 } 
