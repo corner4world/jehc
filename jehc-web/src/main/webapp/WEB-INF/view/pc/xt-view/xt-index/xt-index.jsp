@@ -13,7 +13,8 @@
 	</head>
     <!-- END HEAD -->
     <!-- <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid"> 非采用滚动条-->
-    <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-fixed page-sidebar-closed"><!-- 采用滚动条menu -->
+    <!-- <body class="page-header-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-fixed page-sidebar-closed">采用滚动条menu -->
+    <body class="page-header-fixed page-footer-fixed page-sidebar-closed-hide-logo page-container-bg-solid page-sidebar-fixed page-sidebar-closed">
         <!-- BEGIN HEADER -->
         <div class="page-header navbar navbar-fixed-top">
             <!-- BEGIN HEADER INNER -->
@@ -240,8 +241,12 @@
                    </ul>
                    -->
                    --%>
-                   <!-- 手风琴+侧边样式 -->
+                   <!-- 手风琴+侧边样式
                    <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-compact page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                   		${MenuList }
+                   </ul>
+                    -->
+                   <ul class="page-sidebar-menu  page-header-fixed page-sidebar-menu-closed" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
                    		${MenuList }
                    </ul>
                   

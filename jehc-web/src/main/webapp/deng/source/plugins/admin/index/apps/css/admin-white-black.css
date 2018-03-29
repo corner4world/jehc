@@ -1,6 +1,6 @@
-.page-boxed .page-footer .page-footer-inner, .page-footer-fixed .page-footer .page-footer-inner {
+/* .page-boxed .page-footer .page-footer-inner, .page-footer-fixed .page-footer .page-footer-inner {
     color: #ffffff;
-}
+} */
 .page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
     font-size: 14px;
     font-weight: 300;
@@ -67,7 +67,7 @@
     margin-right: 8px;
 }
 .page-sidebar .page-sidebar-menu>li:last-child>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li:last-child>a {
-    border-bottom: 1px solid #e9ecf3!important;/**×ó±ß²Ëµ¥µ×²ã±ß¿ò·ôÉ«**/
+    border-bottom: 1px solid #ffffff!important;/**×ó±ß²Ëµ¥µ×²ã±ß¿ò·ôÉ«**/
 }
 .page-header-fixed .page-container {
     margin-top: 43px;
@@ -105,7 +105,7 @@
 .page-sidebar .page-sidebar-menu .sub-menu, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu {
     background: #ffffff;/**Õ¹¿ª²ãÑùÊ½**/
 }
-.page-content-wrapper .page-content {
+/* .page-content-wrapper .page-content {
     margin-left: 225px;
     margin-top: 0;
     min-height: 600px;
@@ -129,7 +129,7 @@
     margin-left: 0;
     top: 68px;
     width: 225px;
-}
+} */
 .page-sidebar .page-sidebar-menu.page-sidebar-menu-compact>li>.sub-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact>li>.sub-menu>li>a {
     padding-left: 34px;
 }
@@ -153,3 +153,40 @@ body{
 	background: #e9ecf3;
 }
 .page-sidebar .page-sidebar-menu .sub-menu li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>a {padding: 4px 15px;font-weight: 100;}
+
+
+.arrow {
+    float: right;
+    margin-top: 12px;
+}
+.page-sidebar .page-sidebar-menu .sub-menu li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>a {
+    display: block;
+    margin: 0;
+    padding: 6px 15px 0px 70px;
+    text-align:left;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 300;
+    background: 0 0;
+}
+.page-sidebar .page-sidebar-menu .sub-menu li>.sub-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>.sub-menu>li>a {
+    padding-left: 70px;
+}
+.page-sidebar .page-sidebar-menu .sub-menu li>.sub-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>.sub-menu>li>a {
+    padding-left: 70px;
+}
+.page-sidebar .page-sidebar-menu .sub-menu li>.sub-menu>li>.sub-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>.sub-menu>li>.sub-menu>li>a {
+    padding-left: 70px;
+}
+.page-sidebar .page-sidebar-menu>li>a>i.glyphicon, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a>i.glyphicon {
+    top: 0px;
+    margin-left: 1px;
+    margin-right: 4px;
+}
+/* .page-footer {
+    font-size: 12px;
+    height: 30px;
+} */
+.page-footer-fixed .page-boxed .page-footer, .page-footer-fixed .page-footer {
+    background-color: #f5f5f5;
+}
