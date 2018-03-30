@@ -68,6 +68,7 @@
 				classpath*:config/spring/springmvc.xml
 			</param-value>
 		</init-param>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>dispatcherServlet</servlet-name>

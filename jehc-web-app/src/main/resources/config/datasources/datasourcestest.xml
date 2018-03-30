@@ -47,8 +47,12 @@
 	<!-- 配置工厂 -->
 	<bean id="sqlSessionFactoryOverrideMapper" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSourceTest" />  
+        <!--废弃全部扫包通配符
         <property name="typeAliasesPackage" value="*" />
         <property name="mapperLocations" value="classpath:/**/**/*dao/mapper/*.xml"/>
+        -->
+        <property name="typeAliasesPackage" value="jehc.*modules.*model" />
+        <property name="mapperLocations" value="classpath*:jehc/*modules/*dao/mapper/*.xml"/>
 		<property name="configLocation" value="classpath:/config/mybatis/mybatistest.xml"></property>
     </bean> 
 	

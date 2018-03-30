@@ -83,9 +83,13 @@
 	<!-- 配置工厂 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">  
         <property name="dataSource" ref="dataSource"/>   
+        <!--废弃全部扫包通配符
         <property name="typeAliasesPackage" value="*" />
-        <!-- classpath*表示读取lib中jar -->
         <property name="mapperLocations" value="classpath*:**/**/*dao/mapper/*.xml"/>
+         -->
+        <property name="typeAliasesPackage" value="jehc.*modules.*model" />
+        <!-- classpath*表示读取lib中jar -->
+        <property name="mapperLocations" value="classpath*:jehc/*modules/*dao/mapper/*.xml"/>
 		<property name="configLocation" value="classpath:/config/mybatis/mybatis.xml"></property>
     </bean>  
 	<!-- 事物配置 -->
@@ -103,9 +107,9 @@
 			<tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
 			<tx:method name="del*" propagation="REQUIRED" rollback-for="java.lang.Exception" />
 			<tx:method name="save*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
-			<tx:method name="get*" propagation="REQUIRED" isolation="DEFAULT" read-only="true" timeout="-1" />  
-			<tx:method name="put*" propagation="REQUIRED" isolation="DEFAULT" read-only="false"/> 
-			<tx:method name="*"  propagation="REQUIRED" isolation="DEFAULT" read-only="true" timeout="-1" />
+			<tx:method name="get*" propagation="NOT_SUPPORTED" isolation="DEFAULT" read-only="true" timeout="-1" />  
+			<tx:method name="put*" propagation="NOT_SUPPORTED" isolation="DEFAULT" read-only="false"/> 
+			<tx:method name="*"  propagation="NOT_SUPPORTED" isolation="DEFAULT" read-only="true" timeout="-1" />
 		</tx:attributes>
 	</tx:advice>
 	<!-- 定义切换至从库方法条件 -->
@@ -123,7 +127,10 @@
 	</bean>
 	<!-- 面向切面 -->
 	<aop:config proxy-target-class="false">
-	  <aop:pointcut id="ep" expression="execution(* *.*.*service.impl.*.*(..)) ||execution(* com.phone.*.service.*.*(..))"/>
+	  <!--  
+	  <aop:pointcut id="ep" expression="execution(* *.*.*service.impl.*.*(..)) ||execution(* com.phone.*.service.*.*(..))"/> 
+	  -->
+	  <aop:pointcut id="ep" expression="execution(* jehc.*modules.*service.impl.*.*(..))"/>
 	  <aop:advisor pointcut-ref="ep" advice-ref="txAdvice" />
 	  <aop:advisor pointcut-ref="ep" advice-ref="dataSourceAdvice" />
 	  
