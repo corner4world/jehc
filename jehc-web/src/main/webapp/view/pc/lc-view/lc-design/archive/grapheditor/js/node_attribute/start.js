@@ -117,7 +117,7 @@ function startNodeAttributePanel(cell,graph_refresh){
 	//基本配置
 	editStartNodeAttributeForm(cell);
 	//共用taskGrid属性事件
-	event_task_grid(cell,2);
+	event_task_grid(cell,1);
 	//一般属性 参数1表示非开始2其他
 	initNodeNormalForm(cell,1);
 	//表单配置信息

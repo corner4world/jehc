@@ -31,10 +31,18 @@ function event_task_grid(cell,flag){
 	}
 	//定义列
 	//事件类型数据源
-	var events_Store = new Ext.data.SimpleStore({
-	  fields:['value', 'name'],
-      data:[["create","create"],["assignment","assignment"],["complete","complete"],["All","All"]]
-	});
+	var events_Store;
+	if(flag == 1){
+		events_Store = new Ext.data.SimpleStore({
+		  fields:['value', 'name'],
+	      data:[["start","start"],["end","end"]]
+		});
+	}else{
+		events_Store = new Ext.data.SimpleStore({
+		  fields:['value', 'name'],
+	      data:[["create","create"],["assignment","assignment"],["complete","complete"],["All","All"]]
+		});
+	}
 	var event_typeStore = new Ext.data.SimpleStore({
 	  fields:['value', 'name'],
       data:[["javaclass","javaclass"],["express","express"]]
