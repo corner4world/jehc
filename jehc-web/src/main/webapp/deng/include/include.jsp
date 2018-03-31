@@ -23,11 +23,10 @@
 		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-triton/resources/theme-triton-all.css" type="text/css" />
 		--%>
 		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/css/font-awesome.css" type="text/css" />
-		
-		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/index.css" />
 		<%-- 
-		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/triton.css" />
+		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/index.css" />
 		--%>
+		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/triton.css" />
 	   	<script type="text/javascript">
 	    	var basePath = "${syspath}";
 	    	var sys_pt_login = "${sys_pt_login}";
