@@ -211,12 +211,26 @@ function event_setvalue(cell){
 			event_node_value="";
 			msgTishi('请选择事件类型!');
 			return false;	
+		}else{
+			if(event_type.indexOf("#") >= 0 || event_type.indexOf("@") >= 0 || event_type.indexOf("$") >= 0 || event_type.indexOf("&") >= 0 ){
+				event_grid.store.getAt(i).data.event_type="";
+				event_node_value="";
+				msgTishi('事件类型不能出现#，@，$，&等符号!');
+				return false;	
+			}
 		}
 		if("undefined" == typeof(javaclass_express) || null == javaclass_express || javaclass_express == ""){
 			event_grid.store.getAt(i).data.javaclass_express="";
 			event_node_value="";
 			msgTishi('请输入执行的类或表达式!');
 			return false;
+		}else{
+			if(javaclass_express.indexOf("#") >= 0 || javaclass_express.indexOf("@") >= 0|| javaclass_express.indexOf("$") >= 0 || javaclass_express.indexOf("&") >= 0 ) {
+				javaclass_express.store.getAt(i).data.javaclass_express="";
+				event_node_value="";
+				msgTishi('执行的类或表达式不能出现#，@，$，&等符号!');
+				return false;	
+			}
 		}
 	}
 	//赋值操作
@@ -422,6 +436,10 @@ function initField(){
 
 var field_node_value;
 function setField(){
+	if(fieldGrid.getStore().getCount() == 0){
+		event_grid.getSelectionModel().getSelected().items[0].set("fields","");
+		return;
+	}
 	//验证操作
 	for(var i=0;i<fieldGrid.getStore().getCount();i++){
 		var fieldName = fieldGrid.store.getAt(i).data.fieldName;
@@ -432,12 +450,35 @@ function setField(){
 			field_node_value="";
 			msgTishi('请选择事件类型!');
 			return false;	
+		}else{
+			if(fieldtype.indexOf("#") >= 0 || fieldtype.indexOf("@") >= 0 || fieldtype.indexOf("$") >= 0 || fieldtype.indexOf("&") >= 0 ){
+				fieldGrid.store.getAt(i).data.fieldtype="";
+				field_node_value="";
+				msgTishi('事件类型不能出现#，@，$，&等符号!');
+				return false;	
+			}
 		}
 		if("undefined" == typeof(fieldName) || null == fieldName || fieldName == ""){
 			fieldGrid.store.getAt(i).data.fieldName="";
 			field_node_value="";
 			msgTishi('请输入字段名称!');
 			return false;
+		}else{
+			if(fieldName.indexOf("#") >= 0 || fieldName.indexOf("@") >= 0|| fieldName.indexOf("$") >= 0 || fieldName.indexOf("&") >= 0 ){
+				fieldGrid.store.getAt(i).data.fieldName="";
+				field_node_value="";
+				msgTishi('字段名称不能出现#，@，$，&等符号!');
+				return false;	
+			}
+		}
+		
+		if("undefined" != typeof(fieldValue) && null != fieldValue && fieldValue != ""){
+			if(fieldValue.indexOf("#") >= 0 || fieldValue.indexOf("@") >= 0|| fieldValue.indexOf("$") >= 0 || fieldValue.indexOf("&") >= 0 ){
+				fieldGrid.store.getAt(i).data.fieldValue="";
+				field_node_value="";
+				msgTishi('字段值不能出现#，@，$，&等符号!');
+				return false;	
+			}
 		}
 	}
 	//赋值操作
@@ -448,7 +489,6 @@ function setField(){
 		if(null != field_node_value && "" != field_node_value){
 			field_node_value = field_node_value+"$"+fieldName+"&"+fieldtype+"&"+fieldValue;
 		}else{
-			console.info(field_node_value);
 			field_node_value = fieldName+"&"+fieldtype+"&"+fieldValue;
 		}
 	}
