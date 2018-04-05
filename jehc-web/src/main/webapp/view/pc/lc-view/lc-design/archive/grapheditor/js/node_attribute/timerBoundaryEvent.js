@@ -152,7 +152,7 @@ function timerBoundaryEventNodeAttributePanel(cell,graph_refresh){
 		//基本配置与高级配置
 		editTimerBoundaryEventNodeAttributeForm(cell);
 		//共用taskGrid属性事件
-		event_task_grid(cell,2);
+		event_task_grid(cell,1);
 		//一般属性 参数1表示非开始2其他
 		initNodeNormalForm(cell,2);
 	    timerBoundaryEventNodeAttributeTabPanel = new Ext.TabPanel({
@@ -235,7 +235,7 @@ function timerBoundaryEventNodeAttributePanel(cell,graph_refresh){
 		//基本配置与高级配置
 		editTimerBoundaryEventNodeAttributeForm(cell);
 		//共用taskGrid属性事件
-		event_task_grid(cell,2);
+		event_task_grid(cell,1);
 		//一般属性 参数1表示非开始2其他
 		initNodeNormalForm(cell,2);
 	    timerBoundaryEventNodeAttributeTabPanel = new Ext.TabPanel({

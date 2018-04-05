@@ -6,6 +6,7 @@ import java.util.Map;
 import org.dom4j.Element;
 
 import jehc.lcmodules.mxgraph.mxUtils.communal.MxUtils;
+import jehc.xtmodules.xtcore.allutils.StringUtil;
 /**
  * 人工任务
  * @author邓纯杰
@@ -37,6 +38,8 @@ public class MxUserTask {
  		String priority = mxCell.attributeValue("priority");
  		String asynchronous = mxCell.attributeValue("asynchronous");
  		String isForCompensation =  mxCell.attributeValue("isForCompensation");//是否补偿边界
+ 		
+ 		String event_node_value = mxCell.attributeValue("event_node_value");/**监听事件属性**/
  		/////////////主要配置结束/////////////
  		
  		//节点中其他基本属性
@@ -106,8 +109,45 @@ public class MxUserTask {
         
         //****开始区间与闭区间属性 开始****//
         task_node += "<extensionElements>";
+        //监听器配置开始 总循环操作
         //1监听的类开始
-        task_node+=MxUtils.eventListenerNode(mxCell);
+        if(null != event_node_value && !"".equals(event_node_value)){
+        	//主列表
+        	String[] eventGrid = event_node_value.split("#",-1);
+        	for(int i = 0; i < eventGrid.length; i++){
+        		if(!StringUtil.isEmpty(eventGrid[i])){
+        			String[] cell = eventGrid[i].split("@",-1);
+            		String excuteStr=null;
+            		//javaclass类型
+            		if(null != cell[1] && !"".equals(cell[1]) && "javaclass".equals(cell[1])){
+            			excuteStr = "class='"+cell[0]+"'";
+            		}
+            		//express类型
+            		if(null != cell[1] && !"".equals(cell[1]) && "express".equals(cell[1])){
+            			excuteStr = " expression='"+cell[0]+"'";
+            		}
+            		task_node += "<activiti:taskListener event='"+cell[2]+"' "+excuteStr+">";
+                    //1-1字段开始 子循环操作
+            		if(null != cell[1] && !"".equals(cell[1]) && ("javaclass".equals(cell[1]) || "express".equals(cell[1]))){
+            			//此时存在字段 字段位置在最后一个
+            			String[] field = cell[3].split("$",-1);
+            			for(int j = 0; j < field.length; j++){
+            				if(!StringUtil.isEmpty(field[j])){
+            					String[] fieldV = field[j].split("&",-1);
+            					if(null != fieldV&& fieldV.length == 3){
+            						task_node += "<activiti:field name='"+fieldV[0]+"'>";
+            						task_node += "<activiti:string><![CDATA["+fieldV[2]+"]]></activiti:string>";
+            						task_node += "</activiti:field>";
+            					}
+            				}
+            			}
+            		}
+                    //1-1字段结束
+            		task_node += "</activiti:taskListener>";
+                    //1监听的类结束
+        		}
+        	}
+        }        
         //1监听器配置结束
         
         //3表单配置开始

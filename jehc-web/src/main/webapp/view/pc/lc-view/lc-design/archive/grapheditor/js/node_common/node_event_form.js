@@ -371,8 +371,10 @@ function event_form_setvalue(cell){
 	//赋值
 	if(null != form_node_value && "" != form_node_value){
 		cell.form_node_value = form_node_value;
-		form_node_value="";
+	}else{
+		cell.form_node_value = "";
 	}
+	form_node_value="";
 }
 
 

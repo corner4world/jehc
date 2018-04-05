@@ -71,7 +71,7 @@ function eventSubProcessPanel(cell,graph_refresh){
 	reGetWidthAndHeight();
 	if(lc_design_displaywin_for_edit){
 		//共用taskGrid属性事件
-		event_task_grid(cell,2);
+		event_task_grid(cell,1);
 		//一般属性 参数1表示非开始2其他
 		initNodeNormalForm(cell,1);
 		//数据属性配置
@@ -140,7 +140,7 @@ function eventSubProcessPanel(cell,graph_refresh){
 	    });
 	}else{
 		//共用taskGrid属性事件
-		event_task_grid(cell,2);
+		event_task_grid(cell,1);
 		//一般属性 参数1表示非开始2其他
 		initNodeNormalForm(cell,1);
 		//数据属性配置

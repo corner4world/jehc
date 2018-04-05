@@ -95,7 +95,7 @@ function signalThrowingEventPanel(cell,graph_refresh){
 		//基本配置与高级配置
 		editSignalThrowingEventForm(cell);
 		//共用taskGrid属性事件
-		event_task_grid(cell,2);
+		event_task_grid(cell,1);
 		//一般属性 参数1表示非开始2其他
 		initNodeNormalForm(cell,2);
 	    signalThrowingEventTabPanel = new Ext.TabPanel({
@@ -160,7 +160,7 @@ function signalThrowingEventPanel(cell,graph_refresh){
 		//基本配置与高级配置
 		editSignalThrowingEventForm(cell);
 		//共用taskGrid属性事件
-		event_task_grid(cell,2);
+		event_task_grid(cell,1);
 		//一般属性 参数1表示非开始2其他
 		initNodeNormalForm(cell,2);
 	    signalThrowingEventTabPanel = new Ext.TabPanel({

@@ -178,7 +178,7 @@ public class MxStartEvent {
             		}
             		//express类型
             		if(null != cell[1] && !"".equals(cell[1]) && "express".equals(cell[1])){
-            			excuteStr = " expression='Expression'";
+            			excuteStr = " expression='"+cell[0]+"'";
             		}
             		start_node += "<activiti:executionListener event='"+cell[2]+"' "+excuteStr+">";
                     //1-1字段开始 子循环操作
@@ -188,9 +188,11 @@ public class MxStartEvent {
             			for(int j = 0; j < field.length; j++){
             				if(!StringUtil.isEmpty(field[j])){
             					String[] fieldV = field[j].split("&",-1);
-                				start_node += "<activiti:field name='"+fieldV[0]+"'>";
-                                start_node += "<activiti:string><![CDATA["+fieldV[2]+"]]></activiti:string>";
-                                start_node += "</activiti:field>";
+            					if(null != fieldV&& fieldV.length == 3){
+            						start_node += "<activiti:field name='"+fieldV[0]+"'>";
+                                    start_node += "<activiti:string><![CDATA["+fieldV[2]+"]]></activiti:string>";
+                                    start_node += "</activiti:field>";
+            					}
             				}
             			}
             		}

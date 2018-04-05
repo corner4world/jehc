@@ -204,7 +204,7 @@ function poolPanel(cell,graph_refresh){
 		//一般属性 参数1表示非开始2其他
 		initNodeNormalForm(cell,2);
 		//共用taskGrid属性事件
-		event_task_grid(cell,2);
+		event_task_grid(cell,1);
 	    poolTabPanel = new Ext.TabPanel({
 	        border:false,
 	        activeTab:0,
@@ -314,7 +314,7 @@ function poolPanel(cell,graph_refresh){
 		//一般属性 参数1表示非开始2其他
 		initNodeNormalForm(cell,2);
 		//共用taskGrid属性事件
-		event_task_grid(cell,2);
+		event_task_grid(cell,1);
 	    poolTabPanel = new Ext.TabPanel({
 	        border:false,
 	        activeTab:0,
