@@ -16,12 +16,13 @@
 		<input type="hidden" value="${BASE_HTTP_SESSION.XT_FUNCTIONINFOMETHOD }" id="xtFunctionInfoBtnStr">
 	   	<!-- 主题技术Extjs支持 -->
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ext-all.js"></script>
+		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/theme-triton/theme-triton.js"></script>
 		<script type="text/javascript" src="${syspath}/deng/source/plugins/e6/classic/locale/locale-zh_CN.js"></script>
-		
-		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-crisp-touch/resources/theme-crisp-touch-all.css" type="text/css" />
 		<%-- 
-		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-triton/resources/theme-triton-all.css" type="text/css" />
+		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-crisp-touch/resources/theme-crisp-touch-all.css" type="text/css" />
 		--%>
+		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/classic/theme-triton/resources/theme-triton-all.css" type="text/css" />
+		
 		<link rel="stylesheet" href="${syspath}/deng/source/plugins/e6/css/font-awesome.css" type="text/css" />
 		<%-- 
 		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/css/index.css" />
@@ -52,11 +53,11 @@
 			</script>
 		</c:if>
 		<style type="text/css">
-			/*样式采用theme-crisp-touch-all.css则放开此处注释*/
+			/*样式采用theme-crisp-touch-all.css则放开此处注释
 			.x-column-header-checkbox .x-column-header-inner, .x-grid-checkcolumn-cell-inner {
 	    		padding: 5px 12px 6px 1px;
 			}
-			 
+			*/
 		</style>
         <script type="text/javascript" src="${syspath}/deng/source/plugins/e6/ux/ProgressBarPager.js"></script>
 		<!-- 公共模块包含上传控件，共同JS封装 -->
@@ -313,7 +314,7 @@
 			/*Panel自定义样式*/
 			.x-panel-header-defined{
 			    background-image:none;
-			    background-color:#17C4BB;/**#35baf6**/
+			    background-color:#5fa2dd;/**#35baf6**/
 			}
 			.x-panel-header-default .x-tool-img{
 				background-color:#fff;/**0e90d2,#dd514c**/
@@ -325,9 +326,9 @@
 			.x-accordion-hd .x-panel-header-title{
 				text-transform:none;
 			}
-			.x-tab-bar-default{
+			/* .x-tab-bar-default{
 				background-color:#fff;
-			}
+			} */
 			.x-title-text {
 			    cursor: pointer;
 			}
@@ -344,10 +345,10 @@
 			.x-body {
 			    background: #ffffff;
 			}
-			.x-accordion-item .x-accordion-hd {
+			/* .x-accordion-item .x-accordion-hd {
 			    background: #ffffff;
 			    border-color: #ffffff #ffffff #f5f5f5;
-			}
+			} */
 		</style>
 	</head>
 </html>
