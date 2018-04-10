@@ -24,8 +24,7 @@ https://gitee.com/jehc/jehc-admin
 效果图片如下：
 
 jEhc能做什么
-![输入图片说明](https://gitee.com/uploads/images/2018/0314/104427_503cc218_1341290.png "首页默认.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0314/104443_fa41c016_1341290.png "首页黑白.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0410/210849_d16c8e6d_1341290.png "首页.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0410/205805_a19f4919_1341290.png "设计器.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0410/210706_c3cf0a3e_1341290.png "流程中心.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0410/210039_38616b78_1341290.png "角色权限.png")
