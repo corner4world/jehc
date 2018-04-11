@@ -51,7 +51,7 @@ public class GeneratorModel extends GeneratorUtil{
         }
         sb.append("import java.io.Serializable;\r\n");
         sb.append("import java.util.Date;\r\n");
-        sb.append("import java.math.BigDecimal\r\n");
+        sb.append("import java.math.BigDecimal;\r\n");
         //判断是否为一对多 并且是主表 如果为一对多则导入实体
         if(xt_Generator.getIs_one_to_many().equals("1") && xt_Generator.isIs_main_table()){
         	List<XtGeneratorTableManyToOne> xt_Generator_TableMany_To_OneList = xt_Generator.getXt_Generator_TableMany_To_OneList();
@@ -179,10 +179,10 @@ public class GeneratorModel extends GeneratorUtil{
     public void createColumenMethod(XtGenerator xt_Generator,StringBuffer sb,List<XtGeneratorTableColumn> xt_Generator_Table_ColumnList){
     	for(int i = 0; i < xt_Generator_Table_ColumnList.size(); i++){
         	XtGeneratorTableColumn xt_Generator_Table_Column = xt_Generator_Table_ColumnList.get(i);
-        	 sb.append("\tpublic void set" + initcap(xt_Generator_Table_Column.getCOLUMN_NAME()) + "(" + sqlType2JavaType(xt_Generator_Table_Column.getDATA_TYPE()) + " " + xt_Generator_Table_Column.getCOLUMN_NAME() + "){\r\n");
+        	 sb.append("\tpublic void set" + initGetSetColumncap(xt_Generator_Table_Column.getCOLUMN_NAME()) + "(" + sqlType2JavaType(xt_Generator_Table_Column.getDATA_TYPE()) + " " + xt_Generator_Table_Column.getCOLUMN_NAME() + "){\r\n");
              sb.append("\t\tthis." + xt_Generator_Table_Column.getCOLUMN_NAME() + "=" + xt_Generator_Table_Column.getCOLUMN_NAME() + ";\r\n");
              sb.append("\t}\r\n");
-             sb.append("\tpublic " + sqlType2JavaType(xt_Generator_Table_Column.getDATA_TYPE()) + " get" + initcap(xt_Generator_Table_Column.getCOLUMN_NAME()) + "(){\r\n");
+             sb.append("\tpublic " + sqlType2JavaType(xt_Generator_Table_Column.getDATA_TYPE()) + " get" + initGetSetColumncap(xt_Generator_Table_Column.getCOLUMN_NAME()) + "(){\r\n");
              sb.append("\t\treturn " + xt_Generator_Table_Column.getCOLUMN_NAME() + ";\r\n");
              sb.append("\t}\r\n");
     	}

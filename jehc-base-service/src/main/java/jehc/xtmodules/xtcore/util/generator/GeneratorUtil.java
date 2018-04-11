@@ -34,6 +34,21 @@ public class GeneratorUtil {
         }
         return new String(ch);
     }
+    
+    /**
+     * 将输入字符串的首字母改成大写
+     * 在字段中使用
+     * @param str
+     * @return
+     */
+    public String initGetSetColumncap(String str) {
+        char[] ch = str.toCharArray();
+        if(ch[0] >= 'a' && ch[0] <= 'z'){
+            ch[0] = (char)(ch[0] - 32);
+        }
+        return new String(ch);
+    }
+    
     /**
      * 将字符中"_"后面第一个字母转换成大写 （并去除所有"_"）
      * 在类名上使用和类文件

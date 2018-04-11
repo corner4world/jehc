@@ -226,6 +226,12 @@ public class GeneratorBootPageUpdate extends GeneratorUtil {
 						}else if("int".equals(sqlType2PageType(dataType))){
 							//数字框
 							sb.append("\t\t\t\t\t'<input class=\"form-control\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_'+numbers+'_"+column_name+"\" name=\""+lowfristTableName+"['+numbers+']."+column_name+"\" placeholder=\"请输入"+column_comment+"\">'+\r\n");
+						}else if("BigDecimal".equals(sqlType2PageType(dataType))){
+							//数字框
+							sb.append("\t\t\t\t\t'<input class=\"form-control\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_'+numbers+'_"+column_name+"\" name=\""+lowfristTableName+"['+numbers+']."+column_name+"\" placeholder=\"请输入"+column_comment+"\">'+\r\n");
+						}else{
+							//文本框
+							sb.append("\t\t\t\t\t'<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_'+numbers+'_"+column_name+"\" name=\""+lowfristTableName+"['+numbers+']."+column_name+"\"  placeholder=\"请输入"+column_comment+"\">'+\r\n");
 						}
 						//结束判断类型
 						sb.append("\t\t\t\t'</div>'+\r\n");
@@ -422,6 +428,12 @@ public class GeneratorBootPageUpdate extends GeneratorUtil {
 				}else if("int".equals(sqlType2PageType(xt_Generator_Table_Column_Form.getData_type()))){
 					//数字框
 					sb.append("\t\t\t\t\t<input class=\"form-control\" maxlength=\""+column_maxlength+"\" "+required.toString()+" name=\""+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+tbName+"."+column_name+" }\">\r\n");
+				}else if("BigDecimal".equals(sqlType2PageType(xt_Generator_Table_Column_Form.getData_type()))){
+					//数字框
+					sb.append("\t\t\t\t\t<input class=\"form-control\" maxlength=\""+column_maxlength+"\" "+required.toString()+" name=\""+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+tbName+"."+column_name+" }\">\r\n");
+				}else{
+					//文本框
+					sb.append("\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" name=\""+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+tbName+"."+column_name+" }\">\r\n");
 				}
 				//结束判断类型
 				sb.append("\t\t\t\t</div>\r\n");
@@ -537,6 +549,12 @@ public class GeneratorBootPageUpdate extends GeneratorUtil {
 						}else if("int".equals(sqlType2PageType(dataType))){
 							//数字框
 							sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+						}else if("BigDecimal".equals(sqlType2PageType(dataType))){
+							//数字框
+							sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+						}else{
+							//文本框
+							sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
 						}
 						//结束判断类型
 						sb.append("\t\t\t\t\t\t</div>\r\n");
