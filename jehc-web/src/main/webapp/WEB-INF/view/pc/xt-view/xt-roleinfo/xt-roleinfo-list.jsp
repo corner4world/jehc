@@ -13,12 +13,12 @@
                 	查询区域
             </div>
             <div class="actions">
-                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
-                     <i class="glyphicon glyphicon-search"></i>
-                 </a>
-                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
-                     <i class="icon-trash"></i>
-                 </a>
+                 <button class="btn btn-default" onclick="search('datatables');">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+				</button>
+				<button class="btn btn-default" onclick="resetAll();">
+					<i class="glyphicon glyphicon-trash"></i>&nbsp;重置
+				</button>
             </div>
         </div>
         <div class="portlet-body form">
@@ -113,11 +113,11 @@
 				                	待分配用户
 				            </div>
 				            <div class="actions">
-				                <button class="btn btn-primary" onclick="search('UnImportUDatatables')">
+				                <button class="btn btn-default" onclick="search('UnImportUDatatables')">
 									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
 								</button>
-								<button class="btn btn-primary" onclick="resetAll('searchFormUnImportU');">重置</button>
-								<button class="btn btn-primary" onclick="addXtUr();">导入用户</button>
+								<button class="btn btn-default" onclick="resetAll('searchFormUnImportU');">重置</button>
+								<button class="btn btn-default" onclick="addXtUr();">导入用户</button>
 				            </div>
 				        </div>
 				        <div class="portlet-body form">
@@ -167,11 +167,11 @@
 				                	已分配用户
 				            </div>
 				            <div class="actions">
-				                <button class="btn btn-primary" onclick="search('ImportUDatatables')">
+				                <button class="btn btn-default" onclick="search('ImportUDatatables')">
 									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
 								</button>
-								<button class="btn btn-primary" onclick="resetAll('searchFormUnImportU');">重置</button>
-								<button class="btn btn-primary" onclick="delXtUR();">移除用户</button>
+								<button class="btn btn-default" onclick="resetAll('searchFormUnImportU');">重置</button>
+								<button class="btn btn-default" onclick="delXtUR();">移除用户</button>
 				            </div>
 				        </div>
 				        <div class="portlet-body form">
