@@ -305,7 +305,7 @@ function datatablesCallBack(data, callback, settings,url,opt){
      param.searchJson = JSON.stringify(paramdata);
 	 //ajax请求数据
 	 $.ajax({
-	 	  type:"GET",
+	 	  type:"POST",
 		  url:url,
 		  cache:false,//禁用缓存
 		  data:param,//传入组装的参数
@@ -417,7 +417,7 @@ function datatablesListCallBack(data, callback, settings,url,opt){
      param.searchJson = JSON.stringify(paramdata);
 	 //ajax请求数据
 	 $.ajax({
-	 	  type:"GET",
+	 	  type:"POST",
 		  url:url,
 		  cache:false,//禁用缓存
 		  data:param,//传入组装的参数
