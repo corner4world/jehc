@@ -15,11 +15,11 @@ http://git.oschina.net/jehc/jehc
 
  **非maven版本地址：** 
 
-https://gitee.com/jehc/jehc-none-maven
+ **https://gitee.com/jehc/jehc-none-maven** 
 
  **
 单工程版本如下：** 
-https://gitee.com/jehc/jehc-admin
+ **https://gitee.com/jehc/jehc-admin** 
 
 效果图片如下：
 
