@@ -41,14 +41,14 @@ jEhc能做什么
 
 
 统一开发 统一开放 统一规范 统一开源
-http://git.oschina.net/jehc/jehc
+ **http://git.oschina.net/jehc/jehc** 
 
 
  **开发工具：** 
-eclipse-jee-mars-1
+ **eclipse-jee-mars-1
 或eclipse-jee-mars-2
 或eclipse-juno
-或STS
+或STS** 
 
  **非maven版本地址：** 
 
