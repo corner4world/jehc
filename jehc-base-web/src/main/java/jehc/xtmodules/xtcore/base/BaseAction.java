@@ -498,18 +498,18 @@ public class BaseAction extends CommonUtils{
         	throw new ExceptionUtil("输出查找对象的JSON格式字符串 或集合JSON格式字符串出现异常：原因【"+e.getCause()+"】 详细信息【"+e.getMessage()+"】");
         }
 	}
-	/**
-	 * 封装共同的数据权限获取参数
-	 * @param condition
-	 */
-	protected void commonSysUID(String key,Map<String, Object> condition,HttpServletRequest request){
-		String sysUID = (String)request.getSession().getAttribute("sysUID");
-		if(null != sysUID && !"".equals(sysUID)){
-			condition.put(key,sysUID);
-		}else{
-			condition.put(key,"0");
-		}
-	}
+//	/**
+//	 * 封装共同的数据权限获取参数
+//	 * @param condition
+//	 */
+//	protected void commonSysUID(String key,Map<String, Object> condition,HttpServletRequest request){
+//		String sysUID = (String)request.getSession().getAttribute("sysUID");
+//		if(null != sysUID && !"".equals(sysUID)){
+//			condition.put(key,sysUID);
+//		}else{
+//			condition.put(key,"0");
+//		}
+//	}
 	
 	/**
 	 * 封装共同分页参数
