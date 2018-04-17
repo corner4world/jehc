@@ -334,7 +334,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		
 		/////////////////////////内容开始////////////////////////
 		//按钮开始
-		sb.append("\t <div class=\"pull-left form-actions\" style=\"margin-right:0px;margin-bottom: 5px\">\r\n");
+		sb.append("\t<div class=\"pull-left form-actions\" style=\"margin-right:0px;margin-bottom: 5px\">\r\n");
 		sb.append("\t\t<button class=\"btn btn-default\" onclick=\"to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Add()\">\r\n");
 		sb.append("\t\t\t<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>新增\r\n");
 		sb.append("\t\t</button>\r\n");
