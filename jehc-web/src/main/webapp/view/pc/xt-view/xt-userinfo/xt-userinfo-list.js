@@ -125,59 +125,64 @@ function delXtUserinfo(){
 
 //已删除用户
 function initListDeleted(){
-	$('#deletedUserinfoSelectModal').modal();
-	$('#searchFormDeletedUserinfo')[0].reset();
-	var opt = {
-			searchformId:'searchFormDeletedUserinfo'
-		};
-	var options = DataTablesPaging.pagingOptions({
-		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtUserinfoDeletedListByCondition',opt);},//渲染数据
-			//在第一位置追加序列号
-			fnRowCallback:function(nRow, aData, iDisplayIndex){
-				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
-				return nRow;
-		},
-		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
-		//列表表头字段
-		colums:[
-			{
-				sClass:"text-center",
-				width:"50px",
-				data:"xt_userinfo_id",
-				render:function (data, type, full, meta) {
-					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildDeletedUserinfo" value="' + data + '" /><span></span></label>';
-				},
-				bSortable:false
-			},
-			{
-				data:"xt_userinfo_id",
-				width:"50px"
-			},
-			{
-				data:'xt_userinfo_name'
-			},
-			{
-				data:'xt_userinfo_realName'
-			},
-			{
-				data:'xt_userinfo_phone'
-			},
-			{
-				data:'xt_userinfo_origo'
-			},
-			{
-				data:'xt_userinfo_birthday'
-			},
-			{
-				data:'xt_userinfo_email'
-			}
-		]
-	});
-	grid=$('#deletedUserinfoDatatables').dataTable(options);
-	//实现全选反选
-	docheckboxall('checkallDeletedUserinfo','checkchildDeletedUserinfo');
-	//实现单击行选中
-	clickrowselected('deletedUserinfoDatatables');
+	$('#deletedUserinfoSelectModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
+		$('#deletedUserinfoBody').height(reGetBodyHeight());
+        // 是弹出框居中。。。  
+        var $modal_dialog = $("#UserinfoModalDialog");  
+        $('#searchFormDeletedUserinfo')[0].reset();
+        $modal_dialog.css({'width':reGetBodyWidth()*0.9+'px'});  
+        var opt = {
+    			searchformId:'searchFormDeletedUserinfo'
+    		};
+    	var options = DataTablesPaging.pagingOptions({
+    		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtUserinfoDeletedListByCondition',opt);},//渲染数据
+    			//在第一位置追加序列号
+    			fnRowCallback:function(nRow, aData, iDisplayIndex){
+    				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+    				return nRow;
+    		},
+    		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+    		//列表表头字段
+    		colums:[
+    			{
+    				sClass:"text-center",
+    				width:"50px",
+    				data:"xt_userinfo_id",
+    				render:function (data, type, full, meta) {
+    					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildDeletedUserinfo" value="' + data + '" /><span></span></label>';
+    				},
+    				bSortable:false
+    			},
+    			{
+    				data:"xt_userinfo_id",
+    				width:"50px"
+    			},
+    			{
+    				data:'xt_userinfo_name'
+    			},
+    			{
+    				data:'xt_userinfo_realName'
+    			},
+    			{
+    				data:'xt_userinfo_phone'
+    			},
+    			{
+    				data:'xt_userinfo_origo'
+    			},
+    			{
+    				data:'xt_userinfo_birthday'
+    			},
+    			{
+    				data:'xt_userinfo_email'
+    			}
+    		]
+    	});
+    	grid=$('#deletedUserinfoDatatables').dataTable(options);
+    	//实现全选反选
+    	docheckboxall('checkallDeletedUserinfo','checkchildDeletedUserinfo');
+    	//实现单击行选中
+    	clickrowselected('deletedUserinfoDatatables');
+    });  
 }
 
 //恢复用户

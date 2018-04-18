@@ -79,71 +79,65 @@
 </body>
 <!-- 已废除用户模态框（Modal）开始 -->
 <div class="modal fade" id="deletedUserinfoSelectModal" tabindex="-1" role="dialog" aria-labelledby="deletedUserinfoModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
+	<div class="modal-dialog" id="UserinfoModalDialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="deletedUserinfoModalLabel">
 					已废除用户列表
 				</h4>
 			</div>
-			<div class="modal-body">
+			<div class="modal-body" id="deletedUserinfoBody">
 				<div class="panel panel-default">
-					<fieldset>
-						<legend>查询区域</legend>
-						<form method="POST" id="searchFormDeletedUserinfo">
-							<div class="row">
-								<div class="col-md-2">
-									<label>隶属部门</label>
+					<div class="portlet box green" style="margin-bottom: 5px;">
+						<div class="portlet-title">
+				            <div class="caption">
+				                     查询区域
+				            </div>
+				            <div class="actions">
+				                <button class="btn btn-default" onclick="search('deletedUserinfoDatatables')">
+									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+								</button>
+								<button class="btn btn-default" onclick="resetAll('searchFormDeletedUserinfo');">重置</button>
+				            </div>
+				        </div>
+				        <div class="portlet-body form">
+				        	<form method="POST" id="searchFormDeletedUserinfo" style="padding: 5px 5px 5px 5px;">
+								<div class="row">
+									<div class="col-md-3">
+										<label>隶属部门</label>
+										<input type="text" class="form-control" name="xt_departinfo_name" placeholder="请输入部门名称">
+									</div>
+									<div class="col-md-3">
+										<label>岗位</label>
+										<input type="text" class="form-control" name="xt_post_name" placeholder="请输入岗位名称">
+									</div>
+									<div class="col-md-3">
+										<label>姓名</label>
+										<input type="text" class="form-control" name="xt_userinfo_realName" placeholder="请输入姓名">
+									</div>
+									<div class="col-md-3">
+										<label>用户名</label>
+										<input type="text" class="form-control" name="xt_userinfo_name" placeholder="请输入用户名">
+									</div>
 								</div>
-								<div class="col-md-3">
-									<input type="text" class="form-control" name="xt_departinfo_name" placeholder="请输入部门名称">
-								</div>
-								<div class="col-md-2">
-									<label>岗位</label>
-								</div>
-								<div class="col-md-3">
-									<input type="text" class="form-control" name="xt_post_name" placeholder="请输入岗位名称">
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-2">
-									<label>姓名</label>
-								</div>
-								<div class="col-md-3">
-									<input type="text" class="form-control" name="xt_userinfo_realName" placeholder="请输入姓名">
-								</div>
-								<div class="col-md-2">
-									<label>用户名</label>
-								</div>
-								<div class="col-md-3">
-									<input type="text" class="form-control" name="xt_userinfo_name" placeholder="请输入用户名">
-								</div>
-							</div>
-						</form>
-						<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-							<button class="btn btn-primary" onclick="search('deletedUserinfoDatatables')">
-								<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-							</button>
-							<button class="btn btn-default" onclick="resetAll('searchFormDeletedUserinfo');">重置</button>
-						</div>
-					</fieldset>
+							</form>
+				        </div>
+				    </div>
 				</div>
-				<div class="panel-body">
-					<table id="deletedUserinfoDatatables" class="table table-bordered table-striped table-hover">
-						<thead>
-							<tr>
-								<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallDeletedUserinfo" /><span></span></label></th>
-								<th>序号</th>
-								<th>用户名</th>
-								<th>真实姓名</th>
-								<th>联系电话</th>
-								<th>籍贯</th>
-								<th>生日</th>
-								<th>电子邮件</th>
-							</tr>
-						</thead>
-					</table>
-				</div>
+				<table id="deletedUserinfoDatatables" class="table table-bordered table-striped table-hover">
+					<thead>
+						<tr>
+							<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallDeletedUserinfo" /><span></span></label></th>
+							<th>序号</th>
+							<th>用户名</th>
+							<th>真实姓名</th>
+							<th>联系电话</th>
+							<th>籍贯</th>
+							<th>生日</th>
+							<th>电子邮件</th>
+						</tr>
+					</thead>
+				</table>
 			</div>
 			<div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
