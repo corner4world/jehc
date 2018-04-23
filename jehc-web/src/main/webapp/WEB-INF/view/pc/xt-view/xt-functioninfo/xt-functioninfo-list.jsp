@@ -31,26 +31,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
 	        	<div class="form-group">
 					<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
-					<button class="btn btn-default" onclick="addXtFunctioninfo()">
-						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-					</button>
-					<button class="btn btn-default" onclick="updateXtFunctioninfo()">
-						<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-					</button>
-					<button class="btn btn-default" onclick="getXtFunctioninfoById()">
-						<span class="glyphicon glyphicon-share" aria-hidden="true"></span>详情
-					</button>
-					<button class="btn btn-default" onclick="delXtFunctioninfo()">
-						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-					</button>
-					<button class="btn btn-default" onclick="refreshAll()">
-						<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-					</button>
 				</div>
 			</form>
         </div>
+        <div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
+	        <button class="btn btn-default" onclick="addXtFunctioninfo()">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+			</button>
+			<button class="btn btn-default" onclick="updateXtFunctioninfo()">
+				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+			</button>
+			<button class="btn btn-default" onclick="getXtFunctioninfoById()">
+				<span class="glyphicon glyphicon-share" aria-hidden="true"></span>详情
+			</button>
+			<button class="btn btn-default" onclick="delXtFunctioninfo()">
+				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+			</button>
+			<button class="btn btn-default" onclick="refreshAll()">
+				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+			</button>
+		</div>
     </div>
 	<div class="panel-body">
+		<br>
 		<ul id="tree" class="ztree"></ul>
 	</div>
 	
