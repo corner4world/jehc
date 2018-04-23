@@ -1,4 +1,4 @@
-# ** **QQ群：102642604** **
+#  **QQ群：102642604** 
 
 
 **本工程为Maven多工程依赖版本** 
@@ -99,6 +99,6 @@ jEhc能做什么
 
  **https://gitee.com/jehc/jehc-none-maven** 
 
- **
-单工程版本如下：** 
+ 
+单工程版本如下：
  **https://gitee.com/jehc/jehc-admin** 
