@@ -28,7 +28,37 @@ http://git.oschina.net/jehc/jehc
 
 框架基础前端技术：Jquery+Bootstrap+Extjs6.2.1+Mxgraph(流程设计器)等
 
-框架其它技术：接口采用Swagger2，全文检索：solr4.10，工作流引擎Activiti5.22，缓存框架：【Redis，Ehcache】
+框架其它技术：接口采用Swagger2，全文检索：solr4.10，工作流引擎Activiti5.22，缓存框架：【Redis，Ehcache】，Logback，FTP，hessian，
+
+框架基础功能：
+
+1用户中心
+2公司信息
+3部门
+4岗位
+5角色权限
+6组织机构（对部门岗位合并操作）
+7数据权限、
+8全文检索
+9流程关联
+10流程在线设计
+11我的任务
+12平台公告
+13平台通知
+14代码生成器
+15业务日志记录
+16页面性能日志监控
+17操作日志
+18平台日志记录
+19菜单配置、
+20功能配置
+21公告功能配置
+22JSRUN
+23数据库备份
+24数据库维护
+25FlexSeach
+
+
 
 效果图片如下：
 
