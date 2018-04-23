@@ -17,8 +17,7 @@ http://git.oschina.net/jehc/jehc
 
  **https://gitee.com/jehc/jehc-none-maven** 
 
- **
-单工程版本如下：** 
+单工程版本如下：
  **https://gitee.com/jehc/jehc-admin** 
 
 
