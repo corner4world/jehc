@@ -63,7 +63,9 @@ http://git.oschina.net/jehc/jehc
 28. 调度器执行操作
 
 
-
+框架其它功能：
+    电商后端
+    
 效果图片如下：
 
 jEhc能做什么
