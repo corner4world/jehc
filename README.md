@@ -28,7 +28,9 @@ http://git.oschina.net/jehc/jehc
 
 框架基础前端技术：Jquery+Bootstrap+Extjs6.2.1+Mxgraph(流程设计器)等
 
-框架其它技术：接口采用Swagger2，全文检索：solr4.10，工作流引擎Activiti5.22，缓存框架：【Redis，Ehcache】，Logback，FTP，hessian，
+框架其它技术：接口采用Swagger2，全文检索：solr4.10，工作流引擎Activiti5.22，缓存框架：【Redis，Ehcache】，Logback，FTP，hessian，FastJSON,GZIP(TK技术)，quartz，消息中间件RabbitMq+Kafka，及时通讯NETTY
+
+框架数据库支持：Mysql5.6，Oracle11g
 
 框架基础功能：
 
@@ -58,6 +60,8 @@ http://git.oschina.net/jehc/jehc
 24. 数据库维护
 25. FlexSeach
 26. 平台统一附件
+27. 调度器维护
+28. 调度器执行操作
 
 
 
