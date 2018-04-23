@@ -527,7 +527,7 @@ public class XtDataAuthorityController extends BaseAction{
 			}
 			list.add(BaseTreeGridEntity);
 		}
-		condition.put("xt_functioninfoIsAuthority", 1);
+		condition.put("xt_functioninfoIsAuthority", 0);
 		List<XtFunctioninfo> xtFunctioninfoList = xtFunctioninfoService.getXtFunctioninfoAllForData(condition);
 		for(int j = 0; j < xt_DepartinfoList.size(); j++){
 			XtDepartinfo xt_Departinfo = xt_DepartinfoList.get(j);
@@ -629,23 +629,27 @@ public class XtDataAuthorityController extends BaseAction{
 		//如果类型:部门 则查出所有部门下的一级岗位
 		StringBuffer jsonStr = new StringBuffer(); 
 		Map<String, Object> condition = new HashMap<String, Object>();
+		List<XtPost> xtPostList = new ArrayList<XtPost>();
 		if(null != type && !"".equals(type) && "部门".equals(type)){
 			condition.put("xt_departinfo_id", id);
-			List<XtPost> xtPostList = xtPostService.getXtPostinfoList(condition);
-			//拼接字符串
-			for(int i = 0; i < xtPostList.size(); i++){
-				XtPost xtPost = xtPostList.get(i);
-				String leaf = "false";
-				if(xtPost.getXt_post_isLeaf() == 0){
-					leaf = "false";
-				}else{
-					leaf = "true";
-				}
-				if(i==(xtPostList.size()-1)){
-					jsonStr.append("{id:'"+xtPost.getXt_post_id()+"',name:'"+xtPost.getXt_post_name()+"',icon:'../deng/images/icons/users.png',xt_post_parentId:'"+xtPost.getXt_post_parentId()+"',type:'岗位',leaf:"+leaf+",remark:'"+xtPost.getXt_post_desc()+"',xt_departinfo_id:'"+xtPost.getXt_departinfo_id()+"',xt_departinfo_name:'"+xtPost.getXt_departinfo_name()+"'}");  
-				}else{
-					jsonStr.append("{id:'"+xtPost.getXt_post_id()+"',name:'"+xtPost.getXt_post_name()+"',icon:'../deng/images/icons/users.png',xt_post_parentId:'"+xtPost.getXt_post_parentId()+"',type:'岗位',leaf:"+leaf+",remark:'"+xtPost.getXt_post_desc()+"',xt_departinfo_id:'"+xtPost.getXt_departinfo_id()+"',xt_departinfo_name:'"+xtPost.getXt_departinfo_name()+"'},");
-				}
+			xtPostList = xtPostService.getXtPostinfoList(condition);
+		}else{
+			condition.put("xt_post_parentId", id);
+			xtPostList = xtPostService.getXtPostListChild(condition);
+		}
+		//拼接字符串
+		for(int i = 0; i < xtPostList.size(); i++){
+			XtPost xtPost = xtPostList.get(i);
+			String leaf = "false";
+			if(xtPost.getXt_post_isLeaf() == 0){
+				leaf = "false";
+			}else{
+				leaf = "true";
+			}
+			if(i==(xtPostList.size()-1)){
+				jsonStr.append("{id:'"+xtPost.getXt_post_id()+"',name:'"+xtPost.getXt_post_name()+"',icon:'../deng/images/icons/users.png',xt_post_parentId:'"+xtPost.getXt_post_parentId()+"',type:'岗位',leaf:"+leaf+",remark:'"+xtPost.getXt_post_desc()+"',xt_departinfo_id:'"+xtPost.getXt_departinfo_id()+"',xt_departinfo_name:'"+xtPost.getXt_departinfo_name()+"'}");  
+			}else{
+				jsonStr.append("{id:'"+xtPost.getXt_post_id()+"',name:'"+xtPost.getXt_post_name()+"',icon:'../deng/images/icons/users.png',xt_post_parentId:'"+xtPost.getXt_post_parentId()+"',type:'岗位',leaf:"+leaf+",remark:'"+xtPost.getXt_post_desc()+"',xt_departinfo_id:'"+xtPost.getXt_departinfo_id()+"',xt_departinfo_name:'"+xtPost.getXt_departinfo_name()+"'},");
 			}
 		}
 		return jsonStr.toString();
@@ -690,7 +694,7 @@ public class XtDataAuthorityController extends BaseAction{
 			}
 			list.add(BaseTreeGridEntity);
 		}
-		condition.put("xt_functioninfoIsAuthority", 1);
+		condition.put("xt_functioninfoIsAuthority", 0);
 		List<XtFunctioninfo> xtFunctioninfoList = xtFunctioninfoService.getXtFunctioninfoAllForData(condition);
 		for(int j = 0; j < xtPostList.size(); j++){
 			XtPost xtPost = xtPostList.get(j);
