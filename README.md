@@ -21,6 +21,15 @@ http://git.oschina.net/jehc/jehc
 单工程版本如下：** 
  **https://gitee.com/jehc/jehc-admin** 
 
+
+采用的技术如下：
+
+框架基础后端技术：Spring+SpringMVC+Mybatis
+
+框架基础前端技术：Jquery+Bootstrap+Extjs6.2.1+Mxgraph(流程设计器)等
+
+框架其它技术：接口采用Swagger2，全文检索：solr4.10，工作流引擎Activiti5.22，缓存框架：【Redis，Ehcache】
+
 效果图片如下：
 
 jEhc能做什么
