@@ -150,12 +150,12 @@
 
 .arrow {
     float: right;
-    margin-top: 12px;
+    /* margin-top: 12px; */
 }
 .page-sidebar .page-sidebar-menu .sub-menu li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu .sub-menu li>a {
     display: block;
     margin: 0;
-    padding: 6px 15px 0px 70px;
+    padding: 12px 15px 12px 70px;
     text-align:left;
     text-decoration: none;
     font-size: 13px;

@@ -28,7 +28,8 @@ public class IndexTree {
 				html.append("\r\n<i class=\""+node.getXt_menuinfo_iconCls()+"\"></i>");
 				html.append("\r\n<span class=\"title\">"+node.getXt_menuinfo_title()+"</span>");
 				if(node.getXt_menuinfo_leaf().equals("0")){
-					html.append("\r\n<span class=\"arrow \"></span>");
+//					html.append("\r\n<span class=\"arrow \" style=\"padding-top:18px\"></span>");
+					html.append("\r\n<span class=\" \" style=\"padding-top:18px\"></span>");
 				}
 				html.append("\r\n <span class=\"selected\"></span>");
 				html.append("\r\n</a>");
@@ -61,7 +62,7 @@ public class IndexTree {
 //				html.append("\r\n<i class=\""+child.getXt_menuinfo_iconCls()+"\"></i> "+child.getXt_menuinfo_title()+"");//二级图标不再显示
 				if(child.getXt_menuinfo_leaf().equals("0")){
 					//存在下级菜单
-					html.append("\r\n<span class=\"arrow\"></span>");
+					html.append("\r\n<span class=\"arrow\" style=\"padding-top:8px\"></span>");
 					html.append("\r\n <span class=\"selected\"></span>");
 				}
 				html.append("\r\n</a>");
