@@ -69,12 +69,63 @@ http://git.oschina.net/jehc/jehc
 效果图片如下：
 
 jEhc能做什么
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/210849_d16c8e6d_1341290.png "首页.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/205805_a19f4919_1341290.png "设计器.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/210706_c3cf0a3e_1341290.png "流程中心.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/210039_38616b78_1341290.png "角色权限.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/210315_2b221424_1341290.png "分配用户.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/205936_60584a04_1341290.png "用户体系.png")
+
+流程模块
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/213837_5ecabddb_1341290.png "在线设计.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/213901_f60e44a7_1341290.png "流程中心.png")
+
+基础模块
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/213921_8041d0e3_1341290.png "用户管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/213953_f01303b3_1341290.png "公司管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214038_ab3782e9_1341290.png "组织机构.png")
+
+角色权限
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214130_b0b64ccd_1341290.png "数据权限.png")
+
+
+配置模块
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214059_f0829e25_1341290.png "功能配置.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214303_fdef338e_1341290.png "菜单配置.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214603_bea899e3_1341290.png "定时执行器.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214616_c7f3ddf5_1341290.png "定时任务.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214741_efa6b835_1341290.png "数据字典.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214803_c8c4244d_1341290.png "文件中心.png")
+
+
+日志中心
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214322_cdc058d4_1341290.png "异常日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214339_127eb6ab_1341290.png "登录日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214400_e6453694_1341290.png "业务日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214410_702e1efd_1341290.png "虚拟机监控.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214421_bc9b87a9_1341290.png "页面停留监控日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214816_b8920585_1341290.png "定时器运行日志.png")
+
+
+高级代码生成器
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214631_0c8feecc_1341290.png "代码生成器.png")
+
+
+监控模块
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214434_a6892270_1341290.png "硬盘监控.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214228_6f0ef838_1341290.png "虚拟机监控.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214452_9b7a9bd0_1341290.png "CPU监控.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214509_6e864f6f_1341290.png "内存监控.png")
+
+其他
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214523_cb89afe1_1341290.png "行政区域.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214540_284a9db3_1341290.png "缓存中心.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214551_8420331a_1341290.png "附件中心.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214703_dd8af289_1341290.png "单号维护.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214717_9097a652_1341290.png "数据库备份.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/214728_c5d5bbbe_1341290.png "库表结构.png")
+
+
+
 
 只列举小部分功能如下：
 
