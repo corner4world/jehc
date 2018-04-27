@@ -82,6 +82,7 @@ jEhc能做什么
 ![输入图片说明](https://gitee.com/uploads/images/2018/0427/214038_ab3782e9_1341290.png "组织机构.png")
 
 角色权限
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/231026_a1e7488d_1341290.png "角色权限.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0427/214130_b0b64ccd_1341290.png "数据权限.png")
 
 
@@ -132,8 +133,10 @@ jEhc能做什么
 ![输入图片说明](https://gitee.com/uploads/images/2018/0410/210159_7c3098ea_1341290.png "各种功能.png")
 
 电商后端及前端
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/210458_d5472108_1341290.png "购物车.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/210418_1846ff18_1341290.png "订单.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/231049_dbbea11d_1341290.png "商品中心.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/231109_5f1a7937_1341290.png "商户管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/231122_d825794f_1341290.png "购物车.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0427/231132_e5e490e9_1341290.png "订单中心.png")
 
 
 统一开发 统一开放 统一规范 统一开源
