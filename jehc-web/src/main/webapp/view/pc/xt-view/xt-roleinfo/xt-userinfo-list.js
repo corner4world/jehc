@@ -4,13 +4,14 @@ function addXtUserinfo(xt_role_id,xt_role_name){
 	$('#UserinfoModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
         // 是弹出框居中。。。  
         var $modal_dialog = $("#UserinfoModalDialog");  
+        $('#UserinfoModalLabel').html("角色权限--->分配用户---><font color=red>"+xt_role_name+"</font>");
         $('#searchFormUnImportU')[0].reset();
     	$('#searchFormImportU')[0].reset();
     	$('#xt_role_id1').val(xt_role_id);
     	$('#xt_role_id2').val(xt_role_id);
     	initUnImportU(xt_role_id);
     	initImportU(xt_role_id);
-        $modal_dialog.css({'width':reGetBodyWidth()*0.8+'px'});  
+        $modal_dialog.css({'width':reGetBodyWidth()*0.95+'px'});  
     });  
 }
 /**待导入用户**/
@@ -26,6 +27,7 @@ function initUnImportU(xt_role_id){
 				return nRow;
 		},
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		dom:'<"top"i>rt<"bottom"flp><"clear">',
 		//列表表头字段
 		colums:[
 			{
@@ -46,15 +48,6 @@ function initUnImportU(xt_role_id){
 			},
 			{
 				data:'xt_userinfo_realName'
-			},
-			{
-				data:'xt_userinfo_phone'
-			},
-			{
-				data:'xt_userinfo_origo'
-			},
-			{
-				data:'xt_userinfo_birthday'
 			},
 			{
 				data:'xt_userinfo_email'
@@ -82,6 +75,7 @@ function initImportU(xt_role_id){
 				return nRow;
 		},
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		dom:'<"top"i>rt<"bottom"flp><"clear">',
 		//列表表头字段
 		colums:[
 			{
@@ -102,15 +96,6 @@ function initImportU(xt_role_id){
 			},
 			{
 				data:'xt_userinfo_realName'
-			},
-			{
-				data:'xt_userinfo_phone'
-			},
-			{
-				data:'xt_userinfo_origo'
-			},
-			{
-				data:'xt_userinfo_birthday'
 			},
 			{
 				data:'xt_userinfo_email'

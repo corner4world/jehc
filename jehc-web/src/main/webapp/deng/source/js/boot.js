@@ -249,7 +249,7 @@ var DataTablesPaging = {
 //        		"sScrollX":"100%",//表格的宽度
     			"sScrollXInner":"100%",//表格的内容宽度
     			"bScrollCollapse":true,
-    			dom:'<"top">rt<"bottom"iflp><"clear">',
+    			dom:settings.dom != null?settings.dom:'<"top">rt<"bottom"iflp><"clear">',
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
     			"bInfo":true,//显示表格信息
