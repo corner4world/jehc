@@ -43,11 +43,13 @@
 		<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <%-- 
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+         --%>
         <!-- 基础插件样式结束 -->
         <!-- 自定义主题样式开始 -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath}/deng/source/plugins/admin/index/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+        <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
         <!-- 自定义主题样式结束 -->
         <%-- [if lt IE 9]>
 		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/respond.min.js"></script>
@@ -85,9 +87,11 @@
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" type="text/javascript"></script>
         <!-- 日期选择器控件结束 -->
         <!-- 其他插件开始 -->
+        <%-- 
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js" type="text/javascript"></script>
+         --%>
         <!-- 其他插件结束 -->
         <!-- 提示插件开始 -->
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
@@ -95,8 +99,10 @@
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootbox.js" type="text/javascript"></script>
         <!-- 提示插件结束 -->
         <!-- 添加选项卡插件开始 -->
+        <%-- 
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/css/bootstrap.addtabs.css" rel="stylesheet" type="text/css" />
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/js/bootstrap.addtabs.js" type="text/javascript"></script>
+		--%>
         <!-- 添加选项卡插件结束 -->
         <!-- 对话框插件开始 -->
 		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/other/jquery/alert/zeroModal.css" />
