@@ -47,8 +47,8 @@
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
         -->
         <!-- 基础插件样式结束 -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath}/deng/source/plugins/admin/index/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+        <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
         <%-- 
         <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout3/css/themes/red-sunglo.min.css" rel="stylesheet" type="text/css" id="style_color" />

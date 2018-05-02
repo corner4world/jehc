@@ -23,8 +23,8 @@
     <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
     <!-- 基础插件样式结束 -->
     <!-- 自定义主题样式开始 -->
-    <link href="${syspath}/deng/source/plugins/admin/index/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-    <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
+    <link href="${syspath}/deng/source/plugins/admin/index/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
     <!-- 自定义主题样式结束 -->
     <!-- 基础插件开始 -->
     <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.min.js" type="text/javascript"></script>
