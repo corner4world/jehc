@@ -211,14 +211,15 @@ function callLang(){
 	var lang = {
 			//"sLengthMenu":"每页显示 _MENU_ 条记录",
 			"sZeroRecords":"对不起，查询不到任何相关数据",
-			"sInfo":"当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+			"sInfo":"当前 _START_ - _END_ 项结果，共 _TOTAL_ 项",
+			//"sInfo":"第 _PAGE_ 页 (共 _PAGES_ 页)",
 			"sInfoEmtpy":"找不到相关数据",
-			"sInfoFiltered":"数据表中共为 _MAX_ 条记录)",
+			"sInfoFiltered":"数据表中共为 _MAX_ 条记录",
 			"sProcessing":"<i class='glyphicon glyphicon-dashboard'></i>正在加载中...",
 			"sLoadingRecords":"载入中...",
 			"sSearch":"搜索",
 			"bAutoWidth":true,
-		    "sLengthMenu":"，每页显示 _MENU_ 条记录",
+		    "sLengthMenu":"	_MENU_ ",
 		    "sInfoEmpty":"显示0条记录",
 		    "sInfoFiltered":"(全部记录数 _MAX_ 条)",
 		    "sInfoPostFix":"",
@@ -265,7 +266,7 @@ var DataTablesPaging = {
     			"pageLength":10,//首次加载的数据条数
     			"bLengthChange":true,//每页显示的记录数
     			"sPaginationType":"full_numbers",//分页，一共两种样式，full_numbers和two_button(默认)
-    			"aLengthMenu":[[10, 25, 50, 100, 500 ],["10", "25","50", "100","500" ]],//设置每页显示记录的下拉菜单也可以设置为pageList
+    			"aLengthMenu":[[10, 25, 50, 100, 500 ],["10条/页", "25条/页","50条/页", "100条/页","500条/页" ]],//设置每页显示记录的下拉菜单也可以设置为pageList
     			height:tableHeight(),//高度调整
     			bJQueryUI:true,//采用jQueryUI样式
 	            order:settings.order,//[index,'asc|desc']
