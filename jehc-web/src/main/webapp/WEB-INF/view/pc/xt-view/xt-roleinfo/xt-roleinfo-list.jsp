@@ -171,7 +171,7 @@
 						                <button class="btn btn-default" onclick="search('ImportUDatatables')">
 											<i class="glyphicon glyphicon-search"></i>&nbsp;检索
 										</button>
-										<button class="btn btn-default" onclick="resetAll('searchFormUnImportU');">重置</button>
+										<button class="btn btn-default" onclick="resetAll('searchFormImportU');">重置</button>
 										<button class="btn btn-default" onclick="delXtUR();">移除用户</button>
 						            </div>
 						        </div>
