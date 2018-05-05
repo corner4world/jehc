@@ -11,6 +11,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta charset="UTF-8">  
 <title>平台知识内容搜索结果明细</title>
 	<script type="text/javascript" src="../view/pc/xt-view/xt-search/xt-knowledge-form-search.js"></script>  
+	<style type="text/css"  >  
+       .label2{font-size: 12px; color: #ffffff;}   
+   </style> 
 </head>  
 <body>  
 	<input id="searchid" type="hidden" value="${searchid }">

@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>平台知识内容搜索结果</title>
 	<script type="text/javascript" src="../view/pc/xt-view/xt-search/xt-knowledge-list-search.js"></script>  
 	<style>
-		.x-panel-header-default-framed {
+		/* .x-panel-header-default-framed {
 		border: 0px solid #fff;
 		}
 		.x-column-header {
@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		.x-panel-header-defined {
 		    background-image: none;
 		    background-color: #32c5d2;
-		}
+		} */
 	</style>
 </head>  
 <body>  

@@ -3,7 +3,7 @@ Ext.onReady(function(){
 	var resultPanel = Ext.create('Ext.Window',{
 		region:'center',
 		xtype:'panel',
-		title:'结果详细',
+		title:'平台问题、知识库详情',
 		layout:'fit',
 		width:clientWidth,                    
 		height:clientHeight, 
@@ -19,10 +19,12 @@ Ext.onReady(function(){
 		tools:[
 		{
 			xtype:'label',
+			cls:'label2',
 			id:'ctime'
 		},
 		{
 			xtype:'label',
+			cls:'label2',
 			id:'cUser'
 		}
 		]

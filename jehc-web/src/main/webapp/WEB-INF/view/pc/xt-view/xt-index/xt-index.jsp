@@ -24,7 +24,8 @@
                		<%-- <div style="position:absolute;width:100px;height:65px;text-align:center;line-height:65px;">
                 		<font style="text-align:center;font-weight: 700;font-size: 20px;" color="#ffffff">${sys_pt_index}</font>
                 	</div>  --%>
-                	
+                	<!-- TabAddClick使用 -->
+		
                     <a href="index.html">
                     	<img src="${syspath}/deng/images/logo/logo.png" alt="logo" class="logo-default" /> 
                     </a>
@@ -69,7 +70,7 @@
                 <div class="page-top">
                     <!-- BEGIN HEADER SEARCH BOX -->
                     <!-- DOC: Apply "search-form-expanded" right after the "search-form" class to have half expanded search box -->
-                    <form class="search-form search-form-expanded" method="GET">
+                    <div class="search-form search-form-expanded" method="GET">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="请输入关键字..." id="keywords" name="keywords">
                             <span class="input-group-btn">
@@ -78,7 +79,7 @@
                                 </a>
                             </span>
                         </div>
-                    </form>
+                    </div>
                     <!-- END HEADER SEARCH BOX -->
                     <!-- BEGIN TOP NAVIGATION MENU -->
                     <div class="top-menu">
@@ -189,7 +190,7 @@
                                     <li class="divider"> </li>
                                     <li>
                                     	<a href='../xtUserinfoController/loadMyXtUserinfo' class="nav-link J_menuItem" data-index='myUserInfo' rootId='myUserInfo' idBu='myUserInfo'>
-			                                <i class="icon-user"></i>个人资料</span>
+			                               <span><i class="icon-user"></i>个人资料</span>
 			                            </a>
                                     </li>
                                     <li class="divider"> </li>
@@ -472,7 +473,10 @@
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal -->
 		</div>
-		<!-- 肤色模态框（Modal）结束 -->
+		<!-- 肤色模态框（Modal）结束 -->		
+		<a href='' id="triggerID" class="nav-link J_menuItem" data-index='' rootId='' idBu='' style="display:none;">
+           <span id="triggerSpanID"></span>
+        </a>
     </body>
     <script type="text/javascript" src="${syspath}/view/pc/xt-view/xt-index/xt-admin.js"></script>
 </html>

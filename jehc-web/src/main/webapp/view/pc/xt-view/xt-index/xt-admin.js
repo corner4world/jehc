@@ -23,33 +23,16 @@ $(function () {
 	  */ 
 }) 
 
-function clickAddTab(url,title,id,rootId,idList,close){
-	//var tabNumbs = Addtabs.tabList();
-//	if(tabNumbs > 5){
-//		toastrBoot(4,"打开选项卡超过6个，请关闭操作!");
-//		return;
-//	}
+function clickAddTab(url,title,id){
 	if(null == url || url == ''){
 		return;
-	}
-	/*
-	var closeable = close;
-	if(closeable == false){
-		closeable=false;
-	}else{
-		closeable=true;
-	}
-	var dt1 = nowTimestamp();
-	Addtabs.add({
-        id:id,
-        title:title,
-        close:closeable,
-        url:"../"+url,
-        idList:idList
-    })
-    doActive(id,idList);
-    loadXtIframeComplete(id,dt1,title);
-    */
+	}	
+	$('#triggerID').attr('data-index',id);
+	$('#triggerID').attr('rootId',id);
+	$('#triggerID').attr('idBu',id);
+	$('#triggerID').attr('href',url);
+	$('#triggerSpanID').text(title);
+	document.getElementById("triggerSpanID").click();
 }
 function doActive(id,idList,tabIdList){
 	try{
@@ -235,7 +218,7 @@ function unlockSystem() {
 //////////////////解锁结束///////////////////
 //关键字搜索
 function search(){
-	clickAddTab('/xtSearchController/loadXtSearch?keywords='+encodeURI($('#keywords').val()),'关键字搜索结果','search_page_');
+	clickAddTab(basePath+'/xtSearchController/loadXtSearch?keywords='+encodeURI($('#keywords').val()),'关键词检索','search_page_');
 }
 
 function updateUserPic(){
@@ -427,6 +410,9 @@ function geNotify(){
 	ajaxBRequestCallFn('../xtNotifyReceiverController/getXtNotifyReceiverListByCondition?receive_status=0',null,function(result){
 		result = eval("(" + result + ")");
 		var data=result.data;
+		if(null == data){
+			return;
+		}
 		$('#notifyNum').html(data.length);
 		$('#notifyNumright').html(data.length);
 		$("#notify").empty();
