@@ -218,7 +218,10 @@ function unlockSystem() {
 //////////////////解锁结束///////////////////
 //关键字搜索
 function search(){
-	clickAddTab(basePath+'/xtSearchController/loadXtSearch?keywords='+encodeURI($('#keywords').val()),'关键词检索','search_page_');
+	//采用Tab页打开方式
+	//clickAddTab(basePath+'/xtSearchController/loadXtSearch?keywords='+encodeURI($('#keywords').val()),'关键词检索','search_page_');
+	//直接打开新窗体方式
+	window.open('../xtSearchController/loadXtSearch?keywords='+encodeURI($('#keywords').val()), "_blank");
 }
 
 function updateUserPic(){

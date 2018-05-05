@@ -27,7 +27,7 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">已读时间</label>
 				<div class="col-lg-6">
-                    <label class="control-label">${xtNotifyReceiver.read_time }</label>
+                    <label class="control-label"><fmt:formatDate value='${xtNotifyReceiver.read_time }' pattern="yyyy-MM-dd HH:mm:ss"/></label>
                 </div>
             </div>
 			<div class="form-group">
