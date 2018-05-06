@@ -40,7 +40,7 @@ body {
 	</h3>
 	<div class="page-bar">
 		<ul class="page-breadcrumb">
-			<li><i class="icon-home"></i> <a href="index.html">首页</a> <i
+			<li><i class="icon-home"></i> <a href="javascript:void(0)">首页</a> <i
 				class="fa fa-angle-right"></i></li>
 			<li><span>工作区</span></li>
 		</ul>
