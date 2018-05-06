@@ -53,6 +53,13 @@ public class XtMessageController extends BaseAction{
 	@RequestMapping(value="/getXtMessageListByCondition",method={RequestMethod.POST,RequestMethod.GET})
 	public String getXtMessageListByCondition(BaseSearch baseSearch,HttpServletRequest request){
 		Map<String, Object> condition = baseSearch.convert();
+		if("0".equals(condition.get("type"))){//我发送的消息
+			condition.put("from_id", getXtUid());
+		}else if("1".equals(condition.get("type"))){
+			condition.put("to_id", getXtUid());
+		}else{
+			condition.put("to_id", "-1");
+		}
 		commonHPager(condition,request);
 		List<XtMessage> xt_MessageList = xtMessageService.getXtMessageListByCondition(condition);
 		PageInfo<XtMessage> page = new PageInfo<XtMessage>(xt_MessageList);
@@ -223,6 +230,25 @@ public class XtMessageController extends BaseAction{
 		return outItemsStr(xtMessageList);
 	}
 	
+	
+	/**
+	* 发送至新增页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtMessageAdd",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtMessageAdd(XtMessage xtMessage,HttpServletRequest request){
+		return new ModelAndView("pc/xt-view/xt-message/xt-message-add");
+	}
+	/**
+	* 发送至编辑页面
+	* @param request 
+	*/
+	@RequestMapping(value="/toXtMessageUpdate",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView toXtMessageUpdate(String xt_message_id,HttpServletRequest request, Model model){
+		XtMessage xtMessage = xtMessageService.getXtMessageById(xt_message_id);
+		model.addAttribute("xtMessage", xtMessage);
+		return new ModelAndView("pc/xt-view/xt-message/xt-message-update");
+	}
 	/**
 	* 发送至明细页面
 	* @param request 

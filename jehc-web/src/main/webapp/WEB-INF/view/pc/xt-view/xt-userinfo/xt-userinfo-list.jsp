@@ -86,7 +86,7 @@
 					已废除用户列表
 				</h4>
 			</div>
-			<div class="modal-body" id="deletedUserinfoBody">
+			<div class="modal-body" id="deletedUserinfoBody" style="overflow:auto;">
 				<div class="panel panel-default">
 					<div class="portlet box green" style="margin-bottom: 5px;">
 						<div class="portlet-title">

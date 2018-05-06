@@ -27,6 +27,18 @@
 		<if test="null != to_id">
 			AND to_id = #{to_id}
 		</if>
+		<if test="null != ctime_st and ctime_st != ''">
+			AND ctime &gt;=#{ctime_st}
+		</if>
+		<if test="null != ctime_et and ctime_et != ''">
+			AND ctime &lt;=#{ctime_et}
+		</if>
+		<if test="null != readtime_st and readtime_st != ''">
+			AND readtime &gt;=#{readtime_st}
+		</if>
+		<if test="null != readtime_et and readtime_et != ''">
+			AND readtime &lt;=#{readtime_et}
+		</if>
 		ORDER BY ctime ASC
 	</select>
 	

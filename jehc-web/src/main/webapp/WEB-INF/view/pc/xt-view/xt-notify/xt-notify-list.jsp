@@ -16,7 +16,7 @@
 			</li>
 			<li>
 				<a href="#tab1" data-toggle="tab">
-					<i class="glyphicon glyphicon-indent-left"></i>我收到的的通知
+					<i class="glyphicon glyphicon-indent-left"></i>我收到的通知
 				</a>
 			</li>
 		</ul>

@@ -1,8 +1,7 @@
-var grid;
 $(document).ready(function() {
 	/////////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用） 如弹窗分页查找根据条件 可能此时的form发生变化 此时 可以解决该类问题
 	var opt = {
-		searchformId:'searchForm'
+		searchformId:'searchReceiverForm'
 	};
 	var options = DataTablesPaging.pagingOptions({
 		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtMessageController/getXtMessageListByCondition',opt);},//渲染数据
@@ -19,7 +18,7 @@ $(document).ready(function() {
 				width:"50px",
 				data:"xt_message_id",
 				render:function (data, type, full, meta) {
-					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
+					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildReceiver " value="' + data + '" /><span></span></label>';
 				},
 				bSortable:false
 			},
@@ -65,42 +64,9 @@ $(document).ready(function() {
 			}
 		]
 	});
-	grid=$('#datatables').dataTable(options);
+	var grid=$('#datatablesReceiver').dataTable(options);
 	//实现全选反选
-	docheckboxall('checkall','checkchild');
+	docheckboxall('checkallReceiver','checkchildReceiver');
 	//实现单击行选中
-	clickrowselected('datatables');
-});
-//新增
-function toXtMessageAdd(){
-	tlocation('../xtMessageController/toXtMessageAdd');
-}
-//修改
-function toXtMessageUpdate(){
-	if($(".checkchild:checked").length != 1){
-		toastrBoot(4,"选择数据非法");
-		return;
-	}
-	var id = $(".checkchild:checked").val();
-	tlocation("../xtMessageController/toXtMessageUpdate?xt_message_id="+id);
-}
-//详情
-function toXtMessageDetail(id){
-	tlocation("../xtMessageController/toXtMessageDetail?xt_message_id="+id);
-}
-//删除
-function delXtMessage(){
-	if(returncheckedLength('checkchild') <= 0){
-		toastrBoot(4,"请选择要删除的数据");
-		return;
-	}
-	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
-		var id = returncheckIds('checkId').join(",");
-		var params = {xt_message_id:id};
-		ajaxBReq('../xtMessageController/delXtMessage',params,['datatables']);
-	})
-}
-//初始化日期选择器
-$(document).ready(function(){
-	datetimeInit();
+	clickrowselected('datatablesReceiver');
 });
