@@ -52,7 +52,7 @@ public class XtMessageDaoImpl  extends BaseDaoImpl implements XtMessageDao{
 	* @return
 	*/
 	public int delXtMessage(Map<String,Object> condition){
-		return this.del("delXtMessage", condition);
+		return this.update("delXtMessage", condition);
 	}
 	/**
 	* 批量添加

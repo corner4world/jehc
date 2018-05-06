@@ -1,5 +1,6 @@
 package jehc.xtmodules.xtmodel;
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,9 +22,9 @@ public class XtMessage extends BaseEntity implements Serializable{
 	private String to_id;/**接收者编号**/
 	@Size(min=1 ,max= 500 ,message = "聊天内容字数必须在1-500之内")
 	private String xt_meesage_content;/**送发内容**/
-	private String isread;/**是否已读0未读1已读**/
-	private String ctime;/**发送时间**/
-	private String readtime;/**取读时间**/
+	private int isread;/**是否已读0未读1已读**/
+	private Date ctime;/**发送时间**/
+	private Date readtime;/**取读时间**/
 	private String fromName;/**发送者**/
 	private String toName;/**接收者**/
 	private int count;/**统计个数**/
@@ -51,23 +52,24 @@ public class XtMessage extends BaseEntity implements Serializable{
 	public String getXt_meesage_content(){
 		return xt_meesage_content;
 	}
-	public void setIsread(String isread){
-		this.isread=isread;
-	}
-	public String getIsread(){
+	public int getIsread() {
 		return isread;
 	}
-	public void setCtime(String ctime){
-		this.ctime=ctime;
+	public void setIsread(int isread) {
+		this.isread = isread;
 	}
-	public String getCtime(){
+	
+	public Date getCtime() {
 		return ctime;
 	}
-	public void setReadtime(String readtime){
-		this.readtime=readtime;
+	public void setCtime(Date ctime) {
+		this.ctime = ctime;
 	}
-	public String getReadtime(){
+	public Date getReadtime() {
 		return readtime;
+	}
+	public void setReadtime(Date readtime) {
+		this.readtime = readtime;
 	}
 	public String getFromName() {
 		return fromName;

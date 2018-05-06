@@ -62,7 +62,7 @@
 					<button class="btn btn-default" onclick="toXtMessageAdd()">
 						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 					</button>
-					<button class="btn btn-default" onclick="delXtMessage()">
+					<button class="btn btn-default" onclick="delXtMessage(1)">
 						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 					</button>
 					<button class="btn btn-default" onclick="search('datatables')">
@@ -122,6 +122,9 @@
 					</div>
 				</div>
 				<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
+					<button class="btn btn-default" onclick="delXtMessage(2)">
+						<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+					</button>
 					<button class="btn btn-default" onclick="search('datatablesReceiver')">
 						<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 					</button>

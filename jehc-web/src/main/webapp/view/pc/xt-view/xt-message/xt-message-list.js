@@ -45,22 +45,22 @@ $(document).ready(function() {
 				}
 			},
 			{
-				data:'ctime'/*,
+				data:'ctime',
 				render:function(data, type, row, meta) {
 					return dateformat(data); 
-				}*/
+				}
 			},
 			{
-				data:'readtime'/*,
+				data:'readtime',
 				render:function(data, type, row, meta) {
 					return dateformat(data); 
-				}*/
+				}
 			},
 			{
 				data:"xt_message_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<button class='btn btn-default' onclick=\"javascript:toXtMessageDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></button>";
+					return "<button class='btn btn-default' onclick=\"javascript:toXtMessageDetail('"+ data +"',0)\"><span class='glyphicon glyphicon-eye-open'></span></button>";
 				}
 			}
 		]
@@ -85,18 +85,18 @@ function toXtMessageUpdate(){
 	tlocation("../xtMessageController/toXtMessageUpdate?xt_message_id="+id);
 }
 //详情
-function toXtMessageDetail(id){
-	tlocation("../xtMessageController/toXtMessageDetail?xt_message_id="+id);
+function toXtMessageDetail(id,type){
+	tlocation("../xtMessageController/toXtMessageDetail?xt_message_id="+id+"&type="+type);
 }
 //删除
-function delXtMessage(){
+function delXtMessage(type){
 	if(returncheckedLength('checkchild') <= 0){
 		toastrBoot(4,"请选择要删除的数据");
 		return;
 	}
 	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
 		var id = returncheckIds('checkId').join(",");
-		var params = {xt_message_id:id};
+		var params = {xt_message_id:id,type:type};
 		ajaxBReq('../xtMessageController/delXtMessage',params,['datatables']);
 	})
 }

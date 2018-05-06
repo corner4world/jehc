@@ -72,7 +72,14 @@ public class XtMessageController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/getXtMessageById",method={RequestMethod.POST,RequestMethod.GET})
-	public String getXtMessageById(String xt_message_id,HttpServletRequest request){
+	public String getXtMessageById(String xt_message_id,String type,HttpServletRequest request){
+		if("1".equals(type)){
+			Map<String, Object> condition = new HashMap<String,Object>();
+			condition.put("isread", 1);
+			condition.put("readtime", getDate());
+			condition.put("xt_message_id", xt_message_id);
+			xtMessageService.updateRead(condition);
+		}
 		XtMessage xt_Message = xtMessageService.getXtMessageById(xt_message_id);
 		return outDataStr(xt_Message);
 	}
@@ -90,7 +97,7 @@ public class XtMessageController extends BaseAction{
 		int i = 0;
 		if(null != xt_Message && !"".equals(xt_Message)){
 			xt_Message.setXt_message_id(UUID.toUUID());
-			xt_Message.setCtime(getSimpleDateFormat());
+			xt_Message.setCtime(getDate());
 			xt_Message.setFrom_id(getXtUid());
 			i=xtMessageService.addXtMessage(xt_Message);
 		}
@@ -125,11 +132,12 @@ public class XtMessageController extends BaseAction{
 	*/
 	@ResponseBody
 	@RequestMapping(value="/delXtMessage",method={RequestMethod.POST,RequestMethod.GET})
-	public String delXtMessage(String xt_message_id,HttpServletRequest request){
+	public String delXtMessage(String xt_message_id,String type ,HttpServletRequest request){
 		int i = 0;
 		if(null != xt_message_id && !"".equals(xt_message_id)){
 			Map<String, Object> condition = new HashMap<String, Object>();
 			condition.put("xt_message_id",xt_message_id.split(","));
+			condition.put("type",type);
 			i=xtMessageService.delXtMessage(condition);
 		}
 		if(i>0){
@@ -254,7 +262,14 @@ public class XtMessageController extends BaseAction{
 	* @param request 
 	*/
 	@RequestMapping(value="/toXtMessageDetail",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView toXtMessageDetail(String xt_message_id,HttpServletRequest request, Model model){
+	public ModelAndView toXtMessageDetail(String xt_message_id,String type,HttpServletRequest request, Model model){
+		if("1".equals(type)){
+			Map<String, Object> condition = new HashMap<String,Object>();
+			condition.put("isread", 1);
+			condition.put("readtime", getDate());
+			condition.put("xt_message_id", xt_message_id);
+			xtMessageService.updateRead(condition);
+		}
 		XtMessage xtMessage = xtMessageService.getXtMessageById(xt_message_id);
 		model.addAttribute("xtMessage", xtMessage);
 		return new ModelAndView("pc/xt-view/xt-message/xt-message-detail");

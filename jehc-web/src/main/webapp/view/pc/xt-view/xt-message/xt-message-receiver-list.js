@@ -44,22 +44,22 @@ $(document).ready(function() {
 				}
 			},
 			{
-				data:'ctime'/*,
+				data:'ctime',
 				render:function(data, type, row, meta) {
 					return dateformat(data); 
-				}*/
+				}
 			},
 			{
-				data:'readtime'/*,
+				data:'readtime',
 				render:function(data, type, row, meta) {
 					return dateformat(data); 
-				}*/
+				}
 			},
 			{
 				data:"xt_message_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<button class='btn btn-default' onclick=\"javascript:toXtMessageDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></button>";
+					return "<button class='btn btn-default' onclick=\"javascript:toXtMessageDetail('"+ data +"',1)\"><span class='glyphicon glyphicon-eye-open'></span></button>";
 				}
 			}
 		]

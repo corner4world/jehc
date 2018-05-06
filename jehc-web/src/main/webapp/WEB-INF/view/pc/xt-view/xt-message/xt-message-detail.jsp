@@ -59,7 +59,7 @@
 		        </div>
 		        <div class="col-md-11">
 		        	<label class="control-label">
-		        		${xtMessage.ctime }
+		        		<fmt:formatDate value="${xtMessage.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 		        	</label>
 		        </div>
 			</div>
@@ -69,7 +69,7 @@
 		        </div>
 		        <div class="col-md-11">
 		        	<label class="control-label">
-		        		${xtMessage.readtime }
+		        		<fmt:formatDate value="${xtMessage.readtime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 		        	</label>
 		        </div>
 			</div>

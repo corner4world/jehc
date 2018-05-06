@@ -23,9 +23,11 @@
 		</if>
 		<if test="null != from_id">
 			AND from_id = #{from_id}
+			AND from_delete = 0
 		</if>
 		<if test="null != to_id">
 			AND to_id = #{to_id}
+			AND to_delete = 0
 		</if>
 		<if test="null != ctime_st and ctime_st != ''">
 			AND ctime &gt;=#{ctime_st}
@@ -91,7 +93,9 @@
 			xt_meesage_content,
 			isread,
 			ctime,
-			readtime
+			readtime,
+			from_delete,
+			to_delete
 			)
 			VALUES
 			(
@@ -101,7 +105,9 @@
 			#{xt_meesage_content},
 			0,
 			#{ctime},
-			#{readtime}
+			#{readtime},
+			0,
+			0
 			)
 	</insert>
 
@@ -122,10 +128,19 @@
 
 	<!--删除-->
 	<delete id="delXtMessage" parameterType="map">
-		DELETE FROM xt_message WHERE xt_message_id IN
-		<foreach item="item" index="index" collection="xt_message_id" open="(" separator="," close=")">
-			#{item}
-		</foreach>
+		<if test="null != type">
+			UPDATE xt_message SET
+			<if test="type == 1">
+				from_delete = 1
+			</if>
+			<if test="type == 2">
+				to_delete = 1
+			</if>
+			WHERE xt_message_id IN
+			<foreach item="item" index="index" collection="xt_message_id" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
 	</delete>
 
 	<!--批量添加-->
@@ -139,7 +154,9 @@
 			xt_meesage_content,
 			isread,
 			ctime,
-			readtime
+			readtime,
+			from_delete,
+			to_delete
 			)
 			VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
@@ -150,7 +167,9 @@
 			#{item.xt_meesage_content},
 			0,
 			#{item.ctime},
-			#{item.readtime}
+			#{item.readtime},
+			0,
+			0
 			)
 		</foreach>
 	</insert>
@@ -178,9 +197,6 @@
 		SET
 			isread = #{isread},
 			readtime = #{readtime}
-		WHERE 1=1
-		AND isread = 0
-		AND from_id = #{from_id}
-		AND to_id = #{to_id}
+		WHERE xt_message_id = #{xt_message_id}
 	</update>
 </mapper>
