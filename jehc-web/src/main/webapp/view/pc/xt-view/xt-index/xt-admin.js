@@ -409,20 +409,19 @@ function changeTheme(){
 	})
 }
 //获取通知信息
-function geNotify(){
-	ajaxBRequestCallFn('../xtNotifyReceiverController/getXtNotifyReceiverListByCondition?receive_status=0',null,function(result){
-		result = eval("(" + result + ")");
-		var data=result.data;
-		if(null == data){
+function geDyRemind(){
+	ajaxBRequestCallFn('../xtDyRemindController/getXtDyRemindList',null,function(result){
+		////////////////我的通知开始////////////////
+		var xtNotifyReceiver=result.xtNotifyReceiverList;
+		if(null == xtNotifyReceiver){
 			return;
 		}
-		$('#notifyNum').html(data.length);
-		$('#notifyNumright').html(data.length);
+		$('#notifyNum').html(xtNotifyReceiver.length);
+		$('#notifyNumright').html(xtNotifyReceiver.length);
 		$("#notify").empty();
-		if(data.length>15){
+		if(xtNotifyReceiver.length>15){
 			for(var i=0;i<15;i++){
-				var xt_notify = data[i];
-				console.info(xt_notify);
+				var xt_notify = xtNotifyReceiver[i];
 				var xt_notify_receiver_id=xt_notify.xt_notify_receiver_id;
 				var xt_notify_title=xt_notify.xt_notify_title;
 				var sub_xt_notify_title;
@@ -431,18 +430,14 @@ function geNotify(){
 				}else{
 					sub_xt_notify_title=xt_notify_title;
 				};
-				var receive_time=xt_notify.receive_time;
-				var date=receive_time.time
-				var localtime=date.toLocaleString()
-				var date1=new Date();
-				date1.setTime(date);
-				$("#notify").append("<li><a target='_blank' onclick=\"toXtReceiverDetail('"+xt_notify_receiver_id+"')\"><span class='time'>"+date1.toLocaleStringMDHM()+"</span><span class='details' title='"+xt_notify_title+"'><span class='label label-sm label-icon label-success'><i class='fa fa-plus'></i></span>"+sub_xt_notify_title+"</span></a></li>")
+				var receive_time=new Date(xt_notify.receive_time);
+				receive_time = receive_time.toLocaleStringMDHM();
+				$("#notify").append("<li><a target='_blank' onclick=\"toXtReceiverDetail('"+xt_notify_receiver_id+"')\"><span class='time'>"+receive_time+"</span><span class='details' title='"+xt_notify_title+"'><span class='label label-sm label-icon label-success'><i class='fa fa-plus'></i></span>"+sub_xt_notify_title+"</span></a></li>")
 			}
 			$("#notify").append("<li class='text-center'><a href='../xtNotifyController/loadXtNotify' target='_blank'>查看更多</a></li>")
 		}else{
-			for(var i=0;i<data.length;i++){
-				var xt_notify = data[i];
-				console.info(xt_notify);
+			for(var i=0;i<xtNotifyReceiver.length;i++){
+				var xt_notify = xtNotifyReceiver[i];
 				var xt_notify_receiver_id=xt_notify.xt_notify_receiver_id;
 				var xt_notify_title=xt_notify.xt_notify_title;
 				var sub_xt_notify_title;
@@ -451,22 +446,93 @@ function geNotify(){
 				}else{
 					sub_xt_notify_title=xt_notify_title;
 				};
-				var receive_time=xt_notify.receive_time;
-				var date=receive_time.time
-				var localtime=date.toLocaleString()
-				var date1=new Date();
-				date1.setTime(date);
-				
-				$("#notify").append("<li><a target='_blank' onclick=\"toXtReceiverDetail('"+xt_notify_receiver_id+"')\"><span class='time'>"+date1.toLocaleStringMDHM()+"</span><span class='details' title='"+xt_notify_title+"'><span class='label label-sm label-icon label-success'><i class='fa fa-plus'></i></span>"+sub_xt_notify_title+"</span></a></li>")
+				var receive_time=new Date(xt_notify.receive_time);
+				receive_time = receive_time.toLocaleStringMDHM();
+				$("#notify").append("<li><a target='_blank' onclick=\"toXtReceiverDetail('"+xt_notify_receiver_id+"')\"><span class='time'>"+receive_time+"</span><span class='details' title='"+xt_notify_title+"'><span class='label label-sm label-icon label-success'><i class='fa fa-plus'></i></span>"+sub_xt_notify_title+"</span></a></li>")
 			}
 		}
+		////////////////我的通知结束////////////////
+		
+		
+		
+		////////////////我的消息开始////////////////
+		var xtMessageList=result.xtMessageList;
+		if(null == xtMessageList){
+			return;
+		}
+		$('#messageNum').html(xtMessageList.length);
+		$('#messageNumright').html(xtMessageList.length);
+		$("#message").empty();
+		if(xtMessageList.length>15){
+			for(var i=0;i<15;i++){
+				var xtMessage = xtMessageList[i];
+				var xt_message_id=xtMessage.xt_message_id;
+				var xt_meesage_content=xtMessage.xt_meesage_content;
+				var sub_xt_meesage_content;
+				if(xt_meesage_content.length>10){
+					sub_xt_meesage_content=xt_meesage_content.substr(0,10)+"...";
+				}else{
+					sub_xt_meesage_content=xt_meesage_content;
+				};
+				var ctime=new Date(xtMessage.ctime);
+				ctime = ctime.toLocaleStringMDHM();
+				var fromName = xtMessage.fromName;
+				$("#message").append(
+					"<li>"+
+		                "<a href='#' target='_blank' onclick=\"toXtMessageDetail('"+xt_message_id+"')\">"+
+		                    '<span class="photo"><img src="../deng/images/default/user.png" class="img-circle" alt=""> </span>'+
+		                    '<span class="subject">'+
+		                        '<span class="from"> '+fromName+' </span>'+
+		                        '<span class="time">'+ctime+' </span>'+
+		                    '</span>'+
+		                    '<span class="message">'+sub_xt_meesage_content+'</span>'+
+		                '</a>'+
+		            '</li>'
+	            )
+				//$("#message").append("<li><a target='_blank' onclick=\"toXtMessageDetail('"+xt_message_id+"')\"><span class='time'>"+ctime+"</span><span class='details' title='"+xt_meesage_content+"'><span class='label label-sm label-icon label-success'><i class='fa fa-plus'></i></span>"+sub_xt_meesage_content+"</span></a></li>")
+			}
+			$("#message").append("<li class='text-center'><a href='../xtMessageController/loadXtMessage' target='_blank'>查看更多</a></li>")
+		}else{
+			for(var i=0;i<xtMessageList.length;i++){
+				var xtMessage = xtMessageList[i];
+				var xt_message_id=xtMessage.xt_message_id;
+				var xt_meesage_content=xtMessage.xt_meesage_content;
+				var fromName = xtMessage.fromName;
+				if(xt_meesage_content.length>10){
+					sub_xt_meesage_content=xt_meesage_content.substr(0,10)+"...";
+				}else{
+					sub_xt_meesage_content=xt_meesage_content;
+				};
+				var ctime=new Date(xtMessage.ctime);
+				ctime = ctime.toLocaleStringMDHM();
+				$("#message").append(
+					"<li>"+
+		                "<a href='#' target='_blank' onclick=\"toXtMessageDetail('"+xt_message_id+"')\">"+
+		                    '<span class="photo"><img src="../deng/images/default/user.png" class="img-circle" alt=""> </span>'+
+		                    '<span class="subject">'+
+		                        '<span class="from"> '+fromName+' </span>'+
+		                        '<span class="time">'+ctime+' </span>'+
+		                    '</span>'+
+		                    '<span class="message">'+sub_xt_meesage_content+'</span>'+
+		                '</a>'+
+		            '</li>'
+	            )
+				//$("#message").append("<li><a target='_blank' onclick=\"toXtMessageDetail('"+xt_message_id+"')\"><span class='time'>"+ctime+"</span><span class='details' title='"+xt_meesage_content+"'><span class='label label-sm label-icon label-success'><i class='fa fa-plus'></i></span>"+sub_xt_meesage_content+"</span></a></li>")
+			}
+		}
+		////////////////我的消息结束////////////////
 	});
 }
-geNotify();
-setInterval(geNotify,5000);
+geDyRemind();
+setInterval(geDyRemind,50000);
 function toXtReceiverDetail(xt_notify_receiver_id){
 	window.open('../xtNotifyReceiverController/toXtReceiverDetail?xt_notify_receiver_id='+xt_notify_receiver_id,"_blank"); 
-	setTimeout(geNotify,500)
+	setTimeout(geDyRemind,500)
+}
+
+function toXtMessageDetail(xt_message_id){
+	window.open('../xtMessageController/toXtMessageDetail?type=1&xt_message_id='+xt_message_id,"_blank"); 
+	setTimeout(geDyRemind,500)
 }
 Date.prototype.toLocaleStringMDHM = function() {
     return (this.getMonth() + 1) + "-" + this.getDate() + " " + this.getHours() + ":" + this.getMinutes();

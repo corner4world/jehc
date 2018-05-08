@@ -86,27 +86,16 @@
                         <ul class="nav navbar-nav pull-right">
                         	<li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <i class="icon-bell"></i>
+                                    <i class="fa fa-bell"></i>
                                     <span id="notifyNumright" class="badge badge-default"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="external">
-                                        <h3>
-                                            <span id="notifyNum" class="bold"></span> 通知</h3>
-                                        <a href="../xtNotifyController/loadXtNotify" target="_blank">全部</a>
+                                        <h3><span id="notifyNum" class="bold"></span> 通知</h3>
+                                       	<a href="../xtNotifyController/loadXtNotify" target="_blank">全部</a>
                                     </li>
                                     <li>
-                                        <ul id="notify" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-<!--                                             <li>
-                                                <a href="javascript:;">
-                                                    <span class="time">刚才</span>
-                                                    <span class="details">
-                                                        <span class="label label-sm label-icon label-success">
-                                                            <i class="fa fa-plus"></i>
-                                                        </span> 新用户注册. </span>
-                                                </a>
-                                            </li> -->
-                                        </ul>
+                                        <ul id="notify" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283"></ul>
                                     </li>
                                 </ul>
                             </li>
@@ -115,17 +104,16 @@
                             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                             <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <i class="icon-envelope-open"></i>
-                                    <span class="badge badge-default"> 1 </span>
+                                    <i class="fa fa-comment-o"></i>
+                                    <span class="badge badge-default" id="messageNumright"></span>
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li class="external">
-                                        <h3>您有
-                                            <span class="bold">1 个</span> 消息</h3>
-                                        <a href="#">显示全部</a>
+                                        <h3>您有<span class="bold"  id="messageNum"></span> 消息</h3>
+                                        <a href="../xtMessageController/loadXtMessage" target="_blank">显示全部</a>
                                     </li>
                                     <li>
-                                        <ul class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
+                                        <ul id="message" class="dropdown-menu-list scroller" style="height: 275px;" data-handle-color="#637283">
                                             <li>
                                                 <a href="#">
                                                     <span class="photo">
@@ -139,6 +127,12 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <!-- 
+                                    <li>
+                                        <ul id="message" class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
+                                        </ul>
+                                    </li> 
+                                    -->
                                 </ul>
                             </li>
                             <!-- END INBOX DROPDOWN -->
@@ -146,7 +140,7 @@
                             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
                             <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                                    <i class="icon-calendar"></i>
+                                    <i class="fa fa-cogs"></i>
                                     <span class="badge badge-default"> 1 </span>
                                 </a>
                                 <ul class="dropdown-menu extended tasks">
