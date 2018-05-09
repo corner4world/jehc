@@ -561,6 +561,7 @@ function confirmB(msg,fn){
 		animate:true,
 		locale:"zh-CN",
 		message:msg,
+		width:200,
 		buttons:{
 			"success":{
 				"label":"确认",
@@ -577,7 +578,7 @@ function confirmB(msg,fn){
 				}
 			}
 		}
-	 });
+	 }).find("div.modal-dialog").addClass('confirmWidth');
 }
 //获取所有DataTables中复选框值集合
 function returncheckIds(checkboxName){
