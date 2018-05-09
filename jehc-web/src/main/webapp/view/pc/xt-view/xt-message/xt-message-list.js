@@ -90,15 +90,28 @@ function toXtMessageDetail(id,type){
 }
 //删除
 function delXtMessage(type){
-	if(returncheckedLength('checkchild') <= 0){
-		toastrBoot(4,"请选择要删除的数据");
-		return;
+	if(type == 2){
+		if(returncheckedLength('checkchildReceiver') <= 0){
+			toastrBoot(4,"请选择要删除的数据");
+			return;
+		}
+		msgTishCallFnBoot("确定要删除所选择的数据？",function(){
+			var id = returncheckIds('checkId').join(",");
+			var params = {xt_message_id:id,type:type};
+			ajaxBReq('../xtMessageController/delXtMessage',params,['datatablesReceiver']);
+		})
+	}else{
+		if(returncheckedLength('checkchild') <= 0){
+			toastrBoot(4,"请选择要删除的数据");
+			return;
+		}
+		msgTishCallFnBoot("确定要删除所选择的数据？",function(){
+			var id = returncheckIds('checkId').join(",");
+			var params = {xt_message_id:id,type:type};
+			ajaxBReq('../xtMessageController/delXtMessage',params,['datatables']);
+		})
 	}
-	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
-		var id = returncheckIds('checkId').join(",");
-		var params = {xt_message_id:id,type:type};
-		ajaxBReq('../xtMessageController/delXtMessage',params,['datatables']);
-	})
+	
 }
 //初始化日期选择器
 $(document).ready(function(){
