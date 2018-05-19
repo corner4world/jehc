@@ -215,7 +215,7 @@ function callLang(){
 			//"sInfo":"第 _PAGE_ 页 (共 _PAGES_ 页)",
 			"sInfoEmtpy":"找不到相关数据",
 			"sInfoFiltered":"数据表中共为 _MAX_ 条记录",
-			"sProcessing":"<i class='glyphicon glyphicon-dashboard'></i>正在加载中...",
+			"sProcessing":"<i class='fa fa-spin fa-spinner'></i>正在拼命的加载中...",
 			"sLoadingRecords":"载入中...",
 			"sSearch":"搜索",
 			"bAutoWidth":true,
@@ -344,7 +344,7 @@ function callLiLang(){
 			//"sLengthMenu":"每页显示 _MENU_ 条记录",
 			"sZeroRecords":"对不起，查询不到任何相关数据",
 			"sInfoEmtpy":"找不到相关数据",
-			"sProcessing":"<i class='glyphicon glyphicon-dashboard'></i>正在加载中...",
+			"sProcessing":"<i class='fa fa-spin fa-spinner'></i>正在拼命的加载中...",
 			"sLoadingRecords":"载入中...",
 			"sSearch":"搜索",
 			"bAutoWidth":true,
@@ -1059,7 +1059,16 @@ function ajaxBFilePathBackRequest(url,params){
  * llowedFileExtensions:['jpg','gif','png']
 **/
 var fileUploadResultArray = [];
+var fieldid_,picid_,validateparameter_,validateSize_ ,xt_path_absolutek_,xt_path_relativek_, xt_path_urlk_;
 function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolutek,xt_path_relativek,xt_path_urlk){
+	fieldid_ = fieldid;
+	picid_ = picid;
+	validateparameter_ = validateparameter;
+	validateSize_ = validateSize;
+	xt_path_absolutek_ = xt_path_absolutek;
+	xt_path_relativek_ = xt_path_relativek;
+	xt_path_urlk_ = xt_path_urlk;
+	
 	fileUploadResultArray.push('0');
 	var allowedFileExtensions_ = ['jpg','gif','png','xls','xlsx','bmp','zip','docx','pptx','pdf','csv','txt','apk'];
 	var maxFileSize_ = 0;
@@ -1070,6 +1079,7 @@ function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolu
 		allowedFileExtensions_ = validateparameter;
 	}
 	$('#jehcUploadModal').modal({backdrop: 'static', keyboard: false});
+	$('.jehcFile').fileinput('clear');
 	$("#jehcFile").fileinput({
 		showUpload:true, //是否显示上传按钮
 		showCaption:false,
@@ -1103,8 +1113,8 @@ function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolu
     			 var obj = eval("(" + data.response + ")");
     	     	 if(obj.data.jsonID != 0){
     	     		//赋值
-    	          	$("#"+picid).attr('src',obj.data.jsonValue); 
-    	          	$("#"+fieldid).val(obj.data.jsonID);
+    	          	$("#"+picid_).attr('src',obj.data.jsonValue); 
+    	          	$("#"+fieldid_).val(obj.data.jsonID);
     	      		//关闭上传窗口
     	          	$('#jehcUploadModal').modal('hide');
     	          	//并清空上传控件内容
@@ -1115,6 +1125,7 @@ function initBUpload(fieldid,picid,validateparameter,validateSize,xt_path_absolu
     	        	 window.parent.toastrBoot(4,obj.data.msg);
     	         }
     	     	 fileUploadResultArray.splice(0,fileUploadResultArray.length);
+    	     	 i--;
     	     	 break;
     	     }
     	 }
