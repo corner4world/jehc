@@ -1149,7 +1149,7 @@ function initBFileRight(fieldid,picid,isUpAndDelete,validateparameter,validateSi
 			      name:'下载',
 			      iconClass:'fa-download',
 			      onClick:function(){
-			    	  var xt_attachment_id = $('#fieldid').val();
+			    	  var xt_attachment_id = $('#'+fieldid).val();
 					  downOrExportB(basePath+'/xtCommonController/downFile?xt_attachment_id='+xt_attachment_id);
 			      }
 			    }, 
@@ -1185,7 +1185,7 @@ function initBFileRight(fieldid,picid,isUpAndDelete,validateparameter,validateSi
 			      name:'下载',
 			      iconClass:'fa-download',
 			      onClick:function(){
-			    	  var xt_attachment_id = $('#fieldid').val();
+			    	  var xt_attachment_id = $('#'+fieldid).val();
 					  downOrExportB(basePath+'/xtCommonController/downFile?xt_attachment_id='+xt_attachment_id);
 			      }
 			    }, 

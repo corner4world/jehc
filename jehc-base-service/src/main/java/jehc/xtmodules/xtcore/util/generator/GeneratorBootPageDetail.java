@@ -365,7 +365,7 @@ public class GeneratorBootPageDetail extends GeneratorUtil {
 								sb.append("\t\t\t\t\t\t\t<img src = \"../deng/images/default/add_d.png\" class=\"img\" width=\"96\"  height=\"96\"  id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"_pic\">\r\n");
 							}else{
 								//文本框
-								sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+								sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
 							}
 						}else if("Date".equals(sqlType2PageType(dataType)) || "datetime".equals(sqlType2PageType(dataType)) || "time".equals(sqlType2PageType(dataType))){
 							sb.append("\t\t\t\t\t\t\t<input class=\"form_datetime form-control\" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" "+required.toString()+" placeholder=\"请选择时间\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
@@ -377,7 +377,7 @@ public class GeneratorBootPageDetail extends GeneratorUtil {
 							sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
 						}else{
 							//文本框
-							sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
+							sb.append("\t\t\t\t\t\t\t<input class=\"form-control\" type=\"text\" maxlength=\""+column_maxlength+"\" "+required.toString()+" id=\""+lowfristTableName+"_${"+lowfristTableName+"Status.index}_"+column_name+"\" name=\""+lowfristTableName+"[${"+lowfristTableName+"Status.index}]."+column_name+"\" placeholder=\"请输入"+column_comment+"\" value=\"${"+lowfristTableName+"."+column_name+" }\">\r\n");
 						}
 						//结束判断类型
 						sb.append("\t\t\t\t\t\t</div>\r\n");
