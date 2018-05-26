@@ -246,10 +246,12 @@ var DataTablesPaging = {
      * 获取ajax分页options设置
      */
     pagingOptions:function(settings) {
+    	console.log("tabHeight",tableHeight());
         var options = {
-//        		"sScrollX":"100%",//表格的宽度
-    			"sScrollXInner":"100%",//表格的内容宽度
-    			"bScrollCollapse":true,
+        		"scrollX":true,//表格的宽度
+//    			"sScrollXInner":"100%",//表格的内容宽度
+        		"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.55+'px',//dt高度
+//    			"bScrollCollapse":true,
     			dom:settings.dom != null?settings.dom:'<"top">rt<"bottom"iflp><"clear">',
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
@@ -267,8 +269,9 @@ var DataTablesPaging = {
     			"bLengthChange":true,//每页显示的记录数
     			"sPaginationType":"full_numbers",//分页，一共两种样式，full_numbers和two_button(默认)
     			"aLengthMenu":[[10, 25, 50, 100, 500 ],["10条/页", "25条/页","50条/页", "100条/页","500条/页" ]],//设置每页显示记录的下拉菜单也可以设置为pageList
-    			height:tableHeight(),//高度调整
-    			bJQueryUI:true,//采用jQueryUI样式
+//    			height:tableHeight(),//高度调整
+//    			bJQueryUI:true,//采用jQueryUI样式
+    			"jQueryUI":true,
 	            order:settings.order,//[index,'asc|desc']
 	            columns:settings.colums,
 	            columnDefs:settings.columsdefs,
@@ -367,9 +370,10 @@ var DataTablesList = {
     listOptions:function(settings) {
         var options = {
 //        		"sScrollX":"100%",//表格的宽度
-    			"sScrollXInner":"100%",//表格的内容宽度
+        		"scrollX":true,//表格的宽度
+//    			"sScrollXInner":"100%",//表格的内容宽度
+    			"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.55+'px',//dt高度
     			"bScrollCollapse":false,//当显示的数据不足以支撑表格的默认的高度时，依然显示纵向的滚动条。(默认是false) 
-    			"bScrollCollapse":true,
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
     			"bInfo":false,//显示表格信息

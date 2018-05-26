@@ -1,5 +1,5 @@
 function addXtUserinfo(xt_role_id,xt_role_name){
-	$('#UserinfoBody').height(reGetBodyHeight());
+	$('#UserinfoBody').height(reGetBodyHeight()*0.7);
 	$('#UserinfoModal').modal({backdrop:'static',keyboard:false});
 	$('#UserinfoModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
         // 是弹出框居中。。。  
@@ -28,6 +28,7 @@ function initUnImportU(xt_role_id){
 		},
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
 		dom:'<"top"i>rt<"bottom"flp><"clear">',
+		tableHeight:'100px',
 		//列表表头字段
 		colums:[
 			{
@@ -76,6 +77,7 @@ function initImportU(xt_role_id){
 		},
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
 		dom:'<"top"i>rt<"bottom"flp><"clear">',
+		tableHeight:'120px',
 		//列表表头字段
 		colums:[
 			{

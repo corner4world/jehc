@@ -40,9 +40,6 @@ $(document).ready(function() {
 				data:'xt_quartz_log_etime'
 			},
 			{
-				data:'xt_userinfo_realName'
-			},
-			{
 				data:'xt_quartz_log_flag'
 			},
 			{

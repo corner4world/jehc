@@ -73,7 +73,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="panel-body">
-						<table id="RoleDatatables" class="table table-bordered table-striped table-hover">
+						<table id="RoleDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.5%">
 							<thead>
 								<tr>
 									<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallRole" /><span></span></label></th>
@@ -127,25 +127,25 @@
 										<input type="hidden" id="flag2" name="flag" value="2">
 										<input type="hidden" name="xt_roleinfo_id" id="xt_role_id1">
 										<div class="row">
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label>隶属部门</label>
-												<input type="text" class="form-control" style="width:250px;" name="xt_departinfo_name" placeholder="请输入部门名称">
+												<input type="text" class="form-control" name="xt_departinfo_name" placeholder="请输入部门名称">
 											</div>
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label>岗位</label>
-												<input type="text" class="form-control" style="width:250px;" name="xt_post_name" placeholder="请输入岗位名称">
+												<input type="text" class="form-control" name="xt_post_name" placeholder="请输入岗位名称">
 											</div>
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label>姓名</label>
-												<input type="text" class="form-control" style="width:250px;" name="xt_userinfo_realName" placeholder="请输入姓名">
+												<input type="text" class="form-control" name="xt_userinfo_realName" placeholder="请输入姓名">
 											</div>
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label>用户名</label>
-												<input type="text" class="form-control" style="width:250px;" name="xt_userinfo_name" placeholder="请输入用户名">
+												<input type="text" class="form-control" name="xt_userinfo_name" placeholder="请输入用户名">
 											</div>
 										</div>
 									</form>
-									<table id="UnImportUDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+									<table id="UnImportUDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.5%">
 										<thead>
 											<tr>
 												<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallUnImportU" /><span></span></label></th>
@@ -180,25 +180,25 @@
 										<input type="hidden" name="flag" value="1">
 										<input type="hidden" name="xt_roleinfo_id" id="xt_role_id2">
 										<div class="row">
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label>隶属部门</label>
-												<input type="text" class="form-control" style="width:250px;" name="xt_departinfo_name" placeholder="请输入部门名称">
+												<input type="text" class="form-control" name="xt_departinfo_name" placeholder="请输入部门名称">
 											</div>
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label>岗位</label>
-												<input type="text" class="form-control" style="width:250px;" name="xt_post_name" placeholder="请输入岗位名称">
+												<input type="text" class="form-control" name="xt_post_name" placeholder="请输入岗位名称">
 											</div>
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label>姓名</label>
-												<input type="text" class="form-control" style="width:250px;" name="xt_userinfo_realName" placeholder="请输入姓名">
+												<input type="text" class="form-control" name="xt_userinfo_realName" placeholder="请输入姓名">
 											</div>
-											<div class="col-md-2">
+											<div class="col-md-3">
 												<label>用户名</label>
-												<input type="text" class="form-control" style="width:250px;" name="xt_userinfo_name" placeholder="请输入用户名">
+												<input type="text" class="form-control" name="xt_userinfo_name" placeholder="请输入用户名">
 											</div>
 										</div>
 									</form>
-									<table id="ImportUDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+									<table id="ImportUDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.5%">
 										<thead>
 											<tr>
 												<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallImportU" /><span></span></label></th>

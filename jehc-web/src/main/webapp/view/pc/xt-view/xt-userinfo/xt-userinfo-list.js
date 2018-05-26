@@ -126,7 +126,7 @@ function delXtUserinfo(){
 //已删除用户
 function initListDeleted(){
 	$('#deletedUserinfoSelectModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
-		$('#deletedUserinfoBody').height(reGetBodyHeight());
+		$('#deletedUserinfoBody').height(reGetBodyHeight()*0.7);
         // 是弹出框居中。。。  
         var $modal_dialog = $("#UserinfoModalDialog");  
         $('#searchFormDeletedUserinfo')[0].reset();
@@ -142,6 +142,7 @@ function initListDeleted(){
     				return nRow;
     		},
     		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+    		tableHeight:'100px',
     		//列表表头字段
     		colums:[
     			{
@@ -216,6 +217,7 @@ function initRoleinfo(id){
 				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
 				return nRow;
 		},
+		tableHeight:'200px',
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
 		//列表表头字段
 		colums:[

@@ -7,3 +7,13 @@ table.dataTable.no-footer{border-bottom:1px solid #fff}.uneditable-input{padding
     background-color: #ffffff;
     border-bottom: 1px solid #d0d0d0;
 } */
+.portlet.box.green>.portlet-title, .portlet.green, .portlet>.portlet-body.green {
+    background-color: #ffffff;
+}
+.portlet.box.green {
+    border: 1px solid #ffffff;
+    border-top: 0;
+}
+.portlet.box.green>.portlet-title>.caption, .portlet.box.green>.portlet-title>.caption>i {
+    color: #333;
+}

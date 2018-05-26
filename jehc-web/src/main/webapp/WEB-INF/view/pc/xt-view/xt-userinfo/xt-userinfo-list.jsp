@@ -53,7 +53,7 @@
 			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 		</button>
 		<button class="btn btn-default" onclick="initListDeleted()">
-			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>已废除
+			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>已禁用
 		</button>
 		<button class="btn btn-default" onclick="search('datatables')">
 			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
@@ -83,7 +83,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="deletedUserinfoModalLabel">
-					已废除用户列表
+					禁用用户列表
 				</h4>
 			</div>
 			<div class="modal-body" id="deletedUserinfoBody" style="overflow:auto;">
@@ -124,7 +124,7 @@
 				        </div>
 				    </div>
 				</div>
-				<table id="deletedUserinfoDatatables" class="table table-bordered table-striped table-hover">
+				<table id="deletedUserinfoDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.5%">
 					<thead>
 						<tr>
 							<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallDeletedUserinfo" /><span></span></label></th>
@@ -160,7 +160,7 @@
 			</div>
 			<div class="modal-body">
 				<div class="panel-body">
-					<table id="userRoleDatatables" class="table table-bordered table-striped table-hover">
+					<table id="userRoleDatatables" class="table table-bordered table-striped table-hover"  style="white-space: nowrap; width: 99.5%">
 						<thead>
 							<tr>
 								<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallUserRole" /><span></span></label></th>
