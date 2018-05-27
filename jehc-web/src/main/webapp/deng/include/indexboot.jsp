@@ -78,6 +78,11 @@
         -->
         --%>
         <!-- 其他插件结束 -->
+        
+        <!-- 笼罩插件开始 -->
+        <link type="text/css" rel="stylesheet" href="${syspath}/deng/source/plugins/other/alertplug/alert/alert.css">
+		<script type="text/javascript" src='${syspath}/deng/source/plugins/other/alertplug/alert/alert.js'></script>
+		<!-- 笼罩插件结束 -->
         <!-- 提示插件开始 -->
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>

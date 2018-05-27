@@ -521,7 +521,7 @@ function geDyRemind(){
 			}
 		}
 		////////////////我的消息结束////////////////
-	});
+	},{isShowWating:false});
 }
 geDyRemind();
 setInterval(geDyRemind,50000);

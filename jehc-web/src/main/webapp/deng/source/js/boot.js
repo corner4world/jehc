@@ -250,14 +250,14 @@ var DataTablesPaging = {
         var options = {
         		"scrollX":true,//表格的宽度
 //    			"sScrollXInner":"100%",//表格的内容宽度
-        		"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.55+'px',//dt高度
+        		"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.5+'px',//dt高度
 //    			"bScrollCollapse":true,
     			dom:settings.dom != null?settings.dom:'<"top">rt<"bottom"iflp><"clear">',
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
     			"bInfo":true,//显示表格信息
     			"destroy":true,//销毁表格对象
-    			"bAutoWidth":false,//自适应宽度
+    			"bAutoWidth":true,//自适应宽度
     			"serverSide":true,//启用服务器端分页
     			"searching":false,//禁用原生搜索
     			"orderMulti":false,//启用多列排序
@@ -318,18 +318,19 @@ function datatablesCallBack(data, callback, settings,url,opt){
 		  success:function (result){
 			  try {
 				  //setTimeout仅为测试延迟效果
-				  setTimeout(function(){
-					  result = eval("(" + result + ")");
-					  //封装返回数据
-					  var returnData = {};
-					  returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
-					  returnData.recordsTotal = result.total;//返回数据全部记录
-					  returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
-					  returnData.data = result.data;//返回的数据列表
-					  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-					  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
-					  callback(returnData);
-				   },200);
+//				  setTimeout(function(){
+//					  
+//				  },200);
+				  result = eval("(" + result + ")");
+				  //封装返回数据
+				  var returnData = {};
+				  returnData.draw = data.draw;//这里直接自行返回了draw计数器,应该由后台返回
+				  returnData.recordsTotal = result.total;//返回数据全部记录
+				  returnData.recordsFiltered = result.total;//后台不实现过滤功能，每次查询均视作全部结果
+				  returnData.data = result.data;//返回的数据列表
+				  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+				  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+				  callback(returnData);
 			 } catch (e) {
 				 
 			 }
@@ -340,7 +341,6 @@ function datatablesCallBack(data, callback, settings,url,opt){
 		$(element).attr("class","uneditable-input")
 	});
 }
-
 //bootstrap datatables 国际化分页提示信息
 function callLiLang(){
 	var lang = {
@@ -372,13 +372,13 @@ var DataTablesList = {
 //        		"sScrollX":"100%",//表格的宽度
         		"scrollX":true,//表格的宽度
 //    			"sScrollXInner":"100%",//表格的内容宽度
-    			"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.55+'px',//dt高度
+    			"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.5+'px',//dt高度
     			"bScrollCollapse":false,//当显示的数据不足以支撑表格的默认的高度时，依然显示纵向的滚动条。(默认是false) 
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
     			"bInfo":false,//显示表格信息
     			"destroy":true,//销毁表格对象
-    			"bAutoWidth":false,//自适应宽度
+    			"bAutoWidth":true,//自适应宽度
     			"serverSide":false,//启用服务器端分页
     			"searching":false,//禁用原生搜索
     			"orderMulti":false,//启用多列排序
@@ -386,7 +386,7 @@ var DataTablesList = {
     			"bStateSave":true,//保存状态到cookie *************** 很重要 ， 当搜索的时候页面一刷新会导致搜索的消失。使用这个属性就可避免了
     			"oLanguage":callLiLang(),//多语言配置
     			"bPaginate":false,//是否显示分页
-    			height:tableHeight(),//高度调整
+//    			height:tableHeight(),//高度调整
     			bJQueryUI:true,//采用jQueryUI样式
 	            order:settings.order,//[index,'asc|desc']
 	            columns:settings.colums,
@@ -431,15 +431,16 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 		  success:function (result){
 			  try {
 				  //setTimeout仅为测试延迟效果
-				  setTimeout(function(){
-					  result = eval("(" + result + ")");
-					  //封装返回数据
-					  var returnData = {};
-					  returnData.data = result.items;//返回的数据列表
-					  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
-					  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
-					  callback(returnData);
-				   },200);
+//				  setTimeout(function(){
+//					  
+//				  },200);
+				  result = eval("(" + result + ")");
+				  //封装返回数据
+				  var returnData = {};
+				  returnData.data = result.items;//返回的数据列表
+				  //调用DataTables提供的callback方法，代表数据已封装完成并传回DataTables进行渲染
+				  //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+				  callback(returnData);
 			 } catch (e) {
 				 
 			 }
@@ -504,7 +505,9 @@ function datetimeInit(){
 
 //tableHeight函数
 function tableHeight(){
-    return $(window).height();
+//	return $(window).height();
+//	return window.screen.height;
+	return $(document).height();
 }
 
 //bootstrap提示
@@ -711,8 +714,8 @@ function tlocation(url){
 	document.location.href=url;
 }
 
-//发起提交表单
-function submitBForm(formid,url,callUrl){
+//发起提交表单 ,wsetting笼罩层参数设置
+function submitBForm(formid,url,callUrl,wsetting){
 	if(null == formid || '' == formid){
 		window.parent.toastrBoot(4,"未能获取到formid!");
 		return;
@@ -728,13 +731,16 @@ function submitBForm(formid,url,callUrl){
 	//验证有效开启发送异步请求
 	if(boostrapValidator.isValid()){
 		msgTishCallFnBoot("确定要提交该表单信息？",function(){
+			var dialogWating = showWating(wsetting);
 			$.ajax({
 	            url:url,
 	            xhrFields:{withCredentials:true},
 //	            async:false,//同步，会阻塞操作
 	            type:'POST',//PUT DELETE POST
 	            data:bootform.serialize(),
+	            timeout:1200000,//超时时间设置，单位毫秒（20分钟）
 	            success:function(result){
+	            	closeWating(wsetting,dialogWating);
 	            	try {
 	            		result = eval("(" + result + ")");  
 	            		if(typeof(result.success) != "undefined"){
@@ -750,11 +756,10 @@ function submitBForm(formid,url,callUrl){
 			        		}
 	            		}
 					} catch (e) {
-						
 					}
 	            }, 
 	            error:function(){
-	            	
+	            	closeWating(wsetting,dialogWating);
 	            }
 	        })
 		})
@@ -763,8 +768,8 @@ function submitBForm(formid,url,callUrl){
 	}
 }
 
-//发起提交表单并返回Fn方法
-function submitBFormCallFn(formid,url,fn){
+//发起提交表单并返回Fn方法 ,wsetting笼罩层参数设置
+function submitBFormCallFn(formid,url,fn,wsetting){
 	if(null == formid || '' == formid){
 		window.parent.toastrBoot(4,"未能获取到formid!");
 		return;
@@ -780,16 +785,20 @@ function submitBFormCallFn(formid,url,fn){
 	//验证有效开启发送异步请求
 	if(boostrapValidator.isValid()){
 		msgTishCallFnBoot("确定要提交该表单信息？",function(){
+			var dialogWating = showWating(wsetting);
 			$.ajax({
 	            url:url,
 	            xhrFields:{withCredentials:true},
 //	            async:false,//同步，会阻塞操作
 	            type:'POST',//PUT DELETE POST
+	            timeout:1200000,//超时时间设置，单位毫秒（20分钟）
 	            data:bootform.serialize(),
 	            success:function(result){
+	            	closeWating(wsetting,dialogWating);
 	                fn(result);
 	            }, 
 	            error:function(){
+	            	closeWating(wsetting,dialogWating);
 	            }
 	        })
 		})
@@ -798,15 +807,18 @@ function submitBFormCallFn(formid,url,fn){
 	}
 }
 
-//ajax开启请求并返回地址（url处理地址，params参数，datatablesid数组 缺省默认）
-function ajaxBReq(url,params,datatablesid){
+//ajax开启请求并返回地址（url处理地址，params参数，datatablesid数组 缺省默认,wsetting笼罩层参数设置）
+function ajaxBReq(url,params,datatablesid,wsetting){
+	var dialogWating = showWating(wsetting);
 	$.ajax({
         url:url,
         xhrFields:{withCredentials:true},
 //      async:false,//同步，会阻塞操作
         type:'POST',//PUT DELETE POST
         data:params,
+        timeout:1200000,//超时时间设置，单位毫秒（20分钟）
         success:function(result){
+        	closeWating(wsetting,dialogWating);
         	try {
         		result = eval("(" + result + ")");  
         		if(typeof(result.success) != "undefined"){
@@ -829,19 +841,23 @@ function ajaxBReq(url,params,datatablesid){
 			}
         }, 
         error:function(){
+        	closeWating(wsetting,dialogWating);
         }
     })
 }
 
-//ajax开启请求并返回地址（url处理地址 callUrl处理成功返回的地址，params参数）
-function ajaxBRequestCallUrl(url,callUrl,params){
+//ajax开启请求并返回地址（url处理地址 callUrl处理成功返回的地址，params参数,wsetting笼罩层参数设置）
+function ajaxBRequestCallUrl(url,callUrl,params,wsetting){
+	var dialogWating = showWating(wsetting);
 	$.ajax({
         url:url,
         xhrFields:{withCredentials:true},
 //      async:false,//同步，会阻塞操作
         type:'POST',//PUT DELETE POST
+        timeout:1200000,//超时时间设置，单位毫秒（20分钟）
         data:params,
         success:function(result){
+        	closeWating(wsetting,dialogWating);
         	try {
         		result = eval("(" + result + ")");  
         		if(typeof(result.success) != "undefined"){
@@ -861,22 +877,27 @@ function ajaxBRequestCallUrl(url,callUrl,params){
 			}
         }, 
         error:function(){
+        	closeWating(wsetting,dialogWating);
         }
     })
 }
 
-//ajax开启请求并回调（url处理地址 ，params参数,fn返回的方法）
-function ajaxBRequestCallFn(url,params,fn){
+//ajax开启请求并回调（url处理地址 ，params参数,fn返回的方法,wsetting笼罩层参数设置）
+function ajaxBRequestCallFn(url,params,fn,wsetting){
+	var dialogWating = showWating(wsetting);
 	$.ajax({
         url:url,
+        timeout:1200000,//超时时间设置，单位毫秒（20分钟）
         xhrFields:{withCredentials:true},
 //      async:false,//同步，会阻塞操作
         type:'POST',//PUT DELETE POST
         data:params,
         success:function(result){
+        	closeWating(wsetting,dialogWating);
             fn(result);
         }, 
         error:function(){
+        	closeWating(wsetting,dialogWating);
         }
     })
 }
@@ -1458,4 +1479,52 @@ function reGetBodyHeight(){
 //	console.info($(document).height());
 //	console.info($(document.body).height());
 	return $(document.body).height();
+}
+
+//显示笼罩层
+function showWating(wsetting){
+//	var dialogWating;
+	var msg = null;
+	var isShowWating = true;
+	if(undefined !== wsetting){
+		if(wsetting.msg){
+			msg = wsetting.msg;
+		}
+		isShowWating = wsetting.isShowWating;
+	}
+	if(isShowWating == true){
+		// 判断是否已存在，如果已存在则直接显示
+//		dialogWating = jqueryAlert({
+//			'title':'提示',
+//			'contentTextAlign':"center",
+//			'contentTextAlign':'center', //内容对齐方式
+//			'width':'auto',//宽度
+//			'height':'auto',//高度
+//		    'content':msg!=null?"<i class='fa fa-spin fa-spinner'></i>"+msg:"<i class='fa fa-spin fa-spinner'></i>"+'正在操作中，请稍后....',
+//		    'modal':true
+//		})
+		return jqueryAlert({
+			'title':'提示',
+			'contentTextAlign':"center",
+			'contentTextAlign':'center', //内容对齐方式
+			'width':'auto',//宽度
+			'height':'auto',//高度
+			'closeTime':1200000,//当没有按钮时关闭时间
+		    'content':msg!=null?"<i class='fa fa-spin fa-spinner'></i>"+msg:"<i class='fa fa-spin fa-spinner'></i>"+'正在操作中，请稍后....',
+		    'modal':true
+		})
+	}
+}
+//关闭笼罩层
+function closeWating(wsetting,dialogWating){
+	var isShowWating = true;
+	if(undefined !== wsetting){
+		if(wsetting.msg){
+			msg = wsetting.msg;
+		}
+		isShowWating = wsetting.isShowWating;
+	}
+	if(isShowWating == true){
+		dialogWating.close();
+	}
 }
