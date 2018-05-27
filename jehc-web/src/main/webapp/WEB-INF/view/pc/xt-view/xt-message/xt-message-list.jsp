@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>短消息</title>
+<style type="text/css">
+#datatablesReceiver{  
+    width:99.9% !important;  
+}  
+</style>
 </head>
 <body>
 	<div class="portlet-title tabbable-line">

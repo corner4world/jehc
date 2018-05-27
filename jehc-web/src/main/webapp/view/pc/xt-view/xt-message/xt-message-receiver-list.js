@@ -1,16 +1,17 @@
 $(document).ready(function() {
-	/////////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用） 如弹窗分页查找根据条件 可能此时的form发生变化 此时 可以解决该类问题
-	var opt = {
+/////////////jehc扩展属性目的可方便使用（boot.js文件datatablesCallBack方法使用） 如弹窗分页查找根据条件 可能此时的form发生变化 此时 可以解决该类问题
+	var opt1 = {
 		searchformId:'searchReceiverForm'
 	};
-	var options = DataTablesPaging.pagingOptions({
-		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtMessageController/getXtMessageListByCondition',opt);},//渲染数据
+	var options1 = DataTablesPaging.pagingOptions({
+		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtMessageController/getXtMessageListByCondition',opt1);},//渲染数据
 			//在第一位置追加序列号
 			fnRowCallback:function(nRow, aData, iDisplayIndex){
 				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
 				return nRow;
 		},
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		tableHeight:tableHeight()*0.4+'px',
 		//列表表头字段
 		colums:[
 			{
@@ -64,7 +65,7 @@ $(document).ready(function() {
 			}
 		]
 	});
-	var grid=$('#datatablesReceiver').dataTable(options);
+	var grid1=$('#datatablesReceiver').dataTable(options1);
 	//实现全选反选
 	docheckboxall('checkallReceiver','checkchildReceiver');
 	//实现单击行选中

@@ -12,6 +12,7 @@ $(document).ready(function() {
 				return nRow;
 		},
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		tableHeight:tableHeight()*0.4+'px',
 		//列表表头字段
 		colums:[
 			{

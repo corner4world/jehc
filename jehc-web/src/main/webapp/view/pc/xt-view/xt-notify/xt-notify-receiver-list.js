@@ -12,6 +12,7 @@ $(document).ready(function() {
 				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
 				return nRow;
 		},
+		tableHeight:tableHeight()*0.35+'px',
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
 		//列表表头字段
 		colums:[
@@ -55,6 +56,10 @@ $(document).ready(function() {
 	docheckboxall('checkXtNotifyReceiverall','checkXtNotifyReceiverchild');
 	//实现单击行选中
 	clickrowselected('xtNotifyReceiverDatatables');
+	var table = $.fn.dataTable.fnTables(true); //防止tab切换后的表头错位
+	if(table.length > 0) {
+		$(table).dataTable().fnAdjustColumnSizing();
+	};
 });
 //详情
 function toXtReceiverDetail(id){
