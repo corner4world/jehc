@@ -65,12 +65,13 @@
         <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
         <!-- 基础插件结束 -->
         <!-- DataTables插件开始 -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/dataTables.fixedColumns.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/datatables.min.css" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/datatable.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/datatables.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/dataTables.fixedColumns.min.js" type="text/javascript"></script>
+        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/extensions/FixedColumns/css/fixedColumns.bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <%-- <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css" /> --%>
+        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+        <%-- <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/datatable.js" type="text/javascript"></script> --%>
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
+        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/extensions/FixedColumns/js/dataTables.fixedColumns.min.js" type="text/javascript"></script>
         <!-- DataTables插件结束 -->
         <!-- 日期选择器控件开始 -->
         <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css" rel="stylesheet" type="text/css" />
