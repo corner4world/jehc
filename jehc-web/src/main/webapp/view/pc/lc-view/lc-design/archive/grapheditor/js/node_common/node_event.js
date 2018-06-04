@@ -50,14 +50,17 @@ function event_task_grid(cell,flag){
 	}
 	var event_typeStore = new Ext.data.SimpleStore({
 	  fields:['value', 'name'],
-      data:[["javaclass","javaclass"],["express","express"]]
+      data:[["javaclass","javaclass"],["express","express"],["delegateExpression","delegateExpression"],["ScriptExecutionListener","ScriptExecutionListener"],["ScriptTaskListener","ScriptTaskListener"]]
 	});
 	//列的类型
 	var event_Plant = Ext.data.Record.create([
            {name:'javaclass_express',type:'String'},
            {name:'event_type',type:'string'},
            {name:'event',type:'string'},
-           {name:'fields',type:'string'}
+           {name:'fields',type:'string'},
+           {name:'script',type:'string'},
+           {name:'runAs',type:'string'},
+           {name:'scriptProcessor',type:'string'}
     ]);
 	//定义数据源
 	event_store = Ext.create('Ext.data.Store',{  
@@ -111,6 +114,7 @@ function event_task_grid(cell,flag){
 				{
 					header:'类型',
 					dataIndex:'event_type',
+					flex:1,
 	                editor:{
 		                    name:"name",
 				            hiddenName:'name',
@@ -122,7 +126,30 @@ function event_task_grid(cell,flag){
 				            emptyText:"请选择",
 				            mode:"local",
 				            triggerAction:"all",
-				            editable:false
+				            editable:false,
+				            listeners:{ 
+							   select:function(combo,records,eOpts){
+								   console.info(records);
+								   var eventType = records.data.event_type;
+								   /*
+								   if(eventType == 'delegateExpression'){
+									   
+								   }
+								   if(eventType == 'ScriptExecutionListener' || eventType == 'ScriptTaskListener'){
+									   dmyColumn(event_grid,4,true);
+									   dmyColumn(event_grid,5,true);
+									   dmyColumn(event_grid,6,true);
+									   dmyColumn(event_grid,3,false);
+								   }else{
+									   dmyColumn(event_grid,4,false);
+									   dmyColumn(event_grid,5,false);
+									   dmyColumn(event_grid,6,false);
+									   dmyColumn(event_grid,3,true);
+								   }
+								   
+								   */
+						  		}  
+				            }
 	                }
 				},
 				{
@@ -159,6 +186,31 @@ function event_task_grid(cell,flag){
 								});  
 							} 
 			            } 
+	                }
+				},
+				{
+					header:'脚本',
+					dataIndex:'script',
+					flex:1,
+	                editor:{
+	                	height:100,
+	                    xtype:'textareafield'
+	                }
+				},
+				{
+					header:'运行方式',
+					dataIndex:'runAs',
+					flex:1,
+	                editor:{
+	                    xtype:'textfield'
+	                }
+				},
+				{
+					header:'脚本解析器',
+					dataIndex:'scriptProcessor',
+					flex:1,
+	                editor:{
+	                    xtype:'textfield'
 	                }
 				}
 			],
@@ -202,6 +254,10 @@ function event_task_grid(cell,flag){
 				 }]　　　　　
 	}); 
 	event_store.load(); 
+}
+
+function dmyColumn(grid,columnNumber,isShow){
+	grid.columns[columnNumber].setVisible(isShow);
 }
 
 //点击确定按钮设置mxgraph中cell属性

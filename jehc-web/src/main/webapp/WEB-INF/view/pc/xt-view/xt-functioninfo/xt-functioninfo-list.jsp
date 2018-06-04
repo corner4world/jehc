@@ -54,12 +54,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
 	<div class="panel-body">
 		<br>
+		<br>
 		<ul id="tree" class="ztree"></ul>
 	</div>
 	
 	<!-- 功能模态框（Modal）开始 -->
 	<div class="modal fade" id="addXtFunctioninfoModal" tabindex="-1" role="dialog" aria-labelledby="addXtFunctioninfoModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="addXtFunctioninfoModalLabel">
@@ -176,7 +177,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<!-- 详情功能模态框（Modal）开始 -->
 	<div class="modal fade" id="detailXtFunctioninfoModal" tabindex="-1" role="dialog" aria-labelledby="detailXtFunctioninfoModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="detailXtFunctioninfoModalLabel">
@@ -286,7 +287,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<!-- 编辑功能模态框（Modal）开始 -->
 	<div class="modal fade" id="updateXtFunctioninfoModal" tabindex="-1" role="dialog" aria-labelledby="updateXtFunctioninfoModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="updateXtFunctioninfoModalLabel">

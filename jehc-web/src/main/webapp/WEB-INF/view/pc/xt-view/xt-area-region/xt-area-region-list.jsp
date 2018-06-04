@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 	<!-- 新增行政区域模态框（Modal）开始 -->
 	<div class="modal fade" id="addXtAreaRegionModal" tabindex="-1" role="dialog" aria-labelledby="addXtAreaRegionModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="addXtAreaRegionModalLabel">
@@ -116,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<!-- 编辑行政区域模态框（Modal）开始 -->
 	<div class="modal fade" id="updateXtAreaRegionModal" tabindex="-1" role="dialog" aria-labelledby="updateXtAreaRegionModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="updateXtAreaRegionModalLabel">
@@ -171,7 +171,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<!-- 详细行政区域模态框（Modal）开始 -->
 	<div class="modal fade" id="detailXtAreaRegionModal" tabindex="-1" role="dialog" aria-labelledby="detailXtAreaRegionModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="detailXtAreaRegionModalLabel">

@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>用户角色表</title>
+<style>
+#RoleDatatables{width:100%!important}
+#ImportUDatatables{width:100%!important} 
+#UnImportUDatatables{width:100%!important}
+</style>
 </head>
 <body>
 	<div class="portlet box green" style="margin-bottom: 5px">
@@ -64,7 +69,7 @@
 	
 	<!-- 已废除权限模态框（Modal）开始 -->
 	<div class="modal fade" id="RoleModal" tabindex="-1" role="dialog" aria-labelledby="RoleModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="RoleModalLabel">
@@ -73,7 +78,7 @@
 				</div>
 				<div class="modal-body">
 					<div class="panel-body">
-						<table id="RoleDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.5%">
+						<table id="RoleDatatables" class="table table-bordered table-striped table-hover">
 							<thead>
 								<tr>
 									<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallRole" /><span></span></label></th>
@@ -98,16 +103,17 @@
 	
 	<!-- 分配用户模态框（Modal）开始 -->
 	<div class="modal fade" id="UserinfoModal" tabindex="-1" role="dialog" aria-labelledby="UserinfoModalLabel" aria-hidden="true">
-		<div class="modal-dialog"  id="UserinfoModalDialog">
+		<div class="modal-dialog modal-lg"  id="UserinfoModalDialog">
 			<div class="modal-content">
 				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 					<h4 class="modal-title" id="UserinfoModalLabel">
 						分配用户
 					</h4>
 				</div>
 				<div class="modal-body" id="UserinfoBody" style="overflow:auto;">
 					<div class="row">
-						<div class="col-md-6">					
+						<div class="col-md-12">					
 							<!-- 待分配用户开始 -->
 							<div class="portlet box green" style="margin-bottom: 5px;">
 								<div class="portlet-title">
@@ -145,7 +151,7 @@
 											</div>
 										</div>
 									</form>
-									<table id="UnImportUDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.5%">
+									<table id="UnImportUDatatables" class="table table-bordered table-striped table-hover">
 										<thead>
 											<tr>
 												<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallUnImportU" /><span></span></label></th>
@@ -160,8 +166,10 @@
 						    </div>
 						    </div>
 							<!-- 待分配用户结束 -->
-							<!-- 已分配用户开始 -->
-							<div class="col-md-6">
+					    </div>
+					    <div class="row">
+					    	<!-- 已分配用户开始 -->
+							<div class="col-md-12">
 							<div class="portlet box green" style="margin-bottom: 5px;">
 								<div class="portlet-title">
 						            <div class="caption">
@@ -198,7 +206,7 @@
 											</div>
 										</div>
 									</form>
-									<table id="ImportUDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.5%">
+									<table id="ImportUDatatables" class="table table-bordered table-striped table-hover">
 										<thead>
 											<tr>
 												<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallImportU" /><span></span></label></th>
@@ -227,7 +235,7 @@
 	
 	<!-- 分配菜单模态框（Modal）开始 -->
 	<div class="modal fade" id="XtMenuinfoModal" tabindex="-1" role="dialog" aria-labelledby="XtMenuinfoModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="XtMenuinfoModalLabel">

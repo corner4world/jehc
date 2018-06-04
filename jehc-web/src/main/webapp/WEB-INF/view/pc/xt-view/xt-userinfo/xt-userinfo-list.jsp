@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>员工信息表</title>
+<style>
+#deletedUserinfoDatatables{width:100%!important}
+#userRoleDatatables{width:100%!important} 
+</style>
 </head>
 <body>
 	<div class="portlet box green" style="margin-bottom: 5px;">
@@ -14,7 +18,7 @@
             </div>
             <div class="actions">
                  <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
-                     <i class="glyphicon glyphicon-search"></i>
+                     <i class="fi-search"></i>
                  </a>
                  <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
                      <i class="icon-trash"></i>
@@ -44,22 +48,22 @@
     </div>
 	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
         <button class="btn btn-default" onclick="toXtUserinfoAdd()">
-		<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+			新增
 		</button>
 		<button class="btn btn-default" onclick="toXtUserinfoUpdate()">
-			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+			修改
 		</button>
 		<button class="btn btn-default" onclick="delXtUserinfo()">
-			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+			删除
 		</button>
 		<button class="btn btn-default" onclick="initListDeleted()">
-			<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>已禁用
+			已禁用
 		</button>
 		<button class="btn btn-default" onclick="search('datatables')">
-			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+			刷新
 		</button>
     </div>
-	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+	<table id="datatables" class="table table-bordered table-striped table-hover">
 		<thead>
 			<tr>
 				<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
@@ -79,7 +83,7 @@
 </body>
 <!-- 已废除用户模态框（Modal）开始 -->
 <div class="modal fade" id="deletedUserinfoSelectModal" tabindex="-1" role="dialog" aria-labelledby="deletedUserinfoModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="UserinfoModalDialog">
+	<div class="modal-dialog modal-lg" id="UserinfoModalDialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="deletedUserinfoModalLabel">
@@ -124,7 +128,7 @@
 				        </div>
 				    </div>
 				</div>
-				<table id="deletedUserinfoDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.5%">
+				<table id="deletedUserinfoDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap;">
 					<thead>
 						<tr>
 							<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallDeletedUserinfo" /><span></span></label></th>
@@ -149,18 +153,19 @@
 <!-- 已废除用户模态框（Modal）结束 -->
 
 
+
+                            
 <!-- 已拥有权限模态框（Modal）开始 -->
-<div class="modal fade" id="userRoleModal" tabindex="-1" role="dialog" aria-labelledby="userRoleModalLabel" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h4 class="modal-title" id="userRoleModalLabel">
-					角色列表
-				</h4>
-			</div>
-			<div class="modal-body">
-				<div class="panel-body">
-					<table id="userRoleDatatables" class="table table-bordered table-striped table-hover"  style="white-space: nowrap; width: 99.5%">
+<div class="modal fade" id="userRoleModal" tabindex="-1" role="dialog" aria-labelledby="userRoleModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+            	 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myLargeModalLabel">角色列表</h4>
+            </div>
+            <div class="modal-body">
+                <div class="panel-body">
+					<table id="userRoleDatatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap;">
 						<thead>
 							<tr>
 								<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkallUserRole" /><span></span></label></th>
@@ -170,12 +175,9 @@
 						</thead>
 					</table>
 				</div>
-			</div>
-			<div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
             </div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
 </div>
 <!-- 已拥有权限用户模态框（Modal）结束 -->
 <script type="text/javascript" src="../view/pc/xt-view/xt-userinfo/xt-userinfo-list.js"></script> 

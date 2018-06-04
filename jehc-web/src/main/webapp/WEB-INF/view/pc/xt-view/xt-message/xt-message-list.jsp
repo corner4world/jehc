@@ -12,21 +12,21 @@
 </style>
 </head>
 <body>
-	<div class="portlet-title tabbable-line">
-		<ul id="myTab" class="nav nav-tabs">
+	<div class="card-box">
+		<ul id="myTab" class="nav nav-tabs nav nav-tabs tabs-bordered">
 			<li class="active">
-				<a href="#tab0" data-toggle="tab">
+				<a href="#tab0" data-toggle="tab"  aria-expanded="false" class="nav-link active show">
 					<i class="glyphicon glyphicon-pencil"></i>我发送的消息
 				</a>
 			</li>
 			<li>
-				<a href="#tab1" data-toggle="tab">
+				<a href="#tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
 					<i class="glyphicon glyphicon-indent-left"></i>我收到的消息
 				</a>
 			</li>
 		</ul>
 		<div id="myTabContent" class="tab-content">
-			<div class="tab-pane fade in active" id="tab0">
+			<div class="tab-pane active show"  id="tab0">
 				<div class="portlet box green" style="margin-bottom: 5px">
 					<div class="portlet-title">
 						<div class="caption">
@@ -89,7 +89,7 @@
 					</thead>
 				</table>
 			</div>
-			<div class="tab-pane fade" id="tab1">
+			<div class="tab-pane " id="tab1">
 				<div class="portlet box green" style="margin-bottom: 5px">
 					<div class="portlet-title">
 						<div class="caption">

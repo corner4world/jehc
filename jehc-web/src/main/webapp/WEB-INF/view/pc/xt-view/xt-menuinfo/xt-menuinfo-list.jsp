@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<!-- 菜单新增页面模态框（Modal）开始 -->
 	<div class="modal fade" id="addXtMenuinfoModal" tabindex="-1" role="dialog" aria-labelledby="addXtMenuinfoModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="addXtMenuinfoModalLabel">
@@ -169,7 +169,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<!-- 菜单编辑页面模态框（Modal）开始 -->
 	<div class="modal fade" id="updateXtMenuinfoModal" tabindex="-1" role="dialog" aria-labelledby="updateXtMenuinfoModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="updateXtMenuinfoModalLabel">
@@ -282,7 +282,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<!-- 菜单上级变更页面模态框（Modal）开始 -->
 	<div class="modal fade" id="changeXtMenuinfoModal" tabindex="-1" role="dialog" aria-labelledby="changeXtMenuinfoModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<h4 class="modal-title" id="changeXtMenuinfoModalLabel">

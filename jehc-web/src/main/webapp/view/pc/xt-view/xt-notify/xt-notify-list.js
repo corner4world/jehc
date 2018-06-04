@@ -12,7 +12,7 @@ $(document).ready(function() {
 				return nRow;
 		},
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
-		tableHeight:tableHeight()*0.35+'px',
+		tableHeight:tableHeight()*0.25+'px',
 		//列表表头字段
 		colums:[
 			{
@@ -55,12 +55,13 @@ $(document).ready(function() {
 	docheckboxall('checkall','checkchild');
 	//实现单击行选中
 	clickrowselected('datatables');
-	
-	var table = $.fn.dataTable.fnTables(true); //防止tab切换后的表头错位
-	if(table.length > 0) {
-		$(table).dataTable().fnAdjustColumnSizing();
-	};
 });
+
+$('#myTab a').click(function (e) {
+	e.preventDefault()
+	$(this).tab('show');
+	$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+})
 
 //新增
 function toXtNotifyAdd(){

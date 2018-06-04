@@ -16,7 +16,7 @@ $(document).ready(function() {
 		colums:[
 			{
 				sClass:"text-center",
-				width:"50px",
+				width:"20px",
 				data:"xt_userinfo_id",
 				render:function (data, type, full, meta) {
 					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchild " value="' + data + '" /><span></span></label>';
@@ -25,7 +25,7 @@ $(document).ready(function() {
 			},
 			{
 				data:"xt_userinfo_id",
-				width:"50px"
+				width:"20px"
 			},
 			{
 				data:'xt_userinfo_name'
@@ -125,65 +125,65 @@ function delXtUserinfo(){
 
 //已删除用户
 function initListDeleted(){
-	$('#deletedUserinfoSelectModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
-		$('#deletedUserinfoBody').height(reGetBodyHeight()*0.7);
-        // 是弹出框居中。。。  
-        var $modal_dialog = $("#UserinfoModalDialog");  
-        $('#searchFormDeletedUserinfo')[0].reset();
-        $modal_dialog.css({'width':reGetBodyWidth()*0.9+'px'});  
-        var opt = {
-    			searchformId:'searchFormDeletedUserinfo'
-    		};
-    	var options = DataTablesPaging.pagingOptions({
-    		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtUserinfoDeletedListByCondition',opt);},//渲染数据
-    			//在第一位置追加序列号
-    			fnRowCallback:function(nRow, aData, iDisplayIndex){
-    				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
-    				return nRow;
-    		},
-    		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
-    		tableHeight:'100px',
-    		//列表表头字段
-    		colums:[
-    			{
-    				sClass:"text-center",
-    				width:"50px",
-    				data:"xt_userinfo_id",
-    				render:function (data, type, full, meta) {
-    					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildDeletedUserinfo" value="' + data + '" /><span></span></label>';
-    				},
-    				bSortable:false
-    			},
-    			{
-    				data:"xt_userinfo_id",
-    				width:"50px"
-    			},
-    			{
-    				data:'xt_userinfo_name'
-    			},
-    			{
-    				data:'xt_userinfo_realName'
-    			},
-    			{
-    				data:'xt_userinfo_phone'
-    			},
-    			{
-    				data:'xt_userinfo_origo'
-    			},
-    			{
-    				data:'xt_userinfo_birthday'
-    			},
-    			{
-    				data:'xt_userinfo_email'
-    			}
-    		]
-    	});
-    	grid=$('#deletedUserinfoDatatables').dataTable(options);
-    	//实现全选反选
-    	docheckboxall('checkallDeletedUserinfo','checkchildDeletedUserinfo');
-    	//实现单击行选中
-    	clickrowselected('deletedUserinfoDatatables');
-    });  
+	var deletedUserinfoSelectModalCount = 0 ;
+	$('#deletedUserinfoSelectModal').modal({backdrop: 'static', keyboard: false});
+	$('#deletedUserinfoSelectModal').on("shown.bs.modal",function(){  
+		if(++deletedUserinfoSelectModalCount == 1){
+			$('#searchFormDeletedUserinfo')[0].reset();
+		    var opt = {
+					searchformId:'searchFormDeletedUserinfo'
+				};
+			var options = DataTablesPaging.pagingOptions({
+				ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtUserinfoDeletedListByCondition',opt);},//渲染数据
+					//在第一位置追加序列号
+					fnRowCallback:function(nRow, aData, iDisplayIndex){
+						jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+						return nRow;
+				},
+				order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+				tableHeight:'120px',
+				//列表表头字段
+				colums:[
+					{
+						sClass:"text-center",
+						width:"20px",
+						data:"xt_userinfo_id",
+						render:function (data, type, full, meta) {
+							return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildDeletedUserinfo" value="' + data + '" /><span></span></label>';
+						},
+						bSortable:false
+					},
+					{
+						data:"xt_userinfo_id",
+						width:"20px"
+					},
+					{
+						data:'xt_userinfo_name'
+					},
+					{
+						data:'xt_userinfo_realName'
+					},
+					{
+						data:'xt_userinfo_phone'
+					},
+					{
+						data:'xt_userinfo_origo'
+					},
+					{
+						data:'xt_userinfo_birthday'
+					},
+					{
+						data:'xt_userinfo_email'
+					}
+				]
+			});
+			grid=$('#deletedUserinfoDatatables').dataTable(options);
+			//实现全选反选
+			docheckboxall('checkallDeletedUserinfo','checkchildDeletedUserinfo');
+			//实现单击行选中
+			clickrowselected('deletedUserinfoDatatables');
+		}
+	})
 }
 
 //恢复用户
@@ -209,41 +209,46 @@ function recoverXtUserinfo(){
 
 //角色权限
 function initRoleinfo(id){
-	$('#userRoleModal').modal();
-	var options = DataTablesPaging.pagingOptions({
-		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtRoleinfoListByUserinfoId?xt_userinfo_id='+id,null);},//渲染数据
-			//在第一位置追加序列号
-			fnRowCallback:function(nRow, aData, iDisplayIndex){
-				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
-				return nRow;
-		},
-		tableHeight:'200px',
-		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
-		//列表表头字段
-		colums:[
-			{
-				sClass:"text-center",
-				width:"50px",
-				data:"xt_roleinfo_id",
-				render:function (data, type, full, meta) {
-					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildUserRole" value="' + data + '" /><span></span></label>';
+	var userRoleModalCount = 0;
+	$('#userRoleModal').modal({backdrop: 'static', keyboard: false});
+	$('#userRoleModal').on("shown.bs.modal",function(){  
+		if(++userRoleModalCount == 1){
+			var options = DataTablesPaging.pagingOptions({
+				ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtRoleinfoListByUserinfoId?xt_userinfo_id='+id,null);},//渲染数据
+					//在第一位置追加序列号
+					fnRowCallback:function(nRow, aData, iDisplayIndex){
+						jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+						return nRow;
 				},
-				bSortable:false
-			},
-			{
-				data:"xt_roleinfo_id",
-				width:"50px"
-			},
-			{
-				data:'xt_role_name'
-			}
-		]
+				tableHeight:'200px',
+				order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+				//列表表头字段
+				colums:[
+					{
+						sClass:"text-center",
+						data:"xt_roleinfo_id",
+						width:'20px',
+						render:function (data, type, full, meta) {
+							return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildUserRole" value="' + data + '" /><span></span></label>';
+						},
+						bSortable:false
+					},
+					{
+						width:'20px',
+						data:"xt_roleinfo_id"
+					},
+					{
+						data:'xt_role_name'
+					}
+				]
+			});
+			$('#userRoleDatatables').dataTable(options);
+			//实现全选反选
+			docheckboxall('checkallUserRole','checkchildUserRole');
+			//实现单击行选中
+			clickrowselected('userRoleDatatables');
+		}
 	});
-	$('#userRoleDatatables').dataTable(options);
-	//实现全选反选
-	docheckboxall('checkallUserRole','checkchildUserRole');
-	//实现单击行选中
-	clickrowselected('userRoleDatatables');
 }
 
 //重置密码

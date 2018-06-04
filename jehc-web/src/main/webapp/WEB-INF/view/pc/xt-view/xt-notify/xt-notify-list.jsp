@@ -7,26 +7,26 @@
 <title>平台通知</title>
 <style type="text/css">
 #xtNotifyReceiverDatatables{  
-    width:99.9% !important;  
+    width:100% !important;  
 }  
 </style>
 </head>
 <body>
-	<div class="portlet-title tabbable-line">
-		<ul id="myTab" class="nav nav-tabs">
+	<div class="card-box">
+		<ul id="myTab" class="nav nav-tabs nav nav-tabs tabs-bordered">
 			<li class="active">
-				<a href="#tab0" data-toggle="tab">
+				<a href="#tab0" data-toggle="tab" aria-expanded="false" class="nav-link active show">
 					<i class="glyphicon glyphicon-pencil"></i>我发送的通知
 				</a>
 			</li>
 			<li>
-				<a href="#tab1" data-toggle="tab">
+				<a href="#tab1" data-toggle="tab" aria-expanded="false" class="nav-link">
 					<i class="glyphicon glyphicon-indent-left"></i>我收到的通知
 				</a>
 			</li>
 		</ul>
 		<div id="myTabContent" class="tab-content">
-			<div class="tab-pane fade in active" id="tab0">
+			<div  class="tab-pane active show" id="tab0">
 				<div class="portlet box green" style="margin-bottom: 5px">
 					<div class="portlet-title">
 			            <div class="caption">
@@ -34,7 +34,7 @@
 			            </div>
 			            <div class="actions">
 			                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
-			                     <i class="glyphicon glyphicon-search"></i>
+			                     <i class="fi-search"></i>
 			                 </a>
 			                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
 			                     <i class="icon-trash"></i>
@@ -78,7 +78,7 @@
 					</thead>
 				</table>
 			</div>
-			<div class="tab-pane fade" id="tab1">
+			<div class="tab-pane " id="tab1">
 				<div class="portlet box green" style="margin-bottom: 5px">
 					<div class="portlet-title">
 			            <div class="caption">
@@ -86,7 +86,7 @@
 			            </div>
 			            <div class="actions">
 			                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('xtNotifyReceiverDatatables');">
-			                     <i class="glyphicon glyphicon-search"></i>
+			                     <i class="fi-search"></i>
 			                 </a>
 			                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll('searchXtNotifyReceiverForm')">
 			                     <i class="icon-trash"></i>

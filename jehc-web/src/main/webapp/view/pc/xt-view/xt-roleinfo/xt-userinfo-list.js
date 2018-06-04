@@ -1,7 +1,9 @@
 function addXtUserinfo(xt_role_id,xt_role_name){
+	var UserinfoModalCount = 0 ;
 	$('#UserinfoBody').height(reGetBodyHeight()*0.7);
 	$('#UserinfoModal').modal({backdrop:'static',keyboard:false});
 	$('#UserinfoModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
+		if(++UserinfoModalCount == 1){
         // 是弹出框居中。。。  
         var $modal_dialog = $("#UserinfoModalDialog");  
         $('#UserinfoModalLabel').html("角色权限--->分配用户---><font color=red>"+xt_role_name+"</font>");
@@ -12,6 +14,7 @@ function addXtUserinfo(xt_role_id,xt_role_name){
     	initUnImportU(xt_role_id);
     	initImportU(xt_role_id);
         $modal_dialog.css({'width':reGetBodyWidth()*0.95+'px'});  
+		}
     });  
 }
 /**待导入用户**/

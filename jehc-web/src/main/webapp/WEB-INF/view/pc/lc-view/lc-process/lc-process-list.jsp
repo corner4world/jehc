@@ -81,7 +81,7 @@
 </body>
 <!-- 流程设计器模态框（Modal）开始 -->
 <div class="modal fade" id="lcDesignModal" tabindex="-1" role="dialog" aria-labelledby="lcDesignModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="lcDesignModalDialog">
+	<div class="modal-dialog modal-lg" id="lcDesignModalDialog">
 		<div class="modal-content">
 			<div class="modal-header" style="display: none;">
 				<h4 class="modal-title" id="lcDesignModalLabel">

@@ -100,60 +100,64 @@ function delXtRoleinfo(){
 	})
 }
 
-
 function initListDeleted(){
-	$('#RoleModal').modal();
-	var options = DataTablesPaging.pagingOptions({
-		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtRoleinfoController/getXtRoleinfoListByCondition?xt_role_isdelete=1',null);},//渲染数据
-			//在第一位置追加序列号
-			fnRowCallback:function(nRow, aData, iDisplayIndex){
-				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
-				return nRow;
-		},
-		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
-		tableHeight:'200px',
-		//列表表头字段
-		colums:[
-			{
-				sClass:"text-center",
-				width:"50px",
-				data:"xt_role_id",
-				render:function (data, type, full, meta) {
-					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildRole " value="' + data + '" /><span></span></label>';
+	var RoleModalCount = 0 ;
+	$('#RoleModal').modal('show').on("shown.bs.modal",function(){  
+		if(++RoleModalCount == 1){
+			var options = DataTablesPaging.pagingOptions({
+				ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtRoleinfoController/getXtRoleinfoListByCondition?xt_role_isdelete=1',null);},//渲染数据
+					//在第一位置追加序列号
+					fnRowCallback:function(nRow, aData, iDisplayIndex){
+						jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+						return nRow;
 				},
-				bSortable:false
-			},
-			{
-				data:"xt_role_id",
-				width:"150px"
-			},
-			{
-				data:'xt_role_name'
-			},
-			{
-				data:'xt_role_type',
-				render:function(data, type, row, meta) {
-					if(data == 0){
-						return "平台权限";
+				order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+				tableHeight:'200px',
+				//列表表头字段
+				colums:[
+					{
+						sClass:"text-center",
+						width:"20px",
+						data:"xt_role_id",
+						render:function (data, type, full, meta) {
+							return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildRole " value="' + data + '" /><span></span></label>';
+						},
+						bSortable:false
+					},
+					{
+						data:"xt_role_id",
+						width:"20px"
+					},
+					{
+						data:'xt_role_name'
+					},
+					{
+						data:'xt_role_type',
+						render:function(data, type, row, meta) {
+							if(data == 0){
+								return "平台权限";
+							}
+							if(data == 1){
+								return "业务权限";
+							}
+						}
+					},
+					{
+						data:'xt_role_createTime'
+					},
+					{
+						data:'xt_role_updateTime'
 					}
-					if(data == 1){
-						return "业务权限";
-					}
-				}
-			},
-			{
-				data:'xt_role_createTime'
-			},
-			{
-				data:'xt_role_updateTime'
-			}
-		]
-	});
-	grid=$('#RoleDatatables').dataTable(options);
-	//实现全选反选
-	docheckboxall('checkallRole','checkchildRole');
-	//实现单击行选中
-	clickrowselected('RoleDatatables');
+				]
+			});
+			grid=$('#RoleDatatables').dataTable(options);
+			//实现全选反选
+			docheckboxall('checkallRole','checkchildRole');
+			//实现单击行选中
+			clickrowselected('RoleDatatables');
+
+		}
+    });  
 }
 
 

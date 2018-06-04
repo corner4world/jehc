@@ -250,9 +250,10 @@ var DataTablesPaging = {
         var options = {
         		"scrollX":true,//表格的宽度
 //    			"sScrollXInner":"100%",//表格的内容宽度
-        		"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.5+'px',//dt高度
+        		"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.4+'px',//dt高度
 //    			"bScrollCollapse":true,
     			dom:settings.dom != null?settings.dom:'<"top">rt<"bottom"iflp><"clear">',
+//        		"dom":'<"top"i>rt<"bottom"flp><"clear">',
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
     			"bInfo":true,//显示表格信息
@@ -265,20 +266,20 @@ var DataTablesPaging = {
     			"bStateSave":true,//保存状态到cookie *************** 很重要 ， 当搜索的时候页面一刷新会导致搜索的消失。使用这个属性就可避免了
     			"oLanguage":callLang(),//多语言配置
     			"bPaginate":true,//是否显示分页
-    			"pageLength":10,//首次加载的数据条数
+    			"pageLength":30,//首次加载的数据条数
     			"bLengthChange":true,//每页显示的记录数
     			"sPaginationType":"full_numbers",//分页，一共两种样式，full_numbers和two_button(默认)
-    			"aLengthMenu":[[10, 25, 50, 100, 500 ],["10条/页", "25条/页","50条/页", "100条/页","500条/页" ]],//设置每页显示记录的下拉菜单也可以设置为pageList
+    			"aLengthMenu":[[10, 30, 50, 100, 500 ],["10条/页", "30条/页","50条/页", "100条/页","500条/页" ]],//设置每页显示记录的下拉菜单也可以设置为pageList
 //    			height:tableHeight(),//高度调整
-//    			bJQueryUI:true,//采用jQueryUI样式
-    			"jQueryUI":true,
+//    			bJQueryUI:getnavigator()==1?true:false,//采用jQueryUI样式
+//     			"jQueryUI":true,
 	            order:settings.order,//[index,'asc|desc']
 	            columns:settings.colums,
 	            columnDefs:settings.columsdefs,
 		        striped:true, //是否显示行间隔色
 		        showRefresh:true,//刷新按钮
 		        ajax:settings.ajax,
-		        processing:true,//隐藏加载提示,自行处理
+		        processing:false,//隐藏加载提示,自行处理
 		        fnRowCallback:settings.fnRowCallback
         };
         return options;
@@ -286,6 +287,7 @@ var DataTablesPaging = {
 };
 
 function datatablesCallBack(data, callback, settings,url,opt){
+	var dialogWating = showWating({msg:'正在拼命的加载中...'});
 	 var formdata;
 	 //缺省采用searchForm
 	 if(null != opt){
@@ -316,6 +318,7 @@ function datatablesCallBack(data, callback, settings,url,opt){
 		  dataType:"json",
 		  xhrFields:{withCredentials:true},
 		  success:function (result){
+			  closeWating(null,dialogWating);
 			  try {
 				  //setTimeout仅为测试延迟效果
 //				  setTimeout(function(){
@@ -334,7 +337,10 @@ function datatablesCallBack(data, callback, settings,url,opt){
 			 } catch (e) {
 				 
 			 }
-		  }
+		  }, 
+	      error:function(){
+	    	  closeWating(null,dialogWating);
+	      }
 	});
 	//datatables每页显示数量下拉框样式
 	$("[class=dataTables_length]").find("select").each(function(index,element){
@@ -372,29 +378,30 @@ var DataTablesList = {
 //        		"sScrollX":"100%",//表格的宽度
         		"scrollX":true,//表格的宽度
 //    			"sScrollXInner":"100%",//表格的内容宽度
-    			"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.5+'px',//dt高度
+    			"scrollY":settings.tableHeight != null ?settings.tableHeight:tableHeight()*0.4+'px',//dt高度
     			"bScrollCollapse":false,//当显示的数据不足以支撑表格的默认的高度时，依然显示纵向的滚动条。(默认是false) 
     			"bFilter":false,//搜索栏
     			"bSort":false,//是否支持排序功能
     			"bInfo":false,//显示表格信息
     			"destroy":true,//销毁表格对象
     			"bAutoWidth":true,//自适应宽度
-    			"serverSide":false,//启用服务器端分页
+    			"serverSide":true,//启用服务器端分页
     			"searching":false,//禁用原生搜索
     			"orderMulti":false,//启用多列排序
     			//"aaSorting":[[2,"asc"]],//给列表排序 ，第一个参数表示数组 (由0开始)。1 表示Browser列。第二个参数为 desc或是asc
     			"bStateSave":true,//保存状态到cookie *************** 很重要 ， 当搜索的时候页面一刷新会导致搜索的消失。使用这个属性就可避免了
     			"oLanguage":callLiLang(),//多语言配置
     			"bPaginate":false,//是否显示分页
+    			"jQueryUI":true,
 //    			height:tableHeight(),//高度调整
-    			bJQueryUI:true,//采用jQueryUI样式
+//    			bJQueryUI:getnavigator()==1?true:false,//采用jQueryUI样式
 	            order:settings.order,//[index,'asc|desc']
 	            columns:settings.colums,
 	            columnDefs:settings.columsdefs,
 		        striped:true, //是否显示行间隔色
 		        showRefresh:true,//刷新按钮
 		        ajax:settings.ajax,
-		        processing:true,//隐藏加载提示,自行处理
+		        processing:false,//隐藏加载提示,自行处理
 		        fnRowCallback:settings.fnRowCallback
         };
         return options;
@@ -402,6 +409,7 @@ var DataTablesList = {
 };
 
 function datatablesListCallBack(data, callback, settings,url,opt){
+	var dialogWating = showWating({msg:'正在拼命的加载中...'});
 	 var formdata;
 	 //缺省采用searchForm
 	 if(null != opt){
@@ -429,6 +437,7 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 		  dataType:"json",
 		  xhrFields:{withCredentials:true},
 		  success:function (result){
+			  closeWating(null,dialogWating);
 			  try {
 				  //setTimeout仅为测试延迟效果
 //				  setTimeout(function(){
@@ -444,7 +453,10 @@ function datatablesListCallBack(data, callback, settings,url,opt){
 			 } catch (e) {
 				 
 			 }
-		  }
+		  }, 
+	      error:function(){
+	    	  closeWating(null,dialogWating);
+	      }
 	});
 	//datatables每页显示数量下拉框样式
 	$("[class=dataTables_length]").find("select").each(function(index,element){
@@ -490,15 +502,16 @@ function getTableContent(table){
 
 //日期选择器渲染
 function datetimeInit(){
-	$(".form_datetime").datetimepicker({
+	$(".form_datetime").datepicker({
 		 format:"yyyy-mm-dd",
 		 autoclose:true,
-		 todayBtn:true,
+//		 todayBtn:true,
+		 clearBtn:true,
 		 todayHighlight:true,
 		 showMeridian:true,
 		 pickerPosition:"bottom-left",
 		 language:'zh-CN',//中文，需要引用zh-CN.js包
-		 startView:2,//月视图
+		 startView:0,//月视图
 		 minView:2//日期时间选择器所能够提供的最精确的时间选择视图
 	}); 
 }
@@ -1490,7 +1503,9 @@ function showWating(wsetting){
 		if(wsetting.msg){
 			msg = wsetting.msg;
 		}
-		isShowWating = wsetting.isShowWating;
+		if(undefined !== wsetting.isShowWating){
+			isShowWating = wsetting.isShowWating;
+		}
 	}
 	if(isShowWating == true){
 		// 判断是否已存在，如果已存在则直接显示
@@ -1518,7 +1533,7 @@ function showWating(wsetting){
 //关闭笼罩层
 function closeWating(wsetting,dialogWating){
 	var isShowWating = true;
-	if(undefined !== wsetting){
+	if(null != wsetting && undefined !== wsetting){
 		if(wsetting.msg){
 			msg = wsetting.msg;
 		}

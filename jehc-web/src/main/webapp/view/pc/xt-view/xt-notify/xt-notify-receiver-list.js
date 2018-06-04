@@ -12,7 +12,7 @@ $(document).ready(function() {
 				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
 				return nRow;
 		},
-		tableHeight:tableHeight()*0.35+'px',
+		tableHeight:tableHeight()*0.25+'px',
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
 		//列表表头字段
 		colums:[

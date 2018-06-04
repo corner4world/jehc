@@ -12,7 +12,7 @@ $(document).ready(function() {
 				return nRow;
 		},
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
-		tableHeight:tableHeight()*0.4+'px',
+		tableHeight:tableHeight()*0.2+'px',
 		//列表表头字段
 		colums:[
 			{
@@ -72,6 +72,11 @@ $(document).ready(function() {
 	//实现单击行选中
 	clickrowselected('datatables');
 });
+$('#myTab a').click(function (e) {
+	e.preventDefault()
+	$(this).tab('show');
+	$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+})
 //新增
 function toXtMessageAdd(){
 	tlocation('../xtMessageController/toXtMessageAdd');
