@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>短消息新增页面</title>
+<style>
+#UserinfoDatatables{width:100%!important}
+</style>
 </head>
 <body>
 	<div class="panel-body">
@@ -50,7 +53,7 @@
 </body>
 <!-- 用户选择器模态框（Modal）开始 -->
 <div class="modal fade" id="UserinfoSelectModal" tabindex="-1" role="dialog" aria-labelledby="UserinfoModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="UserinfoModalDialog">
+	<div class="modal-dialog modal-lg" id="UserinfoModalDialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="UserinfoModalLabel">

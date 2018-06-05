@@ -18,52 +18,55 @@ $(document).ready(function(){
 
 //用户选择器
 function XtUserSelect(){
+	var UserinfoSelectModalCount = 0 ;
 	$('#UserinfoSelectModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
-		$('#UserinfoBody').height(reGetBodyHeight()*0.5);
-      // 是弹出框居中。。。  
-      var $modal_dialog = $("#UserinfoModalDialog");  
-      $('#searchFormUserinfo')[0].reset();
-      $modal_dialog.css({'width':reGetBodyWidth()*0.5+'px'});  
-      var opt = {
-  			searchformId:'searchFormUserinfo'
-  		};
-  	var options = DataTablesPaging.pagingOptions({
-  		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtUserinfoListByCondition',opt);},//渲染数据
-  			//在第一位置追加序列号
-  			fnRowCallback:function(nRow, aData, iDisplayIndex){
-  				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
-  				return nRow;
-  		},
-  		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
-  		//列表表头字段
-  		colums:[
-  			{
-  				sClass:"text-center",
-  				width:"50px",
-  				data:"xt_userinfo_id",
-  				render:function (data, type, full, meta) {
-  					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildUserinfo" value="' + data + '" /><span></span></label>';
-  				},
-  				bSortable:false
-  			},
-  			{
-  				data:"xt_userinfo_id",
-  				width:"50px"
-  			},
-  			{
-  				data:'xt_userinfo_name'
-  			},
-  			{
-  				data:'xt_userinfo_realName'
-  			}
-  		]
-  	});
-  	grid=$('#UserinfoDatatables').dataTable(options);
-  	//实现全选反选
-  	docheckboxall('checkallUserinfo','checkchildUserinfo');
-  	//实现单击行选中
-  	clickrowselected('UserinfoDatatables');
-  });  
+		if(++UserinfoSelectModalCount == 1){
+			$('#UserinfoBody').height(reGetBodyHeight()*0.5);
+			// 是弹出框居中。。。  
+			var $modal_dialog = $("#UserinfoModalDialog");  
+			$('#searchFormUserinfo')[0].reset();
+			$modal_dialog.css({'width':reGetBodyWidth()*0.5+'px'});  
+			var opt = {
+	  			searchformId:'searchFormUserinfo'
+	  		};
+			var options = DataTablesPaging.pagingOptions({
+		  		ajax:function (data, callback, settings){datatablesCallBack(data, callback, settings,'../xtUserinfoController/getXtUserinfoListByCondition',opt);},//渲染数据
+		  			//在第一位置追加序列号
+		  			fnRowCallback:function(nRow, aData, iDisplayIndex){
+		  				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
+		  				return nRow;
+		  		},
+		  		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
+		  		//列表表头字段
+		  		colums:[
+		  			{
+		  				sClass:"text-center",
+		  				width:"50px",
+		  				data:"xt_userinfo_id",
+		  				render:function (data, type, full, meta) {
+		  					return '<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" name="checkId" class="checkchildUserinfo" value="' + data + '" /><span></span></label>';
+		  				},
+		  				bSortable:false
+		  			},
+		  			{
+		  				data:"xt_userinfo_id",
+		  				width:"50px"
+		  			},
+		  			{
+		  				data:'xt_userinfo_name'
+		  			},
+		  			{
+		  				data:'xt_userinfo_realName'
+		  			}
+		  		]
+		  	});
+		  	grid=$('#UserinfoDatatables').dataTable(options);
+		  	//实现全选反选
+		  	docheckboxall('checkallUserinfo','checkchildUserinfo');
+		  	//实现单击行选中
+		  	clickrowselected('UserinfoDatatables');
+		}
+	});  
 }
 
 function doSelectXtUserinfo(){

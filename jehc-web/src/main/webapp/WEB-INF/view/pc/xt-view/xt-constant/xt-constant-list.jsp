@@ -14,7 +14,7 @@
             </div>
             <div class="actions">
                  <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
-                     <i class="glyphicon glyphicon-search"></i>
+                     <i class="fi-search"></i>
                  </a>
                  <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
                      <i class="icon-trash"></i>

@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>平台通知</title>
+<style>
+#UserinfoDatatables{width:100%!important}
+</style>
 </head>
 <body>
 	<div class="panel-body">
@@ -119,6 +122,8 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
+<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/select2/js/select2.min.js" type="text/javascript"></script>
 <!-- 用户选择器模态框（Modal）结束 -->
 <script type="text/javascript" src="../view/pc/xt-view/xt-notify/xt-notify-add.js"></script> 
 </html>

@@ -19,7 +19,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-3 control-label">状态0正常1关闭</label>
+				<label class="col-lg-3 control-label">状态</label>
 				<div class="col-lg-6">
 					<input class="form-control" type="text" maxlength="10"  name="xt_platform_status" placeholder="请输入状态0正常1关闭">
 				</div>

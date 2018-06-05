@@ -32,16 +32,14 @@
 					</div>
 				</div>
 			</form>
-			<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-				<button class="btn btn-primary" onclick="search('datatables')">
-					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-				</button>
-				<button class="btn btn-default" onclick="resetAll();">重置</button>
-			</div>
 		</fieldset>
 	</div>
 	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 20px;">
+		<div class="btn-group pull-left" style="margin-right: 20px;">
+			<button class="btn btn-primary" onclick="search('datatables')">
+				<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+			</button>
+			<button class="btn btn-default" onclick="resetAll();">重置</button>
 			<button class="btn btn-default" onclick="delXtChangePwd()">
 				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 			</button>
