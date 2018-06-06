@@ -32,14 +32,6 @@
 						<div class="caption">
 							查询区域
 						</div>
-						<div class="actions">
-							<button class="btn btn-default" onclick="search('datatables');">
-								<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-							</button>
-							<button class="btn btn-default" onclick="resetAll();">
-								<i class="glyphicon glyphicon-trash"></i>&nbsp;重置
-							</button>
-						</div>
 					</div>
 					<div class="portlet-body form">
 						<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
@@ -60,6 +52,13 @@
 									<input type="text" class="form_datetime form-control" placeholder="结束时间" name="readtime_et" />
 								</div>
 							</div>
+								&nbsp;
+							<a class="btn btn-primary" title="检索" href="javascript:search('datatables');">
+					           <i class="fi-search"></i>检索
+					        </a>&nbsp;
+					        <a class="btn btn-primary" title="重置" href="javascript:resetAll();;">
+					           <i class="icon-trash"></i>重置
+					        </a>
 						</form>
 					</div>
 				</div>
@@ -95,14 +94,6 @@
 						<div class="caption">
 							查询区域
 						</div>
-						<div class="actions">
-							<button class="btn btn-default" onclick="search('datatablesReceiver');">
-								<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-							</button>
-							<button class="btn btn-default" onclick="resetAll('searchReceiverForm');">
-								<i class="glyphicon glyphicon-trash"></i>&nbsp;重置
-							</button>
-						</div>
 					</div>
 					<div class="portlet-body form">
 						<form method="POST" id="searchReceiverForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
@@ -123,6 +114,12 @@
 									<input type="text" class="form_datetime form-control" placeholder="结束时间" name="readtime_et" />
 								</div>
 							</div>
+							<button class="btn btn-primary" onclick="search('datatablesReceiver');">
+								<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+							</button>
+							<button class="btn btn-primary" onclick="resetAll('searchReceiverForm');">
+								<i class="glyphicon glyphicon-trash"></i>&nbsp;重置
+							</button>
 						</form>
 					</div>
 				</div>

@@ -15,15 +15,18 @@
 					<label>公司</label>
 					<input type="text" class="form-control" name="xt_smsCompany" placeholder="请输入公司">
 				</div>
+					&nbsp;
+				<a class="btn btn-primary" title="检索" href="javascript:search('datatables');">
+		           <i class="fi-search"></i>检索
+		        </a>&nbsp;
+		        <a class="btn btn-primary" title="重置" href="javascript:resetAll();;">
+		           <i class="icon-trash"></i>重置
+		        </a>
 			</form>
 		</fieldset>
 	</div>
 	<div class="panel-body">
 		<div class="btn-group pull-left" style="margin-right: 20px;">
-			<button class="btn btn-primary" onclick="search('datatables')">
-				<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-			</button>
-			<button class="btn btn-default" onclick="resetAll();">重置</button>
 			<button class="btn btn-default" onclick="toXtSmsAdd()">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 			</button>

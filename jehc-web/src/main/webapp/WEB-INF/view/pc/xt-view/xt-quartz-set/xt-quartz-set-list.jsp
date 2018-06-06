@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>  
 <body>  
 	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 20px;">
+		<div class="btn-group pull-left" style="margin-right: 20px;">
 			<button class="btn btn-default" onclick="defaultStartXtQuartzSet()">
 				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>启动默认任务
 			</button>
@@ -21,6 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 			</button>
 		</div>
+		<br><br>
 		<table id="datatables" class="table table-bordered table-striped table-hover">
 			<thead>
 				<tr>

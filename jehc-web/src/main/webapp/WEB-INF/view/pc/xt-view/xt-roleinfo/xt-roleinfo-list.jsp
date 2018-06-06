@@ -17,14 +17,6 @@
             <div class="caption">
                 	查询区域
             </div>
-            <div class="actions">
-                 <button class="btn btn-default" onclick="search('datatables');">
-					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-				</button>
-				<button class="btn btn-default" onclick="resetAll();">
-					<i class="glyphicon glyphicon-trash"></i>&nbsp;重置
-				</button>
-            </div>
         </div>
         <div class="portlet-body form">
         	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
@@ -32,6 +24,13 @@
 					<label>角色名称</label>
 					<input type="text" class="form-control" name="xt_role_name" placeholder="请输入角色名称">
 				</div>
+					&nbsp;
+				<a class="btn btn-primary" title="检索" href="javascript:search('datatables');">
+		           <i class="fi-search"></i>检索
+		        </a>&nbsp;
+		        <a class="btn btn-primary" title="重置" href="javascript:resetAll();;">
+		           <i class="icon-trash"></i>重置
+		        </a>
 			</form>
         </div>
     </div>

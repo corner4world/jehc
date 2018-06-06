@@ -21,20 +21,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="caption">
                 	查询区域
             </div>
-            <div class="actions">
-                <button class="btn btn-primary" onclick="filter('tree','keyword')">
-					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-				</button>
-				<button class="btn btn-default" onclick="$('#keyword').val('')">重置</button>
-            </div>
         </div>
         <div class="portlet-body form">
         	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
 				<div class="form-group">
 					<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
 				</div>
+				<button class="btn btn-primary" onclick="filter('tree','keyword')">
+					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
+				</button>
+				<button class="btn btn-default" onclick="$('#keyword').val('')">重置</button>
 			</form>
-			<div class="btn-group pull-right" style="margin-right:0px;margin-bottom: 5px">
+			<div class="btn-group pull-left" style="margin-right:0px;margin-bottom: 5px">
 				<button class="btn btn-default" onclick="addXtAreaRegion(0)">
 					<span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span> 新增一级（国家）
 				</button>
@@ -56,6 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
         </div>
     </div>
+    <br><br>
     <div class="panel-body">
 	<ul id="tree" class="ztree"></ul>
 	</div>

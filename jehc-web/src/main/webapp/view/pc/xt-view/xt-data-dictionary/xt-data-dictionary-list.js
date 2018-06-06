@@ -63,7 +63,7 @@ function initTreeTable(){
 function btnFormatter(value, row, index){
 	var integerappend = row.integerappend;
 	if(integerappend == 0){
-		return '<a href=javascript:addXtDataDictionary("'+value+'") class="btn btn-success btn-sm" title="添加下级"><i class="glyphicon glyphicon-plus"></i></a><a href=javascript:updateXtDataDictionary("'+value+'") title="编辑" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a><a href=javascript:delXtDataDictionary("'+value+'") class="btn btn-danger btn-sm" title="删 除"><i class="fa fa-trash-o"></i></a>';
+		return '<a href=javascript:addXtDataDictionary("'+value+'") class="btn btn-success btn-sm" title="添加下级"><i class="fa fa-gears"></i></a><a href=javascript:updateXtDataDictionary("'+value+'") title="编辑" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a><a href=javascript:delXtDataDictionary("'+value+'") class="btn btn-danger btn-sm" title="删 除"><i class="fa fa-trash-o"></i></a>';
 	}else{
 		return '<a href=javascript:updateXtDataDictionary("'+value+'") class="btn btn-info btn-sm" title="编 辑"><i class="fa fa-edit"></i></a><a href=javascript:delXtDataDictionary("'+value+'") class="btn btn-danger btn-sm" title="删 除"><i class="fa fa-trash-o"></i></a>';
 	}

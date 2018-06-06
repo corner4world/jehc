@@ -16,14 +16,6 @@
             <div class="caption">
                 	查询区域
             </div>
-            <div class="actions">
-                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
-                     <i class="fi-search"></i>
-                 </a>
-                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
-                     <i class="icon-trash"></i>
-                 </a>
-            </div>
         </div>
         <div class="portlet-body form">
         	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
@@ -47,20 +39,26 @@
         </div>
     </div>
 	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
+		<button class="btn btn-circle btn-icon-only btn-default" title="检索" onclick="search('datatables')">
+            <i class="fi-search"></i>检索
+        </button>
+        <button class="btn btn-circle btn-icon-only btn-default" title="重置" onclick="resetAll()">
+            <i class="icon-trash"></i>重置
+        </button>
         <button class="btn btn-default" onclick="toXtUserinfoAdd()">
-			新增
+			 <i class="fa fa-plus-circle"></i>新增
 		</button>
 		<button class="btn btn-default" onclick="toXtUserinfoUpdate()">
-			修改
+			 <i class="fa fa-pencil"></i>修改
 		</button>
 		<button class="btn btn-default" onclick="delXtUserinfo()">
-			删除
+			<i class="fa fa-trash-o"></i>删除
 		</button>
 		<button class="btn btn-default" onclick="initListDeleted()">
-			已禁用
+			<i class="fa fa-user-times"></i>已禁用
 		</button>
 		<button class="btn btn-default" onclick="search('datatables')">
-			刷新
+			<i class="fa fa-spin fa-refresh"></i>刷新
 		</button>
     </div>
 	<table id="datatables" class="table table-bordered table-striped table-hover">

@@ -12,14 +12,6 @@
             <div class="caption">
                 	异常日志列表
             </div>
-            <div class="actions">
-                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
-                     <i class="fi-search"></i>
-                 </a>
-                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
-                     <i class="icon-trash"></i>
-                 </a>
-            </div>
         </div>
     </div>
 	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">

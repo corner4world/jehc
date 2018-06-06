@@ -18,20 +18,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="caption">
                 	查询区域
             </div>
-            <div class="actions">
-                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:filter('tree','keyword')">
-                     <i class="fi-search"></i>
-                 </a>
-                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:$('#keyword').val('')">
-                     <i class="icon-trash"></i>
-                 </a>
-            </div>
         </div>
         <div class="portlet-body form">
         	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
 	        	<div class="form-group">
 					<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
 				</div>
+				&nbsp;
+				<a class="btn btn-primary" title="检索" href="javascript:filter('tree','keyword')">
+                     <i class="fi-search"></i>检索
+                 </a>
+                 &nbsp;
+                 <a class="btn btn-primary" title="重置" href="javascript:$('#keyword').val('')">
+                     <i class="icon-trash"></i>重置
+                 </a>
 			</form>
         </div>
         <div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">

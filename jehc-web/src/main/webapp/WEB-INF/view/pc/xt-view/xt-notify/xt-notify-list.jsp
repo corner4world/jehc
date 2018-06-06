@@ -32,14 +32,6 @@
 			            <div class="caption">
 			                	查询区域
 			            </div>
-			            <div class="actions">
-			                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('datatables');">
-			                     <i class="fi-search"></i>
-			                 </a>
-			                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll();;">
-			                     <i class="icon-trash"></i>
-			                 </a>
-			            </div>
 			        </div>
 			        <div class="portlet-body form">
 			        	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
@@ -47,6 +39,13 @@
 								<label>标题</label>
 								<input type="text" class="form-control" name="xt_notify_title" placeholder="请输入标题">
 							</div>
+								&nbsp;
+							<a class="btn btn-primary" title="检索" href="javascript:search('datatables');">
+					           <i class="fi-search"></i>检索
+					        </a>&nbsp;
+					        <a class="btn btn-primary" title="重置" href="javascript:resetAll();;">
+					           <i class="icon-trash"></i>重置
+					        </a>
 						</form>
 			        </div>
 			    </div>
@@ -84,14 +83,6 @@
 			            <div class="caption">
 			                	查询区域
 			            </div>
-			            <div class="actions">
-			                 <a class="btn btn-circle btn-icon-only btn-default" title="检索" href="javascript:search('xtNotifyReceiverDatatables');">
-			                     <i class="fi-search"></i>
-			                 </a>
-			                 <a class="btn btn-circle btn-icon-only btn-default" title="重置" href="javascript:resetAll('searchXtNotifyReceiverForm')">
-			                     <i class="icon-trash"></i>
-			                 </a>
-			            </div>
 			        </div>
 			        <div class="portlet-body form">
 			        	<form method="POST" id="searchXtNotifyReceiverForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
@@ -99,6 +90,13 @@
 								<label>标题</label>
 								<input type="text" class="form-control" name="xt_notify_title" placeholder="请输入标题">
 							</div>
+								&nbsp;
+							<a class="btn btn-primary" title="检索" href="javascript:search('xtNotifyReceiverDatatables');">
+					           <i class="fi-search"></i>检索
+					        </a>&nbsp;
+					        <a class="btn btn-primary" title="重置" href="javascript:resetAll('searchXtNotifyReceiverForm');">
+					           <i class="icon-trash"></i>重置
+					        </a>
 						</form>
 			        </div>
 			    </div>
