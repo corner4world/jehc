@@ -121,17 +121,13 @@ jEhc能做什么
 ![输入图片说明](https://gitee.com/uploads/images/2018/0606/132245_afb3436c_1341290.png "全文检索.png")
 
 其他
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/221101_2e1ea769_1341290.png "问题知识库.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/133040_7e8af64b_1341290.png "知识库.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/133110_20308136_1341290.png "平台公告.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/133117_814b8d41_1341290.png "密码找回.png")
 
-只列举小部分功能如下：
-
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/210159_7c3098ea_1341290.png "各种功能.png")
 
 电商后端及前端
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/231049_dbbea11d_1341290.png "商品中心.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/231109_5f1a7937_1341290.png "商户管理.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/231122_d825794f_1341290.png "购物车.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/231132_e5e490e9_1341290.png "订单中心.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/133125_00be1896_1341290.png "会员管理.png")
 
 
 统一开发 统一开放 统一规范 统一开源
