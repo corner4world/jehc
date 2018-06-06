@@ -74,51 +74,67 @@ http://git.oschina.net/jehc/jehc
 
 jEhc能做什么
 
+首页
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131719_fdb7cc90_1341290.png "index.png")
+
 流程模块
 
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220546_64e25763_1341290.png "在线设计.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220604_2e2c2613_1341290.png "流程中心.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131743_ff1615aa_1341290.png "在线设计.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131811_d71dfc95_1341290.png "流程中心.png")
 
 基础模块
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220626_ae2de91e_1341290.png "用户.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220646_2d7398ab_1341290.png "部门.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220658_7c242969_1341290.png "岗位.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131826_c7e96d09_1341290.png "员工信息.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131835_09b91357_1341290.png "公司信息.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131843_91b9d8f2_1341290.png "部门信息.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131852_d0d188ef_1341290.png "岗位信息.png")
 
 角色权限
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220717_e1c8ab62_1341290.png "角色分配菜单.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220748_6e624675_1341290.png "角色分配用户.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131902_47d0e39f_1341290.png "角色权限.png")
 
 
 配置模块
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220804_5b429b72_1341290.png "创建菜单.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220825_e683fb62_1341290.png "全文检索配置.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220837_cf79374e_1341290.png "常量配置.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220859_dbcc10b5_1341290.png "定时任务.png")
-![![输入图片说明](https://gitee.com/uploads/images/2018/0527/220923_ea3283c4_1341290.png "行政区域.png")](https://gitee.com/uploads/images/2018/0527/220913_27f4f2ae_1341290.png "缓存中心.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220933_845c9c9d_1341290.png "功能配置.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/220949_b5906e88_1341290.png "数据字典.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131927_356c9bb3_1341290.png "常量配置.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131937_0399c695_1341290.png "定时任务.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/131949_9c0b11db_1341290.png "二维码.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132000_0d8991b3_1341290.png "功能权限.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132011_09bb69b9_1341290.png "行政区域.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132021_79fd968d_1341290.png "合同管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132036_afe06130_1341290.png "数据字典.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132056_3fdf54df_1341290.png "版本控制.png")
+
 
 
 日志中心
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/221025_b981a6c5_1341290.png "异常日志.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/221156_dc5e5c99_1341290.png "操作日志.png")
-
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132110_47fa042a_1341290.png "变更日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132117_697d2e95_1341290.png "操作日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132125_502ea093_1341290.png "登录日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132133_d5061786_1341290.png "定时器执行日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132147_93c8dfc8_1341290.png "业务日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132155_f0b4e60d_1341290.png "页面载入时间统计.png")
 
 高级代码生成器
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/214631_0c8feecc_1341290.png "代码生成器.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132212_d927f295_1341290.png "代码生成器.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132226_5903bfe3_1341290.png "缓存监控.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/132245_afb3436c_1341290.png "全文检索.png")
 
 其他
-![输入图片说明](https://gitee.com/uploads/images/2018/0527/221101_2e1ea769_1341290.png "问题知识库.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/133040_7e8af64b_1341290.png "知识库.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/133110_20308136_1341290.png "平台公告.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/133117_814b8d41_1341290.png "密码找回.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143446_0c3586e9_1341290.png "消息管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143405_aab1f111_1341290.png "公告.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143401_5aaa7401_1341290.png "工作日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143440_9917d628_1341290.png "通知.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143420_2aafe08e_1341290.png "平台消息.png")
 
-只列举小部分功能如下：
-
-![输入图片说明](https://gitee.com/uploads/images/2018/0410/210159_7c3098ea_1341290.png "各种功能.png")
 
 电商后端及前端
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/231049_dbbea11d_1341290.png "商品中心.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/231109_5f1a7937_1341290.png "商户管理.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/231122_d825794f_1341290.png "购物车.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0427/231132_e5e490e9_1341290.png "订单中心.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/133125_00be1896_1341290.png "会员管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143352_34fb9230_1341290.png "订单管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143434_8f8e6c3c_1341290.png "商品中心.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143428_96cc2d9f_1341290.png "商户管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143413_5b16f22d_1341290.png "购物车管理.png")
 
 统一开发 统一开放 统一规范 统一开源
  **http://git.oschina.net/jehc/jehc** 
