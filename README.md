@@ -92,7 +92,6 @@ jEhc能做什么
 
 角色权限
 ![输入图片说明](https://gitee.com/uploads/images/2018/0606/131902_47d0e39f_1341290.png "角色权限.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0606/131912_c437d04f_1341290.png "数据权限.png")
 
 
 配置模块
@@ -124,10 +123,19 @@ jEhc能做什么
 ![输入图片说明](https://gitee.com/uploads/images/2018/0606/133040_7e8af64b_1341290.png "知识库.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0606/133110_20308136_1341290.png "平台公告.png")
 ![输入图片说明](https://gitee.com/uploads/images/2018/0606/133117_814b8d41_1341290.png "密码找回.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143446_0c3586e9_1341290.png "消息管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143405_aab1f111_1341290.png "公告.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143401_5aaa7401_1341290.png "工作日志.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143440_9917d628_1341290.png "通知.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143420_2aafe08e_1341290.png "平台消息.png")
 
 
 电商后端及前端
 ![输入图片说明](https://gitee.com/uploads/images/2018/0606/133125_00be1896_1341290.png "会员管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143352_34fb9230_1341290.png "订单管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143434_8f8e6c3c_1341290.png "商品中心.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143428_96cc2d9f_1341290.png "商户管理.png")
+![输入图片说明](https://gitee.com/uploads/images/2018/0606/143413_5b16f22d_1341290.png "购物车管理.png")
 
 
 统一开发 统一开放 统一规范 统一开源
