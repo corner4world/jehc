@@ -16,24 +16,13 @@
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<!-- 基础插件样式开始 -->
-	<script type="text/javascript" src="${syspath}/deng/source/plugins/other/jquery/jquery-1.7.2.min.js"></script>
-	<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- 基础插件样式结束 -->
-    <!-- 自定义主题样式开始 -->
-    <link href="${syspath}/deng/source/plugins/admin/index/global/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
-    <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
-    <!-- 自定义主题样式结束 -->
     <!-- 基础插件开始 -->
     <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
     <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
     <!-- 基础插件结束 -->
     <!-- 提示插件开始 -->
     <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
@@ -45,14 +34,14 @@
 	<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
 	<!-- bootstrap验证框架结束 -->
 	<!-- 公共模块包含上传控件，共同JS封装 -->
-	<script type="text/javascript" src="${syspath}/deng/source/js/boot.js"></script>
+	<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
 	<style>
 	.modal.in .modal-dialog{-webkit-transform:translate(0,-50%);-ms-transform:translate(0,-50%);-o-transform:translate(0,-50%);transform:translate(0,-50%)}
-	.modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;top:50%;}
-	@media (min-width:400px){.modal-dialog{width:400px}
- 	.modal-body{
+	.modal-dialog{position:absolute;width:auto;margin:10px auto;left:0;right:0;} 
+	@media (min-width:400px){.modal-dialog{width:400px} 
+	.modal-body{
            min-height:420px;
-    }
+    } 
     .input-icon>.form-control {
 	    height: 50px;
 	}
@@ -90,6 +79,9 @@
 	    text-align: right;
 	    border-top: 0px solid #e5e5e5;
 	}
+	.bv-form .help-block {
+	    color: red;
+	}
 	</style>
 	<script type="text/javascript">
     	var basePath = "${syspath}";
@@ -100,7 +92,7 @@
 	<!-- 模态框（Modal） -->
 	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop=”static” aria-hidden="true">
 		<div class="modal-dialog">
-			<div class="modal-content">
+			<div class="modal-content modal-lg">
 				<div class="modal-header">
 					<h4 class="modal-title" id="myModalLabel">
 						${sys_pt_login }
@@ -111,14 +103,15 @@
 						<div class="form-group">
 		                    <label class="control-label"><font style="font-size:16px;font-family:楷体;color:#CFCFCF;">输入登录信息时，请注意周边环境</font></label>
 		                    <div class="input-icon">
-		                        <i class="fa fa-user"></i>
+		                        <!-- <i class="fa fa-user"></i> -->
+		                        <label class="control-label">账号</label>
 		                        <input class="form-control placeholder-no-fix" type="text" placeholder="请输入账号" name="userName" id="userName" /> 
 		                    </div>
 		                </div>
 		                <div class="form-group">
-		                    <!-- <label class="control-label">密码</label> -->
 		                    <div class="input-icon">
-		                    <i class="fa fa-lock"></i>
+		                    <!-- <i class="fa fa-lock"></i> -->
+		                    <label class="control-label">密码</label>
 		                    <input class="form-control placeholder-no-fix" type="password" placeholder="请输入密码" name="password" id="password"/> 
 		                    </div>
 		                </div>
@@ -126,7 +119,7 @@
 		                    <div class="col-sm-6">
 		                    	 <div class="form-group">
 				                    <div class="input-icon">
-					                    <i class="fa fa-sign-out"></i>
+					                    <!-- <i class="fa fa-sign-out"></i> -->
 					                    <input class="form-control" type="text" placeholder="请输入验证码" name="validateCode" id="validateCode"/> 
 				                    </div>
 			                     </div>
@@ -137,10 +130,12 @@
 		                    </div>
 		                </div>
 		                <div class="form-actions">
-		                    <label class="rememberme mt-checkbox mt-checkbox-outline">
-		                        <input type="checkbox" name="readme" id="readme" value="1" /> 记住我？
-		                        <span></span>
-		                    </label>
+		                	<div class="checkbox">
+                                <input type="checkbox" name="readme" id="readme" value="1" /> 
+                                <label for="readme">
+                                  	 记住我？
+                                </label>
+                            </div>
 		                </div>
 		                <div class="form-group">
 		                    <input type="button" id="loginBtn" class="btn btn-primary" style="width: 370px;" onclick="login()" value="登录">
@@ -179,6 +174,13 @@ $(document).ready(function() {
 		$('#userName').val(getCookie('XTUSERNAMECOOKIE'));
 		$('#password').val(getCookie('XTUSERPASSWORDCOOKIE'));
 	}
+	$("#myModal").on('shown.bs.modal', function(e){
+		var _this = e.target;
+		var dl = $(_this).find('.modal-dialog')[0];
+		var top = ($(_this).height() - $(dl).height())/2;
+		top = top < 0 ? 0 : top;
+		$(dl).animate({'margin-top':top+'px'},700);
+	});
 });
 
 //刷新验证码
