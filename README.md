@@ -5,6 +5,10 @@ http://116.62.121.126/jehc/index/index.html
 
 演示账号及密码：jehc/123456
 
+ **捐赠：** 
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0607/151148_2ecb3136_1341290.jpeg "微信.jpg")
+![输入图片说明](https://gitee.com/uploads/images/2018/0607/151155_ddbbd81d_1341290.jpeg "支付宝.jpg")
 
 **本工程为Maven多工程依赖版本** 
 统一开发 统一开放 统一规范 统一开源
@@ -155,3 +159,14 @@ jEhc能做什么
  
 单工程版本如下：
  **https://gitee.com/jehc/jehc-admin** 
+
+
+
+http://116.62.121.126/jehc/index/index.html
+
+演示账号及密码：jehc/123456
+
+ **捐赠：** 
+
+![输入图片说明](https://gitee.com/uploads/images/2018/0607/151148_2ecb3136_1341290.jpeg "微信.jpg")
+![输入图片说明](https://gitee.com/uploads/images/2018/0607/151155_ddbbd81d_1341290.jpeg "支付宝.jpg")
