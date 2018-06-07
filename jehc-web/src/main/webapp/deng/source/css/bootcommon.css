@@ -125,7 +125,7 @@
   .mt-checkbox.mt-checkbox-outline > span {
     border: 1px solid #d9d9d9;
     background: none; 
-    border-radius:2px;
+    border-radius:4px;
     }
   .mt-radio.mt-radio-outline:hover > input:not([disabled]) ~ span,
   .mt-radio.mt-radio-outline > input:focus ~ span, .mt-radio.mt-checkbox-outline:hover > input:not([disabled]) ~ span,
@@ -218,4 +218,6 @@ div.dataTables_wrapper div.dataTables_length select {
 .bv-form .help-block {
     color: #e73d4a;
 }
+.table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {padding: 5px 10px;}
+table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {background-color: #f2e3b2;}
 #datatables{white-space: nowrap;width:100%!important} 
