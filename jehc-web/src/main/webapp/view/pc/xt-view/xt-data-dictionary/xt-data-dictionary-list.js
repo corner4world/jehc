@@ -50,8 +50,8 @@ function initTreeTable(){
             $table.treegrid({
                 initialState:'collapsed',//收缩
                 treeColumn:0,//指明第几列数据改为树形
-                expanderExpandedClass:'glyphicon glyphicon-triangle-bottom',
-                expanderCollapsedClass:'glyphicon glyphicon-triangle-right',
+                expanderExpandedClass:'fa fa-minus-circle',
+                expanderCollapsedClass:'fa fa-plus-circle',
                 onChange:function(){
                     $table.bootstrapTable('resetWidth');
                 }
