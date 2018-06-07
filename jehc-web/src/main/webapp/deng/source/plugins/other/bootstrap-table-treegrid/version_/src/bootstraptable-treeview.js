@@ -634,9 +634,9 @@
         treeId: "id",
         treeRootLevel: 1,//根节点序号
         treeCollapseAll: true,//是否全部展开，默认不展开
-        collapseIcon: "glyphicon glyphicon-folder-close",//折叠样式
-        expandIcon: "glyphicon glyphicon-folder-open",//展开样式
-        leafIcon:"	glyphicon glyphicon-file"//叶子节点样式
+        collapseIcon: "fa fa-folder-o",//折叠样式
+        expandIcon: "fa fa-folder-open-o",//展开样式
+        leafIcon:"fa fa-file-o"//叶子节点样式
     });
     $.fn.bootstrapTable.methods.push('expandAllTree', 'collapseAllTree');
 })(jQuery);
