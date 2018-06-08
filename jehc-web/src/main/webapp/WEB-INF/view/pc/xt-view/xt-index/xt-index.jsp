@@ -38,7 +38,7 @@
                 <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
                 <!-- END RESPONSIVE MENU TOGGLER -->
                 <!-- BEGIN PAGE ACTIONS -->
-                <!-- DOC: Remove "hide" class to enable the page header actions -->
+                <!-- DOC: Remove "hide" class to enable the page header actions
                 <div class="page-actions">
                     <div class="btn-group">
                         <button type="button" class="btn btn-circle btn-outline red dropdown-toggle" data-toggle="dropdown">
@@ -65,6 +65,7 @@
                         </ul>
                     </div>
                 </div>
+				-->
                 <!-- END PAGE ACTIONS -->
                 <!-- BEGIN PAGE TOP -->
                 <div class="page-top">
@@ -138,6 +139,7 @@
                             <!-- END INBOX DROPDOWN -->
                             <!-- BEGIN TODO DROPDOWN -->
                             <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+							<%--
                             <li class="dropdown dropdown-extended dropdown-tasks" id="header_task_bar">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                     <i class="fa fa-cogs"></i>
@@ -168,6 +170,7 @@
                                     </li>
                                 </ul>
                             </li>
+							--%>
                             <!-- BEGIN USER LOGIN DROPDOWN -->
                             <li class="dropdown dropdown-user">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
@@ -372,7 +375,7 @@
         </div>
 		<!-- 修改密码模态框（Modal）开始 -->
 		<div class="modal fade" id="updatePwdModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" id="updatePwdModalDialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">
@@ -414,7 +417,7 @@
 		<!-- 修改密码模态框（Modal）结束 -->
 		<!-- 锁屏模态框（Modal）开始 -->
 		<div class="modal fade" id="lockModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop=”static”  aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" id="lockModalDialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="myModalLabel">
@@ -441,7 +444,7 @@
 		
 		<!-- 肤色模态框（Modal）开始 -->
 		<div class="modal fade" id="themeModal" tabindex="-1" role="dialog" aria-labelledby="themeModalLabel" data-backdrop=”static”  aria-hidden="true">
-			<div class="modal-dialog">
+			<div class="modal-dialog" id="themeModalDialog">
 				<div class="modal-content">
 					<div class="modal-header">
 						<h4 class="modal-title" id="themeModalLabel">

@@ -1,4 +1,4 @@
-/* .page-boxed .page-footer .page-footer-inner, .page-footer-fixed .page-footer .page-footer-inner {
+﻿/* .page-boxed .page-footer .page-footer-inner, .page-footer-fixed .page-footer .page-footer-inner {
     color: #eee;
 } */
 .page-sidebar .page-sidebar-menu>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu>li>a {
@@ -20,6 +20,7 @@
     background: #23262E;
 }
 .page-header.navbar .page-top {
+    box-shadow: 0 0px 0px 0 rgba(50,50,50,.2);
     background: #23262E;
 }
 .page-sidebar .page-sidebar-menu {
@@ -36,16 +37,20 @@
 }
 */
 
-
-.page-header.navbar .page-top {
-    background: #23262E;
-}
+/**
+废弃黑色头
 .page-header.navbar .search-form {
     background: #23262E;
 } 
+**/
+.page-header.navbar .page-top {
+    box-shadow: 0 0px 0px 0 rgba(50,50,50,.2);
+}
+/**
 .page-container-bg-solid .page-content {
     background: #eef1f5;
 }
+**/
 .page-sidebar .page-sidebar-menu.page-sidebar-menu-compact>li>a, .page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu.page-sidebar-menu-compact>li>a {
     min-height: 50px;
     padding: 15px 15px 15px 5px;
@@ -72,10 +77,13 @@
 .page-header-fixed .page-container {
     margin-top: 43px;
 }
+/**
+废弃黑色头
 .btn.btn-outline.red {
     border-color: #23262E;
     color:rgba(255,255,255,.7);
 }
+**/
 .btn-circle {
     border-radius: 0px!important;
 }
@@ -88,7 +96,7 @@
     margin-right: 0px;
 }
 .page-container-bg-solid .page-content {
-    background: #f5f5f5;
+    background: #ffffff;
 }
 .page-sidebar-fixed:not(.page-footer-fixed) .page-footer {
     background-color: #f5f5f5;

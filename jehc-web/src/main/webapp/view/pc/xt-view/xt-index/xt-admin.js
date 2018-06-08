@@ -86,7 +86,9 @@ function loginout(){
 
 /////////////修改密码开始///////////////////
 function updatePwd(){
-	$('#updatePwdModal').modal();
+	$('#updatePwdModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
+		$("#updatePwdModalDialog").css({'width':'420px'}); 
+    });
 	$('#updatePwdForm').bootstrapValidator({
 	  message:'此值不是有效的',
 	  feedbackIcons:{
@@ -178,11 +180,15 @@ function doUpdate(){
 //////////////////初始化锁屏开始//////////////
 function initLockSystem(flag){
 	if(getCookie("syslock") == 1){
-		$('#lockModal').modal({backdrop: 'static', keyboard: false});
+		$('#lockModal').modal({backdrop: 'static', keyboard: false}).on("shown.bs.modal",function(){  
+			$("#lockModalDialog").css({'width':'420px'}); 
+	    });
 		setCookie("syslock", '1', 240);
 	}else{
 		if(flag == 1){
-			$('#lockModal').modal({backdrop: 'static', keyboard: false});
+			$('#lockModal').modal({backdrop: 'static', keyboard: false}).on("shown.bs.modal",function(){  
+				$("#lockModalDialog").css({'width':'420px'}); 
+		    });
 			setCookie("syslock", '1', 240);
 		}
 	}
@@ -395,7 +401,9 @@ function displayTheme(){
 	if(null != themecss && "" != themecss){
 		$('#chatheme').val(themecss);
 	}
-	$('#themeModal').modal({backdrop:'static',keyboard:false});
+	$('#themeModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
+		$("#themeModalDialog").css({'width':'420px'}); 
+    });
 }
 //保存肤色
 function changeTheme(){
