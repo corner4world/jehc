@@ -69,9 +69,12 @@ http://git.oschina.net/jehc/jehc
 27. 调度器维护
 28. 调度器执行操作
 
-http://116.62.121.126/jehc/index/index.html
 
-演示账号及密码：jehc/123456
+http://116.62.121.126
+或
+www.jehc.top
+
+普通账号及密码：jehc/123456
 
  **捐赠：** 
 
