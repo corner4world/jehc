@@ -1,8 +1,11 @@
 #  **QQ群：102642604** 
 
-http://116.62.121.126/jehc/index/index.html
 
-演示账号及密码：jehc/123456
+http://116.62.121.126
+或
+www.jehc.top
+
+普通账号及密码：jehc/123456
 
 
 **本工程为Maven多工程依赖版本** 
@@ -163,9 +166,11 @@ jEhc能做什么
  **https://gitee.com/jehc/jehc-admin** 
 
 
-http://116.62.121.126/jehc/index/index.html
+http://116.62.121.126
+或
+www.jehc.top
 
-演示账号及密码：jehc/123456
+普通账号及密码：jehc/123456
 
  **捐赠：** 
 
