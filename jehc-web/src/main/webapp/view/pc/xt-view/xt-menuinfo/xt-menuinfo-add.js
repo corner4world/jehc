@@ -14,6 +14,7 @@ function addXtMenuinfo(value,valueText){
 	$('#addXtMenuinfoForm').bootstrapValidator({
 		message:'此值不是有效的'
 	});
+	InitMenuModuleListSetV('xt_menuinfo_module_id');
 	$('#addXtMenuinfoModal').modal({"backdrop":"static"});
 }
 //执行新增操作

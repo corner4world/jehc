@@ -16,22 +16,21 @@
 	<meta name="renderer" content="webkit">
 	<meta http-equiv="Cache-Control" content="no-siteapp" />
 	<!-- 基础插件样式开始 -->
-    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/css/style.css" rel="stylesheet" type="text/css" />
-    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!-- 基础插件样式结束 -->
     <!-- 基础插件开始 -->
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.min.js" type="text/javascript"></script>
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.min.js" type="text/javascript"></script>
+    <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
     <!-- 基础插件结束 -->
     <!-- 提示插件开始 -->
-    <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
-    <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootbox.js" type="text/javascript"></script>
+    <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+    <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+    <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootbox.js" type="text/javascript"></script>
     <!-- 提示插件结束 -->
 	<!-- bootstrap验证框架开始 -->
-	<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.css" />
-	<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
+	<link rel="stylesheet" type="text/css" href="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-validate/bootstrapValidator.css" />
+		<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
 	<!-- bootstrap验证框架结束 -->
 	<!-- 公共模块包含上传控件，共同JS封装 -->
 	<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>

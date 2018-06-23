@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsCase">
+	<!--初始化分页-->
+	<select id="getCmsCaseListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsCase" parameterType="map">
+		SELECT
+			cms_case.cms_case_id,
+			cms_case.title,
+			cms_case.remark,
+			cms_case.ctime,
+			cms_case.mtime,
+			cms_case.status,
+			cms_case.xt_userinfo_id,
+			cms_case.imgpath,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_case cms_case LEFT JOIN xt_userinfo xt_userinfo ON cms_case.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != title">
+			AND cms_case.title LIKE CONCAT(CONCAT('%',#{title}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsCaseById" resultType="jehc.cmsmodules.cmsmodel.CmsCase" parameterType="string">
+		SELECT
+			cms_case.cms_case_id,
+			cms_case.title,
+			cms_case.remark,
+			cms_case.content,
+			cms_case.ctime,
+			cms_case.mtime,
+			cms_case.status,
+			cms_case.xt_userinfo_id,
+			cms_case.imgpath,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_case cms_case LEFT JOIN xt_userinfo xt_userinfo ON cms_case.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_case_id=#{cms_case_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsCase" parameterType="jehc.cmsmodules.cmsmodel.CmsCase">
+		INSERT INTO
+			cms_case
+			(
+			cms_case_id,
+			title,
+			remark,
+			content,
+			ctime,
+			mtime,
+			status,
+			xt_userinfo_id,
+			imgpath
+			)
+			VALUES
+			(
+			#{cms_case_id},
+			#{title},
+			#{remark},
+			#{content},
+			#{ctime},
+			#{mtime},
+			#{status},
+			#{xt_userinfo_id},
+			#{imgpath}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsCase" parameterType="jehc.cmsmodules.cmsmodel.CmsCase">
+		UPDATE
+			cms_case
+		SET
+			title = #{title},
+			remark = #{remark},
+			content = #{content},
+			ctime = #{ctime},
+			mtime = #{mtime},
+			status = #{status},
+			xt_userinfo_id = #{xt_userinfo_id},
+			imgpath = #{imgpath}
+		WHERE cms_case_id=#{cms_case_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsCaseBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsCase">
+		UPDATE
+			cms_case
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="imgpath != null">
+				imgpath = #{imgpath},
+			</if>
+		</set>
+		WHERE cms_case_id=#{cms_case_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsCase" parameterType="map">
+		DELETE FROM cms_case WHERE cms_case_id IN
+		<foreach item="item" index="index" collection="cms_case_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsCase" parameterType="list">
+		INSERT INTO
+			cms_case
+			(
+			cms_case_id,
+			title,
+			remark,
+			content,
+			ctime,
+			mtime,
+			status,
+			xt_userinfo_id,
+			imgpath
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_case_id},
+			#{item.title},
+			#{item.remark},
+			#{item.content},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.status},
+			#{item.xt_userinfo_id},
+			#{item.imgpath}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsCase" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_case
+			SET
+				title = #{item.title},
+				remark = #{item.remark},
+				content = #{item.content},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				status = #{item.status},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				imgpath = #{item.imgpath}
+			WHERE cms_case_id=#{item.cms_case_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsCaseBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_case
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.remark != null">
+					remark = #{item.remark},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.imgpath != null">
+					imgpath = #{item.imgpath},
+				</if>
+			</set>
+			WHERE cms_case_id=#{item.cms_case_id}
+		</foreach>
+	</update>
+</mapper>

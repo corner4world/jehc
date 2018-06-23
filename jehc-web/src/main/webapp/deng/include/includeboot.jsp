@@ -39,50 +39,51 @@
 	    	var xt_userinfo_id='${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_id}'; 
 		</script>
 		<!-- 基础插件样式开始 -->
-		<%-- <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> --%>
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/css/icons.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/css/style.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+		<%-- <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> --%>
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/icons.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/style.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
         <!-- 基础插件样式结束 -->
         <!-- 基础插件开始 -->
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.min.js" type="text/javascript"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/popper.min.js"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
         <!-- DataTables插件开始 -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/datatables/1.10.15/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+        <link href="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+        <script src="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
         <!-- DataTables插件结束 -->
         <!-- 基础插件结束 -->
         <!-- 日期选择器控件开始 -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/bootstrap-timepicker/bootstrap-timepicker.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/bootstrap-timepicker/bootstrap-timepicker.min.css" rel="stylesheet" type="text/css" />
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/bootstrap-daterangepicker/daterangepicker.js" type="text/javascript"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/bootstrap-timepicker/bootstrap-timepicker.js" type="text/javascript"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.min.js" type="text/javascript"></script>
         <!-- 日期选择器控件结束 -->
         <!-- 笼罩插件开始 -->
 		<link type="text/css" rel="stylesheet" href="${syspath}/deng/source/plugins/other/alertplug/alert/alert.css"'/>
 		<script type="text/javascript" src='${syspath}/deng/source/plugins/other/alertplug/alert/alert.js'></script>
 		<!-- 笼罩插件结束 -->
         <!-- 提示插件开始 -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootbox.js" type="text/javascript"></script>
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootbox.js" type="text/javascript"></script>
         <!-- 提示插件结束 -->
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<!-- 文件上传通用模块 -->
-		<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-fileinput/js/fileinput_locale_zh.js" type="text/javascript"></script>
+		<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-fileinput/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-fileinput/js/fileinput.js" type="text/javascript"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-fileinput/js/fileinput_locale_zh.js" type="text/javascript"></script>
 		<!-- 右键插件-->
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-contextmenu/BootstrapMenu.min.js" type="text/javascript"></script>
+		<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-contextmenu/BootstrapMenu.min.js" type="text/javascript"></script>
 		<link href="${syspath}/deng/source/css/bootcommon.min.css" rel="stylesheet" type="text/css" />
 		<!-- bootstrap验证框架开始 -->
-		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.css" />
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-validate/bootstrapValidator.css" />
+		<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
 		<!-- bootstrap验证框架结束 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
 	</head>

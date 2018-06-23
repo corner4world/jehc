@@ -416,7 +416,7 @@ function changeTheme(){
 		 window.location.href=basePath+"/index/index.html";
 	})
 }
-//获取通知信息
+/*//获取通知信息
 function geDyRemind(){
 	ajaxBRequestCallFn('../xtDyRemindController/getXtDyRemindList',null,function(result){
 		////////////////我的通知开始////////////////
@@ -533,6 +533,10 @@ function geDyRemind(){
 }
 geDyRemind();
 setInterval(geDyRemind,50000);
+
+Date.prototype.toLocaleStringMDHM = function() {
+    return (this.getMonth() + 1) + "-" + this.getDate() + " " + this.getHours() + ":" + this.getMinutes();
+};*/
 function toXtReceiverDetail(xt_notify_receiver_id){
 	window.open('../xtNotifyReceiverController/toXtReceiverDetail?xt_notify_receiver_id='+xt_notify_receiver_id,"_blank"); 
 	setTimeout(geDyRemind,500)
@@ -542,6 +546,3 @@ function toXtMessageDetail(xt_message_id){
 	window.open('../xtMessageController/toXtMessageDetail?type=1&xt_message_id='+xt_message_id,"_blank"); 
 	setTimeout(geDyRemind,500)
 }
-Date.prototype.toLocaleStringMDHM = function() {
-    return (this.getMonth() + 1) + "-" + this.getDate() + " " + this.getHours() + ":" + this.getMinutes();
-};

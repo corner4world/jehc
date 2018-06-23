@@ -24,7 +24,10 @@ public class XtMenuinfo extends BaseEntity  implements Serializable{
 	private String xt_menuinfo_status;//状态0可用1禁用
 	
 	private String xt_menuinfo_parentTitle;//父级标题
-
+	
+	private String xt_menuinfo_module_id;//模块编号
+	private String title;/**模块名称**/
+	private String keyid;/**唯一值**/
 	public String getXt_menuinfo_status() {
 		return xt_menuinfo_status;
 	}
@@ -111,6 +114,30 @@ public class XtMenuinfo extends BaseEntity  implements Serializable{
 
 	public void setXt_menuinfo_parentTitle(String xt_menuinfo_parentTitle) {
 		this.xt_menuinfo_parentTitle = xt_menuinfo_parentTitle;
+	}
+
+	public String getXt_menuinfo_module_id() {
+		return xt_menuinfo_module_id;
+	}
+
+	public void setXt_menuinfo_module_id(String xt_menuinfo_module_id) {
+		this.xt_menuinfo_module_id = xt_menuinfo_module_id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getKeyid() {
+		return keyid;
+	}
+
+	public void setKeyid(String keyid) {
+		this.keyid = keyid;
 	}
 	
 }

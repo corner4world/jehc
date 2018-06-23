@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsAbout">
+	<!--初始化分页-->
+	<select id="getCmsAboutListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsAbout" parameterType="map">
+		SELECT
+			cms_about.cms_about_id,
+			cms_about.title,
+			cms_about.imgpath,
+			cms_about.ctime,
+			cms_about.mtime,
+			cms_about.xt_userinfo_id,
+			cms_about.status,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_about cms_about LEFT JOIN xt_userinfo xt_userinfo ON cms_about.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != title">
+			AND cms_about.title LIKE CONCAT(CONCAT('%',#{title}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsAboutById" resultType="jehc.cmsmodules.cmsmodel.CmsAbout" parameterType="string">
+		SELECT
+			cms_about.cms_about_id,
+			cms_about.content,
+			cms_about.title,
+			cms_about.imgpath,
+			cms_about.ctime,
+			cms_about.mtime,
+			cms_about.xt_userinfo_id,
+			cms_about.status,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_about cms_about LEFT JOIN xt_userinfo xt_userinfo ON cms_about.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_about_id=#{cms_about_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsAbout" parameterType="jehc.cmsmodules.cmsmodel.CmsAbout">
+		INSERT INTO
+			cms_about
+			(
+			cms_about_id,
+			title,
+			content,
+			imgpath,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status
+			)
+			VALUES
+			(
+			#{cms_about_id},
+			#{title},
+			#{content},
+			#{imgpath},
+			#{ctime},
+			#{mtime},
+			#{xt_userinfo_id},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsAbout" parameterType="jehc.cmsmodules.cmsmodel.CmsAbout">
+		UPDATE
+			cms_about
+		SET
+			title = #{title},
+			content = #{content},
+			imgpath = #{imgpath},
+			ctime = #{ctime},
+			mtime = #{mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			status = #{status}
+		WHERE cms_about_id=#{cms_about_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsAboutBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsAbout">
+		UPDATE
+			cms_about
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="imgpath != null">
+				imgpath = #{imgpath},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+		</set>
+		WHERE cms_about_id=#{cms_about_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsAbout" parameterType="map">
+		DELETE FROM cms_about WHERE cms_about_id IN
+		<foreach item="item" index="index" collection="cms_about_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsAbout" parameterType="list">
+		INSERT INTO
+			cms_about
+			(
+			cms_about_id,
+			title,
+			content,
+			imgpath,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_about_id},
+			#{item.title},
+			#{item.content},
+			#{item.imgpath},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.xt_userinfo_id},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsAbout" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_about
+			SET
+				title = #{item.title},
+				content = #{item.content},
+				imgpath = #{item.imgpath},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				status = #{item.status}
+			WHERE cms_about_id=#{item.cms_about_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsAboutBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_about
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.imgpath != null">
+					imgpath = #{item.imgpath},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+			</set>
+			WHERE cms_about_id=#{item.cms_about_id}
+		</foreach>
+	</update>
+</mapper>

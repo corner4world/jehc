@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- 继承父级 -->
+	<parent>
+		<groupId>jehc.p</groupId>
+		<artifactId>jehc-p</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../jehc-p/pom.xml</relativePath>
+	</parent>
+
+
+	<artifactId>jehc-cmsmodules-dao</artifactId>
+	<packaging>jar</packaging>
+	<version>${jehc.version}</version>
+	<name>jehc-cmsmodules-dao</name>
+	<url>http://maven.apache.org</url>
+	
+	<dependencies>
+		<dependency>
+			<!-- 数据访问层Dao需要引用父级中定义的Model层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-cmsmodules-model</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 数据访问层Dao需要引用父级中定义的base-dao层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-base-dao</artifactId>
+		</dependency>
+	</dependencies>
+	
+	<!-- 解决Idea中mapper.xml编译 -->
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+</project>

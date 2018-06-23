@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsNews">
+	<!--初始化分页-->
+	<select id="getCmsNewsListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsNews" parameterType="map">
+		SELECT
+			cms_news.cms_news_id,
+			cms_news.title,
+			cms_news.imgpath,
+			cms_news.status,
+			cms_news.xt_userinfo_id,
+			cms_news.ctime,
+			cms_news.mtime,
+			cms_news.news_category_id,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_news cms_news LEFT JOIN xt_userinfo xt_userinfo ON cms_news.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != title">
+			AND cms_news.title LIKE CONCAT(CONCAT('%',#{title}),'%')
+		</if>
+		<if test="null != news_category_id">
+			AND cms_news.news_category_id = #{news_category_id}
+		</if>
+		<if test="null != ctime_st and ctime_st != ''">
+			AND cms_news.ctime &gt;=#{ctime_st}
+		</if>
+		<if test="null != ctime_et and ctime_et != ''">
+			AND cms_news.ctime &lt;=#{ctime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsNewsById" resultType="jehc.cmsmodules.cmsmodel.CmsNews" parameterType="string">
+		SELECT
+			cms_news.cms_news_id,
+			cms_news.title,
+			cms_news.imgpath,
+			cms_news.content,
+			cms_news.status,
+			cms_news.xt_userinfo_id,
+			cms_news.ctime,
+			cms_news.mtime,
+			cms_news.news_category_id,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_news cms_news LEFT JOIN xt_userinfo xt_userinfo ON cms_news.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_news_id=#{cms_news_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsNews" parameterType="jehc.cmsmodules.cmsmodel.CmsNews">
+		INSERT INTO
+			cms_news
+			(
+			cms_news_id,
+			title,
+			imgpath,
+			content,
+			status,
+			xt_userinfo_id,
+			ctime,
+			mtime,
+			news_category_id
+			)
+			VALUES
+			(
+			#{cms_news_id},
+			#{title},
+			#{imgpath},
+			#{content},
+			#{status},
+			#{xt_userinfo_id},
+			#{ctime},
+			#{mtime},
+			#{news_category_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsNews" parameterType="jehc.cmsmodules.cmsmodel.CmsNews">
+		UPDATE
+			cms_news
+		SET
+			title = #{title},
+			imgpath = #{imgpath},
+			content = #{content},
+			status = #{status},
+			xt_userinfo_id = #{xt_userinfo_id},
+			ctime = #{ctime},
+			mtime = #{mtime},
+			news_category_id = #{news_category_id}
+		WHERE cms_news_id=#{cms_news_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsNewsBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsNews">
+		UPDATE
+			cms_news
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="imgpath != null">
+				imgpath = #{imgpath},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="news_category_id != null">
+				news_category_id = #{news_category_id},
+			</if>
+		</set>
+		WHERE cms_news_id=#{cms_news_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsNews" parameterType="map">
+		DELETE FROM cms_news WHERE cms_news_id IN
+		<foreach item="item" index="index" collection="cms_news_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsNews" parameterType="list">
+		INSERT INTO
+			cms_news
+			(
+			cms_news_id,
+			title,
+			imgpath,
+			content,
+			status,
+			xt_userinfo_id,
+			ctime,
+			mtime,
+			news_category_id
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_news_id},
+			#{item.title},
+			#{item.imgpath},
+			#{item.content},
+			#{item.status},
+			#{item.xt_userinfo_id},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.news_category_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsNews" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_news
+			SET
+				title = #{item.title},
+				imgpath = #{item.imgpath},
+				content = #{item.content},
+				status = #{item.status},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				news_category_id = #{item.news_category_id}
+			WHERE cms_news_id=#{item.cms_news_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsNewsBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_news
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.imgpath != null">
+					imgpath = #{item.imgpath},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.news_category_id != null">
+					news_category_id = #{item.news_category_id},
+				</if>
+			</set>
+			WHERE cms_news_id=#{item.cms_news_id}
+		</foreach>
+	</update>
+</mapper>

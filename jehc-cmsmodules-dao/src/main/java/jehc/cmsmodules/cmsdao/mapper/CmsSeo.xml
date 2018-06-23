@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsSeo">
+	<!--初始化分页-->
+	<select id="getCmsSeoListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsSeo" parameterType="map">
+		SELECT
+			cms_seo.cms_seo_id,
+			cms_seo.domainname,
+			cms_seo.title,
+			cms_seo.keywords,
+			cms_seo.content,
+			cms_seo.email,
+			cms_seo.contact,
+			cms_seo.phone,
+			cms_seo.icp,
+			cms_seo.address,
+			cms_seo.ctime,
+			cms_seo.mtime,
+			cms_seo.xt_userinfo_id,
+			cms_seo.status,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_seo cms_seo LEFT JOIN xt_userinfo xt_userinfo ON cms_seo.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsSeoById" resultType="jehc.cmsmodules.cmsmodel.CmsSeo" parameterType="string">
+		SELECT
+			cms_seo.cms_seo_id,
+			cms_seo.domainname,
+			cms_seo.title,
+			cms_seo.keywords,
+			cms_seo.content,
+			cms_seo.email,
+			cms_seo.contact,
+			cms_seo.phone,
+			cms_seo.icp,
+			cms_seo.address,
+			cms_seo.ctime,
+			cms_seo.mtime,
+			cms_seo.xt_userinfo_id,
+			cms_seo.status,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_seo cms_seo LEFT JOIN xt_userinfo xt_userinfo ON cms_seo.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_seo_id=#{cms_seo_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsSeo" parameterType="jehc.cmsmodules.cmsmodel.CmsSeo">
+		INSERT INTO
+			cms_seo
+			(
+			cms_seo_id,
+			domainname,
+			title,
+			keywords,
+			content,
+			email,
+			contact,
+			phone,
+			icp,
+			address,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status
+			)
+			VALUES
+			(
+			#{cms_seo_id},
+			#{domainname},
+			#{title},
+			#{keywords},
+			#{content},
+			#{email},
+			#{contact},
+			#{phone},
+			#{icp},
+			#{address},
+			#{ctime},
+			#{mtime},
+			#{xt_userinfo_id},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsSeo" parameterType="jehc.cmsmodules.cmsmodel.CmsSeo">
+		UPDATE
+			cms_seo
+		SET
+			domainname = #{domainname},
+			title = #{title},
+			keywords = #{keywords},
+			content = #{content},
+			email = #{email},
+			contact = #{contact},
+			phone = #{phone},
+			icp = #{icp},
+			address = #{address},
+			ctime = #{ctime},
+			mtime = #{mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			status = #{status}
+		WHERE cms_seo_id=#{cms_seo_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsSeoBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsSeo">
+		UPDATE
+			cms_seo
+		<set>
+			<if test="domainname != null">
+				domainname = #{domainname},
+			</if>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="keywords != null">
+				keywords = #{keywords},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="email != null">
+				email = #{email},
+			</if>
+			<if test="contact != null">
+				contact = #{contact},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="icp != null">
+				icp = #{icp},
+			</if>
+			<if test="address != null">
+				address = #{address},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+		</set>
+		WHERE cms_seo_id=#{cms_seo_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsSeo" parameterType="map">
+		DELETE FROM cms_seo WHERE cms_seo_id IN
+		<foreach item="item" index="index" collection="cms_seo_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsSeo" parameterType="list">
+		INSERT INTO
+			cms_seo
+			(
+			cms_seo_id,
+			domainname,
+			title,
+			keywords,
+			content,
+			email,
+			contact,
+			phone,
+			icp,
+			address,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_seo_id},
+			#{item.domainname},
+			#{item.title},
+			#{item.keywords},
+			#{item.content},
+			#{item.email},
+			#{item.contact},
+			#{item.phone},
+			#{item.icp},
+			#{item.address},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.xt_userinfo_id},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsSeo" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_seo
+			SET
+				domainname = #{item.domainname},
+				title = #{item.title},
+				keywords = #{item.keywords},
+				content = #{item.content},
+				email = #{item.email},
+				contact = #{item.contact},
+				phone = #{item.phone},
+				icp = #{item.icp},
+				address = #{item.address},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				status = #{item.status}
+			WHERE cms_seo_id=#{item.cms_seo_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsSeoBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_seo
+			<set>
+				<if test="item.domainname != null">
+					domainname = #{item.domainname},
+				</if>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.keywords != null">
+					keywords = #{item.keywords},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.email != null">
+					email = #{item.email},
+				</if>
+				<if test="item.contact != null">
+					contact = #{item.contact},
+				</if>
+				<if test="item.phone != null">
+					phone = #{item.phone},
+				</if>
+				<if test="item.icp != null">
+					icp = #{item.icp},
+				</if>
+				<if test="item.address != null">
+					address = #{item.address},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+			</set>
+			WHERE cms_seo_id=#{item.cms_seo_id}
+		</foreach>
+	</update>
+</mapper>

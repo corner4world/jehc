@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsRecruitment">
+	<!--初始化分页-->
+	<select id="getCmsRecruitmentListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsRecruitment" parameterType="map">
+		SELECT
+			cms_recruitment.cms_recruitment_id,
+			cms_recruitment.post,
+			cms_recruitment.sex,
+			cms_recruitment.age_from,
+			cms_recruitment.treatment,
+			cms_recruitment.language,
+			cms_recruitment.workplace,
+			cms_recruitment.vld,
+			cms_recruitment.education,
+			cms_recruitment.content,
+			cms_recruitment.numbersH,
+			cms_recruitment.status,
+			cms_recruitment.ctime,
+			cms_recruitment.mtime,
+			cms_recruitment.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_recruitment cms_recruitment LEFT JOIN xt_userinfo xt_userinfo ON cms_recruitment.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != post">
+			AND cms_recruitment.post LIKE CONCAT(CONCAT('%',#{post}),'%')
+		</if>
+		<if test="null != language">
+			AND cms_recruitment.language LIKE CONCAT(CONCAT('%',#{language}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsRecruitmentById" resultType="jehc.cmsmodules.cmsmodel.CmsRecruitment" parameterType="string">
+		SELECT
+			cms_recruitment.cms_recruitment_id,
+			cms_recruitment.post,
+			cms_recruitment.sex,
+			cms_recruitment.age_from,
+			cms_recruitment.treatment,
+			cms_recruitment.language,
+			cms_recruitment.workplace,
+			cms_recruitment.vld,
+			cms_recruitment.education,
+			cms_recruitment.content,
+			cms_recruitment.numbersH,
+			cms_recruitment.status,
+			cms_recruitment.ctime,
+			cms_recruitment.mtime,
+			cms_recruitment.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_recruitment cms_recruitment LEFT JOIN xt_userinfo xt_userinfo ON cms_recruitment.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_recruitment_id=#{cms_recruitment_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsRecruitment" parameterType="jehc.cmsmodules.cmsmodel.CmsRecruitment">
+		INSERT INTO
+			cms_recruitment
+			(
+			cms_recruitment_id,
+			post,
+			sex,
+			age_from,
+			treatment,
+			language,
+			workplace,
+			vld,
+			education,
+			content,
+			numbersH,
+			status,
+			ctime,
+			mtime,
+			xt_userinfo_id
+			)
+			VALUES
+			(
+			#{cms_recruitment_id},
+			#{post},
+			#{sex},
+			#{age_from},
+			#{treatment},
+			#{language},
+			#{workplace},
+			#{vld},
+			#{education},
+			#{content},
+			#{numbersH},
+			#{status},
+			#{ctime},
+			#{mtime},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsRecruitment" parameterType="jehc.cmsmodules.cmsmodel.CmsRecruitment">
+		UPDATE
+			cms_recruitment
+		SET
+			post = #{post},
+			sex = #{sex},
+			age_from = #{age_from},
+			treatment = #{treatment},
+			language = #{language},
+			workplace = #{workplace},
+			vld = #{vld},
+			education = #{education},
+			content = #{content},
+			numbersH = #{numbersH},
+			status = #{status},
+			ctime = #{ctime},
+			mtime = #{mtime},
+			xt_userinfo_id = #{xt_userinfo_id}
+		WHERE cms_recruitment_id=#{cms_recruitment_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsRecruitmentBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsRecruitment">
+		UPDATE
+			cms_recruitment
+		<set>
+			<if test="post != null">
+				post = #{post},
+			</if>
+			<if test="sex != null">
+				sex = #{sex},
+			</if>
+			<if test="age_from != null">
+				age_from = #{age_from},
+			</if>
+			<if test="treatment != null">
+				treatment = #{treatment},
+			</if>
+			<if test="language != null">
+				language = #{language},
+			</if>
+			<if test="workplace != null">
+				workplace = #{workplace},
+			</if>
+			<if test="vld != null">
+				vld = #{vld},
+			</if>
+			<if test="education != null">
+				education = #{education},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="numbersH != null">
+				numbersH = #{numbersH},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+		</set>
+		WHERE cms_recruitment_id=#{cms_recruitment_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsRecruitment" parameterType="map">
+		DELETE FROM cms_recruitment WHERE cms_recruitment_id IN
+		<foreach item="item" index="index" collection="cms_recruitment_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsRecruitment" parameterType="list">
+		INSERT INTO
+			cms_recruitment
+			(
+			cms_recruitment_id,
+			post,
+			sex,
+			age_from,
+			treatment,
+			language,
+			workplace,
+			vld,
+			education,
+			content,
+			numbersH,
+			status,
+			ctime,
+			mtime,
+			xt_userinfo_id
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_recruitment_id},
+			#{item.post},
+			#{item.sex},
+			#{item.age_from},
+			#{item.treatment},
+			#{item.language},
+			#{item.workplace},
+			#{item.vld},
+			#{item.education},
+			#{item.content},
+			#{item.numbersH},
+			#{item.status},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.xt_userinfo_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsRecruitment" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_recruitment
+			SET
+				post = #{item.post},
+				sex = #{item.sex},
+				age_from = #{item.age_from},
+				treatment = #{item.treatment},
+				language = #{item.language},
+				workplace = #{item.workplace},
+				vld = #{item.vld},
+				education = #{item.education},
+				content = #{item.content},
+				numbersH = #{item.numbersH},
+				status = #{item.status},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id}
+			WHERE cms_recruitment_id=#{item.cms_recruitment_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsRecruitmentBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_recruitment
+			<set>
+				<if test="item.post != null">
+					post = #{item.post},
+				</if>
+				<if test="item.sex != null">
+					sex = #{item.sex},
+				</if>
+				<if test="item.age_from != null">
+					age_from = #{item.age_from},
+				</if>
+				<if test="item.treatment != null">
+					treatment = #{item.treatment},
+				</if>
+				<if test="item.language != null">
+					language = #{item.language},
+				</if>
+				<if test="item.workplace != null">
+					workplace = #{item.workplace},
+				</if>
+				<if test="item.vld != null">
+					vld = #{item.vld},
+				</if>
+				<if test="item.education != null">
+					education = #{item.education},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.numbersH != null">
+					numbersH = #{item.numbersH},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+			</set>
+			WHERE cms_recruitment_id=#{item.cms_recruitment_id}
+		</foreach>
+	</update>
+</mapper>

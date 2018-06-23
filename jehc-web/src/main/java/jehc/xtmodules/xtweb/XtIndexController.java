@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -24,23 +23,24 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseHttpSessionEntity;
-import jehc.xtmodules.xtcore.base.BaseTreeEntity;
+import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.md5.MD5;
+import jehc.xtmodules.xtcore.util.AdminTree;
 import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.IndexTree;
 import jehc.xtmodules.xtcore.util.SortList;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
+import jehc.xtmodules.xtmodel.XtDyRemind;
 import jehc.xtmodules.xtmodel.XtMenuinfo;
-import jehc.xtmodules.xtmodel.XtNotify;
+import jehc.xtmodules.xtmodel.XtMessage;
 import jehc.xtmodules.xtmodel.XtNotifyReceiver;
 import jehc.xtmodules.xtmodel.XtUserinfo;
 import jehc.xtmodules.xtservice.XtKnowledgeService;
-import jehc.xtmodules.xtservice.XtKwordsService;
 import jehc.xtmodules.xtservice.XtLoginLogsService;
 import jehc.xtmodules.xtservice.XtMenuinfoService;
+import jehc.xtmodules.xtservice.XtMessageService;
 import jehc.xtmodules.xtservice.XtNoticeService;
 import jehc.xtmodules.xtservice.XtNotifyReceiverService;
-import jehc.xtmodules.xtservice.XtNotifyService;
 import jehc.xtmodules.xtservice.XtUserinfoService;
 
 /**
@@ -53,6 +53,10 @@ import jehc.xtmodules.xtservice.XtUserinfoService;
 @Scope("prototype")
 public class XtIndexController extends BaseAction{
 	@Autowired
+	private XtNotifyReceiverService xtNotifyReceiverService;
+	@Autowired
+	private XtMessageService xtMessageService;
+	@Autowired
 	private XtMenuinfoService xtMenuinfoService;
 	@Autowired
 	private XtUserinfoService xtUserinfoService;
@@ -61,7 +65,7 @@ public class XtIndexController extends BaseAction{
 	 * @param xt_Menuinfo
 	 * @param request
 	 * @return
-	 */
+	 *//*
 	@SuppressWarnings("static-access")
 	@RequestMapping(value="/index.html",method={RequestMethod.POST,RequestMethod.GET})
 	public ModelAndView loadIndex(Model model,HttpServletRequest request) {
@@ -72,7 +76,7 @@ public class XtIndexController extends BaseAction{
 		sortList.Sort(xtMenuinfoList, "xt_menuinfo_sort", "asc");
 		IndexTree tree = new IndexTree(xtMenuinfoList);  
         model.addAttribute("MenuList", tree.buildTree());
-		/*邓纯杰 注释 
+		邓纯杰 注释 
 		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinfoRootForRole(condition);
 		SortList<XtMenuinfo> sortList = new SortList<XtMenuinfo>();
 		sortList.Sort(xtMenuinfoList, "xt_menuinfo_sort", "asc");
@@ -87,10 +91,48 @@ public class XtIndexController extends BaseAction{
 		}
 		msg.append("]");
 		request.setAttribute("msg", msg.toString());
-		*/
+		
+		return new ModelAndView("pc/xt-view/xt-index/xt-index");
+	}*/
+	
+	/**
+	 * 载入初始化页面（风格二------------Admin风格）
+	 * @param xt_Menuinfo
+	 * @param request
+	 * @return
+	 */
+	@SuppressWarnings("static-access")
+	@RequestMapping(value="/index.html",method={RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView admin(BaseSearch baseSearch,Model model,HttpServletRequest request) {
+		Map<String, Object> condition = new HashMap<String, Object>();
+		commonM(condition,request);
+		List<XtMenuinfo> xtMenuinfoList = xtMenuinfoService.getXtMenuinListForRole(condition);
+		SortList<XtMenuinfo> sortList = new SortList<XtMenuinfo>();
+		sortList.Sort(xtMenuinfoList, "xt_menuinfo_sort", "asc");
+		IndexTree tree = new IndexTree(xtMenuinfoList);  
+        model.addAttribute("MenuList", tree.buildTree(false));
+        AdminTree adminTree = new AdminTree(xtMenuinfoList);  
+        model.addAttribute("AdminMenuList", adminTree.buildTree());
+        
+        XtDyRemind xtDyRemind = new XtDyRemind();
+		//处理通知
+		condition = baseSearch.convert();
+		commonHPager(condition,request);
+		condition.put("xt_userinfo_id", getXtUid());
+		condition.put("receive_status",0);
+		List<XtNotifyReceiver> xtNotifyReceiverList = xtNotifyReceiverService.getXtNotifyReceiverListByCondition(condition);
+		PageInfo<XtNotifyReceiver> page = new PageInfo<XtNotifyReceiver>(xtNotifyReceiverList);
+		xtDyRemind.setXtNotifyReceiverList(page.getList());
+		//处理短消息
+		condition.put("type", "1");
+		condition.put("to_id", getXtUid());
+		condition.put("isread", 0);
+		List<XtMessage> xt_MessageList = xtMessageService.getXtMessageListByCondition(condition);
+		PageInfo<XtMessage> xtMessage = new PageInfo<XtMessage>(xt_MessageList);
+		xtDyRemind.setXtMessageList(xtMessage.getList());
+		model.addAttribute("xtDyRemind", xtDyRemind);
 		return new ModelAndView("pc/xt-view/xt-index/xt-index");
 	}
-	
 	
 	/**
 	 * 加载主页菜单
@@ -189,8 +231,6 @@ public class XtIndexController extends BaseAction{
 	private XtLoginLogsService xtLoginLogsService;
 	@Autowired
 	private XtKnowledgeService xtKnowledgeService;
-	@Autowired
-	private XtNotifyReceiverService xtNotifyReceiverService;
 	/**
 	 * 载入桌面
 	 * @param request
@@ -212,6 +252,15 @@ public class XtIndexController extends BaseAction{
 		model.addAttribute("xtLoginLogsCount", xtLoginLogsService.getXtLoginLogsCount(condition));
 		//平台知识库数
 		model.addAttribute("xtKnowledgeCount", xtKnowledgeService.getXtKnowledgeCount(condition));
+		
+		condition = new HashMap<String,Object>();
+		//处理短消息
+		condition.put("type", "1");
+		condition.put("to_id", getXtUid());
+		condition.put("isread", 0);
+		List<XtMessage> xt_MessageList = xtMessageService.getXtMessageListByCondition(condition);
+		PageInfo<XtMessage> xtMessage = new PageInfo<XtMessage>(xt_MessageList);
+		model.addAttribute("xtMessageList", xtMessage.getList());
 		return new ModelAndView("pc/xt-view/xt-desk/xt-desk");
 	}
 	

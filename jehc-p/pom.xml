@@ -152,6 +152,12 @@
 		<module>jehc-oamodules-model</module>
 		<module>jehc-oamodules-dao</module>
 		<module>jehc-oamodules-service</module>
+		
+		
+		<!-- CMS模块 -->
+		<module>jehc-cmsmodules-model</module>
+		<module>jehc-cmsmodules-dao</module>
+		<module>jehc-cmsmodules-service</module>
 
 		<!-- web模块 -->
 		<module>jehc-web</module>
@@ -263,6 +269,23 @@
 			<dependency>
 				<groupId>jehc.p</groupId>
 				<artifactId>jehc-oamodules-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<!-- CMS模块 -->
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-cmsmodules-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-cmsmodules-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-cmsmodules-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

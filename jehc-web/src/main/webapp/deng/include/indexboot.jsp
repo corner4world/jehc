@@ -38,111 +38,36 @@
 	    	var lc_design_displaywin_for_edit = ${lc_design_displaywin_for_edit};
 	    	var xt_userinfo_id='${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_id}'; 
 		</script>
-		<!-- 基础插件样式开始 -->
-		<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/other/iconfont/iconfont.css">
-        <!--  
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
-        -->
-        <!-- 基础插件样式结束 -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/css/components.min.css" rel="stylesheet" id="style_components" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/global/css/plugins.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/layout.min.css" rel="stylesheet" type="text/css" />
-        <%-- 
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout3/css/themes/red-sunglo.min.css" rel="stylesheet" type="text/css" id="style_color" />
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout4/css/themes/light.min.css" rel="stylesheet" type="text/css" id="style_color" /> 
-        --%>
-        <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/custom.min.css" rel="stylesheet" type="text/css" />
-        <!--[if lt IE 9]>
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/respond.min.js"></script>
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/excanvas.min.js"></script> 
-		<![endif]-->
-        <!-- 基础插件开始 -->
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-        
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/js.cookie.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
-        
-        <%--
-        <!-- 基础插件结束 -->
-        <!-- 其他插件开始 
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/fancybox/source/jquery.fancybox.pack.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js" type="text/javascript"></script>
-        -->
-        --%>
-        <!-- 其他插件结束 -->
-        
-        <!-- 笼罩插件开始 -->
+		<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/other/iconfont/iconfont.css" rel="stylesheet" type="text/css" >
+		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="${syspath }/deng/source/plugins/newAdmin/using/base/theme/smallleft/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="${syspath }/deng/source/plugins/newAdmin/tab/css/style.min.css" rel="stylesheet">
+		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/perfect-scrollbar.min.css" rel="stylesheet">
+		<!--begin::Base Scripts-->
+		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.min.js" type="text/javascript"></script>
+		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.mousewheel.js" type="text/javascript"></script>
+		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/perfect-scrollbar.min.js" type="text/javascript"></script>
+		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/popper.min.js" type="text/javascript"></script>
+		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.smooth-scroll.min.js" type="text/javascript"></script>		
+		 <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="${syspath}/deng/source/plugins/newAdmin/using/base/theme/smallleft/scripts.bundle.js" type="text/javascript"></script>
+		<!--end::Base Scripts -->   
+		<!-- 笼罩插件开始 -->
         <link type="text/css" rel="stylesheet" href="${syspath}/deng/source/plugins/other/alertplug/alert/alert.css">
 		<script type="text/javascript" src='${syspath}/deng/source/plugins/other/alertplug/alert/alert.js'></script>
 		<!-- 笼罩插件结束 -->
         <!-- 提示插件开始 -->
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootbox.js" type="text/javascript"></script>
-        <!-- 提示插件结束 -->
-        <script src="${syspath}/deng/source/plugins/admin/index/global/scripts/app.min.js" type="text/javascript"></script>
-        <script src="${syspath}/deng/source/plugins/admin/index/layouts/layout2/scripts/layout.min.js" type="text/javascript"></script> 
-        <script src="${syspath}/deng/source/plugins/admin/index/layouts/layout2/scripts/demo.min.js" type="text/javascript"></script>
-        <%--
-        <!-- 
-        <script src="${syspath}/deng/source/plugins/admin/index/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
-        
-        <link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/css/bootstrap.addtabs.css" rel="stylesheet" type="text/css" />
-        <script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-addtab/js/bootstrap.addtabs.js" type="text/javascript"></script>
-        --%>
-        <!-- bootstrap验证框架开始 -->
-		<link rel="stylesheet" type="text/css" href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.css" />
-		<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-toastr/toastr.min.css" rel="stylesheet" type="text/css" />
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-toastr/toastr.min.js" type="text/javascript"></script>
+        <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootbox.js" type="text/javascript"></script>
+		<!-- bootstrap验证框架开始 -->
+		<link rel="stylesheet" type="text/css" href="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-validate/bootstrapValidator.css" />
+		<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
 		<!-- bootstrap验证框架结束 -->
 		<!-- 公共模块包含上传控件，共同JS封装 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
-		<link href="${syspath}/deng/source/plugins/admin/index/tab/css/style.min.css" rel="stylesheet">
-		<script type="text/javascript" src="${syspath}/deng/source/plugins/admin/index/tab/js/contabs.min.js"></script>
-		<%
-        Cookie cookies[]=request.getCookies(); 
-		Cookie cookieC=null; 
-		if(null != cookies){
-			for(int i=0;i < cookies.length;i++){
-			    if(("css").equals(cookies[i].getName())){ 
-		      		cookieC=cookies[i]; 
-		      		break; 
-		      	}
-		    }
-		}
-	    if(null != cookieC){
-		    if(cookieC.getValue().indexOf("whiteClass")>=0){
-				%>
-		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-white.min.css" rel="stylesheet" type="text/css" />
-				<%
-			}else  if(cookieC.getValue().indexOf("whiteBlackClass")>=0){
-				%>
-		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-white-black.min.css" rel="stylesheet" type="text/css" />
-				<%
-			}else  if(cookieC.getValue().indexOf("groupClass")>=0){
-				%>
-		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin-group.min.css" rel="stylesheet" type="text/css" />
-				<%
-			}else{
-				%>
-		 <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-		 <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
-				<%
-			}
-	    }else{
-	    	%>
-	    <link href="${syspath}/deng/source/plugins/admin/index/layouts/layout2/css/themes/blue.min.css" rel="stylesheet" type="text/css" id="style_color" />
-	    <link href="${syspath}/deng/source/plugins/admin/index/apps/css/admin.min.css" rel="stylesheet" type="text/css" />
-	    	<%
-	    }
-        %>
-        <link href="${syspath}/deng/source/css/bootcommon.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="${syspath}/deng/source/plugins/newAdmin/tab/js/contabs.min.js"></script>
 	</head>
 </html>

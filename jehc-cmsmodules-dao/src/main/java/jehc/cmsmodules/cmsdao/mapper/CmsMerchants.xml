@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsMerchants">
+	<!--初始化分页-->
+	<select id="getCmsMerchantsListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsMerchants" parameterType="map">
+		SELECT
+			cms_merchants.cms_merchants_id,
+			cms_merchants.title,
+			cms_merchants.xt_userinfo_id,
+			cms_merchants.status,
+			cms_merchants.ctime,
+			cms_merchants.mtime,
+			cms_merchants.imgpath,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_merchants cms_merchants LEFT JOIN xt_userinfo xt_userinfo ON cms_merchants.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != title">
+			AND cms_merchants.title LIKE CONCAT(CONCAT('%',#{title}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsMerchantsById" resultType="jehc.cmsmodules.cmsmodel.CmsMerchants" parameterType="string">
+		SELECT
+			cms_merchants.cms_merchants_id,
+			cms_merchants.title,
+			cms_merchants.content,
+			cms_merchants.xt_userinfo_id,
+			cms_merchants.status,
+			cms_merchants.ctime,
+			cms_merchants.mtime,
+			cms_merchants.imgpath,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_merchants cms_merchants LEFT JOIN xt_userinfo xt_userinfo ON cms_merchants.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_merchants_id=#{cms_merchants_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsMerchants" parameterType="jehc.cmsmodules.cmsmodel.CmsMerchants">
+		INSERT INTO
+			cms_merchants
+			(
+			cms_merchants_id,
+			title,
+			content,
+			xt_userinfo_id,
+			status,
+			ctime,
+			mtime,
+			imgpath
+			)
+			VALUES
+			(
+			#{cms_merchants_id},
+			#{title},
+			#{content},
+			#{xt_userinfo_id},
+			#{status},
+			#{ctime},
+			#{mtime},
+			#{imgpath}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsMerchants" parameterType="jehc.cmsmodules.cmsmodel.CmsMerchants">
+		UPDATE
+			cms_merchants
+		SET
+			title = #{title},
+			content = #{content},
+			xt_userinfo_id = #{xt_userinfo_id},
+			status = #{status},
+			ctime = #{ctime},
+			mtime = #{mtime},
+			imgpath = #{imgpath}
+		WHERE cms_merchants_id=#{cms_merchants_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsMerchantsBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsMerchants">
+		UPDATE
+			cms_merchants
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="imgpath != null">
+				imgpath = #{imgpath},
+			</if>
+		</set>
+		WHERE cms_merchants_id=#{cms_merchants_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsMerchants" parameterType="map">
+		DELETE FROM cms_merchants WHERE cms_merchants_id IN
+		<foreach item="item" index="index" collection="cms_merchants_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsMerchants" parameterType="list">
+		INSERT INTO
+			cms_merchants
+			(
+			cms_merchants_id,
+			title,
+			content,
+			xt_userinfo_id,
+			status,
+			ctime,
+			mtime,
+			imgpath
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_merchants_id},
+			#{item.title},
+			#{item.content},
+			#{item.xt_userinfo_id},
+			#{item.status},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.imgpath}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsMerchants" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_merchants
+			SET
+				title = #{item.title},
+				content = #{item.content},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				status = #{item.status},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				imgpath = #{item.imgpath}
+			WHERE cms_merchants_id=#{item.cms_merchants_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsMerchantsBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_merchants
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.imgpath != null">
+					imgpath = #{item.imgpath},
+				</if>
+			</set>
+			WHERE cms_merchants_id=#{item.cms_merchants_id}
+		</foreach>
+	</update>
+</mapper>

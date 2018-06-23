@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.xtmodules.xtmodel.XtMenuinfoModule">
+	<!--初始化分页-->
+	<select id="getXtMenuinfoModuleListByCondition" resultType="jehc.xtmodules.xtmodel.XtMenuinfoModule" parameterType="map">
+		SELECT
+			xt_menuinfo_module_id,
+			title,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status,
+			remark,
+			keyid
+		FROM 
+			xt_menuinfo_module
+		WHERE 1=1
+		<if test="null != title">
+			AND title LIKE CONCAT(CONCAT('%',#{title}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getXtMenuinfoModuleById" resultType="jehc.xtmodules.xtmodel.XtMenuinfoModule" parameterType="string">
+		SELECT
+			xt_menuinfo_module_id,
+			title,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status,
+			remark,
+			keyid
+		FROM 
+			xt_menuinfo_module
+		WHERE xt_menuinfo_module_id=#{xt_menuinfo_module_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addXtMenuinfoModule" parameterType="jehc.xtmodules.xtmodel.XtMenuinfoModule">
+		INSERT INTO
+			xt_menuinfo_module
+			(
+			xt_menuinfo_module_id,
+			title,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status,
+			remark,
+			keyid
+			)
+			VALUES
+			(
+			#{xt_menuinfo_module_id},
+			#{title},
+			#{ctime},
+			#{mtime},
+			#{xt_userinfo_id},
+			#{status},
+			#{remark},
+			#{keyid}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateXtMenuinfoModule" parameterType="jehc.xtmodules.xtmodel.XtMenuinfoModule">
+		UPDATE
+			xt_menuinfo_module
+		SET
+			title = #{title},
+			ctime = #{ctime},
+			mtime = #{mtime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			status = #{status},
+			remark = #{remark},
+			keyid = #{keyid}
+		WHERE xt_menuinfo_module_id=#{xt_menuinfo_module_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateXtMenuinfoModuleBySelective" parameterType="jehc.xtmodules.xtmodel.XtMenuinfoModule">
+		UPDATE
+			xt_menuinfo_module
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="keyid != null">
+				keyid = #{keyid},
+			</if>
+		</set>
+		WHERE xt_menuinfo_module_id=#{xt_menuinfo_module_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delXtMenuinfoModule" parameterType="map">
+		DELETE FROM xt_menuinfo_module WHERE xt_menuinfo_module_id IN
+		<foreach item="item" index="index" collection="xt_menuinfo_module_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchXtMenuinfoModule" parameterType="list">
+		INSERT INTO
+			xt_menuinfo_module
+			(
+			xt_menuinfo_module_id,
+			title,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status,
+			remark,
+			keyid
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.xt_menuinfo_module_id},
+			#{item.title},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.xt_userinfo_id},
+			#{item.status},
+			#{item.remark},
+			#{item.keyid}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchXtMenuinfoModule" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_menuinfo_module
+			SET
+				title = #{item.title},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				status = #{item.status},
+				remark = #{item.remark},
+				keyid = #{item.keyid}
+			WHERE xt_menuinfo_module_id=#{item.xt_menuinfo_module_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchXtMenuinfoModuleBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				xt_menuinfo_module
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.remark != null">
+					remark = #{item.remark},
+				</if>
+				<if test="item.keyid != null">
+					keyid = #{item.keyid},
+				</if>
+			</set>
+			WHERE xt_menuinfo_module_id=#{item.xt_menuinfo_module_id}
+		</foreach>
+	</update>
+</mapper>

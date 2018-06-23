@@ -227,3 +227,30 @@ function getChildNodes(treeNode,result){
   }
   return result;
 }
+
+
+function InitMenuModuleListSetV(id,value_id){
+	$("#"+id).html("");;
+	var str = "<option value=''>请选择</option>";
+	$.ajax({
+	   type:"GET",
+	   xhrFields:{withCredentials:true},
+	   url:"../xtMenuinfoModuleController/getXtMenuinfoModuleList",
+	   success: function(result){
+		   //从服务器获取数据进行绑定
+           $.each(result, function(i, item){
+           	 str += "<option value=" + item.xt_menuinfo_module_id + ">" + item.title + "</option>";
+           })
+           $("#"+id).append(str);
+           try {
+        	   if(null != value_id && '' != value_id){
+        		   if('undefined' != typeof($('#'+value_id).val()) && null != $('#'+value_id).val() && '' != $('#'+value_id).val() && '请选择' != $('#'+value_id).val()){
+        			   $('#'+id).val($('#'+value_id).val());
+        		   }
+               }
+		   } catch (e) {
+				console.log("读取下拉框并赋值出现异常，异常信息："+e);
+		   }
+	   }
+	});
+}

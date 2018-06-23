@@ -20,6 +20,8 @@ function updateXtMenuinfo(value){
 		   $("#updateXtMenuinfoForm").find("#xt_menuinfo_url").val(result.xt_menuinfo_url);
 		   $("#updateXtMenuinfoForm").find("#xt_menuinfo_sort").val(result.xt_menuinfo_sort);
 		   $("#updateXtMenuinfoForm").find("#xt_menuinfo_status").val(result.xt_menuinfo_status);
+		   $("#updateXtMenuinfoForm").find("#xt_menuinfo_module_idTemp").val(result.xt_menuinfo_module_id);
+		   InitMenuModuleListSetV('xt_menuinfo_module_id_','xt_menuinfo_module_idTemp');
 		   $('#updateXtMenuinfoModal').modal({"backdrop":"static"});
 		}
 	});

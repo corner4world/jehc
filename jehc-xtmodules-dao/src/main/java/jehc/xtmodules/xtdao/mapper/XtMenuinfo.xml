@@ -14,12 +14,18 @@
 		  xt_menuinfo_images,
 		  xt_menuinfo_sort,
 		  xt_menuinfo_sys,
-		  xt_menuinfo_status
+		  xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title
 		FROM
-		  xt_menuinfo
+		  xt_menuinfo xt_menuinfo LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE 1=1
 		<if test="null != xt_menuinfo_title">  
 			AND xt_menuinfo_title LIKE CONCAT(CONCAT('%',#{xt_menuinfo_title}),'%')
+		</if>
+		<if test="null != keyid">
+			AND xt_menuinfo_module.keyid = #{keyid}
 		</if>
 	</select>
 	
@@ -35,12 +41,18 @@
 		  xt_menuinfo_images,
 		  xt_menuinfo_sort,
 		  xt_menuinfo_sys,
-		  xt_menuinfo_status
+		  xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title
 		FROM
-		  xt_menuinfo xt_menuinfo
+		  xt_menuinfo xt_menuinfo LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE xt_menuinfo_parentId = #{xt_menuinfo_parentId} 
 		<if test="null != xt_menuinfo_sys">  
 			AND xt_menuinfo_sys = #{xt_menuinfo_sys}
+		</if>
+		<if test="null != keyid">
+			AND xt_menuinfo_module.keyid = #{keyid}
 		</if>
 		ORDER BY xt_menuinfo_sort ASC,xt_menuinfo_sys ASC
 	</select>
@@ -57,9 +69,12 @@
 		  xt_menuinfo_images,
 		  xt_menuinfo_sort,
 		  xt_menuinfo_sys,
-		  xt_menuinfo_status
+		  xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title
 		FROM
-		  xt_menuinfo
+		  xt_menuinfo xt_menuinfo LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE xt_menuinfo_parentId = '0'
 		ORDER BY xt_menuinfo_sort ASC
 	</select>
@@ -76,9 +91,12 @@
 		  xt_menuinfo_images,
 		  xt_menuinfo_sort,
 		  xt_menuinfo_sys,
-		  xt_menuinfo_status
+		  xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title
 		FROM
-		  xt_menuinfo
+		  xt_menuinfo xt_menuinfo LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE xt_menuinfo_parentId != '0'
 		ORDER BY xt_menuinfo_sort ASC
 	</select>
@@ -97,9 +115,12 @@
 		  xt_menuinfo.xt_menuinfo_sort,
 		  xt_menuinfo.xt_menuinfo_sys,
 		  xt_menuinfo.xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title,
 		  (select m.xt_menuinfo_title from xt_menuinfo m where m.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_parentId) as xt_menuinfo_parentTitle
 		FROM
-		  xt_menuinfo xt_menuinfo
+		  xt_menuinfo xt_menuinfo LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE 
 		  xt_menuinfo.xt_menuinfo_id = #{xt_menuinfo_id}
 	</select>
@@ -116,7 +137,8 @@
 						xt_menuinfo_iconCls,
 						xt_menuinfo_sys,
 						xt_menuinfo_sort,
-						xt_menuinfo_status)
+						xt_menuinfo_status,
+						xt_menuinfo_module_id)
 		VALUES
 		  (#{xt_menuinfo_id},
 		   #{xt_menuinfo_parentId},
@@ -127,7 +149,8 @@
 		   #{xt_menuinfo_iconCls},
 		   #{xt_menuinfo_sys},
 		   #{xt_menuinfo_sort},
-		   #{xt_menuinfo_status})
+		   #{xt_menuinfo_status},
+		   #{xt_menuinfo_module_id})
 	</insert>
 	<!--  修改系统菜单  -->
 	<update id="updateXtMenuinfo" parameterType="jehc.xtmodules.xtmodel.XtMenuinfo">
@@ -142,7 +165,8 @@
 			xt_menuinfo_iconCls=#{xt_menuinfo_iconCls},
 			xt_menuinfo_sys=#{xt_menuinfo_sys},
 			xt_menuinfo_sort=#{xt_menuinfo_sort},
-			xt_menuinfo_status=#{xt_menuinfo_status}
+			xt_menuinfo_status=#{xt_menuinfo_status},
+			xt_menuinfo_module_id = #{xt_menuinfo_module_id}
 		WHERE xt_menuinfo_id=#{xt_menuinfo_id}
 	</update>
 	<!--  查询所有系统菜单  -->
@@ -160,9 +184,12 @@
 				  xt_menuinfo.xt_menuinfo_images,
 				  xt_menuinfo.xt_menuinfo_sort,
 				  xt_menuinfo.xt_menuinfo_sys,
-				  xt_menuinfo.xt_menuinfo_status
+				  xt_menuinfo.xt_menuinfo_status,
+				  xt_menuinfo_module.keyid,
+				  xt_menuinfo_module.title
 				FROM
 				  xt_menuinfo xt_menuinfo LEFT JOIN xt_m_r xt_m_r ON xt_m_r.xt_menuinfo_id = xt_menuinfo.xt_menuinfo_id
+					LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 				WHERE 1=1
 				AND xt_m_r.xt_role_id = #{xt_role_id}
 				AND xt_menuinfo_status = '0'
@@ -181,9 +208,11 @@
 				  xt_menuinfo_images,
 				  xt_menuinfo_sort,
 				  xt_menuinfo_sys,
-				  xt_menuinfo_status
+				  xt_menuinfo_status,
+				  xt_menuinfo_module.keyid,
+				  xt_menuinfo_module.title
 				FROM
-				  xt_menuinfo
+				  xt_menuinfo xt_menuinfo LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 				WHERE 1=1
 				AND xt_menuinfo_status = '0'
 				<if test="null != xt_menuinfo_sys">
@@ -205,9 +234,12 @@
 		  xt_menuinfo_images,
 		  xt_menuinfo_sort,
 		  xt_menuinfo_sys,
-		  xt_menuinfo_status
+		  xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title
 		FROM
-		  xt_menuinfo
+		  xt_menuinfo xt_menuinfo LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE 1=1
         AND sa_menuinfo_id = #{xt_menuinfo_parentId}
         ORDER BY xt_menuinfo_sort ASC
@@ -236,9 +268,13 @@
 		  xt_menuinfo.xt_menuinfo_images,
 		  xt_menuinfo.xt_menuinfo_sort,
 		  xt_menuinfo.xt_menuinfo_sys,
-		  xt_menuinfo.xt_menuinfo_status
+		  xt_menuinfo.xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title
 		FROM
 		  xt_menuinfo xt_menuinfo LEFT JOIN xt_m_r xt_m_r ON xt_menuinfo.xt_menuinfo_id = xt_m_r.xt_menuinfo_id
+		  LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE 1=1
 		<if test="null != xt_role_id">
 			AND xt_m_r.xt_role_id IN 
@@ -262,9 +298,13 @@
 		  xt_menuinfo.xt_menuinfo_images,
 		  xt_menuinfo.xt_menuinfo_sort,
 		  xt_menuinfo.xt_menuinfo_sys,
-		  xt_menuinfo.xt_menuinfo_status
+		  xt_menuinfo.xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title
 		FROM
 		  xt_menuinfo xt_menuinfo LEFT JOIN xt_m_r xt_m_r ON xt_menuinfo.xt_menuinfo_id = xt_m_r.xt_menuinfo_id
+		  LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE 1=1
 		<if test="null != xt_role_id">
 			AND xt_m_r.xt_role_id IN 
@@ -290,9 +330,13 @@
 		  xt_menuinfo.xt_menuinfo_images,
 		  xt_menuinfo.xt_menuinfo_sort,
 		  xt_menuinfo.xt_menuinfo_sys,
-		  xt_menuinfo.xt_menuinfo_status
+		  xt_menuinfo.xt_menuinfo_status,
+		  xt_menuinfo_module.xt_menuinfo_module_id,
+		  xt_menuinfo_module.keyid,
+		  xt_menuinfo_module.title
 		FROM
 		  xt_menuinfo xt_menuinfo LEFT JOIN xt_m_r xt_m_r ON xt_menuinfo.xt_menuinfo_id = xt_m_r.xt_menuinfo_id
+		  LEFT JOIN xt_menuinfo_module xt_menuinfo_module ON xt_menuinfo.xt_menuinfo_module_id = xt_menuinfo_module.xt_menuinfo_module_id
 		WHERE 1=1
 		<if test="null != xt_role_id">
 			AND xt_m_r.xt_role_id IN 

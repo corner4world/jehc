@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsContact">
+	<!--初始化分页-->
+	<select id="getCmsContactListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsContact" parameterType="map">
+		SELECT
+			cms_contact.cms_contact_id,
+			cms_contact.ctime,
+			cms_contact.mtime,
+			cms_contact.status,
+			cms_contact.xt_userinfo_id,
+			cms_contact.imgpath,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_contact cms_contact LEFT JOIN xt_userinfo xt_userinfo ON cms_contact.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != ctime_st and ctime_st != ''">
+			AND ctime &gt;=#{ctime_st}
+		</if>
+		<if test="null != ctime_et and ctime_et != ''">
+			AND ctime &lt;=#{ctime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsContactById" resultType="jehc.cmsmodules.cmsmodel.CmsContact" parameterType="string">
+		SELECT
+			cms_contact.cms_contact_id,
+			cms_contact.content,
+			cms_contact.ctime,
+			cms_contact.mtime,
+			cms_contact.status,
+			cms_contact.xt_userinfo_id,
+			cms_contact.imgpath,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_contact cms_contact LEFT JOIN xt_userinfo xt_userinfo ON cms_contact.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_contact_id=#{cms_contact_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsContact" parameterType="jehc.cmsmodules.cmsmodel.CmsContact">
+		INSERT INTO
+			cms_contact
+			(
+			cms_contact_id,
+			content,
+			ctime,
+			mtime,
+			status,
+			xt_userinfo_id,
+			imgpath
+			)
+			VALUES
+			(
+			#{cms_contact_id},
+			#{content},
+			#{ctime},
+			#{mtime},
+			#{status},
+			#{xt_userinfo_id},
+			#{imgpath}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsContact" parameterType="jehc.cmsmodules.cmsmodel.CmsContact">
+		UPDATE
+			cms_contact
+		SET
+			content = #{content},
+			ctime = #{ctime},
+			mtime = #{mtime},
+			status = #{status},
+			xt_userinfo_id = #{xt_userinfo_id},
+			imgpath = #{imgpath}
+		WHERE cms_contact_id=#{cms_contact_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsContactBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsContact">
+		UPDATE
+			cms_contact
+		<set>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="imgpath != null">
+				imgpath = #{imgpath},
+			</if>
+		</set>
+		WHERE cms_contact_id=#{cms_contact_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsContact" parameterType="map">
+		DELETE FROM cms_contact WHERE cms_contact_id IN
+		<foreach item="item" index="index" collection="cms_contact_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsContact" parameterType="list">
+		INSERT INTO
+			cms_contact
+			(
+			cms_contact_id,
+			content,
+			ctime,
+			mtime,
+			status,
+			xt_userinfo_id,
+			imgpath
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_contact_id},
+			#{item.content},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.status},
+			#{item.xt_userinfo_id},
+			#{item.imgpath}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsContact" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_contact
+			SET
+				content = #{item.content},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime},
+				status = #{item.status},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				imgpath = #{item.imgpath}
+			WHERE cms_contact_id=#{item.cms_contact_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsContactBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_contact
+			<set>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.imgpath != null">
+					imgpath = #{item.imgpath},
+				</if>
+			</set>
+			WHERE cms_contact_id=#{item.cms_contact_id}
+		</foreach>
+	</update>
+</mapper>

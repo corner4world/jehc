@@ -80,6 +80,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                		<input class="form-control placeholder-no-fix" type="text" placeholder="请输入菜单标题" data-bv-notempty data-bv-notempty-message="请输入菜单标题" name="xt_menuinfo_title"/> 
 		                		</div>
 		                	</div>
+		                	<div class="col-md-2">
+		                		<label class="control-label">所属模块</label>
+		                	</div>
+		                	<div class="col-md-4">
+		                		<div class="form-group">
+		                			<select class="form-control" maxlength="32" name="xt_menuinfo_module_id" id="xt_menuinfo_module_id">
+			                    	</select>
+		                		</div>
+		                	</div>
 		                </div>
 		                <div class="row">
 		                	<div class="col-md-2">
@@ -185,6 +194,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		                	<div class="col-md-4">
 		                		<div class="form-group">
 		                		<input class="form-control placeholder-no-fix" type="text" placeholder="请输入菜单标题" data-bv-notempty data-bv-notempty-message="请输入菜单标题" name="xt_menuinfo_title" id="xt_menuinfo_title"/> 
+		                		</div>
+		                	</div>
+		                	<div class="col-md-2">
+		                		<label class="control-label">所属模块</label>
+		                	</div>
+		                	<div class="col-md-4">
+		                		<div class="form-group">
+		                			<input class="form-control placeholder-no-fix" type="hidden" id="xt_menuinfo_module_idTemp"/> 
+		                			<select class="form-control" maxlength="32" name="xt_menuinfo_module_id" id="xt_menuinfo_module_id_">
+			                    	</select>
 		                		</div>
 		                	</div>
 		                </div>

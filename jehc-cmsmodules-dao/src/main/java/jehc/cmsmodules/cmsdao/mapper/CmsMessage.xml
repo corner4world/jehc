@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsMessage">
+	<!--初始化分页-->
+	<select id="getCmsMessageListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsMessage" parameterType="map">
+		SELECT
+			cms_message_id,
+			title,
+			content,
+			userName,
+			phone,
+			ctime
+		FROM 
+			cms_message
+		WHERE 1=1
+		<if test="null != ctime">
+			AND ctime LIKE CONCAT(CONCAT('%',#{ctime}),'%')
+		</if>
+		<if test="null != phone">
+			AND phone LIKE CONCAT(CONCAT('%',#{phone}),'%')
+		</if>
+		<if test="null != userName">
+			AND userName LIKE CONCAT(CONCAT('%',#{userName}),'%')
+		</if>
+		<if test="null != title_st and title_st != ''">
+			AND title &gt;=#{title_st}
+		</if>
+		<if test="null != title_et and title_et != ''">
+			AND title &lt;=#{title_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsMessageById" resultType="jehc.cmsmodules.cmsmodel.CmsMessage" parameterType="string">
+		SELECT
+			cms_message_id,
+			title,
+			content,
+			userName,
+			phone,
+			ctime
+		FROM 
+			cms_message
+		WHERE cms_message_id=#{cms_message_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsMessage" parameterType="jehc.cmsmodules.cmsmodel.CmsMessage">
+		INSERT INTO
+			cms_message
+			(
+			cms_message_id,
+			title,
+			content,
+			userName,
+			phone,
+			ctime
+			)
+			VALUES
+			(
+			#{cms_message_id},
+			#{title},
+			#{content},
+			#{userName},
+			#{phone},
+			#{ctime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsMessage" parameterType="jehc.cmsmodules.cmsmodel.CmsMessage">
+		UPDATE
+			cms_message
+		SET
+			title = #{title},
+			content = #{content},
+			userName = #{userName},
+			phone = #{phone},
+			ctime = #{ctime}
+		WHERE cms_message_id=#{cms_message_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsMessageBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsMessage">
+		UPDATE
+			cms_message
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="userName != null">
+				userName = #{userName},
+			</if>
+			<if test="phone != null">
+				phone = #{phone},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+		</set>
+		WHERE cms_message_id=#{cms_message_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsMessage" parameterType="map">
+		DELETE FROM cms_message WHERE cms_message_id IN
+		<foreach item="item" index="index" collection="cms_message_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsMessage" parameterType="list">
+		INSERT INTO
+			cms_message
+			(
+			cms_message_id,
+			title,
+			content,
+			userName,
+			phone,
+			ctime
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_message_id},
+			#{item.title},
+			#{item.content},
+			#{item.userName},
+			#{item.phone},
+			#{item.ctime}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsMessage" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_message
+			SET
+				title = #{item.title},
+				content = #{item.content},
+				userName = #{item.userName},
+				phone = #{item.phone},
+				ctime = #{item.ctime}
+			WHERE cms_message_id=#{item.cms_message_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsMessageBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_message
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.userName != null">
+					userName = #{item.userName},
+				</if>
+				<if test="item.phone != null">
+					phone = #{item.phone},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+			</set>
+			WHERE cms_message_id=#{item.cms_message_id}
+		</foreach>
+	</update>
+</mapper>

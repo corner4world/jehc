@@ -9,204 +9,269 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-body {
-	background-color: #ffffff;
-}
-.page-title {
-	font-size: 18px;
-}
-.portlet>.portlet-title>.actions .btn-icon-only.btn-default.fullscreen {
-    font-family: FontAwesome;
-    color: #a0a0a0;
-    padding-top: 3px;
-}
-.portlet>.portlet-title>.actions .btn-icon-only.btn-default {
-    padding: 4px 6px 2px;
-}
-.portlet.light>.portlet-title>.actions .btn-icon-only {
-    height: 27px;
-    width: 27px;
-}
-.btn-circle {
-    border-radius: 25px!important;
-    overflow: hidden;
-}
-</style>
 </head>
 <body>
-	<h3 class="page-title">
-		桌面控制台 <small>工作区 &amp; 统计</small>
-	</h3>
-	<div class="page-bar">
-		<ul class="page-breadcrumb">
-			<li><i class="icon-home"></i> <a href="javascript:void(0)">首页</a> <i
-				class="fa fa-angle-right"></i></li>
-			<li><span>工作区</span></li>
-		</ul>
+	<div class="m-portlet">
+		<div class="m-portlet__body  m-portlet__body--no-padding">
+			<div class="row m-row--no-padding m-row--col-separator-xl">
+				<div class="col-xl-4">
+					<!--begin:: Widgets/Stats2-1 -->
+					<div class="m-widget1">
+						<div class="m-widget1__item">
+							<div class="row m-row--no-padding align-items-center">
+								<div class="col">
+									<h3 class="m-widget1__title">
+										登录次数
+									</h3>
+									<!-- <span class="m-widget1__desc">
+										当前登录人登录平台历史次数
+									</span> -->
+								</div>
+								<div class="col m--align-right">
+									<span class="m-widget1__number m--font-brand">
+										${xtLoginLogsCount }
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="m-widget1__item">
+							<div class="row m-row--no-padding align-items-center">
+								<div class="col">
+									<h3 class="m-widget1__title">
+										平台公告数
+									</h3>
+									<!-- <span class="m-widget1__desc">
+										平台历史发布公告总数统计
+									</span> -->
+								</div>
+								<div class="col m--align-right">
+									<span class="m-widget1__number m--font-danger">
+										${xtNoticeCount }
+									</span>
+								</div>
+							</div>
+						</div>
+						<div class="m-widget1__item">
+							<div class="row m-row--no-padding align-items-center">
+								<div class="col">
+									<h3 class="m-widget1__title">
+										知识库数
+									</h3>
+									<!-- <span class="m-widget1__desc">
+										平台知识库数量统计
+									</span> -->
+								</div>
+								<div class="col m--align-right">
+									<span class="m-widget1__number m--font-success">
+										${xtKnowledgeCount }
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--end:: Widgets/Stats2-1 -->
+				</div>
+				<div class="col-xl-4">
+					<!--begin:: Widgets/Daily Sales-->
+					<div class="m-widget14">
+						<div class="m-widget14__header">
+							<h3 class="m-widget14__title">
+								任务统计报表
+							</h3>
+							<span class="m-widget14__desc">
+								个人任务统计报表查看
+							</span>
+						</div>
+						<div class="row  align-items-center">
+							<div class="col">
+								<div id="m_chart_revenue_change" class="m-widget14__chart1" style="height: 180px"><svg height="180" version="1.1" width="243" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative; left: -0.4375px; top: -0.375px;"><desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.2.0</desc><defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><path fill="none" stroke="#00c5dc" d="M121.5,143.33333333333334A53.333333333333336,53.333333333333336,0,0,0,174.2735447138144,82.29302765130979" stroke-width="2" opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1;"></path><path fill="#00c5dc" stroke="#ffffff" d="M121.5,146.33333333333334A56.333333333333336,56.333333333333336,0,0,0,177.24205660396646,81.85951045669596L200.66031707072162,78.43954147696468A80,80,0,0,1,121.5,170Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#f4516c" d="M174.2735447138144,82.29302765130979A53.333333333333336,53.333333333333336,0,0,0,131.91744960680708,37.693966044689645" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#f4516c" stroke="#ffffff" d="M177.24205660396646,81.85951045669596A56.333333333333336,56.333333333333336,0,0,0,132.50343114718999,34.75175163470344L136.14953850957247,16.44463975034482A75,75,0,0,1,195.7127972538015,79.16207013465439Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><path fill="none" stroke="#716aca" d="M131.91744960680708,37.693966044689645A53.333333333333336,53.333333333333336,0,1,0,121.48324483945652,143.33333070143885" stroke-width="2" opacity="0" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path><path fill="#716aca" stroke="#ffffff" d="M132.50343114718999,34.75175163470344A56.333333333333336,56.333333333333336,0,1,0,121.48230236167595,146.33333055339477L121.47643805548573,164.9999962988984A75,75,0,1,1,136.14953850957247,16.44463975034482Z" stroke-width="3" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="121.5" y="80" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="15px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 15px; font-weight: 800;" font-weight="800" transform="matrix(1.1854,0,0,1.1854,-22.619,-16.8727)" stroke-width="0.8435872395833334"><tspan dy="6" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">任务报表统计</tspan></text><text x="121.5" y="100" text-anchor="middle" font-family="&quot;Arial&quot;" font-size="14px" stroke="none" fill="#000000" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-family: Arial; font-size: 14px;" transform="matrix(1.1111,0,0,1.1111,-13.5104,-10.2222)" stroke-width="0.8999999999999999"><tspan dy="5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">10</tspan></text></svg></div>
+							</div>
+							<div class="col">
+								<div class="m-widget14__legends">
+									<div class="m-widget14__legend">
+										<span class="m-widget14__legend-bullet m--bg-accent"></span>
+										<span class="m-widget14__legend-text">
+											86% 重要任务
+										</span>
+									</div>
+									<div class="m-widget14__legend">
+										<span class="m-widget14__legend-bullet m--bg-warning"></span>
+										<span class="m-widget14__legend-text">
+											85% 一般任务
+										</span>
+									</div>
+									<div class="m-widget14__legend">
+										<span class="m-widget14__legend-bullet m--bg-brand"></span>
+										<span class="m-widget14__legend-text">
+											90% 紧急任务
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--end:: Widgets/Daily Sales-->
+				</div>
+				<div class="col-xl-4">
+					<!--begin:: Widgets/Profit Share-->
+					<div class="m-widget14">
+						<div class="m-widget14__header">
+							<h3 class="m-widget14__title">
+								页面渲染速度统计
+							</h3>
+							<span class="m-widget14__desc">
+								平台页面载入时间统计
+							</span>
+						</div>
+						<div class="row  align-items-center">
+							<div class="col">
+								<div id="m_chart_profit_share" class="m-widget14__chart" style="height: 160px">
+									<div class="m-widget14__stat">
+										45
+									</div>
+								<svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-donut" style="width: 100%; height: 100%;"><g class="ct-series custom"><path d="M141.265,108.314A66.5,66.5,0,0,0,81.094,13.5" class="ct-slice-donut" value="32" meta="{&amp;quot;data&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;#716aca&amp;quot;}}" stroke-dasharray="133.70703125px 133.70703125px" stroke-dashoffset="-133.70703125px" stroke="#716aca" style="stroke-width: 17px;"><animate attributeName="stroke-dashoffset" id="anim0" dur="1000ms" from="-133.70703125px" to="0px" fill="freeze" stroke="#716aca" calcMode="spline" keySplines="0.23 1 0.32 1" keyTimes="0;1"></animate></path></g><g class="ct-series custom"><path d="M29.855,122.389A66.5,66.5,0,0,0,141.363,108.104" class="ct-slice-donut" value="32" meta="{&amp;quot;data&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;#00c5dc&amp;quot;}}" stroke-dasharray="133.93873596191406px 133.93873596191406px" stroke-dashoffset="-133.93873596191406px" stroke="#00c5dc" style="stroke-width: 17px;"><animate attributeName="stroke-dashoffset" id="anim1" dur="1000ms" from="-133.93873596191406px" to="0px" fill="freeze" stroke="#00c5dc" begin="anim0.end" calcMode="spline" keySplines="0.23 1 0.32 1" keyTimes="0;1"></animate></path></g><g class="ct-series custom"><path d="M81.094,13.5A66.5,66.5,0,0,0,30.003,122.567" class="ct-slice-donut" value="36" meta="{&amp;quot;data&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;#ffb822&amp;quot;}}" stroke-dasharray="150.65408325195312px 150.65408325195312px" stroke-dashoffset="-150.65408325195312px" stroke="#ffb822" style="stroke-width: 17px;"><animate attributeName="stroke-dashoffset" id="anim2" dur="1000ms" from="-150.65408325195312px" to="0px" fill="freeze" stroke="#ffb822" begin="anim1.end" calcMode="spline" keySplines="0.23 1 0.32 1" keyTimes="0;1"></animate></path></g></svg></div>
+							</div>
+							<div class="col">
+								<div class="m-widget14__legends">
+									<div class="m-widget14__legend">
+										<span class="m-widget14__legend-bullet m--bg-accent"></span>
+										<span class="m-widget14__legend-text">
+											10毫秒 用户管理
+										</span>
+									</div>
+									<div class="m-widget14__legend">
+										<span class="m-widget14__legend-bullet m--bg-warning"></span>
+										<span class="m-widget14__legend-text">
+											10毫秒 部门管理
+										</span>
+									</div>
+									<div class="m-widget14__legend">
+										<span class="m-widget14__legend-bullet m--bg-brand"></span>
+										<span class="m-widget14__legend-text">
+											10毫秒 岗位管理
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--end:: Widgets/Profit Share-->
+				</div>
+			</div>
+		</div>
 	</div>
+	
+	
+	
+	
 	<div class="row">
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<a class="dashboard-stat dashboard-stat-v2 blue" href="#">
-				<div class="visual">
-					<i class="fa fa-comments"></i>
-				</div>
-				<div class="details">
-					<div class="number">
-						<span data-counter="counterup" data-value="${xtLoginLogsCount }">${xtLoginLogsCount }</span>
-					</div>
-					<div class="desc">登录次数</div>
-				</div>
-			</a>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<a class="dashboard-stat dashboard-stat-v2 red" href="#">
-				<div class="visual">
-					<i class="fa fa-bar-chart-o"></i>
-				</div>
-				<div class="details">
-					<div class="number">
-						<span data-counter="counterup" data-value="${xtNoticeCount }">${xtNoticeCount }</span>条
-					</div>
-					<div class="desc">平台公告数</div>
-				</div>
-			</a>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<a class="dashboard-stat dashboard-stat-v2 green" href="#">
-				<div class="visual">
-					<i class="fa fa-shopping-cart"></i>
-				</div>
-				<div class="details">
-					<div class="number">
-						<span data-counter="counterup" data-value="${xtKnowledgeCount }">${xtKnowledgeCount }</span>条
-					</div>
-					<div class="desc">平台知识库数量</div>
-				</div>
-			</a>
-		</div>
-		<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-			<a class="dashboard-stat dashboard-stat-v2 purple" href="#">
-				<div class="visual">
-					<i class="fa fa-globe"></i>
-				</div>
-				<div class="details">
-					<div class="number">
-						<span data-counter="counterup" data-value="${xtNotifyCount }">${xtNotifyCount }</span>个
-					</div>
-					<div class="desc">通知</div>
-				</div>
-			</a>
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	<div class="row">
-		<div class="col-md-6 col-sm-6">
-			<div class="portlet light ">
-				<div class="portlet-title">
-					<div class="caption">
-						<i class="icon-share font-dark hide"></i><span class="caption-subject font-dark bold uppercase">平台公告</span>
+		<div class="col-xl-8">
+			<div class="m-portlet m-portlet--mobile ">
+				<div class="m-portlet__head">
+					<div class="m-portlet__head-caption">
+						<div class="m-portlet__head-title">
+							<h3 class="m-portlet__head-text">
+								平台公告
+							</h3>
+						</div>
 					</div>
 				</div>
-				<div class="portlet-body">
-                    <div class="scroller" style="height: 300px;" data-always-visible="1" data-rail-visible="0">
-                        <ul class="feeds">
-                        	<c:forEach var="xtNotice" items="${xtNoticeList }">
-                        		<li>
-	                                <div class="col1">
-	                                    <div class="cont">
-	                                        <div class="cont-col1">
-	                                            <div class="label label-sm label-warning">
-	                                                <i class="fa fa-bell-o"></i>
-	                                            </div>
-	                                        </div>
-	                                        <div class="cont-col2">
-	                                            <c:choose>
-	                                            <c:when test="${fn:length(xtNotice.xt_title)>20 }">
-		                                            <div class="desc" title="${xtNotice.xt_title }">${fn:substring( xtNotice.xt_title ,0,20)}...<span class="label label-sm label-default "> 完成 </span></div>
-	                                            </c:when>
-	                                            <c:otherwise>
-	                                            <div class="desc" title="${xtNotice.xt_title }">${xtNotice.xt_title }<span class="label label-sm label-default "> 完成 </span></div>
-	                                            </c:otherwise>
-	                                            </c:choose>
-	                                        </div>
-	                                    </div>
-	                                </div>
-	                                <div class="col2">
-	                                    <div class="date">
-	                                    <c:choose>
-                                        	<c:when test="${fn:length(xtNotice.xt_createTime)>16 }">${fn:substring(xtNotice.xt_createTime ,8,16)}</c:when>
-                                        	<c:otherwise>-</c:otherwise>
+				<div class="m-portlet__body">
+					<div class="tab-pane active show" id="m_widget5_tab1_content" aria-expanded="true">
+						<!--begin::m-widget5-->
+						<div class="m-widget5">
+							<c:forEach var="xtNotice" items="${xtNoticeList }">
+							<div class="m-widget5__item">
+								<div class="m-widget5__pic">
+									<!-- <img class="m-widget7__img" src="" alt=""> -->
+								</div>
+								<div class="m-widget5__content">
+									<h4 class="m-widget5__title">
+										<c:choose>
+	                                        <c:when test="${fn:length(xtNotice.xt_title)>20 }">
+	                                        	${fn:substring( xtNotice.xt_title ,0,20)}...
+	                                        </c:when>
+	                                        <c:otherwise>
+	                                        	${xtNotice.xt_title }
+	                                        </c:otherwise>
                                         </c:choose>
-	                                    </div>
-	                                </div>
-	                            </li>
-                        	</c:forEach>
-                        </ul>
-                    </div>
-					<div class="scroller-footer">
-						<div class="btn-arrow-link pull-right">
-							<a href="javascript:;">更多...</a><i class="icon-arrow-right"></i>
+									</h4>
+									<span class="m-widget5__desc">
+										${xtNotice.xt_content }
+									</span>
+									<div class="m-widget5__info">
+										<span class="m-widget5__author">
+											发布人:
+										</span>
+										<span class="m-widget5__info-author m--font-info">
+											${xtNotice.xt_userinfo_realName }
+										</span>
+										<span class="m-widget5__info-label">
+											发布时间:
+										</span>
+										<span class="m-widget5__info-date m--font-info">
+											${xtNotice.xt_createTime }
+										</span>
+									</div>
+								</div>
+								<div class="m-widget5__stats1">
+									<span class="m-widget5__number">
+										${xtNotice.xt_createTime }
+									</span>
+									<br>
+								</div>
+							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-6">
-			 <div class="portlet light tasks-widget ">
-                <div class="portlet-title">
-                    <div class="caption">
-                        <i class="icon-share font-dark hide"></i>
-                        <span class="caption-subject font-dark bold uppercase">个人任务</span>
-                    </div>
-                    <div class="actions">
-                        <a class="btn btn-circle btn-icon-only btn-default fullscreen" href="javascript:;" data-original-title="" title=""> </a>
-                    </div>
-                </div>
-				<div class="portlet-body">
-                    <div class="task-content">
-                       <div class="scroller" style="height: 312px;" data-always-visible="1" data-rail-visible1="1">
-							<ul class="task-list">
-								<li>
-									<div class="task-checkbox">
-										<label class="mt-checkbox mt-checkbox-single mt-checkbox-outline">
-											<input type="checkbox" class="checkboxes" value="1">
-											<span></span>
-										</label>
-									</div>
-									<div class="task-title">
-										<span class="task-title-sp"> jEhc平台V1.0上线了...</span> <span class="label label-sm label-success">公司</span> <span class="task-bell"> <i class="fa fa-bell-o"></i></span>
-									</div>
-									<div class="task-config">
-										<div class="task-config-btn btn-group">
-											<a class="btn btn-sm default" href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"> <i class="fa fa-cog"></i> <i class="fa fa-angle-down"></i></a>
-											<ul class="dropdown-menu pull-right">
-												<li><a href="javascript:;"> <i class="fa fa-check"></i> 完成 </a></li>
-												<li><a href="javascript:;"> <i class="fa fa-pencil"></i> 编辑 </a></li>
-												<li><a href="javascript:;"> <i class="fa fa-trash-o"></i> 取消</a></li>
-											</ul>
-										</div>
-									</div>
-								</li>
-							</ul>
+		<div class="col-xl-4">
+			<!--begin:: Widgets/Audit Log-->
+			<div class="m-portlet m-portlet--full-height ">
+				<div class="m-portlet__head">
+					<div class="m-portlet__head-caption">
+						<div class="m-portlet__head-title">
+							<h3 class="m-portlet__head-text">
+								个人任务
+							</h3>
 						</div>
 					</div>
-					<div class="task-footer">
-                        <div class="btn-arrow-link pull-right">
-                            <a href="javascript:;">更多...</a> <i class="icon-arrow-right"></i>
-                            <i class="icon-arrow-right"></i>
-                        </div>
-                    </div>
+				</div>
+				<div class="m-portlet__body">
+				
+				
+					
+					<div class="m-timeline-3">
+						<div class="m-timeline-3__items">
+							<c:forEach var="xtMessage" items="${xtMessageList }">
+								<div class="m-timeline-3__item m-timeline-3__item--info">
+									<span class="m-timeline-3__item-time">
+										<fmt:formatDate value="${xtMessage.ctime }" pattern="HH:mm"/>
+									</span>
+									<div class="m-timeline-3__item-desc">
+										<span class="m-timeline-3__item-text">
+											${xtMessage.xt_meesage_content }
+										</span>
+										<br>
+										<span class="m-timeline-3__item-user-name">
+											<a href="#" class="m-link m-link--metal m-timeline-3__item-link">
+												${xtMessage.fromName }
+											</a>
+										</span>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</div>
+					
+					
+					
 				</div>
 			</div>
+			<!--end:: Widgets/Audit Log-->
 		</div>
 	</div>
 </body>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/counterup/jquery.waypoints.min.js" type="text/javascript"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/counterup/jquery.counterup.min.js" type="text/javascript"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/horizontal-timeline/horozontal-timeline.min.js" type="text/javascript"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/flot/jquery.flot.min.js" type="text/javascript"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/flot/jquery.flot.resize.min.js" type="text/javascript"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/flot/jquery.flot.categories.min.js" type="text/javascript"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/jquery.sparkline.min.js" type="text/javascript"></script>
 </html>

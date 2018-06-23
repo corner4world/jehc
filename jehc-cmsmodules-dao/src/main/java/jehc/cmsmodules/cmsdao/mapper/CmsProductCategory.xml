@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsProductCategory">
+	<!--初始化分页-->
+	<select id="getCmsProductCategoryListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsProductCategory" parameterType="map">
+		SELECT
+			cms_product_category.cms_product_category_id,
+			cms_product_category.title,
+			cms_product_category.imgpath,
+			cms_product_category.status,
+			cms_product_category.xt_userinfo_id,
+			cms_product_category.ctime,
+			cms_product_category.mtime,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_product_category cms_product_category LEFT JOIN xt_userinfo xt_userinfo ON cms_product_category.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != title">
+			AND cms_product_category.title LIKE CONCAT(CONCAT('%',#{title}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsProductCategoryById" resultType="jehc.cmsmodules.cmsmodel.CmsProductCategory" parameterType="string">
+		SELECT
+			cms_product_category.cms_product_category_id,
+			cms_product_category.title,
+			cms_product_category.imgpath,
+			cms_product_category.content,
+			cms_product_category.status,
+			cms_product_category.xt_userinfo_id,
+			cms_product_category.ctime,
+			cms_product_category.mtime,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			cms_product_category cms_product_category LEFT JOIN xt_userinfo xt_userinfo ON cms_product_category.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_product_category_id=#{cms_product_category_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsProductCategory" parameterType="jehc.cmsmodules.cmsmodel.CmsProductCategory">
+		INSERT INTO
+			cms_product_category
+			(
+			cms_product_category_id,
+			title,
+			imgpath,
+			content,
+			status,
+			xt_userinfo_id,
+			ctime,
+			mtime
+			)
+			VALUES
+			(
+			#{cms_product_category_id},
+			#{title},
+			#{imgpath},
+			#{content},
+			#{status},
+			#{xt_userinfo_id},
+			#{ctime},
+			#{mtime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsProductCategory" parameterType="jehc.cmsmodules.cmsmodel.CmsProductCategory">
+		UPDATE
+			cms_product_category
+		SET
+			title = #{title},
+			imgpath = #{imgpath},
+			content = #{content},
+			status = #{status},
+			xt_userinfo_id = #{xt_userinfo_id},
+			ctime = #{ctime},
+			mtime = #{mtime}
+		WHERE cms_product_category_id=#{cms_product_category_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsProductCategoryBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsProductCategory">
+		UPDATE
+			cms_product_category
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="imgpath != null">
+				imgpath = #{imgpath},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+		</set>
+		WHERE cms_product_category_id=#{cms_product_category_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsProductCategory" parameterType="map">
+		DELETE FROM cms_product_category WHERE cms_product_category_id IN
+		<foreach item="item" index="index" collection="cms_product_category_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsProductCategory" parameterType="list">
+		INSERT INTO
+			cms_product_category
+			(
+			cms_product_category_id,
+			title,
+			imgpath,
+			content,
+			status,
+			xt_userinfo_id,
+			ctime,
+			mtime
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_product_category_id},
+			#{item.title},
+			#{item.imgpath},
+			#{item.content},
+			#{item.status},
+			#{item.xt_userinfo_id},
+			#{item.ctime},
+			#{item.mtime}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsProductCategory" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_product_category
+			SET
+				title = #{item.title},
+				imgpath = #{item.imgpath},
+				content = #{item.content},
+				status = #{item.status},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				ctime = #{item.ctime},
+				mtime = #{item.mtime}
+			WHERE cms_product_category_id=#{item.cms_product_category_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsProductCategoryBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_product_category
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.imgpath != null">
+					imgpath = #{item.imgpath},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+			</set>
+			WHERE cms_product_category_id=#{item.cms_product_category_id}
+		</foreach>
+	</update>
+</mapper>
