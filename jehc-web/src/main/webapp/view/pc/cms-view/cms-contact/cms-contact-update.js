@@ -7,6 +7,7 @@ $('#defaultForm').bootstrapValidator({
 });
 //保存
 function updateCmsContact(){
+	$('#content').val($('#summernote').summernote('code'));
 	submitBForm('defaultForm','../cmsContactController/updateCmsContact','../cmsContactController/loadCmsContact');
 }
 //初始化日期选择器

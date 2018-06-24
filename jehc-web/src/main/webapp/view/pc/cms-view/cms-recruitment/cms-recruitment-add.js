@@ -7,6 +7,7 @@ $('#defaultForm').bootstrapValidator({
 });
 //保存
 function addCmsRecruitment(){
+	$('#content').val($('#summernote').summernote('code'));
 	submitBForm('defaultForm','../cmsRecruitmentController/addCmsRecruitment','../cmsRecruitmentController/loadCmsRecruitment');
 }
 //初始化日期选择器

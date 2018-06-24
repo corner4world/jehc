@@ -101,9 +101,7 @@
 			phone = #{phone},
 			icp = #{icp},
 			address = #{address},
-			ctime = #{ctime},
 			mtime = #{mtime},
-			xt_userinfo_id = #{xt_userinfo_id},
 			status = #{status}
 		WHERE cms_seo_id=#{cms_seo_id}
 	</update>
@@ -140,14 +138,8 @@
 			<if test="address != null">
 				address = #{address},
 			</if>
-			<if test="ctime != null">
-				ctime = #{ctime},
-			</if>
 			<if test="mtime != null">
 				mtime = #{mtime},
-			</if>
-			<if test="xt_userinfo_id != null">
-				xt_userinfo_id = #{xt_userinfo_id},
 			</if>
 			<if test="status != null">
 				status = #{status},
@@ -220,9 +212,7 @@
 				phone = #{item.phone},
 				icp = #{item.icp},
 				address = #{item.address},
-				ctime = #{item.ctime},
 				mtime = #{item.mtime},
-				xt_userinfo_id = #{item.xt_userinfo_id},
 				status = #{item.status}
 			WHERE cms_seo_id=#{item.cms_seo_id}
 		</foreach>
@@ -261,14 +251,8 @@
 				<if test="item.address != null">
 					address = #{item.address},
 				</if>
-				<if test="item.ctime != null">
-					ctime = #{item.ctime},
-				</if>
 				<if test="item.mtime != null">
 					mtime = #{item.mtime},
-				</if>
-				<if test="item.xt_userinfo_id != null">
-					xt_userinfo_id = #{item.xt_userinfo_id},
 				</if>
 				<if test="item.status != null">
 					status = #{item.status},

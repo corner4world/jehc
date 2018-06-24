@@ -19,14 +19,13 @@
 					<label>标题</label>
 					<input type="text" class="form-control" name="title" placeholder="请输入标题">
 				</div>
-				&nbsp;
-				<button class="btn btn-primary" onclick="search('datatables');">
-					 <i class="fi-search"></i>检索
-				</button>
-				&nbsp;
-				<button class="btn btn-default" onclick="resetAll();">
-					<i class="icon-trash"></i>重置
-				</button>
+					&nbsp;
+				<a class="btn btn-primary" title="检索" href="javascript:search('datatables');">
+		           <i class="fi-search"></i>检索
+		        </a>&nbsp;
+		        <a class="btn btn-primary" title="重置" href="javascript:resetAll();;">
+		           <i class="icon-trash"></i>重置
+		        </a>
 			</form>
 		</div>
 	</div>

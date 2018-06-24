@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>内容发布平台新闻分类编辑页面</title>
+<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/waves.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/lang/summernote-zh-CN.min.js"></script>
 </head>
 <body>
 	<div class="panel-body">
@@ -34,8 +38,8 @@
 				<label class="col-lg-3 control-label">状态</label>
 				<div class="col-lg-6">
 					<select class="form-control" name="status" >
-						<option value="0" <c:if test="${cmsNewsCategroy.status = 0 }">selected</c:if> >正常</option>
-						<option value="1" <c:if test="${cmsNewsCategroy.status = 1 }">selected</c:if> >关闭</option>
+						<option value="0" <c:if test="${cmsNewsCategroy.status eq 0 }">selected</c:if> >正常</option>
+						<option value="1" <c:if test="${cmsNewsCategroy.status eq 1 }">selected</c:if> >关闭</option>
 					</select>
 				</div>
 			</div>

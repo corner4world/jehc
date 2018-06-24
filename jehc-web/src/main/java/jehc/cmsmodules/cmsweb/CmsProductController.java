@@ -73,6 +73,8 @@ public class CmsProductController extends BaseAction{
 	public String addCmsProduct(CmsProduct cmsProduct,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsProduct && !"".equals(cmsProduct)){
+			cmsProduct.setCtime(getDate());
+			cmsProduct.setXt_userinfo_id(getXtUid());
 			cmsProduct.setCms_product_id(UUID.toUUID());
 			i=cmsProductService.addCmsProduct(cmsProduct);
 		}
@@ -92,6 +94,7 @@ public class CmsProductController extends BaseAction{
 	public String updateCmsProduct(CmsProduct cmsProduct,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsProduct && !"".equals(cmsProduct)){
+			cmsProduct.setMtime(getDate());
 			i=cmsProductService.updateCmsProduct(cmsProduct);
 		}
 		if(i>0){

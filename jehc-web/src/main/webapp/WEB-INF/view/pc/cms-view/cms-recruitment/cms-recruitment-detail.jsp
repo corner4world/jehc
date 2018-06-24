@@ -5,6 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>内容发布平台招贤纳士详情页面</title>
+<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/waves.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/lang/summernote-zh-CN.min.js"></script>
 </head>
 <body>
 	<div class="panel-body">
@@ -75,34 +79,35 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">状态</label>
 				<div class="col-lg-6">
-					<select class="form-control" name="status" >
-						<option value="0" <c:if test="${cmsRecruitment.status = 0 }">selected</c:if> >正常</option>
-						<option value="1" <c:if test="${cmsRecruitment.status = 1 }">selected</c:if> >关闭</option>
+					<select class="form-control select_boot" name="status" >
+						<option value="0" <c:if test="${cmsRecruitment.status eq 0 }">selected</c:if> >正常</option>
+						<option value="1" <c:if test="${cmsRecruitment.status eq 1 }">selected</c:if> >关闭</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">详细描述</label>
-				<div class="col-lg-6">
-					<textarea class="form-control" maxlength="65535"  name="content" placeholder="请输入详细描述">${cmsRecruitment.content }</textarea>
+				<div class="col-lg-9">
+					<div id="summernote">${cmsRecruitment.content }</div>
+					<input type="hidden" name="content" id="content">
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="ctime"  placeholder="请选择时间" value="${cmsRecruitment.ctime }">
+					<fmt:formatDate value="${cmsRecruitment.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">最后修改时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="mtime"  placeholder="请选择时间" value="${cmsRecruitment.mtime }">
+					<fmt:formatDate value="${cmsRecruitment.mtime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建人</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="xt_userinfo_id" placeholder="请输入创建人" value="${cmsRecruitment.xt_userinfo_realName }">
+					${cmsRecruitment.xt_userinfo_realName }
 				</div>
 			</div>
 			<div class="form-group">
@@ -115,4 +120,11 @@
 	</div>
 </body>
 <script type="text/javascript" src="../view/pc/cms-view/cms-recruitment/cms-recruitment-detail.js"></script> 
+<script>
+    jQuery(document).ready(function(){
+        $('#summernote').summernote({
+            airMode: true
+        });
+    });
+</script>
 </html>

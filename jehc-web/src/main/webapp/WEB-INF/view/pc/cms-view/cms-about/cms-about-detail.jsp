@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>关于我们详情页面</title>
-<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
+<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
 </head>
 <body>
 	<div class="panel-body">
@@ -22,7 +22,7 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">标题</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  data-bv-notempty data-bv-notempty-message="请输入标题"  name="title" placeholder="请输入标题" value="${cmsAbout.title }">
+					<input class="form-control select_boot" type="text" maxlength="255"  data-bv-notempty data-bv-notempty-message="请输入标题"  name="title" placeholder="请输入标题" value="${cmsAbout.title }">
 				</div>
 			</div>
 			<div class="form-group">
@@ -42,28 +42,28 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">状态</label>
 				<div class="col-lg-6">
-					<select class="form-control" name="status" >
-						<option value="0" <c:if test="${cmsAbout.status = 0 }">selected</c:if> >正常</option>
-						<option value="1" <c:if test="${cmsAbout.status = 1 }">selected</c:if> >关闭</option>
+					<select class="form-control select_boot" name="status" >
+						<option value="0" <c:if test="${cmsAbout.status eq 0 }">selected</c:if> >正常</option>
+						<option value="1" <c:if test="${cmsAbout.status eq 1 }">selected</c:if> >关闭</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="ctime"  data-bv-notempty data-bv-notempty-message="请输入创建时间"  placeholder="请选择时间" value="${cmsAbout.ctime }">
+					<fmt:formatDate value="${cmsAbout.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">最后修改日期</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="mtime"  placeholder="请选择时间" value="${cmsAbout.mtime }">
+					<fmt:formatDate value="${cmsAbout.mtime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建人</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  data-bv-notempty data-bv-notempty-message="请输入创建人"  name="xt_userinfo_id" placeholder="请输入创建人" value="${cmsAbout.xt_userinfo_id }">
+					${cmsAbout.xt_userinfo_realName }
 				</div>
 			</div>
 			<div class="form-group">
@@ -76,9 +76,9 @@
 	</div>
 </body>
 
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/js/waves.js"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/summernote/summernote-bs4.min.js"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/summernote/lang/summernote-zh-CN.min.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/waves.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/lang/summernote-zh-CN.min.js"></script>
 <script type="text/javascript" src="../view/pc/cms-view/cms-about/cms-about-detail.js"></script> 
 <script>
     jQuery(document).ready(function(){

@@ -76,8 +76,8 @@
 				<label class="col-lg-3 control-label">状态</label>
 				<div class="col-lg-6">
 					<select class="form-control" name="status" >
-						<option value="0" <c:if test="${cmsSeo.status = 0 }">selected</c:if> >正常</option>
-						<option value="1" <c:if test="${cmsSeo.status = 1 }">selected</c:if> >关闭</option>
+						<option value="0" <c:if test="${cmsSeo.status eq 0 }">selected</c:if> >正常</option>
+						<option value="1" <c:if test="${cmsSeo.status eq 1 }">selected</c:if> >关闭</option>
 					</select>
 				</div>
 			</div>

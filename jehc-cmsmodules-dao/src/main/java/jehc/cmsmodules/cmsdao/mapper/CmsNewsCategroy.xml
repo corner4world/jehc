@@ -67,9 +67,7 @@
 			cms_news_categroy
 		SET
 			name = #{name},
-			ctime = #{ctime},
 			mtime = #{mtime},
-			xt_userinfo_id = #{xt_userinfo_id},
 			status = #{status},
 			content = #{content}
 		WHERE cms_news_categroy_id=#{cms_news_categroy_id}
@@ -83,14 +81,8 @@
 			<if test="name != null">
 				name = #{name},
 			</if>
-			<if test="ctime != null">
-				ctime = #{ctime},
-			</if>
 			<if test="mtime != null">
 				mtime = #{mtime},
-			</if>
-			<if test="xt_userinfo_id != null">
-				xt_userinfo_id = #{xt_userinfo_id},
 			</if>
 			<if test="status != null">
 				status = #{status},
@@ -144,9 +136,7 @@
 				cms_news_categroy
 			SET
 				name = #{item.name},
-				ctime = #{item.ctime},
 				mtime = #{item.mtime},
-				xt_userinfo_id = #{item.xt_userinfo_id},
 				status = #{item.status},
 				content = #{item.content}
 			WHERE cms_news_categroy_id=#{item.cms_news_categroy_id}
@@ -162,14 +152,8 @@
 				<if test="item.name != null">
 					name = #{item.name},
 				</if>
-				<if test="item.ctime != null">
-					ctime = #{item.ctime},
-				</if>
 				<if test="item.mtime != null">
 					mtime = #{item.mtime},
-				</if>
-				<if test="item.xt_userinfo_id != null">
-					xt_userinfo_id = #{item.xt_userinfo_id},
 				</if>
 				<if test="item.status != null">
 					status = #{item.status},

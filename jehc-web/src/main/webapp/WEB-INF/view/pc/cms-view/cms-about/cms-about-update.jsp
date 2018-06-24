@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>关于我们编辑页面</title>
-<link href="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
+<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/summernote-bs4.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -44,8 +44,8 @@
 				<label class="col-lg-3 control-label">状态</label>
 				<div class="col-lg-6">
 					<select class="form-control" name="status" >
-						<option value="0" <c:if test="${cmsAbout.status = 0 }">selected</c:if> >正常</option>
-						<option value="1" <c:if test="${cmsAbout.status = 1 }">selected</c:if> >关闭</option>
+						<option value="0" <c:if test="${cmsAbout.status eq 0 }">selected</c:if> >正常</option>
+						<option value="1" <c:if test="${cmsAbout.status eq 1 }">selected</c:if> >关闭</option>
 					</select>
 				</div>
 			</div>
@@ -59,9 +59,9 @@
 		</form>
 	</div>
 </body>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/js/waves.js"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/summernote/summernote-bs4.min.js"></script>
-<script src="${syspath}/deng/source/plugins/admin/index/global/plugins/bootstrap/4.0.0/plugins/summernote/lang/summernote-zh-CN.min.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/waves.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/summernote-bs4.min.js"></script>
+<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/plugins/summernote/lang/summernote-zh-CN.min.js"></script>
 <script type="text/javascript" src="../view/pc/cms-view/cms-about/cms-about-update.js"></script> 
 <script>
     jQuery(document).ready(function(){
@@ -72,25 +72,26 @@
             focus:false,                 // set focus to editable area after initializing summernote
             callbacks:{  
                 onImageUpload: function(file) {//图片默认以二进制的形式存储到数据库，调用此方法将请求后台将图片存储到服务器，返回图片请求地址到前端
-                      //将图片放入Formdate对象中                                         
-                      var formData = new FormData();  
-                      //‘picture’为后台获取的文件名，file[0]是要上传的文件
-                      formData.append("picture", file[0]); 
-                      $.ajax({                            
-                           type:'post',        
-                           url:basePath+'/xtCommonController/upload',                        
-                           cache: false,
-                           data:formData, 
-                           processData: false,
-                           contentType: false,
-                           dataType:'text', //请求成功后，后台返回图片访问地址字符串，故此以text格式获取，而不是json格式
-                           success: function(picture) {                                            
-                             $('#summernote').summernote('insertImage',picture); 
-                           },  
-                           error:function(){                                                  
-                              msgTishi(4,"上传失败");                                                     
-                           } 
-                      });
+                	//将图片放入Formdate对象中                                         
+                    var formData = new FormData();  
+                    //‘picture’为后台获取的文件名，file[0]是要上传的文件
+                    formData.append("picFile", file[0]); 
+                    $.ajax({                            
+                         type:'post',        
+                         url:'../xtCommonController/upload',                        
+                         cache: false,
+                         data:formData, 
+                         processData:false,
+                         contentType: false,
+                         dataType:'text', //请求成功后，后台返回图片访问地址字符串，故此以text格式获取，而不是json格式
+                         success: function(result) { 
+                      	   var obj = eval("(" + result + ")");
+                      	   $('#summernote').summernote('editor.insertImage', obj.data.jsonValue);
+                         },  
+                         error:function(result){     
+                            msgTishi(4,"上传失败");                                                     
+                         } 
+                    });
                 }  
             },
             toolbar: [
@@ -121,7 +122,7 @@
                       ['help',['help']]  //帮助
                     ],
                     lang:'zh-CN',  //设置中文，需引入中文插件summernote-zh-CN.js
-                    placeholder: 'write here...', //占位符
+                    placeholder: '请输入内容...', //占位符
                     dialogsInBody: true,  //对话框放在编辑框还是Body
                     dialogsFade: true ,//对话框显示效果
                     disableDragAndDrop: true ,//禁用拖放功能

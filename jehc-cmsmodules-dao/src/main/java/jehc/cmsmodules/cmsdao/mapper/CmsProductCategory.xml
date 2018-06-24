@@ -74,8 +74,6 @@
 			imgpath = #{imgpath},
 			content = #{content},
 			status = #{status},
-			xt_userinfo_id = #{xt_userinfo_id},
-			ctime = #{ctime},
 			mtime = #{mtime}
 		WHERE cms_product_category_id=#{cms_product_category_id}
 	</update>
@@ -96,12 +94,6 @@
 			</if>
 			<if test="status != null">
 				status = #{status},
-			</if>
-			<if test="xt_userinfo_id != null">
-				xt_userinfo_id = #{xt_userinfo_id},
-			</if>
-			<if test="ctime != null">
-				ctime = #{ctime},
 			</if>
 			<if test="mtime != null">
 				mtime = #{mtime},
@@ -157,8 +149,6 @@
 				imgpath = #{item.imgpath},
 				content = #{item.content},
 				status = #{item.status},
-				xt_userinfo_id = #{item.xt_userinfo_id},
-				ctime = #{item.ctime},
 				mtime = #{item.mtime}
 			WHERE cms_product_category_id=#{item.cms_product_category_id}
 		</foreach>
@@ -181,12 +171,6 @@
 				</if>
 				<if test="item.status != null">
 					status = #{item.status},
-				</if>
-				<if test="item.xt_userinfo_id != null">
-					xt_userinfo_id = #{item.xt_userinfo_id},
-				</if>
-				<if test="item.ctime != null">
-					ctime = #{item.ctime},
 				</if>
 				<if test="item.mtime != null">
 					mtime = #{item.mtime},

@@ -83,10 +83,8 @@
 			name = #{name},
 			product_category_id = #{product_category_id},
 			content = #{content},
-			ctime = #{ctime},
 			mtime = #{mtime},
 			status = #{status},
-			xt_userinfo_id = #{xt_userinfo_id},
 			imgpath = #{imgpath}
 		WHERE cms_product_id=#{cms_product_id}
 	</update>
@@ -105,17 +103,11 @@
 			<if test="content != null">
 				content = #{content},
 			</if>
-			<if test="ctime != null">
-				ctime = #{ctime},
-			</if>
 			<if test="mtime != null">
 				mtime = #{mtime},
 			</if>
 			<if test="status != null">
 				status = #{status},
-			</if>
-			<if test="xt_userinfo_id != null">
-				xt_userinfo_id = #{xt_userinfo_id},
 			</if>
 			<if test="imgpath != null">
 				imgpath = #{imgpath},
@@ -172,10 +164,8 @@
 				name = #{item.name},
 				product_category_id = #{item.product_category_id},
 				content = #{item.content},
-				ctime = #{item.ctime},
 				mtime = #{item.mtime},
 				status = #{item.status},
-				xt_userinfo_id = #{item.xt_userinfo_id},
 				imgpath = #{item.imgpath}
 			WHERE cms_product_id=#{item.cms_product_id}
 		</foreach>
@@ -196,17 +186,11 @@
 				<if test="item.content != null">
 					content = #{item.content},
 				</if>
-				<if test="item.ctime != null">
-					ctime = #{item.ctime},
-				</if>
 				<if test="item.mtime != null">
 					mtime = #{item.mtime},
 				</if>
 				<if test="item.status != null">
 					status = #{item.status},
-				</if>
-				<if test="item.xt_userinfo_id != null">
-					xt_userinfo_id = #{item.xt_userinfo_id},
 				</if>
 				<if test="item.imgpath != null">
 					imgpath = #{item.imgpath},

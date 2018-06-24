@@ -74,6 +74,8 @@ public class CmsCaseController extends BaseAction{
 		int i = 0;
 		if(null != cmsCase && !"".equals(cmsCase)){
 			cmsCase.setCms_case_id(UUID.toUUID());
+			cmsCase.setCtime(getDate());
+			cmsCase.setXt_userinfo_id(getXtUid());
 			i=cmsCaseService.addCmsCase(cmsCase);
 		}
 		if(i>0){
@@ -92,6 +94,7 @@ public class CmsCaseController extends BaseAction{
 	public String updateCmsCase(CmsCase cmsCase,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsCase && !"".equals(cmsCase)){
+			cmsCase.setMtime(getDate());
 			i=cmsCaseService.updateCmsCase(cmsCase);
 		}
 		if(i>0){

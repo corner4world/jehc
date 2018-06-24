@@ -73,6 +73,8 @@ public class CmsRecruitmentController extends BaseAction{
 	public String addCmsRecruitment(CmsRecruitment cmsRecruitment,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsRecruitment && !"".equals(cmsRecruitment)){
+			cmsRecruitment.setCtime(getDate());
+			cmsRecruitment.setXt_userinfo_id(getXtUid());
 			cmsRecruitment.setCms_recruitment_id(UUID.toUUID());
 			i=cmsRecruitmentService.addCmsRecruitment(cmsRecruitment);
 		}
@@ -92,6 +94,7 @@ public class CmsRecruitmentController extends BaseAction{
 	public String updateCmsRecruitment(CmsRecruitment cmsRecruitment,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsRecruitment && !"".equals(cmsRecruitment)){
+			cmsRecruitment.setMtime(getDate());
 			i=cmsRecruitmentService.updateCmsRecruitment(cmsRecruitment);
 		}
 		if(i>0){

@@ -73,9 +73,7 @@
 			title = #{title},
 			content = #{content},
 			imgpath = #{imgpath},
-			ctime = #{ctime},
 			mtime = #{mtime},
-			xt_userinfo_id = #{xt_userinfo_id},
 			status = #{status}
 		WHERE cms_about_id=#{cms_about_id}
 	</update>
@@ -93,9 +91,6 @@
 			</if>
 			<if test="imgpath != null">
 				imgpath = #{imgpath},
-			</if>
-			<if test="ctime != null">
-				ctime = #{ctime},
 			</if>
 			<if test="mtime != null">
 				mtime = #{mtime},
@@ -156,7 +151,6 @@
 				title = #{item.title},
 				content = #{item.content},
 				imgpath = #{item.imgpath},
-				ctime = #{item.ctime},
 				mtime = #{item.mtime},
 				xt_userinfo_id = #{item.xt_userinfo_id},
 				status = #{item.status}
@@ -178,9 +172,6 @@
 				</if>
 				<if test="item.imgpath != null">
 					imgpath = #{item.imgpath},
-				</if>
-				<if test="item.ctime != null">
-					ctime = #{item.ctime},
 				</if>
 				<if test="item.mtime != null">
 					mtime = #{item.mtime},

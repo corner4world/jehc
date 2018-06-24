@@ -7,6 +7,7 @@ $('#defaultForm').bootstrapValidator({
 });
 //保存
 function addCmsMerchants(){
+	$('#content').val($('#summernote').summernote('code'));
 	submitBForm('defaultForm','../cmsMerchantsController/addCmsMerchants','../cmsMerchantsController/loadCmsMerchants');
 }
 //初始化日期选择器

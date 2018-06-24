@@ -133,7 +133,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\t\t\t\tdata:\""+getColumnKey(xt_Generator_Table_ColumnList)+"\",\r\n");
 		sb.append("\t\t\t\twidth:\"150px\",\r\n");
 		sb.append("\t\t\t\trender:function(data, type, row, meta) {\r\n");
-		sb.append("\t\t\t\t\treturn \"<button class='btn btn-default' onclick=\\\"javascript:to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Detail('\"+ data +\"')\\\"><span class='glyphicon glyphicon-eye-open'></span></button>\";\r\n");
+		sb.append("\t\t\t\t\treturn \"<button class='btn btn-default' onclick=\\\"javascript:to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Detail('\"+ data +\"')\\\"><span class='icon-loop'></span></button>\";\r\n");
 		sb.append("\t\t\t\t}\r\n");
 		sb.append("\t\t\t}\r\n");
 		//字段显示结束

@@ -73,6 +73,8 @@ public class CmsMerchantsController extends BaseAction{
 	public String addCmsMerchants(CmsMerchants cmsMerchants,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsMerchants && !"".equals(cmsMerchants)){
+			cmsMerchants.setCtime(getDate());
+			cmsMerchants.setXt_userinfo_id(getXtUid());
 			cmsMerchants.setCms_merchants_id(UUID.toUUID());
 			i=cmsMerchantsService.addCmsMerchants(cmsMerchants);
 		}
@@ -92,6 +94,7 @@ public class CmsMerchantsController extends BaseAction{
 	public String updateCmsMerchants(CmsMerchants cmsMerchants,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsMerchants && !"".equals(cmsMerchants)){
+			cmsMerchants.setMtime(getDate());
 			i=cmsMerchantsService.updateCmsMerchants(cmsMerchants);
 		}
 		if(i>0){

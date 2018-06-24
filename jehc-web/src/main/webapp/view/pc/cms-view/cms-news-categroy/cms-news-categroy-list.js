@@ -60,7 +60,7 @@ $(document).ready(function() {
 				data:"cms_news_categroy_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<button class='btn btn-default' onclick=\"javascript:toCmsNewsCategroyDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></button>";
+					return "<button class='btn btn-default' onclick=\"javascript:toCmsNewsCategroyDetail('"+ data +"')\"><span class='icon-loop'></span></button>";
 				}
 			}
 		]

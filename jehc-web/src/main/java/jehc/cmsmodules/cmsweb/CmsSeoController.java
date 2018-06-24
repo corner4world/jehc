@@ -74,6 +74,8 @@ public class CmsSeoController extends BaseAction{
 		int i = 0;
 		if(null != cmsSeo && !"".equals(cmsSeo)){
 			cmsSeo.setCms_seo_id(UUID.toUUID());
+			cmsSeo.setXt_userinfo_id(getXtUid());
+			cmsSeo.setCtime(getDate());
 			i=cmsSeoService.addCmsSeo(cmsSeo);
 		}
 		if(i>0){
@@ -92,6 +94,7 @@ public class CmsSeoController extends BaseAction{
 	public String updateCmsSeo(CmsSeo cmsSeo,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsSeo && !"".equals(cmsSeo)){
+			cmsSeo.setMtime(getDate());
 			i=cmsSeoService.updateCmsSeo(cmsSeo);
 		}
 		if(i>0){

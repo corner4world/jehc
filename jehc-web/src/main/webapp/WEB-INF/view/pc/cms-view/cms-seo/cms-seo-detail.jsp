@@ -75,28 +75,28 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">状态</label>
 				<div class="col-lg-6">
-					<select class="form-control" name="status" >
-						<option value="0" <c:if test="${cmsSeo.status = 0 }">selected</c:if> >正常</option>
-						<option value="1" <c:if test="${cmsSeo.status = 1 }">selected</c:if> >关闭</option>
+					<select class="form-control select_boot" name="status" >
+						<option value="0" <c:if test="${cmsSeo.status eq 0 }">selected</c:if> >正常</option>
+						<option value="1" <c:if test="${cmsSeo.status eq 1 }">selected</c:if> >关闭</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="ctime"  placeholder="请选择时间" value="${cmsSeo.ctime }">
+					<fmt:formatDate value="${cmsSeo.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">最后修改时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="mtime"  placeholder="请选择时间" value="${cmsSeo.mtime }">
+					<fmt:formatDate value="${cmsSeo.mtime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建人</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="xt_userinfo_id" placeholder="请输入创建人" value="${cmsSeo.xt_userinfo_realName }">
+					${cmsSeo.xt_userinfo_realName }
 				</div>
 			</div>
 			<div class="form-group">

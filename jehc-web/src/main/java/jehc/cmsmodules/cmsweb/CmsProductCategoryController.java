@@ -73,6 +73,8 @@ public class CmsProductCategoryController extends BaseAction{
 	public String addCmsProductCategory(CmsProductCategory cmsProductCategory,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsProductCategory && !"".equals(cmsProductCategory)){
+			cmsProductCategory.setCtime(getDate());
+			cmsProductCategory.setXt_userinfo_id(getXtUid());
 			cmsProductCategory.setCms_product_category_id(UUID.toUUID());
 			i=cmsProductCategoryService.addCmsProductCategory(cmsProductCategory);
 		}
@@ -92,6 +94,7 @@ public class CmsProductCategoryController extends BaseAction{
 	public String updateCmsProductCategory(CmsProductCategory cmsProductCategory,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsProductCategory && !"".equals(cmsProductCategory)){
+			cmsProductCategory.setMtime(getDate());
 			i=cmsProductCategoryService.updateCmsProductCategory(cmsProductCategory);
 		}
 		if(i>0){

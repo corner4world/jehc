@@ -7,6 +7,7 @@ $('#defaultForm').bootstrapValidator({
 });
 //保存
 function addCmsNews(){
+	$('#content').val($('#summernote').summernote('code'));
 	submitBForm('defaultForm','../cmsNewsController/addCmsNews','../cmsNewsController/loadCmsNews');
 }
 //初始化日期选择器

@@ -72,9 +72,7 @@
 		SET
 			title = #{title},
 			content = #{content},
-			xt_userinfo_id = #{xt_userinfo_id},
 			status = #{status},
-			ctime = #{ctime},
 			mtime = #{mtime},
 			imgpath = #{imgpath}
 		WHERE cms_merchants_id=#{cms_merchants_id}
@@ -91,14 +89,8 @@
 			<if test="content != null">
 				content = #{content},
 			</if>
-			<if test="xt_userinfo_id != null">
-				xt_userinfo_id = #{xt_userinfo_id},
-			</if>
 			<if test="status != null">
 				status = #{status},
-			</if>
-			<if test="ctime != null">
-				ctime = #{ctime},
 			</if>
 			<if test="mtime != null">
 				mtime = #{mtime},
@@ -155,9 +147,7 @@
 			SET
 				title = #{item.title},
 				content = #{item.content},
-				xt_userinfo_id = #{item.xt_userinfo_id},
 				status = #{item.status},
-				ctime = #{item.ctime},
 				mtime = #{item.mtime},
 				imgpath = #{item.imgpath}
 			WHERE cms_merchants_id=#{item.cms_merchants_id}
@@ -176,14 +166,8 @@
 				<if test="item.content != null">
 					content = #{item.content},
 				</if>
-				<if test="item.xt_userinfo_id != null">
-					xt_userinfo_id = #{item.xt_userinfo_id},
-				</if>
 				<if test="item.status != null">
 					status = #{item.status},
-				</if>
-				<if test="item.ctime != null">
-					ctime = #{item.ctime},
 				</if>
 				<if test="item.mtime != null">
 					mtime = #{item.mtime},

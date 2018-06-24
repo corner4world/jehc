@@ -60,7 +60,7 @@ $(document).ready(function() {
 				data:"cms_about_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<button class='btn btn-default' onclick=\"javascript:toCmsAboutDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></button>";
+					return "<button class='btn btn-default' onclick=\"javascript:toCmsAboutDetail('"+ data +"')\"><span class='icon-loop'></span></button>";
 				}
 			}
 		]

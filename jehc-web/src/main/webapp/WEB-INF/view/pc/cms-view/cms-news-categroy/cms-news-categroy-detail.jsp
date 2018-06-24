@@ -33,28 +33,28 @@
 			<div class="form-group">
 				<label class="col-lg-3 control-label">状态</label>
 				<div class="col-lg-6">
-					<select class="form-control" name="status" >
-						<option value="0" <c:if test="${cmsNewsCategroy.status = 0 }">selected</c:if> >正常</option>
-						<option value="1" <c:if test="${cmsNewsCategroy.status = 1 }">selected</c:if> >关闭</option>
+					<select class="form-control select_boot" name="status" >
+						<option value="0" <c:if test="${cmsNewsCategroy.status eq 0 }">selected</c:if> >正常</option>
+						<option value="1" <c:if test="${cmsNewsCategroy.status eq 1 }">selected</c:if> >关闭</option>
 					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="ctime"  data-bv-notempty data-bv-notempty-message="请输入创建时间"  placeholder="请选择时间" value="${cmsNewsCategroy.ctime }">
+					<fmt:formatDate value="${cmsNewsCategroy.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">最后修改时间</label>
 				<div class="col-lg-6">
-					<input class="form_datetime form-control" name="mtime"  placeholder="请选择时间" value="${cmsNewsCategroy.mtime }">
+					<fmt:formatDate value="${cmsNewsCategroy.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-lg-3 control-label">创建人</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="255"  data-bv-notempty data-bv-notempty-message="请输入创建人"  name="xt_userinfo_id" placeholder="请输入创建人" value="${cmsNewsCategroy.xt_userinfo_realName }">
+					${cmsNewsCategroy.xt_userinfo_realName }
 				</div>
 			</div>
 			<div class="form-group">

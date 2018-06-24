@@ -74,6 +74,8 @@ public class CmsNewsController extends BaseAction{
 		int i = 0;
 		if(null != cmsNews && !"".equals(cmsNews)){
 			cmsNews.setCms_news_id(UUID.toUUID());
+			cmsNews.setCtime(getDate());
+			cmsNews.setXt_userinfo_id(getXtUid());
 			i=cmsNewsService.addCmsNews(cmsNews);
 		}
 		if(i>0){
@@ -92,6 +94,7 @@ public class CmsNewsController extends BaseAction{
 	public String updateCmsNews(CmsNews cmsNews,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsNews && !"".equals(cmsNews)){
+			cmsNews.setMtime(getDate());
 			i=cmsNewsService.updateCmsNews(cmsNews);
 		}
 		if(i>0){

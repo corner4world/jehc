@@ -74,6 +74,8 @@ public class CmsContactController extends BaseAction{
 		int i = 0;
 		if(null != cmsContact && !"".equals(cmsContact)){
 			cmsContact.setCms_contact_id(UUID.toUUID());
+			cmsContact.setCtime(getDate());
+			cmsContact.setXt_userinfo_id(getXtUid());
 			i=cmsContactService.addCmsContact(cmsContact);
 		}
 		if(i>0){
@@ -92,6 +94,7 @@ public class CmsContactController extends BaseAction{
 	public String updateCmsContact(CmsContact cmsContact,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsContact && !"".equals(cmsContact)){
+			cmsContact.setMtime(getDate());
 			i=cmsContactService.updateCmsContact(cmsContact);
 		}
 		if(i>0){

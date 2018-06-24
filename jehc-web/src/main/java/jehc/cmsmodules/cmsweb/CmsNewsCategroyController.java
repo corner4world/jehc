@@ -73,6 +73,8 @@ public class CmsNewsCategroyController extends BaseAction{
 	public String addCmsNewsCategroy(CmsNewsCategroy cmsNewsCategroy,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsNewsCategroy && !"".equals(cmsNewsCategroy)){
+			cmsNewsCategroy.setCtime(getDate());
+			cmsNewsCategroy.setXt_userinfo_id(getXtUid());
 			cmsNewsCategroy.setCms_news_categroy_id(UUID.toUUID());
 			i=cmsNewsCategroyService.addCmsNewsCategroy(cmsNewsCategroy);
 		}
@@ -92,6 +94,7 @@ public class CmsNewsCategroyController extends BaseAction{
 	public String updateCmsNewsCategroy(CmsNewsCategroy cmsNewsCategroy,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsNewsCategroy && !"".equals(cmsNewsCategroy)){
+			cmsNewsCategroy.setMtime(getDate());
 			i=cmsNewsCategroyService.updateCmsNewsCategroy(cmsNewsCategroy);
 		}
 		if(i>0){

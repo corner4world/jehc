@@ -76,8 +76,7 @@
 			title = #{title},
 			content = #{content},
 			userName = #{userName},
-			phone = #{phone},
-			ctime = #{ctime}
+			phone = #{phone}
 		WHERE cms_message_id=#{cms_message_id}
 	</update>
 

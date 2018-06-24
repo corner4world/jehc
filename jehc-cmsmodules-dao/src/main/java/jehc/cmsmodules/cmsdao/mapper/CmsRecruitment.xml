@@ -113,9 +113,7 @@
 			content = #{content},
 			numbersH = #{numbersH},
 			status = #{status},
-			ctime = #{ctime},
-			mtime = #{mtime},
-			xt_userinfo_id = #{xt_userinfo_id}
+			mtime = #{mtime}
 		WHERE cms_recruitment_id=#{cms_recruitment_id}
 	</update>
 
@@ -157,14 +155,8 @@
 			<if test="status != null">
 				status = #{status},
 			</if>
-			<if test="ctime != null">
-				ctime = #{ctime},
-			</if>
 			<if test="mtime != null">
 				mtime = #{mtime},
-			</if>
-			<if test="xt_userinfo_id != null">
-				xt_userinfo_id = #{xt_userinfo_id},
 			</if>
 		</set>
 		WHERE cms_recruitment_id=#{cms_recruitment_id}
@@ -238,9 +230,7 @@
 				content = #{item.content},
 				numbersH = #{item.numbersH},
 				status = #{item.status},
-				ctime = #{item.ctime},
-				mtime = #{item.mtime},
-				xt_userinfo_id = #{item.xt_userinfo_id}
+				mtime = #{item.mtime}
 			WHERE cms_recruitment_id=#{item.cms_recruitment_id}
 		</foreach>
 	</update>
@@ -284,14 +274,8 @@
 				<if test="item.status != null">
 					status = #{item.status},
 				</if>
-				<if test="item.ctime != null">
-					ctime = #{item.ctime},
-				</if>
 				<if test="item.mtime != null">
 					mtime = #{item.mtime},
-				</if>
-				<if test="item.xt_userinfo_id != null">
-					xt_userinfo_id = #{item.xt_userinfo_id},
 				</if>
 			</set>
 			WHERE cms_recruitment_id=#{item.cms_recruitment_id}

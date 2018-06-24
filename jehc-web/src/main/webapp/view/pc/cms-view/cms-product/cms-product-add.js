@@ -7,6 +7,7 @@ $('#defaultForm').bootstrapValidator({
 });
 //保存
 function addCmsProduct(){
+	$('#content').val($('#summernote').summernote('code'));
 	submitBForm('defaultForm','../cmsProductController/addCmsProduct','../cmsProductController/loadCmsProduct');
 }
 //初始化日期选择器

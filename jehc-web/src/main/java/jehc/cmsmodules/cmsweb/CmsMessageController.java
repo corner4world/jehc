@@ -73,6 +73,7 @@ public class CmsMessageController extends BaseAction{
 	public String addCmsMessage(CmsMessage cmsMessage,HttpServletRequest request){
 		int i = 0;
 		if(null != cmsMessage && !"".equals(cmsMessage)){
+			cmsMessage.setCtime(getDate());
 			cmsMessage.setCms_message_id(UUID.toUUID());
 			i=cmsMessageService.addCmsMessage(cmsMessage);
 		}
