@@ -9,6 +9,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+	.row{
+	margin-right:0px;
+	margin-left:0px;
+	}
+</style>
 </head>
 <body>
 	<div class="m-portlet">
