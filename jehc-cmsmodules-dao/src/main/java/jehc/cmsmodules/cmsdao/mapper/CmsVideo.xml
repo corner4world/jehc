@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsVideo">
+	<!--初始化分页-->
+	<select id="getCmsVideoListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsVideo" parameterType="map">
+		SELECT
+			cms_video.cms_video_id,
+			cms_video.title,
+			cms_video.imgPath,
+			cms_video.ctime,
+			cms_video.mtime,
+			cms_video.xt_userinfo_id,
+			cms_video.status,
+			xt_userinfo.xt_userinfo_realName 
+		FROM 
+			cms_video cms_video LEFT JOIN xt_userinfo xt_userinfo ON cms_video.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != title">
+			AND cms_video.title LIKE CONCAT(CONCAT('%',#{title}),'%')
+		</if>
+		<if test="null != ctime_st and ctime_st != ''">
+			AND cms_video.ctime &gt;=#{ctime_st}
+		</if>
+		<if test="null != ctime_et and ctime_et != ''">
+			AND cms_video.ctime &lt;=#{ctime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsVideoById" resultType="jehc.cmsmodules.cmsmodel.CmsVideo" parameterType="string">
+		SELECT
+			cms_video.cms_video_id,
+			cms_video.title,
+			cms_video.content,
+			cms_video.imgPath,
+			cms_video.videoPath,
+			cms_video.ctime,
+			cms_video.mtime,
+			xt_userinfo.xt_userinfo_id,
+			cms_video.status,
+			xt_userinfo.xt_userinfo_realName 
+		FROM 
+			cms_video cms_video LEFT JOIN xt_userinfo xt_userinfo ON cms_video.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE cms_video.cms_video_id=#{cms_video_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsVideo" parameterType="jehc.cmsmodules.cmsmodel.CmsVideo">
+		INSERT INTO
+			cms_video
+			(
+			cms_video_id,
+			title,
+			content,
+			imgPath,
+			videoPath,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status
+			)
+			VALUES
+			(
+			#{cms_video_id},
+			#{title},
+			#{content},
+			#{imgPath},
+			#{videoPath},
+			#{ctime},
+			#{mtime},
+			#{xt_userinfo_id},
+			#{status}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsVideo" parameterType="jehc.cmsmodules.cmsmodel.CmsVideo">
+		UPDATE
+			cms_video
+		SET
+			title = #{title},
+			content = #{content},
+			imgPath = #{imgPath},
+			videoPath = #{videoPath},
+			mtime = #{mtime},
+			status = #{status}
+		WHERE cms_video_id=#{cms_video_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsVideoBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsVideo">
+		UPDATE
+			cms_video
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="imgPath != null">
+				imgPath = #{imgPath},
+			</if>
+			<if test="videoPath != null">
+				videoPath = #{videoPath},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+		</set>
+		WHERE cms_video_id=#{cms_video_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsVideo" parameterType="map">
+		DELETE FROM cms_video WHERE cms_video_id IN
+		<foreach item="item" index="index" collection="cms_video_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsVideo" parameterType="list">
+		INSERT INTO
+			cms_video
+			(
+			cms_video_id,
+			title,
+			content,
+			imgPath,
+			videoPath,
+			ctime,
+			mtime,
+			xt_userinfo_id,
+			status
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_video_id},
+			#{item.title},
+			#{item.content},
+			#{item.imgPath},
+			#{item.videoPath},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.xt_userinfo_id},
+			#{item.status}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsVideo" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_video
+			SET
+				title = #{item.title},
+				content = #{item.content},
+				imgPath = #{item.imgPath},
+				videoPath = #{item.videoPath},
+				mtime = #{item.mtime},
+				status = #{item.status}
+			WHERE cms_video_id=#{item.cms_video_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsVideoBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_video
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.imgPath != null">
+					imgPath = #{item.imgPath},
+				</if>
+				<if test="item.videoPath != null">
+					videoPath = #{item.videoPath},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+			</set>
+			WHERE cms_video_id=#{item.cms_video_id}
+		</foreach>
+	</update>
+</mapper>
