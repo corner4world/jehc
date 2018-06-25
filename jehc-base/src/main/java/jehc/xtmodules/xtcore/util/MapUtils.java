@@ -1,5 +1,6 @@
 package jehc.xtmodules.xtcore.util;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 import javax.servlet.ServletContext;
 
+import jehc.xtmodules.xtcore.allutils.DateUtil;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import net.sf.json.JSONNull;
 
@@ -152,8 +154,26 @@ public class MapUtils {
 			Object obj = entry.getValue();
 			if (obj instanceof String) {
 				String str = (String) obj;
-				if (!StringUtil.isEmpty(str)) {
-					map.put(entry.getKey(), entry.getValue());
+				if(DateUtil.isValidDate(str)){
+					try {
+						//如果对象未满足时分秒则系统必须判断将其补全（注意 如果是10的话 此时还需要判断是否以et结尾的 如果et结尾 则设置为23:59：:59）
+						//客户自定义查询 则可以在控制层中设置好str长度为全量即年月日 时分秒即可 此时 逻辑 不会到达该代码块
+						if(str.length()==10){
+							if(entry.getKey().indexOf("_et")>0){
+								str = str +" 23:59:59";
+							}else{
+								str = str +" 00:00:00";
+							}
+						}
+//						map.put(entry.getKey(), DateUtil.dateToStamp(str));
+						map.put(entry.getKey(), str);
+					} catch (Exception e) {
+						
+					}
+				}else{
+					if (!StringUtil.isEmpty(str)) {
+						map.put(entry.getKey(), entry.getValue());
+					}
 				}
 			} else if (obj instanceof Collection) {
 				Collection col = (Collection) obj;
