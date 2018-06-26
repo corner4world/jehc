@@ -19,6 +19,7 @@ import jehc.cmsmodules.cmsservice.CmsContactService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.BrowserUtil;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 
 /**
 * 内容发布平台联系我们 
@@ -36,7 +37,17 @@ public class CmsContactController extends BaseAction{
 	* @return
 	*/
 	@RequestMapping(value="/contact.html",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadCmsContact(CmsContact cmsContact,HttpServletRequest request){
+	public ModelAndView loadCmsContact(BaseSearch baseSearch,HttpServletRequest request, Model model){
+		Map<String, Object> condition = baseSearch.convert();
+		commonHPager(condition,request);
+		List<CmsContact> cmsContactList = cmsContactService.getCmsContactListByCondition(condition);
+		PageInfo<CmsContact> page = new PageInfo<CmsContact>(cmsContactList);
+		if(null != page.getList() && page.getList().size() > 0){
+			model.addAttribute("page", page.getList().get(0));
+		}
+		model.addAttribute("title", "联系我们");
+		String jehcimg_base_url = CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path();
+		model.addAttribute("jehcimg_base_url", jehcimg_base_url);
 		if(BrowserUtil.isPhone(request)){
 			return new ModelAndView("phone/cms-view/cms-contact/cms-contact-list");
 		}else{
@@ -66,6 +77,13 @@ public class CmsContactController extends BaseAction{
 	public ModelAndView toCmsContactDetail(String cms_contact_id,HttpServletRequest request, Model model){
 		CmsContact cmsContact = cmsContactService.getCmsContactById(cms_contact_id);
 		model.addAttribute("cmsContact", cmsContact);
-		return new ModelAndView("pc/cms-view/cms-contact/cms-contact-detail");
+		model.addAttribute("title", "联系我们");
+		String jehcimg_base_url = CommonUtils.getXtPathCache("jehcsources_base_url").get(0).getXt_path();
+		model.addAttribute("jehcimg_base_url", jehcimg_base_url);
+		if(BrowserUtil.isPhone(request)){
+			return new ModelAndView("phone/cms-view/cms-contact/cms-contact-detail");
+		}else{
+			return new ModelAndView("pc/cms-view/cms-contact/cms-contact-detail");
+		}
 	}
 }

@@ -11,15 +11,18 @@
 			cms_contact.status,
 			cms_contact.xt_userinfo_id,
 			cms_contact.imgpath,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			cms_contact.content,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_contact cms_contact LEFT JOIN xt_userinfo xt_userinfo ON cms_contact.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_contact.imgpath
 		WHERE 1=1
 		<if test="null != ctime_st and ctime_st != ''">
-			AND ctime &gt;=#{ctime_st}
+			AND cms_contact.ctime &gt;=#{ctime_st}
 		</if>
 		<if test="null != ctime_et and ctime_et != ''">
-			AND ctime &lt;=#{ctime_et}
+			AND cms_contact.ctime &lt;=#{ctime_et}
 		</if>
 	</select>
 
@@ -33,9 +36,11 @@
 			cms_contact.status,
 			cms_contact.xt_userinfo_id,
 			cms_contact.imgpath,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_contact cms_contact LEFT JOIN xt_userinfo xt_userinfo ON cms_contact.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_contact.imgpath
 		WHERE cms_contact_id=#{cms_contact_id}
 	</select>
 

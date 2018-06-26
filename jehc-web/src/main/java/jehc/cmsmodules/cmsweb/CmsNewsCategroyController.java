@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.cmsmodules.cmsmodel.CmsNewsCategroy;
 import jehc.cmsmodules.cmsservice.CmsNewsCategroyService;
@@ -49,6 +50,10 @@ public class CmsNewsCategroyController extends BaseAction{
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<CmsNewsCategroy> cmsNewsCategroyList = cmsNewsCategroyService.getCmsNewsCategroyListByCondition(condition);
+		String jehcimg_base_url = callBaseFileUrl();
+		for(int i = 0; i < cmsNewsCategroyList.size(); i++){
+			cmsNewsCategroyList.get(i).setXt_attachmentPath(jehcimg_base_url+cmsNewsCategroyList.get(i).getXt_attachmentPath());
+		}
 		PageInfo<CmsNewsCategroy> page = new PageInfo<CmsNewsCategroy>(cmsNewsCategroyList);
 		return outPageBootStr(page,request);
 	}

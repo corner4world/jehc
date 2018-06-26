@@ -12,9 +12,11 @@
 			cms_merchants.ctime,
 			cms_merchants.mtime,
 			cms_merchants.imgpath,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_merchants cms_merchants LEFT JOIN xt_userinfo xt_userinfo ON cms_merchants.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_merchants.imgpath
 		WHERE 1=1
 		<if test="null != title">
 			AND cms_merchants.title LIKE CONCAT(CONCAT('%',#{title}),'%')
@@ -32,9 +34,11 @@
 			cms_merchants.ctime,
 			cms_merchants.mtime,
 			cms_merchants.imgpath,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_merchants cms_merchants LEFT JOIN xt_userinfo xt_userinfo ON cms_merchants.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_merchants.imgpath
 		WHERE cms_merchants_id=#{cms_merchants_id}
 	</select>
 

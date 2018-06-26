@@ -3,7 +3,7 @@
 *{ font-size:16px;padding:0px; margin:0px }
 body{	color:#000;	background-color: #FFF;	padding:0px; 	margin:0px auto;	overflow:scroll;	overflow-x:hidden;	overflow-y:auto;	font-family: Microsoft YaHei,Helvitica,Verdana,Tohoma,Arial,san-serif;	font-size:16px;	max-width:640px;}div{ margin:0; padding:0; border:0; color:#333333;}img{ margin:0; padding:0; border:0; max-width:100%}p{ margin: 0px 0px 1em 0;}b,strong {font-weight: bold;}table { border-collapse: collapse; border-spacing: 0;/* Remove most spacing between table cells.*/}li{ list-style: none outside none;}/*链接*/a{text-decoration:none; color:#000; background: transparent;  outline:none}a:visited {}a:focus { outline:none; }a:hover, a:active{ color:#fff; outline:none;}/*标题*/h1 {font-size: 1.3em;margin:  0;}h2 {font-size: 1.2em; margin: 0;}h3 { font-size: 1.17em;margin: 0;}h4 {font-size: 1em;margin:0;}h5 {font-size: 0.83em;margin: 0;}h6 { font-size: 0.67em;margin: 0;}/*表单*/form {margin: 0;}button,input,select,textarea {    font-size: 100%;  /* Correct font size not being inherited in all browsers. */    margin: 0;  /* Address margins set differently in IE 6/7, Firefox 3+, Safari 5,and Chrome */    vertical-align: baseline; /* Improve appearance and consistency in all browsers */    *vertical-align: middle; /* Improve appearance and consistency in all browsers */
 }
-button,select {text-transform: none;}input{    border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px;-o-border-radius:5px;	background-color: #FFFFFF;	outline: none;	border: none;	border-bottom: 1px solid #E8E8E8;	margin: 3px 0px;	padding: 5px 3px;	width:99%;	line-height: normal;}textarea{	/* -moz-box-sizing: border-box; */    border-radius:5px; -webkit-border-radius:5px; -moz-border-radius:5px; -o-border-radius:5px;	background-color: #FFFFFF;	outline: none;	border: none;	resize: none;	border-bottom: 1px solid #E8E8E8;	margin: 3px 0px;	padding: 5px 3px;	width:99%;}/*其它*/blockquote {margin: 1em 40px;}dfn {font-style: italic;}hr {-moz-box-sizing: content-box;box-sizing: content-box;height: 0;}code, kbd, pre, samp {font-size: 1em;}pre {margin: 1em 0; white-space: pre;white-space: pre-wrap;word-wrap: break-word; }small {font-size: 80%;}sub,sup {font-size: 75%;line-height: 0; position: relative;vertical-align: baseline; /* Prevent `sub` and `sup` affecting `line-height` in all browsers.*/}sup {top: -0.5em;}sub {bottom: -0.25em;}dl{margin: 1em 0;}dd {margin: 0 0 0 40px;}audio:not([controls]) {display: none; height: 0;}/*==========@@HTML默认样式  结束@@==========*/
+button,select {text-transform: none;}input{    border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px;-o-border-radius:0px;	background-color: #FFFFFF;	outline: none;	border: none;	border-bottom: 1px solid #E8E8E8;	margin: 3px 0px;	padding: 5px 3px;	width:99%;	line-height: normal;}textarea{	/* -moz-box-sizing: border-box; */    border-radius:0px; -webkit-border-radius:0px; -moz-border-radius:0px; -o-border-radius:0px;	background-color: #FFFFFF;	outline: none;	border: none;	resize: none;	border-bottom: 1px solid #E8E8E8;	margin: 3px 0px;	padding: 5px 3px;	width:99%;}/*其它*/blockquote {margin: 1em 40px;}dfn {font-style: italic;}hr {-moz-box-sizing: content-box;box-sizing: content-box;height: 0;}code, kbd, pre, samp {font-size: 1em;}pre {margin: 1em 0; white-space: pre;white-space: pre-wrap;word-wrap: break-word; }small {font-size: 80%;}sub,sup {font-size: 75%;line-height: 0; position: relative;vertical-align: baseline; /* Prevent `sub` and `sup` affecting `line-height` in all browsers.*/}sup {top: -0.5em;}sub {bottom: -0.25em;}dl{margin: 1em 0;}dd {margin: 0 0 0 40px;}audio:not([controls]) {display: none; height: 0;}/*==========@@HTML默认样式  结束@@==========*/
 /*==========@@频道模型 开始@@==========*//*表字段全局样式 开始*//*信息表*/.InfoTitle, .ChannelName{ font-size:18px; line-height: 2.5em; vertical-align:middle; font-weight:bold;}.InfoTime{color:#999; text-align:left; font-size:12px; padding:2px 0px; height:25px}.InfoContent{ font-size:17px; line-height:1.5em}.InfoContent p{ font-size:17px}.InfoPicture{ text-align: center;}.InfoPicture img{width:100%;}.f1{}.f2{}.f3{}.f4{}.f5{}.ShowInfo{ height: 36px; line-height: 2.5em; font-size:18px; border-top: 1px solid #bdbec1; vertical-align:middle; padding-top:5px; color:#000000}
 /*频道表*/.ChannelName{}.ChannelContent{}.ChannelSContent{}/*数据字段全局样式 结束*/
 /*频道body类*/.body_article, .body_download, .body_picture, .body_product, .body_page, .body_video, .body_job, .body_feedback{ background-color:#e2e3e6; }.single, .article, .picture, .download, .video, .product, .job, .guestbook, .sitemap, .feedback{ width:99%; margin:0px auto }
@@ -39,7 +39,7 @@ button,select {text-transform: none;}input{    border-radius:5px; -webkit-bord
 /*分享按钮*/.tool{width:95%; margin:0px auto;  text-align:center;}.tool a{color:#000; font-size:16px}.tool table{ width:100%; margin:5px 0px }.tool td{ padding: 3px 5px; width:50%; text-align:center}
 /*分享到朋友圈弹出框提示*/#guide{ position: fixed;top:0;left:0;	width:100%;	height:100%;background:rgba(0, 0, 0, 0.7);	display:none;z-index:20000;}#guide img {position: fixed;right: 18px;top:5px;width: 260px;height: 180px; z-index:20001;}
 /*版权信息*/.copyright{ padding:5px; text-align:center; font-size:14px; color:#666; border:0px solid red}.copyright a{color:#666;}
-/*快捷菜单按钮 开始*/.plug-div {position:fixed;bottom:0;left:0px;z-index:900;}.phone {width:100%; height:480px; border: #000 solid 1px; position:relative; }.plug-menu {	width:36px;	height:36px;	border-radius:36px;	position: absolute;	bottom:16px;	left: 16px;	z-index:999;	-moz-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);	-webkit-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);	box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);	background-color: #B70000;	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #FF0000), color-stop(100%, #B70000));	background-image:-webkit-linear-gradient(top, #FF0000, #B70000);	background-image:-moz-linear-gradient(top, #FF0000, #B70000);	background-image:-o-linear-gradient(top, #FF0000, #B70000);	background-image:linear-gradient(top, #FF0000, #B70000);}
+/*快捷菜单按钮 开始*/.plug-div {position:fixed;bottom:60px;left:-10px;z-index:900;}.phone {width:100%; height:480px; border: #000 solid 1px; position:relative; }.plug-menu {	width:36px;	height:36px;	border-radius:36px;	position: absolute;	bottom:16px;	left: 16px;	z-index:999;	-moz-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);	-webkit-box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);	box-shadow:0 0 0 4px #FFFFFF, 0 2px 5px 4px rgba(0, 0, 0, 0.25);	background-color: #B70000;	background-image:-webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #FF0000), color-stop(100%, #B70000));	background-image:-webkit-linear-gradient(top, #FF0000, #B70000);	background-image:-moz-linear-gradient(top, #FF0000, #B70000);	background-image:-o-linear-gradient(top, #FF0000, #B70000);	background-image:linear-gradient(top, #FF0000, #B70000);}
 .plug-menu span {	display: block;	width:28px;	height:28px;	background: url(../ky_img/plugmenu.png) no-repeat;	background-size: 28px 28px;	text-indent: -999px;	position:absolute;	top:50%;	left:50%;	margin-top:-14px;	margin-left: -14px;	overflow: hidden;}.plug-btn {	width:32px;	height:32px;	border-radius:32px;	-moz-box-shadow:0 0 0 3px #FFFFFF, 0 2px 5px 3px rgba(0, 0, 0, 0.25);	-webkit-box-shadow:0 0 0 3px #FFFFFF, 0 2px 5px 3px rgba(0, 0, 0, 0.25);	box-shadow:0 0 0 3px #FFFFFF, 0 2px 5px 3px rgba(0, 0, 0, 0.25);	background:#333333;	position:absolute;	bottom:0;	left:0;	margin-bottom:20px;	margin-left:20px;	z-index:998;}
 .plug-btn span {	display: block;	width: 24px;	height: 24px;	text-indent: -999px;	position: absolute;	top: 50%;	left: 50%;	margin-top: -12px;	margin-left: -12px;	overflow: hidden;	background-repeat: no-repeat;	background-size: 24px 24px;}
 .plug-phone .plug-useless {background:#e2e2e2;}.plug-btn {-webkit-transition: -webkit-transform 200ms;}
@@ -47,4 +47,51 @@ button,select {text-transform: none;}input{    border-radius:5px; -webkit-bord
 .plug-btn2.open {-webkit-transform: translate(47px, -81px) rotate(720deg);}.plug-btn2.close {-webkit-transform: translate(0, 0) rotate(0deg);}.plug-btn3.open {-webkit-transform: translate(81px, -45px) rotate(720deg);}.plug-btn3.close {-webkit-transform: translate(0, 0) rotate(0deg);}.plug-btn4.open {-webkit-transform: translate(100px, 0) rotate(720deg);}.plug-btn4.close {-webkit-transform: translate(0, 0) rotate(0deg);}.plug-btn5.open {	display: block;	width:310px;	height:310px;	border-radius:310px;	background-color:rgba(255, 255, 255, 0);	-moz-box-shadow: none;	-webkit-box-shadow:none;	box-shadow:none;	z-index:997;	left:-170px;	top:-170px;	overflow: hidden;}
 .plug-btn5.close {	display: none;}
  .themeStyle{background:#32c5d2} /*必须放在最后，覆盖前面定义的样式*//*快捷菜单按钮 结束*//*==========@@公共板块样式 结束@@==========*//*==========@@重用组件 开始@@==========*//*常用颜色*/.blue {color: #00F !important;}.green {color: #0F0 !important;}.red {color: #F00 !important;}.black {color: #000000 !important;}.white {color: #FFFFFF !important;}/*清除浮动*/.clear { display:block; clear:both;}/*必须输入，主要*/.required{ color:red; font-weight:bold;}/*按钮*/a.btn{	display:block; 	width: 99%;	color:#000000; 	font-size:16px;	padding: 8px 0px;	background-color: #3598dc;	background-image: linear-gradient(to top, #fff,#fff);	border: 1px solid #fff;	box-shadow: 0px 1px 2px 0px #fff;-moz-box-shadow:0px 1px 2px 0 #fff;-webkit-box-shadow:0px 1px 2px 0 #fff;-o-box-shadow:0px 1px 2px 0 #fff;	text-shadow: 0.5px 0.5px 1px #fff;	text-align: center;	vertical-align:middle;	border-radius: 0px;-moz-border-radius: 0px;-webkit-border-radius: 0px;-o-border-radius:0px;	cursor: pointer;}/*箭头*/.arrow{ 	background:url(../ky_img/arrow1.png) center center no-repeat; 	background-size:14px;	width:30px; height:30px; display:block; float:right;	vertical-align:middle;}/*==========@@重用组件 结束@@==========*/
-/*==========@@其它样式定义 开始@@==========*//*==========@@其它样式定义 结束@@==========*/
+/*==========@@其它样式定义 开始@@==========*//*==========@@其它样式定义 结束@@==========*//****底部样式*/
+  #foot-div {
+
+            position: fixed;
+            bottom: 0;
+            height:50px;
+            width: 100%;
+            border-top: 1px solid #ccc;
+            background: #fff;
+            z-index:1000;
+               left: 0;
+        }
+
+        #foot_ul {
+            list-style: none;
+            float: left;
+            width: 100%;
+        }
+
+            #foot_ul li {
+                float: left;
+            }
+          #foot_ul li img{
+              height:20px;
+          }
+                #foot_ul li span {
+                    font-size: 12px;
+                }
+
+                .foota{
+                    color: #696060;
+                    text-decoration: none;
+                }
+
+        .foot_acive {
+            color: #5cadff;
+            text-decoration: none;
+        }
+
+        .foot_liwidth {
+            width:25%;
+            text-align: center;
+            padding-top: 5px;
+        }
+
+            .foot_liwidth div {
+                line-height: 20px;
+            }

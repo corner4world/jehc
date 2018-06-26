@@ -6,12 +6,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import jehc.cmsmodules.cmsmodel.CmsMessage;
 import jehc.cmsmodules.cmsservice.CmsMessageService;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.util.BrowserUtil;
+import jehc.xtmodules.xtcore.util.UUID;
 
 /**
 * 内容发布平台在线留言 
@@ -29,7 +31,8 @@ public class CmsMessageController extends BaseAction{
 	* @return
 	*/
 	@RequestMapping(value="/message.html",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView loadCmsMessage(CmsMessage cmsMessage,HttpServletRequest request){
+	public ModelAndView loadCmsMessage(CmsMessage cmsMessage,HttpServletRequest request, Model model){
+		model.addAttribute("title", "在线留言");
 		if(BrowserUtil.isPhone(request)){
 			return new ModelAndView("phone/cms-view/cms-message/cms-message-list");
 		}else{
@@ -38,13 +41,23 @@ public class CmsMessageController extends BaseAction{
 	}
 	
 	/**
-	* 发送至明细页面
+	* 添加
+	* @param cms_message 
 	* @param request 
 	*/
-	@RequestMapping(value="/toCmsMessageDetail",method={RequestMethod.POST,RequestMethod.GET})
-	public ModelAndView toCmsMessageDetail(String cms_message_id,HttpServletRequest request, Model model){
-		CmsMessage cmsMessage = cmsMessageService.getCmsMessageById(cms_message_id);
-		model.addAttribute("cmsMessage", cmsMessage);
-		return new ModelAndView("pc/cms-view/cms-message/cms-message-detail");
+	@ResponseBody
+	@RequestMapping(value="/addCmsMessage",method={RequestMethod.POST,RequestMethod.GET})
+	public String addCmsMessage(CmsMessage cmsMessage,HttpServletRequest request){
+		int i = 0;
+		if(null != cmsMessage && !"".equals(cmsMessage)){
+			cmsMessage.setCtime(getDate());
+			cmsMessage.setCms_message_id(UUID.toUUID());
+			i=cmsMessageService.addCmsMessage(cmsMessage);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
 	}
 }

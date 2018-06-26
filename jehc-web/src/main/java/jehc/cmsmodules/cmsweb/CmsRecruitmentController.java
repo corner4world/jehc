@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.cmsmodules.cmsmodel.CmsRecruitment;
 import jehc.cmsmodules.cmsservice.CmsRecruitmentService;
@@ -49,6 +50,10 @@ public class CmsRecruitmentController extends BaseAction{
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<CmsRecruitment> cmsRecruitmentList = cmsRecruitmentService.getCmsRecruitmentListByCondition(condition);
+		String jehcimg_base_url = callBaseFileUrl();
+		for(int i = 0; i < cmsRecruitmentList.size(); i++){
+			cmsRecruitmentList.get(i).setXt_attachmentPath(jehcimg_base_url+cmsRecruitmentList.get(i).getXt_attachmentPath());
+		}
 		PageInfo<CmsRecruitment> page = new PageInfo<CmsRecruitment>(cmsRecruitmentList);
 		return outPageBootStr(page,request);
 	}

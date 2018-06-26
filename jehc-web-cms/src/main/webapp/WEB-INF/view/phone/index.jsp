@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <!--导航开始-->
    <ul class="channellist">
     <li>
-    	<a href="cmsAboutController/about.html">
+    	<a href="${sysPath }/cmsAboutController/about.html">
       	<div class="ChannelIcon">
        		<img src="${sysPath }/deng/phone/images/index/q1.png" />
       	</div>
@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	</a>
     </li>
     <li>
-    	<a href="cmsNewsController/news.html">
+    	<a href="${sysPath }/cmsNewsController/news.html">
 	      	<div class="ChannelIcon">
 	       		<img src="${sysPath }/deng/phone/images/index/q2.png" />
 	      	</div>
@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	</a>
     </li>
     <li>
-    	<a href="cmsProductCategoryController/productCategory.html">
+    	<a href="${sysPath }/cmsProductCategoryController/productCategory.html">
       		<div class="ChannelIcon">
        			<img src="${sysPath }/deng/phone/images/index/q3.png" />
       		</div>
@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	</a>
     </li>
     <li>
-    	<a href="cmsCaseController/case.html">
+    	<a href="${sysPath }/cmsCaseController/case.html">
       		<div class="ChannelIcon">
        			<img src="${sysPath }/deng/phone/images/index/q4.png" />
       		</div>
@@ -121,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </li>
     -->
     <li>
-    	<a href="cmsMerchantsController/merchants.html">
+    	<a href="${sysPath }/cmsMerchantsController/merchants.html">
       		<div class="ChannelIcon">
        			<img src="${sysPath }/deng/phone/images/index/q6.png" />
       		</div>
@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </li>
     
     <li>
-    	<a href="cmsRecruitmentController/recruitment.html">
+    	<a href="${sysPath }/cmsRecruitmentController/recruitment.html">
       		<div class="ChannelIcon">
        			<img src="${sysPath }/deng/phone/images/index/q7.png" />
       		</div>
@@ -142,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	</a>
     </li>
     <li>
-    	<a href="cmsMessageController/message.html">
+    	<a href="${sysPath }/cmsMessageController/message.html">
       		<div class="ChannelIcon">
        			<img src="${sysPath }/deng/phone/images/index/q8.png" />
       		</div>
@@ -152,7 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	</a>
     </li>
     <li>
-    	<a href="cmsContactController/contact.html">
+    	<a href="${sysPath }/cmsContactController/contact.html">
       		<div class="ChannelIcon">
        			<img src="${sysPath }/deng/phone/images/index/q9.png" />
       		</div>

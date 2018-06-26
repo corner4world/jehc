@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.cmsmodules.cmsmodel.CmsMerchants;
 import jehc.cmsmodules.cmsservice.CmsMerchantsService;
@@ -49,6 +50,10 @@ public class CmsMerchantsController extends BaseAction{
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<CmsMerchants> cmsMerchantsList = cmsMerchantsService.getCmsMerchantsListByCondition(condition);
+		String jehcimg_base_url = callBaseFileUrl();
+		for(int i = 0; i < cmsMerchantsList.size(); i++){
+			cmsMerchantsList.get(i).setXt_attachmentPath(jehcimg_base_url+cmsMerchantsList.get(i).getXt_attachmentPath());
+		}
 		PageInfo<CmsMerchants> page = new PageInfo<CmsMerchants>(cmsMerchantsList);
 		return outPageBootStr(page,request);
 	}

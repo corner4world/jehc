@@ -589,4 +589,12 @@ public class BaseAction extends CommonUtils{
 //            }
 //        });
 	}
+	
+	/**
+	 * 获取基础文件url工程地址
+	 * @param jsonStr
+	 */
+	protected String callBaseFileUrl(){
+		return getXtPathCache("jehcsources_base_url").get(0).getXt_path();
+	}
 }

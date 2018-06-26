@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.cmsmodules.cmsmodel.CmsProductCategory;
 import jehc.cmsmodules.cmsservice.CmsProductCategoryService;
@@ -49,6 +50,10 @@ public class CmsProductCategoryController extends BaseAction{
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<CmsProductCategory> cmsProductCategoryList = cmsProductCategoryService.getCmsProductCategoryListByCondition(condition);
+		String jehcimg_base_url = callBaseFileUrl();
+		for(int i = 0; i < cmsProductCategoryList.size(); i++){
+			cmsProductCategoryList.get(i).setXt_attachmentPath(jehcimg_base_url+cmsProductCategoryList.get(i).getXt_attachmentPath());
+		}
 		PageInfo<CmsProductCategory> page = new PageInfo<CmsProductCategory>(cmsProductCategoryList);
 		return outPageBootStr(page,request);
 	}

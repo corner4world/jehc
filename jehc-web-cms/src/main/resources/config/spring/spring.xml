@@ -71,6 +71,12 @@
 	-->
 	<!-- 以上为插件及其他支持【结束】 -->
 	
+	<!-- 配置调度器 -->
+	<import resource="classpath*:config/quartz/quartz.xml"/>
+	
+	<!-- init初始化 -->
+	<import resource="classpath*:config/init/init.xml"/>
+	
 	<!-- FTP上传 -->
 	<import resource="classpath*:config/ftp/ftp.xml"/>
 	

@@ -12,9 +12,12 @@
 			cms_product_category.xt_userinfo_id,
 			cms_product_category.ctime,
 			cms_product_category.mtime,
-			xt_userinfo.xt_userinfo_realName
+			cms_product_category.content,
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_product_category cms_product_category LEFT JOIN xt_userinfo xt_userinfo ON cms_product_category.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_product_category.imgpath
 		WHERE 1=1
 		<if test="null != title">
 			AND cms_product_category.title LIKE CONCAT(CONCAT('%',#{title}),'%')
@@ -32,9 +35,11 @@
 			cms_product_category.xt_userinfo_id,
 			cms_product_category.ctime,
 			cms_product_category.mtime,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_product_category cms_product_category LEFT JOIN xt_userinfo xt_userinfo ON cms_product_category.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_product_category.imgpath
 		WHERE cms_product_category_id=#{cms_product_category_id}
 	</select>
 

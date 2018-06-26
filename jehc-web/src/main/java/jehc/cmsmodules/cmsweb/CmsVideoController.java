@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.cmsmodules.cmsmodel.CmsVideo;
 import jehc.cmsmodules.cmsservice.CmsVideoService;
@@ -49,6 +50,10 @@ public class CmsVideoController extends BaseAction{
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<CmsVideo> cmsVideoList = cmsVideoService.getCmsVideoListByCondition(condition);
+		String jehcimg_base_url = callBaseFileUrl();
+		for(int i = 0; i < cmsVideoList.size(); i++){
+			cmsVideoList.get(i).setXt_attachmentPath(jehcimg_base_url+cmsVideoList.get(i).getXt_attachmentPath());
+		}
 		PageInfo<CmsVideo> page = new PageInfo<CmsVideo>(cmsVideoList);
 		return outPageBootStr(page,request);
 	}

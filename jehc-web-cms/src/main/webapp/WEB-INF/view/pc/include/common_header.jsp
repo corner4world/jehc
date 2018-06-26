@@ -21,7 +21,7 @@
 	<div style="margin-bottom: 55px;">
 		<div id="toolbar">
 			<div class="fixed-green">
-				<a class="ui-title" id="popmenu">关于我们</a> 
+				<a class="ui-title" id="popmenu">${title }</a> 
 				<a class="ui-btn-back" href="javascript:history.go(-1)"></a> 
 				<a class="ui-btn-home" href="${sysPath }/index.html"></a>
 			</div>

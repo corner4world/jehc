@@ -48,40 +48,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <!--顶部结束-->
   <div id="content">
    <div class="product">
-    <ul class="wxlist">
-     <a href="ProductList.html"><li>
-       <div class="ChannelName">
-       	 产品类别01
-       </div>
-       <div class="ChannelPicture">
-        <img src="${sysPath }/deng/phone/images/1409219004.jpg" />
-       </div>
-       <div class="ChannelSContent">
-       	 产品类别简介产品类别简介产品类别简介产品类别简介
-       </div>
-       <div class="ShowInfo">
-        	点击查看详情&gt;&gt;
-       </div></li>
-     </a>
-     <a href="ProductList.html"><li>
-	       <div class="ChannelName">
-	        	产品类别02
-	       </div>
-	       <div class="ChannelSContent"></div>
-	       <div class="ShowInfo">
-	        	点击查看详情&gt;&gt;
-	       </div></li>
-     </a>
-     <a href="ProductList.html"><li>
-       <div class="ChannelName">
-        	产品类别03
-       </div>
-       <div class="ChannelSContent"></div>
-       <div class="ShowInfo">
-       		 点击查看详情&gt;&gt;
-       </div></li>
-     </a>
-    </ul>
+	   <ul class="wxlist">
+	    	<c:forEach var="cmsProductCategory" items="${page.list }">
+			     <a href="#">
+			     	<li>
+				       <div class="ChannelName">
+				       	 ${cmsProductCategory.title }
+				       </div>
+				       <div class="ChannelPicture">
+				        <img src="${jehcimg_base_url }${cmsProductCategory.xt_attachmentPath }" />
+				       </div>
+				       <div class="ChannelSContent">
+				       	 ${cmsProductCategory.content }
+				       </div>
+				       <div class="ShowInfo">
+				        	点击查看详情&gt;&gt;
+				       </div>
+			       </li>
+			     </a>
+		     </c:forEach>
+	    </ul>
     <!--子频道显示 结束-->
     <div class="clear"></div>
    </div>

@@ -52,3 +52,37 @@
 	</div>
 </div>
 <!--页脚结束-->
+<footer id="footer_mess">
+    <div id="foot-div">
+        <ul id="foot_ul">
+            <li class="foot_acive foot_liwidth">
+                <span>
+                    <a href="${sysPath }/index.html" class="foot_acive">
+                       <i><img src="${sysPath }/deng/phone/images/sy_i.png" /></i><br />首页
+                    </a>
+                </span>
+            </li>
+            <li class="foot_liwidth">
+                <span>
+                    <a href="${sysPath }/cmsNewsController/news.html" class="foota"><i>
+                    <img src="${sysPath }/deng/phone/images/jd_i1.png" /></i><br />资讯中心
+                    </a>
+                </span>
+            </li>
+            <li class="foot_liwidth">
+                <span>
+                    <a href="${sysPath }/cmsCaseController/case.html" class="foota">
+                        <i><img src="${sysPath }/deng/phone/images/hd_i1.png" /></i><br />案例展示
+                    </a>
+                </span>
+            </li>
+            <li class="foot_liwidth">
+                <span>
+                    <a href="${sysPath }/cmsContactController/contact.html" class="foota">
+                        <i><img src="${sysPath }/deng/phone/images/xm_i1.png" /></i><br />联系我们
+                    </a>
+                </span>
+            </li>
+        </ul>
+    </div>
+</footer>

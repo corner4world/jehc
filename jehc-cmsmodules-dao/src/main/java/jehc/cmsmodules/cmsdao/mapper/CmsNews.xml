@@ -13,9 +13,11 @@
 			cms_news.ctime,
 			cms_news.mtime,
 			cms_news.news_category_id,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_news cms_news LEFT JOIN xt_userinfo xt_userinfo ON cms_news.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_news.imgpath
 		WHERE 1=1
 		<if test="null != title">
 			AND cms_news.title LIKE CONCAT(CONCAT('%',#{title}),'%')
@@ -43,9 +45,11 @@
 			cms_news.ctime,
 			cms_news.mtime,
 			cms_news.news_category_id,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_news cms_news LEFT JOIN xt_userinfo xt_userinfo ON cms_news.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_news.imgpath
 		WHERE cms_news_id=#{cms_news_id}
 	</select>
 

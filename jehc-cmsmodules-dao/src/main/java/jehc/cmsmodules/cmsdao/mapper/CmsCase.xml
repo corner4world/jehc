@@ -13,9 +13,11 @@
 			cms_case.status,
 			cms_case.xt_userinfo_id,
 			cms_case.imgpath,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_case cms_case LEFT JOIN xt_userinfo xt_userinfo ON cms_case.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_case.imgpath
 		WHERE 1=1
 		<if test="null != title">
 			AND cms_case.title LIKE CONCAT(CONCAT('%',#{title}),'%')
@@ -34,9 +36,11 @@
 			cms_case.status,
 			cms_case.xt_userinfo_id,
 			cms_case.imgpath,
-			xt_userinfo.xt_userinfo_realName
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_case cms_case LEFT JOIN xt_userinfo xt_userinfo ON cms_case.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_case.imgpath
 		WHERE cms_case_id=#{cms_case_id}
 	</select>
 

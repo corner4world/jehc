@@ -24,134 +24,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="content">
    <div class="picture">
     <ul class="wxlist">
-     <a href="info/66.html"><li style="width:auto">
-       <div class="InfoTitle">
-        	案例展示案例名称
-       </div>
-       <div class="InfoTime">
-        2015-01-01
-       </div>
-       <div class="InfoPicture">
-        <img src="${sysPath }/deng/phone/images/1409305274.jpg" />
-       </div>
-       <div class="InfoSContent">
-        	案例展示案例名称程
-       </div>
-       <div class="ShowInfo">
-       	 点击阅读全文&gt;&gt;
-       </div></li></a>
-     <a href="${sysPath }/deng/phone/info/65.html"><li style="width:auto">
-       <div class="InfoTitle">
-        	案例展示案例名称
-       </div>
-       <div class="InfoTime">
-        2015-01-16
-       </div>
-       <div class="InfoPicture">
-        <img src="${sysPath }/deng/phone/images/1409305196.jpg" />
-       </div>
-       <div class="InfoSContent">
-        	案例展示案例简介。
-       </div>
-       <div class="ShowInfo">
-        	点击阅读全文&gt;&gt;
-       </div></li></a>
-     <a href="${sysPath }/deng/phone/info/64.html"><li style="width:auto">
-       <div class="InfoTitle">
-        	案例展示案例名称
-       </div>
-       <div class="InfoTime">
-        2013-03-26
-       </div>
-       <div class="InfoPicture">
-        <img src="${sysPath }/deng/phone/images/1409305057.jpg" />
-       </div>
-       <div class="InfoSContent">
-       	 案例展示案例名称
-       </div>
-       <div class="ShowInfo">
-        	点击阅读全文&gt;&gt;
-       </div></li></a>
-     <a href="${sysPath }/deng/phone/info/63.html"><li style="width:auto">
-       <div class="InfoTitle">
-        	案例展示案例名称
-       </div>
-       <div class="InfoTime">
-        	2013-03-26
-       </div>
-       <div class="InfoPicture">
-        <img src="${sysPath }/deng/phone/images/1409304823.jpg" />
-       </div>
-       <div class="InfoSContent">
-      		  案例展示案例名称
-       </div>
-       <div class="ShowInfo">
-        	点击阅读全文&gt;&gt;
-       </div></li></a>
-     <a href="info/62.html"><li style="width:auto">
-       <div class="InfoTitle">
-       		 案例展示案例名称
-       </div>
-       <div class="InfoTime">
-       		2013-03-26
-       </div>
-       <div class="InfoPicture">
-        <img src="images/1409304642.jpg" />
-       </div>
-       <div class="InfoSContent">
-        	案例展示案例名称
-       </div>
-       <div class="ShowInfo">
-       	 	点击阅读全文&gt;&gt;
-       </div></li></a>
-     <a href="info/61.html"><li style="width:auto">
-       <div class="InfoTitle">
-        	案例展示案例名称
-       </div>
-       <div class="InfoTime">
-        2013-03-26
-       </div>
-       <div class="InfoPicture">
-        <img src="images/1409304350.jpg" />
-       </div>
-       <div class="InfoSContent">
-      	  案例展示案例名称
-       </div>
-       <div class="ShowInfo">
-        	点击阅读全文&gt;&gt;
-       </div></li></a>
-     <a href="info/60.html"><li style="width:auto">
-       <div class="InfoTitle">
-      	  案例展示案例名称
-       </div>
-       <div class="InfoTime">
-        2013-03-26
-       </div>
-       <div class="InfoPicture">
-        <img src="images/1409304109.jpg" />
-       </div>
-       <div class="InfoSContent">
-        	案例展示案例名称
-       </div>
-       <div class="ShowInfo">
-       	 点击阅读全文&gt;&gt;
-       </div></li></a>
-     <a href="info/31.html"><li style="width:auto">
-       <div class="InfoTitle">
-       	 案例展示案例名称
-       </div>
-       <div class="InfoTime">
-        2013-03-26
-       </div>
-       <div class="InfoPicture">
-        <img src="${sysPath }/deng/phone/images/1409303896.jpg" />
-       </div>
-       <div class="InfoSContent">
-        	案例展示案例名称
-       </div>
-       <div class="ShowInfo">
-        	点击阅读全文&gt;&gt;
-       </div></li></a>
+    	<c:forEach var="cmsCase" items="${page.list }">
+			<a href="${sysPath }/cmsCaseController/toCmsCaseDetail">
+				<li style="width:auto">
+			       <div class="InfoTitle">
+			        	${cmsCase.title }
+			       </div>
+			       <div class="InfoTime">
+			        	<fmt:formatDate value="${cmsCase.ctime }" pattern="yyyy-MM-dd HH:mm:ss"/>
+			       </div>
+			       <div class="InfoPicture">
+			        	<img src="${jehcimg_base_url }${cmsCase.xt_attachmentPath }" />
+			       </div>
+			       <div class="InfoSContent">
+			        	${cmsCase.remark }
+			       </div>
+			       <div class="ShowInfo">
+			       	 	点击阅读全文&gt;&gt;
+			       </div>
+		      </li>
+	    	</a>
+		</c:forEach>
     </ul>
     <div class="page"></div>
     <!-- 图文样式 列表结束-->

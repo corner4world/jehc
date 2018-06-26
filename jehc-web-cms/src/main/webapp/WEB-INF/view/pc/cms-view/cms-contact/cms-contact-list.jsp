@@ -53,9 +53,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					联系我们
 				</div>
 				<div class="ChannelPicture">
-					<img src="${sysPath }/deng/phone/images/1409446193.jpg" alt="联系我们" />
+					<img src="${jehcimg_base_url }${page.xt_attachmentPath }" alt="联系我们" />
 				</div>
 				<div class="ChannelContent">
+					${page.content }
 				</div>
 			</li>
 			</ul>

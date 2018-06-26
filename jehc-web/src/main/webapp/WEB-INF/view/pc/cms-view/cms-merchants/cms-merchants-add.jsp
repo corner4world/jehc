@@ -23,9 +23,10 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-lg-3 control-label">大图片</label>
+				<label class="col-lg-3 control-label">图片</label>
 				<div class="col-lg-6">
-					<input class="form-control" type="text" maxlength="32"  name="imgpath" placeholder="请输入大图片">
+					<input class="form-control" type="hidden" name="imgpath" id="imgpath">
+					<img src = "../deng/images/default/add_d.png" class="img" width="96"  height="96"  id="imgpath_pic">
 				</div>
 			</div>
 			<div class="form-group">

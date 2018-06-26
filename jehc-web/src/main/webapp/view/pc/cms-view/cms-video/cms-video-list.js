@@ -28,7 +28,11 @@ $(document).ready(function() {
 				width:"50px"
 			},
 			{
-				data:'imgPath'
+				data:'xt_attachmentPath',
+				width:"100px",
+				render:function(data, type, row, meta) {
+					return '<img src='+data+' width="80" height="80">';
+				}
 			},
 			{
 				data:'title'

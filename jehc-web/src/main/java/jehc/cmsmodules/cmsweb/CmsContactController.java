@@ -15,7 +15,9 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
+import jehc.cmsmodules.cmsmodel.CmsAbout;
 import jehc.cmsmodules.cmsmodel.CmsContact;
 import jehc.cmsmodules.cmsservice.CmsContactService;
 
@@ -49,6 +51,10 @@ public class CmsContactController extends BaseAction{
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<CmsContact> cmsContactList = cmsContactService.getCmsContactListByCondition(condition);
+		String jehcimg_base_url = callBaseFileUrl();
+		for(int i = 0; i < cmsContactList.size(); i++){
+			cmsContactList.get(i).setXt_attachmentPath(jehcimg_base_url+cmsContactList.get(i).getXt_attachmentPath());
+		}
 		PageInfo<CmsContact> page = new PageInfo<CmsContact>(cmsContactList);
 		return outPageBootStr(page,request);
 	}

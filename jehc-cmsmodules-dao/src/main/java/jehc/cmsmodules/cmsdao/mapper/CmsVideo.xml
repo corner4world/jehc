@@ -12,9 +12,11 @@
 			cms_video.mtime,
 			cms_video.xt_userinfo_id,
 			cms_video.status,
-			xt_userinfo.xt_userinfo_realName 
+			xt_userinfo.xt_userinfo_realName ,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_video cms_video LEFT JOIN xt_userinfo xt_userinfo ON cms_video.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_video.videoPath
 		WHERE 1=1
 		<if test="null != title">
 			AND cms_video.title LIKE CONCAT(CONCAT('%',#{title}),'%')
@@ -39,9 +41,11 @@
 			cms_video.mtime,
 			xt_userinfo.xt_userinfo_id,
 			cms_video.status,
-			xt_userinfo.xt_userinfo_realName 
+			xt_userinfo.xt_userinfo_realName ,
+			xt_attachment.xt_attachmentPath
 		FROM 
 			cms_video cms_video LEFT JOIN xt_userinfo xt_userinfo ON cms_video.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_video.videoPath
 		WHERE cms_video.cms_video_id=#{cms_video_id}
 	</select>
 

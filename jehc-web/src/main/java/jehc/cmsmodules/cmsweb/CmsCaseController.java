@@ -15,6 +15,7 @@ import com.github.pagehelper.PageInfo;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
+import jehc.xtmodules.xtcore.util.CommonUtils;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.cmsmodules.cmsmodel.CmsCase;
 import jehc.cmsmodules.cmsservice.CmsCaseService;
@@ -49,6 +50,10 @@ public class CmsCaseController extends BaseAction{
 		Map<String, Object> condition = baseSearch.convert();
 		commonHPager(condition,request);
 		List<CmsCase> cmsCaseList = cmsCaseService.getCmsCaseListByCondition(condition);
+		String jehcimg_base_url = callBaseFileUrl();
+		for(int i = 0; i < cmsCaseList.size(); i++){
+			cmsCaseList.get(i).setXt_attachmentPath(jehcimg_base_url+cmsCaseList.get(i).getXt_attachmentPath());
+		}
 		PageInfo<CmsCase> page = new PageInfo<CmsCase>(cmsCaseList);
 		return outPageBootStr(page,request);
 	}
