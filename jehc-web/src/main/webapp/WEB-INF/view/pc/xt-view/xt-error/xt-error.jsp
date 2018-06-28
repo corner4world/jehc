@@ -34,9 +34,9 @@ h2{color:#0188DE; font-size:14px; padding:10px 0px 40px 0px;}
 		<h1>抱歉，平台出现异常</h1>
 		<h2>Sorry, the site now can not be accessed. </h2>
 		<font color="#666666">你请求访问的页面，出现异常，我们建议你返回首页进行浏览，谢谢！</font><br /><br />
-		<div class="button">
+		<!-- <div class="button">
 			<a href="#" title="返回" target="_blank">返回</a>
-		</div>
+		</div> -->
 	</div>
 	${ex }
 </body>  

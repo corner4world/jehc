@@ -90,6 +90,7 @@ function showLcAppyDetail(data){
 	$('#xt_constantRemark').val(data.xt_constantRemark);
 	$('#lc_apply_title').val(data.lc_apply_title);
 	$('#lc_apply_time').val(dateformat(data.lc_apply_time));
+	$('#lc_apply_remark').val(data.lc_apply_remark);
 }
 
 function initLcApprovalWin(id){
@@ -105,6 +106,7 @@ function initLcApprovalWin(id){
 				jQuery('td:eq(1)', nRow).html(iDisplayIndex +1);  
 				return nRow;
 		},
+		tableHeight:'100px',
 		order:[],//取消默认排序查询,否则复选框一列会出现小箭头
 		//列表表头字段
 		colums:[
@@ -141,3 +143,9 @@ function initLcApprovalWin(id){
 	//实现单击行选中
 	clickrowselected('approvalDatatables');
 }
+
+$('#myTab a').click(function (e) {
+	e.preventDefault()
+	$(this).tab('show');
+	$.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+})

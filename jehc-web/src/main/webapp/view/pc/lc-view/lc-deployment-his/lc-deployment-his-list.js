@@ -13,10 +13,7 @@ Ext.onReady(function(){
 			labelAlign:'left',
 			flex:1,
 			margin:'2 5 4 5'
-		},
-		items:[
-		{}
-		]
+		}
 	});
 	initSearchForm('north',items,false,'left');
 	store = getGridJsonStore('../lcDeploymentHisController/getLcDeploymentHisListByCondition?lc_process_id='+$('#lc_process_id').val(),[]);
@@ -55,7 +52,10 @@ Ext.onReady(function(){
 			{
 				header:'部署时间',
 				flex:1,
-				dataIndex:'lc_deployment_his_time'
+				dataIndex:'lc_deployment_his_time',
+				renderer:function(value){
+					return dateformat(value); 
+				}
 			},
 			{
 				header:'租户编号',
@@ -237,8 +237,9 @@ Ext.onReady(function(){
 	Ext.create('Ext.Viewport',{
 		layout:'border',
 		xtype:'viewport',
-		items:[searchForm,grid]
+		items:[/*searchForm,*/grid]
 	});
+	store.on('beforeload',function(thiz, options){Ext.apply(thiz.proxy.extraParams,{/*lc_process_id:$('#lc_process_id').val()*/});});
 	/**调用右键**/
 	initRight();
 });
@@ -325,7 +326,7 @@ function initRight(){
 /**查询操作**/
 function search(){
 	store.load({
-		url:'../lcDeploymentHisController/getLcDeploymentHisListByCondition',
+		url:'../lcDeploymentHisController/getLcDeploymentHisListByCondition?lc_process_id='+$('#lc_process_id').val(),
 		params:{
 			start:0,
 			limit:getGridBBar(store).pageSize

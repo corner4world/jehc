@@ -1010,6 +1010,9 @@ public class ActivitiUtil extends BaseService{
 			XtConstantDao xt_ConstantDao = (XtConstantDao)SpringUtil.getBean("xtConstantDao");
 			LcDeploymentHisDao lc_Deployment_HisDao = (LcDeploymentHisDao)SpringUtil.getBean("lcDeploymentHisDao");
 			LcDeploymentHis lc_Deployment_His = lc_Deployment_HisDao.getLcDeploymentHisById(id);
+			if(null == lc_Deployment_His){
+				throw new ExceptionUtil("未能获取到流程部署最新对象,jehc.lcmodules.lcmodel.LcDeploymentHis"); 
+			}
 			XtConstant xtConstant = xt_ConstantDao.getXtConstantById(lc_Deployment_His.getXt_constant_id());
 			LcApplyDao lc_ApplyDao = (LcApplyDao)SpringUtil.getBean("lcApplyDao");
 			ProcessDefinition processDefinition = getProcessDefinition(lc_Deployment_His.getLc_deployment_his_id());
@@ -1036,10 +1039,10 @@ public class ActivitiUtil extends BaseService{
 					//完成第一个任务即发起人
 					completeTask(tasks.get(0).getId());
 				}
-				System.out.println("-------调用工作流审批信息模块成功-------");
+				logger.debug("-------调用工作流审批信息模块成功-------");
 				return true;
 			}else{
-				System.out.println("-------调用工作流审批信息模块失败-------");
+				logger.debug("-------调用工作流审批信息模块失败-------");
 				return false;
 			}
 			/**Activiti发起实例模块(即提交发起申请)结束**/

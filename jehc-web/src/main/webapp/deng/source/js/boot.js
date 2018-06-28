@@ -575,6 +575,9 @@ function msgTishCallFnBoot(msg,fn){
 
 //确认提示
 function confirmB(msg,fn){
+	if(null == msg || msg == ''){
+		msg = '缺省';
+	}
 	 bootbox.dialog({
 		title:"提示",
 		closeButton:true,
@@ -657,39 +660,66 @@ $(function(){
     //设置jQuery Ajax全局的参数  
     $.ajaxSetup({  
         type:"POST",  
-        complete:function(jqXHR,status){
+        complete:function(jqXHR,statusText){
         	//处理sucess和error之后的方法
         	try{
-        		var obj = eval("(" + jqXHR.responseText + ")");
-	        	var status = obj.xt_pt_status;
-	        	//1.优先级判断访问成功后是否存在自定义非法信息提示
-	    		if(typeof(status) != "undefined"){
-	    			if(status==888){ 
-	    		    	//1.session失效 
-	    				msgTishCallFnBoot("您的账号由于长时间没有操作已经失效",function(){
-	    					 var win = top;
-	    					 if(window.opener != null) {win=opener.top; window.close();}
-	    					 win.location=basePath; 
-	    				});
-	    				return;
-	    		    }else if(status==777){
-	    		    	//2.功能权限 
-	    		    	window.parent.toastrBoot(2, "您还没有该模块的操作权限,请与管理员联系");
-	    		    	return;
-	    		    }else if(status==001){
-	    		    	//3.非法页面
-	    		    	window.parent.toastrBoot(2,"您的请求访问，已经列入到黑名单中，我们建议您联系管理员，谢谢！");
-	    		    	return;
-	    		    }else if(obj.xt_pt_status == 500){
-	            		//只处理平台出现异常即拦截器抛出的异常json对象
-	            		showBErrorLog(obj.xt_pt_error_msg);
-	            	}
-	    		}	
+				//2.判断是否出现服务器端异常
+				status = jqXHR.status;
+				if(status == 200){
+					var obj = eval("(" + jqXHR.responseText + ")");
+					var responsestatus = obj.xt_pt_status;
+					console.log('status',responsestatus);
+					//1.优先级判断访问成功后是否存在自定义非法信息提示
+					if(responsestatus !== undefined){
+						if(responsestatus==888){ 
+							//1.session失效 
+							msgTishCallFnBoot("您的账号由于长时间没有操作已经失效",function(){
+								 var win = top;
+								 if(window.opener != null) {win=opener.top; window.close();}
+								 win.location=basePath; 
+							});
+							return;
+						}else if(responsestatus==777){
+							//2.功能权限 
+							window.parent.toastrBoot(2, "您还没有该模块的操作权限,请与管理员联系");
+							return;
+						}else if(responsestatus==001){
+							//3.非法页面
+							window.parent.toastrBoot(2,"您的请求访问，已经列入到黑名单中，我们建议您联系管理员，谢谢！");
+							return;
+						}else if(responsestatus == 500){
+							console.log('500',responsestatus);
+							//只处理平台出现异常即拦截器抛出的异常json对象
+							showBErrorLog(obj.xt_pt_error_msg);
+						}
+					}
+					return;					
+				}
+				if(status == 500){
+					//1.系统出现异常
+					showBErrorLog(obj.xt_pt_error_msg);
+				}else if(status == 404){
+					//2.404异常
+					window.parent.toastrBoot(2,"404无法找到页面请稍后再试!");
+				}else if(status == 400 || status == 403 || status == 504 || status == 408){
+					//3.访问超时
+					window.parent.toastrBoot(2,"访问超时,可能存在网络异常,检查后请重试!");
+				}else if(status == 0){
+					//4.其他异常
+					//window.parent.toastrBoot(2,"无法连接网络!");
+				}else{
+					//5.其他异常
+					window.parent.toastrBoot(2,"其他异常!错误状态信息:"+status);
+				}
+			
+        		console.log('jqXHR',jqXHR);
+        		
     	 	}catch(e){
     	 		//window.parent.toastrBoot(4,'json转换出现异常');
     	 	}
-        },
+        }/**,
         error:function(jqXHR, textStatus, errorThrown){  
+        	console.log('jqXHR1',jqXHR);
         	//2.判断是否出现服务器端异常
     		status = jqXHR.status;
     		if(status == 200){
@@ -711,15 +741,17 @@ $(function(){
 		    	//5.其他异常
 		    	window.parent.toastrBoot(2,"其他异常!错误状态信息:"+status);
 		    }
-        }
+        }**/
     });  
 });  
 ////////////////////////全局Ajax处理结束////////////////////////////
 
 //异常信息详细处理
-function showBErrorLog(msg){
-	msgTishBoot(msg,function(){
-	});
+function showBErrorLog(errorMsg){
+	if(null == errorMsg || '' == errorMsg){
+		errorMsg = "服务端出现异常！";
+	}
+	msgTishCallFnBoot(errorMsg,function(){});
 }
 
 //发送位置

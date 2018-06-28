@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.crmmodules.crmmodel.CrmCustomer">
+	<!--初始化分页-->
+	<select id="getCrmCustomerListByCondition" resultType="jehc.crmmodules.crmmodel.CrmCustomer" parameterType="map">
+		SELECT
+			customerId,
+			name,
+			shortName,
+			provinceId,
+			cityId,
+			districtId,
+			address,
+			levelnum,
+			industryId,
+			scaleId,
+			ageScope,
+			corporation,
+			tel,
+			cdate,
+			mdate,
+			createUser,
+			modifyUser,
+			status,
+			endTime,
+			levelStatus,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			crm_customer crm_customer LEFT JOIN xt_userinfo xt_userinfo ON crm_customer.createUser = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != tel">
+			AND tel LIKE CONCAT(CONCAT('%',#{tel}),'%')
+		</if>
+		<if test="null != shortName">
+			AND shortName LIKE CONCAT(CONCAT('%',#{shortName}),'%')
+		</if>
+		<if test="null != name">
+			AND name LIKE CONCAT(CONCAT('%',#{name}),'%')
+		</if>
+		<if test="null != endTime_st and endTime_st != ''">
+			AND endTime &gt;=#{endTime_st}
+		</if>
+		<if test="null != endTime_et and endTime_et != ''">
+			AND endTime &lt;=#{endTime_et}
+		</if>
+		<if test="null != createUser">
+			AND createUser IN
+			<foreach item="item" index="index" collection="createUser" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCrmCustomerById" resultType="jehc.crmmodules.crmmodel.CrmCustomer" parameterType="string">
+		SELECT
+			customerId,
+			name,
+			shortName,
+			provinceId,
+			cityId,
+			districtId,
+			address,
+			levelnum,
+			industryId,
+			scaleId,
+			ageScope,
+			corporation,
+			tel,
+			cdate,
+			mdate,
+			createUser,
+			modifyUser,
+			status,
+			endTime,
+			levelStatus,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			crm_customer crm_customer LEFT JOIN xt_userinfo xt_userinfo ON crm_customer.createUser = xt_userinfo.xt_userinfo_id
+		WHERE customerId=#{customerId}
+	</select>
+
+	<!--添加-->
+	<insert id="addCrmCustomer" parameterType="jehc.crmmodules.crmmodel.CrmCustomer">
+		INSERT INTO
+			crm_customer
+			(
+			customerId,
+			name,
+			shortName,
+			provinceId,
+			cityId,
+			districtId,
+			address,
+			levelnum,
+			industryId,
+			scaleId,
+			ageScope,
+			corporation,
+			tel,
+			cdate,
+			mdate,
+			createUser,
+			modifyUser,
+			status,
+			endTime
+			)
+			VALUES
+			(
+			#{customerId},
+			#{name},
+			#{shortName},
+			#{provinceId},
+			#{cityId},
+			#{districtId},
+			#{address},
+			#{levelnum},
+			#{industryId},
+			#{scaleId},
+			#{ageScope},
+			#{corporation},
+			#{tel},
+			#{cdate},
+			#{mdate},
+			#{createUser},
+			#{modifyUser},
+			#{status},
+			#{endTime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCrmCustomer" parameterType="jehc.crmmodules.crmmodel.CrmCustomer">
+		UPDATE
+			crm_customer
+		SET
+			name = #{name},
+			shortName = #{shortName},
+			provinceId = #{provinceId},
+			cityId = #{cityId},
+			districtId = #{districtId},
+			address = #{address},
+			levelnum = #{levelnum},
+			industryId = #{industryId},
+			scaleId = #{scaleId},
+			ageScope = #{ageScope},
+			corporation = #{corporation},
+			tel = #{tel},
+			mdate = #{mdate},
+			modifyUser = #{modifyUser},
+			status = #{status},
+			endTime = #{endTime}
+		WHERE customerId=#{customerId}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCrmCustomerBySelective" parameterType="jehc.crmmodules.crmmodel.CrmCustomer">
+		UPDATE
+			crm_customer
+		<set>
+			<if test="name != null">
+				name = #{name},
+			</if>
+			<if test="shortName != null">
+				shortName = #{shortName},
+			</if>
+			<if test="provinceId != null">
+				provinceId = #{provinceId},
+			</if>
+			<if test="cityId != null">
+				cityId = #{cityId},
+			</if>
+			<if test="districtId != null">
+				districtId = #{districtId},
+			</if>
+			<if test="address != null">
+				address = #{address},
+			</if>
+			<if test="levelnum != null">
+				levelnum = #{levelnum},
+			</if>
+			<if test="industryId != null">
+				industryId = #{industryId},
+			</if>
+			<if test="scaleId != null">
+				scaleId = #{scaleId},
+			</if>
+			<if test="ageScope != null">
+				ageScope = #{ageScope},
+			</if>
+			<if test="corporation != null">
+				corporation = #{corporation},
+			</if>
+			<if test="tel != null">
+				tel = #{tel},
+			</if>
+			<if test="mdate != null">
+				mdate = #{mdate},
+			</if>
+			<if test="modifyUser != null">
+				modifyUser = #{modifyUser},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="endTime != null">
+				endTime = #{endTime},
+			</if>
+		</set>
+		WHERE customerId=#{customerId}
+	</update>
+
+	<!--删除-->
+	<delete id="delCrmCustomer" parameterType="map">
+		DELETE FROM crm_customer WHERE customerId IN
+		<foreach item="item" index="index" collection="customerId" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCrmCustomer" parameterType="list">
+		INSERT INTO
+			crm_customer
+			(
+			customerId,
+			name,
+			shortName,
+			provinceId,
+			cityId,
+			districtId,
+			address,
+			levelnum,
+			industryId,
+			scaleId,
+			ageScope,
+			corporation,
+			tel,
+			cdate,
+			mdate,
+			createUser,
+			modifyUser,
+			status,
+			endTime
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.customerId},
+			#{item.name},
+			#{item.shortName},
+			#{item.provinceId},
+			#{item.cityId},
+			#{item.districtId},
+			#{item.address},
+			#{item.levelnum},
+			#{item.industryId},
+			#{item.scaleId},
+			#{item.ageScope},
+			#{item.corporation},
+			#{item.tel},
+			#{item.cdate},
+			#{item.mdate},
+			#{item.createUser},
+			#{item.modifyUser},
+			#{item.status},
+			#{item.endTime}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCrmCustomer" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_customer
+			SET
+				name = #{item.name},
+				shortName = #{item.shortName},
+				provinceId = #{item.provinceId},
+				cityId = #{item.cityId},
+				districtId = #{item.districtId},
+				address = #{item.address},
+				levelnum = #{item.levelnum},
+				industryId = #{item.industryId},
+				scaleId = #{item.scaleId},
+				ageScope = #{item.ageScope},
+				corporation = #{item.corporation},
+				tel = #{item.tel},
+				mdate = #{item.mdate},
+				modifyUser = #{item.modifyUser},
+				status = #{item.status},
+				endTime = #{item.endTime}
+			WHERE customerId=#{item.customerId}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCrmCustomerBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_customer
+			<set>
+				<if test="item.name != null">
+					name = #{item.name},
+				</if>
+				<if test="item.shortName != null">
+					shortName = #{item.shortName},
+				</if>
+				<if test="item.provinceId != null">
+					provinceId = #{item.provinceId},
+				</if>
+				<if test="item.cityId != null">
+					cityId = #{item.cityId},
+				</if>
+				<if test="item.districtId != null">
+					districtId = #{item.districtId},
+				</if>
+				<if test="item.address != null">
+					address = #{item.address},
+				</if>
+				<if test="item.levelnum != null">
+					levelnum = #{item.levelnum},
+				</if>
+				<if test="item.industryId != null">
+					industryId = #{item.industryId},
+				</if>
+				<if test="item.scaleId != null">
+					scaleId = #{item.scaleId},
+				</if>
+				<if test="item.ageScope != null">
+					ageScope = #{item.ageScope},
+				</if>
+				<if test="item.corporation != null">
+					corporation = #{item.corporation},
+				</if>
+				<if test="item.tel != null">
+					tel = #{item.tel},
+				</if>
+				<if test="item.mdate != null">
+					mdate = #{item.mdate},
+				</if>
+				<if test="item.modifyUser != null">
+					modifyUser = #{item.modifyUser},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.endTime != null">
+					endTime = #{item.endTime},
+				</if>
+			</set>
+			WHERE customerId=#{item.customerId}
+		</foreach>
+	</update>
+	
+	<!-- 批量分配客户至客户所属人 -->
+	<update id="updateCToUser" parameterType="map">
+		UPDATE
+			crm_customer
+		SET
+			mdate = #{mdate},
+			createUser = #{createUser},
+			modifyUser = #{modifyUser}
+		WHERE customerId IN 
+		<foreach item="item" index="index" collection="customerId" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!-- 客户等级状态更新 -->
+	<update id="updateCrmLevelStatus" parameterType="map">
+		UPDATE
+			crm_customer
+		SET
+			levelStatus = #{levelStatus}
+		WHERE customerId = #{customerId}
+	</update>
+</mapper>

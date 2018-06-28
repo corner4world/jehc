@@ -158,6 +158,11 @@
 		<module>jehc-cmsmodules-model</module>
 		<module>jehc-cmsmodules-dao</module>
 		<module>jehc-cmsmodules-service</module>
+		
+		<!-- CRM模块 -->
+		<module>jehc-crmmodules-model</module>
+		<module>jehc-crmmodules-dao</module>
+		<module>jehc-crmmodules-service</module>
 
 		<!-- web模块 -->
 		<module>jehc-web</module>
@@ -286,6 +291,23 @@
 			<dependency>
 				<groupId>jehc.p</groupId>
 				<artifactId>jehc-cmsmodules-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<!-- CRM模块 -->
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-crmmodules-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-crmmodules-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-crmmodules-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

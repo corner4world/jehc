@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.crmmodules.crmmodel.CrmCustomerAttach">
+	<!--初始化分页-->
+	<select id="getCrmCustomerAttachListByCondition" resultType="jehc.crmmodules.crmmodel.CrmCustomerAttach" parameterType="map">
+		SELECT
+			customer_attach_id,
+			custom_id,
+			xt_attachement_id,
+			ctime,
+			xt_userinfo_id,
+			isDeleted
+		FROM 
+			crm_customer_attach
+		WHERE 1=1
+		<if test="null != custom_id">
+			AND custom_id LIKE CONCAT(CONCAT('%',#{custom_id}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCrmCustomerAttachById" resultType="jehc.crmmodules.crmmodel.CrmCustomerAttach" parameterType="string">
+		SELECT
+			customer_attach_id,
+			custom_id,
+			xt_attachement_id,
+			ctime,
+			xt_userinfo_id,
+			isDeleted
+		FROM 
+			crm_customer_attach
+		WHERE customer_attach_id=#{customer_attach_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCrmCustomerAttach" parameterType="jehc.crmmodules.crmmodel.CrmCustomerAttach">
+		INSERT INTO
+			crm_customer_attach
+			(
+			customer_attach_id,
+			custom_id,
+			xt_attachement_id,
+			ctime,
+			xt_userinfo_id,
+			isDeleted
+			)
+			VALUES
+			(
+			#{customer_attach_id},
+			#{custom_id},
+			#{xt_attachement_id},
+			#{ctime},
+			#{xt_userinfo_id},
+			#{isDeleted}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCrmCustomerAttach" parameterType="jehc.crmmodules.crmmodel.CrmCustomerAttach">
+		UPDATE
+			crm_customer_attach
+		SET
+			custom_id = #{custom_id},
+			xt_attachement_id = #{xt_attachement_id},
+			ctime = #{ctime},
+			xt_userinfo_id = #{xt_userinfo_id},
+			isDeleted = #{isDeleted}
+		WHERE customer_attach_id=#{customer_attach_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCrmCustomerAttachBySelective" parameterType="jehc.crmmodules.crmmodel.CrmCustomerAttach">
+		UPDATE
+			crm_customer_attach
+		<set>
+			<if test="custom_id != null">
+				custom_id = #{custom_id},
+			</if>
+			<if test="xt_attachement_id != null">
+				xt_attachement_id = #{xt_attachement_id},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="isDeleted != null">
+				isDeleted = #{isDeleted},
+			</if>
+		</set>
+		WHERE customer_attach_id=#{customer_attach_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCrmCustomerAttach" parameterType="map">
+		DELETE FROM crm_customer_attach WHERE customer_attach_id IN
+		<foreach item="item" index="index" collection="customer_attach_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCrmCustomerAttach" parameterType="list">
+		INSERT INTO
+			crm_customer_attach
+			(
+			customer_attach_id,
+			custom_id,
+			xt_attachement_id,
+			ctime,
+			xt_userinfo_id,
+			isDeleted
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.customer_attach_id},
+			#{item.custom_id},
+			#{item.xt_attachement_id},
+			#{item.ctime},
+			#{item.xt_userinfo_id},
+			#{item.isDeleted}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCrmCustomerAttach" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_customer_attach
+			SET
+				custom_id = #{item.custom_id},
+				xt_attachement_id = #{item.xt_attachement_id},
+				ctime = #{item.ctime},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				isDeleted = #{item.isDeleted}
+			WHERE customer_attach_id=#{item.customer_attach_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCrmCustomerAttachBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_customer_attach
+			<set>
+				<if test="item.custom_id != null">
+					custom_id = #{item.custom_id},
+				</if>
+				<if test="item.xt_attachement_id != null">
+					xt_attachement_id = #{item.xt_attachement_id},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.isDeleted != null">
+					isDeleted = #{item.isDeleted},
+				</if>
+			</set>
+			WHERE customer_attach_id=#{item.customer_attach_id}
+		</foreach>
+	</update>
+</mapper>

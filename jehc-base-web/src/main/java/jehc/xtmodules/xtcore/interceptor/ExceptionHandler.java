@@ -1,6 +1,7 @@
 package jehc.xtmodules.xtcore.interceptor;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -10,19 +11,22 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
-import com.alibaba.fastjson.support.spring.FastJsonJsonView;
-
+import jehc.xtmodules.xtcore.base.BaseExceptionEntity;
 import jehc.xtmodules.xtcore.util.CommonUtils;
+import jehc.xtmodules.xtcore.util.JsonUtil;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtcore.util.constant.PathConstant;
 import jehc.xtmodules.xtcore.util.constant.StatusConstant;
 import jehc.xtmodules.xtmodel.XtErrorLogs;
 import jehc.xtmodules.xtservice.XtErrorLogsService;
+import net.sf.json.JSONObject;
 
 /**
  * 捕捉平台所有发生异常拦截
@@ -32,6 +36,7 @@ import jehc.xtmodules.xtservice.XtErrorLogsService;
 public class ExceptionHandler extends SimpleMappingExceptionResolver implements HandlerExceptionResolver{
 	@Autowired
 	private XtErrorLogsService xt_Error_LogsService;
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 控制层异常拦截
 	 */
@@ -72,17 +77,20 @@ public class ExceptionHandler extends SimpleMappingExceptionResolver implements 
         String head = request.getHeader("x-requested-with");
 		//XMLHttpRequest为异步 Ext.basex为同步
 		if(null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head))) { 
-			/* 使用FastJson提供的FastJsonJsonView视图返回，不需要捕获异常   */
-			ModelAndView mv = new ModelAndView();  
-            FastJsonJsonView view = new FastJsonJsonView();  
-            Map<String, Object> attributes = new HashMap<String, Object>();  
-            attributes.put(StatusConstant.XT_PT_STATUS, StatusConstant.XT_PT_STATUS_VAL_500);  
-            attributes.put(StatusConstant.XT_PT_ERROR_MSG, ex.getMessage());  
-            view.setAttributesMap(attributes);  
-            mv.setView(view);  
-            return mv;
+            try {
+            	PrintWriter writer = response.getWriter();
+            	BaseExceptionEntity baseExceptionEntity = new BaseExceptionEntity(StatusConstant.XT_PT_STATUS_VAL_500, ex.getMessage());
+            	JSONObject json = JsonUtil.toJsonObj(baseExceptionEntity);
+            	writer.write(json.toString());
+                writer.flush();
+				logger.debug("异步请求捕捉到异常输出字符串结束");
+            } catch (IOException e) {
+            	logger.debug("异步请求捕捉到异常后发送输出操作出现异常，IOException:"+e.getMessage());
+			}
+            return null;
 		}
         /**向数据库中插入数据**/
+		logger.debug("同步请求捕捉到异常输出字符串结束");
         return new ModelAndView(PathConstant.XT_ERROR_JSP_PATH, model);  
     }  
 }

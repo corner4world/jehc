@@ -138,6 +138,23 @@
 			<groupId>jehc.p</groupId>
 			<artifactId>jehc-cmsmodules-model</artifactId>
 		</dependency>
+		
+		<!-- CRM模块 -->
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-crmmodules-service层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-crmmodules-service</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-crmmodules-dao层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-crmmodules-dao</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-crmmodules-model层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-crmmodules-model</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- 编译过的文件指向路径 -->

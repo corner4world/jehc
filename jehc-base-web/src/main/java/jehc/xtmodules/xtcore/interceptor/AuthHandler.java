@@ -1,6 +1,7 @@
 package jehc.xtmodules.xtcore.interceptor;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.NamedThreadLocal;
 import org.springframework.web.method.HandlerMethod;
@@ -17,13 +20,16 @@ import org.springframework.web.servlet.ModelAndView;
 import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.annotation.AuthUneedLogin;
 import jehc.xtmodules.xtcore.annotation.NeedLoginUnAuth;
+import jehc.xtmodules.xtcore.base.BaseExceptionEntity;
 import jehc.xtmodules.xtcore.base.BaseHttpSessionEntity;
+import jehc.xtmodules.xtcore.base.BaseJson;
 import jehc.xtmodules.xtcore.util.CommonUtils;
+import jehc.xtmodules.xtcore.util.JsonUtil;
 import jehc.xtmodules.xtcore.util.Logback4jUtil;
 import jehc.xtmodules.xtcore.util.constant.PathConstant;
 import jehc.xtmodules.xtcore.util.constant.SessionConstant;
 import jehc.xtmodules.xtcore.util.constant.StatusConstant;
-import jehc.xtmodules.xtmodel.XtUserinfo;
+import net.sf.json.JSONObject;
 
 /**
  * 采用自定义注解做权限
@@ -39,7 +45,7 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 	public void setAllowFunUrls(String[] allowFunUrls) {
 		this.allowFunUrls = allowFunUrls;
 	}
-
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	/**
 	 * 前置通知
 	 */
@@ -56,9 +62,19 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 			String head = request.getHeader("x-requested-with");
 			//XMLHttpRequest为异步 Ext.basex为同步
 			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head)))) { 
-				response.setContentType("text/html;charset=utf-8");  
-	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_001+"}");
-	        	response.getWriter().flush();
+				try {
+					response.setContentType("text/html;charset=utf-8"); 
+	            	PrintWriter writer = response.getWriter();
+	            	BaseExceptionEntity baseExceptionEntity = new BaseExceptionEntity(StatusConstant.XT_PT_STATUS_VAL_001);
+	            	JSONObject json = JsonUtil.toJsonObj(baseExceptionEntity);
+	            	writer.write(json.toString());
+	                writer.flush();
+					logger.debug("ip拦截输出日志");
+	            } catch (IOException e) {
+	            	logger.debug("ip拦截输出日志,操作出现异常，IOException:"+e.getMessage());
+				}
+//	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_001+"}");
+//	        	response.getWriter().flush();
 			}else{
 				request.getRequestDispatcher(PathConstant.XT_ILLEGAL_JSP_PATH).forward(request, response);  
 			}
@@ -113,9 +129,20 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
     			String head = request.getHeader("x-requested-with");
     			//XMLHttpRequest为异步 Ext.basex为同步 则Ajax拦截
     			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head)))) { 
-    				response.setContentType("text/html;charset=utf-8");  
-    	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_777+"}");
-    	        	response.getWriter().flush();
+    				try {
+    					response.setContentType("text/html;charset=utf-8"); 
+    	            	PrintWriter writer = response.getWriter();
+    	            	BaseExceptionEntity baseExceptionEntity = new BaseExceptionEntity(StatusConstant.XT_PT_STATUS_VAL_777);
+    	            	JSONObject json = JsonUtil.toJsonObj(baseExceptionEntity);
+    	            	writer.write(json.toString());
+    	                writer.flush();
+    					logger.debug("功能权限拦截输出日志");
+    	            } catch (IOException e) {
+    	            	logger.debug("功能权限拦截输出日志,操作出现异常，IOException:"+e.getMessage());
+    				}
+//    				response.setContentType("text/html;charset=utf-8");  
+//    	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_777+"}");
+//    	        	response.getWriter().flush();
     			}else{
     				//发送至拦截页面
     				request.getRequestDispatcher(PathConstant.XT_NO_ROLE_JSP_PATH).forward(request, response);  
@@ -134,9 +161,20 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 			String head = request.getHeader("x-requested-with");
 			//XMLHttpRequest为异步 Ext.basex为同步
 			if((null != head && (head.equalsIgnoreCase("XMLHttpRequest")|| "Ext.basex".equalsIgnoreCase(head)))) { 
-				response.setContentType("text/html;charset=utf-8");  
-	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_888+"}");
-	        	response.getWriter().flush();
+				try {
+					response.setContentType("text/html;charset=utf-8"); 
+	            	PrintWriter writer = response.getWriter();
+	            	BaseExceptionEntity baseExceptionEntity = new BaseExceptionEntity(StatusConstant.XT_PT_STATUS_VAL_888);
+	            	JSONObject json = JsonUtil.toJsonObj(baseExceptionEntity);
+	            	writer.write(json.toString());
+	                writer.flush();
+					logger.debug("session失效拦截输出日志");
+	            } catch (IOException e) {
+	            	logger.debug("session失效拦截输出日志,操作出现异常，IOException:"+e.getMessage());
+				}
+//				response.setContentType("text/html;charset=utf-8");  
+//	        	response.getWriter().print("{"+StatusConstant.XT_PT_STATUS+":"+StatusConstant.XT_PT_STATUS_VAL_888+"}");
+//	        	response.getWriter().flush();
 			}else{
 				request.getRequestDispatcher(PathConstant.XT_SESSION_JSP_PATH).forward(request, response);  
 			}
@@ -222,7 +260,6 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 	 * @return
 	 * @throws IOException
 	 */
-	@SuppressWarnings("unchecked")
 	public boolean dataAuth(HttpServletRequest request,HttpServletResponse response,String requestUrl,BaseHttpSessionEntity baseHttpSessionEntity) throws IOException{
 		String[] paramNames = (String[])request.getParameterValues("systemUID");//唯一标志systemUID
 		List<String> systemUandM = baseHttpSessionEntity.getSYSTEMUANDM();
@@ -257,8 +294,19 @@ public class AuthHandler extends Logback4jUtil implements HandlerInterceptor {
 				//如果参数全部符合则进入方法
 				if(result != systemUIDarray.length){
 					//没有权限操作
-					response.setContentType("text/html;charset=utf-8"); 
-					response.getWriter().write("{success:false,msg:'您没有该操作权限,请与管理员联系!'}");
+					try {
+						response.setContentType("text/html;charset=utf-8"); 
+		            	PrintWriter writer = response.getWriter();
+		            	BaseJson baseJson = new BaseJson(false,"您没有该操作权限,请与管理员联系!");
+		            	JSONObject json = JsonUtil.toJsonObj(baseJson);
+		            	writer.write(json.toString());
+		                writer.flush();
+						logger.debug("session失效拦截输出日志");
+		            } catch (IOException e) {
+		            	logger.debug("session失效拦截输出日志,操作出现异常，IOException:"+e.getMessage());
+					}
+//					response.setContentType("text/html;charset=utf-8"); 
+//					response.getWriter().write("{success:false,msg:'您没有该操作权限,请与管理员联系!'}");
 					return false;
 				}
 			}

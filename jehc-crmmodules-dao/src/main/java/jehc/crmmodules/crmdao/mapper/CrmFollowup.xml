@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.crmmodules.crmmodel.CrmFollowup">
+	<!--初始化分页-->
+	<select id="getCrmFollowupListByCondition" resultType="jehc.crmmodules.crmmodel.CrmFollowup" parameterType="map">
+		SELECT
+			followupId,
+			content,
+			xt_userinfo.xt_userinfo_id,
+			ctime,
+			followupTime,
+			customerId,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			crm_followup crm_followup LEFT JOIN xt_userinfo xt_userinfo ON crm_followup.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != ctime_st and ctime_st != ''">
+			AND ctime &gt;=#{ctime_st}
+		</if>
+		<if test="null != ctime_et and ctime_et != ''">
+			AND ctime &lt;=#{ctime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCrmFollowupById" resultType="jehc.crmmodules.crmmodel.CrmFollowup" parameterType="string">
+		SELECT
+			followupId,
+			content,
+			xt_userinfo.xt_userinfo_id,
+			ctime,
+			followupTime,
+			customerId,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			crm_followup crm_followup LEFT JOIN xt_userinfo xt_userinfo ON crm_followup.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE followupId=#{followupId}
+	</select>
+
+	<!--添加-->
+	<insert id="addCrmFollowup" parameterType="jehc.crmmodules.crmmodel.CrmFollowup">
+		INSERT INTO
+			crm_followup
+			(
+			followupId,
+			content,
+			xt_userinfo_id,
+			ctime,
+			followupTime,
+			customerId
+			)
+			VALUES
+			(
+			#{followupId},
+			#{content},
+			#{xt_userinfo_id},
+			#{ctime},
+			#{followupTime},
+			#{customerId}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCrmFollowup" parameterType="jehc.crmmodules.crmmodel.CrmFollowup">
+		UPDATE
+			crm_followup
+		SET
+			content = #{content},
+			xt_userinfo_id = #{xt_userinfo_id},
+			ctime = #{ctime},
+			followupTime = #{followupTime},
+			customerId = #{customerId}
+		WHERE followupId=#{followupId}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCrmFollowupBySelective" parameterType="jehc.crmmodules.crmmodel.CrmFollowup">
+		UPDATE
+			crm_followup
+		<set>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="followupTime != null">
+				followupTime = #{followupTime},
+			</if>
+			<if test="customerId != null">
+				customerId = #{customerId},
+			</if>
+		</set>
+		WHERE followupId=#{followupId}
+	</update>
+
+	<!--删除-->
+	<delete id="delCrmFollowup" parameterType="map">
+		DELETE FROM crm_followup WHERE followupId IN
+		<foreach item="item" index="index" collection="followupId" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCrmFollowup" parameterType="list">
+		INSERT INTO
+			crm_followup
+			(
+			followupId,
+			content,
+			xt_userinfo_id,
+			ctime,
+			followupTime,
+			customerId
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.followupId},
+			#{item.content},
+			#{item.xt_userinfo_id},
+			#{item.ctime},
+			#{item.followupTime},
+			#{item.customerId}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCrmFollowup" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_followup
+			SET
+				content = #{item.content},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				ctime = #{item.ctime},
+				followupTime = #{item.followupTime},
+				customerId = #{item.customerId}
+			WHERE followupId=#{item.followupId}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCrmFollowupBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_followup
+			<set>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.followupTime != null">
+					followupTime = #{item.followupTime},
+				</if>
+				<if test="item.customerId != null">
+					customerId = #{item.customerId},
+				</if>
+			</set>
+			WHERE followupId=#{item.followupId}
+		</foreach>
+	</update>
+</mapper>

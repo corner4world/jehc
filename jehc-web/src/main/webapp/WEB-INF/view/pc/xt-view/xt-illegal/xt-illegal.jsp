@@ -35,9 +35,9 @@ h2{color:#0188DE; font-size:16px; padding:10px 0px 40px 0px;}
 		<h1>抱歉，您已经被列入平台的黑账户了，请联系管理员~</h1>
 		<h2>Sorry, You have to be included in the black platform account, please contact the administrator. </h2>
 		<font color="#666666">您的请求访问，已经列入到黑名单中，我们建议您联系管理员，谢谢！</font><br /><br />
-		<div class="button">
+		<!-- <div class="button">
 			<a href="#" title="返回" target="_blank">返回</a>
-		</div>
+		</div> -->
 	</div>
 </body>  
 </html> 

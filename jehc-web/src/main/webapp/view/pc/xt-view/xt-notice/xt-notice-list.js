@@ -58,7 +58,7 @@ $(document).ready(function() {
 				width:"150px",
 				render:function(data, type, row, meta) {
 					var xt_userinfo_id = row.xt_userinfo_id;
-					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toXtNoticeDetail("'+data+'")><i class="glyphicon glyphicon-eye-open"></i>详情</button>';
+					var btn = '<button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toXtNoticeDetail("'+data+'")><i class="icon-loop"></i>详情</button>';
 						btn = btn +'<jEhcPermissionTag:jehcBtnTag modules="updateXtNotice" systemUID="'+xt_userinfo_id+'"><button class="btn btn-sm green btn-outline filter-submit margin-bottom" onclick=toXtNoticeUpdate_("'+data+'")><i class="glyphicon glyphicon-edit"></i>修改</button></jEhcPermissionTag:jehcBtnTag>';
 					return btn;
 				}

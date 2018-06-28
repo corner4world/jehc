@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.crmmodules.crmmodel.CrmInvoice">
+	<!--初始化分页-->
+	<select id="getCrmInvoiceListByCondition" resultType="jehc.crmmodules.crmmodel.CrmInvoice" parameterType="map">
+		SELECT
+			invoiceId,
+			invoiceType,
+			invoiceName,
+			customerId,
+			invoiceTaxNumber
+		FROM 
+			crm_invoice
+		WHERE 1=1
+		<if test="null != customerId">
+			AND customerId LIKE CONCAT(CONCAT('%',#{customerId}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCrmInvoiceById" resultType="jehc.crmmodules.crmmodel.CrmInvoice" parameterType="string">
+		SELECT
+			invoiceId,
+			invoiceType,
+			invoiceName,
+			customerId,
+			invoiceTaxNumber
+		FROM 
+			crm_invoice
+		WHERE invoiceId=#{invoiceId}
+	</select>
+
+	<!--添加-->
+	<insert id="addCrmInvoice" parameterType="jehc.crmmodules.crmmodel.CrmInvoice">
+		INSERT INTO
+			crm_invoice
+			(
+			invoiceId,
+			invoiceType,
+			invoiceName,
+			customerId,
+			invoiceTaxNumber
+			)
+			VALUES
+			(
+			#{invoiceId},
+			#{invoiceType},
+			#{invoiceName},
+			#{customerId},
+			#{invoiceTaxNumber}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCrmInvoice" parameterType="jehc.crmmodules.crmmodel.CrmInvoice">
+		UPDATE
+			crm_invoice
+		SET
+			invoiceType = #{invoiceType},
+			invoiceName = #{invoiceName},
+			customerId = #{customerId},
+			invoiceTaxNumber = #{invoiceTaxNumber}
+		WHERE invoiceId=#{invoiceId}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCrmInvoiceBySelective" parameterType="jehc.crmmodules.crmmodel.CrmInvoice">
+		UPDATE
+			crm_invoice
+		<set>
+			<if test="invoiceType != null">
+				invoiceType = #{invoiceType},
+			</if>
+			<if test="invoiceName != null">
+				invoiceName = #{invoiceName},
+			</if>
+			<if test="customerId != null">
+				customerId = #{customerId},
+			</if>
+			<if test="invoiceTaxNumber != null">
+				invoiceTaxNumber = #{invoiceTaxNumber},
+			</if>
+		</set>
+		WHERE invoiceId=#{invoiceId}
+	</update>
+
+	<!--删除-->
+	<delete id="delCrmInvoice" parameterType="map">
+		DELETE FROM crm_invoice WHERE invoiceId IN
+		<foreach item="item" index="index" collection="invoiceId" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCrmInvoice" parameterType="list">
+		INSERT INTO
+			crm_invoice
+			(
+			invoiceId,
+			invoiceType,
+			invoiceName,
+			customerId,
+			invoiceTaxNumber
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.invoiceId},
+			#{item.invoiceType},
+			#{item.invoiceName},
+			#{item.customerId},
+			#{item.invoiceTaxNumber}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCrmInvoice" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_invoice
+			SET
+				invoiceType = #{item.invoiceType},
+				invoiceName = #{item.invoiceName},
+				customerId = #{item.customerId},
+				invoiceTaxNumber = #{item.invoiceTaxNumber}
+			WHERE invoiceId=#{item.invoiceId}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCrmInvoiceBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_invoice
+			<set>
+				<if test="item.invoiceType != null">
+					invoiceType = #{item.invoiceType},
+				</if>
+				<if test="item.invoiceName != null">
+					invoiceName = #{item.invoiceName},
+				</if>
+				<if test="item.customerId != null">
+					customerId = #{item.customerId},
+				</if>
+				<if test="item.invoiceTaxNumber != null">
+					invoiceTaxNumber = #{item.invoiceTaxNumber},
+				</if>
+			</set>
+			WHERE invoiceId=#{item.invoiceId}
+		</foreach>
+	</update>
+	
+	<!--根据客户查找唯一发票-->
+	<select id="getCrmInvoiceSingleByCustomerId" resultType="jehc.crmmodules.crmmodel.CrmInvoice" parameterType="string">
+		SELECT
+			invoiceId,
+			invoiceType,
+			invoiceName,
+			customerId,
+			invoiceTaxNumber
+		FROM 
+			crm_invoice
+		WHERE customerId=#{customerId}
+	</select>
+</mapper>

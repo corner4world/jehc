@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.crmmodules.crmmodel.CrmContact">
+	<!--初始化分页-->
+	<select id="getCrmContactListByCondition" resultType="jehc.crmmodules.crmmodel.CrmContact" parameterType="map">
+		SELECT
+			contactId,
+			contactName,
+			contactTel,
+			interests,
+			postId,
+			incumbency,
+			customerId,
+			(select dict.xt_data_dictionary_name from xt_data_dictionary dict WHERE dict.xt_data_dictionary_id = crm_contact.postId) postValue
+		FROM 
+			crm_contact
+		WHERE 1=1
+		<if test="null != contactTel">
+			AND contactTel LIKE CONCAT(CONCAT('%',#{contactTel}),'%')
+		</if>
+		<if test="null != contactName">
+			AND contactName LIKE CONCAT(CONCAT('%',#{contactName}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCrmContactById" resultType="jehc.crmmodules.crmmodel.CrmContact" parameterType="string">
+		SELECT
+			contactId,
+			contactName,
+			contactTel,
+			interests,
+			postId,
+			incumbency,
+			customerId
+		FROM 
+			crm_contact
+		WHERE contactId=#{contactId}
+	</select>
+
+	<!--添加-->
+	<insert id="addCrmContact" parameterType="jehc.crmmodules.crmmodel.CrmContact">
+		INSERT INTO
+			crm_contact
+			(
+			contactId,
+			contactName,
+			contactTel,
+			interests,
+			postId,
+			incumbency,
+			customerId
+			)
+			VALUES
+			(
+			#{contactId},
+			#{contactName},
+			#{contactTel},
+			#{interests},
+			#{postId},
+			#{incumbency},
+			#{customerId}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCrmContact" parameterType="jehc.crmmodules.crmmodel.CrmContact">
+		UPDATE
+			crm_contact
+		SET
+			contactName = #{contactName},
+			contactTel = #{contactTel},
+			interests = #{interests},
+			postId = #{postId},
+			incumbency = #{incumbency},
+			customerId = #{customerId}
+		WHERE contactId=#{contactId}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCrmContactBySelective" parameterType="jehc.crmmodules.crmmodel.CrmContact">
+		UPDATE
+			crm_contact
+		<set>
+			<if test="contactName != null">
+				contactName = #{contactName},
+			</if>
+			<if test="contactTel != null">
+				contactTel = #{contactTel},
+			</if>
+			<if test="interests != null">
+				interests = #{interests},
+			</if>
+			<if test="postId != null">
+				postId = #{postId},
+			</if>
+			<if test="incumbency != null">
+				incumbency = #{incumbency},
+			</if>
+			<if test="customerId != null">
+				customerId = #{customerId},
+			</if>
+		</set>
+		WHERE contactId=#{contactId}
+	</update>
+
+	<!--删除-->
+	<delete id="delCrmContact" parameterType="map">
+		DELETE FROM crm_contact WHERE contactId IN
+		<foreach item="item" index="index" collection="contactId" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCrmContact" parameterType="list">
+		INSERT INTO
+			crm_contact
+			(
+			contactId,
+			contactName,
+			contactTel,
+			interests,
+			postId,
+			incumbency,
+			customerId
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.contactId},
+			#{item.contactName},
+			#{item.contactTel},
+			#{item.interests},
+			#{item.postId},
+			#{item.incumbency},
+			#{item.customerId}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCrmContact" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_contact
+			SET
+				contactName = #{item.contactName},
+				contactTel = #{item.contactTel},
+				interests = #{item.interests},
+				postId = #{item.postId},
+				incumbency = #{item.incumbency},
+				customerId = #{item.customerId}
+			WHERE contactId=#{item.contactId}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCrmContactBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				crm_contact
+			<set>
+				<if test="item.contactName != null">
+					contactName = #{item.contactName},
+				</if>
+				<if test="item.contactTel != null">
+					contactTel = #{item.contactTel},
+				</if>
+				<if test="item.interests != null">
+					interests = #{item.interests},
+				</if>
+				<if test="item.postId != null">
+					postId = #{item.postId},
+				</if>
+				<if test="item.incumbency != null">
+					incumbency = #{item.incumbency},
+				</if>
+				<if test="item.customerId != null">
+					customerId = #{item.customerId},
+				</if>
+			</set>
+			WHERE contactId=#{item.contactId}
+		</foreach>
+	</update>
+</mapper>

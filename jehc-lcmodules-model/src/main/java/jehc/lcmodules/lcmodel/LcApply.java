@@ -23,6 +23,7 @@ public class LcApply extends BaseEntity implements Serializable{
 	private int lc_apply_isonlysaverecord;/**是否只保存该记录0否1是（是否只用于保存业务编号与流程部署、实例绑定）**/
 	private String xt_constantRemark;/**常量备注**/
 	private String xt_constantURL;/**常量URL地址**/
+	private String lc_apply_remark;/**备注**/
 	public void setLc_apply_id(String lc_apply_id){
 		this.lc_apply_id=lc_apply_id;
 	}
@@ -103,6 +104,12 @@ public class LcApply extends BaseEntity implements Serializable{
 	}
 	public void setXt_constantURL(String xt_constantURL) {
 		this.xt_constantURL = xt_constantURL;
+	}
+	public String getLc_apply_remark() {
+		return lc_apply_remark;
+	}
+	public void setLc_apply_remark(String lc_apply_remark) {
+		this.lc_apply_remark = lc_apply_remark;
 	}
 	
 }

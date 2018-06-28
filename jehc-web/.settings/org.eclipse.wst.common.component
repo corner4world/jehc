@@ -73,6 +73,15 @@
         <dependent-module archiveName="jehc-cmsmodules-model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jehc-cmsmodules-model/jehc-cmsmodules-model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="jehc-crmmodules-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jehc-crmmodules-service/jehc-crmmodules-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jehc-crmmodules-dao-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jehc-crmmodules-dao/jehc-crmmodules-dao">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jehc-crmmodules-model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jehc-crmmodules-model/jehc-crmmodules-model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/jehc-web/target/classes"/>
         <property name="context-root" value="jehc-web"/>
     </wb-module>

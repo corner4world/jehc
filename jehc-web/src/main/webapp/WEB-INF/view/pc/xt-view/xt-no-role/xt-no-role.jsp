@@ -35,9 +35,9 @@ h2{color:#0188DE; font-size:14px; padding:10px 0px 40px 0px;}
 		<h1>抱歉，您没有权限操作，请联系管理员~</h1>
 		<h2>Sorry, the site now can not be accessed. </h2>
 		<font color="#666666">你操作的功能，没有权限，我们建议您联系管理员，谢谢！</font><br /><br />
-		<div class="button">
+		<!-- <div class="button">
 			<a href="#" title="返回" target="_blank">返回</a>
-		</div>
+		</div> -->
 	</div>
 	${ex }
 </body>  
