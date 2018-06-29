@@ -68,8 +68,7 @@ http://git.oschina.net/jehc/jehc
 
 
 
-http://116.62.121.126
-或
+### 演示地址：
 www.jehc.top
 
 普通账号及密码：jehc/123456
