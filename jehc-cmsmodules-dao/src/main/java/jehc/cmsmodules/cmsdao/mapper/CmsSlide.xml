@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.cmsmodules.cmsmodel.CmsSlide">
+	<!--初始化分页-->
+	<select id="getCmsSlideListByCondition" resultType="jehc.cmsmodules.cmsmodel.CmsSlide" parameterType="map">
+		SELECT
+			cms_slide.cms_slide_id,
+			cms_slide.title,
+			cms_slide.status,
+			cms_slide.imgpath,
+			cms_slide.href,
+			cms_slide.content,
+			cms_slide.xt_userinfo_id,
+			cms_slide.ctime,
+			cms_slide.mtime,
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
+		FROM 
+			cms_slide cms_slide LEFT JOIN xt_userinfo xt_userinfo ON cms_slide.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_slide.imgpath
+		WHERE 1=1
+		<if test="null != title">
+			AND cms_slide.title LIKE CONCAT(CONCAT('%',#{title}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getCmsSlideById" resultType="jehc.cmsmodules.cmsmodel.CmsSlide" parameterType="string">
+		SELECT
+			cms_slide.cms_slide_id,
+			cms_slide.title,
+			cms_slide.status,
+			cms_slide.imgpath,
+			cms_slide.href,
+			cms_slide.content,
+			cms_slide.xt_userinfo_id,
+			cms_slide.ctime,
+			cms_slide.mtime,
+			xt_userinfo.xt_userinfo_realName,
+			xt_attachment.xt_attachmentPath
+		FROM 
+			cms_slide cms_slide LEFT JOIN xt_userinfo xt_userinfo ON cms_slide.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN xt_attachment xt_attachment ON xt_attachment.xt_attachment_id = cms_slide.imgpath
+		WHERE cms_slide.cms_slide_id=#{cms_slide_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addCmsSlide" parameterType="jehc.cmsmodules.cmsmodel.CmsSlide">
+		INSERT INTO
+			cms_slide
+			(
+			cms_slide_id,
+			title,
+			status,
+			imgpath,
+			href,
+			content,
+			xt_userinfo_id,
+			ctime,
+			mtime
+			)
+			VALUES
+			(
+			#{cms_slide_id},
+			#{title},
+			#{status},
+			#{imgpath},
+			#{href},
+			#{content},
+			#{xt_userinfo_id},
+			#{ctime},
+			#{mtime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateCmsSlide" parameterType="jehc.cmsmodules.cmsmodel.CmsSlide">
+		UPDATE
+			cms_slide
+		SET
+			title = #{title},
+			status = #{status},
+			imgpath = #{imgpath},
+			href = #{href},
+			content = #{content},
+			mtime = #{mtime}
+		WHERE cms_slide_id=#{cms_slide_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateCmsSlideBySelective" parameterType="jehc.cmsmodules.cmsmodel.CmsSlide">
+		UPDATE
+			cms_slide
+		<set>
+			<if test="title != null">
+				title = #{title},
+			</if>
+			<if test="status != null">
+				status = #{status},
+			</if>
+			<if test="imgpath != null">
+				imgpath = #{imgpath},
+			</if>
+			<if test="href != null">
+				href = #{href},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+		</set>
+		WHERE cms_slide_id=#{cms_slide_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delCmsSlide" parameterType="map">
+		DELETE FROM cms_slide WHERE cms_slide_id IN
+		<foreach item="item" index="index" collection="cms_slide_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchCmsSlide" parameterType="list">
+		INSERT INTO
+			cms_slide
+			(
+			cms_slide_id,
+			title,
+			status,
+			imgpath,
+			href,
+			content,
+			xt_userinfo_id,
+			ctime,
+			mtime
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.cms_slide_id},
+			#{item.title},
+			#{item.status},
+			#{item.imgpath},
+			#{item.href},
+			#{item.content},
+			#{item.xt_userinfo_id},
+			#{item.ctime},
+			#{item.mtime}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchCmsSlide" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_slide
+			SET
+				title = #{item.title},
+				status = #{item.status},
+				imgpath = #{item.imgpath},
+				href = #{item.href},
+				content = #{item.content},
+				mtime = #{item.mtime}
+			WHERE cms_slide_id=#{item.cms_slide_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchCmsSlideBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				cms_slide
+			<set>
+				<if test="item.title != null">
+					title = #{item.title},
+				</if>
+				<if test="item.status != null">
+					status = #{item.status},
+				</if>
+				<if test="item.imgpath != null">
+					imgpath = #{item.imgpath},
+				</if>
+				<if test="item.href != null">
+					href = #{item.href},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+			</set>
+			WHERE cms_slide_id=#{item.cms_slide_id}
+		</foreach>
+	</update>
+</mapper>
