@@ -53,6 +53,7 @@
         <link href="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <script src="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+        <link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/datatables.bundle.css" rel="stylesheet" type="text/css" /> 
         <!-- DataTables插件结束 -->
         <!-- 基础插件结束 -->
         <!-- 日期选择器控件开始 -->

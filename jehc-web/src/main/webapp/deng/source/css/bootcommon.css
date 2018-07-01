@@ -8,9 +8,9 @@
     margin-left: 0px;
 }
 .img{cursor:pointer}legend{font-size:16px;background:#f5f5f5}fieldset,legend{padding:5px 0 5px 0}
-.btn-icon-only>[class^=icon-],.btn-icon-only>i {
+/* .btn-icon-only>[class^=icon-],.btn-icon-only>i {
 	margin-top: 4px
-}
+} */
 
 .page-sidebar .page-sidebar-menu li>a>.arrow:before,.page-sidebar-closed.page-sidebar-fixed .page-sidebar:hover .page-sidebar-menu li>a>.arrow:before {
 	border-left: 0 solid transparent;
@@ -219,7 +219,7 @@ div.dataTables_wrapper div.dataTables_length select {
     color: #e73d4a;
 }
 .table > tbody > tr > td, .table > tbody > tr > th, .table > tfoot > tr > td, .table > tfoot > tr > th, .table > thead > tr > td, .table > thead > tr > th {padding: 8px 10px;}
-table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {background-color: #ffefbb;}
+table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {/* background-color: #ffefbb; */background-color: #17C4BB;}
 #datatables{white-space: nowrap;width:100%!important} 
 h4 {
    font-size: 18px;
@@ -241,7 +241,7 @@ h4 {
     background: transparent;  
     appearance:none;  
     -moz-appearance:none; /* Firefox */  
-    -webkit-appearance:none; /* Safari  Chrome */  
+    -webkit-appearance:none; /* Safari ºÍ Chrome */  
 }  
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
     background-color: #fff;
