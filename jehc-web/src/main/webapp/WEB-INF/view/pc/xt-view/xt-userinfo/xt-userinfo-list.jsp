@@ -39,25 +39,21 @@
         </div>
     </div>
 	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
-		<button class="btn btn-circle btn-icon-only btn-default" title="检索" onclick="search('datatables')">
-            <i class="fi-search"></i>检索
-        </button>
-        <button class="btn btn-circle btn-icon-only btn-default" title="重置" onclick="resetAll()">
-            <i class="icon-trash"></i>重置
-        </button>
-        <button class="btn btn-default" onclick="toXtUserinfoAdd()">
+        <button type="button" class="btn btn-outline-primary waves-light waves-effect"  title="检索" onclick="search('datatables')"><i class="fa fa-search m-r-5"></i>检索</button>
+        <button type="button" class="btn btn-outline-danger waves-light waves-effect" title="重置" onclick="resetAll()"> <i class="fa fa-remove m-r-5"></i>重置</button>
+        <button class="btn btn-outline-success waves-light waves-effect" onclick="toXtUserinfoAdd()">
 			 <i class="fa fa-plus-circle"></i>新增
 		</button>
-		<button class="btn btn-default" onclick="toXtUserinfoUpdate()">
+		<button class="btn btn-outline-info waves-light waves-effect" onclick="toXtUserinfoUpdate()">
 			 <i class="fa fa-pencil"></i>修改
 		</button>
-		<button class="btn btn-default" onclick="delXtUserinfo()">
+		<button class="btn btn-outline-danger waves-light waves-effect" onclick="delXtUserinfo()">
 			<i class="fa fa-trash-o"></i>删除
 		</button>
-		<button class="btn btn-default" onclick="initListDeleted()">
+		<button class="btn btn-outline-danger waves-light waves-effect" onclick="initListDeleted()">
 			<i class="fa fa-user-times"></i>已禁用
 		</button>
-		<button class="btn btn-default" onclick="search('datatables')">
+		<button class="btn btn-outline-warning waves-light waves-effect" onclick="search('datatables')">
 			<i class="fa fa-spin fa-refresh"></i>刷新
 		</button>
     </div>

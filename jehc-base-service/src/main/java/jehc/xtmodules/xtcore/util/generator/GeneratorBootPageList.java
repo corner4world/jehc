@@ -280,12 +280,12 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		sb.append("\t\t\t\t查询区域\r\n");
 		sb.append("\t\t\t</div>\r\n");
 		sb.append("\t\t\t<div class=\"actions\">\r\n");
-		sb.append("\t\t\t\t<button class=\"btn btn-default\" onclick=\"search('datatables');\">\r\n");
-		sb.append("\t\t\t\t\t<i class=\"glyphicon glyphicon-search\"></i>&nbsp;检索\r\n");
-		sb.append("\t\t\t\t</button>\r\n");
-		sb.append("\t\t\t\t<button class=\"btn btn-default\" onclick=\"resetAll();\">\r\n");
-		sb.append("\t\t\t\t\t<i class=\"glyphicon glyphicon-trash\"></i>&nbsp;重置\r\n");
-		sb.append("\t\t\t\t</button>\r\n");
+		sb.append("\t\t\t\t&nbsp;<a class=\"btn btn-outline-primary waves-light waves-effect\" href=\"javascript:search('datatables');\">\r\n");
+		sb.append("\t\t\t\t\t<i class=\"fa fa-search m-r-5\"></i>&nbsp;检索\r\n");
+		sb.append("\t\t\t\t</a>&nbsp;\r\n");
+		sb.append("\t\t\t\t<a class=\"btn btn-outline-danger waves-light waves-effect\" href=\"javascript:resetAll();\">\r\n");
+		sb.append("\t\t\t\t\t<i class=\"fa fa-remove m-r-5\"></i>&nbsp;重置\r\n");
+		sb.append("\t\t\t\t</a>\r\n");
 		sb.append("\t\t\t</div>\r\n");
 		sb.append("\t\t</div>\r\n");
 		
@@ -335,17 +335,17 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		/////////////////////////内容开始////////////////////////
 		//按钮开始
 		sb.append("\t<div class=\"pull-left form-actions\" style=\"margin-right:0px;margin-bottom: 5px\">\r\n");
-		sb.append("\t\t<button class=\"btn btn-default\" onclick=\"to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Add()\">\r\n");
-		sb.append("\t\t\t<span class=\"glyphicon glyphicon-plus\" aria-hidden=\"true\"></span>新增\r\n");
+		sb.append("\t\t<button class=\"btn btn-outline-success waves-light waves-effect\" onclick=\"to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Add()\">\r\n");
+		sb.append("\t\t\t<i class=\"fa fa-plus-circle\"></i>新增\r\n");
 		sb.append("\t\t</button>\r\n");
-		sb.append("\t\t<button class=\"btn btn-default\" onclick=\"to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Update()\">\r\n");
-		sb.append("\t\t\t<span class=\"glyphicon glyphicon-pencil\" aria-hidden=\"true\"></span>修改\r\n");
+		sb.append("\t\t<button class=\"btn btn-outline-info waves-light waves-effect\" onclick=\"to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Update()\">\r\n");
+		sb.append("\t\t\t<i class=\"fa fa-pencil\"></i>修改\r\n");
 		sb.append("\t\t</button>\r\n");
-		sb.append("\t\t<button class=\"btn btn-default\" onclick=\"del"+uprepchar(xt_Generator.getXt_generator_tbname())+"()\">\r\n");
-		sb.append("\t\t\t<span class=\"glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>删除\r\n");
+		sb.append("\t\t<button class=\"btn btn-outline-danger waves-light waves-effect\" onclick=\"del"+uprepchar(xt_Generator.getXt_generator_tbname())+"()\">\r\n");
+		sb.append("\t\t\t<i class=\"fa fa-trash-o\"></i>删除\r\n");
 		sb.append("\t\t</button>\r\n");
-		sb.append("\t\t<button class=\"btn btn-default\" onclick=\"search('datatables')\">\r\n");
-		sb.append("\t\t\t<span class=\"glyphicon glyphicon-refresh\" aria-hidden=\"true\"></span>刷新\r\n");
+		sb.append("\t\t<button class=\"btn btn-outline-warning waves-light waves-effect\" onclick=\"search('datatables')\">\r\n");
+		sb.append("\t\t\t<i class=\"fa fa-spin fa-refresh\"></i>刷新\r\n");
 		sb.append("\t\t</button>\r\n");
 		sb.append("\t</div>\r\n");
 		//按钮结束

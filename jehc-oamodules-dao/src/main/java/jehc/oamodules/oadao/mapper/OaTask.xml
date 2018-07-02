@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.oamodules.oamodel.OaTask">
+	<!--初始化分页-->
+	<select id="getOaTaskListByCondition" resultType="jehc.oamodules.oamodel.OaTask" parameterType="map">
+		SELECT
+			oa_task_id,
+			oa_taskTitle,
+			oa_taskBegTime,
+			oa_taskBegApTime,
+			oa_taskEndTime,
+			oa_taskEndApTime,
+			oa_taskIsAllDay,
+			oa_taskType,
+			oa_taskRemindType,
+			oa_taskTightness,
+			oa_taskContent,
+			xt_userinfo_id
+		FROM 
+			oa_task
+		WHERE 1=1
+		<if test="null != oa_taskTitle">
+			AND oa_taskTitle LIKE CONCAT(CONCAT('%',#{oa_taskTitle}),'%')
+		</if>
+		<if test="null != oa_taskIsAllDay">
+			AND oa_taskIsAllDay = #{oa_taskIsAllDay}
+		</if>
+		<if test="null != oa_taskTightness">
+			AND oa_taskTightness = #{oa_taskTightness}
+		</if>
+		<if test="null != oa_taskType">
+			AND oa_taskType = #{oa_taskType}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getOaTaskById" resultType="jehc.oamodules.oamodel.OaTask" parameterType="string">
+		SELECT
+			oa_task_id,
+			oa_taskTitle,
+			oa_taskBegTime,
+			oa_taskBegApTime,
+			oa_taskEndTime,
+			oa_taskEndApTime,
+			oa_taskIsAllDay,
+			oa_taskType,
+			oa_taskRemindType,
+			oa_taskTightness,
+			oa_taskContent,
+			xt_userinfo_id
+		FROM 
+			oa_task
+		WHERE oa_task_id=#{oa_task_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addOaTask" parameterType="jehc.oamodules.oamodel.OaTask">
+		INSERT INTO
+			oa_task
+			(
+			oa_task_id,
+			oa_taskTitle,
+			oa_taskBegTime,
+			oa_taskBegApTime,
+			oa_taskEndTime,
+			oa_taskEndApTime,
+			oa_taskIsAllDay,
+			oa_taskType,
+			oa_taskRemindType,
+			oa_taskTightness,
+			oa_taskContent,
+			xt_userinfo_id
+			)
+			VALUES
+			(
+			#{oa_task_id},
+			#{oa_taskTitle},
+			#{oa_taskBegTime},
+			#{oa_taskBegApTime},
+			#{oa_taskEndTime},
+			#{oa_taskEndApTime},
+			#{oa_taskIsAllDay},
+			#{oa_taskType},
+			#{oa_taskRemindType},
+			#{oa_taskTightness},
+			#{oa_taskContent},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateOaTask" parameterType="jehc.oamodules.oamodel.OaTask">
+		UPDATE
+			oa_task
+		SET
+			oa_taskTitle = #{oa_taskTitle},
+			oa_taskBegTime = #{oa_taskBegTime},
+			oa_taskBegApTime = #{oa_taskBegApTime},
+			oa_taskEndTime = #{oa_taskEndTime},
+			oa_taskEndApTime = #{oa_taskEndApTime},
+			oa_taskIsAllDay = #{oa_taskIsAllDay},
+			oa_taskType = #{oa_taskType},
+			oa_taskRemindType = #{oa_taskRemindType},
+			oa_taskTightness = #{oa_taskTightness},
+			oa_taskContent = #{oa_taskContent},
+			xt_userinfo_id = #{xt_userinfo_id}
+		WHERE oa_task_id=#{oa_task_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateOaTaskBySelective" parameterType="jehc.oamodules.oamodel.OaTask">
+		UPDATE
+			oa_task
+		<set>
+			<if test="oa_taskTitle != null">
+				oa_taskTitle = #{oa_taskTitle},
+			</if>
+			<if test="oa_taskBegTime != null">
+				oa_taskBegTime = #{oa_taskBegTime},
+			</if>
+			<if test="oa_taskBegApTime != null">
+				oa_taskBegApTime = #{oa_taskBegApTime},
+			</if>
+			<if test="oa_taskEndTime != null">
+				oa_taskEndTime = #{oa_taskEndTime},
+			</if>
+			<if test="oa_taskEndApTime != null">
+				oa_taskEndApTime = #{oa_taskEndApTime},
+			</if>
+			<if test="oa_taskIsAllDay != null">
+				oa_taskIsAllDay = #{oa_taskIsAllDay},
+			</if>
+			<if test="oa_taskType != null">
+				oa_taskType = #{oa_taskType},
+			</if>
+			<if test="oa_taskRemindType != null">
+				oa_taskRemindType = #{oa_taskRemindType},
+			</if>
+			<if test="oa_taskTightness != null">
+				oa_taskTightness = #{oa_taskTightness},
+			</if>
+			<if test="oa_taskContent != null">
+				oa_taskContent = #{oa_taskContent},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+		</set>
+		WHERE oa_task_id=#{oa_task_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delOaTask" parameterType="map">
+		DELETE FROM oa_task WHERE oa_task_id IN
+		<foreach item="item" index="index" collection="oa_task_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchOaTask" parameterType="list">
+		INSERT INTO
+			oa_task
+			(
+			oa_task_id,
+			oa_taskTitle,
+			oa_taskBegTime,
+			oa_taskBegApTime,
+			oa_taskEndTime,
+			oa_taskEndApTime,
+			oa_taskIsAllDay,
+			oa_taskType,
+			oa_taskRemindType,
+			oa_taskTightness,
+			oa_taskContent,
+			xt_userinfo_id
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.oa_task_id},
+			#{item.oa_taskTitle},
+			#{item.oa_taskBegTime},
+			#{item.oa_taskBegApTime},
+			#{item.oa_taskEndTime},
+			#{item.oa_taskEndApTime},
+			#{item.oa_taskIsAllDay},
+			#{item.oa_taskType},
+			#{item.oa_taskRemindType},
+			#{item.oa_taskTightness},
+			#{item.oa_taskContent},
+			#{item.xt_userinfo_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchOaTask" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_task
+			SET
+				oa_taskTitle = #{item.oa_taskTitle},
+				oa_taskBegTime = #{item.oa_taskBegTime},
+				oa_taskBegApTime = #{item.oa_taskBegApTime},
+				oa_taskEndTime = #{item.oa_taskEndTime},
+				oa_taskEndApTime = #{item.oa_taskEndApTime},
+				oa_taskIsAllDay = #{item.oa_taskIsAllDay},
+				oa_taskType = #{item.oa_taskType},
+				oa_taskRemindType = #{item.oa_taskRemindType},
+				oa_taskTightness = #{item.oa_taskTightness},
+				oa_taskContent = #{item.oa_taskContent},
+				xt_userinfo_id = #{item.xt_userinfo_id}
+			WHERE oa_task_id=#{item.oa_task_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchOaTaskBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_task
+			<set>
+				<if test="item.oa_taskTitle != null">
+					oa_taskTitle = #{item.oa_taskTitle},
+				</if>
+				<if test="item.oa_taskBegTime != null">
+					oa_taskBegTime = #{item.oa_taskBegTime},
+				</if>
+				<if test="item.oa_taskBegApTime != null">
+					oa_taskBegApTime = #{item.oa_taskBegApTime},
+				</if>
+				<if test="item.oa_taskEndTime != null">
+					oa_taskEndTime = #{item.oa_taskEndTime},
+				</if>
+				<if test="item.oa_taskEndApTime != null">
+					oa_taskEndApTime = #{item.oa_taskEndApTime},
+				</if>
+				<if test="item.oa_taskIsAllDay != null">
+					oa_taskIsAllDay = #{item.oa_taskIsAllDay},
+				</if>
+				<if test="item.oa_taskType != null">
+					oa_taskType = #{item.oa_taskType},
+				</if>
+				<if test="item.oa_taskRemindType != null">
+					oa_taskRemindType = #{item.oa_taskRemindType},
+				</if>
+				<if test="item.oa_taskTightness != null">
+					oa_taskTightness = #{item.oa_taskTightness},
+				</if>
+				<if test="item.oa_taskContent != null">
+					oa_taskContent = #{item.oa_taskContent},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+			</set>
+			WHERE oa_task_id=#{item.oa_task_id}
+		</foreach>
+	</update>
+</mapper>
