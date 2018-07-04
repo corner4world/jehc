@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.oamodules.oamodel.OaNoteClassify">
+	<!--初始化分页-->
+	<select id="getOaNoteClassifyListByCondition" resultType="jehc.oamodules.oamodel.OaNoteClassify" parameterType="map">
+		SELECT
+			oa_note_classify_id,
+			oa_note_classify_name,
+			ctime,
+			mtime,
+			isdeleted,
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			oa_note_classify oa_note_classify LEFT JOIN xt_userinfo xt_userinfo ON oa_note_classify.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != oa_note_classify_name">
+			AND oa_note_classify_name LIKE CONCAT(CONCAT('%',#{oa_note_classify_name}),'%')
+		</if>
+		AND isdeleted = 0
+	</select>
+
+	<!--查询对象-->
+	<select id="getOaNoteClassifyById" resultType="jehc.oamodules.oamodel.OaNoteClassify" parameterType="string">
+		SELECT
+			oa_note_classify_id,
+			oa_note_classify_name,
+			ctime,
+			mtime,
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			oa_note_classify oa_note_classify LEFT JOIN xt_userinfo xt_userinfo ON oa_note_classify.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE oa_note_classify_id=#{oa_note_classify_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addOaNoteClassify" parameterType="jehc.oamodules.oamodel.OaNoteClassify">
+		INSERT INTO
+			oa_note_classify
+			(
+			oa_note_classify_id,
+			oa_note_classify_name,
+			ctime,
+			isdeleted,
+			xt_userinfo_id
+			)
+			VALUES
+			(
+			#{oa_note_classify_id},
+			#{oa_note_classify_name},
+			#{ctime},
+			#{isdeleted},
+			#{xt_userinfo_id}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateOaNoteClassify" parameterType="jehc.oamodules.oamodel.OaNoteClassify">
+		UPDATE
+			oa_note_classify
+		SET
+			oa_note_classify_name = #{oa_note_classify_name},
+			mtime = #{mtime}
+		WHERE oa_note_classify_id=#{oa_note_classify_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateOaNoteClassifyBySelective" parameterType="jehc.oamodules.oamodel.OaNoteClassify">
+		UPDATE
+			oa_note_classify
+		<set>
+			<if test="oa_note_classify_name != null">
+				oa_note_classify_name = #{oa_note_classify_name},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+		</set>
+		WHERE oa_note_classify_id=#{oa_note_classify_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delOaNoteClassify" parameterType="map">
+		UPDATE oa_note_classify SET isdeleted =1 WHERE oa_note_classify_id IN
+		<foreach item="item" index="index" collection="oa_note_classify_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchOaNoteClassify" parameterType="list">
+		INSERT INTO
+			oa_note_classify
+			(
+			oa_note_classify_id,
+			oa_note_classify_name,
+			ctime,
+			isdeleted,
+			xt_userinfo_id
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.oa_note_classify_id},
+			#{item.oa_note_classify_name},
+			#{item.ctime},
+			#{item.isdeleted},
+			#{item.xt_userinfo_id}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchOaNoteClassify" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_note_classify
+			SET
+				oa_note_classify_name = #{item.oa_note_classify_name},
+				mtime = #{item.mtime},
+				xt_userinfo_id = #{item.xt_userinfo_id}
+			WHERE oa_note_classify_id=#{item.oa_note_classify_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchOaNoteClassifyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_note_classify
+			<set>
+				<if test="item.oa_note_classify_name != null">
+					oa_note_classify_name = #{item.oa_note_classify_name},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+			</set>
+			WHERE oa_note_classify_id=#{item.oa_note_classify_id}
+		</foreach>
+	</update>
+</mapper>
