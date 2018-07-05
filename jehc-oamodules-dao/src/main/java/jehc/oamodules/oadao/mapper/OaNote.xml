@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.oamodules.oamodel.OaNote">
+	<!--初始化分页-->
+	<select id="getOaNoteListByCondition" resultType="jehc.oamodules.oamodel.OaNote" parameterType="map">
+		SELECT
+			oa_note.oa_note_id,
+			oa_note.oa_noteTitle,
+			oa_note.oa_note_classify_id,
+			oa_note.content,
+			oa_note.begtime,
+			oa_note.endtime,
+			oa_note.xt_userinfo_id,
+			oa_note.ctime,
+			oa_note.mtime,
+			xt_userinfo.xt_userinfo_realName,
+			oa_note_classify.oa_note_classify_name
+		FROM 
+			oa_note oa_note LEFT JOIN xt_userinfo xt_userinfo ON oa_note.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN oa_note_classify oa_note_classify ON oa_note_classify.oa_note_classify_id = oa_note.oa_note_classify_id
+		WHERE 1=1
+		<if test="null != oa_noteTitle">
+			AND oa_noteTitle LIKE CONCAT(CONCAT('%',#{oa_noteTitle}),'%')
+		</if>
+		<if test="null != oa_note_classify_id">
+			AND oa_note_classify_id = #{oa_note_classify_id}
+		</if>
+		<if test="null != begtime_st and begtime_st != ''">
+			AND begtime &gt;=#{begtime_st}
+		</if>
+		<if test="null != begtime_et and begtime_et != ''">
+			AND begtime &lt;=#{begtime_et}
+		</if>
+		<if test="null != endtime_st and endtime_st != ''">
+			AND endtime &gt;=#{endtime_st}
+		</if>
+		<if test="null != endtime_et and endtime_et != ''">
+			AND endtime &lt;=#{endtime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getOaNoteById" resultType="jehc.oamodules.oamodel.OaNote" parameterType="string">
+		SELECT
+			oa_note.oa_note_id,
+			oa_note.oa_noteTitle,
+			oa_note.oa_note_classify_id,
+			oa_note.content,
+			oa_note.begtime,
+			oa_note.endtime,
+			oa_note.xt_userinfo_id,
+			oa_note.ctime,
+			oa_note.mtime,
+			xt_userinfo.xt_userinfo_realName,
+			oa_note_classify.oa_note_classify_name
+		FROM 
+			oa_note oa_note LEFT JOIN xt_userinfo xt_userinfo ON oa_note.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+			LEFT JOIN oa_note_classify oa_note_classify ON oa_note_classify.oa_note_classify_id = oa_note.oa_note_classify_id
+		WHERE oa_note_id=#{oa_note_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addOaNote" parameterType="jehc.oamodules.oamodel.OaNote">
+		INSERT INTO
+			oa_note
+			(
+			oa_note_id,
+			oa_noteTitle,
+			oa_note_classify_id,
+			content,
+			begtime,
+			endtime,
+			xt_userinfo_id,
+			ctime,
+			mtime
+			)
+			VALUES
+			(
+			#{oa_note_id},
+			#{oa_noteTitle},
+			#{oa_note_classify_id},
+			#{content},
+			#{begtime},
+			#{endtime},
+			#{xt_userinfo_id},
+			#{ctime},
+			#{mtime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateOaNote" parameterType="jehc.oamodules.oamodel.OaNote">
+		UPDATE
+			oa_note
+		SET
+			oa_noteTitle = #{oa_noteTitle},
+			oa_note_classify_id = #{oa_note_classify_id},
+			content = #{content},
+			begtime = #{begtime},
+			endtime = #{endtime},
+			mtime = #{mtime}
+		WHERE oa_note_id=#{oa_note_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateOaNoteBySelective" parameterType="jehc.oamodules.oamodel.OaNote">
+		UPDATE
+			oa_note
+		<set>
+			<if test="oa_noteTitle != null">
+				oa_noteTitle = #{oa_noteTitle},
+			</if>
+			<if test="oa_note_classify_id != null">
+				oa_note_classify_id = #{oa_note_classify_id},
+			</if>
+			<if test="content != null">
+				content = #{content},
+			</if>
+			<if test="begtime != null">
+				begtime = #{begtime},
+			</if>
+			<if test="endtime != null">
+				endtime = #{endtime},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+		</set>
+		WHERE oa_note_id=#{oa_note_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delOaNote" parameterType="map">
+		DELETE FROM oa_note WHERE oa_note_id IN
+		<foreach item="item" index="index" collection="oa_note_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchOaNote" parameterType="list">
+		INSERT INTO
+			oa_note
+			(
+			oa_note_id,
+			oa_noteTitle,
+			oa_note_classify_id,
+			content,
+			begtime,
+			endtime,
+			xt_userinfo_id,
+			ctime,
+			mtime
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.oa_note_id},
+			#{item.oa_noteTitle},
+			#{item.oa_note_classify_id},
+			#{item.content},
+			#{item.begtime},
+			#{item.endtime},
+			#{item.xt_userinfo_id},
+			#{item.ctime},
+			#{item.mtime}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchOaNote" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_note
+			SET
+				oa_noteTitle = #{item.oa_noteTitle},
+				oa_note_classify_id = #{item.oa_note_classify_id},
+				content = #{item.content},
+				begtime = #{item.begtime},
+				endtime = #{item.endtime},
+				mtime = #{item.mtime}
+			WHERE oa_note_id=#{item.oa_note_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchOaNoteBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_note
+			<set>
+				<if test="item.oa_noteTitle != null">
+					oa_noteTitle = #{item.oa_noteTitle},
+				</if>
+				<if test="item.oa_note_classify_id != null">
+					oa_note_classify_id = #{item.oa_note_classify_id},
+				</if>
+				<if test="item.content != null">
+					content = #{item.content},
+				</if>
+				<if test="item.begtime != null">
+					begtime = #{item.begtime},
+				</if>
+				<if test="item.endtime != null">
+					endtime = #{item.endtime},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+			</set>
+			WHERE oa_note_id=#{item.oa_note_id}
+		</foreach>
+	</update>
+</mapper>
