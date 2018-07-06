@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.oamodules.oamodel.OaSuggestionbox">
+	<!--初始化分页-->
+	<select id="getOaSuggestionboxListByCondition" resultType="jehc.oamodules.oamodel.OaSuggestionbox" parameterType="map">
+		SELECT
+			oa_suggestionbox_id,
+			oa_suggestionboxType,
+			oa_suggestionboxTitle,
+			oa_suggestionboxContent,
+			oa_suggestionboxIsPub,
+			createTime,
+			isDelete,
+			state,
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			oa_suggestionbox oa_suggestionbox LEFT JOIN xt_userinfo xt_userinfo ON oa_suggestionbox.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+			AND isDelete = 0
+		<if test="null != oa_suggestionboxTitle">
+			AND oa_suggestionboxTitle LIKE CONCAT(CONCAT('%',#{oa_suggestionboxTitle}),'%')
+		</if>
+		<if test="null != oa_suggestionboxIsPub">
+			AND oa_suggestionboxIsPub = #{oa_suggestionboxIsPub}
+		</if>
+		<if test="null != state">
+			AND state = #{state}
+		</if>
+		<if test="null != oa_suggestionboxType">
+			AND oa_suggestionboxType = #{oa_suggestionboxType}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getOaSuggestionboxById" resultType="jehc.oamodules.oamodel.OaSuggestionbox" parameterType="string">
+		SELECT
+			oa_suggestionbox_id,
+			oa_suggestionboxType,
+			oa_suggestionboxTitle,
+			oa_suggestionboxContent,
+			oa_suggestionboxIsPub,
+			createTime,
+			isDelete,
+			state,
+			xt_userinfo.xt_userinfo_id,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			oa_suggestionbox oa_suggestionbox LEFT JOIN xt_userinfo xt_userinfo ON oa_suggestionbox.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE oa_suggestionbox_id=#{oa_suggestionbox_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addOaSuggestionbox" parameterType="jehc.oamodules.oamodel.OaSuggestionbox">
+		INSERT INTO
+			oa_suggestionbox
+			(
+			oa_suggestionbox_id,
+			oa_suggestionboxType,
+			xt_userinfo_id,
+			oa_suggestionboxTitle,
+			oa_suggestionboxContent,
+			oa_suggestionboxIsPub,
+			createTime,
+			isDelete,
+			state
+			)
+			VALUES
+			(
+			#{oa_suggestionbox_id},
+			#{oa_suggestionboxType},
+			#{xt_userinfo_id},
+			#{oa_suggestionboxTitle},
+			#{oa_suggestionboxContent},
+			#{oa_suggestionboxIsPub},
+			#{createTime},
+			#{isDelete},
+			#{state}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateOaSuggestionbox" parameterType="jehc.oamodules.oamodel.OaSuggestionbox">
+		UPDATE
+			oa_suggestionbox
+		SET
+			oa_suggestionboxType = #{oa_suggestionboxType},
+			oa_suggestionboxTitle = #{oa_suggestionboxTitle},
+			oa_suggestionboxContent = #{oa_suggestionboxContent},
+			oa_suggestionboxIsPub = #{oa_suggestionboxIsPub},
+			state = #{state}
+		WHERE oa_suggestionbox_id=#{oa_suggestionbox_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateOaSuggestionboxBySelective" parameterType="jehc.oamodules.oamodel.OaSuggestionbox">
+		UPDATE
+			oa_suggestionbox
+		<set>
+			<if test="oa_suggestionboxType != null">
+				oa_suggestionboxType = #{oa_suggestionboxType},
+			</if>
+			<if test="oa_suggestionboxTitle != null">
+				oa_suggestionboxTitle = #{oa_suggestionboxTitle},
+			</if>
+			<if test="oa_suggestionboxContent != null">
+				oa_suggestionboxContent = #{oa_suggestionboxContent},
+			</if>
+			<if test="oa_suggestionboxIsPub != null">
+				oa_suggestionboxIsPub = #{oa_suggestionboxIsPub},
+			</if>
+			<if test="state != null">
+				state = #{state},
+			</if>
+		</set>
+		WHERE oa_suggestionbox_id=#{oa_suggestionbox_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delOaSuggestionbox" parameterType="map">
+		UPDATE oa_suggestionbox SET isDelete =1 WHERE oa_suggestionbox_id IN
+		<foreach item="item" index="index" collection="oa_suggestionbox_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchOaSuggestionbox" parameterType="list">
+		INSERT INTO
+			oa_suggestionbox
+			(
+			oa_suggestionbox_id,
+			oa_suggestionboxType,
+			xt_userinfo_id,
+			oa_suggestionboxTitle,
+			oa_suggestionboxContent,
+			oa_suggestionboxIsPub,
+			createTime,
+			isDelete,
+			state
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.oa_suggestionbox_id},
+			#{item.oa_suggestionboxType},
+			#{item.xt_userinfo_id},
+			#{item.oa_suggestionboxTitle},
+			#{item.oa_suggestionboxContent},
+			#{item.oa_suggestionboxIsPub},
+			#{item.createTime},
+			#{item.isDelete},
+			#{item.state}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchOaSuggestionbox" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_suggestionbox
+			SET
+				oa_suggestionboxType = #{item.oa_suggestionboxType},
+				oa_suggestionboxTitle = #{item.oa_suggestionboxTitle},
+				oa_suggestionboxContent = #{item.oa_suggestionboxContent},
+				oa_suggestionboxIsPub = #{item.oa_suggestionboxIsPub},
+				state = #{item.state}
+			WHERE oa_suggestionbox_id=#{item.oa_suggestionbox_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchOaSuggestionboxBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_suggestionbox
+			<set>
+				<if test="item.oa_suggestionboxType != null">
+					oa_suggestionboxType = #{item.oa_suggestionboxType},
+				</if>
+				<if test="item.oa_suggestionboxTitle != null">
+					oa_suggestionboxTitle = #{item.oa_suggestionboxTitle},
+				</if>
+				<if test="item.oa_suggestionboxContent != null">
+					oa_suggestionboxContent = #{item.oa_suggestionboxContent},
+				</if>
+				<if test="item.oa_suggestionboxIsPub != null">
+					oa_suggestionboxIsPub = #{item.oa_suggestionboxIsPub},
+				</if>
+				<if test="item.state != null">
+					state = #{item.state},
+				</if>
+			</set>
+			WHERE oa_suggestionbox_id=#{item.oa_suggestionbox_id}
+		</foreach>
+	</update>
+</mapper>
