@@ -16,6 +16,8 @@ public class BaseEntity extends jehc.xtmodules.xtcore.allutils.DateUtil implemen
 	private Long version;/**乐观锁使用**/ 
 	private static final long serialVersionUID = 1L;
 	private String xt_userinfo_realName;/**操作人名称**/
+	
+	private String xt_userinfo_email;/**邮件**/
 	private String jehcimg_base_url;/**图片工程资源统一URL**/
 	private String jehcimg_base_path_url;/**图片路径统一URL+路径（完整路径）**/
 	private String jehcsources_base_url;/**平台默认资源统一URL**/
@@ -96,6 +98,14 @@ public class BaseEntity extends jehc.xtmodules.xtcore.allutils.DateUtil implemen
 
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
+	}
+
+	public String getXt_userinfo_email() {
+		return xt_userinfo_email;
+	}
+
+	public void setXt_userinfo_email(String xt_userinfo_email) {
+		this.xt_userinfo_email = xt_userinfo_email;
 	}
 	
 }

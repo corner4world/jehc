@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.oamodules.oamodel.OaSuggestionboxReply">
+	<!--初始化分页-->
+	<select id="getOaSuggestionboxReplyListByCondition" resultType="jehc.oamodules.oamodel.OaSuggestionboxReply" parameterType="map">
+		SELECT
+			oa_suggestionbox_reply.oa_suggestionbox_replyID,
+			oa_suggestionbox_reply.oa_suggestionbox_id,
+			oa_suggestionbox_reply.xt_userinfo_id,
+			oa_suggestionbox_reply.oa_suggestionbox_replyContent,
+			oa_suggestionbox_reply.createtime,
+			oa_suggestionbox_reply.isDelete,
+			xt_userinfo.xt_userinfo_email,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			oa_suggestionbox_reply oa_suggestionbox_reply LEFT JOIN xt_userinfo xt_userinfo ON oa_suggestionbox_reply.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		AND oa_suggestionbox_reply.isDelete = 0
+		<if test="null != oa_suggestionbox_id">
+			AND oa_suggestionbox_reply.oa_suggestionbox_id LIKE CONCAT(CONCAT('%',#{oa_suggestionbox_id}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getOaSuggestionboxReplyById" resultType="jehc.oamodules.oamodel.OaSuggestionboxReply" parameterType="string">
+		SELECT
+			oa_suggestionbox_replyID,
+			oa_suggestionbox_id,
+			xt_userinfo_id,
+			oa_suggestionbox_replyContent,
+			createtime,
+			isDelete
+		FROM 
+			oa_suggestionbox_reply
+		WHERE oa_suggestionbox_replyID=#{oa_suggestionbox_replyID}
+	</select>
+
+	<!--添加-->
+	<insert id="addOaSuggestionboxReply" parameterType="jehc.oamodules.oamodel.OaSuggestionboxReply">
+		INSERT INTO
+			oa_suggestionbox_reply
+			(
+			oa_suggestionbox_replyID,
+			oa_suggestionbox_id,
+			xt_userinfo_id,
+			oa_suggestionbox_replyContent,
+			createtime,
+			isDelete
+			)
+			VALUES
+			(
+			#{oa_suggestionbox_replyID},
+			#{oa_suggestionbox_id},
+			#{xt_userinfo_id},
+			#{oa_suggestionbox_replyContent},
+			#{createtime},
+			#{isDelete}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateOaSuggestionboxReply" parameterType="jehc.oamodules.oamodel.OaSuggestionboxReply">
+		UPDATE
+			oa_suggestionbox_reply
+		SET
+			oa_suggestionbox_id = #{oa_suggestionbox_id},
+			xt_userinfo_id = #{xt_userinfo_id},
+			oa_suggestionbox_replyContent = #{oa_suggestionbox_replyContent},
+			createtime = #{createtime},
+			isDelete = #{isDelete}
+		WHERE oa_suggestionbox_replyID=#{oa_suggestionbox_replyID}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateOaSuggestionboxReplyBySelective" parameterType="jehc.oamodules.oamodel.OaSuggestionboxReply">
+		UPDATE
+			oa_suggestionbox_reply
+		<set>
+			<if test="oa_suggestionbox_id != null">
+				oa_suggestionbox_id = #{oa_suggestionbox_id},
+			</if>
+			<if test="xt_userinfo_id != null">
+				xt_userinfo_id = #{xt_userinfo_id},
+			</if>
+			<if test="oa_suggestionbox_replyContent != null">
+				oa_suggestionbox_replyContent = #{oa_suggestionbox_replyContent},
+			</if>
+			<if test="createtime != null">
+				createtime = #{createtime},
+			</if>
+			<if test="isDelete != null">
+				isDelete = #{isDelete},
+			</if>
+		</set>
+		WHERE oa_suggestionbox_replyID=#{oa_suggestionbox_replyID}
+	</update>
+
+	<!--删除-->
+	<delete id="delOaSuggestionboxReply" parameterType="map">
+		DELETE FROM oa_suggestionbox_reply WHERE oa_suggestionbox_replyID IN
+		<foreach item="item" index="index" collection="oa_suggestionbox_replyID" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchOaSuggestionboxReply" parameterType="list">
+		INSERT INTO
+			oa_suggestionbox_reply
+			(
+			oa_suggestionbox_replyID,
+			oa_suggestionbox_id,
+			xt_userinfo_id,
+			oa_suggestionbox_replyContent,
+			createtime,
+			isDelete
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.oa_suggestionbox_replyID},
+			#{item.oa_suggestionbox_id},
+			#{item.xt_userinfo_id},
+			#{item.oa_suggestionbox_replyContent},
+			#{item.createtime},
+			#{item.isDelete}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchOaSuggestionboxReply" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_suggestionbox_reply
+			SET
+				oa_suggestionbox_id = #{item.oa_suggestionbox_id},
+				xt_userinfo_id = #{item.xt_userinfo_id},
+				oa_suggestionbox_replyContent = #{item.oa_suggestionbox_replyContent},
+				createtime = #{item.createtime},
+				isDelete = #{item.isDelete}
+			WHERE oa_suggestionbox_replyID=#{item.oa_suggestionbox_replyID}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchOaSuggestionboxReplyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_suggestionbox_reply
+			<set>
+				<if test="item.oa_suggestionbox_id != null">
+					oa_suggestionbox_id = #{item.oa_suggestionbox_id},
+				</if>
+				<if test="item.xt_userinfo_id != null">
+					xt_userinfo_id = #{item.xt_userinfo_id},
+				</if>
+				<if test="item.oa_suggestionbox_replyContent != null">
+					oa_suggestionbox_replyContent = #{item.oa_suggestionbox_replyContent},
+				</if>
+				<if test="item.createtime != null">
+					createtime = #{item.createtime},
+				</if>
+				<if test="item.isDelete != null">
+					isDelete = #{item.isDelete},
+				</if>
+			</set>
+			WHERE oa_suggestionbox_replyID=#{item.oa_suggestionbox_replyID}
+		</foreach>
+	</update>
+</mapper>

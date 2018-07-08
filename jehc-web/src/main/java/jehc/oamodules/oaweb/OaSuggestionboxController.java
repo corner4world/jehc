@@ -17,6 +17,7 @@ import jehc.xtmodules.xtcore.base.BaseSearch;
 import jehc.xtmodules.xtcore.util.excel.poi.ExportExcel;
 import jehc.xtmodules.xtcore.util.UUID;
 import jehc.oamodules.oamodel.OaSuggestionbox;
+import jehc.oamodules.oaservice.OaSuggestionboxReplyService;
 import jehc.oamodules.oaservice.OaSuggestionboxService;
 
 /**
@@ -28,6 +29,8 @@ import jehc.oamodules.oaservice.OaSuggestionboxService;
 public class OaSuggestionboxController extends BaseAction{
 	@Autowired
 	private OaSuggestionboxService oaSuggestionboxService;
+	@Autowired
+	private OaSuggestionboxReplyService oaSuggestionboxReplyService;
 	/**
 	* 载入初始化页面
 	* @param oa_suggestionbox 
@@ -181,6 +184,9 @@ public class OaSuggestionboxController extends BaseAction{
 	public ModelAndView toOaSuggestionboxDetail(String oa_suggestionbox_id,HttpServletRequest request, Model model){
 		OaSuggestionbox oaSuggestionbox = oaSuggestionboxService.getOaSuggestionboxById(oa_suggestionbox_id);
 		model.addAttribute("oaSuggestionbox", oaSuggestionbox);
+		Map<String, Object> condition = new HashMap<String, Object>();
+		condition.put("oa_suggestionbox_id", oaSuggestionbox.getOa_suggestionbox_id());
+		model.addAttribute("oaSuggestionboxReplyList", oaSuggestionboxReplyService.getOaSuggestionboxReplyListByCondition(condition));
 		return new ModelAndView("pc/oa-view/oa-suggestionbox/oa-suggestionbox-detail");
 	}
 }

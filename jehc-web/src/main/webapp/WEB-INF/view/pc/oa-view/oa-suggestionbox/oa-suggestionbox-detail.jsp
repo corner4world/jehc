@@ -72,6 +72,29 @@
 					${oaSuggestionbox.xt_userinfo_realName }
 				</div>
 			</div>
+			<fieldset>
+				<legend><font color=red>&nbsp;&nbsp;申诉回复</font></legend>
+				<c:if test="${empty oaSuggestionboxReplyList }">
+					
+					<div class="form-group">
+						<div class="col-lg-6">
+							暂无回复
+						</div>
+					</div>
+				</c:if>
+				<c:forEach var="oaSuggestionboxReply" items="${oaSuggestionboxReplyList }">
+					<div class="mt-4">
+		                <div class="media mb-4 mt-1">
+		                    <div class="media-body">
+		                        <span class="pull-right"><fmt:formatDate value="${oaSuggestionboxReply.createtime }" pattern="yyyy-MM-dd HH:mm:ss"/></span>
+		                        <h6 class="m-0">${oaSuggestionboxReply.xt_userinfo_realName }</h6>
+		                        <small class="text-muted">${oaSuggestionboxReply.xt_userinfo_email }</small>
+		                    </div>
+		                </div>
+		                <p><b>${oaSuggestionboxReply.oa_suggestionbox_replyContent }</b></p>
+		            </div>
+				</c:forEach>
+			</fieldset>
 			<div class="form-group">
 				<label class="col-lg-3 control-label"></label>
 				<div class="col-lg-6">
