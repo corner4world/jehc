@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.oamodules.oamodel.OaMplanClassify">
+	<!--初始化分页-->
+	<select id="getOaMplanClassifyListByCondition" resultType="jehc.oamodules.oamodel.OaMplanClassify" parameterType="map">
+		SELECT
+			oa_mplan_classify_id,
+			oa_mplan_classify_name,
+			xt_userinfo.xt_userinfo_id,
+			ctime,
+			mtime,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			oa_mplan_classify oa_mplan_classify LEFT JOIN xt_userinfo xt_userinfo ON oa_mplan_classify.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+			AND isdelete = 0
+		<if test="null != oa_mplan_classify_name">
+			AND oa_mplan_classify_name LIKE CONCAT(CONCAT('%',#{oa_mplan_classify_name}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getOaMplanClassifyById" resultType="jehc.oamodules.oamodel.OaMplanClassify" parameterType="string">
+		SELECT
+			oa_mplan_classify_id,
+			oa_mplan_classify_name,
+			xt_userinfo.xt_userinfo_id,
+			ctime,
+			mtime,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			oa_mplan_classify oa_mplan_classify LEFT JOIN xt_userinfo xt_userinfo ON oa_mplan_classify.xt_userinfo_id = xt_userinfo.xt_userinfo_id
+		WHERE oa_mplan_classify_id=#{oa_mplan_classify_id}
+	</select>
+
+	<!--添加-->
+	<insert id="addOaMplanClassify" parameterType="jehc.oamodules.oamodel.OaMplanClassify">
+		INSERT INTO
+			oa_mplan_classify
+			(
+			oa_mplan_classify_id,
+			oa_mplan_classify_name,
+			xt_userinfo_id,
+			ctime,
+			mtime,
+			isdelete
+			)
+			VALUES
+			(
+			#{oa_mplan_classify_id},
+			#{oa_mplan_classify_name},
+			#{xt_userinfo_id},
+			#{ctime},
+			#{mtime},
+			#{isdelete}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updateOaMplanClassify" parameterType="jehc.oamodules.oamodel.OaMplanClassify">
+		UPDATE
+			oa_mplan_classify
+		SET
+			oa_mplan_classify_name = #{oa_mplan_classify_name},
+			mtime = #{mtime},
+			isdelete = #{isdelete}
+		WHERE oa_mplan_classify_id=#{oa_mplan_classify_id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updateOaMplanClassifyBySelective" parameterType="jehc.oamodules.oamodel.OaMplanClassify">
+		UPDATE
+			oa_mplan_classify
+		<set>
+			<if test="oa_mplan_classify_name != null">
+				oa_mplan_classify_name = #{oa_mplan_classify_name},
+			</if>
+			<if test="mtime != null">
+				mtime = #{mtime},
+			</if>
+			<if test="isdelete != null">
+				isdelete = #{isdelete},
+			</if>
+		</set>
+		WHERE oa_mplan_classify_id=#{oa_mplan_classify_id}
+	</update>
+
+	<!--删除-->
+	<delete id="delOaMplanClassify" parameterType="map">
+		UPDATE oa_mplan_classify isdelete = 1
+		WHERE oa_mplan_classify_id IN
+		<foreach item="item" index="index" collection="oa_mplan_classify_id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchOaMplanClassify" parameterType="list">
+		INSERT INTO
+			oa_mplan_classify
+			(
+			oa_mplan_classify_id,
+			oa_mplan_classify_name,
+			xt_userinfo_id,
+			ctime,
+			mtime,
+			isdelete
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.oa_mplan_classify_id},
+			#{item.oa_mplan_classify_name},
+			#{item.xt_userinfo_id},
+			#{item.ctime},
+			#{item.mtime},
+			#{item.isdelete}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchOaMplanClassify" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_mplan_classify
+			SET
+				oa_mplan_classify_name = #{item.oa_mplan_classify_name},
+				mtime = #{item.mtime},
+				isdelete = #{item.isdelete}
+			WHERE oa_mplan_classify_id=#{item.oa_mplan_classify_id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchOaMplanClassifyBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				oa_mplan_classify
+			<set>
+				<if test="item.oa_mplan_classify_name != null">
+					oa_mplan_classify_name = #{item.oa_mplan_classify_name},
+				</if>
+				<if test="item.mtime != null">
+					mtime = #{item.mtime},
+				</if>
+				<if test="item.isdelete != null">
+					isdelete = #{item.isdelete},
+				</if>
+			</set>
+			WHERE oa_mplan_classify_id=#{item.oa_mplan_classify_id}
+		</foreach>
+	</update>
+</mapper>
