@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
+import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
 import jehc.xtmodules.xtmodel.XtDepartinfo;
 import jehc.xtmodules.xtmodel.XtPost;
 import jehc.xtmodules.xtservice.XtDepartinfoService;
@@ -58,109 +59,48 @@ public class XtOrgController extends BaseAction{
 	@ResponseBody
 	@RequestMapping(value="/getXtOrgTree",method={RequestMethod.POST,RequestMethod.GET})
 	public String getXtOrgTree(String id,String type,HttpServletRequest request) throws UnsupportedEncodingException{
-		id = request.getParameter("node");
-		type = URLDecoder.decode(type, "UTF-8");
-		StringBuffer jsonStr = new StringBuffer("");  
-		if(null != id && !"".equals(id) && "0".equals(id)){
-			jsonStr.append("[");
-			List<XtDepartinfo> xtDepartinfoList = xtDepartinfoService.getXtDepartinfoList();
-			for(int i = 0; i < xtDepartinfoList.size(); i++){
-				XtDepartinfo xtDepartinfo = xtDepartinfoList.get(i);
-				if(i==(xtDepartinfoList.size()-1)){
-					jsonStr.append("{id:'"+xtDepartinfo.getXt_departinfo_id()+"',name:'"+xtDepartinfo.getXt_departinfo_name()+"',icon:'../deng/images/icons/depart.png',xt_departinfo_parentId:'"+xtDepartinfo.getXt_departinfo_parentId()+"',type:'部门',remark:'"+xtDepartinfo.getXt_departinfo_desc()+"'}");  
-				}else{
-					jsonStr.append("{id:'"+xtDepartinfo.getXt_departinfo_id()+"',name:'"+xtDepartinfo.getXt_departinfo_name()+"',icon:'../deng/images/icons/depart.png',xt_departinfo_parentId:'"+xtDepartinfo.getXt_departinfo_parentId()+"',type:'部门',remark:'"+xtDepartinfo.getXt_departinfo_desc()+"'},");
-				}
-			}
-			jsonStr.append("]");
-		}else{
-			//1查找部门
-			jsonStr.append("[");
-			Map<String, Object> condition = new HashMap<String, Object>();
-			condition.put("xt_departinfo_parentId", id);
-			List<XtDepartinfo> xtDepartinfoList = xtDepartinfoService.getXtDepartinfoListChild(condition);
-			for(int i = 0; i < xtDepartinfoList.size(); i++){
-				XtDepartinfo xtDepartinfo = xtDepartinfoList.get(i);
-				String leaf = "false";
-				if(i==(xtDepartinfoList.size()-1)){
-					if(xtDepartinfo.getXt_departinfo_leaf() == 0){
-						leaf = "false";
-					}else{
-						leaf = "true";
-					}
-					jsonStr.append("{id:'"+xtDepartinfo.getXt_departinfo_id()+"',name:'"+xtDepartinfo.getXt_departinfo_name()+"',leaf:"+leaf+",icon:'../deng/images/icons/depart.png',xt_departinfo_parentId:'"+xtDepartinfo.getXt_departinfo_parentId()+"',type:'部门',remark:'"+xtDepartinfo.getXt_departinfo_desc()+"'}");  
-				}else{
-					if(xtDepartinfo.getXt_departinfo_leaf() == 0){
-						leaf = "false";
-					}else{
-						leaf = "true";
-					}
-					jsonStr.append("{id:'"+xtDepartinfo.getXt_departinfo_id()+"',name:'"+xtDepartinfo.getXt_departinfo_name()+"',leaf:"+leaf+",icon:'../deng/images/icons/depart.png',xt_departinfo_parentId:'"+xtDepartinfo.getXt_departinfo_parentId()+"',type:'部门',remark:'"+xtDepartinfo.getXt_departinfo_desc()+"'},");  
-				}
-			}
-			//2查找部门下面一级岗位
-			String xtPostStr = xtPostStr(id,type);
-			if(null != xtPostStr && !"".equals(xtPostStr) && !"[".equals(jsonStr.toString())){
-				jsonStr.append(","+xtPostStr);
-			}else{
-				jsonStr.append(xtPostStr);
-			}
-			jsonStr.append("]");
-		}
-		return outStr(jsonStr.toString());
-	}
-	
-	/**
-	 * 返回岗位字符串
-	 * @param id
-	 * @return
-	 */
-	public String xtPostStr(String id,String type){
-		//如果类型:部门 则查出所有部门下的一级岗位
-		StringBuffer jsonStr = new StringBuffer(); 
 		Map<String, Object> condition = new HashMap<String, Object>();
-		if(null != type && !"".equals(type) && "部门".equals(type)){
-			condition = new HashMap<String, Object>();
-			condition.put("xt_departinfo_id", id);
-			List<XtPost> xtPostList = xtPostService.getXtPostinfoList(condition);
-			//拼接字符串
-			for(int i = 0; i < xtPostList.size(); i++){
-				XtPost xtPost = xtPostList.get(i);
-				String leaf = "false";
-				if(xtPost.getXt_post_isLeaf() == 0){
-					leaf = "false";
-				}else{
-					leaf = "true";
-				}
-				if(i==(xtPostList.size()-1)){
-					jsonStr.append("{id:'"+xtPost.getXt_post_id()+"',leaf:"+leaf+",name:'"+xtPost.getXt_post_name()+"',icon:'../deng/images/icons/users.png',xt_post_parentId:'"+xtPost.getXt_post_parentId()+"',type:'岗位',remark:'"+xtPost.getXt_post_desc()+"',xt_departinfo_id:'"+xtPost.getXt_departinfo_id()+"',xt_departinfo_name:'"+xtPost.getXt_departinfo_name()+"'}");  
-				}else{
-					jsonStr.append("{id:'"+xtPost.getXt_post_id()+"',leaf:"+leaf+",name:'"+xtPost.getXt_post_name()+"',icon:'../deng/images/icons/users.png',xt_post_parentId:'"+xtPost.getXt_post_parentId()+"',type:'岗位',remark:'"+xtPost.getXt_post_desc()+"',xt_departinfo_id:'"+xtPost.getXt_departinfo_id()+"',xt_departinfo_name:'"+xtPost.getXt_departinfo_name()+"'},");
-				}
-			}
-		}else if(null != type && !"".equals(type) && "岗位".equals(type)){
-			condition = new HashMap<String, Object>();
-			condition.put("xt_post_parentId", id);
-			List<XtPost> xtPostList = xtPostService.getXtPostListChild(condition);
-			//拼接字符串
-			for(int i = 0; i < xtPostList.size(); i++){
-				XtPost xtPost = xtPostList.get(i);
-				String leaf = "false";
-				if(xtPost.getXt_post_isLeaf() == 0){
-					leaf = "false";
-				}else{
-					leaf = "true";
-				}
-				if(i==(xtPostList.size()-1)){
-					jsonStr.append("{id:'"+xtPost.getXt_post_id()+"',leaf:"+leaf+",name:'"+xtPost.getXt_post_name()+"',icon:'../deng/images/icons/users.png',xt_post_parentId:'"+xtPost.getXt_post_parentId()+"',type:'岗位',remark:'"+xtPost.getXt_post_desc()+"',xt_departinfo_id:'"+xtPost.getXt_departinfo_id()+"',xt_departinfo_name:'"+xtPost.getXt_departinfo_name()+"'}");  
-				}else{
-					jsonStr.append("{id:'"+xtPost.getXt_post_id()+"',leaf:"+leaf+",name:'"+xtPost.getXt_post_name()+"',icon:'../deng/images/icons/users.png',xt_post_parentId:'"+xtPost.getXt_post_parentId()+"',type:'岗位',remark:'"+xtPost.getXt_post_desc()+"',xt_departinfo_id:'"+xtPost.getXt_departinfo_id()+"',xt_departinfo_name:'"+xtPost.getXt_departinfo_name()+"'},");
-				}
-			}
+		List<BaseZTreeEntity> list = new ArrayList<BaseZTreeEntity>();
+		List<XtDepartinfo> xtDepartinfoList = xtDepartinfoService.getXtDepartinfoListAll(condition);
+		for(int i = 0; i < xtDepartinfoList.size(); i++){
+			XtDepartinfo xtDepartinfo = xtDepartinfoList.get(i);
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xtDepartinfo.getXt_departinfo_id());
+			BaseZTreeEntity.setPid(xtDepartinfo.getXt_departinfo_parentId());
+			BaseZTreeEntity.setText(xtDepartinfo.getXt_departinfo_name());
+			BaseZTreeEntity.setExpanded(true);
+			BaseZTreeEntity.setSingleClickExpand(true);
+			BaseZTreeEntity.setTempObject("DEPART");
+			list.add(BaseZTreeEntity);
 		}
-		return jsonStr.toString();
+		
+		//根岗位遍历
+		List<XtPost> xtPostList = xtPostService.getXtPostinfoList(condition);
+		for(XtPost xtPost:xtPostList){
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xtPost.getXt_post_id());
+			BaseZTreeEntity.setPid(xtPost.getXt_departinfo_id());
+			BaseZTreeEntity.setText(xtPost.getXt_post_name());
+			BaseZTreeEntity.setExpanded(true);
+			BaseZTreeEntity.setSingleClickExpand(true);
+			BaseZTreeEntity.setTempObject("POST");
+			list.add(BaseZTreeEntity);
+		}
+		
+		//非根岗位
+		xtPostList = xtPostService.getXtPostinfoUnRootList(condition);
+		for(XtPost xtPost:xtPostList){
+			BaseZTreeEntity BaseZTreeEntity = new BaseZTreeEntity();
+			BaseZTreeEntity.setId(xtPost.getXt_post_id());
+			BaseZTreeEntity.setPid(xtPost.getXt_post_parentId());
+			BaseZTreeEntity.setText(xtPost.getXt_post_name());
+			BaseZTreeEntity.setExpanded(true);
+			BaseZTreeEntity.setSingleClickExpand(true);
+			BaseZTreeEntity.setTempObject("POST");
+			list.add(BaseZTreeEntity);
+		}		
+		return outStr(BaseZTreeEntity.buildTree(list,false));
 	}
-	
 	/**
 	 * 获取静态部门及岗位组成的树
 	 * @param id

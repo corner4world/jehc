@@ -126,6 +126,25 @@
 		</if>
 	</select>
 	
+	<!-- 非岗位根目录集合 -->
+	<select id="getXtPostinfoUnRootList" resultType="jehc.xtmodules.xtmodel.XtPost" parameterType="map">
+		SELECT
+			xt_post.xt_post_id,
+			xt_post.xt_departinfo_id,
+			xt_post.xt_post_parentId,
+			xt_post.xt_post_name,
+			xt_post.xt_post_desc,
+			xt_post.xt_post_maxNum,
+			xt_post.xt_post_isLeaf,
+			xt_post.xt_post_image,
+			xt_post.xt_post_grade,
+			xt_departinfo.xt_departinfo_name
+		FROM 
+			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
+		WHERE (xt_post_parentId != '0' AND xt_post_parentId is not null)
+			AND xt_post.xt_post_isdelete = 0
+	</select>
+	
 	<!-- 查找子集合 -->
 	<select id="getXtPostListChild" parameterType="map" resultType="jehc.xtmodules.xtmodel.XtPost">
 		SELECT

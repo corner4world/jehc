@@ -558,12 +558,22 @@
 					</div>
 					<div class="modal-body">
 						<form id="themeForm" method="post">
+						   <div class="custom-control custom-radio">
+                               <input type="radio" id="chatheme1" value="defaultClass" name="chatheme" class="custom-control-input">
+                               <label class="custom-control-label"  for="chatheme1">默认经典</label>
+                           </div>
+                           <div class="custom-control custom-radio">
+                               <input type="radio" id="chatheme2" value="whiteClass" name="chatheme" class="custom-control-input">
+                               <label class="custom-control-label" for="chatheme2">清爽肤色</label>
+                           </div>
+			               <!-- 
 			               <div class="form-group">
                            	<select class="bs-select form-control" id="chatheme">
                                <option value="defaultClass">默认经典</option>
                                <option value="whiteClass">清爽肤色</option>
                             </select>
-                           </div>
+                           </div> 
+                           -->
 		                </form>
 					</div>
 					<div class="modal-footer">

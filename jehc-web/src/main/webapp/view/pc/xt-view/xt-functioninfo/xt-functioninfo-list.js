@@ -33,7 +33,9 @@ $(document).ready(function(){
 	InitztData();
 });
 //初始数据
+var dialogWating;
 function InitztData() {
+	dialogWating = showWating({msg:'正在拼命的加载中...'});
 	$.fn.zTree.init($("#tree"), setting);
 }
 
@@ -51,6 +53,7 @@ function onAsyncSuccess(event, treeId, treeNode, msg){
 	    //将找到的nodelist节点更新至Ztree内
 	    $.fn.zTree.init($("#"+treeId), setting, nodeList);
 	}
+	closeWating(null,dialogWating);
 }  
 
 //单击事件

@@ -63,6 +63,11 @@ public interface XtPostService{
 	 * @param condition
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<XtPost> getXtPostList(Map<String,Object> condition);
+	/**
+	 * 非根岗位全部集合
+	 * @param condition
+	 * @return
+	 */
+	public List<XtPost> getXtPostinfoUnRootList(Map<String,Object> condition);
 }

@@ -157,8 +157,16 @@ public class XtPostServiceImpl extends BaseService implements XtPostService{
 	 * @param condition
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	public List<XtPost> getXtPostList(Map<String,Object> condition){
 		return xtPostDao.getXtPostList(condition);
+	}
+	
+	/**
+	 * 非根岗位全部集合
+	 * @param condition
+	 * @return
+	 */
+	public List<XtPost> getXtPostinfoUnRootList(Map<String,Object> condition){
+		return xtPostDao.getXtPostinfoUnRootList(condition);
 	}
 }
