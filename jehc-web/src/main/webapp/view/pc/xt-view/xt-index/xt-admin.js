@@ -404,6 +404,14 @@ function displayTheme(){
 			$("#chatheme1").attr("checked","checked");
 		}else if(themecss == 'whiteClass'){
 			$("#chatheme2").attr("checked","checked");
+		}else if(themecss == 'BlackminiClass'){
+			$("#chatheme3").attr("checked","checked");
+		}else if(themecss == 'WhiteminiClass'){
+			$("#chatheme4").attr("checked","checked");
+		}else if(themecss == 'BlackminiClassshrink'){
+			$("#chatheme5").attr("checked","checked");
+		}else if(themecss == 'WhiteminiClassshrink'){
+			$("#chatheme6").attr("checked","checked");
 		}
 	}else{
 		$("#chatheme1").attr("checked","checked");
@@ -416,7 +424,6 @@ function displayTheme(){
 function changeTheme(){
 //	var chatheme = $('#chatheme').val();
 	var chatheme = $('input[name="chatheme"]:checked').val();
-	console.info(chatheme);
 	msgTishCallFnBoot("切换肤色之后平台将重新刷新整个页面,确定要切换肤色吗？",function(){
 		 var date=new Date();
       	 date.setTime(date.getTime() + 365*24*3066*1000);

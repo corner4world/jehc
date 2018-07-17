@@ -19,6 +19,8 @@ public class XtPost implements Serializable{
 	private int xt_post_grade;/**岗位级别**/
 	private int xt_post_isdelete=0;/**是否删除0正常1删除**/
 	private String xt_departinfo_name;/**部门名称**/
+	
+	private String xt_post_pname;//父级名称
 	public void setXt_post_id(String xt_post_id){
 		this.xt_post_id=xt_post_id;
 	}
@@ -85,4 +87,11 @@ public class XtPost implements Serializable{
 	public void setXt_post_isdelete(int xt_post_isdelete) {
 		this.xt_post_isdelete = xt_post_isdelete;
 	}
+	public String getXt_post_pname() {
+		return xt_post_pname;
+	}
+	public void setXt_post_pname(String xt_post_pname) {
+		this.xt_post_pname = xt_post_pname;
+	}
+	
 }

@@ -19,7 +19,7 @@ public class AdminTree {
 		StringBuffer html = new StringBuffer();
 		for(XtMenuinfo node:nodes){
 			if ("0".equals(node.getXt_menuinfo_parentId()) && node.getKeyid().equals("jEhcDevModule")) {
-				html.append("<li class=\"m-menu__item  m-menu__item--active  m-menu__item--submenu m-menu__item--rel\" id=\"menu"+node.getXt_menuinfo_id()+"\" m-menu-submenu-toggle=\"click\" aria-haspopup=\"true\">");
+				html.append("<li class=\"m-menu__item  m-menu__item--submenu m-menu__item--rel\" id=\"menu"+node.getXt_menuinfo_id()+"\" m-menu-submenu-toggle=\"click\" aria-haspopup=\"true\">");
 					//根目录开始
 					if(node.getXt_menuinfo_leaf().equals("0")){
 						html.append("<a href=\"javascript:;\" class=\"m-menu__link m-menu__toggle\">");
@@ -45,9 +45,16 @@ public class AdminTree {
 		List<XtMenuinfo> children = getChildren(node);
 		if (!children.isEmpty()) {
 			//遍历子级菜单----1将父级信息作为子级标题带入开始
-			html.append("<div class=\"m-menu__submenu m-menu__submenu--classic m-menu__submenu--right \">");
+//			m-menu__submenu m-menu__submenu--classic m-menu__submenu--left
+			if("0".equals(node.getXt_menuinfo_parentId()) || StringUtils.isEmpty(node.getXt_menuinfo_parentId())){
+				html.append("<div class=\"m-menu__submenu m-menu__submenu--classic m-menu__submenu--left\">");
 				//遍历子级菜单----1将父级信息作为子级标题带入开始
-				html.append("<span class=\"m-menu__arrow\"></span>");
+				html.append("<span class=\"m-menu__arrow m-menu__arrow--adjust\"></span>");
+			}else{
+				html.append("<div class=\"m-menu__submenu m-menu__submenu--classic m-menu__submenu--right\">");
+				//遍历子级菜单----1将父级信息作为子级标题带入开始
+				html.append("<span class=\"m-menu__arrow \"></span>");
+			}
 				//遍历子级菜单----1将父级信息作为子级标题带入开始
 				html.append("<ul class=\"m-menu__subnav\">");
 //					//遍历子级菜单----1将父级信息作为子级标题带入开始
@@ -64,7 +71,7 @@ public class AdminTree {
 					String existChildText = "";
 					if(child.getXt_menuinfo_leaf().equals("0")){
 						existChild = true;
-						existChildText = " class=\"m-menu__item  m-menu__item--submenu\" aria-haspopup=\"true\"  m-menu-submenu-toggle=\"hover\" m-menu-link-redirect=\"1\"";
+						existChildText = " class=\"m-menu__item m-menu__item--submenu\" aria-haspopup=\"true\"  m-menu-submenu-toggle=\"hover\" m-menu-link-redirect=\"1\"";
 					}else{
 						existChildText = " class=\"m-menu__item \" aria-haspopup=\"true\"  m-menu-link-redirect=\"1\"";
 					}

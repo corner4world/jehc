@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import jehc.xtmodules.xtcore.allutils.StringUtil;
 import jehc.xtmodules.xtcore.base.BaseAction;
 import jehc.xtmodules.xtcore.base.BaseTreeGridEntity;
 import jehc.xtmodules.xtcore.base.BaseZTreeEntity;
+import jehc.xtmodules.xtcore.util.ExceptionUtil;
+import jehc.xtmodules.xtcore.util.UUID;
 import jehc.xtmodules.xtmodel.XtDepartinfo;
 import jehc.xtmodules.xtmodel.XtPost;
 import jehc.xtmodules.xtservice.XtDepartinfoService;
@@ -147,5 +151,89 @@ public class XtOrgController extends BaseAction{
 			}
 		}
 		return outStr(BaseTreeGridEntity.buildTree(list,false));
+	}
+	
+	/**
+	* 添加或编辑
+	* @param xt_departinfo 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/saveOrUpdateXtDepartinfo",method={RequestMethod.POST,RequestMethod.GET})
+	public String saveOrUpdateXtDepartinfo(XtDepartinfo xt_Departinfo,HttpServletRequest request){
+		int i = 0;
+		if(StringUtil.isEmpty(xt_Departinfo.getXt_departinfo_parentId())){
+			xt_Departinfo.setXt_departinfo_parentId("0");
+		}
+		if(StringUtils.isEmpty(xt_Departinfo.getXt_departinfo_id())){
+			xt_Departinfo.setXt_departinfo_id(UUID.toUUID());
+			i=xtDepartinfoService.addXtDepartinfo(xt_Departinfo);
+		}else{
+			//编辑
+			i=xtDepartinfoService.updateXtDepartinfo(xt_Departinfo);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	/**
+	* 删除
+	* @param id 
+	* @param tempObject 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/delXtOrg",method={RequestMethod.POST,RequestMethod.GET})
+	public String delXtOrg(String id,String tempObject,HttpServletRequest request){
+		int i = 0;
+		if(StringUtils.isEmpty(tempObject)){
+			throw new ExceptionUtil("未能获取到tempObject");
+		}
+		if(StringUtils.isEmpty(id)){
+			throw new ExceptionUtil("未能获取到id");
+		}
+		if(tempObject.equals("DEPART")){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_departinfo_id",id.split(","));
+			i=xtDepartinfoService.delXtDepartinfo(condition);
+		}else if(tempObject.equals("POST")){
+			Map<String, Object> condition = new HashMap<String, Object>();
+			condition.put("xt_post_id",id.split(","));
+			i=xtPostService.delXtPost(condition);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
+	}
+	
+	/**
+	* 添加
+	* @param xt_post 
+	* @param request 
+	*/
+	@ResponseBody
+	@RequestMapping(value="/saveOrUpdateXtPost",method={RequestMethod.POST,RequestMethod.GET})
+	public String saveOrUpdateXtPost(XtPost xt_Post,HttpServletRequest request){
+		int i = 0;
+		if(StringUtil.isEmpty(xt_Post.getXt_post_parentId())){
+			xt_Post.setXt_post_parentId("0");
+		}
+		if(StringUtils.isEmpty(xt_Post.getXt_post_id())){
+			//新增
+			xt_Post.setXt_post_id(UUID.toUUID());
+			i=xtPostService.addXtPost(xt_Post);
+		}else{
+			//编辑
+			i=xtPostService.updateXtPost(xt_Post);
+		}
+		if(i>0){
+			return outAudStr(true);
+		}else{
+			return outAudStr(false);
+		}
 	}
 }

@@ -38,10 +38,12 @@
 			xt_post.xt_post_isLeaf,
 			xt_post.xt_post_image,
 			xt_post.xt_post_grade,
-			xt_departinfo.xt_departinfo_name
+			xt_departinfo.xt_departinfo_name,
+			p.xt_post_name as xt_post_pname
 		FROM 
 			xt_post left join xt_departinfo on xt_post.xt_departinfo_id = xt_departinfo.xt_departinfo_id
-		WHERE xt_post_id=#{xt_post_id}
+			LEFT JOIN xt_post p ON p.xt_post_id = xt_post.xt_post_parentId
+		WHERE xt_post.xt_post_id=#{xt_post_id}
 	</select>
 
 	<!--添加-->

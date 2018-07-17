@@ -16,6 +16,8 @@
         <meta content="" name="author" />
         <%
         String colorTheme="dark";
+        String mini = "NO";
+        String classshrink = "NO";
         Cookie cookies[]=request.getCookies(); 
 		Cookie cookieC=null; 
 		if(null != cookies){
@@ -27,10 +29,18 @@
 		    }
 		}
 	    if(null != cookieC){
-		    if(cookieC.getValue().indexOf("whiteClass")>=0){
+		    if(cookieC.getValue().indexOf("whiteClass")>=0 || cookieC.getValue().indexOf("Whitemini")>=0){
 		    	colorTheme = "light";
 		    }
+		    if(cookieC.getValue().indexOf("miniClass")>=0){
+		    	mini = "YES";
+		    	if(cookieC.getValue().indexOf("Classshrink")>=0){
+		    		classshrink = "YES";			    	
+			    }
+		    }
 	    }
+	    request.setAttribute("mini", mini);
+	    request.setAttribute("classshrink",classshrink);
         %>
         <script type="text/javascript">
 	    	var basePath = "${syspath}";
@@ -55,7 +65,14 @@
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/other/iconfont/iconfont.css" rel="stylesheet" type="text/css" >
 		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="${syspath }/deng/source/plugins/newAdmin/using/base/theme/smallleft/style.bundle.css" rel="stylesheet" type="text/css" />
+		<c:choose>
+			<c:when test="${mini eq 'YES' }">
+				<link href="${syspath }/deng/source/plugins/newAdmin/using/base/theme/bigleft/style.bundle.css" rel="stylesheet" type="text/css" />
+			</c:when>
+			<c:otherwise>
+				<link href="${syspath }/deng/source/plugins/newAdmin/using/base/theme/smallleft/style.bundle.css" rel="stylesheet" type="text/css" />
+			</c:otherwise>
+		</c:choose>
 		<link href="${syspath }/deng/source/plugins/newAdmin/tab/css/style.min.css" rel="stylesheet">
 		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/perfect-scrollbar.min.css" rel="stylesheet">
 		<style type="text/css">
@@ -93,30 +110,50 @@
 				-moz-box-shadow: 0 1px 0px 1px rgba(69,65,78,.1);
 			    box-shadow: 0 1px 0px 1px rgba(69,65,78,.1);
 			}
+			.m-brand.m-brand--skin-light {
+			    background: #ad5beb;/* #17C4BB */
+			}
 		</style>
 		<input type="hidden" id="lc_apply_model_biz_id" value="${lc_apply_model_biz_id }"/>
-	   	
 	</head>
     <!-- end::Body -->
-	<body  class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-aside-left--minimize m-brand--minimize m-footer--fixed m-footer--push m-aside--offcanvas-default"  >
+    <c:choose>
+		<c:when test="${mini eq 'YES' }">
+			<c:choose>
+				<c:when test="${classshrink eq 'YES' }">
+	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-<%=colorTheme %> m-aside-left--fixed m-aside-left--offcanvas m-aside-left--minimize m-brand--minimize m-footer--fixed m-footer--push m-aside--offcanvas-default"  >			
+	<%-- <body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-<%=colorTheme %> m-aside-left--fixed m-aside-left--offcanvas m-aside-left--minimize m-brand--minimize m-aside-left--hide m-footer--fixed m-footer--push m-aside--offcanvas-default"  > --%>
+				</c:when>
+				<c:otherwise>
+	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-footer--fixed m-footer--push m-aside--offcanvas-default"  >
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:otherwise>
+	<body class="m-page--fluid m--skin- m-content--skin-light2 m-header--fixed m-header--fixed-mobile m-aside-left--enabled m-aside-left--skin-dark m-aside-left--fixed m-aside-left--offcanvas m-aside-left--minimize m-brand--minimize m-footer--fixed m-footer--push m-aside--offcanvas-default"  >
+		</c:otherwise>
+	</c:choose>
 		<!-- begin:: Page -->
 		<div class="m-grid m-grid--hor m-grid--root m-page"  style="height:100%;">
 			<!-- BEGIN: Header -->
-			<header id="m_header" class="m-grid__item    m-header "  m-minimize-offset="200" m-minimize-mobile-offset="200" >
+			<header id="m_header" class="m-grid__item m-header" m-minimize-offset="200" m-minimize-mobile-offset="200" >
 				<div class="m-container m-container--fluid m-container--full-height">
 					<div class="m-stack m-stack--ver m-stack--desktop">
 						<!-- BEGIN: Brand -->
-						<div class="m-stack__item m-brand  m-brand--skin-light ">
+						<div class="m-stack__item m-brand  m-brand--skin-<%=colorTheme %>">
 							<div class="m-stack m-stack--ver m-stack--general">
 								<div class="m-stack__item m-stack__item--middle m-brand__logo">
 									<a href="index.html" class="m-brand__logo-wrapper">
-										<img alt="" src="${syspath }/deng/images/logo/logo.png"/>
-									</a>
-									<h3 class="m-header__title">
-										移动版
-									</h3>
+									<img alt="" src="${syspath }/deng/images/logo/logo.png"/>
+									</a> 
 								</div>
 								<div class="m-stack__item m-stack__item--middle m-brand__tools">
+									<!-- BEGIN: Left Aside Minimize Toggle -->
+									<a href="javascript:;" id="m_aside_left_minimize_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-desktop-inline-block 
+										 ">
+										<span></span>
+									</a>
+									<!-- END -->
 									<!-- BEGIN: Responsive Aside Left Menu Toggler -->
 									<a href="javascript:;" id="m_aside_left_offcanvas_toggle" class="m-brand__icon m-brand__toggler m-brand__toggler--left m--visible-tablet-and-mobile-inline-block">
 										<span></span>
@@ -137,11 +174,17 @@
 						</div>
 						<!-- END: Brand -->
 						<div class="m-stack__item m-stack__item--fluid m-header-head" id="m_header_nav">
-							<div class="m-header__title">
-								<h3 class="m-header__title-text">
-									${sys_pt_index_top}
-								</h3>
-							</div>
+							<c:choose>
+								<c:when test="${mini eq 'YES' }">
+								</c:when>
+								<c:otherwise>
+									<div class="m-header__title">
+										<h3 class="m-header__title-text">
+											${sys_pt_index_top}
+										</h3>
+									</div>
+								</c:otherwise>
+							</c:choose>
 							<!-- BEGIN: Horizontal Menu -->
 							<!-- 
 							<button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-light " id="m_aside_header_menu_mobile_close_btn">
@@ -149,12 +192,27 @@
 							</button>
 							<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light "  > 
 							-->
-							<button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-light " id="m_aside_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+							<c:choose>
+								<c:when test="${mini eq 'YES' }">
+							<button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-<%=colorTheme%> " id="m_aside_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+								</c:when>
+								<c:otherwise>
+							<button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-<%=colorTheme%> " id="m_aside_header_menu_mobile_close_btn"><i class="la la-close"></i></button>
+								</c:otherwise>
+							</c:choose>
+							<!-- <button class="m-aside-header-menu-mobile-close  m-aside-header-menu-mobile-close--skin-light " id="m_aside_header_menu_mobile_close_btn"><i class="la la-close"></i></button> -->
 							<!-- 默认主题 白色菜单
 							<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-light m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light "  > 
 							-->
 							<!-- 黑色主题 -->
+							<c:choose>
+								<c:when test="${mini eq 'YES' }">
+							<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-<%=colorTheme%> m-aside-header-menu-mobile--skin-dark m-aside-header-menu-mobile--submenu-skin-dark ">	
+								</c:when>
+								<c:otherwise>
 							<div id="m_header_menu" class="m-header-menu m-aside-header-menu-mobile m-aside-header-menu-mobile--offcanvas  m-header-menu--skin-light m-header-menu--submenu-skin-<%=colorTheme%> m-aside-header-menu-mobile--skin-light m-aside-header-menu-mobile--submenu-skin-light "  >
+								</c:otherwise>
+							</c:choose>
 								<ul class="m-menu__nav  m-menu__nav--submenu-arrow ">
 									${AdminMenuList }
 								</ul>
@@ -162,7 +220,7 @@
 							<!-- END: Horizontal Menu -->				
 							<!-- BEGIN: Topbar -->
 							<div id="m_header_topbar" class="m-topbar  m-stack m-stack--ver m-stack--general">
-								<div class="m-stack__item m-stack__item--middle m-dropdown m-dropdown--arrow m-dropdown--large m-dropdown--mobile-full-width m-dropdown--align-right m-dropdown--skin-light m-header-search m-header-search--expandable m-header-search--skin-light" id="m_quicksearch" m-quicksearch-mode="default">
+								<div class="m-stack__item m-stack__item--middle m-dropdown m-dropdown--arrow m-dropdown--large m-dropdown--mobile-full-width m-dropdown--align-right m-dropdown--skin-<%=colorTheme%> m-header-search m-header-search--expandable m-header-search--skin-<%=colorTheme%>" id="m_quicksearch" m-quicksearch-mode="default">
 									<!--BEGIN: Search Form -->
 									<div class="m-header-search__form">
 										<div class="m-header-search__wrapper">
@@ -430,7 +488,7 @@
 			</div>
 			<!-- end:: Body -->
 			<!-- begin::Footer -->
-			<footer class="m-grid__item		m-footer ">
+			<footer class="m-grid__item	m-footer ">
 				<div class="m-container m-container--fluid m-container--full-height m-page__container">
 					<div class="m-stack m-stack--flex-tablet-and-mobile m-stack--ver m-stack--desktop">
 						<div class="m-stack__item m-stack__item--left m-stack__item--middle m-stack__item--last">
@@ -566,6 +624,22 @@
                                <input type="radio" id="chatheme2" value="whiteClass" name="chatheme" class="custom-control-input">
                                <label class="custom-control-label" for="chatheme2">清爽肤色</label>
                            </div>
+                           <div class="custom-control custom-radio">
+                               <input type="radio" id="chatheme3" value="BlackminiClass" name="chatheme" class="custom-control-input">
+                               <label class="custom-control-label" for="chatheme3">黑色mini</label>
+                           </div>
+                           <div class="custom-control custom-radio">
+                               <input type="radio" id="chatheme4" value="WhiteminiClass" name="chatheme" class="custom-control-input">
+                               <label class="custom-control-label" for="chatheme4">清爽mini</label>
+                           </div>
+                           <div class="custom-control custom-radio">
+                               <input type="radio" id="chatheme5" value="BlackminiClassshrink" name="chatheme" class="custom-control-input">
+                               <label class="custom-control-label" for="chatheme5">黑色初始化收缩mini</label>
+                           </div>
+                           <div class="custom-control custom-radio">
+                               <input type="radio" id="chatheme6" value="WhiteminiClassshrink" name="chatheme" class="custom-control-input">
+                               <label class="custom-control-label" for="chatheme6">清爽初始化收缩mini</label>
+                           </div>
 			               <!-- 
 			               <div class="form-group">
                            	<select class="bs-select form-control" id="chatheme">
@@ -601,7 +675,14 @@
 		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
 		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.smooth-scroll.min.js" type="text/javascript"></script>		
 		<script src="${syspath}/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
-		<script src="${syspath}/deng/source/plugins/newAdmin/using/base/theme/smallleft/scripts.bundle.js" type="text/javascript"></script>
+		<c:choose>
+			<c:when test="${mini eq 'YES' }">
+				<script src="${syspath}/deng/source/plugins/newAdmin/using/base/theme/smallleft/scripts.bundle.js" type="text/javascript"></script>
+			</c:when>
+			<c:otherwise>
+				<script src="${syspath}/deng/source/plugins/newAdmin/using/base/theme/bigleft/scripts.bundle.js" type="text/javascript"></script>
+			</c:otherwise>
+		</c:choose>
 		<!--end::Base Scripts -->   
 		<!-- 笼罩插件开始 -->
         <link type="text/css" rel="stylesheet" href="${syspath}/deng/source/plugins/other/alertplug/alert/alert.css">

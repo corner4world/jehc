@@ -66,7 +66,7 @@ function onClick(event, treeId, treeNode, msg){
 		ajaxBRequestCallFn('../xtDepartinfoController/getXtDepartinfoById?xt_departinfo_id='+id,null,function(result){
 			var data = eval("(" + result + ")");  
 			data = data.data;
-			var tempObject = data.tempObject;
+			console.log(data);
 			$('#xt_departinfo_name').val(data.xt_departinfo_name);
 			$('#xt_departinfo_type').val(data.xt_departinfo_type);
 			$('#xt_departinfo_connectTelNo').val(data.xt_departinfo_connectTelNo);
@@ -74,6 +74,7 @@ function onClick(event, treeId, treeNode, msg){
 			$('#xt_departinfo_faxes').val(data.xt_departinfo_faxes);
 			$('#xt_departinfo_desc').val(data.xt_departinfo_desc);
 			$('#xt_departinfo_time').val(data.xt_departinfo_time);
+			$('#xt_departinfo_parentName').val(data.xt_departinfo_parentName);
 		});
 	}
 	if(tempObject == 'POST'){
@@ -88,6 +89,12 @@ function onClick(event, treeId, treeNode, msg){
 			$('#xt_post_maxNum').val(data.xt_post_maxNum);
 			$('#xt_post_grade').val(data.xt_post_grade);
 			$('#xt_post_desc').val(data.xt_post_desc);
+			$('#xt_departinfo_id_').val(data.xt_departinfo_id);
+			if(data.xt_post_parentId == '0' || data.xt_post_parentId == '' || data.xt_post_parentId == null){
+				$('#xt_post_parentName').val('无');
+			}else{
+				$('#xt_post_parentName').val(data.xt_post_pname);
+			}
 		});
 	}
 }  
@@ -101,350 +108,218 @@ function filter(){
 	InitztData();
 }
 
+//弹窗新增部门
+function addOrg(){
+	var zTree = $.fn.zTree.getZTreeObj("tree");
+	var nodes = zTree.getSelectedNodes();
+	if (nodes.length > 1) {
+		toastrBoot(4,"只能选择一条记录");
+		return;
+	}else if(nodes.length <= 0){
+		//直接是创建根部门
+		$('#SaveOrUpdateXtOrgDepartForm')[0].reset();
+		$('#SaveOrUpdateXtOrgDepartForm').bootstrapValidator({
+			message:'此值不是有效的'
+		});
+		datetimeInit();
+		$('#SaveOrUpdateXtOrgDepartModal').modal({"backdrop":"static"});
+		$('#xt_departinfo_parentNameTemp').val("无");
+	}else{
+		if(nodes[0].tempObject == 'DEPART'){
+			//弹窗选择创建子部门还是岗位
+			var dialog = bootbox.dialog({
+				title:'提示',
+				message:"创建子部门或岗位",
+				buttons:{
+				    noclose: {
+				        label:"创建子部门",
+				        //className:'btn-warning',
+				        callback:function(){
+				            //return false;
+				        	displayDepartOrPost(nodes[0],1)
+				        }
+				    },
+				    ok:{
+				        label:"创建岗位",
+				        //className:'btn-info',
+				        callback:function(){
+				        	//return false;
+				        	displayDepartOrPost(nodes[0],2)
+				        }
+				    },
+				    cancel:{
+				        label:"取消",
+				        className:'btn-info',
+				        callback:function(){
+				        	//return false;
+				        }
+				    }
+				}
+			});
+		}else if(nodes[0].tempObject == 'POST'){
+			displayDepartOrPost(nodes[0],2);//只能创建子岗位
+		}
+	}
+}
 
+function displayDepartOrPost(node,flag){
+	if(flag == 1){
+		//创建子部门
+		$('#SaveOrUpdateXtOrgDepartForm')[0].reset();
+		$('#SaveOrUpdateXtOrgDepartForm').bootstrapValidator({
+			message:'此值不是有效的'
+		});
+		datetimeInit();
+		$('#xt_departinfo_parentIdTemp').val(node.id);
+		$('#xt_departinfo_parentNameTemp').val(node.name);
+		$('#SaveOrUpdateXtOrgDepartModal').modal({"backdrop":"static"});
+	}
+	if(flag == 2){
+		//创建子岗位
+		$('#SaveOrUpdateXtOrgPostForm')[0].reset();
+		$('#SaveOrUpdateXtOrgPostForm').bootstrapValidator({
+			message:'此值不是有效的'
+		});
+		if(node.tempObject == 'DEPART'){
+			//如果当前选择节点是部门 则设置部门名称
+			$('#xt_departinfo_id_Temp').val(node.id);
+			$('#xt_departinfo_name_Temp').val(node.name);
+		}
+		if(node.tempObject == 'POST'){
+			$('#xt_departinfo_id_Temp').val($('#xt_departinfo_id_').val());
+			$('#xt_departinfo_name_Temp').val($('#xt_departinfo_name_').val());
+			$('#xt_post_parentIdTemp').val(node.id);
+			$('#xt_post_parentNameTemp').val(node.name);
+		}
+		$('#SaveOrUpdateXtOrgPostModal').modal({"backdrop":"static"});
+	}
+}
 
+//处理新增窗体
+function doSaveOrUpdateOrg(flag){
+	if(flag == 1){
+		//编辑或修改部门
+		submitBFormCallFn('SaveOrUpdateXtOrgDepartForm','../xtOrgController/saveOrUpdateXtDepartinfo',function(result){
+			try {
+	    		result = eval("(" + result + ")");  
+	    		if(typeof(result.success) != "undefined"){
+	    			if(result.success){
+	            		window.parent.toastrBoot(3,result.msg);
+	            		filter('tree','keyword');
+	            		$('#SaveOrUpdateXtOrgDepartModal').modal('hide');
+	        		}else{
+	        			window.parent.toastrBoot(4,result.msg);
+	        		}
+	    		}
+			} catch (e) {
+				
+			}
+		});
+	}else if(flag == 2){
+		submitBFormCallFn('SaveOrUpdateXtOrgPostForm','../xtOrgController/saveOrUpdateXtPost',function(result){
+			try {
+	    		result = eval("(" + result + ")");  
+	    		if(typeof(result.success) != "undefined"){
+	    			if(result.success){
+	            		window.parent.toastrBoot(3,result.msg);
+	            		filter('tree','keyword');
+	            		$('#SaveOrUpdateXtOrgPostModal').modal('hide');
+	        		}else{
+	        			window.parent.toastrBoot(4,result.msg);
+	        		}
+	    		}
+			} catch (e) {
+				
+			}
+		});
+	}
+}
 
+//弹窗编辑窗口
+function updateOrg(){
+	var zTree = $.fn.zTree.getZTreeObj("tree");
+	var nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"只能选择一条记录");
+		return;
+	}
+	var id = nodes[0].id;
+	if(nodes[0].tempObject == 'DEPART'){
+		ajaxBRequestCallFn('../xtDepartinfoController/getXtDepartinfoById?xt_departinfo_id='+id,null,function(result){
+			$('#SaveOrUpdateXtOrgDepartModal').modal({"backdrop":"static"});
+			var data = eval("(" + result + ")");  
+			data = data.data;
+			datetimeInit();
+			$('#SaveOrUpdateXtOrgDepartForm')[0].reset();
+			$('#SaveOrUpdateXtOrgDepartForm').bootstrapValidator({
+				message:'此值不是有效的'
+			});
+			if(data.xt_departinfo_parentId == '0' || data.xt_departinfo_parentId == null || data.xt_departinfo_parentId == ''){
+				$('#xt_departinfo_parentNameTemp').val("无");
+			}else{
+				$('#xt_departinfo_parentNameTemp').val(data.xt_departinfo_parentName);
+			}
+			$('#xt_departinfo_parentIdTemp').val(data.xt_departinfo_parentId);
+			$('#xt_departinfo_nameTemp').val(data.xt_departinfo_name);
+			$('#xt_departinfo_typeTemp').val(data.xt_departinfo_type);
+			$('#xt_departinfo_connectTelNoTemp').val(data.xt_departinfo_connectTelNo);
+			$('#xt_departinfo_mobileTelNoTemp').val(data.xt_departinfo_mobileTelNo);
+			$('#xt_departinfo_faxesTemp').val(data.xt_departinfo_faxes);
+			$('#xt_departinfo_descTemp').val(data.xt_departinfo_desc);
+			$('#xt_departinfo_timeTemp').val(data.xt_departinfo_time);
+			$('#xt_departinfo_idTemp').val(data.xt_departinfo_id);
+		});
+	}
+	if(nodes[0].tempObject == 'POST'){
+		ajaxBRequestCallFn('../xtPostController/getXtPostById?xt_post_id='+id,null,function(result){
+			$('#SaveOrUpdateXtOrgPostModal').modal({"backdrop":"static"});
+			var data = eval("(" + result + ")");  
+			data = data.data;
+			$('#SaveOrUpdateXtOrgPostForm')[0].reset();
+			$('#SaveOrUpdateXtOrgPostForm').bootstrapValidator({
+				message:'此值不是有效的'
+			});
+			$('#xt_post_idTemp').val(data.xt_post_id);
+			$('#xt_post_nameTemp').val(data.xt_post_name);
+			$('#xt_departinfo_id_Temp').val(data.xt_departinfo_id);
+			$('#xt_departinfo_name_Temp').val(data.xt_departinfo_name);
+			
+			if(data.xt_post_parentId == '0' || data.xt_post_parentId == null || data.xt_post_parentId == ''){
+				$('#xt_post_parentNameTemp').val('无');
+			}else{
+				$('#xt_post_parentNameTemp').val(data.xt_post_pname);
+			}
+			$('#xt_post_parentIdTemp').val(data.xt_post_parentId);
+			$('#xt_post_descTemp').val(data.xt_post_desc);
+			$('#xt_post_maxNumTemp').val(data.xt_post_maxNum);
+			$('#xt_post_gradeTemp').val(data.xt_post_grade);
+		});
+	}
+}
 
-
-
-
-
-
-//Ext.require([
-//    'Ext.data.*',
-//    'Ext.grid.*',
-//    'Ext.tip.*',
-//    'Ext.tree.*'
-//]);
-//var grid;
-//var store;
-//Ext.onReady(function() {
-//    store = Ext.create('Ext.data.TreeStore',{
-//    	root:{
-//			name:'一级',
-//			id:'0',
-//			expanded:true
-//		},
-//		/**此处一定要设置否则全部展开节点无效**/
-//		autoLoad:true,
-//        proxy:{
-//            type:'ajax',
-//            method:'post',
-//			url:'../xtOrgController/getXtOrgTree',
-//			reader:{
-//				type:'json'
-//			},
-//			extraParams:{id:'0',type:encodeURI('部门')}
-//        },
-//        lazyFill:true
-//    });
-//    grid = Ext.create('Ext.tree.Panel', {
-//        renderTo:Ext.getBody(),
-//        reserveScrollbar:true,
-//        loadMask:true,
-//        useArrows:true,
-//        rootVisible:false,
-//        store:store,
-//        id:'treeGrid',
-//        animate:false,
-//        title:'组织机构列表',
-//        columnLines:true,
-//        frame:true,
-//        listeners:{  
-//            beforeitemexpand:function(node,optd){
-//                var id=node.data.id; 
-//                var type=node.data.type; 
-//                store.setProxy({   
-//		       	   //异步从服务器上加载数据extjs会自动帮我们解析  
-//		           type:'ajax',  
-//		           url:'../xtOrgController/getXtOrgTree',  
-//		           extraParams:{id:id,type:encodeURI(type)}
-//		        });  
-//            },
-//            beforeitemcollapse:function(node,optd){
-//                return false;  
-//            },
-//            itemclick:function(node,optd){
-//            	var leaf = optd.data.leaf;
-//            	if(leaf == true){
-//            		
-//            	}
-//            }
-//        },
-//        viewConfig:{
-//			emptyText:'暂无数据',
-//			stripeRows:true
-//		},
-//		tbar:[
-//			 {
-//			   width:310,
-//			   xtype:'triggerfield',
-//			   emptyText:'请输入关键字（如研发部、技术总监等）',
-//		       triggerCls:'x-form-clear-trigger',
-//		       onTriggerClick:function(){
-//		           this.reset();
-//		       },
-//		       listeners:{
-//		           change:function(){
-//		           	filterBy(grid,this.getValue(),'name');
-//		           },
-//		           buffer:250
-//		       }
-//			 },
-//			 {
-//				text:'添加一级信息',
-//				tooltip:'添加一级信息',
-//				icon:addIcon,
-//				cls:'addBtn',
-//				handler:function(){
-//					addXtDepartinfo(0);
-//				}
-//			 },
-//			 {
-//				text:'刷新',
-//				tooltip:'刷新',
-//				cls:'updateBtn',
-//				icon:refreshIcon,
-//				handler:function(){
-//					grid.expandAll();
-//				}
-//			 }
-//		],
-//        columns:[{
-//            text:'ID',
-//            flex:2,
-//            hideable:false,
-//            hidden:true,
-//            sortable:true,
-//            dataIndex:'id'
-//        },{
-//            xtype:'treecolumn',
-//            text:'名称',
-//            flex:1,
-//            sortable:true,
-//            dataIndex:'name'
-//        },{
-//            text:'性质',
-//            dataIndex:'type',
-//            sortable:true,
-//            renderer:function(value){
-//            	if(value == '部门'){
-//            		return value;
-//            	}else{
-//            		return "<font color='red'>"+value+"</font>";
-//            	}
-//            }
-//        },/**{
-//            text:'上级名称',
-//            flex:1,
-//            dataIndex:'upname'
-//        },**/{
-//            text:'备注',
-//            flex:1,
-//            dataIndex:'remark',
-//            renderer:function(value){
-//            	return value;
-//            }
-//        },{
-//        	header:'操 作',
-//        	columns:[{
-//				header:'编 辑',
-//				align:'center',
-//				xtype:'widgetcolumn',
-//				width:140,
-//				widget:{
-//					xtype:'button',
-//	                text:'编 辑',
-//	                icon:editIcon,
-//	                listeners:{
-//					    render:function(rec) {
-//					        var record = rec.getWidgetRecord();
-//					        //console.log();
-//					        var type = record.data.type;
-//					        if(type == '部门'){
-//					        	rec.setText("<font color=''>编辑部门</font>");
-//					        }else{
-//					        	rec.setText("<font color='green'>编辑岗位</font>");
-//					        }
-//					        //label.setText(record.data.asgmt, false);
-//					    } 
-//					}, 
-//					/**
-//	                xtype:'label',
-//	                text:'编 辑',
-//	                glyph:0xf016,
-//	                listeners:{
-//					    resize:function(label) {
-//					        var parent = label.up();
-//					        while(typeof parent.up() !== 'undefined') {
-//					            parent = parent.up();
-//					        }  
-//					        var record = parent.getWidgetRecord();
-//					        if (typeof record === 'undefined') return;
-//					        label.setText(record.data.asgmt, false);
-//					    } 
-//					}, 
-//					**/
-//	                /**style:{background:'blue'},**/
-//	                handler:function(rec){
-//	                	console.log(rec.getWidgetRecord());
-//	                	var id = rec.getWidgetRecord().data.id;
-//	                	var type = rec.getWidgetRecord().data.type;
-//	                	var xt_post_parentId = rec.getWidgetRecord().data.xt_post_parentId;
-//	                	var text = rec.getWidgetRecord().parentNode.data.name;
-//	                	if(type == '部门'){
-//	                		updateXtDepartinfo(id,xt_post_parentId,text);
-//	                	}else if(type == '岗位'){
-//	                		var xt_post_parentId = rec.getWidgetRecord().data.xt_post_parentId;
-//	                		var xt_depart_id = rec.getWidgetRecord().data.xt_departinfo_id;
-//	                		updateXtPost(xt_depart_id,xt_post_parentId,id);
-//	                	}
-//				    }
-//	            }
-//			},{
-//				header:'删 除',
-//				align:'center',
-//				xtype:'widgetcolumn',
-//				width:140,
-//				widget:{
-//	                xtype:'button',
-//	                text:'删 除',
-//	                icon:delIcon,
-//	                listeners:{
-//					    render:function(rec) {
-//					        var record = rec.getWidgetRecord();
-//					        //console.log();
-//					        var type = record.data.type;
-//					        if(type == '部门'){
-//					        	rec.setText("删除部门");
-//					        }else{
-//					        	rec.setText("<font color='green'>删除岗位</font>");
-//					        }
-//					        //label.setText(record.data.asgmt, false);
-//					    } 
-//					}, 
-//	                /**style:{background:'blue'},**/
-//	                handler:function(rec){
-//	                	var id = rec.getWidgetRecord().data.id;
-//	                	var type = rec.getWidgetRecord().data.type;
-//	                	if(type == '部门'){
-//	                	}else{
-//	                	}
-//				    }
-//	            }
-//			},{
-//				header:'操作部门',
-//				align:'center',
-//				xtype:'widgetcolumn',
-//				width:180,
-//				widget:{
-//	                xtype:'button',
-//	                text:'添加下级信息',
-//	                icon:addIcon,
-//	                listeners:{
-//					    render:function(rec) {
-//					        var record = rec.getWidgetRecord();
-//					        //console.log();
-//					        var type = record.data.type;
-//					        if(type == '部门'){
-//					        	rec.setText("<font color='green'>添加下级部门</font>");
-//					        }else{
-//					        	rec.disable();
-//					        	rec.setIcon();
-//					        	rec.setText("<font color='red'>该按钮不能操作</font>");
-//					        }
-//					        //label.setText(record.data.asgmt, false);
-//					    } 
-//					}, 
-//	                /**style:{background:'blue'},**/
-//	                handler:function(rec){
-//	                	var id = rec.getWidgetRecord().data.id;
-//	                	var type = rec.getWidgetRecord().data.type;
-//	                	var text = rec.getWidgetRecord().data.name;
-//	                	if(type == '部门'){
-//	                		var xt_departinfo_parentId = rec.getWidgetRecord().data.xt_departinfo_parentId
-//	                		addXtDepartinfo(id,xt_departinfo_parentId,text);
-//	                	}else{
-//	                		var xt_departinfo_id = rec.getWidgetRecord().data.xt_departinfo_id;
-//	                		var xt_departinfo_name = rec.getWidgetRecord().data.xt_departinfo_name;
-//	                		addXtPost(xt_departinfo_id,id,xt_departinfo_name);
-//	                	}
-//				    }
-//	            }
-//			},{
-//				header:'操作岗位',
-//				align:'center',
-//				xtype:'widgetcolumn',
-//				width:170,
-//				widget:{
-//	                xtype:'button',
-//	                text:'添加岗位',
-//	                icon:addIcon,
-//	                listeners:{
-//					    render:function(rec) {
-//					        var record = rec.getWidgetRecord();
-//					        //console.log();
-//					        var type = record.data.type;
-//					        if(type == '部门'){
-//					        	rec.setText("添加一级岗位");
-//					        }else{
-//					        	rec.setText("<font color='green'>添加下级岗位</font>");
-//					        }
-//					        //label.setText(record.data.asgmt, false);
-//					    } 
-//					},
-//	                /**style:{background:'blue'},**/
-//	                handler:function(rec){
-//	                	var id = rec.getWidgetRecord().data.id;
-//	                	var type = rec.getWidgetRecord().data.type;
-//	                	var xt_post_id = "";
-//	                	var xt_departinfo_id;
-//	                	var xt_departinfo_name;
-//	                	if(type == '部门'){
-//	                		xt_departinfo_id = id;
-//	                		//一级岗位
-//	                		xt_departinfo_name = rec.getWidgetRecord().data.name;
-//	                		addXtPost(xt_departinfo_id,'0',xt_departinfo_name);
-//	                	}else{
-//	                		//下级岗位
-//	                		xt_departinfo_name = rec.getWidgetRecord().data.xt_departinfo_name;
-//	                		var xt_departinfo_id = rec.getWidgetRecord().data.xt_departinfo_id;
-//	                		addXtPost(xt_departinfo_id,id,xt_departinfo_name);
-//	                	}
-//	                }
-//	            }
-//			}]
-//        }]
-//    });
-//    grid.on('beforeload',function(treeloader,node) { 
-//   		/**
-//   		如果node为一个参数情况下取属性值如下:
-//   		var id = node.data.items[0].data.id;
-//           var type = node.data.items[0].data.type;
-//   		**/
-//   		/**
-//   		如果node为第二个参数情况下取属性值如下:
-//   		var id = node.node.data.id;
-//           var type = node.node.data.type;
-//   		**/
-//        var id = node.node.data.id;
-//        var type = node.node.data.type;
-//        store.setProxy({   
-//       	   //异步从服务器上加载数据extjs会自动帮我们解析  
-//           type:'ajax',  
-//           url:'../xtOrgController/getXtOrgTree',  
-//           extraParams:{id:id,type:encodeURI(type)}
-//        });
-//    });
-//    //grid.expandAll();
-//    Ext.create('Ext.Viewport',{
-//		layout:'fit',
-//		xtype:'viewport',
-//		items:grid
-//	});
-//	showWaitMsg("正在展开数据...");
-//	new Ext.util.DelayedTask(function(){  
-//       grid.expandAll();
-//       hideWaitMsg();
-//    }).delay(1000);
-//});
+function delOrg(){
+	var zTree = $.fn.zTree.getZTreeObj("tree"),
+	nodes = zTree.getSelectedNodes();
+	if (nodes.length != 1) {
+		toastrBoot(4,"必须选择一条记录进行删除");
+		return;
+	}
+	var params = {id:nodes[0].id,tempObject:nodes[0].tempObject};
+	msgTishCallFnBoot("确定要删除所选择的数据？",function(){
+		ajaxBRequestCallFn('../xtOrgController/delXtOrg',params,function(result){
+			try {
+	    		result = eval("(" + result + ")");  
+	    		if(typeof(result.success) != "undefined"){
+	    			if(result.success){
+	    				filter('tree','keyword');
+	            		window.parent.toastrBoot(3,result.msg);
+	        		}else{
+	        			window.parent.toastrBoot(4,result.msg);
+	        		}
+	    		}
+			} catch (e) {
+				
+			}
+		});
+	})
+}

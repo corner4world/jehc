@@ -21,6 +21,7 @@ public class XtDepartinfo implements Serializable{
 	private int xt_departinfo_isdelete = 0;/**是否删除0未删除1已删除**/
 	private String xt_departinfo_time;/**立成时间**/
 	private String xt_departinfo_type;/**部门性质**/
+	private String xt_departinfo_parentName;//父名称
 	public void setXt_departinfo_id(String xt_departinfo_id){
 		this.xt_departinfo_id=xt_departinfo_id;
 	}
@@ -99,4 +100,11 @@ public class XtDepartinfo implements Serializable{
 	public String getXt_departinfo_type(){
 		return xt_departinfo_type;
 	}
+	public String getXt_departinfo_parentName() {
+		return xt_departinfo_parentName;
+	}
+	public void setXt_departinfo_parentName(String xt_departinfo_parentName) {
+		this.xt_departinfo_parentName = xt_departinfo_parentName;
+	}
+	
 }

@@ -29,22 +29,23 @@
 	<!--查询对象-->
 	<select id="getXtDepartinfoById" resultType="jehc.xtmodules.xtmodel.XtDepartinfo" parameterType="string">
 		SELECT
-			xt_departinfo_id,
-			xt_company_id,
-			xt_departinfo_parentId,
-			xt_departinfo_name,
-			xt_departinfo_connectTelNo,
-			xt_departinfo_mobileTelNo,
-			xt_departinfo_faxes,
-			xt_departinfo_desc,
-			xt_departinfo_image,
-			xt_departinfo_leaf,
-			xt_departinfo_isdelete,
-			xt_departinfo_time,
-			xt_departinfo_type
+			xt_departinfo.xt_departinfo_id,
+			xt_departinfo.xt_company_id,
+			xt_departinfo.xt_departinfo_parentId,
+			xt_departinfo.xt_departinfo_name,
+			xt_departinfo.xt_departinfo_connectTelNo,
+			xt_departinfo.xt_departinfo_mobileTelNo,
+			xt_departinfo.xt_departinfo_faxes,
+			xt_departinfo.xt_departinfo_desc,
+			xt_departinfo.xt_departinfo_image,
+			xt_departinfo.xt_departinfo_leaf,
+			xt_departinfo.xt_departinfo_isdelete,
+			xt_departinfo.xt_departinfo_time,
+			xt_departinfo.xt_departinfo_type,
+			dp.xt_departinfo_name as xt_departinfo_parentName
 		FROM 
-			xt_departinfo
-		WHERE xt_departinfo_id=#{xt_departinfo_id}
+			xt_departinfo xt_departinfo LEFT JOIN xt_departinfo dp ON xt_departinfo.xt_departinfo_parentId = dp.xt_departinfo_id
+		WHERE xt_departinfo.xt_departinfo_id=#{xt_departinfo_id}
 	</select>
 
 	<!--添加-->

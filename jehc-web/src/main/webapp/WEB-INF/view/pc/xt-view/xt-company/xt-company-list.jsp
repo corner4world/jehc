@@ -26,6 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input class="form-control" type="text" maxlength="50"  data-bv-notempty data-bv-notempty-message="请输入公司名称"  value="${xt_Company.xt_company_name }" name="xt_company_name" placeholder="请输入公司名称">
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-1">
 					<label class="control-label">公司电话</label>
@@ -34,6 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input class="form-control" type="text" maxlength="20"  name="xt_company_tel" placeholder="请输入公司电话" value="${xt_Company.xt_company_tel }">
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-1">
 					<label class="control-label">联&nbsp;系&nbsp;人</label>
@@ -42,6 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input class="form-control" type="text" maxlength="20"  name="xt_company_userName" placeholder="请输入联系人" value="${xt_Company.xt_company_userName }">
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-1">
 					<label class="control-label">公司性质</label>
@@ -50,6 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input class="form-control" type="text" maxlength="20"  name="xt_company_type" placeholder="请输入公司性质" value="${xt_Company.xt_company_type }">
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-1">
 					<label class="control-label">立成时间</label>
@@ -58,6 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input class="form_datetime form-control" readonly="readonly" style="width: 150px;" type="text" maxlength="20"  name="xt_company_upTime" placeholder="请输入立成时间" value="${xt_Company.xt_company_upTime }">
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-1">
 					<label class="control-label">总负责人</label>
@@ -66,6 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input class="form-control" type="text" maxlength="20"  name="xt_company_ceo" placeholder="请输入总负责人" value="${xt_Company.xt_company_ceo }">
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-1">
 					<label class="control-label">省市区县</label>
@@ -92,6 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<input class="form-control" type="text" maxlength="20"  name="xt_company_address" placeholder="请输入详细地址" value="${xt_Company.xt_company_address }">
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-1">
 					<label class="control-label">公司简介</label>
@@ -100,6 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<textarea class="form-control" maxlength="500"  name="xt_company_remark" placeholder="请输入公司简介">${xt_Company.xt_company_remark }</textarea>
 				</div>
 			</div>
+			<br>
 			<div class="row">
 				<div class="col-md-1">
 				</div>
