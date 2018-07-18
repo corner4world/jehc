@@ -1,12 +1,15 @@
 $(function () {
 	initTreeTable();
 }) 
+var dialogWating;
 function initTreeTable(){
+	dialogWating = showWating({msg:'正在拼命的加载中...'});
 	$.ajax({
         url:"../xtDataDictionaryController/getXtDataDictionaryListByCondition",
         type:"post",
         dataType:"json",
         success:function(data) {
+        	closeWating(null,dialogWating);
         	var $table = $("#table");
         	data = eval("(" + data + ")");
         	//data = jQuery.parseJSON(data);
@@ -16,6 +19,7 @@ function initTreeTable(){
                 sidePagination:"client",//表示服务端请求  
                 idField:'id',
                 sortable:false,//是否启用排序
+                showColumns:true,//开启自定义列显示功能
                 columns:[
                     /* 
                     {
@@ -63,9 +67,9 @@ function initTreeTable(){
 function btnFormatter(value, row, index){
 	var integerappend = row.integerappend;
 	if(integerappend == 0){
-		return '<a href=javascript:addXtDataDictionary("'+value+'") class="btn btn-success btn-sm" title="添加下级"><i class="fa fa-gears"></i></a><a href=javascript:updateXtDataDictionary("'+value+'") title="编辑" class="btn btn-info btn-sm"><i class="fa fa-edit"></i></a><a href=javascript:delXtDataDictionary("'+value+'") class="btn btn-danger btn-sm" title="删 除"><i class="fa fa-trash-o"></i></a>';
+		return '<a href=javascript:addXtDataDictionary("'+value+'") class="btn btn-success" title="添加下级"><i class="fa fa-gears"></i></a><a href=javascript:updateXtDataDictionary("'+value+'") title="编辑" class="btn btn-info"><i class="fa fa-edit"></i></a><a href=javascript:delXtDataDictionary("'+value+'") class="btn btn-danger" title="删 除"><i class="fa fa-trash-o"></i></a>';
 	}else{
-		return '<a href=javascript:updateXtDataDictionary("'+value+'") class="btn btn-info btn-sm" title="编 辑"><i class="fa fa-edit"></i></a><a href=javascript:delXtDataDictionary("'+value+'") class="btn btn-danger btn-sm" title="删 除"><i class="fa fa-trash-o"></i></a>';
+		return '<a href=javascript:updateXtDataDictionary("'+value+'") class="btn btn-info" title="编 辑"><i class="fa fa-edit"></i></a><a href=javascript:delXtDataDictionary("'+value+'") class="btn btn-danger" title="删 除"><i class="fa fa-trash-o"></i></a>';
 	}
 }
 

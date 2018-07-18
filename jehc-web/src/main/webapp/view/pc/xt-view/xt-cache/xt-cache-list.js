@@ -1,18 +1,19 @@
 $(function (){
 	initTreeTable();
 }) 
+var dialogWating;
 function initTreeTable(){
+	dialogWating = showWating({msg:'正在拼命的加载中...'});
 	$.ajax({
         url:"../xtCacheController/getXtCacheListByCondition",
         type:"post",
         dataType:"json",
         success:function(data) {
+        	closeWating(null,dialogWating);
         	var $table = $("#table");
         	data = eval("(" + data + ")");
     	    $('#table').bootstrapTable('destroy').bootstrapTable({
-    	        columns:[{
-    	            checkbox:true
-    	        },
+    	        columns:[
     	        {
     	            title:'名称',
     	            field:'CacheName',
@@ -55,7 +56,7 @@ function initTreeTable(){
     	            title:'操作',
     	            field:'CacheName',
     	            formatter:function(value, row, index) {
-    	            	return '<a href=javascript:delCache("'+value+'") class="btn btn-danger btn-sm" title="清空缓存"><i class="fa fa-trash-o"></i></a>';
+    	            	return '<a href=javascript:delCache("'+value+'") class="btn btn-danger" title="清空缓存"><i class="fa fa-trash-o"></i></a>';
     	            }
     	        }],
     	        data:data,
@@ -78,6 +79,8 @@ function initTreeTable(){
     	        striped:true,
     	        showColumns:true,//开启自定义列显示功能
     	        //注册加载子表的事件。你可以理解为点击父表中+号时触发的事件
+    	        expanderExpandedClass:'fa fa-minus-circle',
+                expanderCollapsedClass:'fa fa-plus-circle',
     	        onExpandRow:function(index, row, $detail) {
     	            var cur_table = $detail.html('<table></table>').find('table');
     	            var html = "";

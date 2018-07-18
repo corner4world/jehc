@@ -104,8 +104,8 @@ function loadCrmContact(id){
 }
 //提交申请
 function addCrmLevelApply(){
+	console.info($('#systemUID').val());
 	submitBFormCallFn('applyForm','../crmCustomerController/addCrmLevelApply?customerId='+$('#customerId').val(),function(result){
-		console.log('result',result);
 		result = eval("(" + result + ")");  
 		if(typeof(result.success) != "undefined"){
 			toastrBoot(3,result.msg);

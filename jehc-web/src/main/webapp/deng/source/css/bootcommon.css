@@ -179,7 +179,7 @@ td > .mt-radio.mt-radio-single {
   top: 3px;
   width: 5px;
   height: 10px;
-  border: solid #666666;
+  border: solid #fff;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg); }
 
@@ -206,6 +206,7 @@ div.dataTables_wrapper div.dataTables_length select {
     max-width: 100%;
     padding: .469rem .75rem;
     font-size: 14px;
+    height: 32px;
     -webkit-box-shadow: none;
     box-shadow: none;
 } 
@@ -246,4 +247,16 @@ h4 {
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
     background-color: #fff;
     opacity: 1;
+}
+.datepicker td, .datepicker th {
+    width: auto;
+    height: auto;
+}
+.dataTables_wrapper .dataTable .selected td, .dataTables_wrapper .dataTable .selected th {
+    background-color: #ffefbb;
+    color: #3f4047;
+}
+.mt-radio.mt-radio-outline:hover>input:not([disabled]):checked ~ span, .mt-radio.mt-radio-outline>input:checked ~ span, .mt-radio.mt-checkbox-outline:hover>input:not([disabled]):checked ~ span, .mt-radio.mt-checkbox-outline>input:checked ~ span, .mt-checkbox.mt-radio-outline:hover>input:not([disabled]):checked ~ span, .mt-checkbox.mt-radio-outline>input:checked ~ span, .mt-checkbox.mt-checkbox-outline:hover>input:not([disabled]):checked ~ span, .mt-checkbox.mt-checkbox-outline>input:checked ~ span {
+    border: 1px solid #716aca;
+    background: #716aca;
 }

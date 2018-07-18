@@ -41,10 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<legend>数据字典列表</legend>
 		</fieldset>
 	</div>
-	<div class="btn-group pull-left" style="margin-right: 20px;">
+	<div class="form-group form-inline">
 		<button class="btn btn-default" onclick="addXtDataDictionary()">
 			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增一级
 		</button>
+		&nbsp;
 		<button class="btn btn-default" onclick="initTreeTable()">
 			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
 		</button>

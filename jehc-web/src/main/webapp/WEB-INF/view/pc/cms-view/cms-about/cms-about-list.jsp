@@ -20,27 +20,27 @@
 					<input type="text" class="form-control" name="title" placeholder="请输入标题">
 				</div>
 					&nbsp;
-				<a class="btn btn-primary" title="检索" href="javascript:search('datatables');">
-		           <i class="fi-search"></i>检索
+				<a class="btn btn-outline-primary waves-light waves-effect" title="检索" href="javascript:search('datatables');">
+		           <i class="fa fa-search m-r-5"></i>检索
 		        </a>&nbsp;
-		        <a class="btn btn-primary" title="重置" href="javascript:resetAll();;">
-		           <i class="icon-trash"></i>重置
+		        <a class="btn btn-outline-danger waves-light waves-effect" title="重置" href="javascript:resetAll();;">
+		           <i class="fa fa-remove m-r-5"></i>重置
 		        </a>
 			</form>
 		</div>
 	</div>
 	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
-		<button class="btn btn-default" onclick="toCmsAboutAdd()">
-			<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+		<button class="btn btn-outline-success waves-light waves-effect" onclick="toCmsAboutAdd()">
+			<i class="fa fa-plus-circle"></i>新增
 		</button>
-		<button class="btn btn-default" onclick="toCmsAboutUpdate()">
-			<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
+		<button class="btn btn-outline-info waves-light waves-effect" onclick="toCmsAboutUpdate()">
+			<i class="fa fa-pencil"></i>修改
 		</button>
-		<button class="btn btn-default" onclick="delCmsAbout()">
-			<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+		<button class="btn btn-outline-danger waves-light waves-effect" onclick="delCmsAbout()">
+			<i class="fa fa-trash-o"></i>删除
 		</button>
-		<button class="btn btn-default" onclick="search('datatables')">
-			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+		<button class="btn btn-outline-warning waves-light waves-effect" onclick="search('datatables')">
+			<i class="fa fa-spin fa-refresh"></i>刷新
 		</button>
 	</div>
 	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">

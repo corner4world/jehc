@@ -40,7 +40,9 @@
 		</script>
 		<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/other/iconfont/iconfont.css" rel="stylesheet" type="text/css" >
-		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/flaticon.css" rel="stylesheet" type="text/css" />
+		<%-- <link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" /> --%>
+		<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<link href="${syspath }/deng/source/plugins/newAdmin/using/base/theme/smallleft/style.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="${syspath }/deng/source/plugins/newAdmin/tab/css/style.min.css" rel="stylesheet">
 		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/perfect-scrollbar.min.css" rel="stylesheet">
@@ -51,7 +53,7 @@
 		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/popper.min.js" type="text/javascript"></script>
 		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
 		<script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.smooth-scroll.min.js" type="text/javascript"></script>		
-		 <script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
+		<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/js/bootstrap.min.js" type="text/javascript"></script>
 		<script src="${syspath}/deng/source/plugins/newAdmin/using/base/theme/smallleft/scripts.bundle.js" type="text/javascript"></script>
 		<!--end::Base Scripts -->   
 		<!-- 笼罩插件开始 -->

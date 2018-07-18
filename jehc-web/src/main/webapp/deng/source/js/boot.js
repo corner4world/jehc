@@ -225,10 +225,10 @@ function callLang(){
 		    "sInfoPostFix":"",
 			"sUrl":"", //多语言配置文件，可将oLanguage的设置放在一个txt文件中，例：Javascript/datatable/dtCH.txt
 			"oPaginate":{
-				"sFirst":"首页",
-				"sPrevious":"上一页 ",
-				"sNext":"下一页 ",
-				"sLast":"尾页 ",
+				"sFirst":'<i class="mdi mdi-chevron-double-left"></i>',
+				"sPrevious":'<i class="mdi mdi-chevron-left"></i>',
+				"sNext":'<i class="mdi mdi-chevron-right"></i>',
+				"sLast":'<i class=" mdi mdi-chevron-double-right"></i>',
 				"sJump":"跳转"
 			},
 			"oAria":{
@@ -580,7 +580,7 @@ function confirmB(msg,fn){
 	}
 	 bootbox.dialog({
 		title:"提示",
-		closeButton:true,
+		closeButton:false,
 		animate:true,
 		locale:"zh-CN",
 		message:msg,

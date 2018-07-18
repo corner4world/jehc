@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bootstrap-table-treegrid/js/bootstrap-table-zh-CN.js"></script>
 	<style>
 		/* dataTables表头居中 */  
-		.table>thead:first-child>tr:first-child>th{  
+		/* .table>thead:first-child>tr:first-child>th{  
 		        text-align:left;  
 		        background-color: #f5f5f5;
 		        font-weight:normal;
@@ -33,22 +33,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		}
 		.list-group {
 		    margin-bottom: 0px;
-		}
+		} */
 	</style>
 </head>  
 <body> 
-	<div class="portlet box green" style="margin-bottom: 5px">
-		<div class="portlet-title">
-            <div class="caption">
-                	缓存列表
-            </div>
-            <div class="actions">
-                 <button class="btn btn-default" onclick="initTreeTable()">
-					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-				</button>
-            </div>
-        </div>
-    </div>
+    <div class="panel panel-default">
+		<fieldset>
+			<legend>缓存列表</legend>
+		</fieldset>
+	</div>
+	<div class="form-group form-inline">
+		<button class="btn btn-default" onclick="initTreeTable()">
+			<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
+		</button>
+	</div>
 	<table id="table"></table>
 </body>  
 </html> 

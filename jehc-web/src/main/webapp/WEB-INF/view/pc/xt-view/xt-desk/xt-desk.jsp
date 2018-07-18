@@ -119,49 +119,31 @@
 					<!--end:: Widgets/Daily Sales-->
 				</div>
 				<div class="col-xl-4">
-					<!--begin:: Widgets/Profit Share-->
-					<div class="m-widget14">
-						<div class="m-widget14__header">
-							<h3 class="m-widget14__title">
-								页面渲染速度统计
-							</h3>
-							<span class="m-widget14__desc">
-								平台页面载入时间统计
+					<!-- 客户 订单 日程开始 -->
+					<div class="m-widget24">
+						<div class="m-widget24__item">
+					        <h4 class="m-widget24__title">
+					                     本月订单数
+					        </h4><br>
+					        <span class="m-widget24__desc">
+					                    订单总金额
+					        </span>
+					        <span class="m-widget24__stats m--font-danger">
+					            86980
+					        </span>		
+					        <div class="m--space-10"></div>
+							<div class="progress m-progress--sm">
+								<div class="progress-bar m--bg-danger" role="progressbar" style="width: 69%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<span class="m-widget24__change">
+								同比增长
 							</span>
-						</div>
-						<div class="row  align-items-center">
-							<div class="col">
-								<div id="m_chart_profit_share" class="m-widget14__chart" style="height: 160px">
-									<div class="m-widget14__stat">
-										45
-									</div>
-								<svg xmlns:ct="http://gionkunz.github.com/chartist-js/ct" width="100%" height="100%" class="ct-chart-donut" style="width: 100%; height: 100%;"><g class="ct-series custom"><path d="M141.265,108.314A66.5,66.5,0,0,0,81.094,13.5" class="ct-slice-donut" value="32" meta="{&amp;quot;data&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;#716aca&amp;quot;}}" stroke-dasharray="133.70703125px 133.70703125px" stroke-dashoffset="-133.70703125px" stroke="#716aca" style="stroke-width: 17px;"><animate attributeName="stroke-dashoffset" id="anim0" dur="1000ms" from="-133.70703125px" to="0px" fill="freeze" stroke="#716aca" calcMode="spline" keySplines="0.23 1 0.32 1" keyTimes="0;1"></animate></path></g><g class="ct-series custom"><path d="M29.855,122.389A66.5,66.5,0,0,0,141.363,108.104" class="ct-slice-donut" value="32" meta="{&amp;quot;data&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;#00c5dc&amp;quot;}}" stroke-dasharray="133.93873596191406px 133.93873596191406px" stroke-dashoffset="-133.93873596191406px" stroke="#00c5dc" style="stroke-width: 17px;"><animate attributeName="stroke-dashoffset" id="anim1" dur="1000ms" from="-133.93873596191406px" to="0px" fill="freeze" stroke="#00c5dc" begin="anim0.end" calcMode="spline" keySplines="0.23 1 0.32 1" keyTimes="0;1"></animate></path></g><g class="ct-series custom"><path d="M81.094,13.5A66.5,66.5,0,0,0,30.003,122.567" class="ct-slice-donut" value="36" meta="{&amp;quot;data&amp;quot;:{&amp;quot;color&amp;quot;:&amp;quot;#ffb822&amp;quot;}}" stroke-dasharray="150.65408325195312px 150.65408325195312px" stroke-dashoffset="-150.65408325195312px" stroke="#ffb822" style="stroke-width: 17px;"><animate attributeName="stroke-dashoffset" id="anim2" dur="1000ms" from="-150.65408325195312px" to="0px" fill="freeze" stroke="#ffb822" begin="anim1.end" calcMode="spline" keySplines="0.23 1 0.32 1" keyTimes="0;1"></animate></path></g></svg></div>
-							</div>
-							<div class="col">
-								<div class="m-widget14__legends">
-									<div class="m-widget14__legend">
-										<span class="m-widget14__legend-bullet m--bg-accent"></span>
-										<span class="m-widget14__legend-text">
-											10毫秒 用户管理
-										</span>
-									</div>
-									<div class="m-widget14__legend">
-										<span class="m-widget14__legend-bullet m--bg-warning"></span>
-										<span class="m-widget14__legend-text">
-											10毫秒 部门管理
-										</span>
-									</div>
-									<div class="m-widget14__legend">
-										<span class="m-widget14__legend-bullet m--bg-brand"></span>
-										<span class="m-widget14__legend-text">
-											10毫秒 岗位管理
-										</span>
-									</div>
-								</div>
-							</div>
-						</div>
+							<span class="m-widget24__number">
+								86%
+				            </span>
+					    </div>		
 					</div>
-					<!--end:: Widgets/Profit Share-->
+					<!-- 客户 订单 日程结束 -->
 				</div>
 			</div>
 		</div>

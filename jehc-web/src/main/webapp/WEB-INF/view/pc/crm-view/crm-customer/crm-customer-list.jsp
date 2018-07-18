@@ -43,7 +43,7 @@
       </div>
     </div>
 	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
-		<jEhcPermissionTag:jehcBtnTag modules="addCrmCustomer">
+		<jEhcPermissionTag:jehcBtnTag modules="toCrmCustomerAdd">
 			<button class="btn btn-default" onclick="toCrmCustomerAdd()">
 				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
 			</button>

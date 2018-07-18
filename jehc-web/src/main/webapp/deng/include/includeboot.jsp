@@ -44,6 +44,7 @@
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/style.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/newAdmin/using/base/theme/default/style.bundle.css" rel="stylesheet" type="text/css" />
         <!-- 基础插件样式结束 -->
         <!-- 基础插件开始 -->
         <script src="${syspath}/deng/source/plugins/newAdmin/vendors/base/jquery.min.js" type="text/javascript"></script>
@@ -53,6 +54,7 @@
         <link href="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
         <script src="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/js/jquery.dataTables.min.js" type="text/javascript"></script>
         <script src="${syspath }/deng/source/plugins/newAdmin/datatables/1.10.15/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+        <%-- <link href="${syspath }/deng/source/plugins/newAdmin/using/base/theme/smallleft/style.bundle.css" rel="stylesheet" type="text/css" /> --%>
         <link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/datatables.bundle.css" rel="stylesheet" type="text/css" /> 
         <!-- DataTables插件结束 -->
         <!-- 基础插件结束 -->
@@ -87,6 +89,7 @@
 		<script src="${syspath }/deng/source/plugins/newAdmin/bootstrap/bootstrap-validate/bootstrapValidator.js" type="text/javascript"></script>
 		<!-- bootstrap验证框架结束 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
+		<script src="${syspath}/deng/source/plugins/newAdmin/using/base/theme/default/scripts.bundle.js" type="text/javascript"></script>
 	</head>
 	<!-- upload模态框（Modal）开始 -->
 	<div class="modal fade" id="jehcUploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop=”static”  aria-hidden="true">

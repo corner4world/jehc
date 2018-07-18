@@ -32,23 +32,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<label>关键词</label>
 						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="请输入关键词">
 							&nbsp;
-						<a class="btn btn-outline-primary waves-light waves-effect" href="javascript:filter('tree','keyword')">
+						<a class="btn btn-default" href="javascript:filter('tree','keyword')">
 							<i class="fa fa-search m-r-5"></i>&nbsp;检索
 						</a>
 						&nbsp;
-						<button class="btn btn-outline-success waves-light waves-effect" onclick="addOrg()">
+						<button class="btn btn-default" onclick="addOrg()">
 							<i class="fa fa-plus-circle"></i>创建
 						</button>
 						&nbsp;
-						<button class="btn btn-outline-info waves-light waves-effect" onclick="updateOrg()">
+						<button class="btn btn-default" onclick="updateOrg()">
 							<i class="fa fa-pencil"></i>编辑
 						</button>
 						&nbsp;
-						<button class="btn btn-outline-danger waves-light waves-effect" onclick="delOrg()">
+						<button class="btn btn-default" onclick="delOrg()">
 							<i class="fa fa-trash-o"></i>删除
 						</button>
 						&nbsp;
-						<button class="btn btn-outline-warning waves-light waves-effect" onclick="filter('tree','keyword')">
+						<button class="btn btn-default" onclick="filter('tree','keyword')">
 							<i class="fa fa-spin fa-refresh"></i>刷新
 						</button>
 					</div>
@@ -164,13 +164,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="col-md-3">
 				        	<div class="form-group">
 				        		<label class="control-label">岗位最大人数</label>
-				        		<input class="form-control" disabled="disabled" type="text" maxlength="12"  id="xt_post_maxNum">
+				        		<input class="form-control" disabled="disabled" type="number" maxlength="12"  id="xt_post_maxNum">
 				       		</div>
 				        </div>
 						<div class="col-md-3">
 				        	<div class="form-group">
 				        		<label class="control-label">级别</label>
-				        		<input class="form-control" disabled="disabled" type="text" maxlength="50" id="xt_post_grade">
+				        		<input class="form-control" disabled="disabled" type="number" maxlength="50" id="xt_post_grade">
 				       		</div>
 				        </div>
 					</div>
@@ -314,13 +314,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<div class="col-md-3">
 					        	<div class="form-group">
 					        		<label class="control-label">岗位最大人数</label>
-					        		<input class="form-control" type="text" data-bv-numeric data-bv-numeric-message="必须为整数" maxlength="12" name="xt_post_maxNum" id="xt_post_maxNumTemp">
+					        		<input class="form-control" type="number" data-bv-numeric data-bv-numeric-message="必须为整数" maxlength="12" name="xt_post_maxNum" id="xt_post_maxNumTemp">
 					       		</div>
 					        </div>
 							<div class="col-md-3">
 					        	<div class="form-group">
 					        		<label class="control-label">级别</label>
-					        		<input class="form-control" type="text" data-bv-numeric data-bv-numeric-message="必须为整数" maxlength="50" name="xt_post_grade" id="xt_post_gradeTemp">
+					        		<input class="form-control" type="number" data-bv-numeric data-bv-numeric-message="必须为整数" maxlength="50" name="xt_post_grade" id="xt_post_gradeTemp">
 					       		</div>
 					        </div>
 						</div>

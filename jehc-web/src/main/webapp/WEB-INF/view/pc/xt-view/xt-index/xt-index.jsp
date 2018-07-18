@@ -63,8 +63,11 @@
 		</script>
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/line-awesome/css/line-awesome.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/other/iconfont/iconfont.css" rel="stylesheet" type="text/css" >
-		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" />
+        <link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/flaticon.css" rel="stylesheet" type="text/css" />
+		<%-- <link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" /> --%>
+		<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 		<c:choose>
 			<c:when test="${mini eq 'YES' }">
 				<link href="${syspath }/deng/source/plugins/newAdmin/using/base/theme/bigleft/style.bundle.css" rel="stylesheet" type="text/css" />

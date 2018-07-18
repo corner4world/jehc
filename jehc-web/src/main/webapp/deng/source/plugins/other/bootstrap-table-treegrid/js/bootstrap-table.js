@@ -1,9 +1,3 @@
-/**
- * @author zhixin wen <wenzhixin2010@gmail.com>
- * version: 1.11.1
- * https://github.com/wenzhixin/bootstrap-table/
- */
-
 (function ($) {
     'use strict';
 
@@ -358,10 +352,10 @@
             paginationSwitchDown: 'glyphicon-collapse-down icon-chevron-down',
             paginationSwitchUp: 'glyphicon-collapse-up icon-chevron-up',
             refresh: 'glyphicon-refresh icon-refresh',
-            toggle: 'glyphicon-list-alt icon-list-alt',
-            columns: 'glyphicon-th icon-th',
-            detailOpen: 'glyphicon-plus icon-plus',
-            detailClose: 'glyphicon-minus icon-minus'
+            toggle: 'la la-bars',
+            columns: 'la la-bars',
+            detailOpen: 'fa fa-plus-circle',
+            detailClose: 'fa fa-minus-circle'
         },
 
         customSearch: $.noop,
