@@ -1,0 +1,7 @@
+.m-form.m-form--group-seperator .m-form__group, .m-form.m-form--group-seperator-dashed .m-form__group {
+    padding-top:5px;
+    padding-bottom:5px;
+}
+.m-form .m-form__actions {
+    padding:5px;
+}

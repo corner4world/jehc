@@ -5,75 +5,98 @@
 <head>
 <meta charset="UTF-8">
 <title>员工信息表</title>
+<link href="${syspath}/deng/source/css/bootlist.css" rel="stylesheet" type="text/css" />
 <style>
 #deletedUserinfoDatatables{width:100%!important}
 #userRoleDatatables{width:100%!important} 
 </style>
 </head>
 <body>
-	<div class="portlet box green" style="margin-bottom: 5px;">
-		<div class="portlet-title">
-            <div class="caption">
-                	查询区域
-            </div>
-        </div>
-        <div class="portlet-body form">
-        	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
-				<div class="form-group">
-					<label>隶属部门</label>
-					<input type="text" class="form-control" name="xt_departinfo_name" placeholder="请输入部门名称">
+	<div class="m-content">
+		<div class="m-portlet">
+			<div class="m-portlet__head">
+				<div class="m-portlet__head-caption">
+					<div class="m-portlet__head-title">
+						<h3 class="m-portlet__head-text">
+							<span class="m-accordion__item-icon"><i class="flaticon-search"></i>查询区域</span>
+						</h3>
+					</div>
 				</div>
-				<div class="form-group">
-					<label>岗位</label>
-					<input type="text" class="form-control" name="xt_post_name" placeholder="请输入岗位名称">
-				</div>
-				<div class="form-group">
-					<label>姓名</label>
-					<input type="text" class="form-control" name="xt_userinfo_realName" placeholder="请输入姓名">
-				</div>
-				<div class="form-group">
-					<label>用户名</label>
-					<input type="text" class="form-control" name="xt_userinfo_name" placeholder="请输入用户名">
+			</div>
+			<!--begin::Form-->
+			<form class="m-form m-form--fit m-form--label-align-left m-form--group-seperator-dashed" method="POST" id="searchForm">
+				<div class="m-portlet__body">	
+					<div class="form-group m-form__group row">
+						<label class="col-form-label">隶属部门:</label>
+						<div class="col-lg-2">
+							<input type="text" class="form-control" name="xt_departinfo_name" placeholder="请输入部门名称">
+						</div>
+						<label class="col-form-label">岗位:</label>
+						<div class="col-lg-2">
+							<input type="text" class="form-control" name="xt_post_name" placeholder="请输入岗位名称">
+						</div>
+						<label class="col-form-label">姓名:</label>
+						<div class="col-lg-2">
+							<input type="text" class="form-control" name="xt_userinfo_name" placeholder="请输入用户名">
+						</div>
+						<label class="col-form-label">用户名:</label>
+						<div class="col-lg-2">
+							<input type="text" class="form-control" name="xt_userinfo_name" placeholder="请输入用户名">
+						</div>
+					</div>	
+	            </div>
+	            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+					<div class="m-form__actions m-form__actions--solid">
+						<div class="row">
+							<div class="col m--align-left">
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:toXtUserinfoAdd()">
+									 <span><i class="fa fa-plus-circle m-r-5"></i><span>新增</span></span>
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:toXtUserinfoUpdate()">
+									 <i class="fa fa-pencil m-r-5"></i>修改
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:delXtUserinfo()">
+									<i class="fa fa-trash-o m-r-5"></i>&nbsp;删除
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:initListDeleted()">
+									<i class="fa fa-user-times m-r-5"></i>&nbsp;已禁用
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:search('datatables')">
+									<i class="fa fa-spin fa-refresh m-r-5"></i>&nbsp;刷新
+								</a>
+							</div>
+							<div class="col m--align-right">
+								<a href="javascript:search('datatables')" class="btn btn-info m-btn m-btn--custom m-btn--icon">
+									<span><i class="fa fa-search"></i><span>检索</span></span>
+								</a>
+								<a href="javascript:resetAll()" class="btn btn-secondary m-btn m-btn--custom m-btn--icon">
+									<span><i class="fa fa-repeat"></i><span>重置</span></span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
 			</form>
-        </div>
-    </div>
-	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
-        <button type="button" class="btn btn-outline-primary waves-light waves-effect"  title="检索" onclick="search('datatables')"><i class="fa fa-search m-r-5"></i>检索</button>
-        <button type="button" class="btn btn-outline-danger waves-light waves-effect" title="重置" onclick="resetAll()"> <i class="fa fa-remove m-r-5"></i>重置</button>
-        <button class="btn btn-outline-success waves-light waves-effect" onclick="toXtUserinfoAdd()">
-			 <i class="fa fa-plus-circle"></i>新增
-		</button>
-		<button class="btn btn-outline-info waves-light waves-effect" onclick="toXtUserinfoUpdate()">
-			 <i class="fa fa-pencil"></i>修改
-		</button>
-		<button class="btn btn-outline-danger waves-light waves-effect" onclick="delXtUserinfo()">
-			<i class="fa fa-trash-o"></i>删除
-		</button>
-		<button class="btn btn-outline-danger waves-light waves-effect" onclick="initListDeleted()">
-			<i class="fa fa-user-times"></i>已禁用
-		</button>
-		<button class="btn btn-outline-warning waves-light waves-effect" onclick="search('datatables')">
-			<i class="fa fa-spin fa-refresh"></i>刷新
-		</button>
-    </div>
-	<table id="datatables" class="table table-bordered table-striped table-hover">
-		<thead>
-			<tr>
-				<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
-				<th>序号</th>
-				<th>用户名</th>
-				<th>真实姓名</th>
-				<th>联系电话</th>
-				<th>状态</th>
-				<th>性别</th>
-				<th>籍贯</th>
-				<th>生日</th>
-				<th>电子邮件</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-	</table>
+			<!--end::Form-->
+		</div>
+		<table id="datatables" class="table table-bordered table-striped table-hover">
+			<thead>
+				<tr>
+					<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
+					<th>序号</th>
+					<th>用户名</th>
+					<th>真实姓名</th>
+					<th>联系电话</th>
+					<th>状态</th>
+					<th>性别</th>
+					<th>籍贯</th>
+					<th>生日</th>
+					<th>电子邮件</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
 </body>
 <!-- 已废除用户模态框（Modal）开始 -->
 <div class="modal fade" id="deletedUserinfoSelectModal" tabindex="-1" role="dialog" aria-labelledby="deletedUserinfoModalLabel" aria-hidden="true">

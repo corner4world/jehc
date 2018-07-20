@@ -8,11 +8,22 @@
 <title>员工信息表详情页面</title>
 </head>
 <body>
-	<div class="panel-body">
-		<div class="page-header">
-			<h4>员工详情</h4>
+	<div class="m-portlet">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<span class="m-portlet__head-icon m--hide">
+					<i class="la la-gear"></i>
+					</span>
+					<h3 class="m-portlet__head-text">
+						员工详情
+					</h3>
+				</div>
+			</div>
 		</div>
-		<form class="form-horizontal" id="defaultForm" method="post">
+		<!--begin::Form-->
+		<form class="m-form" id="defaultForm" method="post">
+			<div class="m-portlet__body">		
 			<fieldset>
 				<legend>组织机构</legend>
 				<div class="row">
@@ -274,13 +285,20 @@
 			        </div>
 			    </div>
 			</fieldset>
-			<div class="form-group">
-				<label class="col-lg-3 control-label"></label>
-				<div class="col-lg-6">
-					<button type="button" class="btn default" onclick="goback()">返回</button>
+			</div>
+			<div class="m-portlet__foot m-portlet__foot--fit">
+				<div class="m-form__actions m-form__actions--right">
+					<div class="row">
+						<div class="col m--align-left">
+						</div>
+						<div class="col m--align-right">
+							<button type="button" class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="goback()">返回</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</form>
+		<!--end::Form-->
 	</div>
 </body>
 <script type="text/javascript" src="../view/pc/xt-view/xt-userinfo/xt-userinfo-detail.js"></script> 

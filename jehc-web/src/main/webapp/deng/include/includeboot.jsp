@@ -39,7 +39,10 @@
 	    	var xt_userinfo_id='${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_id}'; 
 		</script>
 		<!-- 基础插件样式开始 -->
-		<%-- <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> --%>
+		<%-- 
+		<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" /> 
+		--%>
+        <link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/flaticon.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/icons.css" rel="stylesheet" type="text/css" />
         <link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/style.css" rel="stylesheet" type="text/css" />

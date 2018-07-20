@@ -175,7 +175,7 @@
 		        </div>
 		    </div>
 			<div class="form-group">
-				&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn green" onclick="updateXtUserinfo()">保存</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success green m-btn m-btn--custom m-btn--icon" onclick="updateXtUserinfo()">保存</button>
 			</div>
 		</form>
 	</div>

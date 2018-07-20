@@ -39,7 +39,7 @@
 	    	var xt_userinfo_id='${BASE_HTTP_SESSION.XTUSERINFO.xt_userinfo_id}'; 
 		</script>
 		<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
-        <link href="${syspath }/deng/source/plugins/other/iconfont/iconfont.css" rel="stylesheet" type="text/css" >
+        <link href="${syspath }/deng/source/plugins/other/iconfont/iconfont.css" rel="stylesheet" type="text/css" />
 		<link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/flaticon.css" rel="stylesheet" type="text/css" />
 		<%-- <link href="${syspath }/deng/source/plugins/newAdmin/vendors/base/vendors.bundle.css" rel="stylesheet" type="text/css" /> --%>
 		<link href="${syspath }/deng/source/plugins/newAdmin/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
