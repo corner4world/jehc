@@ -17,55 +17,94 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" src="../view/pc/xt-view/xt-org/xt-post-add.js"></script>  
 	<script type="text/javascript" src="../view/pc/xt-view/xt-org/xt-post-update.js"></script>   
 	-->
+	<link href="${syspath}/deng/source/css/bootlist.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="${syspath}/deng/source/plugins/other/bztree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
 	<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.core.js"></script>
 	<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.excheck.js"></script>
 	<script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.exedit.js"></script>
 </head>  
 <body>  
-	<div class="panel-body">
-		<div class="row">
-			<div class="col-md-12">
-				<fieldset>
-					<legend>查询区域</legend>
-		        	<div class="form-group form-inline">
-						<label>关键词</label>
-						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="请输入关键词">
-							&nbsp;
-						<a class="btn btn-default" href="javascript:filter('tree','keyword')">
-							<i class="fa fa-search m-r-5"></i>&nbsp;检索
-						</a>
-						&nbsp;
-						<button class="btn btn-default" onclick="addOrg()">
-							<i class="fa fa-plus-circle"></i>创建
-						</button>
-						&nbsp;
-						<button class="btn btn-default" onclick="updateOrg()">
-							<i class="fa fa-pencil"></i>编辑
-						</button>
-						&nbsp;
-						<button class="btn btn-default" onclick="delOrg()">
-							<i class="fa fa-trash-o"></i>删除
-						</button>
-						&nbsp;
-						<button class="btn btn-default" onclick="filter('tree','keyword')">
-							<i class="fa fa-spin fa-refresh"></i>刷新
-						</button>
+	<div class="m-content">
+		<div class="m-portlet">
+			<div class="m-portlet__head">
+				<div class="m-portlet__head-caption">
+					<div class="m-portlet__head-title">
+						<h3 class="m-portlet__head-text">
+							<span class="m-accordion__item-icon"><i class="flaticon-search"></i>查询区域</span>
+						</h3>
 					</div>
-			    </fieldset>
-		    </div>
-	    </div>
+				</div>
+			</div>
+			<!--begin::Form-->
+			<form class="m-form m-form--fit m-form--label-align-left m-form--group-seperator-dashed" method="POST" id="searchForm">
+				<div class="m-portlet__body">	
+					<div class="form-group m-form__group row">
+						<label class="col-form-label">关键词:</label>
+						<div class="col-lg-2">
+							<input type="text" class="form-control" name="keyword" id="keyword" placeholder="请输入关键词">
+						</div>
+					</div>	
+	            </div>
+	            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+					<div class="m-form__actions m-form__actions--solid">
+						<div class="row">
+							<div class="col m--align-left">
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:addOrg()">
+									<i class="fa fa-plus-circle"></i>创建
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:updateOrg()">
+									<i class="fa fa-pencil"></i>编辑
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:delOrg()">
+									<i class="fa fa-trash-o"></i>删除
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:filter('tree','keyword')">
+									<i class="fa fa-spin fa-refresh"></i>刷新
+								</a>
+							</div>
+							<div class="col m--align-right">
+								&nbsp;
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:filter('tree','keyword')">
+									<i class="fa fa-search m-r-5"></i>&nbsp;检索
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!--end::Form-->
+		</div>
+	</div>
+	<div class="m-form">
 		<div class="row">
 	        <div class="col-md-2">
-	        	<fieldset>
-					<legend>组织机构</legend>
+	        	<div class="m-portlet">
+		        	<div class="m-portlet__head">
+						<div class="m-portlet__head-caption">
+							<div class="m-portlet__head-title">
+								<h3 class="m-portlet__head-text">
+									<span class="m-accordion__item-icon"><i class="flaticon-user-ok"></i>组织机构</span>
+								</h3>
+							</div>
+						</div>
+					</div>
 					<ul id="tree" class="ztree"></ul>
-				</fieldset>
+				</div>
 	        </div>
-	        <div class="col-md-10">
-	        	<!-- 部门信息开始 -->
-	        	<fieldset id="departFieldSet">
-					<legend>部门信息</legend>
+	        <!-- 部门信息开始 -->
+	        <div class="col-md-10" id="departFieldSet">
+	        	<div class="m-portlet">
+		        	<div class="m-portlet__head">
+						<div class="m-portlet__head-caption">
+							<div class="m-portlet__head-title">
+								<h3 class="m-portlet__head-text">
+									<span class="m-accordion__item-icon"><i class="flaticon-user-ok"></i>部门信息</span>
+								</h3>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="m-portlet__body">
 					<div class="form-group" style="display:none;">
 						<label class="col-lg-3 control-label">序列号</label>
 						<div class="col-lg-6">
@@ -127,64 +166,73 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input class="form-control" disabled="disabled" type="text" maxlength="20"  readonly="readonly" style="width: 150px;" id="xt_departinfo_time">
 						</div>
 					</div>
-				</fieldset>
-				<!-- 部门信息结束 -->
-				
-				<!-- 岗位信息开始 -->
-	        	<fieldset id="postFieldSet" style="display: none;">
-					<legend>岗位信息</legend>
-					<div class="form-group" style="display:none;">
-						<label class="col-lg-3 control-label">序列号</label>
-						<div class="col-lg-6">
-							<input class="form-control" type="hidden" name="xt_post_id"  placeholder="请输入序列号">
+	            </div>
+			</div>
+			<!-- 部门信息结束 -->
+			<!-- 岗位信息开始 -->
+			<div class="col-md-10" id="postFieldSet"style="display: none;">
+				<div class="m-portlet">
+		        	<div class="m-portlet__head">
+						<div class="m-portlet__head-caption">
+							<div class="m-portlet__head-title">
+								<h3 class="m-portlet__head-text">
+									<span class="m-accordion__item-icon"><i class="flaticon-user-ok"></i>岗位信息</span>
+								</h3>
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-3">
-				        	<div class="form-group">
-				        		<label class="control-label">名称</label>
-								<input class="form-control" disabled="disabled" type="text" maxlength="32" value="无" id="xt_post_name" readonly="readonly">
-				       		</div>
-				        </div>
-						<div class="col-md-3">
-				        	<div class="form-group">
-				        		<label class="control-label">隶属部门</label>
-				        		<input class="form-control" disabled="disabled" type="hidden" maxlength="50" id="xt_departinfo_id_">
-				        		<input class="form-control" disabled="disabled" type="text" maxlength="50" id="xt_departinfo_name_">
-				       		</div>
-				        </div>
-				        <div class="col-md-3">
-				        	<div class="form-group">
-				        		<label class="control-label">上级岗位</label>
-								<input class="form-control" type="text" maxlength="32" readonly="readonly" value="无" id="xt_post_parentName">
-				        	</div>
-				        </div>
+				</div>
+				<div class="form-group" style="display:none;">
+					<label class="col-lg-3 control-label">序列号</label>
+					<div class="col-lg-6">
+						<input class="form-control" type="hidden" name="xt_post_id"  placeholder="请输入序列号">
 					</div>
-					<div class="row">
-						<div class="col-md-3">
-				        	<div class="form-group">
-				        		<label class="control-label">岗位最大人数</label>
-				        		<input class="form-control" disabled="disabled" type="number" maxlength="12"  id="xt_post_maxNum">
-				       		</div>
-				        </div>
-						<div class="col-md-3">
-				        	<div class="form-group">
-				        		<label class="control-label">级别</label>
-				        		<input class="form-control" disabled="disabled" type="number" maxlength="50" id="xt_post_grade">
-				       		</div>
-				        </div>
-					</div>
-					<div class="row">
-						<div class="col-md-6">
-				        	<div class="form-group">
-				        		<label class="control-label">描&nbsp;&nbsp;&nbsp;&nbsp;述</label>
-				        		<textarea class="form-control" disabled="disabled" maxlength="200"  id="xt_post_desc" placeholder="请输入描述"></textarea>	
-				       		</div>
-				        </div>
-					</div>
-				</fieldset>
-				<!-- 岗位信息结束 -->
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+			        	<div class="form-group">
+			        		<label class="control-label">名称</label>
+							<input class="form-control" disabled="disabled" type="text" maxlength="32" value="无" id="xt_post_name" readonly="readonly">
+			       		</div>
+			        </div>
+					<div class="col-md-3">
+			        	<div class="form-group">
+			        		<label class="control-label">隶属部门</label>
+			        		<input class="form-control" disabled="disabled" type="hidden" maxlength="50" id="xt_departinfo_id_">
+			        		<input class="form-control" disabled="disabled" type="text" maxlength="50" id="xt_departinfo_name_">
+			       		</div>
+			        </div>
+			        <div class="col-md-3">
+			        	<div class="form-group">
+			        		<label class="control-label">上级岗位</label>
+							<input class="form-control" type="text" maxlength="32" readonly="readonly" value="无" id="xt_post_parentName">
+			        	</div>
+			        </div>
+				</div>
+				<div class="row">
+					<div class="col-md-3">
+			        	<div class="form-group">
+			        		<label class="control-label">岗位最大人数</label>
+			        		<input class="form-control" disabled="disabled" type="number" maxlength="12"  id="xt_post_maxNum">
+			       		</div>
+			        </div>
+					<div class="col-md-3">
+			        	<div class="form-group">
+			        		<label class="control-label">级别</label>
+			        		<input class="form-control" disabled="disabled" type="number" maxlength="50" id="xt_post_grade">
+			       		</div>
+			        </div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+			        	<div class="form-group">
+			        		<label class="control-label">描&nbsp;&nbsp;&nbsp;&nbsp;述</label>
+			        		<textarea class="form-control" disabled="disabled" maxlength="200"  id="xt_post_desc" placeholder="请输入描述"></textarea>	
+			       		</div>
+			        </div>
+				</div>
 	        </div>
+	        <!-- 岗位信息结束 -->
 	    </div>
 	</div>
 	

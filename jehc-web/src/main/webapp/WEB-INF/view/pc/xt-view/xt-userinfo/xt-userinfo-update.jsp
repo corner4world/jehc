@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>员工信息表编辑页面</title>
+<link href="${syspath}/deng/source/css/bootform.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div class="m-portlet">

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>员工信息表详情页面</title>
+<link href="${syspath}/deng/source/css/bootform.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 	<div class="m-portlet">
@@ -73,11 +74,10 @@
 			<legend>基本信息</legend>
 				<div class="row">
 			        <div class="col-md-1">
-			        	
+			        	<label class="control-label">用户名称</label>
 			        </div>
 			        <div class="col-md-3">
 			        	<div class="form-group">
-			        		<label class="control-label">用户名称</label>
 			        		<input class="form-control" type="hidden" maxlength="64" id="xt_userinfo_name_"  value="${xtUserinfo.xt_userinfo_name}">
 			        		<input class="form-control" type="text" maxlength="64" onblur="validateUser(this);" style="width: 150px;" id="xt_userinfo_name"  value="${xtUserinfo.xt_userinfo_name }" data-bv-notempty data-bv-notempty-message="请输入用户名"  name="xt_userinfo_name" placeholder="请输入用户名">
 			        	</div>

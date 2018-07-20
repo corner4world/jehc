@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>员工信息表新增页面</title>
+<link href="${syspath}/deng/source/css/bootform.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" href="${syspath}/deng/source/plugins/other/bztree/css/bootstrapStyle/bootstrapStyle.css" type="text/css">
 <script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.core.js"></script>
 <script type="text/javascript" src="${syspath}/deng/source/plugins/other/bztree/js/jquery.ztree.excheck.js"></script>
