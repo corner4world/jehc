@@ -273,25 +273,24 @@ public class GeneratorBootPageList extends GeneratorUtil {
 		
 		sb.append("<body>\r\n");
 		//查询开始
-		
-		sb.append("\t<div class=\"portlet box green\" style=\"margin-bottom: 5px\">\r\n");
-		sb.append("\t\t<div class=\"portlet-title\">\r\n");
-		sb.append("\t\t\t<div class=\"caption\">\r\n");
-		sb.append("\t\t\t\t查询区域\r\n");
+		sb.append("\t<div class=\"m-content\">\r\n");
+		sb.append("\t\t<div class=\"m-portlet\">\r\n");
+		sb.append("\t\t\t<div class=\"m-portlet__head\">\r\n");
+		sb.append("\t\t\t\t<div class=\"m-portlet__head-caption\">\r\n");
+		sb.append("\t\t\t\t\t<div class=\"m-portlet__head-title\">\r\n");
+		sb.append("\t\t\t\t\t\t<h3 class=\"m-portlet__head-text\">\r\n");
+		sb.append("\t\t\t\t\t\t\t<span class=\"m-accordion__item-icon\"><i class=\"flaticon-search\"></i>查询区域</span>\r\n");
+		sb.append("\t\t\t\t\t\t</h3>\r\n");
+		sb.append("\t\t\t\t\t</div>\r\n");
+		sb.append("\t\t\t\t</div>\r\n");
 		sb.append("\t\t\t</div>\r\n");
-		sb.append("\t\t\t<div class=\"actions\">\r\n");
-		sb.append("\t\t\t\t&nbsp;<a class=\"btn btn-outline-primary waves-light waves-effect\" href=\"javascript:search('datatables');\">\r\n");
-		sb.append("\t\t\t\t\t<i class=\"fa fa-search m-r-5\"></i>&nbsp;检索\r\n");
-		sb.append("\t\t\t\t</a>&nbsp;\r\n");
-		sb.append("\t\t\t\t<a class=\"btn btn-outline-danger waves-light waves-effect\" href=\"javascript:resetAll();\">\r\n");
-		sb.append("\t\t\t\t\t<i class=\"fa fa-remove m-r-5\"></i>&nbsp;重置\r\n");
-		sb.append("\t\t\t\t</a>\r\n");
-		sb.append("\t\t\t</div>\r\n");
-		sb.append("\t\t</div>\r\n");
 		
-		sb.append("\t\t<div class=\"portlet-body form\">\r\n");
-		sb.append("\t\t\t<form method=\"POST\" id=\"searchForm\" class=\"form-inline\" style=\"padding: 5px 0px 5px 0px;\">\r\n");		
+		/**表单设计开始**/
+		sb.append("\t\t\t<form class=\"m-form m-form--fit m-form--label-align-left m-form--group-seperator-dashed\" method=\"POST\" id=\"searchForm\">\r\n");
+		//内容模块
+		sb.append("\t\t\t\t<div class=\"m-portlet__body\">\r\n");
 		//查询区域内容开始
+		sb.append("\t\t\t\t\t<div class=\"form-group m-form__group row\">\r\n");
 		for(int i = 0; i < xt_generator_search_filedList.size(); i++){
 			XtGeneratorSearchFiled xt_generator_search_filed = xt_generator_search_filedList.get(i);
 			String xt_generator_search_name = xt_generator_search_filed.getXt_generator_search_name();
@@ -309,64 +308,82 @@ public class GeneratorBootPageList extends GeneratorUtil {
 			}else if("4".equals(xt_generator_search_type)){
 				xtype="datefield";
 			}
-			
-			sb.append("\t\t\t\t<div class=\"form-group\">\r\n");
-			sb.append("\t\t\t\t\t<label>"+xt_generator_search_label+"</label>\r\n");
+//			sb.append("\t\t\t\t\t<div class=\"form-group m-form__group row\">\r\n");
+			sb.append("\t\t\t\t\t\t<label class=\"col-form-label\">"+xt_generator_search_label+"</label>\r\n");
+			sb.append("\t\t\t\t\t\t<div class=\"col-lg-2\">\r\n");
 			if("0".equals(xt_generator_search_type) || "2".equals(xt_generator_search_type)){
-				sb.append("\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请输入"+xt_generator_search_label+"\">\r\n");
+				sb.append("\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请输入"+xt_generator_search_label+"\">\r\n");
 			}else if("1".equals(xt_generator_search_type)){
-				sb.append("\t\t\t\t\t<textarea class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请输入"+xt_generator_search_label+"\"></textarea>\r\n");
+				sb.append("\t\t\t\t\t\t\t<textarea class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请输入"+xt_generator_search_label+"\"></textarea>\r\n");
 			}else if("3".equals(xt_generator_search_type)){
-				sb.append("\t\t\t\t\t<select class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请选择\"></select>\r\n");
+				sb.append("\t\t\t\t\t\t\t<select class=\"form-control\" name=\""+xt_generator_search_name+"\" placeholder=\"请选择\"></select>\r\n");
 			}else if("4".equals(xt_generator_search_type)){
-				sb.append("\t\t\t\t\t<div class=\"input-group\">\r\n");
-				sb.append("\t\t\t\t\t\t<input type=\"text\" class=\"form_datetime form-control\" placeholder=\"起始时间\" name=\""+xt_generator_search_name+"_st\" />\r\n");
-				sb.append("\t\t\t\t\t\t<span class=\"input-group-addon\">至</span>\r\n");
-				sb.append("\t\t\t\t\t\t<input type=\"text\" class=\"form_datetime form-control\" placeholder=\"结束时间\" name=\""+xt_generator_search_name+"_et\" />\r\n");
-				sb.append("\t\t\t\t\t</div>\r\n");
+				sb.append("\t\t\t\t\t\t\t<div class=\"input-group\">\r\n");
+				sb.append("\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form_datetime form-control\" placeholder=\"起始时间\" name=\""+xt_generator_search_name+"_st\" />\r\n");
+				sb.append("\t\t\t\t\t\t\t\t<span class=\"input-group-addon\">至</span>\r\n");
+				sb.append("\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form_datetime form-control\" placeholder=\"结束时间\" name=\""+xt_generator_search_name+"_et\" />\r\n");
+				sb.append("\t\t\t\t\t\t\t</div>\r\n");
 			}
-			sb.append("\t\t\t\t</div>\r\n");
+			sb.append("\t\t\t\t\t\t</div>\r\n");
+//			sb.append("\t\t\t\t\t</div>\r\n");
 		}
+		sb.append("\t\t\t\t\t</div>\r\n");
+		sb.append("\t\t\t\t</div>\r\n");
+		sb.append("\t\t\t\t<div class=\"m-portlet__foot m-portlet__no-border m-portlet__foot--fit\">\r\n");
+		sb.append("\t\t\t\t\t<div class=\"m-form__actions m-form__actions--solid\">\r\n");
+		sb.append("\t\t\t\t\t\t<div class=\"row\">\r\n");
+		//按钮开始
+		sb.append("\t\t\t\t\t\t\t<div class=\"col m--align-left\">\r\n");
+		sb.append("\t\t\t\t\t\t\t\t<a class=\"btn btn-secondary m-btn m-btn--custom m-btn--icon\" href=\"javascript:to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Add()\">\r\n");
+		sb.append("\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-pencil fa-lg\"></i><span>新增</span></span>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t</a>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t<a class=\"btn btn-secondary m-btn m-btn--custom m-btn--icon\" href=\"javascript:to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Update()\">\r\n");
+		sb.append("\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-magic fa-lg\"></i><span>修改</span></span>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t</a>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t<a class=\"btn btn-secondary m-btn m-btn--custom m-btn--icon\" href=\"javascript:del"+uprepchar(xt_Generator.getXt_generator_tbname())+"()\">\r\n");
+		sb.append("\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-times\"></i><span>删除</span></span>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t</a>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t<a class=\"btn btn-secondary m-btn m-btn--custom m-btn--icon\" href=\"javascript:search('datatables')\">\r\n");
+		sb.append("\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-spin fa-refresh m-r-5\"></i><span>刷新</span></span>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t</a>\r\n");
+		sb.append("\t\t\t\t\t\t\t</div>\r\n");
+		
+		sb.append("\t\t\t\t\t\t\t<div class=\"col m--align-right\">\r\n");
+		sb.append("\t\t\t\t\t\t\t\t<a href=\"javascript:search('datatables')\" class=\"btn btn-info m-btn m-btn--custom m-btn--icon\">\r\n");
+		sb.append("\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-search\"></i><span>检索</span></span>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t</a>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t<a href=\"javascript:resetAll()\" class=\"btn btn-secondary m-btn m-btn--custom m-btn--icon\">\r\n");
+		sb.append("\t\t\t\t\t\t\t\t\t<span><i class=\"fa fa-repeat\"></i><span>重置</span></span>\r\n");
+		sb.append("\t\t\t\t\t\t\t\t</a>\r\n");
+		sb.append("\t\t\t\t\t\t\t</div>\r\n");
+		//按钮结束
+		sb.append("\t\t\t\t\t\t</div>\r\n");
+		sb.append("\t\t\t\t\t</div>\r\n");
+		sb.append("\t\t\t\t</div>\r\n");
+		/**表单设计结束**/
 		sb.append("\t\t\t</form>\r\n");
 		sb.append("\t\t</div>\r\n");
-		sb.append("\t</div>\r\n");
 		//查询区域内容结束
 		
 		/////////////////////////内容开始////////////////////////
-		//按钮开始
-		sb.append("\t<div class=\"pull-left form-actions\" style=\"margin-right:0px;margin-bottom: 5px\">\r\n");
-		sb.append("\t\t<button class=\"btn btn-outline-success waves-light waves-effect\" onclick=\"to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Add()\">\r\n");
-		sb.append("\t\t\t<i class=\"fa fa-plus-circle\"></i>新增\r\n");
-		sb.append("\t\t</button>\r\n");
-		sb.append("\t\t<button class=\"btn btn-outline-info waves-light waves-effect\" onclick=\"to"+uprepchar(xt_Generator.getXt_generator_tbname())+"Update()\">\r\n");
-		sb.append("\t\t\t<i class=\"fa fa-pencil\"></i>修改\r\n");
-		sb.append("\t\t</button>\r\n");
-		sb.append("\t\t<button class=\"btn btn-outline-danger waves-light waves-effect\" onclick=\"del"+uprepchar(xt_Generator.getXt_generator_tbname())+"()\">\r\n");
-		sb.append("\t\t\t<i class=\"fa fa-trash-o\"></i>删除\r\n");
-		sb.append("\t\t</button>\r\n");
-		sb.append("\t\t<button class=\"btn btn-outline-warning waves-light waves-effect\" onclick=\"search('datatables')\">\r\n");
-		sb.append("\t\t\t<i class=\"fa fa-spin fa-refresh\"></i>刷新\r\n");
-		sb.append("\t\t</button>\r\n");
-		sb.append("\t</div>\r\n");
-		//按钮结束
-		
-		
-		sb.append("\t<table id=\"datatables\" class=\"table table-bordered table-striped table-hover\" style=\"white-space: nowrap; width: 99.9%\">\r\n");
-		sb.append("\t\t<thead>\r\n");
-		sb.append("\t\t\t<tr>\r\n");
-		sb.append("\t\t\t\t<th><label class=\"mt-checkbox mt-checkbox-single mt-checkbox-outline\"><input type=\"checkbox\" class=\"checkall\" /><span></span></label></th>\r\n");//复选框
-		sb.append("\t\t\t\t<th>序号</th>\r\n");//序号
+		sb.append("\t\t<table id=\"datatables\" class=\"table table-bordered table-striped table-hover\" style=\"white-space: nowrap; width: 99.9%\">\r\n");
+		sb.append("\t\t\t<thead>\r\n");
+		sb.append("\t\t\t\t<tr>\r\n");
+		sb.append("\t\t\t\t\t<th><label class=\"mt-checkbox mt-checkbox-single mt-checkbox-outline\"><input type=\"checkbox\" class=\"checkall\" /><span></span></label></th>\r\n");//复选框
+		sb.append("\t\t\t\t\t<th>序号</th>\r\n");//序号
 		//遍历字段开始
 		List<XtGeneratorGridColumn> xt_Generator_Grid_ColumnList = xt_Generator.getXt_Generator_Grid_ColumnList();
 		for(int i = 0; i < xt_Generator_Grid_ColumnList.size(); i++){
 			XtGeneratorGridColumn xt_Generator_Grid_Column = xt_Generator_Grid_ColumnList.get(i);
-			sb.append("\t\t\t\t<th>"+xt_Generator_Grid_Column.getXt_generator_grid_column_label()+"</th>\r\n");
+			sb.append("\t\t\t\t\t<th>"+xt_Generator_Grid_Column.getXt_generator_grid_column_label()+"</th>\r\n");
 		}
 		//遍历字段结束
-		sb.append("\t\t\t\t<th>操作</th>\r\n");
-		sb.append("\t\t\t</tr>\r\n");
-		sb.append("\t\t</thead>\r\n");
-		sb.append("\t</table>\r\n");
+		sb.append("\t\t\t\t\t<th>操作</th>\r\n");
+		sb.append("\t\t\t\t</tr>\r\n");
+		sb.append("\t\t\t</thead>\r\n");
+		sb.append("\t\t</table>\r\n");
+		sb.append("\t</div>\r\n");
+		
 		sb.append("</body>\r\n");
 		//导入JS支持
 		sb.append("<script type=\"text/javascript\" src=\"../view/pc/"+xt_Generator.getXt_generator_page_package()+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"/"+lowAllChar_(xt_Generator.getXt_generator_tbname())+"-list.js\"></script> \r\n");

@@ -164,6 +164,13 @@
 		<module>jehc-crmmodules-dao</module>
 		<module>jehc-crmmodules-service</module>
 
+		<!-- Payment支付模块 -->
+		<module>jehc-payment-base</module>		
+		<module>jehc-payment-plugin</module>	
+		<module>jehc-paymentmodules-model</module>		
+		<module>jehc-paymentmodules-dao</module>
+		<module>jehc-paymentmodules-service</module>		
+		
 		<!-- web模块 -->
 		<module>jehc-web</module>
 	</modules>
@@ -308,6 +315,33 @@
 			<dependency>
 				<groupId>jehc.p</groupId>
 				<artifactId>jehc-crmmodules-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			
+			<!-- Payment支付模块 -->
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-payment-base</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-payment-plugin</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-paymentmodules-model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-paymentmodules-dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>jehc.p</groupId>
+				<artifactId>jehc-paymentmodules-service</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 		</dependencies>

@@ -5,3 +5,6 @@
 .m-form .m-form__actions {
     padding:5px;
 }
+.m-portlet .m-portlet__head {
+    height:4.1rem;
+}

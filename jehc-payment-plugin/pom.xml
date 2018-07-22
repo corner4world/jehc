@@ -12,15 +12,54 @@
 	<artifactId>jehc-payment-plugin</artifactId>
 	<packaging>jar</packaging>
 	<version>${jehc.version}</version>
-	<name>jehc-lcmodules-dao</name>
+	<name>jehc-payment-plugin</name>
 	<url>http://maven.apache.org</url>
 	
+	<properties>
+        <pay.version>2.10.1</pay.version>
+        <httpmime.version>4.5.4</httpmime.version>
+        <log4j.version>1.2.17</log4j.version>
+        <fastjson.version>1.2.41</fastjson.version>
+        <zxing.version>3.3.1</zxing.version>
+    </properties>
+    
 	<dependencies>
+		<!-- jehc-payment-base -->
 		<dependency>
-			<!-- 数据访问层Dao需要引用父级中定义的base-dao层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-payment-base</artifactId>
+		</dependency>		
+		
+		<!-- 数据访问层Dao需要引用父级中定义的base-dao层 -->
+		<dependency>
 			<groupId>jehc.p</groupId>
 			<artifactId>jehc-base-dao</artifactId>
-		</dependency>
+		</dependency>		
+		<!--httpcomponents-->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpmime</artifactId>
+            <version>${httpmime.version}</version>
+        </dependency>
+        <!--/httpcomponents-->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+        <!-- log4j  -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+        <!-- / log4j -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+        
 	</dependencies>
 	
 	<!-- 解决Idea中mapper.xml编译 -->

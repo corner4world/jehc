@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- 继承父级 -->
+	<parent>
+		<groupId>jehc.p</groupId>
+		<artifactId>jehc-p</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../jehc-p/pom.xml</relativePath>
+	</parent>
+	
+	
+	<artifactId>jehc-paymentmodules-model</artifactId>
+	<packaging>jar</packaging>
+	<version>${jehc.version}</version>
+	<name>jehc-paymentmodules-model</name>
+	<url>http://maven.apache.org</url>
+	
+	<dependencies>
+		<dependency>
+			<!-- 需要引用父级中定义的jehc-base层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-base</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 需要引用父级中定义的xtmodules-model层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-xtmodules-model</artifactId>
+		</dependency>
+	</dependencies>
+</project>

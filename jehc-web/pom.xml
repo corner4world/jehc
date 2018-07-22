@@ -155,6 +155,25 @@
 			<groupId>jehc.p</groupId>
 			<artifactId>jehc-crmmodules-model</artifactId>
 		</dependency>
+		
+		
+		<!-- Payment支付模块 -->
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-paymentmodules-service层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-paymentmodules-service</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-paymentmodules-dao层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-paymentmodules-dao</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-paymentmodules-model层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-paymentmodules-model</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<!-- 编译过的文件指向路径 -->

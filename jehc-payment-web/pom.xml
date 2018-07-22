@@ -1,0 +1,109 @@
+﻿<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- 继承父级 -->
+	<parent>
+		<groupId>jehc.p</groupId>
+		<artifactId>jehc-p</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>../jehc-p/pom.xml</relativePath>
+	</parent>
+
+
+	<groupId>jehc.payment.web</groupId>
+	<artifactId>jehc-payment-web</artifactId>
+	<version>${jehc.version}</version>
+	<packaging>war</packaging>
+	<name>jehc-payment-web</name>
+	<url>http://maven.apache.org</url>
+
+	<dependencies>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的Model层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-xtmodules-model</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的Dao层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-xtmodules-dao</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 需要引用父级中定义的jehc-base层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-base</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-base-dao层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-base-dao</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的Service层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-xtmodules-service</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-base-web层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-base-web</artifactId>
+		</dependency>
+
+		
+		<!-- 电商模块 -->
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-bmodules-service层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-bmodules-service</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-bmodules-dao层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-bmodules-dao</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-bmodules-model层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-bmodules-model</artifactId>
+		</dependency>
+		
+		<!-- 支付模块 -->
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-payment-plugin层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-payment-plugin</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-paymentmodules-service层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-paymentmodules-service</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-paymentmodules-dao层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-paymentmodules-dao</artifactId>
+		</dependency>
+		<dependency>
+			<!-- 控制层web需要引用父级中定义的jehc-paymentmodules-model层 -->
+			<groupId>jehc.p</groupId>
+			<artifactId>jehc-paymentmodules-model</artifactId>
+		</dependency>
+		
+	</dependencies>
+
+	<!-- 编译过的文件指向路径 -->
+	<build>
+		<finalName>jehc-payment-web</finalName>
+		<resources>
+			<resource>
+				<targetPath>${project.build.directory}/classes</targetPath>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+</project>

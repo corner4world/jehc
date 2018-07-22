@@ -50,19 +50,19 @@
 						<div class="row">
 							<div class="col m--align-left">
 								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:toXtUserinfoAdd()">
-									 <span><i class="fa fa-plus-circle m-r-5"></i><span>新增</span></span>
+									 <span><i class="fa fa-pencil fa-lg"></i><span>新增</span></span>
 								</a>
 								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:toXtUserinfoUpdate()">
-									 <i class="fa fa-pencil m-r-5"></i>修改
+									 <span><i class="fa fa-magic fa-lg"></i><span>修改</span></span>
 								</a>
 								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:delXtUserinfo()">
-									<i class="fa fa-trash-o m-r-5"></i>&nbsp;删除
+									<span><i class="fa fa-times"></i><span>删除</span></span>
 								</a>
 								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:initListDeleted()">
-									<i class="fa fa-user-times m-r-5"></i>&nbsp;已禁用
+									<span><i class="fa fa-history fa-lg"></i><span>找回用户</span></span>
 								</a>
 								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:search('datatables')">
-									<i class="fa fa-spin fa-refresh m-r-5"></i>&nbsp;刷新
+									<span><i class="fa fa-spin fa-refresh m-r-5"></i><span>刷新</span></span>
 								</a>
 							</div>
 							<div class="col m--align-right">

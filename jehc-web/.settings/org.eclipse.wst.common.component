@@ -82,6 +82,15 @@
         <dependent-module archiveName="jehc-crmmodules-model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jehc-crmmodules-model/jehc-crmmodules-model">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="jehc-paymentmodules-service-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jehc-paymentmodules-service/jehc-paymentmodules-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jehc-paymentmodules-dao-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jehc-paymentmodules-dao/jehc-paymentmodules-dao">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="jehc-paymentmodules-model-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jehc-paymentmodules-model/jehc-paymentmodules-model">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/jehc-web/target/classes"/>
         <property name="context-root" value="jehc-web"/>
     </wb-module>

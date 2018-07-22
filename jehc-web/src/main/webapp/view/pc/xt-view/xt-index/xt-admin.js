@@ -1,28 +1,10 @@
 $(function () {
-    /*
-     * $('#tabs').addtabs();
-     */
     initLockSystem();
     $("#content-main").css("height", tableHeight()-153);
 })
 
 function indexHome(){
-	 /*
-	 $('#tab_home').addClass('active');
-     $('#home').addClass('active');
-     Addtabs.drop();
-     */
 }
-$(function () {  
-	  /*
-	  $('#myTab a:last').tab('show');//初始化显示哪个tab  
-	  $('#myTab a').click(function (e) {  
-	    e.preventDefault();//阻止a链接的跳转行为  
-	    $(this).tab('show');//显示当前选中的链接及关联的content  
-	  })
-	  */ 
-}) 
-
 function clickAddTab(url,title,id){
 	if(null == url || url == ''){
 		return;
@@ -56,7 +38,6 @@ function doActive(id,idList,tabIdList){
         		$('#menu'+idArray[i]).addClass('start active open');
             }
         }
-        //<span class="selected"></span>
         if(null != id && '' != id){
         	$('#menu'+id).addClass('start active open');
         }
@@ -233,115 +214,6 @@ function search(){
 function updateUserPic(){
 	toastrBoot(1,'该功能暂未开放');
 }
-/*
-//关闭所有选项卡
-function closeAllTab(){
-	//清空之前选中样式
-	var tabIdList = Addtabs.tabIdList();
-	Addtabs.closeAll();
-	for(var i = 0; i < tabIdList.length; i++){
-		var tabIdTemp = tabIdList[i];
-		if(null != tabIdTemp && '' != tabIdTemp){
-			var tabIdArray = tabIdTemp.split(',');
-			for(var j = 0; j < tabIdArray.length; j++){
-				$('#menu'+tabIdArray[j]).removeClass('start active open');
-			}
-		}
-	}
-}
-
-//关闭当前选项卡
-function closeCruTab(){
-	var id = Addtabs.activeTabId();
-	if(typeof(id) != "undefined" && id != 'home'){
-		Addtabs.close(id.replace("tab_tab_",""));
-	    Addtabs.drop();
-	    $('#popMenu').fadeOut();
-	}
-}
-
-function refreshCruTab(){
-	var jehchref = Addtabs.tabJehchref();
-	var jehcid = Addtabs.tabJehcId();
-	if(null == jehchref){
-		return;
-	}
-	Addtabs.add({'id':jehcid,'url':jehchref});
-}
-
-//关闭左侧选项卡
-function closeLeftTab(){
-	
-}
-//关闭右侧选项卡
-function closeRightTab(){
-	var tab_id = $("li.active").children("a")[0].href.split("#")[1];
-	if(tab_id != 'home'){
-	    $('#tab_' + tab_id).nextUntil().each(function () {
-	        var id = $(this).attr('id');
-	        if (id && id != 'tab_' + tab_id) {
-	            Addtabs.close($(this).children('a').attr('aria-controls'));
-	        }
-	    });
-	    Addtabs.drop();
-	    $('#popMenu').fadeOut();
-	}
-}
-*/
-///**
-// * 增加标签页
-// */
-//function addTab(options) {
-//    //option:
-//    //tabMainName:tab标签页所在的容器
-//    //tabName:当前tab的名称
-//    //tabTitle:当前tab的标题
-//    //tabUrl:当前tab所指向的URL地址
-//    var exists = checkTabIsExists(options.tabMainName, options.tabName);
-//    if(exists){
-//        $("#tab_a_"+options.tabName).click();
-//    } else {
-//        $("#"+options.tabMainName).append('<li id="tab_li_'+options.tabName+'"><a href="#tab_content_'+options.tabName+'" data-toggle="tab" id="tab_a_'+options.tabName+'"><button class="close closeTab" type="button" onclick="closeTab(this);">×</button>'+options.tabTitle+'</a></li>');
-//        //固定TAB中IFRAME高度
-//        mainHeight = $(document.body).height() - 5;
-//        var content = '';
-//        if(options.content){
-//            content = option.content;
-//        } else {
-//            content = '<iframe src="' + options.tabUrl + '" width="100%" height="'+mainHeight+'px" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes" allowtransparency="yes"></iframe>';
-//        }
-//        $("#"+options.tabContentMainName).append('<div id="tab_content_'+options.tabName+'" role="tabpanel" class="tab-pane" id="'+options.tabName+'">'+content+'</div>');
-//        $("#tab_a_"+options.tabName).click();
-//    }
-//}
-// 
-///**
-// * 关闭标签页
-// * @param button
-// */
-//function closeTab (button) {
-//    //通过该button找到对应li标签的id
-//    var li_id = $(button).parent().parent().attr('id');
-//    var id = li_id.replace("tab_li_","");
-//    //如果关闭的是当前激活的TAB，激活他的前一个TAB
-//    if ($("li.active").attr('id') == li_id) {
-//        $("li.active").prev().find("a").click();
-//    }
-//    //关闭TAB
-//    $("#" + li_id).remove();
-//    $("#tab_content_" + id).remove();
-//};
-///**
-// * 判断是否存在指定的标签页
-// * @param tabMainName
-// * @param tabName
-// * @returns {Boolean}
-// */
-//function checkTabIsExists(tabMainName, tabName){
-//    var tab = $("#"+tabMainName+" > #tab_li_"+tabName);
-//    return tab.length > 0;
-//}
-
 
 //判断iframe是否加载完毕
 var xtIframe;

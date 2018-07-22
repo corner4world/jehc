@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.paymentmodules.paymentmodel.PaymentAccount">
+	<!--初始化分页-->
+	<select id="getPaymentAccountListByCondition" resultType="jehc.paymentmodules.paymentmodel.PaymentAccount" parameterType="map">
+		SELECT
+			id,
+			partner,
+			appid,
+			public_key,
+			private_key,
+			notify_url,
+			return_url,
+			seller,
+			sign_type,
+			input_charset,
+			pay_type,
+			msg_type,
+			keystore_path,
+			store_password,
+			is_test,
+			create_by,
+			create_time,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			payment_account payment_account LEFT JOIN xt_userinfo xt_userinfo ON payment_account.create_by = xt_userinfo.xt_userinfo_id
+		WHERE 1=1
+		<if test="null != is_test">
+			AND is_test LIKE CONCAT(CONCAT('%',#{is_test}),'%')
+		</if>
+		<if test="null != sign_type">
+			AND sign_type LIKE CONCAT(CONCAT('%',#{sign_type}),'%')
+		</if>
+		<if test="null != appid">
+			AND appid LIKE CONCAT(CONCAT('%',#{appid}),'%')
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getPaymentAccountById" resultType="jehc.paymentmodules.paymentmodel.PaymentAccount" parameterType="string">
+		SELECT
+			id,
+			partner,
+			appid,
+			public_key,
+			private_key,
+			notify_url,
+			return_url,
+			seller,
+			sign_type,
+			input_charset,
+			pay_type,
+			msg_type,
+			keystore_path,
+			store_password,
+			is_test,
+			create_by,
+			create_time,
+			xt_userinfo.xt_userinfo_realName
+		FROM 
+			payment_account payment_account LEFT JOIN xt_userinfo xt_userinfo ON payment_account.create_by = xt_userinfo.xt_userinfo_id
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addPaymentAccount" parameterType="jehc.paymentmodules.paymentmodel.PaymentAccount">
+		INSERT INTO
+			payment_account
+			(
+			id,
+			partner,
+			appid,
+			public_key,
+			private_key,
+			notify_url,
+			return_url,
+			seller,
+			sign_type,
+			input_charset,
+			pay_type,
+			msg_type,
+			keystore_path,
+			store_password,
+			is_test,
+			create_by,
+			create_time
+			)
+			VALUES
+			(
+			#{id},
+			#{partner},
+			#{appid},
+			#{public_key},
+			#{private_key},
+			#{notify_url},
+			#{return_url},
+			#{seller},
+			#{sign_type},
+			#{input_charset},
+			#{pay_type},
+			#{msg_type},
+			#{keystore_path},
+			#{store_password},
+			#{is_test},
+			#{create_by},
+			#{create_time}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updatePaymentAccount" parameterType="jehc.paymentmodules.paymentmodel.PaymentAccount">
+		UPDATE
+			payment_account
+		SET
+			partner = #{partner},
+			appid = #{appid},
+			public_key = #{public_key},
+			private_key = #{private_key},
+			notify_url = #{notify_url},
+			return_url = #{return_url},
+			seller = #{seller},
+			sign_type = #{sign_type},
+			input_charset = #{input_charset},
+			pay_type = #{pay_type},
+			msg_type = #{msg_type},
+			keystore_path = #{keystore_path},
+			store_password = #{store_password},
+			is_test = #{is_test}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updatePaymentAccountBySelective" parameterType="jehc.paymentmodules.paymentmodel.PaymentAccount">
+		UPDATE
+			payment_account
+		<set>
+			<if test="partner != null">
+				partner = #{partner},
+			</if>
+			<if test="appid != null">
+				appid = #{appid},
+			</if>
+			<if test="public_key != null">
+				public_key = #{public_key},
+			</if>
+			<if test="private_key != null">
+				private_key = #{private_key},
+			</if>
+			<if test="notify_url != null">
+				notify_url = #{notify_url},
+			</if>
+			<if test="return_url != null">
+				return_url = #{return_url},
+			</if>
+			<if test="seller != null">
+				seller = #{seller},
+			</if>
+			<if test="sign_type != null">
+				sign_type = #{sign_type},
+			</if>
+			<if test="input_charset != null">
+				input_charset = #{input_charset},
+			</if>
+			<if test="pay_type != null">
+				pay_type = #{pay_type},
+			</if>
+			<if test="msg_type != null">
+				msg_type = #{msg_type},
+			</if>
+			<if test="keystore_path != null">
+				keystore_path = #{keystore_path},
+			</if>
+			<if test="store_password != null">
+				store_password = #{store_password},
+			</if>
+			<if test="is_test != null">
+				is_test = #{is_test},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delPaymentAccount" parameterType="map">
+		DELETE FROM payment_account WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchPaymentAccount" parameterType="list">
+		INSERT INTO
+			payment_account
+			(
+			id,
+			partner,
+			appid,
+			public_key,
+			private_key,
+			notify_url,
+			return_url,
+			seller,
+			sign_type,
+			input_charset,
+			pay_type,
+			msg_type,
+			keystore_path,
+			store_password,
+			is_test,
+			create_by,
+			create_time
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.partner},
+			#{item.appid},
+			#{item.public_key},
+			#{item.private_key},
+			#{item.notify_url},
+			#{item.return_url},
+			#{item.seller},
+			#{item.sign_type},
+			#{item.input_charset},
+			#{item.pay_type},
+			#{item.msg_type},
+			#{item.keystore_path},
+			#{item.store_password},
+			#{item.is_test},
+			#{item.create_by},
+			#{item.create_time}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchPaymentAccount" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				payment_account
+			SET
+				partner = #{item.partner},
+				appid = #{item.appid},
+				public_key = #{item.public_key},
+				private_key = #{item.private_key},
+				notify_url = #{item.notify_url},
+				return_url = #{item.return_url},
+				seller = #{item.seller},
+				sign_type = #{item.sign_type},
+				input_charset = #{item.input_charset},
+				pay_type = #{item.pay_type},
+				msg_type = #{item.msg_type},
+				keystore_path = #{item.keystore_path},
+				store_password = #{item.store_password},
+				is_test = #{item.is_test}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchPaymentAccountBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				payment_account
+			<set>
+				<if test="item.partner != null">
+					partner = #{item.partner},
+				</if>
+				<if test="item.appid != null">
+					appid = #{item.appid},
+				</if>
+				<if test="item.public_key != null">
+					public_key = #{item.public_key},
+				</if>
+				<if test="item.private_key != null">
+					private_key = #{item.private_key},
+				</if>
+				<if test="item.notify_url != null">
+					notify_url = #{item.notify_url},
+				</if>
+				<if test="item.return_url != null">
+					return_url = #{item.return_url},
+				</if>
+				<if test="item.seller != null">
+					seller = #{item.seller},
+				</if>
+				<if test="item.sign_type != null">
+					sign_type = #{item.sign_type},
+				</if>
+				<if test="item.input_charset != null">
+					input_charset = #{item.input_charset},
+				</if>
+				<if test="item.pay_type != null">
+					pay_type = #{item.pay_type},
+				</if>
+				<if test="item.msg_type != null">
+					msg_type = #{item.msg_type},
+				</if>
+				<if test="item.keystore_path != null">
+					keystore_path = #{item.keystore_path},
+				</if>
+				<if test="item.store_password != null">
+					store_password = #{item.store_password},
+				</if>
+				<if test="item.is_test != null">
+					is_test = #{item.is_test},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>
