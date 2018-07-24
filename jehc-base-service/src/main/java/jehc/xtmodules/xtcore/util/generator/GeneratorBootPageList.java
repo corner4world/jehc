@@ -320,7 +320,7 @@ public class GeneratorBootPageList extends GeneratorUtil {
 			}else if("4".equals(xt_generator_search_type)){
 				sb.append("\t\t\t\t\t\t\t<div class=\"input-group\">\r\n");
 				sb.append("\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form_datetime form-control\" placeholder=\"起始时间\" name=\""+xt_generator_search_name+"_st\" />\r\n");
-				sb.append("\t\t\t\t\t\t\t\t<span class=\"input-group-addon\">至</span>\r\n");
+				sb.append("\t\t\t\t\t\t\t\t<label class=\"col-form-label\">至</label>\r\n");
 				sb.append("\t\t\t\t\t\t\t\t<input type=\"text\" class=\"form_datetime form-control\" placeholder=\"结束时间\" name=\""+xt_generator_search_name+"_et\" />\r\n");
 				sb.append("\t\t\t\t\t\t\t</div>\r\n");
 			}

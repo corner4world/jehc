@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.paymentmodules.paymentmodel.PaymentRecord">
+	<!--初始化分页-->
+	<select id="getPaymentRecordListByCondition" resultType="jehc.paymentmodules.paymentmodel.PaymentRecord" parameterType="map">
+		SELECT
+			id,
+			subject,
+			body,
+			price,
+			outTradeNo,
+			bankType,
+			deviceInfo,
+			spbillCreateIp,
+			authCode,
+			wapUrl,
+			wapName,
+			openid,
+			transactionType,
+			curType,
+			ctime,
+			fromto,
+			payresult,
+			payresultmsg,
+			paylasttime
+		FROM 
+			payment_record
+		WHERE isdelete = 0
+		<if test="null != curType">
+			AND curType LIKE CONCAT(CONCAT('%',#{curType}),'%')
+		</if>
+		<if test="null != openid">
+			AND openid LIKE CONCAT(CONCAT('%',#{openid}),'%')
+		</if>
+		<if test="null != outTradeNo">
+			AND outTradeNo LIKE CONCAT(CONCAT('%',#{outTradeNo}),'%')
+		</if>
+		<if test="null != subject">
+			AND subject LIKE CONCAT(CONCAT('%',#{subject}),'%')
+		</if>
+		<if test="null != ctime_st and ctime_st != ''">
+			AND ctime &gt;=#{ctime_st}
+		</if>
+		<if test="null != ctime_et and ctime_et != ''">
+			AND ctime &lt;=#{ctime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getPaymentRecordById" resultType="jehc.paymentmodules.paymentmodel.PaymentRecord" parameterType="string">
+		SELECT
+			id,
+			subject,
+			body,
+			price,
+			outTradeNo,
+			bankType,
+			deviceInfo,
+			spbillCreateIp,
+			authCode,
+			wapUrl,
+			wapName,
+			openid,
+			transactionType,
+			curType,
+			ctime,
+			fromto,
+			payresult,
+			payresultmsg,
+			paylasttime
+		FROM 
+			payment_record
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addPaymentRecord" parameterType="jehc.paymentmodules.paymentmodel.PaymentRecord">
+		INSERT INTO
+			payment_record
+			(
+			id,
+			subject,
+			body,
+			price,
+			outTradeNo,
+			bankType,
+			deviceInfo,
+			spbillCreateIp,
+			authCode,
+			wapUrl,
+			wapName,
+			openid,
+			transactionType,
+			curType,
+			ctime,
+			fromto,
+			payresult,
+			payresultmsg,
+			paylasttime
+			)
+			VALUES
+			(
+			#{id},
+			#{subject},
+			#{body},
+			#{price},
+			#{outTradeNo},
+			#{bankType},
+			#{deviceInfo},
+			#{spbillCreateIp},
+			#{authCode},
+			#{wapUrl},
+			#{wapName},
+			#{openid},
+			#{transactionType},
+			#{curType},
+			#{ctime},
+			#{fromto},
+			#{payresult},
+			#{payresultmsg},
+			#{paylasttime}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updatePaymentRecord" parameterType="jehc.paymentmodules.paymentmodel.PaymentRecord">
+		UPDATE
+			payment_record
+		SET
+			subject = #{subject},
+			body = #{body},
+			price = #{price},
+			outTradeNo = #{outTradeNo},
+			bankType = #{bankType},
+			deviceInfo = #{deviceInfo},
+			spbillCreateIp = #{spbillCreateIp},
+			authCode = #{authCode},
+			wapUrl = #{wapUrl},
+			wapName = #{wapName},
+			openid = #{openid},
+			transactionType = #{transactionType},
+			curType = #{curType},
+			payresult = #{payresult},
+			payresultmsg = #{payresultmsg},
+			paylasttime = #{paylasttime}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updatePaymentRecordBySelective" parameterType="jehc.paymentmodules.paymentmodel.PaymentRecord">
+		UPDATE
+			payment_record
+		<set>
+			<if test="subject != null">
+				subject = #{subject},
+			</if>
+			<if test="body != null">
+				body = #{body},
+			</if>
+			<if test="price != null">
+				price = #{price},
+			</if>
+			<if test="outTradeNo != null">
+				outTradeNo = #{outTradeNo},
+			</if>
+			<if test="bankType != null">
+				bankType = #{bankType},
+			</if>
+			<if test="deviceInfo != null">
+				deviceInfo = #{deviceInfo},
+			</if>
+			<if test="spbillCreateIp != null">
+				spbillCreateIp = #{spbillCreateIp},
+			</if>
+			<if test="authCode != null">
+				authCode = #{authCode},
+			</if>
+			<if test="wapUrl != null">
+				wapUrl = #{wapUrl},
+			</if>
+			<if test="wapName != null">
+				wapName = #{wapName},
+			</if>
+			<if test="openid != null">
+				openid = #{openid},
+			</if>
+			<if test="transactionType != null">
+				transactionType = #{transactionType},
+			</if>
+			<if test="curType != null">
+				curType = #{curType},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delPaymentRecord" parameterType="map">
+		UPDATE payment_record SET isdelete = 1 WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchPaymentRecord" parameterType="list">
+		INSERT INTO
+			payment_record
+			(
+			id,
+			subject,
+			body,
+			price,
+			outTradeNo,
+			bankType,
+			deviceInfo,
+			spbillCreateIp,
+			authCode,
+			wapUrl,
+			wapName,
+			openid,
+			transactionType,
+			curType,
+			ctime,
+			fromto,
+			payresult,
+			payresultmsg,
+			paylasttime
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.subject},
+			#{item.body},
+			#{item.price},
+			#{item.outTradeNo},
+			#{item.bankType},
+			#{item.deviceInfo},
+			#{item.spbillCreateIp},
+			#{item.authCode},
+			#{item.wapUrl},
+			#{item.wapName},
+			#{item.openid},
+			#{item.transactionType},
+			#{item.curType},
+			#{item.ctime},
+			#{item.fromto},
+			#{item.payresult},
+			#{item.payresultmsg},
+			#{item.paylasttime}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchPaymentRecord" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				payment_record
+			SET
+				subject = #{item.subject},
+				body = #{item.body},
+				price = #{item.price},
+				outTradeNo = #{item.outTradeNo},
+				bankType = #{item.bankType},
+				deviceInfo = #{item.deviceInfo},
+				spbillCreateIp = #{item.spbillCreateIp},
+				authCode = #{item.authCode},
+				wapUrl = #{item.wapUrl},
+				wapName = #{item.wapName},
+				openid = #{item.openid},
+				transactionType = #{item.transactionType},
+				curType = #{item.curType},
+				ctime = #{item.ctime}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchPaymentRecordBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				payment_record
+			<set>
+				<if test="item.subject != null">
+					subject = #{item.subject},
+				</if>
+				<if test="item.body != null">
+					body = #{item.body},
+				</if>
+				<if test="item.price != null">
+					price = #{item.price},
+				</if>
+				<if test="item.outTradeNo != null">
+					outTradeNo = #{item.outTradeNo},
+				</if>
+				<if test="item.bankType != null">
+					bankType = #{item.bankType},
+				</if>
+				<if test="item.deviceInfo != null">
+					deviceInfo = #{item.deviceInfo},
+				</if>
+				<if test="item.spbillCreateIp != null">
+					spbillCreateIp = #{item.spbillCreateIp},
+				</if>
+				<if test="item.authCode != null">
+					authCode = #{item.authCode},
+				</if>
+				<if test="item.wapUrl != null">
+					wapUrl = #{item.wapUrl},
+				</if>
+				<if test="item.wapName != null">
+					wapName = #{item.wapName},
+				</if>
+				<if test="item.openid != null">
+					openid = #{item.openid},
+				</if>
+				<if test="item.transactionType != null">
+					transactionType = #{item.transactionType},
+				</if>
+				<if test="item.curType != null">
+					curType = #{item.curType},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

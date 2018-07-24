@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:mvc="http://www.springframework.org/schema/mvc"
+		xmlns:util="http://www.springframework.org/schema/util"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+			http://www.springframework.org/schema/tx
+			http://www.springframework.org/schema/tx/spring-tx-2.5.xsd 
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-2.0.xsd 
+			http://mybatis.org/schema/mybatis-spring 
+			http://mybatis.org/schema/mybatis-spring-1.2.xsd 
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+		default-lazy-init="true">
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="false"/>
+	<!-- 将Controller的注解排除掉 -->	
+	<!-- 
+	1.
+	<context:component-scan base-package="*.*.*web,*.*.*service,*.*.*dao,jehc.xtmodules.xtcore.util.quartz.task,activitiUtil,jehc.xtmodules.xtcore.util"> 
+	2.
+	<context:component-scan base-package="jehc.*modules.*web,jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"> 
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" /> 
+	</context:component-scan>
+	3.
+	<context:component-scan base-package="jehc.*modules.*service,jehc.*modules.*dao,xtcore.util.quartz.task,jehc.lcmodules.activitiutil,jehc.xtmodules.xtcore.util"/> 
+	-->
+	
+	<context:component-scan base-package="jehc">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan> 
+    
+    <!-- properties 文件位置 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="order" value="1" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="ignoreUnresolvablePlaceholders" value="true" />
+		<property name="locations">
+			<list>
+				<!-- 引入jdbc配置文件-->
+				<value>classpath*:config/jdbc.properties</value>
+				<!-- 引入连接池配置文件-->
+				<value>classpath*:config/pool/pool.properties</value>
+				<!-- 引入ftp配置文件 -->
+				<value>classpath*:config/ftp/ftp.properties</value>
+			</list>
+		</property>
+	</bean>
+    <import resource="classpath*:config/datasources/basedatasources.xml"/>
+	<!-- 以下为插件及其他支持【开始】 -->
+	<!-- spring上下文应用环境 -->
+    <bean id="applicationContext" class="jehc.xtmodules.xtcore.util.springutil.SpringContextUtil" lazy-init="false"/>
+	<!-- 异常统一处理类 -->
+	<bean id="exceptionResolver" class="jehc.xtmodules.xtcore.interceptor.ExceptionHandler"/>
+	
+	<!-- redis整合
+	<import resource="classpath*:config/redis/redis.xml"/>
+	  -->
+	<!-- 连接池整合 
+	<import resource="classpath*:config/pool/pool.xml"/>
+	--> 
+	
+	
+	<!-- Hession整合
+	<import resource="classpath*:config/hessian/hessian.xml"/> 
+	-->
+	<!-- 以上为插件及其他支持【结束】 -->
+	
+	<!-- 配置调度器 -->
+	<import resource="classpath*:config/quartz/quartz.xml"/>
+	
+	<!-- init初始化 -->
+	<import resource="classpath*:config/init/init.xml"/>
+	
+	<!-- FTP上传 -->
+	<import resource="classpath*:config/ftp/ftp.xml"/>
+	
+	<!-- ehcache整合  暂废弃
+	<import resource="classpath*:config/ehcache/ehcache-spring.xml"/>
+	 -->
+</beans>

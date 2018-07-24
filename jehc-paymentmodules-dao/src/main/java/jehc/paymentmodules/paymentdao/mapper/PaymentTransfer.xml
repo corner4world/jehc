@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.paymentmodules.paymentmodel.PaymentTransfer">
+	<!--初始化分页-->
+	<select id="getPaymentTransferListByCondition" resultType="jehc.paymentmodules.paymentmodel.PaymentTransfer" parameterType="map">
+		SELECT
+			id,
+			outNo,
+			payeeAccount,
+			amount,
+			payerName,
+			payeeName,
+			remark,
+			bank,
+			curType,
+			ctime,
+			transferlasttime,
+			transferresult,
+			transferresultmsg,
+			fromto,
+			isdelete
+		FROM 
+			payment_transfer
+		WHERE 1=1
+		<if test="null != payerName">
+			AND payerName LIKE CONCAT(CONCAT('%',#{payerName}),'%')
+		</if>
+		<if test="null != bank">
+			AND bank LIKE CONCAT(CONCAT('%',#{bank}),'%')
+		</if>
+		<if test="null != payeeAccount">
+			AND payeeAccount LIKE CONCAT(CONCAT('%',#{payeeAccount}),'%')
+		</if>
+		<if test="null != outNo">
+			AND outNo LIKE CONCAT(CONCAT('%',#{outNo}),'%')
+		</if>
+		<if test="null != transferlasttime_st and transferlasttime_st != ''">
+			AND transferlasttime &gt;=#{transferlasttime_st}
+		</if>
+		<if test="null != transferlasttime_et and transferlasttime_et != ''">
+			AND transferlasttime &lt;=#{transferlasttime_et}
+		</if>
+		<if test="null != ctime_st and ctime_st != ''">
+			AND ctime &gt;=#{ctime_st}
+		</if>
+		<if test="null != ctime_et and ctime_et != ''">
+			AND ctime &lt;=#{ctime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getPaymentTransferById" resultType="jehc.paymentmodules.paymentmodel.PaymentTransfer" parameterType="string">
+		SELECT
+			id,
+			outNo,
+			payeeAccount,
+			amount,
+			payerName,
+			payeeName,
+			remark,
+			bank,
+			curType,
+			ctime,
+			transferlasttime,
+			transferresult,
+			transferresultmsg,
+			fromto,
+			isdelete
+		FROM 
+			payment_transfer
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addPaymentTransfer" parameterType="jehc.paymentmodules.paymentmodel.PaymentTransfer">
+		INSERT INTO
+			payment_transfer
+			(
+			id,
+			outNo,
+			payeeAccount,
+			amount,
+			payerName,
+			payeeName,
+			remark,
+			bank,
+			curType,
+			ctime,
+			transferlasttime,
+			transferresult,
+			transferresultmsg,
+			fromto,
+			isdelete
+			)
+			VALUES
+			(
+			#{id},
+			#{outNo},
+			#{payeeAccount},
+			#{amount},
+			#{payerName},
+			#{payeeName},
+			#{remark},
+			#{bank},
+			#{curType},
+			#{ctime},
+			#{transferlasttime},
+			#{transferresult},
+			#{transferresultmsg},
+			#{fromto},
+			#{isdelete}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updatePaymentTransfer" parameterType="jehc.paymentmodules.paymentmodel.PaymentTransfer">
+		UPDATE
+			payment_transfer
+		SET
+			outNo = #{outNo},
+			payeeAccount = #{payeeAccount},
+			amount = #{amount},
+			payerName = #{payerName},
+			payeeName = #{payeeName},
+			remark = #{remark},
+			bank = #{bank},
+			curType = #{curType},
+			ctime = #{ctime},
+			transferlasttime = #{transferlasttime},
+			transferresult = #{transferresult},
+			transferresultmsg = #{transferresultmsg},
+			fromto = #{fromto},
+			isdelete = #{isdelete}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updatePaymentTransferBySelective" parameterType="jehc.paymentmodules.paymentmodel.PaymentTransfer">
+		UPDATE
+			payment_transfer
+		<set>
+			<if test="outNo != null">
+				outNo = #{outNo},
+			</if>
+			<if test="payeeAccount != null">
+				payeeAccount = #{payeeAccount},
+			</if>
+			<if test="amount != null">
+				amount = #{amount},
+			</if>
+			<if test="payerName != null">
+				payerName = #{payerName},
+			</if>
+			<if test="payeeName != null">
+				payeeName = #{payeeName},
+			</if>
+			<if test="remark != null">
+				remark = #{remark},
+			</if>
+			<if test="bank != null">
+				bank = #{bank},
+			</if>
+			<if test="curType != null">
+				curType = #{curType},
+			</if>
+			<if test="ctime != null">
+				ctime = #{ctime},
+			</if>
+			<if test="transferlasttime != null">
+				transferlasttime = #{transferlasttime},
+			</if>
+			<if test="transferresult != null">
+				transferresult = #{transferresult},
+			</if>
+			<if test="transferresultmsg != null">
+				transferresultmsg = #{transferresultmsg},
+			</if>
+			<if test="fromto != null">
+				fromto = #{fromto},
+			</if>
+			<if test="isdelete != null">
+				isdelete = #{isdelete},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delPaymentTransfer" parameterType="map">
+		DELETE FROM payment_transfer WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchPaymentTransfer" parameterType="list">
+		INSERT INTO
+			payment_transfer
+			(
+			id,
+			outNo,
+			payeeAccount,
+			amount,
+			payerName,
+			payeeName,
+			remark,
+			bank,
+			curType,
+			ctime,
+			transferlasttime,
+			transferresult,
+			transferresultmsg,
+			fromto,
+			isdelete
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.outNo},
+			#{item.payeeAccount},
+			#{item.amount},
+			#{item.payerName},
+			#{item.payeeName},
+			#{item.remark},
+			#{item.bank},
+			#{item.curType},
+			#{item.ctime},
+			#{item.transferlasttime},
+			#{item.transferresult},
+			#{item.transferresultmsg},
+			#{item.fromto},
+			#{item.isdelete}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchPaymentTransfer" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				payment_transfer
+			SET
+				outNo = #{item.outNo},
+				payeeAccount = #{item.payeeAccount},
+				amount = #{item.amount},
+				payerName = #{item.payerName},
+				payeeName = #{item.payeeName},
+				remark = #{item.remark},
+				bank = #{item.bank},
+				curType = #{item.curType},
+				ctime = #{item.ctime},
+				transferlasttime = #{item.transferlasttime},
+				transferresult = #{item.transferresult},
+				transferresultmsg = #{item.transferresultmsg},
+				fromto = #{item.fromto},
+				isdelete = #{item.isdelete}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchPaymentTransferBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				payment_transfer
+			<set>
+				<if test="item.outNo != null">
+					outNo = #{item.outNo},
+				</if>
+				<if test="item.payeeAccount != null">
+					payeeAccount = #{item.payeeAccount},
+				</if>
+				<if test="item.amount != null">
+					amount = #{item.amount},
+				</if>
+				<if test="item.payerName != null">
+					payerName = #{item.payerName},
+				</if>
+				<if test="item.payeeName != null">
+					payeeName = #{item.payeeName},
+				</if>
+				<if test="item.remark != null">
+					remark = #{item.remark},
+				</if>
+				<if test="item.bank != null">
+					bank = #{item.bank},
+				</if>
+				<if test="item.curType != null">
+					curType = #{item.curType},
+				</if>
+				<if test="item.ctime != null">
+					ctime = #{item.ctime},
+				</if>
+				<if test="item.transferlasttime != null">
+					transferlasttime = #{item.transferlasttime},
+				</if>
+				<if test="item.transferresult != null">
+					transferresult = #{item.transferresult},
+				</if>
+				<if test="item.transferresultmsg != null">
+					transferresultmsg = #{item.transferresultmsg},
+				</if>
+				<if test="item.fromto != null">
+					fromto = #{item.fromto},
+				</if>
+				<if test="item.isdelete != null">
+					isdelete = #{item.isdelete},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>

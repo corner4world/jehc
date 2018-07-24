@@ -13,51 +13,67 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>功能配置</title>   
 </head>  
 <body>  
-	<div class="portlet box green" style="margin-bottom: 5px">
-		<div class="portlet-title">
-            <div class="caption">
-                	查询区域
-            </div>
-        </div>
-        <div class="portlet-body form">
-        	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
-	        	<div class="form-group">
-					<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
+	<div class="m-portlet">
+		<div class="m-portlet__head">
+			<div class="m-portlet__head-caption">
+				<div class="m-portlet__head-title">
+					<h3 class="m-portlet__head-text">
+						<span class="m-accordion__item-icon"><i class="flaticon-search"></i>查询区域</span>
+					</h3>
 				</div>
-				&nbsp;
-				<a class="btn btn-primary" title="检索" href="javascript:filter('tree','keyword')">
-                     <i class="fi-search"></i>检索
-                 </a>
-                 &nbsp;
-                 <a class="btn btn-primary" title="重置" href="javascript:$('#keyword').val('')">
-                     <i class="icon-trash"></i>重置
-                 </a>
-			</form>
-        </div>
-        <div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
-	        <button class="btn btn-default" onclick="addXtFunctioninfo()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-			</button>
-			<button class="btn btn-default" onclick="updateXtFunctioninfo()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-			</button>
-			<button class="btn btn-default" onclick="getXtFunctioninfoById()">
-				<span class="glyphicon glyphicon-share" aria-hidden="true"></span>详情
-			</button>
-			<button class="btn btn-default" onclick="delXtFunctioninfo()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
-			<button class="btn btn-default" onclick="refreshAll()">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
+			</div>
 		</div>
-    </div>
-	<div class="panel-body">
-		<br>
-		<br>
-		<ul id="tree" class="ztree"></ul>
+		<!--begin::Form-->
+		<form class="m-form m-form--fit m-form--label-align-left m-form--group-seperator-dashed" method="POST" id="searchForm">
+			<div class="m-portlet__body">	
+				<div class="form-group m-form__group row">
+					<label class="col-form-label">关键词:</label>
+					<div class="col-lg-2">
+						<input type="text" style="width: 260px;" class="form-control" id="keyword" placeholder="请输入关键字">
+					</div>
+				</div>	
+            </div>
+            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+				<div class="m-form__actions m-form__actions--solid">
+					<div class="row">
+						<div class="col m--align-left">
+							<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:addXtFunctioninfo()">
+								<i class="fa fa-plus-circle"></i>新增
+							</a>
+							<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:updateXtFunctioninfo()">
+								<i class="fa fa-pencil"></i>修改
+							</a>
+							<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:getXtFunctioninfoById()">
+								<i class="fa fa-trash-o"></i>详情
+							</a>
+							<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:delXtFunctioninfo()">
+								<i class="fa fa-trash-o"></i>删除
+							</a>
+							<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:refreshAll()">
+								<i class="fa fa-spin fa-refresh"></i>刷新
+							</a>
+						</div>
+						<div class="col m--align-right">
+							&nbsp;
+							<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:filter('tree','keyword')">
+								<i class="fa fa-search m-r-5"></i>&nbsp;检索
+							</a>
+			                 &nbsp;
+			                 <a class="btn btn-primary" title="重置" href="javascript:$('#keyword').val('')">
+			                     <i class="icon-trash"></i>重置
+			                 </a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+		<!--end::Form-->
 	</div>
-	
+    <div class="m-form">
+		<div class="row">
+			<ul id="tree" class="ztree"></ul>
+		</div>
+	</div>
 	<!-- 功能模态框（Modal）开始 -->
 	<div class="modal fade" id="addXtFunctioninfoModal" tabindex="-1" role="dialog" aria-labelledby="addXtFunctioninfoModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">

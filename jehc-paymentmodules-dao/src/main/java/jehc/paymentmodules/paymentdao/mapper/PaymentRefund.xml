@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="jehc.paymentmodules.paymentmodel.PaymentRefund">
+	<!--初始化分页-->
+	<select id="getPaymentRefundListByCondition" resultType="jehc.paymentmodules.paymentmodel.PaymentRefund" parameterType="map">
+		SELECT
+			id,
+			refundNo,
+			tradeNo,
+			outTradeNo,
+			refundAmount,
+			totalAmount,
+			orderDate,
+			curType,
+			description,
+			refundresult,
+			refundresultmsg,
+			refundlasttime,
+			isdelete,
+			fromto
+		FROM 
+			payment_refund
+		WHERE 1=1
+		<if test="null != tradeNo">
+			AND tradeNo LIKE CONCAT(CONCAT('%',#{tradeNo}),'%')
+		</if>
+		<if test="null != outTradeNo">
+			AND outTradeNo LIKE CONCAT(CONCAT('%',#{outTradeNo}),'%')
+		</if>
+		<if test="null != refundNo">
+			AND refundNo LIKE CONCAT(CONCAT('%',#{refundNo}),'%')
+		</if>
+		<if test="null != orderDate_st and orderDate_st != ''">
+			AND orderDate &gt;=#{orderDate_st}
+		</if>
+		<if test="null != orderDate_et and orderDate_et != ''">
+			AND orderDate &lt;=#{orderDate_et}
+		</if>
+		<if test="null != refundlasttime_st and refundlasttime_st != ''">
+			AND refundlasttime &gt;=#{refundlasttime_st}
+		</if>
+		<if test="null != refundlasttime_et and refundlasttime_et != ''">
+			AND refundlasttime &lt;=#{refundlasttime_et}
+		</if>
+	</select>
+
+	<!--查询对象-->
+	<select id="getPaymentRefundById" resultType="jehc.paymentmodules.paymentmodel.PaymentRefund" parameterType="string">
+		SELECT
+			id,
+			refundNo,
+			tradeNo,
+			outTradeNo,
+			refundAmount,
+			totalAmount,
+			orderDate,
+			curType,
+			description,
+			refundresult,
+			refundresultmsg,
+			refundlasttime,
+			isdelete,
+			fromto
+		FROM 
+			payment_refund
+		WHERE id=#{id}
+	</select>
+
+	<!--添加-->
+	<insert id="addPaymentRefund" parameterType="jehc.paymentmodules.paymentmodel.PaymentRefund">
+		INSERT INTO
+			payment_refund
+			(
+			id,
+			refundNo,
+			tradeNo,
+			outTradeNo,
+			refundAmount,
+			totalAmount,
+			orderDate,
+			curType,
+			description,
+			refundresult,
+			refundresultmsg,
+			refundlasttime,
+			isdelete,
+			fromto
+			)
+			VALUES
+			(
+			#{id},
+			#{refundNo},
+			#{tradeNo},
+			#{outTradeNo},
+			#{refundAmount},
+			#{totalAmount},
+			#{orderDate},
+			#{curType},
+			#{description},
+			#{refundresult},
+			#{refundresultmsg},
+			#{refundlasttime},
+			#{isdelete},
+			#{fromto}
+			)
+	</insert>
+
+	<!--修改-->
+	<update id="updatePaymentRefund" parameterType="jehc.paymentmodules.paymentmodel.PaymentRefund">
+		UPDATE
+			payment_refund
+		SET
+			refundNo = #{refundNo},
+			tradeNo = #{tradeNo},
+			outTradeNo = #{outTradeNo},
+			refundAmount = #{refundAmount},
+			totalAmount = #{totalAmount},
+			orderDate = #{orderDate},
+			curType = #{curType},
+			description = #{description},
+			refundresult = #{refundresult},
+			refundresultmsg = #{refundresultmsg},
+			refundlasttime = #{refundlasttime},
+			isdelete = #{isdelete},
+			fromto = #{fromto}
+		WHERE id=#{id}
+	</update>
+
+	<!--修改（根据动态条件）-->
+	<update id="updatePaymentRefundBySelective" parameterType="jehc.paymentmodules.paymentmodel.PaymentRefund">
+		UPDATE
+			payment_refund
+		<set>
+			<if test="refundNo != null">
+				refundNo = #{refundNo},
+			</if>
+			<if test="tradeNo != null">
+				tradeNo = #{tradeNo},
+			</if>
+			<if test="outTradeNo != null">
+				outTradeNo = #{outTradeNo},
+			</if>
+			<if test="refundAmount != null">
+				refundAmount = #{refundAmount},
+			</if>
+			<if test="totalAmount != null">
+				totalAmount = #{totalAmount},
+			</if>
+			<if test="orderDate != null">
+				orderDate = #{orderDate},
+			</if>
+			<if test="curType != null">
+				curType = #{curType},
+			</if>
+			<if test="description != null">
+				description = #{description},
+			</if>
+			<if test="refundresult != null">
+				refundresult = #{refundresult},
+			</if>
+			<if test="refundresultmsg != null">
+				refundresultmsg = #{refundresultmsg},
+			</if>
+			<if test="refundlasttime != null">
+				refundlasttime = #{refundlasttime},
+			</if>
+			<if test="isdelete != null">
+				isdelete = #{isdelete},
+			</if>
+			<if test="fromto != null">
+				fromto = #{fromto},
+			</if>
+		</set>
+		WHERE id=#{id}
+	</update>
+
+	<!--删除-->
+	<delete id="delPaymentRefund" parameterType="map">
+		DELETE FROM payment_refund WHERE id IN
+		<foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--批量添加-->
+	<insert id="addBatchPaymentRefund" parameterType="list">
+		INSERT INTO
+			payment_refund
+			(
+			id,
+			refundNo,
+			tradeNo,
+			outTradeNo,
+			refundAmount,
+			totalAmount,
+			orderDate,
+			curType,
+			description,
+			refundresult,
+			refundresultmsg,
+			refundlasttime,
+			isdelete,
+			fromto
+			)
+			VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+			#{item.id},
+			#{item.refundNo},
+			#{item.tradeNo},
+			#{item.outTradeNo},
+			#{item.refundAmount},
+			#{item.totalAmount},
+			#{item.orderDate},
+			#{item.curType},
+			#{item.description},
+			#{item.refundresult},
+			#{item.refundresultmsg},
+			#{item.refundlasttime},
+			#{item.isdelete},
+			#{item.fromto}
+			)
+		</foreach>
+	</insert>
+
+	<!--批量修改-->
+	<update id="updateBatchPaymentRefund" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				payment_refund
+			SET
+				refundNo = #{item.refundNo},
+				tradeNo = #{item.tradeNo},
+				outTradeNo = #{item.outTradeNo},
+				refundAmount = #{item.refundAmount},
+				totalAmount = #{item.totalAmount},
+				orderDate = #{item.orderDate},
+				curType = #{item.curType},
+				description = #{item.description},
+				refundresult = #{item.refundresult},
+				refundresultmsg = #{item.refundresultmsg},
+				refundlasttime = #{item.refundlasttime},
+				isdelete = #{item.isdelete},
+				fromto = #{item.fromto}
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+
+	<!--批量修改（根据动态条件）-->
+	<update id="updateBatchPaymentRefundBySelective" parameterType="list">
+		<foreach collection="list" item="item" index="index" open="" close="" separator=";">
+			UPDATE
+				payment_refund
+			<set>
+				<if test="item.refundNo != null">
+					refundNo = #{item.refundNo},
+				</if>
+				<if test="item.tradeNo != null">
+					tradeNo = #{item.tradeNo},
+				</if>
+				<if test="item.outTradeNo != null">
+					outTradeNo = #{item.outTradeNo},
+				</if>
+				<if test="item.refundAmount != null">
+					refundAmount = #{item.refundAmount},
+				</if>
+				<if test="item.totalAmount != null">
+					totalAmount = #{item.totalAmount},
+				</if>
+				<if test="item.orderDate != null">
+					orderDate = #{item.orderDate},
+				</if>
+				<if test="item.curType != null">
+					curType = #{item.curType},
+				</if>
+				<if test="item.description != null">
+					description = #{item.description},
+				</if>
+				<if test="item.refundresult != null">
+					refundresult = #{item.refundresult},
+				</if>
+				<if test="item.refundresultmsg != null">
+					refundresultmsg = #{item.refundresultmsg},
+				</if>
+				<if test="item.refundlasttime != null">
+					refundlasttime = #{item.refundlasttime},
+				</if>
+				<if test="item.isdelete != null">
+					isdelete = #{item.isdelete},
+				</if>
+				<if test="item.fromto != null">
+					fromto = #{item.fromto},
+				</if>
+			</set>
+			WHERE id=#{item.id}
+		</foreach>
+	</update>
+</mapper>
