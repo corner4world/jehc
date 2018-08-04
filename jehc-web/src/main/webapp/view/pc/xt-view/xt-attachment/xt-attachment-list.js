@@ -67,7 +67,7 @@ $(document).ready(function() {
 			{
 				data:"xt_attachment_id",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtAttachmentDetail('"+ data +"')\"  class='btn btn-default'><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtAttachmentDetail('"+ data +"')\"  class='btn btn-success'><span class='fa fa-gears'></span></a>";
 				}
 			}
 		]

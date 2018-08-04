@@ -58,7 +58,7 @@ $(document).ready(function() {
 				data:"xt_ip_frozen_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtIpFrozenDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtIpFrozenDetail('"+ data +"')\" class='btn btn-default'><span class='fa fa-gears'></span></a>";
 				}
 			}
 		]

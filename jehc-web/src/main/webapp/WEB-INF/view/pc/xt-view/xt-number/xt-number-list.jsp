@@ -7,31 +7,48 @@
 <title>单号生成序列</title>
 </head>
 <body>
-	<div class="portlet box green" style="margin-bottom: 5px">
-		<div class="portlet-title">
-            <div class="caption">
-                	单号维护列表
-            </div>
-            <div class="actions">
-                 <button class="btn btn-default" onclick="search('datatables')">
-					<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-				</button>
-            </div>
-        </div>
-    </div>
-    <table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
-		<thead>
-			<tr>
-				<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
-				<th>序号</th>
-				<th>当前值</th>
-				<th>最后版本号</th>
-				<th>创建时间</th>
-				<th>最后修改时间</th>
-				<th>模块类型</th>
-			</tr>
-		</thead>
-	</table>
+	<div class="m-content">
+		<div class="m-portlet">
+			<div class="m-portlet__head">
+				<div class="m-portlet__head-caption">
+					<div class="m-portlet__head-title">
+						<h3 class="m-portlet__head-text">
+							单号维护列表
+						</h3>
+					</div>
+				</div>
+			</div>
+			<!--begin::Form-->
+			<form class="m-form m-form--fit m-form--label-align-left m-form--group-seperator-dashed " method="POST" id="searchForm">
+	            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+					<div class="m-form__actions m-form__actions--solid">
+						<div class="row">
+							<div class="col m--align-left">
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:search('datatables')">
+									<span><i class="fa fa-spin fa-refresh m-r-5"></i><span>刷新</span></span>
+								</a>
+							</div>
+							<div class="col m--align-right">
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!--end::Form-->
+		</div>
+	    <table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+			<thead>
+				<tr>
+					<th>序号</th>
+					<th>当前值</th>
+					<th>最后版本号</th>
+					<th>创建时间</th>
+					<th>最后修改时间</th>
+					<th>模块类型</th>
+				</tr>
+			</thead>
+		</table>
+	</div>
 </body>
 <script type="text/javascript" src="../view/pc/xt-view/xt-number/xt-number-list.js"></script> 
 </html>

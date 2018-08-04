@@ -37,7 +37,7 @@ $(document).ready(function() {
 				data:"xt_concordat_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtConcordatDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtConcordatDetail('"+ data +"')\" class='btn btn-success'><span class='fa fa-gears'></span></a>";
 				}
 			}
 		]

@@ -8,58 +8,73 @@
 </head>
 <body>
 	<div class="m-content">
-		<div class="portlet box green" style="margin-bottom: 5px">
-			<div class="portlet-title">
-	            <div class="caption">
-	                	查询区域
+		<div class="m-portlet">
+			<div class="m-portlet__head">
+				<div class="m-portlet__head-caption">
+					<div class="m-portlet__head-title">
+						<h3 class="m-portlet__head-text">
+							<span class="m-accordion__item-icon"><i class="flaticon-search"></i>查询区域</span>
+						</h3>
+					</div>
+				</div>
+			</div>
+			<!--begin::Form-->
+			<form class="m-form m-form--fit m-form--label-align-left m-form--group-seperator-dashed " method="POST" id="searchForm">
+				<div class="m-portlet__body">	
+					<div class="form-group m-form__group row">
+						<label class="col-form-label">版本名称:</label>
+						<div class="col-lg-2">
+							<input type="text" class="form-control" name="xt_version_name" placeholder="请输入版本名称">
+						</div>
+						<label class="col-form-label">上传时间:</label>
+						<div class="col-lg-2">
+							<div class="input-group">
+								<input type="text" class="form_datetime form-control" placeholder="起始时间" name="xt_version_ctime_st" />
+								<span class="col-form-label">至</span>
+								<input type="text" class="form_datetime form-control" placeholder="结束时间" name="xt_version_ctime_et" />
+							</div>
+						</div>
+						<label class="col-form-label">最后修改时间:</label>
+						<div class="col-lg-2">
+							<div class="input-group">
+								<input type="text" class="form_datetime form-control" placeholder="起始时间" name="xt_version_mtime_st" />
+								<span class="col-form-label">至</span>
+								<input type="text" class="form_datetime form-control" placeholder="结束时间" name="xt_version_mtime_et" />
+							</div>
+						</div>
+					</div>
 	            </div>
-	        </div>
-	        <div class="portlet-body form">
-	        	<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
-					<div class="form-group">
-						<label>版本名称</label>
-						<input type="text" class="form-control" name="xt_version_name" placeholder="请输入版本名称">
-					</div>
-					<div class="form-group">
-						<label>上传时间</label>
-						<div class="input-group">
-							<input type="text" class="form_datetime form-control" placeholder="起始时间" name="xt_version_ctime_st" />
-							<span class="input-group-addon">至</span>
-							<input type="text" class="form_datetime form-control" placeholder="结束时间" name="xt_version_ctime_et" />
+	            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+					<div class="m-form__actions m-form__actions--solid">
+						<div class="row">
+							<div class="col m--align-left">
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="toXtVersionAdd()">
+									<span><i class="fa fa-pencil fa-lg"></i><span>新增</span></span>
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="toXtVersionUpdate()">
+									<span><i class="fa fa-magic fa-lg"></i><span>修改</span></span>
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:delXtVersion()">
+									<span><i class="fa fa-times"></i><span>删除</span></span>
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:search('datatables')">
+									<span><i class="fa fa-spin fa-refresh m-r-5"></i><span>刷新</span></span>
+								</a>
+							</div>
+							<div class="col m--align-right">
+								<a href="javascript:search('datatables')" class="btn btn-info m-btn m-btn--custom m-btn--icon">
+									<span><i class="fa fa-search"></i><span>检索</span></span>
+								</a>
+								<a href="javascript:resetAll()" class="btn btn-secondary m-btn m-btn--custom m-btn--icon">
+									<span><i class="fa fa-repeat"></i><span>重置</span></span>
+								</a>
+							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label>修改时间</label>
-						<div class="input-group">
-							<input type="text" class="form_datetime form-control" placeholder="起始时间" name="xt_version_mtime_st" />
-							<span class="input-group-addon">至</span>
-							<input type="text" class="form_datetime form-control" placeholder="结束时间" name="xt_version_mtime_et" />
-						</div>
-					</div>
-						&nbsp;
-					<a class="btn btn-primary" title="检索" href="javascript:search('datatables');">
-			           <i class="fi-search"></i>检索
-			        </a>&nbsp;
-			        <a class="btn btn-primary" title="重置" href="javascript:resetAll();;">
-			           <i class="icon-trash"></i>重置
-			        </a>
-				</form>
-	        </div>
-	    </div>
-		<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
-	        <button class="btn btn-default" onclick="toXtVersionAdd()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
-			</button>
-			<button class="btn btn-default" onclick="toXtVersionUpdate()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改
-			</button>
-			<button class="btn btn-default" onclick="delXtVersion()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-			</button>
-			<button class="btn btn-default" onclick="search('datatables')">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
-	    </div>
+				</div>
+			</form>
+			<!--end::Form-->
+		</div>
 		<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
 			<thead>
 				<tr>

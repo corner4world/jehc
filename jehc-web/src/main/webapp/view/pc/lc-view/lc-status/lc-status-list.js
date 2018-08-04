@@ -49,7 +49,7 @@ $(document).ready(function() {
 				data:"lc_status_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toLcStatusDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toLcStatusDetail('"+ data +"')\" class='btn btn-default'><span class='fa fa-gears'></span></a>";
 				}
 			}
 		]
