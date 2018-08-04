@@ -1,0 +1,10 @@
+.m-form.m-form--group-seperator .m-form__group, .m-form.m-form--group-seperator-dashed .m-form__group {
+    padding-top:12px;
+    padding-bottom:12px;
+}
+.m-form .m-form__actions {
+    padding:5px;
+}
+.m-portlet .m-portlet__head {
+    height:4.1rem;
+}
