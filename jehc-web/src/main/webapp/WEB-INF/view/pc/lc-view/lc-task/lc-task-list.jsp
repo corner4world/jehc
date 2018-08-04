@@ -12,40 +12,47 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>待办任务（全部）</title>  
 </head>  
 <body>  
-<div class="panel panel-default">
-		<fieldset>
-			<legend>查询区域</legend>
-			<form method="POST" id="searchForm" class="form-inline">
-				
-			</form>
-			<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-				<button class="btn btn-primary" onclick="search('datatables')">
-					<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-				</button>
-				<button class="btn btn-default" onclick="resetAll();">重置</button>
+<div class="m-content">
+		<div class="m-portlet">
+			<div class="m-portlet__head">
+				<div class="m-portlet__head-caption">
+					<div class="m-portlet__head-title">
+						<h3 class="m-portlet__head-text">
+							<span class="m-accordion__item-icon"><i class="flaticon-search"></i>任务列表</span>
+						</h3>
+					</div>
+				</div>
 			</div>
-		</fieldset>
-	</div>
-	<div class="panel-body">
-		<div class="btn-group pull-right" style="margin-right: 20px;">
-			<button class="btn btn-default" onclick="setAssignee()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>设置经办人
-			</button>
-			<button class="btn btn-default" onclick="setOwner()">
-				<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>设置归属人
-			</button>
-			<button class="btn btn-default" onclick="addGroupUser()">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加组成员
-			</button>
-			<button class="btn btn-default" onclick="deleteGroupUser()">
-				<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>移除组成员
-			</button>
-			<button class="btn btn-default" onclick="completeTask()">
-				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>完成任务
-			</button>
-			<button class="btn btn-default" onclick="search('datatables')">
-				<span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>刷新
-			</button>
+			<!--begin::Form-->
+			<form class="m-form m-form--fit m-form--label-align-left m-form--group-seperator-dashed " method="POST" id="searchForm">
+	            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+					<div class="m-form__actions m-form__actions--solid">
+						<div class="row">
+							<div class="col m--align-left">
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="setAssignee()">
+									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>设置经办人
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="setOwner()">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>设置归属人
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="addGroupUser()">
+									<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>添加组成员
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="deleteGroupUser()">
+									<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>移除组成员
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="completeTask()">
+									<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>完成任务
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:search('datatables')">
+									<span><i class="fa fa-spin fa-refresh m-r-5"></i><span>刷新</span></span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!--end::Form-->
 		</div>
 		<table id="datatables" class="table table-bordered table-striped table-hover">
 			<thead>
@@ -68,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </body>
 <!-- 流程图监控模态框（Modal）开始 -->
 <div class="modal fade" id="lcImageModal" tabindex="-1" role="dialog" aria-labelledby="lcImageModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="lcImageModalDialog">
+	<div class="modal-dialog modal-lg" id="lcImageModalDialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="lcImageModalLabel">
@@ -91,7 +98,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 流程发布历史记录模态框（Modal）开始 -->
 <div class="modal fade" id="lcDeploymentHisModal" tabindex="-1" role="dialog" aria-labelledby="lcDeploymentHisModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="lcDeploymentHisModalDialog">
+	<div class="modal-dialog modal-lg" id="lcDeploymentHisModalDialog">
 		<div class="modal-content">
 			<div class="modal-header" style="display: none;">
 				<h4 class="modal-title" id="lcDeploymentHisModalLabel">
@@ -113,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 人员设置模态框（Modal）开始 -->
 <div class="modal fade" id="lcAssigneeModal" tabindex="-1" role="dialog" aria-labelledby="lcAssigneeModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="lcAssigneeModalDialog">
+	<div class="modal-dialog modal-lg" id="lcAssigneeModalDialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="lcAssigneeModalLabel">
@@ -158,10 +165,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div>
 							</form>
 							<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-								<button class="btn btn-primary" onclick="search('userinfoDatatables')">
-									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-								</button>
-								<button class="btn btn-default" onclick="resetAll('searchFormUserinfo');">重置</button>
+								<a href="javascript:search('userinfoDatatables')" class="btn btn-info m-btn m-btn--custom m-btn--icon">
+									<span><i class="fa fa-search"></i><span>检索</span></span>
+								</a>
+								<a href="javascript:resetAll('searchFormUserinfo');" class="btn btn-secondary m-btn m-btn--custom m-btn--icon">
+									<span><i class="fa fa-repeat"></i><span>重置</span></span>
+								</a>
 							</div>
 						</fieldset>
 					</div>
@@ -195,7 +204,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!-- 审批记录模态框（Modal）开始 -->
 <div class="modal fade" id="lcHisLogModal" tabindex="-1" role="dialog" aria-labelledby="lcHisLogModalLabel" aria-hidden="true">
-	<div class="modal-dialog" id="lcHisLogModalDialog">
+	<div class="modal-dialog modal-lg" id="lcHisLogModalDialog">
 		<div class="modal-content">
 			<div class="modal-header">
 				<h4 class="modal-title" id="lcHisLogModalLabel">
@@ -205,18 +214,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="modal-body">
 				<div class="panel-body" id="lcHisLogPanelBody" style="overflow:auto;">
 					<div class="panel panel-default">
-						<fieldset>
-							<legend>查询区域</legend>
-							<form method="POST" id="searchFormApproval">
-								<input type="hidden" class="form-control" id="instanceId" name="instanceId">	
-							</form>
-							<div class="form-group" style="margin-left: 35px;margin-top: 25px;">
-								<button class="btn btn-primary" onclick="search('userinfoDatatables')">
-									<i class="glyphicon glyphicon-search"></i>&nbsp;检索
-								</button>
-								<button class="btn btn-default" onclick="resetAll('searchFormUserinfo');">重置</button>
-							</div>
-						</fieldset>
+						<form method="POST" id="searchFormApproval">
+							<input type="hidden" class="form-control" id="instanceId" name="instanceId">	
+						</form>
 					</div>
 					<div class="panel-body">
 						<table id="approvalDatatables" class="table table-bordered table-striped table-hover">

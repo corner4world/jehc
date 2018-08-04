@@ -77,7 +77,7 @@ $(document).ready(function() {
 				data:"oa_noticeID",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toOaNoticeDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toOaNoticeDetail('"+ data +"')\" class='btn btn-default'><span class='icon-loop'></span></a>";
 				}
 			}
 		]

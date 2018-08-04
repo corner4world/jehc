@@ -77,7 +77,7 @@ function showLcAppyDetail(data){
 	var urlInstanceImag = "../lcProcessController/loadLcProcessInstanceImg?processInstanceId="+processInstance_id;
 	var url ="../"+ data.xt_constantURL+"?lc_apply_model_biz_id="+lc_apply_model_biz_id;
 	initLcApprovalWin(processInstance_id);
-	$('#lcApplyDetailPanelBody').height(reGetBodyHeight()*0.8);
+	$('#lcApplyDetailPanelBody').height(reGetBodyHeight()*0.6);
 	$('#lcApplyDetailModal').modal({backdrop:'static',keyboard:false});
 	$("#lcFormIframe",document.body).attr("src",url) 
 	$("#lcProcessInstanceImgIframe",document.body).attr("src",urlInstanceImag) 
