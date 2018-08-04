@@ -7,80 +7,98 @@
 <title>任务表</title>
 </head>
 <body>
-	<div class="portlet box green" style="margin-bottom: 5px">
-		<div class="portlet-title">
-			<div class="caption">
-				查询区域
+	<div class="m-content">
+		<div class="m-portlet">
+			<div class="m-portlet__head">
+				<div class="m-portlet__head-caption">
+					<div class="m-portlet__head-title">
+						<h3 class="m-portlet__head-text">
+							<span class="m-accordion__item-icon"><i class="flaticon-search"></i>查询区域</span>
+						</h3>
+					</div>
+				</div>
 			</div>
-		</div>
-		<div class="portlet-body form">
-			<form method="POST" id="searchForm" class="form-inline" style="padding: 5px 0px 5px 0px;">
-				<div class="form-group">
-					<label>任务标题</label>
-					<input type="text" class="form-control" name="oa_taskTitle" placeholder="请输入任务标题">
+			<!--begin::Form-->
+			<form class="m-form m-form--fit m-form--label-align-left m-form--group-seperator-dashed " method="POST" id="searchForm">
+				<div class="m-portlet__body">	
+					<div class="form-group m-form__group row">
+						<label class="col-form-label">标题:</label>
+						<div class="col-lg-2">
+							<input type="text" class="form-control" name="oa_taskTitle" placeholder="请输入任务标题">
+						</div>
+						<label class="col-form-label">是否全体:</label>
+						<div class="col-lg-2">
+							<select class="form-control" name="oa_taskIsAllDay" placeholder="请选择">
+								<option value="">请选择</option>
+								<option value="1">是</option>
+								<option value="2">否</option>
+							</select>
+						</div>
+						<label class="col-form-label">级别:</label>
+						<div class="col-lg-2">
+							<select class="form-control" name="oa_taskTightness" placeholder="请选择">
+								<option value="">请选择</option>
+								<option value="1">一般</option>
+								<option value="2">重要</option>
+								<option value="3">紧急</option>
+							</select>
+						</div>
+						<label class="col-form-label">类型:</label>
+						<div class="col-lg-2">
+							<select class="form-control" name="oa_taskType" placeholder="请选择">
+								<option value="">请选择</option>
+								<option value="1">个人</option>
+								<option value="2">公开</option>
+							</select>
+						</div>
+					</div>
+	            </div>
+	            <div class="m-portlet__foot m-portlet__no-border m-portlet__foot--fit">
+					<div class="m-form__actions m-form__actions--solid">
+						<div class="row">
+							<div class="col m--align-left">
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="toOaTaskAdd()">
+									<span><i class="fa fa-pencil fa-lg"></i><span>新增</span></span>
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" onclick="toOaTaskUpdate()">
+									 <span><i class="fa fa-magic fa-lg"></i><span>修改</span></span>
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:delOaTask()">
+									<span><i class="fa fa-times"></i><span>删除</span></span>
+								</a>
+								<a class="btn btn-secondary m-btn m-btn--custom m-btn--icon" href="javascript:search('datatables')">
+									<span><i class="fa fa-spin fa-refresh m-r-5"></i><span>刷新</span></span>
+								</a>
+							</div>
+							<div class="col m--align-right">
+								<a href="javascript:search('datatables')" class="btn btn-info m-btn m-btn--custom m-btn--icon">
+									<span><i class="fa fa-search"></i><span>检索</span></span>
+								</a>
+								<a href="javascript:resetAll()" class="btn btn-secondary m-btn m-btn--custom m-btn--icon">
+									<span><i class="fa fa-repeat"></i><span>重置</span></span>
+								</a>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="form-group">
-					<label>是否全天</label>
-					<select class="form-control" name="oa_taskIsAllDay" placeholder="请选择">
-						<option value="">请选择</option>
-						<option value="1">是</option>
-						<option value="2">否</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>级别</label>
-					<select class="form-control" name="oa_taskTightness" placeholder="请选择">
-						<option value="">请选择</option>
-						<option value="1">一般</option>
-						<option value="2">重要</option>
-						<option value="3">紧急</option>
-					</select>
-				</div>
-				<div class="form-group">
-					<label>任务类型</label>
-					<select class="form-control" name="oa_taskType" placeholder="请选择">
-						<option value="">请选择</option>
-						<option value="1">个人</option>
-						<option value="2">公开</option>
-					</select>
-				</div>&nbsp;
-				<a class="btn btn-outline-primary waves-light waves-effect" href="javascript:search('datatables');">
-					<i class="fa fa-search m-r-5"></i>&nbsp;检索
-				</a>&nbsp;
-				<a class="btn btn-outline-danger waves-light waves-effect" href="javascript:resetAll();">
-					<i class="fa fa-remove m-r-5"></i>&nbsp;重置
-				</a>
 			</form>
+			<!--end::Form-->
 		</div>
+		<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
+			<thead>
+				<tr>
+					<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
+					<th>序号</th>
+					<th>任务标题</th>
+					<th>是否全天</th>
+					<th>任务类型</th>
+					<th>级别</th>
+					<th>创建人</th>
+					<th>操作</th>
+				</tr>
+			</thead>
+		</table>
 	</div>
-	<div class="pull-left form-actions" style="margin-right:0px;margin-bottom: 5px">
-		<button class="btn btn-outline-success waves-light waves-effect" onclick="toOaTaskAdd()">
-			<i class="fa fa-plus-circle"></i>新增
-		</button>
-		<button class="btn btn-outline-info waves-light waves-effect" onclick="toOaTaskUpdate()">
-			<i class="fa fa-pencil"></i>修改
-		</button>
-		<button class="btn btn-outline-danger waves-light waves-effect" onclick="delOaTask()">
-			<i class="fa fa-trash-o"></i>删除
-		</button>
-		<button class="btn btn-outline-warning waves-light waves-effect" onclick="search('datatables')">
-			<i class="fa fa-spin fa-refresh"></i>刷新
-		</button>
-	</div>
-	<table id="datatables" class="table table-bordered table-striped table-hover" style="white-space: nowrap; width: 99.9%">
-		<thead>
-			<tr>
-				<th><label class="mt-checkbox mt-checkbox-single mt-checkbox-outline"><input type="checkbox" class="checkall" /><span></span></label></th>
-				<th>序号</th>
-				<th>任务标题</th>
-				<th>是否全天</th>
-				<th>任务类型</th>
-				<th>级别</th>
-				<th>创建人</th>
-				<th>操作</th>
-			</tr>
-		</thead>
-	</table>
 </body>
 <script type="text/javascript" src="../view/pc/oa-view/oa-task/oa-task-list.js"></script> 
 </html>
