@@ -49,7 +49,7 @@ $(document).ready(function() {
 				data:"xt_departinfo_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<button class='btn btn-default'  onclick=\"javascript:toXtDepartinfoDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></button>";
+					return "<button class='btn btn-success'  onclick=\"javascript:toXtDepartinfoDetail('"+ data +"')\"><span class='fa fa-gears'></span></button>";
 				}
 			}
 		]

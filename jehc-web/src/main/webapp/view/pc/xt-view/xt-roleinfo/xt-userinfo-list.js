@@ -1,6 +1,6 @@
 function addXtUserinfo(xt_role_id,xt_role_name){
 	var UserinfoModalCount = 0 ;
-	$('#UserinfoBody').height(reGetBodyHeight()*0.7);
+	$('#UserinfoBody').height(reGetBodyHeight()*0.6);
 	$('#UserinfoModal').modal({backdrop:'static',keyboard:false});
 	$('#UserinfoModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
 		if(++UserinfoModalCount == 1){

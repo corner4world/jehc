@@ -40,7 +40,7 @@
 								<label>发送时间</label>
 								<div class="input-group">
 									<input type="text" class="form_datetime form-control" placeholder="起始时间" name="ctime_st" />
-									<span class="input-group-addon">至</span>
+									<label>至</label>
 									<input type="text" class="form_datetime form-control" placeholder="结束时间" name="ctime_et" />
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 								<label>取读时间</label>
 								<div class="input-group">
 									<input type="text" class="form_datetime form-control" placeholder="起始时间" name="readtime_st" />
-									<span class="input-group-addon">至</span>
+									<label>至</label>
 									<input type="text" class="form_datetime form-control" placeholder="结束时间" name="readtime_et" />
 								</div>
 							</div>
@@ -102,7 +102,7 @@
 								<div class="input-group">
 									<input type="hidden" value="1" name="type">
 									<input type="text" class="form_datetime form-control" placeholder="起始时间" name="ctime_st" />
-									<span class="input-group-addon">至</span>
+									<label>至</label>
 									<input type="text" class="form_datetime form-control" placeholder="结束时间" name="ctime_et" />
 								</div>
 							</div>
@@ -110,7 +110,7 @@
 								<label>取读时间</label>
 								<div class="input-group">
 									<input type="text" class="form_datetime form-control" placeholder="起始时间" name="readtime_st" />
-									<span class="input-group-addon">至</span>
+									<label>至</label>
 									<input type="text" class="form_datetime form-control" placeholder="结束时间" name="readtime_et" />
 								</div>
 							</div>

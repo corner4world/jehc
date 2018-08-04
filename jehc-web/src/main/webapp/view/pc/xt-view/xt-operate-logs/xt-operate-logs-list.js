@@ -46,7 +46,7 @@ $(document).ready(function() {
 				data:"xt_operate_log_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtOperateLogsDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtOperateLogsDetail('"+ data +"')\" class='btn btn-success'><span class='fa fa-gears'></span></a>";
 				}
 			}
 		]

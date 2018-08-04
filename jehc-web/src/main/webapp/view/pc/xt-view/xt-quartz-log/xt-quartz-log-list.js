@@ -46,7 +46,7 @@ $(document).ready(function() {
 				data:"xt_quartz_log_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtQuartzLogDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtQuartzLogDetail('"+ data +"')\" class='btn btn-success'><span class='fa fa-gears'></span></a>";
 				}
 			}
 		]

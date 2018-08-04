@@ -1,6 +1,6 @@
 //分配资源
 function addXtMenuinfo(xt_role_id,xt_role_name){
-	$('#XtMenuinfoBody').height(reGetBodyHeight()*0.7);
+	$('#XtMenuinfoBody').height(reGetBodyHeight()*0.6);
 	$('#XtMenuinfoModal').modal({backdrop:'static',keyboard:false});
 	$('#XtMenuinfoModal').modal({"backdrop":"static"}).modal('show').on("shown.bs.modal",function(){  
         // 是弹出框居中。。。  

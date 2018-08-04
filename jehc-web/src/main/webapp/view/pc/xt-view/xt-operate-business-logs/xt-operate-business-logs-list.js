@@ -49,7 +49,7 @@ $(document).ready(function() {
 				data:"xt_operate_b_logs_id",
 				width:"150px",
 				render:function(data, type, row, meta) {
-					return "<a href=\"javascript:toXtOperateBusinessLogsDetail('"+ data +"')\"><span class='glyphicon glyphicon-eye-open'></span></a>";
+					return "<a href=\"javascript:toXtOperateBusinessLogsDetail('"+ data +"')\" class='btn btn-success'><span class='fa fa-gears'></span></a>";
 				}
 			}
 		]

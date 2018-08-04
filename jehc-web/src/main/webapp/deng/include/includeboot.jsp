@@ -93,6 +93,7 @@
 		<!-- bootstrap验证框架结束 -->
 		<script type="text/javascript" src="${syspath}/deng/source/js/boot.min.js"></script>
 		<script src="${syspath}/deng/source/plugins/newAdmin/using/base/theme/default/scripts.bundle.js" type="text/javascript"></script>
+		<link href="${syspath}/deng/source/css/bootlist.css" rel="stylesheet" type="text/css" />
 	</head>
 	<!-- upload模态框（Modal）开始 -->
 	<div class="modal fade" id="jehcUploadModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop=”static”  aria-hidden="true">
