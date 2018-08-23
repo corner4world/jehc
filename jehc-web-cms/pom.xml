@@ -11,7 +11,7 @@
 
 
 	<groupId>jehc.web.cms</groupId>
-	<artifactId>jehc-web-app</artifactId>
+	<artifactId>jehc-web-cms</artifactId>
 	<version>${jehc.version}</version>
 	<packaging>war</packaging>
 	<name>jehc-web-cms</name>

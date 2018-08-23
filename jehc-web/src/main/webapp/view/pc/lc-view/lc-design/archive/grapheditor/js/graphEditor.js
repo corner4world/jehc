@@ -383,11 +383,11 @@ function main(){
 	container.style.bottom = '0px';
     graph.init(container);
     if (mxClient.IS_GC || mxClient.IS_SF){
-    	graph.container.style.background = '-webkit-gradient(linear, 0% 0%, 100% 0%, from(#FFFFFF), to(#FFFFEE))';
+    	graph.container.style.background = '-webkit-gradient(linear, 0% 0%, 100% 0%, from(#FFFFFF), to(#FFFFFF))';
     }else if (mxClient.IS_NS){
-    	graph.container.style.background = '-moz-linear-gradient(left, #FFFFFF, #FFFFEE)';  
+    	graph.container.style.background = '-moz-linear-gradient(left, #FFFFFF, #FFFFFF)';  
     }else if (mxClient.IS_IE){
-    	graph.container.style.filter = 'progid:DXImageTransform.Microsoft.Gradient('+'StartColorStr=\'#FFFFFF\', EndColorStr=\'#FFFFEE\', GradientType=1)';
+    	graph.container.style.filter = 'progid:DXImageTransform.Microsoft.Gradient('+'StartColorStr=\'#FFFFFF\', EndColorStr=\'#FFFFFF\', GradientType=1)';
     }
     initSwimlane(graph);  
     initCellsSytle(graph);

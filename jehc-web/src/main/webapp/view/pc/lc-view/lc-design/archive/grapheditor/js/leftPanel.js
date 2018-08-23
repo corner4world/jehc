@@ -1,26 +1,35 @@
 function initLeftPanel(){
-	leftPanel = new Ext.Panel({
+	var endeventbarPanel = new Ext.Panel({
+		 xtype:'panel',
+		 region:'center',
+		 html:'<div id="endeventbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:7px;cursor:pointer;"></div>'
+	});
+	leftPanel = new Ext.TabPanel({
         region:'west',
-        hideCollapseTool:hideCollapseToolFlag,
-        title:'<font color=#ffffff>工作流设计器</font>',
-        layout:'border',
-        id:'leftPanel',
-        split:false,
-        width:180,
+        headerPosition:'top',
+        tabPosition:'left',
+        title:'流程设计器',
+        /*hideCollapseTool:false,
         collapsible:true,
+        layout:'hbox',
         border:false,
-        /**新方法使用开始**/  
-        /*scrollable:true,  
-        scrollable:'x',
-        scrollable:'y',*/
+        split:false,
+        autoScroll:false,*/
+        id:'leftPanel',        
+        width:220,
         autoScroll:false,
-        /**新方法使用结束**/ 
+		tabPosition:'left',
+		tabRotation:0,
+		deferredRender:false,
+		activeTab:0,  
+        /*
         layout:{
 			type:'accordion',
 			animate:true
 		},
+		*/
 		header:{
-        	titleAlign:'center',
+        	titleAlign:'left',
         	cls:'x-panel-header-defined'
         },
 		items:[
@@ -34,60 +43,99 @@ function initLeftPanel(){
 			   },
 			   **/
 			   {
-			   	 header:{
+			   	 /*header:{
 	                  titleAlign:'center'
 	             },
+	             hideCollapseTool:false,*/
 				 title:'开始事件',
-				 hideCollapseTool:false,
-				 html:'<div id="starteventbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:27px;cursor:pointer;"></div>'
+				 layout:'border',
+				 items:[{
+					 xtype:'panel',
+					 region:'center',
+					 html:'<div id="starteventbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:7px;cursor:pointer;"></div>'
+				 }]
 			   },
 			   {
-			   	 header:{
+			   	 /*header:{
 	                  titleAlign:'center'
-	             },
+	                  hideCollapseTool:false,
+	             },*/
 				 title:'结束事件',
-				 hideCollapseTool:false,
-				 html:'<div id="endeventbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:27px;cursor:pointer;"></div>'
+				 layout:'border',
+				 items:endeventbarPanel
 			   },
 			   {
-			     header:{
+			    /* header:{
 	                  titleAlign:'center'
-	             },
+	                  hideCollapseTool:false,
+	             },*/
 				 title:'任务类型',
-				 hideCollapseTool:false,
-				 html:'<div id="taskbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:27px;cursor:pointer;"></div>'
+				 layout:'border',
+				 items:[{
+					 xtype:'panel',
+					 region:'center',
+					 html:'<div id="taskbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:7px;cursor:pointer;"></div>'
+				 }]
 			   },
-			   {
+			   /*{
 			     header:{
 	                  titleAlign:'center'
 	             },
+				 title:'其它任务',
+				 hideCollapseTool:false,
+				 html:'<div id="taskbarOther" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:7px;cursor:pointer;"></div>'
+			   },*/
+			   {
+			     /*header:{
+	                  titleAlign:'center'
+	             },
+	             hideCollapseTool:false,*/
 				 title:'容器管理',
-				 hideCollapseTool:false,
-				 html:'<div id="rqbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:27px;cursor:pointer;"></div>'
+				 layout:'border',
+				 items:[{
+					 xtype:'panel',
+					 region:'center',
+					 html:'<div id="rqbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:7px;cursor:pointer;"></div>'
+				 }]
 			   },
 			   {
-			     header:{
+			     /*header:{
 	                  titleAlign:'center'
 	             },
+	             hideCollapseTool:false,*/
 				 title:'默认网关',
-				 hideCollapseTool:false,
-				 html:'<div id="defaultwebbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:27px;cursor:pointer;"></div> '
+				 layout:'border',
+				 items:[{
+					 xtype:'panel',
+					 region:'center',
+					 html:'<div id="defaultwebbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:7px;cursor:pointer;"></div> '
+				 }]
 			   },
 			   {
-			     header:{
+			     /*header:{
 	                  titleAlign:'center'
 	             },
+	             hideCollapseTool:false,*/
 				 title:'边界事件',
-				 hideCollapseTool:false,
-				 html:'<div id="bjwebbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:27px;cursor:pointer;"></div> '
+				 layout:'border',
+				 items:[{
+					 xtype:'panel',
+					 region:'center',
+					 html:'<div id="bjwebbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:7px;cursor:pointer;"></div> '
+				 }]
 			   },
 			   {
-			     header:{
+			     /*header:{
 	                  titleAlign:'center'
 	             },
+	             hideCollapseTool:false,*/
 				 title:'中间事件',
-				 hideCollapseTool:false,
-				 html:'<div id="zjwebbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:27px;cursor:pointer;"></div> '
+				 layout:'border',
+				 items:[{
+					 xtype:'panel',
+					 region:'center',
+					 html:'<div id="zjwebbar" style="background:white; color:white;position:absolute;overflow:auto;height:100%;width:100%;padding-left:7px;cursor:pointer;"></div> '
+				 }]
 			   }]
    	});
 }

@@ -29,13 +29,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		background-repeat: no-repeat !important;
 	}
 	.x-btn-over.x-btn-default-toolbar-small {
-		/* border-color: #5fa2dd; */
 		border-color: #FFFFFF;
 		background-image: none;
-		/* background-color: #5fa2d */d;
 	}
 	.x-btn-default-toolbar-small {
-		/* border-color: #5fa2dd; */
 		border-color: #ffffff;
 		height:28px;
 	}
@@ -48,11 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	.x-toolbar-default {
 		padding: 6px 0 6px 8px;
 		border-style: solid;
-		/* border-color: #cecece; */
 		border-color: #FFFFFF;
 		border-width: 1px;
 		background-image: none;
-		/* background-color: #fff; *//**#157fcc**/
 	}
 	.x-btn-default-toolbar-small {
 		border-color: #fff; 
@@ -66,25 +61,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		padding: 3px 3px 3px 3px;
 		border-width: 0px;
 		border-style: solid;
-		/* background-color: #5fa2dd; */
 	}
 	/**tbar与bbar鼠标移上样式**/
 	.x-btn-over.x-btn-default-toolbar-small {
 		border-color: #fff;
 		background-image: none;
-		/* background-color: #5fa2dd; */
 	}
 	/**tbar与bbar鼠标点击时样式**/
 	.x-btn.x-btn-menu-active.x-btn-default-toolbar-small, .x-btn.x-btn-pressed.x-btn-default-toolbar-small {
-		/* border-color: #5fa2dd; */
 		border-color: #ffffff;
 		background-image: none;
-		/* background-color: #5fa2dd; */
 	}
 	/**tbar与bbar鼠标点击后样式**/
 	.x-btn-focus.x-btn-default-toolbar-small {
 		background-image: none;
-		/* background-color: #3892d3; */
 		-webkit-box-shadow: #fff 0 0px 0px 0 inset, #fff 0 -1px 0px 0 inset, #fff -1px 0 0px 0 inset, #fff 0px 0 0px 0 inset;
 		-moz-box-shadow: #fff 0 0px 0px 0 inset, #fff 0 -1px 0px 0 inset, #fff -1px 0 0px 0 inset, #fff 0px 0 0px 0 inset;
 		box-shadow: #fff 0 0px 0px 0 inset, #fff 0 -1px 0px 0 inset, #fff -1px 0 0px 0 inset, #fff 1px 0 0px 0 inset;
@@ -92,16 +82,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/**tbar与bbar禁用后样式**/
 	.x-btn.x-btn-disabled.x-btn-default-toolbar-small {
 		background-image: none;
-		/* background-color: #3892d3; */
 	}
 	.x-btn-wrap-default-toolbar-small.x-btn-arrow-right:after {
 		width:0px;
 		padding-right:0px;
-		/* background-image: url(); */
 	}
 	/**button选项默认样式开始**/
 	.x-btn-default-small {
-	    /* border-color: #fff; */
 	}
 	.x-btn-icon-el-default-small.x-btn-glyph {
 		/* color: #35baf6; */
@@ -114,7 +101,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    border-radius: 0px;
 	    border-width: 1px;
 	    border-style: solid;
-	   /*  background-color: #5fa2dd; */
 	}
 	/**button选项默认样式结束**/
 	/**tbar字体颜色开始**/
@@ -127,88 +113,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	/**tbar字体颜色结束**/
 	.x-tab-bar-default-top .x-box-scroller-tab-bar-default {
 	}
-	<%-- <%
-	if((null != cookieC && cookieC.getValue().indexOf("triton")>=0) || null == cookieC){
-	%>
-	.x-accordion-item .x-accordion-hd {
-	    padding: 3px 10px;
-	}
-	<%
-	}else{
-		
-	}
-	%> --%>
-	.x-accordion-item .x-accordion-hd {
-	    padding: 4px 10px;
-	}
-	/* .x-panel-default-framed-outer-border-rbl {
-	    border-right-color: #ffffff!important;
-	    border-right-width: 1px !important;
-	    border-bottom-color: #ffffff!important;
-	    border-bottom-width: 1px !important;
-	    border-left-color: #ffffff!important;
-	    border-left-width: 1px !important;
-	}
-	
-	.x-panel-default-framed-outer-border-trl {
-	    border-top-color: #ffffff!important;
-	    border-top-width: 1px !important;
-	    border-right-color: #ffffff!important;
-	    border-right-width: 1px !important;
-	    border-left-color: #ffffff!important;
-	    border-left-width: 1px !important;
-	}
-	
-	.x-panel-default-framed-outer-border-rl {
-	    border-right-color: #ffffff!important;
-	    border-right-width: 1px !important;
-	    border-left-color: #ffffff!important;
-	    border-left-width: 1px !important;
-	}
-	
-	
-	.x-panel-default-framed {
-	    -moz-border-radius-topleft: 0;
-	    -webkit-border-top-left-radius: 0;
-	    border-top-left-radius: 0;
-	    -moz-border-radius-topright: 0;
-	    -webkit-border-top-right-radius: 0;
-	    border-top-right-radius: 0;
-	    -moz-border-radius-bottomright: 0;
-	    -webkit-border-bottom-right-radius: 0;
-	    border-bottom-right-radius: 0;
-	    -moz-border-radius-bottomleft: 0;
-	    -webkit-border-bottom-left-radius: 0;
-	    border-bottom-left-radius: 0;
-	    padding: 0 0 0 0;
-	    border-width: 0px;
-	    border-style: solid;
-	    background-color: #ffffff;
-	}
-	.x-panel-default {
-	    border-color: #ffffff;
-	    padding: 0;
-	}
-	.x-panel-body-default {
-	    background: rgb(255, 255, 255);
-	    border-color: #ffffff;
-	    color: rgb(64, 64, 64);
-	    font-size: 13px;
-	    font-weight: 300;
-	    font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
-	    border-width: 1px;
-	    border-style: solid;
-	}
-	.x-panel-body-default {
-	    background: rgb(255, 255, 255);
-	    border-color: #ffffff;
-	    color: rgb(64, 64, 64);
-	    font-size: 13px;
-	    font-weight: 300;
-	    font-family: 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
-	    border-width: 1px;
-	    border-style: solid;
-	} */
     </style>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/js/mxClient.js"></script>
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/view/pc/lc-view/lc-design/archive/grapheditor/css/grapheditor.css" />
@@ -302,6 +206,95 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			Ext.example.msg(message, '', '');
 		};
 	</script>
+	<style type="">
+	.x-panel-default-framed-outer-border-rl {
+	 border-right-color: #f4f5f8 !important;
+	 border-right-width: 1px !important;
+	 border-left-color: #f4f5f8 !important;
+	 border-left-width: 1px !important;
+	}
+	.x-panel-default-framed {
+	 background-color: #f4f5f8;
+	}
+	.x-panel-header-defined {
+	    background-image: none;
+	    background-color: #f4f5f8;
+	}
+	.x-panel-default-framed-outer-border-rl {
+	    border-right-color: #f4f5f8 !important;
+	    border-right-width: 1px !important;
+	    border-left-color: #f4f5f8 !important;
+	    border-left-width: 1px !important;
+	}
+	.x-panel-default-framed-outer-border-trl {
+	    border-top-color: #f4f5f8 !important;
+	    border-top-width: 1px !important;
+	    border-right-color: #f4f5f8 !important;
+	    border-right-width: 1px !important;
+	    border-left-color: #f4f5f8 !important;
+	    border-left-width: 1px !important;
+	}
+	.x-panel-default-framed-outer-border-rbl {
+	    border-right-color: #f4f5f8 !important;
+	    border-right-width: 1px !important;
+	    border-bottom-color: #f4f5f8 !important;
+	    border-bottom-width: 1px !important;
+	    border-left-color: #f4f5f8 !important;
+	    border-left-width: 1px !important;
+	}
+	.x-toolbar-default {
+	    padding: 6px 0 6px 8px;
+	    border-style: solid;
+	    border-color: #cecece;
+	    border-width: 1px;
+	    background-image: none;
+	    background-color: #f4f5f8;
+	}
+	.x-tab-bar-default {
+	    background-color: #f4f5f8;
+	}
+	.x-tab-inner-default {
+	    color: #000;
+	}
+	.x-btn-inner-default-toolbar-small {
+	    color: #000;
+	}
+	.x-btn-default-toolbar-small {
+	    border-color: #ebedf2;
+	}
+	.x-btn-default-toolbar-small {
+	    background-color: #fff;
+	}
+	.x-toolbar-default {
+	    padding: 8px 0 7px 8px;
+	}
+	.x-panel-default-framed {
+	    background-color: #f4f5f8;
+	}
+	.x-panel-header-title-default {
+	    color: #6f727d;
+	}
+	.x-panel-header-default .x-tool-img {
+	    color: #6f727d;
+	}
+	.x-accordion-hd .x-panel-header-title {
+	    color: #6f727d;
+	    text-transform: none;
+	}
+	.x-accordion-hd .x-tool-img {
+	    color: #6f727d;
+	}
+	.x-accordion-item .x-accordion-hd {
+	    background: #f4f5f8;
+	    border-color: #f4f5f8 #f4f5f8 #f4f5f8;
+	}
+	.x-accordion-item .x-accordion-hd {
+	    padding: 8px 10px;
+	}
+	.x-tab-bar-default-left > .x-tab-bar-body-default {
+	    padding: 0px 0 8px 8px;
+	}
+	</style>
 </head>
 <body onload="main(); ">
 	<input type="hidden" value="${lc_process_id }" id="lc_process_hideid"/>

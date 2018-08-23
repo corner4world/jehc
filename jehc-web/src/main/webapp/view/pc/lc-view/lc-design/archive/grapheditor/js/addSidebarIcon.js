@@ -422,12 +422,12 @@ function initAddCellIcon(graph,history){
         var br = document.createElement('br');  
         //1.创建DIV
         var div = document.createElement('div');
-        //div.id="round";//圆角
+        div.style.background="round";//圆角
 		div.style.height = "50px";
 		div.style.width = "120px";
 		div.style.border = "1px";
 		div.style.left = '20px';
-		div.style.background="#157fcc";
+		div.style.background="#f4f5f8";
 		div.style.marginTop="-10px";
 		sidebar.appendChild(br);
 		//创建图片
@@ -445,7 +445,7 @@ function initAddCellIcon(graph,history){
         
         //创建文字
         var font = document.createElement('span');
-        font.style.color = 'white'; 
+        font.style.color = '#343a40'; 
         font.style.position = 'absolute'; 
         if('userTask' == node_type 
             || 'manualTask' == node_type 
@@ -467,7 +467,7 @@ function initAddCellIcon(graph,history){
         	|| 'cancelBoundaryEvent' == node_type
         	|| 'compensationBoundaryEvent' == node_type
         	|| 'signalBoundaryEvent' == node_type){
-        	font.style.padding="30px 0px 0px 30px";
+        	font.style.padding="30px 0px 0px 34px";
         }else if('select' == node_type
         		 || 'zxline' == node_type
         		 || 'zjline' == node_type
@@ -495,9 +495,9 @@ function initAddCellIcon(graph,history){
         		 || 'messageCatchingEvent' == node_type
         		 || 'signalThrowingEvent' == node_type
         		 || 'compensationThrowingEvent' == node_type){
-        	font.style.padding="30px 0px 0px 18px";
+        	font.style.padding="30px 0px 0px 22px";
         }
-        font.style.fontWeight="bold";//加粗
+//        font.style.fontWeight="bold";//加粗
         font.innerHTML = label;
         div.appendChild(font);
         sidebar.appendChild(div); 
