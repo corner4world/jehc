@@ -72,6 +72,11 @@ www.jehc.top
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164008_b29786a7_1341290.png "分配用户.png")
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164015_dc7516f2_1341290.png "流程监控图.png")
 
+全文检索配置
+
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/165046_b96b70a5_1341290.png "2PYIIK998WJ]02}]O{[[`}Y.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/165226_11d49b04_1341290.png "I%7$_(X{U`CD_2GB}W@4B07.png")
+
 
 统一开发 统一开放 统一规范 统一开源
  **http://git.oschina.net/jehc/jehc** 
