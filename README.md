@@ -70,13 +70,15 @@ jEhc能做什么
 
 流程模块
 
-![输入图片说明](https://gitee.com/uploads/images/2018/0606/131743_ff1615aa_1341290.png "在线设计.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0624/083202_528f2cf5_1341290.png "排他网关.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0624/083211_a0f64d88_1341290.png "事件子流程.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0624/083224_42f2ba9d_1341290.png "调用子流程案例.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0624/083232_3391981c_1341290.png "销售流程.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0624/083240_c03a06cf_1341290.png "泳道设计.png")
-![输入图片说明](https://gitee.com/uploads/images/2018/0606/131811_d71dfc95_1341290.png "流程中心.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164022_57141690_1341290.png "流程排他.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164041_9eabe1e7_1341290.png "排他.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164048_b0445dde_1341290.png "泳道.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164055_be96c2e4_1341290.png "配置表单字段.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164032_550cbdea_1341290.png "流程中心.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/163959_0fe6e2d5_1341290.png "发起流程实例.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164008_b29786a7_1341290.png "分配用户.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0824/164015_dc7516f2_1341290.png "流程监控图.png")
+
 
 
 
